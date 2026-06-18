@@ -1,7 +1,7 @@
 {
   "name": "Gériatrie — 5e édition · CNEG",
   "short_name": "Gériatrie 5e",
-  "description": "Manuel de gériatrie CNEG 5e édition — 20 chapitres, 344 pages, 70 figures. Hors-ligne.",
+  "description": "Manuel de gériatrie CNEG 5e édition — 20 chapitres, 344 pages, 33 figures. Hors-ligne.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0a0b11",

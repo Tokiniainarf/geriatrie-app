@@ -65,54 +65,67 @@ function toggleTheme() {
 }
 function setFS(v) { S.fs = +v; document.body.style.fontSize = v + 'px'; localStorage.setItem('gfs', v); }
 
-function illSrc(type, id) {
-  const maps = { fig: typeof FIGURES !== 'undefined' ? FIGURES : {}, tab: typeof TABLEAUX !== 'undefined' ? TABLEAUX : {}, enc: typeof ENCADRES !== 'undefined' ? ENCADRES : {} };
-  const imgs = maps[type]?.[id];
-  return imgs?.[0] || null;
+function isGoodSrc(src) {
+  return src && !src.includes('figures/page_');
 }
 
-function illBlock(type, id, label) {
-  const key = type + ':' + id;
-  if (shownIll.has(key)) return '';
-  const src = illSrc(type, id);
-  if (!src) return '';
+function illBlock(figId) {
+  const key = 'fig:' + figId;
+  if (shownIll.has(key) || typeof FIGURES === 'undefined') return '';
+  const src = FIGURES[figId]?.[0];
+  if (!isGoodSrc(src)) return '';
   shownIll.add(key);
-  const icons = { fig: '📊', tab: '📋', enc: '📌' };
-  const cls = { fig: '', tab: ' fig-tab', enc: ' fig-enc' }[type] || '';
-  return `<div class="fig-block${cls}" onclick="openLb('${src}')"><img src="${src}" alt="${label}" loading="lazy"><div class="fig-cap">${icons[type]} ${label} — toucher pour agrandir</div></div>`;
+  return `<div class="fig-block" onclick="openLb('${src}')"><img src="${src}" alt="Fig. ${figId}" loading="lazy"><div class="fig-cap">📊 Fig. ${figId}</div></div>`;
 }
 
 function chThumb(id) {
-  const src = typeof CHAPTER_ILL !== 'undefined' ? CHAPTER_ILL[id] : null;
-  if (src) return `<img src="${src}" alt="" loading="lazy">`;
   return `<span class="ch-emoji">${CH_ILL[id] || '📖'}</span>`;
 }
 
 function setChapterHero(id) {
   const banner = document.getElementById('chBanner');
+  if (banner) { banner.innerHTML = ''; banner.style.display = 'none'; }
   const ill = document.getElementById('chIll');
-  const src = typeof CHAPTER_ILL !== 'undefined' ? CHAPTER_ILL[id] : null;
-  if (src && banner) {
-    banner.innerHTML = `<img src="${src}" alt="" loading="lazy">`;
-    banner.style.display = 'block';
-    ill.style.display = 'none';
-  } else {
-    if (banner) { banner.innerHTML = ''; banner.style.display = 'none'; }
-    ill.textContent = CH_ILL[id] || '📖';
-    ill.style.display = 'block';
-  }
+  ill.textContent = CH_ILL[id] || '📖';
+  ill.style.display = 'block';
 }
 
-function pageImgs(pageNum) {
-  if (typeof PAGE_IMAGES === 'undefined') return '';
-  const imgs = PAGE_IMAGES[String(pageNum)];
-  if (!imgs) return '';
-  const crops = imgs.filter(s => s.includes('/crops/'));
-  const rest = imgs.filter(s => !s.includes('/figures/page_'));
-  let list = crops.length ? [...crops, ...rest.filter(r => !crops.includes(r))] : imgs.filter(s => !s.includes('/figures/page_') || !crops.length);
-  if (!list.length) list = imgs.slice(0, 1);
-  const unique = [...new Set(list)].filter(s => { const k = 'pg:' + s; if (shownIll.has(k)) return false; shownIll.add(k); return true; }).slice(0, 3);
-  return unique.map((src, i) => `<div class="fig-block" onclick="openLb('${src}')"><img src="${src}" alt="Illustration p.${pageNum}" loading="lazy"><div class="fig-cap">🖼️ Illustration p.${pageNum}${unique.length > 1 ? ' (' + (i+1) + '/' + unique.length + ')' : ''}</div></div>`).join('');
+function pageImgs() { return ''; }
+
+const SKIP_LINE = /^(▼|©\s*\d{4}|Elsevier|Tous droits réservés|Gériatrie$|Entraînement$|En lien avec|Item, objectifs|hiérarchisation)/i;
+
+function fixHyph(text) {
+  return text.replace(/(\w)-\s*\n\s*(\w)/g, '$1$2');
+}
+
+function renderItemTable(raw) {
+  const lines = raw.split('\n').map(l => l.trim()).filter(l => l && !SKIP_LINE.test(l) && !/Rang Rubrique/i.test(l));
+  let title = 'Objectifs pédagogiques';
+  const rows = [];
+  let cur = null;
+  for (const line of lines) {
+    if (/^ITEM\s+\d+/i.test(line)) { title = line; continue; }
+    const m = line.match(/^([A-D])\s+(.+)/);
+    if (m) {
+      if (cur) rows.push(cur);
+      let rest = m[2];
+      let desc = '';
+      if (rest.includes('Connaître')) {
+        const i = rest.indexOf('Connaître');
+        desc = rest.slice(i);
+        rest = rest.slice(0, i).trim();
+      }
+      cur = { rang: m[1], rubrique: '', intitule: rest, desc };
+    } else if (cur) {
+      if (line.includes('Connaître') && !cur.desc) cur.desc = line;
+      else if (cur.desc) cur.desc += ' ' + line;
+      else cur.intitule += ' ' + line;
+    }
+  }
+  if (cur) rows.push(cur);
+  if (rows.length < 2) return null;
+  const trs = rows.map(r => `<tr><td>${fmt(r.rang)}</td><td>${fmt(r.rubrique)}</td><td>${fmt(r.intitule)}</td><td>${fmt(r.desc)}</td></tr>`).join('');
+  return `<div class="tbl-w tbl-item"><div class="tbl-title">📋 ${fmt(title)}</div><table><thead><tr><th>Rang</th><th>Rubrique</th><th>Intitulé</th><th>Descriptif</th></tr></thead><tbody>${trs}</tbody></table></div>`;
 }
 
 function renderBlocks(raw) {
@@ -146,91 +159,98 @@ function fmt(s) {
   return s;
 }
 
-function renderBody(raw, pageNum) {
+function extractFigs(s) {
+  let extra = '';
+  let m;
+  const re = /Fig\.\s*(\d+)\.(\d+)/g;
+  while ((m = re.exec(s)) !== null) extra += illBlock(m[1]+'.'+m[2]);
+  return extra;
+}
+
+function renderBody(raw, pageNum, chTitle) {
+  raw = fixHyph(raw);
+  if (/Rang Rubrique/i.test(raw) || (raw.match(/^[A-D]\s+/gm) || []).length >= 3) {
+    const tbl = renderItemTable(raw);
+    if (tbl) return tbl;
+  }
+
   let html = '';
   const lines = raw.split('\n');
-  let inUL = false, inBox = null;
+  let inUL = false, inBox = null, inSit = false;
+  const plan = [];
 
   function closeBox() { if (inBox) { html += '</div>'; inBox = null; } }
   function closeUL() { if (inUL) { html += '</ul>'; inUL = false; } }
   function getSecIcon(s) { for (const [k,v] of Object.entries(SEC_HINTS)) if (s.includes(k)) return v; return ''; }
-  function extractIllustrations(s) {
-    let extra = '';
-    let m;
-    const figRe = /Fig\.\s*(\d+)\.(\d+)/g;
-    while ((m = figRe.exec(s)) !== null) extra += illBlock('fig', m[1]+'.'+m[2], `Fig. ${m[1]}.${m[2]}`);
-    const tabRe = /Tableau\s*(\d+)\.(\d+)/gi;
-    while ((m = tabRe.exec(s)) !== null) extra += illBlock('tab', m[1]+'.'+m[2], `Tableau ${m[1]}.${m[2]}`);
-    const encRe = /Encadré\s*(\d+)\.(\d+)/gi;
-    while ((m = encRe.exec(s)) !== null) extra += illBlock('enc', m[1]+'.'+m[2], `Encadré ${m[1]}.${m[2]}`);
-    return extra;
-  }
 
   for (let i = 0; i < lines.length; i++) {
     let s = lines[i].trim();
-    if (!s) { closeUL(); closeBox(); continue; }
-    if (/^[[\]]/.test(s) || /^Rang\s*\|/.test(s)) continue;
-    if (/^\[\[H4:(.+)\]\]$/.test(s)) {
-      closeUL(); closeBox();
-      let content = s.match(/^\[\[H4:(.+)\]\]$/)[1];
-      const sm = content.match(/^([A-Z])\.\s+(.+)$/);
-      if (sm) {
-        const rest = sm[2];
-        const cut = rest.search(/\s+[A-Z]\s+(?=[A-ZÉÈÀÂ«])/);
-        if (cut > 15) {
-          html += `<h4>${fmt(sm[1]+'. '+rest.substring(0, cut).trim())}</h4>`;
-          html += `<p>${fmt(rest.substring(cut).trim())}</p>`;
-          continue;
-        }
-      }
-      html += `<h4>${fmt(content)}</h4>`;
+    if (!s || SKIP_LINE.test(s)) { closeUL(); closeBox(); continue; }
+    if (/^Connaissances$/i.test(s)) continue;
+
+    if (/^Situations de départ/i.test(s)) {
+      closeUL(); closeBox(); inSit = true; inBox = 'sit';
+      html += '<div class="bx bx-sit"><div class="bx-t">🎭 Situations de départ</div><ul class="bx-list">';
       continue;
     }
+    if (inSit && /^\d{2,3}\s+/.test(s)) {
+      html += `<li>${fmt(s.replace(/^\d{2,3}\s+/, ''))}</li>`;
+      continue;
+    }
+    if (inSit && (/^ITEM\s+\d+/i.test(s) || /^[IVX]+\.\s/.test(s))) {
+      html += '</ul></div>'; inBox = null; inSit = false;
+      i--;
+      continue;
+    }
+
     let m;
-    if ((m = s.match(/^([IVX]+)\.\s+(.+)$/))) {
+    if ((m = s.match(/^([IVX]+)\.\s+(.+)$/)) && m[2].length > 5) {
+      if (!html && plan.length < 8) { plan.push(s); continue; }
       closeUL(); closeBox();
       const ic = getSecIcon(s);
-      const sid = `sec-p${pageNum}-${m[1]}`;
-      html += `<h3 id="${sid}">${ic ? '<span style="font-size:.9em;margin-right:2px">'+ic+'</span>' : ''}${fmt(m[1]+'. '+m[2])}</h3>`;
+      html += `<h3 id="sec-p${pageNum}-${m[1]}">${ic ? ic+' ' : ''}${fmt(m[1]+'. '+m[2])}</h3>`;
       continue;
     }
-    if ((m = s.match(/^([A-Z])\.\s+([A-ZÉÈÀÂ].+)$/)) && !/^A\s+(Définition|diagnostic)/i.test(s)) {
+    if (plan.length && !html && !/^[IVX]+\./.test(s)) {
+      html += `<div class="bx bx-enc"><div class="bx-t">📑 Plan du chapitre</div><ul class="bx-list">${plan.map(p=>`<li>${fmt(p)}</li>`).join('')}</ul></div>`;
+      plan.length = 0;
+    }
+    if (chTitle && s.replace(/\s+/g,' ').toLowerCase() === chTitle.replace(/\s+/g,' ').toLowerCase()) continue;
+
+    if ((m = s.match(/^([A-Z])\.\s+([A-ZÉÈÀÂ].+)$/))) {
       closeUL(); closeBox();
       html += `<h4>${fmt(m[1]+'. '+m[2])}</h4>`; continue;
     }
-    if ((m = s.match(/^(\d+)\.\s+([A-ZÉÈÊËÀÂ].{3,})$/)) && s.length < 150) {
+    if ((m = s.match(/^([A-D])\s+([a-zéèêëàâäùûüœ].+)$/))) {
       closeUL(); closeBox();
-      html += `<h4>${fmt(m[1]+'. '+m[2])}</h4>`; continue;
+      html += `<p><span class="para-lbl">${m[1]}</span> ${fmt(m[2])}</p>`; continue;
     }
     if (/^points?\s+clés?|^clés\s*$/i.test(s)) { closeUL(); closeBox(); inBox='key'; html+='<div class="bx bx-key"><div class="bx-t">🔑 Points clés</div>'; continue; }
     if (/^Encadré\s+\d+/.test(s)) { closeUL(); closeBox(); inBox='enc'; html+=`<div class="bx bx-enc"><div class="bx-t">📋 ${fmt(s)}</div>`; continue; }
     if (/^Mises?\s+en\s+situation/i.test(s)) { closeUL(); closeBox(); inBox='sit'; html+=`<div class="bx bx-sit"><div class="bx-t">🎭 ${fmt(s)}</div>`; continue; }
     if (/^[•\-\–\*]\s/.test(s)) { closeBox(); if (!inUL) { inUL=true; html+='<ul>'; } html+=`<li>${fmt(s.replace(/^[•\-\–\*]\s*/,''))}</li>`; continue; }
     closeUL();
-    if (/^(Rang|Rubrique|Connaissances|Gériatrie|Elsevier|©|▼)/i.test(s)) continue;
+    if (/^(Rang|Rubrique)\b/i.test(s)) continue;
+
     let merged = s;
     while (i+1 < lines.length) {
       let next = lines[i+1].trim();
-      if (!next || /^[IVX]+\.\s/.test(next) || /^[A-Z]\.\s+[A-ZÉÈ]/.test(next) || /^\d+\.\s+[A-ZÉÈ]/.test(next) || /^[•\-\–\*]\s/.test(next) || /^points?\s+clés/i.test(next) || /^Encadré/.test(next) || /^Mises?\s+en/i.test(next) || /^[[\]]/.test(next)) break;
-      if (!merged.match(/[.!?:…]$/) && !next.match(/^[IVX]+\.|^[A-Z]\.\s|^\d+\.\s/)) { merged += ' '+next; i++; } else break;
+      if (!next || SKIP_LINE.test(next) || /^[IVX]+\.\s/.test(next) || /^[A-Z]\.\s+[A-ZÉÈ]/.test(next) || /^[A-D]\s+[a-zéè]/.test(next) || /^[•\-\–\*]\s/.test(next) || /^Situations de départ/i.test(next) || /^Encadré/.test(next)) break;
+      if (!merged.match(/[.!?:…»)]$/) && next[0] && (next[0].toLowerCase() === next[0] || next.length < 80)) { merged += ' ' + next; i++; } else break;
     }
-    if (merged.length < 3) continue;
+    if (merged.length < 4) continue;
     html += `<p>${fmt(merged)}</p>`;
-    html += extractIllustrations(merged);
+    html += extractFigs(merged);
   }
+  if (plan.length) html = `<div class="bx bx-enc"><div class="bx-t">📑 Plan du chapitre</div><ul class="bx-list">${plan.map(p=>`<li>${fmt(p)}</li>`).join('')}</ul></div>` + html;
   closeUL(); closeBox();
+  if (inSit) html += '</ul></div>';
   return html;
 }
 
 function renderText(raw, pageNum) {
-  let out = '';
-  if (/\[\[(TABLE|BOX):/.test(raw)) out = renderBlocks(raw);
-  const rest = raw
-    .replace(/\[\[TABLE:[\s\S]*?\[\[\/TABLE\]\]/g, '')
-    .replace(/\[\[BOX:[\s\S]*?\[\[\/BOX\]\]/g, '')
-    .trim();
-  if (rest) out += renderBody(rest, pageNum);
-  return out || renderBody(raw, pageNum);
+  const ch = S.ch ? APP_DATA.chapters.find(c => c.id === S.ch) : null;
+  return renderBody(raw, pageNum, ch?.t || '');
 }
 
 function buildTOC(pages) {
@@ -379,14 +399,13 @@ function renderHome() {
     card.setAttribute('data-part', ch.part);
     card.onclick = () => showCh(ch.id);
     const prog = S.scroll[ch.id] ? Math.min(100, Math.round(S.scroll[ch.id]/50)) : (rd ? 100 : 0);
-    const hasIll = typeof CHAPTER_ILL !== 'undefined' && CHAPTER_ILL[ch.id];
-    card.innerHTML = `<div class="cc-ill${hasIll?' cc-ill-img':''}" style="background:linear-gradient(135deg,${CH_COLORS[ch.id]}22,${CH_COLORS[ch.id]}44)">${chThumb(ch.id)}</div><div class="cc-body"><div class="cc-top"><div class="cc-n" style="border-color:${CH_COLORS[ch.id]}44;color:${CH_COLORS[ch.id]}">${ch.id.replace('ch','')}</div><div class="cc-inf"><div class="cc-t">${ch.t}</div><div class="cc-m">${ch.items.map(i=>`<span class="cc-tag">${i}</span>`).join('')}<span class="cc-pg">${pgCount} p.${rd?' ✅':''}</span></div></div></div></div><button class="cc-bm ${bm?'sv':''}" onclick="event.stopPropagation();quickBm('${ch.id}')">${bm?'⭐':'☆'}</button>${prog>0?`<div class="prog"><div class="fill" style="width:${prog}%"></div></div>`:''}`;
+    card.innerHTML = `<div class="cc-ill" style="background:linear-gradient(135deg,${CH_COLORS[ch.id]}22,${CH_COLORS[ch.id]}44)">${chThumb(ch.id)}</div><div class="cc-body"><div class="cc-top"><div class="cc-n" style="border-color:${CH_COLORS[ch.id]}44;color:${CH_COLORS[ch.id]}">${ch.id.replace('ch','')}</div><div class="cc-inf"><div class="cc-t">${ch.t}</div><div class="cc-m">${ch.items.map(i=>`<span class="cc-tag">${i}</span>`).join('')}<span class="cc-pg">${pgCount} p.${rd?' ✅':''}</span></div></div></div></div><button class="cc-bm ${bm?'sv':''}" onclick="event.stopPropagation();quickBm('${ch.id}')">${bm?'⭐':'☆'}</button>${prog>0?`<div class="prog"><div class="fill" style="width:${prog}%"></div></div>`:''}`;
     (ch.part === 1 ? p1 : p2).appendChild(card);
   });
   if (S.read.length > 0) {
     document.getElementById('recent').style.display = 'block';
     const last = S.read[S.read.length-1], lc = APP_DATA.chapters.find(c => c.id === last);
-    if (lc) document.getElementById('recentC').innerHTML = `<div class="cc recent-card" data-c="${last}" onclick="showCh('${last}')"><div class="cc-ill cc-ill-img" style="background:linear-gradient(135deg,${CH_COLORS[last]}33,${CH_COLORS[last]}55)">${chThumb(last)}</div><div class="cc-body"><div class="cc-top"><div class="cc-n">${lc.id.replace('ch','')}</div><div class="cc-inf"><div class="cc-t">${lc.t}</div><div class="cc-m"><span class="cc-pg">▶ Reprendre la lecture</span></div></div></div></div></div>`;
+    if (lc) document.getElementById('recentC').innerHTML = `<div class="cc recent-card" data-c="${last}" onclick="showCh('${last}')"><div class="cc-ill" style="background:linear-gradient(135deg,${CH_COLORS[last]}33,${CH_COLORS[last]}55)">${chThumb(last)}</div><div class="cc-body"><div class="cc-top"><div class="cc-n">${lc.id.replace('ch','')}</div><div class="cc-inf"><div class="cc-t">${lc.t}</div><div class="cc-m"><span class="cc-pg">▶ Reprendre la lecture</span></div></div></div></div></div>`;
   }
 }
 
@@ -404,30 +423,27 @@ function updBB() { const b = document.getElementById('bmB'); if (b) b.innerHTML 
 function renderBm() {
   const l = document.getElementById('bml');
   if (!S.bm.length) { l.innerHTML = '<div class="bm-empty"><div class="bm-ic">⭐</div><p>Aucun favori.<br>Touchez ☆ sur un chapitre.</p></div>'; return; }
-  l.innerHTML = S.bm.map(id => { const ch = APP_DATA.chapters.find(c => c.id === id); if (!ch) return ''; return `<div class="cc" onclick="showCh('${id}')"><div class="cc-ill cc-ill-img">${chThumb(id)}</div><div class="cc-body"><div class="cc-top"><div class="cc-n">${ch.id.replace('ch','')}</div><div class="cc-inf"><div class="cc-t">${ch.t}</div></div></div></div></div>`; }).join('');
+  l.innerHTML = S.bm.map(id => { const ch = APP_DATA.chapters.find(c => c.id === id); if (!ch) return ''; return `<div class="cc" onclick="showCh('${id}')"><div class="cc-ill">${chThumb(id)}</div><div class="cc-body"><div class="cc-top"><div class="cc-n">${ch.id.replace('ch','')}</div><div class="cc-inf"><div class="cc-t">${ch.t}</div></div></div></div></div>`; }).join('');
 }
 
 function renderGallery() {
   const el = document.getElementById('illGrid');
-  if (!el) return;
-  const items = [];
-  const add = (type, map, prefix, icon) => {
-    if (!map) return;
-    Object.entries(map).forEach(([id, srcs]) => {
+  if (!el || typeof FIGURES === 'undefined') return;
+  const items = Object.entries(FIGURES)
+    .filter(([, srcs]) => isGoodSrc(srcs[0]))
+    .map(([id, srcs]) => {
       const chNum = parseInt(id.split('.')[0], 10);
       const ch = APP_DATA.chapters.find(c => c.id === 'ch' + chNum);
-      items.push({ type, id, src: srcs[0], label: prefix + ' ' + id, ch: ch?.t || 'Ch.' + chNum, chId: ch?.id || 'ch' + chNum, icon });
+      return { id, src: srcs[0], ch: ch?.t || 'Chapitre ' + chNum, chId: ch?.id };
+    })
+    .sort((a, b) => {
+      const [ac, ai] = a.id.split('.').map(Number);
+      const [bc, bi] = b.id.split('.').map(Number);
+      return ac - bc || ai - bi;
     });
-  };
-  add('fig', typeof FIGURES !== 'undefined' ? FIGURES : null, 'Fig.', '📊');
-  add('tab', typeof TABLEAUX !== 'undefined' ? TABLEAUX : null, 'Tableau', '📋');
-  add('enc', typeof ENCADRES !== 'undefined' ? ENCADRES : null, 'Encadré', '📌');
-  items.sort((a, b) => {
-    const [ac, ai] = a.id.split('.').map(Number);
-    const [bc, bi] = b.id.split('.').map(Number);
-    return ac - bc || ai - bi;
-  });
-  el.innerHTML = items.map(it => `<div class="ill-card" onclick="openLb('${it.src}')"><img src="${it.src}" alt="${it.label}" loading="lazy"><div class="ill-cap"><span class="ill-type">${it.icon} ${it.label}</span><span class="ill-ch">${it.ch}</span></div></div>`).join('');
+  el.innerHTML = items.length
+    ? items.map(it => `<div class="ill-card" onclick="openLb('${it.src}')"><img src="${it.src}" alt="Fig. ${it.id}" loading="lazy"><div class="ill-cap"><span class="ill-type">📊 Fig. ${it.id}</span><span class="ill-ch">${it.ch}</span></div></div>`).join('')
+    : '<div class="bm-empty"><p>Aucune figure extraite pour ce chapitre.</p></div>';
   const cnt = document.getElementById('illCnt');
   if (cnt) cnt.textContent = items.length;
 }
@@ -510,17 +526,9 @@ function updStats() {
   document.getElementById('bmc').innerHTML = `⭐ <b>${b}</b> fav.`;
   const bd = document.getElementById('bmb');
   if (b > 0) { bd.style.display='flex'; bd.textContent=b; } else bd.style.display='none';
-  const nFig = typeof FIGURES !== 'undefined' ? Object.keys(FIGURES).length : 0;
-  const nTab = typeof TABLEAUX !== 'undefined' ? Object.keys(TABLEAUX).length : 0;
-  const nEnc = typeof ENCADRES !== 'undefined' ? Object.keys(ENCADRES).length : 0;
-  const total = nFig + nTab + nEnc;
+  const total = typeof FIGURES !== 'undefined' ? Object.values(FIGURES).filter(s => isGoodSrc(s[0])).length : 0;
   const figEl = document.getElementById('figC');
-  if (figEl) figEl.innerHTML = `🖼️ <b>${total}</b> ill.`;
-  const coverImg = document.getElementById('coverImg');
-  if (coverImg && typeof CHAPTER_ILL !== 'undefined') {
-    const src = CHAPTER_ILL.ch6 || CHAPTER_ILL.ch1 || Object.values(CHAPTER_ILL)[0];
-    if (src) { coverImg.src = src; coverImg.style.display = 'block'; document.getElementById('coverIcon').style.display = 'none'; }
-  }
+  if (figEl) figEl.innerHTML = `🖼️ <b>${total}</b> fig.`;
 }
 function resetProg() { S.read=[]; S.scroll={}; localStorage.setItem('grd','[]'); localStorage.setItem('gsc','{}'); renderHome(); toast('Progression réinitialisée'); }
 function clearAll() { if (!confirm('Tout effacer ?')) return; S.bm=[]; S.read=[]; S.scroll={}; localStorage.removeItem('gbm'); localStorage.removeItem('grd'); localStorage.removeItem('gsc'); renderHome(); renderBm(); updStats(); toast('Données effacées'); }

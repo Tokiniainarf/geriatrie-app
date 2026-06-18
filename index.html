@@ -225,6 +225,7 @@ a{color:var(--accent2);text-decoration:none}
 .bx-list{margin:0;padding:0 0 0 4px;list-style:none}
 .bx-list li{margin-bottom:6px;padding-left:16px;position:relative;font-size:.85rem;line-height:1.65}
 .bx-list li::before{content:'';position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+.para-lbl{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;border-radius:6px;background:var(--accent);color:#fff;font-size:.72rem;font-weight:800;margin-right:4px}
 
 /* Chapter nav */
 .ch-nav{display:flex;gap:8px;padding:12px 16px;position:sticky;bottom:var(--bottom);background:var(--bg);border-top:1px solid var(--border);z-index:50}
@@ -383,7 +384,7 @@ a{color:var(--accent2);text-decoration:none}
 <div class="ob" id="ob">
   <div class="ob-ill">📖</div>
   <h1>Gériatrie</h1>
-  <p>5e édition · CNEG · Pr Jacques Boddaert — 20 chapitres, 344 pages, 70 figures, hors-ligne.</p>
+  <p>5e édition · CNEG · Pr Jacques Boddaert — 20 chapitres, 344 pages, 33 figures, hors-ligne.</p>
   <button class="ob-btn" onclick="closeOb()">Commencer</button>
   <button class="ob-skip" onclick="closeOb()">J'ai déjà utilisé l'app</button>
 </div>
@@ -419,7 +420,7 @@ a{color:var(--accent2);text-decoration:none}
   <!-- HOME -->
   <div class="view active" id="vHome">
     <div class="cover">
-      <div class="cover-bg"><img id="coverImg" class="cover-photo" style="display:none" alt=""><div class="cover-icon" id="coverIcon">📖</div></div>
+      <div class="cover-bg"><div class="cover-icon">📖</div></div>
       <div class="cover-body">
         <h2>Gériatrie</h2>
         <p>5e édition · Collège National des Enseignants de Gériatrie · Pr Jacques Boddaert · Elsevier Masson 2021</p>
@@ -428,7 +429,7 @@ a{color:var(--accent2);text-decoration:none}
     <div class="stats" style="padding:0 16px 8px">
       <div class="chip">📚 <b>20</b> chap.</div>
       <div class="chip">📄 <b>344</b> p.</div>
-      <div class="chip" id="figC" onclick="sw('ill')" style="cursor:pointer">🖼️ <b>133</b> ill.</div>
+      <div class="chip" id="figC" onclick="sw('ill')" style="cursor:pointer">🖼️ <b>33</b> fig.</div>
       <div class="chip">🏷️ <b>11</b> ITEMs</div>
       <div class="chip" id="bmc">⭐ <b>0</b> fav.</div>
     </div>
@@ -467,7 +468,7 @@ a{color:var(--accent2);text-decoration:none}
 
   <!-- ILLUSTRATIONS -->
   <div class="view" id="vIll">
-    <div class="hero"><h1>🖼️ Illustrations</h1><div class="sub"><span id="illCnt">133</span> figures, tableaux et encadrés</div></div>
+    <div class="hero"><h1>🖼️ Figures</h1><div class="sub"><span id="illCnt">33</span> schémas et illustrations cliniques</div></div>
     <div class="ill-grid" id="illGrid"></div>
   </div>
 
