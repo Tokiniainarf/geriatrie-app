@@ -1,11 +1,11 @@
 {
-  "name": "Gériatrie 5e édition — CNEG",
-  "short_name": "Gériatrie",
-  "description": "Manuel de gériatrie du CNEG — 5e édition, Pr Jacques Boddaert. Application complète hors-ligne.",
+  "name": "Gériatrie — 5e édition · CNEG",
+  "short_name": "Gériatrie 5e",
+  "description": "Manuel de gériatrie CNEG 5e édition — 20 chapitres, 344 pages, 70 figures. Hors-ligne.",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#0f1117",
-  "theme_color": "#312e81",
+  "background_color": "#0a0b11",
+  "theme_color": "#4338ca",
   "orientation": "portrait-primary",
   "icons": [
     { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },

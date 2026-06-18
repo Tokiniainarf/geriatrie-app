@@ -6,10 +6,10 @@
 <meta name="theme-color" content="#1e1b4b">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Gériatrie">
+<meta name="apple-mobile-web-app-title" content="Gériatrie 5e éd.">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
-<title>Gériatrie 5e éd. — CNEG</title>
+<title>Gériatrie — 5e édition · CNEG</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Merriweather:wght@400;700&display=swap');
 :root{
@@ -75,7 +75,8 @@ a{color:var(--accent2);text-decoration:none}
 .sr-empty .sr-ic{font-size:2rem;margin-bottom:8px;opacity:.5}
 
 /* === MAIN === */
-.main{padding-top:56px;padding-bottom:var(--bottom);min-height:100dvh}
+.main{padding-top:56px;padding-bottom:var(--bottom);min-height:100dvh;transition:padding-top .2s}
+.main.ch-active{padding-top:96px}
 .view{display:none;animation:fadeUp .3s ease}
 .view.active{display:block}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
@@ -213,6 +214,11 @@ a{color:var(--accent2);text-decoration:none}
 .tbl-w td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:top}
 .tbl-w tr:last-child td{border-bottom:none}
 .tbl-w tr:hover td{background:rgba(99,102,241,.03)}
+.tbl-title{padding:12px 14px 8px;font-size:.78rem;font-weight:800;color:var(--accent2);border-bottom:1px solid var(--border)}
+.tbl-item{margin:14px 0}
+.bx-list{margin:0;padding:0 0 0 4px;list-style:none}
+.bx-list li{margin-bottom:6px;padding-left:16px;position:relative;font-size:.85rem;line-height:1.65}
+.bx-list li::before{content:'';position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--accent)}
 
 /* Chapter nav */
 .ch-nav{display:flex;gap:8px;padding:12px 16px;position:sticky;bottom:var(--bottom);background:var(--bg);border-top:1px solid var(--border);z-index:50}
@@ -222,7 +228,7 @@ a{color:var(--accent2);text-decoration:none}
 .ch-nav button:disabled:active{transform:none;background:var(--card);color:var(--text)}
 
 /* Progress bar */
-.rp{position:fixed;top:56px;left:0;right:0;height:3px;background:var(--bg3);z-index:90}
+.rp{position:fixed;top:56px;left:0;right:0;height:3px;background:var(--bg3);z-index:90;transition:top .2s}
 .rp .bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--pink),var(--cyan));width:0;transition:width .05s}
 
 /* === ITEMS === */
@@ -280,7 +286,73 @@ a{color:var(--accent2);text-decoration:none}
 .toast{position:fixed;bottom:calc(var(--bottom) + 20px);left:50%;transform:translateX(-50%) translateY(80px);background:var(--card2);border:1px solid var(--border);color:var(--text);padding:10px 20px;border-radius:var(--radius);font-size:.82rem;font-weight:600;z-index:500;opacity:0;transition:.25s;pointer-events:none;white-space:nowrap;box-shadow:var(--shadow)}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-@media(min-width:768px){.main{max-width:640px;margin:0 auto}}
+/* Figures */
+.fig-block{margin:14px 0;border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--border);background:var(--bg3);cursor:zoom-in;transition:.2s}
+.fig-block:active{transform:scale(.98);border-color:var(--accent)}
+.fig-block img{width:100%;height:auto;display:block;max-height:420px;object-fit:contain;background:#fff}
+.fig-cap{padding:8px 12px;font-size:.7rem;color:var(--text2);font-weight:600;border-top:1px solid var(--border)}
+
+/* Lightbox */
+.lb{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:400;display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:.25s}
+.lb.open{opacity:1;pointer-events:all}
+.lb img{max-width:100%;max-height:90dvh;object-fit:contain;border-radius:8px}
+.lb-cl{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:1.2rem;cursor:pointer}
+
+/* TOC drawer */
+.toc-d{position:fixed;inset:0;z-index:250;pointer-events:none}
+.toc-d.open{pointer-events:all}
+.toc-bg{position:absolute;inset:0;background:rgba(0,0,0,.5);opacity:0;transition:.25s}
+.toc-d.open .toc-bg{opacity:1}
+.toc-pan{position:absolute;bottom:0;left:0;right:0;max-height:70dvh;background:var(--bg2);border-radius:20px 20px 0 0;border-top:1px solid var(--border);transform:translateY(100%);transition:.3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
+.toc-d.open .toc-pan{transform:translateY(0)}
+.toc-hd{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.toc-hd h3{font-size:.95rem;font-weight:800}
+.toc-ls{overflow-y:auto;padding:8px 0 24px;flex:1}
+.toc-i{padding:12px 20px;cursor:pointer;font-size:.82rem;border-bottom:1px solid var(--border);display:flex;gap:10px;align-items:flex-start;transition:.12s}
+.toc-i:active{background:var(--bg3)}
+.toc-p{font-size:.65rem;font-weight:800;color:var(--accent2);background:var(--bg3);padding:2px 8px;border-radius:6px;flex-shrink:0}
+.toc-empty{padding:24px;text-align:center;color:var(--text3);font-size:.85rem}
+
+/* Reading toolbar */
+.rtoolbar{position:fixed;top:56px;left:0;right:0;height:40px;background:var(--bg2);border-bottom:1px solid var(--border);display:none;align-items:center;padding:0 12px;gap:6px;z-index:95;overflow-x:auto}
+.rtoolbar button{padding:6px 12px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--text2);font-size:.72rem;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0}
+.rtoolbar button:active{background:var(--accent);color:#fff}
+.page-ind{margin-left:auto;font-size:.7rem;color:var(--text3);font-weight:600;white-space:nowrap;padding:0 8px}
+
+/* Page nav (page mode) */
+.pgnav{display:none;gap:8px;padding:8px 16px;background:var(--bg);border-top:1px solid var(--border)}
+.pgnav button{flex:1;padding:10px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--card);font-size:.82rem;font-weight:600;cursor:pointer}
+.pgnav button:disabled{opacity:.3}
+.pg-of{margin-left:auto;font-size:.68rem;color:var(--text3);font-weight:600}
+.pg-single{min-height:50dvh}
+
+/* Page jump */
+.pjump{position:fixed;inset:0;z-index:260;background:rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:.25s;display:flex;align-items:flex-end}
+.pjump.open{opacity:1;pointer-events:all}
+.pjump-pan{width:100%;max-height:60dvh;background:var(--bg2);border-radius:20px 20px 0 0;overflow-y:auto;padding:16px 0 24px}
+.pj-i{padding:12px 20px;cursor:pointer;font-size:.85rem;border-bottom:1px solid var(--border);display:flex;gap:12px}
+.pj-i span{font-weight:800;color:var(--accent2);min-width:50px}
+.pj-i:active{background:var(--bg3)}
+
+/* Cover hero */
+.cover{margin:16px;border-radius:20px;overflow:hidden;position:relative;border:1px solid var(--border);box-shadow:var(--shadow)}
+.cover-bg{height:140px;background:linear-gradient(135deg,#1e1b4b 0%,#4338ca 40%,#7c3aed 70%,#db2777 100%);display:flex;align-items:center;justify-content:center;position:relative}
+.cover-bg::after{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.cover-icon{font-size:4rem;filter:drop-shadow(0 4px 16px rgba(0,0,0,.4));position:relative;z-index:1}
+.cover-body{padding:16px 18px;background:var(--card)}
+.cover-body h2{font-size:1.1rem;font-weight:900;letter-spacing:-.02em;margin-bottom:4px}
+.cover-body p{font-size:.75rem;color:var(--text2);line-height:1.5}
+.recent-card{border:2px solid var(--accent)!important;box-shadow:0 4px 20px rgba(99,102,241,.2)}
+
+/* Install banner */
+.install-b{display:none;position:fixed;bottom:calc(var(--bottom) + 8px);left:16px;right:16px;background:linear-gradient(135deg,var(--accent),var(--pink));color:#fff;padding:12px 16px;border-radius:var(--radius);align-items:center;gap:12px;z-index:110;box-shadow:0 6px 24px rgba(99,102,241,.4);cursor:pointer;font-size:.82rem;font-weight:600}
+.install-b span{flex:1}
+.install-b button{background:rgba(255,255,255,.2);border:none;color:#fff;padding:6px 14px;border-radius:8px;font-weight:700;cursor:pointer}
+
+.cc-bm{background:none;border:none;position:absolute;top:8px;right:10px;font-size:.9rem;opacity:.4;transition:.15s;z-index:2;cursor:pointer;padding:4px}
+.cc-bm.sv{opacity:1;color:var(--orange)}
+
+@media(min-width:768px){.main{max-width:640px;margin:0 auto}.toc-pan,.pjump-pan{max-width:640px;left:50%;transform:translateX(-50%) translateY(100%)}.toc-d.open .toc-pan,.pjump.open .pjump-pan{transform:translateX(-50%) translateY(0)}}
 </style>
 </head>
 <body>
@@ -288,15 +360,15 @@ a{color:var(--accent2);text-decoration:none}
 <!-- ONBOARDING -->
 <div class="ob" id="ob">
   <div class="ob-ill">📖</div>
-  <h1>Gériatrie 5e éd.</h1>
-  <p>Manuel complet du CNEG — Pr Jacques Boddaert. 20 chapitres, 386 pages, entièrement hors-ligne.</p>
+  <h1>Gériatrie</h1>
+  <p>5e édition · CNEG · Pr Jacques Boddaert — 20 chapitres, 344 pages, 70 figures, hors-ligne.</p>
   <button class="ob-btn" onclick="closeOb()">Commencer</button>
   <button class="ob-skip" onclick="closeOb()">J'ai déjà utilisé l'app</button>
 </div>
 
 <!-- TOPBAR -->
 <div class="topbar">
-  <div class="logo"><span class="logo-gr">Gériatrie</span><sub>5e édition · CNEG · Elsevier 2021</sub></div>
+  <div class="logo"><span class="logo-gr">Gériatrie</span><sub>5e édition · CNEG · Boddaert</sub></div>
   <div style="margin-left:auto;display:flex;gap:6px;align-items:center">
     <button class="tb" onclick="openSearch()" title="Rechercher (/)">🔍</button>
     <button class="tb" onclick="toggleTheme()" id="thBtn">🌙</button>
@@ -312,21 +384,31 @@ a{color:var(--accent2);text-decoration:none}
 </div>
 
 <div class="rp" id="rp" style="display:none"><div class="bar" id="rpb"></div></div>
+<div class="rtoolbar" id="rtoolbar">
+  <button onclick="openTOC()">📑 Sommaire</button>
+  <button onclick="openPgJump()">📄 Pages</button>
+  <button onclick="toggleReadMode()" id="rmBtn">📄 Page</button>
+  <span class="page-ind" id="pageInd"></span>
+</div>
 
 <!-- MAIN -->
 <div class="main">
 
   <!-- HOME -->
   <div class="view active" id="vHome">
-    <div class="hero">
-      <h1>📖 Gériatrie</h1>
-      <div class="sub">Collège National des Enseignants de Gériatrie</div>
-      <div class="stats">
-        <div class="chip">📚 <b>20</b> chap.</div>
-        <div class="chip">📄 <b>386</b> p.</div>
-        <div class="chip">🏷️ <b>11</b> ITEMs</div>
-        <div class="chip" id="bmc">⭐ <b>0</b> fav.</div>
+    <div class="cover">
+      <div class="cover-bg"><div class="cover-icon">📖</div></div>
+      <div class="cover-body">
+        <h2>Gériatrie</h2>
+        <p>5e édition · Collège National des Enseignants de Gériatrie · Pr Jacques Boddaert · Elsevier Masson 2021</p>
       </div>
+    </div>
+    <div class="stats" style="padding:0 16px 8px">
+      <div class="chip">📚 <b>20</b> chap.</div>
+      <div class="chip">📄 <b>344</b> p.</div>
+      <div class="chip" id="figC">📊 <b>70</b> fig.</div>
+      <div class="chip">🏷️ <b>11</b> ITEMs</div>
+      <div class="chip" id="bmc">⭐ <b>0</b> fav.</div>
     </div>
     <div style="padding:0 16px">
       <div id="recent" style="display:none"><div class="sec-t">📍 Reprendre la lecture</div><div id="recentC"></div></div>
@@ -349,10 +431,14 @@ a{color:var(--accent2);text-decoration:none}
       <div class="ch-tags" id="chTags"></div>
     </div>
     <div class="ch-body" id="chBody"></div>
+    <div class="pgnav" id="pgNav">
+      <button id="pgPrev" onclick="navPage(-1)">← Page préc.</button>
+      <button id="pgNext" onclick="navPage(1)">Page suiv. →</button>
+    </div>
     <div class="ch-nav">
-      <button id="prevB" onclick="navCh(-1)">← Précédent</button>
+      <button id="prevB" onclick="navCh(-1)">← Chap.</button>
       <button id="bmB" onclick="toggleBm()">☆ Favori</button>
-      <button id="nextB" onclick="navCh(1)">Suivant →</button>
+      <button id="nextB" onclick="navCh(1)">Chap. →</button>
     </div>
   </div>
 
@@ -375,6 +461,7 @@ a{color:var(--accent2);text-decoration:none}
     <div class="sg">
       <div class="sr"><div><div class="lb">🌙 Mode sombre</div><div class="ds">Thème de l'application</div></div><div class="tog on" id="dtog" onclick="toggleTheme()"></div></div>
       <div class="sr"><div><div class="lb">🔤 Taille du texte</div><div class="ds">Ajuster la lisibilité</div></div><input type="range" min="12" max="22" value="15" id="fsl" oninput="setFS(this.value)"></div>
+      <div class="sr"><div><div class="lb">📄 Mode lecture</div><div class="ds">Défilement ou page par page</div></div><div class="tog" id="rmTog" onclick="toggleReadMode();document.getElementById('rmTog').classList.toggle('on',localStorage.getItem('grm')==='page')"></div></div>
     </div>
     <div class="sg">
       <div class="sr"><div><div class="lb">📊 Progression</div><div class="ds" id="pd">0 chapitres lus</div></div><button class="tb" onclick="resetProg()">🗑️</button></div>
@@ -396,200 +483,36 @@ a{color:var(--accent2);text-decoration:none}
   <div class="ni" onclick="sw('set')" data-v="set"><span class="ni-ic">⚙️</span>Régl.</div>
 </nav>
 
+<!-- TOC Drawer -->
+<div class="toc-d" id="tocD" onclick="if(event.target===this)closeTOC()">
+  <div class="toc-bg"></div>
+  <div class="toc-pan">
+    <div class="toc-hd"><h3>📑 Sommaire du chapitre</h3><button class="tb" onclick="closeTOC()">✕</button></div>
+    <div class="toc-ls" id="tocList"></div>
+  </div>
+</div>
+
+<!-- Page Jump -->
+<div class="pjump" id="pgJump" onclick="if(event.target===this)closePgJump()">
+  <div class="pjump-pan" id="pgJumpList"></div>
+</div>
+
+<!-- Lightbox -->
+<div class="lb" id="lb" onclick="closeLb()">
+  <button class="lb-cl" onclick="closeLb()">✕</button>
+  <img id="lbImg" src="" alt="Figure agrandie">
+</div>
+
+<div class="install-b" id="installB" onclick="installPWA()">
+  <span>📲 Installer l'app sur votre téléphone</span>
+  <button>Installer</button>
+</div>
+
 <button class="fab" id="fab" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="display:none">↑</button>
 <div class="toast" id="toast"></div>
 
 <script src="data.js"></script>
-<script>
-// Chapter illustrations mapping
-const CH_ILL={
-  ch1:'🧬',ch2:'🧠',ch3:'📊',ch4:'⚖️',ch5:'👁️',
-  ch6:'🦴',ch7:'🦵',ch8:'💊',ch9:'🧠',ch10:'😔',
-  ch11:'😵',ch12:'🚶',ch13:'🛏️',ch14:'🍎',ch15:'💧',
-  ch16:'💉',ch17:'🕊️',ch18:'📝',ch19:'🔑',ch20:'❓'
-};
-// Section illustration hints
-const SEC_HINTS={
-  'I.':'📌','II.':'📌','III.':'📌','IV.':'📌','V.':'📌','VI.':'📌',
-  'définition':'📖','Définition':'📖','épidémiologie':'📊','Épidémiologie':'📊',
-  'physiopathologie':'🔬','Physiopathologie':'🔬','diagnostic':'🔍','Diagnostic':'🔍',
-  'traitement':'💊','Traitement':'💊','prévention':'🛡️','Prévention':'🛡️',
-  'pronostic':'📈','Pronostic':'📈','étiologie':'🔎','Étiologie':'🔎',
-  'clinique':'🩺','Clinique':'🩺','bilan':'📋','Bilan':'📋',
-  'Points clés':'🔑','points clés':'🔑','Encadré':'📋','Mise en':'🎭',
-};
-
-// State
-const S={view:'home',ch:null,bm:JSON.parse(localStorage.getItem('gbm')||'[]'),read:JSON.parse(localStorage.getItem('grd')||'[]'),fs:parseInt(localStorage.getItem('gfs')||'15'),th:localStorage.getItem('gth')||'dark',ob:localStorage.getItem('gob')==='1'};
-
-// Init
-document.addEventListener('DOMContentLoaded',()=>{
-  if(S.ob)document.getElementById('ob').classList.add('done');
-  setFS(S.fs);document.getElementById('fsl').value=S.fs;
-  if(S.th==='light'){document.documentElement.setAttribute('data-theme','light');document.getElementById('thBtn').textContent='☀️';document.getElementById('dtog').classList.remove('on')}
-  renderHome();renderItems();renderBm();updStats();
-  if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
-});
-function closeOb(){document.getElementById('ob').classList.add('done');localStorage.setItem('gob','1')}
-function toggleTheme(){S.th=S.th==='dark'?'light':'dark';localStorage.setItem('gth',S.th);document.documentElement.setAttribute('data-theme',S.th==='light'?'light':'');document.getElementById('thBtn').textContent=S.th==='light'?'☀️':'🌙';document.getElementById('dtog').classList.toggle('on',S.th==='dark')}
-function setFS(v){S.fs=+v;document.body.style.fontSize=v+'px';localStorage.setItem('gfs',v)}
-
-// Text renderer with illustrations
-function renderText(raw,pageNum){
-  let html='';
-  const lines=raw.split('\n');
-  let inUL=false,inBox=null;
-
-  function closeBox(){if(inBox){html+='</div>';inBox=null}}
-  function closeUL(){if(inUL){html+='</ul>';inUL=false}}
-  function getSecIcon(s){
-    for(const[k,v]of Object.entries(SEC_HINTS)){if(s.includes(k))return v}
-    return''
-  }
-  function fmt(s){
-    s=s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-    s=s.replace(/(ITEM\s+\d+)/g,'<span class="item-r">$1</span>');
-    s=s.replace(/(Fig\.\s*\d+\.\d+)/g,'<span class="fig-r">$1</span>');
-    s=s.replace(/(Encadré\s+\d+\.\d+)/g,'<span class="enc-r">$1</span>');
-    s=s.replace(/(Tableau\s+\d+\.\d+)/g,'<span class="enc-r">$1</span>');
-    s=s.replace(/«\s*(.+?)\s*»/g,'« <em>$1</em> »');
-    s=s.replace(/(Remarque[s]?|Attention|Important|Note|Principe|Objectif|Conclusion|Diagnostic|Traitement|Étiologie|Pronostic|Épidémiologie|Physiopathologie|Clinique|Bilan|Prise en charge|Prévention|Surveillance|Critère[s]?|Facteur[s]?|Risque)\s*:/g,'<strong>$1</strong> :');
-    s=s.replace(/(\d+[.,]?\d*)\s*(mg|kg|ml|mmol|g\/l|mmHg|cm|ans|m\/s|UI)\b/g,'<span class="clin-v">$1 $2</span>');
-    return s;
-  }
-
-  for(let i=0;i<lines.length;i++){
-    let s=lines[i].trim();
-    if(!s){closeUL();closeBox();continue}
-    let m;
-    if((m=s.match(/^([IVX]+)\.\s+(.+)$/))){
-      closeUL();closeBox();
-      const ic=getSecIcon(s);
-      html+=`<h3>${ic?'<span style="font-size:.9em;margin-right:2px">'+ic+'</span>':''}${fmt(m[1]+'. '+m[2])}</h3>`;continue;
-    }
-    if((m=s.match(/^([A-Z])\.\s+([A-Z].+)$/))&&!s.startsWith('A ')){
-      closeUL();closeBox();
-      html+=`<h4>${fmt(m[1]+'. '+m[2])}</h4>`;continue;
-    }
-    if((m=s.match(/^(\d+)\.\s+([A-ZÉÈÊË].{3,})$/))&&s.length<150){
-      closeUL();closeBox();
-      html+=`<h4>${fmt(m[1]+'. '+m[2])}</h4>`;continue;
-    }
-    if(/^points?\s+clés?|^clés\s*$/i.test(s)){closeUL();closeBox();inBox='key';html+='<div class="bx bx-key"><div class="bx-t">🔑 Points clés</div>';continue}
-    if(/^Encadré\s+\d+/.test(s)){closeUL();closeBox();inBox='enc';html+=`<div class="bx bx-enc"><div class="bx-t">📋 ${fmt(s)}</div>`;continue}
-    if(/^Mises?\s+en\s+situation/i.test(s)){closeUL();closeBox();inBox='sit';html+=`<div class="bx bx-sit"><div class="bx-t">🎭 ${fmt(s)}</div>`;continue}
-    if(/^[•\-\–\*]\s/.test(s)){closeBox();if(!inUL){inUL=true;html+='<ul>'}html+=`<li>${fmt(s.replace(/^[•\-\–\*]\s*/,''))}</li>`;continue}
-    closeUL();
-    if(/^Rang\s+Rubrique|^Rubrique\s+Intitulé/.test(s))continue;
-    let merged=s;
-    while(i+1<lines.length){
-      let next=lines[i+1].trim();
-      if(!next||/^[IVX]+\.\s/.test(next)||/^[A-Z]\.\s+[A-Z]/.test(next)||/^\d+\.\s+[A-ZÉÈ]/.test(next)||/^[•\-\–\*]\s/.test(next)||/^points?\s+clés/i.test(next)||/^Encadré/.test(next)||/^Mises?\s+en/i.test(next))break;
-      if(!merged.match(/[.!?:…]$/)&&!next.match(/^[IVX]+\.|^[A-Z]\.\s|^\d+\.\s/)){merged+=' '+next;i++}else break;
-    }
-    html+=`<p>${fmt(merged)}</p>`;
-  }
-  closeUL();closeBox();
-  return html;
-}
-
-// Navigation
-function sw(view){
-  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));
-  const el=document.getElementById('v'+view.charAt(0).toUpperCase()+view.slice(1));
-  if(el)el.classList.add('active');
-  document.querySelector(`[data-v="${view}"]`)?.classList.add('on');
-  S.view=view;
-  document.getElementById('rp').style.display=view==='ch'?'block':'none';
-  document.getElementById('fab').style.display=view==='ch'?'flex':'none';
-  window.scrollTo(0,0);
-  if(view==='bm')renderBm();
-  if(view==='set')document.getElementById('pd').textContent=`${S.read.length} chapitres lus sur ${APP_DATA.chapters.length}`;
-}
-function goHome(){sw('home');S.ch=null}
-
-function showCh(id){
-  const ch=APP_DATA.chapters.find(c=>c.id===id);if(!ch)return;
-  S.ch=id;
-  if(!S.read.includes(id)){S.read.push(id);localStorage.setItem('grd',JSON.stringify(S.read))}
-  // Hero
-  document.getElementById('chHero').setAttribute('data-c',id);
-  document.getElementById('chIll').textContent=CH_ILL[id]||'📖';
-  document.getElementById('chT').textContent=ch.t;
-  document.getElementById('chTags').innerHTML=ch.items.map(i=>`<span class="ch-tag">${i}</span>`).join('');
-  // Content
-  const pages=APP_DATA.content[id]||[];
-  document.getElementById('chBody').innerHTML=pages.map(p=>`<div class="pg"><div class="pg-hd"><span class="pg-num">p.${p[0]}</span><span class="pg-ill">${CH_ILL[id]||'📄'}</span></div>${renderText(p[1],p[0])}</div>`).join('');
-  const idx=APP_DATA.chapters.findIndex(c=>c.id===id);
-  document.getElementById('prevB').disabled=idx<=0;
-  document.getElementById('nextB').disabled=idx>=APP_DATA.chapters.length-1;
-  updBB();sw('ch');
-}
-
-function navCh(d){const idx=APP_DATA.chapters.findIndex(c=>c.id===S.ch);const n=APP_DATA.chapters[idx+d];if(n)showCh(n.id)}
-
-// Home
-function renderHome(){
-  const p1=document.getElementById('p1'),p2=document.getElementById('p2');
-  p1.innerHTML=p2.innerHTML='';
-  APP_DATA.chapters.forEach(ch=>{
-    const rd=S.read.includes(ch.id),bm=S.bm.includes(ch.id);
-    const pgCount=APP_DATA.content[ch.id]?APP_DATA.content[ch.id].length:0;
-    const card=document.createElement('div');card.className='cc';card.setAttribute('data-c',ch.id);card.setAttribute('data-part',ch.part);
-    card.onclick=()=>showCh(ch.id);
-    card.innerHTML=`<div class="cc-ill">${CH_ILL[ch.id]||'📖'}</div><div class="cc-body"><div class="cc-top"><div class="cc-n">${ch.id.replace('ch','')}</div><div class="cc-inf"><div class="cc-t">${ch.t}</div><div class="cc-m">${ch.items.map(i=>`<span class="cc-tag">${i}</span>`).join('')}<span class="cc-pg">${pgCount} p.${rd?' ✅':''}</span></div></div></div></div><span class="cc-bm ${bm?'sv':''}">${bm?'⭐':'☆'}</span>${rd?'<div class="prog"><div class="fill" style="width:100%"></div></div>':''}`;
-    (ch.part===1?p1:p2).appendChild(card);
-  });
-  if(S.read.length>0){
-    document.getElementById('recent').style.display='block';
-    const last=S.read[S.read.length-1],lc=APP_DATA.chapters.find(c=>c.id===last);
-    if(lc)document.getElementById('recentC').innerHTML=`<div class="cc" data-c="${last}" data-part="${lc.part}" onclick="showCh('${last}')"><div class="cc-ill">${CH_ILL[last]||'📖'}</div><div class="cc-body"><div class="cc-top"><div class="cc-n">${lc.id.replace('ch','')}</div><div class="cc-inf"><div class="cc-t">${lc.t}</div><div class="cc-m"><span class="cc-pg">Reprendre →</span></div></div></div></div></div>`;
-  }
-}
-
-// Bookmarks
-function toggleBm(){if(!S.ch)return;const i=S.bm.indexOf(S.ch);if(i>=0){S.bm.splice(i,1);toast('Retiré des favoris')}else{S.bm.push(S.ch);toast('Ajouté aux favoris ⭐')}localStorage.setItem('gbm',JSON.stringify(S.bm));updBB();updStats()}
-function updBB(){const b=document.getElementById('bmB');if(b)b.innerHTML=S.bm.includes(S.ch)?'⭐ Retirer':'☆ Favori'}
-function renderBm(){
-  const l=document.getElementById('bml');
-  if(!S.bm.length){l.innerHTML='<div class="bm-empty"><div class="bm-ic">⭐</div><p>Aucun favori pour l\'instant.<br>Touchez ☆ sur un chapitre.</p></div>';return}
-  l.innerHTML=S.bm.map(id=>{const ch=APP_DATA.chapters.find(c=>c.id===id);if(!ch)return'';return`<div class="cc" data-c="${id}" data-part="${ch.part}" onclick="showCh('${id}')"><div class="cc-ill">${CH_ILL[id]||'📖'}</div><div class="cc-body"><div class="cc-top"><div class="cc-n">${ch.id.replace('ch','')}</div><div class="cc-inf"><div class="cc-t">${ch.t}</div></div></div></div></div>`}).join('');
-}
-
-// Items
-function renderItems(){
-  const items=[];APP_DATA.chapters.forEach(ch=>ch.items.forEach(it=>items.push({it,ch:ch.id,t:ch.t})));
-  const fl=document.getElementById('ifl');
-  fl.innerHTML='<div class="fl-chip on" onclick="flI(\'all\',this)">Tous</div>';
-  [...new Set(items.map(i=>i.it))].sort().forEach(it=>{fl.innerHTML+=`<div class="fl-chip" onclick="flI('${it}',this)">${it}</div>`});
-  window._id=items;flI('all',document.querySelector('.fl-chip'));
-}
-function flI(f,el){document.querySelectorAll('.fl-chip').forEach(c=>c.classList.remove('on'));el.classList.add('on');const items=f==='all'?window._id:window._id.filter(i=>i.it===f);document.getElementById('il').innerHTML=items.map(i=>`<div class="it-card" onclick="showCh('${i.ch}')"><div class="it-id">${i.it}</div><div class="it-t">${i.t}</div><div class="it-ch">→ Chapitre</div></div>`).join('')}
-
-// Search
-let sIdx=[];
-function buildSI(){if(sIdx.length)return;APP_DATA.chapters.forEach(ch=>{(APP_DATA.content[ch.id]||[]).forEach(p=>{sIdx.push({t:p[1].toLowerCase(),p:p[0],ch:ch.id,ct:ch.t,raw:p[1]})})})}
-function openSearch(){buildSI();document.getElementById('sov').classList.add('open');setTimeout(()=>document.getElementById('si').focus(),80);document.getElementById('srl').innerHTML='<div class="sr-empty"><div class="sr-ic">🔍</div>Tapez pour chercher...</div>'}
-function closeSearch(){document.getElementById('sov').classList.remove('open');document.getElementById('si').value=''}
-document.getElementById('si').addEventListener('input',function(){
-  const q=this.value.toLowerCase().trim(),el=document.getElementById('srl');
-  if(q.length<2){el.innerHTML='<div class="sr-empty"><div class="sr-ic">⌨️</div>2 caractères minimum...</div>';return}
-  const words=q.split(/\s+/);let res=[];
-  for(const it of sIdx){if(words.every(w=>it.t.includes(w))){const idx=it.t.indexOf(words[0]),s=Math.max(0,idx-50),e=Math.min(it.raw.length,idx+words[0].length+80);let sn=it.raw.substring(s,e);words.forEach(w=>{sn=sn.replace(new RegExp(`(${w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`,'gi'),'<mark>$1</mark>')});res.push({p:it.p,ch:it.ch,ct:it.ct,sn})}if(res.length>=25)break}
-  if(!res.length){el.innerHTML=`<div class="sr-empty"><div class="sr-ic">😕</div>Aucun résultat pour « ${q}»</div>`;return}
-  el.innerHTML=res.map(r=>`<div class="sr-i" onclick="closeSearch();showCh('${r.ch}')"><div class="sr-h"><span class="sr-p">p.${r.p}</span><span class="sr-c">${r.ct}</span></div><div class="sr-t">…${r.sn}…</div></div>`).join('');
-});
-
-// Scroll
-window.addEventListener('scroll',()=>{if(S.view==='ch'){const h=document.documentElement,pct=h.scrollTop/(h.scrollHeight-h.clientHeight)*100;document.getElementById('rpb').style.width=pct+'%';document.getElementById('fab').style.display=h.scrollTop>400?'flex':'none'}});
-
-// Utils
-function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),1800)}
-function updStats(){const b=S.bm.length;document.getElementById('bmc').innerHTML=`⭐ <b>${b}</b> fav.`;const bd=document.getElementById('bmb');if(b>0){bd.style.display='flex';bd.textContent=b}else bd.style.display='none'}
-function resetProg(){S.read=[];localStorage.setItem('grd','[]');renderHome();toast('Progression réinitialisée')}
-function clearAll(){if(!confirm('Tout effacer ?'))return;S.bm=[];S.read=[];localStorage.removeItem('gbm');localStorage.removeItem('grd');renderHome();renderBm();updStats();toast('Données effacées')}
-document.addEventListener('keydown',e=>{if(e.key==='/'&&!e.ctrlKey&&document.activeElement.tagName!=='INPUT'){e.preventDefault();openSearch()}if(e.key==='Escape')closeSearch();if(S.view==='ch'){if(e.key==='ArrowRight')navCh(1);if(e.key==='ArrowLeft')navCh(-1)}});
-</script>
+<script src="figures.js"></script>
+<script src="app.js"></script>
 </body>
 </html>

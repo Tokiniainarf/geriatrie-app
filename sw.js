@@ -1,14 +1,17 @@
-const CACHE_NAME = 'geriatrie-v1';
-const ASSETS = [
+const CACHE_NAME = 'geriatrie-v3';
+const CORE = [
   './',
   './index.html',
+  './app.js',
+  './data.js',
+  './figures.js',
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png'
 ];
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(ASSETS)));
+  e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(CORE)));
   self.skipWaiting();
 });
 
@@ -22,13 +25,18 @@ self.addEventListener('activate', e => {
 });
 
 self.addEventListener('fetch', e => {
+  const url = new URL(e.request.url);
+  if (e.request.method !== 'GET') return;
   e.respondWith(
-    caches.match(e.request).then(r => r || fetch(e.request).then(resp => {
-      if (resp.status === 200 && resp.type === 'basic') {
-        const clone = resp.clone();
-        caches.open(CACHE_NAME).then(c => c.put(e.request, clone));
-      }
-      return resp;
-    }).catch(() => caches.match('./index.html')))
+    caches.match(e.request).then(cached => {
+      if (cached) return cached;
+      return fetch(e.request).then(resp => {
+        if (resp.status === 200 && (resp.type === 'basic' || url.pathname.startsWith('/images'))) {
+          const clone = resp.clone();
+          caches.open(CACHE_NAME).then(c => c.put(e.request, clone));
+        }
+        return resp;
+      }).catch(() => caches.match('./index.html'));
+    })
   );
 });
