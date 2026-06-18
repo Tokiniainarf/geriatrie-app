@@ -106,7 +106,10 @@ a{color:var(--accent2);text-decoration:none}
 /* Chapter cards */
 .cc{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:0;margin-bottom:8px;cursor:pointer;transition:.2s;position:relative;overflow:hidden}
 .cc:active{transform:scale(.98);border-color:var(--accent)}
-.cc-ill{height:48px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;position:relative;overflow:hidden}
+.cc-ill{height:56px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;position:relative;overflow:hidden}
+.cc-ill-img{height:72px}
+.cc-ill img{width:100%;height:100%;object-fit:cover;display:block}
+.cc-ill .ch-emoji{font-size:1.6rem;position:relative;z-index:1}
 .cc-ill::before{content:'';position:absolute;inset:0;opacity:.15}
 .cc[data-c="ch1"] .cc-ill::before{background:linear-gradient(135deg,#6366f1,#8b5cf6)}
 .cc[data-c="ch2"] .cc-ill::before{background:linear-gradient(135deg,#ec4899,#f43f5e)}
@@ -164,6 +167,9 @@ a{color:var(--accent2);text-decoration:none}
 .ch-hero[data-c="ch18"]::before{background:linear-gradient(135deg,#059669,#34d399)}
 .ch-hero[data-c="ch19"]::before{background:linear-gradient(135deg,#d946ef,#e879f9)}
 .ch-hero[data-c="ch20"]::before{background:linear-gradient(135deg,#0284c7,#38bdf8)}
+.ch-banner{display:none;margin:0 -20px 12px;height:130px;overflow:hidden;border-radius:0 0 16px 16px;position:relative;z-index:1}
+.ch-banner img{width:100%;height:100%;object-fit:cover;opacity:.92}
+.ch-banner::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(10,11,17,.7))}
 .ch-hero .ch-ill{font-size:2.8rem;margin-bottom:8px;position:relative;z-index:1;filter:drop-shadow(0 4px 12px rgba(0,0,0,.3))}
 .ch-hero .back{background:none;border:none;color:var(--accent2);font-size:.8rem;cursor:pointer;display:flex;align-items:center;gap:4px;margin-bottom:8px;padding:2px 0;font-weight:600;position:relative;z-index:1}
 .ch-hero h2{font-size:1.3rem;font-weight:900;line-height:1.3;margin-bottom:8px;position:relative;z-index:1;letter-spacing:-.02em}
@@ -262,7 +268,7 @@ a{color:var(--accent2);text-decoration:none}
 /* === BOTTOM NAV === */
 .bnav{position:fixed;bottom:0;left:0;right:0;height:var(--bottom);background:rgba(10,11,17,.94);backdrop-filter:blur(24px) saturate(1.2);-webkit-backdrop-filter:blur(24px) saturate(1.2);border-top:1px solid var(--border);display:flex;z-index:100;padding-bottom:env(safe-area-inset-bottom)}
 [data-theme="light"] .bnav{background:rgba(255,255,255,.92)}
-.ni{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;color:var(--text3);transition:.15s;font-size:.58rem;font-weight:600;position:relative}
+.ni{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;color:var(--text3);transition:.15s;font-size:.52rem;font-weight:600;position:relative;min-width:0}
 .ni .ni-ic{font-size:1.2rem;transition:.2s}
 .ni.on{color:var(--accent2)}.ni.on .ni-ic{transform:scale(1.15);filter:drop-shadow(0 2px 6px rgba(99,102,241,.4))}
 .badge{position:absolute;top:4px;right:calc(50% - 18px);min-width:16px;height:16px;background:linear-gradient(135deg,var(--red),var(--pink));color:#fff;font-size:.5rem;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 4px;font-weight:800;box-shadow:0 2px 6px rgba(248,113,113,.4)}
@@ -290,7 +296,23 @@ a{color:var(--accent2);text-decoration:none}
 .fig-block{margin:14px 0;border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--border);background:var(--bg3);cursor:zoom-in;transition:.2s}
 .fig-block:active{transform:scale(.98);border-color:var(--accent)}
 .fig-block img{width:100%;height:auto;display:block;max-height:420px;object-fit:contain;background:#fff}
+.fig-block.fig-tab{border-color:rgba(34,211,238,.3)}
+.fig-block.fig-enc{border-color:rgba(251,191,36,.3)}
 .fig-cap{padding:8px 12px;font-size:.7rem;color:var(--text2);font-weight:600;border-top:1px solid var(--border)}
+
+/* Gallery */
+.ill-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:16px}
+.ill-card{border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--border);background:var(--card);cursor:pointer;transition:.15s}
+.ill-card:active{transform:scale(.97);border-color:var(--accent)}
+.ill-card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#fff}
+.ill-cap{padding:8px 10px}
+.ill-type{display:block;font-size:.72rem;font-weight:800;color:var(--accent2)}
+.ill-ch{display:block;font-size:.62rem;color:var(--text3);margin-top:2px;line-height:1.3}
+
+/* Cover image */
+.cover-bg{position:relative}
+.cover-bg img.cover-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.45}
+.cover-icon{position:relative;z-index:1}
 
 /* Lightbox */
 .lb{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:400;display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:.25s}
@@ -397,7 +419,7 @@ a{color:var(--accent2);text-decoration:none}
   <!-- HOME -->
   <div class="view active" id="vHome">
     <div class="cover">
-      <div class="cover-bg"><div class="cover-icon">📖</div></div>
+      <div class="cover-bg"><img id="coverImg" class="cover-photo" style="display:none" alt=""><div class="cover-icon" id="coverIcon">📖</div></div>
       <div class="cover-body">
         <h2>Gériatrie</h2>
         <p>5e édition · Collège National des Enseignants de Gériatrie · Pr Jacques Boddaert · Elsevier Masson 2021</p>
@@ -406,7 +428,7 @@ a{color:var(--accent2);text-decoration:none}
     <div class="stats" style="padding:0 16px 8px">
       <div class="chip">📚 <b>20</b> chap.</div>
       <div class="chip">📄 <b>344</b> p.</div>
-      <div class="chip" id="figC">📊 <b>70</b> fig.</div>
+      <div class="chip" id="figC" onclick="sw('ill')" style="cursor:pointer">🖼️ <b>133</b> ill.</div>
       <div class="chip">🏷️ <b>11</b> ITEMs</div>
       <div class="chip" id="bmc">⭐ <b>0</b> fav.</div>
     </div>
@@ -426,6 +448,7 @@ a{color:var(--accent2);text-decoration:none}
   <div class="view" id="vCh">
     <div class="ch-hero" id="chHero">
       <button class="back" onclick="goHome()">← Retour aux chapitres</button>
+      <div class="ch-banner" id="chBanner"></div>
       <div class="ch-ill" id="chIll"></div>
       <h2 id="chT"></h2>
       <div class="ch-tags" id="chTags"></div>
@@ -440,6 +463,12 @@ a{color:var(--accent2);text-decoration:none}
       <button id="bmB" onclick="toggleBm()">☆ Favori</button>
       <button id="nextB" onclick="navCh(1)">Chap. →</button>
     </div>
+  </div>
+
+  <!-- ILLUSTRATIONS -->
+  <div class="view" id="vIll">
+    <div class="hero"><h1>🖼️ Illustrations</h1><div class="sub"><span id="illCnt">133</span> figures, tableaux et encadrés</div></div>
+    <div class="ill-grid" id="illGrid"></div>
   </div>
 
   <!-- ITEMS -->
@@ -478,6 +507,7 @@ a{color:var(--accent2);text-decoration:none}
 <!-- BOTTOM NAV -->
 <nav class="bnav">
   <div class="ni on" onclick="sw('home')" data-v="home"><span class="ni-ic">🏠</span>Accueil</div>
+  <div class="ni" onclick="sw('ill')" data-v="ill"><span class="ni-ic">🖼️</span>Ill.</div>
   <div class="ni" onclick="sw('items')" data-v="items"><span class="ni-ic">🏷️</span>ITEMs</div>
   <div class="ni" onclick="sw('bm')" data-v="bm"><span class="ni-ic">⭐</span>Fav.<span class="badge" id="bmb" style="display:none">0</span></div>
   <div class="ni" onclick="sw('set')" data-v="set"><span class="ni-ic">⚙️</span>Régl.</div>

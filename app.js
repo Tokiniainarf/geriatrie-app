@@ -31,7 +31,7 @@ const S = {
   ob:localStorage.getItem('gob')==='1'
 };
 
-let shownFigs = new Set(), sIdx = [], deferredPrompt = null;
+let shownIll = new Set(), sIdx = [], deferredPrompt = null;
 
 S.readMode = localStorage.getItem('grm') || 'scroll';
 
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('pgNav').style.display = S.readMode === 'page' ? 'flex' : 'none';
   const rmTog = document.getElementById('rmTog');
   if (rmTog) rmTog.classList.toggle('on', S.readMode === 'page');
-  renderHome(); renderItems(); renderBm(); updStats();
+  renderHome(); renderItems(); renderBm(); renderGallery(); updStats();
   if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
   window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; document.getElementById('installB').style.display = 'flex'; });
   initSwipe();
@@ -65,19 +65,54 @@ function toggleTheme() {
 }
 function setFS(v) { S.fs = +v; document.body.style.fontSize = v + 'px'; localStorage.setItem('gfs', v); }
 
-function figBlock(figId) {
-  if (shownFigs.has(figId) || typeof FIGURES === 'undefined') return '';
-  const imgs = FIGURES[figId];
-  if (!imgs || !imgs.length) return '';
-  shownFigs.add(figId);
-  return `<div class="fig-block" onclick="openLb('${imgs[0]}')"><img src="${imgs[0]}" alt="Fig. ${figId}" loading="lazy"><div class="fig-cap">📊 Fig. ${figId} — toucher pour agrandir</div></div>`;
+function illSrc(type, id) {
+  const maps = { fig: typeof FIGURES !== 'undefined' ? FIGURES : {}, tab: typeof TABLEAUX !== 'undefined' ? TABLEAUX : {}, enc: typeof ENCADRES !== 'undefined' ? ENCADRES : {} };
+  const imgs = maps[type]?.[id];
+  return imgs?.[0] || null;
+}
+
+function illBlock(type, id, label) {
+  const key = type + ':' + id;
+  if (shownIll.has(key)) return '';
+  const src = illSrc(type, id);
+  if (!src) return '';
+  shownIll.add(key);
+  const icons = { fig: '📊', tab: '📋', enc: '📌' };
+  const cls = { fig: '', tab: ' fig-tab', enc: ' fig-enc' }[type] || '';
+  return `<div class="fig-block${cls}" onclick="openLb('${src}')"><img src="${src}" alt="${label}" loading="lazy"><div class="fig-cap">${icons[type]} ${label} — toucher pour agrandir</div></div>`;
+}
+
+function chThumb(id) {
+  const src = typeof CHAPTER_ILL !== 'undefined' ? CHAPTER_ILL[id] : null;
+  if (src) return `<img src="${src}" alt="" loading="lazy">`;
+  return `<span class="ch-emoji">${CH_ILL[id] || '📖'}</span>`;
+}
+
+function setChapterHero(id) {
+  const banner = document.getElementById('chBanner');
+  const ill = document.getElementById('chIll');
+  const src = typeof CHAPTER_ILL !== 'undefined' ? CHAPTER_ILL[id] : null;
+  if (src && banner) {
+    banner.innerHTML = `<img src="${src}" alt="" loading="lazy">`;
+    banner.style.display = 'block';
+    ill.style.display = 'none';
+  } else {
+    if (banner) { banner.innerHTML = ''; banner.style.display = 'none'; }
+    ill.textContent = CH_ILL[id] || '📖';
+    ill.style.display = 'block';
+  }
 }
 
 function pageImgs(pageNum) {
   if (typeof PAGE_IMAGES === 'undefined') return '';
   const imgs = PAGE_IMAGES[String(pageNum)];
   if (!imgs) return '';
-  return imgs.map((src, i) => `<div class="fig-block" onclick="openLb('${src}')"><img src="${src}" alt="Illustration p.${pageNum}" loading="lazy"><div class="fig-cap">Illustration ${i+1} — p.${pageNum}</div></div>`).join('');
+  const crops = imgs.filter(s => s.includes('/crops/'));
+  const rest = imgs.filter(s => !s.includes('/figures/page_'));
+  let list = crops.length ? [...crops, ...rest.filter(r => !crops.includes(r))] : imgs.filter(s => !s.includes('/figures/page_') || !crops.length);
+  if (!list.length) list = imgs.slice(0, 1);
+  const unique = [...new Set(list)].filter(s => { const k = 'pg:' + s; if (shownIll.has(k)) return false; shownIll.add(k); return true; }).slice(0, 3);
+  return unique.map((src, i) => `<div class="fig-block" onclick="openLb('${src}')"><img src="${src}" alt="Illustration p.${pageNum}" loading="lazy"><div class="fig-cap">🖼️ Illustration p.${pageNum}${unique.length > 1 ? ' (' + (i+1) + '/' + unique.length + ')' : ''}</div></div>`).join('');
 }
 
 function renderBlocks(raw) {
@@ -119,11 +154,15 @@ function renderBody(raw, pageNum) {
   function closeBox() { if (inBox) { html += '</div>'; inBox = null; } }
   function closeUL() { if (inUL) { html += '</ul>'; inUL = false; } }
   function getSecIcon(s) { for (const [k,v] of Object.entries(SEC_HINTS)) if (s.includes(k)) return v; return ''; }
-  function extractFigs(s) {
+  function extractIllustrations(s) {
     let extra = '';
-    const re = /Fig\.\s*(\d+)\.(\d+)/g;
     let m;
-    while ((m = re.exec(s)) !== null) extra += figBlock(m[1]+'.'+m[2]);
+    const figRe = /Fig\.\s*(\d+)\.(\d+)/g;
+    while ((m = figRe.exec(s)) !== null) extra += illBlock('fig', m[1]+'.'+m[2], `Fig. ${m[1]}.${m[2]}`);
+    const tabRe = /Tableau\s*(\d+)\.(\d+)/gi;
+    while ((m = tabRe.exec(s)) !== null) extra += illBlock('tab', m[1]+'.'+m[2], `Tableau ${m[1]}.${m[2]}`);
+    const encRe = /Encadré\s*(\d+)\.(\d+)/gi;
+    while ((m = encRe.exec(s)) !== null) extra += illBlock('enc', m[1]+'.'+m[2], `Encadré ${m[1]}.${m[2]}`);
     return extra;
   }
 
@@ -177,7 +216,7 @@ function renderBody(raw, pageNum) {
     }
     if (merged.length < 3) continue;
     html += `<p>${fmt(merged)}</p>`;
-    html += extractFigs(merged);
+    html += extractIllustrations(merged);
   }
   closeUL(); closeBox();
   return html;
@@ -219,6 +258,7 @@ function sw(view) {
   document.getElementById('rtoolbar').style.display = view === 'ch' ? 'flex' : 'none';
   window.scrollTo(0,0);
   if (view === 'bm') renderBm();
+  if (view === 'ill') renderGallery();
   if (view === 'set') document.getElementById('pd').textContent = `${S.read.length} chapitres lus sur ${APP_DATA.chapters.length}`;
 }
 function goHome() { saveScroll(); sw('home'); S.ch = null; }
@@ -229,11 +269,11 @@ function showCh(id, pgIdx) {
   saveScroll();
   S.ch = id;
   S.pgIdx = pgIdx || 0;
-  shownFigs = new Set();
+  shownIll = new Set();
   if (!S.read.includes(id)) { S.read.push(id); localStorage.setItem('grd', JSON.stringify(S.read)); }
 
   document.getElementById('chHero').setAttribute('data-c', id);
-  document.getElementById('chIll').textContent = CH_ILL[id] || '📖';
+  setChapterHero(id);
   document.getElementById('chT').textContent = ch.t;
   document.getElementById('chTags').innerHTML = ch.items.map(i => `<span class="ch-tag">${i}</span>`).join('') +
     `<span class="ch-tag">${(APP_DATA.content[id]||[]).length} pages</span>`;
@@ -273,7 +313,7 @@ function navCh(d) { const idx = APP_DATA.chapters.findIndex(c => c.id === S.ch);
 function navPage(d) {
   const pages = APP_DATA.content[S.ch] || [];
   S.pgIdx = Math.max(0, Math.min(pages.length-1, S.pgIdx + d));
-  shownFigs = new Set();
+  shownIll = new Set();
   renderChapterPages(pages);
   window.scrollTo(0, 0);
   updPageInd();
@@ -287,7 +327,7 @@ function toggleReadMode() {
   const rmTog = document.getElementById('rmTog');
   if (rmTog) rmTog.classList.toggle('on', S.readMode === 'page');
   document.getElementById('fab').style.display = S.readMode === 'scroll' && S.view === 'ch' ? 'flex' : 'none';
-  if (S.ch) { shownFigs = new Set(); renderChapterPages(APP_DATA.content[S.ch]||[]); }
+  if (S.ch) { shownIll = new Set(); renderChapterPages(APP_DATA.content[S.ch]||[]); }
 }
 
 function jumpSec(id) { closeTOC(); const el = document.getElementById(id); if (el) el.scrollIntoView({behavior:'smooth',block:'start'}); }
@@ -339,13 +379,14 @@ function renderHome() {
     card.setAttribute('data-part', ch.part);
     card.onclick = () => showCh(ch.id);
     const prog = S.scroll[ch.id] ? Math.min(100, Math.round(S.scroll[ch.id]/50)) : (rd ? 100 : 0);
-    card.innerHTML = `<div class="cc-ill" style="background:linear-gradient(135deg,${CH_COLORS[ch.id]}22,${CH_COLORS[ch.id]}44)">${CH_ILL[ch.id]||'📖'}</div><div class="cc-body"><div class="cc-top"><div class="cc-n" style="border-color:${CH_COLORS[ch.id]}44;color:${CH_COLORS[ch.id]}">${ch.id.replace('ch','')}</div><div class="cc-inf"><div class="cc-t">${ch.t}</div><div class="cc-m">${ch.items.map(i=>`<span class="cc-tag">${i}</span>`).join('')}<span class="cc-pg">${pgCount} p.${rd?' ✅':''}</span></div></div></div></div><button class="cc-bm ${bm?'sv':''}" onclick="event.stopPropagation();quickBm('${ch.id}')">${bm?'⭐':'☆'}</button>${prog>0?`<div class="prog"><div class="fill" style="width:${prog}%"></div></div>`:''}`;
+    const hasIll = typeof CHAPTER_ILL !== 'undefined' && CHAPTER_ILL[ch.id];
+    card.innerHTML = `<div class="cc-ill${hasIll?' cc-ill-img':''}" style="background:linear-gradient(135deg,${CH_COLORS[ch.id]}22,${CH_COLORS[ch.id]}44)">${chThumb(ch.id)}</div><div class="cc-body"><div class="cc-top"><div class="cc-n" style="border-color:${CH_COLORS[ch.id]}44;color:${CH_COLORS[ch.id]}">${ch.id.replace('ch','')}</div><div class="cc-inf"><div class="cc-t">${ch.t}</div><div class="cc-m">${ch.items.map(i=>`<span class="cc-tag">${i}</span>`).join('')}<span class="cc-pg">${pgCount} p.${rd?' ✅':''}</span></div></div></div></div><button class="cc-bm ${bm?'sv':''}" onclick="event.stopPropagation();quickBm('${ch.id}')">${bm?'⭐':'☆'}</button>${prog>0?`<div class="prog"><div class="fill" style="width:${prog}%"></div></div>`:''}`;
     (ch.part === 1 ? p1 : p2).appendChild(card);
   });
   if (S.read.length > 0) {
     document.getElementById('recent').style.display = 'block';
     const last = S.read[S.read.length-1], lc = APP_DATA.chapters.find(c => c.id === last);
-    if (lc) document.getElementById('recentC').innerHTML = `<div class="cc recent-card" data-c="${last}" onclick="showCh('${last}')"><div class="cc-ill" style="background:linear-gradient(135deg,${CH_COLORS[last]}33,${CH_COLORS[last]}55)">${CH_ILL[last]||'📖'}</div><div class="cc-body"><div class="cc-top"><div class="cc-n">${lc.id.replace('ch','')}</div><div class="cc-inf"><div class="cc-t">${lc.t}</div><div class="cc-m"><span class="cc-pg">▶ Reprendre la lecture</span></div></div></div></div></div>`;
+    if (lc) document.getElementById('recentC').innerHTML = `<div class="cc recent-card" data-c="${last}" onclick="showCh('${last}')"><div class="cc-ill cc-ill-img" style="background:linear-gradient(135deg,${CH_COLORS[last]}33,${CH_COLORS[last]}55)">${chThumb(last)}</div><div class="cc-body"><div class="cc-top"><div class="cc-n">${lc.id.replace('ch','')}</div><div class="cc-inf"><div class="cc-t">${lc.t}</div><div class="cc-m"><span class="cc-pg">▶ Reprendre la lecture</span></div></div></div></div></div>`;
   }
 }
 
@@ -363,7 +404,32 @@ function updBB() { const b = document.getElementById('bmB'); if (b) b.innerHTML 
 function renderBm() {
   const l = document.getElementById('bml');
   if (!S.bm.length) { l.innerHTML = '<div class="bm-empty"><div class="bm-ic">⭐</div><p>Aucun favori.<br>Touchez ☆ sur un chapitre.</p></div>'; return; }
-  l.innerHTML = S.bm.map(id => { const ch = APP_DATA.chapters.find(c => c.id === id); if (!ch) return ''; return `<div class="cc" onclick="showCh('${id}')"><div class="cc-ill">${CH_ILL[id]||'📖'}</div><div class="cc-body"><div class="cc-top"><div class="cc-n">${ch.id.replace('ch','')}</div><div class="cc-inf"><div class="cc-t">${ch.t}</div></div></div></div></div>`; }).join('');
+  l.innerHTML = S.bm.map(id => { const ch = APP_DATA.chapters.find(c => c.id === id); if (!ch) return ''; return `<div class="cc" onclick="showCh('${id}')"><div class="cc-ill cc-ill-img">${chThumb(id)}</div><div class="cc-body"><div class="cc-top"><div class="cc-n">${ch.id.replace('ch','')}</div><div class="cc-inf"><div class="cc-t">${ch.t}</div></div></div></div></div>`; }).join('');
+}
+
+function renderGallery() {
+  const el = document.getElementById('illGrid');
+  if (!el) return;
+  const items = [];
+  const add = (type, map, prefix, icon) => {
+    if (!map) return;
+    Object.entries(map).forEach(([id, srcs]) => {
+      const chNum = parseInt(id.split('.')[0], 10);
+      const ch = APP_DATA.chapters.find(c => c.id === 'ch' + chNum);
+      items.push({ type, id, src: srcs[0], label: prefix + ' ' + id, ch: ch?.t || 'Ch.' + chNum, chId: ch?.id || 'ch' + chNum, icon });
+    });
+  };
+  add('fig', typeof FIGURES !== 'undefined' ? FIGURES : null, 'Fig.', '📊');
+  add('tab', typeof TABLEAUX !== 'undefined' ? TABLEAUX : null, 'Tableau', '📋');
+  add('enc', typeof ENCADRES !== 'undefined' ? ENCADRES : null, 'Encadré', '📌');
+  items.sort((a, b) => {
+    const [ac, ai] = a.id.split('.').map(Number);
+    const [bc, bi] = b.id.split('.').map(Number);
+    return ac - bc || ai - bi;
+  });
+  el.innerHTML = items.map(it => `<div class="ill-card" onclick="openLb('${it.src}')"><img src="${it.src}" alt="${it.label}" loading="lazy"><div class="ill-cap"><span class="ill-type">${it.icon} ${it.label}</span><span class="ill-ch">${it.ch}</span></div></div>`).join('');
+  const cnt = document.getElementById('illCnt');
+  if (cnt) cnt.textContent = items.length;
 }
 
 function renderItems() {
@@ -444,9 +510,17 @@ function updStats() {
   document.getElementById('bmc').innerHTML = `⭐ <b>${b}</b> fav.`;
   const bd = document.getElementById('bmb');
   if (b > 0) { bd.style.display='flex'; bd.textContent=b; } else bd.style.display='none';
-  const figCount = typeof FIGURES !== 'undefined' ? Object.keys(FIGURES).length : 0;
+  const nFig = typeof FIGURES !== 'undefined' ? Object.keys(FIGURES).length : 0;
+  const nTab = typeof TABLEAUX !== 'undefined' ? Object.keys(TABLEAUX).length : 0;
+  const nEnc = typeof ENCADRES !== 'undefined' ? Object.keys(ENCADRES).length : 0;
+  const total = nFig + nTab + nEnc;
   const figEl = document.getElementById('figC');
-  if (figEl) figEl.innerHTML = `📊 <b>${figCount}</b> fig.`;
+  if (figEl) figEl.innerHTML = `🖼️ <b>${total}</b> ill.`;
+  const coverImg = document.getElementById('coverImg');
+  if (coverImg && typeof CHAPTER_ILL !== 'undefined') {
+    const src = CHAPTER_ILL.ch6 || CHAPTER_ILL.ch1 || Object.values(CHAPTER_ILL)[0];
+    if (src) { coverImg.src = src; coverImg.style.display = 'block'; document.getElementById('coverIcon').style.display = 'none'; }
+  }
 }
 function resetProg() { S.read=[]; S.scroll={}; localStorage.setItem('grd','[]'); localStorage.setItem('gsc','{}'); renderHome(); toast('Progression réinitialisée'); }
 function clearAll() { if (!confirm('Tout effacer ?')) return; S.bm=[]; S.read=[]; S.scroll={}; localStorage.removeItem('gbm'); localStorage.removeItem('grd'); localStorage.removeItem('gsc'); renderHome(); renderBm(); updStats(); toast('Données effacées'); }
