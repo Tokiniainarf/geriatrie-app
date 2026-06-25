@@ -12,16 +12,20 @@ const RUBRIQUES = [
   'Traitement', 'Pronostic', 'Clinique', 'Bilan', 'Surveillance'
 ];
 
+function safeJSON(key, fallback) {
+  try { return JSON.parse(localStorage.getItem(key)) || fallback; }
+  catch { return fallback; }
+}
 const S = {
   view:'home', ch:null, pgIdx:0, readMode:'scroll',
-  bm:JSON.parse(localStorage.getItem('gbm')||'[]'),
-  read:JSON.parse(localStorage.getItem('grd')||'[]'),
-  scroll:JSON.parse(localStorage.getItem('gsc')||'{}'),
-  fs:parseInt(localStorage.getItem('gfs')||'17'),
-  lh:parseFloat(localStorage.getItem('glh')||'1.78'),
-  th:localStorage.getItem('gth')||'light',
-  ob:localStorage.getItem('gob')==='1',
-  prog:JSON.parse(localStorage.getItem('gprog')||'{}')   // { ch1: [0,2,5,...] indices des pages visitées }
+  bm: safeJSON('gbm', []),
+  read: safeJSON('grd', []),
+  scroll: safeJSON('gsc', {}),
+  fs: parseInt(localStorage.getItem('gfs')||'17'),
+  lh: parseFloat(localStorage.getItem('glh')||'1.78'),
+  th: localStorage.getItem('gth')||'light',
+  ob: localStorage.getItem('gob')==='1',
+  prog: safeJSON('gprog', {})
 };
 
 let shownIll = new Set(), sIdx = [], deferredPrompt = null;
@@ -661,18 +665,19 @@ function onSearchInput() {
   for (const it of sIdx) {
     if (words.every(w => it.t.includes(w))) {
       const idx = it.t.indexOf(words[0]), s = Math.max(0, idx - 70), e = Math.min(it.raw.length, idx + words[0].length + 120);
-      let sn = it.raw.substring(s, e);
-      words.forEach(w => { sn = sn.replace(new RegExp(`(${w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`,'gi'),'<mark>$1</mark>'); });
-      res.push({ p: it.p, pi: it.pi, ch: it.ch, ct: it.ct, sn });
+      let snippet = it.raw.substring(s, e);
+      snippet = snippet.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      words.forEach(w => { snippet = snippet.replace(new RegExp(`(${w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`,'gi'),'<mark>$1</mark>'); });
+      res.push({ p: it.p, pi: it.pi, ch: it.ch, ct: it.ct, sn: snippet });
       if (res.length >= 18) break;
     }
   }
   el.innerHTML = res.length
-    ? res.map(r => `<div class="sr-i" onclick="closeSearch(); showCh('${r.ch}', ${r.pi});"><div class="sr-h"><span class="sr-p">p. ${r.p}</span><span class="sr-c">${esc(r.ct)}</span></div><div class="sr-t">${sn(r.sn)}</div></div>`).join('')
+    ? res.map(r => `<div class="sr-i" onclick="closeSearch(); showCh('${r.ch}', ${r.pi});"><div class="sr-h"><span class="sr-p">p. ${r.p}</span><span class="sr-c">${esc(r.ct)}</span></div><div class="sr-t">${r.sn}</div></div>`).join('')
     : `<div class="sr-empty">Aucun résultat pour « ${esc(q)} »</div>`;
 }
 
-function sn(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+// sn() removed — escaping done inline in search
 
 window.addEventListener('scroll', () => {
   if (S.view === 'ch') {

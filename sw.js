@@ -1,4 +1,4 @@
-const CACHE_NAME = 'geriatrie-v8';
+const CACHE_NAME = 'geriatrie-v9';
 const CORE = [
   './',
   './index.html',
@@ -31,7 +31,14 @@ self.addEventListener('fetch', e => {
     caches.match(e.request).then(cached => {
       if (cached) return cached;
       return fetch(e.request).then(resp => {
-        if (resp.status === 200 && (resp.type === 'basic' || url.pathname.startsWith('/images'))) {
+        const isAsset = resp.status === 200 && (
+          resp.type === 'basic' ||
+          url.pathname.includes('/images/') ||
+          url.pathname.includes('/icons/') ||
+          url.hostname.includes('fonts.googleapis.com') ||
+          url.hostname.includes('fonts.gstatic.com')
+        );
+        if (isAsset) {
           const clone = resp.clone();
           caches.open(CACHE_NAME).then(c => c.put(e.request, clone));
         }

@@ -7,6 +7,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Gériatrie 5e éd.">
+<meta name="description" content="Gériatrie 5e éd. CNEG — Manuel complet hors-ligne. 20 chapitres, 344 pages, ITEMs ECN. PWA pour étudiants en médecine.">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <title>Gériatrie — 5e édition · CNEG</title>
@@ -381,7 +384,7 @@ body {
   background:var(--bg2); border-top:1px solid var(--border);
   display:flex; z-index:100; padding-bottom:env(safe-area-inset-bottom);
 }
-.ni { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; cursor:pointer; color:var(--text3); font-size:.58rem; font-weight:600 }
+.ni { flex:1; display:flex; background:none; border:none; font-family:inherit; padding:0; cursor:pointer; flex-direction:column; align-items:center; justify-content:center; gap:2px; cursor:pointer; color:var(--text3); font-size:.58rem; font-weight:600 }
 .ni.on { color:var(--accent) }
 .ni-ic { font-size:.65rem; font-weight:700; letter-spacing:.02em }
 .badge { position:absolute; top:6px; right:calc(50% - 16px); min-width:14px; height:14px; background:var(--accent); color:#fff; font-size:.48rem; border-radius:7px; display:flex; align-items:center; justify-content:center; font-weight:800 }
@@ -441,6 +444,7 @@ body {
   .toc-pan, .pjump-pan { max-width:720px; left:50%; transform:translateX(-50%) translateY(100%) }
   .toc-d.open .toc-pan, .pjump.open .pjump-pan { transform:translateX(-50%) translateY(0) }
 }
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
 </style>
 </head>
 <body>
@@ -456,15 +460,16 @@ body {
 <div class="topbar">
   <div class="logo">Gériatrie<sub>5e éd. · CNEG</sub></div>
   <div style="margin-left:auto;display:flex;gap:6px">
-    <button class="tb" onclick="openSearch()" title="Rechercher (/)">⌕</button>
-    <button class="tb" onclick="toggleTheme()" id="thBtn">☀</button>
+    <button class="tb" onclick="openSearch()" title="Rechercher (/)" aria-label="Rechercher">⌕</button>
+    <button class="tb" onclick="toggleTheme()" id="thBtn" aria-label="Basculer le thème">☀</button>
   </div>
 </div>
 
 <div class="sov" id="sov" onclick="if(event.target===this)closeSearch()">
   <div class="sbox">
     <div class="si-w">
-      <input type="text" id="si" placeholder="Rechercher un concept, ITEM, mot-clé…" autocomplete="off">
+      <label for="si" class="sr-only">Rechercher</label>
+      <input type="text" id="si" aria-label="Rechercher dans le manuel" placeholder="Rechercher un concept, ITEM, mot-clé…" autocomplete="off">
       <button class="sr-cl" onclick="closeSearch()">Fermer</button>
     </div>
     <div class="sr-l" id="srl"></div>
@@ -480,7 +485,7 @@ body {
   <span id="ch-prog-mini" style="margin-left:8px; font-size:.7rem; color:var(--text3); font-weight:600;"></span>
 </div>
 
-<div class="main">
+<main class="main">
 
   <div class="view active" id="vHome">
     <div class="book-header">
@@ -539,7 +544,7 @@ body {
   <div class="view" id="vSet">
     <div class="page-hd"><h1>Réglages</h1></div>
     <div class="sg">
-      <div class="sr"><div><div class="lb">Mode sombre</div></div><div class="tog" id="dtog" onclick="toggleTheme()"></div></div>
+      <div class="sr"><div><div class="lb">Mode sombre</div></div><div class="tog" id="dtog" onclick="toggleTheme()" role="switch" aria-checked="false" aria-label="Mode sombre" tabindex="0"></div></div>
       <div class="sr"><div><div class="lb">Taille du texte</div></div><input type="range" min="14" max="22" value="17" id="fsl" oninput="setFS(this.value)"></div>
       <div class="sr"><div><div class="lb">Interligne</div></div><input type="range" min="1.5" max="2.1" step="0.05" value="1.78" id="lhsl" oninput="setLH(this.value)"></div>
       <div class="sr"><div><div class="lb">Lecture page par page</div></div><div class="tog" id="rmTog" onclick="toggleReadMode();document.getElementById('rmTog').classList.toggle('on',localStorage.getItem('grm')==='page')"></div></div>
@@ -554,14 +559,14 @@ body {
     </div>
   </div>
 
-</div>
+</main>
 
 <nav class="bnav">
-  <div class="ni on" onclick="sw('home')" data-v="home"><span class="ni-ic">Accueil</span></div>
-  <div class="ni" onclick="sw('ill')" data-v="ill"><span class="ni-ic">Figures</span></div>
-  <div class="ni" onclick="sw('items')" data-v="items"><span class="ni-ic">ITEM</span></div>
-  <div class="ni" onclick="sw('bm')" data-v="bm"><span class="ni-ic">Favoris</span><span class="badge" id="bmb" style="display:none">0</span></div>
-  <div class="ni" onclick="sw('set')" data-v="set"><span class="ni-ic">Réglages</span></div>
+  <button class="ni on" onclick="sw('home')" data-v="home" aria-label="Accueil"><span class="ni-ic">Accueil</span></button>
+  <button class="ni" onclick="sw('ill')" data-v="ill" aria-label="Figures"><span class="ni-ic">Figures</span></button>
+  <button class="ni" onclick="sw('items')" data-v="items" aria-label="ITEMs"><span class="ni-ic">ITEM</span></button>
+  <button class="ni" onclick="sw('bm')" data-v="bm" aria-label="Favoris"><span class="ni-ic">Favoris</span><span class="badge" id="bmb" style="display:none">0</span></button>
+  <button class="ni" onclick="sw('set')" data-v="set" aria-label="Réglages"><span class="ni-ic">Réglages</span></button>
 </nav>
 
 <div class="toc-d" id="tocD" onclick="if(event.target===this)closeTOC()">
@@ -587,7 +592,7 @@ body {
 </div>
 
 <button class="fab" id="fab" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="display:none">↑</button>
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" aria-live="polite" aria-atomic="true"></div>
 
 <script src="data.js"></script>
 <script src="figures.js"></script>

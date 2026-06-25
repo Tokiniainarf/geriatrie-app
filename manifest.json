@@ -2,9 +2,9 @@
   "name": "Gériatrie — 5e édition · CNEG",
   "short_name": "Gériatrie 5e",
   "description": "Gériatrie 5e éd. CNEG — Lecture hors-ligne complète. 20 chapitres, 344 pages, ITEMs ECN, 33 figures. PWA optimisée pour étudiants en médecine.",
-  "start_url": "./index.html",
+  "start_url": "./",
   "display": "standalone",
-  "background_color": "#0a0b11",
+  "background_color": "#f7f5f0",
   "theme_color": "#1a4d6e",
   "orientation": "portrait-primary",
   "icons": [
