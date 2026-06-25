@@ -1,7 +1,7 @@
 {
   "name": "Gériatrie — 5e édition · CNEG",
   "short_name": "Gériatrie 5e",
-  "description": "Manuel de gériatrie CNEG 5e édition — 20 chapitres, 344 pages, 33 figures. Hors-ligne.",
+  "description": "Gériatrie 5e éd. CNEG — Lecture hors-ligne complète. 20 chapitres, 344 pages, ITEMs ECN, 33 figures. PWA optimisée pour étudiants en médecine.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0a0b11",

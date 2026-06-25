@@ -1,4 +1,4 @@
-/* Gériatrie 5e éd. — App logic v2 */
+/* Gériatrie 5e éd. — App logic v3 (améliorations UI/UX + progression chapitres) */
 const CH_COLORS = {
   ch1:'#1e5f8a',ch2:'#2d6a4f',ch3:'#5c4d7d',ch4:'#9a6b2e',ch5:'#1a6b7c',
   ch6:'#8b4513',ch7:'#3d6b59',ch8:'#8b2942',ch9:'#2c5282',ch10:'#5a6472',
@@ -18,8 +18,10 @@ const S = {
   read:JSON.parse(localStorage.getItem('grd')||'[]'),
   scroll:JSON.parse(localStorage.getItem('gsc')||'{}'),
   fs:parseInt(localStorage.getItem('gfs')||'17'),
+  lh:parseFloat(localStorage.getItem('glh')||'1.78'),
   th:localStorage.getItem('gth')||'light',
-  ob:localStorage.getItem('gob')==='1'
+  ob:localStorage.getItem('gob')==='1',
+  prog:JSON.parse(localStorage.getItem('gprog')||'{}')   // { ch1: [0,2,5,...] indices des pages visitées }
 };
 
 let shownIll = new Set(), sIdx = [], deferredPrompt = null;
@@ -28,6 +30,9 @@ S.readMode = localStorage.getItem('grm') || 'scroll';
 document.addEventListener('DOMContentLoaded', () => {
   if (S.ob) document.getElementById('ob').classList.add('done');
   setFS(S.fs);
+  setLH(S.lh, true);
+  const lhEl = document.getElementById('lhsl');
+  if (lhEl) lhEl.value = S.lh;
   document.getElementById('fsl').value = S.fs;
   applyTheme();
   syncReadModeUI();
@@ -38,7 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('installB').style.display = 'flex';
   });
   initSwipe();
-  document.getElementById('si').addEventListener('input', onSearchInput);
+  const si = document.getElementById('si');
+  si.addEventListener('input', debounce(onSearchInput, 160));
 });
 
 function applyTheme() {
@@ -66,7 +72,37 @@ function toggleTheme() {
 
 function setFS(v) { S.fs = +v; document.body.style.fontSize = v + 'px'; localStorage.setItem('gfs', v); }
 
+function setLH(v, initOnly = false) {
+  S.lh = parseFloat(v);
+  document.documentElement.style.setProperty('--lh', S.lh);
+  if (!initOnly) localStorage.setItem('glh', S.lh);
+}
+
+function debounce(fn, ms) {
+  let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); };
+}
+
 function isGoodSrc(src) { return src && !src.includes('figures/page_'); }
+
+/* --- Progression par chapitre (pages visitées) --- */
+function trackVisit(chId, pageIdx) {
+  if (!chId || typeof pageIdx !== 'number') return;
+  if (!S.prog[chId]) S.prog[chId] = [];
+  const arr = S.prog[chId];
+  if (!arr.includes(pageIdx)) {
+    arr.push(pageIdx);
+    arr.sort((a,b)=>a-b);
+    localStorage.setItem('gprog', JSON.stringify(S.prog));
+  }
+}
+
+function getChProgress(chId) {
+  const pages = APP_DATA.content[chId] || [];
+  const visited = (S.prog[chId] || []).length;
+  const total = pages.length;
+  const pct = total > 0 ? Math.round((visited / total) * 100) : 0;
+  return { visited, total, pct };
+}
 
 function illBlock(figId) {
   const key = 'fig:' + figId;
@@ -74,7 +110,8 @@ function illBlock(figId) {
   const src = FIGURES[figId]?.[0];
   if (!isGoodSrc(src)) return '';
   shownIll.add(key);
-  return `<figure class="fig-block" onclick="openLb('${src}')"><img src="${src}" alt="Figure ${figId}" loading="lazy"><figcaption>Figure ${figId}</figcaption></figure>`;
+  const safeId = esc(figId);
+  return `<figure class="fig-block" onclick="openLb('${src}', '${safeId}')"><img src="${src}" alt="Figure ${figId}" loading="lazy"><figcaption>Figure ${figId}</figcaption></figure>`;
 }
 
 /* ── Text preprocessing ── */
@@ -332,7 +369,10 @@ function sw(view) {
   window.scrollTo(0, 0);
   if (view === 'bm') renderBm();
   if (view === 'ill') renderGallery();
-  if (view === 'set') document.getElementById('pd').textContent = `${S.read.length} / ${APP_DATA.chapters.length} chapitres lus`;
+  if (view === 'set') {
+    const totalVisited = Object.values(S.prog).reduce((sum, arr) => sum + (arr ? arr.length : 0), 0);
+    document.getElementById('pd').textContent = `${S.read.length} chapitres lus · ${totalVisited} pages visitées`;
+  }
 }
 
 function goHome() { saveScroll(); sw('home'); S.ch = null; }
@@ -351,11 +391,12 @@ function showCh(id, pgIdx) {
   document.getElementById('chNum').textContent = num;
   document.getElementById('chNum').style.color = CH_COLORS[id];
   document.getElementById('chT').textContent = ch.t;
+  const pages = APP_DATA.content[id] || [];
+  const prog = getChProgress(id);
   document.getElementById('chTags').innerHTML =
     ch.items.map(i => `<span class="tag">${i}</span>`).join('') +
-    `<span class="tag tag-muted">${(APP_DATA.content[id]||[]).length} pages</span>`;
+    `<span class="tag tag-muted">${pages.length} pages · ${prog.pct}%</span>`;
 
-  const pages = APP_DATA.content[id] || [];
   const toc = buildTOC(pages);
   document.getElementById('tocList').innerHTML = toc.length
     ? toc.map(s => `<div class="toc-i" onclick="jumpSec('${s.id}')"><span class="toc-p">p. ${s.page}</span><span>${esc(s.title)}</span></div>`).join('')
@@ -366,11 +407,18 @@ function showCh(id, pgIdx) {
   document.getElementById('prevB').disabled = idx <= 0;
   document.getElementById('nextB').disabled = idx >= APP_DATA.chapters.length - 1;
   updBB(); sw('ch');
+  // mini progression dans la barre d'outils
+  const mini = document.getElementById('ch-prog-mini');
+  if (mini) {
+    const p = getChProgress(id);
+    mini.textContent = `${p.visited}/${p.total} (${p.pct}%)`;
+  }
   setTimeout(() => {
     if (S.scroll[id]) window.scrollTo(0, S.scroll[id]);
     else if (pgIdx > 0) jumpPage(pgIdx);
     updPageInd();
-  }, 60);
+    trackVisit(id, S.readMode === 'page' ? S.pgIdx : 0);
+  }, 70);
 }
 
 function renderChapterPages(pages) {
@@ -383,8 +431,11 @@ function renderChapterPages(pages) {
     body.innerHTML = `<article class="reader">${content || '<p class="empty-page">Page vide</p>'}</article>`;
     document.getElementById('pgPrev').disabled = S.pgIdx <= 0;
     document.getElementById('pgNext').disabled = S.pgIdx >= pages.length - 1;
+    trackVisit(S.ch, S.pgIdx);
   } else {
     body.innerHTML = `<article class="reader">${pages.map(p => renderPageContent(p, ch)).join('')}</article>`;
+    // Marquer la première page visible comme visitée
+    trackVisit(S.ch, 0);
   }
 }
 
@@ -397,6 +448,7 @@ function navPage(d) {
   renderChapterPages(pages);
   window.scrollTo(0, 0);
   updPageInd();
+  trackVisit(S.ch, S.pgIdx);
 }
 
 function toggleReadMode() {
@@ -415,6 +467,7 @@ function jumpPage(idx) {
   if (S.readMode === 'page') { S.pgIdx = idx; renderChapterPages(pages); window.scrollTo(0, 0); }
   else document.getElementById('pg-' + pages[idx][0])?.scrollIntoView({ behavior: 'smooth' });
   closePgJump(); updPageInd();
+  trackVisit(S.ch, idx);
 }
 
 function openTOC() { document.getElementById('tocD').classList.add('open'); }
@@ -427,8 +480,24 @@ function openPgJump() {
   document.getElementById('pgJump').classList.add('open');
 }
 function closePgJump() { document.getElementById('pgJump').classList.remove('open'); }
-function openLb(src) { document.getElementById('lbImg').src = src; document.getElementById('lb').classList.add('open'); }
-function closeLb() { document.getElementById('lb').classList.remove('open'); }
+function openLb(src, figId = null) {
+  const img = document.getElementById('lbImg');
+  img.src = src;
+  const lb = document.getElementById('lb');
+  lb.classList.add('open');
+  // Ajouter une légende simple si figId
+  if (figId && !document.getElementById('lb-cap')) {
+    const cap = document.createElement('div');
+    cap.id = 'lb-cap';
+    cap.style.cssText = 'position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:#ddd;font-size:.82rem;opacity:.9;';
+    cap.textContent = 'Figure ' + figId;
+    lb.appendChild(cap);
+  }
+}
+function closeLb() {
+  document.getElementById('lb').classList.remove('open');
+  const cap = document.getElementById('lb-cap'); if (cap) cap.remove();
+}
 
 function saveScroll() {
   if (S.ch && S.readMode === 'scroll') { S.scroll[S.ch] = window.scrollY; localStorage.setItem('gsc', JSON.stringify(S.scroll)); }
@@ -445,6 +514,13 @@ function updPageInd() {
   }
   const p = pages[cur];
   document.getElementById('pageInd').textContent = p ? `p. ${p[0]} · ${cur + 1}/${pages.length}` : '';
+
+  // Mise à jour mini-prog
+  const mini = document.getElementById('ch-prog-mini');
+  if (mini && S.ch) {
+    const pr = getChProgress(S.ch);
+    mini.textContent = `${pr.visited}/${pr.total} (${pr.pct}%)`;
+  }
 }
 
 /* ── Home & lists ── */
@@ -456,6 +532,7 @@ function renderHome() {
     const rd = S.read.includes(ch.id), bm = S.bm.includes(ch.id);
     const pgCount = APP_DATA.content[ch.id]?.length || 0;
     const num = ch.id.replace('ch', '');
+    const prog = getChProgress(ch.id);
     const el = document.createElement('div');
     el.className = 'ch-row' + (rd ? ' read' : '');
     el.onclick = () => showCh(ch.id);
@@ -463,21 +540,24 @@ function renderHome() {
       <div class="ch-row-num" style="color:${CH_COLORS[ch.id]}">${num}</div>
       <div class="ch-row-body">
         <div class="ch-row-title">${esc(ch.t)}</div>
-        <div class="ch-row-meta">${ch.items.map(i=>`<span>${i}</span>`).join('')}${pgCount ? `<span>${pgCount} p.</span>` : ''}${rd ? '<span class="read-mark">Lu</span>' : ''}</div>
+        <div class="ch-row-meta">${ch.items.map(i=>`<span>${i}</span>`).join('')}${pgCount ? `<span>${pgCount} p.</span>` : ''}${prog.pct > 0 && prog.pct < 100 ? `<span>${prog.visited}/${prog.total}</span>` : ''}${rd && prog.pct >= 95 ? '<span class="read-mark">Lu</span>' : ''}</div>
       </div>
-      <button class="ch-row-bm ${bm?'on':''}" onclick="event.stopPropagation();quickBm('${ch.id}')" aria-label="Favori">${bm?'★':'☆'}</button>`;
+      <button class="ch-row-bm ${bm?'on':''}" onclick="event.stopPropagation();quickBm('${ch.id}')" aria-label="Favori">${bm?'★':'☆'}</button>
+      <div class="ch-progress" style="width:${prog.pct}%"></div>`;
     (ch.part === 1 ? p1 : p2).appendChild(el);
   });
+  updStats();
   const recent = document.getElementById('recent');
   if (S.read.length) {
     recent.style.display = 'block';
     const last = S.read[S.read.length - 1], lc = APP_DATA.chapters.find(c => c.id === last);
     if (lc) {
+      const p = getChProgress(last);
       document.getElementById('recentC').innerHTML = `
         <div class="resume-card" onclick="showCh('${last}')">
           <div class="resume-label">Reprendre</div>
           <div class="resume-title">${esc(lc.t)}</div>
-          <div class="resume-meta">Chapitre ${last.replace('ch','')}</div>
+          <div class="resume-meta">Chapitre ${last.replace('ch','')} · ${p.visited}/${p.total} pages (${p.pct}%)</div>
         </div>`;
     }
   } else recent.style.display = 'none';
@@ -500,7 +580,14 @@ function renderBm() {
   l.innerHTML = S.bm.map(id => {
     const ch = APP_DATA.chapters.find(c => c.id === id);
     if (!ch) return '';
-    return `<div class="ch-row" onclick="showCh('${id}')"><div class="ch-row-num">${id.replace('ch','')}</div><div class="ch-row-body"><div class="ch-row-title">${esc(ch.t)}</div></div></div>`;
+    const prog = getChProgress(id);
+    return `<div class="ch-row" onclick="showCh('${id}')">
+      <div class="ch-row-num">${id.replace('ch','')}</div>
+      <div class="ch-row-body">
+        <div class="ch-row-title">${esc(ch.t)}</div>
+        <div class="ch-row-meta"><span>${prog.visited}/${prog.total} pages</span> <span>${prog.pct}%</span></div>
+      </div>
+    </div>`;
   }).join('');
 }
 
@@ -520,7 +607,7 @@ function renderGallery() {
       return ac - bc || ai - bi;
     });
   el.innerHTML = items.length
-    ? items.map(it => `<div class="fig-card" onclick="openLb('${it.src}')"><img src="${it.src}" alt="Fig. ${it.id}" loading="lazy"><div class="fig-card-cap"><strong>Fig. ${it.id}</strong><span>${esc(it.ch)}</span></div></div>`).join('')
+    ? items.map(it => `<div class="fig-card" onclick="openLb('${it.src}', '${esc(it.id)}')"><img src="${it.src}" alt="Fig. ${it.id}" loading="lazy"><div class="fig-card-cap"><strong>Fig. ${it.id}</strong><span>${esc(it.ch)}</span></div></div>`).join('')
     : '<div class="empty-state"><p>Aucune figure</p></div>';
   const cnt = document.getElementById('illCnt');
   if (cnt) cnt.textContent = items.length;
@@ -552,8 +639,8 @@ function flI(f, el) {
 function buildSI() {
   if (sIdx.length) return;
   APP_DATA.chapters.forEach(ch => {
-    (APP_DATA.content[ch.id] || []).forEach(p => {
-      sIdx.push({ t: p[1].toLowerCase(), p: p[0], ch: ch.id, ct: ch.t, raw: p[1] });
+    (APP_DATA.content[ch.id] || []).forEach((p, idx) => {
+      sIdx.push({ t: p[1].toLowerCase(), p: p[0], pi: idx, ch: ch.id, ct: ch.t, raw: p[1] });
     });
   });
 }
@@ -573,15 +660,15 @@ function onSearchInput() {
   const words = q.split(/\s+/), res = [];
   for (const it of sIdx) {
     if (words.every(w => it.t.includes(w))) {
-      const idx = it.t.indexOf(words[0]), s = Math.max(0, idx - 60), e = Math.min(it.raw.length, idx + words[0].length + 100);
+      const idx = it.t.indexOf(words[0]), s = Math.max(0, idx - 70), e = Math.min(it.raw.length, idx + words[0].length + 120);
       let sn = it.raw.substring(s, e);
       words.forEach(w => { sn = sn.replace(new RegExp(`(${w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`,'gi'),'<mark>$1</mark>'); });
-      res.push({ p: it.p, ch: it.ch, ct: it.ct, sn });
-      if (res.length >= 20) break;
+      res.push({ p: it.p, pi: it.pi, ch: it.ch, ct: it.ct, sn });
+      if (res.length >= 18) break;
     }
   }
   el.innerHTML = res.length
-    ? res.map(r => `<div class="sr-i" onclick="closeSearch();showCh('${r.ch}')"><div class="sr-h"><span class="sr-p">p. ${r.p}</span><span class="sr-c">${esc(r.ct)}</span></div><div class="sr-t">${sn(r.sn)}</div></div>`).join('')
+    ? res.map(r => `<div class="sr-i" onclick="closeSearch(); showCh('${r.ch}', ${r.pi});"><div class="sr-h"><span class="sr-p">p. ${r.p}</span><span class="sr-c">${esc(r.ct)}</span></div><div class="sr-t">${sn(r.sn)}</div></div>`).join('')
     : `<div class="sr-empty">Aucun résultat pour « ${esc(q)} »</div>`;
 }
 
@@ -594,6 +681,14 @@ window.addEventListener('scroll', () => {
     document.getElementById('rpb').style.width = pct + '%';
     document.getElementById('fab').style.display = S.readMode === 'scroll' && h.scrollTop > 500 ? 'flex' : 'none';
     updPageInd();
+
+    // Suivi approximatif des pages visitées en mode scroll
+    if (S.readMode === 'scroll' && S.ch) {
+      const secs = document.querySelectorAll('.page-section');
+      secs.forEach((el, i) => {
+        if (el.getBoundingClientRect().top < 300) trackVisit(S.ch, i);
+      });
+    }
   }
 }, { passive: true });
 
@@ -627,13 +722,29 @@ function updStats() {
   const total = typeof FIGURES !== 'undefined' ? Object.values(FIGURES).filter(s => isGoodSrc(s[0])).length : 0;
   const figEl = document.getElementById('figC');
   if (figEl) figEl.innerHTML = `<b>${total}</b> figures`;
+
+  // Global progress hint
+  const g = document.getElementById('global-prog');
+  if (g) {
+    const chapters = APP_DATA.chapters.length;
+    const readC = S.read.length;
+    const totalPages = Object.values(APP_DATA.content).reduce((a, arr) => a + arr.length, 0);
+    let visited = 0;
+    Object.values(S.prog).forEach(arr => { if (arr) visited += arr.length; });
+    g.textContent = `${readC}/${chapters} chapitres · ~${visited} pages consultées`;
+  }
 }
 
-function resetProg() { S.read = []; S.scroll = {}; localStorage.setItem('grd', '[]'); localStorage.setItem('gsc', '{}'); renderHome(); toast('Progression réinitialisée'); }
+function resetProg() {
+  S.read = []; S.scroll = {}; S.prog = {};
+  localStorage.setItem('grd', '[]'); localStorage.setItem('gsc', '{}'); localStorage.setItem('gprog', '{}');
+  renderHome(); toast('Progression réinitialisée');
+}
 function clearAll() {
   if (!confirm('Effacer favoris et progression ?')) return;
-  S.bm = []; S.read = []; S.scroll = {};
+  S.bm = []; S.read = []; S.scroll = {}; S.prog = {};
   localStorage.removeItem('gbm'); localStorage.removeItem('grd'); localStorage.removeItem('gsc');
+  localStorage.removeItem('gprog');
   renderHome(); renderBm(); updStats(); toast('Données effacées');
 }
 
