@@ -3,599 +3,156 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes">
-<meta name="theme-color" content="#1a4d6e">
+<meta name="theme-color" content="#0d9488">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Gériatrie 5e éd.">
-<meta name="description" content="Gériatrie 5e éd. CNEG — Manuel complet hors-ligne. 20 chapitres, 344 pages, ITEMs ECN. PWA pour étudiants en médecine.">
+<meta name="apple-mobile-web-app-title" content="Gériatrie">
+<meta name="description" content="Manuel de gériatrie interactif — 20 chapitres, flashcards, fiches synthèse">
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
 <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
-<title>Gériatrie — 5e édition · CNEG</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600;7..72,700&family=Source+Sans+3:wght@400;500;600;700&display=swap');
-
-:root {
-  --bg: #f7f5f0;
-  --bg2: #ffffff;
-  --bg3: #edeae3;
-  --text: #1c1c1e;
-  --text2: #5c5c66;
-  --text3: #8e8e96;
-  --accent: #1a4d6e;
-  --accent2: #2a6f96;
-  --accent-soft: rgba(26,77,110,.08);
-  --border: #ddd8ce;
-  --border2: #c8c2b6;
-  --serif: 'Literata', Georgia, 'Times New Roman', serif;
-  --sans: 'Source Sans 3', system-ui, -apple-system, sans-serif;
-  --radius: 12px;
-  --bottom: 64px;
-  --reader: 46rem;
-  --shadow: 0 1px 3px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.04);
-  --lh: 1.78; /* line-height par défaut, contrôlable */
-}
-
-[data-theme="dark"] {
-  --bg: #141416;
-  --bg2: #1c1c1f;
-  --bg3: #26262b;
-  --text: #ececea;
-  --text2: #a0a0a8;
-  --text3: #6e6e78;
-  --accent: #5ba4cc;
-  --accent2: #7ec0e0;
-  --accent-soft: rgba(91,164,204,.1);
-  --border: #333338;
-  --border2: #44444c;
-  --shadow: 0 2px 8px rgba(0,0,0,.3);
-}
-
-* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent }
-html { scroll-behavior:smooth }
-body {
-  font-family: var(--sans);
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
-  font-size: 17px;
-  min-height: 100dvh;
-  -webkit-font-smoothing: antialiased;
-}
-::selection { background: var(--accent); color: #fff }
-
-/* Topbar */
-.topbar {
-  position: fixed; top:0; left:0; right:0; height:52px;
-  background: var(--bg2); border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; padding: 0 16px; z-index: 100; gap: 12px;
-}
-.logo { font-size: .95rem; font-weight: 700; color: var(--accent); letter-spacing: -.01em }
-.logo sub { display:block; font-size:.62rem; font-weight:500; color:var(--text3); letter-spacing:.02em }
-.tb {
-  width:36px; height:36px; border-radius:8px; border:1px solid var(--border);
-  background:var(--bg); color:var(--text2); display:flex; align-items:center;
-  justify-content:center; cursor:pointer; font-size:.9rem;
-}
-.tb:active { background:var(--accent-soft); color:var(--accent) }
-
-/* Search */
-.sov { position:fixed; inset:0; background:rgba(0,0,0,.4); z-index:200; opacity:0; pointer-events:none; transition:.2s }
-.sov.open { opacity:1; pointer-events:all }
-.sbox { position:absolute; top:0; left:0; right:0; background:var(--bg2); border-bottom:1px solid var(--border); padding:10px 16px; transform:translateY(-100%); transition:.25s }
-.sov.open .sbox { transform:translateY(0) }
-.si-w { display:flex; align-items:center; gap:10px; background:var(--bg); border:1px solid var(--border); border-radius:var(--radius); padding:0 14px }
-.si-w:focus-within { border-color:var(--accent) }
-.si-w input { flex:1; background:none; border:none; color:var(--text); font-size:.95rem; padding:12px 0; outline:none; font-family:var(--sans) }
-.sr-cl { background:none; border:none; color:var(--accent); font-size:.85rem; cursor:pointer; font-weight:600; padding:8px }
-.sr-l { max-height:calc(100dvh - 120px); overflow-y:auto }
-.sr-i { padding:13px 16px; cursor:pointer; border-bottom:1px solid var(--border) }
-.sr-i:active { background:var(--bg3) }
-.sr-h { display:flex; gap:8px; margin-bottom:3px; font-size:.74rem }
-.sr-p { font-weight:700; color:var(--accent) }
-.sr-c { color:var(--text3) }
-.sr-t { font-size:.87rem; line-height:1.5; font-family:var(--serif) }
-.sr-i mark { background:var(--accent); color:#fff; padding:0 2px; border-radius:2px }
-.sr-empty { text-align:center; padding:38px 20px; color:var(--text3); font-size:.88rem }
-
-/* Main */
-.main { padding-top:52px; padding-bottom:var(--bottom); min-height:100dvh }
-.main.ch-active { padding-top:92px }
-.view { display:none }
-.view.active { display:block; animation:fadeIn .25s ease }
-@keyframes fadeIn { from{opacity:0} to{opacity:1} }
-
-/* Home header */
-.book-header {
-  padding: 28px 20px 20px;
-  border-bottom: 1px solid var(--border);
-  background: var(--bg2);
-}
-.book-header h1 {
-  font-family: var(--serif);
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--accent);
-  letter-spacing: -.02em;
-  margin-bottom: 6px;
-}
-.book-header .edition { font-size: .82rem; color: var(--text2); line-height: 1.5; max-width: 28rem }
-.stats {
-  display: flex; gap: 16px; padding: 14px 20px;
-  border-bottom: 1px solid var(--border);
-  background: var(--bg2);
-  font-size: .78rem; color: var(--text2);
-}
-.stats b { color: var(--text); font-weight: 700 }
-.stats .stat-link { cursor:pointer; color:var(--accent); font-weight:600 }
-
-.part-label {
-  font-size: .7rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: .1em; color: var(--text3);
-  padding: 20px 20px 8px;
-}
-
-/* Chapter list */
-.ch-row {
-  display: flex; align-items: center; gap: 14px;
-  padding: 14px 20px; background: var(--bg2);
-  border-bottom: 1px solid var(--border); cursor: pointer;
-  transition: background .12s;
-  position: relative;
-}
-.ch-row:active { background: var(--bg3) }
-.ch-row.read .ch-row-title { color: var(--text2) }
-.ch-row-num {
-  font-size: 1.1rem; font-weight: 700; width: 28px;
-  text-align: center; flex-shrink: 0; font-variant-numeric: tabular-nums;
-}
-.ch-row-body { flex:1; min-width:0 }
-.ch-row-title { font-size: .95rem; font-weight: 600; line-height: 1.35; margin-bottom: 3px }
-.ch-row-meta { display:flex; gap:8px; flex-wrap:wrap; font-size:.72rem; color:var(--text3) }
-.ch-row-meta span { background:var(--bg3); padding:1px 7px; border-radius:4px }
-.read-mark { color:var(--accent)!important; font-weight:600 }
-.ch-row-bm { background:none; border:none; font-size:1.1rem; color:var(--text3); cursor:pointer; padding:4px; z-index: 2; }
-.ch-row-bm.on { color: #c9a227 }
-
-.ch-progress {
-  position: absolute; bottom: 0; left: 0; height: 3px; background: var(--accent);
-  border-radius: 0 0 0 3px; transition: width .25s ease; opacity: .65;
-}
-.ch-progress.complete { opacity: .95; }
-[data-theme="dark"] .ch-progress { opacity: .75; }
-
-.resume-card {
-  margin: 12px 20px; padding: 16px 18px;
-  background: var(--accent-soft); border: 1px solid var(--border);
-  border-left: 3px solid var(--accent); border-radius: var(--radius);
-  cursor: pointer;
-}
-.resume-card:active { opacity:.85 }
-.resume-label { font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--accent); margin-bottom:4px }
-.resume-title { font-family:var(--serif); font-size:1rem; font-weight:600 }
-.resume-meta { font-size:.75rem; color:var(--text3); margin-top:4px }
-
-/* Chapter view */
-.ch-hero {
-  padding: 14px 20px 16px;
-  background: var(--bg2);
-  border-bottom: 1px solid var(--border);
-}
-.ch-hero .back {
-  background:none; border:none; color:var(--accent);
-  font-size:.82rem; font-weight:600; cursor:pointer;
-  margin-bottom:12px; padding:0;
-}
-.ch-num {
-  font-size:.7rem; font-weight:700; text-transform:uppercase;
-  letter-spacing:.12em; margin-bottom:5px; opacity:.85;
-}
-.ch-hero h2 {
-  font-family:var(--serif); font-size:1.5rem; font-weight:700;
-  line-height:1.22; letter-spacing:-.025em; margin-bottom:9px;
-}
-.ch-tags { display:flex; gap:6px; flex-wrap:wrap }
-.tag {
-  font-size:.68rem; font-weight:600; padding:3px 10px;
-  border-radius:20px; background:var(--accent-soft); color:var(--accent);
-  border:1px solid var(--border);
-}
-.tag-muted { background:var(--bg3); color:var(--text3); border-color:transparent }
-
-/* Reader */
-.ch-body { padding: 0 }
-.reader {
-  max-width: var(--reader);
-  margin: 0 auto;
-  padding: 22px 18px 52px;
-}
-.page-section { margin-bottom: 4px }
-.page-section + .page-section { padding-top: 20px; border-top: 1px solid var(--border) }
-
-.section-title {
-  font-family: var(--serif);
-  font-size: 1.28rem;
-  font-weight: 700;
-  color: var(--accent);
-  margin: 32px 0 10px;
-  padding-bottom: 6px;
-  border-bottom: 2px solid var(--border);
-  line-height: 1.28;
-  letter-spacing: -.015em;
-}
-.section-title:first-child { margin-top: 4px }
-
-.subsection-title {
-  font-family: var(--serif);
-  font-size: 1.08rem;
-  font-weight: 600;
-  color: var(--text);
-  margin: 22px 0 7px;
-  letter-spacing: -.01em;
-}
-
-.body-text, .reader p {
-  font-family: var(--serif);
-  font-size: 1.02rem;
-  line-height: var(--lh);
-  margin-bottom: 15px;
-  color: var(--text);
-  text-align: justify;
-  hyphens: auto;
-}
-.body-list, .reader ul { margin: 10px 0 18px 0; padding-left: 0; list-style:none }
-.body-list li, .reader ul li {
-  font-family: var(--serif);
-  font-size: 1.01rem; line-height: calc(var(--lh) * 0.96);
-  margin-bottom: 9px; padding-left: 22px; position: relative;
-}
-.body-list li::before, .reader ul li::before {
-  content: '—'; position: absolute; left: 0; color: var(--accent); font-weight: 600;
-}
-.reader strong { font-weight: 700; color: var(--text) }
-.reader em { font-style: italic }
-.item-ref { font-size:.78rem; font-weight:700; color:var(--accent); white-space:nowrap }
-.fig-ref, .enc-ref { color:var(--accent2); font-style:italic; font-size:.92em }
-.dose { font-weight:600; font-family:var(--sans); font-size:.92em }
-
-/* Callouts */
-.callout {
-  margin: 20px 0; padding: 15px 17px 14px;
-  border-radius: var(--radius); border: 1px solid var(--border);
-  background: var(--bg2);
-  position: relative;
-}
-.callout::before {
-  content: '';
-  position: absolute; left: 0; top: 0; bottom: 0;
-  width: 4px; border-radius: var(--radius) 0 0 var(--radius);
-}
-.callout-title {
-  font-size: .72rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: .07em; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
-}
-.callout-sit { border-left-color: #b8860b; background: #fffaf0; }
-[data-theme="dark"] .callout-sit { background: rgba(184,134,11,.08); }
-.callout-sit::before { background: #b8860b; }
-.callout-sit .callout-title { color: #8b6914 }
-.callout-enc { border-left-color: var(--accent); }
-.callout-enc::before { background: var(--accent); }
-.callout-enc .callout-title { color: var(--accent) }
-.callout-key { border-left-color: #2d6a4f; background: rgba(45,106,79,.055); }
-[data-theme="dark"] .callout-key { background: rgba(45,106,79,.12); }
-.callout-key::before { background: #2d6a4f; }
-.callout-key .callout-title { color: #2d6a4f }
-.chapter-plan { margin-bottom: 26px; padding: 14px 16px; background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius) }
-.chapter-plan ol { margin:0; padding-left:18px }
-.chapter-plan li { font-family:var(--serif); font-size:.9rem; line-height:1.55; margin-bottom:3px; color:var(--text2) }
-
-/* ITEM table */
-.item-table { margin: 20px 0; border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; background:var(--bg2) }
-.item-table-hd { padding:12px 16px; font-size:.82rem; font-weight:700; color:var(--accent); border-bottom:1px solid var(--border); background:var(--accent-soft) }
-.tbl-scroll { overflow-x:auto; -webkit-overflow-scrolling:touch }
-.item-table table { width:100%; border-collapse:collapse; font-size:.8rem; min-width:480px }
-.item-table th { background:var(--bg3); color:var(--text2); font-weight:700; text-align:left; padding:10px 12px; font-size:.7rem; text-transform:uppercase; letter-spacing:.04em; border-bottom:1px solid var(--border) }
-.item-table td { padding:10px 12px; border-bottom:1px solid var(--border); vertical-align:top; line-height:1.5 }
-.item-table tr:last-child td { border-bottom:none }
-.item-table .rang-a { font-weight:800; color:#2d6a4f }
-.item-table .rang-b { font-weight:700; color:var(--accent) }
-.item-table .rang-c, .item-table .rang-d { color:var(--text3) }
-
-/* Figures */
-.fig-block { margin:22px 0; border:1px solid var(--border); border-radius:10px; overflow:hidden; cursor:zoom-in; background:#fff; box-shadow: 0 1px 4px rgba(0,0,0,.04); }
-.fig-block img { width:100%; height:auto; display:block; max-height:520px; object-fit:contain; transition: transform .2s ease; }
-.fig-block:hover img { transform: scale(1.005); }
-.fig-block figcaption { padding:10px 14px; font-size:.76rem; color:var(--text2); border-top:1px solid var(--border); font-weight:600; background:var(--bg2); }
-
-/* Chapter nav */
-.ch-nav {
-  display:flex; gap:8px; padding:12px 16px;
-  position:sticky; bottom:var(--bottom);
-  background:var(--bg2); border-top:1px solid var(--border); z-index:50;
-}
-.ch-nav button {
-  flex:1; padding:11px; border-radius:8px; border:1px solid var(--border);
-  background:var(--bg); color:var(--text); font-size:.82rem; font-weight:600; cursor:pointer;
-}
-.ch-nav button:active { background:var(--accent-soft); border-color:var(--accent); color:var(--accent) }
-.ch-nav button:disabled { opacity:.3 }
-
-.pgnav { display:none; gap:8px; padding:8px 16px; background:var(--bg2); border-top:1px solid var(--border) }
-.pgnav button { flex:1; padding:10px; border-radius:8px; border:1px solid var(--border); background:var(--bg); font-size:.82rem; font-weight:600; cursor:pointer }
-.pgnav button:disabled { opacity:.3 }
-
-/* Progress */
-.rp { position:fixed; top:52px; left:0; right:0; height:2px; background:var(--border); z-index:90 }
-.rp .bar { height:100%; background:var(--accent); width:0; transition:width .05s }
-
-.rtoolbar {
-  position:fixed; top:52px; left:0; right:0; height:40px;
-  background:var(--bg2); border-bottom:1px solid var(--border);
-  display:none; align-items:center; padding:0 12px; gap:6px; z-index:95;
-}
-.rtoolbar button {
-  padding:5px 12px; border-radius:6px; border:1px solid var(--border);
-  background:var(--bg); color:var(--text2); font-size:.72rem; font-weight:600; cursor:pointer;
-}
-.rtoolbar button:active { background:var(--accent-soft); color:var(--accent) }
-.page-ind { margin-left:auto; font-size:.72rem; color:var(--text3); font-weight:600 }
-
-/* Views */
-.page-hd { padding:22px 20px 14px; border-bottom:1px solid var(--border); background:var(--bg2) }
-.page-hd h1 { font-family:var(--serif); font-size:1.32rem; font-weight:700; color:var(--accent) }
-.page-hd p { font-size:.82rem; color:var(--text2); margin-top:3px }
-
-/* Gallery */
-.fig-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; padding:16px }
-.fig-card { border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; background:var(--bg2); cursor:pointer }
-.fig-card:active { border-color:var(--accent) }
-.fig-card img { width:100%; aspect-ratio:4/3; object-fit:cover; display:block; background:#fff }
-.fig-card-cap { padding:10px 12px }
-.fig-card-cap strong { display:block; font-size:.78rem; color:var(--accent) }
-.fig-card-cap span { font-size:.7rem; color:var(--text3); line-height:1.3 }
-
-/* ITEMs index */
-.filter-bar { display:flex; gap:6px; padding:12px 16px; overflow-x:auto; border-bottom:1px solid var(--border) }
-.filter-bar::-webkit-scrollbar { display:none }
-.filter-btn { padding:6px 14px; border-radius:20px; border:1px solid var(--border); background:var(--bg2); color:var(--text2); font-size:.75rem; font-weight:600; cursor:pointer; white-space:nowrap }
-.filter-btn.on { background:var(--accent); color:#fff; border-color:var(--accent) }
-.item-list { padding:8px 0 }
-.item-row { display:flex; align-items:center; gap:12px; padding:14px 20px; border-bottom:1px solid var(--border); cursor:pointer; background:var(--bg2) }
-.item-row:active { background:var(--bg3) }
-.item-badge { font-size:.68rem; font-weight:700; color:var(--accent); background:var(--accent-soft); padding:3px 8px; border-radius:4px; flex-shrink:0 }
-.item-label { font-size:.9rem; font-weight:500 }
-
-/* Settings */
-.sg { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); margin:0 16px 12px; overflow:hidden }
-.sr { display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-bottom:1px solid var(--border); gap:12px }
-.sr:last-child { border-bottom:none }
-.sr .lb { font-size:.88rem; font-weight:600 }
-.sr .ds { font-size:.72rem; color:var(--text3); margin-top:2px }
-.sr input[type=range] { width:110px; accent-color:var(--accent) }
-.tog { width:44px; height:26px; border-radius:13px; background:var(--border2); cursor:pointer; position:relative; flex-shrink:0 }
-.tog.on { background:var(--accent) }
-.tog::after { content:''; position:absolute; width:20px; height:20px; border-radius:50%; background:#fff; top:3px; left:3px; transition:.2s; box-shadow:0 1px 3px rgba(0,0,0,.15) }
-.tog.on::after { left:21px }
-
-/* Bottom nav */
-.bnav {
-  position:fixed; bottom:0; left:0; right:0; height:var(--bottom);
-  background:var(--bg2); border-top:1px solid var(--border);
-  display:flex; z-index:100; padding-bottom:env(safe-area-inset-bottom);
-}
-.ni { flex:1; display:flex; background:none; border:none; font-family:inherit; padding:0; cursor:pointer; flex-direction:column; align-items:center; justify-content:center; gap:2px; cursor:pointer; color:var(--text3); font-size:.58rem; font-weight:600 }
-.ni.on { color:var(--accent) }
-.ni-ic { font-size:.65rem; font-weight:700; letter-spacing:.02em }
-.badge { position:absolute; top:6px; right:calc(50% - 16px); min-width:14px; height:14px; background:var(--accent); color:#fff; font-size:.48rem; border-radius:7px; display:flex; align-items:center; justify-content:center; font-weight:800 }
-
-/* Onboarding */
-.ob { position:fixed; inset:0; background:var(--bg); z-index:300; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:32px; text-align:center }
-.ob.done { display:none }
-.ob-mark { width:64px; height:64px; border-radius:16px; background:var(--accent); color:#fff; display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-size:1.8rem; font-weight:700; margin-bottom:24px }
-.ob h1 { font-family:var(--serif); font-size:1.5rem; font-weight:700; margin-bottom:8px; color:var(--accent) }
-.ob p { color:var(--text2); font-size:.88rem; margin-bottom:28px; max-width:300px; line-height:1.6 }
-.ob-btn { background:var(--accent); color:#fff; border:none; padding:14px 40px; border-radius:var(--radius); font-size:.95rem; font-weight:600; cursor:pointer }
-.ob-skip { background:none; border:none; color:var(--text3); font-size:.78rem; margin-top:14px; cursor:pointer }
-
-/* Misc */
-.empty-state { text-align:center; padding:48px 20px; color:var(--text3) }
-.empty-state p { font-size:.95rem; margin-bottom:4px }
-.empty-state span { font-size:.82rem }
-.toast { position:fixed; bottom:calc(var(--bottom) + 16px); left:50%; transform:translateX(-50%) translateY(60px); background:var(--bg2); border:1px solid var(--border); padding:10px 20px; border-radius:var(--radius); font-size:.82rem; font-weight:600; z-index:500; opacity:0; transition:.2s; box-shadow:var(--shadow) }
-.toast.show { opacity:1; transform:translateX(-50%) translateY(0) }
-.fab { position:fixed; bottom:calc(var(--bottom) + 12px); right:16px; width:44px; height:44px; border-radius:50%; background:var(--accent); color:#fff; border:none; font-size:1rem; cursor:pointer; z-index:90; display:none; align-items:center; justify-content:center; box-shadow:var(--shadow) }
-
-/* TOC */
-.toc-d { position:fixed; inset:0; z-index:250; pointer-events:none }
-.toc-d.open { pointer-events:all }
-.toc-bg { position:absolute; inset:0; background:rgba(0,0,0,.4); opacity:0; transition:.2s }
-.toc-d.open .toc-bg { opacity:1 }
-.toc-pan { position:absolute; bottom:0; left:0; right:0; max-height:70dvh; background:var(--bg2); border-radius:16px 16px 0 0; transform:translateY(100%); transition:.3s; display:flex; flex-direction:column }
-.toc-d.open .toc-pan { transform:translateY(0) }
-.toc-hd { padding:16px 20px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between }
-.toc-hd h3 { font-size:.9rem; font-weight:700 }
-.toc-ls { overflow-y:auto; padding:4px 0 24px }
-.toc-i { padding:12px 20px; cursor:pointer; font-size:.85rem; border-bottom:1px solid var(--border); display:flex; gap:10px }
-.toc-i:active { background:var(--bg3) }
-.toc-p { font-size:.68rem; font-weight:700; color:var(--accent); flex-shrink:0; min-width:44px }
-.toc-empty { padding:24px; text-align:center; color:var(--text3) }
-
-/* Page jump */
-.pjump { position:fixed; inset:0; z-index:260; background:rgba(0,0,0,.4); opacity:0; pointer-events:none; transition:.2s; display:flex; align-items:flex-end }
-.pjump.open { opacity:1; pointer-events:all }
-.pjump-pan { width:100%; max-height:60dvh; background:var(--bg2); border-radius:16px 16px 0 0; overflow-y:auto; padding:8px 0 24px }
-.pj-i { padding:12px 20px; cursor:pointer; font-size:.85rem; border-bottom:1px solid var(--border); display:flex; gap:12px }
-.pj-i span { font-weight:700; color:var(--accent); min-width:50px }
-.pj-i:active { background:var(--bg3) }
-
-/* Lightbox */
-.lb { position:fixed; inset:0; background:rgba(0,0,0,.92); z-index:400; display:flex; align-items:center; justify-content:center; padding:16px; opacity:0; pointer-events:none; transition:.2s }
-.lb.open { opacity:1; pointer-events:all }
-.lb img { max-width:96%; max-height:88dvh; object-fit:contain; border-radius:6px; box-shadow: 0 10px 40px rgba(0,0,0,.5); }
-.lb-cl { position:absolute; top:16px; right:16px; width:42px; height:42px; border-radius:50%; background:rgba(255,255,255,.15); border:none; color:#fff; font-size:1.15rem; cursor:pointer; backdrop-filter: blur(2px); }
-
-.install-b { display:none; position:fixed; bottom:calc(var(--bottom) + 8px); left:16px; right:16px; background:var(--accent); color:#fff; padding:12px 16px; border-radius:var(--radius); align-items:center; gap:12px; z-index:110; cursor:pointer; font-size:.82rem; font-weight:600 }
-.install-b button { background:rgba(255,255,255,.2); border:none; color:#fff; padding:6px 14px; border-radius:6px; font-weight:700; cursor:pointer }
-
-@media (min-width:768px) {
-  .main, .reader { max-width: var(--reader); margin-left:auto; margin-right:auto }
-  .bnav, .topbar, .rp, .rtoolbar { max-width:720px; left:50%; transform:translateX(-50%); right:auto; width:100% }
-  .toc-pan, .pjump-pan { max-width:720px; left:50%; transform:translateX(-50%) translateY(100%) }
-  .toc-d.open .toc-pan, .pjump.open .pjump-pan { transform:translateX(-50%) translateY(0) }
-}
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
-</style>
+<title>Gériatrie — Manuel Interactif</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="ob" id="ob">
-  <div class="ob-mark">G</div>
-  <h1>Gériatrie</h1>
-  <p>5e édition · CNEG · Pr Jacques Boddaert<br>20 chapitres · 344 pages · lecture hors-ligne</p>
-  <button class="ob-btn" onclick="closeOb()">Ouvrir le manuel</button>
-  <button class="ob-skip" onclick="closeOb()">Passer</button>
-</div>
-
-<div class="topbar">
-  <div class="logo">Gériatrie<sub>5e éd. · CNEG</sub></div>
-  <div style="margin-left:auto;display:flex;gap:6px">
-    <button class="tb" onclick="openSearch()" title="Rechercher (/)" aria-label="Rechercher">⌕</button>
-    <button class="tb" onclick="toggleTheme()" id="thBtn" aria-label="Basculer le thème">☀</button>
+<header class="top-bar">
+  <h1>🩺 Gériatrie</h1>
+  <button class="search-toggle" onclick="toggleSearch()" aria-label="Rechercher">🔍</button>
+  <div class="search-bar" id="searchBar">
+    <input type="text" id="searchInput" placeholder="Chercher un chapitre, concept..." oninput="onSearch(this.value)">
+    <button onclick="toggleSearch()">✕</button>
   </div>
-</div>
+</header>
 
-<div class="sov" id="sov" onclick="if(event.target===this)closeSearch()">
-  <div class="sbox">
-    <div class="si-w">
-      <label for="si" class="sr-only">Rechercher</label>
-      <input type="text" id="si" aria-label="Rechercher dans le manuel" placeholder="Rechercher un concept, ITEM, mot-clé…" autocomplete="off">
-      <button class="sr-cl" onclick="closeSearch()">Fermer</button>
-    </div>
-    <div class="sr-l" id="srl"></div>
-  </div>
-</div>
-
-<div class="rp" id="rp" style="display:none"><div class="bar" id="rpb"></div></div>
-<div class="rtoolbar" id="rtoolbar">
-  <button onclick="openTOC()">Sommaire</button>
-  <button onclick="openPgJump()">Pages</button>
-  <button onclick="toggleReadMode()" id="rmBtn">Page par page</button>
-  <span class="page-ind" id="pageInd"></span>
-  <span id="ch-prog-mini" style="margin-left:8px; font-size:.7rem; color:var(--text3); font-weight:600;"></span>
-</div>
-
-<main class="main">
-
+<main class="main-content">
+  <!-- HOME -->
   <div class="view active" id="vHome">
-    <div class="book-header">
-      <h1>Gériatrie</h1>
-      <p class="edition">5e édition · Collège National des Enseignants de Gériatrie<br>Pr Jacques Boddaert · Elsevier Masson 2021</p>
-    </div>
-    <div class="stats">
-      <span><b>20</b> chapitres</span>
-      <span><b>344</b> pages</span>
-      <span class="stat-link" id="figC" onclick="sw('ill')"><b>33</b> figures</span>
-      <span id="bmc"><b>0</b> favoris</span>
-    </div>
-    <div id="global-prog" style="font-size:.7rem; padding:0 20px 10px; color:var(--text3);"></div>
-    <div id="recent" style="display:none"><div id="recentC"></div></div>
-    <div class="part-label">Partie I — Connaissances</div>
+    <div id="recent" style="display:none"></div>
+    <div class="section-header">Partie I — Connaissances</div>
     <div id="p1"></div>
-    <div class="part-label">Partie II — Entraînement</div>
+    <div class="section-header">Partie II — Entraînement</div>
     <div id="p2"></div>
   </div>
 
+  <!-- SYNTHESIS -->
+  <div class="view" id="vSynth">
+    <div class="page-hd"><h1>📋 Fiches Synthèse</h1><p>Les concepts clés en un coup d'œil</p></div>
+    <div id="synthGrid" class="synth-grid"></div>
+  </div>
+
+  <!-- FLASHCARDS -->
+  <div class="view" id="vFlash">
+    <div class="page-hd"><h1>🧠 Mode Révision</h1></div>
+    <div class="flash-hdr">
+      <div class="flash-stats"><span id="flashProg">0 / 0</span></div>
+      <div class="flash-filters">
+        <button class="flash-filt active" data-r="all" onclick="filterFlash('all',this)">Tous</button>
+        <button class="flash-filt" data-r="A" onclick="filterFlash('A',this)">Rang A</button>
+        <button class="flash-filt" data-r="B" onclick="filterFlash('B',this)">Rang B</button>
+      </div>
+    </div>
+    <div class="flash-container">
+      <div class="flash-card" id="flashCard" onclick="this.classList.toggle('flipped')">
+        <div class="flash-front">
+          <div class="flash-ch" id="flashCh"></div>
+          <div class="flash-rang" id="flashRang"></div>
+          <div class="flash-q" id="flashQ"></div>
+          <div class="flash-hint">Tapez pour retourner ↻</div>
+        </div>
+        <div class="flash-back">
+          <div class="flash-a" id="flashA"></div>
+          <div class="flash-tags" id="flashTags"></div>
+        </div>
+      </div>
+    </div>
+    <div class="flash-nav">
+      <button class="flash-btn" onclick="prevFlash()">← Précédent</button>
+      <button class="flash-btn" onclick="shuffleFlash()">🔀 Mélanger</button>
+      <button class="flash-btn" onclick="nextFlash()">Suivant →</button>
+    </div>
+  </div>
+
+  <!-- CHAPTER READING -->
   <div class="view" id="vCh">
     <div class="ch-hero" id="chHero">
-      <button class="back" onclick="goHome()">← Chapitres</button>
       <div class="ch-num" id="chNum"></div>
-      <h2 id="chT"></h2>
+      <div class="ch-title" id="chT"></div>
       <div class="ch-tags" id="chTags"></div>
     </div>
-    <div class="ch-body" id="chBody"></div>
-    <div class="pgnav" id="pgNav">
-      <button id="pgPrev" onclick="navPage(-1)">← Précédent</button>
-      <button id="pgNext" onclick="navPage(1)">Suivant →</button>
-    </div>
-    <div class="ch-nav">
-      <button id="prevB" onclick="navCh(-1)">← Chap.</button>
-      <button id="bmB" onclick="toggleBm()">☆ Favori</button>
-      <button id="nextB" onclick="navCh(1)">Chap. →</button>
+    <div class="ch-toolbar" id="chToolbar"></div>
+    <div class="ch-content" id="chContent"></div>
+    <div class="pg-nav" id="pgNav" style="display:none">
+      <button onclick="pgPrev()">← Page précédente</button>
+      <button onclick="pgNext()">Page suivante →</button>
     </div>
   </div>
 
-  <div class="view" id="vIll">
-    <div class="page-hd"><h1>Figures</h1><p><span id="illCnt">33</span> schémas et illustrations</p></div>
-    <div class="fig-grid" id="illGrid"></div>
-  </div>
-
+  <!-- ITEMS -->
   <div class="view" id="vItems">
-    <div class="page-hd"><h1>Index ITEM</h1><p>Objectifs pédagogiques ECN</p></div>
-    <div class="filter-bar" id="ifl"></div>
-    <div class="item-list" id="il"></div>
+    <div class="page-hd"><h1>🎓 Objectifs ITEMs</h1><p>Connaissances hiérarchisées par rang</p></div>
+    <div id="itemsList"></div>
   </div>
 
-  <div class="view" id="vBm">
-    <div class="page-hd"><h1>Favoris</h1><p>Chapitres sauvegardés</p></div>
-    <div id="bml"></div>
-  </div>
-
+  <!-- SETTINGS -->
   <div class="view" id="vSet">
-    <div class="page-hd"><h1>Réglages</h1></div>
-    <div class="sg">
-      <div class="sr"><div><div class="lb">Mode sombre</div></div><div class="tog" id="dtog" onclick="toggleTheme()" role="switch" aria-checked="false" aria-label="Mode sombre" tabindex="0"></div></div>
-      <div class="sr"><div><div class="lb">Taille du texte</div></div><input type="range" min="14" max="22" value="17" id="fsl" oninput="setFS(this.value)"></div>
-      <div class="sr"><div><div class="lb">Interligne</div></div><input type="range" min="1.5" max="2.1" step="0.05" value="1.78" id="lhsl" oninput="setLH(this.value)"></div>
-      <div class="sr"><div><div class="lb">Lecture page par page</div></div><div class="tog" id="rmTog" onclick="toggleReadMode();document.getElementById('rmTog').classList.toggle('on',localStorage.getItem('grm')==='page')"></div></div>
+    <div class="page-hd"><h1>⚙️ Réglages</h1></div>
+    <div class="set-group">
+      <div class="set-row">
+        <div class="set-label"><div class="lb">Mode sombre</div></div>
+        <div class="toggle" id="darkTog" onclick="toggleTheme()"></div>
+      </div>
+      <div class="set-row">
+        <div class="set-label"><div class="lb">Taille du texte</div><div class="ds" id="fsVal">17px</div></div>
+        <input type="range" min="14" max="24" value="17" oninput="setFS(this.value)">
+      </div>
+      <div class="set-row">
+        <div class="set-label"><div class="lb">Interligne</div><div class="ds" id="lhVal">1.6</div></div>
+        <input type="range" min="1.3" max="2.2" step="0.05" value="1.6" oninput="setLH(this.value)">
+      </div>
+      <div class="set-row">
+        <div class="set-label"><div class="lb">Lecture page par page</div></div>
+        <div class="toggle" id="rmTog" onclick="toggleReadMode()"></div>
+      </div>
     </div>
-    <div class="sg">
-      <div class="sr"><div><div class="lb">Progression</div><div class="ds" id="pd">0 chapitres lus</div></div><button class="tb" onclick="resetProg()">↺</button></div>
-      <div class="sr"><div><div class="lb">Effacer les données</div><div class="ds">Favoris et progression</div></div><button class="tb" onclick="clearAll()">✕</button></div>
+    <div class="set-group">
+      <div class="set-row">
+        <div class="set-label"><div class="lb">Progression</div><div class="ds" id="pd">0 chapitres lus</div></div>
+      </div>
+      <div class="set-btn" onclick="resetProg()">↺ Réinitialiser la progression</div>
+      <div class="set-btn" onclick="clearAll()">✕ Effacer toutes les données</div>
     </div>
-    <div class="sg">
-      <div class="sr"><div><div class="lb">Source</div><div class="ds">Gériatrie 5e éd., Elsevier Masson 2021</div></div></div>
-      <div class="sr"><div><div class="lb">Coordination</div><div class="ds">Pr Jacques Boddaert — CNEG</div></div></div>
+    <div class="set-group">
+      <div class="set-row"><div class="set-label"><div class="lb">Source</div><div class="ds">Gériatrie 5e éd., Elsevier Masson 2021</div></div></div>
+      <div class="set-row"><div class="set-label"><div class="lb">Coordination</div><div class="ds">Pr Jacques Boddaert — CNEG</div></div></div>
     </div>
   </div>
-
 </main>
 
-<nav class="bnav">
-  <button class="ni on" onclick="sw('home')" data-v="home" aria-label="Accueil"><span class="ni-ic">Accueil</span></button>
-  <button class="ni" onclick="sw('ill')" data-v="ill" aria-label="Figures"><span class="ni-ic">Figures</span></button>
-  <button class="ni" onclick="sw('items')" data-v="items" aria-label="ITEMs"><span class="ni-ic">ITEM</span></button>
-  <button class="ni" onclick="sw('bm')" data-v="bm" aria-label="Favoris"><span class="ni-ic">Favoris</span><span class="badge" id="bmb" style="display:none">0</span></button>
-  <button class="ni" onclick="sw('set')" data-v="set" aria-label="Réglages"><span class="ni-ic">Réglages</span></button>
+<nav class="bottom-nav" id="bnav">
+  <button class="active" data-v="home" onclick="sw('home')"><span class="nav-icon">🏠</span>Accueil</button>
+  <button data-v="synth" onclick="sw('synth')"><span class="nav-icon">📋</span>Synthèse</button>
+  <button data-v="flash" onclick="sw('flash')"><span class="nav-icon">🧠</span>Révision</button>
+  <button data-v="items" onclick="sw('items')"><span class="nav-icon">🎓</span>ITEMs</button>
+  <button data-v="set" onclick="sw('set')"><span class="nav-icon">⚙️</span>Réglages</button>
 </nav>
 
-<div class="toc-d" id="tocD" onclick="if(event.target===this)closeTOC()">
-  <div class="toc-bg"></div>
-  <div class="toc-pan">
-    <div class="toc-hd"><h3>Sommaire</h3><button class="tb" onclick="closeTOC()">✕</button></div>
-    <div class="toc-ls" id="tocList"></div>
+<div class="concept-modal" id="conceptModal" onclick="if(event.target===this)closeConceptModal()">
+  <div class="concept-pan">
+    <div class="concept-hdr"><h3 id="conceptTitle"></h3><button onclick="closeConceptModal()">✕</button></div>
+    <div class="concept-body" id="conceptBody"></div>
   </div>
 </div>
 
-<div class="pjump" id="pgJump" onclick="if(event.target===this)closePgJump()">
-  <div class="pjump-pan" id="pgJumpList"></div>
-</div>
-
-<div class="lb" id="lb" onclick="closeLb()">
-  <button class="lb-cl" onclick="closeLb()">✕</button>
-  <img id="lbImg" src="" alt="Figure agrandie">
-</div>
-
-<div class="install-b" id="installB" onclick="installPWA()">
-  <span>Installer sur l'écran d'accueil</span>
-  <button>Installer</button>
-</div>
-
-<button class="fab" id="fab" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="display:none">↑</button>
-<div class="toast" id="toast" aria-live="polite" aria-atomic="true"></div>
+<button class="fab" id="fab" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<div class="toast" id="toast"></div>
 
 <script src="data.js"></script>
 <script src="figures.js"></script>
+<script src="synthesis.js"></script>
+<script src="concepts.js"></script>
+<script src="flashcards.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
