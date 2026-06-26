@@ -155,7 +155,22 @@ function renderChapter(raw,chId){
     if(DIAGRAM_RE.test(l)&&!/Fig\.\s*\d+\.\d+/.test(l))return false;
     return true;
   });
-  let html='';let paraBuf=[];let bulletBuf=[];let inSection=false;let inSit=false;let inCallout=false;let calloutTitle='';let calloutBuf=[];let inNumList=false;let numBuf=[];
+  let html='';let paraBuf=[];let bulletBuf=[];let inSection=false;let inSit=false;let inCallout=false;let calloutTitle='';let calloutBuf=[];let inNumList=false;let numBuf=[];let pastPreamble=false;
+
+  function markBodyStart(){pastPreamble=true}
+  function isPreambleLine(l){
+    if(/Situations?\s+de\s+départ/i.test(l))return false;
+    if(LETTER_RE.test(l))return false;
+    const rm=l.match(RANG_RE);
+    if(rm&&rm[2].length>45)return false;
+    if(SECTION_RE.test(l))return true;
+    if(/^\d{3}\s+\S/.test(l))return true;
+    if(/^ITEM\s/i.test(l))return true;
+    if(/^En lien avec/i.test(l))return true;
+    if(/^diagnostic et thérapeutique/i.test(l))return true;
+    if(l.length<55&&!BULLET_RE.test(l))return true;
+    return false;
+  }
 
   function flushPara(rang){
     if(!paraBuf.length)return;
@@ -189,13 +204,15 @@ function renderChapter(raw,chId){
 
   const outlineSeen=new Set();
   const outlineParts=[];
-  for(const ol of lines){
+  const outlineCap=lines.slice(0,35);
+  for(const ol of outlineCap){
     const om=ol.match(SECTION_RE);
     if(!om)continue;
     const key=om[1]+'|'+om[2];
     if(outlineSeen.has(key))continue;
     outlineSeen.add(key);
     outlineParts.push(om);
+    if(outlineParts.length>=8)break;
   }
   if(outlineParts.length>=3){
     html+=`<nav class="ch-outline" aria-label="Plan du chapitre"><p class="outline-label">Plan du chapitre</p><ul>${outlineParts.map(m=>`<li><span class="outline-num">${esc(m[1])}</span> ${esc(m[2])}</li>`).join('')}</ul></nav>`;
@@ -207,6 +224,7 @@ function renderChapter(raw,chId){
 
     if(/Situations?\s+de\s+départ/i.test(l)){
       flushPara();flushBullets();flushNumList();closeSection();
+      markBodyStart();
       html+=`<div class="key-point"><strong>Situations de départ</strong><ul>`;inSit=true;continue;
     }
     if(inSit){
@@ -239,6 +257,7 @@ function renderChapter(raw,chId){
 
     const secM=l.match(SECTION_RE);
     if(secM){
+      if(!pastPreamble)continue;
       flushPara();flushBullets();flushNumList();closeSection();
       html+=`<section class="manual-section"><header class="section-head"><span class="section-num">${esc(secM[1])}</span><span class="section-title">${esc(secM[2])}</span></header><div class="section-body">`;
       inSection=true;continue;
@@ -246,6 +265,7 @@ function renderChapter(raw,chId){
 
     const letM=l.match(LETTER_RE);
     if(letM&&letM[2].length>2){
+      markBodyStart();
       flushPara();flushBullets();flushNumList();
       html+=`<h3 class="sub-head"><span class="sub-letter">${esc(letM[1])}</span>${esc(letM[2])}</h3>`;
       continue;
@@ -270,10 +290,15 @@ function renderChapter(raw,chId){
         flushPara();html+=`<div class="def-block"><span class="rang-badge ${rangM[1]==='A'?'rang-a':'rang-b'}">Rang ${rangM[1]}</span><span class="def-text">${esc(body)}</span></div>`;
         continue;
       }
-      paraBuf.push(body);flushPara(rangM[1]);continue;
+      paraBuf.push(body);flushPara(rangM[1]);markBodyStart();continue;
     }
 
-    if(/^Critères de /i.test(l)){flushPara();html+=`<div class="callout callout-soft"><div class="callout-title">${esc(l)}</div><ul class="reader-list">`; 
+    if(!pastPreamble){
+      if(isPreambleLine(l))continue;
+      markBodyStart();
+    }
+
+    if(/^Critères de /i.test(l)){flushPara();html+=`<div class="callout callout-soft"><div class="callout-title">${esc(l)}</div><ul class="reader-list">`;
       let j=i+1;while(j<lines.length&&NUM_LIST_RE.test(lines[j])){const nm=lines[j].match(NUM_LIST_RE);html+=`<li>${esc(nm[2])}</li>`;j++}html+=`</ul></div>`;i=j-1;continue}
 
     if(/^(\d{1,3})$/.test(l))continue;
