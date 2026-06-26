@@ -18,8 +18,10 @@
 <body>
 
 <header class="top-bar">
-  <h1>🩺 Gériatrie</h1>
-  <button class="search-toggle" onclick="toggleSearch()" aria-label="Rechercher">🔍</button>
+  <h1>Gériatrie</h1>
+  <button class="search-toggle" onclick="toggleSearch()" aria-label="Rechercher">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  </button>
   <div class="search-bar" id="searchBar">
     <input type="text" id="searchInput" placeholder="Chercher un chapitre, concept..." oninput="onSearch(this.value)">
     <button onclick="toggleSearch()">✕</button>
@@ -102,7 +104,7 @@
 
   <!-- SETTINGS -->
   <div class="view" id="vSet">
-    <div class="page-hd"><h1>⚙️ Réglages</h1></div>
+    <div class="page-hd"><h1>Réglages</h1></div>
     <div class="set-group">
       <div class="set-row">
         <div class="set-label"><div class="lb">Mode sombre</div></div>
@@ -136,12 +138,26 @@
 </main>
 
 <nav class="bottom-nav" id="bnav">
-  <button class="active" data-v="home" onclick="sw('home')"><span class="nav-icon">🏠</span>Accueil</button>
-  <button data-v="synth" onclick="sw('synth')"><span class="nav-icon">📋</span>Synthèse</button>
-  <button data-v="graph" onclick="sw('graph')"><span class="nav-icon">🕸️</span>Carte</button>
-  <button data-v="flash" onclick="sw('flash')"><span class="nav-icon">🧠</span>Révision</button>
-  <button data-v="items" onclick="sw('items')"><span class="nav-icon">🎓</span>ITEMs</button>
-  <button data-v="set" onclick="sw('set')"><span class="nav-icon">⚙️</span>Réglages</button>
+  <button class="active" data-v="home" onclick="sw('home')">
+    <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span>Accueil</span>
+  </button>
+  <button data-v="synth" onclick="sw('synth')">
+    <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+    <span>Synthèse</span>
+  </button>
+  <button data-v="flash" onclick="sw('flash')">
+    <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+    <span>Révision</span>
+  </button>
+  <button data-v="items" onclick="sw('items')">
+    <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+    <span>ITEMs</span>
+  </button>
+  <button data-v="set" onclick="sw('set')">
+    <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    <span>Réglages</span>
+  </button>
 </nav>
 
 <div class="concept-modal" id="conceptModal" onclick="if(event.target===this)closeConceptModal()">
