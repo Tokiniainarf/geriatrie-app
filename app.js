@@ -91,7 +91,27 @@ function quickBm(id){const i=S.bm.indexOf(id);if(i>-1)S.bm.splice(i,1);else S.bm
 
 /* ── SEARCH ── */
 function toggleSearch(){const sb=document.getElementById('searchBar');sb.classList.toggle('open');if(sb.classList.contains('open'))document.getElementById('searchInput').focus()}
-function onSearch(q){q=q.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');document.querySelectorAll('.ch-row').forEach(r=>{const t=r.querySelector('.ch-row-title').textContent.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');r.style.display=!q||t.includes(q)?'':'none'})}
+function onSearch(q){
+  if(typeof AppSearch!=='undefined' && q.length >= 2){
+    const results = AppSearch.search(q);
+    const container = document.getElementById('searchResults');
+    if(container){ AppSearch.renderResults(results, container); container.style.display = results.length ? 'block' : 'none'; }
+    // Also filter chapter rows
+    document.querySelectorAll('.ch-row').forEach(r=>{
+      const t=r.querySelector('.ch-row-title').textContent.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+      const nq=q.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+      r.style.display=!q||t.includes(nq)?'':'none';
+    });
+  } else {
+    const container = document.getElementById('searchResults');
+    if(container) container.style.display = 'none';
+    q=q.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    document.querySelectorAll('.ch-row').forEach(r=>{
+      const t=r.querySelector('.ch-row-title').textContent.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+      r.style.display=!q||t.includes(q)?'':'none';
+    });
+  }
+}
 
 /* ── FAVORIS ── */
 function renderFav(){

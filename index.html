@@ -40,9 +40,10 @@
     </button>
   </div>
   <div class="search-bar" id="searchBar">
-    <input type="text" id="searchInput" placeholder="Chercher un chapitre, concept..." oninput="onSearch(this.value)">
+    <input type="text" id="searchInput" placeholder="Chercher un chapitre, concept, flashcard..." oninput="onSearch(this.value)">
     <button onclick="toggleSearch()">Annuler</button>
   </div>
+  <div id="searchResults" class="search-results-dropdown"></div>
 </header>
 
 <main class="main-content">
@@ -286,6 +287,7 @@
 <script src="brainfeed.js"></script>
 <script src="quiz.js"></script>
 <script src="dashboard.js"></script>
+<script src="appsearch.js"></script>
 <script src="annales.js"></script>
 <script src="has-reco.js"></script>
 <script src="graph.js"></script>
