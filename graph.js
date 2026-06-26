@@ -266,7 +266,7 @@
       ctx.fillText(n.id.replace('ch',''), n.x, n.y);
 
       // Label
-      ctx.fillStyle = isHov ? n.color : '#8A8F98';
+      ctx.fillStyle = isHov ? n.color : (document.documentElement.getAttribute('data-theme')==='dark' ? '#8A8F98' : '#64748B');
       ctx.font = `${isHov?'600':'500'} 11px sans-serif`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'top';

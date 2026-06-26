@@ -3,10 +3,11 @@ const CH_COLORS={ch1:'#7C3AED',ch2:'#059669',ch3:'#D97706',ch4:'#DC2626',ch5:'#2
 const BM_SVG={on:'<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.77 5.82 22 7 14.14l-5-4.87 6.91-1.01z"/></svg>',off:'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.77 5.82 22 7 14.14l-5-4.87 6.91-1.01z"/></svg>'};
 
 function safeJSON(k,f){try{return JSON.parse(localStorage.getItem(k))||f}catch{return f}}
-const S={view:'home',ch:null,pgIdx:0,readMode:localStorage.getItem('grm')||'scroll',bm:safeJSON('gbm',[]),read:safeJSON('grd',[]),prog:safeJSON('gprog',{}),fs:parseInt(localStorage.getItem('gfs')||'17'),lh:parseFloat(localStorage.getItem('glh')||'1.6'),th:localStorage.getItem('gth')||'dark'};
+const S={view:'home',ch:null,pgIdx:0,readMode:localStorage.getItem('grm')||'scroll',bm:safeJSON('gbm',[]),read:safeJSON('grd',[]),prog:safeJSON('gprog',{}),fs:parseInt(localStorage.getItem('gfs')||'17'),lh:parseFloat(localStorage.getItem('glh')||'1.6'),th:localStorage.getItem('gth')||'light'};
 let flashIdx=0,flashDeck=[],flashFilter='all';
 
 document.addEventListener('DOMContentLoaded',()=>{
+  if(localStorage.getItem('gth')==='dark'){S.th='light';localStorage.setItem('gth','light');}
   setFS(S.fs);setLH(S.lh,true);
   document.documentElement.setAttribute('data-theme',S.th);
   if(S.readMode==='page')document.getElementById('rmTog')?.classList.add('on');
