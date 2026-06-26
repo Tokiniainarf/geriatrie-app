@@ -113,7 +113,7 @@ function showCh(id){
   document.getElementById('chNum').textContent=id.replace('ch','');
   document.getElementById('chT').textContent=ch.t;
   // Chapter hero image (AI-generated or fallback to PDF illustration)
-  const heroImg = CHAPTER_HERO[id] || CHAPTER_ILL[id] || '';
+  const heroImg = (typeof CHAPTER_HERO!=='undefined'?CHAPTER_HERO[id]:null) || CHAPTER_ILL[id] || '';
   const heroEl = document.getElementById('chHero');
   const oldImg = heroEl.querySelector('.ch-hero-img');
   if(oldImg) oldImg.remove();
