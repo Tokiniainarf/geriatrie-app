@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Auto-test ch1</title></head>
+<body style="background:#ECFEFF;padding:40px;font-family:system-ui">
+<h1>Chargement chapitre 1...</h1>
+<script>
+// Load the app data and render chapter 1
+fetch('data.js').then(r=>r.text()).then(dataText=>{
+  fetch('app.js').then(r=>r.text()).then(appText=>{
+    fetch('figures.js').then(r=>r.text()).then(figText=>{
+      fetch('interactive-figures.js').then(r=>r.text()).then(intFigText=>{
+        // Execute scripts
+        var s1=document.createElement('script');s1.textContent=dataText;document.body.appendChild(s1);
+        var s2=document.createElement('script');s2.textContent=figText;document.body.appendChild(s2);
+        var s3=document.createElement('script');s3.textContent=intFigText;document.body.appendChild(s3);
+        var s4=document.createElement('script');s4.textContent=appText;document.body.appendChild(s4);
+        
+        setTimeout(()=>{
+          // Now render chapter 1
+          var chunks=APP_DATA.content['ch1']||[];
+          var total='';
+          for(var i=0;i<chunks.length;i++){
+            total+=renderPage(chunks[i][1],chunks[i][0],i>0);
+          }
+          document.body.innerHTML='<div style="max-width:40rem;margin:0 auto;font-family:Noto Sans,system-ui;font-size:18px;line-height:1.7;color:#164E63;background:#fff;padding:20px;border-radius:18px">'+total+'</div>';
+        }, 500);
+      });
+    });
+  });
+});
+</script>
+</body>
+</html>

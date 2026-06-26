@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head><meta charset="UTF-8"><title>Nettoyage cache...</title></head>
+<body style="font-family:system-ui;text-align:center;padding:60px;background:#ECFEFF;color:#164E63">
+<h1>🧹 Nettoyage du cache...</h1>
+<p id="status">En cours...</p>
+<script>
+(async()=>{
+  const s=document.getElementById('status');
+  try{
+    // Delete ALL caches
+    const keys=await caches.keys();
+    for(const k of keys){await caches.delete(k);s.textContent='Suppression: '+k;}
+    
+    // Unregister ALL service workers
+    const regs=await navigator.serviceWorker.getRegistrations();
+    for(const r of regs){await r.unregister();s.textContent='SW désactivé';}
+    
+    s.textContent='✅ Cache nettoyé ! Redirection...';
+    setTimeout(()=>{window.location.href='./index.html?nocache='+Date.now()},1000);
+  }catch(e){
+    s.textContent='Redirection...';
+    setTimeout(()=>{window.location.href='./index.html?nocache='+Date.now()},500);
+  }
+})();
+</script>
+</body>
+</html>

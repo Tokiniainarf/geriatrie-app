@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="640" height="400">
+  <defs>
+    <linearGradient id="bg9" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF7ED"/>
+      <stop offset="100%" stop-color="#FFFBEB"/>
+    </linearGradient>
+    <linearGradient id="accent9" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0891B2" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#22D3EE" stop-opacity="0.4"/>
+    </linearGradient>
+    <radialGradient id="glow9" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0891B2" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#0891B2" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="320" height="200" rx="12" fill="url(#bg9)"/>
+  
+  <!-- Subtle grid pattern -->
+  <line x1="0" y1="50" x2="320" y2="50" stroke="#0891B2" stroke-width="0.3" opacity="0.1"/>
+  <line x1="0" y1="100" x2="320" y2="100" stroke="#0891B2" stroke-width="0.3" opacity="0.1"/>
+  <line x1="0" y1="150" x2="320" y2="150" stroke="#0891B2" stroke-width="0.3" opacity="0.1"/>
+  <line x1="80" y1="0" x2="80" y2="200" stroke="#0891B2" stroke-width="0.3" opacity="0.1"/>
+  <line x1="160" y1="0" x2="160" y2="200" stroke="#0891B2" stroke-width="0.3" opacity="0.1"/>
+  <line x1="240" y1="0" x2="240" y2="200" stroke="#0891B2" stroke-width="0.3" opacity="0.1"/>
+  
+  <!-- Glow behind icon -->
+  <circle cx="160" cy="120" r="60" fill="url(#glow9)"/>
+  
+  <!-- Decorative dots -->
+  <circle cx="30" cy="30" r="2" fill="#0891B2" opacity="0.15"/>
+  <circle cx="290" cy="30" r="2" fill="#0891B2" opacity="0.15"/>
+  <circle cx="30" cy="170" r="2" fill="#0891B2" opacity="0.15"/>
+  <circle cx="290" cy="170" r="2" fill="#0891B2" opacity="0.15"/>
+  <circle cx="50" cy="60" r="1.5" fill="#22D3EE" opacity="0.2"/>
+  <circle cx="270" cy="60" r="1.5" fill="#22D3EE" opacity="0.2"/>
+  <circle cx="50" cy="140" r="1.5" fill="#22D3EE" opacity="0.2"/>
+  <circle cx="270" cy="140" r="1.5" fill="#22D3EE" opacity="0.2"/>
+  
+  <!-- Icon area -->
+  
+    <path d="M130,130 Q130,80 160,75 Q190,80 190,130 Q190,155 160,160 Q130,155 130,130" fill="none" stroke="#0891B2" stroke-width="2.5"/>
+    <path d="M160,75 L160,95" fill="none" stroke="#0891B2" stroke-width="2" opacity="0.4"/>
+    <path d="M140,90 Q160,100 180,90" fill="none" stroke="#0891B2" stroke-width="1.5" opacity="0.4"/>
+    <path d="M135,110 Q160,120 185,110" fill="none" stroke="#0891B2" stroke-width="1.5" opacity="0.4"/>
+    <path d="M138,130 Q160,140 182,130" fill="none" stroke="#0891B2" stroke-width="1.5" opacity="0.4"/>
+    <circle cx="150" cy="100" r="3" fill="#0891B2" opacity="0.3"/>
+    <circle cx="170" cy="110" r="3" fill="#0891B2" opacity="0.3"/>
+    <circle cx="155" cy="125" r="3" fill="#0891B2" opacity="0.3"/>
+    <circle cx="165" cy="95" r="2" fill="#F59E0B" opacity="0.4"/>
+    <circle cx="145" cy="120" r="2" fill="#F59E0B" opacity="0.4"/>
+    <circle cx="175" cy="130" r="2" fill="#F59E0B" opacity="0.4"/>
+    <circle cx="100" cy="100" r="8" fill="none" stroke="#22D3EE" stroke-width="1.5" opacity="0.3"/>
+    <circle cx="220" cy="110" r="6" fill="none" stroke="#22D3EE" stroke-width="1.5" opacity="0.3"/>
+    
+  
+  <!-- Top accent bar -->
+  <rect x="0" y="0" width="320" height="4" rx="0" fill="url(#accent9)"/>
+  
+  <!-- Chapter number -->
+  <rect x="15" y="15" width="40" height="20" rx="10" fill="#0891B2" opacity="0.15"/>
+  <text x="35" y="29" text-anchor="middle" font-size="10" fill="#0891B2" font-family="system-ui, sans-serif" font-weight="600" opacity="0.8">Ch 9</text>
+  
+  <!-- Title -->
+  <text x="160" y="50" text-anchor="middle" font-size="16" fill="#1E293B" font-family="system-ui, sans-serif" font-weight="700">Cognitive Disorders</text>
+  
+  <!-- Subtitle -->
+  <text x="160" y="188" text-anchor="middle" font-size="10" fill="#065F73" font-family="system-ui, sans-serif" font-weight="400" opacity="0.6">Dementia & Cognition</text>
+  
+  <!-- Bottom accent line -->
+  <rect x="100" y="175" width="120" height="2" rx="1" fill="#0891B2" opacity="0.2"/>
+  
+  <!-- Border -->
+  <rect width="320" height="200" rx="12" fill="none" stroke="#0891B2" stroke-width="1" opacity="0.15"/>
+</svg>

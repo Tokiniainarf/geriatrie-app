@@ -7,7 +7,6 @@ const S={view:'home',ch:null,bm:safeJSON('gbm',[]),read:safeJSON('grd',[]),fs:pa
 let flashIdx=0,flashDeck=[],flashFilter='all';
 
 document.addEventListener('DOMContentLoaded',()=>{
-  if(localStorage.getItem('gth')==='dark'){S.th='light';localStorage.setItem('gth','light');}
   setFS(S.fs);setLH(S.lh,true);
   const fsR=document.getElementById('fsRange');if(fsR)fsR.value=S.fs;
   const lhR=document.getElementById('lhRange');if(lhR)lhR.value=S.lh;
@@ -39,7 +38,7 @@ function sw(view){
   if(view==='graph'&&typeof initGraph==='function')initGraph();
   if(view==='set'){document.getElementById('pd').textContent=`${S.read.length} chapitre${S.read.length>1?'s':''} consulté${S.read.length>1?'s':''}`}
 }
-function goHome(){sw('home');S.ch=null}
+function goHome(){sw('home');S.ch=null;renderHome()}
 
 /* ── THEME ── */
 function toggleTheme(){
@@ -109,10 +108,21 @@ function renderFav(){
 function showCh(id){
   const ch=APP_DATA.chapters.find(c=>c.id===id);if(!ch)return;
   S.ch=id;
-  if(!S.read.includes(id)){S.read.push(id);localStorage.setItem('grd',JSON.stringify(S.read))}
+  if(!S.read.includes(id)){S.read.push(id);localStorage.setItem('grd',JSON.stringify(S.read));updStats()}
   document.getElementById('chHero').style.background=`linear-gradient(145deg,${CH_COLORS[id]},#164E63)`;
   document.getElementById('chNum').textContent=id.replace('ch','');
   document.getElementById('chT').textContent=ch.t;
+  // Chapter hero image (AI-generated or fallback to PDF illustration)
+  const heroImg = CHAPTER_HERO[id] || CHAPTER_ILL[id] || '';
+  const heroEl = document.getElementById('chHero');
+  const oldImg = heroEl.querySelector('.ch-hero-img');
+  if(oldImg) oldImg.remove();
+  if(heroImg){
+    const img = document.createElement('img');
+    img.className='ch-hero-img'; img.src=heroImg; img.alt=ch.t; img.loading='lazy';
+    img.onerror=function(){this.style.display='none'};
+    heroEl.insertBefore(img, heroEl.firstChild);
+  }
   const tags=ch.items.map(i=>`<span class="tag">${i}</span>`).join('');
   document.getElementById('chTags').innerHTML=tags+(S.read.includes(id)?'<span class="tag tag-read">Consulté</span>':'');
   const bmOn=S.bm.includes(id);
@@ -143,7 +153,7 @@ function renderChapter(raw,chId){
   const ch=APP_DATA.chapters.find(c=>c.id===chId);
   const titleRe=ch?new RegExp('^'+ch.t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\s*$','i'):null;
   let text=raw.replace(/(\w)-\s*\n\s*(\w)/g,'$1$2');
-  const lines=text.replace(/\r\n/g,'\n').split('\n').map(l=>l.trim()).filter((l,i,arr)=>{
+  let lines=text.replace(/\r\n/g,'\n').split('\n').map(l=>l.trim()).filter((l,i,arr)=>{
     if(!l)return false;
     if(RUN_HDR_RE.test(l))return false;
     if(SKIP_LINE_RE.test(l))return false;
@@ -155,36 +165,49 @@ function renderChapter(raw,chId){
     if(DIAGRAM_RE.test(l)&&!/Fig\.\s*\d+\.\d+/.test(l))return false;
     return true;
   });
+  // Filter ITEM table rows before first section + kill short garbage
+  let firstSec=-1;
+  for(let i=0;i<lines.length;i++){if(SECTION_RE.test(lines[i])||LETTER_RE.test(lines[i])){firstSec=i;break}}
+  if(firstSec>0){
+    lines=lines.filter((l,i)=>{
+      if(i>=firstSec)return true;
+      if(/Situations?\s+de\s+départ/i.test(l))return true;
+      if(/^\d{2,3}\s+/.test(l))return true;
+      if(BULLET_RE.test(l))return true;
+      if(l.length > 40 && /[.!?]/.test(l)) return true;
+      if(/gérontologie|gériatrie|vieillissement/i.test(l)) return true;
+      return false;
+    });
+  }
+  // Kill remaining short non-sentence fragments (common OCR junk)
+  lines = lines.filter(l => {
+    if (l.length >= 50) return true;
+    if (BULLET_RE.test(l) || SECTION_RE.test(l) || LETTER_RE.test(l)) return true;
+    if (/^Fig\.|Tableau|Encadré|^\d{2,3}\s+/.test(l)) return true;
+    if (/[.!?]$/.test(l)) return true;   // keep if it ends a sentence
+    return false;
+  });
   let html='';let paraBuf=[];let bulletBuf=[];let inSection=false;let inSit=false;let inCallout=false;let calloutTitle='';let calloutBuf=[];let inNumList=false;let numBuf=[];let pastPreamble=false;
 
   function markBodyStart(){pastPreamble=true}
   function isPreambleLine(l){
-    if(/Situations?\s+de\s+départ/i.test(l))return false;
-    if(LETTER_RE.test(l))return false;
-    const rm=l.match(RANG_RE);
-    if(rm&&rm[2].length>45)return false;
-    if(SECTION_RE.test(l))return true;
     if(/^\d{3}\s+\S/.test(l))return true;
     if(/^ITEM\s/i.test(l))return true;
     if(/^En lien avec/i.test(l))return true;
     if(/^diagnostic et thérapeutique/i.test(l))return true;
-    if(l.length<55&&!BULLET_RE.test(l))return true;
     return false;
   }
 
   function flushPara(rang){
     if(!paraBuf.length)return;
-    const merged=paraBuf.join(' ').replace(/\s+/g,' ').trim();
+    const merged=paraBuf.join(" ").replace(/\s+/g," ").trim();
     paraBuf=[];
     if(merged.length<12)return;
-    const chip=rang?`<span class="rang-inline rang-${rang==='A'?'a':'b'}">Rang ${rang}</span>`:'';
-    if(merged.length>950){
-      merged.split(/(?<=[.!?])\s+(?=[A-ZÉÈÊÀÂÎÔÙÇ«])/).forEach(part=>{
-        const t=part.trim();
-        if(t.length>25)html+=`<div class="para-card">${chip}<p>${esc(t)}</p></div>`;
-      });
-    }else html+=`<div class="para-card">${chip}<p>${esc(merged)}</p></div>`;
+    const chip=rang?`<span class="rang-inline rang-${rang==="A"?"a":"b"}">Rang ${rang}</span>`:"";
+    // No more splitting - create large continuous blocks
+    html+=`<div class="para-card">${chip}<p>${esc(merged)}</p></div>`;
   }
+
   function flushBullets(){
     if(!bulletBuf.length)return;
     html+=`<div class="reader-list-card"><ul class="reader-list">${bulletBuf.map(b=>`<li>${esc(b)}</li>`).join('')}</ul></div>`;
@@ -220,10 +243,10 @@ function renderChapter(raw,chId){
 
   for(let i=0;i<lines.length;i++){
     let l=lines[i];
-    if(!l){flushPara();flushBullets();flushNumList();if(inCallout)flushCallout();continue}
+    if(!l){flushBullets();flushNumList();if(inCallout)flushCallout();continue}
 
     if(/Situations?\s+de\s+départ/i.test(l)){
-      flushPara();flushBullets();flushNumList();closeSection();
+      flushBullets();flushNumList();closeSection();
       markBodyStart();
       html+=`<div class="key-point"><strong>Situations de départ</strong><ul>`;inSit=true;continue;
     }
@@ -234,7 +257,7 @@ function renderChapter(raw,chId){
     }
 
     const enc=l.match(/^Encadré\s+([\d.]+)/i);
-    if(enc){flushPara();flushBullets();flushNumList();flushCallout();calloutTitle='Encadré '+enc[1];inCallout=true;continue}
+    if(enc){flushBullets();flushNumList();flushCallout();calloutTitle='Encadré '+enc[1];inCallout=true;continue}
     if(inCallout){
       if(SECTION_RE.test(l)||LETTER_RE.test(l)||/^Tableau\s+/i.test(l)){flushCallout()}
       else if(BULLET_RE.test(l)){calloutBuf.push(l.match(BULLET_RE)[1]);continue}
@@ -245,9 +268,14 @@ function renderChapter(raw,chId){
     const figM=l.match(/Fig\.\s*(\d+\.\d+)/);
     if(figM&&typeof FIGURES!=='undefined'){
       flushPara();flushBullets();flushNumList();
-      const src=FIGURES[figM[1]]?.[0];
-      if(src&&!src.includes('figures/page_')){
-        html+=`<figure class="fig-block"><img src="${src}" alt="Figure ${figM[1]}" loading="lazy"><figcaption>Figure ${figM[1]}</figcaption></figure>`;
+      const figId=figM[1];
+      if(typeof renderInteractiveFigure==='function'){
+        html+=`<figure class="fig-block">${renderInteractiveFigure(figId)}<figcaption>Figure ${figId}</figcaption></figure>`;
+      }else{
+        const src=FIGURES[figId]?.[0];
+        if(src&&!src.includes('figures/page_')){
+          html+=`<figure class="fig-block"><img src="${src}" alt="Figure ${figId}" loading="lazy"><figcaption>Figure ${figId}</figcaption></figure>`;
+        }
       }
       continue;
     }
@@ -273,19 +301,33 @@ function renderChapter(raw,chId){
 
     const numM=l.match(NUM_LIST_RE);
     if(numM&&numM[2].length<120){
-      flushPara();flushBullets();
+      flushBullets();
       inNumList=true;numBuf.push(numM[2]);continue;
     }
     if(inNumList&&l.length<100&&!SECTION_RE.test(l)){numBuf.push(l);continue}
     if(inNumList)flushNumList();
 
     const bulM=l.match(BULLET_RE);
-    if(bulM){flushPara();flushNumList();bulletBuf.push(bulM[1]);continue}
-    if(bulletBuf.length)flushBullets();
+    if(bulM){flushNumList();bulletBuf.push(bulM[1]);continue}
+    // Bullet continuation: if we have bullets and line is not structural, append to last bullet
+    if(bulletBuf.length){
+      const isStruct=SECTION_RE.test(l)||LETTER_RE.test(l)||/^Situations?\s+de\s+départ/i.test(l)||/^Encadré\s+/i.test(l)||/^Tableau\s+/i.test(l)||/^Fig\.\s*\d/i.test(l)||RANG_RE.test(l)||/^\d{2,3}\s+/.test(l);
+      if(!isStruct&&l.length<200){
+        bulletBuf[bulletBuf.length-1]+=' '+l;continue;
+      }
+      flushBullets();
+    }
 
     const rangM=l.match(RANG_RE);
     if(rangM&&!/Rubrique|Intitulé|Descriptif|Connaître|Modifications|Éléments physiopathologiques/.test(l)){
       const body=rangM[2];
+      // If body starts with prose words, treat as paragraph not rang annotation
+      const isProse=/^(Le |La |Les |L'|Il |Elle |Pour |C'est|Ainsi|On |En |Un |Une |Cette |Ce |Cela |De |Du |Des |Dans |Avec |Son |Sa |Ses |Sur |Par |Au |Aux |Tout |Tous |Bien |Mais |Or |Donc |Chez|Avec|Après|Avant|Depuis)/i.test(body);
+      if(isProse){
+        paraBuf.push(body);
+        markBodyStart();
+        continue;
+      }
       if(body.length<100&&!/[.;:]$/.test(body)){
         flushPara();html+=`<div class="def-block"><span class="rang-badge ${rangM[1]==='A'?'rang-a':'rang-b'}">Rang ${rangM[1]}</span><span class="def-text">${esc(body)}</span></div>`;
         continue;
@@ -303,10 +345,18 @@ function renderChapter(raw,chId){
 
     if(/^(\d{1,3})$/.test(l))continue;
     if(/^diagnostic et thérapeutique/i.test(l))continue;
+    if(/^\w{4,20}$/.test(l)&&!/^(Fig|Tableau|Encadré)/i.test(l))continue;
+    if(l.length<15&&!/[.!?]/.test(l)&&!/^[A-Z]\./.test(l)&&!BULLET_RE.test(l)&&!SECTION_RE.test(l)&&!LETTER_RE.test(l))continue;
+    // OCR garbage - catch specific patterns that leak through preamble
+    if(/Bouchon\s*\)/.test(l))continue;
+    if(/vieillissemnt|viellissement/.test(l))continue;
+    if(/physiopathologiques\s+physiopathologiques/i.test(l))continue;
+    if(/et sans incapacité/i.test(l)&&!(/espérance de vie/i.test(l)))continue;
+    if(/\bgine\b/.test(l))continue;
+    if(/physiopathologiques.*(gine|agents étiologiques)/i.test(l))continue;
+    if(/anthropologiques\s+populationnel/i.test(l))continue;
 
     paraBuf.push(l);
-    const joined=paraBuf.join(' ');
-    if(joined.length>180||/[.!?]["']?\s*$/.test(l))flushPara();
   }
   flushPara();flushBullets();flushNumList();if(inCallout)flushCallout();if(inSit)html+=`</ul></div>`;closeSection();
   return html||'<div class="empty"><div class="empty-text">Aucun contenu structuré</div></div>';
@@ -399,6 +449,8 @@ function updStats(){
   if(pd)pd.textContent=`${S.read.length} chapitre${S.read.length>1?'s':''} consulté${S.read.length>1?'s':''}`;
   const sf=document.getElementById('statFav');
   if(sf)sf.textContent=String(S.bm.length);
+  const stats=document.querySelector('.stats-bar');
+  if(stats&&S.view==='home')renderHome();
 }
 function installPWA(){if(window.deferredPrompt){window.deferredPrompt.prompt();window.deferredPrompt=null}}
 

@@ -594,3 +594,13 @@ input[type="range"] { width: 100px; accent-color: var(--accent); }
 .text-center { text-align: center; }
 .text-muted { color: var(--text2); }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+/* Modal + toolbar polish */
+.concept-hdr button {
+  min-height: 44px; min-width: 44px; padding: 8px 14px;
+  border-radius: var(--radius-sm); background: var(--glass);
+  border: 1px solid var(--glass-border); font-weight: 600; font-size: .85rem;
+}
+.ch-toolbar button { display: inline-flex; align-items: center; gap: 6px; }
+.ch-toolbar button svg { flex-shrink: 0; }
+.fab svg { display: block; }
