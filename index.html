@@ -36,6 +36,11 @@
     <div id="p2"></div>
   </div>
 
+  <!-- GRAPH -->
+  <div class="view" id="vGraph" style="padding:0;height:calc(100vh - 52px - 68px)">
+    <canvas id="graphCanvas" style="width:100%;height:100%;display:block"></canvas>
+  </div>
+
   <!-- SYNTHESIS -->
   <div class="view" id="vSynth">
     <div class="page-hd"><h1>📋 Fiches Synthèse</h1><p>Les concepts clés en un coup d'œil</p></div>
@@ -133,6 +138,7 @@
 <nav class="bottom-nav" id="bnav">
   <button class="active" data-v="home" onclick="sw('home')"><span class="nav-icon">🏠</span>Accueil</button>
   <button data-v="synth" onclick="sw('synth')"><span class="nav-icon">📋</span>Synthèse</button>
+  <button data-v="graph" onclick="sw('graph')"><span class="nav-icon">🕸️</span>Carte</button>
   <button data-v="flash" onclick="sw('flash')"><span class="nav-icon">🧠</span>Révision</button>
   <button data-v="items" onclick="sw('items')"><span class="nav-icon">🎓</span>ITEMs</button>
   <button data-v="set" onclick="sw('set')"><span class="nav-icon">⚙️</span>Réglages</button>
@@ -153,6 +159,7 @@
 <script src="synthesis.js"></script>
 <script src="concepts.js"></script>
 <script src="flashcards.js"></script>
+<script src="graph.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
