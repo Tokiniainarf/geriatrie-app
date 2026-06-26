@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes">
-<meta name="theme-color" content="#0d9488">
+<meta name="theme-color" content="#08090d">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Gériatrie">
@@ -50,6 +50,10 @@
       <div class="hero-content">
         <div class="hero-title">Gériatrie</div>
         <div class="hero-sub">5e édition · Collège National des Enseignants de Gériatrie · Pr Jacques Boddaert · Elsevier Masson 2021</div>
+        <div class="hero-actions">
+          <button type="button" class="hero-btn" onclick="sw('graph')">Carte des liens</button>
+          <button type="button" class="hero-btn hero-btn-ghost" onclick="sw('fav')">Favoris</button>
+        </div>
       </div>
     </div>
     <div class="stats-bar" id="statsBar">
@@ -57,7 +61,7 @@
       <div class="stat"><span class="stat-num">344</span><span class="stat-label">p.</span></div>
       <div class="stat"><span class="stat-num">33</span><span class="stat-label">fig.</span></div>
       <div class="stat"><span class="stat-num">11</span><span class="stat-label">ITEMs</span></div>
-      <div class="stat"><span class="stat-num" id="statFav">0</span><span class="stat-label">fav.</span></div>
+      <div class="stat stat-click" role="button" tabindex="0" onclick="sw('fav')" onkeydown="if(event.key==='Enter')sw('fav')"><span class="stat-num" id="statFav">0</span><span class="stat-label">fav.</span></div>
     </div>
     <div id="recent" style="display:none"></div>
     <div class="section-header">Partie I — Connaissances</div>
@@ -67,8 +71,12 @@
   </div>
 
   <!-- GRAPH -->
-  <div class="view" id="vGraph" style="padding:0;height:calc(100vh - 56px - 64px)">
-    <canvas id="graphCanvas" style="width:100%;height:100%;display:block"></canvas>
+  <div class="view" id="vGraph">
+    <div class="graph-bar">
+      <button type="button" class="hero-btn hero-btn-ghost" onclick="sw('home')">Retour</button>
+      <span class="graph-hint">Glisser un chapitre · clic pour ouvrir</span>
+    </div>
+    <canvas id="graphCanvas"></canvas>
   </div>
 
   <!-- SYNTHESIS -->
@@ -157,6 +165,10 @@
       <div class="set-row">
         <div class="set-label"><div class="lb">Progression</div><div class="ds" id="pd">0 chapitres lus</div></div>
       </div>
+      <div class="set-row set-link" role="button" tabindex="0" onclick="sw('fav')" onkeydown="if(event.key==='Enter')sw('fav')">
+        <div class="set-label"><div class="lb">Favoris</div><div class="ds">Chapitres marqués</div></div>
+        <span class="set-chevron" aria-hidden="true">›</span>
+      </div>
       <div class="set-btn" onclick="resetProg()">Réinitialiser la progression</div>
       <div class="set-btn" onclick="clearAll()">Effacer toutes les données</div>
     </div>
@@ -196,9 +208,9 @@
 <button class="fab" id="fab" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 <div class="toast" id="toast"></div>
 
-<div class="install-bar" id="installB" onclick="installPWA()">
+<div class="install-bar" id="installB">
   <span>Installer l'app sur votre téléphone</span>
-  <button class="install-btn">Installer</button>
+  <button type="button" class="install-btn" onclick="event.stopPropagation();installPWA()">Installer</button>
 </div>
 
 <script src="data.js"></script>

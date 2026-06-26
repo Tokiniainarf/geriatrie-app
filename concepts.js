@@ -94,7 +94,7 @@ function linkifyText(text) {
 
     const info = CONCEPT_MAP[entry];
     return (
-      '<span class="concept-link" data-chapter="' + info.ch + '" data-search="' + info.search + '"' +
+      '<span class="cl concept-link" data-chapter="' + info.ch + '" data-search="' + info.search + '"' +
       ' onclick="navigateToConcept(\'' + info.ch + '\', \'' + info.search + '\')">' +
       matched + '</span>'
     );

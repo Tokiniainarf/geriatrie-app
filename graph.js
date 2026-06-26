@@ -29,12 +29,15 @@
   let canvas, ctx, W, H, animId, dragging = null, hovered = null;
   let scale = 1, offsetX = 0, offsetY = 0;
   let lastTouch = null, pinchDist = 0;
+  let graphStarted = false;
 
   function initGraph(){
     canvas = document.getElementById('graphCanvas');
     if(!canvas) return;
     ctx = canvas.getContext('2d');
     resize();
+    if(graphStarted){ animate(); return; }
+    graphStarted = true;
     window.addEventListener('resize', resize);
 
     // Position nodes in a circle
@@ -60,8 +63,10 @@
 
   function resize(){
     const rect = canvas.parentElement.getBoundingClientRect();
+    const bar = canvas.parentElement.querySelector('.graph-bar');
+    const barH = bar ? bar.offsetHeight : 0;
     W = canvas.width = rect.width;
-    H = canvas.height = rect.height;
+    H = canvas.height = Math.max(200, rect.height - barH);
   }
 
   function getNodeAt(mx, my){
@@ -261,7 +266,7 @@
       ctx.fillText(n.id.replace('ch',''), n.x, n.y);
 
       // Label
-      ctx.fillStyle = isHov ? n.color : 'var(--text2)';
+      ctx.fillStyle = isHov ? n.color : '#8A8F98';
       ctx.font = `${isHov?'600':'500'} 11px sans-serif`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'top';
@@ -278,12 +283,11 @@
     animId = requestAnimationFrame(animate);
   }
 
-  function destroy(){
+  function destroyGraph(){
     if(animId) cancelAnimationFrame(animId);
+    animId = null;
   }
 
-  // Expose
   window.initGraph = initGraph;
   window.destroyGraph = destroyGraph;
-  function destroyGraph(){ destroy(); }
 })();
