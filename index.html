@@ -18,19 +18,47 @@
 <body>
 
 <header class="top-bar">
-  <h1>Gériatrie</h1>
-  <button class="search-toggle" onclick="toggleSearch()" aria-label="Rechercher">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-  </button>
+  <div class="top-left">
+    <div class="top-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"/></svg>
+    </div>
+    <div>
+      <h1>Gériatrie</h1>
+      <div class="top-sub">5e édition · CNEG · Boddaert</div>
+    </div>
+  </div>
+  <div class="top-actions">
+    <button class="top-btn" onclick="toggleSearch()" aria-label="Rechercher">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </button>
+    <button class="top-btn" onclick="toggleTheme()" aria-label="Thème">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
   <div class="search-bar" id="searchBar">
     <input type="text" id="searchInput" placeholder="Chercher un chapitre, concept..." oninput="onSearch(this.value)">
-    <button onclick="toggleSearch()">✕</button>
+    <button onclick="toggleSearch()">Annuler</button>
   </div>
 </header>
 
 <main class="main-content">
   <!-- HOME -->
   <div class="view active" id="vHome">
+    <div class="hero-card">
+      <div class="hero-gradient"></div>
+      <div class="hero-content">
+        <div class="hero-title">Gériatrie</div>
+        <div class="hero-sub">5e édition · Collège National des Enseignants de Gériatrie · Pr Jacques Boddaert · Elsevier Masson 2021</div>
+      </div>
+    </div>
+    <div class="stats-bar" id="statsBar">
+      <div class="stat"><span class="stat-num">20</span><span class="stat-label">chap.</span></div>
+      <div class="stat"><span class="stat-num">344</span><span class="stat-label">p.</span></div>
+      <div class="stat"><span class="stat-num">33</span><span class="stat-label">fig.</span></div>
+      <div class="stat"><span class="stat-num">11</span><span class="stat-label">ITEMs</span></div>
+      <div class="stat"><span class="stat-num" id="statFav">0</span><span class="stat-label">fav.</span></div>
+    </div>
     <div id="recent" style="display:none"></div>
     <div class="section-header">Partie I — Connaissances</div>
     <div id="p1"></div>
@@ -39,19 +67,19 @@
   </div>
 
   <!-- GRAPH -->
-  <div class="view" id="vGraph" style="padding:0;height:calc(100vh - 52px - 68px)">
+  <div class="view" id="vGraph" style="padding:0;height:calc(100vh - 56px - 64px)">
     <canvas id="graphCanvas" style="width:100%;height:100%;display:block"></canvas>
   </div>
 
   <!-- SYNTHESIS -->
   <div class="view" id="vSynth">
-    <div class="page-hd"><h1> Fiches Synthèse</h1><p>Les concepts clés en un coup d'œil</p></div>
+    <div class="page-hd"><h1>Fiches Synthèse</h1><p>Les concepts clés en un coup d'œil</p></div>
     <div id="synthGrid" class="synth-grid"></div>
   </div>
 
   <!-- FLASHCARDS -->
   <div class="view" id="vFlash">
-    <div class="page-hd"><h1> Mode Révision</h1></div>
+    <div class="page-hd"><h1>Mode Révision</h1></div>
     <div class="flash-hdr">
       <div class="flash-stats"><span id="flashProg">0 / 0</span></div>
       <div class="flash-filters">
@@ -66,7 +94,7 @@
           <div class="flash-ch" id="flashCh"></div>
           <div class="flash-rang" id="flashRang"></div>
           <div class="flash-q" id="flashQ"></div>
-          <div class="flash-hint">Tapez pour retourner ↻</div>
+          <div class="flash-hint">Tapez pour retourner</div>
         </div>
         <div class="flash-back">
           <div class="flash-a" id="flashA"></div>
@@ -75,9 +103,9 @@
       </div>
     </div>
     <div class="flash-nav">
-      <button class="flash-btn" onclick="prevFlash()">← Précédent</button>
-      <button class="flash-btn" onclick="shuffleFlash()"> Mélanger</button>
-      <button class="flash-btn" onclick="nextFlash()">Suivant →</button>
+      <button class="flash-btn" onclick="prevFlash()">Précédent</button>
+      <button class="flash-btn" onclick="shuffleFlash()">Mélanger</button>
+      <button class="flash-btn" onclick="nextFlash()">Suivant</button>
     </div>
   </div>
 
@@ -91,25 +119,27 @@
     <div class="ch-toolbar" id="chToolbar"></div>
     <div class="ch-content" id="chContent"></div>
     <div class="pg-nav" id="pgNav" style="display:none">
-      <button onclick="pgPrev()">← Page précédente</button>
-      <button onclick="pgNext()">Page suivante →</button>
+      <button onclick="pgPrev()">Page précédente</button>
+      <button onclick="pgNext()">Page suivante</button>
     </div>
   </div>
 
   <!-- ITEMS -->
   <div class="view" id="vItems">
-    <div class="page-hd"><h1> Objectifs ITEMs</h1><p>Connaissances hiérarchisées par rang</p></div>
+    <div class="page-hd"><h1>Objectifs ITEMs</h1><p>Connaissances hiérarchisées par rang</p></div>
     <div id="itemsList"></div>
+  </div>
+
+  <!-- FAVORIS -->
+  <div class="view" id="vFav">
+    <div class="page-hd"><h1>Favoris</h1></div>
+    <div id="favList"></div>
   </div>
 
   <!-- SETTINGS -->
   <div class="view" id="vSet">
     <div class="page-hd"><h1>Réglages</h1></div>
     <div class="set-group">
-      <div class="set-row">
-        <div class="set-label"><div class="lb">Mode sombre</div></div>
-        <div class="toggle" id="darkTog" onclick="toggleTheme()"></div>
-      </div>
       <div class="set-row">
         <div class="set-label"><div class="lb">Taille du texte</div><div class="ds" id="fsVal">17px</div></div>
         <input type="range" min="14" max="24" value="17" oninput="setFS(this.value)">
@@ -127,48 +157,49 @@
       <div class="set-row">
         <div class="set-label"><div class="lb">Progression</div><div class="ds" id="pd">0 chapitres lus</div></div>
       </div>
-      <div class="set-btn" onclick="resetProg()">↺ Réinitialiser la progression</div>
-      <div class="set-btn" onclick="clearAll()">✕ Effacer toutes les données</div>
-    </div>
-    <div class="set-group">
-      <div class="set-row"><div class="set-label"><div class="lb">Source</div><div class="ds">Gériatrie 5e éd., Elsevier Masson 2021</div></div></div>
-      <div class="set-row"><div class="set-label"><div class="lb">Coordination</div><div class="ds">Pr Jacques Boddaert — CNEG</div></div></div>
+      <div class="set-btn" onclick="resetProg()">Réinitialiser la progression</div>
+      <div class="set-btn" onclick="clearAll()">Effacer toutes les données</div>
     </div>
   </div>
 </main>
 
 <nav class="bottom-nav" id="bnav">
   <button class="active" data-v="home" onclick="sw('home')">
-    <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
     <span>Accueil</span>
   </button>
   <button data-v="synth" onclick="sw('synth')">
-    <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+    <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
     <span>Synthèse</span>
   </button>
   <button data-v="flash" onclick="sw('flash')">
-    <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+    <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 4v16"/><path d="M17 4v16"/><path d="M2 12h20"/></svg>
     <span>Révision</span>
   </button>
   <button data-v="items" onclick="sw('items')">
-    <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+    <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
     <span>ITEMs</span>
   </button>
   <button data-v="set" onclick="sw('set')">
-    <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
     <span>Réglages</span>
   </button>
 </nav>
 
 <div class="concept-modal" id="conceptModal" onclick="if(event.target===this)closeConceptModal()">
   <div class="concept-pan">
-    <div class="concept-hdr"><h3 id="conceptTitle"></h3><button onclick="closeConceptModal()">✕</button></div>
+    <div class="concept-hdr"><h3 id="conceptTitle"></h3><button onclick="closeConceptModal()">Fermer</button></div>
     <div class="concept-body" id="conceptBody"></div>
   </div>
 </div>
 
 <button class="fab" id="fab" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 <div class="toast" id="toast"></div>
+
+<div class="install-bar" id="installB" onclick="installPWA()">
+  <span>Installer l'app sur votre téléphone</span>
+  <button class="install-btn">Installer</button>
+</div>
 
 <script src="data.js"></script>
 <script src="figures.js"></script>

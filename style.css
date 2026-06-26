@@ -370,3 +370,69 @@ input[type="range"] { width: 100px; accent-color: var(--primary); }
 .mt-1 { margin-top: 8px; }
 .mb-1 { margin-bottom: 8px; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+/* ---------- HERO CARD ---------- */
+.hero-card {
+  border-radius: var(--radius-lg); overflow: hidden;
+  margin-bottom: 16px; position: relative;
+}
+.hero-gradient {
+  height: 120px; background: linear-gradient(135deg, #7C3AED, #A78BFA, #C084FC);
+}
+.hero-content { padding: 20px; background: var(--bg2); }
+.hero-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 6px; }
+.hero-sub { font-size: .8rem; color: var(--text2); line-height: 1.5; }
+
+/* ---------- STATS BAR ---------- */
+.stats-bar {
+  display: flex; gap: 6px; margin-bottom: 20px; flex-wrap: wrap;
+}
+.stat {
+  display: flex; align-items: center; gap: 4px;
+  padding: 6px 12px; border-radius: 99px;
+  background: var(--primary-soft); font-size: .78rem; font-weight: 600;
+}
+.stat-num { color: var(--primary); }
+.stat-label { color: var(--text2); }
+
+/* ---------- TOP BAR ---------- */
+.top-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(250,248,245,.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 12px; height: var(--topbar);
+  display: flex; align-items: center; gap: 8px;
+}
+[data-theme="dark"] .top-bar { background: rgba(15,15,18,.92); }
+.top-left { display: flex; align-items: center; gap: 10px; flex: 1; }
+.top-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: var(--primary-light); color: var(--primary);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.top-icon svg { width: 20px; height: 20px; }
+.top-bar h1 { font-size: 1.1rem; font-weight: 700; color: var(--primary); letter-spacing: -.02em; }
+.top-sub { font-size: .65rem; color: var(--text3); }
+.top-actions { display: flex; gap: 4px; }
+.top-btn {
+  width: 40px; height: 40px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--primary-soft); color: var(--primary); transition: all .2s;
+}
+.top-btn:hover { background: var(--primary); color: #fff; }
+.top-btn svg { width: 20px; height: 20px; }
+.icon-moon { display: none; }
+[data-theme="dark"] .icon-sun { display: none; }
+[data-theme="dark"] .icon-moon { display: block; }
+
+/* ---------- INSTALL BAR ---------- */
+.install-bar {
+  position: fixed; bottom: var(--bottom); left: 0; right: 0;
+  background: linear-gradient(135deg, #7C3AED, #A78BFA); color: #fff;
+  padding: 12px 16px; display: none; align-items: center; justify-content: space-between;
+  z-index: 99; font-size: .85rem; font-weight: 500;
+}
+.install-btn {
+  background: #fff; color: #7C3AED; padding: 8px 16px;
+  border-radius: 8px; font-weight: 600; font-size: .82rem;
+}
