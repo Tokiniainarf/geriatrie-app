@@ -1,9 +1,10 @@
-const CACHE_NAME = 'geriatrie-v44';
+const CACHE_NAME = 'geriatrie-v45';
 const CORE = [
   './',
   './index.html',
   './style.css',
   './app.js',
+  './brainfeed.js',
   './data.js',
   './figures.js',
   './interactive-figures.js',

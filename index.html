@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;600;700&family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <title>Gériatrie — Manuel Interactif</title>
-<link rel="stylesheet" href="style.css?v=44">
+<link rel="stylesheet" href="style.css?v=45">
 </head>
 <body>
 
@@ -142,6 +142,36 @@
     <div id="favList"></div>
   </div>
 
+  <!-- BRAINFEED -->
+  <div class="view" id="vFeed">
+    <div class="bf-header">
+      <div class="bf-stats-bar">
+        <span id="bfStreak">🔥 Jour 1</span>
+        <span id="bfPoints">⭐ 0</span>
+        <span id="bfCounter">0 / 50</span>
+      </div>
+      <div class="bf-progress-track"><div class="bf-progress-fill" id="bfProgress"></div></div>
+    </div>
+    <div class="bf-feed" id="bfFeed">
+      <div class="bf-card-container" id="bfCard"></div>
+    </div>
+    <div class="bf-actions">
+      <button class="bf-action-btn bf-action-fail" onclick="BrainFeed.actionDontKnow()" aria-label="Je ne sais pas">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        <span>Je sais pas</span>
+      </button>
+      <button class="bf-action-btn bf-action-fav" onclick="BrainFeed.actionFav()" aria-label="Sauvegarder">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span>Sauver</span>
+      </button>
+      <button class="bf-action-btn bf-action-know" onclick="BrainFeed.actionKnow()" aria-label="Je sais">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        <span>Je sais</span>
+      </button>
+    </div>
+    <div class="bf-toast" id="bfToast"></div>
+  </div>
+
   <!-- SETTINGS -->
   <div class="view" id="vSet">
     <div class="page-hd"><h1>Réglages</h1></div>
@@ -186,6 +216,10 @@
     <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
     <span>ITEMs</span>
   </button>
+  <button data-v="feed" onclick="sw('feed')">
+    <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+    <span>Feed</span>
+  </button>
   <button data-v="set" onclick="sw('set')">
     <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
     <span>Réglages</span>
@@ -213,7 +247,8 @@
 <script src="synthesis.js"></script>
 <script src="concepts.js"></script>
 <script src="flashcards.js"></script>
-<script src="app.js?v=44"></script>
+<script src="app.js?v=45"></script>
+<script src="brainfeed.js"></script>
 <script src="graph.js"></script>
 </body>
 </html>

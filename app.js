@@ -36,6 +36,8 @@ function sw(view){
   if(view==='items')renderItems();
   if(view==='fav')renderFav();
   if(view==='graph'&&typeof initGraph==='function')initGraph();
+  if(view==='feed'&&typeof BrainFeed!=='undefined')BrainFeed.init();
+  if(view!=='feed'&&typeof BrainFeed!=='undefined')BrainFeed.destroy();
   if(view==='set'){document.getElementById('pd').textContent=`${S.read.length} chapitre${S.read.length>1?'s':''} consulté${S.read.length>1?'s':''}`}
 }
 function goHome(){sw('home');S.ch=null;renderHome()}
