@@ -61,7 +61,6 @@
     </div>
     <div class="stats-bar" id="statsBar">
       <div class="stat"><span class="stat-num">20</span><span class="stat-label">chap.</span></div>
-      <div class="stat"><span class="stat-num">344</span><span class="stat-label">p.</span></div>
       <div class="stat"><span class="stat-num">33</span><span class="stat-label">fig.</span></div>
       <div class="stat"><span class="stat-num">11</span><span class="stat-label">ITEMs</span></div>
       <div class="stat stat-click" role="button" tabindex="0" onclick="sw('fav')" onkeydown="if(event.key==='Enter')sw('fav')"><span class="stat-num" id="statFav">0</span><span class="stat-label">fav.</span></div>
@@ -129,10 +128,6 @@
     </div>
     <div class="ch-toolbar" id="chToolbar"></div>
     <div class="ch-content" id="chContent"></div>
-    <div class="pg-nav" id="pgNav" style="display:none">
-      <button onclick="pgPrev()">Page précédente</button>
-      <button onclick="pgNext()">Page suivante</button>
-    </div>
   </div>
 
   <!-- ITEMS -->
@@ -158,10 +153,6 @@
       <div class="set-row">
         <div class="set-label"><div class="lb">Interligne</div><div class="ds" id="lhVal">1.7</div></div>
         <input type="range" id="lhRange" min="1.4" max="2.2" step="0.05" value="1.7" oninput="setLH(this.value)">
-      </div>
-      <div class="set-row">
-        <div class="set-label"><div class="lb">Lecture page par page</div></div>
-        <div class="toggle" id="rmTog" onclick="toggleReadMode()"></div>
       </div>
     </div>
     <div class="set-group">
