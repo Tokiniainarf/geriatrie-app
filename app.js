@@ -79,7 +79,7 @@ function renderChPages(){
   if(S.readMode==='page'){
     pn.style.display='flex';
     const pg=pages[S.pgIdx];
-    cc.innerHTML=pg?renderPage(pg[1],pg[0]):'<div class="empty"><div class="empty-icon">📄</div><div class="empty-text">Aucune page</div></div>';
+    cc.innerHTML=pg?renderPage(pg[1],pg[0]):'<div class="empty"><div class="empty-icon"></div><div class="empty-text">Aucune page</div></div>';
     pn.querySelector('button:first-child').disabled=S.pgIdx<=0;
     pn.querySelector('button:last-child').disabled=S.pgIdx>=pages.length-1;
   }else{
@@ -115,7 +115,7 @@ function renderPage(raw,pageNum,addSep){
     
     // Situation de départ
     if(/Situations?\s+de\s+départ/i.test(l)){
-      html+=`<div class="key-point"><strong>📋 Situations de départ</strong><ul>`;
+      html+=`<div class="key-point"><strong> Situations de départ</strong><ul>`;
       prevWasSit=true;continue;
     }
     if(prevWasSit){
