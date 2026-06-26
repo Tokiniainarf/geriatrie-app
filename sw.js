@@ -1,4 +1,4 @@
-const CACHE_NAME = 'geriatrie-v48';
+const CACHE_NAME = 'geriatrie-v49';
 const CORE = [
   './',
   './index.html',
@@ -6,6 +6,7 @@ const CORE = [
   './app.js',
   './brainfeed.js',
   './quiz.js',
+  './dashboard.js',
   './annales.js',
   './has-reco.js',
   './flashcards-batch-A.js',

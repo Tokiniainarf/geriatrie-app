@@ -142,6 +142,12 @@
     <div id="favList"></div>
   </div>
 
+  <!-- DASHBOARD -->
+  <div class="view" id="vDash">
+    <div class="page-hd"><h1>Tableau de bord</h1><p>Votre progression EVC</p></div>
+    <div id="dashContent"></div>
+  </div>
+
   <!-- QUIZ -->
   <div class="view" id="vQuiz">
     <div class="quiz-header">
@@ -234,6 +240,10 @@
     <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
     <span>ITEMs</span>
   </button>
+  <button data-v="dash" onclick="sw('dash')">
+    <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    <span>Stats</span>
+  </button>
   <button data-v="quiz" onclick="sw('quiz')">
     <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M9 9h.01"/><path d="M15 9h.01"/><path d="M8 13a4 4 0 0 0 8 0"/></svg>
     <span>Quiz</span>
@@ -275,6 +285,7 @@
 <script src="app.js?v=45"></script>
 <script src="brainfeed.js"></script>
 <script src="quiz.js"></script>
+<script src="dashboard.js"></script>
 <script src="annales.js"></script>
 <script src="has-reco.js"></script>
 <script src="graph.js"></script>

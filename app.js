@@ -38,6 +38,7 @@ function sw(view){
   if(view==='graph'&&typeof initGraph==='function')initGraph();
   if(view==='feed'&&typeof BrainFeed!=='undefined')BrainFeed.init();
   if(view!=='feed'&&typeof BrainFeed!=='undefined')BrainFeed.destroy();
+  if(view==='dash'&&typeof Dashboard!=='undefined')Dashboard.render();
   if(view!=='quiz'&&typeof QuizMode!=='undefined')QuizMode.destroy();
   if(view==='set'){document.getElementById('pd').textContent=`${S.read.length} chapitre${S.read.length>1?'s':''} consulté${S.read.length>1?'s':''}`}
 }
