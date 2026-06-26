@@ -1,14 +1,16 @@
 /* Gériatrie 2026 — Manuel Interactif v3 */
-const CH_COLORS={ch1:'#7C3AED',ch2:'#059669',ch3:'#D97706',ch4:'#DC2626',ch5:'#2563EB',ch6:'#9333EA',ch7:'#0891B2',ch8:'#DB2777',ch9:'#4F46E5',ch10:'#6B7280',ch11:'#BE185D',ch12:'#EA580C',ch13:'#0369A1',ch14:'#16A34A',ch15:'#0D9488',ch16:'#7C3AED',ch17:'#6B7280',ch18:'#059669',ch19:'#9333EA',ch20:'#2563EB'};
+const CH_COLORS={ch1:'#0891B2',ch2:'#059669',ch3:'#0D9488',ch4:'#DC2626',ch5:'#0284C7',ch6:'#047857',ch7:'#0369A1',ch8:'#BE123C',ch9:'#0E7490',ch10:'#64748B',ch11:'#B45309',ch12:'#EA580C',ch13:'#0369A1',ch14:'#15803D',ch15:'#0F766E',ch16:'#164E63',ch17:'#475569',ch18:'#059669',ch19:'#0891B2',ch20:'#2563EB'};
 const BM_SVG={on:'<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.77 5.82 22 7 14.14l-5-4.87 6.91-1.01z"/></svg>',off:'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.77 5.82 22 7 14.14l-5-4.87 6.91-1.01z"/></svg>'};
 
 function safeJSON(k,f){try{return JSON.parse(localStorage.getItem(k))||f}catch{return f}}
-const S={view:'home',ch:null,pgIdx:0,readMode:localStorage.getItem('grm')||'scroll',bm:safeJSON('gbm',[]),read:safeJSON('grd',[]),prog:safeJSON('gprog',{}),fs:parseInt(localStorage.getItem('gfs')||'17'),lh:parseFloat(localStorage.getItem('glh')||'1.6'),th:localStorage.getItem('gth')||'light'};
+const S={view:'home',ch:null,pgIdx:0,readMode:localStorage.getItem('grm')||'scroll',bm:safeJSON('gbm',[]),read:safeJSON('grd',[]),prog:safeJSON('gprog',{}),fs:parseInt(localStorage.getItem('gfs')||'18'),lh:parseFloat(localStorage.getItem('glh')||'1.7'),th:localStorage.getItem('gth')||'light'};
 let flashIdx=0,flashDeck=[],flashFilter='all';
 
 document.addEventListener('DOMContentLoaded',()=>{
   if(localStorage.getItem('gth')==='dark'){S.th='light';localStorage.setItem('gth','light');}
   setFS(S.fs);setLH(S.lh,true);
+  const fsR=document.getElementById('fsRange');if(fsR)fsR.value=S.fs;
+  const lhR=document.getElementById('lhRange');if(lhR)lhR.value=S.lh;
   document.documentElement.setAttribute('data-theme',S.th);
   if(S.readMode==='page')document.getElementById('rmTog')?.classList.add('on');
   document.getElementById('fsVal').textContent=S.fs+'px';
@@ -112,7 +114,7 @@ function showCh(id,pgIdx){
   S.ch=id;S.pgIdx=pgIdx||0;
   if(!S.read.includes(id)){S.read.push(id);localStorage.setItem('grd',JSON.stringify(S.read))}
   const prog=getChProgress(id);
-  document.getElementById('chHero').style.background=`linear-gradient(135deg,${CH_COLORS[id]},${CH_COLORS[id]}bb)`;
+  document.getElementById('chHero').style.background=`linear-gradient(145deg,${CH_COLORS[id]},#164E63)`;
   document.getElementById('chNum').textContent=id.replace('ch','');
   document.getElementById('chT').textContent=ch.t;
   document.getElementById('chTags').innerHTML=ch.items.map(i=>`<span class="tag">${i}</span>`).join('')+`<span class="tag">${prog.pct}% lu</span>`;
@@ -145,38 +147,68 @@ const DIAGRAM_RE=/^(Fonction|d'organe|Réserve|Seuil|Effet|100\s*%|0\s+Âge|\d\s
 function renderPage(raw,pageNum,addSep){
   let text=raw.replace(/(\w)-\s*\n\s*(\w)/g,'$1$2');
   const lines=text.replace(/\r\n/g,'\n').split('\n').map(l=>l.trim());
-  let html='';let prevWasSit=false;
-  for(let i=0;i<lines.length;i++){
-    const l=lines[i];if(!l||SKIP_RE.test(l))continue;
-    if(DIAGRAM_RE.test(l))continue;
-    // Situations de départ
-    if(/Situations?\s+de\s+départ/i.test(l)){html+=`<div class="key-point"><strong>Situations de départ</strong><ul>`;prevWasSit=true;continue}
-    if(prevWasSit){const m=l.match(/^(\d{2,3})\s+(.+)/);if(m){html+=`<li>${esc(m[2])}</li>`;continue}else{html+=`</ul></div>`;prevWasSit=false}}
-    // Figures
-    const figM=l.match(/Fig\.\s*(\d+\.\d+)/);
-    if(figM&&typeof FIGURES!=='undefined'){const src=FIGURES[figM[1]]?.[0];if(src&&!src.includes('figures/page_')){html+=`<div class="fig-block"><img src="${src}" alt="Figure ${figM[1]}" loading="lazy"><figcaption>Figure ${figM[1]}</figcaption></div>`;continue}}
-    // Sections
-    const secM=l.match(SECTION_RE);if(secM){html+=`<h2>${esc(secM[1]+'. '+secM[2])}</h2>`;continue}
-    // Subsections
-    const subM=l.match(SUBSEC_RE);if(subM){html+=`<h3>${esc(subM[1]+'. '+subM[2])}</h3>`;continue}
-    // Rang markers
-    const rangM=l.match(RANG_RE);if(rangM&&!/Rubrique|Intitulé|Descriptif|Connaître|Modifications/.test(l)&&l.length<200){html+=`<div class="def-block"><span class="rang-badge ${rangM[1]==='A'?'rang-a':'rang-b'}">Rang ${rangM[1]}</span>${esc(rangM[2])}</div>`;continue}
-    // Bullets
-    const bulM=l.match(BULLET_RE);if(bulM){html+=`<p class="bullet">${esc(bulM[1])}</p>`;continue}
-    // Skip noise
-    if(/^(ITEM\s+\d+|Rang\s+Rubrique|Hiérarchisation|Item, objectifs)/i.test(l))continue;
-    if(/^\d{1,3}$/.test(l))continue;
-    // Paragraph
-    html+=`<p>${esc(l)}</p>`;
+  let html='';let prevWasSit=false;let paraBuf=[];let inSection=false;
+
+  function flushPara(){
+    if(!paraBuf.length)return;
+    const merged=paraBuf.join(' ').replace(/\s+/g,' ').trim();
+    paraBuf=[];
+    if(merged.length<3)return;
+    if(merged.length>900){
+      const parts=merged.split(/(?<=[.!?])\s+(?=[A-ZÉÈÊÀÂÎÔÙÇ])/);
+      parts.forEach(part=>{
+        const t=part.trim();
+        if(t.length>20)html+=`<div class="para-card"><p>${esc(t)}</p></div>`;
+      });
+    }else html+=`<div class="para-card"><p>${esc(merged)}</p></div>`;
   }
+  function closeSection(){if(inSection){html+=`</div></section>`;inSection=false}}
+  function lineIsSpecial(l){
+    if(!l||SKIP_RE.test(l)||DIAGRAM_RE.test(l))return true;
+    if(SECTION_RE.test(l)||SUBSEC_RE.test(l))return true;
+    if(RANG_RE.test(l)&&!/Rubrique|Intitulé|Descriptif|Connaître|Modifications/.test(l)&&l.length<200)return true;
+    if(BULLET_RE.test(l))return true;
+    if(/Fig\.\s*\d+\.\d+/.test(l))return true;
+    if(/Situations?\s+de\s+départ/i.test(l))return true;
+    if(/^(ITEM\s+\d+|Rang\s+Rubrique|Hiérarchisation|Item, objectifs)/i.test(l))return true;
+    if(/^\d{1,3}$/.test(l))return true;
+    return false;
+  }
+
+  for(let i=0;i<lines.length;i++){
+    const l=lines[i];
+    if(!l){flushPara();continue}
+    if(DIAGRAM_RE.test(l))continue;
+    if(/Situations?\s+de\s+départ/i.test(l)){flushPara();closeSection();html+=`<div class="key-point"><strong>Situations de départ</strong><ul>`;prevWasSit=true;continue}
+    if(prevWasSit){const m=l.match(/^(\d{2,3})\s+(.+)/);if(m){html+=`<li>${esc(m[2])}</li>`;continue}else{html+=`</ul></div>`;prevWasSit=false}}
+    const figM=l.match(/Fig\.\s*(\d+\.\d+)/);
+    if(figM&&typeof FIGURES!=='undefined'){flushPara();const src=FIGURES[figM[1]]?.[0];if(src&&!src.includes('figures/page_')){html+=`<figure class="fig-block"><img src="${src}" alt="Figure ${figM[1]}" loading="lazy"><figcaption>Figure ${figM[1]}</figcaption></figure>`}continue}
+    const secM=l.match(SECTION_RE);
+    if(secM){flushPara();closeSection();html+=`<section class="manual-section"><header class="section-head"><span class="section-num">${esc(secM[1])}</span><span class="section-title">${esc(secM[2])}</span></header><div class="section-body">`;inSection=true;continue}
+    const subM=l.match(SUBSEC_RE);
+    if(subM){flushPara();html+=`<h3 class="sub-head">${esc(subM[1]+'. '+subM[2])}</h3>`;continue}
+    const rangM=l.match(RANG_RE);
+    if(rangM&&!/Rubrique|Intitulé|Descriptif|Connaître|Modifications/.test(l)&&l.length<200){flushPara();html+=`<div class="def-block"><span class="rang-badge ${rangM[1]==='A'?'rang-a':'rang-b'}">Rang ${rangM[1]}</span><span class="def-text">${esc(rangM[2])}</span></div>`;continue}
+    const bulM=l.match(BULLET_RE);
+    if(bulM){flushPara();html+=`<div class="bullet-card"><p class="bullet">${esc(bulM[1])}</p></div>`;continue}
+    if(lineIsSpecial(l))continue;
+    if(l.length<55&&i+1<lines.length&&!lineIsSpecial(lines[i+1])&&!/[.!?]$/.test(l)){
+      paraBuf.push(l);
+      continue;
+    }
+    paraBuf.push(l);
+    if(paraBuf.join(' ').length>120||/[.!?]["']?$/.test(l))flushPara();
+  }
+  flushPara();
   if(prevWasSit)html+=`</ul></div>`;
-  if(pageNum)html=`<div class="page-sep">Page ${pageNum}</div>`+html;
+  closeSection();
+  if(pageNum)html=`<div class="page-marker" aria-label="Page ${pageNum}"><span>Page ${pageNum}</span></div>`+html;
   return html;
 }
 
 function applyConceptLinks(){
   if(typeof linkifyText!=='function')return;
-  document.querySelectorAll('.ch-content p, .ch-content .def-block, .ch-content h3').forEach(el=>{
+  document.querySelectorAll('.ch-content p, .ch-content .def-block, .ch-content .def-text, .ch-content h3, .ch-content .para-card p').forEach(el=>{
     if(el.querySelector('.concept-link'))return;
     el.innerHTML=linkifyText(el.innerHTML);
   });
