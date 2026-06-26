@@ -142,6 +142,24 @@
     <div id="favList"></div>
   </div>
 
+  <!-- QUIZ -->
+  <div class="view" id="vQuiz">
+    <div class="quiz-header">
+      <h1>Mode Examen</h1>
+      <div class="quiz-config" id="quizConfig">
+        <p class="quiz-desc">Simule un examen EVC avec timer et scoring</p>
+        <div class="quiz-options">
+          <button class="quiz-opt-btn active" onclick="QuizMode.startQuiz('mixed',20,30)">20 questions (10 min)</button>
+          <button class="quiz-opt-btn" onclick="QuizMode.startQuiz('mixed',40,30)">40 questions (20 min)</button>
+          <button class="quiz-opt-btn" onclick="QuizMode.startQuiz('annales',10,60)">Cas cliniques (10)</button>
+          <button class="quiz-opt-btn" onclick="QuizMode.startQuiz('flash',30,20)">Flashcards rapides (30)</button>
+        </div>
+      </div>
+      <div class="quiz-timer-bar"><span class="quiz-timer" id="quizTimer"></span></div>
+    </div>
+    <div id="quizContent" class="quiz-content"></div>
+  </div>
+
   <!-- BRAINFEED -->
   <div class="view" id="vFeed">
     <div class="bf-header">
@@ -216,6 +234,10 @@
     <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
     <span>ITEMs</span>
   </button>
+  <button data-v="quiz" onclick="sw('quiz')">
+    <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M9 9h.01"/><path d="M15 9h.01"/><path d="M8 13a4 4 0 0 0 8 0"/></svg>
+    <span>Quiz</span>
+  </button>
   <button data-v="feed" onclick="sw('feed')">
     <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
     <span>Feed</span>
@@ -252,6 +274,7 @@
 <script src="flashcards-batch-C.js"></script>
 <script src="app.js?v=45"></script>
 <script src="brainfeed.js"></script>
+<script src="quiz.js"></script>
 <script src="annales.js"></script>
 <script src="has-reco.js"></script>
 <script src="graph.js"></script>
