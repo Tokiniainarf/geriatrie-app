@@ -40,6 +40,7 @@ function sw(view){
   if(view!=='feed'&&typeof BrainFeed!=='undefined')BrainFeed.destroy();
   if(view==='dash'&&typeof Dashboard!=='undefined')Dashboard.render();
   if(view==='garde')renderGarde();
+  if(view==='dict')renderDict();
   if(view!=='quiz'&&typeof QuizMode!=='undefined')QuizMode.destroy();
   if(view==='set'){document.getElementById('pd').textContent=`${S.read.length} chapitre${S.read.length>1?'s':''} consulté${S.read.length>1?'s':''}`}
 }
@@ -525,21 +526,472 @@ function navigateToConcept(chId,search){
 window.navigateToConcept=navigateToConcept;
 function closeConceptModal(){document.getElementById('conceptModal').classList.remove('open')}
 
+/* ── DICTIONNAIRE MÉDICAL ── */
+const DICT_FAV_KEY='gdict_fav';
+let dictCache=null;
+let dictFilter={q:'',letter:'',favOnly:false};
+
+const DICT_CAT_LABELS={
+  abbreviation:'Abréviation',
+  disease:'Maladie / concept',
+  score:'Score / échelle',
+  drug:'Médicament',
+  procedure:'Procédure / examen'
+};
+
+const DICT_DRUG_TERMS=new Set([
+  'metformine','tramadol','sertraline','haloperidol','donepezil','benzodiazépine',
+  'opioïde','neuroleptique','isrs','inhibiteur de la cholinestérase'
+]);
+
+function loadDictFavs(){
+  return safeJSON(DICT_FAV_KEY,[]);
+}
+function saveDictFavs(arr){
+  localStorage.setItem(DICT_FAV_KEY,JSON.stringify(arr));
+}
+
+function dictFirstLetter(term){
+  const n=(term||'').trim().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  const c=n.charAt(0).toUpperCase();
+  return c>='A'&&c<='Z'?c:'#';
+}
+
+function inferDictCategory(term,definition){
+  const t=term||'';
+  const d=definition||'';
+  const tl=t.toLowerCase();
+  if(DICT_DRUG_TERMS.has(tl))return'drug';
+  if(/^(mms|mmse|gds|mna|cam|eva|adl|iadl|aggir|avd|dfg|imc|dexa|frax|tinetti|braden|norton|berg|charlson|kellgren|cha2ds2|has-bled|bgs|ecpa|peg|sng|epa|apa|ssr|ehpad|had|dlb|ftd|mci|bpco|hta|dm2|avc|ep|tvp|ira|itu|dmla|fa|ic|aomi|bph|tv)$/i.test(t))return'abbreviation';
+  if(/^[A-Z0-9]{2,8}$/.test(t)&&t===t.toUpperCase())return'abbreviation';
+  if(/échelle|scale|index de|classification|score|cha2ds2|has-bled|frax|tinetti|braden|norton|berg|charlson|kellgren/i.test(t+' '+d))return'score';
+  if(/gastrostomie|sonde |densitométrie|scanner|anticoagulation|rééducation|prothèse|chirurgie|manœuvre|endoscopique|hospitalisation/i.test(t+' '+d))return'procedure';
+  return'disease';
+}
+
+function buildDictIndex(){
+  if(dictCache)return dictCache;
+  const map={};
+
+  if(typeof CONCEPT_MAP_EXPANDED!=='undefined'){
+    Object.entries(CONCEPT_MAP_EXPANDED).forEach(([term,info])=>{
+      map[term]={
+        term,
+        definition:info.definition||'',
+        chapter:info.chapter||'',
+        related:info.related||[],
+        search:null,
+        category:inferDictCategory(term,info.definition)
+      };
+    });
+  }
+
+  if(typeof CONCEPT_MAP!=='undefined'){
+    Object.entries(CONCEPT_MAP).forEach(([term,info])=>{
+      if(map[term]){
+        if(!map[term].search)map[term].search=info.search;
+        if(!map[term].chapter)map[term].chapter=info.ch;
+        return;
+      }
+      const parent=Object.keys(map).find(k=>{
+        if(k.toLowerCase()===term.toLowerCase())return false;
+        if(typeof CONCEPT_MAP!=='undefined'&&CONCEPT_MAP[k]&&CONCEPT_MAP[k].search===info.search)return true;
+        return(info.search&&k.toLowerCase()===info.search.toLowerCase());
+      });
+      const def=parent
+        ?`Variante ou synonyme de « ${parent} ». ${map[parent].definition}`
+        :'Concept du manuel gériatrique — consultez le chapitre associé pour le développement clinique.';
+      map[term]={
+        term,
+        definition:def,
+        chapter:info.ch,
+        related:parent?[parent]:[],
+        search:info.search,
+        category:inferDictCategory(term,def)
+      };
+    });
+  }
+
+  dictCache=map;
+  return map;
+}
+
+function getDictEntries(){
+  const map=buildDictIndex();
+  return Object.values(map).sort((a,b)=>{
+    const la=dictFirstLetter(a.term),lb=dictFirstLetter(b.term);
+    if(la!==lb)return la.localeCompare(lb,'fr');
+    return a.term.localeCompare(b.term,'fr',{sensitivity:'base'});
+  });
+}
+
+function getChTitle(chId){
+  const ch=APP_DATA.chapters.find(c=>c.id===chId);
+  return ch?ch.t:'';
+}
+
+function renderDictAlpha(){
+  const el=document.getElementById('dictAlpha');
+  if(!el)return;
+  const letters='ABCDEFGHIJKLMNOPQRSTUVWXYZ#'.split('');
+  el.innerHTML=letters.map(L=>{
+    const active=dictFilter.letter===L?' active':'';
+    return`<button type="button" class="dict-alpha-btn${active}" data-letter="${L}" onclick="dictJumpLetter('${L}')">${L==='#'?'#':L}</button>`;
+  }).join('');
+}
+
+function dictJumpLetter(letter){
+  dictFilter.letter=dictFilter.letter===letter?'':letter;
+  renderDictAlpha();
+  renderDictList();
+  if(dictFilter.letter){
+    const first=document.querySelector(`.dict-card[data-letter="${dictFilter.letter}"]`);
+    if(first)first.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+}
+
+function onDictSearch(q){
+  dictFilter.q=q||'';
+  renderDictList();
+}
+
+function toggleDictFavFilter(){
+  dictFilter.favOnly=!dictFilter.favOnly;
+  const btn=document.getElementById('dictFavOnlyBtn');
+  if(btn){
+    btn.classList.toggle('active',dictFilter.favOnly);
+    btn.setAttribute('aria-pressed',dictFilter.favOnly?'true':'false');
+  }
+  renderDictList();
+}
+
+function toggleDictFav(term,btn){
+  const favs=loadDictFavs();
+  const i=favs.indexOf(term);
+  if(i>-1)favs.splice(i,1);else favs.push(term);
+  saveDictFavs(favs);
+  if(btn){
+    btn.classList.toggle('on',favs.includes(term));
+    btn.setAttribute('aria-label',favs.includes(term)?'Retirer des favoris':'Ajouter aux favoris');
+  }
+  if(dictFilter.favOnly)renderDictList();
+  toast(i>-1?'Terme retiré des favoris':'Terme ajouté aux favoris');
+}
+
+function dictNavigateChapter(chId,search){
+  if(!chId)return;
+  if(typeof navigateToConcept==='function'&&search)navigateToConcept(chId,search);
+  else showCh(chId);
+}
+
+function dictFocusTerm(term){
+  dictFilter.q=term;
+  dictFilter.letter='';
+  dictFilter.favOnly=false;
+  const inp=document.getElementById('dictSearch');
+  if(inp)inp.value=term;
+  const btn=document.getElementById('dictFavOnlyBtn');
+  if(btn){btn.classList.remove('active');btn.setAttribute('aria-pressed','false')}
+  renderDictAlpha();
+  renderDictList();
+  requestAnimationFrame(()=>{
+    const card=document.querySelector(`.dict-card[data-term="${CSS.escape(term)}"]`);
+    if(card){
+      card.classList.add('dict-card-highlight');
+      card.scrollIntoView({behavior:'smooth',block:'center'});
+      setTimeout(()=>card.classList.remove('dict-card-highlight'),2000);
+    }
+  });
+}
+
+function renderDictList(){
+  const list=document.getElementById('dictList');
+  const meta=document.getElementById('dictMeta');
+  if(!list)return;
+  const favs=loadDictFavs();
+  const q=dictFilter.q.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  let entries=getDictEntries();
+
+  if(dictFilter.favOnly)entries=entries.filter(e=>favs.includes(e.term));
+  if(dictFilter.letter)entries=entries.filter(e=>dictFirstLetter(e.term)===dictFilter.letter);
+  if(q){
+    entries=entries.filter(e=>{
+      const blob=(e.term+' '+e.definition+' '+(e.related||[]).join(' ')).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+      return blob.includes(q);
+    });
+  }
+
+  if(meta)meta.textContent=`${entries.length} terme${entries.length>1?'s':''}${dictFilter.favOnly?' (favoris)':''}`;
+
+  if(!entries.length){
+    list.innerHTML='<div class="empty"><div class="empty-icon">📚</div><div class="empty-text">Aucun terme trouvé</div><div class="empty-hint">Modifiez la recherche ou l’index A-Z</div></div>';
+    return;
+  }
+
+  const map=buildDictIndex();
+  list.innerHTML=entries.map(e=>{
+    const letter=dictFirstLetter(e.term);
+    const isFav=favs.includes(e.term);
+    const chTitle=getChTitle(e.chapter);
+    const search=e.search||(typeof CONCEPT_MAP!=='undefined'&&CONCEPT_MAP[e.term]?CONCEPT_MAP[e.term].search:'');
+    const relatedHtml=(e.related||[]).filter(r=>r!==e.term).map(r=>{
+      const exists=map[r];
+      if(exists)return`<button type="button" class="dict-related" onclick="dictFocusTerm('${escAttr(r)}')">${esc(r)}</button>`;
+      return`<span class="dict-related dict-related-muted">${esc(r)}</span>`;
+    }).join('');
+    return`<article class="dict-card" data-term="${escAttr(e.term)}" data-letter="${letter}" id="dict-${escAttr(e.term).replace(/\\s+/g,'-')}">
+      <div class="dict-card-head">
+        <h2 class="dict-card-title">${esc(e.term)}</h2>
+        <div class="dict-card-actions">
+          <span class="dict-badge dict-badge-${e.category}">${DICT_CAT_LABELS[e.category]||e.category}</span>
+          <button type="button" class="dict-fav-btn ${isFav?'on':''}" aria-label="${isFav?'Retirer des favoris':'Ajouter aux favoris'}" onclick="event.stopPropagation();toggleDictFav('${escAttr(e.term)}',this)">${isFav?'★':'☆'}</button>
+        </div>
+      </div>
+      <p class="dict-card-def">${esc(e.definition)}</p>
+      ${relatedHtml?`<div class="dict-related-wrap"><span class="dict-related-label">Voir aussi</span>${relatedHtml}</div>`:''}
+      ${e.chapter?`<button type="button" class="dict-chapter-link" onclick="dictNavigateChapter('${e.chapter}','${escAttr(search||'')}')">Chap. ${e.chapter.replace('ch','')} — ${esc(chTitle)}</button>`:''}
+    </article>`;
+  }).join('');
+}
+
+function escAttr(s){
+  return String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+}
+
+function renderDict(){
+  dictFilter={q:'',letter:'',favOnly:false};
+  const inp=document.getElementById('dictSearch');
+  if(inp)inp.value='';
+  const btn=document.getElementById('dictFavOnlyBtn');
+  if(btn){btn.classList.remove('active');btn.setAttribute('aria-pressed','false')}
+  renderDictAlpha();
+  renderDictList();
+}
+
+window.onDictSearch=onDictSearch;
+window.dictJumpLetter=dictJumpLetter;
+window.toggleDictFavFilter=toggleDictFavFilter;
+window.toggleDictFav=toggleDictFav;
+window.dictFocusTerm=dictFocusTerm;
+window.dictNavigateChapter=dictNavigateChapter;
+
 /* ── SYNTHESIS ── */
-function renderSynthesis(){
-  const grid=document.getElementById('synthGrid');if(!grid||typeof SYNTHESIS==='undefined')return;
-  grid.innerHTML=SYNTHESIS.map(card=>`
-    <div class="synth-card" style="border-left:4px solid ${card.color}">
-      <div class="synth-card-head" onclick="this.parentElement.classList.toggle('open')">
-        <div class="synth-card-icon" aria-hidden="true">${esc(card.title.charAt(0))}</div>
-        <div class="synth-card-title">${esc(card.title)}</div>
-        <div class="synth-card-chevron">▾</div>
-      </div>
-      <div class="synth-card-body">
-        ${card.sections.map(s=>`<div class="synth-section"><div class="synth-section-head" onclick="event.stopPropagation();this.parentElement.classList.toggle('open')">${esc(s.title)}</div><div class="synth-section-content">${typeof linkifyText==='function'?linkifyText(s.content):s.content}</div></div>`).join('')}
-      </div>
+const SYNTH_MASTER_KEY='gsynth_mastered';
+let synthFilterQuery='';
+
+function getSynthMastered(){return safeJSON(SYNTH_MASTER_KEY,[])}
+function isSynthMastered(chId){return getSynthMastered().includes(chId)}
+function toggleSynthMastered(chId){
+  let m=getSynthMastered();
+  if(m.includes(chId))m=m.filter(id=>id!==chId);
+  else m=[...m,chId];
+  localStorage.setItem(SYNTH_MASTER_KEY,JSON.stringify(m));
+  renderSynthesis();
+  toast(m.includes(chId)?'Chapitre marqué maîtrisé':'Marque retirée');
+}
+function synthChIdFromExpanded(card,idx){
+  if(card&&card.id&&/^syn-\d+$/.test(card.id))return 'ch'+card.id.replace('syn-','');
+  return 'ch'+(idx+1);
+}
+function synthPointBadges(text){
+  const b=[];
+  if(/Rang\s*A/i.test(text))b.push('<span class="synth-point-badge rang-a">Rang A</span>');
+  else if(/Rang\s*B/i.test(text))b.push('<span class="synth-point-badge rang-b">Rang B</span>');
+  if(/🎯|EVC/i.test(text))b.push('<span class="synth-point-badge synth-badge-evc">EVC</span>');
+  if(/💎|Perle/i.test(text))b.push('<span class="synth-point-badge synth-badge-perle">Perle</span>');
+  return b.join('');
+}
+function synthItemBadges(chId){
+  const ch=APP_DATA.chapters.find(c=>c.id===chId);
+  if(!ch||!ch.items.length)return '';
+  return ch.items.map(i=>`<span class="synth-point-badge rang-a">${esc(i)}</span>`).join('');
+}
+function synthSearchBlob(card,chId){
+  const parts=[card.title||'',chId];
+  (card.sections||[]).forEach(s=>{
+    parts.push(s.title||'');
+    if(s.points)(s.points||[]).forEach(p=>parts.push(p));
+    if(s.content)parts.push(s.content.replace(/<[^>]+>/g,' '));
+  });
+  return parts.join(' ').toLowerCase();
+}
+function renderSynthPoint(text){
+  const badges=synthPointBadges(text);
+  const clean=text.replace(/^💎\s*Perle\s*:\s*/i,'').replace(/^🎯\s*EVC\s*:\s*/i,'');
+  return `<li class="synth-point-item"><span class="synth-point-check" aria-hidden="true"></span><div class="synth-point-body">${badges?`<div class="synth-point-badges">${badges}</div>`:''}<span class="synth-point-text">${esc(clean)}</span></div></li>`;
+}
+function renderSynthExpandedSections(card){
+  return (card.sections||[]).map((s,si)=>`
+    <div class="synth-section" data-section="${si}">
+      <button type="button" class="synth-section-head" onclick="synthToggleSection(this)">
+        <span class="synth-section-title">${esc(s.title)}</span>
+        <span class="synth-section-count">${(s.points||[]).length} pts</span>
+      </button>
+      <div class="synth-section-panel"><div class="synth-section-panel-inner">
+        ${s.points?`<ul class="synth-point-list">${s.points.map(p=>renderSynthPoint(p)).join('')}</ul>`:''}
+        ${s.content?`<div class="synth-section-content">${typeof linkifyText==='function'?linkifyText(s.content):s.content}</div>`:''}
+      </div></div>
     </div>`).join('');
 }
+function renderSynthThemeSections(card){
+  return (card.sections||[]).map((s,si)=>`
+    <div class="synth-section" data-section="${si}">
+      <button type="button" class="synth-section-head" onclick="synthToggleSection(this)">
+        <span class="synth-section-title">${esc(s.title)}</span>
+      </button>
+      <div class="synth-section-panel"><div class="synth-section-panel-inner">
+        <div class="synth-section-content">${typeof linkifyText==='function'?linkifyText(s.content):s.content}</div>
+      </div></div>
+    </div>`).join('');
+}
+function renderSynthChapterCard(card,idx){
+  const chId=synthChIdFromExpanded(card,idx);
+  const color=CH_COLORS[chId]||'#0891B2';
+  const num=chId.replace('ch','');
+  const nSec=(card.sections||[]).length;
+  const mastered=isSynthMastered(chId);
+  const hidden=synthFilterQuery&&!synthSearchBlob(card,chId).includes(synthFilterQuery);
+  return `
+    <article class="synth-card synth-chapter${mastered?' mastered':''}${hidden?' synth-hidden':''}" data-ch="${chId}" data-search="${esc(synthSearchBlob(card,chId))}" style="--synth-ch-color:${color}">
+      <div class="synth-card-accent" aria-hidden="true"></div>
+      <div class="synth-card-head">
+        <button type="button" class="synth-card-head-main" onclick="synthToggleChapter(this.closest('.synth-card'))" aria-expanded="false">
+          <div class="synth-card-num">${num}</div>
+          <div class="synth-card-head-text">
+            <div class="synth-card-title">${esc(card.title)}</div>
+            <div class="synth-card-meta">
+              <span>${nSec} section${nSec>1?'s':''}</span>
+              ${synthItemBadges(chId)?`<span class="synth-card-items">${synthItemBadges(chId)}</span>`:''}
+            </div>
+          </div>
+          <span class="synth-card-chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="synth-card-actions no-print">
+          <button type="button" class="synth-btn-ghost" onclick="event.stopPropagation();synthSetChapterSections('${chId}',true)" title="Tout développer">+</button>
+          <button type="button" class="synth-btn-ghost" onclick="event.stopPropagation();synthSetChapterSections('${chId}',false)" title="Tout replier">−</button>
+          <button type="button" class="synth-master-btn${mastered?' on':''}" onclick="event.stopPropagation();toggleSynthMastered('${chId}')">${mastered?'✓ Maîtrisé':'Marquer maîtrisé'}</button>
+        </div>
+      </div>
+      <div class="synth-card-body">
+        ${renderSynthExpandedSections(card)}
+      </div>
+    </article>`;
+}
+function renderSynthThemeCard(card){
+  const blob=synthSearchBlob(card,card.id||'');
+  const hidden=synthFilterQuery&&!blob.includes(synthFilterQuery);
+  const color=card.color||'var(--accent)';
+  return `
+    <article class="synth-card synth-theme${hidden?' synth-hidden':''}" data-ch="${esc(card.id||'')}" data-search="${esc(blob)}" style="--synth-ch-color:${color};border-left:4px solid ${color}">
+      <div class="synth-card-head">
+        <button type="button" class="synth-card-head-main" onclick="synthToggleChapter(this.closest('.synth-card'))" aria-expanded="false">
+          <div class="synth-card-icon" aria-hidden="true">${card.icon||esc((card.title||'?').charAt(0))}</div>
+          <div class="synth-card-head-text">
+            <div class="synth-card-title">${esc(card.title)}</div>
+            <div class="synth-card-meta"><span>${(card.sections||[]).length} sections · fiche transversale</span></div>
+          </div>
+          <span class="synth-card-chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="synth-card-actions no-print">
+          <button type="button" class="synth-btn-ghost" onclick="event.stopPropagation();synthSetCardSections(this.closest('.synth-card'),true)">+</button>
+          <button type="button" class="synth-btn-ghost" onclick="event.stopPropagation();synthSetCardSections(this.closest('.synth-card'),false)">−</button>
+        </div>
+      </div>
+      <div class="synth-card-body">${renderSynthThemeSections(card)}</div>
+    </article>`;
+}
+function synthToggleChapter(card){
+  if(!card)return;
+  const open=card.classList.toggle('open');
+  const btn=card.querySelector('.synth-card-head-main');
+  if(btn)btn.setAttribute('aria-expanded',open?'true':'false');
+}
+function synthToggleSection(btn){
+  const sec=btn&&btn.closest('.synth-section');
+  if(sec)sec.classList.toggle('open');
+}
+function synthSetChapterSections(chId,open){
+  const card=document.querySelector(`.synth-chapter[data-ch="${chId}"]`);
+  if(card&&open)card.classList.add('open');
+  document.querySelectorAll(`.synth-chapter[data-ch="${chId}"] .synth-section`).forEach(s=>s.classList.toggle('open',open));
+}
+function synthSetCardSections(card,open){
+  if(!card)return;
+  card.querySelectorAll('.synth-section').forEach(s=>s.classList.toggle('open',open));
+  if(open)card.classList.add('open');
+}
+function onSynthFilterInput(el){
+  synthFilterQuery=(el&&el.value||'').trim().toLowerCase();
+  document.querySelectorAll('#synthGrid .synth-card').forEach(c=>{
+    const blob=(c.getAttribute('data-search')||'').toLowerCase();
+    c.classList.toggle('synth-hidden',!!synthFilterQuery&&!blob.includes(synthFilterQuery));
+  });
+  const vis=document.querySelectorAll('#synthGrid .synth-card:not(.synth-hidden)').length;
+  const empty=document.getElementById('synthEmpty');
+  if(empty)empty.style.display=vis?'none':'block';
+}
+function synthPrint(){
+  document.body.classList.add('synth-printing');
+  window.print();
+  setTimeout(()=>document.body.classList.remove('synth-printing'),500);
+}
+function renderSynthesis(){
+  const view=document.getElementById('vSynth');
+  const grid=document.getElementById('synthGrid');
+  if(!grid)return;
+  const hasExpanded=typeof SYNTHESIS_EXPANDED!=='undefined'&&SYNTHESIS_EXPANDED.length;
+  const hasClassic=typeof SYNTHESIS!=='undefined'&&SYNTHESIS.length;
+  if(!hasExpanded&&!hasClassic)return;
+
+  let toolbar=document.getElementById('synthToolbar');
+  if(!toolbar&&view){
+    toolbar=document.createElement('div');
+    toolbar.id='synthToolbar';
+    toolbar.className='synth-toolbar';
+    view.insertBefore(toolbar,grid);
+  }
+  const mastered=getSynthMastered().filter(id=>/^ch\d+$/.test(id));
+  const totalCh=20;
+  const pct=Math.round((mastered.length/totalCh)*100);
+  if(toolbar){
+    toolbar.innerHTML=`
+      <div class="synth-toolbar-row">
+        <div class="synth-search-wrap">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
+          <input type="search" id="synthSearch" class="synth-search-input" placeholder="Filtrer chapitres, sections, points…" value="${esc(synthFilterQuery)}" oninput="onSynthFilterInput(this)" autocomplete="off">
+        </div>
+        <div class="synth-toolbar-actions no-print">
+          <button type="button" class="synth-print-btn" onclick="synthPrint()">Imprimer</button>
+        </div>
+      </div>
+      <div class="synth-progress-wrap">
+        <div class="synth-progress-label"><span>Progression maîtrise</span><strong>${mastered.length}/${totalCh}</strong></div>
+        <div class="synth-progress-bar" role="progressbar" aria-valuenow="${mastered.length}" aria-valuemin="0" aria-valuemax="${totalCh}">
+          <div class="synth-progress-fill" style="width:${pct}%"></div>
+        </div>
+      </div>`;
+  }
+
+  let html='';
+  if(hasExpanded){
+    html+=`<div class="synth-group-hd"><h2>20 chapitres — synthèse complète</h2><p>Points clés, perles et repères EVC par section</p></div>`;
+    html+=SYNTHESIS_EXPANDED.map((card,i)=>renderSynthChapterCard(card,i)).join('');
+  }
+  if(hasClassic){
+    html+=`<div class="synth-group-hd synth-group-theme"><h2>Fiches transversales</h2><p>Modèles et tableaux de référence (SYNTHESIS)</p></div>`;
+    html+=SYNTHESIS.map(card=>renderSynthThemeCard(card)).join('');
+  }
+  html+=`<div id="synthEmpty" class="synth-empty" style="display:none"><div class="empty-icon">🔍</div><div class="empty-text">Aucune fiche ne correspond à votre recherche</div></div>`;
+  grid.innerHTML=html;
+  onSynthFilterInput(document.getElementById('synthSearch'));
+}
+window.toggleSynthMastered=toggleSynthMastered;
+window.synthToggleChapter=synthToggleChapter;
+window.synthToggleSection=synthToggleSection;
+window.synthSetChapterSections=synthSetChapterSections;
+window.synthSetCardSections=synthSetCardSections;
+window.onSynthFilterInput=onSynthFilterInput;
+window.synthPrint=synthPrint;
 
 /* ── FLASHCARDS ── */
 function shuffleFlash(){flashDeck=filterDeck();for(let i=flashDeck.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[flashDeck[i],flashDeck[j]]=[flashDeck[j],flashDeck[i]]}flashIdx=0;renderFlashcard()}

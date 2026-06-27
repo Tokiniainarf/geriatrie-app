@@ -197,6 +197,18 @@
     <div class="bf-toast" id="bfToast"></div>
   </div>
 
+  <!-- DICTIONNAIRE MÉDICAL -->
+  <div class="view" id="vDict">
+    <div class="page-hd"><h1>Dictionnaire médical</h1><p>Glossaire gériatrique — définitions, liens entre concepts et chapitres du manuel</p></div>
+    <div class="dict-toolbar">
+      <input type="search" class="dict-search" id="dictSearch" placeholder="Rechercher un terme, une abréviation…" oninput="onDictSearch(this.value)" autocomplete="off" aria-label="Rechercher dans le dictionnaire">
+      <button type="button" class="dict-fav-toggle" id="dictFavOnlyBtn" onclick="toggleDictFavFilter()" aria-pressed="false">★ Favoris</button>
+    </div>
+    <div class="dict-alpha" id="dictAlpha" role="navigation" aria-label="Index alphabétique"></div>
+    <div class="dict-meta" id="dictMeta"></div>
+    <div class="dict-list" id="dictList"></div>
+  </div>
+
   <!-- FICHES DE GARDE -->
   <div class="view" id="vGarde">
     <div class="page-hd"><h1>Fiches de Garde</h1><p>Quick reference pour les urgences gériatriques</p></div>
@@ -238,6 +250,10 @@
   <button data-v="synth" onclick="sw('synth')">
     <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
     <span>Synthèse</span>
+  </button>
+  <button data-v="dict" onclick="sw('dict')">
+    <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+    <span>Dict.</span>
   </button>
   <button data-v="flash" onclick="sw('flash')">
     <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 4v16"/><path d="M17 4v16"/><path d="M2 12h20"/></svg>
@@ -327,6 +343,12 @@
 <script src="synthesis-expanded.js"></script>
 <script src="concepts-expanded.js"></script>
 <script src="clinical-reference.js"></script>
+<script src="items-evc.js"></script>
+<script src="interactions-critiques.js"></script>
+<script src="mega-cases.js"></script>
+<script src="examens-guide.js"></script>
+<script src="demences-comparatif.js"></script>
+<script src="aide-memoire-evc.js"></script>
 <script src="synthesis-rapide.js"></script>
 </body>
 </html>
