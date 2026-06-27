@@ -168,7 +168,20 @@ input { font-family: inherit; font-size: inherit; }
   height: 120px;
   background: linear-gradient(125deg, #CFFAFE 0%, #A5F3FC 40%, #D1FAE5 100%);
   position: relative;
+  overflow: hidden;
 }
+.hero-gradient::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(110deg, transparent 25%, rgba(255,255,255,.45) 50%, transparent 75%);
+  background-size: 200% 100%;
+  animation: heroShimmer 4s ease-in-out infinite;
+}
+@keyframes heroShimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+@media (prefers-reduced-motion: reduce) { .hero-gradient::before { animation: none; } }
 [data-theme="dark"] .hero-gradient {
   background: linear-gradient(135deg, #0891B2, #164E63, #0F766E);
 }
