@@ -174,6 +174,7 @@ const QuizMode = (() => {
     const allAnnales = [];
     if (typeof ANNALES !== 'undefined') allAnnales.push(...ANNALES);
     if (typeof ANNALES_EXPANDED !== 'undefined') allAnnales.push(...ANNALES_EXPANDED);
+    if(typeof ANNALES_V2!=='undefined')allAnnales.push(...ANNALES_V2);
     allAnnales.forEach(a => {
       const caseLabel = (a.case || a.cas || a.title || '').substring(0, 40);
       const questions = a.questions || [];

@@ -1196,6 +1196,7 @@ function renderAnnales(){
   if(typeof ANNALES!=='undefined')all.push(...ANNALES.map(a=>({...a,_src:'base'})));
   if(typeof ANNALES_EXPANDED!=='undefined')all.push(...ANNALES_EXPANDED.map(a=>({...a,_src:'expanded'})));
   if(typeof ANNALES_ARCHIVE!=='undefined')all.push(...ANNALES_ARCHIVE.map(a=>({...a,_src:'archive'})));
+  if(typeof ANNALES_V2!=='undefined')all.push(...ANNALES_V2.map(a=>({...a,_src:v2})));
   if(typeof CAS_INTERACTIFS!=='undefined')all.push(...CAS_INTERACTIFS.map(a=>({...a,_src:'cas'})));
   if(typeof SITUATIONS_EVC!=='undefined')all.push(...SITUATIONS_EVC.map(a=>({...a,_src:'situations'})));
   if(typeof MEGA_CASES!=='undefined')all.push(...MEGA_CASES.map(a=>({...a,_src:'mega'})));

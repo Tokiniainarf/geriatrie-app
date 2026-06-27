@@ -156,6 +156,7 @@ const BrainFeed = (() => {
     if (typeof ANNALES !== 'undefined') annales.push(...ANNALES);
     if (typeof ANNALES_EXPANDED !== 'undefined') annales.push(...ANNALES_EXPANDED);
     if (typeof ANNALES_ARCHIVE !== 'undefined') annales.push(...ANNALES_ARCHIVE);
+    if(typeof ANNALES_V2!=='undefined')all.push(...ANNALES_V2);
     if (typeof CAS_INTERACTIFS !== 'undefined') annales.push(...CAS_INTERACTIFS);
     if (typeof SITUATIONS_EVC !== 'undefined') annales.push(...SITUATIONS_EVC);
     const casChoc = annales.map(a => ({
