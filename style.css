@@ -1887,7 +1887,10 @@ input[type="range"] { width: 100px; accent-color: var(--accent); }
 .search-result + .search-result { border-top: 1px solid var(--glass-border); }
 .search-type { font-size: .7rem; font-weight: 600; color: var(--text3); white-space: nowrap; }
 .search-title { font-size: .88rem; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.search-empty { padding: 16px; text-align: center; font-size: .88rem; color: var(--text3); }
+.search-empty { padding: 24px 16px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.search-empty-icon { font-size: 2rem; opacity: .45; animation: emptyBob 3s ease-in-out infinite; }
+.search-empty-text { font-size: .9rem; font-weight: 500; color: var(--text3); }
+.search-empty-hint { font-size: .78rem; color: var(--text3); opacity: .65; }
 
 /* ═══════════════════════════════════════════════════
    MICRO-ANIMATIONS & POLISH

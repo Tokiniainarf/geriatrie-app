@@ -213,7 +213,7 @@ function onSearch(q){
   if(typeof AppSearch!=='undefined' && q.length >= 2){
     const results = AppSearch.search(q);
     const container = document.getElementById('searchResults');
-    if(container){ AppSearch.renderResults(results, container); container.style.display = results.length ? 'block' : 'none'; }
+    if(container){ AppSearch.renderResults(results, container); container.style.display = 'block'; }
     // Also filter chapter rows
     document.querySelectorAll('.ch-row').forEach(r=>{
       const t=r.querySelector('.ch-row-title').textContent.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');

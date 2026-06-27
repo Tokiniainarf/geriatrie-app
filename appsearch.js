@@ -505,7 +505,7 @@ const AppSearch = (() => {
     if (!container) return;
 
     if (!results.length) {
-      container.innerHTML = '<div class="search-empty">Aucun résultat</div>';
+      container.innerHTML = '<div class="search-empty"><div class="search-empty-icon">🔍</div><div class="search-empty-text">Aucun résultat</div><div class="search-empty-hint">Essayez un terme plus court ou vérifiez l\'orthographe</div></div>';
       return;
     }
 
