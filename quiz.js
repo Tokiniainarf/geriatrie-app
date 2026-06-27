@@ -20,17 +20,20 @@ const QuizMode = (() => {
     if (typeof FLASHCARDS_A !== 'undefined') allFlash.push(...FLASHCARDS_A);
     if (typeof FLASHCARDS_B !== 'undefined') allFlash.push(...FLASHCARDS_B);
     if (typeof FLASHCARDS_C !== 'undefined') allFlash.push(...FLASHCARDS_C);
+    if (typeof FLASHCARDS_MEMOS !== 'undefined') allFlash.push(...FLASHCARDS_MEMOS);
     allFlash.forEach(fc => {
       q.push({ type: 'flash', chapter: fc.chapter, rang: fc.rang, question: fc.question, answer: fc.answer, tags: fc.tags });
     });
     // From annales
-    if (typeof ANNALES !== 'undefined') {
-      ANNALES.forEach(a => {
+    // Annales for quiz
+    const allAnnales = [];
+    if (typeof ANNALES !== 'undefined') allAnnales.push(...ANNALES);
+    if (typeof ANNALES_EXPANDED !== 'undefined') allAnnales.push(...ANNALES_EXPANDED);
+    allAnnales.forEach(a => {
         a.questions.forEach(aq => {
           q.push({ type: 'annale', chapter: a.chapter, rang: aq.rang, question: aq.q, answer: aq.a, tags: [a.case.substring(0, 40) + '...'] });
         });
       });
-    }
     return q;
   }
 

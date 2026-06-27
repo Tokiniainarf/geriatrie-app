@@ -116,7 +116,7 @@ function onSearch(q){
 /* ── FAVORIS ── */
 function renderFav(){
   const list=document.getElementById('favList');if(!list)return;
-  if(!S.bm.length){list.innerHTML='<div class="empty"><div class="empty-text">Aucun favori</div></div>';return}
+  if(!S.bm.length){list.innerHTML='<div class="empty"><div class="empty-icon">⭐</div><div class="empty-text">Aucun favori pour l\'instant</div><div class="empty-hint">Appuyez sur l\'étoile d\'un chapitre pour le sauvegarder</div></div>';return}
   list.innerHTML='';
   S.bm.forEach(id=>{
     const ch=APP_DATA.chapters.find(c=>c.id===id);if(!ch)return;
@@ -156,7 +156,7 @@ function showCh(id){
 function renderChapterContent(){
   const cc=document.getElementById('chContent');if(!cc)return;
   const chunks=APP_DATA.content[S.ch]||[];
-  if(!chunks.length){cc.innerHTML='<div class="empty"><div class="empty-text">Contenu indisponible</div></div>';return}
+  if(!chunks.length){cc.innerHTML='<div class="empty"><div class="empty-icon">📖</div><div class="empty-text">Contenu indisponible</div><div class="empty-hint">Ce chapitre sera bientôt disponible</div></div>';return}
   cc.innerHTML=renderChapter(chunks.map(c=>c[1]).join('\n'),S.ch);
   applyConceptLinks();
 }
@@ -440,8 +440,8 @@ function renderFlashcard(){
   if(!flashDeck.length){
     document.getElementById('flashCh').textContent='';
     document.getElementById('flashRang').textContent='';
-    document.getElementById('flashQ').textContent='Aucune carte pour ce filtre';
-    document.getElementById('flashA').textContent='Changez de filtre ou réessayez « Tous ».';
+    document.getElementById('flashQ').innerHTML='<div class="empty"><div class="empty-icon">🎴</div><div class="empty-text">Aucune carte pour ce filtre</div></div>';
+    document.getElementById('flashA').textContent='Essayez le filtre « Tous » pour voir toutes les cartes.';
     document.getElementById('flashTags').innerHTML='';
     document.getElementById('flashProg').textContent='0 / 0';
     return;

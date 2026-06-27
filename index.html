@@ -171,26 +171,26 @@
   <div class="view" id="vFeed">
     <div class="bf-header">
       <div class="bf-stats-bar">
-        <span id="bfStreak">🔥 Jour 1</span>
-        <span id="bfPoints">⭐ 0</span>
+        <span id="bfStreak">Jour 1</span>
+        <span id="bfPoints">0 pts</span>
         <span id="bfCounter">0 / 50</span>
       </div>
-      <div class="bf-progress-track"><div class="bf-progress-fill" id="bfProgress"></div></div>
     </div>
+    <div class="bf-progress-track"><div class="bf-progress-fill" id="bfProgress"></div></div>
     <div class="bf-feed" id="bfFeed">
-      <div class="bf-card-container" id="bfCard"></div>
+      <!-- Slides rendered dynamically by brainfeed.js -->
     </div>
     <div class="bf-actions">
       <button class="bf-action-btn bf-action-fail" onclick="BrainFeed.actionDontKnow()" aria-label="Je ne sais pas">
-        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         <span>Je sais pas</span>
       </button>
       <button class="bf-action-btn bf-action-fav" onclick="BrainFeed.actionFav()" aria-label="Sauvegarder">
-        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         <span>Sauver</span>
       </button>
       <button class="bf-action-btn bf-action-know" onclick="BrainFeed.actionKnow()" aria-label="Je sais">
-        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
         <span>Je sais</span>
       </button>
     </div>
@@ -283,13 +283,16 @@
 <script src="flashcards-batch-A.js"></script>
 <script src="flashcards-batch-B.js"></script>
 <script src="flashcards-batch-C.js"></script>
+<script src="flashcards-memos.js"></script>
 <script src="app.js?v=45"></script>
 <script src="brainfeed.js"></script>
 <script src="quiz.js"></script>
 <script src="dashboard.js"></script>
 <script src="appsearch.js"></script>
 <script src="annales.js"></script>
+<script src="annales-expanded.js"></script>
 <script src="has-reco.js"></script>
+<script src="has-expanded.js"></script>
 <script src="graph.js"></script>
 </body>
 </html>

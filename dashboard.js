@@ -30,6 +30,7 @@ const Dashboard = (() => {
     if (typeof FLASHCARDS_A !== 'undefined') totalFlash += FLASHCARDS_A.length;
     if (typeof FLASHCARDS_B !== 'undefined') totalFlash += FLASHCARDS_B.length;
     if (typeof FLASHCARDS_C !== 'undefined') totalFlash += FLASHCARDS_C.length;
+    if (typeof FLASHCARDS_MEMOS !== 'undefined') totalFlash += FLASHCARDS_MEMOS.length;
 
     // Heatmap (last 7 days)
     const heatmap = buildHeatmap();

@@ -23,6 +23,7 @@ const AppSearch = (() => {
     if (typeof FLASHCARDS_A !== 'undefined') allFlash.push(...FLASHCARDS_A);
     if (typeof FLASHCARDS_B !== 'undefined') allFlash.push(...FLASHCARDS_B);
     if (typeof FLASHCARDS_C !== 'undefined') allFlash.push(...FLASHCARDS_C);
+    if (typeof FLASHCARDS_MEMOS !== 'undefined') allFlash.push(...FLASHCARDS_MEMOS);
     allFlash.forEach(fc => {
       allContent.push({ type: 'flashcard', id: 'fc-' + fc.id, title: fc.question, text: fc.question + ' ' + fc.answer, link: () => sw('feed') });
     });
@@ -36,19 +37,22 @@ const AppSearch = (() => {
     }
 
     // Annales
-    if (typeof ANNALES !== 'undefined') {
-      ANNALES.forEach(a => {
+    // Search annales
+    const allAnnales = [];
+    if (typeof ANNALES !== 'undefined') allAnnales.push(...ANNALES);
+    if (typeof ANNALES_EXPANDED !== 'undefined') allAnnales.push(...ANNALES_EXPANDED);
+    allAnnales.forEach(a => {
         const qText = a.questions.map(q => q.q + ' ' + q.a).join(' ');
         allContent.push({ type: 'annale', id: 'ann-' + a.id, title: 'Cas ' + a.id + ' — ' + a.case.substring(0, 60), text: a.case + ' ' + qText, link: () => sw('quiz') });
       });
-    }
 
     // HAS
-    if (typeof HAS_RECOMMANDATIONS !== 'undefined') {
-      HAS_RECOMMANDATIONS.forEach(h => {
+    const allHas = [];
+    if (typeof HAS_RECOMMANDATIONS !== 'undefined') allHas.push(...HAS_RECOMMANDATIONS);
+    if (typeof HAS_EXPANDED !== 'undefined') allHas.push(...HAS_EXPANDED);
+    allHas.forEach(h => {
         allContent.push({ type: 'has', id: h.id, title: h.theme, text: h.reco + ' ' + (h.details || ''), link: () => sw('synth') });
       });
-    }
 
     // Concepts
     if (typeof CONCEPT_MAP !== 'undefined') {
