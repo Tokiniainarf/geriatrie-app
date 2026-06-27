@@ -2061,3 +2061,59 @@ button, input, a {
   background: rgba(5, 150, 105, .08); border: 1px solid rgba(5, 150, 105, .2);
 }
 .dict-chapter-link:hover { background: rgba(5, 150, 105, .14); }
+
+/* ═══════════════════════════════════════════════════
+   ANNALES EVC PAR ANNÉE
+   ═══════════════════════════════════════════════════ */
+.ann-filter-bar { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 16px; }
+.ann-filter-bar select, .ann-filter-bar input { padding: 8px 12px; border-radius: var(--radius-sm); border: 1px solid var(--glass-border); background: var(--bg-card); color: var(--text); font-size: .85rem; }
+.ann-filter-bar select { min-width: 140px; }
+.ann-filter-bar input { flex: 1; min-width: 160px; }
+.ann-count { font-size: .75rem; color: var(--text3); font-weight: 600; }
+.ann-year-group { margin-bottom: 16px; }
+.ann-year-header { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: var(--radius-sm); cursor: pointer; transition: all .2s; }
+.ann-year-header:hover { border-color: var(--accent); }
+.ann-year-label { font-size: 1.1rem; font-weight: 700; color: var(--accent); }
+.ann-year-count { font-size: .78rem; color: var(--text3); background: var(--accent-soft); padding: 2px 8px; border-radius: 99px; }
+.ann-chevron { color: var(--text3); transition: transform .3s; margin-left: auto; }
+.ann-year-group.open .ann-chevron { transform: rotate(180deg); }
+.ann-year-body { display: none; padding: 8px 0; }
+.ann-year-group.open .ann-year-body { display: block; }
+.ann-card { background: var(--bg-elevated); border: 1px solid var(--glass-border); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 8px; }
+.ann-card-head { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
+.ann-card-ch { font-size: .75rem; color: var(--text3); }
+.ann-card-title { font-size: .95rem; font-weight: 600; margin-bottom: 8px; }
+.ann-card-situation { font-size: .88rem; line-height: 1.6; color: var(--text2); margin-bottom: 12px; white-space: pre-line; }
+.ann-q { margin-bottom: 12px; padding: 12px; background: var(--bg-card); border-radius: var(--radius-sm); border-left: 3px solid var(--accent); }
+.ann-q-text { font-size: .88rem; font-weight: 500; margin-bottom: 8px; }
+.ann-a-text { font-size: .85rem; line-height: 1.6; color: var(--text2); padding: 12px; background: rgba(5,150,105,.05); border-radius: var(--radius-sm); margin-bottom: 8px; }
+.ann-reveal-btn { padding: 6px 14px; border-radius: var(--radius-sm); background: var(--accent-soft); color: var(--accent); font-size: .78rem; font-weight: 600; border: 1px solid var(--glass-border); cursor: pointer; }
+.ann-reveal-btn:hover { background: var(--accent); color: #fff; }
+.ann-jury-tip { font-size: .82rem; color: var(--orange); padding: 8px 12px; background: rgba(217,119,6,.05); border-radius: var(--radius-sm); border-left: 3px solid var(--orange); }
+
+/* ═══════════════════════════════════════════════════
+   PROTOCOLES
+   ═══════════════════════════════════════════════════ */
+.proto-filter-bar { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 16px; }
+.proto-filter-bar select { padding: 8px 12px; border-radius: var(--radius-sm); border: 1px solid var(--glass-border); background: var(--bg-card); color: var(--text); font-size: .85rem; min-width: 160px; }
+.proto-filter-bar input { flex: 1; padding: 8px 12px; border-radius: var(--radius-sm); border: 1px solid var(--glass-border); background: var(--bg-card); color: var(--text); font-size: .85rem; min-width: 160px; }
+.proto-count { font-size: .75rem; color: var(--text3); font-weight: 600; }
+.proto-cat-group { margin-bottom: 16px; }
+.proto-cat-header { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: var(--radius-sm); cursor: pointer; transition: all .2s; }
+.proto-cat-header:hover { border-color: var(--accent); }
+.proto-cat-label { font-size: 1rem; font-weight: 700; color: var(--accent); }
+.proto-cat-count { font-size: .75rem; color: var(--text3); background: var(--accent-soft); padding: 2px 8px; border-radius: 99px; }
+.proto-cat-body { display: none; padding: 8px 0; }
+.proto-cat-group.open .proto-cat-body { display: block; }
+.proto-cat-group.open .ann-chevron { transform: rotate(180deg); }
+.proto-card { background: var(--bg-elevated); border: 1px solid var(--glass-border); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 8px; }
+.proto-urgent { border-left: 4px solid var(--red); }
+.proto-card-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.proto-icon { font-size: 1.2rem; }
+.proto-card-title { font-size: .95rem; font-weight: 600; }
+.proto-indication { font-size: .82rem; color: var(--text3); margin-bottom: 10px; font-style: italic; }
+.proto-steps { padding-left: 20px; margin: 8px 0; }
+.proto-steps li { font-size: .85rem; line-height: 1.6; margin-bottom: 4px; color: var(--text2); }
+.proto-alert { font-size: .82rem; color: var(--red); padding: 8px 12px; background: rgba(220,38,38,.05); border-radius: var(--radius-sm); border-left: 3px solid var(--red); margin-top: 8px; }
+.proto-surveillance { font-size: .82rem; color: var(--accent); margin-top: 6px; }
+.proto-ci { font-size: .82rem; color: var(--orange); margin-top: 4px; }

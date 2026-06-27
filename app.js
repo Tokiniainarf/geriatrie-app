@@ -41,6 +41,8 @@ function sw(view){
   if(view==='dash'&&typeof Dashboard!=='undefined')Dashboard.render();
   if(view==='garde')renderGarde();
   if(view==='dict')renderDict();
+  if(view==='annales')renderAnnales();
+  if(view==='proto')renderProto();
   if(view!=='quiz'&&typeof QuizMode!=='undefined')QuizMode.destroy();
   if(view==='set'){document.getElementById('pd').textContent=`${S.read.length} chapitre${S.read.length>1?'s':''} consulté${S.read.length>1?'s':''}`}
 }
@@ -1044,6 +1046,135 @@ function renderGarde(){
         ${f.alert?`<div class="garde-alert" role="note">${esc(f.alert)}</div>`:''}
       </div>
     </div>`).join('')+'</div>';
+}
+
+/* ── ANNALES EVC PAR ANNÉE ── */
+function renderAnnales(){
+  const el=document.getElementById('annalesContent');
+  const filtEl=document.getElementById('annalesFilters');
+  if(!el)return;
+  // Gather all annales
+  const all=[];
+  if(typeof ANNALES!=='undefined')all.push(...ANNALES.map(a=>({...a,_src:'base'})));
+  if(typeof ANNALES_EXPANDED!=='undefined')all.push(...ANNALES_EXPANDED.map(a=>({...a,_src:'expanded'})));
+  if(typeof ANNALES_ARCHIVE!=='undefined')all.push(...ANNALES_ARCHIVE.map(a=>({...a,_src:'archive'})));
+  if(typeof CAS_INTERACTIFS!=='undefined')all.push(...CAS_INTERACTIFS.map(a=>({...a,_src:'cas'})));
+  if(typeof SITUATIONS_EVC!=='undefined')all.push(...SITUATIONS_EVC.map(a=>({...a,_src:'situations'})));
+  if(typeof MEGA_CASES!=='undefined')all.push(...MEGA_CASES.map(a=>({...a,_src:'mega'})));
+  if(!all.length){el.innerHTML='<div class="empty"><div class="empty-text">Aucune annale disponible</div></div>';return}
+  // Years available
+  const years=[...new Set(all.map(a=>a.year).filter(Boolean))].sort((a,b)=>b-a);
+  const chapters=[...new Set(all.map(a=>a.chapter).filter(Boolean))];
+  // Filters
+  if(filtEl){
+    filtEl.innerHTML=`<div class="ann-filter-bar">
+      <select id="annYearFilter" onchange="filterAnnales()"><option value="">Toutes les années</option>${years.map(y=>`<option value="${y}">${y}</option>`).join('')}</select>
+      <select id="annChapFilter" onchange="filterAnnales()"><option value="">Tous les chapitres</option>${chapters.map(c=>{const ch=APP_DATA.chapters.find(x=>x.id===c);return`<option value="${c}">${c.replace('ch','')} — ${ch?ch.t:c}</option>`}).join('')}</select>
+      <span class="ann-count" id="annCount">${all.length} cas</span>
+    </div>`;
+  }
+  window._annales=all;
+  window._annYear='';
+  window._annChap='';
+  window.filterAnnales=function(){
+    const yf=document.getElementById('annYearFilter');
+    const cf=document.getElementById('annChapFilter');
+    window._annYear=yf?yf.value:'';
+    window._annChap=cf?cf.value:'';
+    renderAnnalesList();
+  };
+  renderAnnalesList();
+}
+function renderAnnalesList(){
+  const el=document.getElementById('annalesContent');if(!el)return;
+  let list=window._annales||[];
+  if(window._annYear)list=list.filter(a=>String(a.year)===window._annYear);
+  if(window._annChap)list=list.filter(a=>a.chapter===window._annChap);
+  const cnt=document.getElementById('annCount');if(cnt)cnt.textContent=list.length+' cas';
+  // Group by year
+  const groups={};
+  list.forEach(a=>{const y=a.year||'Sans année';if(!groups[y])groups[y]=[];groups[y].push(a)});
+  const sortedKeys=Object.keys(groups).sort((a,b)=>b-a);
+  el.innerHTML=sortedKeys.map(year=>{
+    const cases=groups[year];
+    return`<div class="ann-year-group">
+      <div class="ann-year-header" onclick="this.parentElement.classList.toggle('open')">
+        <span class="ann-year-label">${year}</span>
+        <span class="ann-year-count">${cases.length} cas</span>
+        <span class="ann-chevron">▾</span>
+      </div>
+      <div class="ann-year-body">${cases.map(a=>{
+        const chName=APP_DATA.chapters.find(c=>c.id===a.chapter);
+        const diffBadge=a.difficulty?`<span class="rang-badge rang-${a.difficulty.toLowerCase()}">Rang ${a.difficulty}</span>`:'';
+        const questions=a.questions?a.questions.map((q,i)=>`<div class="ann-q"><div class="ann-q-text"><strong>Q${i+1}:</strong> ${esc(q.q||q.question||'')}</div><div class="ann-a-text" style="display:none" id="ans-${a.id}-${i}">${esc(q.a||q.answer||'')}</div><button class="ann-reveal-btn" onclick="var e=document.getElementById('ans-${a.id}-${i}');e.style.display=e.style.display==='none'?'block':'none';this.textContent=e.style.display==='none'?'Voir réponse':'Masquer'">Voir réponse</button></div>`).join(''):(a.correction||a.reponse?`<div class="ann-q"><div class="ann-a-text" style="display:none" id="ans-${a.id}">${esc(a.correction||a.reponse)}</div><button class="ann-reveal-btn" onclick="var e=document.getElementById('ans-${a.id}');e.style.display=e.style.display==='none'?'block':'none';this.textContent=e.style.display==='none'?'Voir réponse':'Masquer'">Voir réponse</button></div>`:'');
+        return`<div class="ann-card">
+          <div class="ann-card-head">${diffBadge}<span class="ann-card-ch">${chName?chName.t:a.chapter||''}</span></div>
+          <div class="ann-card-title">${esc(a.title||a.titre||'')}</div>
+          <div class="ann-card-situation">${esc(a.situation||a.cas||a.case||'')}</div>
+          ${questions}
+          ${a.juryTips?`<div class="ann-jury-tip">💡 Jury: ${esc(a.juryTips)}</div>`:''}
+        </div>`;
+      }).join('')}</div>
+    </div>`;
+  }).join('');
+}
+
+/* ── PROTOCOLES ── */
+function renderProto(){
+  const el=document.getElementById('protoContent');
+  const filtEl=document.getElementById('protoFilters');
+  if(!el)return;
+  const all=[];
+  if(typeof PROTOCOLES_URGENCE!=='undefined')all.push(...PROTOCOLES_URGENCE.map(p=>({...p,_src:'urgence'})));
+  if(typeof PROTOCOLES_COMPLETS!=='undefined')all.push(...PROTOCOLES_COMPLETS.map(p=>({...p,_src:'complets'})));
+  if(typeof CLINICAL_REFERENCE!=='undefined')all.push(...CLINICAL_REFERENCE.filter(p=>p.category==='Urgence').map(p=>({...p,_src:'ref',protocole:p.content?p.content.split('. ').filter(Boolean):[]})));
+  if(!all.length){el.innerHTML='<div class="empty"><div class="empty-text">Aucun protocole disponible</div></div>';return}
+  const cats=[...new Set(all.map(p=>p.categorie||p.category||'Autre'))];
+  if(filtEl){
+    filtEl.innerHTML=`<div class="proto-filter-bar">
+      <select id="protoCatFilter" onchange="filterProto()"><option value="">Toutes catégories</option>${cats.map(c=>`<option value="${c}">${c}</option>`).join('')}</select>
+      <input type="text" id="protoSearch" placeholder="Rechercher un protocole..." oninput="filterProto()">
+      <span class="proto-count" id="protoCount">${all.length} protocoles</span>
+    </div>`;
+  }
+  window._protocoles=all;
+  window.filterProto=function(){
+    const cf=document.getElementById('protoCatFilter');
+    const sf=document.getElementById('protoSearch');
+    const cat=cf?cf.value:'';
+    const q=sf?sf.value.toLowerCase():'';
+    let filtered=window._protocoles;
+    if(cat)filtered=filtered.filter(p=>(p.categorie||p.category||'')===cat);
+    if(q)filtered=filtered.filter(p=>(p.titre||p.title||'').toLowerCase().includes(q)||(p.indication||'').toLowerCase().includes(q));
+    renderProtoList(filtered);
+  };
+  renderProtoList(all);
+}
+function renderProtoList(list){
+  const el=document.getElementById('protoContent');if(!el)return;
+  const cnt=document.getElementById('protoCount');if(cnt)cnt.textContent=list.length+' protocoles';
+  const grouped={};
+  list.forEach(p=>{const cat=p.categorie||p.category||'Autre';if(!grouped[cat])grouped[cat]=[];grouped[cat].push(p)});
+  el.innerHTML=Object.entries(grouped).map(([cat,items])=>`
+    <div class="proto-cat-group">
+      <div class="proto-cat-header" onclick="this.parentElement.classList.toggle('open')">
+        <span class="proto-cat-label">${esc(cat)}</span>
+        <span class="proto-cat-count">${items.length}</span>
+        <span class="ann-chevron">▾</span>
+      </div>
+      <div class="proto-cat-body">${items.map(p=>{
+        const steps=p.protocole||p.steps||p.checklist||[];
+        const icon=p.icon||'📋';
+        return`<div class="proto-card${p.urgency==='high'?' proto-urgent':''}">
+          <div class="proto-card-head"><span class="proto-icon">${icon}</span><div class="proto-card-title">${esc(p.titre||p.title||'')}</div></div>
+          ${p.indication?`<div class="proto-indication">${esc(p.indication)}</div>`:''}
+          ${steps.length?`<ol class="proto-steps">${steps.map(s=>`<li>${esc(s)}</li>`).join('')}</ol>`:''}
+          ${p.alerte||p.alert?`<div class="proto-alert">⚠️ ${esc(p.alerte||p.alert)}</div>`:''}
+          ${p.surveillance?`<div class="proto-surveillance">📊 ${esc(p.surveillance)}</div>`:''}
+          ${p.contreIndications?`<div class="proto-ci">🚫 CI: ${esc(p.contreIndications)}</div>`:''}
+        </div>`;
+      }).join('')}</div>
+    </div>`).join('');
 }
 
 /* ── ITEMS ── */
