@@ -1,4 +1,4 @@
-const CACHE_NAME = 'geriatrie-v110';
+const CACHE_NAME = 'geriatrie-v111';
 const CORE = [
   './',
   './index.html',
@@ -107,6 +107,7 @@ const CORE = [
   './protocoles-vie-quotidienne.js',
   './protocoles-ergotherapie.js',
   './protocoles-dietetique.js',
+  './protocoles-psychologie.js',
   './guides-aidants.js',
   './interpretation-biologie.js',
   './guides-oncologie.js',
