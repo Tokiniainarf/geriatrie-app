@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   updateThemeIcon();
   if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
   window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();window.deferredPrompt=e;const ib=document.getElementById('installB');if(ib)ib.style.display='flex'});
-  window.addEventListener('scroll',()=>{const f=document.getElementById('fab');if(f)f.style.display=window.scrollY>300?'flex':'none'});
+  window.addEventListener('scroll',()=>{const f=document.getElementById('fab');if(f){if(window.scrollY>300){if(!f.classList.contains('show')){f.classList.add('show')}}else{f.classList.remove('show')}}});
 });
 
 /* ── NAV ── */
