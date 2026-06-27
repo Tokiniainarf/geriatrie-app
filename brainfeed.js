@@ -13,7 +13,19 @@ const BrainFeed = (() => {
   let quizCombo = 0;
   const DAILY_GOAL = 50;
   const COMBO_BONUS_AT = 5;
+  const COMBO_CONFETTI_AT = 10;
+  const ACHIEVEMENTS = [
+    { id: 'first_card', icon: '🎯', title: 'Première carte', desc: '1 carte validée', check: (s) => (s.totalCards || 0) >= 1 },
+    { id: 'streak_3', icon: '🔥', title: 'En feu', desc: '3 jours de suite', check: (s) => (s.streak || 0) >= 3 },
+    { id: 'streak_10', icon: '💥', title: 'Inferno', desc: '10 jours de suite', check: (s) => (s.streak || 0) >= 10 },
+    { id: 'cards_50', icon: '📚', title: 'Demi-cent', desc: '50 cartes au total', check: (s) => (s.totalCards || 0) >= 50 },
+    { id: 'cards_100', icon: '🏅', title: 'Centurion', desc: '100 cartes au total', check: (s) => (s.totalCards || 0) >= 100 },
+    { id: 'combo_10', icon: '⚡', title: 'Combo x10', desc: '10 bonnes réponses d\'affilée', check: (s) => s._sessionCombo10 },
+    { id: 'daily_goal', icon: '🏆', title: 'Objectif jour', desc: '50 cartes aujourd\'hui', check: (s) => (s.dailyDone || 0) >= DAILY_GOAL }
+  ];
   let observer = null;
+  let audioCtx = null;
+  let sessionCombo10Unlocked = false;
   let renderedRange = { start: 0, end: 0 };
   const BATCH_SIZE = 6;
   let activeTimers = new Map();
@@ -74,9 +86,46 @@ const BrainFeed = (() => {
   }
   function saveSRS(srs) { localStorage.setItem('bf_srs', JSON.stringify(srs)); }
   function loadStats() {
-    try { return JSON.parse(localStorage.getItem('bf_stats')) || { streak: 0, points: 0, lastDay: '', dailyDone: 0 }; } catch { return { streak: 0, points: 0, lastDay: '', dailyDone: 0 }; }
+    try {
+      return JSON.parse(localStorage.getItem('bf_stats')) || { streak: 0, points: 0, lastDay: '', dailyDone: 0, totalCards: 0 };
+    } catch {
+      return { streak: 0, points: 0, lastDay: '', dailyDone: 0, totalCards: 0 };
+    }
   }
   function saveStats(s) { localStorage.setItem('bf_stats', JSON.stringify(s)); }
+  function loadAchievements() {
+    try { return JSON.parse(localStorage.getItem('bf_achievements')) || []; } catch { return []; }
+  }
+  function saveAchievements(ids) { localStorage.setItem('bf_achievements', JSON.stringify(ids)); }
+
+  function playSound(kind) {
+    try {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      const t = audioCtx.currentTime;
+      if (kind === 'ding') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(880, t);
+        osc.frequency.exponentialRampToValueAtTime(1320, t + 0.08);
+        gain.gain.setValueAtTime(0.12, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.25);
+        osc.start(t);
+        osc.stop(t + 0.25);
+      } else if (kind === 'buzz') {
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(180, t);
+        osc.frequency.exponentialRampToValueAtTime(90, t + 0.15);
+        gain.gain.setValueAtTime(0.06, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.2);
+        osc.start(t);
+        osc.stop(t + 0.2);
+      }
+    } catch (_) { /* placeholder — no audio hardware */ }
+  }
   function loadFavs() {
     try { return JSON.parse(localStorage.getItem('bf_favs')) || []; } catch { return []; }
   }
@@ -559,6 +608,7 @@ const BrainFeed = (() => {
           if (card.srsKey) updateSRS(card, false);
           combo = 0;
           quizCombo = 0;
+          playSound('buzz');
         }
       });
     });
@@ -568,36 +618,78 @@ const BrainFeed = (() => {
 
   function setupSwipe(slide, slideIdx) {
     let startX = 0, startY = 0, active = false;
+    let lastX = 0, lastT = 0;
+    let velocityX = 0;
+    const moveSamples = [];
     const TH = 70;
+    const VEL_TH = 0.45;
+
+    const applyTransform = (dx, rotFactor = 0.02) => {
+      slide.style.transform = `translateX(${dx}px) rotate(${dx * rotFactor}deg)`;
+    };
 
     const onStart = (x, y) => {
-      startX = x; startY = y; active = true;
+      startX = x; startY = y; lastX = x; lastT = performance.now();
+      active = true;
+      moveSamples.length = 0;
+      velocityX = 0;
       slide.classList.add('bf-swiping');
     };
     const onMove = (x, y) => {
       if (!active) return;
+      const now = performance.now();
       const dx = x - startX;
       const dy = y - startY;
-      if (Math.abs(dy) > Math.abs(dx)) return;
-      slide.style.transform = `translateX(${dx * 0.35}px) rotate(${dx * 0.02}deg)`;
+      if (Math.abs(dy) > Math.abs(dx) && Math.abs(dx) < 20) return;
+      moveSamples.push({ x, t: now });
+      if (moveSamples.length > 8) moveSamples.shift();
+      const dt = now - lastT;
+      if (dt > 0) velocityX = (x - lastX) / dt;
+      lastX = x;
+      lastT = now;
+      const momentumBoost = Math.min(1.15, 1 + Math.abs(velocityX) * 0.08);
+      applyTransform(dx * 0.42 * momentumBoost, 0.025);
       const favOv = slide.querySelector('.bf-swipe-fav-overlay');
       const shareOv = slide.querySelector('.bf-swipe-share-overlay');
-      if (dx < -40 && favOv) favOv.style.opacity = Math.min(1, (Math.abs(dx) - 40) / 80);
-      if (dx > 40 && shareOv) shareOv.style.opacity = Math.min(1, (dx - 40) / 80);
+      const intensity = Math.min(1, (Math.abs(dx) + Math.abs(velocityX) * 40) / 120);
+      if (dx < -30 && favOv) favOv.style.opacity = intensity;
+      if (dx > 30 && shareOv) shareOv.style.opacity = intensity;
+    };
+    const finishSwipe = (dx, vx) => {
+      const effective = dx + vx * 180;
+      if (effective < -TH || (dx < -40 && vx < -VEL_TH)) {
+        slide.classList.add('bf-swipe-out-left');
+        setTimeout(() => { actionFavForIdx(slideIdx); slide.classList.remove('bf-swipe-out-left'); }, 280);
+      } else if (effective > TH || (dx > 40 && vx > VEL_TH)) {
+        slide.classList.add('bf-swipe-out-right');
+        setTimeout(() => { shareCard(slideIdx); slide.classList.remove('bf-swipe-out-right'); }, 280);
+      } else if (Math.abs(vx) > 0.25) {
+        let pos = dx;
+        let v = vx * 220;
+        const decay = 0.92;
+        const step = () => {
+          pos += v * 0.016;
+          v *= decay;
+          applyTransform(pos, 0.02);
+          if (Math.abs(v) > 2) requestAnimationFrame(step);
+          else {
+            slide.style.transform = '';
+            slide.querySelectorAll('.bf-swipe-overlay').forEach(o => { o.style.opacity = 0; });
+          }
+        };
+        requestAnimationFrame(step);
+        return;
+      }
     };
     const onEnd = (x) => {
       if (!active) return;
       active = false;
       slide.classList.remove('bf-swiping');
-      slide.style.transform = '';
-      slide.querySelectorAll('.bf-swipe-overlay').forEach(o => { o.style.opacity = 0; });
       const dx = x - startX;
-      if (dx < -TH) {
-        slide.classList.add('bf-swipe-out-left');
-        setTimeout(() => { actionFavForIdx(slideIdx); slide.classList.remove('bf-swipe-out-left'); }, 280);
-      } else if (dx > TH) {
-        slide.classList.add('bf-swipe-out-right');
-        setTimeout(() => { shareCard(slideIdx); slide.classList.remove('bf-swipe-out-right'); }, 280);
+      slide.querySelectorAll('.bf-swipe-overlay').forEach(o => { o.style.opacity = 0; });
+      finishSwipe(dx, velocityX);
+      if (!slide.classList.contains('bf-swipe-out-left') && !slide.classList.contains('bf-swipe-out-right')) {
+        if (Math.abs(velocityX) <= 0.25) slide.style.transform = '';
       }
     };
 
@@ -682,6 +774,7 @@ const BrainFeed = (() => {
     renderedRange = { start: idx, end: end };
     setupObserver();
     updateHeader();
+    highlightActiveSlide(feed);
   }
 
   function setupObserver() {
@@ -697,6 +790,7 @@ const BrainFeed = (() => {
             stopCasChocTimer(idx);
             idx = slideIdx;
             updateHeader();
+            highlightActiveSlide(feed);
             if (idx >= renderedRange.end - 2) loadMoreSlides();
           }
           const type = entry.target.dataset.type;
@@ -724,33 +818,152 @@ const BrainFeed = (() => {
     renderedRange.end = end;
   }
 
+  function highlightActiveSlide(feed) {
+    if (!feed) feed = document.getElementById('bfFeed');
+    if (!feed) return;
+    feed.querySelectorAll('.bf-slide').forEach(s => {
+      s.classList.toggle('bf-slide-active', parseInt(s.dataset.idx, 10) === idx);
+    });
+  }
+
+  function checkAchievements() {
+    const unlocked = loadAchievements();
+    const stats = loadStats();
+    const snapshot = {
+      streak: stats.streak,
+      dailyDone: stats.dailyDone,
+      totalCards: stats.totalCards,
+      _sessionCombo10: sessionCombo10Unlocked
+    };
+    const newly = [];
+    ACHIEVEMENTS.forEach(a => {
+      if (!unlocked.includes(a.id) && a.check(snapshot)) {
+        unlocked.push(a.id);
+        newly.push(a);
+      }
+    });
+    if (newly.length) {
+      saveAchievements(unlocked);
+      renderAchievementBadges();
+      const first = newly[0];
+      showToast(`${first.icon} Badge : ${first.title}`);
+      showAchievementToast(newly);
+    }
+  }
+
+  function showAchievementToast(badges) {
+    let el = document.getElementById('bfAchievementPop');
+    if (!el) {
+      el = document.createElement('div');
+      el.id = 'bfAchievementPop';
+      el.className = 'bf-achievement-pop';
+      document.getElementById('vFeed')?.appendChild(el);
+    }
+    el.innerHTML = badges.map(b =>
+      `<div class="bf-achievement-pop-item"><span class="bf-ach-icon">${b.icon}</span><div><strong>${esc(b.title)}</strong><span>${esc(b.desc)}</span></div></div>`
+    ).join('');
+    el.classList.add('show');
+    setTimeout(() => el.classList.remove('show'), 3200);
+  }
+
+  function renderAchievementBadges() {
+    const tray = document.getElementById('bfAchTray');
+    if (!tray) return;
+    const unlocked = new Set(loadAchievements());
+    tray.innerHTML = ACHIEVEMENTS.map(a => {
+      const on = unlocked.has(a.id);
+      return `<button type="button" class="bf-ach-badge ${on ? 'unlocked' : 'locked'}" title="${esc(a.title)} — ${esc(a.desc)}" aria-label="${esc(a.title)}">${a.icon}</button>`;
+    }).join('');
+  }
+
+  function ensureFeedChrome() {
+    const header = document.querySelector('#vFeed .bf-header');
+    if (!header) return;
+    header.classList.add('bf-header-enhanced');
+    if (!document.getElementById('bfDailyGoal')) {
+      const goalWrap = document.createElement('div');
+      goalWrap.className = 'bf-daily-goal';
+      goalWrap.id = 'bfDailyGoal';
+      goalWrap.innerHTML = `
+      <div class="bf-daily-goal-label">
+        <span>Objectif du jour</span>
+        <span id="bfCounterGoal">0 / ${DAILY_GOAL}</span>
+      </div>
+      <div class="bf-daily-goal-track"><div class="bf-daily-goal-fill" id="bfDailyGoalFill"></div></div>`;
+      header.appendChild(goalWrap);
+
+      const achTray = document.createElement('div');
+      achTray.id = 'bfAchTray';
+      achTray.className = 'bf-ach-tray';
+      achTray.setAttribute('aria-label', 'Badges');
+      header.appendChild(achTray);
+    }
+
+    const streakEl = document.getElementById('bfStreak');
+    if (streakEl) streakEl.classList.add('bf-streak-fire');
+
+    let comboCanvas = document.getElementById('bfComboConfetti');
+    if (!comboCanvas) {
+      comboCanvas = document.createElement('canvas');
+      comboCanvas.id = 'bfComboConfetti';
+      comboCanvas.className = 'bf-combo-confetti-canvas';
+      document.getElementById('vFeed')?.appendChild(comboCanvas);
+    }
+    renderAchievementBadges();
+  }
+
   function updateHeader() {
     const counter = document.getElementById('bfCounter');
     const progressBar = document.getElementById('bfProgress');
+    const goalFill = document.getElementById('bfDailyGoalFill');
+    const counterGoal = document.getElementById('bfCounterGoal');
     const pointsEl = document.getElementById('bfPoints');
     const streakEl = document.getElementById('bfStreak');
     const comboEl = document.getElementById('bfComboBadge');
 
-    if (counter) counter.textContent = `${Math.min(dailyDone + 1, DAILY_GOAL)} / ${DAILY_GOAL}`;
-    if (progressBar) progressBar.style.width = `${Math.min(100, (dailyDone / DAILY_GOAL) * 100)}%`;
+    const pct = Math.min(100, (dailyDone / DAILY_GOAL) * 100);
+    if (counter) counter.textContent = `${dailyDone} / ${DAILY_GOAL}`;
+    if (counterGoal) counterGoal.textContent = `${dailyDone} / ${DAILY_GOAL}`;
+    if (progressBar) progressBar.style.width = `${pct}%`;
+    if (goalFill) {
+      goalFill.style.width = `${pct}%`;
+      goalFill.classList.toggle('bf-goal-complete', dailyDone >= DAILY_GOAL);
+    }
     if (pointsEl) pointsEl.textContent = `${points} pts`;
-    if (streakEl) streakEl.textContent = `🔥 ${streak}`;
+    if (streakEl) {
+      streakEl.innerHTML = `<span class="bf-fire-emoji" aria-hidden="true">🔥</span><span class="bf-streak-num">${streak}</span>`;
+      streakEl.classList.toggle('bf-streak-hot', streak >= 3);
+      streakEl.classList.toggle('bf-streak-mega', streak >= 10);
+    }
     if (comboEl) {
       comboEl.textContent = combo >= 2 ? `x${combo}` : '';
       comboEl.classList.toggle('visible', combo >= 2);
+      comboEl.classList.toggle('bf-combo-on-fire', combo >= COMBO_CONFETTI_AT);
     }
   }
 
   function registerCorrect(fromQuiz) {
     combo++;
     if (fromQuiz) quizCombo++;
+    playSound('ding');
     const bonus = 10 + Math.min(combo * 2, 24);
     points += bonus;
     dailyDone++;
-    updateStats();
+    const stats = loadStats();
+    stats.totalCards = (stats.totalCards || 0) + 1;
+    stats.points = points;
+    stats.dailyDone = dailyDone;
+    stats.streak = streak;
+    stats.lastDay = new Date().toDateString();
+    saveStats(stats);
     showCombo();
+    if (combo === COMBO_CONFETTI_AT) {
+      sessionCombo10Unlocked = true;
+      launchConfetti('bfComboConfetti');
+      showToast(`🎉 COMBO x${combo} !`);
+    }
+    checkAchievements();
     if (dailyDone === DAILY_GOAL) checkDailyGoal();
-    else if (dailyDone > DAILY_GOAL && dailyDone === DAILY_GOAL + 1) { /* already celebrated */ }
     updateHeader();
   }
 
@@ -773,6 +986,7 @@ const BrainFeed = (() => {
     if (card.srsKey) updateSRS(card, false);
     combo = 0;
     quizCombo = 0;
+    playSound('buzz');
     const removed = deck.splice(idx, 1)[0];
     deck.splice(Math.min(idx + 3, deck.length), 0, removed);
     updateStats();
@@ -849,6 +1063,7 @@ const BrainFeed = (() => {
     stats.dailyDone = dailyDone;
     stats.streak = streak;
     stats.lastDay = new Date().toDateString();
+    if (stats.totalCards == null) stats.totalCards = 0;
     saveStats(stats);
   }
 
@@ -892,8 +1107,8 @@ const BrainFeed = (() => {
     }
   }
 
-  function launchConfetti() {
-    const canvas = document.getElementById('bfConfetti');
+  function launchConfetti(canvasId = 'bfConfetti') {
+    const canvas = document.getElementById(canvasId);
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -952,7 +1167,8 @@ const BrainFeed = (() => {
       document.body.appendChild(cel);
     }
     cel.classList.add('show');
-    requestAnimationFrame(() => launchConfetti());
+    requestAnimationFrame(() => launchConfetti('bfConfetti'));
+    checkAchievements();
     points += 50;
     updateStats();
     updateHeader();
@@ -963,7 +1179,10 @@ const BrainFeed = (() => {
     idx = 0;
     combo = 0;
     quizCombo = 0;
+    sessionCombo10Unlocked = false;
+    ensureFeedChrome();
     renderSlides();
+    highlightActiveSlide();
     document.addEventListener('keydown', onKeyDown);
 
     const feed = document.getElementById('bfFeed');
