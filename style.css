@@ -133,6 +133,9 @@ input { font-family: inherit; font-size: inherit; }
 }
 .bottom-nav button:not(.active):hover { color: var(--text); }
 .bottom-nav button.active { color: var(--accent); }
+.bottom-nav button.active .nav-svg { animation: navPop .35s cubic-bezier(.34,1.56,.64,1); }
+@keyframes navPop { from { transform: scale(.7); opacity:.5; } to { transform: scale(1); opacity:1; } }
+@media (prefers-reduced-motion: reduce) { .bottom-nav button.active .nav-svg { animation: none; } }
 .nav-svg { width: 22px; height: 22px; stroke-width: 1.8; transition: all .25s; }
 .bottom-nav button.active .nav-svg { stroke: var(--accent); filter: drop-shadow(0 0 8px var(--accent-glow)); }
 
