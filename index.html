@@ -233,6 +233,12 @@
     <div id="annalesContent"></div>
   </div>
 
+  <!-- SUJETS EVC COMPLETS -->
+  <div class="view" id="vSujets">
+    <div class="page-hd"><h1>Sujets EVC</h1><p>Vrais sujets d'examen complets avec corrigé</p></div>
+    <div id="sujetsContent"></div>
+  </div>
+
   <!-- PROTOCOLES -->
   <div class="view" id="vProto">
     <div class="page-hd"><h1>Protocoles</h1><p>Tous les protocoles médicaux de référence</p></div>
@@ -304,9 +310,13 @@
     <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
     <span>Garde</span>
   </button>
-  <button data-v="annales" onclick="sw('annales')" title="Annales EVC">
+  <button data-v="annales" onclick="sw('annales')">
     <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
     <span>Annales</span>
+  </button>
+  <button data-v="sujets" onclick="sw('sujets')">
+    <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+    <span>Sujets</span>
   </button>
   <button data-v="proto" onclick="sw('proto')" title="Protocoles">
     <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
@@ -491,5 +501,6 @@
 <script src="guides-geriatrie-sociale.js"></script>
 <script src="guides-sommeil.js"></script>
 <script src="guides-plaies.js"></script>
+<script src="sujets-evc-complets.js"></script>
 </body>
 </html>

@@ -42,6 +42,7 @@ function sw(view){
   if(view==='garde')renderGarde();
   if(view==='dict')renderDict();
   if(view==='annales')renderAnnales();
+  if(view==='sujets')renderSujets();
   if(view==='proto')renderProto();
   if(view!=='quiz'&&typeof QuizMode!=='undefined')QuizMode.destroy();
   if(view==='set'){document.getElementById('pd').textContent=`${S.read.length} chapitre${S.read.length>1?'s':''} consulté${S.read.length>1?'s':''}`}
@@ -1157,6 +1158,33 @@ function toggleAnnAnswer(ansId,btn){
   }
 }
 window.toggleAnnAnswer=toggleAnnAnswer;
+
+/* ── SUJETS EVC COMPLETS ── */
+function renderSujets(){
+  const el=document.getElementById('sujetsContent');if(!el)return;
+  if(typeof SUJETS_EVC_COMPLETS==='undefined'||!SUJETS_EVC_COMPLETS.length){
+    el.innerHTML='<div class="empty"><div class="empty-icon">📋</div><div class="empty-text">Aucun sujet disponible</div></div>';return;
+  }
+  el.innerHTML=SUJETS_EVC_COMPLETS.map(s=>`
+    <div class="sujet-card">
+      <div class="sujet-header">
+        <span class="sujet-annee">${s.annee} — ${s.session||''}</span>
+        <span class="sujet-duree">⏱ ${s.duree}</span>
+        <span class="sujet-bareme">📊 ${s.bareme}</span>
+      </div>
+      <div class="sujet-consigne"><strong>Consigne :</strong> ${esc(s.consigne)}</div>
+      <div class="sujet-body">
+        <div class="sujet-text" id="sujet-text-${s.id}">${esc(s.sujet).replace(/\n/g,'<br>')}</div>
+        <button class="ann-reveal-btn" onclick="var e=document.getElementById('sujet-corrige-${s.id}');e.style.display=e.style.display==='none'?'block':'none';this.textContent=e.style.display==='none'?'Voir le corrigé':'Masquer le corrigé'">Voir le corrigé</button>
+        <div class="sujet-corrige" id="sujet-corrige-${s.id}" style="display:none">
+          <div class="sujet-corrige-title">📝 Corrigé détaillé</div>
+          <div class="sujet-corrige-text">${esc(s.corrigé).replace(/\n/g,'<br>')}</div>
+          ${s.juryTips?`<div class="ann-jury-tip">💡 Jury: ${esc(s.juryTips)}</div>`:''}
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
 
 /* ── ANNALES EVC PAR ANNÉE ── */
 function renderAnnales(){
