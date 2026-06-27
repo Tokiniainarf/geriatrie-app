@@ -24,6 +24,7 @@ const AppSearch = (() => {
     if (typeof FLASHCARDS_B !== 'undefined') allFlash.push(...FLASHCARDS_B);
     if (typeof FLASHCARDS_C !== 'undefined') allFlash.push(...FLASHCARDS_C);
     if (typeof FLASHCARDS_MEMOS !== 'undefined') allFlash.push(...FLASHCARDS_MEMOS);
+    if (typeof FLASHCARDS_EXPANDED !== 'undefined') allFlash.push(...FLASHCARDS_EXPANDED);
     allFlash.forEach(fc => {
       allContent.push({ type: 'flashcard', id: 'fc-' + fc.id, title: fc.question, text: fc.question + ' ' + fc.answer, link: () => sw('feed') });
     });

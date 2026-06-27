@@ -623,6 +623,26 @@ input[type="range"] { width: 100px; accent-color: var(--accent); }
 .ch-toolbar button svg { flex-shrink: 0; }
 .fab svg { display: block; }
 
+/* ── DAILY REVISION CARD ── */
+.daily-rev-card {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 20px; border-radius: var(--radius); margin-bottom: 16px;
+  background: linear-gradient(135deg, var(--accent), #0E7490);
+  color: #fff; cursor: pointer; transition: all .25s cubic-bezier(.16,1,.3,1);
+  box-shadow: 0 4px 20px rgba(8,145,178,.25);
+}
+.daily-rev-card:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(8,145,178,.35); }
+.daily-rev-card:active { transform: scale(.98); }
+.daily-rev-title { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+.daily-rev-sub { font-size: .78rem; opacity: .8; margin-bottom: 10px; }
+.daily-rev-progress { display: flex; align-items: center; gap: 8px; }
+.daily-rev-bar { flex: 1; height: 6px; background: rgba(255,255,255,.2); border-radius: 3px; overflow: hidden; }
+.daily-rev-fill { height: 100%; background: #34D399; border-radius: 3px; transition: width .5s cubic-bezier(.16,1,.3,1); }
+.daily-rev-count { font-size: .72rem; font-weight: 700; opacity: .8; }
+.daily-rev-right { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.daily-rev-streak { font-size: .82rem; font-weight: 700; background: rgba(255,255,255,.15); padding: 4px 12px; border-radius: 99px; }
+.daily-rev-icon { opacity: .7; }
+
 /* ═══════════════════════════════════════════════════
    BrainFeed — 9:16 TikTok-style vertical scroll
    Full-screen cards, snap scroll, addictive UX
@@ -840,7 +860,24 @@ input[type="range"] { width: 100px; accent-color: var(--accent); }
   background: var(--glass); border: 1px solid var(--glass-border); transition: all .2s; min-height: 48px;
 }
 .quiz-opt-btn:hover, .quiz-opt-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-.quiz-timer-bar { margin: 12px 0; }
+.quiz-timer-bar { margin: 12px 0; display: flex; justify-content: center; }
+.quiz-timer-wrap {
+  position: relative; width: 72px; height: 72px;
+  display: flex; align-items: center; justify-content: center;
+}
+.quiz-timer-ring { width: 72px; height: 72px; transform: rotate(-90deg); }
+.quiz-timer-ring-bg {
+  fill: none; stroke: var(--glass-border); stroke-width: 3;
+}
+.quiz-timer-ring-progress {
+  fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round;
+  transition: stroke-dashoffset .95s linear, stroke .3s;
+}
+.quiz-timer-ring-urgent { stroke: var(--red); }
+.quiz-timer-center {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-size: .95rem; font-weight: 700; padding: 0; border: none; background: transparent;
+}
 .quiz-timer {
   font-size: 1.2rem; font-weight: 700; padding: 6px 16px; border-radius: 99px;
   background: var(--glass); border: 1px solid var(--glass-border);
@@ -852,8 +889,22 @@ input[type="range"] { width: 100px; accent-color: var(--accent); }
 .quiz-question-card {
   background: var(--bg-elevated); border: 1px solid var(--glass-border); border-radius: var(--radius);
   padding: 24px; margin-top: 16px;
-  animation: fadeUp .35s cubic-bezier(.16,1,.3,1);
 }
+.quiz-question-card.quiz-card-slide {
+  transform: translateX(28px);
+  opacity: 0;
+  transition: transform .42s cubic-bezier(.16,1,.3,1), opacity .35s ease;
+}
+.quiz-question-card.quiz-card-slide.quiz-card-visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+.quiz-diff {
+  font-size: .65rem; font-weight: 700; padding: 2px 8px; border-radius: 99px;
+}
+.quiz-diff-easy { background: rgba(5,150,105,.12); color: var(--green); }
+.quiz-diff-medium { background: rgba(2,132,199,.12); color: var(--blue); }
+.quiz-diff-hard { background: rgba(220,38,38,.12); color: var(--red); }
 .quiz-q-header { display: flex; gap: 8px; align-items: center; margin-bottom: 16px; flex-wrap: wrap; }
 .quiz-progress { font-size: .78rem; font-weight: 600; color: var(--text3); }
 .quiz-rang { font-size: .68rem; font-weight: 700; padding: 2px 8px; border-radius: 99px; }
@@ -889,7 +940,21 @@ input[type="range"] { width: 100px; accent-color: var(--accent); }
 .quiz-results-bar { height: 8px; background: var(--glass-border); border-radius: 4px; overflow: hidden; margin-bottom: 16px; }
 .quiz-results-fill { height: 100%; background: linear-gradient(90deg, var(--accent), #34D399); border-radius: 4px; transition: width .6s; }
 .quiz-results-details { font-size: .92rem; color: var(--text2); margin-bottom: 24px; }
-.quiz-results-actions { display: flex; gap: 12px; justify-content: center; }
+.quiz-results-chapters { text-align: left; margin-bottom: 24px; max-width: 420px; margin-left: auto; margin-right: auto; }
+.quiz-results-chapters-title { font-size: .82rem; font-weight: 700; color: var(--text2); margin-bottom: 12px; }
+.quiz-ch-list { display: flex; flex-direction: column; gap: 10px; }
+.quiz-ch-row { padding: 10px 12px; border-radius: var(--radius-sm); background: var(--bg-card); border: 1px solid var(--glass-border); }
+.quiz-ch-row-weak { border-color: rgba(220,38,38,.35); background: rgba(220,38,38,.04); }
+.quiz-ch-row-head { display: flex; justify-content: space-between; gap: 8px; font-size: .78rem; margin-bottom: 6px; }
+.quiz-ch-name { font-weight: 600; color: var(--text); }
+.quiz-ch-pct { color: var(--text3); font-weight: 600; }
+.quiz-ch-bar { height: 5px; background: var(--glass-border); border-radius: 3px; overflow: hidden; }
+.quiz-ch-fill { height: 100%; background: linear-gradient(90deg, var(--accent), #34D399); border-radius: 3px; transition: width .5s ease; }
+.quiz-ch-row-weak .quiz-ch-fill { background: linear-gradient(90deg, var(--red), #F87171); }
+.quiz-results-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.quiz-btn-review { background: rgba(220,38,38,.08); border-color: rgba(220,38,38,.35); color: var(--red); }
+.quiz-btn-review:hover { background: rgba(220,38,38,.14); }
+.quiz-review-block { margin-top: 0; }
 
 /* ═══════════════════════════════════════════════════
    DASHBOARD — Progress tracking
@@ -904,9 +969,62 @@ input[type="range"] { width: 100px; accent-color: var(--accent); }
 .dash-card-icon { font-size: 1.5rem; margin-bottom: 4px; }
 .dash-card-value { font-size: 1.4rem; font-weight: 800; color: var(--accent); }
 .dash-card-label { font-size: .72rem; color: var(--text3); margin-top: 2px; }
+.dash-card-goal { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.dash-counter { font-variant-numeric: tabular-nums; }
+
+/* Daily goal ring */
+.dash-goal-ring {
+  position: relative; width: 88px; height: 88px; margin: 0 auto 4px;
+}
+.dash-goal-ring-svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.dash-goal-ring-track {
+  fill: none; stroke: var(--glass-border); stroke-width: 8;
+}
+.dash-goal-ring-fill {
+  fill: none; stroke: var(--accent-cta); stroke-width: 8; stroke-linecap: round;
+  stroke-dasharray: 283; stroke-dashoffset: 283;
+  transition: stroke-dashoffset 1.1s cubic-bezier(.16,1,.3,1);
+  filter: drop-shadow(0 0 6px rgba(5, 150, 105, .35));
+}
+.dash-goal-ring-center {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-size: .95rem; font-weight: 800; color: var(--accent); gap: 1px;
+}
+.dash-goal-slash { font-weight: 600; color: var(--text3); font-size: .82rem; }
 
 .dash-section { margin-bottom: 20px; }
 .dash-section h2 { font-size: 1rem; font-weight: 700; margin-bottom: 12px; }
+
+/* SRS donut (CSS conic-gradient) */
+.dash-srs-donut-row {
+  display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+}
+.dash-donut {
+  --donut-p1: 0;
+  --donut-p2: 0;
+  width: 120px; height: 120px; border-radius: 50%; flex-shrink: 0;
+  background: conic-gradient(
+    var(--green) 0 calc(var(--donut-p1) * 1%),
+    var(--orange) calc(var(--donut-p1) * 1%) calc(var(--donut-p2) * 1%),
+    var(--accent) calc(var(--donut-p2) * 1%) 100%
+  );
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--shadow-card);
+  animation: dashDonutIn .8s cubic-bezier(.16,1,.3,1);
+}
+@keyframes dashDonutIn {
+  from { transform: scale(.85); opacity: .5; }
+  to { transform: scale(1); opacity: 1; }
+}
+.dash-donut-hole {
+  width: 76px; height: 76px; border-radius: 50%;
+  background: var(--bg-base); border: 1px solid var(--glass-border);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  line-height: 1.1;
+}
+.dash-donut-total { font-size: 1.15rem; font-weight: 800; color: var(--text); }
+.dash-donut-sub { font-size: .62rem; color: var(--text3); text-transform: uppercase; letter-spacing: .04em; }
+.dash-srs-legend-col { flex: 1; min-width: 180px; display: flex; flex-direction: column; gap: 8px; }
 
 .dash-srs-bar { display: flex; height: 12px; border-radius: 6px; overflow: hidden; background: var(--glass-border); margin-bottom: 8px; }
 .dash-srs-mastered { background: var(--green); }
@@ -928,15 +1046,54 @@ input[type="range"] { width: 100px; accent-color: var(--accent); }
 }
 .dash-ch-bar:hover { border-color: var(--accent); }
 .dash-ch-num { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .78rem; font-weight: 700; flex-shrink: 0; }
-.dash-ch-title { flex: 1; font-size: .85rem; font-weight: 500; }
+.dash-ch-body { flex: 1; min-width: 0; }
+.dash-ch-title-row { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
+.dash-ch-title { flex: 1; font-size: .85rem; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dash-ch-pct { font-size: .75rem; font-weight: 700; color: var(--text2); flex-shrink: 0; }
+.dash-ch-progress {
+  height: 8px; border-radius: 99px; background: var(--glass-border); overflow: hidden;
+}
+.dash-ch-progress-fill {
+  height: 100%; border-radius: 99px; width: 0;
+  transition: width .85s cubic-bezier(.16,1,.3,1);
+}
+.dash-ch-tone-high { background: linear-gradient(90deg, var(--green), #34D399); }
+.dash-ch-tone-mid { background: linear-gradient(90deg, var(--orange), #FBBF24); }
+.dash-ch-tone-low { background: linear-gradient(90deg, var(--accent), #22D3EE); }
+.dash-ch-tone-none { background: var(--text3); opacity: .35; }
+.dash-ch-summary { font-size: .8rem; color: var(--text2); margin-top: 10px; }
 .dash-ch-status { font-size: 1rem; }
 .dash-ch-done { color: var(--green); }
+
+/* Streak calendar (30-day grid) */
+.dash-streak-cal {
+  display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px;
+  padding: 12px; background: var(--bg-card); border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+}
+.dash-streak-day {
+  aspect-ratio: 1; border-radius: 4px; background: var(--glass-border);
+  opacity: .45; transition: transform .2s, opacity .2s;
+}
+.dash-streak-day.dash-streak-active {
+  opacity: 1; background: linear-gradient(135deg, #F97316, #FBBF24);
+  box-shadow: 0 0 0 1px rgba(249, 115, 22, .25);
+}
+.dash-streak-day.dash-streak-today {
+  outline: 2px solid var(--accent); outline-offset: 1px;
+}
+.dash-streak-day:hover { transform: scale(1.15); }
 
 .dash-heat-row { display: flex; gap: 8px; }
 .dash-heat-cell {
   flex: 1; text-align: center; padding: 8px 4px; border-radius: var(--radius-sm);
   background: var(--bg-card); border: 1px solid var(--glass-border);
+  transition: background .25s, border-color .25s;
 }
+.dash-heat-l1 { background: rgba(8, 145, 178, .12); border-color: rgba(8, 145, 178, .25); }
+.dash-heat-l2 { background: rgba(8, 145, 178, .22); border-color: rgba(8, 145, 178, .4); }
+.dash-heat-l3 { background: rgba(5, 150, 105, .25); border-color: var(--green); }
+.dash-heat-today { box-shadow: 0 0 0 2px var(--accent-soft); }
 .dash-heat-day { display: block; font-size: .65rem; color: var(--text3); text-transform: uppercase; }
 .dash-heat-num { display: block; font-size: 1.1rem; font-weight: 700; }
 
@@ -949,6 +1106,11 @@ input[type="range"] { width: 100px; accent-color: var(--accent); }
 .dash-fav-item:hover { border-color: var(--accent); }
 .dash-fav-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 .dash-empty { font-size: .88rem; color: var(--text3); text-align: center; padding: 16px; }
+@media (prefers-reduced-motion: reduce) {
+  .dash-donut { animation: none; }
+  .dash-goal-ring-fill, .dash-ch-progress-fill { transition: none; }
+  .dash-streak-day:hover { transform: none; }
+}
 
 /* ═══════════════════════════════════════════════════
    FULL-TEXT SEARCH

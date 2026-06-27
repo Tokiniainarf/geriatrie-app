@@ -56,6 +56,7 @@ const BrainFeed = (() => {
     if (typeof FLASHCARDS_B !== 'undefined') allFlash.push(...FLASHCARDS_B);
     if (typeof FLASHCARDS_C !== 'undefined') allFlash.push(...FLASHCARDS_C);
     if (typeof FLASHCARDS_MEMOS !== 'undefined') allFlash.push(...FLASHCARDS_MEMOS);
+    if (typeof FLASHCARDS_EXPANDED !== 'undefined') allFlash.push(...FLASHCARDS_EXPANDED);
 
     allFlash.forEach(fc => {
       const srsEntry = srs[fc.id] || { ease: 2.5, interval: 0, nextReview: 0 };
@@ -86,7 +87,7 @@ const BrainFeed = (() => {
     allAnnales.forEach(a => {
         cards.push({
           type: 'case', id: 'ann-' + a.id, chapter: a.chapter, rang: a.difficulty,
-          question: a.title || a.cas || '',
+          question: a.cas || a.title || '',
           answer: a.correction || a.reponse || '',
           tags: ['Cas clinique', a.chapter || ''], priority: 0, srsKey: null, srs: null
         });

@@ -42,6 +42,44 @@ function sw(view){
   if(view!=='quiz'&&typeof QuizMode!=='undefined')QuizMode.destroy();
   if(view==='set'){document.getElementById('pd').textContent=`${S.read.length} chapitre${S.read.length>1?'s':''} consulté${S.read.length>1?'s':''}`}
 }
+/* ── DAILY REVISION CARD ── */
+function renderDailyRev(){
+  const el=document.getElementById('recent');if(!el)return;
+  // Count SRS due cards
+  let dueCount=0;
+  try{
+    const srs=JSON.parse(localStorage.getItem('bf_srs'))||{};
+    const now=Date.now();
+    Object.values(srs).forEach(e=>{if(e.nextReview<=now)dueCount++});
+  }catch{}
+  const stats=loadBfStats();
+  const streak=stats.streak||0;
+  const dailyDone=stats.dailyDone||0;
+  const goal=50;
+  const pct=Math.min(100,Math.round((dailyDone/goal)*100));
+  el.style.display='block';
+  el.innerHTML=`
+    <div class="daily-rev-card" onclick="sw('feed')">
+      <div class="daily-rev-left">
+        <div class="daily-rev-title">Révision du jour</div>
+        <div class="daily-rev-sub">${dueCount>0?dueCount+' cartes à révoir':'Tout est à jour !'}</div>
+        <div class="daily-rev-progress">
+          <div class="daily-rev-bar"><div class="daily-rev-fill" style="width:${pct}%"></div></div>
+          <span class="daily-rev-count">${dailyDone}/${goal}</span>
+        </div>
+      </div>
+      <div class="daily-rev-right">
+        <div class="daily-rev-streak">${streak>0?'Jour '+streak:'Commencer'}</div>
+        <div class="daily-rev-icon">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+      </div>
+    </div>`;
+}
+function loadBfStats(){
+  try{return JSON.parse(localStorage.getItem('bf_stats'))||{streak:0,points:0,lastDay:'',dailyDone:0}}catch{return{streak:0,points:0,lastDay:'',dailyDone:0}}
+}
+
 function goHome(){sw('home');S.ch=null;renderHome()}
 
 /* ── THEME ── */
@@ -70,6 +108,8 @@ function renderHome(){
     <div class="stat"><span class="stat-num">${totalItems}</span><span class="stat-label">ITEMs</span></div>
     <div class="stat"><span class="stat-num">${S.read.length}</span><span class="stat-label">lus</span></div>
     <div class="stat stat-click" role="button" tabindex="0" onclick="sw('fav')" onkeydown="if(event.key==='Enter')sw('fav')"><span class="stat-num" id="statFav">${S.bm.length}</span><span class="stat-label">fav.</span></div>`;
+  // Daily revision card
+  renderDailyRev();
   // Render chapters
   APP_DATA.chapters.forEach(ch=>{
     const rd=S.read.includes(ch.id),bm=S.bm.includes(ch.id);
