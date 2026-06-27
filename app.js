@@ -81,6 +81,77 @@ function loadBfStats(){
   try{return JSON.parse(localStorage.getItem('bf_stats'))||{streak:0,points:0,lastDay:'',dailyDone:0}}catch{return{streak:0,points:0,lastDay:'',dailyDone:0}}
 }
 
+/* ── NOTES PERSONNELLES ── */
+function openNotes(chId){
+  const key='grd_notes_'+chId;
+  const existing=localStorage.getItem(key)||'';
+  const ch=APP_DATA.chapters.find(c=>c.id===chId);
+  const title=ch?ch.t:'Notes';
+  let modal=document.getElementById('notesModal');
+  if(!modal){
+    modal=document.createElement('div');
+    modal.id='notesModal';
+    modal.className='notes-modal';
+    modal.onclick=function(e){if(e.target===this)closeNotes()};
+    document.body.appendChild(modal);
+  }
+  const saved=localStorage.getItem(key+'_ts');
+  const savedText=saved?'Dernière sauvegarde: '+new Date(parseInt(saved)).toLocaleString('fr'):'';
+  modal.innerHTML=`
+    <div class="notes-pan">
+      <div class="notes-hdr">
+        <h3>📝 ${esc(title)}</h3>
+        <div class="notes-actions">
+          <span class="notes-saved">${savedText}</span>
+          <button onclick="closeNotes()">Fermer</button>
+        </div>
+      </div>
+      <textarea class="notes-textarea" id="notesText" placeholder="Vos notes personnelles pour ce chapitre...">${esc(existing)}</textarea>
+      <div class="notes-footer">
+        <span class="notes-count" id="notesCount">${existing.split(/\s+/).filter(Boolean).length} mots</span>
+        <button class="notes-save-btn" onclick="saveNotes('${chId}')">Sauvegarder</button>
+      </div>
+    </div>`;
+  modal.classList.add('open');
+  const ta=document.getElementById('notesText');
+  ta.focus();
+  ta.addEventListener('input',()=>{
+    const words=ta.value.split(/\s+/).filter(Boolean).length;
+    document.getElementById('notesCount').textContent=words+' mots';
+  });
+  // Auto-save every 5 seconds
+  window._notesAutoSave=setInterval(()=>{
+    const val=ta.value;
+    localStorage.setItem(key,val);
+    localStorage.setItem(key+'_ts',Date.now().toString());
+  },5000);
+}
+function saveNotes(chId){
+  const ta=document.getElementById('notesText');
+  if(!ta)return;
+  localStorage.setItem('grd_notes_'+chId,ta.value);
+  localStorage.setItem('grd_notes_'+chId+'_ts',Date.now().toString());
+  showToast('📝 Notes sauvegardées');
+}
+function closeNotes(){
+  const modal=document.getElementById('notesModal');
+  if(modal)modal.classList.remove('open');
+  if(window._notesAutoSave)clearInterval(window._notesAutoSave);
+}
+function getAllNotes(){
+  const notes=[];
+  for(let i=0;i<localStorage.length;i++){
+    const k=localStorage.key(i);
+    if(k&&k.startsWith('grd_notes_')&&!k.endsWith('_ts')){
+      const chId=k.replace('grd_notes_','');
+      const ch=APP_DATA.chapters.find(c=>c.id===chId);
+      const ts=localStorage.getItem(k+'_ts');
+      notes.push({chId,title:ch?ch.t:chId,content:localStorage.getItem(k),timestamp:ts?parseInt(ts):0});
+    }
+  }
+  return notes.sort((a,b)=>b.timestamp-a.timestamp);
+}
+
 function goHome(){sw('home');S.ch=null;renderHome()}
 
 /* ── THEME ── */
@@ -191,7 +262,7 @@ function showCh(id){
   const tags=ch.items.map(i=>`<span class="tag">${i}</span>`).join('');
   document.getElementById('chTags').innerHTML=tags+(S.read.includes(id)?'<span class="tag tag-read">Consulté</span>':'');
   const bmOn=S.bm.includes(id);
-  document.getElementById('chToolbar').innerHTML=`<button onclick="goHome()">Retour</button><button onclick="quickBm('${id}')">${bmOn?BM_SVG.on+' Retirer':BM_SVG.off+' Favori'}</button>`;
+  document.getElementById('chToolbar').innerHTML=`<button onclick="goHome()">Retour</button><button onclick="quickBm('${id}')">${bmOn?BM_SVG.on+' Retirer':BM_SVG.off+' Favori'}</button><button onclick="openNotes('${id}')">📝 Notes</button>`;
   renderChapterContent();sw('ch');
 }
 function renderChapterContent(){

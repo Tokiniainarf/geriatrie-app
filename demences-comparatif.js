@@ -1,0 +1,28 @@
+// Tableau comparatif des démences — Pour l'examen
+const DEMENCES_COMPARATIF = [
+  { type: 'Alzheimer', prevalence: '60-70%',
+    debut: 'Insidieux, progressif', memoire: 'Atteinte précoce (hippocampique)',
+    autres: 'Aphasie, apraxie, agnosie (stade avancé)', imagerie: 'Atrophie hippocampique bilatérale',
+    biomarkers: 'LCS : Aβ42↓, tau↑, p-tau↑', traitement: 'Inhibiteurs cholinestérasiques (donépézil, rivastigmine)',
+    pronostic: 'Progressif, 8-12 ans après diagnostic' },
+  { type: 'Corps de Lewy', prevalence: '10-15%',
+    debut: 'Subaigu, fluctuations', memoire: 'Variable (moins marquée qu\'Alzheimer)',
+    autres: 'Hallucinations visuelles + parkinson + troubles du sommeil paradoxal', imagerie: 'DAT-Scan anormal',
+    biomarkers: 'LCS : α-synucléine', traitement: 'Inhibiteurs cholinestérasiques (MEILLEURE réponse qu\'Alzheimer)',
+    pronostic: '6-8 ans. NEUROLEPTIQUES CONTRE-INDIQUÉS' },
+  { type: 'Fronto-temporale', prevalence: '5-10%',
+    debut: 'Précoce (50-60 ans)', memoire: 'Préservée initialement',
+    autres: 'Changement comportemental, désinhibition, apathie, écholalie', imagerie: 'Atrophie frontale/temporale',
+    biomarkers: 'LCS : tau↑, Aβ42 normal', traitement: 'ISRS (comportement), pas d\'inhibiteurs cholinestérasiques',
+    pronostic: '6-8 ans' },
+  { type: 'Vasculaire', prevalence: '15-20%',
+    debut: 'En marches (post-AVC)', memoire: 'Variable (exécutive > mémoire)',
+    autres: 'Déficits focaux, marche à petits pas, dysexécutive', imagerie: 'Lacunes, leucoaraïose, infarctus',
+    biomarkers: 'N/A', traitement: 'Prévention cardiovasculaire (HTA, diabète, statines)',
+    pronostic: 'Variable, dépend des facteurs de risque' },
+  { type: 'Mixte', prevalence: '10-15%',
+    debut: 'Variable', memoire: 'Atteinte mixte',
+    autres: 'Association Alzheimer + vasculaire (fréquent après 80 ans)', imagerie: 'Atrophie + vasculaire',
+    biomarkers: 'Mélange', traitement: 'Combiné (cholinestérasiques + prévention vasculaire)',
+    pronostic: 'Plus mauvais que Alzheimer seul' }
+];
