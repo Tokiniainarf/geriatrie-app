@@ -183,7 +183,7 @@ const Dashboard = (() => {
   }
 
   function buildChapterBars(read, srs, allFlash) {
-    if (typeof APP_DATA === 'undefined') return '<p class="dash-empty">Aucune donnée</p>';
+    if (typeof APP_DATA === 'undefined') return '<div class="dash-empty"><span class="dash-empty-icon">📚</span><span>Aucune donnée de chapitre</span></div>';
     return APP_DATA.chapters.map(ch => {
       const pct = chapterCompletionPct(ch.id, read, srs, allFlash);
       const tone = chapterBarTone(pct);
@@ -288,7 +288,7 @@ const Dashboard = (() => {
   }
 
   function buildFavList(bm) {
-    if (!bm.length) return '<p class="dash-empty">Aucun favori</p>';
+    if (!bm.length) return '<div class="dash-empty"><span class="dash-empty-icon">⭐</span><span>Aucun favori pour l\'instant</span><span class="dash-empty-hint">Touchez l\'étoile sur un chapitre pour l\'ajouter ici</span></div>';
     if (typeof APP_DATA === 'undefined') return '';
     return bm.map(id => {
       const ch = APP_DATA.chapters.find(c => c.id === id);

@@ -1971,9 +1971,12 @@ input[type="range"] { width: 100px; accent-color: var(--accent); }
   background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: var(--radius-sm);
   cursor: pointer; font-size: .85rem; transition: all .2s;
 }
-.dash-fav-item:hover { border-color: var(--accent); }
+.dash-fav-item:hover { border-color: var(--accent); transform: translateX(4px); }
 .dash-fav-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-.dash-empty { font-size: .88rem; color: var(--text3); text-align: center; padding: 16px; }
+.dash-empty { font-size: .88rem; color: var(--text3); text-align: center; padding: 24px 16px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.dash-empty-icon { font-size: 2rem; opacity: .55; line-height: 1; animation: emptyBob 3s ease-in-out infinite; filter: drop-shadow(0 0 6px rgba(8,145,178,.12)); }
+@media (prefers-reduced-motion: reduce) { .dash-empty-icon { animation: none; } }
+.dash-empty-hint { font-size: .78rem; color: var(--text3); opacity: .65; }
 @media (prefers-reduced-motion: reduce) {
   .dash-donut { animation: none; }
   .dash-goal-ring-fill, .dash-ch-progress-fill { transition: none; }
@@ -2424,7 +2427,7 @@ button, input, a {
 .proto-card { transition: border-color .2s, box-shadow .2s; }
 .proto-card:hover { box-shadow: var(--shadow-card); }
 
-.dash-empty { text-align: center; color: var(--text3); padding: 24px; font-size: .9rem; }
+/* .dash-empty consolidated above (line 1976) */
 
 @media (prefers-reduced-motion: reduce) {
   .ch-row-enter, .item-card-enter, .hero-card, .ann-a-text.ann-a-visible { animation: none; }
