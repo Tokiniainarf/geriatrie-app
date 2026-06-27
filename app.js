@@ -186,10 +186,13 @@ function renderHome(){
   // Daily revision card
   renderDailyRev();
   // Render chapters
+  let chIdx=0;
   APP_DATA.chapters.forEach(ch=>{
     const rd=S.read.includes(ch.id),bm=S.bm.includes(ch.id);
     const pct=rd?100:0;
-    const el=document.createElement('div');el.className='ch-row';
+    const el=document.createElement('div');el.className='ch-row ch-row-enter';
+    el.style.animationDelay=(chIdx*0.04)+'s';
+    chIdx++;
     el.onclick=()=>showCh(ch.id);
     el.innerHTML=`<div class="ch-row-num" style="background:${CH_COLORS[ch.id]}15;color:${CH_COLORS[ch.id]}">${ch.id.replace('ch','')}</div>
       <div class="ch-row-body">
@@ -231,7 +234,7 @@ function onSearch(q){
 /* ── FAVORIS ── */
 function renderFav(){
   const list=document.getElementById('favList');if(!list)return;
-  if(!S.bm.length){list.innerHTML='<div class="empty"><div class="empty-icon">⭐</div><div class="empty-text">Aucun favori pour l\'instant</div><div class="empty-hint">Appuyez sur l\'étoile d\'un chapitre pour le sauvegarder</div></div>';return}
+  if(!S.bm.length){list.innerHTML='<div class="empty"><div class="empty-icon">⭐</div><div class="empty-text">Aucun favori pour l\'instant</div><div class="empty-hint">Appuyez sur l\'étoile d\'un chapitre pour le sauvegarder</div><button type="button" class="empty-cta" onclick="sw(\'home\')">Parcourir les chapitres</button></div>';return}
   list.innerHTML='';
   S.bm.forEach(id=>{
     const ch=APP_DATA.chapters.find(c=>c.id===id);if(!ch)return;
@@ -863,6 +866,7 @@ function renderSynthChapterCard(card,idx){
             <div class="synth-card-title">${esc(card.title)}</div>
             <div class="synth-card-meta">
               <span>${nSec} section${nSec>1?'s':''}</span>
+              ${mastered?'<span class="synth-mastered-pill">✓ Maîtrisé</span>':''}
               ${synthItemBadges(chId)?`<span class="synth-card-items">${synthItemBadges(chId)}</span>`:''}
             </div>
           </div>
@@ -999,32 +1003,118 @@ window.synthPrint=synthPrint;
 function shuffleFlash(){flashDeck=filterDeck();for(let i=flashDeck.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[flashDeck[i],flashDeck[j]]=[flashDeck[j],flashDeck[i]]}flashIdx=0;renderFlashcard()}
 function filterDeck(){if(typeof FLASHCARDS==='undefined')return[];return flashFilter==='all'?[...FLASHCARDS]:FLASHCARDS.filter(c=>c.rang===flashFilter)}
 function filterFlash(rang,btn){flashFilter=rang;document.querySelectorAll('.flash-filt').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');shuffleFlash()}
+function flashFilterLabel(){return flashFilter==='all'?'Toutes les cartes':'Rang '+flashFilter+' uniquement'}
+function ensureFlashEvalBar(){
+  let bar=document.getElementById('flashEval');
+  if(bar)return bar;
+  const nav=document.querySelector('.flash-nav');
+  if(!nav)return null;
+  bar=document.createElement('div');
+  bar.id='flashEval';
+  bar.className='flash-eval rev-eval rev-eval-hidden';
+  bar.innerHTML='<button type="button" class="rev-eval-btn rev-eval-dont flash-eval-btn" onclick="flashSelfEval(\'dont\')">Je ne savais pas</button><button type="button" class="rev-eval-btn rev-eval-review flash-eval-btn" onclick="flashSelfEval(\'review\')">À revoir</button><button type="button" class="rev-eval-btn rev-eval-know flash-eval-btn" onclick="flashSelfEval(\'know\')">Je savais</button>';
+  nav.parentNode.insertBefore(bar,nav);
+  return bar;
+}
+function updateFlashEvalVisibility(){
+  const card=document.getElementById('flashCard');
+  const bar=document.getElementById('flashEval');
+  if(!bar||!card)return;
+  const show=card.classList.contains('flipped')&&flashDeck.length>0;
+  bar.classList.toggle('rev-eval-hidden',!show);
+}
+function bindFlashCardFlip(){
+  const card=document.getElementById('flashCard');
+  if(!card||card.dataset.flashBound)return;
+  card.dataset.flashBound='1';
+  card.addEventListener('click',e=>{
+    if(e.target.closest('.flash-eval-btn'))return;
+    setTimeout(updateFlashEvalVisibility,320);
+  });
+}
+function flashUpdateSRS(cardId,correct){
+  if(!cardId)return;
+  try{
+    const srs=JSON.parse(localStorage.getItem('bf_srs'))||{};
+    const entry=srs[cardId]||{ease:2.5,interval:0,nextReview:0};
+    if(correct){
+      entry.interval=entry.interval===0?1:Math.round(entry.interval*entry.ease);
+      entry.ease=Math.max(1.3,entry.ease+0.1);
+    }else{
+      entry.interval=0;
+      entry.ease=Math.max(1.3,entry.ease-0.2);
+    }
+    entry.nextReview=Date.now()+entry.interval*86400000;
+    srs[cardId]=entry;
+    localStorage.setItem('bf_srs',JSON.stringify(srs));
+  }catch(e){}
+}
+function flashSelfEval(mode){
+  if(!flashDeck.length)return;
+  const c=flashDeck[flashIdx];
+  if(c&&c.id){
+    if(mode==='know')flashUpdateSRS(c.id,true);
+    else flashUpdateSRS(c.id,false);
+  }
+  const labels={know:'Bien joué !',review:'Noté pour révision',dont:'On révise ensemble'};
+  toast(labels[mode]||'');
+  nextFlash();
+}
 function renderFlashcard(){
   const card=document.getElementById('flashCard');
   if(!card)return;
+  ensureFlashEvalBar();
+  bindFlashCardFlip();
   card.classList.remove('flipped');
+  updateFlashEvalVisibility();
+  let sess=document.getElementById('flashSession');
+  if(!sess){
+    const hdr=document.querySelector('.flash-hdr');
+    if(hdr){
+      sess=document.createElement('div');
+      sess.id='flashSession';
+      sess.className='flash-session-label';
+      const stats=hdr.querySelector('.flash-stats');
+      if(stats)hdr.insertBefore(sess,stats);
+      else hdr.appendChild(sess);
+    }
+  }
+  if(sess)sess.textContent=flashFilterLabel();
   if(!flashDeck.length){
+    card.classList.add('flash-empty-state');
     document.getElementById('flashCh').textContent='';
     document.getElementById('flashRang').textContent='';
-    document.getElementById('flashQ').innerHTML='<div class="empty"><div class="empty-icon">🎴</div><div class="empty-text">Aucune carte pour ce filtre</div></div>';
-    document.getElementById('flashA').textContent='Essayez le filtre « Tous » pour voir toutes les cartes.';
+    const fq=document.getElementById('flashQ');
+    if(fq){
+      fq.innerHTML='';
+      const empty=document.createElement('div');
+      empty.className='flash-empty-inner';
+      empty.innerHTML='<div class="empty-icon">🎴</div><div class="empty-text">Aucune carte pour ce filtre</div><div class="empty-hint">Essayez « Tous » ou un autre rang</div>';
+      fq.appendChild(empty);
+    }
+    document.getElementById('flashA').textContent='';
     document.getElementById('flashTags').innerHTML='';
     document.getElementById('flashProg').textContent='0 / 0';
     return;
   }
+  card.classList.remove('flash-empty-state');
   const c=flashDeck[flashIdx];
   const chName=APP_DATA.chapters.find(ch=>ch.id===c.chapter)?.t||'';
   document.getElementById('flashCh').textContent=chName;
   const r=document.getElementById('flashRang');
   r.textContent='Rang '+c.rang;
   r.className='flash-rang '+(c.rang==='A'?'rang-a':'rang-b');
-  document.getElementById('flashQ').textContent=c.question;
+  const fq=document.getElementById('flashQ');
+  if(fq)fq.textContent=c.question;
   document.getElementById('flashA').textContent=c.answer;
-  document.getElementById('flashTags').innerHTML=(c.tags||[]).map(t=>`<span class="tag">${t}</span>`).join('');
-  document.getElementById('flashProg').textContent=`${flashIdx+1} / ${flashDeck.length}`;
+  document.getElementById('flashTags').innerHTML=(c.tags||[]).map(t=>'<span class="tag">'+t+'</span>').join('');
+  document.getElementById('flashProg').textContent=(flashIdx+1)+' / '+flashDeck.length;
+  card.classList.toggle('rev-rang-a',c.rang==='A');
+  card.classList.toggle('rev-rang-b',c.rang==='B');
 }
 function nextFlash(){if(!flashDeck.length)return;flashIdx=(flashIdx+1)%flashDeck.length;renderFlashcard()}
 function prevFlash(){if(!flashDeck.length)return;flashIdx=(flashIdx-1+flashDeck.length)%flashDeck.length;renderFlashcard()}
+window.flashSelfEval=flashSelfEval;
 
 /* ── FICHES DE GARDE ── */
 function renderGarde(){
@@ -1046,7 +1136,27 @@ function renderGarde(){
         ${f.alert?`<div class="garde-alert" role="note">${esc(f.alert)}</div>`:''}
       </div>
     </div>`).join('')+'</div>';
+  const firstGarde=el.querySelector('.garde-card');
+  if(firstGarde)firstGarde.classList.add('open');
 }
+
+function toggleAnnAnswer(ansId,btn){
+  const e=document.getElementById(ansId);
+  if(!e||!btn)return;
+  const hidden=e.style.display==='none'||!e.classList.contains('ann-a-visible');
+  if(hidden){
+    e.style.display='block';
+    e.classList.add('ann-a-visible');
+    btn.textContent='Masquer';
+    btn.classList.add('ann-reveal-open');
+  }else{
+    e.style.display='none';
+    e.classList.remove('ann-a-visible');
+    btn.textContent='Voir réponse';
+    btn.classList.remove('ann-reveal-open');
+  }
+}
+window.toggleAnnAnswer=toggleAnnAnswer;
 
 /* ── ANNALES EVC PAR ANNÉE ── */
 function renderAnnales(){
@@ -1095,9 +1205,14 @@ function renderAnnalesList(){
   const groups={};
   list.forEach(a=>{const y=a.year||'Sans année';if(!groups[y])groups[y]=[];groups[y].push(a)});
   const sortedKeys=Object.keys(groups).sort((a,b)=>b-a);
-  el.innerHTML=sortedKeys.map(year=>{
+  if(!sortedKeys.length){
+    el.innerHTML='<div class="empty"><div class="empty-icon">📋</div><div class="empty-text">Aucun cas pour ces filtres</div><div class="empty-hint">Réinitialisez année ou chapitre</div></div>';
+    return;
+  }
+  el.innerHTML=sortedKeys.map((year,yi)=>{
     const cases=groups[year];
-    return`<div class="ann-year-group">
+    const openCls=yi===0?' open':'';
+    return`<div class="ann-year-group${openCls}">
       <div class="ann-year-header" onclick="this.parentElement.classList.toggle('open')">
         <span class="ann-year-label">${year}</span>
         <span class="ann-year-count">${cases.length} cas</span>
@@ -1106,7 +1221,7 @@ function renderAnnalesList(){
       <div class="ann-year-body">${cases.map(a=>{
         const chName=APP_DATA.chapters.find(c=>c.id===a.chapter);
         const diffBadge=a.difficulty?`<span class="rang-badge rang-${a.difficulty.toLowerCase()}">Rang ${a.difficulty}</span>`:'';
-        const questions=a.questions?a.questions.map((q,i)=>`<div class="ann-q"><div class="ann-q-text"><strong>Q${i+1}:</strong> ${esc(q.q||q.question||'')}</div><div class="ann-a-text" style="display:none" id="ans-${a.id}-${i}">${esc(q.a||q.answer||'')}</div><button class="ann-reveal-btn" onclick="var e=document.getElementById('ans-${a.id}-${i}');e.style.display=e.style.display==='none'?'block':'none';this.textContent=e.style.display==='none'?'Voir réponse':'Masquer'">Voir réponse</button></div>`).join(''):(a.correction||a.reponse?`<div class="ann-q"><div class="ann-a-text" style="display:none" id="ans-${a.id}">${esc(a.correction||a.reponse)}</div><button class="ann-reveal-btn" onclick="var e=document.getElementById('ans-${a.id}');e.style.display=e.style.display==='none'?'block':'none';this.textContent=e.style.display==='none'?'Voir réponse':'Masquer'">Voir réponse</button></div>`:'');
+        const questions=a.questions?a.questions.map((q,i)=>`<div class="ann-q"><div class="ann-q-text"><strong>Q${i+1}:</strong> ${esc(q.q||q.question||'')}</div><div class="ann-a-text ann-a-hidden" style="display:none" id="ans-${a.id}-${i}">${esc(q.a||q.answer||'')}</div><button type="button" class="ann-reveal-btn" onclick="toggleAnnAnswer('ans-${a.id}-${i}',this)">Voir réponse</button></div>`).join(''):(a.correction||a.reponse?`<div class="ann-q"><div class="ann-a-text ann-a-hidden" style="display:none" id="ans-${a.id}">${esc(a.correction||a.reponse)}</div><button type="button" class="ann-reveal-btn" onclick="toggleAnnAnswer('ans-${a.id}',this)">Voir réponse</button></div>`:'');
         return`<div class="ann-card">
           <div class="ann-card-head">${diffBadge}<span class="ann-card-ch">${chName?chName.t:a.chapter||''}</span></div>
           <div class="ann-card-title">${esc(a.title||a.titre||'')}</div>
@@ -1155,8 +1270,13 @@ function renderProtoList(list){
   const cnt=document.getElementById('protoCount');if(cnt)cnt.textContent=list.length+' protocoles';
   const grouped={};
   list.forEach(p=>{const cat=p.categorie||p.category||'Autre';if(!grouped[cat])grouped[cat]=[];grouped[cat].push(p)});
-  el.innerHTML=Object.entries(grouped).map(([cat,items])=>`
-    <div class="proto-cat-group">
+  const entries=Object.entries(grouped);
+  if(!entries.length){
+    el.innerHTML='<div class="empty"><div class="empty-icon">📋</div><div class="empty-text">Aucun protocole trouvé</div><div class="empty-hint">Modifiez la catégorie ou la recherche</div></div>';
+    return;
+  }
+  el.innerHTML=entries.map(([cat,items],ci)=>`
+    <div class="proto-cat-group${ci===0?' open':''}">
       <div class="proto-cat-header" onclick="this.parentElement.classList.toggle('open')">
         <span class="proto-cat-label">${esc(cat)}</span>
         <span class="proto-cat-count">${items.length}</span>
@@ -1178,7 +1298,33 @@ function renderProtoList(list){
 }
 
 /* ── ITEMS ── */
-function renderItems(){const list=document.getElementById('itemsList');if(!list)return;list.innerHTML='';APP_DATA.chapters.filter(ch=>ch.items.length>0).forEach(ch=>{ch.items.forEach(item=>{const el=document.createElement('div');el.className='item-card';el.onclick=()=>showCh(ch.id);el.innerHTML=`<div class="item-title"><span class="rang-badge rang-a">${item}</span>${esc(ch.t)}</div><div class="item-desc">Chapitre ${ch.id.replace('ch','')} — Cliquez pour lire</div>`;list.appendChild(el)})})}
+function itemRangClass(itemStr){
+  if(/rang\s*b/i.test(itemStr)||/\bB\b/.test(itemStr))return 'rang-b';
+  return 'rang-a';
+}
+function renderItems(){
+  const list=document.getElementById('itemsList');if(!list)return;
+  const rows=[];
+  APP_DATA.chapters.filter(ch=>ch.items.length>0).forEach(ch=>{
+    ch.items.forEach(item=>{
+      rows.push({item,ch});
+    });
+  });
+  if(!rows.length){
+    list.innerHTML='<div class="empty"><div class="empty-icon">📌</div><div class="empty-text">Aucun objectif ITEM référencé</div><div class="empty-hint">Les ITEMs apparaissent au fil des chapitres</div></div>';
+    return;
+  }
+  list.innerHTML='';
+  rows.forEach(({item,ch},i)=>{
+    const el=document.createElement('div');
+    el.className='item-card item-card-enter';
+    el.style.animationDelay=(i*0.03)+'s';
+    el.onclick=()=>showCh(ch.id);
+    const rc=itemRangClass(item);
+    el.innerHTML='<div class="item-title"><span class="rang-badge '+rc+'">'+esc(item)+'</span><span class="item-ch-title">'+esc(ch.t)+'</span></div><div class="item-desc">Chapitre '+ch.id.replace('ch','')+' — Cliquez pour lire</div>';
+    list.appendChild(el);
+  });
+}
 
 /* ── SETTINGS ── */
 function setFS(v){S.fs=+v;document.body.style.fontSize=v+'px';localStorage.setItem('gfs',v);document.getElementById('fsVal').textContent=v+'px'}

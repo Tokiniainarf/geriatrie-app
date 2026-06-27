@@ -92,10 +92,17 @@
   let edgeReveal = 0;
   let dashPhase = 0;
   let searchQuery = '';
-  let tooltipEl, searchInput;
+  let tooltipEl, infoPanelEl, searchInput;
   let dragTrail = [];
   let zoomAnim = null;
   let bounds = { minX: -400, minY: -300, maxX: 400, maxY: 300 };
+  let hoveredEdge = null;
+  let kbFocusId = null;
+  let entranceDone = false;
+  let defaultView = null;
+  let viewSaveTimer = null;
+  const VIEW_STORAGE_KEY = 'geriatrie_graph_view';
+  const STATUS_COLORS = { mastered: '#22c55e', started: '#eab308', unread: '#94a3b8' };
 
   const PHYS = {
     repulse: 4200,
@@ -114,6 +121,135 @@
     } catch { return false; }
   }
 
+  function isChapterMastered(id){
+    try {
+      if(typeof isSynthMastered === 'function') return isSynthMastered(id);
+      const m = JSON.parse(localStorage.getItem('gsynth_mastered') || '[]');
+      return m.includes(id);
+    } catch { return false; }
+  }
+
+  function getChapterStatus(id){
+    if(isChapterMastered(id)) return 'mastered';
+    if(isChapterRead(id)) return 'started';
+    return 'unread';
+  }
+
+  function getCardCount(chId){
+    const sources = ['FLASHCARDS', 'FLASHCARDS_A', 'FLASHCARDS_B', 'FLASHCARDS_C', 'FLASHCARDS_MEMOS', 'FLASHCARDS_EXPANDED'];
+    let n = 0;
+    sources.forEach(name => {
+      if(typeof window[name] !== 'undefined'){
+        n += window[name].filter(c => c.chapter === chId).length;
+      }
+    });
+    return n;
+  }
+
+  function loadSavedView(){
+    try {
+      const raw = localStorage.getItem(VIEW_STORAGE_KEY);
+      if(!raw) return null;
+      const v = JSON.parse(raw);
+      if(typeof v.scale !== 'number' || typeof v.offsetX !== 'number' || typeof v.offsetY !== 'number') return null;
+      return v;
+    } catch { return null; }
+  }
+
+  function scheduleSaveView(){
+    if(viewSaveTimer) clearTimeout(viewSaveTimer);
+    viewSaveTimer = setTimeout(() => {
+      try {
+        localStorage.setItem(VIEW_STORAGE_KEY, JSON.stringify({
+          scale: targetScale,
+          offsetX: targetOffsetX,
+          offsetY: targetOffsetY
+        }));
+      } catch { /* ignore */ }
+    }, 400);
+  }
+
+  function resetGraphView(){
+    if(defaultView){
+      targetScale = defaultView.scale;
+      targetOffsetX = defaultView.offsetX;
+      targetOffsetY = defaultView.offsetY;
+      scale = targetScale;
+      offsetX = targetOffsetX;
+      offsetY = targetOffsetY;
+    } else {
+      fitGraphToView(true);
+    }
+    try { localStorage.removeItem(VIEW_STORAGE_KEY); } catch { /* ignore */ }
+  }
+
+  function exportGraphPng(){
+    if(!canvas) return;
+    const link = document.createElement('a');
+    link.download = 'geriatrie-graphe-chapitres.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  }
+
+  function nodeEntranceScale(i){
+    if(entranceDone) return 1;
+    const stagger = i * 70;
+    const t = Math.min(1, Math.max(0, (performance.now() - loadStart - stagger) / 420));
+    if(t >= 1 && i === NODES.length - 1) entranceDone = true;
+    return 1 - Math.pow(1 - t, 3);
+  }
+
+  function getKbFocusNode(){
+    if(kbFocusId) return nodeById.get(kbFocusId) || null;
+    return hovered;
+  }
+
+  function moveKbFocus(dir){
+    const sorted = [...NODES].sort((a, b) => parseInt(a.id.replace('ch', ''), 10) - parseInt(b.id.replace('ch', ''), 10));
+    let idx = sorted.findIndex(n => n.id === (kbFocusId || hovered?.id));
+    if(idx < 0) idx = 0;
+    else idx = (idx + dir + sorted.length) % sorted.length;
+    kbFocusId = sorted[idx].id;
+    hovered = sorted[idx];
+    updateInfoPanel();
+    panToNode(sorted[idx], false);
+  }
+
+  function panToNode(node, animate){
+    const endScale = Math.max(targetScale, Math.min(2.4, targetScale));
+    const toOx = W / 2 - node.x * endScale;
+    const toOy = H / 2 - node.y * endScale;
+    if(animate){
+      targetScale = endScale;
+      targetOffsetX = toOx;
+      targetOffsetY = toOy;
+    } else {
+      targetScale = endScale;
+      targetOffsetX = toOx;
+      targetOffsetY = toOy;
+      offsetX = toOx;
+      offsetY = toOy;
+    }
+  }
+
+  function getEdgeAt(mx, my){
+    const { x, y } = screenToWorld(mx, my);
+    const threshold = 10 / scale;
+    let best = null, bestDist = threshold;
+    EDGES.forEach(e => {
+      const a = nodeById.get(e.from), b = nodeById.get(e.to);
+      if(!a || !b) return;
+      const dx = b.x - a.x, dy = b.y - a.y;
+      const lenSq = dx * dx + dy * dy || 1;
+      let t = ((x - a.x) * dx + (y - a.y) * dy) / lenSq;
+      t = Math.max(0, Math.min(1, t));
+      const px = a.x + t * dx, py = a.y + t * dy;
+      const d = Math.hypot(x - px, y - py);
+      if(d < bestDist){ bestDist = d; best = e; }
+    });
+    return best;
+  }
+
   function initGraph(){
     canvas = document.getElementById('graphCanvas');
     if(!canvas) return;
@@ -125,7 +261,18 @@
     edgeReveal = 0;
 
     if(graphStarted){
-      fitGraphToView(false);
+      entranceDone = true;
+      const saved = loadSavedView();
+      if(saved){
+        targetScale = saved.scale;
+        targetOffsetX = saved.offsetX;
+        targetOffsetY = saved.offsetY;
+        scale = saved.scale;
+        offsetX = saved.offsetX;
+        offsetY = saved.offsetY;
+      } else {
+        fitGraphToView(false);
+      }
       animate();
       return;
     }
@@ -142,6 +289,20 @@
     });
 
     fitGraphToView(true);
+    defaultView = { scale: targetScale, offsetX: targetOffsetX, offsetY: targetOffsetY };
+    const saved = loadSavedView();
+    if(saved){
+      targetScale = saved.scale;
+      targetOffsetX = saved.offsetX;
+      targetOffsetY = saved.offsetY;
+      scale = saved.scale;
+      offsetX = saved.offsetX;
+      offsetY = saved.offsetY;
+    }
+
+    canvas.setAttribute('tabindex', '0');
+    canvas.setAttribute('aria-label', 'Graphe des chapitres — utilisez les flèches pour naviguer');
+    canvas.addEventListener('keydown', onGraphKeydown);
 
     canvas.addEventListener('mousedown', onDown);
     canvas.addEventListener('mousemove', onMove);
@@ -166,6 +327,23 @@
       searchInput.addEventListener('input', () => {
         searchQuery = (searchInput.value || '').trim().toLowerCase();
       });
+    }
+    if(bar && !bar.querySelector('.graph-actions')){
+      const actions = document.createElement('div');
+      actions.className = 'graph-actions';
+      actions.innerHTML =
+        '<button type="button" class="graph-btn" id="graphResetView" title="Réinitialiser zoom et position">⟲ Vue</button>' +
+        '<button type="button" class="graph-btn" id="graphExportPng" title="Exporter le graphe en PNG">PNG</button>';
+      bar.appendChild(actions);
+      actions.querySelector('#graphResetView').addEventListener('click', resetGraphView);
+      actions.querySelector('#graphExportPng').addEventListener('click', exportGraphPng);
+    }
+    if(!infoPanelEl){
+      infoPanelEl = document.createElement('aside');
+      infoPanelEl.className = 'graph-info-panel';
+      infoPanelEl.hidden = true;
+      infoPanelEl.setAttribute('aria-live', 'polite');
+      graphWrap.appendChild(infoPanelEl);
     }
     if(!tooltipEl){
       tooltipEl = document.createElement('div');
@@ -237,8 +415,10 @@
       dragging.vx = 0;
       dragging.vy = 0;
       canvas.style.cursor = 'grabbing';
+      canvas.focus();
     } else {
       panning = { x: mx, y: my, ox: offsetX, oy: offsetY };
+      canvas.focus();
     }
   }
 
@@ -260,8 +440,14 @@
       targetOffsetY = offsetY;
     } else if(!zoomAnim){
       hovered = getNodeAt(mx, my);
-      canvas.style.cursor = hovered ? 'pointer' : 'grab';
-      updateTooltip(mx, my);
+      if(hovered){
+        hoveredEdge = null;
+        kbFocusId = null;
+      } else {
+        hoveredEdge = getEdgeAt(mx, my);
+      }
+      canvas.style.cursor = hovered ? 'pointer' : (hoveredEdge ? 'crosshair' : 'grab');
+      updateInfoPanel();
     }
   }
 
@@ -287,12 +473,31 @@
     dragging = null;
     panning = null;
     dragTrail = [];
+    scheduleSaveView();
     if(!hovered) canvas.style.cursor = 'grab';
   }
 
   function onLeave(){
     if(!dragging) hovered = null;
-    hideTooltip();
+    hoveredEdge = null;
+    hideInfoPanel();
+  }
+
+  function onGraphKeydown(e){
+    if(e.key === 'ArrowRight' || e.key === 'ArrowDown'){
+      e.preventDefault();
+      moveKbFocus(1);
+    } else if(e.key === 'ArrowLeft' || e.key === 'ArrowUp'){
+      e.preventDefault();
+      moveKbFocus(-1);
+    } else if(e.key === 'Enter'){
+      const n = getKbFocusNode() || hovered;
+      if(n){ e.preventDefault(); startZoomToNode(n); }
+    } else if(e.key === 'Escape'){
+      kbFocusId = null;
+      hovered = null;
+      hideInfoPanel();
+    }
   }
 
   function zoomAt(mx, my, factor){
@@ -307,6 +512,7 @@
     const rect = canvas.getBoundingClientRect();
     const mx = e.clientX - rect.left, my = e.clientY - rect.top;
     zoomAt(mx, my, e.deltaY > 0 ? 0.9 : 1.11);
+    scheduleSaveView();
   }
 
   function onTouchStart(e){
@@ -385,6 +591,7 @@
     dragging = null;
     panning = null;
     dragTrail = [];
+    scheduleSaveView();
   }
 
   function startZoomToNode(node){
@@ -404,7 +611,7 @@
       focusY: screen.y
     };
     hovered = node;
-    hideTooltip();
+    hideInfoPanel();
   }
 
   function tickZoomAnim(){
@@ -417,6 +624,7 @@
     if(t >= 1){
       const id = zoomAnim.nodeId;
       zoomAnim = null;
+      scheduleSaveView();
       setTimeout(() => openChapter(id), 80);
     }
   }
@@ -425,31 +633,35 @@
     if(typeof showCh === 'function') showCh(id);
   }
 
-  function updateTooltip(mx, my){
-    if(!tooltipEl || !hovered){
-      hideTooltip();
+  function updateInfoPanel(){
+    const node = hovered || getKbFocusNode();
+    if(!infoPanelEl || !node){
+      hideInfoPanel();
       return;
     }
-    const read = isChapterRead(hovered.id);
-    const items = hovered.items?.length ? hovered.items.join(', ') : '—';
-    const links = (adjacency.get(hovered.id) || []).length;
-    const status = read
-      ? '<span class="graph-tooltip-read">✓ Consulté</span>'
-      : '<span class="graph-tooltip-unread">Non consulté</span>';
-    tooltipEl.innerHTML =
-      `<strong>Ch. ${hovered.id.replace('ch', '')}</strong>` +
-      `<span>${hovered.label}</span>` +
-      `${status}` +
-      `<em>Partie ${hovered.part} · ${links} lien${links > 1 ? 's' : ''}</em>` +
-      `<span class="graph-tooltip-items">ITEM : ${items}</span>`;
-    tooltipEl.hidden = false;
-    const pad = 14;
-    let left = mx + pad, top = my + pad;
-    const tw = tooltipEl.offsetWidth, th = tooltipEl.offsetHeight;
-    if(left + tw > W - 8) left = mx - tw - pad;
-    if(top + th > H - 8) top = my - th - pad;
-    tooltipEl.style.left = left + 'px';
-    tooltipEl.style.top = top + 'px';
+    const status = getChapterStatus(node.id);
+    const statusLabel = status === 'mastered' ? 'Maîtrisé' : status === 'started' ? 'Commencé' : 'Non lu';
+    const items = node.items?.length ? node.items.join(', ') : '—';
+    const cards = getCardCount(node.id);
+    const links = (adjacency.get(node.id) || []).length;
+    infoPanelEl.innerHTML =
+      '<div class="graph-info-head">' +
+      '<span class="graph-info-num">Ch. ' + node.id.replace('ch', '') + '</span>' +
+      '<span class="graph-info-status graph-info-status--' + status + '">' + statusLabel + '</span>' +
+      '</div>' +
+      '<h3 class="graph-info-title">' + node.label + '</h3>' +
+      '<dl class="graph-info-meta">' +
+      '<div><dt>ITEM</dt><dd>' + items + '</dd></div>' +
+      '<div><dt>Fiches</dt><dd>' + cards + '</dd></div>' +
+      '<div><dt>Liens</dt><dd>' + links + '</dd></div>' +
+      '<div><dt>Partie</dt><dd>' + node.part + '</dd></div>' +
+      '</dl>' +
+      '<p class="graph-info-hint">Entrée · ouvrir · flèches · naviguer</p>';
+    infoPanelEl.hidden = false;
+  }
+
+  function hideInfoPanel(){
+    if(infoPanelEl) infoPanelEl.hidden = true;
   }
 
   function hideTooltip(){
@@ -550,6 +762,7 @@
   }
 
   function edgeHighlighted(e){
+    if(hoveredEdge === e) return true;
     if(!hovered) return false;
     return e.from === hovered.id || e.to === hovered.id;
   }
@@ -601,14 +814,19 @@
       drawEdgeParticle(e, a, b, color, hi);
     }
 
-    if(hi && e.meta){
+    const showRelLabel = hi || hoveredEdge === e;
+    if(showRelLabel && edgeReveal >= 0.85){
+      const style = EDGE_STYLES[e.type] || EDGE_STYLES.concept;
       const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
-      ctx.font = '600 10px var(--sans), sans-serif';
-      ctx.fillStyle = color;
+      const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+      ctx.font = '600 11px var(--sans), sans-serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      const meta = e.meta.length > 28 ? e.meta.slice(0, 26) + '…' : e.meta;
-      ctx.fillText(meta, mx, my - 8);
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = dark ? 'rgba(15,17,23,0.85)' : 'rgba(255,255,255,0.95)';
+      ctx.fillStyle = color;
+      ctx.strokeText(style.label, mx, my);
+      ctx.fillText(style.label, mx, my);
     }
   }
 
@@ -628,57 +846,72 @@
 
   function drawNodes(){
     const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-    NODES.forEach(n => {
+    NODES.forEach((n, i) => {
+      const entrance = nodeEntranceScale(i);
+      if(entrance < 0.02) return;
+
       const match = nodeMatchesFilter(n);
       const isHov = hovered === n;
+      const isKb = kbFocusId === n.id;
       const isZoomFocus = zoomAnim && zoomAnim.nodeId === n.id;
-      let r = isHov || isZoomFocus ? 30 : 26;
-      const alpha = searchQuery && !match ? 0.2 : 1;
+      const status = getChapterStatus(n.id);
+      const statusColor = STATUS_COLORS[status];
+      let r = (isHov || isZoomFocus || isKb ? 30 : 26);
+      const alpha = (searchQuery && !match ? 0.2 : 1) * entrance;
       const pulse = isZoomFocus
         ? 1 + 0.08 * Math.sin((performance.now() - zoomAnim.start) / 50)
         : 1;
-      r *= pulse;
+      r *= pulse * (0.35 + 0.65 * entrance);
 
-      if(isHov){
+      if(isHov || isKb){
         ctx.beginPath();
         ctx.arc(n.x, n.y, r + 14, 0, Math.PI * 2);
         const g = ctx.createRadialGradient(n.x, n.y, r, n.x, n.y, r + 14);
-        g.addColorStop(0, n.color + '50');
-        g.addColorStop(1, n.color + '00');
+        g.addColorStop(0, (status === 'unread' ? statusColor : n.color) + '50');
+        g.addColorStop(1, (status === 'unread' ? statusColor : n.color) + '00');
         ctx.fillStyle = g;
+        ctx.globalAlpha = alpha;
         ctx.fill();
       }
 
       ctx.globalAlpha = alpha;
       ctx.beginPath();
-      ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
-      ctx.fillStyle = n.color;
-      ctx.fill();
-      ctx.strokeStyle = isHov ? '#fff' : (dark ? 'rgba(255,255,255,0.35)' : 'rgba(255,255,255,0.85)');
-      ctx.lineWidth = isHov ? 3.5 : 2;
+      ctx.arc(n.x, n.y, r + 5, 0, Math.PI * 2);
+      ctx.strokeStyle = statusColor;
+      ctx.lineWidth = isHov || isKb ? 4 : 3;
       ctx.stroke();
 
-      if(isChapterRead(n.id)){
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+      if(status === 'mastered') ctx.fillStyle = STATUS_COLORS.mastered;
+      else if(status === 'started') ctx.fillStyle = STATUS_COLORS.started;
+      else ctx.fillStyle = STATUS_COLORS.unread;
+      ctx.fill();
+      ctx.strokeStyle = isHov || isKb ? '#fff' : (dark ? 'rgba(255,255,255,0.35)' : 'rgba(255,255,255,0.85)');
+      ctx.lineWidth = isHov || isKb ? 3.5 : 2;
+      ctx.stroke();
+
+      if(isKb){
         ctx.beginPath();
-        ctx.arc(n.x + r * 0.65, n.y - r * 0.65, 5, 0, Math.PI * 2);
-        ctx.fillStyle = '#22c55e';
-        ctx.strokeStyle = '#fff';
-        ctx.lineWidth = 1.5;
-        ctx.fill();
+        ctx.arc(n.x, n.y, r + 9, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(8,145,178,0.9)';
+        ctx.lineWidth = 2;
+        ctx.setLineDash([5, 4]);
         ctx.stroke();
+        ctx.setLineDash([]);
       }
 
-      ctx.fillStyle = '#fff';
-      ctx.font = `bold ${isHov ? 15 : 13}px var(--sans), sans-serif`;
+      ctx.fillStyle = status === 'unread' ? (dark ? '#e2e8f0' : '#fff') : '#fff';
+      ctx.font = 'bold ' + (isHov || isKb ? 15 : 13) + 'px var(--sans), sans-serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(n.id.replace('ch', ''), n.x, n.y);
 
-      ctx.fillStyle = isHov ? n.color : (dark ? '#9ca3af' : '#64748B');
-      ctx.font = `${isHov ? '600' : '500'} 11px var(--sans), sans-serif`;
+      ctx.fillStyle = isHov || isKb ? (dark ? '#f4f4f5' : '#0f172a') : (dark ? '#9ca3af' : '#64748B');
+      ctx.font = (isHov || isKb ? '600' : '500') + ' 11px var(--sans), sans-serif';
       ctx.textBaseline = 'top';
       const label = n.label.length > 22 ? n.label.substring(0, 20) + '…' : n.label;
-      ctx.fillText(label, n.x, n.y + r + 5);
+      ctx.fillText(label, n.x, n.y + r + 8);
       ctx.globalAlpha = 1;
     });
   }
@@ -755,6 +988,31 @@
       ctx.font = '10px var(--sans), sans-serif';
       ctx.fillText(style.label, x0 + 34, y + 4);
     });
+
+    const sx0 = x0 + boxW + 14;
+    const statusItems = [
+      { key: 'mastered', label: 'Maîtrisé' },
+      { key: 'started', label: 'Commencé' },
+      { key: 'unread', label: 'Non lu' }
+    ];
+    const sboxW = 118, sboxH = 58;
+    roundRect(ctx, sx0 - 8, y0 - 10, sboxW, sboxH, 10);
+    ctx.fillStyle = dark ? 'rgba(22,24,34,0.9)' : 'rgba(255,255,255,0.94)';
+    ctx.fill();
+    ctx.stroke();
+    ctx.font = '600 9px var(--sans), sans-serif';
+    ctx.fillStyle = dark ? '#a1a1aa' : '#64748B';
+    ctx.fillText('Chapitres', sx0, y0 - 2);
+    statusItems.forEach((it, i) => {
+      const y = y0 + 12 + i * 14;
+      ctx.beginPath();
+      ctx.arc(sx0 + 6, y, 5, 0, Math.PI * 2);
+      ctx.fillStyle = STATUS_COLORS[it.key];
+      ctx.fill();
+      ctx.fillStyle = dark ? '#d4d4d8' : '#475569';
+      ctx.font = '10px var(--sans), sans-serif';
+      ctx.fillText(it.label, sx0 + 16, y + 4);
+    });
     ctx.restore();
   }
 
@@ -802,7 +1060,7 @@
       const p = toM(n);
       mctx.beginPath();
       mctx.arc(p.x, p.y, 2.8, 0, Math.PI * 2);
-      mctx.fillStyle = n.color;
+      mctx.fillStyle = STATUS_COLORS[getChapterStatus(n.id)];
       mctx.fill();
     });
 
@@ -827,6 +1085,8 @@
     if(animId) cancelAnimationFrame(animId);
     animId = null;
     zoomAnim = null;
+    scheduleSaveView();
+    hideInfoPanel();
     hideTooltip();
   }
 

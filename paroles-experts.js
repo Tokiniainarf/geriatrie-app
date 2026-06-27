@@ -1,0 +1,18 @@
+// Paroles d'experts — Citations de gériatres et éducateurs médicaux
+const PAROLES_EXPERTS = [
+  { id: 'pe-1', auteur: 'Pr Jacques Boddaert', specialite: 'Gériatrie', citation: 'La gériatrie n\'est pas la médecine des vieux, c\'est la médecine de la complexité.', contexte: 'Préface du Manuel de Gériatrie CNEG, 5e édition' },
+  { id: 'pe-2', auteur: 'Pr Olivier Saint-Jean', specialite: 'Gériatrie', citation: 'Le sujet âgé n\'est pas un adulte jeune qui a vieilli, c\'est un patient avec une physiologie différente.', contexte: 'Enseignement Paris Descartes' },
+  { id: 'pe-3', auteur: 'Pr Bruno Vellas', specialite: 'Gériatrie / Nutrition', citation: 'La dénutrition est le marqueur le plus fiable de la fragilité. Un patient qui perd du poids perd son autonomie.', contexte: 'Recherches MNA, Toulouse' },
+  { id: 'pe-4', auteur: 'Pr Philp Gillick', specialite: 'Gériatrie / Éthique', citation: 'L\'objectif n\'est pas d\'ajouter des années à la vie, mais de la vie aux années.', contexte: 'Sur les soins palliatifs en gériatrie' },
+  { id: 'pe-5', auteur: 'Pr Alain Franco', specialite: 'Gériatrie', citation: 'Tout médicament prescrit chez un sujet âgé doit avoir une date de fin.', contexte: 'Enseignement sur la déprescription' },
+  { id: 'pe-6', auteur: 'Pr Laure de Sèze', specialite: 'Gériatrie', citation: 'La chute n\'est jamais un accident. C\'est le symptôme d\'une fragilité sous-jacente.', contexte: 'Recherches chutes, Paris' },
+  { id: 'pe-7', auteur: 'Pr Jean-Pierre Aquino', specialite: 'Gériatrie / Alzheimer', citation: 'Le patient dément n\'a pas perdu sa mémoire, il a perdu l\'accès à ses souvenirs. L\'émotion, elle, reste.', contexte: 'Accompagnement Alzheimer' },
+  { id: 'pe-8', auteur: 'Pr Béatrice Gallois', specialite: 'Gériatrie / Éthique', citation: 'L\'autonomie du patient est le premier principe éthique. Même un patient dément a des préférences.', contexte: 'Loi Kouchner et droits des patients' },
+  { id: 'pe-9', auteur: 'Pr Christophe Trivalle', specialite: 'Gériatrie / Confusion', citation: 'Toute confusion aiguë est une urgence médicale jusqu\'à preuve du contraire.', contexte: 'Enseignement sur le delirium' },
+  { id: 'pe-10', auteur: 'Pr Olivier Hanon', specialite: 'Gériatrie / HTA', citation: 'L\'hypertension du sujet âgé se traite, mais il ne faut pas viser les mêmes cibles que chez l\'adulte jeune.', contexte: 'Recherches HTA sujet âgé' },
+  { id: 'pe-11', auteur: 'Pr Matteo Cesari', specialite: 'Gériatrie / Fragilité', citation: 'La fragilité est un syndrome, pas une fatalité. Elle est réversible dans 30% des cas avec une intervention adaptée.', contexte: 'Recherches fragilité, Toulouse' },
+  { id: 'pe-12', auteur: 'Pr Sophie Gillette-Guyonnet', specialite: 'Gériatrie / Nutrition', citation: 'Un albumine à 20 g/L chez un sujet âgé n\'est pas seulement un problème nutritionnel, c\'est un signal d\'alarme systémique.', contexte: 'Recherches dénutrition' },
+  { id: 'pe-13', auteur: 'Pr Florence Doucet', specialite: 'Gériatrie / Palliatif', citation: 'Les soins palliatifs ne sont pas l\'abandon des soins. C\'est un changement de paradigme : le confort devient l\'objectif principal.', contexte: 'Formation soins palliatifs' },
+  { id: 'pe-14', auteur: 'Pr Christelle Cantet', specialite: 'Gériatrie / Épidémiologie', citation: 'La démence n\'est pas une fatalité du vieillissement. 40% des facteurs de risque sont modifiables.', contexte: 'Étude Lancet Commission 2020' },
+  { id: 'pe-15', auteur: 'Dr Isabelle Adam', specialite: 'Gériatrie / EHPAD', citation: 'En EHPAD, chaque résident a une histoire. Notre rôle est de donner du sens à ses dernières années.', contexte: 'Pratique EHPAD' }
+];
