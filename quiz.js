@@ -11,8 +11,20 @@ const QuizMode = (() => {
   let timeLeft = 0;
   let initialTime = 0;
   let answers = [];
-  let quizType = 'flash'; // flash, annales, mixed
+  let quizType = 'flash'; // flash, annale, mixed, scores, pharmaco, urgence, mega
   let reviewMode = false;
+  let quizCount = 20;
+  let questionTimerSec = 30; // 10, 30, 60, or 0 = no limit (per question)
+  let questionTimeLeft = 0;
+
+  const CATEGORY_LABELS = {
+    flash: 'Flashcards',
+    annale: 'Cas cliniques',
+    scores: 'Échelles & scores',
+    pharmaco: 'Pharmacologie',
+    urgence: 'Urgences',
+    mega: 'Cas cliniques (mega)'
+  };
 
   function loadSRS() {
     try { return JSON.parse(localStorage.getItem('bf_srs')) || {}; } catch { return {}; }
@@ -31,9 +43,120 @@ const QuizMode = (() => {
     return { level: 'medium', label: 'Moyen' };
   }
 
+  function pushScoreQuestions(q, scores, category) {
+    if (!scores || !scores.length) return;
+    scores.forEach(s => {
+      const nom = s.nom;
+      const ch = s.chapitre || s.chapter || '';
+      if (s.seuils) {
+        q.push({
+          type: category === 'urgence' ? 'urgence' : 'scores', category, chapter: ch, rang: 'A',
+          question: `Score ${nom} : quels sont les seuils d'interprétation ?`,
+          answer: s.seuils,
+          tags: [nom, 'Seuils']
+        });
+      }
+      if (s.items) {
+        q.push({
+          type: category === 'urgence' ? 'urgence' : 'scores', category, chapter: ch, rang: 'A',
+          question: `Score ${nom} : quels items ou dimensions sont évalués ?`,
+          answer: s.items,
+          tags: [nom, 'Items']
+        });
+      }
+      const extra = s.description || s.utilisation;
+      if (extra) {
+        q.push({
+          type: category === 'urgence' ? 'urgence' : 'scores', category, chapter: ch, rang: 'A',
+          question: `À quoi sert le score ${nom} en pratique clinique ?`,
+          answer: extra,
+          tags: [nom, 'Utilisation']
+        });
+      }
+    });
+  }
+
+  function getPharmacoQuestions() {
+    const q = [];
+    if (typeof PHARMO_GERIATRIE === 'undefined') return q;
+    PHARMO_GERIATRIE.forEach(p => {
+      q.push({
+        type: 'pharmaco', category: 'pharmaco', chapter: '', rang: 'A',
+        question: `${p.drug} (${p.category}) : quelle posologie chez le sujet âgé / IDEM ?`,
+        answer: p.doseIdem || p.doseNormale,
+        tags: [p.category, p.drug, 'Posologie']
+      });
+      if (p.renal) {
+        q.push({
+          type: 'pharmaco', category: 'pharmaco', chapter: '', rang: 'A',
+          question: `${p.drug} : quel ajustement en cas d'insuffisance rénale ?`,
+          answer: p.renal,
+          tags: [p.category, p.drug, 'Rénal']
+        });
+      }
+      if (p.interactions) {
+        q.push({
+          type: 'pharmaco', category: 'pharmaco', chapter: '', rang: 'A',
+          question: `${p.drug} : interactions médicamenteuses majeures à connaître ?`,
+          answer: p.interactions,
+          tags: [p.category, p.drug, 'Interactions']
+        });
+      }
+      if (p.precautions) {
+        q.push({
+          type: 'pharmaco', category: 'pharmaco', chapter: '', rang: 'A',
+          question: `${p.drug} : principales précautions chez le sujet âgé ?`,
+          answer: p.precautions,
+          tags: [p.category, p.drug, 'Précautions']
+        });
+      }
+    });
+    return q;
+  }
+
+  function getUrgenceQuestions() {
+    const q = [];
+    if (typeof QUIZ_URGENCE !== 'undefined') {
+      QUIZ_URGENCE.forEach(u => {
+        q.push({
+          type: 'urgence', category: 'urgence', chapter: '', rang: u.diffculte || 'A',
+          question: u.question,
+          answer: u.reponse,
+          tags: [u.categorie || 'urgence', u.id]
+        });
+      });
+    }
+    if (typeof SCORES_URGENCE !== 'undefined') {
+      pushScoreQuestions(q, SCORES_URGENCE, 'urgence');
+    }
+    return q;
+  }
+
+  function getMegaQuestions() {
+    const q = [];
+    if (typeof MEGA_CASES === 'undefined') return q;
+    MEGA_CASES.forEach(mc => {
+      if (!mc.questions || !mc.questions.length) return;
+      mc.questions.forEach(mq => {
+        const ctx = [
+          mc.title ? `Cas : ${mc.title}` : '',
+          mc.patient ? mc.patient : '',
+          mc.examen ? `Examen : ${mc.examen}` : ''
+        ].filter(Boolean).join('\n\n');
+        q.push({
+          type: 'mega', category: 'mega', chapter: mc.chapter, rang: mc.difficulty || 'A',
+          question: ctx ? `${ctx}\n\nQuestion EVC : ${mq.q}` : mq.q,
+          answer: mq.a,
+          tags: [mc.id, mc.context || 'mega'],
+          caseId: mc.id
+        });
+      });
+    });
+    return q;
+  }
+
   function getAllQuestions() {
     const q = [];
-    // From flashcards
     const allFlash = [];
     if (typeof FLASHCARDS !== 'undefined') allFlash.push(...FLASHCARDS);
     if (typeof FLASHCARDS_A !== 'undefined') allFlash.push(...FLASHCARDS_A);
@@ -43,48 +166,56 @@ const QuizMode = (() => {
     if (typeof FLASHCARDS_EXPANDED !== 'undefined') allFlash.push(...FLASHCARDS_EXPANDED);
     allFlash.forEach(fc => {
       q.push({
-        type: 'flash', flashId: fc.id, chapter: fc.chapter, rang: fc.rang,
+        type: 'flash', category: 'flash', flashId: fc.id, chapter: fc.chapter, rang: fc.rang,
         question: fc.question, answer: fc.answer, tags: fc.tags
       });
     });
-    // From annales
-    // Annales for quiz
     const allAnnales = [];
     if (typeof ANNALES !== 'undefined') allAnnales.push(...ANNALES);
     if (typeof ANNALES_EXPANDED !== 'undefined') allAnnales.push(...ANNALES_EXPANDED);
     allAnnales.forEach(a => {
-        a.questions.forEach(aq => {
-          q.push({ type: 'annale', chapter: a.chapter, rang: aq.rang, question: aq.q, answer: aq.a, tags: [a.case.substring(0, 40) + '...'] });
+      const caseLabel = (a.case || a.cas || a.title || '').substring(0, 40);
+      const questions = a.questions || [];
+      questions.forEach(aq => {
+        q.push({
+          type: 'annale', category: 'annale', chapter: a.chapter, rang: aq.rang,
+          question: aq.q, answer: aq.a,
+          tags: [caseLabel ? caseLabel + '...' : 'annale']
         });
       });
+    });
+    if (typeof SCORES_GERIATRIE !== 'undefined') {
+      pushScoreQuestions(q, SCORES_GERIATRIE, 'scores');
+    }
+    q.push(...getPharmacoQuestions());
+    q.push(...getUrgenceQuestions());
+    q.push(...getMegaQuestions());
     return q;
   }
 
   function startQuiz(type, count, timePerQ) {
     quizType = type || 'mixed';
+    quizCount = count || 20;
+    questionTimerSec = timePerQ == null ? 30 : Number(timePerQ);
     const all = getAllQuestions();
     const filtered = quizType === 'mixed' ? all : all.filter(q => q.type === quizType);
-    // Shuffle
     for (let i = filtered.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [filtered[i], filtered[j]] = [filtered[j], filtered[i]];
     }
-    questions = filtered.slice(0, count || 20);
+    questions = filtered.slice(0, quizCount);
     total = questions.length;
     current = 0;
     score = 0;
     answers = [];
     reviewMode = false;
-    timeLeft = (timePerQ || 30) * total;
-    initialTime = timeLeft;
+    timeLeft = 0;
+    initialTime = 0;
     ensureTimerUI();
     const config = document.getElementById('quizConfig');
     if (config) config.style.display = 'none';
-    const timerBar = document.querySelector('.quiz-timer-bar');
-    if (timerBar) timerBar.style.display = '';
     renderQuestion();
-    updateTimerDisplay();
-    startTimer();
+    startQuestionTimer();
   }
 
   function ensureTimerUI() {
@@ -103,16 +234,52 @@ const QuizMode = (() => {
     }
   }
 
-  function startTimer() {
+  function startQuestionTimer() {
     clearInterval(timer);
+    const timerBar = document.querySelector('.quiz-timer-bar');
+    if (questionTimerSec <= 0 || reviewMode) {
+      if (timerBar) timerBar.style.display = 'none';
+      return;
+    }
+    if (timerBar) timerBar.style.display = '';
+    questionTimeLeft = questionTimerSec;
+    initialTime = questionTimerSec;
+    timeLeft = questionTimeLeft;
+    updateTimerDisplay();
     timer = setInterval(() => {
-      timeLeft--;
+      questionTimeLeft--;
+      timeLeft = questionTimeLeft;
       updateTimerDisplay();
-      if (timeLeft <= 0) {
-        clearInterval(timer);
-        showResults();
+      if (questionTimeLeft <= 0) {
+        onQuestionTimeout();
       }
     }, 1000);
+  }
+
+  function onQuestionTimeout() {
+    if (reviewMode || current >= total) return;
+    const q = questions[current];
+    answers.push({
+      question: q.question,
+      answer: q.answer,
+      chapter: q.chapter,
+      category: q.category || q.type,
+      correct: false,
+      type: q.type,
+      timedOut: true
+    });
+    current++;
+    if (current >= total) {
+      clearInterval(timer);
+      showResults();
+    } else {
+      renderQuestion();
+      startQuestionTimer();
+    }
+  }
+
+  function startTimer() {
+    startQuestionTimer();
   }
 
   function updateTimerDisplay() {
@@ -121,15 +288,28 @@ const QuizMode = (() => {
     const m = Math.floor(timeLeft / 60);
     const s = timeLeft % 60;
     el.textContent = `${m}:${s.toString().padStart(2, '0')}`;
-    el.className = 'quiz-timer quiz-timer-center' + (timeLeft < 30 ? ' quiz-timer-urgent' : '');
+    el.className = 'quiz-timer quiz-timer-center' + (questionTimeLeft <= 10 && questionTimerSec > 0 ? ' quiz-timer-urgent' : '');
     const ring = document.getElementById('quizTimerRing');
     if (ring && initialTime > 0) {
       const circumference = 2 * Math.PI * 18;
       const pct = Math.max(0, Math.min(1, timeLeft / initialTime));
       ring.style.strokeDasharray = `${circumference}`;
       ring.style.strokeDashoffset = `${circumference * (1 - pct)}`;
-      ring.classList.toggle('quiz-timer-ring-urgent', timeLeft < 30);
+      ring.classList.toggle('quiz-timer-ring-urgent', questionTimeLeft <= 10 && questionTimerSec > 0);
     }
+  }
+
+  function getTypeBadge(q) {
+    const labels = {
+      annale: 'Cas clinique',
+      scores: 'Échelle / score',
+      pharmaco: 'Pharmacologie',
+      urgence: 'Urgence',
+      mega: 'Cas mega EVC',
+      flash: ''
+    };
+    const label = labels[q.type];
+    return label ? `<span class="quiz-type-badge">${label}</span>` : '';
   }
 
   function renderQuestion() {
@@ -139,9 +319,10 @@ const QuizMode = (() => {
     const q = questions[current];
     const chName = getChapterName(q.chapter);
     const rangBadge = q.rang ? `<span class="quiz-rang quiz-rang-${q.rang.toLowerCase()}">Rang ${q.rang}</span>` : '';
-    const typeBadge = q.type === 'annale' ? '<span class="quiz-type-badge">Cas clinique</span>' : '';
+    const typeBadge = getTypeBadge(q);
     const diff = getDifficulty(q);
     const diffBadge = `<span class="quiz-diff quiz-diff-${diff.level}" title="Basé sur vos révisions SRS">${diff.label}</span>`;
+    const qTextClass = q.type === 'mega' ? 'quiz-q-text quiz-q-text-pre' : 'quiz-q-text';
 
     const answerBlock = reviewMode ? `
         <div class="quiz-reveal quiz-review-block">
@@ -170,7 +351,7 @@ const QuizMode = (() => {
           <span class="quiz-progress">${current + 1} / ${total}</span>
           ${diffBadge} ${rangBadge} ${typeBadge}
         </div>
-        <div class="quiz-q-text">${esc(q.question)}</div>
+        <div class="${qTextClass}">${esc(q.question)}</div>
         <div class="quiz-q-chapter">${chName}</div>
         ${answerBlock}
       </div>
@@ -194,6 +375,7 @@ const QuizMode = (() => {
       question: q.question,
       answer: q.answer,
       chapter: q.chapter,
+      category: q.category || q.type,
       correct,
       type: q.type
     });
@@ -204,7 +386,30 @@ const QuizMode = (() => {
       showResults();
     } else {
       renderQuestion();
+      startQuestionTimer();
     }
+  }
+
+  function buildCategoryBreakdown() {
+    const byCat = {};
+    answers.forEach(a => {
+      const key = a.category || a.type || '_';
+      if (!byCat[key]) byCat[key] = { correct: 0, total: 0 };
+      byCat[key].total++;
+      if (a.correct) byCat[key].correct++;
+    });
+    return Object.entries(byCat)
+      .map(([key, stats]) => {
+        const pct = stats.total ? Math.round((stats.correct / stats.total) * 100) : 0;
+        return {
+          key,
+          name: CATEGORY_LABELS[key] || key,
+          ...stats,
+          pct,
+          weak: pct < 60
+        };
+      })
+      .sort((a, b) => a.pct - b.pct);
   }
 
   function buildChapterBreakdown() {
@@ -235,6 +440,7 @@ const QuizMode = (() => {
     reviewMode = true;
     questions = wrong.map(w => ({
       type: w.type,
+      category: w.category || w.type,
       chapter: w.chapter,
       rang: '',
       question: w.question,
@@ -269,15 +475,23 @@ const QuizMode = (() => {
     const resultTotal = answers.length;
     const resultScore = answers.filter(a => a.correct).length;
     const pct = resultTotal > 0 ? Math.round((resultScore / resultTotal) * 100) : 0;
-    const flashCorrect = answers.filter(a => a.correct && a.type === 'flash').length;
-    const flashTotal = answers.filter(a => a.type === 'flash').length;
-    const annaleCorrect = answers.filter(a => a.correct && a.type === 'annale').length;
-    const annaleTotal = answers.filter(a => a.type === 'annale').length;
     const chapters = buildChapterBreakdown();
+    const categories = buildCategoryBreakdown();
     const weakChapters = chapters.filter(c => c.weak);
+    const weakCategories = categories.filter(c => c.weak);
     const wrongCount = answers.filter(a => !a.correct).length;
 
     const chapterRows = chapters.map(c => `
+      <div class="quiz-ch-row${c.weak ? ' quiz-ch-row-weak' : ''}">
+        <div class="quiz-ch-row-head">
+          <span class="quiz-ch-name">${esc(c.name)}</span>
+          <span class="quiz-ch-pct">${c.correct}/${c.total} (${c.pct}%)</span>
+        </div>
+        <div class="quiz-ch-bar"><div class="quiz-ch-fill" style="width:${c.pct}%"></div></div>
+      </div>
+    `).join('');
+
+    const categoryRows = categories.map(c => `
       <div class="quiz-ch-row${c.weak ? ' quiz-ch-row-weak' : ''}">
         <div class="quiz-ch-row-head">
           <span class="quiz-ch-name">${esc(c.name)}</span>
@@ -299,8 +513,12 @@ const QuizMode = (() => {
         <div class="quiz-results-score">${resultScore} / ${resultTotal} (${pct}%)</div>
         <div class="quiz-results-bar"><div class="quiz-results-fill" style="width:${pct}%"></div></div>
         <div class="quiz-results-details">
-          ${flashTotal > 0 ? `<div>Flashcards : ${flashCorrect}/${flashTotal}</div>` : ''}
-          ${annaleTotal > 0 ? `<div>Cas cliniques : ${annaleCorrect}/${annaleTotal}</div>` : ''}
+          ${categories.length ? `
+        <div class="quiz-results-chapters">
+          <div class="quiz-results-chapters-title">Par catégorie${weakCategories.length ? ` · ${weakCategories.length} à renforcer` : ''}</div>
+          <div class="quiz-ch-list">${categoryRows}</div>
+        </div>
+        ` : ''}
         </div>
         ${chapters.length ? `
         <div class="quiz-results-chapters">
@@ -310,7 +528,7 @@ const QuizMode = (() => {
         ` : ''}
         <div class="quiz-results-actions">
           ${wrongCount > 0 ? `<button class="quiz-btn quiz-btn-review" onclick="QuizMode.reviewWrong()">Revoir les erreurs (${wrongCount})</button>` : ''}
-          <button class="quiz-btn" onclick="QuizMode.startQuiz('${quizType}', 20, 30)">Recommencer</button>
+          <button class="quiz-btn" onclick="QuizMode.startQuiz('${quizType}', ${quizCount}, ${questionTimerSec})">Recommencer</button>
           <button class="quiz-btn quiz-btn-ghost" onclick="sw('home')">Retour</button>
         </div>
       </div>

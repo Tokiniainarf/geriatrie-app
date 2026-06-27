@@ -154,12 +154,23 @@
     <div class="quiz-header">
       <h1>Mode Examen</h1>
       <div class="quiz-config" id="quizConfig">
-        <p class="quiz-desc">Simule un examen EVC avec timer et scoring</p>
+        <p class="quiz-desc">Simule un examen EVC avec timer par question et scoring multi-sources</p>
         <div class="quiz-options">
-          <button class="quiz-opt-btn active" onclick="QuizMode.startQuiz('mixed',20,30)">20 questions (10 min)</button>
-          <button class="quiz-opt-btn" onclick="QuizMode.startQuiz('mixed',40,30)">40 questions (20 min)</button>
-          <button class="quiz-opt-btn" onclick="QuizMode.startQuiz('annales',10,60)">Cas cliniques (10)</button>
-          <button class="quiz-opt-btn" onclick="QuizMode.startQuiz('flash',30,20)">Flashcards rapides (30)</button>
+          <button class="quiz-opt-btn" onclick="QuizMode.startQuiz('mixed',20,30)">Mixte — 20 Q (30s/Q)</button>
+          <button class="quiz-opt-btn" onclick="QuizMode.startQuiz('mixed',40,30)">Mixte — 40 Q (30s/Q)</button>
+          <button class="quiz-opt-btn" onclick="QuizMode.startQuiz('flash',30,20)">Flashcards (30s/Q)</button>
+          <button class="quiz-opt-btn" onclick="QuizMode.startQuiz('annale',10,60)">Annales / cas (60s/Q)</button>
+          <button class="quiz-opt-btn" onclick="QuizMode.startQuiz('scores',15,30)">Échelles & scores</button>
+          <button class="quiz-opt-btn" onclick="QuizMode.startQuiz('pharmaco',15,30)">Pharmacologie</button>
+          <button class="quiz-opt-btn" onclick="QuizMode.startQuiz('urgence',20,30)">Urgences + scores garde</button>
+          <button class="quiz-opt-btn" onclick="QuizMode.startQuiz('mega',5,0)">Cas mega EVC (sans limite)</button>
+        </div>
+        <div class="quiz-options quiz-options-timer">
+          <span class="quiz-timer-label">Timer par question :</span>
+          <button class="quiz-opt-btn quiz-opt-sm" onclick="QuizMode.startQuiz('mixed',20,10)">10s</button>
+          <button class="quiz-opt-btn quiz-opt-sm active" onclick="QuizMode.startQuiz('mixed',20,30)">30s</button>
+          <button class="quiz-opt-btn quiz-opt-sm" onclick="QuizMode.startQuiz('mixed',20,60)">60s</button>
+          <button class="quiz-opt-btn quiz-opt-sm" onclick="QuizMode.startQuiz('mixed',20,0)">Sans limite</button>
         </div>
       </div>
       <div class="quiz-timer-bar"><span class="quiz-timer" id="quizTimer"></span></div>
@@ -370,6 +381,9 @@
 <script src="examens-guide.js"></script>
 <script src="vocabulaire-medical.js"></script>
 <script src="tableaux-comparatifs.js"></script>
+<script src="abbreviations.js"></script>
+<script src="doses-urgence.js"></script>
+<script src="faq-geriatrie.js"></script>
 <script src="paroles-experts.js"></script>
 <script src="questions-vives.js"></script>
 <script src="scores-urgence.js"></script>
