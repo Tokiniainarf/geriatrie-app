@@ -140,6 +140,7 @@ const Dashboard = (() => {
     if (typeof FLASHCARDS_C !== 'undefined') all.push(...FLASHCARDS_C);
     if (typeof FLASHCARDS_MEMOS !== 'undefined') all.push(...FLASHCARDS_MEMOS);
     if (typeof FLASHCARDS_EXPANDED !== 'undefined') all.push(...FLASHCARDS_EXPANDED);
+    if (typeof MEGA_FLASHCARDS !== 'undefined') all.push(...MEGA_FLASHCARDS);
     return all;
   }
 

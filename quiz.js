@@ -164,6 +164,7 @@ const QuizMode = (() => {
     if (typeof FLASHCARDS_C !== 'undefined') allFlash.push(...FLASHCARDS_C);
     if (typeof FLASHCARDS_MEMOS !== 'undefined') allFlash.push(...FLASHCARDS_MEMOS);
     if (typeof FLASHCARDS_EXPANDED !== 'undefined') allFlash.push(...FLASHCARDS_EXPANDED);
+    if (typeof MEGA_FLASHCARDS !== 'undefined') all.push(...MEGA_FLASHCARDS);
     allFlash.forEach(fc => {
       q.push({
         type: 'flash', category: 'flash', flashId: fc.id, chapter: fc.chapter, rang: fc.rang,

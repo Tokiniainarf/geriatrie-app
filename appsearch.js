@@ -195,6 +195,7 @@ const AppSearch = (() => {
     if (typeof FLASHCARDS_C !== 'undefined') allFlash.push(...FLASHCARDS_C);
     if (typeof FLASHCARDS_MEMOS !== 'undefined') allFlash.push(...FLASHCARDS_MEMOS);
     if (typeof FLASHCARDS_EXPANDED !== 'undefined') allFlash.push(...FLASHCARDS_EXPANDED);
+    if (typeof MEGA_FLASHCARDS !== 'undefined') all.push(...MEGA_FLASHCARDS);
     allFlash.forEach(fc => {
       allContent.push({ type: 'flashcard', id: 'fc-' + fc.id, title: fc.question, text: fc.question + ' ' + fc.answer, view: 'feed', link: () => navView('feed') });
     });
