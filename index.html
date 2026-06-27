@@ -197,6 +197,12 @@
     <div class="bf-toast" id="bfToast"></div>
   </div>
 
+  <!-- FICHES DE GARDE -->
+  <div class="view" id="vGarde">
+    <div class="page-hd"><h1>Fiches de Garde</h1><p>Quick reference pour les urgences gériatriques</p></div>
+    <div id="gardeContent"></div>
+  </div>
+
   <!-- SETTINGS -->
   <div class="view" id="vSet">
     <div class="page-hd"><h1>Réglages</h1></div>
@@ -253,6 +259,10 @@
     <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
     <span>Feed</span>
   </button>
+  <button data-v="garde" onclick="sw('garde')">
+    <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <span>Garde</span>
+  </button>
   <button data-v="set" onclick="sw('set')">
     <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
     <span>Réglages</span>
@@ -285,6 +295,7 @@
 <script src="flashcards-batch-C.js"></script>
 <script src="flashcards-memos.js"></script>
 <script src="flashcards-expanded.js"></script>
+<script src="fiches-garde.js"></script>
 <script src="app.js?v=45"></script>
 <script src="brainfeed.js"></script>
 <script src="quiz.js"></script>
@@ -295,5 +306,23 @@
 <script src="has-reco.js"></script>
 <script src="has-expanded.js"></script>
 <script src="graph.js"></script>
+<script src="fiches-garde.js"></script>
+<script src="protocoles-urgence.js"></script>
+<script src="protocoles-complets.js"></script>
+<script src="situations-evc.js"></script>
+<script src="cas-interactifs.js"></script>
+<script src="epreuves-externes.js"></script>
+<script src="evc-coach.js"></script>
+<script src="scores-geriatrie.js"></script>
+<script src="formules-geriatrie.js"></script>
+<script src="pharmaco-geriatrie.js"></script>
+<script src="pieges-exam.js"></script>
+<script src="memos-rapides.js"></script>
+<script src="quiz-urgence.js"></script>
+<script src="ressources-evc.js"></script>
+<script src="checklist-garde.js"></script>
+<script src="guide-accompagnant.js"></script>
+<script src="figures-index.js"></script>
+<script src="annales-archive.js"></script>
 </body>
 </html>

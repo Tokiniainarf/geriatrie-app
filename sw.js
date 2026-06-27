@@ -1,4 +1,4 @@
-const CACHE_NAME = 'geriatrie-v52';
+const CACHE_NAME = 'geriatrie-v54';
 const CORE = [
   './',
   './index.html',
@@ -24,6 +24,24 @@ const CORE = [
   './concepts.js',
   './flashcards.js',
   './graph.js',
+  './fiches-garde.js',
+  './protocoles-urgence.js',
+  './protocoles-complets.js',
+  './situations-evc.js',
+  './cas-interactifs.js',
+  './epreuves-externes.js',
+  './evc-coach.js',
+  './scores-geriatrie.js',
+  './formules-geriatrie.js',
+  './pharmaco-geriatrie.js',
+  './pieges-exam.js',
+  './memos-rapides.js',
+  './quiz-urgence.js',
+  './ressources-evc.js',
+  './checklist-garde.js',
+  './guide-accompagnant.js',
+  './figures-index.js',
+  './annales-archive.js',
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png'

@@ -39,6 +39,7 @@ function sw(view){
   if(view==='feed'&&typeof BrainFeed!=='undefined')BrainFeed.init();
   if(view!=='feed'&&typeof BrainFeed!=='undefined')BrainFeed.destroy();
   if(view==='dash'&&typeof Dashboard!=='undefined')Dashboard.render();
+  if(view==='garde')renderGarde();
   if(view!=='quiz'&&typeof QuizMode!=='undefined')QuizMode.destroy();
   if(view==='set'){document.getElementById('pd').textContent=`${S.read.length} chapitre${S.read.length>1?'s':''} consulté${S.read.length>1?'s':''}`}
 }
@@ -499,6 +500,28 @@ function renderFlashcard(){
 }
 function nextFlash(){if(!flashDeck.length)return;flashIdx=(flashIdx+1)%flashDeck.length;renderFlashcard()}
 function prevFlash(){if(!flashDeck.length)return;flashIdx=(flashIdx-1+flashDeck.length)%flashDeck.length;renderFlashcard()}
+
+/* ── FICHES DE GARDE ── */
+function renderGarde(){
+  const el=document.getElementById('gardeContent');
+  if(!el)return;
+  if(typeof FICHES_GARDE==='undefined'||!FICHES_GARDE.length){
+    el.innerHTML='<div class="empty"><div class="empty-icon">🚨</div><div class="empty-text">Fiches indisponibles</div><div class="empty-hint">Rechargez l\'application</div></div>';
+    return;
+  }
+  el.innerHTML='<div class="garde-grid">'+FICHES_GARDE.map(f=>`
+    <div class="garde-card garde-urgency-${esc(f.urgency)}" id="${esc(f.id)}">
+      <div class="garde-card-head" onclick="this.parentElement.classList.toggle('open')">
+        <span class="garde-card-icon" aria-hidden="true">${f.icon}</span>
+        <div class="garde-card-title">${esc(f.title)}</div>
+        <span class="garde-card-chevron" aria-hidden="true">▾</span>
+      </div>
+      <div class="garde-card-body">
+        <ul class="garde-checklist">${f.checklist.map(item=>`<li>${esc(item)}</li>`).join('')}</ul>
+        ${f.alert?`<div class="garde-alert" role="note">${esc(f.alert)}</div>`:''}
+      </div>
+    </div>`).join('')+'</div>';
+}
 
 /* ── ITEMS ── */
 function renderItems(){const list=document.getElementById('itemsList');if(!list)return;list.innerHTML='';APP_DATA.chapters.filter(ch=>ch.items.length>0).forEach(ch=>{ch.items.forEach(item=>{const el=document.createElement('div');el.className='item-card';el.onclick=()=>showCh(ch.id);el.innerHTML=`<div class="item-title"><span class="rang-badge rang-a">${item}</span>${esc(ch.t)}</div><div class="item-desc">Chapitre ${ch.id.replace('ch','')} — Cliquez pour lire</div>`;list.appendChild(el)})})}

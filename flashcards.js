@@ -90,3 +90,495 @@ const FLASHCARDS = [
   { id: 56, chapter: 'ch17', rang: 'A', question: 'Définition de l\'obstination déraisonnable (acharnement thérapeutique) ?', answer: 'Poursuite de traitements qui n\'ont d\'autre effet que le seul maintien artificiel de la vie, lorsqu\'ils apparaissent inutiles, disproportionnés ou n\'ayant d\'autre effet que le seul maintien artificiel de la vie. Interdite par la loi Léonetti (2005) et Claeys-Leonetti (2016). Décision collégiale.', tags: ['obstination déraisonnable', 'fin de vie', 'loi'] },
   { id: 57, chapter: 'ch17', rang: 'A', question: 'Types de sédation en fin de vie ?', answer: '1. Sédation symptomatique intermittente : pour soulager un symptôme réfractaire (douleur, dyspnée, agitation). 2. Sédation terminale/profonde et continue : maintenue jusqu\'au décès, pour un ou plusieurs symptômes réfractaires, à la demande du patient, après décision collégiale. Sédation profonde et continue maintenue jusqu\'au décès = légalement encadrée (loi 2016).', tags: ['sédation', 'fin de vie', 'soins palliatifs'] },
 ];
+
+/* ═══════════════════════════════════════════════════════════════════
+   Mode Révision — sessions structurées (Anki / Quizlet)
+   ═══════════════════════════════════════════════════════════════════ */
+const REVISION_SRS_KEY = 'revision_srs';
+const REVISION_STATS_KEY = 'revision_stats';
+
+function getAllFlashcards() {
+  const pools = [];
+  if (typeof FLASHCARDS !== 'undefined') pools.push(...FLASHCARDS);
+  if (typeof FLASHCARDS_A !== 'undefined') pools.push(...FLASHCARDS_A);
+  if (typeof FLASHCARDS_B !== 'undefined') pools.push(...FLASHCARDS_B);
+  if (typeof FLASHCARDS_C !== 'undefined') pools.push(...FLASHCARDS_C);
+  if (typeof FLASHCARDS_MEMOS !== 'undefined') pools.push(...FLASHCARDS_MEMOS);
+  if (typeof FLASHCARDS_EXPANDED !== 'undefined') pools.push(...FLASHCARDS_EXPANDED);
+  const seen = new Set();
+  return pools.filter(c => {
+    if (!c || c.id == null) return false;
+    const k = String(c.id);
+    if (seen.has(k)) return false;
+    seen.add(k);
+    return true;
+  });
+}
+
+function revisionChapterTitle(chId) {
+  if (typeof APP_DATA !== 'undefined' && APP_DATA.chapters) {
+    const ch = APP_DATA.chapters.find(x => x.id === chId);
+    if (ch) return ch.t;
+  }
+  return chId || '';
+}
+
+function loadRevisionSRS() {
+  try { return JSON.parse(localStorage.getItem(REVISION_SRS_KEY)) || {}; } catch { return {}; }
+}
+function saveRevisionSRS(srs) {
+  localStorage.setItem(REVISION_SRS_KEY, JSON.stringify(srs));
+}
+
+function loadRevisionStats() {
+  try {
+    return JSON.parse(localStorage.getItem(REVISION_STATS_KEY)) || {
+      totalSeen: 0, streak: 0, lastDay: '', sessions: 0,
+      byChapter: {}, history: []
+    };
+  } catch {
+    return { totalSeen: 0, streak: 0, lastDay: '', sessions: 0, byChapter: {}, history: [] };
+  }
+}
+function saveRevisionStats(stats) {
+  localStorage.setItem(REVISION_STATS_KEY, JSON.stringify(stats));
+}
+
+function srsKey(card) { return String(card.id); }
+
+function applySRSRating(card, rating) {
+  const srs = loadRevisionSRS();
+  const key = srsKey(card);
+  const entry = srs[key] || { ease: 2.5, interval: 0, nextReview: 0, reps: 0 };
+  const now = Date.now();
+  if (rating === 'know') {
+    entry.reps += 1;
+    entry.interval = entry.interval === 0 ? 1 : Math.round(entry.interval * entry.ease);
+    entry.ease = Math.min(3, entry.ease + 0.15);
+    entry.nextReview = now + entry.interval * 86400000;
+  } else if (rating === 'review') {
+    entry.interval = 1;
+    entry.ease = Math.max(1.3, entry.ease - 0.05);
+    entry.nextReview = now + 86400000;
+  } else {
+    entry.interval = 0;
+    entry.ease = Math.max(1.3, entry.ease - 0.2);
+    entry.nextReview = now + 600000;
+  }
+  srs[key] = entry;
+  saveRevisionSRS(srs);
+  return entry;
+}
+
+function shuffleArr(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+const RevisionMode = {
+  screen: 'setup',
+  sessionMode: 'full',
+  chapter: 'mixed',
+  queue: [],
+  index: 0,
+  startedAt: 0,
+  results: { know: 0, review: 0, dont: 0, requeued: 0 },
+  sessionRepeats: {},
+  flipped: false,
+  animating: false,
+
+  mount() {
+    const root = document.getElementById('vFlash');
+    if (!root || root.querySelector('#revApp')) return;
+    root.innerHTML = `
+      <div class="rev-app" id="revApp">
+        <div class="rev-screen rev-setup active" id="revSetup">
+          <div class="page-hd">
+            <h1>Mode Révision</h1>
+            <p>Sessions ciblées · répétition espacée · pas de scroll infini</p>
+          </div>
+          <div class="rev-stats-panel" id="revStatsPanel"></div>
+          <div class="rev-mode-row">
+            <span class="rev-mode-label">Durée de session</span>
+            <div class="rev-mode-toggle">
+              <button type="button" class="rev-mode-btn" data-mode="quick">Rapide · 5</button>
+              <button type="button" class="rev-mode-btn active" data-mode="full">Complet · 20</button>
+            </div>
+          </div>
+          <p class="rev-grid-title">Choisir un chapitre</p>
+          <div class="rev-ch-grid" id="revChGrid"></div>
+        </div>
+        <div class="rev-screen rev-study" id="revStudy">
+          <div class="rev-study-hdr">
+            <button type="button" class="rev-text-btn" id="revQuitBtn">← Quitter</button>
+            <span class="rev-session-label" id="revSessionLabel"></span>
+          </div>
+          <div class="rev-progress-wrap">
+            <div class="rev-progress-meta">
+              <span id="revProgText">0 / 0</span>
+              <span id="revTimer">0:00</span>
+            </div>
+            <div class="rev-progress-bar"><div class="rev-progress-fill" id="revProgFill"></div></div>
+          </div>
+          <div class="rev-card-stage" id="revCardStage">
+            <div class="rev-slide rev-slide-active" id="revSlide">
+              <div class="flash-container rev-container">
+                <div class="flash-card rev-card" id="revCard" role="button" tabindex="0" aria-label="Retourner la carte">
+                  <div class="flash-front rev-face">
+                    <div class="flash-ch" id="revCh"></div>
+                    <div class="flash-rang" id="revRang"></div>
+                    <div class="flash-q" id="revQ"></div>
+                    <div class="flash-hint rev-tap-hint">Toucher pour retourner</div>
+                  </div>
+                  <div class="flash-back rev-face">
+                    <div class="flash-a" id="revA"></div>
+                    <div class="flash-tags" id="revTags"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="rev-eval rev-eval-hidden" id="revEval">
+            <button type="button" class="rev-eval-btn rev-eval-know" data-rating="know">Je sais</button>
+            <button type="button" class="rev-eval-btn rev-eval-review" data-rating="review">À revoir</button>
+            <button type="button" class="rev-eval-btn rev-eval-dont" data-rating="dont">Je sais pas</button>
+          </div>
+        </div>
+        <div class="rev-screen rev-results" id="revResults">
+          <div class="page-hd rev-results-hd">
+            <h1>Session terminée</h1>
+            <p id="revResultsSub"></p>
+          </div>
+          <div class="rev-score-ring" id="revScoreRing">
+            <span class="rev-score-pct" id="revScorePct">0%</span>
+            <span class="rev-score-lbl">maîtrise</span>
+          </div>
+          <div class="rev-results-grid" id="revResultsGrid"></div>
+          <div class="rev-results-actions">
+            <button type="button" class="rev-primary-btn" id="revAgainBtn">Nouvelle session</button>
+            <button type="button" class="rev-ghost-btn" id="revHomeBtn">Choisir un chapitre</button>
+          </div>
+        </div>
+      </div>`;
+    this.bindEvents();
+    this.showSetup();
+  },
+
+  bindEvents() {
+    const app = document.getElementById('revApp');
+    if (!app) return;
+    app.addEventListener('click', e => {
+      const modeBtn = e.target.closest('.rev-mode-btn');
+      if (modeBtn) {
+        app.querySelectorAll('.rev-mode-btn').forEach(b => b.classList.remove('active'));
+        modeBtn.classList.add('active');
+        this.sessionMode = modeBtn.dataset.mode;
+        return;
+      }
+      const chBtn = e.target.closest('.rev-ch-tile');
+      if (chBtn) {
+        this.startSession(chBtn.dataset.chapter);
+        return;
+      }
+      const evalBtn = e.target.closest('.rev-eval-btn');
+      if (evalBtn) {
+        this.rateCard(evalBtn.dataset.rating);
+        return;
+      }
+      if (e.target.closest('#revCard')) this.flipCard();
+      if (e.target.closest('#revQuitBtn')) this.confirmQuit();
+      if (e.target.closest('#revAgainBtn')) this.showSetup();
+      if (e.target.closest('#revHomeBtn')) this.showSetup();
+    });
+    document.addEventListener('keydown', e => {
+      if (this.screen !== 'study') return;
+      if (e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        this.flipCard();
+      }
+      if (this.flipped && ['1', '2', '3'].includes(e.key)) {
+        const map = { '1': 'dont', '2': 'review', '3': 'know' };
+        this.rateCard(map[e.key]);
+      }
+    });
+  },
+
+  onViewShow() {
+    if (!document.getElementById('revApp')) this.mount();
+    if (this.screen === 'study' && this.queue.length) this.renderCurrentCard();
+    else this.showSetup();
+  },
+
+  showScreen(name) {
+    this.screen = name;
+    ['revSetup', 'revStudy', 'revResults'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.classList.toggle('active', id === 'revSetup' && name === 'setup' || id === 'revStudy' && name === 'study' || id === 'revResults' && name === 'results');
+    });
+  },
+
+  showSetup() {
+    this.showScreen('setup');
+    this.renderSetup();
+  },
+
+  countByChapter(all) {
+    const counts = { mixed: all.length };
+    all.forEach(c => {
+      counts[c.chapter] = (counts[c.chapter] || 0) + 1;
+    });
+    return counts;
+  },
+
+  renderSetup() {
+    const all = getAllFlashcards();
+    const counts = this.countByChapter(all);
+    const stats = loadRevisionStats();
+    const panel = document.getElementById('revStatsPanel');
+    if (panel) {
+      const mastered = Object.values(stats.byChapter || {}).reduce((s, ch) => s + (ch.know || 0), 0);
+      panel.innerHTML = `
+        <div class="rev-stat-chip"><span class="rev-stat-n">${stats.totalSeen || 0}</span><span class="rev-stat-l">cartes vues</span></div>
+        <div class="rev-stat-chip"><span class="rev-stat-n">${stats.streak || 0}</span><span class="rev-stat-l">jours d'affilée</span></div>
+        <div class="rev-stat-chip"><span class="rev-stat-n">${stats.sessions || 0}</span><span class="rev-stat-l">sessions</span></div>
+        <div class="rev-stat-chip"><span class="rev-stat-n">${mastered}</span><span class="rev-stat-l">« Je sais »</span></div>`;
+    }
+    const grid = document.getElementById('revChGrid');
+    if (!grid) return;
+    const chapters = typeof APP_DATA !== 'undefined' ? APP_DATA.chapters.filter(c => (counts[c.id] || 0) > 0) : [];
+    let html = `<button type="button" class="rev-ch-tile rev-ch-mixed" data-chapter="mixed">
+      <span class="rev-ch-num">∞</span>
+      <span class="rev-ch-name">Mixte</span>
+      <span class="rev-ch-count">${counts.mixed} cartes</span>
+    </button>`;
+    chapters.forEach(ch => {
+      const n = counts[ch.id] || 0;
+      const chStats = stats.byChapter?.[ch.id] || { seen: 0, know: 0 };
+      const mastery = chStats.seen ? Math.round((chStats.know / chStats.seen) * 100) : 0;
+      html += `<button type="button" class="rev-ch-tile" data-chapter="${ch.id}">
+        <span class="rev-ch-num">${ch.id.replace('ch', '')}</span>
+        <span class="rev-ch-name">${this.esc(revisionChapterTitle(ch.id))}</span>
+        <span class="rev-ch-count">${n} cartes</span>
+        ${chStats.seen ? `<span class="rev-ch-mastery">${mastery}% maîtrise</span>` : ''}
+      </button>`;
+    });
+    grid.innerHTML = html;
+  },
+
+  esc(s) {
+    if (typeof esc === 'function') return esc(s);
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  },
+
+  sessionSize(poolLen) {
+    const want = this.sessionMode === 'quick' ? 5 : 20;
+    return Math.max(1, Math.min(want, poolLen, 20));
+  },
+
+  buildQueue(chapter) {
+    const all = getAllFlashcards();
+    let pool = chapter === 'mixed' ? all : all.filter(c => c.chapter === chapter);
+    if (!pool.length) return [];
+    const srs = loadRevisionSRS();
+    const now = Date.now();
+    const due = pool.filter(c => (srs[srsKey(c)]?.nextReview || 0) <= now);
+    const notDue = pool.filter(c => (srs[srsKey(c)]?.nextReview || 0) > now);
+    const size = this.sessionSize(pool.length);
+    const picked = [];
+    const take = (list, n) => shuffleArr(list).slice(0, n);
+    picked.push(...take(due, Math.min(due.length, Math.ceil(size * 0.6))));
+    const remain = size - picked.length;
+    if (remain > 0) {
+      const rest = notDue.filter(c => !picked.includes(c));
+      picked.push(...take(rest.length ? rest : pool.filter(c => !picked.includes(c)), remain));
+    }
+    return shuffleArr(picked.slice(0, size));
+  },
+
+  startSession(chapter) {
+    this.chapter = chapter;
+    this.queue = this.buildQueue(chapter);
+    if (!this.queue.length) {
+      if (typeof showToast === 'function') showToast('Aucune carte pour ce chapitre');
+      return;
+    }
+    this.index = 0;
+    this.startedAt = Date.now();
+    this.results = { know: 0, review: 0, dont: 0, requeued: 0 };
+    this.sessionRepeats = {};
+    this.flipped = false;
+    this.timerIv = setInterval(() => this.updateTimer(), 1000);
+    const label = document.getElementById('revSessionLabel');
+    if (label) {
+      label.textContent = chapter === 'mixed' ? 'Mixte · ' + (this.sessionMode === 'quick' ? '5' : '20') : revisionChapterTitle(chapter);
+    }
+    this.showScreen('study');
+    this.renderCurrentCard(true);
+  },
+
+  updateTimer() {
+    const el = document.getElementById('revTimer');
+    if (!el || !this.startedAt) return;
+    const s = Math.floor((Date.now() - this.startedAt) / 1000);
+    const m = Math.floor(s / 60);
+    const r = s % 60;
+    el.textContent = m + ':' + String(r).padStart(2, '0');
+  },
+
+  renderCurrentCard(initial) {
+    const card = this.queue[this.index];
+    const cardEl = document.getElementById('revCard');
+    const slide = document.getElementById('revSlide');
+    if (!card || !cardEl) return;
+
+    const paint = () => {
+      cardEl.classList.remove('flipped');
+      this.flipped = false;
+      cardEl.className = 'flash-card rev-card ' + (card.rang === 'A' ? 'rev-rang-a' : 'rev-rang-b');
+      document.getElementById('revCh').textContent = revisionChapterTitle(card.chapter);
+      const r = document.getElementById('revRang');
+      r.textContent = 'Rang ' + card.rang;
+      r.className = 'flash-rang ' + (card.rang === 'A' ? 'rang-a' : 'rang-b');
+      document.getElementById('revQ').textContent = card.question;
+      document.getElementById('revA').textContent = card.answer;
+      document.getElementById('revTags').innerHTML = (card.tags || []).map(t => `<span class="tag">${this.esc(t)}</span>`).join('');
+      const total = this.queue.length;
+      document.getElementById('revProgText').textContent = `${this.index + 1} / ${total}`;
+      const fill = document.getElementById('revProgFill');
+      if (fill) fill.style.width = `${((this.index + 1) / total) * 100}%`;
+      document.getElementById('revEval')?.classList.add('rev-eval-hidden');
+    };
+
+    if (initial || !slide) {
+      paint();
+      return;
+    }
+    if (this.animating) return;
+    this.animating = true;
+    slide.classList.add('rev-slide-exit');
+    setTimeout(() => {
+      slide.classList.remove('rev-slide-exit');
+      slide.classList.add('rev-slide-enter');
+      paint();
+      requestAnimationFrame(() => {
+        slide.classList.remove('rev-slide-enter');
+        this.animating = false;
+      });
+    }, 280);
+  },
+
+  flipCard() {
+    if (this.screen !== 'study' || this.animating) return;
+    const cardEl = document.getElementById('revCard');
+    if (!cardEl) return;
+    this.flipped = !this.flipped;
+    cardEl.classList.toggle('flipped', this.flipped);
+    const evalEl = document.getElementById('revEval');
+    if (evalEl) evalEl.classList.toggle('rev-eval-hidden', !this.flipped);
+  },
+
+  rateCard(rating) {
+    if (!this.flipped) return;
+    const card = this.queue[this.index];
+    if (!card) return;
+    const map = { know: 'know', review: 'review', dont: 'dont' };
+    const r = map[rating] || 'review';
+    applySRSRating(card, r);
+    if (r === 'know') this.results.know++;
+    else if (r === 'review') this.results.review++;
+    else this.results.dont++;
+
+    this.bumpStats(card, r);
+
+    if (r === 'dont') {
+      const k = srsKey(card);
+      const times = (this.sessionRepeats[k] || 0) + 1;
+      this.sessionRepeats[k] = times;
+      if (times < 2) {
+        this.queue.push(card);
+        this.results.requeued++;
+      }
+    }
+
+    if (this.index >= this.queue.length - 1) this.finishSession();
+    else {
+      this.index++;
+      this.renderCurrentCard();
+    }
+  },
+
+  bumpStats(card, rating) {
+    const stats = loadRevisionStats();
+    stats.totalSeen = (stats.totalSeen || 0) + 1;
+    if (!stats.byChapter) stats.byChapter = {};
+    const ch = card.chapter || 'mixed';
+    if (!stats.byChapter[ch]) stats.byChapter[ch] = { seen: 0, know: 0, review: 0, dont: 0 };
+    stats.byChapter[ch].seen++;
+    if (rating === 'know') stats.byChapter[ch].know++;
+    else if (rating === 'review') stats.byChapter[ch].review++;
+    else stats.byChapter[ch].dont++;
+    saveRevisionStats(stats);
+  },
+
+  finishSession() {
+    clearInterval(this.timerIv);
+    const elapsed = Date.now() - this.startedAt;
+    const total = this.results.know + this.results.review + this.results.dont;
+    const pct = total ? Math.round((this.results.know / total) * 100) : 0;
+    const stats = loadRevisionStats();
+    stats.sessions = (stats.sessions || 0) + 1;
+    const today = new Date().toDateString();
+    if (stats.lastSessionDay !== today) {
+      const yesterday = new Date();
+      yesterday.setDate(yesterday.getDate() - 1);
+      stats.streak = stats.lastSessionDay === yesterday.toDateString() ? (stats.streak || 0) + 1 : 1;
+      stats.lastSessionDay = today;
+    }
+    saveRevisionStats(stats);
+
+    document.getElementById('revScorePct').textContent = pct + '%';
+    document.getElementById('revResultsSub').textContent =
+      revisionChapterTitle(this.chapter === 'mixed' ? '' : this.chapter) || 'Session mixte';
+    const sec = Math.floor(elapsed / 1000);
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    document.getElementById('revResultsGrid').innerHTML = `
+      <div class="rev-result-item"><span class="rev-result-val">${this.formatTime(m, s)}</span><span class="rev-result-lbl">Durée</span></div>
+      <div class="rev-result-item rev-result-good"><span class="rev-result-val">${this.results.know}</span><span class="rev-result-lbl">Maîtrisées</span></div>
+      <div class="rev-result-item rev-result-warn"><span class="rev-result-val">${this.results.review}</span><span class="rev-result-lbl">À revoir</span></div>
+      <div class="rev-result-item rev-result-bad"><span class="rev-result-val">${this.results.dont}</span><span class="rev-result-lbl">À retravailler</span></div>
+      <div class="rev-result-item"><span class="rev-result-val">${this.queue.length}</span><span class="rev-result-lbl">Cartes passées</span></div>`;
+    this.showScreen('results');
+  },
+
+  formatTime(m, s) {
+    return m + ' min ' + s + ' s';
+  },
+
+  confirmQuit() {
+    if (confirm('Quitter la session en cours ?')) {
+      clearInterval(this.timerIv);
+      this.showSetup();
+    }
+  }
+};
+
+(function bootRevisionMode() {
+  function install() {
+    RevisionMode.mount();
+    window.renderFlashcard = function () { RevisionMode.onViewShow(); };
+    window.shuffleFlash = function () { RevisionMode.showSetup(); };
+    window.filterFlash = function () {};
+    window.nextFlash = function () {};
+    window.prevFlash = function () {};
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => setTimeout(install, 0));
+  } else {
+    setTimeout(install, 0);
+  }
+})();

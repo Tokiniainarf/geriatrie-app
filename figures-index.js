@@ -1,0 +1,28 @@
+// Images et tableaux du manuel — Index des figures principales
+const FIGURES_INDEX = [
+  { id: 'fig-ch1-1', chapitre: 'ch1', description: 'Modèle de décompensation gériatrique de Bouchon', type: 'schema', svg: true },
+  { id: 'fig-ch1-2', chapitre: 'ch1', description: 'Mécanismes cellulaires du vieillissement (télomères, ROS, AGE)', type: 'schema', svg: false },
+  { id: 'fig-ch3-1', chapitre: 'ch3', description: 'Échelle ADL de Katz — 6 activités', type: 'tableau', svg: false },
+  { id: 'fig-ch3-2', chapitre: 'ch3', description: 'Échelle IADL de Lawton — 8 activités', type: 'tableau', svg: false },
+  { id: 'fig-ch3-3', chapitre: 'ch3', description: 'Critères de Fried — pentagramme fragilité', type: 'schema', svg: true },
+  { id: 'fig-ch6-1', chapitre: 'ch6', description: 'Densité osseuse — T-score et Z-score', type: 'schema', svg: false },
+  { id: 'fig-ch6-2', chapitre: 'ch6', description: 'FRAX — facteurs de risque fracturaire', type: 'tableau', svg: false },
+  { id: 'fig-ch7-1', chapitre: 'ch7', description: 'Anatomie du genou — arthrose fémoro-tibiale', type: 'schema', svg: true },
+  { id: 'fig-ch7-2', chapitre: 'ch7', description: 'Stades radiologiques de Kellgren-Lawrence', type: 'tableau', svg: false },
+  { id: 'fig-ch8-1', chapitre: 'ch8', description: 'Voies de la douleur — gate control', type: 'schema', svg: true },
+  { id: 'fig-ch9-1', chapitre: 'ch9', description: 'Cascade de décompensation cognitive', type: 'schema', svg: true },
+  { id: 'fig-ch9-2', chapitre: 'ch9', description: 'Stades GDS de Reisberg (1-7)', type: 'tableau', svg: false },
+  { id: 'fig-ch10-1', chapitre: 'ch10', description: 'Spectre dépressif chez la personne âgée', type: 'schema', svg: true },
+  { id: 'fig-ch11-1', chapitre: 'ch11', description: 'Algorithme CAM — diagnostic confusion', type: 'algorithme', svg: true },
+  { id: 'fig-ch12-1', chapitre: 'ch12', description: 'Chaîne causale des chutes', type: 'schema', svg: true },
+  { id: 'fig-ch12-2', chapitre: 'ch12', description: 'Échelle de Tinetti — grille d\'évaluation', type: 'tableau', svg: false },
+  { id: 'fig-ch13-1', chapitre: 'ch13', description: 'Stades d\'escarre (NPUAP 1-4)', type: 'schema', svg: true },
+  { id: 'fig-ch13-2', chapitre: 'ch13', description: 'Échelle de Braden — 6 facteurs', type: 'tableau', svg: false },
+  { id: 'fig-ch13-3', chapitre: 'ch13', description: 'Conséquences de l\'alitement par appareil', type: 'tableau', svg: false },
+  { id: 'fig-ch14-1', chapitre: 'ch14', description: 'Pyramide nutritionnelle gériatrique', type: 'schema', svg: true },
+  { id: 'fig-ch14-2', chapitre: 'ch14', description: 'Mini Nutritional Assessment (MNA)', type: 'questionnaire', svg: false },
+  { id: 'fig-ch15-1', chapitre: 'ch15', description: 'Anatomie vésicale — types d\'incontinence', type: 'schema', svg: true },
+  { id: 'fig-ch16-1', chapitre: 'ch16', description: 'Cascade iatrogénique', type: 'schema', svg: true },
+  { id: 'fig-ch16-2', chapitre: 'ch16', description: 'Critères de Beers 2023 — extraits', type: 'tableau', svg: false },
+  { id: 'fig-ch17-1', chapitre: 'ch17', description: 'Trajectoires de fin de vie (cancer vs dégénératif)', type: 'schema', svg: true }
+];

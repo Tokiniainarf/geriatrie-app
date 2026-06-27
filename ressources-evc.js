@@ -1,0 +1,27 @@
+// Biblio et ressources pour préparation EVC Gériatrie
+const RESSOURCES_EVC = [
+  { id: 'res-1', type: 'livre', titre: 'Gériatrie — Pr Jacques Boddaert (CNEG)',
+    description: 'Manuel de référence, 5e édition Elsevier Masson 2021. 20 chapitres couvrant tout le programme EVC.',
+    utilite: 'Base de contenu principale. Tous les ITEMS sont couverts.' },
+  { id: 'res-2', type: 'guide', titre: 'Recommandations HAS — Parcours de soins personnes âgées',
+    description: 'HAS 2023. Fragilité, dénutrition, chutes, soins palliatifs.',
+    utilite: 'Connaître les reco officielles = points faciles à l\'examen.' },
+  { id: 'res-3', type: 'score', titre: 'Critères de Beers (AGS 2023)',
+    description: 'Liste de médicaments inappropriés chez le sujet âgé. Actualisée régulièrement.',
+    utilite: 'Classique EVC : "Quels sont les médicaments inappropriés ?"' },
+  { id: 'res-4', type: 'score', titre: 'Critères STOPP/START v2',
+    description: 'Prescription inappropriée (STOPP) et omission (START) chez sujet âgé.',
+    utilite: 'Complémentaire aux Beers. Plus sensible pour détecter les erreurs.' },
+  { id: 'res-5', type: 'guide', titre: 'Loi Leonetti (2005) + loi Claeys-Leonetti (2016)',
+    description: 'Fin de vie, directives anticipées, obstination déraisonnable, sédation profonde.',
+    utilite: 'Questions éthique fréquentes en EVC.' },
+  { id: 'res-6', type: 'outil', titre: 'Protocole HAS — Prévention des chutes',
+    description: 'Arbre décisionnel : dépistage, évaluation, intervention, suivi.',
+    utilite: 'Connaître l\'algorithme de prise en charge des chutes.' },
+  { id: 'res-7', type: 'score', titre: 'Phénotype de Fried (fragilité)',
+    description: '5 critères : perte poids, épuisement, faiblesse, lenteur, inactivité. ≥3 = fragile.',
+    utilite: 'Distinction robuste/pré-fragile/fragile = question classique.' },
+  { id: 'res-8', type: 'guide', titre: 'Stratégie médicamenteuse du sujet âgé (HAS)',
+    description: 'Prescrire, déprescrire, évaluer iatrogénie. START/STOP.',
+    utilite: 'Cascade iatrogénique, polymédication = thème récurrent EVC.' }
+];
