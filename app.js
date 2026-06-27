@@ -734,7 +734,7 @@ function renderDictList(){
   }
 
   const map=buildDictIndex();
-  list.innerHTML=entries.map(e=>{
+  list.innerHTML=entries.map((e,idx)=>{
     const letter=dictFirstLetter(e.term);
     const isFav=favs.includes(e.term);
     const chTitle=getChTitle(e.chapter);
@@ -744,7 +744,7 @@ function renderDictList(){
       if(exists)return`<button type="button" class="dict-related" onclick="dictFocusTerm('${escAttr(r)}')">${esc(r)}</button>`;
       return`<span class="dict-related dict-related-muted">${esc(r)}</span>`;
     }).join('');
-    return`<article class="dict-card" data-term="${escAttr(e.term)}" data-letter="${letter}" id="dict-${escAttr(e.term).replace(/\\s+/g,'-')}">
+    return`<article class="dict-card dict-card-enter" style="animation-delay:${Math.min(idx*0.03,0.6)}s" data-term="${escAttr(e.term)}" data-letter="${letter}" id="dict-${escAttr(e.term).replace(/\\s+/g,'-')}">
       <div class="dict-card-head">
         <h2 class="dict-card-title">${esc(e.term)}</h2>
         <div class="dict-card-actions">

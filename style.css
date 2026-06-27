@@ -208,7 +208,9 @@ input { font-family: inherit; font-size: inherit; }
   border-top: 1px solid var(--glass-border);
   border-radius: 0 0 var(--radius) var(--radius);
 }
-.hero-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 4px; color: var(--text); }
+.hero-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 4px; color: var(--text); animation: heroTitleIn .6s cubic-bezier(.16,1,.3,1) both; }
+@keyframes heroTitleIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .hero-title { animation: none; } }
 .hero-btn { background: linear-gradient(135deg, var(--accent), #0E7490); box-shadow: 0 6px 20px var(--accent-glow); }
 .hero-btn-ghost { background: var(--bg-card); backdrop-filter: blur(8px); border: 1px solid var(--glass-border-strong); }
 .hero-sub { font-size: .78rem; color: var(--text2); line-height: 1.5; }
@@ -2176,6 +2178,9 @@ button, input, a {
   background: var(--bg-card); border: 1px solid var(--glass-border);
   box-shadow: var(--shadow-card); transition: border-color .2s, box-shadow .2s, transform .25s cubic-bezier(.16,1,.3,1);
 }
+.dict-card-enter { animation: dictCardIn .4s cubic-bezier(.16,1,.3,1) both; }
+@keyframes dictCardIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .dict-card-enter { animation: none; } }
 .dict-card:hover { border-color: var(--glass-border-strong); transform: translateY(-2px); box-shadow: var(--shadow-soft); }
 .dict-card-highlight {
   border-color: var(--accent) !important;
