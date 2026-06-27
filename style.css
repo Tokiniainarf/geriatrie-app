@@ -217,6 +217,9 @@ input { font-family: inherit; font-size: inherit; }
 
 .stat-click { cursor: pointer; transition: border-color .2s, background .2s; }
 .stat-click:hover { border-color: var(--accent); background: var(--accent-soft); }
+.stat-click:hover .stat-num { animation: statNumPop .3s cubic-bezier(.34,1.56,.64,1); }
+@keyframes statNumPop { from { transform: scale(.8); } to { transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) { .stat-click:hover .stat-num { animation: none; } }
 
 /* ── STATS BAR ── */
 .stats-bar { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
@@ -239,7 +242,23 @@ input { font-family: inherit; font-size: inherit; }
 @media (prefers-reduced-motion: reduce) { .stats-bar .stat { animation: none; } }
 
 /* ── SECTION HEADERS ── */
-.section-header { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--text3); padding: 20px 4px 10px; }
+.section-header {
+  font-size: .78rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .12em; color: var(--text3); padding: 20px 4px 10px;
+  position: relative; overflow: hidden;
+  animation: sectionSlide .5s cubic-bezier(.16,1,.3,1) both;
+}
+.section-header::before {
+  content: ''; position: absolute; left: 0; bottom: 8px;
+  width: 40px; height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  opacity: .5;
+}
+@keyframes sectionSlide {
+  from { opacity: 0; transform: translateX(-16px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) { .section-header { animation: none; } }
 
 /* ── CHAPTER CARDS ── */
 .ch-row {
