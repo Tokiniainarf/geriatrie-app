@@ -1,4 +1,4 @@
-const CACHE_NAME = 'geriatrie-v79';
+const CACHE_NAME = 'geriatrie-v80';
 const CORE = [
   './',
   './index.html',
@@ -74,6 +74,7 @@ const CORE = [
   './guides-ehpad.js',
   './cas-evc-2018-2019.js',
   './cas-evc-2015-2017.js',
+  './cas-evc-2010-2014.js',
   './guides-ssr.js',
   './cas-complexes.js',
   './infections-reference.js',
@@ -85,6 +86,8 @@ const CORE = [
   './guides-diabetologie.js',
   './guides-cardiologie.js',
   './pharmaco-complete.js',
+  './protocoles-palliatif.js',
+  './protocoles-rcp.js',
   './guides-rhumatologie.js',
   './guides-pneumologie.js',
   './guides-neurologie.js',
