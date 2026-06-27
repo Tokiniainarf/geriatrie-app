@@ -1,4 +1,4 @@
-const CACHE_NAME = 'geriatrie-v137';
+const CACHE_NAME = 'geriatrie-v138';
 const CORE = [
   './',
   './index.html',
@@ -149,6 +149,8 @@ const CORE = [
   "./sujets-evc-2004-2006.js",
   "./sujets-evc-supp.js",
   "./mega-flashcards-4.js",
+  "./sujets-evc-2001-2003.js",
+  "./mega-flashcards-5.js",
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png'
