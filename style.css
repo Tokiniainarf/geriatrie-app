@@ -266,7 +266,10 @@ input { font-family: inherit; font-size: inherit; }
 .ch-row-meta { display: flex; gap: 6px; flex-wrap: wrap; }
 .tag { font-size: .75rem; padding: 4px 10px; border-radius: 99px; font-weight: 600; background: var(--accent-soft); color: var(--accent); border: 1px solid rgba(8,145,178,.2); }
 .ch-row-bm { font-size: 1.2rem; color: var(--text3); transition: color .2s; padding: 4px; min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center; }
-.ch-row-bm.on { color: var(--orange); }
+.ch-row-bm.on { color: var(--orange); animation: starPop .45s cubic-bezier(.175,.885,.32,1.275); }
+.ch-row-bm:active { transform: scale(.85); }
+@keyframes starPop { 0% { transform: scale(.3); opacity: .4; } 50% { transform: scale(1.25); } 100% { transform: scale(1); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .ch-row-bm.on { animation: none; } }
 .ch-progress { position: absolute; bottom: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--accent), #22D3EE); border-radius: 0 2px 0 0; transition: width .3s; }
 
 /* ── CHAPTER READING ── */
