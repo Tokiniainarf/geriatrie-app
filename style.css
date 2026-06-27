@@ -102,6 +102,9 @@ input { font-family: inherit; font-size: inherit; }
   transition: all .2s;
 }
 .top-btn:hover { background: var(--accent-soft); border-color: var(--accent); }
+.top-btn:active { transform: scale(0.88); transition: transform .08s ease; }
+.top-icon { transition: transform .3s ease, box-shadow .3s ease; }
+.top-icon:hover { transform: scale(1.08); box-shadow: 0 0 28px var(--accent-glow); }
 .top-btn svg { width: 18px; height: 18px; }
 .icon-moon { display: none; }
 [data-theme="dark"] .icon-sun { display: none; }
