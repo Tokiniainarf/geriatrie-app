@@ -154,6 +154,8 @@ const CORE = [
   "./mega-flashcards-6.js",
   "./mega-flashcards-7.js",
   "./mega-flashcards-8.js",
+  "./mega-flashcards-9.js",
+  "./mega-flashcards-10.js",
   "./sujets-evc-extra.js",
   "./guides-geriatrie-palliative-avancee.js",
   "./sujets-evc-1998-2000.js",
@@ -162,6 +164,7 @@ const CORE = [
   "./sujets-evc-fin.js",
   "./guides-geriatrie-cardio-avancee.js",
   "./sujets-evc-1995-1997.js",
+  "./sujets-evc-items.js",
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png'
