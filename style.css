@@ -219,10 +219,12 @@ input { font-family: inherit; font-size: inherit; }
   padding: 10px 16px; border-radius: var(--radius-sm); font-size: .82rem; font-weight: 600;
   background: var(--accent); color: #fff; border: 1px solid transparent;
   box-shadow: 0 0 16px var(--accent-glow); min-height: 44px;
+  transition: transform .22s cubic-bezier(.34,1.56,.64,1), filter .2s, box-shadow .2s;
 }
 .hero-btn-ghost { background: var(--glass); color: var(--text); border-color: var(--glass-border); box-shadow: none; }
 .hero-btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
-.hero-btn:active { transform: scale(0.97) translateY(0); filter: brightness(0.98); transition: transform .08s ease; }
+.hero-btn:active { transform: scale(0.97) translateY(0); filter: brightness(0.98); transition-duration: .08s; }
+@media (prefers-reduced-motion: reduce) { .hero-btn { transition: none; } }
 
 /* ── PAGE HEADERS ── */
 .page-hd { margin-bottom: 18px; padding: 4px 2px 0; }
