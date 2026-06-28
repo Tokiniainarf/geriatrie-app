@@ -7,6 +7,7 @@ const S={view:'home',ch:null,bm:safeJSON('gbm',[]),read:safeJSON('grd',[]),fs:pa
 let flashIdx=0,flashDeck=[],flashFilter='all';
 
 document.addEventListener('DOMContentLoaded',()=>{
+  preprocessAppData();
   setFS(S.fs);setLH(S.lh,true);
   const fsR=document.getElementById('fsRange');if(fsR)fsR.value=S.fs;
   const lhR=document.getElementById('lhRange');if(lhR)lhR.value=S.lh;
@@ -293,6 +294,84 @@ const BULLET_RE=/^[•\-–]\s*(.+)/;
 const DIAGRAM_RE=/^(Fonction|d'organe|Réserve|Seuil|Effet|100\s*%|0\s+Âge|\d\s+(Vieillissement|Maladie|Stress)|Fig\.\s*\d)/i;
 const NUM_LIST_RE=/^(\d{1,2})[\.)]\s+(.+)/;
 
+function preprocessAppData(){
+  if (typeof APP_DATA === 'undefined' || !APP_DATA.chapters || !APP_DATA.content) return;
+  const normalize = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');
+  const chapters = APP_DATA.chapters;
+  
+  for (let i = 0; i < chapters.length - 1; i++) {
+    const chId = chapters[i].id;
+    const nextChId = chapters[i+1].id;
+    const pages = APP_DATA.content[chId];
+    const nextPages = APP_DATA.content[nextChId];
+    
+    if (!pages || !pages.length || !nextPages || !nextPages.length) {
+      continue;
+    }
+    
+    const nextFirstPageNum = nextPages[0][0];
+    let candidate = -1;
+    
+    // Detection A ('stnioP')
+    for (let idx = Math.floor(pages.length / 2); idx < pages.length; idx++) {
+      if (pages[idx][1].includes('stnioP')) {
+        candidate = idx + 1;
+        break;
+      }
+    }
+    
+    // Detection B (Fallback Title)
+    if (candidate === -1) {
+      const normTitle = normalize(chapters[i+1].t);
+      for (let idx = Math.floor(pages.length / 2); idx < pages.length; idx++) {
+        if (normalize(pages[idx][1]).includes(normTitle)) {
+          candidate = idx;
+          break;
+        }
+      }
+    }
+    
+    // Backwards Expansion for Blank Pages
+    if (candidate !== -1) {
+      while (candidate > 0) {
+        const prevPageText = pages[candidate - 1][1].toLowerCase();
+        if (prevPageText.includes("this page intentionally left blank")) {
+          candidate--;
+        } else {
+          break;
+        }
+      }
+    }
+    
+    // Validation Gating
+    if (candidate !== -1 && candidate < pages.length) {
+      const pagesToMove = pages.slice(candidate);
+      const lastPageNum = pagesToMove[pagesToMove.length - 1][0];
+      const pageGap = nextFirstPageNum - lastPageNum;
+      
+      const gapCheck = pageGap > 0 && pageGap <= 2;
+      const sizeCheck = pagesToMove.length <= 4;
+      
+      let hasNonBlank = false;
+      for (const p of pagesToMove) {
+        const text = p[1].toLowerCase();
+        if (!text.includes("this page intentionally left blank") && text.trim().length > 0) {
+          hasNonBlank = true;
+          break;
+        }
+      }
+      
+      if (gapCheck && sizeCheck && hasNonBlank) {
+        const moved = pages.splice(candidate);
+        nextPages.unshift(...moved);
+      }
+    }
+  }
+}
+if (typeof APP_DATA !== 'undefined' && (typeof document === 'undefined' || !document.getElementById)) {
+  preprocessAppData();
+}
+
 function renderChapter(raw,chId){
   const ch=APP_DATA.chapters.find(c=>c.id===chId);
   const titleRe=ch?new RegExp('^'+ch.t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\s*$','i'):null;
@@ -330,6 +409,31 @@ function renderChapter(raw,chId){
     if (/^Fig\.|Tableau|Encadré|^\d{2,3}\s+/.test(l)) return true;
     if (/[.!?]$/.test(l)) return true;   // keep if it ends a sentence
     return false;
+  });
+  // R2 — Filtrer les listes de sections internes (TOC dupliquees dans le corps)
+  // Proteger les 40 premieres lignes (sommaire du debut du chapitre)
+  const preambleHeadings = new Set();
+  for (let pi = 0; pi < Math.min(lines.length, 40); pi++) {
+    if (SECTION_RE.test(lines[pi]) || LETTER_RE.test(lines[pi])) preambleHeadings.add(lines[pi]);
+  }
+  lines = lines.filter((l, i) => {
+    if (i < 40 || preambleHeadings.has(l)) return true;
+    const isSec = SECTION_RE.test(l);
+    const isLet = LETTER_RE.test(l);
+    if (!isSec && !isLet) return true;
+    const re = isSec ? SECTION_RE : LETTER_RE;
+    let nxtFound = false, prvFound = false;
+    for (let j = i + 1, cnt = 0; j < lines.length && cnt < 5; j++) {
+      if (!lines[j]) continue; cnt++;
+      if (re.test(lines[j])) { nxtFound = true; break; }
+      if (lines[j].length > 50 && /[.!?]/.test(lines[j])) break;
+    }
+    for (let j = i - 1, cnt = 0; j >= 40 && cnt < 5; j--) {
+      if (!lines[j]) continue; cnt++;
+      if (re.test(lines[j])) { prvFound = true; break; }
+      if (lines[j].length > 50 && /[.!?]/.test(lines[j])) break;
+    }
+    return !(nxtFound || prvFound);
   });
   let html='';let paraBuf=[];let bulletBuf=[];let inSection=false;let inSit=false;let inCallout=false;let calloutTitle='';let calloutBuf=[];let inNumList=false;let numBuf=[];let pastPreamble=false;
 
@@ -503,6 +607,8 @@ function renderChapter(raw,chId){
     paraBuf.push(l);
   }
   flushPara();flushBullets();flushNumList();if(inCallout)flushCallout();if(inSit)html+=`</ul></div>`;closeSection();
+  // R3 — Supprimer les sections sans contenu (en-tete de plan sans texte correspondant dans la BDD)
+  html = html.replace(/<section class="manual-section"><header class="section-head">[\s\S]*?<\/header><div class="section-body">\s*<\/div><\/section>/g, '');
   return html||'<div class="empty"><div class="empty-text">Aucun contenu structuré</div></div>';
 }
 function applyConceptLinks(){
