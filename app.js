@@ -1161,25 +1161,77 @@ function toggleAnnAnswer(ansId,btn){
 window.toggleAnnAnswer=toggleAnnAnswer;
 
 /* ── SUJETS EVC COMPLETS ── */
+function mergeSujetsPools(){
+  const chunks=[];
+  const push=(arr)=>{if(Array.isArray(arr)&&arr.length)chunks.push(arr);};
+  push(typeof SUJETS_EVC_COMPLETS!=='undefined'?SUJETS_EVC_COMPLETS:null);
+  push(typeof SUJETS_EVC_1995_1997!=='undefined'?SUJETS_EVC_1995_1997:null);
+  push(typeof SUJETS_EVC_1998_2000!=='undefined'?SUJETS_EVC_1998_2000:null);
+  push(typeof SUJETS_EVC_2001_2003!=='undefined'?SUJETS_EVC_2001_2003:null);
+  push(typeof SUJETS_EVC_2004_2006!=='undefined'?SUJETS_EVC_2004_2006:null);
+  push(typeof SUJETS_EVC_2007_2009!=='undefined'?SUJETS_EVC_2007_2009:null);
+  push(typeof SUJETS_EVC_2010_2012!=='undefined'?SUJETS_EVC_2010_2012:null);
+  push(typeof SUJETS_EVC_2013_2015!=='undefined'?SUJETS_EVC_2013_2015:null);
+  push(typeof SUJETS_EVC_2016_2018!=='undefined'?SUJETS_EVC_2016_2018:null);
+  push(typeof SUJETS_EVC_2019_2021!=='undefined'?SUJETS_EVC_2019_2021:null);
+  push(typeof SUJETS_EVC_CLASSIQUES!=='undefined'?SUJETS_EVC_CLASSIQUES:null);
+  push(typeof SUJETS_EVC_EXTRA!=='undefined'?SUJETS_EVC_EXTRA:null);
+  push(typeof SUJETS_EVC_DETAIlLES!=='undefined'?SUJETS_EVC_DETAIlLES:null);
+  push(typeof SUJETS_EVC_FIN!=='undefined'?SUJETS_EVC_FIN:null);
+  push(typeof SUJETS_EVC_ITEMS!=='undefined'?SUJETS_EVC_ITEMS:null);
+  push(typeof SUJETS_EVC_SUPP!=='undefined'?SUJETS_EVC_SUPP:null);
+  const seen=new Set();const out=[];
+  chunks.flat().forEach(s=>{
+    if(!s)return;
+    const k=s.id||`${s.annee||0}-${s.session||''}-${String(s.sujet||'').slice(0,48)}`;
+    if(seen.has(k))return;
+    seen.add(k);out.push(s);
+  });
+  return out.sort((a,b)=>(Number(b.annee)||0)-(Number(a.annee)||0));
+}
 function renderSujets(){
-  const el=document.getElementById('sujetsContent');if(!el)return;
-  if(typeof SUJETS_EVC_COMPLETS==='undefined'||!SUJETS_EVC_COMPLETS.length){
+  const el=document.getElementById('sujetsContent');
+  const filtEl=document.getElementById('sujetsFilters');
+  if(!el)return;
+  const all=mergeSujetsPools();
+  if(!all.length){
     el.innerHTML='<div class="empty"><div class="empty-icon">📋</div><div class="empty-text">Aucun sujet disponible</div></div>';return;
   }
-  el.innerHTML=SUJETS_EVC_COMPLETS.map(s=>`
+  const years=[...new Set(all.map(s=>s.annee).filter(Boolean))].sort((a,b)=>b-a);
+  if(filtEl){
+    filtEl.innerHTML=`<div class="ann-filter-bar">
+      <select id="sujYearFilter" onchange="filterSujets()"><option value="">Toutes les années</option>${years.map(y=>`<option value="${y}">${y}</option>`).join('')}</select>
+      <span class="ann-count" id="sujCount">${all.length} sujets</span>
+    </div>`;
+  }
+  window._sujets=all;
+  window.filterSujets=function(){
+    const yf=document.getElementById('sujYearFilter');
+    const y=yf?yf.value:'';
+    let list=window._sujets;
+    if(y)list=list.filter(s=>String(s.annee)===y);
+    const cnt=document.getElementById('sujCount');if(cnt)cnt.textContent=list.length+' sujets';
+    renderSujetsList(list);
+  };
+  renderSujetsList(all);
+}
+function renderSujetsList(list){
+  const el=document.getElementById('sujetsContent');if(!el)return;
+  if(!list.length){el.innerHTML='<div class="empty"><div class="empty-text">Aucun sujet pour ce filtre</div></div>';return;}
+  el.innerHTML=list.map(s=>`
     <div class="sujet-card">
       <div class="sujet-header">
         <span class="sujet-annee">${s.annee} — ${s.session||''}</span>
-        <span class="sujet-duree">⏱ ${s.duree}</span>
-        <span class="sujet-bareme">📊 ${s.bareme}</span>
+        <span class="sujet-duree">⏱ ${s.duree||'—'}</span>
+        <span class="sujet-bareme">📊 ${s.bareme||'—'}</span>
       </div>
-      <div class="sujet-consigne"><strong>Consigne :</strong> ${esc(s.consigne)}</div>
+      <div class="sujet-consigne"><strong>Consigne :</strong> ${esc(s.consigne||'')}</div>
       <div class="sujet-body">
-        <div class="sujet-text" id="sujet-text-${s.id}">${esc(s.sujet).replace(/\n/g,'<br>')}</div>
+        <div class="sujet-text" id="sujet-text-${s.id}">${esc(s.sujet||'').replace(/\n/g,'<br>')}</div>
         <button class="ann-reveal-btn" onclick="var e=document.getElementById('sujet-corrige-${s.id}');e.style.display=e.style.display==='none'?'block':'none';this.textContent=e.style.display==='none'?'Voir le corrigé':'Masquer le corrigé'">Voir le corrigé</button>
         <div class="sujet-corrige" id="sujet-corrige-${s.id}" style="display:none">
           <div class="sujet-corrige-title">📝 Corrigé détaillé</div>
-          <div class="sujet-corrige-text">${esc(s.corrigé).replace(/\n/g,'<br>')}</div>
+          <div class="sujet-corrige-text">${esc(s.corrigé||s.corrige||'').replace(/\n/g,'<br>')}</div>
           ${s.juryTips?`<div class="ann-jury-tip">💡 Jury: ${esc(s.juryTips)}</div>`:''}
         </div>
       </div>
@@ -1197,7 +1249,7 @@ function renderAnnales(){
   if(typeof ANNALES!=='undefined')all.push(...ANNALES.map(a=>({...a,_src:'base'})));
   if(typeof ANNALES_EXPANDED!=='undefined')all.push(...ANNALES_EXPANDED.map(a=>({...a,_src:'expanded'})));
   if(typeof ANNALES_ARCHIVE!=='undefined')all.push(...ANNALES_ARCHIVE.map(a=>({...a,_src:'archive'})));
-  if(typeof ANNALES_V2!=='undefined')all.push(...ANNALES_V2.map(a=>({...a,_src:v2})));
+  if(typeof ANNALES_V2!=='undefined')all.push(...ANNALES_V2.map(a=>({...a,_src:'v2'})));
   if(typeof CAS_INTERACTIFS!=='undefined')all.push(...CAS_INTERACTIFS.map(a=>({...a,_src:'cas'})));
   if(typeof SITUATIONS_EVC!=='undefined')all.push(...SITUATIONS_EVC.map(a=>({...a,_src:'situations'})));
   if(typeof MEGA_CASES!=='undefined')all.push(...MEGA_CASES.map(a=>({...a,_src:'mega'})));
@@ -1270,8 +1322,18 @@ function renderProto(){
   const filtEl=document.getElementById('protoFilters');
   if(!el)return;
   const all=[];
-  if(typeof PROTOCOLES_URGENCE!=='undefined')all.push(...PROTOCOLES_URGENCE.map(p=>({...p,_src:'urgence'})));
-  if(typeof PROTOCOLES_COMPLETS!=='undefined')all.push(...PROTOCOLES_COMPLETS.map(p=>({...p,_src:'complets'})));
+  const addProto=(arr,cat)=>{if(!Array.isArray(arr))return;arr.forEach(p=>all.push({...p,categorie:p.categorie||p.category||cat}));};
+  addProto(typeof PROTOCOLES_URGENCE!=='undefined'?PROTOCOLES_URGENCE:null,'Urgence');
+  addProto(typeof PROTOCOLES_COMPLETS!=='undefined'?PROTOCOLES_COMPLETS:null,'Protocoles complets');
+  addProto(typeof PROTOCOLES_REANIMATION!=='undefined'?PROTOCOLES_REANIMATION:null,'Réanimation');
+  addProto(typeof PROTOCOLES_COGNITIF!=='undefined'?PROTOCOLES_COGNITIF:null,'Cognitif');
+  addProto(typeof PROTOCOLES_PALLIATIF_AVANCES!=='undefined'?PROTOCOLES_PALLIATIF_AVANCES:null,'Palliatif');
+  addProto(typeof PROTOCOLES_READAPTATION!=='undefined'?PROTOCOLES_READAPTATION:null,'Réadaptation');
+  addProto(typeof PROTOCOLES_KINE!=='undefined'?PROTOCOLES_KINE:null,'Kinésithérapie');
+  addProto(typeof PROTOCOLES_RCP!=='undefined'?PROTOCOLES_RCP:null,'RCP');
+  addProto(typeof PROTOCOLES_QUALITE!=='undefined'?PROTOCOLES_QUALITE:null,'Qualité');
+  addProto(typeof PROTOCOLES_LEGISLATION!=='undefined'?PROTOCOLES_LEGISLATION:null,'Législation');
+  addProto(typeof PROTOCOLES_FORMATION!=='undefined'?PROTOCOLES_FORMATION:null,'Formation');
   if(typeof CLINICAL_REFERENCE!=='undefined')all.push(...CLINICAL_REFERENCE.filter(p=>p.category==='Urgence').map(p=>({...p,_src:'ref',protocole:p.content?p.content.split('. ').filter(Boolean):[]})));
   if(!all.length){el.innerHTML='<div class="empty"><div class="empty-text">Aucun protocole disponible</div></div>';return}
   const cats=[...new Set(all.map(p=>p.categorie||p.category||'Autre'))];
@@ -1313,7 +1375,8 @@ function renderProtoList(list){
         <span class="ann-chevron">▾</span>
       </div>
       <div class="proto-cat-body">${items.map(p=>{
-        const steps=p.protocole||p.steps||p.checklist||[];
+        const raw=p.protocole||p.steps||p.checklist||[];
+        const steps=Array.isArray(raw)?raw:(typeof raw==='string'?raw.split(/(?=\d+\.\s)/).map(s=>s.replace(/^\d+\.\s*/,'').trim()).filter(Boolean):[]);
         const icon=p.icon||'📋';
         return`<div class="proto-card${p.urgency==='high'?' proto-urgent':''}">
           <div class="proto-card-head"><span class="proto-icon">${icon}</span><div class="proto-card-title">${esc(p.titre||p.title||'')}</div></div>
