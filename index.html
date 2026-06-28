@@ -149,6 +149,12 @@
     <div id="dashContent"></div>
   </div>
 
+  <!-- FICHIER ERREURS PrEP EVC -->
+  <div class="view" id="vErreurs">
+    <div class="page-hd"><h1>Fichier erreurs</h1><p>Méthode PrEP EVC — transformer les ratés en points le jour J</p></div>
+    <div id="errJournalContent" class="err-j-page"></div>
+  </div>
+
   <!-- QUIZ -->
   <div class="view" id="vQuiz">
     <div class="quiz-header">
@@ -171,6 +177,11 @@
           <button class="quiz-opt-btn quiz-opt-sm active" onclick="QuizMode.startQuiz('mixed',20,30)">30s</button>
           <button class="quiz-opt-btn quiz-opt-sm" onclick="QuizMode.startQuiz('mixed',20,60)">60s</button>
           <button class="quiz-opt-btn quiz-opt-sm" onclick="QuizMode.startQuiz('mixed',20,0)">Sans limite</button>
+        </div>
+        <div class="quiz-options quiz-options-prep">
+          <p class="quiz-desc quiz-desc-prep">Méthode PrEP EVC — fichier erreurs & révision J+7</p>
+          <button class="quiz-opt-btn quiz-opt-prep" onclick="sw('erreurs')">Mon fichier erreurs</button>
+          <button class="quiz-opt-btn quiz-opt-prep" onclick="ErrorJournal.startDeferredQuiz()">Révision différée J+7</button>
         </div>
       </div>
       <div class="quiz-timer-bar"><span class="quiz-timer" id="quizTimer"></span></div>
@@ -356,6 +367,7 @@
 <script src="flashcards-expanded.js"></script>
 <script src="app.js?v=45"></script>
 <script src="brainfeed.js"></script>
+<script src="erreurs-journal.js"></script>
 <script src="quiz.js"></script>
 <script src="dashboard.js"></script>
 <script src="appsearch.js"></script>

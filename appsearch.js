@@ -196,6 +196,10 @@ const AppSearch = (() => {
     if (typeof FLASHCARDS_MEMOS !== 'undefined') allFlash.push(...FLASHCARDS_MEMOS);
     if (typeof FLASHCARDS_EXPANDED !== 'undefined') allFlash.push(...FLASHCARDS_EXPANDED);
     if (typeof MEGA_FLASHCARDS !== 'undefined') allFlash.push(...MEGA_FLASHCARDS);
+    for (let n = 2; n <= 10; n++) {
+      const g = globalThis['MEGA_FLASHCARDS_' + n];
+      if (typeof g !== 'undefined') allFlash.push(...g);
+    }
     allFlash.forEach(fc => {
       allContent.push({ type: 'flashcard', id: 'fc-' + fc.id, title: fc.question, text: fc.question + ' ' + fc.answer, view: 'feed', link: () => navView('feed') });
     });

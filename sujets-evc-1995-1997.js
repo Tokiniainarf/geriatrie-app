@@ -192,26 +192,26 @@ BIOLOGIE (veille consultation) :
 - Glycémie 1,48 g/L ; HbA1c 7,9 %
 - TSH 0,8 mUI/L ; T4L 22 pmol/L (limite haute)
 - 25-OH vitamine D : 13 ng/mL
-|- Albumine 33 g/L
-|- Digoxinémie non dosée (pas de digoxine)
-|- Amiodarone : TSH basse suspecte dysthyroïdie iatrogène
-|- BNP 420 pg/mL (limite haute ; surcharge volémique possible)
-|- Lipides : LDL 1,42 g/L, HDL 0,38 g/L, TG 1,85 g/L
-|- PAL 98 UI/L, GGT 62 UI/L (statine + amiodarone)
-|- CRP 8 mg/L ; ECBU : leucocytes −, nitrites −
-|- Glycémie capillaire nocturne (fille) : 0,62 g/L à 4h un épisode la semaine précédente (non rapporté aux urgences)
+- Albumine 33 g/L
+- Digoxinémie non dosée (pas de digoxine)
+- Amiodarone : TSH basse suspecte dysthyroïdie iatrogène
+- BNP 420 pg/mL (limite haute ; surcharge volémique possible)
+- Lipides : LDL 1,42 g/L, HDL 0,38 g/L, TG 1,85 g/L
+- PAL 98 UI/L, GGT 62 UI/L (statine + amiodarone)
+- CRP 8 mg/L ; ECBU : leucocytes −, nitrites −
+- Glycémie capillaire nocturne (fille) : 0,62 g/L à 4h un épisode la semaine précédente (non rapporté aux urgences)
 
 IMAGERIE ET EXAMENS COMPLÉMENTAIRES :
-|- Scanner cérébral post-chute : pas de saignement, atrophie légère
+- Scanner cérébral post-chute : pas de saignement, atrophie légère
 - Rx bassin et rachis dorso-lombaire : pas de fracture ; ostéopénie
 - DMO (5 ans) : T-score −2,6
-|- ECG : FA 58/min, QTc 468 ms
-|- Échographie cardiaque (6 mois) : FEVG 48 %, hypokinésie inférieure, pas de thrombus visible
-|- Holter 24 h (il y a 4 mois, palpitations) : pauses <2 s, extrasystoles ventriculaires 2 %, pas de tachycardie prolongée documentée
-|- Fond d'œil : rétinopathie diabétique modérée, glaucome traité
-|- Échographie rénale : reins de taille normale, pas de dilatation pyélocalicielle
-|- Test orthostatique répété cabinet (3 mesures) : même chute PA ; FC passe de 58 à 64 debout sans compensation adéquate
-|- Inventaire IPP : 12 médicaments, 4 à risque chute (psychotrope, diurétique, bêta-bloquant, hypoglycémiant)
+- ECG : FA 58/min, QTc 468 ms
+- Échographie cardiaque (6 mois) : FEVG 48 %, hypokinésie inférieure, pas de thrombus visible
+- Holter 24 h (il y a 4 mois, palpitations) : pauses <2 s, extrasystoles ventriculaires 2 %, pas de tachycardie prolongée documentée
+- Fond d'œil : rétinopathie diabétique modérée, glaucome traité
+- Échographie rénale : reins de taille normale, pas de dilatation pyélocalicielle
+- Test orthostatique répété cabinet (3 mesures) : même chute PA ; FC passe de 58 à 64 debout sans compensation adéquate
+- Inventaire IPP : 12 médicaments, 4 à risque chute (psychotrope, diurétique, bêta-bloquant, hypoglycémiant)
 
 ENVIRONNEMENT :
 - Maison 2 étages ; chambre à l'étage, WC rez-de-chaussée
@@ -320,27 +320,27 @@ BIOLOGIE (H38) :
 - CRP 48 mg/L
 - Procalcitonine non disponible (1997)
 - ECBU prélevé : en cours
-|- Gaz du sang : pH 7,48, PaCO2 32 mmHg, PaO2 68 mmHg, HCO3 24
-|- Lactates 1,8 mmol/L ; troponine I 0,04 ng/mL (pas d'infarctus récent associé)
-|- ASAT 48 UI/L, ALAT 35 UI/L (légère cytolyse post-AVC)
-|- BNP 280 pg/mL
-|- TSH 2,1 mUI/L ; HbA1c 7,2 %
-|- Ionogramme urinaire : Na urinaire 45 mmol/L (déshydratation relative)
-|- ECBU H40 : leucocyturie 80 000/mL, culture en cours ; nitrites −
+- Gaz du sang : pH 7,48, PaCO2 32 mmHg, PaO2 68 mmHg, HCO3 24
+- Lactates 1,8 mmol/L ; troponine I 0,04 ng/mL (pas d'infarctus récent associé)
+- ASAT 48 UI/L, ALAT 35 UI/L (légère cytolyse post-AVC)
+- BNP 280 pg/mL
+- TSH 2,1 mUI/L ; HbA1c 7,2 %
+- Ionogramme urinaire : Na urinaire 45 mmol/L (déshydratation relative)
+- ECBU H40 : leucocyturie 80 000/mL, culture en cours ; nitrites −
 
 IMAGERIE ET EXAMENS COMPLÉMENTAIRES :
-|- Scanner cérébral contrôle H38 (indication transformation hémorragique / extension) :
+- Scanner cérébral contrôle H38 (indication transformation hémorragique / extension) :
   * Infarctus sylvien droit établi, pas de saignement parenchymateux
   * Pas d'hydrocéphalie aiguë
 - Rx thorax : infiltrat basal droit flou (probable pneumopathie aspiration)
-|- ECG : FA rapide 112/min, pas d'ischémie aiguë
-|- Échographie veineuse membres inférieurs : pas de TVP
-|- IRM cérébrale (H12, bilan initial) : DWI hyperintensité sylvienne droite, ADC bas, pas de saignement, leucoaraïose grade 2
-|- Doppler TSA H0 : plaque carotide gauche mixte 60 % NASCET, pas d'occlusion intracrânienne
-|- Échographie cardiaque transthoracique H18 : oreillette gauche 42 mL, pas de thrombus visible, FEVG 55 %
-|- Vidéofluoroscopie déglutition (H40, demandée) : pénétration laryngée silencieuse liquides fins, altération déglutition post-AVC droit
-|- NIHSS détaillé H38 après réveil : score 7 (conscience 0, regard 0, champ visuel 2, langage 0, négligence 1, motor arm G 2, motor leg G 1, sensibilité 0, dysarthrie 1, extinction 0)
-|- Bandelette urinaire H38 : nitrites −, leucocytes +++, protéines +
+- ECG : FA rapide 112/min, pas d'ischémie aiguë
+- Échographie veineuse membres inférieurs : pas de TVP
+- IRM cérébrale (H12, bilan initial) : DWI hyperintensité sylvienne droite, ADC bas, pas de saignement, leucoaraïose grade 2
+- Doppler TSA H0 : plaque carotide gauche mixte 60 % NASCET, pas d'occlusion intracrânienne
+- Échographie cardiaque transthoracique H18 : oreillette gauche 42 mL, pas de thrombus visible, FEVG 55 %
+- Vidéofluoroscopie déglutition (H40, demandée) : pénétration laryngée silencieuse liquides fins, altération déglutition post-AVC droit
+- NIHSS détaillé H38 après réveil : score 7 (conscience 0, regard 0, champ visuel 2, langage 0, négligence 1, motor arm G 2, motor leg G 1, sensibilité 0, dysarthrie 1, extinction 0)
+- Bandelette urinaire H38 : nitrites −, leucocytes +++, protéines +
 
 CONTEXTE :
 - Épouse 78 ans présente, demande « ne pas l'endormir encore »

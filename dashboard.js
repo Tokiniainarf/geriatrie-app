@@ -27,6 +27,7 @@ const Dashboard = (() => {
     const unseen = Math.max(0, totalFlash - srsEntries.length);
     const newTotal = newCards + unseen;
     const dueNow = srsEntries.filter(e => e.nextReview <= Date.now()).length;
+    const errDue = typeof ErrorJournal !== 'undefined' ? ErrorJournal.countDue() : 0;
 
     const activityByDay = buildActivityByDay(bfStats, revStats);
     const activeDays = new Set(Object.keys(activityByDay).filter(k => activityByDay[k] > 0));
@@ -88,6 +89,17 @@ const Dashboard = (() => {
           <div class="dash-card-icon">⭐</div>
           <div class="dash-card-value"><span class="dash-counter" data-count="${bfStats.points || 0}">0</span></div>
           <div class="dash-card-label">Points BrainFeed</div>
+        </div>
+      </div>
+
+      <div class="dash-card dash-card-prep dash-card-wide" onclick="sw('erreurs')" role="button" tabindex="0">
+        <div class="dash-prep-hdr">
+          <span class="dash-card-icon">📓</span>
+          <div>
+            <div class="dash-prep-title">Méthode PrEP EVC</div>
+            <div class="dash-prep-sub">Fichier erreurs · relecture hebdo · révision J+7</div>
+          </div>
+          <span class="dash-prep-badge" id="dashErrDue">${errDue} à refaire J+7</span>
         </div>
       </div>
 
@@ -354,6 +366,10 @@ const Dashboard = (() => {
     if (typeof FLASHCARDS_MEMOS !== 'undefined') all.push(...FLASHCARDS_MEMOS);
     if (typeof FLASHCARDS_EXPANDED !== 'undefined') all.push(...FLASHCARDS_EXPANDED);
     if (typeof MEGA_FLASHCARDS !== 'undefined') all.push(...MEGA_FLASHCARDS);
+    for (let n = 2; n <= 10; n++) {
+      const g = globalThis['MEGA_FLASHCARDS_' + n];
+      if (typeof g !== 'undefined') all.push(...g);
+    }
     return all;
   }
 

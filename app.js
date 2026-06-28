@@ -39,6 +39,7 @@ function sw(view){
   if(view==='feed'&&typeof BrainFeed!=='undefined')BrainFeed.init();
   if(view!=='feed'&&typeof BrainFeed!=='undefined')BrainFeed.destroy();
   if(view==='dash'&&typeof Dashboard!=='undefined')Dashboard.render();
+  if(view==='erreurs'&&typeof ErrorJournal!=='undefined')ErrorJournal.render();
   if(view==='garde')renderGarde();
   if(view==='dict')renderDict();
   if(view==='annales')renderAnnales();

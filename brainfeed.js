@@ -161,6 +161,10 @@ const BrainFeed = (() => {
     if (typeof FLASHCARDS_MEMOS !== 'undefined') all.push(...FLASHCARDS_MEMOS);
     if (typeof FLASHCARDS_EXPANDED !== 'undefined') all.push(...FLASHCARDS_EXPANDED);
     if (typeof MEGA_FLASHCARDS !== 'undefined') all.push(...MEGA_FLASHCARDS);
+    for (let n = 2; n <= 10; n++) {
+      const g = globalThis['MEGA_FLASHCARDS_' + n];
+      if (typeof g !== 'undefined') all.push(...g);
+    }
     return all;
   }
 
@@ -205,7 +209,7 @@ const BrainFeed = (() => {
     if (typeof ANNALES !== 'undefined') annales.push(...ANNALES);
     if (typeof ANNALES_EXPANDED !== 'undefined') annales.push(...ANNALES_EXPANDED);
     if (typeof ANNALES_ARCHIVE !== 'undefined') annales.push(...ANNALES_ARCHIVE);
-    if(typeof ANNALES_V2!=='undefined')all.push(...ANNALES_V2);
+    if (typeof ANNALES_V2 !== 'undefined') annales.push(...ANNALES_V2);
     if (typeof CAS_INTERACTIFS !== 'undefined') annales.push(...CAS_INTERACTIFS);
     if (typeof SITUATIONS_EVC !== 'undefined') annales.push(...SITUATIONS_EVC);
     const casChoc = annales.map(a => ({

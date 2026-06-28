@@ -16,6 +16,7 @@ const QuizMode = (() => {
   let quizCount = 20;
   let questionTimerSec = 30; // 10, 30, 60, or 0 = no limit (per question)
   let questionTimeLeft = 0;
+  let customMode = null; // null | 'deferred_errors'
 
   const CATEGORY_LABELS = {
     flash: 'Flashcards',
@@ -165,6 +166,10 @@ const QuizMode = (() => {
     if (typeof FLASHCARDS_MEMOS !== 'undefined') allFlash.push(...FLASHCARDS_MEMOS);
     if (typeof FLASHCARDS_EXPANDED !== 'undefined') allFlash.push(...FLASHCARDS_EXPANDED);
     if (typeof MEGA_FLASHCARDS !== 'undefined') allFlash.push(...MEGA_FLASHCARDS);
+    for (let n = 2; n <= 10; n++) {
+      const g = globalThis['MEGA_FLASHCARDS_' + n];
+      if (typeof g !== 'undefined') allFlash.push(...g);
+    }
     allFlash.forEach(fc => {
       q.push({
         type: 'flash', category: 'flash', flashId: fc.id, chapter: fc.chapter, rang: fc.rang,
@@ -195,7 +200,27 @@ const QuizMode = (() => {
     return q;
   }
 
+  function startCustomQuiz(qList, opts) {
+    opts = opts || {};
+    customMode = opts.mode || null;
+    quizType = opts.title || 'custom';
+    quizCount = qList.length;
+    questionTimerSec = opts.timePerQ == null ? 0 : Number(opts.timePerQ);
+    questions = qList.slice();
+    total = questions.length;
+    current = 0;
+    score = 0;
+    answers = [];
+    reviewMode = false;
+    ensureTimerUI();
+    const config = document.getElementById('quizConfig');
+    if (config) config.style.display = 'none';
+    renderQuestion();
+    startQuestionTimer();
+  }
+
   function startQuiz(type, count, timePerQ) {
+    customMode = null;
     quizType = type || 'mixed';
     quizCount = count || 20;
     questionTimerSec = timePerQ == null ? 30 : Number(timePerQ);
@@ -261,23 +286,7 @@ const QuizMode = (() => {
   function onQuestionTimeout() {
     if (reviewMode || current >= total) return;
     const q = questions[current];
-    answers.push({
-      question: q.question,
-      answer: q.answer,
-      chapter: q.chapter,
-      category: q.category || q.type,
-      correct: false,
-      type: q.type,
-      timedOut: true
-    });
-    current++;
-    if (current >= total) {
-      clearInterval(timer);
-      showResults();
-    } else {
-      renderQuestion();
-      startQuestionTimer();
-    }
+    recordWrongAndAdvance(q, { reasonId: 'temps', reasonNote: 'Temps écoulé' });
   }
 
   function startTimer() {
@@ -371,17 +380,36 @@ const QuizMode = (() => {
     if (reveal) reveal.style.display = 'block';
   }
 
-  function eval(correct) {
-    const q = questions[current];
+  function recordWrongAndAdvance(q, extra) {
+    const userAnswerEl = document.getElementById('quizAnswer');
+    const userAnswer = userAnswerEl ? userAnswerEl.value.trim() : '';
+    const payload = {
+      source: 'quiz',
+      question: q.question,
+      userAnswer,
+      correctAnswer: q.answer,
+      chapter: q.chapter,
+      category: q.category || q.type,
+      type: q.type,
+      ...(extra || {})
+    };
+    if (typeof ErrorJournal !== 'undefined' && ErrorJournal.promptAfterWrong) {
+      ErrorJournal.promptAfterWrong(payload, () => advanceAfterWrong(q, false));
+    } else {
+      advanceAfterWrong(q, false);
+    }
+  }
+
+  function advanceAfterWrong(q, correct) {
     answers.push({
       question: q.question,
       answer: q.answer,
       chapter: q.chapter,
       category: q.category || q.type,
       correct,
-      type: q.type
+      type: q.type,
+      errorJournalId: q.errorJournalId
     });
-    if (correct) score++;
     current++;
     if (current >= total) {
       clearInterval(timer);
@@ -390,6 +418,37 @@ const QuizMode = (() => {
       renderQuestion();
       startQuestionTimer();
     }
+  }
+
+  function eval(correct) {
+    const q = questions[current];
+    if (customMode === 'deferred_errors' && q.errorJournalId && typeof ErrorJournal !== 'undefined') {
+      ErrorJournal.markDeferredResult(q.errorJournalId, correct);
+      if (!correct && q.chapter && typeof toast === 'function') {
+        toast('Encore raté → retour au cours recommandé');
+      }
+    }
+    if (correct) {
+      answers.push({
+        question: q.question,
+        answer: q.answer,
+        chapter: q.chapter,
+        category: q.category || q.type,
+        correct: true,
+        type: q.type
+      });
+      score++;
+      current++;
+      if (current >= total) {
+        clearInterval(timer);
+        showResults();
+      } else {
+        renderQuestion();
+        startQuestionTimer();
+      }
+      return;
+    }
+    recordWrongAndAdvance(q);
   }
 
   function buildCategoryBreakdown() {
@@ -530,6 +589,7 @@ const QuizMode = (() => {
         ` : ''}
         <div class="quiz-results-actions">
           ${wrongCount > 0 ? `<button class="quiz-btn quiz-btn-review" onclick="QuizMode.reviewWrong()">Revoir les erreurs (${wrongCount})</button>` : ''}
+          ${typeof ErrorJournal !== 'undefined' ? `<button class="quiz-btn" onclick="sw('erreurs')">Fichier erreurs PrEP</button>` : ''}
           <button class="quiz-btn" onclick="QuizMode.startQuiz('${quizType}', ${quizCount}, ${questionTimerSec})">Recommencer</button>
           <button class="quiz-btn quiz-btn-ghost" onclick="sw('home')">Retour</button>
         </div>
@@ -553,5 +613,5 @@ const QuizMode = (() => {
     clearInterval(timer);
   }
 
-  return { startQuiz, revealAnswer, eval, reviewWrong, nextReview, destroy };
+  return { startQuiz, startCustomQuiz, revealAnswer, eval, reviewWrong, nextReview, destroy };
 })();
