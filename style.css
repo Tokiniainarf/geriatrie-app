@@ -103,6 +103,16 @@ input { font-family: inherit; font-size: inherit; }
 }
 .top-btn:hover { background: var(--accent-soft); border-color: var(--accent); }
 .top-btn:active { transform: scale(0.88); transition: transform .08s ease; }
+.top-btn { position: relative; }
+.top-btn::after {
+  content: attr(title); position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%) scale(0.9);
+  padding: 4px 10px; border-radius: 8px; font-size: .65rem; font-weight: 600; white-space: nowrap;
+  background: var(--text); color: var(--bg-base); pointer-events: none;
+  opacity: 0; transition: opacity .2s, transform .2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,.15); z-index: 110;
+}
+.top-btn:hover::after { opacity: 1; transform: translateX(-50%) scale(1); }
+@media (prefers-reduced-motion: reduce) { .top-btn::after { transition: none; } }
 .top-icon { transition: transform .3s ease, box-shadow .3s ease; animation: iconBreathe 3s ease-in-out infinite; }
 @keyframes iconBreathe { 0%,100% { box-shadow: 0 0 12px var(--accent-glow); } 50% { box-shadow: 0 0 22px var(--accent-glow); } }
 @media (prefers-reduced-motion: reduce) { .top-icon { animation: none; } }
