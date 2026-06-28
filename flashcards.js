@@ -111,6 +111,8 @@ function getAllFlashcards() {
   if (typeof MEGA_FLASHCARDS_4 !== 'undefined') pools.push(...MEGA_FLASHCARDS_4);
   if (typeof MEGA_FLASHCARDS_5 !== 'undefined') pools.push(...MEGA_FLASHCARDS_5);
   if (typeof MEGA_FLASHCARDS_6 !== 'undefined') pools.push(...MEGA_FLASHCARDS_6);
+  if (typeof MEGA_FLASHCARDS_7 !== 'undefined') pools.push(...MEGA_FLASHCARDS_7);
+  if (typeof MEGA_FLASHCARDS_8 !== 'undefined') pools.push(...MEGA_FLASHCARDS_8);
   const seen = new Set();
   return pools.filter(c => {
     if (!c || c.id == null) return false;

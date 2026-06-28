@@ -1,4 +1,4 @@
-const CACHE_NAME = 'geriatrie-v141';
+const CACHE_NAME = 'geriatrie-v142';
 const CORE = [
   './',
   './index.html',
@@ -152,11 +152,15 @@ const CORE = [
   "./sujets-evc-2001-2003.js",
   "./mega-flashcards-5.js",
   "./mega-flashcards-6.js",
+  "./mega-flashcards-7.js",
+  "./mega-flashcards-8.js",
   "./sujets-evc-extra.js",
   "./guides-geriatrie-palliative-avancee.js",
   "./sujets-evc-1998-2000.js",
   "./sujets-evc-classiques.js",
   "./guides-geriatrie-nutrition-avancee.js",
+  "./sujets-evc-fin.js",
+  "./guides-geriatrie-cardio-avancee.js",
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png'
