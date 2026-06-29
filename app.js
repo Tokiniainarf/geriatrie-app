@@ -467,7 +467,17 @@ function renderChapter(raw,chId){
     
     // Fix merged letters/numerals on the same line (OCR artifact)
     l = l.replace(/^([IVX]+)\.?\s*([A-ZÀ-ÖØ-ßŒÆ][a-zà-öø-ÿœæ].*)/, '$1. $2');
-    l = l.replace(/^([A-Z])\.?\s*([A-ZÀ-ÖØ-ßŒÆ][a-zà-öø-ÿœæ].*)/, '$1. $2');
+    
+    // For letter headings, prevent modifying ECN rank table rows or prose paragraphs
+    const letterM = l.match(/^([A-Z])\.?\s*([A-ZÀ-ÖØ-ßŒÆ][a-zà-öø-ÿœæ].*)/);
+    if (letterM) {
+      const rest = letterM[2];
+      const isEcnTable = /^(Définition|Épidémiologie|Éléments|Prise en charge|Diagnostic|Rubrique|Intitulé|Descriptif|Prévalence|Facteurs|B\s|C\s)/i.test(rest);
+      const isProse = /^(Le|La|Les|L'|Il|Elle|Pour|C'est|Ainsi|On|En|Un|Une|Cette|Ce|Cela|De|Du|Des|Dans|Avec|Son|Sa|Ses|Sur|Par|Au|Aux|Tout|Tous|Bien|Mais|Or|Donc|Chez|Après|Avant|Depuis)\b/i.test(rest);
+      if (!isEcnTable && !isProse && rest.length <= 80) {
+        l = letterM[1] + '. ' + rest;
+      }
+    }
     
     preprocessedLines.push(l);
   }
@@ -493,6 +503,7 @@ function renderChapter(raw,chId){
     lines=lines.filter((l,i)=>{
       if(l === '') return true;
       if(i>=firstSec)return true;
+      if(RANG_RE.test(l))return true;
       if(/Situations?\s+de\s+départ/i.test(l))return true;
       if(/^\d{2,3}\s+/.test(l))return true;
       if(BULLET_RE.test(l))return true;
@@ -505,6 +516,7 @@ function renderChapter(raw,chId){
   lines = lines.filter(l => {
     if(l === '') return true;
     if (l.length >= 50) return true;
+    if (RANG_RE.test(l)) return true;
     if (BULLET_RE.test(l) || SECTION_RE.test(l) || LETTER_RE.test(l)) return true;
     if (/^Fig\.|Tableau|Encadré|^\d{2,3}\s+/.test(l)) return true;
     if (/[.!?]$/.test(l)) return true;
