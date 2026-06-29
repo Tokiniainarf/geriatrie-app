@@ -430,7 +430,7 @@ const BrainFeed = (() => {
             </main>
             <footer class="bf-card-ftr">
               ${chTag}
-              <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:window.innerWidth,behavior:'smooth'})">Révéler la réponse ➔</button>
+              <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:document.getElementById('bfScroll-${slideIdx}').clientWidth,behavior:'smooth'})">Révéler la réponse ➔</button>
             </footer>
           </article>
         </div>
@@ -469,7 +469,7 @@ const BrainFeed = (() => {
               <p class="bf-question-text">${esc(card.question)}</p>
             </main>
             <footer class="bf-card-ftr">
-              <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:window.innerWidth,behavior:'smooth'})">Révéler la réponse ➔</button>
+              <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:document.getElementById('bfScroll-${slideIdx}').clientWidth,behavior:'smooth'})">Révéler la réponse ➔</button>
             </footer>
           </article>
         </div>
@@ -513,7 +513,7 @@ const BrainFeed = (() => {
               <div class="bf-choc-vignette">${esc(card.vignette)}</div>
             </main>
             <footer class="bf-card-ftr">
-              <button type="button" class="bf-action-reveal" onclick="stopCasChocTimer(${slideIdx}); document.getElementById('bfScroll-${slideIdx}').scrollBy({left:window.innerWidth,behavior:'smooth'})">Révéler la réponse ➔</button>
+              <button type="button" class="bf-action-reveal" onclick="stopCasChocTimer(${slideIdx}); document.getElementById('bfScroll-${slideIdx}').scrollBy({left:document.getElementById('bfScroll-${slideIdx}').clientWidth,behavior:'smooth'})">Révéler la réponse ➔</button>
             </footer>
           </article>
         </div>
@@ -558,7 +558,7 @@ const BrainFeed = (() => {
               <div class="bf-quiz-options">${opts}</div>
             </main>
             <footer class="bf-card-ftr">
-              <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:window.innerWidth,behavior:'smooth'})">Révéler la réponse ➔</button>
+              <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:document.getElementById('bfScroll-${slideIdx}').clientWidth,behavior:'smooth'})">Révéler la réponse ➔</button>
             </footer>
           </article>
         </div>
@@ -595,7 +595,7 @@ const BrainFeed = (() => {
               <p class="bf-question-text" style="font-size: 1.15rem;">${esc(card.line)}</p>
             </main>
             <footer class="bf-card-ftr">
-              <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:window.innerWidth,behavior:'smooth'})">Révéler la réponse ➔</button>
+              <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:document.getElementById('bfScroll-${slideIdx}').clientWidth,behavior:'smooth'})">Révéler la réponse ➔</button>
             </footer>
           </article>
         </div>
@@ -636,7 +636,7 @@ const BrainFeed = (() => {
               <blockquote class="bf-quote-text" style="font-size: 1.15rem;">${esc(card.text)}</blockquote>
             </main>
             <footer class="bf-card-ftr">
-              <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:window.innerWidth,behavior:'smooth'})">Révéler la réponse ➔</button>
+              <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:document.getElementById('bfScroll-${slideIdx}').clientWidth,behavior:'smooth'})">Révéler la réponse ➔</button>
             </footer>
           </article>
         </div>
@@ -676,7 +676,7 @@ const BrainFeed = (() => {
               </div>
             </main>
             <footer class="bf-card-ftr">
-              <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:window.innerWidth,behavior:'smooth'})">Révéler la réponse ➔</button>
+              <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:document.getElementById('bfScroll-${slideIdx}').clientWidth,behavior:'smooth'})">Révéler la réponse ➔</button>
             </footer>
           </article>
         </div>

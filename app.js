@@ -70,24 +70,181 @@ function sw(view){
 function switchAnnalesMode(mode) {
   const btnAnn = document.getElementById('btnSubAnnales');
   const btnSuj = document.getElementById('btnSubSujets');
+  const btnCch = document.getElementById('btnSubCoach');
   const tabAnn = document.getElementById('subTabAnnales');
   const tabSuj = document.getElementById('subTabSujets');
+  const tabCch = document.getElementById('subTabCoach');
   
-  if (!tabAnn || !tabSuj) return;
+  if (!tabAnn || !tabSuj || !tabCch) return;
+  
+  // Hide all
+  tabAnn.style.display = 'none';
+  tabSuj.style.display = 'none';
+  tabCch.style.display = 'none';
+  
+  btnAnn?.classList.remove('active');
+  btnSuj?.classList.remove('active');
+  btnCch?.classList.remove('active');
   
   if (mode === 'annales') {
     tabAnn.style.display = 'block';
-    tabSuj.style.display = 'none';
     btnAnn?.classList.add('active');
-    btnSuj?.classList.remove('active');
     renderAnnales();
-  } else {
-    tabAnn.style.display = 'none';
+  } else if (mode === 'sujets') {
     tabSuj.style.display = 'block';
-    btnAnn?.classList.remove('active');
     btnSuj?.classList.add('active');
     renderSujets();
+  } else if (mode === 'coach') {
+    tabCch.style.display = 'block';
+    btnCch?.classList.add('active');
+    renderCoach();
   }
+}
+
+function renderCoach() {
+  const el = document.getElementById('coachContent');
+  if (!el) return;
+  
+  if (typeof EVC_COACH === 'undefined') {
+    el.innerHTML = '<div class="empty"><div class="empty-text">Données du coach non chargées.</div></div>';
+    return;
+  }
+
+  let html = `
+    <!-- 1. COACHING INDIVIDUEL ET STATUT (AURILLAC / LISTE A) -->
+    <div class="callout callout-coach" style="border-left-color: var(--orange-gold); margin-bottom: 24px;">
+      <div class="callout-title" style="color: var(--orange-gold); font-size: 1.15rem; display: flex; align-items: center; gap: 8px;">
+        🎓 Mon Plan de Coaching EVC Personnalisé
+      </div>
+      <div style="font-size: 0.95rem; margin-top: 12px; line-height: 1.6;">
+        <p>Puisque tu commences comme stagiaire associé le <strong>1er août 2026</strong>, tu concours sous le statut de la <strong>Voie Externe (Liste A)</strong>. C’est le parcours classique des praticiens arrivant sur le territoire.</p>
+        <p>Voici exactement comment vont se dérouler tes examens, sous quelle forme, et l'organisation logistique obligatoire à prévoir depuis <strong>Aurillac</strong>.</p>
+        
+        <h4 style="margin: 18px 0 8px 0; color: var(--orange-gold);">📍 Où se déroulent les examens ? (Le piège d'Aurillac)</h4>
+        <p>C'est le point logistique le plus important : <strong>les épreuves ne se déroulent pas du tout à Aurillac, ni même en Auvergne</strong>.</p>
+        <p>L'EVC est un concours national unique et totalement centralisé. Pour la session 2026, toutes les épreuves écrites se déroulent en région parisienne, à l'<strong>Espace Jean Monnet situé à Rungis (94533)</strong>.</p>
+        
+        <h5 style="margin: 12px 0 6px 0; font-weight: 600;">🚄 Ce que tu dois planifier depuis Aurillac :</h5>
+        <p style="margin-left: 8px; border-left: 2px solid var(--border); padding-left: 8px; font-style: italic;">
+          Puisque les épreuves commencent à partir de <strong>novembre 2026</strong>, tu devras demander quelques jours de congé ou t'arranger avec le <strong>Dr COMPAORE</strong> pour ton planning de garde à l'hôpital. Il te faudra prendre le train d'Aurillac vers Paris, réserver une chambre d'hôtel à proximité de Rungis la veille de l'examen pour éviter le stress des transports, et te présenter le matin J avec ta convocation imprimée et ton passeport.
+        </p>
+
+        <h4 style="margin: 18px 0 8px 0; color: var(--orange-gold);">📝 Sous quelle forme se passent les épreuves (Voie Externe) ?</h4>
+        <p>Contrairement à la voie interne qui se fait sous forme de QCM, ton concours (Voie Externe) se compose de <strong>deux épreuves écrites et rédactionnelles distinctes</strong>, qui se déroulent <strong>toutes les deux le même jour</strong>. Elles ont le même coefficient.</p>
+        
+        <ul style="list-style: none; padding-left: 0; margin: 12px 0;">
+          <li style="margin-bottom: 12px;">
+            <strong>🕐 Matin : Épreuve de Connaissances Fondamentales (EVCF)</strong><br>
+            <span style="font-size: 0.9rem; color: var(--text-muted);">
+              • Durée : 2 heures (généralement de 10h00 à 12h00).<br>
+              • Le format : Des <strong>QROC</strong> (Questions à Réponses Ouvertes Courtes).<br>
+              • Le but : Évaluer tes connaissances théoriques pures. Réponses précises, définitions, critères diagnostiques officiels (ex: critères de fragilité, scores de confusion) et listes de mots-clés médicaux.
+            </span>
+          </li>
+          <li>
+            <strong>🕒 Après-midi : Épreuve de Connaissances Pratiques (EVCP)</strong><br>
+            <span style="font-size: 0.9rem; color: var(--text-muted);">
+              • Durée : 2 heures (généralement de 15h00 à 17h00).<br>
+              • Le format : Des <strong>Dossiers Cliniques Progressifs</strong>.<br>
+              • Le but : Te mettre dans la peau du médecin de garde à l'hôpital (cas clinique mixte biologie, imagerie, diagnostic, complications, thérapeutique).
+            </span>
+          </li>
+        </ul>
+
+        <h4 style="margin: 18px 0 8px 0; color: var(--orange-gold);">🗓️ Quel est le calendrier exact ?</h4>
+        <p>Le CNG (Centre National de Gestion) publie le calendrier détaillé spécialité par spécialité quelques semaines avant le début du concours. Les épreuves de gériatrie auront lieu sur une seule et unique journée entre <strong>novembre et décembre 2026</strong>. Tu recevras une notification par email pour télécharger ta convocation officielle sur ton espace CNG.</p>
+        <p>Profite de tes premiers mois à Aurillac pour observer la manière dont les seniors rédigent les dossiers d'entrée et gèrent les urgences gériatriques, car le format des dossiers pratiques de l'après-midi calque exactement la vraie vie des services de gériatrie français !</p>
+
+        <div style="margin-top: 16px; padding: 12px; background: rgba(59, 130, 246, 0.1); border-radius: 8px;">
+          🎥 Vidéo de méthodologie indispensable : <a href="https://www.youtube.com/watch?v=hJylaYtRs5Y" target="_blank" style="color: var(--blue-link); text-decoration: underline; font-weight: bold;">Méthodologie et barèmes des corrections de l'EVC</a> (détaille la rigueur d'analyse et les pièges sémantiques).
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. TIMELINE ET TIMETABLE DE PRÉPARATION -->
+    <div class="section-header">🗓️ Planning de révision sur 3 Mois</div>
+    <div class="coach-timeline">
+      ${EVC_COACH.preparation.map((p, idx) => `
+        <div class="callout" style="margin-bottom: 16px;">
+          <div class="callout-title" style="font-size: 1.05rem;">
+            ${p.periode} (${p.semaines})
+          </div>
+          <div style="font-size: 0.92rem; margin-top: 8px;">
+            <p><strong>Objectifs :</strong></p>
+            <ul style="padding-left: 18px; margin: 4px 0 12px 0;">
+              ${p.objectifs.map(o => `<li>${esc(o)}</li>`).join('')}
+            </ul>
+            <p><strong>Ressources clés :</strong></p>
+            <ul style="padding-left: 18px; margin: 4px 0 12px 0; color: var(--text-muted);">
+              ${p.ressources.map(r => `<li>${esc(r)}</li>`).join('')}
+            </ul>
+            <p style="margin-top: 8px;">💡 <em>Méthode : ${esc(p.methodeRevision)} (Charge : ${esc(p.chargeHoraire)})</em></p>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+
+    <!-- 3. MÉTHODES ET TECHNIQUE DE RESTITUTION -->
+    <div class="section-header">⚡ Méthodes & Techniques de Restitution</div>
+    ${EVC_COACH.techniques.map(t => `
+      <div class="callout callout-soft" style="margin-bottom: 16px;">
+        <div class="callout-title" style="font-size: 1.05rem; color: var(--teal-accent);">${esc(t.titre)}</div>
+        <div style="font-size: 0.92rem; margin-top: 8px; line-height: 1.5;">
+          ${t.description ? `<p style="margin-bottom: 8px;">${esc(t.description)}</p>` : ''}
+          ${t.etapes ? `
+            <ul style="list-style: none; padding-left: 0; margin-bottom: 10px;">
+              ${t.etapes.map(e => `<li><strong>[${esc(e.lettre)}]</strong> ${esc(e.action)}</li>`).join('')}
+            </ul>
+          ` : ''}
+          ${t.structure ? `
+            <ul style="list-style: none; padding-left: 0; margin-bottom: 10px;">
+              ${t.structure.map(s => `<li><strong>${esc(s.lettre)}. ${esc(s.titre)} :</strong> ${esc(s.contenu)}</li>`).join('')}
+            </ul>
+          ` : ''}
+          ${t.regles ? `
+            <ul style="padding-left: 18px; margin-bottom: 10px;">
+              ${t.regles.map(r => `<li>${esc(r)}</li>`).join('')}
+            </ul>
+          ` : ''}
+          ${t.apres2min ? `<p style="margin-top: 6px;">👉 <strong>Après 2 minutes :</strong> ${esc(t.apres2min)}</p>` : ''}
+          ${t.erreurAEviter ? `<p style="margin-top: 4px; color: var(--orange-gold);">⚠️ <strong>Erreur à éviter :</strong> ${esc(t.erreurAEviter)}</p>` : ''}
+        </div>
+      </div>
+    `).join('')}
+
+    <!-- 4. LES 10 ERREURS FRÉQUENTES -->
+    <div class="section-header">⚠️ Top 10 des Erreurs Fréquentes à l'EVC</div>
+    <div style="display: grid; gap: 12px; margin-bottom: 24px;">
+      ${EVC_COACH.commonErrors.map(e => `
+        <div style="padding: 12px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; border-left: 4px solid var(--orange-gold);">
+          <div style="font-weight: bold; font-size: 0.95rem; color: var(--orange-gold); margin-bottom: 4px;">
+            N°${e.rang} — ${esc(e.erreur)}
+          </div>
+          <div style="font-size: 0.9rem; line-height: 1.4;">
+            <p style="margin: 2px 0;">🔴 <strong>Conséquence :</strong> ${esc(e.consequence)}</p>
+            <p style="margin: 2px 0; color: var(--teal-accent);">🟢 <strong>Comment corriger :</strong> ${esc(e.correction)}</p>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+
+    <!-- 5. PHRASES CLÉS SELON LE CONTEXTE -->
+    <div class="section-header">💬 Phrases Clés Indispensables</div>
+    <div style="display: grid; gap: 16px; margin-bottom: 30px;">
+      ${EVC_COACH.keyPhrases.map(k => `
+        <div style="padding: 12px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px;">
+          <div style="font-weight: 600; font-size: 0.95rem; color: var(--teal-accent); margin-bottom: 6px; border-bottom: 1px solid var(--border); padding-bottom: 4px;">
+            ${esc(k.contexte)}
+          </div>
+          <ul style="padding-left: 18px; margin: 4px 0; font-size: 0.9rem; line-height: 1.5; font-style: italic; color: var(--text-muted);">
+            ${k.phrases.map(p => `<li>${esc(p)}</li>`).join('')}
+          </ul>
+        </div>
+      `).join('')}
+    </div>
+  `;
+
+  el.innerHTML = html;
 }
 /* ── DAILY REVISION CARD ── */
 function renderDailyRev(){
@@ -1471,9 +1628,6 @@ function mergeSujetsPools(){
   const chunks=[];
   const push=(arr)=>{if(Array.isArray(arr)&&arr.length)chunks.push(arr);};
   push(typeof SUJETS_EVC_COMPLETS!=='undefined'?SUJETS_EVC_COMPLETS:null);
-  push(typeof SUJETS_EVC_1995_1997!=='undefined'?SUJETS_EVC_1995_1997:null);
-  push(typeof SUJETS_EVC_1998_2000!=='undefined'?SUJETS_EVC_1998_2000:null);
-  push(typeof SUJETS_EVC_2001_2003!=='undefined'?SUJETS_EVC_2001_2003:null);
   push(typeof SUJETS_EVC_2004_2006!=='undefined'?SUJETS_EVC_2004_2006:null);
   push(typeof SUJETS_EVC_2007_2009!=='undefined'?SUJETS_EVC_2007_2009:null);
   push(typeof SUJETS_EVC_2010_2012!=='undefined'?SUJETS_EVC_2010_2012:null);
