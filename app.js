@@ -415,9 +415,63 @@ if (typeof APP_DATA !== 'undefined' && (typeof document === 'undefined' || !docu
 function renderChapter(raw,chId){
   const ch=APP_DATA.chapters.find(c=>c.id===chId);
   const titleRe=ch?new RegExp('^'+ch.t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\s*$','i'):null;
-  let text=raw.replace(/(\w)-\s*\n\s*(\w)/g,'$1$2');
-  let lines=text.replace(/\r\n/g,'\n').split('\n').map(l=>l.trim()).filter((l,i,arr)=>{
-    if(!l)return false;
+  
+  // 1. Fix hyphens with spaces (OCR hyphenations) with French accent support
+  let text = raw.replace(/([a-zA-Zà-öø-ÿœŒæÆ]+)-\s+([a-zA-Zà-öø-ÿœŒæÆ]+)/g, (match, p1, p2) => {
+    const prefixes = /^(pré|diffé|repré|dé|con|in|re|trans|inter|intra|co|physio|patho|neuro|ostéo|sympto|cardio|broncho|pneumo|hémato|hépato|néphro|gastro|entéro|myo|dermo|ophtalmo|oto|rhino|laryngo|géronto|géria|psycho|démogra|socio|anthro|biolo|médico|chimio|radiothé|immuno|anti|auto|hyper|hypo|dys|poly|multi|micro|macro|péri|para|post|supra|infra|extra|ultra|pseudo|semi|hémi|mono|bi|tri|quadri|tétra|penta|hexa|pluri)$/i;
+    const normP1Prefix = p1.replace(/é/g, 'e').replace(/è/g, 'e').replace(/à/g, 'a');
+    if (prefixes.test(p1) || prefixes.test(normP1Prefix)) {
+      return p1 + p2;
+    }
+    if (p2.match(/^[a-zà-öø-ÿ]/)) {
+      const compoundBases = /^(garde|arc|celui|celle|ceux|celles|moi|toi|soi|nous|vous|lui|leur|eux|y|en|ci|là|bas|haut|arrière|avant|après|entre|sous|sur|sans|contre|non|quasi|vice)$/i;
+      if (compoundBases.test(p1)) return p1 + '-' + p2;
+      return p1 + p2;
+    }
+    return p1 + '-' + p2;
+  });
+
+  // 2. Fix standard hyphenations at end of lines
+  text = text.replace(/([a-zA-Zà-öø-ÿœŒæÆ]+)-\s*\n\s*([a-zA-Zà-öø-ÿœŒæÆ]+)/g, '$1$2');
+
+  const rawLines = text.replace(/\r\n/g,'\n').split('\n').map(l=>l.trim());
+  
+  // 3. Preprocess and merge split headings
+  const preprocessedLines = [];
+  for (let i = 0; i < rawLines.length; i++) {
+    let l = rawLines[i];
+    if (l === '') {
+      if (preprocessedLines.length > 0 && preprocessedLines[preprocessedLines.length - 1] !== '') {
+        preprocessedLines.push('');
+      }
+      continue;
+    }
+    
+    // Merge Roman numeral on its own line followed by title
+    if (/^[IVX]+$/.test(l)) {
+      if (i + 1 < rawLines.length && rawLines[i+1] && !/[.!?]$/.test(rawLines[i+1]) && rawLines[i+1].length < 100) {
+        l = l + '. ' + rawLines[i+1];
+        i++;
+      }
+    }
+    // Merge capital letter on its own line followed by title
+    else if (/^[A-Z]$/.test(l)) {
+      if (i + 1 < rawLines.length && rawLines[i+1] && !/[.!?]$/.test(rawLines[i+1]) && rawLines[i+1].length < 100) {
+        l = l + '. ' + rawLines[i+1];
+        i++;
+      }
+    }
+    
+    // Fix merged letters/numerals on the same line (OCR artifact)
+    l = l.replace(/^([IVX]+)([A-ZÀ-ÖØ-ß][a-zà-öø-ÿ].*)/, '$1. $2');
+    l = l.replace(/^([A-Z])([A-ZÀ-ÖØ-ß][a-zà-öø-ÿ].*)/, '$1. $2');
+    
+    preprocessedLines.push(l);
+  }
+
+  // 4. Filter OCR junk, keeping empty lines for paragraph breaks
+  let lines = preprocessedLines.filter((l,i,arr)=>{
+    if(l === '') return true;
     if(RUN_HDR_RE.test(l))return false;
     if(SKIP_LINE_RE.test(l))return false;
     if(titleRe&&titleRe.test(l))return false;
@@ -428,11 +482,13 @@ function renderChapter(raw,chId){
     if(DIAGRAM_RE.test(l)&&!/Fig\.\s*\d+\.\d+/.test(l))return false;
     return true;
   });
+
   // Filter ITEM table rows before first section + kill short garbage
   let firstSec=-1;
   for(let i=0;i<lines.length;i++){if(SECTION_RE.test(lines[i])||LETTER_RE.test(lines[i])){firstSec=i;break}}
   if(firstSec>0){
     lines=lines.filter((l,i)=>{
+      if(l === '') return true;
       if(i>=firstSec)return true;
       if(/Situations?\s+de\s+départ/i.test(l))return true;
       if(/^\d{2,3}\s+/.test(l))return true;
@@ -444,19 +500,21 @@ function renderChapter(raw,chId){
   }
   // Kill remaining short non-sentence fragments (common OCR junk)
   lines = lines.filter(l => {
+    if(l === '') return true;
     if (l.length >= 50) return true;
     if (BULLET_RE.test(l) || SECTION_RE.test(l) || LETTER_RE.test(l)) return true;
     if (/^Fig\.|Tableau|Encadré|^\d{2,3}\s+/.test(l)) return true;
-    if (/[.!?]$/.test(l)) return true;   // keep if it ends a sentence
+    if (/[.!?]$/.test(l)) return true;
     return false;
   });
   // R2 — Filtrer les listes de sections internes (TOC dupliquees dans le corps)
-  // Proteger les 40 premieres lignes (sommaire du debut du chapitre)
+  // Proteger les 40 premieres lignes
   const preambleHeadings = new Set();
   for (let pi = 0; pi < Math.min(lines.length, 40); pi++) {
     if (SECTION_RE.test(lines[pi]) || LETTER_RE.test(lines[pi])) preambleHeadings.add(lines[pi]);
   }
   lines = lines.filter((l, i) => {
+    if(l === '') return true;
     if (i < 40 || preambleHeadings.has(l)) return true;
     const isSec = SECTION_RE.test(l);
     const isLet = LETTER_RE.test(l);
@@ -596,7 +654,13 @@ function renderChapter(raw,chId){
     if(inNumList)flushNumList();
 
     const bulM=l.match(BULLET_RE);
-    if(bulM){flushNumList();bulletBuf.push(bulM[1]);continue}
+    const isAutoBullet = bulM || l.endsWith(';') || (bulletBuf.length > 0 && l.endsWith('.'));
+    if(isAutoBullet && !SECTION_RE.test(l) && !LETTER_RE.test(l) && !RANG_RE.test(l)){
+      flushNumList();
+      const cleanL = l.replace(/^[•\-–]\s*/, '');
+      bulletBuf.push(cleanL);
+      continue;
+    }
     // Bullet continuation: if we have bullets and line is not structural, append to last bullet
     if(bulletBuf.length){
       const isStruct=SECTION_RE.test(l)||LETTER_RE.test(l)||/^Situations?\s+de\s+départ/i.test(l)||/^Encadré\s+/i.test(l)||/^Tableau\s+/i.test(l)||/^Fig\.\s*\d/i.test(l)||RANG_RE.test(l)||/^\d{2,3}\s+/.test(l);
