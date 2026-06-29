@@ -29,7 +29,6 @@ const BrainFeed = (() => {
   let renderedRange = { start: 0, end: 0 };
   const BATCH_SIZE = 6;
   let activeTimers = new Map();
-  let swipeState = null;
 
   const TYPE_RATIO = {
     memo_jour: 0.17,
@@ -470,7 +469,7 @@ const BrainFeed = (() => {
               <p class="bf-question-text">${esc(card.question)}</p>
             </main>
             <footer class="bf-card-ftr">
-              <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:window.innerWidth,behavior:'smooth'})">Mnémotechnique ➔</button>
+              <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:window.innerWidth,behavior:'smooth'})">Révéler la réponse ➔</button>
             </footer>
           </article>
         </div>
@@ -514,7 +513,7 @@ const BrainFeed = (() => {
               <div class="bf-choc-vignette">${esc(card.vignette)}</div>
             </main>
             <footer class="bf-card-ftr">
-              <button type="button" class="bf-action-reveal" onclick="stopCasChocTimer(${slideIdx}); document.getElementById('bfScroll-${slideIdx}').scrollBy({left:window.innerWidth,behavior:'smooth'})">Voir le diagnostic ➔</button>
+              <button type="button" class="bf-action-reveal" onclick="stopCasChocTimer(${slideIdx}); document.getElementById('bfScroll-${slideIdx}').scrollBy({left:window.innerWidth,behavior:'smooth'})">Révéler la réponse ➔</button>
             </footer>
           </article>
         </div>
@@ -559,7 +558,7 @@ const BrainFeed = (() => {
               <div class="bf-quiz-options">${opts}</div>
             </main>
             <footer class="bf-card-ftr">
-              <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:window.innerWidth,behavior:'smooth'})">Voir les explications ➔</button>
+              <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:window.innerWidth,behavior:'smooth'})">Révéler la réponse ➔</button>
             </footer>
           </article>
         </div>
@@ -585,7 +584,7 @@ const BrainFeed = (() => {
     const displayVal = Number.isInteger(card.value) ? card.value : card.value.toFixed(1).replace('.', ',');
     return `
       <div class="bf-horiz-scroll" id="bfScroll-${slideIdx}">
-        <!-- CHIFFRE CLÉ -->
+        <!-- PAGE 1 : QUESTION -->
         <div class="bf-horiz-page page-1 bf-theme-stat">
           <div class="bf-bg-emoji">📊</div>
           <article class="bf-card-content">
@@ -593,14 +592,29 @@ const BrainFeed = (() => {
               <span class="bf-type-badge">📊 CHIFFRE CLÉ</span>
             </header>
             <main class="bf-card-main">
+              <p class="bf-question-text" style="font-size: 1.15rem;">${esc(card.line)}</p>
+            </main>
+            <footer class="bf-card-ftr">
+              <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:window.innerWidth,behavior:'smooth'})">Révéler la réponse ➔</button>
+            </footer>
+          </article>
+        </div>
+        <!-- PAGE 2 : RÉPONSE -->
+        <div class="bf-horiz-page page-2 bf-theme-stat">
+          <div class="bf-bg-emoji">📈</div>
+          <article class="bf-card-content">
+            <header class="bf-card-hdr">
+              <span class="bf-type-badge">📊 Valeur</span>
+            </header>
+            <main class="bf-card-main">
               <div class="bf-stat-number-wrap">
                 <span class="bf-stat-number" data-target="${card.value}">${displayVal}</span>
                 <span class="bf-stat-unit">${esc(card.unit)}</span>
               </div>
-              <p class="bf-stat-line">${esc(card.line)}</p>
             </main>
             <footer class="bf-card-ftr">
               <span class="bf-stat-source">${esc(card.source)}</span>
+              <span class="bf-swipe-left-hint">⬅ Revoir la question</span>
             </footer>
           </article>
         </div>
@@ -610,17 +624,35 @@ const BrainFeed = (() => {
   function renderCitation(card, slideIdx) {
     return `
       <div class="bf-horiz-scroll" id="bfScroll-${slideIdx}">
-        <!-- CITATION -->
+        <!-- PAGE 1 : CITATION -->
         <div class="bf-horiz-page page-1 bf-theme-quote">
           <div class="bf-bg-emoji">💬</div>
           <article class="bf-card-content">
+            <header class="bf-card-hdr">
+              <span class="bf-type-badge">CITATION</span>
+            </header>
             <main class="bf-card-main">
               <div class="bf-quote-mark">“</div>
-              <blockquote class="bf-quote-text">${esc(card.text)}</blockquote>
+              <blockquote class="bf-quote-text" style="font-size: 1.15rem;">${esc(card.text)}</blockquote>
+            </main>
+            <footer class="bf-card-ftr">
+              <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:window.innerWidth,behavior:'smooth'})">Révéler la réponse ➔</button>
+            </footer>
+          </article>
+        </div>
+        <!-- PAGE 2 : RÉPONSE -->
+        <div class="bf-horiz-page page-2 bf-theme-quote">
+          <div class="bf-bg-emoji">✍️</div>
+          <article class="bf-card-content">
+            <header class="bf-card-hdr">
+              <span class="bf-type-badge">Auteur</span>
+            </header>
+            <main class="bf-card-main">
+              <blockquote class="bf-quote-text" style="font-size: 1.1rem; margin-bottom: 12px;">${esc(card.text)}</blockquote>
               <cite class="bf-quote-author">— ${esc(card.author)}</cite>
             </main>
             <footer class="bf-card-ftr">
-              <span class="bf-type-badge">CITATION</span>
+              <span class="bf-swipe-left-hint">⬅ Revoir la citation</span>
             </footer>
           </article>
         </div>
@@ -644,7 +676,7 @@ const BrainFeed = (() => {
               </div>
             </main>
             <footer class="bf-card-ftr">
-              <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:window.innerWidth,behavior:'smooth'})">Pourquoi c'est faux ? ➔</button>
+              <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:window.innerWidth,behavior:'smooth'})">Révéler la réponse ➔</button>
             </footer>
           </article>
         </div>
@@ -670,14 +702,6 @@ const BrainFeed = (() => {
   }
 
   function bindSlideInteractions(slide, card, slideIdx) {
-    const classic = slide.querySelector('.bf-card-container');
-    if (classic) {
-      classic.addEventListener('click', (e) => {
-        if (e.target.closest('.bf-side-btn')) return;
-        classic.classList.toggle('flipped');
-      });
-    }
-
     const memoBtn = slide.querySelector('.bf-memo-reveal-btn');
     if (memoBtn) {
       memoBtn.addEventListener('click', () => {
@@ -737,7 +761,7 @@ const BrainFeed = (() => {
     let lastTap = 0;
     slide.addEventListener('click', (e) => {
       // Ignorer si clic sur bouton d'action ou de quiz
-      if (e.target.closest('button') || e.target.closest('.bf-quiz-opt') || e.target.closest('.bf-side-btn')) return;
+      if (e.target.closest('button') || e.target.closest('.bf-quiz-opt')) return;
       
       const now = Date.now();
       const delay = now - lastTap;
@@ -749,7 +773,7 @@ const BrainFeed = (() => {
     });
 
     slide.addEventListener('touchstart', (e) => {
-      if (e.target.closest('button') || e.target.closest('.bf-quiz-opt') || e.target.closest('.bf-side-btn')) return;
+      if (e.target.closest('button') || e.target.closest('.bf-quiz-opt')) return;
       const now = Date.now();
       const delay = now - lastTap;
       if (delay < 300 && delay > 0) {

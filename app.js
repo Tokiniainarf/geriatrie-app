@@ -334,22 +334,25 @@ const BULLET_RE=/^[•\-–]\s*(.+)/;
 const DIAGRAM_RE=/^(Fonction|d'organe|Réserve|Seuil|Effet|100\s*%|0\s+Âge|\d\s+(Vieillissement|Maladie|Stress)|Fig\.\s*\d)/i;
 const NUM_LIST_RE=/^(\d{1,2})[\.)]\s+(.+)/;
 
-function preprocessAppData(){
-  if (typeof APP_DATA === 'undefined' || !APP_DATA.chapters || !APP_DATA.content) return;
+function preprocessAppData(appData){
+  const data = appData || (typeof APP_DATA !== 'undefined' ? APP_DATA : null);
+  if (!data || !data.chapters || !data.content) return;
   const normalize = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');
-  const chapters = APP_DATA.chapters;
+  const chapters = data.chapters;
   
   for (let i = 0; i < chapters.length - 1; i++) {
     const chId = chapters[i].id;
     const nextChId = chapters[i+1].id;
-    const pages = APP_DATA.content[chId];
-    const nextPages = APP_DATA.content[nextChId];
-    
-    if (!pages || !pages.length || !nextPages || !nextPages.length) {
+    const pages = data.content[chId];
+    if (!pages || !pages.length) {
       continue;
     }
+    if (!data.content[nextChId]) {
+      data.content[nextChId] = [];
+    }
+    const nextPages = data.content[nextChId];
     
-    const nextFirstPageNum = nextPages[0][0];
+    const nextFirstPageNum = nextPages.length ? nextPages[0][0] : -1;
     let candidate = -1;
     
     // Detection A ('stnioP')
@@ -387,7 +390,7 @@ function preprocessAppData(){
     if (candidate !== -1 && candidate < pages.length) {
       const pagesToMove = pages.slice(candidate);
       const lastPageNum = pagesToMove[pagesToMove.length - 1][0];
-      const pageGap = nextFirstPageNum - lastPageNum;
+      const pageGap = nextFirstPageNum !== -1 ? (nextFirstPageNum - lastPageNum) : 1;
       
       const gapCheck = pageGap > 0 && pageGap <= 2;
       const sizeCheck = pagesToMove.length <= 4;
@@ -417,13 +420,13 @@ function renderChapter(raw,chId){
   const titleRe=ch?new RegExp('^'+ch.t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\s*$','i'):null;
   
   // 1. Fix hyphens with spaces (OCR hyphenations) with French accent support
-  let text = raw.replace(/([a-zA-Zà-öø-ÿœŒæÆ]+)-\s+([a-zA-Zà-öø-ÿœŒæÆ]+)/g, (match, p1, p2) => {
+  let text = raw.replace(/([a-zA-Zà-öø-ÿœŒæÆÀ-ÖØ-ß]+)-\s+([a-zA-Zà-öø-ÿœŒæÆÀ-ÖØ-ß]+)/g, (match, p1, p2) => {
     const prefixes = /^(pré|diffé|repré|dé|con|in|re|trans|inter|intra|co|physio|patho|neuro|ostéo|sympto|cardio|broncho|pneumo|hémato|hépato|néphro|gastro|entéro|myo|dermo|ophtalmo|oto|rhino|laryngo|géronto|géria|psycho|démogra|socio|anthro|biolo|médico|chimio|radiothé|immuno|anti|auto|hyper|hypo|dys|poly|multi|micro|macro|péri|para|post|supra|infra|extra|ultra|pseudo|semi|hémi|mono|bi|tri|quadri|tétra|penta|hexa|pluri)$/i;
-    const normP1Prefix = p1.replace(/é/g, 'e').replace(/è/g, 'e').replace(/à/g, 'a');
+    const normP1Prefix = p1.replace(/[éèêë]/gi, 'e').replace(/[àâä]/gi, 'a').replace(/[ôö]/gi, 'o').replace(/[ùûü]/gi, 'u').replace(/ç/gi, 'c');
     if (prefixes.test(p1) || prefixes.test(normP1Prefix)) {
       return p1 + p2;
     }
-    if (p2.match(/^[a-zà-öø-ÿ]/)) {
+    if (p2.match(/^[a-zà-öø-ÿœŒæÆÀ-ÖØ-ß]/i)) {
       const compoundBases = /^(garde|arc|celui|celle|ceux|celles|moi|toi|soi|nous|vous|lui|leur|eux|y|en|ci|là|bas|haut|arrière|avant|après|entre|sous|sur|sans|contre|non|quasi|vice)$/i;
       if (compoundBases.test(p1)) return p1 + '-' + p2;
       return p1 + p2;
@@ -432,7 +435,7 @@ function renderChapter(raw,chId){
   });
 
   // 2. Fix standard hyphenations at end of lines
-  text = text.replace(/([a-zA-Zà-öø-ÿœŒæÆ]+)-\s*\n\s*([a-zA-Zà-öø-ÿœŒæÆ]+)/g, '$1$2');
+  text = text.replace(/([a-zA-Zà-öø-ÿœŒæÆÀ-ÖØ-ß]+)-\s*\n\s*([a-zA-Zà-öø-ÿœŒæÆÀ-ÖØ-ß]+)/g, '$1$2');
 
   const rawLines = text.replace(/\r\n/g,'\n').split('\n').map(l=>l.trim());
   
@@ -463,8 +466,8 @@ function renderChapter(raw,chId){
     }
     
     // Fix merged letters/numerals on the same line (OCR artifact)
-    l = l.replace(/^([IVX]+)([A-ZÀ-ÖØ-ß][a-zà-öø-ÿ].*)/, '$1. $2');
-    l = l.replace(/^([A-Z])([A-ZÀ-ÖØ-ß][a-zà-öø-ÿ].*)/, '$1. $2');
+    l = l.replace(/^([IVX]+)\.?\s*([A-ZÀ-ÖØ-ßŒÆ][a-zà-öø-ÿœæ].*)/, '$1. $2');
+    l = l.replace(/^([A-Z])\.?\s*([A-ZÀ-ÖØ-ßŒÆ][a-zà-öø-ÿœæ].*)/, '$1. $2');
     
     preprocessedLines.push(l);
   }
@@ -505,6 +508,7 @@ function renderChapter(raw,chId){
     if (BULLET_RE.test(l) || SECTION_RE.test(l) || LETTER_RE.test(l)) return true;
     if (/^Fig\.|Tableau|Encadré|^\d{2,3}\s+/.test(l)) return true;
     if (/[.!?]$/.test(l)) return true;
+    if (/^Situations?\s+de\s+départ/i.test(l)) return true;
     return false;
   });
   // R2 — Filtrer les listes de sections internes (TOC dupliquees dans le corps)
@@ -513,9 +517,10 @@ function renderChapter(raw,chId){
   for (let pi = 0; pi < Math.min(lines.length, 40); pi++) {
     if (SECTION_RE.test(lines[pi]) || LETTER_RE.test(lines[pi])) preambleHeadings.add(lines[pi]);
   }
+  const isLongDoc = lines.length > 8;
   lines = lines.filter((l, i) => {
     if(l === '') return true;
-    if (i < 40 || preambleHeadings.has(l)) return true;
+    if (isLongDoc && (i < 40 || preambleHeadings.has(l))) return true;
     const isSec = SECTION_RE.test(l);
     const isLet = LETTER_RE.test(l);
     if (!isSec && !isLet) return true;
@@ -526,14 +531,14 @@ function renderChapter(raw,chId){
       if (re.test(lines[j])) { nxtFound = true; break; }
       if (lines[j].length > 50 && /[.!?]/.test(lines[j])) break;
     }
-    for (let j = i - 1, cnt = 0; j >= 40 && cnt < 5; j--) {
+    for (let j = i - 1, cnt = 0; j >= 0 && cnt < 5; j--) {
       if (!lines[j]) continue; cnt++;
       if (re.test(lines[j])) { prvFound = true; break; }
       if (lines[j].length > 50 && /[.!?]/.test(lines[j])) break;
     }
     return !(nxtFound || prvFound);
   });
-  let html='';let paraBuf=[];let bulletBuf=[];let inSection=false;let inSit=false;let inCallout=false;let calloutTitle='';let calloutBuf=[];let inNumList=false;let numBuf=[];let pastPreamble=false;
+  let html='';let paraBuf=[];let bulletBuf=[];let inSection=false;let inSit=false;let inCallout=false;let calloutTitle='';let calloutBuf=[];let inNumList=false;let numBuf=[];let pastPreamble=false;let lettrinePlaced=false;
 
   function markBodyStart(){pastPreamble=true}
   function isPreambleLine(l){
@@ -550,8 +555,13 @@ function renderChapter(raw,chId){
     paraBuf=[];
     if(merged.length<12)return;
     const chip=rang?`<span class="rang-inline rang-${rang==="A"?"a":"b"}">Rang ${rang}</span>`:"";
+    let pClass = "";
+    if (inSection && !lettrinePlaced) {
+      pClass = ' class="has-lettrine"';
+      lettrinePlaced = true;
+    }
     // No more splitting - create large continuous blocks
-    html+=`<div class="para-card">${chip}<p>${esc(merged)}</p></div>`;
+    html+=`<div class="para-card">${chip}<p${pClass}>${esc(merged)}</p></div>`;
   }
 
   function flushBullets(){
@@ -571,35 +581,56 @@ function renderChapter(raw,chId){
   }
   function closeSection(){if(inSection){html+=`</div></section>`;inSection=false}}
 
-  const outlineSeen=new Set();
-  const outlineParts=[];
-  const outlineCap=lines.slice(0,35);
-  for(const ol of outlineCap){
-    const om=ol.match(SECTION_RE);
-    if(!om)continue;
-    const key=om[1]+'|'+om[2];
-    if(outlineSeen.has(key))continue;
-    outlineSeen.add(key);
-    outlineParts.push(om);
-    if(outlineParts.length>=8)break;
-  }
-  if(outlineParts.length>=3){
-    html+=`<details class="ch-outline" aria-label="Plan du chapitre"><summary>Plan du chapitre</summary><ul>${outlineParts.map(m=>`<li><span class="outline-num">${esc(m[1])}</span> ${esc(m[2])}</li>`).join('')}</ul></details>`;
+  const first35Headings = new Set();
+  const outlineCap = lines.slice(0, 35);
+  for (const ol of outlineCap) {
+    const om = ol.match(SECTION_RE);
+    if (om) {
+      const key = om[1] + '|' + om[2];
+      first35Headings.add(key);
+    }
   }
 
   for(let i=0;i<lines.length;i++){
     let l=lines[i];
     if(!l){flushBullets();flushNumList();if(inCallout)flushCallout();continue}
 
-    if(/Situations?\s+de\s+départ/i.test(l)){
+    if(/^Situations?\s+de\s+départ/i.test(l)){
       flushBullets();flushNumList();closeSection();
       markBodyStart();
-      html+=`<div class="key-point"><strong>Situations de départ</strong><ul>`;inSit=true;continue;
+      html+=`<div class="situations-card"><div class="situations-title">Situations de départ</div><ul class="situations-list">`;
+      inSit=true;continue;
     }
     if(inSit){
-      const sm=l.match(/^(\d{2,3})\s+(.+)/);
-      if(sm){html+=`<li>${esc(sm[2])}</li>`;continue}
-      html+=`</ul></div>`;inSit=false;
+      // Check if this line belongs to situations list
+      const parts = l.split(/\s*(?=\b\d{2,3}\b\s+)/);
+      let matchedAny = false;
+      let items = [];
+      for (const part of parts) {
+        const sm = part.trim().match(/^(\d{2,3})\s+(.+)/);
+        if (sm) {
+          items.push(sm);
+          matchedAny = true;
+        }
+      }
+      
+      if (matchedAny) {
+        for (const sm of items) {
+          html += `<li><span class="sit-badge-turquoise">${sm[1]}</span> ${esc(sm[2].replace(/\.$/, ''))}</li>`;
+        }
+        continue;
+      }
+      
+      if (/^En lien avec/i.test(l)) {
+        html += `<li class="sit-group-title">${esc(l)}</li>`;
+        continue;
+      }
+      
+      // If it's not a situation item or group header, the block has ended
+      html += `</ul></div>`;
+      inSit = false;
+      i--; // re-evaluate this line in main loop
+      continue;
     }
 
     const enc=l.match(/^Encadré\s+([\d.]+)/i);
@@ -631,10 +662,22 @@ function renderChapter(raw,chId){
 
     const secM=l.match(SECTION_RE);
     if(secM){
-      if(!pastPreamble)continue;
+      if(!pastPreamble){
+        let hasSibling = false;
+        for (let j = i + 1, cnt = 0; j < lines.length && cnt < 5; j++) {
+          if (!lines[j]) continue; cnt++;
+          if (SECTION_RE.test(lines[j])) { hasSibling = true; break; }
+        }
+        for (let j = i - 1, cnt = 0; j >= 0 && cnt < 5; j--) {
+          if (!lines[j]) continue; cnt++;
+          if (SECTION_RE.test(lines[j])) { hasSibling = true; break; }
+        }
+        if (hasSibling) continue;
+        markBodyStart();
+      }
       flushPara();flushBullets();flushNumList();closeSection();
       html+=`<section class="manual-section"><header class="section-head"><span class="section-num">${esc(secM[1])}</span><span class="section-title">${esc(secM[2])}</span></header><div class="section-body">`;
-      inSection=true;continue;
+      inSection=true;lettrinePlaced=false;continue;
     }
 
     const letM=l.match(LETTER_RE);
@@ -712,7 +755,42 @@ function renderChapter(raw,chId){
   }
   flushPara();flushBullets();flushNumList();if(inCallout)flushCallout();if(inSit)html+=`</ul></div>`;closeSection();
   // R3 — Supprimer les sections sans contenu (en-tete de plan sans texte correspondant dans la BDD)
-  html = html.replace(/<section class="manual-section"><header class="section-head">[\s\S]*?<\/header><div class="section-body">\s*<\/div><\/section>/g, '');
+  html = html.replace(/<section class="manual-section">([\s\S]*?)<\/section>/g, (match, inner) => {
+    const bodyIndex = inner.indexOf('<div class="section-body">');
+    if (bodyIndex === -1) return '';
+    const bodyHtml = inner.substring(bodyIndex + '<div class="section-body">'.length);
+    const cleanBodyHtml = bodyHtml.replace(/<\/div>\s*$/, '');
+    let text = cleanBodyHtml.replace(/<[^>]+>/g, '');
+    text = text.replace(/&nbsp;/gi, ' ')
+               .replace(/&lt;/gi, '<')
+               .replace(/&gt;/gi, '>')
+               .replace(/&amp;/gi, '&')
+               .replace(/&[a-z0-9]+;/gi, '');
+    const plainText = text.trim();
+    if (plainText.length < 20) {
+      return '';
+    }
+    return match;
+  });
+
+  // Now build the outline from the kept sections
+  const keptSections = [];
+  const secRegex = /<section class="manual-section"><header class="section-head"><span class="section-num">(.*?)<\/span><span class="section-title">(.*?)<\/span>/g;
+  let match;
+  while ((match = secRegex.exec(html)) !== null) {
+    const num = match[1];
+    const title = match[2];
+    const key = num + '|' + title;
+    if (first35Headings.has(key)) {
+      keptSections.push({ num, title });
+    }
+  }
+
+  if (keptSections.length >= 3) {
+    const outlineHtml = `<details class="ch-outline" aria-label="Plan du chapitre"><summary>Plan du chapitre</summary><ul>${keptSections.slice(0, 8).map(s => `<li><span class="outline-num">${esc(s.num)}</span> ${esc(s.title)}</li>`).join('')}</ul></details>`;
+    html = outlineHtml + html;
+  }
+
   return html||'<div class="empty"><div class="empty-text">Aucun contenu structuré</div></div>';
 }
 function applyConceptLinks(){
@@ -729,7 +807,13 @@ function navigateToConcept(chId,search){
     const cc=document.getElementById('chContent');
     if(!cc)return;
     cc.querySelectorAll('.concept-hit').forEach(n=>n.classList.remove('concept-hit'));
-    for(const el of cc.querySelectorAll('p,.def-block,h2,h3')){
+    const elements = [
+      ...cc.querySelectorAll('p'),
+      ...cc.querySelectorAll('.def-block'),
+      ...cc.querySelectorAll('h2'),
+      ...cc.querySelectorAll('h3')
+    ];
+    for(const el of elements){
       if(el.textContent.toLowerCase().includes(q)){
         el.classList.add('concept-hit');
         el.scrollIntoView({behavior:'smooth',block:'center'});
