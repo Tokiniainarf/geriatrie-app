@@ -417,73 +417,126 @@ const BrainFeed = (() => {
     const tagsHtml = (card.tags || []).slice(0, 3).map(t => `<span class="bf-tag">${esc(t)}</span>`).join('');
 
     return `
-      <div class="bf-swipe-hint bf-swipe-hint-left">❤️ Favori</div>
-      <div class="bf-swipe-hint bf-swipe-hint-right">↗ Partager</div>
-      <div class="bf-swipe-overlay bf-swipe-fav-overlay">❤️</div>
-      <div class="bf-swipe-overlay bf-swipe-share-overlay">Partager</div>
-      <div class="bf-card-container bf-card-classic" id="bfCard-${slideIdx}">
-        <div class="bf-card-inner">
-          <div class="bf-card-front">
-            <div class="bf-card-header">
-              <span class="bf-card-type">${typeIcons[card.type] || '🎴'} ${typeLabels[card.type] || 'Carte'}</span>
+      <div class="bf-horiz-scroll" id="bfScroll-${slideIdx}">
+        <!-- PAGE 1 : QUESTION -->
+        <div class="bf-horiz-page page-1 bf-theme-classic">
+          <div class="bf-bg-emoji">🎴</div>
+          <article class="bf-card-content">
+            <header class="bf-card-hdr">
+              <span class="bf-type-badge">${typeIcons[card.type] || '🎴'} ${typeLabels[card.type] || 'Carte'}</span>
               ${rangBadge}
-            </div>
-            <div class="bf-card-question">${esc(card.question)}</div>
-            <div>${chTag}</div>
-            <div class="bf-card-hint">Tape pour révéler</div>
-          </div>
-          <div class="bf-card-back">
-            <div class="bf-card-header">
-              <span class="bf-card-type">${typeIcons[card.type] || '🎴'} Réponse</span>
+            </header>
+            <main class="bf-card-main">
+              <p class="bf-question-text">${esc(card.question)}</p>
+            </main>
+            <footer class="bf-card-ftr">
+              ${chTag}
+              <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:window.innerWidth,behavior:'smooth'})">Révéler la réponse ➔</button>
+            </footer>
+          </article>
+        </div>
+        <!-- PAGE 2 : RÉPONSE -->
+        <div class="bf-horiz-page page-2 bf-theme-classic-back">
+          <div class="bf-bg-emoji">💡</div>
+          <article class="bf-card-content">
+            <header class="bf-card-hdr">
+              <span class="bf-type-badge">💡 Réponse</span>
               ${rangBadge}
-            </div>
-            <div class="bf-card-answer">${esc(card.answer)}</div>
-            <div class="bf-card-tags">${tagsHtml}</div>
-          </div>
+            </header>
+            <main class="bf-card-main scrollable">
+              <p class="bf-answer-text">${esc(card.answer)}</p>
+            </main>
+            <footer class="bf-card-ftr">
+              <div class="bf-card-tags">${tagsHtml}</div>
+              <span class="bf-swipe-left-hint">⬅ Revoir la question</span>
+            </footer>
+          </article>
         </div>
       </div>`;
   }
 
-  function renderMemoJour(card) {
+  function renderMemoJour(card, slideIdx) {
     const isDaily = card.title === 'MÉMO DU JOUR';
     return `
-      <div class="bf-swipe-hint bf-swipe-hint-left">❤️ Favori</div>
-      <div class="bf-swipe-hint bf-swipe-hint-right">↗ Partager</div>
-      <div class="bf-swipe-overlay bf-swipe-fav-overlay">❤️</div>
-      <div class="bf-swipe-overlay bf-swipe-share-overlay">Partager</div>
-      <article class="bf-panel bf-panel-memo" data-revealed="0">
-        <header class="bf-memo-badge ${isDaily ? 'bf-memo-daily' : ''}">${esc(card.title)}</header>
-        <p class="bf-memo-prompt">${esc(card.question)}</p>
-        <button type="button" class="bf-memo-reveal-btn">Révéler le mnémotechnique</button>
-        <div class="bf-memo-glow-wrap">
-          <p class="bf-memo-glow-text">${esc(card.mnemonic)}</p>
+      <div class="bf-horiz-scroll" id="bfScroll-${slideIdx}">
+        <!-- PAGE 1 : ENONCE -->
+        <div class="bf-horiz-page page-1 bf-theme-memo">
+          <div class="bf-bg-emoji">🧠</div>
+          <article class="bf-card-content">
+            <header class="bf-card-hdr">
+              <span class="bf-type-badge">🧠 ${esc(card.title)}</span>
+            </header>
+            <main class="bf-card-main">
+              <p class="bf-question-text">${esc(card.question)}</p>
+            </main>
+            <footer class="bf-card-ftr">
+              <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:window.innerWidth,behavior:'smooth'})">Mnémotechnique ➔</button>
+            </footer>
+          </article>
         </div>
-        <p class="bf-memo-detail">${esc(card.detail)}</p>
-      </article>`;
+        <!-- PAGE 2 : MNEMO -->
+        <div class="bf-horiz-page page-2 bf-theme-memo-back">
+          <div class="bf-bg-emoji">✨</div>
+          <article class="bf-card-content">
+            <header class="bf-card-hdr">
+              <span class="bf-type-badge">✨ Rétention</span>
+            </header>
+            <main class="bf-card-main scrollable">
+              <div class="bf-memo-glow-wrap">
+                <p class="bf-memo-glow-text">${esc(card.mnemonic)}</p>
+              </div>
+              <p class="bf-memo-detail">${esc(card.detail)}</p>
+            </main>
+            <footer class="bf-card-ftr">
+              <span class="bf-swipe-left-hint">⬅ Revoir l'énoncé</span>
+            </footer>
+          </article>
+        </div>
+      </div>`;
   }
 
   function renderCasChoc(card, slideIdx) {
     return `
-      <div class="bf-swipe-hint bf-swipe-hint-left">❤️ Favori</div>
-      <div class="bf-swipe-hint bf-swipe-hint-right">↗ Partager</div>
-      <div class="bf-swipe-overlay bf-swipe-fav-overlay">❤️</div>
-      <div class="bf-swipe-overlay bf-swipe-share-overlay">Partager</div>
-      <article class="bf-panel bf-panel-choc" data-slide="${slideIdx}">
-        <header class="bf-choc-header">
-          <span class="bf-choc-label">⚡ CAS CHOC</span>
-          <div class="bf-choc-timer" data-seconds="${card.timer}">
-            <svg class="bf-choc-ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16" class="bf-choc-ring-bg"/><circle cx="18" cy="18" r="16" class="bf-choc-ring-fg"/></svg>
-            <span class="bf-choc-time">${card.timer}</span>
-          </div>
-        </header>
-        <p class="bf-choc-sub">Tu as <strong>${card.timer} secondes</strong> pour poser ton diagnostic</p>
-        <div class="bf-choc-vignette">${esc(card.vignette)}</div>
-        <button type="button" class="bf-choc-reveal">Voir le diagnostic</button>
-        <div class="bf-choc-answer hidden">${esc(card.diagnosis)}</div>
-      </article>`;
+      <div class="bf-horiz-scroll" id="bfScroll-${slideIdx}">
+        <!-- PAGE 1 : CAS CLINIQUE -->
+        <div class="bf-horiz-page page-1 bf-theme-choc">
+          <div class="bf-bg-emoji">🚑</div>
+          <article class="bf-card-content">
+            <header class="bf-card-hdr">
+              <span class="bf-type-badge">🚑 CAS CHOC</span>
+              <div class="bf-choc-timer" data-seconds="${card.timer}">
+                <svg class="bf-choc-ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16" class="bf-choc-ring-bg"/><circle cx="18" cy="18" r="16" class="bf-choc-ring-fg"/></svg>
+                <span class="bf-choc-time">${card.timer}</span>
+              </div>
+            </header>
+            <main class="bf-card-main scrollable">
+              <p class="bf-choc-sub">Tu as <strong>${card.timer} secondes</strong> pour poser ton diagnostic :</p>
+              <div class="bf-choc-vignette">${esc(card.vignette)}</div>
+            </main>
+            <footer class="bf-card-ftr">
+              <button type="button" class="bf-action-reveal" onclick="stopCasChocTimer(${slideIdx}); document.getElementById('bfScroll-${slideIdx}').scrollBy({left:window.innerWidth,behavior:'smooth'})">Voir le diagnostic ➔</button>
+            </footer>
+          </article>
+        </div>
+        <!-- PAGE 2 : DIAGNOSTIC -->
+        <div class="bf-horiz-page page-2 bf-theme-choc-back">
+          <div class="bf-bg-emoji">🩺</div>
+          <article class="bf-card-content">
+            <header class="bf-card-hdr">
+              <span class="bf-type-badge">🩺 Diagnostic gériatrique</span>
+            </header>
+            <main class="bf-card-main scrollable">
+              <div class="bf-choc-answer">${esc(card.diagnosis)}</div>
+            </main>
+            <footer class="bf-card-ftr">
+              <span class="bf-swipe-left-hint">⬅ Revoir le cas</span>
+            </footer>
+          </article>
+        </div>
+      </div>`;
   }
 
-  function renderQuizFlash(card) {
+  function renderQuizFlash(card, slideIdx) {
     const opts = (card.options || []).map((o, i) =>
       `<button type="button" class="bf-quiz-opt" data-correct="${o.correct ? '1' : '0'}" data-idx="${i}">
         <span class="bf-quiz-letter">${['A', 'B', 'C', 'D'][i]}</span>
@@ -491,69 +544,129 @@ const BrainFeed = (() => {
         <span class="bf-quiz-feedback"></span>
       </button>`
     ).join('');
+
     return `
-      <div class="bf-swipe-hint bf-swipe-hint-left">❤️ Favori</div>
-      <div class="bf-swipe-hint bf-swipe-hint-right">↗ Partager</div>
-      <div class="bf-swipe-overlay bf-swipe-fav-overlay">❤️</div>
-      <div class="bf-swipe-overlay bf-swipe-share-overlay">Partager</div>
-      <article class="bf-panel bf-panel-quiz">
-        <header class="bf-quiz-badge">⚡ QUIZ FLASH</header>
-        <h2 class="bf-quiz-q">${esc(card.question)}</h2>
-        <div class="bf-quiz-options">${opts}</div>
-        <p class="bf-quiz-expl hidden">${esc(card.explanation)}</p>
-      </article>`;
+      <div class="bf-horiz-scroll" id="bfScroll-${slideIdx}">
+        <!-- PAGE 1 : QUESTIONS/CHOIX -->
+        <div class="bf-horiz-page page-1 bf-theme-quiz">
+          <div class="bf-bg-emoji">❓</div>
+          <article class="bf-card-content">
+            <header class="bf-card-hdr">
+              <span class="bf-type-badge">⚡ QUIZ FLASH</span>
+            </header>
+            <main class="bf-card-main scrollable">
+              <h2 class="bf-quiz-q">${esc(card.question)}</h2>
+              <div class="bf-quiz-options">${opts}</div>
+            </main>
+            <footer class="bf-card-ftr">
+              <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:window.innerWidth,behavior:'smooth'})">Voir les explications ➔</button>
+            </footer>
+          </article>
+        </div>
+        <!-- PAGE 2 : EXPLICATION -->
+        <div class="bf-horiz-page page-2 bf-theme-quiz-back">
+          <div class="bf-bg-emoji">📖</div>
+          <article class="bf-card-content">
+            <header class="bf-card-hdr">
+              <span class="bf-type-badge">📖 Explication d'expert</span>
+            </header>
+            <main class="bf-card-main scrollable">
+              <p class="bf-quiz-expl">${esc(card.explanation)}</p>
+            </main>
+            <footer class="bf-card-ftr">
+              <span class="bf-swipe-left-hint">⬅ Revoir la question</span>
+            </footer>
+          </article>
+        </div>
+      </div>`;
   }
 
-  function renderChiffreCle(card) {
+  function renderChiffreCle(card, slideIdx) {
     const displayVal = Number.isInteger(card.value) ? card.value : card.value.toFixed(1).replace('.', ',');
     return `
-      <div class="bf-swipe-hint bf-swipe-hint-left">❤️ Favori</div>
-      <div class="bf-swipe-hint bf-swipe-hint-right">↗ Partager</div>
-      <div class="bf-swipe-overlay bf-swipe-fav-overlay">❤️</div>
-      <div class="bf-swipe-overlay bf-swipe-share-overlay">Partager</div>
-      <article class="bf-panel bf-panel-stat">
-        <header class="bf-stat-badge">📊 CHIFFRE CLÉ</header>
-        <div class="bf-stat-number-wrap">
-          <span class="bf-stat-number" data-target="${card.value}">${displayVal}</span>
-          <span class="bf-stat-unit">${esc(card.unit)}</span>
+      <div class="bf-horiz-scroll" id="bfScroll-${slideIdx}">
+        <!-- CHIFFRE CLÉ -->
+        <div class="bf-horiz-page page-1 bf-theme-stat">
+          <div class="bf-bg-emoji">📊</div>
+          <article class="bf-card-content">
+            <header class="bf-card-hdr">
+              <span class="bf-type-badge">📊 CHIFFRE CLÉ</span>
+            </header>
+            <main class="bf-card-main">
+              <div class="bf-stat-number-wrap">
+                <span class="bf-stat-number" data-target="${card.value}">${displayVal}</span>
+                <span class="bf-stat-unit">${esc(card.unit)}</span>
+              </div>
+              <p class="bf-stat-line">${esc(card.line)}</p>
+            </main>
+            <footer class="bf-card-ftr">
+              <span class="bf-stat-source">${esc(card.source)}</span>
+            </footer>
+          </article>
         </div>
-        <p class="bf-stat-line">${esc(card.line)}</p>
-        <span class="bf-stat-source">${esc(card.source)}</span>
-      </article>`;
+      </div>`;
   }
 
-  function renderCitation(card) {
+  function renderCitation(card, slideIdx) {
     return `
-      <div class="bf-swipe-hint bf-swipe-hint-left">❤️ Favori</div>
-      <div class="bf-swipe-hint bf-swipe-hint-right">↗ Partager</div>
-      <div class="bf-swipe-overlay bf-swipe-fav-overlay">❤️</div>
-      <div class="bf-swipe-overlay bf-swipe-share-overlay">Partager</div>
-      <article class="bf-panel bf-panel-quote">
-        <div class="bf-quote-mark">"</div>
-        <blockquote class="bf-quote-text">${esc(card.text)}</blockquote>
-        <cite class="bf-quote-author">— ${esc(card.author)}</cite>
-        <span class="bf-quote-badge">CITATION</span>
-      </article>`;
+      <div class="bf-horiz-scroll" id="bfScroll-${slideIdx}">
+        <!-- CITATION -->
+        <div class="bf-horiz-page page-1 bf-theme-quote">
+          <div class="bf-bg-emoji">💬</div>
+          <article class="bf-card-content">
+            <main class="bf-card-main">
+              <div class="bf-quote-mark">“</div>
+              <blockquote class="bf-quote-text">${esc(card.text)}</blockquote>
+              <cite class="bf-quote-author">— ${esc(card.author)}</cite>
+            </main>
+            <footer class="bf-card-ftr">
+              <span class="bf-type-badge">CITATION</span>
+            </footer>
+          </article>
+        </div>
+      </div>`;
   }
 
-  function renderPiegeExam(card) {
+  function renderPiegeExam(card, slideIdx) {
     return `
-      <div class="bf-swipe-hint bf-swipe-hint-left">❤️ Favori</div>
-      <div class="bf-swipe-hint bf-swipe-hint-right">↗ Partager</div>
-      <div class="bf-swipe-overlay bf-swipe-fav-overlay">❤️</div>
-      <div class="bf-swipe-overlay bf-swipe-share-overlay">Partager</div>
-      <article class="bf-panel bf-panel-trap">
-        <header class="bf-trap-badge">🪤 PIÈGE D'EXAM</header>
-        <div class="bf-trap-wrong">
-          <span class="bf-trap-x">✕</span>
-          <p>${esc(card.trap)}</p>
+      <div class="bf-horiz-scroll" id="bfScroll-${slideIdx}">
+        <!-- PAGE 1 : LE PIEGE -->
+        <div class="bf-horiz-page page-1 bf-theme-trap">
+          <div class="bf-bg-emoji">🪤</div>
+          <article class="bf-card-content">
+            <header class="bf-card-hdr">
+              <span class="bf-type-badge">🪤 PIÈGE D'EXAM</span>
+            </header>
+            <main class="bf-card-main">
+              <div class="bf-trap-wrong">
+                <span class="bf-trap-x">✕</span>
+                <p>${esc(card.trap)}</p>
+              </div>
+            </main>
+            <footer class="bf-card-ftr">
+              <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:window.innerWidth,behavior:'smooth'})">Pourquoi c'est faux ? ➔</button>
+            </footer>
+          </article>
         </div>
-        <button type="button" class="bf-trap-reveal">Pourquoi c'est faux ?</button>
-        <div class="bf-trap-right hidden">
-          <span class="bf-trap-check">✓</span>
-          <p>${esc(card.explain)}</p>
+        <!-- PAGE 2 : RECTIFICATION -->
+        <div class="bf-horiz-page page-2 bf-theme-trap-back">
+          <div class="bf-bg-emoji">✅</div>
+          <article class="bf-card-content">
+            <header class="bf-card-hdr">
+              <span class="bf-type-badge">✅ Règle académique</span>
+            </header>
+            <main class="bf-card-main scrollable">
+              <div class="bf-trap-right">
+                <span class="bf-trap-check">✓</span>
+                <p>${esc(card.explain)}</p>
+              </div>
+            </main>
+            <footer class="bf-card-ftr">
+              <span class="bf-swipe-left-hint">⬅ Revoir le piège</span>
+            </footer>
+          </article>
         </div>
-      </article>`;
+      </div>`;
   }
 
   function bindSlideInteractions(slide, card, slideIdx) {
