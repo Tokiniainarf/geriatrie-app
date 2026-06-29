@@ -211,14 +211,33 @@ const BrainFeed = (() => {
     if (typeof ANNALES_V2 !== 'undefined') annales.push(...ANNALES_V2);
     if (typeof CAS_INTERACTIFS !== 'undefined') annales.push(...CAS_INTERACTIFS);
     if (typeof SITUATIONS_EVC !== 'undefined') annales.push(...SITUATIONS_EVC);
-    const casChoc = annales.map(a => ({
-      type: 'cas_choc', id: 'cc-' + a.id,
-      chapter: a.chapter, rang: a.difficulty || 'A',
-      vignette: a.cas || a.case || a.title || '',
-      diagnosis: a.correction || a.reponse || (a.questions && a.questions[0]?.a) || '',
-      timer: 30,
-      tags: ['Urgence', 'Cas choc']
-    }));
+    if (typeof CAS_EVC_2024 !== 'undefined') annales.push(...CAS_EVC_2024);
+    if (typeof CAS_EVC_2023 !== 'undefined') annales.push(...CAS_EVC_2023);
+    if (typeof CAS_EVC_2020_2022 !== 'undefined') annales.push(...CAS_EVC_2020_2022);
+    if (typeof CAS_EVC_2018_2019 !== 'undefined') annales.push(...CAS_EVC_2018_2019);
+    if (typeof CAS_EVC_2015_2017 !== 'undefined') annales.push(...CAS_EVC_2015_2017);
+    if (typeof CAS_EVC_2010_2014 !== 'undefined') annales.push(...CAS_EVC_2010_2014);
+
+    const casChoc = [];
+    annales.forEach(a => {
+      let diagnosis = '';
+      if (a.questions && a.questions.length) {
+        diagnosis = a.questions.map((q, i) => `<strong>Q${i+1}: ${q.q || q.question || ''}</strong><br>➔ ${q.a || q.answer || ''} ${q.points ? `[${q.points} pts]` : ''}`).join('<br><br>');
+      } else {
+        diagnosis = a.correction || a.reponse || '';
+      }
+      if (!diagnosis) return;
+
+      casChoc.push({
+        type: 'cas_choc', id: 'cc-' + a.id,
+        chapter: a.chapter, rang: a.difficulty || 'A',
+        vignette: a.situation || a.cas || a.case || a.title || '',
+        diagnosis: diagnosis,
+        juryTips: a.juryTips || '',
+        timer: 30,
+        tags: ['Urgence', 'Cas choc']
+      });
+    });
 
     const quizFlash = allFlash.filter(f => (f.answer || '').length > 15).map(fc => ({
       type: 'quiz_flash', id: 'qf-' + fc.id,
@@ -283,6 +302,7 @@ const BrainFeed = (() => {
   function buildLegacyPools(allFlash, srs) {
     const legacy = [];
     allFlash.forEach(fc => {
+      if (!fc.question || !fc.answer) return;
       const srsEntry = srs[fc.id] || { ease: 2.5, interval: 0, nextReview: 0 };
       const now = Date.now();
       legacy.push({
@@ -293,6 +313,7 @@ const BrainFeed = (() => {
     });
     if (typeof SYNTHESIS !== 'undefined') {
       SYNTHESIS.forEach((syn, i) => {
+        if (!syn.title || !syn.sections || !syn.sections.length) return;
         legacy.push({
           type: 'synthesis', id: 'syn-' + i, chapter: '', rang: '',
           question: syn.title,
@@ -304,11 +325,31 @@ const BrainFeed = (() => {
     const annales = [];
     if (typeof ANNALES !== 'undefined') annales.push(...ANNALES);
     if (typeof ANNALES_EXPANDED !== 'undefined') annales.push(...ANNALES_EXPANDED);
+    if (typeof ANNALES_ARCHIVE !== 'undefined') annales.push(...ANNALES_ARCHIVE);
+    if (typeof ANNALES_V2 !== 'undefined') annales.push(...ANNALES_V2);
+    if (typeof CAS_INTERACTIFS !== 'undefined') annales.push(...CAS_INTERACTIFS);
+    if (typeof SITUATIONS_EVC !== 'undefined') annales.push(...SITUATIONS_EVC);
+    if (typeof CAS_EVC_2024 !== 'undefined') annales.push(...CAS_EVC_2024);
+    if (typeof CAS_EVC_2023 !== 'undefined') annales.push(...CAS_EVC_2023);
+    if (typeof CAS_EVC_2020_2022 !== 'undefined') annales.push(...CAS_EVC_2020_2022);
+    if (typeof CAS_EVC_2018_2019 !== 'undefined') annales.push(...CAS_EVC_2018_2019);
+    if (typeof CAS_EVC_2015_2017 !== 'undefined') annales.push(...CAS_EVC_2015_2017);
+    if (typeof CAS_EVC_2010_2014 !== 'undefined') annales.push(...CAS_EVC_2010_2014);
+
     annales.forEach(a => {
+      let answerText = '';
+      if (a.questions && a.questions.length) {
+        answerText = a.questions.map((q, i) => `<strong>Q${i+1}: ${q.q || q.question || ''}</strong><br>➔ ${q.a || q.answer || ''} ${q.points ? `[${q.points} pts]` : ''}`).join('<br><br>');
+      } else {
+        answerText = a.correction || a.reponse || '';
+      }
+      if (!answerText) return;
+
       legacy.push({
         type: 'case', id: 'ann-' + a.id, chapter: a.chapter, rang: a.difficulty,
-        question: a.cas || a.case || a.title || '',
-        answer: a.correction || a.reponse || '',
+        question: a.situation || a.cas || a.case || a.title || '',
+        answer: answerText,
+        juryTips: a.juryTips || '',
         tags: ['Cas clinique'], priority: 0, srsKey: null, srs: null
       });
     });
@@ -406,6 +447,110 @@ const BrainFeed = (() => {
     return slide;
   }
 
+  function formatRichAnswer(card) {
+    let answerText = '';
+    if (card.type === 'flash' || card.type === 'synthesis' || card.type === 'case' || card.type === 'reco') {
+      answerText = card.answer || '';
+    } else if (card.type === 'memo_jour') {
+      answerText = `<strong>Mnémonique :</strong> <span style="color: var(--teal-accent); font-weight: bold; font-size: 1.1rem; border-bottom: 2px dashed var(--teal-accent); padding-bottom: 2px;">${card.mnemonic}</span><br><br>${card.detail}`;
+    } else if (card.type === 'cas_choc') {
+      answerText = card.diagnosis || '';
+    } else if (card.type === 'quiz_flash') {
+      answerText = card.explanation || '';
+    } else if (card.type === 'piege_exam') {
+      answerText = card.explain || '';
+    }
+
+    const keywords = [
+      'MMS', 'MMSE', 'GDS-15', 'GDS', 'Fried', 'CAM', 'Tinetti', 'TUG', 'Beers', 'STOPP', 'START', 'HAS', 'GIR', 'AGGIR',
+      'APA', 'ALD', 'MNA', 'IMC', 'IADL', 'ADL', 'DIAPPERS', 'ECPA', 'Bouchon', 'iatrogénie', 'dénutrition', 'delirium',
+      'fragilité', 'confusion', 'chute', 'sevrage', 'sarcopénie', 'amoxicilline', 'Donepezil', 'tramadol', 'zolpidem',
+      'lorazépam', 'Halopéridol', 'contention', 'directives anticipées', 'personne de confiance', 'Claeys-Leonetti', 'Leonetti'
+    ];
+
+    let formatted = answerText;
+    
+    // Check if it's already got list tags, if not format it
+    if (!formatted.includes('<ul') && !formatted.includes('<li') && !formatted.includes('<p')) {
+      if (formatted.includes('\n') || formatted.includes('1.') || formatted.includes('•') || formatted.includes(' - ')) {
+        const lines = formatted.split('\n');
+        formatted = '<ul class="bf-answer-list" style="margin: 8px 0; padding-left: 20px; line-height: 1.5;">' + lines.map(line => {
+          let l = line.trim();
+          if (!l) return '';
+          if (l.startsWith('•') || l.startsWith('-')) l = l.slice(1).trim();
+          l = l.replace(/^\d+[\s.)-]/, '').trim();
+          return `<li style="margin-bottom: 6px;">${l}</li>`;
+        }).filter(Boolean).join('') + '</ul>';
+      } else {
+        const sentences = formatted.split(/(?<=[.!?])\s+/);
+        if (sentences.length > 2) {
+          formatted = '<ul class="bf-answer-list" style="margin: 8px 0; padding-left: 20px; line-height: 1.5;">' + sentences.map(s => `<li style="margin-bottom: 6px;">${s}</li>`).join('') + '</ul>';
+        } else {
+          formatted = `<p class="bf-answer-paragraph" style="margin: 8px 0; line-height: 1.5;">${formatted}</p>`;
+        }
+      }
+    }
+
+    // Highlight keywords with clean styling
+    keywords.forEach(kw => {
+      const regex = new RegExp(`\\b(${kw}s?)\\b`, 'gi');
+      formatted = formatted.replace(regex, `<span class="bf-keyword" style="font-weight: 700; color: var(--teal-accent); background: rgba(20, 184, 166, 0.08); padding: 1px 4px; border-radius: 4px; border: 1px solid rgba(20, 184, 166, 0.15); font-family: var(--sans);">$1</span>`);
+    });
+
+    const foundKeywords = keywords.filter(kw => {
+      const regex = new RegExp(`\\b${kw}\\b`, 'i');
+      return regex.test(answerText);
+    });
+
+    let coachingTip = card.juryTips || '';
+    if (!coachingTip) {
+      const cardTextLower = (card.question + ' ' + answerText + ' ' + (card.tags || []).join(' ')).toLowerCase();
+      if (cardTextLower.includes('iatro') || cardTextLower.includes('médic') || cardTextLower.includes('beers') || cardTextLower.includes('stopp') || cardTextLower.includes('start')) {
+        coachingTip = "Citez systématiquement la revue médicamenteuse (critères STOPP/Beers) et proposez l'arrêt/adaptation des psychotropes ou anti-hypertenseurs suspects.";
+      } else if (cardTextLower.includes('chute') || cardTextLower.includes('équili') || cardTextLower.includes('tinetti') || cardTextLower.includes('tug')) {
+        coachingTip = "Une chute = bilan orthostatique, vision et médicament. Citez le test TUG (> 20s) et le score de Tinetti.";
+      } else if (cardTextLower.includes('nutri') || cardTextLower.includes('album') || cardTextLower.includes('mna')) {
+        coachingTip = "Mémorisez les seuils HAS : IMC < 21 (ou < 22 si > 75 ans) et albumine < 30 g/L pour la dénutrition sévère.";
+      } else if (cardTextLower.includes('confu') || cardTextLower.includes('delir') || cardTextLower.includes('cam')) {
+        coachingTip = "Pour un delirium, appliquez les critères de la CAM. Cherchez d'abord une cause réversible (globe, fécalome, douleur, infection).";
+      } else if (cardTextLower.includes('démence') || cardTextLower.includes('cognit') || cardTextLower.includes('mms') || cardTextLower.includes('moca')) {
+        coachingTip = "Éliminez toujours les causes réversibles (hypothyroïdie, carence B12/folates) et la dépression avant de diagnostiquer une démence.";
+      } else if (cardTextLower.includes('éthique') || cardTextLower.includes('fin de vie') || cardTextLower.includes('directi') || cardTextLower.includes('confian')) {
+        coachingTip = "Cadre légal Leonetti : pas d'obstination déraisonnable, recueil des directives anticipées et désignation de la personne de confiance.";
+      }
+    }
+
+    let keywordsHtml = '';
+    if (foundKeywords.length) {
+      keywordsHtml = `
+        <div class="bf-coach-keywords" style="margin-top: 14px; padding-top: 10px; border-top: 1px dashed var(--border); display: flex; flex-direction: column; gap: 6px;">
+          <span style="font-size: 0.8rem; font-weight: bold; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">🔑 Mots-clés requis</span>
+          <div class="bf-keyword-tags" style="display: flex; flex-wrap: wrap; gap: 6px;">
+            ${foundKeywords.map(k => `<span class="bf-keyword-tag" style="font-size: 0.75rem; background: var(--bg-body); border: 1px solid var(--border); color: var(--text); padding: 2px 8px; border-radius: 99px; font-weight: 500;">${k}</span>`).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    let coachingHtml = '';
+    if (coachingTip) {
+      coachingHtml = `
+        <div class="bf-coach-tip-box" style="margin-top: 12px; padding: 10px 12px; background: rgba(245, 158, 11, 0.06); border-left: 3px solid #f59e0b; border-radius: 0 6px 6px 0; font-size: 0.85rem;">
+          <div class="bf-coach-tip-title" style="font-weight: 700; color: #d97706; margin-bottom: 4px; display: flex; align-items: center; gap: 4px;">🎓 Coaching EVC / Conseils</div>
+          <p class="bf-coach-tip-text" style="margin: 0; color: var(--text); line-height: 1.4;">${coachingTip}</p>
+        </div>
+      `;
+    }
+
+    return `
+      <div class="bf-rich-answer" style="display: flex; flex-direction: column; gap: 4px;">
+        <div class="bf-answer-body" style="color: var(--text); font-size: 0.95rem;">${formatted}</div>
+        ${keywordsHtml}
+        ${coachingHtml}
+      </div>
+    `;
+  }
+
   function renderClassicCard(card, slideIdx) {
     const chName = getChapterName(card.chapter);
     const typeLabels = { flash: 'Flashcard', synthesis: 'Synthèse', case: 'Cas clinique', reco: 'HAS' };
@@ -443,7 +588,7 @@ const BrainFeed = (() => {
               ${rangBadge}
             </header>
             <main class="bf-card-main scrollable">
-              <p class="bf-answer-text">${esc(card.answer)}</p>
+              ${formatRichAnswer(card)}
             </main>
             <footer class="bf-card-ftr">
               <div class="bf-card-tags">${tagsHtml}</div>
@@ -455,7 +600,6 @@ const BrainFeed = (() => {
   }
 
   function renderMemoJour(card, slideIdx) {
-    const isDaily = card.title === 'MÉMO DU JOUR';
     return `
       <div class="bf-horiz-scroll" id="bfScroll-${slideIdx}">
         <!-- PAGE 1 : ENONCE -->
@@ -481,10 +625,7 @@ const BrainFeed = (() => {
               <span class="bf-type-badge">✨ Rétention</span>
             </header>
             <main class="bf-card-main scrollable">
-              <div class="bf-memo-glow-wrap">
-                <p class="bf-memo-glow-text">${esc(card.mnemonic)}</p>
-              </div>
-              <p class="bf-memo-detail">${esc(card.detail)}</p>
+              ${formatRichAnswer(card)}
             </main>
             <footer class="bf-card-ftr">
               <span class="bf-swipe-left-hint">⬅ Revoir l'énoncé</span>
@@ -525,7 +666,7 @@ const BrainFeed = (() => {
               <span class="bf-type-badge">🩺 Diagnostic gériatrique</span>
             </header>
             <main class="bf-card-main scrollable">
-              <div class="bf-choc-answer">${esc(card.diagnosis)}</div>
+              ${formatRichAnswer(card)}
             </main>
             <footer class="bf-card-ftr">
               <span class="bf-swipe-left-hint">⬅ Revoir le cas</span>
@@ -570,7 +711,7 @@ const BrainFeed = (() => {
               <span class="bf-type-badge">📖 Explication d'expert</span>
             </header>
             <main class="bf-card-main scrollable">
-              <p class="bf-quiz-expl">${esc(card.explanation)}</p>
+              ${formatRichAnswer(card)}
             </main>
             <footer class="bf-card-ftr">
               <span class="bf-swipe-left-hint">⬅ Revoir la question</span>
@@ -688,10 +829,7 @@ const BrainFeed = (() => {
               <span class="bf-type-badge">✅ Règle académique</span>
             </header>
             <main class="bf-card-main scrollable">
-              <div class="bf-trap-right">
-                <span class="bf-trap-check">✓</span>
-                <p>${esc(card.explain)}</p>
-              </div>
+              ${formatRichAnswer(card)}
             </main>
             <footer class="bf-card-ftr">
               <span class="bf-swipe-left-hint">⬅ Revoir le piège</span>
