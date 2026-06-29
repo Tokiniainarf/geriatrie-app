@@ -29,6 +29,7 @@ vm.runInContext(dataSrc, context);
 
 // Load the entire app.js
 vm.runInContext(appSrc, context);
+vm.runInContext('preprocessAppData()', context);
 
 // Verify renderChapter is available
 try {

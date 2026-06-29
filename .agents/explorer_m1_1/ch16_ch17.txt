@@ -1,0 +1,633 @@
+--- CH16 PAGES ---
+Page 300:
+Connaissances
+• l'utilisation d'outils d'aides à la prescription médicamenteuse appropriée, qui comprend :
+– la conciliation médicamenteuse : recueil exhaustif des médicaments pris, bilan médi-
+camenteux par un binôme pharmacien-médecin vérifiant le caractère approprié des
+prescriptions et pouvant mener à des modifications, partage d'informations avec les
+acteurs de soins impliqués dans la santé du malade âgé ;
+– des listes aidant à la détection des PMI et à l'évaluation de la pertinence des prescrip-
+tions médicamenteuses (par exemple, logiciel STOPP-START) ;
+• une culture d'évaluation et d'amélioration des pratiques via :
+– la revue de morbimortalité (RMM) ;
+– le comité de retour d'expérience (CREX) ;
+– l'analyse des événements indésirables graves (EIG).
+3. Éducation thérapeutique
+Cette démarche :
+• est centrée sur les patients ;
+• se fait en partenariat avec leur proche aidant, les professionnels de santé ou les équipes
+impliquées dans la gestion du soin ;
+• a pour objectif d'optimiser l'initiation d'un traitement, son suivi et sa réévaluation ;
+• est essentielle dans la prise en charge des pathologies chroniques telles que le diabète,
+l'insuffisance cardiaque ou dans la gestion des anticoagulants.
+Le succès de l'éducation thérapeutique repose sur un certain nombre de piliers que sont
+la personnalisation des soins, le développement et le renforcement des compétences et de
+l'autonomie des soignants mais aussi du patient lui-même (« empowerment » des auteurs
+anglo-saxons).
+Il est recommandé dans la pratique médicale quotidienne, en particulier pour les personnes
+âgées, de dédier un temps spécifique à l'éducation thérapeutique qui sera distinct du temps
+clinique proprement dit.
+4. Conciliation médicamenteuse
+La conciliation médicamenteuse est une méthode dont les détails sont présentés dans une
+publication de la HAS de 2016. Elle consiste à :
+• recueillir l'information précise et exhaustive de l'ensemble des médicaments pris par
+une personne (y compris liée à l'automédication) en croisant via une enquête au moins
+trois sources (par exemple, données du médecin traitant, du pharmacien, des aidants
+naturels…) ;
+• regrouper les informations recueillies au sein d'un bilan médicamenteux à l'issue de cette
+phase de recueil, par exemple proposée à l'admission d'un malade à l'hôpital ;
+• valider secondairement ce bilan médicamenteux, c'est-à-dire définir parmi les traitements
+les prescriptions médicamenteuses inappropriées (PMI) et/ou les prescriptions médicamen-
+teuses omises (PMO) ;
+• partager et exploiter ce bilan médicamenteux avec l'ensemble des acteurs de soins impli-
+qués dans la santé du malade âgé concerné (par exemple, moment privilégié de la sortie
+de l'hôpital avant un retour à domicile ou en EHPAD). Cette méthode permet de lister et de
+corriger les différences recueillies et éventuellement méconnues des différents partenaires
+de soins (appelées divergences intentionnelles ou non intentionnelles).
+
+Page 301:
+Apprendre à prescrire chez le patient âgé
+5. Outil STOPP-START
+Cet outil validé en langue française et plus récemment disponible en version digitale est utile
+pour réaliser une évaluation objective et précise de la pertinence des médicaments pres-
+crits chez une personne âgée. Cet outil :
+• permet de déterminer une adéquation entre la pathologie ciblée et son traitement en fonc-
+tion des comorbidités, des syndromes gériatriques du patient et enfin des médicaments
+prescrits ;
+• permet de détecter et de corriger des PMI (critères « STOPP » pour Screening Tool of Older
+Persons' Prescriptions) ;
+• permet de détecter et de corriger des PMO (par exemple, absence de prévention secondaire
+en cas d'ostéoporose fracturaire, absence d'anticoagulation en cas de fibrillation atriale)
+(critères « START » pour Screening Tool to Alert to Right Treatment) ;
+• permet de réduire la polypharmacie et de limiter/prévenir les EIM dans une population
+gériatrique ;
+• ne permet cependant pas d'étudier l'adhésion au traitement, qui relève de la responsabilité
+du malade et/ou de son aidant.
+6. Revue de morbi-mortalité (RMM, référence HAS)
+La revue de morbi-mortalité :
+• consiste à l'analyse des causes et du caractère évitable ou non d'un EIM, et débouche sur
+un plan d'action de mesure de prévention de récidive en analysant tous les facteurs impli-
+qués dans l'EIM ;
+• est privilégiée dans les établissements de santé privés ou publics lors du séjour d'un patient ;
+• a pour objectifs l'amélioration des soins dans le cadre d'une démarche qualité dans ces
+établissements ;
+• est inscrite comme une démarche obligatoire dans le Code de santé publique ;
+• se fonde sur une méthodologie d'évaluation des pratiques de prescription qui souligne
+l'intérêt d'une démarche pluriprofessionnelle et plurispécialités.
+En résumé, la démarche de la RMM est de recenser à un moment donné tous les événements
+iatrogènes dans une situation précise (pathologie déterminée) ou d'un établissement de santé
+ou dans un service ou dans un département.
+En pratique, la RMM :
+• part souvent d'un incident survenu durant le parcours hospitalier d'un patient, et devra
+associer les différentes spécialités et professionnels concernés (interactivité) ;
+• commence par la présentation de l'observation, hiérarchisée quant à ses questions, anony-
+misée et confrontée aux données des publications résumant les niveaux de preuve établis
+(imputabilité extrinsèque) sur la thématique ciblée ;
+• permet de dégager les actions futures à engager, source de l'implémentation de bonnes
+pratiques, pour limiter le risque de récidive de l'EIM ;
+• a une portée limitée par le nombre de participants, à l'application/applicabilité et au res-
+pect/observance des recommandations formulées.
+
+Page 302:
+Connaissances
+7. Comité de retour d'expérience (CREX)
+Il s'agit également d'un outil d'amélioration de la qualité de la gestion du risque iatrogène.
+Le CREX a été développé dans les années 1990. Dans certains pays (Canada), un recueil annuel
+est obligatoire au sein d'un département de médecine. Cette démarche s'inscrit dans une
+démarche qualité et à l'échelon individuel comme une possibilité de validation du développe-
+ment professionnel continu des professionnels de santé pour leur certification.
+Dans la démarche CREX, les accidents iatrogènes antérieurs sont repérés et leur sévérité détail-
+lée (allant de l'événement mineur à l'EIG). Il s'agit donc de collecter encore une fois le plus
+d'événements possibles. Dans un second temps, une démarche assez voisine de la RMM est
+proposée pour identifier et rechercher collectivement les causes de la défaillance.
+Événement indésirable grave (EIG)
+B La notion de gravité a pour objectif de garder en mémoire les EIM ayant eu des conséquences impor-
+tantes. Le repérage et l'analyse détaillée de l'EIG font l'objet d'une analyse approfondie qui peut se faire via
+des procédures de type CREX et RMM. Les EIG font l'objet d'une déclaration obligatoire au sein de l'éta-
+blissement au responsable médical de la structure, du département ou du pôle de l'établissement. Des
+réunions transversales au sein de l'établissement sont alors réalisées pour améliorer la qualité et la sécurité
+des soins.
+clés
+Les effets indésirables médicamenteux (EIM) sont synonymes de iatrogénie médicamenteuse.
+En raison de leur gravité et de leur fréquence chez les patients âgés, il faut acquérir un réflexe iatrogé-
+nique qui consiste à évoquer/détecter systématiquement des EIM devant toute modification brutale de
+l'état de santé restant inexpliquée par des causes somatiques évidentes.
+Les prescriptions médicamenteuses inappropriées associent :
+• les surprescriptions des médicaments, autrement dit prescriptions qui ne sont pas justifiées par une
+pathologie → « overuse » ;
+• les prescriptions dont les risques encourus sont nettement supérieurs aux bénéfices attendus → mésu-
+sage, « misuse » ;
+• la non-prescription d'un médicament potentiellement approprié → omission de prescription,
+« underuse ».
+L'identification des patients à risque d'EIM est une étape indispensable avant toute prescription et
+nécessite de cibler :
+• les facteurs liés à l'âge ;
+• les facteurs liés aux comorbidités et aux syndromes gériatriques ;
+• les facteurs liés à la polymédication, au risque d'interaction ;
+• les facteurs liés au contexte aigu.
+Faire une prescription médicamenteuse chez un patient âgé implique de :
+• confirmer l'indication avec prise en compte des comorbidités (à prioriser parfois), du degré d'autono-
+mie, de l'espérance de vie, de ce que le patient dit et souhaite ;
+• évaluer le rapport bénéfice/risque ;
+• intégrer la prescription au sein de l'intégralité des traitements prescrits ;
+• prévoir la durée et programmer la réévaluation du traitement ;
+• prévoir une délivrance sécurisée ;
+• expliquer le traitement voire fournir une éducation thérapeutique ;
+• évaluer l'observance thérapeutique.
+stnioP
+
+Page 303:
+Apprendre à prescrire chez le patient âgé
+Bon usage des psychotropes
+Situations de départ
+En lien avec la définition et avec le diagnostic :
+31 Perte d'autonomie progressive.
+123 Humeur triste/douleur morale.
+131 Troubles de mémoire/déclin cognitif.
+256 Prescrire un hypnotique/anxiolytique.
+288 Consultation de suivi et traitement de fond d'un patient dépressif.
+298 Consultation et suivi d'un patient ayant des troubles cognitifs.
+352 Expliquer un traitement au patient.
+En lien avec l'urgence :
+114 Agitation.
+116 Anxiété.
+119 Confusion/désorientation.
+122 Hallucinations.
+240 Expliquer une hospitalisation en soins psychiatriques à la demande d'un tiers.
+En lien avec la démarche étiologique :
+17 Amaigrissement.
+21 Asthénie.
+27 Chute de la personne âgée.
+30 Dénutrition/malnutrition.
+31 Perte d'autonomie progressive.
+66 Apparition d'une difficulté à la marche.
+114 Agitation.
+116 Anxiété.
+117 Apathie.
+124 Idées délirantes.
+129 Troubles de l'attention.
+131 Troubles de mémoire/déclin cognitif.
+135 Trouble du sommeil, insomnie ou hypersomnie.
+267 Consultation de suivi d'un patient polymorbide.
+279 Consultation de suivi d'une pathologie chronique.
+295 Consultation de suivi gériatrique.
+327 Annonce d'un diagnostic de maladie grave au patient et/ou à sa famille.
+328 Annonce d'une maladie chronique.
+345 Situation de handicap.
+348 Suspicion d'un effet indésirable des médicaments ou d'un soin.
+Items, objectifs pédagogiques, hiérarchisation des connaissances
+ITEM 74 – Prescription et surveillance des psychotropes
+Rang Rubrique Intitulé Descriptif
+A Définition Connaître la définition et les princi- Antipsychotique ; antidépresseurs ;
+pales classes de psychotropes* anxiolytiques ; hypnotiques ; thymo-
+régulateurs ; psychostimulants
+B Prévalence, Connaître les principaux chiffres d'utilisation des psychotropes
+épidémiologie en France, notamment chez les patients âgés (usage et mésusage,
+pharmaco-épidémiologie)*
+A Définition Antipsychotiques : principales classes et molécules*
+▼
+
+Page 304:
+Connaissances
+Rang Rubrique Intitulé Descriptif
+B Prise en charge Antipsychotiques : indications, non-indications, contre-indications à tous
+les âges de la vie, notamment chez les patients âgés
+B Prise en charge Antipsychotiques : règles de bon usage à tous les âges de la vie, notam-
+ment chez les patients âgés et/ou atteints de démence
+B Prise en charge Antipsychotiques : effets indésirables fréquents ou graves, principales
+interactions médicamenteuses à tous les âges de la vie, notamment chez
+les patients âgés
+A Identifier une Antipsychotiques : modalités de Molécules à privilégier, bilan
+urgence prescription en situation d'urgence pré-thérapeutique, voie
+d'administration
+A Définition Antidépresseurs : principales classes et molécules
+A Prise en charge Antidépresseurs : indications, non-indications, contre-indications
+B Prise en charge Antidépresseurs : règles de bon usage à tous les âges de la vie, notamment
+chez les enfants/adolescents et les patients âgés
+A Prise en charge Antidépresseurs : effets indésirables fréquents ou graves, principales inte-
+ractions médicamenteuses
+A Définition Anxiolytiques : principales classes et molécules
+A Prise en charge Anxiolytiques : indications, non-indications, contre-indications à tous les
+âges de la vie, notamment chez les patients âgés
+A Prise en charge Anxiolytiques : règles de bon usage à tous les âges de la vie, notamment
+278 chez les patients âgés
+A Prise en charge Anxiolytiques : effets indésirables fréquents ou graves, principales interactions
+médicamenteuses à tous les âges de la vie, notamment chez les patients âgés
+A Prise en charge Anxiolytiques : modalités de pres- Molécules à privilégier, bilan
+cription en situation d'urgence pré-thérapeutique, voie
+d'administration
+A Définition Hypnotiques : principales classes et molécules
+A Prise en charge Hypnotiques : indications, non-indications, contre-indications à tous les
+âges de la vie, notamment chez les patients âgés
+A Prise en charge Hypnotiques : règles de bon usage à tous les âges de la vie, notamment
+chez les patients âgés
+A Prise en charge Hypnotiques : effets indésirables fréquents ou graves, principales interactions
+médicamenteuses à tous les âges de la vie, notamment chez les patients âgés
+A Définition Thymorégulateurs : principales classes et molécules*
+▼
+▼
+
+Page 305:
+Apprendre à prescrire chez le patient âgé
+Rang Rubrique Intitulé Descriptif
+B Prise en charge Thymorégulateurs : indications, Notamment acide valproïque et
+non-indications, contre-indications autres produits tératogènes et
+à tous les âges de la vie, notamment femme en âge de procréer
+chez les patients âgés*
+B Prise en charge Thymorégulateurs : effets indésirables fréquents ou graves, principales
+interactions médicamenteuses à tous les âges de la vie, notamment chez
+les patients âgés*
+A Définition Psychostimulants : principales classes et molécules*
+B Prise en charge Psychostimulants : indications, non-indications, contre-indications*
+B Prise en charge Psychostimulants : effets indésirables fréquents ou graves, principales
+interactions médicamenteuses*
+ITEM 330 – Prescription et surveillance des classes de médicaments les plus courantes chez l'adulte
+et chez l'enfant, hors anti-infectieux
+Rang Rubrique Intitulé Descriptif
+A Prise en charge Benzodiazépines : connaître les Connaître les mécanismes
+mécanismes d'action, indications, effets d'action
+secondaires, interactions médicamen-
+teuses, modalités de surveillance et
+principales causes d'échec
+A Prise en charge Inhibiteurs spécifiques de recapture Connaître les mécanismes
+de la sérotonine : connaître les méca- d'action
+nismes d'action, indications, effets
+secondaires, interactions médicamen-
+teuses, modalités de surveillance et
+principales causes d'échec
+A Prise en charge Antipsychotiques : connaître les Connaître les mécanismes
+mécanismes d'action, indications, effets d'action
+secondaires, interactions médicamen-
+teuses, modalités de surveillance et
+principales causes d'échec
+I. Généralités
+B La consommation de psychotropes est élevée en France, avec une consommation deux fois
+plus importante chez les femmes. Les benzodiazépines sont en première position, les antidé-
+presseurs en deuxième position. Mais malgré une consommation importante de psycho-
+tropes, le taux de patients dépressifs correctement traités reste largement insuffisant (15 %).
+Ainsi, l'HAS a recommandé en 2007 d'améliorer la prescription des psychotropes chez le
+patient âgé.
+▼
+
+Page 306:
+Connaissances
+Les écueils à éviter concernant la prescription de psychotropes
+du patient âgé
+• Ne pas prendre en compte la vulnérabilité cognitive du patient âgé [131, 298].
+• Négliger les risques de l'introduction ou du sevrage d'un psychotrope [348].
+• Ne pas avoir le réflexe iatrogène psychotrope en présence d'un syndrome confusionnel [119].
+• Ne pas anticiper les difficultés du sevrage d'un psychotrope.
+• Céder trop facilement aux benzodiazépines ou hypnotiques en présence de troubles du sommeil [135].
+→ La prescription de psychotropes est un acte fréquent, en particulier chez les patients ayant des TNC.
+L'introduction autant que les modifications de posologie et le sevrage sont des situations à risque de
+mauvaise tolérance, en particulier de syndrome confusionnel. L'évaluation du rapport risque/bénéfice est
+d'autant plus importante que les patients ont des TNCM ou sont polymédiqués.
+Quand prescrire ou réévaluer un traitement par psychotropes ?
+L'évaluation du risque lié aux psychotropes doit tenir compte du terrain et nécessite une EGS pour en
+limiter les risques.
+Quand ?
+• En cas de dépression [123, 288], d'anxiété [116], de trouble psychotique [122, 124].
+• En cas de trouble du comportement [114, 122] chez un patient avec TNC [298].
+• En présence d'une cassure sur le plan cognitif [119], comportemental [114] ou fonctionnel [31] dans
+280 l'évolution du patient.
+• Systématiquement en cas de syndrome confusionnel [119, 348].
+Comment ?
+• En privilégiant les mesures non médicamenteuses qui permettraient d'éviter un psychotrope.
+• En analysant précisément la sémiologie psychiatrique [31, 114, 116, 117, 124, 129, 135].
+• En impliquant si besoin l'aidant principal [330], le médecin référent.
+Pourquoi ?
+• Afin de ne prescrire de psychotropes que dans le cadre d'indications reconnues.
+• Afin de reconnaître les signes de mauvaise tolérance.
+• Afin de les gérer de manière adaptée en cas de syndrome confusionnel [119].
+• Afin d'en limiter l'indication et le risque iatrogène en corrigeant un facteur étiologique d'un syndrome
+confusionnel.
+II. Antidépresseurs
+A Le traitement de la dépression est aussi efficace chez le patient âgé que chez le patient
+jeune, il améliore 60 à 70 % des patients avec dépression caractérisée.
+Le choix de l'antidépresseur tient compte de l'efficacité d'un traitement antérieur, du risque
+d'effets indésirables propres à la molécule, des comorbidités et des interactions médicamen-
+teuses potentielles. La primo-prescription repose sur les inhibiteurs sélectifs de recapture de la
+sérotonine (ISRS) et sur un ISRS et de la noradrénaline (ISRS-NA) en cas d'échec.
+La résistance au traitement est définie par un échec thérapeutique après deux traitements bien
+conduits avec des molécules différentes (doses efficaces et durée suffisante).
+Rechercher alors une autre cause iatrogène, organique (notamment métabolique ou neurolo-
+gique) ou psychiatrique.
+
+Page 307:
+Apprendre à prescrire chez le patient âgé
+En cas de TNC :
+• utilisés dans le cadre de troubles du comportement (agressivité en particulier après avoir
+éliminé un facteur déclenchant) ;
+• efficacité encore controversée en l'absence de dépression, même si traitements fréquem-
+ment prescrits ;
+• principales difficultés :
+– absence de critères diagnostiques fiables de dépression en cas de TNC ;
+– apathie (diagnostic différentiel).
+Principaux effets secondaires des ISRS (paroxétine, citalopram et
+escitalopram, fluoxétine, fluvoxamine, sertraline)
+• Hyponatrémie par sécrétion inappropriée d'ADH : liées à un effet de classe, 25 % des cas.
+• Syndrome sérotoninergique : en cas de surdosage ou d'association à des molécules avec
+effets sérotoninergiques (par exemple, tramadol).
+• Syndrome extrapyramidal : décrit en raison du déclin des voies nigrostriées.
+• Effets cardiovasculaires : en particulier allongement du QT (précautions d'emploi avec réa-
+lisation d'un ECG au préalable et après l'introduction).
+• Nombreuses interactions médicamenteuses : cytochrome P450.
+Principaux effets secondaires des ISRS-NA (venlafaxine, minalcipran,
+duloxétine)
+• B Hypotension artérielle.
+• Nausée, vomissements.
+• Effets anticholinergiques minimes.
+• Pour la venlafaxine : poussée d'HTA.
+• Allongement du QT (précautions d'emploi avec réalisation d'un ECG au préalable).
+III. Benzodiazépines et molécules apparentées
+A Ces molécules ont en commun une action :
+• sédative et hypnotique : elles accélèrent la survenue du sommeil, diminuent les réveils noc-
+turnes et prolongent la durée du sommeil, mais modifient aussi l'architecture du sommeil
+normal ;
+• anxiolytique : rapide et visible dès la première prise sur la symptomatologie anxieuse ;
+• anticonvulsivante : utilisation réservée au traitement de l'urgence ;
+• myorelaxante.
+Principes de prescription chez le patient âgé
+• S'assurer de l'indication.
+• Informer et expliquer au patient les effets attendus.
+• Informer et expliquer au patient les effets indésirables possibles.
+• S'assurer de l'adhésion du patient et de sa compliance.
+• Proposer une dose minimale efficace.
+• Choisir un produit à demi-vie courte et sans métabolite actif.
+• En cas de primoprescription, prescrire une durée maximale de 4 semaines (hypnotiques) ou
+12 semaines (anxiolytiques).
+
+Page 308:
+Connaissances
+• Informer le patient des modalités d'arrêt dès la première prescription.
+• Réévaluer l'efficacité à chaque renouvellement de la prescription.
+• Réévaluer la pertinence de la poursuite du traitement à chaque renouvellement de la
+prescription.
+Trois principales indications
+• Prévention et traitement des manifestations de sevrage alcoolique (situation rarement
+gériatrique).
+• Troubles du sommeil.
+• Anxiété.
+Dans ces deux dernières indications, l'utilisation de mesures soit non médicamenteuses soit
+médicamenteuses à moindre risque (par exemple, mélatonine pour les troubles du sommeil)
+doit être privilégiée en première intention.
+ARRÊT DES BENZODIAZÉPINES ET APPARENTÉS CHEZ LE PATIENT DE PLUS DE 65 ANS
+DÉMARCHE du MÉDECIN TRAITANT en AMBULATOIRE
+Prise quotidienne de BZD > 30 jours Maintien du traitement par
+BZD ou apparentés si
+indication encore valide y
+compris en termes de durée
+Attentes du patient ? Degré d'attachement aux BZD ?
+Décision partagée d'arrêt des BZD
+Évaluation de la difficulté de l'arrêt des BZD
+Précautions particulières Prise en charge spécialisée conjointe
+• dépression
+• doses très élevées de BZD
+• insomnie chronique
+• insomnie rebelle
+• trouble anxieux caractérisé
+• dépendance à l'alcool
+(tr panique, tr obsessionnel compulsif)
+• autre dépendance
+• troubles cognitifs, démence
+• associations à d'autres psychotropes
+• échecs antérieurs d'arrêt
+• troubles psychiatriques sévères
+• surconsommation régulière d'alcool
+Arrêt progressif adapté
+sur 4 à 10 semaines le plus souvent
+Suivi
+Consultations rapprochées jusqu'à 1 semaine après l'arrêt
+Suivi jusqu'à 6 mois après l'arrêt
+Fig. 16.2. A Modalités d'arrêt des benzodiazépines chez le patient âgé de plus de 65 ans. Démarche
+du médecin traitant en ambulatoire. (Source : Recommandations de bonnes pratiques de l'HAS, 2007, réactuali-
+sée en 2014).
+
+Page 309:
+Apprendre à prescrire chez le patient âgé
+Principaux effets secondaires
+Le plus souvent directement liés à l'action clinique (effet sédatif, somnolence…) :
+• amnésie antérograde dose-dépendante liée aux propriétés amnésiantes (effet de classe) ;
+• risque de chutes et de fracture [27] ;
+• troubles cognitifs, syndrome confusionnel [119] ;
+• rares réactions paradoxales ;
+• tolérance et dépendance en cas de consommation prolongée ;
+• syndrome de sevrage en cas d'arrêt brutal. Recommandations de sevrage publiées par la
+Haute Autorité de Santé (fig. 16.2).
+IV. Antipsychotiques
+Indications et principales utilisations chez le patient âgé
+• Troubles psychotiques : schizophréniques, états maniaques avec délires, dépressions
+sévères avec éléments psychotiques.
+• Symptômes comportementaux et psychologiques lors de la démence (SCPD), comme
+une agressivité ou une agitation importantes ne bénéficiant pas d'un autre traitement et/
+ou en lien avec un trouble délirant.
+• À éviter dans la maladie de Parkinson et la maladie à corps de Lewy en raison d'ef-
+fets indésirables gravissimes — à l'exception de la clozapine, sous certaines conditions avec
+surveillance étroite.
+Choix des antipsychotiques
+Antipsychotiques typiques (ou de première génération)
+• B Tiapride : a l'AMM pour les états d'agitation chez le patient âgé, souvent utilisé pour ses
+propriétés sédatives. N'est pas un traitement chronique.
+• Halopéridol : nombreuses études chez le patient âgé mais du fait de sa mauvaise tolérance,
+n'est pas à utiliser en gériatrie.
+Antipsychotiques atypiques (ou de deuxième génération)
+Ils sont à privilégier du fait de leur meilleure tolérance. Ils ont fait l'objet de très peu d'études
+contrôlées chez le patient âgé (sauf rispéridone). En pratique, on utilise la rispéridone, la quié-
+tiapine ou l'olanzapine.
+Principaux effets secondaires
+• A Effets cardiovasculaires : hypotension orthostatique, allongements du QT (surveillance
+ECG chez les sujets à risque).
+• Syndrome parkinsonien responsable de chutes aux conséquences parfois graves.
+• Effets anticholinergiques.
+• Risques cérébrovasculaires (en particulier en cas d'antécédents cardiovasculaires).
+• Syndrome malin des neuroleptiques, rare mais grave.
+
+Page 310:
+Connaissances
+Savoir quand et comment transfuser un patient
+âgé en concentrés de globules rouges
+Situations de départ
+En lien avec la définition et avec le diagnostic :
+217 Baisse de l'hémoglobine.
+223 Interprétation de l'hémogramme.
+272 Prescrire et réaliser une transfusion sanguine.
+348 Suspicion d'un effet indésirable des médicaments ou d'un soin.
+352 Expliquer un traitement au patient.
+En lien avec la prise en charge en urgence :
+10 Méléna/rectorragie.
+14 Émission de sang par la bouche.
+16 Adénopathies unique ou multiples.
+17 Amaigrissement.
+21 Asthénie.
+27 Chute de la personne âgée.
+31 Perte d'autonomie progressive.
+43 Découverte d'une hypotension artérielle.
+50 Malaise/perte de connaissance.
+60 Hémorragie aiguë.
+64 Vertige et sensation vertigineuse.
+74 Faiblesse musculaire.
+284 89 Purpura/ecchymose/hématome.
+95 Découverte d'une anomalie au toucher rectal.
+112 Saignement génital anormal.
+119 Confusion mentale/désorientation.
+131 Troubles de mémoire/déclin cognitif.
+162 Dyspnée.
+166 Tachycardie.
+173 Traumatisme des membres.
+176 Traumatisme sévère.
+185 Réalisation et interprétation d'un électrocardiogramme (ECG).
+229 Découverte d'une anomalie pelvienne à l'examen d'imagerie médicale.
+231 Demande d'examen d'imagerie.
+En lien avec la démarche étiologique :
+178 Demande/prescription raisonnée et choix d'un examen diagnostique.
+231 Demande d'un examen d'imagerie.
+327 Annonce d'un diagnostic de maladie grave au patient et/ou à sa famille.
+334 Demande de traitement et investigation inappropriés.
+Item, objectifs pédagogiques, hiérarchisation des connaissances
+ITEM 329 – Transfusion sanguine et produits dérivés du sang : indications, complications, hémovigilance
+Rang Rubrique Intitulé Descriptif
+A Éléments Connaître les groupes sanguins Système ABO et système Rhésus,
+physiopathologiques érythrocytaires phénotype
+A Définition Connaître les règles immunolo- Groupage ABO, Rh KELL, règles de
+giques de transfusion des produits compatibilité ABO, recherche RAI
+sanguins labiles* préalable
+▼
+
+--- CH17 PAGES ---
+Page 319:
+Prendre une décision de soins palliatifs et accompagner le patient
+ITEM 141 – Soins palliatifs pluridisciplinaires chez un malade en phase palliative ou terminale
+d'une maladie grave, chronique ou létale (3). La sédation pour détresse en phase terminale et dans
+des situations spécifiques et complexes en fin de vie. Réponse à la demande d'euthanasie ou de
+suicide assisté
+Rang Rubrique Intitulé
+A Définition Comprendre la distinction entre sédation à la demande du patient, sédation
+pour détresse en phase terminale et euthanasie
+B Diagnostic positif Connaître les indications des pratiques sédatives
+B Diagnostic positif Connaître les repères cliniques, relationnels et légaux lorsqu'un patient
+formule une demande d'euthanasie
+B Diagnostic positif Connaître les repères cliniques, relationnels et légaux lorsqu'un patient
+formule une demande de suicide assisté
+B Diagnostic positif Connaître les repères cliniques, relationnels et légaux lorsqu'un patient
+formule une demande de sédation pour détresse
+A Prise en charge Savoir faire appel à des équipes ressources ou à des services de recours
+B Prise en charge Savoir délibérer individuellement et collectivement pour aboutir à une
+décision de sédation
+I. Introduction aux situations et soins palliatifs
+A. Définitions
+A Il existe différents stades de situations palliatives, dont toutes ne relèvent pas de soins
+palliatifs, et la prise en charge varie selon les stades :
+• une phase de stade palliatif actif pouvant durer plusieurs années (par exemple, traitement
+pour cancer colique métastatique par chimiothérapie) ;
+• une phase de stade palliatif symptomatique qui peut durer plusieurs mois (par exemple,
+pose d'une prothèse biliaire pour un cancer du pancréas avancé ictérique) ;
+• une phase de stade terminale qui peut durer plusieurs semaines (par exemple, pertinence
+de l'instauration d'une alimentation artificielle) ;
+• une phase agonique qui peut durer quelques heures à quelques jours (priorité à la prise en
+charge des symptômes inconfortables).
+Les soins palliatifs sont des soins actifs et continus pratiqués par une équipe interdisciplinaire visant
+à soulager la douleur, à apaiser la souffrance psychique, à sauvegarder la dignité de la personne
+malade et à soutenir son entourage (Société française d'accompagnement des soins palliatifs).
+B. Connaître le cadre légal
+La situation de fin de vie s'inscrit dans un cadre légal. La Loi Claeys-Leonetti du 2 février 2016
+créant de nouveaux droits en faveur des malades et des personnes en fin de vie s'inscrit dans
+la lignée des lois :
+• du 4 février 1995 comportant des dispositions sur la lutte contre la douleur ;
+• du 9 juin 1999 visant à garantir le droit à l'accès aux soins palliatifs ;
+• du 4 mars 2002, dite Loi Kouchner, relative aux droits des malades et à la qualité du sys-
+tème de santé ;
+• du 22 avril 2005, dite Loi Leonetti, relative aux droits des malades et à la fin de vie.
+▼
+
+Page 320:
+Connaissances
+Points clefs réglementaires
+Selon la Loi Claeys-Leonetti du 2 février 2016 : « Toute personne a le droit de refuser ou de ne pas recevoir
+un traitement. Le suivi du malade reste cependant assuré par le médecin, notamment son accompagne-
+ment palliatif. » La loi nécessite que le patient réitère sa décision lors d'une réévaluation. Ce refus de trai-
+tement, qui n'est pas un refus de soins, sera inscrit dans le dossier médical et sera suivi de la construction
+d'un projet de soins pluridisciplinaire.
+Lorsqu'un patient exprime un souhait de mourir, le cadre légal rappelle « qu'en France l'euthanasie et le
+suicide assisté sont interdits ».
+La loi permet au patient atteint d'une affection grave et incurable de demander une sédation profonde et
+continue. La sédation est la recherche, par des moyens médicamenteux, d'une diminution de la vigilance afin
+de diminuer voire de faire disparaître la perception d'une situation vécue comme insupportable par le patient :
+• elle fait suite à une procédure collégiale pluridisciplinaire, intégrant le consentement du patient chaque
+fois qu'il est possible de le recueillir ;
+• elle peut être mise en œuvre en cas de situations aiguës à risque vital immédiat ;
+• elle doit être maintenue jusqu'au décès ;
+• elle intervient si :
+– son pronostic vital est engagé à court terme ;
+– et qu'il présente une souffrance (y compris psychique) qu'aucun traitement ne peut réduire ;
+– et que tous les moyens disponibles et adaptés à cette situation ont pu lui être proposés et/ou mis en
+œuvre.
+294 C. Mécanismes psychoadaptatifs du patient atteint de
+maladie grave
+Plusieurs théories sont proposées non spécifiques au patient âgé.
+Kübler-Ross E. (1926-2004) décrit un itinéraire de plusieurs phases qui se succéderont :
+• le choc : réaction à l'annonce « brutale », variable dans sa forme ;
+• la colère : elle vient d'un sentiment d'injustice : « pourquoi moi ? ». Cette colère est la prise
+de conscience de la solitude fondamentale de la personne devant son destin ;
+• le marchandage : c'est la recherche d'une échappatoire qui viendrait atténuer la brutalité
+de la réalité ;
+• le relâchement : plus de colère, plus d'espoir ;
+• la sérénité : il s'agit d'une sorte de lâcher-prise. Le patient peut sembler indifférent voire
+exprime une sorte de joie et calme. Mais il faut être vigilant, car cette étape n'est pas for-
+cément le signe d'une sorte de sagesse.
+Chez la personne âgée, ces phases peuvent paraître tronquées ou moins apparentes, car les
+expériences de la vie et la conscience de sa fragilité du fait de l'avancée en âge préparent la
+personne à l'éventualité de la survenue d'une maladie grave. Mais ceci est très subjectif et cer-
+taines personnes qui vieillissent de manière « réussie » peuvent avoir le même type de réactions
+que des patients plus jeunes.
+Ionescu S. (1997) décrit des réactions qui n'ont pas de relation temporelle entre elles ni de
+caractère obligatoire, la réaction étant très subjective s'inscrivant dans l'histoire et la psycho-
+logie du patient comme :
+• le déni : mécanisme radical par lequel le patient efface de sa conscience une information
+trop agressive sur le plan psychique ;
+• la dénégation : refus partiel de la réalité ;
+• l'isolation : consiste à isoler une pensée de son affect, ce qui amène le patient à parler de
+sa maladie de manière froide et insensible ;
+
+Page 321:
+Prendre une décision de soins palliatifs et accompagner le patient
+• le déplacement : le patient centre ses préoccupations sur un sujet indépendant de sa
+maladie ;
+• la maîtrise : le patient cherche à conserver le contrôle de ce qui lui arrive et va s'investir dans
+les moindres détails des caractéristiques de sa maladie ou des traitements qu'il reçoit d'une
+manière compulsive et obsessionnelle ;
+• la régression : fréquente chez des patients ayant des troubles cognitifs sévères ; il se laisse
+prendre en charge s'abandonnant dans le nursing d'une manière passive ;
+• la projection agressive : le patient devient agressif envers l'entourage et envers lui-même ;
+• la combativité ou la sublimation : ce sont des modes d'investissement psychique dans
+lequel le patient combat pour dépasser l'épreuve.
+D. Modèles de relation médecin-malade pour accompagner
+une personne malade et son entourage
+1. Différents modèles
+Modèle paternaliste
+B Le patient est faible et ignorant. Le médecin se substitue au malade dans un souci de bien-
+veillance et de bienfaisance. Cette position vient en opposition avec la dignité, la citoyenneté
+et le libre arbitre qui fondent l'application des lois, codes et règlements qui régissent l'acte
+médical. Par habitude culturelle, la fragilité présumée ou réelle de la personne âgée peut
+conduire le médecin à agir selon ce modèle. Mais, par contraste avec les personnes très âgées,
+l'abandon de ce modèle est toujours bien reçu par les nouvelles générations de personnes
+âgées, montrant ainsi que sa généralisation à une certaine époque ne voulait pas forcément
+dire son acceptation par le plus grand nombre.
+Modèle autonomiste
+La personne est perçue comme un adulte responsable, qui exprime sa liberté de décision.
+Son application chez les personnes ayant une altération cognitive rend son application
+difficile et fait intervenir les proches dont la reconnaissance juridique est la personne de
+confiance.
+Ces deux modèles sont remis en cause dans la pratique clinique
+En effet, si le modèle paternaliste est le plus aisé à mettre en œuvre, il n'est jamais souhaitable.
+À l'inverse, le modèle autonomiste est celui vers lequel nous devons tendre, car il représente
+le principe même d'une reconnaissance de la dignité de la personne, mais il est le plus difficile
+à appliquer auprès des personnes âgées. C'est pourquoi, quittant les modèles théoriques,
+l'application d'un mode pragmatique est actuellement valorisé, comme le modèle centré
+sur le patient.
+2. Relation centrée sur le patient
+La médecine cherche à construire une relation de confiance au service du patient. L'acte est
+moralement fondé sur sa capacité à reconnaître et à répondre aux attentes du patient et de
+ses proches. La relation mobilisée par l'empathie professionnelle est fondée sur la tolérance
+et la compréhension des mécanismes psychoaffectifs déployés par le patient pour répondre à
+la situation.
+

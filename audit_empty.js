@@ -29,6 +29,7 @@ const sandbox = {
 const context = vm.createContext(sandbox);
 vm.runInContext(dataSrc, context);
 vm.runInContext(appSrc, context);
+vm.runInContext('preprocessAppData()', context);
 
 const chapters = vm.runInContext('APP_DATA.chapters', context);
 const content = vm.runInContext('APP_DATA.content', context);

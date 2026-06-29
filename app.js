@@ -3,7 +3,7 @@ const CH_COLORS={ch1:'#0891B2',ch2:'#059669',ch3:'#0D9488',ch4:'#DC2626',ch5:'#0
 const BM_SVG={on:'<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.77 5.82 22 7 14.14l-5-4.87 6.91-1.01z"/></svg>',off:'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.77 5.82 22 7 14.14l-5-4.87 6.91-1.01z"/></svg>'};
 
 function safeJSON(k,f){try{return JSON.parse(localStorage.getItem(k))||f}catch{return f}}
-const S={view:'home',ch:null,bm:safeJSON('gbm',[]),read:safeJSON('grd',[]),fs:parseInt(localStorage.getItem('gfs')||'18'),lh:parseFloat(localStorage.getItem('glh')||'1.7'),th:localStorage.getItem('gth')||'light'};
+const S={view:'home',ch:null,bm:safeJSON('gbm',[]),read:safeJSON('grd',[]),fs:parseInt(localStorage.getItem('gfs')||'18'),lh:parseFloat(localStorage.getItem('glh')||'1.7'),th:localStorage.getItem('gth')||'dark'};
 let flashIdx=0,flashDeck=[],flashFilter='all';
 
 document.addEventListener('DOMContentLoaded',()=>{
@@ -18,7 +18,14 @@ document.addEventListener('DOMContentLoaded',()=>{
   updateThemeIcon();
   if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
   window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();window.deferredPrompt=e;const ib=document.getElementById('installB');if(ib)ib.style.display='flex'});
-  window.addEventListener('scroll',()=>{const f=document.getElementById('fab');if(f){if(window.scrollY>300){if(!f.classList.contains('show')){f.classList.add('show')}}else{f.classList.remove('show')}}});
+  window.addEventListener('scroll',()=>{const f=document.getElementById('fab');if(f){if(window.scrollY>300){if(!f.classList.contains('show')){f.classList.add('show')}}else{f.classList.remove('show')}}
+    // Barre de progression de lecture
+    const rp=document.getElementById('readingProgress');
+    if(rp){const h=document.documentElement.scrollHeight-window.innerHeight;const pct=h>0?Math.min(100,(window.scrollY/h)*100):0;rp.style.width=pct+'%';}
+    // Bouton retour en haut
+    const stb=document.getElementById('scrollTopBtn');
+    if(stb){if(window.scrollY>300)stb.classList.add('visible');else stb.classList.remove('visible');}
+  });
 });
 
 /* ── NAV ── */
@@ -486,7 +493,7 @@ function renderChapter(raw,chId){
     if(outlineParts.length>=8)break;
   }
   if(outlineParts.length>=3){
-    html+=`<nav class="ch-outline" aria-label="Plan du chapitre"><p class="outline-label">Plan du chapitre</p><ul>${outlineParts.map(m=>`<li><span class="outline-num">${esc(m[1])}</span> ${esc(m[2])}</li>`).join('')}</ul></nav>`;
+    html+=`<details class="ch-outline" aria-label="Plan du chapitre"><summary>Plan du chapitre</summary><ul>${outlineParts.map(m=>`<li><span class="outline-num">${esc(m[1])}</span> ${esc(m[2])}</li>`).join('')}</ul></details>`;
   }
 
   for(let i=0;i<lines.length;i++){

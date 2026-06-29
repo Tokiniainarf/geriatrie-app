@@ -1,6 +1,5 @@
 const vm = require('vm');
 const fs = require('fs');
-process.chdir('C:/Users/tokin/Downloads/GeriatrieApp');
 
 const sb = {
   APP_DATA: null, FIGURES: {}, INTERACTIVE_FIGURES: {},

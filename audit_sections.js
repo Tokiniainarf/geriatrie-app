@@ -25,6 +25,7 @@ const sandbox = {
 const context = vm.createContext(sandbox);
 vm.runInContext(dataSrc, context);
 vm.runInContext(appSrc, context);
+vm.runInContext('preprocessAppData()', context);
 
 const content = vm.runInContext('APP_DATA.content', context);
 const raw = content.ch1.map(c => c[1]).join('\n');
