@@ -617,103 +617,55 @@ const BrainFeed = (() => {
       });
     });
 
-    setupSwipe(slide, slideIdx);
+    setupDoubleTap(slide, slideIdx);
   }
 
-  function setupSwipe(slide, slideIdx) {
-    let startX = 0, startY = 0, active = false;
-    let lastX = 0, lastT = 0;
-    let velocityX = 0;
-    const moveSamples = [];
-    const TH = 70;
-    const VEL_TH = 0.45;
-
-    const applyTransform = (dx, rotFactor = 0.02) => {
-      slide.style.transform = `translateX(${dx}px) rotate(${dx * rotFactor}deg)`;
-    };
-
-    const onStart = (x, y) => {
-      startX = x; startY = y; lastX = x; lastT = performance.now();
-      active = true;
-      moveSamples.length = 0;
-      velocityX = 0;
-      slide.classList.add('bf-swiping');
-    };
-    const onMove = (x, y) => {
-      if (!active) return;
-      const now = performance.now();
-      const dx = x - startX;
-      const dy = y - startY;
-      if (Math.abs(dy) > Math.abs(dx) && Math.abs(dx) < 20) return;
-      moveSamples.push({ x, t: now });
-      if (moveSamples.length > 8) moveSamples.shift();
-      const dt = now - lastT;
-      if (dt > 0) velocityX = (x - lastX) / dt;
-      lastX = x;
-      lastT = now;
-      const momentumBoost = Math.min(1.15, 1 + Math.abs(velocityX) * 0.08);
-      applyTransform(dx * 0.42 * momentumBoost, 0.025);
-      const favOv = slide.querySelector('.bf-swipe-fav-overlay');
-      const shareOv = slide.querySelector('.bf-swipe-share-overlay');
-      const intensity = Math.min(1, (Math.abs(dx) + Math.abs(velocityX) * 40) / 120);
-      if (dx < -30 && favOv) favOv.style.opacity = intensity;
-      if (dx > 30 && shareOv) shareOv.style.opacity = intensity;
-    };
-    const finishSwipe = (dx, vx) => {
-      const effective = dx + vx * 180;
-      if (effective < -TH || (dx < -40 && vx < -VEL_TH)) {
-        slide.classList.add('bf-swipe-out-left');
-        setTimeout(() => { actionFavForIdx(slideIdx); slide.classList.remove('bf-swipe-out-left'); }, 280);
-      } else if (effective > TH || (dx > 40 && vx > VEL_TH)) {
-        slide.classList.add('bf-swipe-out-right');
-        setTimeout(() => { shareCard(slideIdx); slide.classList.remove('bf-swipe-out-right'); }, 280);
-      } else if (Math.abs(vx) > 0.25) {
-        let pos = dx;
-        let v = vx * 220;
-        const decay = 0.92;
-        const step = () => {
-          pos += v * 0.016;
-          v *= decay;
-          applyTransform(pos, 0.02);
-          if (Math.abs(v) > 2) requestAnimationFrame(step);
-          else {
-            slide.style.transform = '';
-            slide.querySelectorAll('.bf-swipe-overlay').forEach(o => { o.style.opacity = 0; });
-          }
-        };
-        requestAnimationFrame(step);
-        return;
+  function setupDoubleTap(slide, slideIdx) {
+    let lastTap = 0;
+    slide.addEventListener('click', (e) => {
+      // Ignorer si clic sur bouton d'action ou de quiz
+      if (e.target.closest('button') || e.target.closest('.bf-quiz-opt') || e.target.closest('.bf-side-btn')) return;
+      
+      const now = Date.now();
+      const delay = now - lastTap;
+      if (delay < 300 && delay > 0) {
+        // Double tap détecté !
+        triggerDoubleTapHeart(slide, slideIdx);
       }
-    };
-    const onEnd = (x) => {
-      if (!active) return;
-      active = false;
-      slide.classList.remove('bf-swiping');
-      const dx = x - startX;
-      slide.querySelectorAll('.bf-swipe-overlay').forEach(o => { o.style.opacity = 0; });
-      finishSwipe(dx, velocityX);
-      if (!slide.classList.contains('bf-swipe-out-left') && !slide.classList.contains('bf-swipe-out-right')) {
-        if (Math.abs(velocityX) <= 0.25) slide.style.transform = '';
-      }
-    };
-
-    slide.addEventListener('touchstart', e => {
-      const t = e.touches[0];
-      onStart(t.clientX, t.clientY);
-    }, { passive: true });
-    slide.addEventListener('touchmove', e => {
-      const t = e.touches[0];
-      onMove(t.clientX, t.clientY);
-    }, { passive: true });
-    slide.addEventListener('touchend', e => {
-      const t = e.changedTouches[0];
-      onEnd(t.clientX);
+      lastTap = now;
     });
 
-    slide.addEventListener('mousedown', e => onStart(e.clientX, e.clientY));
-    slide.addEventListener('mousemove', e => { if (e.buttons) onMove(e.clientX, e.clientY); });
-    slide.addEventListener('mouseup', e => onEnd(e.clientX));
-    slide.addEventListener('mouseleave', e => { if (active) onEnd(e.clientX); });
+    slide.addEventListener('touchstart', (e) => {
+      if (e.target.closest('button') || e.target.closest('.bf-quiz-opt') || e.target.closest('.bf-side-btn')) return;
+      const now = Date.now();
+      const delay = now - lastTap;
+      if (delay < 300 && delay > 0) {
+        triggerDoubleTapHeart(slide, slideIdx);
+      }
+      lastTap = now;
+    }, { passive: true });
+  }
+
+  function triggerDoubleTapHeart(slide, slideIdx) {
+    // Créer le cœur animé
+    let heart = slide.querySelector('.bf-doubletap-heart');
+    if (!heart) {
+      heart = document.createElement('div');
+      heart.className = 'bf-doubletap-heart';
+      heart.innerHTML = '❤️';
+      slide.appendChild(heart);
+    }
+    
+    // Jouer son Ding
+    playSound('ding');
+    
+    // Forcer le reflow
+    heart.classList.remove('animate');
+    void heart.offsetWidth;
+    heart.classList.add('animate');
+    
+    // Action favori
+    actionFavForIdx(slideIdx);
   }
 
   function startCasChocTimer(slideIdx, seconds) {

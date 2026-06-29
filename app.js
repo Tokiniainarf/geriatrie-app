@@ -32,13 +32,21 @@ document.addEventListener('DOMContentLoaded',()=>{
 function sw(view){
   const prev=S.view;
   if(prev==='graph'&&view!=='graph'&&typeof destroyGraph==='function')destroyGraph();
+  
+  // Rediriger "sujets" vers la vue fusionnée "annales"
+  let targetView = view;
+  if(view === 'sujets') targetView = 'annales';
+  
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.querySelectorAll('#bnav button').forEach(b=>b.classList.remove('active'));
-  const el=document.getElementById('v'+view.charAt(0).toUpperCase()+view.slice(1));
+  
+  const el=document.getElementById('v'+targetView.charAt(0).toUpperCase()+targetView.slice(1));
   if(el)el.classList.add('active');
-  document.querySelector(`[data-v="${view}"]`)?.classList.add('active');
-  S.view=view;window.scrollTo(0,0);
+  document.querySelector(`[data-v="${targetView}"]`)?.classList.add('active');
+  
+  S.view=targetView;window.scrollTo(0,0);
   document.getElementById('searchBar')?.classList.remove('open');
+  
   if(view==='synth')renderSynthesis();
   if(view==='flash')renderFlashcard();
   if(view==='items')renderItems();
@@ -50,11 +58,34 @@ function sw(view){
   if(view==='erreurs'&&typeof ErrorJournal!=='undefined')ErrorJournal.render();
   if(view==='garde')renderGarde();
   if(view==='dict')renderDict();
-  if(view==='annales')renderAnnales();
-  if(view==='sujets')renderSujets();
+  if(view==='annales') switchAnnalesMode('annales');
+  if(view==='sujets') switchAnnalesMode('sujets');
   if(view==='proto')renderProto();
   if(view!=='quiz'&&typeof QuizMode!=='undefined')QuizMode.destroy();
   if(view==='set'){document.getElementById('pd').textContent=`${S.read.length} chapitre${S.read.length>1?'s':''} consulté${S.read.length>1?'s':''}`}
+}
+
+function switchAnnalesMode(mode) {
+  const btnAnn = document.getElementById('btnSubAnnales');
+  const btnSuj = document.getElementById('btnSubSujets');
+  const tabAnn = document.getElementById('subTabAnnales');
+  const tabSuj = document.getElementById('subTabSujets');
+  
+  if (!tabAnn || !tabSuj) return;
+  
+  if (mode === 'annales') {
+    tabAnn.style.display = 'block';
+    tabSuj.style.display = 'none';
+    btnAnn?.classList.add('active');
+    btnSuj?.classList.remove('active');
+    renderAnnales();
+  } else {
+    tabAnn.style.display = 'none';
+    tabSuj.style.display = 'block';
+    btnAnn?.classList.remove('active');
+    btnSuj?.classList.add('active');
+    renderSujets();
+  }
 }
 /* ── DAILY REVISION CARD ── */
 function renderDailyRev(){
@@ -1434,8 +1465,13 @@ function renderProto(){
   const el=document.getElementById('protoContent');
   const filtEl=document.getElementById('protoFilters');
   if(!el)return;
-  const all=[];
-  const addProto=(arr,cat)=>{if(!Array.isArray(arr))return;arr.forEach(p=>all.push({...p,categorie:p.categorie||p.category||cat}));};
+  const rawAll=[];
+  const addProto=(arr,cat)=>{
+    if(!Array.isArray(arr))return;
+    arr.forEach(p=>{
+      rawAll.push({...p, fallbackCategory: cat});
+    });
+  };
   addProto(typeof PROTOCOLES_URGENCE!=='undefined'?PROTOCOLES_URGENCE:null,'Urgence');
   addProto(typeof PROTOCOLES_COMPLETS!=='undefined'?PROTOCOLES_COMPLETS:null,'Protocoles complets');
   addProto(typeof PROTOCOLES_REANIMATION!=='undefined'?PROTOCOLES_REANIMATION:null,'Réanimation');
@@ -1447,9 +1483,117 @@ function renderProto(){
   addProto(typeof PROTOCOLES_QUALITE!=='undefined'?PROTOCOLES_QUALITE:null,'Qualité');
   addProto(typeof PROTOCOLES_LEGISLATION!=='undefined'?PROTOCOLES_LEGISLATION:null,'Législation');
   addProto(typeof PROTOCOLES_FORMATION!=='undefined'?PROTOCOLES_FORMATION:null,'Formation');
-  if(typeof CLINICAL_REFERENCE!=='undefined')all.push(...CLINICAL_REFERENCE.filter(p=>p.category==='Urgence').map(p=>({...p,_src:'ref',protocole:p.content?p.content.split('. ').filter(Boolean):[]})));
+  
+  // Charger FICHES_GARDE comme protocoles
+  if (typeof FICHES_GARDE !== 'undefined' && Array.isArray(FICHES_GARDE)) {
+    FICHES_GARDE.forEach(f => {
+      rawAll.push({
+        id: f.id,
+        titre: f.title,
+        icon: f.icon || '🚑',
+        categorie: 'Fiches de Garde (Urgences)',
+        protocole: f.checklist || [],
+        alerte: f.alert || '',
+        urgency: f.urgency || '',
+        fallbackCategory: 'Fiches de Garde (Urgences)'
+      });
+    });
+  }
+
+  if(typeof CLINICAL_REFERENCE!=='undefined') {
+    rawAll.push(...CLINICAL_REFERENCE.filter(p=>p.category==='Urgence').map(p=>({
+      ...p,
+      _src:'ref',
+      protocole: p.content?p.content.split('. ').filter(Boolean):[],
+      fallbackCategory: 'Urgence'
+    })));
+  }
+
+  // Normalisation des catégories et dédoublonnage intelligent par titre normalisé
+  const all = [];
+  const seen = new Map();
+
+  rawAll.forEach(p => {
+    // Détermination de la catégorie
+    let c = p.categorie || p.category || p.fallbackCategory || 'Autre';
+    c = String(c).trim();
+    const lower = c.toLowerCase();
+    
+    if (lower.includes('garde')) {
+      c = '🚑 Fiches de Garde (Urgences)';
+    } else if (lower.includes('urgence') || lower === 'rcp' || lower === 'réanimation' || lower === 'reanimation') {
+      c = '🔴 Urgences & Réanimation';
+    } else if (lower.includes('completes') || lower === 'autre') {
+      c = '📋 Protocoles généraux';
+    } else if (lower.includes('kine') || lower.includes('réadaptation') || lower.includes('readaptation') || lower.includes('kinésithérapie')) {
+      c = '🏃 Rééducation & Kiné';
+    } else if (lower.includes('cognitif') || lower.includes('neuro')) {
+      c = '🧠 Neuro-Gériatrie & Cognition';
+    } else if (lower.includes('qualité') || lower.includes('qualite') || lower.includes('législation') || lower.includes('legislation')) {
+      c = '⚖️ Législation & Qualité';
+    } else if (lower.includes('formation')) {
+      c = '🎓 Formation & Pratique';
+    } else if (lower.includes('antalgie') || lower.includes('douleur') || lower.includes('palliatif')) {
+      c = '💊 Antalgie & Soins Palliatifs';
+    } else if (lower.includes('antibio')) {
+      c = '🦠 Antibiothérapie';
+    } else if (lower.includes('gériatrie') || lower.includes('geriatrie')) {
+      c = '👴 Spécificités Gériatriques';
+    }
+
+    const normalizedTitle = (p.titre || p.title || '').toLowerCase().trim()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+      .replace(/[^a-z0-9]/g, '');
+
+    if (!normalizedTitle) return;
+
+    const currentProtoObj = {
+      ...p,
+      categorie: c,
+      titre: p.titre || p.title || ''
+    };
+
+    if (seen.has(normalizedTitle)) {
+      // Dédupliquer : Choisir le protocole qui contient le plus de détails (ex: étapes du protocole)
+      const existing = seen.get(normalizedTitle);
+      const steps = p.protocole || p.steps || p.checklist || [];
+      const extSteps = existing.protocole || existing.steps || existing.checklist || [];
+      
+      const newScore = (Array.isArray(steps) ? steps.length * 2 : 0) + (p.surveillance ? 5 : 0) + (p.alerte || p.alert ? 3 : 0);
+      const extScore = (Array.isArray(extSteps) ? extSteps.length * 2 : 0) + (existing.surveillance ? 5 : 0) + (existing.alerte || existing.alert ? 3 : 0);
+      
+      if (newScore > extScore) {
+        const idx = all.indexOf(existing);
+        if (idx !== -1) {
+          all[idx] = currentProtoObj;
+          seen.set(normalizedTitle, currentProtoObj);
+        }
+      }
+    } else {
+      all.push(currentProtoObj);
+      seen.set(normalizedTitle, currentProtoObj);
+    }
+  });
+
   if(!all.length){el.innerHTML='<div class="empty"><div class="empty-text">Aucun protocole disponible</div></div>';return}
-  const cats=[...new Set(all.map(p=>p.categorie||p.category||'Autre'))];
+  
+  // Trier les catégories pour avoir Urgences et Gardes en premier
+  const customOrder = {
+    '🚑 Fiches de Garde (Urgences)': 1,
+    '🔴 Urgences & Réanimation': 2,
+    '🦠 Antibiothérapie': 3,
+    '💊 Antalgie & Soins Palliatifs': 4,
+    '🧠 Neuro-Gériatrie & Cognition': 5,
+    '🏃 Rééducation & Kiné': 6,
+    '👴 Spécificités Gériatriques': 7,
+    '📋 Protocoles généraux': 8,
+    '⚖️ Législation & Qualité': 9,
+    '🎓 Formation & Pratique': 10
+  };
+
+  const cats=[...new Set(all.map(p=>p.categorie))].sort((a, b) => {
+    return (customOrder[a] || 99) - (customOrder[b] || 99);
+  });
   if(filtEl){
     filtEl.innerHTML=`<div class="proto-filter-bar">
       <select id="protoCatFilter" onchange="filterProto()"><option value="">Toutes catégories</option>${cats.map(c=>`<option value="${c}">${c}</option>`).join('')}</select>
