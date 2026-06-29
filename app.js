@@ -33,7 +33,7 @@ function sw(view){
   const prev=S.view;
   if(prev==='graph'&&view!=='graph'&&typeof destroyGraph==='function')destroyGraph();
   
-  // Rediriger "sujets" vers la vue fusionnée "annales"
+  // Sujets est fusionné dans Annales
   let targetView = view;
   if(view === 'sujets') targetView = 'annales';
   
@@ -47,22 +47,24 @@ function sw(view){
   S.view=targetView;window.scrollTo(0,0);
   document.getElementById('searchBar')?.classList.remove('open');
   
-  if(view==='synth')renderSynthesis();
-  if(view==='flash')renderFlashcard();
-  if(view==='items')renderItems();
-  if(view==='fav')renderFav();
-  if(view==='graph'&&typeof initGraph==='function')initGraph();
-  if(view==='feed'&&typeof BrainFeed!=='undefined')BrainFeed.init();
-  if(view!=='feed'&&typeof BrainFeed!=='undefined')BrainFeed.destroy();
-  if(view==='dash'&&typeof Dashboard!=='undefined')Dashboard.render();
-  if(view==='erreurs'&&typeof ErrorJournal!=='undefined')ErrorJournal.render();
-  if(view==='garde')renderGarde();
-  if(view==='dict')renderDict();
-  if(view==='annales') switchAnnalesMode('annales');
-  if(view==='sujets') switchAnnalesMode('sujets');
-  if(view==='proto')renderProto();
-  if(view!=='quiz'&&typeof QuizMode!=='undefined')QuizMode.destroy();
-  if(view==='set'){document.getElementById('pd').textContent=`${S.read.length} chapitre${S.read.length>1?'s':''} consulté${S.read.length>1?'s':''}`}
+  if(targetView==='synth')renderSynthesis();
+  if(targetView==='flash')renderFlashcard();
+  if(targetView==='items')renderItems();
+  if(targetView==='fav')renderFav();
+  if(targetView==='graph'&&typeof initGraph==='function')initGraph();
+  if(targetView==='feed'&&typeof BrainFeed!=='undefined')BrainFeed.init();
+  if(targetView!=='feed'&&typeof BrainFeed!=='undefined')BrainFeed.destroy();
+  if(targetView==='dash'&&typeof Dashboard!=='undefined')Dashboard.render();
+  if(targetView==='erreurs'&&typeof ErrorJournal!=='undefined')ErrorJournal.render();
+  if(targetView==='garde')renderGarde();
+  if(targetView==='dict')renderDict();
+  if(targetView==='annales') {
+    if (view === 'sujets') switchAnnalesMode('sujets');
+    else switchAnnalesMode('annales');
+  }
+  if(targetView==='proto')renderProto();
+  if(targetView!=='quiz'&&typeof QuizMode!=='undefined')QuizMode.destroy();
+  if(targetView==='set'){document.getElementById('pd').textContent=`${S.read.length} chapitre${S.read.length>1?'s':''} consulté${S.read.length>1?'s':''}`}
 }
 
 function switchAnnalesMode(mode) {
