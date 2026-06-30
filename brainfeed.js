@@ -31,16 +31,16 @@ const BrainFeed = (() => {
   let activeTimers = new Map();
 
   const TYPE_RATIO = {
-    memo_jour: 0.17,
-    cas_choc: 0.17,
-    quiz_flash: 0.17,
-    chiffre_cle: 0.17,
-    citation: 0.17,
-    piege_exam: 0.17,
+    memo_jour: 0.20,
+    cas_choc: 0.20,
+    quiz_flash: 0.20,
+    chiffre_cle: 0.12,
+    citation: 0.00,
+    piege_exam: 0.20,
     flash: 0.04,
     synthesis: 0.02,
-    case: 0.03,
-    reco: 0.03
+    case: 0.02,
+    reco: 0.00
   };
 
   const CITATIONS = [
@@ -168,20 +168,108 @@ const BrainFeed = (() => {
   }
 
   function buildQuizOptions(correctAnswer, allFlash, fc) {
-    const wrong = shuffle(allFlash.filter(f => f.id !== fc.id && f.answer))
-      .slice(0, 12)
+    const cleanAnswer = (ans) => {
+      let a = (ans || '').trim();
+      a = a.replace(/^[•\-–*]\s*/, '');
+      a = a.replace(/^\d{1,2}\s*[.)-]\s*/, '');
+      a = a.split(/[.·]/)[0].trim().slice(0, 90);
+      return a;
+    };
+
+    const correctClean = cleanAnswer(correctAnswer);
+
+    // 1. Percentage
+    const pctMatch = correctClean.match(/^(\d+(?:,\d+)?)\s*%/);
+    if (pctMatch) {
+      const val = parseFloat(pctMatch[1].replace(',', '.'));
+      const offsets = [-15, 15, 30, -10, 10, 20];
+      const uniqVals = new Set();
+      while (uniqVals.size < 3 && offsets.length > 0) {
+        const offset = offsets.shift();
+        const n = Math.round(val + offset);
+        if (n > 0 && n <= 100 && n !== Math.round(val)) uniqVals.add(n);
+      }
+      const options = [correctClean];
+      uniqVals.forEach(v => options.push(`${v} %`));
+      while (options.length < 4) {
+        options.push(`${Math.round(val * 1.5)} %`);
+      }
+      return shuffle(options.map((t, i) => ({ text: t, correct: i === 0 })));
+    }
+
+    // 2. Score (e.g. 24/30)
+    const scoreMatch = correctClean.match(/^(\d+)\s*\/\s*(\d+)$/);
+    if (scoreMatch) {
+      const num = parseInt(scoreMatch[1]);
+      const den = parseInt(scoreMatch[2]);
+      const uniqNums = new Set();
+      const offsets = [-4, 4, -8, 8, -2, 2];
+      while (uniqNums.size < 3 && offsets.length > 0) {
+        const offset = offsets.shift();
+        const n = num + offset;
+        if (n >= 0 && n <= den && n !== num) uniqNums.add(n);
+      }
+      const options = [correctClean];
+      uniqNums.forEach(v => options.push(`${v}/${den}`));
+      while (options.length < 4) {
+        options.push(`${Math.max(0, num - 5)}/${den}`);
+      }
+      return shuffle(options.map((t, i) => ({ text: t, correct: i === 0 })));
+    }
+
+    // 3. Duration/Count (e.g. 5 ans, 3 mois)
+    const durMatch = correctClean.match(/^(\d+)\s*(ans|mois|jours|heures|semaines|critères|médicaments|molécules)$/i);
+    if (durMatch) {
+      const val = parseInt(durMatch[1]);
+      const unit = durMatch[2];
+      const offsets = [-2, 2, -4, 4, 3, -1];
+      const uniqVals = new Set();
+      while (uniqVals.size < 3 && offsets.length > 0) {
+        const offset = offsets.shift();
+        const n = val + offset;
+        if (n > 0 && n !== val) uniqVals.add(n);
+      }
+      const options = [correctClean];
+      uniqVals.forEach(v => options.push(`${v} ${unit}`));
+      while (options.length < 4) {
+        options.push(`${val + 5} ${unit}`);
+      }
+      return shuffle(options.map((t, i) => ({ text: t, correct: i === 0 })));
+    }
+
+    // 4. GIR
+    if (/^GIR\s+\d$/i.test(correctClean)) {
+      const girNum = parseInt(correctClean.match(/\d/)[0]);
+      const options = [correctClean];
+      const uniqGirs = new Set([1, 2, 3, 4, 5, 6].filter(n => n !== girNum));
+      const wrongGirs = [...uniqGirs].slice(0, 3);
+      wrongGirs.forEach(n => options.push(`GIR ${n}`));
+      return shuffle(options.map((t, i) => ({ text: t, correct: i === 0 })));
+    }
+
+    // Fallback: related flashcards
+    let candidates = allFlash.filter(f => f.id !== fc.id && f.answer);
+    if (fc.chapter) {
+      const sameChap = candidates.filter(f => f.chapter === fc.chapter);
+      if (sameChap.length >= 4) candidates = sameChap;
+    }
+
+    const wrong = shuffle(candidates)
       .map(f => {
-        const a = (f.answer || '').split(/[.·]/)[0].trim().slice(0, 80);
-        return a.length > 8 ? a : null;
+        const a = cleanAnswer(f.answer);
+        if (a.length < 6 || a === correctClean) return null;
+        if (/\d/.test(a) && !/\d/.test(correctClean)) return null; // Avoid mixing number answers with plain text answers
+        return a;
       })
       .filter(Boolean);
+
     const uniq = [...new Set(wrong)].slice(0, 3);
     while (uniq.length < 3) {
       uniq.push(['Aucune de ces réponses', 'Contre-indication absolue', 'Surveillance simple'][uniq.length]);
     }
-    const correctShort = (correctAnswer || '').split(/[.·]/)[0].trim().slice(0, 90);
+
     const options = shuffle([
-      { text: correctShort || correctAnswer, correct: true },
+      { text: correctClean, correct: true },
       ...uniq.map(t => ({ text: t, correct: false }))
     ]);
     return options.slice(0, 4);
@@ -505,17 +593,17 @@ const BrainFeed = (() => {
     let coachingTip = card.juryTips || '';
     if (!coachingTip) {
       const cardTextLower = (card.question + ' ' + answerText + ' ' + (card.tags || []).join(' ')).toLowerCase();
-      if (cardTextLower.includes('iatro') || cardTextLower.includes('médic') || cardTextLower.includes('beers') || cardTextLower.includes('stopp') || cardTextLower.includes('start')) {
+      if (/\b(iatrogé|polymédic|beers|stopp|start|effets indésirables|interaction|surdosage|bzd|benzodiazépine)\b/i.test(cardTextLower)) {
         coachingTip = "Citez systématiquement la revue médicamenteuse (critères STOPP/Beers) et proposez l'arrêt/adaptation des psychotropes ou anti-hypertenseurs suspects.";
-      } else if (cardTextLower.includes('chute') || cardTextLower.includes('équili') || cardTextLower.includes('tinetti') || cardTextLower.includes('tug')) {
+      } else if (/\b(chute|chuter|chutes|tinetti|tug|instabilité|équilibre)\b/i.test(cardTextLower)) {
         coachingTip = "Une chute = bilan orthostatique, vision et médicament. Citez le test TUG (> 20s) et le score de Tinetti.";
-      } else if (cardTextLower.includes('nutri') || cardTextLower.includes('album') || cardTextLower.includes('mna')) {
+      } else if (/\b(nutri|dénutri|mna|albumine|amaigrissement|perte de poids)\b/i.test(cardTextLower)) {
         coachingTip = "Mémorisez les seuils HAS : IMC < 21 (ou < 22 si > 75 ans) et albumine < 30 g/L pour la dénutrition sévère.";
-      } else if (cardTextLower.includes('confu') || cardTextLower.includes('delir') || cardTextLower.includes('cam')) {
+      } else if (/\b(confu|delirium|cam|agitation|confusionnelle)\b/i.test(cardTextLower)) {
         coachingTip = "Pour un delirium, appliquez les critères de la CAM. Cherchez d'abord une cause réversible (globe, fécalome, douleur, infection).";
-      } else if (cardTextLower.includes('démence') || cardTextLower.includes('cognit') || cardTextLower.includes('mms') || cardTextLower.includes('moca')) {
+      } else if (/\b(démence|cognitive|mms|moca|alzheimer|lewy|vasculaire)\b/i.test(cardTextLower)) {
         coachingTip = "Éliminez toujours les causes réversibles (hypothyroïdie, carence B12/folates) et la dépression avant de diagnostiquer une démence.";
-      } else if (cardTextLower.includes('éthique') || cardTextLower.includes('fin de vie') || cardTextLower.includes('directi') || cardTextLower.includes('confian')) {
+      } else if (/\b(éthique|fin de vie|directives anticipées|personne de confiance|claeys|leonetti)\b/i.test(cardTextLower)) {
         coachingTip = "Cadre légal Leonetti : pas d'obstination déraisonnable, recueil des directives anticipées et désignation de la personne de confiance.";
       }
     }
