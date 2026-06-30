@@ -5,10 +5,28 @@ const fs = require('fs');
 const dataSrc = fs.readFileSync('data.js', 'utf8');
 const appSrc = fs.readFileSync('app.js', 'utf8');
 
+class MockElement {
+  constructor(tag) {
+    this.tagName = tag.toUpperCase();
+    this._text = '';
+    this._html = '';
+  }
+  get textContent() { return this._text; }
+  set textContent(v) {
+    this._text = String(v);
+    this._html = this._text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+  get innerHTML() { return this._html; }
+  set innerHTML(v) {
+    this._html = String(v);
+    this._text = v.replace(/<[^>]+>/g, '');
+  }
+}
+
 const sandbox = {
   localStorage: { getItem: ()=>null, setItem: ()=>{} },
   document: {
-    createElement: (t)=>({textContent:'',innerHTML:''}),
+    createElement: (t)=>new MockElement(t),
     querySelectorAll: ()=>[],
     querySelector: ()=>null,
     getElementById: ()=>null,
@@ -91,7 +109,7 @@ for (const ch of chapters) {
 
   // 6. Check paragraphs that are clearly OCR fragments (no verb, very short)
   const allParas = [];
-  const pr = /<p class="reader-p">([^<]*)<\/p>/g;
+  const pr = /<p[^>]*>([^<]*)<\/p>/g;
   let p;
   while ((p = pr.exec(html)) !== null) allParas.push(p[1].trim());
   

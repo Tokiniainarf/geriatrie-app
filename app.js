@@ -325,8 +325,19 @@ function renderChapterContent(){
 /* ── MANUEL NUMÉRIQUE (contenu OCR → structure éditoriale) ── */
 const RUN_HDR_RE=/^(Comprendre le vieillissement|Connaissances|Entraînement|Gériatrie|▼)$/i;
 const SKIP_LINE_RE=/^(©\s*\d{4}|Elsevier|Tous droits réservés|This page intentionally left blank|Index$|En lien avec la définition)/i;
+const SITUATION_NUMBERS = new Set([
+  103, 106, 112, 114, 116, 117, 119, 121, 122, 123, 124,
+  128, 129, 130, 131, 134, 135, 140, 159, 161, 162, 165,
+  166, 170, 171, 172, 173, 174, 175, 176, 178, 184, 185,
+  186, 199, 200, 211, 217, 223, 226, 227, 229, 231, 232,
+  239, 240, 244, 245, 246, 247, 248, 250, 256, 258, 259,
+  260, 264, 266, 267, 269, 270, 272, 276, 279, 281, 284,
+  288, 295, 298, 300, 306, 321, 322, 324, 325, 327, 328,
+  330, 331, 334, 341, 342, 343, 345, 348, 352, 353, 354,
+  355
+]);
 const SYLLABUS_RE=/^(Rang Rubrique|Intitulé Descriptif|Item, objectifs|Hiérarchisation des connaissances|ITEM\s+\d+\s*–|Connaître les |Savoir qualifier|Modifications reconnues|Descriptif$)/i;
-const SYLLABUS_ROW_RE=/^[A-D]\s+(Définition|Épidémiologie|Éléments|Prévalence|Prise en charge|B\s)/;
+const SYLLABUS_ROW_RE=/^[A-D]\s+(Définition|Épidémiologie|Éléments|Prévalence|Prise en charge|B\s)|^(physiopathologiques|complémentaires|pathologiques|physiopa(?:tho)?|épidémiologie|pharmacologique|squelettique|immunologiques|psychomotrice)\s+[a-z]/;
 const SECTION_RE=/^([IVX]+)\.\s+(.+)/;
 const LETTER_RE=/^([A-Z])\.\s+(.+)/;
 const RANG_RE=/^([A-D])\s+(.+)/;
@@ -419,23 +430,28 @@ function renderChapter(raw,chId){
   const ch=APP_DATA.chapters.find(c=>c.id===chId);
   const titleRe=ch?new RegExp('^'+ch.t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\s*$','i'):null;
   
-  // 1. Fix hyphens with spaces (OCR hyphenations) with French accent support
-  let text = raw.replace(/([a-zA-Zà-öø-ÿœŒæÆÀ-ÖØ-ß]+)-\s+([a-zA-Zà-öø-ÿœŒæÆÀ-ÖØ-ß]+)/g, (match, p1, p2) => {
-    const prefixes = /^(pré|diffé|repré|dé|con|in|re|trans|inter|intra|co|physio|patho|neuro|ostéo|sympto|cardio|broncho|pneumo|hémato|hépato|néphro|gastro|entéro|myo|dermo|ophtalmo|oto|rhino|laryngo|géronto|géria|psycho|démogra|socio|anthro|biolo|médico|chimio|radiothé|immuno|anti|auto|hyper|hypo|dys|poly|multi|micro|macro|péri|para|post|supra|infra|extra|ultra|pseudo|semi|hémi|mono|bi|tri|quadri|tétra|penta|hexa|pluri)$/i;
+  // 0. Fix OCR column-merge artifacts: "word1- INJECTED_COLUMN_TEXT\nword1_suffix" → "word1word1_suffix\nINJECTED_COLUMN_TEXT"
+  //    This occurs in ECN rubric tables where the "Rubrique" column text was inserted between a split word.
+  //    Pattern: lowercase_prefix- [UPPERCASE injected text on same line]\nlowercase_suffix
+  let text = raw.replace(
+    /([a-zà-öø-ÿœæ]{2,})-[ \t]+([A-ZÀ-ÖØ-ßŒÆ][^\n]{5,})\n([a-zà-öø-ÿœæ]{2,})\b/g,
+    (match, pre, injected, post) => `${pre}${post}\n${injected}`
+  );
+
+  // 1. Fix hyphens with spaces (OCR hyphenations) with French accent support (suffix must be lowercase)
+  text = text.replace(/([a-zA-Zà-öø-ÿœŒæÆÀ-ÖØ-ß]+)-\s+([a-zà-öø-ÿœŒæÆÀ-ÖØ-ß]+)/g, (match, p1, p2) => {
+    const prefixes = /^(pré|diffé|repré|dé|con|in|re|trans|inter|intra|co|physio|patho|neuro|ostéo|sympto|cardio|broncho|pneumo|hémato|hépato|néphro|gastro|entéro|myo|dermo|ophtalmo|oto|rhino|laryngo|géronto|géria|psycho|démogra|socio|anthro|biolo|médico|chimio|radiothé|immuno|anti|auto|hyper|hyper|hypo|dys|poly|multi|micro|macro|péri|para|post|supra|infra|extra|ultra|pseudo|semi|hémi|mono|bi|tri|quadri|tétra|penta|hexa|pluri)$/i;
     const normP1Prefix = p1.replace(/[éèêë]/gi, 'e').replace(/[àâä]/gi, 'a').replace(/[ôö]/gi, 'o').replace(/[ùûü]/gi, 'u').replace(/ç/gi, 'c');
     if (prefixes.test(p1) || prefixes.test(normP1Prefix)) {
       return p1 + p2;
     }
-    if (p2.match(/^[a-zà-öø-ÿœŒæÆÀ-ÖØ-ß]/i)) {
-      const compoundBases = /^(garde|arc|celui|celle|ceux|celles|moi|toi|soi|nous|vous|lui|leur|eux|y|en|ci|là|bas|haut|arrière|avant|après|entre|sous|sur|sans|contre|non|quasi|vice)$/i;
-      if (compoundBases.test(p1)) return p1 + '-' + p2;
-      return p1 + p2;
-    }
-    return p1 + '-' + p2;
+    const compoundBases = /^(garde|arc|celui|celle|ceux|celles|moi|toi|soi|nous|vous|lui|leur|eux|y|en|ci|là|bas|haut|arrière|avant|après|entre|sous|sur|sans|contre|non|quasi|vice)$/i;
+    if (compoundBases.test(p1)) return p1 + '-' + p2;
+    return p1 + p2;
   });
 
-  // 2. Fix standard hyphenations at end of lines
-  text = text.replace(/([a-zA-Zà-öø-ÿœŒæÆÀ-ÖØ-ß]+)-\s*\n\s*([a-zA-Zà-öø-ÿœŒæÆÀ-ÖØ-ß]+)/g, '$1$2');
+  // 2. Fix standard hyphenations at end of lines (suffix must be lowercase)
+  text = text.replace(/([a-zA-Zà-öø-ÿœŒæÆÀ-ÖØ-ß]+)-\s*\n\s*([a-zà-öø-ÿœŒæÆÀ-ÖØ-ß]+)/g, '$1$2');
 
   const rawLines = text.replace(/\r\n/g,'\n').split('\n').map(l=>l.trim());
   
@@ -482,7 +498,7 @@ function renderChapter(raw,chId){
     preprocessedLines.push(l);
   }
 
-  // 4. Filter OCR junk, keeping empty lines for paragraph breaks
+  // 4. Filter OCR junk, keeping empty lines for paragraph breaks (protect group titles)
   let lines = preprocessedLines.filter((l,i,arr)=>{
     if(l === '') return true;
     if(RUN_HDR_RE.test(l))return false;
@@ -491,7 +507,6 @@ function renderChapter(raw,chId){
     if(/^Page\s+\d+$/i.test(l))return false;
     if(SYLLABUS_RE.test(l))return false;
     if(SYLLABUS_ROW_RE.test(l))return false;
-    if(/^En lien avec/.test(l))return false;
     if(DIAGRAM_RE.test(l)&&!/Fig\.\s*\d+\.\d+/.test(l))return false;
     return true;
   });
@@ -505,22 +520,24 @@ function renderChapter(raw,chId){
       if(i>=firstSec)return true;
       if(RANG_RE.test(l))return true;
       if(/Situations?\s+de\s+départ/i.test(l))return true;
-      if(/^\d{2,3}\s+/.test(l))return true;
+      if(/^\d{2,3}\s*/.test(l))return true;
       if(BULLET_RE.test(l))return true;
+      if(/^En lien avec/i.test(l))return true;
       if(l.length > 40 && /[.!?]/.test(l)) return true;
       if(/gérontologie|gériatrie|vieillissement/i.test(l)) return true;
       return false;
     });
   }
-  // Kill remaining short non-sentence fragments (common OCR junk)
+  // Kill remaining short non-sentence fragments (common OCR junk, protecting group titles and mashed table cells)
   lines = lines.filter(l => {
     if(l === '') return true;
     if (l.length >= 50) return true;
     if (RANG_RE.test(l)) return true;
     if (BULLET_RE.test(l) || SECTION_RE.test(l) || LETTER_RE.test(l)) return true;
-    if (/^Fig\.|Tableau|Encadré|^\d{2,3}\s+/.test(l)) return true;
+    if (/^Fig\.|Tableau|Encadré|^\d{2,3}\s*/.test(l)) return true;
     if (/[.!?]$/.test(l)) return true;
     if (/^Situations?\s+de\s+départ/i.test(l)) return true;
+    if (/^En lien avec/i.test(l)) return true;
     return false;
   });
   // R2 — Filtrer les listes de sections internes (TOC dupliquees dans le corps)
@@ -529,28 +546,43 @@ function renderChapter(raw,chId){
   for (let pi = 0; pi < Math.min(lines.length, 40); pi++) {
     if (SECTION_RE.test(lines[pi]) || LETTER_RE.test(lines[pi])) preambleHeadings.add(lines[pi]);
   }
+  const isProseLine = (txt) => {
+    if (!txt) return false;
+    if (SECTION_RE.test(txt) || LETTER_RE.test(txt) || RANG_RE.test(txt) || BULLET_RE.test(txt)) return false;
+    if (/^Fig\.|Tableau|Encadré|^\d{2,3}\s+/.test(txt)) return false;
+    return txt.length > 10 && /[a-zA-Zà-öø-ÿœŒæÆÀ-ÖØ-ß]/.test(txt);
+  };
   const isLongDoc = lines.length > 8;
   lines = lines.filter((l, i) => {
     if(l === '') return true;
     if (isLongDoc && (i < 40 || preambleHeadings.has(l))) return true;
     const isSec = SECTION_RE.test(l);
-    const isLet = LETTER_RE.test(l);
+    const isLet = LETTER_RE.test(l) && !/^[IVX]\./.test(l);
     if (!isSec && !isLet) return true;
+
+    let hasBody = false;
+    for (let j = i + 1; j < lines.length; j++) {
+      if (!lines[j]) continue;
+      if (SECTION_RE.test(lines[j]) || LETTER_RE.test(lines[j])) break;
+      if (isProseLine(lines[j])) { hasBody = true; break; }
+    }
+    if (hasBody) return true;
+
     const re = isSec ? SECTION_RE : LETTER_RE;
     let nxtFound = false, prvFound = false;
     for (let j = i + 1, cnt = 0; j < lines.length && cnt < 5; j++) {
       if (!lines[j]) continue; cnt++;
       if (re.test(lines[j])) { nxtFound = true; break; }
-      if (lines[j].length > 50 && /[.!?]/.test(lines[j])) break;
+      if (isProseLine(lines[j])) break;
     }
     for (let j = i - 1, cnt = 0; j >= 0 && cnt < 5; j--) {
       if (!lines[j]) continue; cnt++;
       if (re.test(lines[j])) { prvFound = true; break; }
-      if (lines[j].length > 50 && /[.!?]/.test(lines[j])) break;
+      if (isProseLine(lines[j])) break;
     }
     return !(nxtFound || prvFound);
   });
-  let html='';let paraBuf=[];let bulletBuf=[];let inSection=false;let inSit=false;let inCallout=false;let calloutTitle='';let calloutBuf=[];let inNumList=false;let numBuf=[];let pastPreamble=false;let lettrinePlaced=false;
+  let html='';let paraBuf=[];let bulletBuf=[];let inSection=false;let inSit=false;let sitItems=[];let inCallout=false;let calloutTitle='';let calloutBuf=[];let inNumList=false;let numBuf=[];let pastPreamble=false;let lettrinePlaced=false;
 
   function markBodyStart(){pastPreamble=true}
   function isPreambleLine(l){
@@ -559,6 +591,21 @@ function renderChapter(raw,chId){
     if(/^En lien avec/i.test(l))return true;
     if(/^diagnostic et thérapeutique/i.test(l))return true;
     return false;
+  }
+
+  function replaceCitations(escaped) {
+    return escaped.replace(/\[\s*(\d{2,3}(?:\s*,\s*\d{2,3})*)\s*\]/g, (match, numListStr) => {
+      const nums = numListStr.split(',').map(n => n.trim());
+      const mapped = nums.map(n => {
+        const val = parseInt(n);
+        if (SITUATION_NUMBERS.has(val)) {
+          return `<span class="sit-badge-inline">${n}</span>`;
+        }
+        return n;
+      });
+      if (mapped.join(', ') === nums.join(', ')) return match;
+      return '[' + mapped.join(', ') + ']';
+    });
   }
 
   function flushPara(rang){
@@ -572,26 +619,41 @@ function renderChapter(raw,chId){
       pClass = ' class="has-lettrine"';
       lettrinePlaced = true;
     }
-    // No more splitting - create large continuous blocks
-    html+=`<div class="para-card">${chip}<p${pClass}>${esc(merged)}</p></div>`;
+    let escaped = replaceCitations(esc(merged));
+    html+=`<div class="para-card">${chip}<p${pClass}>${escaped}</p></div>`;
   }
 
   function flushBullets(){
     if(!bulletBuf.length)return;
-    html+=`<div class="reader-list-card"><ul class="reader-list">${bulletBuf.map(b=>`<li>${esc(b)}</li>`).join('')}</ul></div>`;
+    html+=`<div class="reader-list-card"><ul class="reader-list">${bulletBuf.map(b=>`<li>${replaceCitations(esc(b))}</li>`).join('')}</ul></div>`;
     bulletBuf=[];
   }
   function flushNumList(){
     if(!numBuf.length)return;
-    html+=`<div class="reader-list-card"><ol class="reader-list num">${numBuf.map(b=>`<li>${esc(b)}</li>`).join('')}</ol></div>`;
+    html+=`<div class="reader-list-card"><ol class="reader-list num">${numBuf.map(b=>`<li>${replaceCitations(esc(b))}</li>`).join('')}</ol></div>`;
     numBuf=[];inNumList=false;
   }
   function flushCallout(){
     if(!calloutBuf.length&&!calloutTitle)return;
-    html+=`<aside class="callout"><div class="callout-title">${esc(calloutTitle||'Encadré')}</div><div class="callout-body">${calloutBuf.map(p=>`<p>${esc(p)}</p>`).join('')}</div></aside>`;
+    html+=`<aside class="callout"><div class="callout-title">${esc(calloutTitle||'Encadré')}</div><div class="callout-body">${calloutBuf.map(p=>`<p>${replaceCitations(esc(p))}</p>`).join('')}</div></aside>`;
     calloutBuf=[];calloutTitle='';inCallout=false;
   }
   function closeSection(){if(inSection){html+=`</div></section>`;inSection=false}}
+  function flushSituations() {
+    if (!inSit) return;
+    if (sitItems.length > 0) {
+      html += `<div class="situations-card"><div class="situations-title">Situations de départ</div><ul class="situations-list">`;
+      for (const item of sitItems) {
+        if (item.type === 'group') {
+          html += `<li class="sit-group-title">${esc(item.text)}</li>`;
+        } else {
+          html += `<li><span class="sit-badge-turquoise">${item.num}</span> ${esc(item.text.replace(/\.$/, ''))}</li>`;
+        }
+      }
+      html += `</ul></div>`;
+    }
+    inSit = false;
+  }
 
   const first35Headings = new Set();
   const outlineCap = lines.slice(0, 35);
@@ -610,38 +672,50 @@ function renderChapter(raw,chId){
     if(/^Situations?\s+de\s+départ/i.test(l)){
       flushBullets();flushNumList();closeSection();
       markBodyStart();
-      html+=`<div class="situations-card"><div class="situations-title">Situations de départ</div><ul class="situations-list">`;
-      inSit=true;continue;
+      sitItems = [];
+      inSit = true;
+      continue;
     }
     if(inSit){
-      // Check if this line belongs to situations list
-      const parts = l.split(/\s*(?=\b\d{2,3}\b\s+)/);
+      const trimmedLine = l.trim();
+      if (trimmedLine === '' || RUN_HDR_RE.test(trimmedLine) || SKIP_LINE_RE.test(trimmedLine) || /^Page\s+\d+$/i.test(trimmedLine)) {
+        continue;
+      }
+      const isStructural = SECTION_RE.test(trimmedLine) || (LETTER_RE.test(trimmedLine) && !/^[IVX]\./.test(trimmedLine));
+      if (isStructural) {
+        flushSituations();
+        i--;
+        continue;
+      }
+      
+      const parts = trimmedLine.split(/\s*(?=\b\d{2,3}\b)/);
       let matchedAny = false;
-      let items = [];
+      let tempItems = [];
       for (const part of parts) {
-        const sm = part.trim().match(/^(\d{2,3})\s+(.+)/);
-        if (sm) {
-          items.push(sm);
+        const trimmedPart = part.trim();
+        if (/^En lien avec/i.test(trimmedPart)) {
+          tempItems.push({ type: 'group', text: trimmedPart });
           matchedAny = true;
+        } else {
+          const sm = trimmedPart.match(/^(\d{2,3})\s*(.+)/);
+          if (sm) {
+            tempItems.push({ type: 'item', num: sm[1], text: sm[2] });
+            matchedAny = true;
+          }
         }
       }
       
       if (matchedAny) {
-        for (const sm of items) {
-          html += `<li><span class="sit-badge-turquoise">${sm[1]}</span> ${esc(sm[2].replace(/\.$/, ''))}</li>`;
-        }
+        sitItems.push(...tempItems);
         continue;
       }
       
-      if (/^En lien avec/i.test(l)) {
-        html += `<li class="sit-group-title">${esc(l)}</li>`;
-        continue;
+      if (sitItems.length > 0) {
+        sitItems[sitItems.length - 1].text += ' ' + trimmedLine;
+      } else {
+        flushSituations();
+        i--;
       }
-      
-      // If it's not a situation item or group header, the block has ended
-      html += `</ul></div>`;
-      inSit = false;
-      i--; // re-evaluate this line in main loop
       continue;
     }
 
@@ -679,12 +753,17 @@ function renderChapter(raw,chId){
         for (let j = i + 1, cnt = 0; j < lines.length && cnt < 5; j++) {
           if (!lines[j]) continue; cnt++;
           if (SECTION_RE.test(lines[j])) { hasSibling = true; break; }
+          if (isProseLine(lines[j])) break;
         }
         for (let j = i - 1, cnt = 0; j >= 0 && cnt < 5; j--) {
           if (!lines[j]) continue; cnt++;
           if (SECTION_RE.test(lines[j])) { hasSibling = true; break; }
+          if (isProseLine(lines[j])) break;
         }
-        if (hasSibling) continue;
+        if (hasSibling) {
+          paraBuf.push(l);
+          continue;
+        }
         markBodyStart();
       }
       flushPara();flushBullets();flushNumList();closeSection();
@@ -693,8 +772,25 @@ function renderChapter(raw,chId){
     }
 
     const letM=l.match(LETTER_RE);
-    if(letM&&letM[2].length>2){
-      markBodyStart();
+    if(letM&&letM[2].length>2&&!/^[IVX]\./.test(l)){
+      if(!pastPreamble){
+        let hasSibling = false;
+        for (let j = i + 1, cnt = 0; j < lines.length && cnt < 5; j++) {
+          if (!lines[j]) continue; cnt++;
+          if (LETTER_RE.test(lines[j])) { hasSibling = true; break; }
+          if (isProseLine(lines[j])) break;
+        }
+        for (let j = i - 1, cnt = 0; j >= 0 && cnt < 5; j--) {
+          if (!lines[j]) continue; cnt++;
+          if (LETTER_RE.test(lines[j])) { hasSibling = true; break; }
+          if (isProseLine(lines[j])) break;
+        }
+        if (hasSibling) {
+          paraBuf.push(l);
+          continue;
+        }
+        markBodyStart();
+      }
       flushPara();flushBullets();flushNumList();
       html+=`<h3 class="sub-head"><span class="sub-letter">${esc(letM[1])}</span>${esc(letM[2])}</h3>`;
       continue;
@@ -705,7 +801,7 @@ function renderChapter(raw,chId){
       flushBullets();
       inNumList=true;numBuf.push(numM[2]);continue;
     }
-    if(inNumList&&l.length<100&&!SECTION_RE.test(l)){numBuf.push(l);continue}
+    if(inNumList&&/^[a-zà-öø-ÿœŒæÆÀ-ÖØ-ß]/.test(l)&&l.length<100&&!SECTION_RE.test(l)){numBuf.push(l);continue}
     if(inNumList)flushNumList();
 
     const bulM=l.match(BULLET_RE);
@@ -716,10 +812,10 @@ function renderChapter(raw,chId){
       bulletBuf.push(cleanL);
       continue;
     }
-    // Bullet continuation: if we have bullets and line is not structural, append to last bullet
+    // Bullet continuation: if we have bullets and line is not structural, append to last bullet (must start with lowercase)
     if(bulletBuf.length){
       const isStruct=SECTION_RE.test(l)||LETTER_RE.test(l)||/^Situations?\s+de\s+départ/i.test(l)||/^Encadré\s+/i.test(l)||/^Tableau\s+/i.test(l)||/^Fig\.\s*\d/i.test(l)||RANG_RE.test(l)||/^\d{2,3}\s+/.test(l);
-      if(!isStruct&&l.length<200){
+      if(!isStruct&&/^[a-zà-öø-ÿœŒæÆÀ-ÖØ-ß]/.test(l)&&l.length<200){
         bulletBuf[bulletBuf.length-1]+=' '+l;continue;
       }
       flushBullets();
@@ -736,7 +832,7 @@ function renderChapter(raw,chId){
         continue;
       }
       if(body.length<100&&!/[.;:]$/.test(body)){
-        flushPara();html+=`<div class="def-block"><span class="rang-badge ${rangM[1]==='A'?'rang-a':'rang-b'}">Rang ${rangM[1]}</span><span class="def-text">${esc(body)}</span></div>`;
+        flushPara();html+=`<div class="def-block"><span class="rang-badge ${rangM[1]==='A'?'rang-a':'rang-b'}">Rang ${rangM[1]}</span><span class="def-text">${replaceCitations(esc(body))}</span></div>`;
         continue;
       }
       paraBuf.push(body);flushPara(rangM[1]);markBodyStart();continue;
@@ -747,8 +843,12 @@ function renderChapter(raw,chId){
       markBodyStart();
     }
 
-    if(/^Critères de /i.test(l)){flushPara();html+=`<div class="callout callout-soft"><div class="callout-title">${esc(l)}</div><ul class="reader-list">`;
-      let j=i+1;while(j<lines.length&&NUM_LIST_RE.test(lines[j])){const nm=lines[j].match(NUM_LIST_RE);html+=`<li>${esc(nm[2])}</li>`;j++}html+=`</ul></div>`;i=j-1;continue}
+    if(/^Critères de /i.test(l)){flushPara();
+      let j=i+1;const critItems=[];
+      while(j<lines.length&&NUM_LIST_RE.test(lines[j])){const nm=lines[j].match(NUM_LIST_RE);critItems.push(`<li>${esc(nm[2])}</li>`);j++}
+      if(critItems.length>0){html+=`<div class="callout callout-soft"><div class="callout-title">${esc(l)}</div><ul class="reader-list">${critItems.join('')}</ul></div>`;}
+      else{html+=`<div class="callout callout-soft"><div class="callout-title">${esc(l)}</div></div>`;}
+      i=j-1;continue}
 
     if(/^(\d{1,3})$/.test(l))continue;
     if(/^diagnostic et thérapeutique/i.test(l))continue;
@@ -765,7 +865,7 @@ function renderChapter(raw,chId){
 
     paraBuf.push(l);
   }
-  flushPara();flushBullets();flushNumList();if(inCallout)flushCallout();if(inSit)html+=`</ul></div>`;closeSection();
+  flushPara();flushBullets();flushNumList();if(inCallout)flushCallout();flushSituations();closeSection();
   // R3 — Supprimer les sections sans contenu (en-tete de plan sans texte correspondant dans la BDD)
   html = html.replace(/<section class="manual-section">([\s\S]*?)<\/section>/g, (match, inner) => {
     const bodyIndex = inner.indexOf('<div class="section-body">');
@@ -785,7 +885,13 @@ function renderChapter(raw,chId){
     return match;
   });
 
-  // Now build the outline from the kept sections
+  // Now build the outline from the kept sections (run after R3 empty cleaning)
+  // Build a Set of Roman numeral prefixes from first35Headings for prefix-matching
+  const first35Nums = new Set();
+  for (const key of first35Headings) {
+    const bar = key.indexOf('|');
+    if (bar > 0) first35Nums.add(key.substring(0, bar));
+  }
   const keptSections = [];
   const secRegex = /<section class="manual-section"><header class="section-head"><span class="section-num">(.*?)<\/span><span class="section-title">(.*?)<\/span>/g;
   let match;
@@ -793,7 +899,8 @@ function renderChapter(raw,chId){
     const num = match[1];
     const title = match[2];
     const key = num + '|' + title;
-    if (first35Headings.has(key)) {
+    // Match by exact key OR by Roman numeral prefix (handles truncated titles)
+    if (first35Headings.has(key) || first35Nums.has(num)) {
       keptSections.push({ num, title });
     }
   }
