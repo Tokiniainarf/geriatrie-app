@@ -1,4 +1,4 @@
-const CACHE_NAME = 'geriatrie-v152';
+const CACHE_NAME = 'geriatrie-v153';
 const CORE = [
   './',
   './index.html',

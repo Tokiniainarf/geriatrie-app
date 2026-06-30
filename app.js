@@ -1956,7 +1956,33 @@ function renderItems(){
     el.style.animationDelay=(i*0.03)+'s';
     el.onclick=()=>showCh(ch.id);
     const rc=itemRangClass(item);
-    el.innerHTML='<div class="item-title"><span class="rang-badge '+rc+'">'+esc(item)+'</span><span class="item-ch-title">'+esc(ch.t)+'</span></div><div class="item-desc">Chapitre '+ch.id.replace('ch','')+' — Cliquez pour lire</div>';
+    
+    let matched = null;
+    if (typeof ITEMS_EVC !== 'undefined') {
+      const seekId = item.toLowerCase().replace(/\s+/g, '-');
+      matched = ITEMS_EVC.find(x => x.id === seekId || x.id.startsWith(seekId + '-'));
+    }
+
+    let objectivesHtml = '';
+    if (matched && matched.objectifs && matched.objectifs.length) {
+      objectivesHtml = `
+        <div class="item-objectives" style="margin-top: 6px; font-size: 0.82rem; color: var(--text-muted); line-height: 1.45;">
+          <ul style="margin: 0; padding-left: 20px; list-style-type: disc;">
+            ${matched.objectifs.map(o => `<li style="margin-bottom: 3px;">${esc(o)}</li>`).join('')}
+          </ul>
+        </div>`;
+    }
+
+    const itemTitle = matched ? matched.titre : ch.t;
+    el.innerHTML=`
+      <div class="item-title">
+        <span class="rang-badge ${rc || 'rang-a'}">${esc(item)}</span>
+        <span class="item-ch-title">${esc(itemTitle)}</span>
+      </div>
+      ${objectivesHtml}
+      <div class="item-desc" style="margin-top: 6px; font-size: 0.78rem; text-align: right; color: var(--text2);">
+        Chapitre ${ch.id.replace('ch','')} : ${esc(ch.t)} — Lire le cours ➔
+      </div>`;
     list.appendChild(el);
   });
 }
