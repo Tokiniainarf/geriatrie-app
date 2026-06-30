@@ -318,12 +318,12 @@ function renderChapterContent(){
   const cc=document.getElementById('chContent');if(!cc)return;
   const chunks=APP_DATA.content[S.ch]||[];
   if(!chunks.length){cc.innerHTML='<div class="empty"><div class="empty-icon">📖</div><div class="empty-text">Contenu indisponible</div><div class="empty-hint">Ce chapitre sera bientôt disponible</div></div>';return}
-  cc.innerHTML=renderChapter(chunks.map(c=>c[1]).join('\n'),S.ch);
+  cc.innerHTML=renderChapter(chunks.map(c=>c[1]).join('\n▼\n'),S.ch);
   applyConceptLinks();
 }
 
 /* ── MANUEL NUMÉRIQUE (contenu OCR → structure éditoriale) ── */
-const RUN_HDR_RE=/^(Comprendre le vieillissement|Connaissances|Entraînement|Gériatrie|▼)$/i;
+const RUN_HDR_RE=/^(Comprendre le vieillissement|Connaissances|Entraînement|Gériatrie)$/i;
 const SKIP_LINE_RE=/^(©\s*\d{4}|Elsevier|Tous droits réservés|This page intentionally left blank|Index$|En lien avec la définition)/i;
 const SITUATION_NUMBERS = new Set([
   103, 106, 112, 114, 116, 117, 119, 121, 122, 123, 124,
@@ -667,6 +667,7 @@ function renderChapter(raw,chId){
 
   for(let i=0;i<lines.length;i++){
     let l=lines[i];
+    if(l === '▼'){flushPara();flushBullets();flushNumList();flushCallout();flushSituations();continue}
     if(!l){flushBullets();flushNumList();if(inCallout)flushCallout();continue}
 
     if(/^Situations?\s+de\s+départ/i.test(l)){
@@ -682,7 +683,8 @@ function renderChapter(raw,chId){
         continue;
       }
       const isStructural = SECTION_RE.test(trimmedLine) || (LETTER_RE.test(trimmedLine) && !/^[IVX]\./.test(trimmedLine));
-      if (isStructural) {
+      const isSyllabus = SYLLABUS_RE.test(trimmedLine) || /^ITEM\s/i.test(trimmedLine) || SYLLABUS_ROW_RE.test(trimmedLine);
+      if (isStructural || isSyllabus) {
         flushSituations();
         i--;
         continue;
@@ -761,7 +763,7 @@ function renderChapter(raw,chId){
           if (isProseLine(lines[j])) break;
         }
         if (hasSibling) {
-          paraBuf.push(l);
+          html+=`<div class="toc-hidden" style="display:none">${replaceCitations(esc(l))}</div>`;
           continue;
         }
         markBodyStart();
@@ -786,7 +788,7 @@ function renderChapter(raw,chId){
           if (isProseLine(lines[j])) break;
         }
         if (hasSibling) {
-          paraBuf.push(l);
+          html+=`<div class="toc-hidden" style="display:none">${replaceCitations(esc(l))}</div>`;
           continue;
         }
         markBodyStart();
@@ -843,7 +845,7 @@ function renderChapter(raw,chId){
       markBodyStart();
     }
 
-    if(/^Critères de /i.test(l)){flushPara();
+    if(/^Critères de /i.test(l) && l.length < 60){flushPara();
       let j=i+1;const critItems=[];
       while(j<lines.length&&NUM_LIST_RE.test(lines[j])){const nm=lines[j].match(NUM_LIST_RE);critItems.push(`<li>${esc(nm[2])}</li>`);j++}
       if(critItems.length>0){html+=`<div class="callout callout-soft"><div class="callout-title">${esc(l)}</div><ul class="reader-list">${critItems.join('')}</ul></div>`;}

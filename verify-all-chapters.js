@@ -25,7 +25,7 @@ for (const ch of chapters) {
     issues++;
     continue;
   }
-  const raw = content.map(c => c[1]).join('\n');
+  const raw = content.map(c => c[1]).join('\n▼\n');
   sb.raw = raw;
   vm.runInNewContext('out = renderChapter(raw, "' + id + '");', sb);
   const html = sb.out;

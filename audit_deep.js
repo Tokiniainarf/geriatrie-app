@@ -55,7 +55,7 @@ for (const ch of chapters) {
   const chunks = content[id];
   if (!chunks || !chunks.length) continue;
   
-  const raw = chunks.map(c => c[1]).join('\n');
+  const raw = chunks.map(c => c[1]).join('\n▼\n');
   const html = vm.runInContext(`renderChapter(${JSON.stringify(raw)}, ${JSON.stringify(id)})`, context);
   const issues = [];
 
