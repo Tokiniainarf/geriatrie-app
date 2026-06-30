@@ -171,8 +171,8 @@ const BrainFeed = (() => {
     const cleanAnswer = (ans) => {
       let a = (ans || '').trim();
       a = a.replace(/^[•\-–*]\s*/, '');
-      a = a.replace(/^\d{1,2}\s*[.)-]\s*/, '');
-      a = a.split(/[.·]/)[0].trim();
+      a = a.replace(/^\d{1,2}(?:\.\s+|\s*[)-]\s*)/, '');
+      a = a.split(/\.(?:\s+|$)/)[0].trim();
       if (a.length > 90) {
         const idx = a.lastIndexOf(' ', 87);
         a = (idx > 10 ? a.substring(0, idx) : a.substring(0, 87)) + '...';
@@ -467,7 +467,8 @@ const BrainFeed = (() => {
   function interleaveDeck(pools, targetSize = 90) {
     const counts = {};
     Object.keys(TYPE_RATIO).forEach(k => {
-      counts[k] = Math.max(1, Math.round(targetSize * TYPE_RATIO[k]));
+      const r = TYPE_RATIO[k];
+      counts[k] = r > 0 ? Math.max(1, Math.round(targetSize * r)) : 0;
     });
     const buckets = {
       memo_jour: pickN(pools.memoJour, counts.memo_jour),
