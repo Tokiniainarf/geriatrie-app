@@ -316,6 +316,7 @@ const BrainFeed = (() => {
     if (typeof CAS_EVC_2010_2014 !== 'undefined') annales.push(...CAS_EVC_2010_2014);
 
     const casChoc = [];
+    const seenCases = new Set();
     annales.forEach(a => {
       let diagnosis = '';
       if (a.questions && a.questions.length) {
@@ -324,6 +325,18 @@ const BrainFeed = (() => {
         diagnosis = a.correction || a.reponse || '';
       }
       if (!diagnosis) return;
+
+      const text = a.situation || a.cas || a.case || a.title || '';
+      const nameMatch = text.match(/M(me|\.)\s+([A-Z][a-z]+)/);
+      const nameKey = nameMatch ? nameMatch[2] : '';
+      const ageMatch = text.match(/(\d+)\s*ans/);
+      const ageKey = ageMatch ? ageMatch[1] : '';
+      
+      const dupKey = (a.chapter || '') + '_' + nameKey + '_' + ageKey;
+      if (nameKey && ageKey) {
+        if (seenCases.has(dupKey)) return;
+        seenCases.add(dupKey);
+      }
 
       casChoc.push({
         type: 'cas_choc', id: 'cc-' + a.id,
