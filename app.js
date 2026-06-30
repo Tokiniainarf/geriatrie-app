@@ -746,7 +746,18 @@ function renderChapter(raw,chId){
     }
 
     const tab=l.match(/^Tableau\s+([\d.]+)\.\s*(.*)/i);
-    if(tab){flushPara();flushBullets();html+=`<div class="table-lead"><span class="table-badge">Tableau ${tab[1]}</span><span>${esc(tab[2]||'')}</span></div>`;continue}
+    if(tab){
+      flushPara();flushBullets();flushNumList();
+      const tabId=tab[1];
+      html+=`<div class="table-lead"><span class="table-badge">Tableau ${tab[1]}</span><span>${esc(tab[2]||'')}</span></div>`;
+      if(typeof FIGURES!=='undefined'){
+        const src=FIGURES[tabId]?.[0];
+        if(src){
+          html+=`<figure class="fig-block table-fig"><img src="${src}" alt="Tableau ${tabId}" loading="lazy"></figure>`;
+        }
+      }
+      continue;
+    }
 
     const secM=l.match(SECTION_RE);
     if(secM){
