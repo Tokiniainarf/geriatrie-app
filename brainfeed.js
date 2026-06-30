@@ -55,16 +55,16 @@ const BrainFeed = (() => {
   ];
 
   const CHIFFRES_CLES = [
-    { value: 30, unit: '%', line: 'des personnes > 65 ans chutent chaque année', source: 'HAS' },
-    { value: 15, unit: '%', line: 'des > 65 ans présentent une dépression non traitée', source: 'GDS' },
-    { value: 5, unit: ' critères', line: 'de Fried pour le syndrome de fragilité (≥ 3 = fragile)', source: 'Fragilité' },
-    { value: 0.8, unit: ' m/s', line: 'seuil de vitesse de marche pour fragilité (< 4,8 s / 4 m)', source: 'Fried' },
-    { value: 24, unit: '/30', line: 'seuil MMS « normal » (corriger âge/scolarité)', source: 'Cognition' },
-    { value: 5, unit: '/15', line: 'seuil GDS-15 suspect de dépression', source: 'Yesavage' },
-    { value: 12, unit: '/28', line: 'Tinetti < 19 = risque élevé de chute', source: 'POMA' },
-    { value: 17, unit: '/30', line: 'MNA < 17 = dénutrition avérée', source: 'Nutrition' },
-    { value: 5, unit: ' méd.', line: 'définition polymédication (≥ 5 molécules/j)', source: 'Iatrogénie' },
-    { value: 85, unit: ' ans', line: 'espérance de vie des femmes en France (≈ 2020)', source: 'Démographie' }
+    { value: 30, unit: '%', line: '... % des personnes > 65 ans chutent chaque année', source: 'HAS' },
+    { value: 15, unit: '%', line: '... % des > 65 ans présentent une dépression non traitée', source: 'GDS' },
+    { value: 5, unit: ' critères', line: 'Nombre de critères de Fried pour le syndrome de fragilité (≥ 3 = fragile) : ...', source: 'Fragilité' },
+    { value: 0.8, unit: ' m/s', line: 'Seuil de vitesse de marche pour la fragilité (< 4,8 s / 4 m) : ... m/s', source: 'Fried' },
+    { value: 24, unit: '/30', line: 'Seuil MMS considéré comme « normal » (à corriger selon âge/scolarité) : ... /30', source: 'Cognition' },
+    { value: 5, unit: '/15', line: 'Seuil GDS-15 suspect de dépression : ... /15', source: 'Yesavage' },
+    { value: 19, unit: '/28', line: 'Seuil du score Tinetti indiquant un risque élevé de chute (POMA) : < ... /28', source: 'POMA' },
+    { value: 17, unit: '/30', line: 'Score MNA indiquant une dénutrition avérée : < ... /30', source: 'Nutrition' },
+    { value: 5, unit: ' méd.', line: 'Seuil du nombre de médicaments définissant la polymédication : ≥ ... molécules/j', source: 'Iatrogénie' },
+    { value: 85, unit: ' ans', line: 'Espérance de vie moyenne des femmes en France (≈ 2020) : ... ans', source: 'Démographie' }
   ];
 
   const PIEGES_EXAM = [
@@ -172,7 +172,11 @@ const BrainFeed = (() => {
       let a = (ans || '').trim();
       a = a.replace(/^[•\-–*]\s*/, '');
       a = a.replace(/^\d{1,2}\s*[.)-]\s*/, '');
-      a = a.split(/[.·]/)[0].trim().slice(0, 90);
+      a = a.split(/[.·]/)[0].trim();
+      if (a.length > 90) {
+        const idx = a.lastIndexOf(' ', 87);
+        a = (idx > 10 ? a.substring(0, idx) : a.substring(0, 87)) + '...';
+      }
       return a;
     };
 
@@ -251,7 +255,12 @@ const BrainFeed = (() => {
     let candidates = allFlash.filter(f => f.id !== fc.id && f.answer);
     if (fc.chapter) {
       const sameChap = candidates.filter(f => f.chapter === fc.chapter);
-      if (sameChap.length >= 4) candidates = sameChap;
+      if (sameChap.length >= 4) {
+        candidates = sameChap;
+      } else if (fc.tags && fc.tags.length) {
+        const sameTags = candidates.filter(f => f.tags && f.tags.some(t => fc.tags.includes(t)));
+        if (sameTags.length >= 4) candidates = sameTags;
+      }
     }
 
     const wrong = shuffle(candidates)
@@ -903,6 +912,9 @@ const BrainFeed = (() => {
                 <span class="bf-trap-x">✕</span>
                 <p>${esc(card.trap)}</p>
               </div>
+              <p class="bf-trap-prompt" style="text-align: center; margin-top: 24px; font-size: 0.95rem; color: rgba(255,255,255,0.7); font-style: italic; font-weight: 500;">
+                👉 Pourquoi est-ce une erreur et comment la corriger ?
+              </p>
             </main>
             <footer class="bf-card-ftr">
               <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:document.getElementById('bfScroll-${slideIdx}').clientWidth,behavior:'smooth'})">Révéler la réponse ➔</button>
