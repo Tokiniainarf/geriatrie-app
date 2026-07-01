@@ -10,6 +10,11 @@
     concept: { dash: [10, 6], label: 'Concept partagé', line: 'dashed' },
     samePart: { dash: [2, 5], label: 'Même partie', line: 'dotted' }
   };
+  const CH_COLORS = typeof window !== 'undefined' && window.CH_COLORS ? window.CH_COLORS : {
+    ch1:'#0891B2',ch2:'#059669',ch3:'#0D9488',ch4:'#DC2626',ch5:'#0284C7',ch6:'#047857',ch7:'#0369A1',ch8:'#BE123C',
+    ch9:'#0E7490',ch10:'#64748B',ch11:'#B45309',ch12:'#EA580C',ch13:'#0369A1',ch14:'#15803D',ch15:'#0F766E',
+    ch16:'#164E63',ch17:'#475569',ch18:'#059669',ch19:'#0891B2',ch20:'#2563EB'
+  };
   const TYPE_PRIORITY = { concept: 3, sameItem: 2, samePart: 1 };
 
   const nodeById = new Map();
