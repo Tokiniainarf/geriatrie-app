@@ -1,4 +1,4 @@
-const CACHE_NAME = 'geriatrie-v153';
+const CACHE_NAME = 'geriatrie-v154';
 const CORE = [
   './',
   './index.html',
@@ -147,7 +147,6 @@ const CORE = [
   "./sujets-evc-2004-2006.js",
   "./sujets-evc-supp.js",
   "./mega-flashcards-4.js",
-  "./sujets-evc-2001-2003.js",
   "./mega-flashcards-5.js",
   "./mega-flashcards-6.js",
   "./mega-flashcards-7.js",
@@ -156,12 +155,10 @@ const CORE = [
   "./mega-flashcards-10.js",
   "./sujets-evc-extra.js",
   "./guides-geriatrie-palliative-avancee.js",
-  "./sujets-evc-1998-2000.js",
   "./sujets-evc-classiques.js",
   "./guides-geriatrie-nutrition-avancee.js",
   "./sujets-evc-fin.js",
   "./guides-geriatrie-cardio-avancee.js",
-  "./sujets-evc-1995-1997.js",
   "./sujets-evc-items.js",
   './erreurs-journal.js',
   './manifest.json',
@@ -170,7 +167,12 @@ const CORE = [
 ];
 
 self.addEventListener('install', e => {
-  self.skipWaiting();
+  e.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(c => Promise.all(CORE.map(u => c.add(new Request(u, { cache: 'no-store' })).catch(() => {}))))
+      .then(() => self.skipWaiting())
+      .catch(() => self.skipWaiting())
+  );
 });
 
 self.addEventListener('activate', e => {

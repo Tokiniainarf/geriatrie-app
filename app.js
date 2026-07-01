@@ -177,7 +177,7 @@ function saveNotes(chId){
   if(!ta)return;
   localStorage.setItem('grd_notes_'+chId,ta.value);
   localStorage.setItem('grd_notes_'+chId+'_ts',Date.now().toString());
-  showToast('📝 Notes sauvegardées');
+  toast('📝 Notes sauvegardées');
 }
 function closeNotes(){
   const modal=document.getElementById('notesModal');

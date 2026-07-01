@@ -3,7 +3,7 @@
 Application web progressive (PWA) permettant la lecture **hors-ligne** du manuel de référence *Gériatrie, 5e édition* (CNEG – Pr Jacques Boddaert, Elsevier Masson 2021).
 
 - **20 chapitres**
-- **344 pages** de contenu structuré
+- **388 pages** (pp. 29-388, contenu des 20 chapitres)
 - **33 figures** sélectionnées
 - Conçu pour la préparation ECN (ITEMs intégrés)
 
@@ -89,12 +89,3 @@ Coordination : Pr Jacques Boddaert
 ---
 
 Bonnes révisions !
-```
-
-This is a solid French README.
-
-Now, let's also improve the on-boarding text slightly if needed.
-
-Finally, to make the app even nicer, let's add a small improvement to the stats in the home and perhaps update manifest description.
-
-Update the manifest to be more accurate with 344 pages.

@@ -40,7 +40,7 @@ const BrainFeed = (() => {
     flash: 0.04,
     synthesis: 0.02,
     case: 0.02,
-    reco: 0.00
+    reco: 0.04
   };
 
   const CITATIONS = [

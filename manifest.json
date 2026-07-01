@@ -1,7 +1,7 @@
 {
   "name": "Gériatrie — Manuel Interactif",
   "short_name": "Gériatrie",
-  "description": "Manuel de gériatrie interactif — 20 chapitres, 57 flashcards, fiches synthèse, liens inter-concepts.",
+  "description": "Manuel de gériatrie interactif — 20 chapitres (CNEG 5e éd.), fiches synthèse, flashcards, feed de révision et entraînement EVC.",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#faf8f5",
