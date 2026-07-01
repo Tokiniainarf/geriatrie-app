@@ -352,9 +352,9 @@ const BrainFeed = (() => {
       if (!diagnosis) return;
 
       const text = a.situation || a.cas || a.case || a.title || '';
-      const nameMatch = text.match(/M(me|\.)\s+([A-Z][a-z]+)/);
-      const nameKey = nameMatch ? nameMatch[2] : '';
-      const ageMatch = text.match(/(\d+)\s*ans/);
+      const nameMatch = text.match(/M(?:me|\.?Monsieur|\.)\s+([A-ZÀ-ÖØ-Þ][a-zà-öø-ÿ'-]+)/);
+      const nameKey = nameMatch ? nameMatch[1] : '';
+      const ageMatch = text.match(/(\d{2,3})\s*ans/);
       const ageKey = ageMatch ? ageMatch[1] : '';
       
       const dupKey = (a.chapter || '') + '_' + nameKey + '_' + ageKey;

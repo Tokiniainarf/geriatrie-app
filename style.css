@@ -414,16 +414,17 @@ input { font-family: inherit; font-size: inherit; }
   border: none;
   border-radius: 0;
   padding: 0;
-  margin: 0 0 1.2em;
+  margin: 0 0 1.5em;
   box-shadow: none;
 }
 .ch-content .para-card p {
   margin: 0;
   font-size: 1em;
   line-height: inherit;
-  color: var(--text2);
+  color: var(--text);
   text-align: left;
   hyphens: auto;
+  letter-spacing: -0.01em;
 }
 .manual-section { margin: 40px 0 12px; }
 .section-head {
