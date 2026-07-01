@@ -1,0 +1,683 @@
+ch1: 15 sections
+  ERROR 0: title is not string (number)
+  WARN 0: header leak in body
+  ERROR 1: title is not string (number)
+  WARN 1: header leak in body
+  ERROR 2: title is not string (number)
+  WARN 2: header leak in body
+  ERROR 3: title is not string (number)
+  WARN 3: header leak in body
+  ERROR 4: title is not string (number)
+  WARN 4: header leak in body
+  ERROR 5: title is not string (number)
+  WARN 5: header leak in body
+  ERROR 6: title is not string (number)
+  WARN 6: header leak in body
+  ERROR 7: title is not string (number)
+  WARN 7: header leak in body
+  ERROR 8: title is not string (number)
+  WARN 8: header leak in body
+  ERROR 9: title is not string (number)
+  WARN 9: header leak in body
+  ERROR 10: title is not string (number)
+  WARN 10: header leak in body
+  ERROR 11: title is not string (number)
+  WARN 11: header leak in body
+  ERROR 12: title is not string (number)
+  WARN 12: header leak in body
+  ERROR 13: title is not string (number)
+  WARN 13: body too short (34 chars)
+  ERROR 14: title is not string (number)
+  WARN 14: header leak in body
+ch2: 14 sections
+  ERROR 0: title is not string (number)
+  WARN 0: header leak in body
+  ERROR 1: title is not string (number)
+  WARN 1: header leak in body
+  ERROR 2: title is not string (number)
+  WARN 2: header leak in body
+  ERROR 3: title is not string (number)
+  WARN 3: header leak in body
+  ERROR 4: title is not string (number)
+  WARN 4: header leak in body
+  ERROR 5: title is not string (number)
+  WARN 5: header leak in body
+  ERROR 6: title is not string (number)
+  WARN 6: header leak in body
+  ERROR 7: title is not string (number)
+  WARN 7: header leak in body
+  ERROR 8: title is not string (number)
+  WARN 8: header leak in body
+  ERROR 9: title is not string (number)
+  WARN 9: header leak in body
+  ERROR 10: title is not string (number)
+  WARN 10: header leak in body
+  ERROR 11: title is not string (number)
+  WARN 11: header leak in body
+  ERROR 12: title is not string (number)
+  WARN 12: header leak in body
+  ERROR 13: title is not string (number)
+  WARN 13: header leak in body
+ch3: 15 sections
+  ERROR 0: title is not string (number)
+  WARN 0: header leak in body
+  ERROR 1: title is not string (number)
+  WARN 1: header leak in body
+  ERROR 2: title is not string (number)
+  WARN 2: header leak in body
+  ERROR 3: title is not string (number)
+  WARN 3: header leak in body
+  ERROR 4: title is not string (number)
+  WARN 4: header leak in body
+  ERROR 5: title is not string (number)
+  WARN 5: header leak in body
+  ERROR 6: title is not string (number)
+  WARN 6: header leak in body
+  ERROR 7: title is not string (number)
+  WARN 7: header leak in body
+  ERROR 8: title is not string (number)
+  WARN 8: header leak in body
+  ERROR 9: title is not string (number)
+  WARN 9: header leak in body
+  ERROR 10: title is not string (number)
+  WARN 10: header leak in body
+  ERROR 11: title is not string (number)
+  WARN 11: header leak in body
+  ERROR 12: title is not string (number)
+  WARN 12: header leak in body
+  ERROR 13: title is not string (number)
+  WARN 13: header leak in body
+  ERROR 14: title is not string (number)
+  WARN 14: header leak in body
+ch4: 13 sections
+  ERROR 0: title is not string (number)
+  WARN 0: header leak in body
+  ERROR 1: title is not string (number)
+  WARN 1: header leak in body
+  ERROR 2: title is not string (number)
+  WARN 2: header leak in body
+  ERROR 3: title is not string (number)
+  WARN 3: header leak in body
+  ERROR 4: title is not string (number)
+  WARN 4: header leak in body
+  ERROR 5: title is not string (number)
+  WARN 5: header leak in body
+  ERROR 6: title is not string (number)
+  WARN 6: header leak in body
+  ERROR 7: title is not string (number)
+  WARN 7: header leak in body
+  ERROR 8: title is not string (number)
+  WARN 8: header leak in body
+  ERROR 9: title is not string (number)
+  WARN 9: header leak in body
+  ERROR 10: title is not string (number)
+  WARN 10: header leak in body
+  ERROR 11: title is not string (number)
+  WARN 11: body too short (34 chars)
+  ERROR 12: title is not string (number)
+  WARN 12: header leak in body
+ch5: 14 sections
+  ERROR 0: title is not string (number)
+  WARN 0: header leak in body
+  ERROR 1: title is not string (number)
+  WARN 1: header leak in body
+  ERROR 2: title is not string (number)
+  WARN 2: header leak in body
+  ERROR 3: title is not string (number)
+  WARN 3: header leak in body
+  ERROR 4: title is not string (number)
+  WARN 4: header leak in body
+  ERROR 5: title is not string (number)
+  WARN 5: header leak in body
+  ERROR 6: title is not string (number)
+  WARN 6: header leak in body
+  ERROR 7: title is not string (number)
+  WARN 7: header leak in body
+  ERROR 8: title is not string (number)
+  WARN 8: header leak in body
+  ERROR 9: title is not string (number)
+  WARN 9: header leak in body
+  ERROR 10: title is not string (number)
+  WARN 10: header leak in body
+  ERROR 11: title is not string (number)
+  WARN 11: header leak in body
+  ERROR 12: title is not string (number)
+  WARN 12: body too short (34 chars)
+  ERROR 13: title is not string (number)
+  WARN 13: header leak in body
+ch6: 20 sections
+  ERROR 0: title is not string (number)
+  WARN 0: header leak in body
+  ERROR 1: title is not string (number)
+  WARN 1: header leak in body
+  ERROR 2: title is not string (number)
+  WARN 2: header leak in body
+  ERROR 3: title is not string (number)
+  WARN 3: header leak in body
+  ERROR 4: title is not string (number)
+  WARN 4: header leak in body
+  ERROR 5: title is not string (number)
+  WARN 5: header leak in body
+  ERROR 6: title is not string (number)
+  WARN 6: header leak in body
+  ERROR 7: title is not string (number)
+  WARN 7: header leak in body
+  ERROR 8: title is not string (number)
+  WARN 8: header leak in body
+  ERROR 9: title is not string (number)
+  WARN 9: header leak in body
+  ERROR 10: title is not string (number)
+  WARN 10: header leak in body
+  ERROR 11: title is not string (number)
+  WARN 11: header leak in body
+  ERROR 12: title is not string (number)
+  WARN 12: header leak in body
+  ERROR 13: title is not string (number)
+  WARN 13: header leak in body
+  ERROR 14: title is not string (number)
+  WARN 14: header leak in body
+  ERROR 15: title is not string (number)
+  WARN 15: header leak in body
+  ERROR 16: title is not string (number)
+  WARN 16: header leak in body
+  ERROR 17: title is not string (number)
+  WARN 17: header leak in body
+  ERROR 18: title is not string (number)
+  WARN 18: header leak in body
+  ERROR 19: title is not string (number)
+  WARN 19: header leak in body
+ch7: 22 sections
+  ERROR 0: title is not string (number)
+  WARN 0: header leak in body
+  ERROR 1: title is not string (number)
+  WARN 1: header leak in body
+  ERROR 2: title is not string (number)
+  WARN 2: header leak in body
+  ERROR 3: title is not string (number)
+  WARN 3: header leak in body
+  ERROR 4: title is not string (number)
+  WARN 4: header leak in body
+  ERROR 5: title is not string (number)
+  WARN 5: header leak in body
+  ERROR 6: title is not string (number)
+  WARN 6: header leak in body
+  ERROR 7: title is not string (number)
+  WARN 7: header leak in body
+  ERROR 8: title is not string (number)
+  WARN 8: header leak in body
+  ERROR 9: title is not string (number)
+  WARN 9: header leak in body
+  ERROR 10: title is not string (number)
+  WARN 10: header leak in body
+  ERROR 11: title is not string (number)
+  WARN 11: header leak in body
+  ERROR 12: title is not string (number)
+  WARN 12: header leak in body
+  ERROR 13: title is not string (number)
+  WARN 13: header leak in body
+  ERROR 14: title is not string (number)
+  WARN 14: header leak in body
+  ERROR 15: title is not string (number)
+  WARN 15: header leak in body
+  ERROR 16: title is not string (number)
+  WARN 16: header leak in body
+  ERROR 17: title is not string (number)
+  WARN 17: header leak in body
+  ERROR 18: title is not string (number)
+  WARN 18: header leak in body
+  ERROR 19: title is not string (number)
+  WARN 19: header leak in body
+  ERROR 20: title is not string (number)
+  WARN 20: header leak in body
+  ERROR 21: title is not string (number)
+  WARN 21: header leak in body
+ch8: 12 sections
+  ERROR 0: title is not string (number)
+  WARN 0: header leak in body
+  ERROR 1: title is not string (number)
+  WARN 1: header leak in body
+  ERROR 2: title is not string (number)
+  WARN 2: header leak in body
+  ERROR 3: title is not string (number)
+  WARN 3: header leak in body
+  ERROR 4: title is not string (number)
+  WARN 4: header leak in body
+  ERROR 5: title is not string (number)
+  WARN 5: header leak in body
+  ERROR 6: title is not string (number)
+  WARN 6: header leak in body
+  ERROR 7: title is not string (number)
+  WARN 7: header leak in body
+  ERROR 8: title is not string (number)
+  WARN 8: header leak in body
+  ERROR 9: title is not string (number)
+  WARN 9: header leak in body
+  ERROR 10: title is not string (number)
+  WARN 10: header leak in body
+  ERROR 11: title is not string (number)
+  WARN 11: header leak in body
+ch9: 23 sections
+  ERROR 0: title is not string (number)
+  WARN 0: header leak in body
+  ERROR 1: title is not string (number)
+  WARN 1: header leak in body
+  ERROR 2: title is not string (number)
+  WARN 2: header leak in body
+  ERROR 3: title is not string (number)
+  WARN 3: header leak in body
+  ERROR 4: title is not string (number)
+  WARN 4: header leak in body
+  ERROR 5: title is not string (number)
+  WARN 5: header leak in body
+  ERROR 6: title is not string (number)
+  WARN 6: header leak in body
+  ERROR 7: title is not string (number)
+  WARN 7: header leak in body
+  ERROR 8: title is not string (number)
+  WARN 8: header leak in body
+  ERROR 9: title is not string (number)
+  WARN 9: header leak in body
+  ERROR 10: title is not string (number)
+  WARN 10: header leak in body
+  ERROR 11: title is not string (number)
+  WARN 11: header leak in body
+  ERROR 12: title is not string (number)
+  WARN 12: header leak in body
+  ERROR 13: title is not string (number)
+  WARN 13: header leak in body
+  ERROR 14: title is not string (number)
+  WARN 14: header leak in body
+  ERROR 15: title is not string (number)
+  WARN 15: header leak in body
+  ERROR 16: title is not string (number)
+  WARN 16: header leak in body
+  ERROR 17: title is not string (number)
+  WARN 17: header leak in body
+  ERROR 18: title is not string (number)
+  WARN 18: header leak in body
+  ERROR 19: title is not string (number)
+  WARN 19: header leak in body
+  ERROR 20: title is not string (number)
+  WARN 20: header leak in body
+  ERROR 21: title is not string (number)
+  WARN 21: body too short (34 chars)
+  ERROR 22: title is not string (number)
+  WARN 22: header leak in body
+ch10: 15 sections
+  ERROR 0: title is not string (number)
+  WARN 0: header leak in body
+  ERROR 1: title is not string (number)
+  WARN 1: header leak in body
+  ERROR 2: title is not string (number)
+  WARN 2: header leak in body
+  ERROR 3: title is not string (number)
+  WARN 3: header leak in body
+  ERROR 4: title is not string (number)
+  WARN 4: header leak in body
+  ERROR 5: title is not string (number)
+  WARN 5: header leak in body
+  ERROR 6: title is not string (number)
+  WARN 6: header leak in body
+  ERROR 7: title is not string (number)
+  WARN 7: header leak in body
+  ERROR 8: title is not string (number)
+  WARN 8: header leak in body
+  ERROR 9: title is not string (number)
+  WARN 9: header leak in body
+  ERROR 10: title is not string (number)
+  WARN 10: header leak in body
+  ERROR 11: title is not string (number)
+  WARN 11: body too short (34 chars)
+  ERROR 12: title is not string (number)
+  WARN 12: header leak in body
+  ERROR 13: title is not string (number)
+  WARN 13: header leak in body
+  ERROR 14: title is not string (number)
+  WARN 14: header leak in body
+ch11: 14 sections
+  ERROR 0: title is not string (number)
+  WARN 0: header leak in body
+  ERROR 1: title is not string (number)
+  WARN 1: header leak in body
+  ERROR 2: title is not string (number)
+  WARN 2: header leak in body
+  ERROR 3: title is not string (number)
+  WARN 3: header leak in body
+  ERROR 4: title is not string (number)
+  WARN 4: header leak in body
+  ERROR 5: title is not string (number)
+  WARN 5: header leak in body
+  ERROR 6: title is not string (number)
+  WARN 6: header leak in body
+  ERROR 7: title is not string (number)
+  WARN 7: header leak in body
+  ERROR 8: title is not string (number)
+  WARN 8: header leak in body
+  ERROR 9: title is not string (number)
+  WARN 9: header leak in body
+  ERROR 10: title is not string (number)
+  WARN 10: header leak in body
+  ERROR 11: title is not string (number)
+  WARN 11: header leak in body
+  ERROR 12: title is not string (number)
+  WARN 12: header leak in body
+  ERROR 13: title is not string (number)
+  WARN 13: header leak in body
+ch12: 19 sections
+  ERROR 0: title is not string (number)
+  WARN 0: header leak in body
+  ERROR 1: title is not string (number)
+  WARN 1: header leak in body
+  ERROR 2: title is not string (number)
+  WARN 2: header leak in body
+  ERROR 3: title is not string (number)
+  WARN 3: header leak in body
+  ERROR 4: title is not string (number)
+  WARN 4: header leak in body
+  ERROR 5: title is not string (number)
+  WARN 5: header leak in body
+  ERROR 6: title is not string (number)
+  WARN 6: header leak in body
+  ERROR 7: title is not string (number)
+  WARN 7: header leak in body
+  ERROR 8: title is not string (number)
+  WARN 8: header leak in body
+  ERROR 9: title is not string (number)
+  WARN 9: header leak in body
+  ERROR 10: title is not string (number)
+  WARN 10: header leak in body
+  ERROR 11: title is not string (number)
+  WARN 11: header leak in body
+  ERROR 12: title is not string (number)
+  WARN 12: header leak in body
+  ERROR 13: title is not string (number)
+  WARN 13: header leak in body
+  ERROR 14: title is not string (number)
+  WARN 14: header leak in body
+  ERROR 15: title is not string (number)
+  WARN 15: body too short (34 chars)
+  ERROR 16: title is not string (number)
+  WARN 16: header leak in body
+  ERROR 17: title is not string (number)
+  WARN 17: header leak in body
+  ERROR 18: title is not string (number)
+  WARN 18: header leak in body
+ch13: 20 sections
+  ERROR 0: title is not string (number)
+  WARN 0: header leak in body
+  ERROR 1: title is not string (number)
+  WARN 1: header leak in body
+  ERROR 2: title is not string (number)
+  WARN 2: header leak in body
+  ERROR 3: title is not string (number)
+  WARN 3: header leak in body
+  ERROR 4: title is not string (number)
+  WARN 4: header leak in body
+  ERROR 5: title is not string (number)
+  WARN 5: header leak in body
+  ERROR 6: title is not string (number)
+  WARN 6: header leak in body
+  ERROR 7: title is not string (number)
+  WARN 7: header leak in body
+  ERROR 8: title is not string (number)
+  WARN 8: header leak in body
+  ERROR 9: title is not string (number)
+  WARN 9: header leak in body
+  ERROR 10: title is not string (number)
+  WARN 10: header leak in body
+  ERROR 11: title is not string (number)
+  WARN 11: header leak in body
+  ERROR 12: title is not string (number)
+  WARN 12: header leak in body
+  ERROR 13: title is not string (number)
+  WARN 13: header leak in body
+  ERROR 14: title is not string (number)
+  WARN 14: header leak in body
+  ERROR 15: title is not string (number)
+  WARN 15: header leak in body
+  ERROR 16: title is not string (number)
+  WARN 16: header leak in body
+  ERROR 17: title is not string (number)
+  WARN 17: header leak in body
+  ERROR 18: title is not string (number)
+  WARN 18: body too short (34 chars)
+  ERROR 19: title is not string (number)
+  WARN 19: header leak in body
+ch14: 20 sections
+  ERROR 0: title is not string (number)
+  WARN 0: header leak in body
+  ERROR 1: title is not string (number)
+  WARN 1: header leak in body
+  ERROR 2: title is not string (number)
+  WARN 2: header leak in body
+  ERROR 3: title is not string (number)
+  WARN 3: header leak in body
+  ERROR 4: title is not string (number)
+  WARN 4: header leak in body
+  ERROR 5: title is not string (number)
+  WARN 5: header leak in body
+  ERROR 6: title is not string (number)
+  WARN 6: header leak in body
+  ERROR 7: title is not string (number)
+  WARN 7: header leak in body
+  ERROR 8: title is not string (number)
+  WARN 8: header leak in body
+  ERROR 9: title is not string (number)
+  WARN 9: header leak in body
+  ERROR 10: title is not string (number)
+  WARN 10: header leak in body
+  ERROR 11: title is not string (number)
+  WARN 11: header leak in body
+  ERROR 12: title is not string (number)
+  WARN 12: header leak in body
+  ERROR 13: title is not string (number)
+  WARN 13: header leak in body
+  ERROR 14: title is not string (number)
+  WARN 14: header leak in body
+  ERROR 15: title is not string (number)
+  WARN 15: header leak in body
+  ERROR 16: title is not string (number)
+  WARN 16: header leak in body
+  ERROR 17: title is not string (number)
+  WARN 17: header leak in body
+  ERROR 18: title is not string (number)
+  WARN 18: header leak in body
+  ERROR 19: title is not string (number)
+  WARN 19: header leak in body
+ch15: 14 sections
+  ERROR 0: title is not string (number)
+  WARN 0: header leak in body
+  ERROR 1: title is not string (number)
+  WARN 1: header leak in body
+  ERROR 2: title is not string (number)
+  WARN 2: header leak in body
+  ERROR 3: title is not string (number)
+  WARN 3: header leak in body
+  ERROR 4: title is not string (number)
+  WARN 4: header leak in body
+  ERROR 5: title is not string (number)
+  WARN 5: header leak in body
+  ERROR 6: title is not string (number)
+  WARN 6: header leak in body
+  ERROR 7: title is not string (number)
+  WARN 7: header leak in body
+  ERROR 8: title is not string (number)
+  WARN 8: header leak in body
+  ERROR 9: title is not string (number)
+  WARN 9: header leak in body
+  ERROR 10: title is not string (number)
+  WARN 10: header leak in body
+  ERROR 11: title is not string (number)
+  WARN 11: header leak in body
+  ERROR 12: title is not string (number)
+  WARN 12: body too short (34 chars)
+  ERROR 13: title is not string (number)
+  WARN 13: header leak in body
+ch16: 29 sections
+  ERROR 0: title is not string (number)
+  WARN 0: header leak in body
+  ERROR 1: title is not string (number)
+  WARN 1: header leak in body
+  ERROR 2: title is not string (number)
+  WARN 2: header leak in body
+  ERROR 3: title is not string (number)
+  WARN 3: header leak in body
+  ERROR 4: title is not string (number)
+  WARN 4: header leak in body
+  ERROR 5: title is not string (number)
+  WARN 5: header leak in body
+  ERROR 6: title is not string (number)
+  WARN 6: header leak in body
+  ERROR 7: title is not string (number)
+  WARN 7: header leak in body
+  ERROR 8: title is not string (number)
+  WARN 8: header leak in body
+  ERROR 9: title is not string (number)
+  WARN 9: header leak in body
+  ERROR 10: title is not string (number)
+  WARN 10: header leak in body
+  ERROR 11: title is not string (number)
+  WARN 11: header leak in body
+  ERROR 12: title is not string (number)
+  WARN 12: header leak in body
+  ERROR 13: title is not string (number)
+  WARN 13: header leak in body
+  ERROR 14: title is not string (number)
+  WARN 14: header leak in body
+  ERROR 15: title is not string (number)
+  WARN 15: header leak in body
+  ERROR 16: title is not string (number)
+  WARN 16: header leak in body
+  ERROR 17: title is not string (number)
+  WARN 17: header leak in body
+  ERROR 18: title is not string (number)
+  WARN 18: header leak in body
+  ERROR 19: title is not string (number)
+  WARN 19: header leak in body
+  ERROR 20: title is not string (number)
+  WARN 20: header leak in body
+  ERROR 21: title is not string (number)
+  WARN 21: header leak in body
+  ERROR 22: title is not string (number)
+  WARN 22: header leak in body
+  ERROR 23: title is not string (number)
+  WARN 23: header leak in body
+  ERROR 24: title is not string (number)
+  WARN 24: header leak in body
+  ERROR 25: title is not string (number)
+  WARN 25: header leak in body
+  ERROR 26: title is not string (number)
+  WARN 26: header leak in body
+  ERROR 27: title is not string (number)
+  WARN 27: header leak in body
+  ERROR 28: title is not string (number)
+  WARN 28: header leak in body
+ch17: 11 sections
+  ERROR 0: title is not string (number)
+  WARN 0: header leak in body
+  ERROR 1: title is not string (number)
+  WARN 1: header leak in body
+  ERROR 2: title is not string (number)
+  WARN 2: header leak in body
+  ERROR 3: title is not string (number)
+  WARN 3: header leak in body
+  ERROR 4: title is not string (number)
+  WARN 4: header leak in body
+  ERROR 5: title is not string (number)
+  WARN 5: header leak in body
+  ERROR 6: title is not string (number)
+  WARN 6: header leak in body
+  ERROR 7: title is not string (number)
+  WARN 7: header leak in body
+  ERROR 8: title is not string (number)
+  WARN 8: header leak in body
+  ERROR 9: title is not string (number)
+  WARN 9: header leak in body
+  ERROR 10: title is not string (number)
+  WARN 10: body too short (34 chars)
+ch18: 22 sections
+  ERROR 0: title is not string (number)
+  ERROR 1: title is not string (number)
+  WARN 1: header leak in body
+  ERROR 2: title is not string (number)
+  ERROR 3: title is not string (number)
+  WARN 3: header leak in body
+  ERROR 4: title is not string (number)
+  ERROR 5: title is not string (number)
+  WARN 5: header leak in body
+  ERROR 6: title is not string (number)
+  ERROR 7: title is not string (number)
+  WARN 7: header leak in body
+  ERROR 8: title is not string (number)
+  ERROR 9: title is not string (number)
+  WARN 9: header leak in body
+  ERROR 10: title is not string (number)
+  ERROR 11: title is not string (number)
+  WARN 11: header leak in body
+  ERROR 12: title is not string (number)
+  ERROR 13: title is not string (number)
+  WARN 13: header leak in body
+  ERROR 14: title is not string (number)
+  ERROR 15: title is not string (number)
+  WARN 15: header leak in body
+  ERROR 16: title is not string (number)
+  ERROR 17: title is not string (number)
+  WARN 17: header leak in body
+  ERROR 18: title is not string (number)
+  ERROR 19: title is not string (number)
+  WARN 19: header leak in body
+  ERROR 20: title is not string (number)
+  ERROR 21: title is not string (number)
+  WARN 21: header leak in body
+ch19: 8 sections
+  ERROR 0: title is not string (number)
+  ERROR 1: title is not string (number)
+  WARN 1: header leak in body
+  ERROR 2: title is not string (number)
+  ERROR 3: title is not string (number)
+  WARN 3: header leak in body
+  ERROR 4: title is not string (number)
+  ERROR 5: title is not string (number)
+  WARN 5: header leak in body
+  ERROR 6: title is not string (number)
+  WARN 6: body too short (34 chars)
+  ERROR 7: title is not string (number)
+  WARN 7: header leak in body
+ch20: 24 sections
+  ERROR 0: title is not string (number)
+  ERROR 1: title is not string (number)
+  WARN 1: header leak in body
+  ERROR 2: title is not string (number)
+  ERROR 3: title is not string (number)
+  WARN 3: header leak in body
+  ERROR 4: title is not string (number)
+  ERROR 5: title is not string (number)
+  WARN 5: header leak in body
+  ERROR 6: title is not string (number)
+  ERROR 7: title is not string (number)
+  WARN 7: header leak in body
+  ERROR 8: title is not string (number)
+  ERROR 9: title is not string (number)
+  WARN 9: header leak in body
+  ERROR 10: title is not string (number)
+  ERROR 11: title is not string (number)
+  WARN 11: header leak in body
+  ERROR 12: title is not string (number)
+  ERROR 13: title is not string (number)
+  WARN 13: header leak in body
+  ERROR 14: title is not string (number)
+  ERROR 15: title is not string (number)
+  WARN 15: header leak in body
+  ERROR 16: title is not string (number)
+  ERROR 17: title is not string (number)
+  WARN 17: header leak in body
+  ERROR 18: title is not string (number)
+  ERROR 19: title is not string (number)
+  WARN 19: header leak in body
+  ERROR 20: title is not string (number)
+  WARN 20: body too short (34 chars)
+  ERROR 21: title is not string (number)
+  ERROR 22: title is not string (number)
+  ERROR 23: title is not string (number)
+
+Total issues: 661
