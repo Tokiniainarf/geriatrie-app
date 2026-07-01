@@ -160,6 +160,7 @@ const BrainFeed = (() => {
     if (typeof FLASHCARDS_MEMOS !== 'undefined') all.push(...FLASHCARDS_MEMOS);
     if (typeof FLASHCARDS_EXPANDED !== 'undefined') all.push(...FLASHCARDS_EXPANDED);
     if (typeof MEGA_FLASHCARDS !== 'undefined') all.push(...MEGA_FLASHCARDS);
+    if (typeof REVISION_FLASHCARDS !== 'undefined') all.push(...REVISION_FLASHCARDS);
     for (let n = 2; n <= 10; n++) {
       const g = globalThis['MEGA_FLASHCARDS_' + n];
       if (typeof g !== 'undefined') all.push(...g);
@@ -273,8 +274,32 @@ const BrainFeed = (() => {
       .filter(Boolean);
 
     const uniq = [...new Set(wrong)].slice(0, 3);
+    // Medically-aware generic distractors based on question theme
     while (uniq.length < 3) {
-      uniq.push(['Aucune de ces réponses', 'Contre-indication absolue', 'Surveillance simple'][uniq.length]);
+      const qLower = (fc.question || '').toLowerCase();
+      const aLower = correctClean.toLowerCase();
+      const ctx = qLower + ' ' + aLower;
+      const pool = [];
+      if (/nutrition|mna|albumine|imc|dénutri|poids/.test(ctx))
+        pool.push('Complémentation systématique par nutrition parentérale', 'IMC > 25 = obésité', 'Albumine > 40 g/L = normal');
+      else if (/chute|tinetti|tug|marche|équilibre/.test(ctx))
+        pool.push('Le TUG < 10 s = risque élevé', 'Arrêter toute activité physique', 'Contention systématique');
+      else if (/démence|cognitif|mms|alzheimer|confusion|delirium/.test(ctx))
+        pool.push('Le MMS augmente avec l’âge', 'Prescrire un anticholinergique', 'La confusion est chronique et irréversible');
+      else if (/douleur|eva|ecpa/.test(ctx))
+        pool.push('L’EVA est impossible chez la PA', 'Le paracétamol est contre-indiqué', 'Douleur = toujours psychogène');
+      else if (/pharmaco|médicament|iatrogène|stopp|beers|psychotrope/.test(ctx))
+        pool.push('Les BZD sont recommandées chez la PA', 'La polymédication est sans risque', 'Arrêter brutalement tous les traitements');
+      else if (/éthique|palliatif|fin de vie|directives|leonetti/.test(ctx))
+        pool.push('L’acharnement est obligatoire', 'Les directives anticipées sont non contraignantes', 'La sédation est toujours interdite');
+      else if (/incontinen|vésico|sphinctér/.test(ctx))
+        pool.push('L’incontinence est normale avec l’âge', 'Pose systématique de sonde à demeure', 'Pas de rééducation périnéale');
+      else if (/ostéopor|fracture|osseux|vitamine d/.test(ctx))
+        pool.push('La vitamine D est inutile chez la PA', 'Le scanner est l’examen de 1re intention', 'Pas de prévention des chutes');
+      else
+        pool.push('Aucune de ces réponses', 'Contre-indication absolue', 'Surveillance simple');
+      const candidate = pool[uniq.length % pool.length];
+      if (!uniq.includes(candidate)) uniq.push(candidate); else uniq.push('Aucune de ces réponses');
     }
 
     const options = shuffle([
@@ -580,6 +605,9 @@ const BrainFeed = (() => {
     ];
 
     let formatted = answerText;
+    // Pre-clean: remove OCR artifacts and normalize whitespace
+    formatted = formatted.replace(/\s{3,}/g, ' ').replace(/\u25bc/g, '').trim();
+    // Extract key takeaway (first meaningful sentence) for emphasis
     
     // Check if it's already got list tags, if not format it
     if (!formatted.includes('<ul') && !formatted.includes('<li') && !formatted.includes('<p')) {

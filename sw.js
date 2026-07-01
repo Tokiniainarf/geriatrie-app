@@ -1,4 +1,4 @@
-const CACHE_NAME = 'geriatrie-v156';
+const CACHE_NAME = 'geriatrie-v157';
 const CORE = [
   './',
   './index.html',
@@ -18,6 +18,7 @@ const CORE = [
   './flashcards-batch-C.js',
   './flashcards-memos.js',
   './flashcards-expanded.js',
+  './revision-aids.js',
   './data.js',
   './figures.js',
   './interactive-figures.js',
