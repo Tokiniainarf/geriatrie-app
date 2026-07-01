@@ -516,7 +516,7 @@ function renderChapter(raw,chId){
     if(SYLLABUS_RE.test(l))return false;
     if(SYLLABUS_ROW_RE.test(l))return false;
     if(DIAGRAM_RE.test(l)&&!/Fig\.\s*\d+\.\d+/.test(l))return false;
-    if(/^(Connaissances|Points|Entraînement|Gériatrie)\s*\d*\s*$/i.test(l))return false;
+    if(/^(Connaissances|Points|Entraînement|Gériatrie|Préface|Avant-propos|Sommaire|Table des matières)\s*[\d\s]*$/i.test(l))return false;
     return true;
   });
 
