@@ -2,8 +2,15 @@ const fs = require('fs');
 const vm = require('vm');
 const files = [
   'data.js', 'figures.js', 'interactive-figures.js', 'synthesis.js', 'concepts.js',
-  'flashcards.js', 'app.js', 'graph.js', 'brainfeed.js', 'quiz.js', 'dashboard.js',
-  'appsearch.js', 'annales.js', 'annales-expanded.js', 'has-reco.js', 'has-expanded.js'
+  'flashcards.js', 'flashcards-batch-A.js', 'flashcards-batch-B.js', 'flashcards-batch-C.js',
+  'flashcards-memos.js', 'flashcards-expanded.js', 'mega-flashcards.js', 'mega-flashcards-2.js',
+  'mega-flashcards-3.js', 'mega-flashcards-4.js', 'mega-flashcards-5.js', 'mega-flashcards-6.js',
+  'mega-flashcards-7.js', 'mega-flashcards-8.js', 'mega-flashcards-9.js', 'mega-flashcards-10.js',
+  'app.js', 'graph.js', 'brainfeed.js', 'quiz.js', 'dashboard.js', 'appsearch.js',
+  'annales.js', 'annales-expanded.js', 'annales-archive.js', 'annales-v2.js', 'cas-interactifs.js',
+  'situations-evc.js', 'cas-evc-2024.js', 'cas-evc-2023.js', 'cas-evc-2020-2022.js',
+  'cas-evc-2018-2019.js', 'cas-evc-2015-2017.js', 'cas-evc-2010-2014.js',
+  'quiz-urgence.js', 'has-reco.js', 'has-expanded.js'
 ];
 const sb = {
   console,
@@ -28,7 +35,9 @@ const sb = {
 sb.globalThis = sb;
 vm.createContext(sb);
 for (const f of files) {
-  const src = fs.readFileSync('C:/Users/tokin/geriatrie-app/' + f, 'utf8');
+  const path = 'C:/Users/tokin/geriatrie-app/' + f;
+  if (!fs.existsSync(path)) continue;
+  const src = fs.readFileSync(path, 'utf8');
   try {
     vm.runInContext(src, sb, { filename: f });
   } catch (e) {
@@ -36,3 +45,6 @@ for (const f of files) {
   }
 }
 console.log('load simulation ok');
+
+module.exports = { sb };
+

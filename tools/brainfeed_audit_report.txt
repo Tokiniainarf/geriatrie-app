@@ -1,0 +1,202 @@
+=== BRAINFEED FULL AUDIT ===
+Deck size: 98
+Type distribution: {"chiffre_cle":13,"cas_choc":17,"piege_exam":12,"memo_jour":17,"flash":5,"quiz_flash":19,"synthesis":3,"citation":5,"case":2,"reco":5}
+
+=== POOL SIZES ===
+memoJour: 30
+casChoc: 172
+quizFlash: 366
+chiffreCle: 15
+citation: 8
+piegeExam: 12
+allFlash: 346
+srs: N/A
+
+=== SAMPLE CARDS ===
+
+--- 1. chiffre_cle (id=ck-13) ---
+Line: Perte de poids significative si ≥ 5 % en ... mois ou ≥ 10 % en 6 mois
+
+--- 2. cas_choc (id=cc-av2-2) ---
+Vignette: M. GARCIA Henri, 79 ans, J2 post-op prothèse de hanche droite (fracture col fémoral). L'infirmière de nuit le trouve agité, il essaie de se lever, parle de ses enfants (décédés il y a 10 ans).
+
+ATCD: 
+
+--- 3. piege_exam (id=px-9) ---
+Trap: Autonomie préservée = pas de bilan gériatrique
+
+--- 4. piege_exam (id=px-6) ---
+Trap: Arrêt brutal des psychotropes
+
+--- 5. memo_jour (id=mj-memo-7) ---
+Title: MÉMO FLASH
+Question: DIAPPERS : rappel mnémotechnique des causes réversibles de confusion ?
+
+--- 6. chiffre_cle (id=ck-4) ---
+Line: Timed Up and Go : plus de ... secondes = risque de chute élevé
+
+--- 7. flash (id=fc-fc-exp-18) ---
+Question: Fracture vertébrale tassement : signes cliniques à rechercher ?
+
+--- 8. memo_jour (id=mj-memo-9) ---
+Title: MÉMO FLASH
+Question: Échelle d'équilibre de Berg : seuils à retenir ?
+
+--- 9. quiz_flash (id=qf-memo-11) ---
+Question: Échelle de Braden : les 6 dimensions et seuil de risque ?
+Options:
+  A. Score de Waterlow : évalue le risque d'escarre
+  B. Score normal ≥ 25/30
+  C. S = Sensory · M = Moisture · A = Activity · M = Mobility · N = Nutrition · F =.. ✓
+  D. Score toujours interprété brut
+
+--- 10. chiffre_cle (id=ck-6) ---
+Line: Seuil GDS-15 à partir duquel on dépiste une dépression : ... /15
+
+--- 11. memo_jour (id=mj-memo-12) ---
+Title: MÉMO FLASH
+Question: Échelle de Norton : items et seuil ?
+
+--- 12. cas_choc (id=cc-117) ---
+Vignette: M. Simon, 86 ans, prend : diazepam 5mg, amitriptyline 25mg, diclofénac 50mg, digoxine 0.25mg. Chutes, constipation, confusion.
+
+--- 13. piege_exam (id=px-11) ---
+Trap: AOMI = aspirine systématique
+
+--- 14. piege_exam (id=px-1) ---
+Trap: Delirium = agitation seulement
+
+--- 15. cas_choc (id=cc-evc21-4) ---
+Vignette: Mme Giraud, 85 ans, fille signale : oublis de cuisson (casserole brûlée), courses impossibles, hygiène partielle. Vit seule en appartement. ADL : toilette 1/1 (aide), habillage 0/1, continence 1/1, tr
+
+--- 16. quiz_flash (id=qf-fc-exp-38) ---
+Question: Échelle de Braden : items et seuil de risque ?
+Options:
+  A. 6 domaines : perception sensorielle, humidité, activité, mobilité, nutrition,... ✓
+  B. Stade 1 : érythème persistant (non blanchissant)
+  C. Score normal ≥ 25/30
+  D. Score toujours interprété brut
+
+--- 17. cas_choc (id=cc-evc12-5) ---
+Vignette: M. Mercier, 91 ans, pancréas métastatique, dyspnée. DA : pas réanimation.
+
+--- 18. cas_choc (id=cc-arch-2022-1) ---
+Vignette: M. Nguyen, 91 ans, Alzheimer MMSE 14, alité 3 semaines. Braden 9, incontinence, IMC 17, albumine 21. Plaie sacrum stade 3, CRP 35. Interrogatoire complété par l'aidant : mode de vie, autonomie antérie
+
+--- 19. memo_jour (id=mj-memo-27) ---
+Title: MÉMO FLASH
+Question: PPS (Palliative Performance Scale) : seuils usuels ?
+
+--- 20. quiz_flash (id=qf-327) ---
+Question: Critères de fragilité de Fried et modèle de Bouchon : lien ?
+Options:
+  A. Signe de décompensation cardiaque
+  B. Manifestation iatrogène
+  C. Rigidité artérielle (HTA systolique isolée), hypertrophie VG concentrique, baiss
+  D. Fried évalue la fragilité (phénotype clinique) ✓
+
+--- 21. cas_choc (id=cc-arch-2022-3) ---
+Vignette: M. Dubois, 86 ans, chutes et isolement. Surdité presbyacousique sévère, acuité 2/10 améliorée 5/10 après correction, cataracte opérable. MMS 24, Tinetti 16. Interrogatoire complété par l'aidant : mode
+
+--- 22. quiz_flash (id=qf-fc-exp-53) ---
+Question: Échelles à mobiliser dans un mini-dossier EVC intégrateur ?
+Options:
+  A. Score normal ≥ 25/30
+  B. Cognition (MMSE/MoCa), humeur (GDS), autonomie (ADL/IADL ou GIR), nutrition (MNA ✓
+  C. Score toujours interprété brut
+  D. MoCa/MMSE, GDS, Katz/Lawton, MNA, TUG/Tinetti, Braden, EVA/ECPA
+
+--- 23. quiz_flash (id=qf-mega-96) ---
+Question: Vaccin grippe PA ?
+Options:
+  A. Surveillance simple
+  B. Contre-indication absolue
+  C. Vaccination annuelle ≥65 ans ✓
+  D. ≥5 médicaments chroniques
+
+--- 24. memo_jour (id=mj-memo-6) ---
+Title: MÉMO DU JOUR
+Question: CAM : mnémotechnique des 4 critères et règle diagnostique ?
+
+--- 25. chiffre_cle (id=ck-5) ---
+Line: Seuil MMSE interprété comme « normal » chez un sujet jeune instruit : ... /30
+
+--- 26. quiz_flash (id=qf-16) ---
+Question: Différence entre curatelle et tutelle ?
+Options:
+  A. Curatelle : protection intermédiaire ✓
+  B. Document écrit par une personne majeure pour exprimer ses souhaits de fin de vie
+  C. Surveillance simple
+  D. Contre-indication absolue
+
+--- 27. piege_exam (id=px-7) ---
+Trap: Albumine basse = dénutrition
+
+--- 28. quiz_flash (id=qf-memo-21) ---
+Question: STOPP / START : complément des critères de Beers ?
+Options:
+  A. Aucun traitement nécessaire
+  B. Ensemble des effets indésirables liés aux actes médicaux (diagnostiques,...
+  C. Hospitalisation systématique
+  D. STOPP = médicaments à arrêter (ex : IPP sans indication, anticholinergique + dém ✓
+
+--- 29. piege_exam (id=px-5) ---
+Trap: Douleur sous-estimée
+
+--- 30. memo_jour (id=mj-memo-8) ---
+Title: MÉMO FLASH
+Question: Échelle de Tinetti (POMA) : composition et interprétation ?
+
+--- 31. synthesis (id=syn-1) ---
+Question: Critères de Fried
+
+--- 32. quiz_flash (id=qf-memo-3) ---
+Question: MMSE (MMS) : que évalue-t-on et seuils mnémotechniques ?
+Options:
+  A. 30 points : Orientation (10) · Mémorisation/rappel (6) · Attention/calcul (5) ·  ✓
+  B. MMSE (Mini Mental State Examination) : /30
+  C. Score toujours interprété brut
+  D. Score normal ≥ 25/30
+
+--- 33. cas_choc (id=cc-114) ---
+Vignette: M. Garcia, 88 ans, hémiplégie gauche post-AVC. Alitement 5 jours. Braden 12/23. Incontinence urinaire. Albumine 24g/L.
+
+--- 34. memo_jour (id=mj-memo-16) ---
+Title: MÉMO FLASH
+Question: EVA, EN et ECPA : quand utiliser quelle échelle ?
+
+--- 35. quiz_flash (id=qf-mega-92) ---
+Question: Hyponatrémie iatrogène PA : médicaments ?
+Options:
+  A. Thiazidiques, ISRS, carbamazépine ✓
+  B. Hospitalisation systématique
+  C. Aucun traitement nécessaire
+  D. Delirium post-op (fréquent, fluctuant, réversible) vs complication neurologique 
+
+--- 36. citation (id=cit-6) ---
+Text: « La prévention de la perte d'autonomie passe par la préservation de l'activité physique. »
+
+--- 37. citation (id=cit-3) ---
+Text: « La polymédication est le plus fréquent des facteurs de risque iatrogène. »
+
+--- 38. quiz_flash (id=qf-29) ---
+Question: Définition de la maladie d'Alzheimer ?
+Options:
+  A. Un symptôme non spécifique
+  B. Un médicament
+  C. Maladie neurodégénérative progressive et irréversible ✓
+  D. Fluctuations cognition, hallucinations visuelles précoces, parkinsonisme,...
+
+--- 39. cas_choc (id=cc-evc24-4) ---
+Vignette: M. Garcia, 84 ans, J1 post-op prothèse hanche. Agité la nuit, arrache perfusion, appelle sa femme (décédée). MMS pré-op 26/30. T° 38.1°C. CRP 95. Tramadol 100mg/j.
+
+--- 40. flash (id=fc-211) ---
+Question: Traitement de la maladie d'Alzheimer ?
+
+=== QUIZ INTEGRITY ===
+Total quiz cards in deck: 19
+Malformed quiz cards: 0
+
+=== CAS CHOC INTEGRITY ===
+Total cas choc in deck: 17
+Incomplete cas choc: 0
