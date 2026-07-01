@@ -31,53 +31,60 @@ const BrainFeed = (() => {
   let activeTimers = new Map();
 
   const TYPE_RATIO = {
-    memo_jour: 0.20,
-    cas_choc: 0.20,
+    memo_jour: 0.18,
+    cas_choc: 0.18,
     quiz_flash: 0.20,
-    chiffre_cle: 0.12,
-    citation: 0.00,
-    piege_exam: 0.20,
-    flash: 0.04,
-    synthesis: 0.02,
+    chiffre_cle: 0.14,
+    citation: 0.05,
+    piege_exam: 0.15,
+    flash: 0.05,
+    synthesis: 0.03,
     case: 0.02,
-    reco: 0.04
+    reco: 0.05
   };
 
   const CITATIONS = [
-    { text: '« La vieillesse n\'est pas une maladie, c\'est une victoire sur la mort. »', author: 'Auguste Forel' },
-    { text: '« Soigner le vieillard, c\'est soigner l\'avenir de chacun d\'entre nous. »', author: 'Gériatrie française' },
-    { text: '« L\'âge n\'est qu\'un chiffre. La fragilité, c\'est un syndrome. »', author: 'Fried et al.' },
-    { text: '« Polymédication : le médicament le plus dangereux est celui qu\'on n\'a pas revu. »', author: 'Revue médicamenteuse' },
-    { text: '« Une chute chez le sujet âgé est toujours un symptôme, jamais un accident banal. »', author: 'HAS — Prévention des chutes' },
-    { text: '« Le delirium est une urgence médicale masquée. »', author: 'Confusion aiguë' },
-    { text: '« L\'autonomie se perd en escalier : d\'abord les AVD instrumentales. »', author: 'Lawton' },
-    { text: '« La douleur sous-déclarée chez la PA est une souffrance évitable. »', author: 'ECPA / EN' }
+    { text: '« Chez le sujet âgé, tout symptôme atypique doit faire évoquer une infection. »', author: 'Gériatrie clinique' },
+    { text: '« Une chute n\'est jamais un accident : c\'est toujours un symptôme. »', author: 'HAS' },
+    { text: '« Le bon médicament, à la bonne dose, pour le bon patient, au bon moment. »', author: 'Appropriation gériatrique' },
+    { text: '« La polymédication est le plus fréquent des facteurs de risque iatrogène. »', author: 'SFGG' },
+    { text: '« Le delirium, urgence médicale masquée, a toujours une cause. »', author: 'CAM' },
+    { text: '« Dépister la dépression, c\'est prévenir la démence. »', author: 'GDS-15' },
+    { text: '« La prévention de la perte d\'autonomie passe par la préservation de l\'activité physique. »', author: 'PAQS' },
+    { text: '« La nutrition est un médicament : il faut la prescrire et la réévaluer. »', author: 'MNA' }
   ];
 
   const CHIFFRES_CLES = [
-    { value: 30, unit: '%', line: '... % des personnes > 65 ans chutent chaque année', source: 'HAS' },
-    { value: 15, unit: '%', line: '... % des > 65 ans présentent une dépression non traitée', source: 'GDS' },
-    { value: 5, unit: ' critères', line: 'Nombre de critères de Fried pour le syndrome de fragilité (≥ 3 = fragile) : ...', source: 'Fragilité' },
-    { value: 0.8, unit: ' m/s', line: 'Seuil de vitesse de marche pour la fragilité (< 4,8 s / 4 m) : ... m/s', source: 'Fried' },
-    { value: 24, unit: '/30', line: 'Seuil MMS considéré comme « normal » (à corriger selon âge/scolarité) : ... /30', source: 'Cognition' },
-    { value: 5, unit: '/15', line: 'Seuil GDS-15 suspect de dépression : ... /15', source: 'Yesavage' },
-    { value: 19, unit: '/28', line: 'Seuil du score Tinetti indiquant un risque élevé de chute (POMA) : < ... /28', source: 'POMA' },
-    { value: 17, unit: '/30', line: 'Score MNA indiquant une dénutrition avérée : < ... /30', source: 'Nutrition' },
-    { value: 5, unit: ' méd.', line: 'Seuil du nombre de médicaments définissant la polymédication : ≥ ... molécules/j', source: 'Iatrogénie' },
-    { value: 85, unit: ' ans', line: 'Espérance de vie moyenne des femmes en France (≈ 2020) : ... ans', source: 'Démographie' }
+    { value: 30, unit: '%', line: '... % des personnes de 65 ans et plus chutent au moins une fois par an', source: 'HAS' },
+    { value: 15, unit: '%', line: '... % des personnes de 65 ans et plus ont une dépression non diagnostiquée', source: 'GDS-15' },
+    { value: 5, unit: ' critères', line: 'Nombre de critères de Fried : au moins ... critères = syndrome de fragilité', source: 'Fried' },
+    { value: 0.8, unit: ' m/s', line: 'Seuil de vitesse de marche en dessous duquel on suspecte la fragilité : ... m/s', source: 'Fried' },
+    { value: 10, unit: ' s', line: 'Timed Up and Go : plus de ... secondes = risque de chute élevé', source: 'TUG' },
+    { value: 24, unit: '/30', line: 'Seuil MMSE interprété comme « normal » chez un sujet jeune instruit : ... /30', source: 'MMSE' },
+    { value: 5, unit: '/15', line: 'Seuil GDS-15 à partir duquel on dépiste une dépression : ... /15', source: 'Yesavage' },
+    { value: 19, unit: '/28', line: 'Score Tinetti (POMA) inférieur à ... = risque élevé de chute', source: 'Tinetti' },
+    { value: 23.5, unit: '/30', line: 'Seuil MNA entre dénutrition et risque de dénutrition : ... /30', source: 'MNA' },
+    { value: 5, unit: ' médicaments', line: 'À partir de ... médicaments quotidiens, on parle de polymédication', source: 'SFGG' },
+    { value: 30, unit: '%', line: 'Environ ... % des personnes de 65 ans et plus présentent une polymédication', source: 'Institut de la longévité' },
+    { value: 50, unit: '%', line: '... % des personnes de 65 ans et plus ont au moins deux affections chroniques', source: 'Comorbidité' },
+    { value: 20, unit: '%', line: 'Environ ... % des personnes de 85 ans et plus ont un trouble cognitif déclaré', source: 'Démographie' },
+    { value: 6, unit: ' mois', line: 'Perte de poids significative si ≥ 5 % en ... mois ou ≥ 10 % en 6 mois', source: 'Dénutrition' },
+    { value: 30, unit: ' mg/j', line: 'Apport protéique recommandé : 1–1,2 g/kg/j, soit environ ... g/j pour un sujet de 60 kg', source: 'Nutrition' }
   ];
 
   const PIEGES_EXAM = [
-    { trap: 'Confondre dépression et démence chez la PA', explain: 'La dépression peut mimer une démence (pseudo-démence) — dépister avec GDS-15 et tester la réversibilité avant de conclure à Alzheimer.' },
-    { trap: 'Prescrire benzodiazépines pour un delirium', explain: 'Le delirium se traite par cause + mesures non médicamenteuses ; les BZD aggravent confusion et chutes. Halopéridol faible dose si agitation sévère.' },
-    { trap: 'Utiliser le MMS seul sans correction', explain: 'Le MMS doit être corrigé selon âge et scolarité ; un score brut peut sous-estimer une pathologie cognitive.' },
-    { trap: 'Oublier la cause réversible de confusion', explain: 'DIAPPERS : infection, médicaments, déshydratation, douleur, constipation — traiter AVANT d\'étiqueter « démence ».' },
-    { trap: 'Considérer une chute comme « accident » sans bilan', explain: 'Bilan multifactoriel obligatoire : orthostatisme, vision, psychotropes, environnement, TUG/Tinetti.' },
-    { trap: 'Arrêter tous les psychotropes d\'un coup', explain: 'Sevrage progressif ; arrêt brutal = delirium, insomnie, rebond anxieux.' },
-    { trap: 'Sous-estimer la douleur chez le patient non communicant', explain: 'Utiliser ECPA (échelle comportementale), pas seulement l\'EVA verbale.' },
-    { trap: 'GIR 5-6 = pas de prévention', explain: 'Même autonome : dépistage fragilité, chutes, nutrition (MNA-SF) en consultation gériatrique.' },
-    { trap: 'IMAO + opioïdes ou SSRI = piège EDN', explain: 'Risque syndrome sérotoninergique / interactions majeures — revue médicamenteuse systématique.' },
-    { trap: 'Albumine basse = toujours dénutrition', explain: 'Inflammation, déshydratation, syndrome néphrotique — interpréter avec CRP et contexte clinique.' }
+    { trap: 'Dépression vs démence', explain: 'Une dépression peut imiter une démence (pseudo-démence). Utiliser GDS-15 et rechercher une réversibilité avant d\'attribuer un diagnostic de démence.' },
+    { trap: 'Delirium = agitation seulement', explain: 'Le delirium peut être hypoactif (apathie, somnolence) dans 50 % des cas. Le CAM reste l\'outil de référence.' },
+    { trap: 'Benzodiazépine dans le delirium', explain: 'Les BZD aggravent confusion et chutes. Privilégier la cause, l\'environnement, et les antipsychotiques de façon très brève si agitation dangereuse.' },
+    { trap: 'MMS sans correction âge/éducation', explain: 'Le MMSE brut n\'est pas interprétable seul. Toujours pondérer selon l\'âge, la scolarité et le niveau socioculturel.' },
+    { trap: 'Chute = accident', explain: 'Toute chute mérite un bilan multifactoriel : orthostatisme, vision, psychotropes, démarche (TUG/Tinetti), environnement.' },
+    { trap: 'Douleur sous-estimée', explain: 'En cas d\'aphasie ou de trouble cognitif, utiliser l\'ECPA (échelle comportementale) plutôt que l\'EVA verbale.' },
+    { trap: 'Arrêt brutal des psychotropes', explain: 'Le sevrage doit être progressif. L\'arrêt brutal peut déclencher delirium, insomnie sévère, agitation ou convulsions.' },
+    { trap: 'Albumine basse = dénutrition', explain: 'L\'albuminémie est un marqueur d\'inflammation et d\'hydratation. Une hypoalbuminémie n\'est pas un diagnostic de dénutrition à elle seule.' },
+    { trap: 'Polymédication = seulement ≥ 5 médicaments', explain: 'Au-delà de 5 médicaments, le risque d\'interactions et d\'effets indésirables augmente exponentiellement. Penser déprescription.' },
+    { trap: 'Autonomie préservée = pas de bilan gériatrique', explain: 'Même un GIR 5-6 nécessite un dépistage de la fragilité, du risque de chute, de la dénutrition et de la dépression.' },
+    { trap: 'Sédation profonde = euthanasie', explain: 'La SPCMD vise à soulager une souffrance réfractaire. Elle ne vise pas à provoquer la mort.' },
+    { trap: 'AOMI = aspirine systématique', explain: 'Le bénéfice de l\'aspirine secondaire chez le très grand âge doit être pondéré par le risque hémorragique. La balance bénéfice/risque est individuelle.' }
   ];
 
   function loadSRS() {
