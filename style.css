@@ -515,6 +515,12 @@ input { font-family: inherit; font-size: inherit; }
 .reader-list li::marker { color: var(--accent); font-size: .7em; }
 .reader-list.num { padding-left: 1.5rem; }
 .reader-list.num li::marker { color: var(--accent-cta); font-weight: 600; font-size: .85em; }
+.reader-list.arrow-list { list-style: none; padding-left: 0; }
+.reader-list.arrow-list li { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
+.reader-list.arrow-list li::marker { content: ''; }
+.arrow-key { font-weight: 700; color: var(--accent); min-width: 90px; flex-shrink: 0; }
+.arrow-sep { color: var(--accent-cta); font-weight: 600; }
+.arrow-val { color: var(--text2); }
 .callout {
   margin: 24px 0; padding: 18px 20px; border-radius: 8px;
   background: linear-gradient(145deg, rgba(8,145,178,.06), rgba(8,145,178,.01));

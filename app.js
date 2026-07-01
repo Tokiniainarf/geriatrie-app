@@ -453,6 +453,14 @@ function renderChapter(raw,chId){
   // 2. Fix standard hyphenations at end of lines (suffix must be lowercase)
   text = text.replace(/([a-zA-Zà-öø-ÿœŒæÆÀ-ÖØ-ß]+)-\s*\n\s*([a-zà-öø-ÿœŒæÆÀ-ÖØ-ß]+)/g, '$1$2');
 
+  // 2b. Strip page headers/footers appended inline by sort=True extraction
+  text = text.replace(/\s{3,}(Connaissances|Points|Entraînement|Gériatrie)\s*\d*\s*$/gm, '');
+  text = text.replace(/\s{3,}[A-Za-zÀ-ſ][^\n]{5,50}\s+\d{1,3}\s*$/gm, function(m) {
+    // Only strip if it looks like a running header (chapter title + page number)
+    if (/vieillissement|autonomie|complexit|fragilit|douceur|sensoriel|osseux|articulaire|douleur|mnésique|thymique|confusionnel|chute|alitement|nutritionnel|vésico|prescri|palliatif|dossier|feature|isol/i.test(m)) return '';
+    return m;
+  });
+
   const rawLines = text.replace(/\r\n/g,'\n').split('\n').map(l=>l.trim());
   
   // 3. Preprocess and merge split headings
@@ -508,6 +516,7 @@ function renderChapter(raw,chId){
     if(SYLLABUS_RE.test(l))return false;
     if(SYLLABUS_ROW_RE.test(l))return false;
     if(DIAGRAM_RE.test(l)&&!/Fig\.\s*\d+\.\d+/.test(l))return false;
+    if(/^(Connaissances|Points|Entraînement|Gériatrie)\s*\d*\s*$/i.test(l))return false;
     return true;
   });
 
@@ -536,6 +545,7 @@ function renderChapter(raw,chId){
     if (BULLET_RE.test(l) || SECTION_RE.test(l) || LETTER_RE.test(l)) return true;
     if (/^Fig\.|Tableau|Encadré|^\d{2,3}\s*/.test(l)) return true;
     if (/[.!?]$/.test(l)) return true;
+    if (l.includes('→')) return true;
     if (/^Situations?\s+de\s+départ/i.test(l)) return true;
     if (/^En lien avec/i.test(l)) return true;
     return false;
@@ -817,6 +827,22 @@ function renderChapter(raw,chId){
     if(inNumList&&/^[a-zà-öø-ÿœŒæÆÀ-ÖØ-ß]/.test(l)&&l.length<100&&!SECTION_RE.test(l)){numBuf.push(l);continue}
     if(inNumList)flushNumList();
 
+    // Arrow-list: "Vasculaire → Rigidité artérielle." → structured list
+    const arrowM = l.match(/^([A-ZÀ-ÞŒÆ][\wÀ-öø-ÿœæ\s]{2,30})\s*[→]\s*(.+)[.;]?$/);
+    if (arrowM) {
+      flushPara(); flushBullets(); flushNumList();
+      const arrowItems = [`<span class="arrow-key">${esc(arrowM[1].trim())}</span><span class="arrow-sep">→</span><span class="arrow-val">${esc(arrowM[2].trim())}</span>`];
+      let j = i + 1;
+      while (j < lines.length) {
+        const am = lines[j].match(/^([A-ZÀ-ÞŒÆ][\wÀ-öø-ÿœæ\s]{2,30})\s*[→]\s*(.+)[.;]?$/);
+        if (!am) break;
+        arrowItems.push(`<span class="arrow-key">${esc(am[1].trim())}</span><span class="arrow-sep">→</span><span class="arrow-val">${esc(am[2].trim())}</span>`);
+        j++;
+      }
+      html += `<div class="reader-list-card"><ul class="reader-list arrow-list">${arrowItems.map(it => `<li>${it}</li>`).join('')}</ul></div>`;
+      i = j - 1; markBodyStart(); continue;
+    }
+
     const bulM=l.match(BULLET_RE);
     const isAutoBullet = bulM || l.endsWith(';') || (bulletBuf.length > 0 && l.endsWith('.'));
     if(isAutoBullet && !SECTION_RE.test(l) && !LETTER_RE.test(l) && !RANG_RE.test(l)){
@@ -866,6 +892,7 @@ function renderChapter(raw,chId){
     if(/^(\d{1,3})$/.test(l))continue;
     if(/^diagnostic et thérapeutique/i.test(l))continue;
     if(/^\w{4,20}$/.test(l)&&!/^(Fig|Tableau|Encadré)/i.test(l))continue;
+    if(/^[→\u25bc]$/.test(l.trim()))continue;
     if(l.length<15&&!/[.!?]/.test(l)&&!/^[A-Z]\./.test(l)&&!BULLET_RE.test(l)&&!SECTION_RE.test(l)&&!LETTER_RE.test(l))continue;
     // OCR garbage - catch specific patterns that leak through preamble
     if(/Bouchon\s*\)/.test(l))continue;
