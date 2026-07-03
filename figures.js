@@ -5,16 +5,211 @@ const CHAPTER_ILL = {"ch1": "images/p031_0.jpg", "ch2": "images/p049_0.jpg", "ch
 // CHAPTER_HERO - High-quality AI-generated illustrations using Grok Imagine (enriched)
 // Preferred over old PDF crops for chapter headers. Fallback to CHAPTER_ILL if missing.
 const CHAPTER_HERO = {
-  "ch1": "images/chapters/ai-heroes/ch1-aging.jpg",
+  "ch1": "images/chapters/educational/fried-criteria.jpg",
   "ch2": "images/chapters/ai-heroes/ch2-complex.jpg",
   "ch4": "images/chapters/ai-heroes/ch4-ethics.jpg",
   "ch6": "images/chapters/ai-heroes/ch6-bone.jpg",
   "ch8": "images/chapters/ai-heroes/ch8-pain.jpg",
-  "ch9": "images/chapters/ai-heroes/ch9-cognitive.jpg",
-  "ch11": "images/chapters/ai-heroes/ch11-delirium.jpg",
-  "ch12": "images/chapters/ai-heroes/ch12-falls.jpg",
+  "ch9": "images/chapters/educational/delirium-vulnerability.jpg",
+  "ch11": "images/chapters/educational/delirium-vulnerability.jpg",
+  "ch12": "images/chapters/educational/ch12-falls-edu.jpg",
   "ch14": "images/chapters/ai-heroes/ch14-nutrition.jpg",
   "ch16": "images/chapters/ai-heroes/ch16-prescribing.jpg",
   "ch17": "images/chapters/ai-heroes/ch17-palliative.jpg"
+};
+
+// Additional educational visuals (more diagram-like, mechanism focused) for chapters and feed
+const CHAPTER_EDU_VISUAL = {
+  "ch12": "images/chapters/educational/ch12-tug-edu.jpg"
+};
+
+// Educational images for inline content in chapters (key mechanisms, to illustrate paragraphs)
+const EDU_VISUALS = {
+  "ch1": [
+    {match: "physiopathologie|réserve fonctionnelle|vieillissement", img: "images/chapters/educational/ch1-extra-1.jpg", note: "Réserve fonctionnelle : déclin physiologique avec l'âge"},
+    {match: "mécanisme|senescence|cellulaire|inflammaging", img: "images/chapters/educational/ch1-extra-2.jpg", note: "Mécanismes de sénescence cellulaire et inflammaging"},
+    {match: "vieillissement|fragilité", img: "images/chapters/educational/ch1-1.jpg", note: "Fragilité et réserve fonctionnelle"},
+    {match: "autonomie|ADL|indépendance", img: "images/chapters/educational/ch1-2.jpg", note: "Autonomie et évaluation"},
+    {match: "cognition|mnésique", img: "images/chapters/educational/ch1-3.jpg", note: "Cognition et troubles"},
+    {match: "fragilité|chute|nutrition", img: "images/chapters/educational/ch1-4.jpg", note: "Fragilité, chutes et nutrition"},
+    {match: "physiopath|biologie", img: "images/chapters/educational/ch1-5.jpg", note: "Biologie du vieillissement"},
+    {match: "prise en charge|prévention", img: "images/chapters/educational/ch1-6.jpg", note: "Prise en charge et prévention"}
+  ],
+  "ch2": [
+    {match: "physiopathologie|évaluation|complexité|CGA|EGM", img: "images/chapters/educational/ch2-extra-1.jpg", note: "Évaluation gériatrique multidimensionnelle (CGA/EGM)"},
+    {match: "complexité|évaluation|CGA", img: "images/chapters/educational/ch2-1.jpg", note: "Évaluation globale"},
+    {match: "autonomie|ADL", img: "images/chapters/educational/ch2-2.jpg", note: "Autonomie"},
+    {match: "cognition|confusion", img: "images/chapters/educational/ch2-3.jpg", note: "Cognition"},
+    {match: "chute|risque", img: "images/chapters/educational/ch2-4.jpg", note: "Risque de chute"},
+    {match: "prescription|iatrog", img: "images/chapters/educational/ch2-5.jpg", note: "Prescription"},
+    {match: "multimorbidité|polypathologie", img: "images/chapters/educational/ch2-6.jpg", note: "Multimorbidité"}
+  ],
+  "ch3": [
+    {match: "autonomie|ADL|IADL|indépendance|évaluation", img: "images/chapters/educational/ch3-extra-1.jpg", note: "Échelles ADL (Katz) vs IADL (Lawton)"},
+    {match: "autonomie|ADL|indépendance", img: "images/chapters/educational/ch3-1.jpg", note: "Autonomie"},
+    {match: "chute", img: "images/chapters/educational/ch3-2.jpg", note: "Chutes"},
+    {match: "cognition", img: "images/chapters/educational/ch3-3.jpg", note: "Cognition"},
+    {match: "nutrition", img: "images/chapters/educational/ch3-4.jpg", note: "Nutrition"},
+    {match: "prescri", img: "images/chapters/educational/ch3-5.jpg", note: "Prescription"},
+    {match: "éthique", img: "images/chapters/educational/ch3-6.jpg", note: "Éthique"}
+  ],
+  "ch4": [
+    {match: "éthique|principes|capacité|autonomie|justice", img: "images/chapters/educational/ch4-extra-1.jpg", note: "Principes éthiques en gériatrie"},
+    {match: "éthique|capacité", img: "images/chapters/educational/ch4-1.jpg", note: "Éthique et capacité"},
+    {match: "autonomie", img: "images/chapters/educational/ch4-2.jpg", note: "Autonomie"},
+    {match: "chute", img: "images/chapters/educational/ch4-3.jpg", note: "Chute"},
+    {match: "delirium", img: "images/chapters/educational/ch4-4.jpg", note: "Delirium"},
+    {match: "fragilité", img: "images/chapters/educational/ch4-5.jpg", note: "Fragilité"},
+    {match: "prescri", img: "images/chapters/educational/ch4-6.jpg", note: "Prescription"}
+  ],
+  "ch5": [
+    {match: "physiopath|sensoriel|vision|audition|presbytie|presbyacousie", img: "images/chapters/educational/ch5-extra-1.jpg", note: "Cascade des déficits sensoriels"},
+    {match: "sensoriel|vision|audition", img: "images/chapters/educational/ch5-1.jpg", note: "Déficits sensoriels"},
+    {match: "chute", img: "images/chapters/educational/ch5-2.jpg", note: "Chutes et sensoriel"},
+    {match: "fragilité", img: "images/chapters/educational/ch5-3.jpg", note: "Fragilité"},
+    {match: "prescri", img: "images/chapters/educational/ch5-4.jpg", note: "Prescription"},
+    {match: "nutrition", img: "images/chapters/educational/ch5-5.jpg", note: "Nutrition"},
+    {match: "cognition", img: "images/chapters/educational/ch5-6.jpg", note: "Cognition"}
+  ],
+  "ch6": [
+    {match: "physiopathologie|remodelage|ostéoporose|déséquilibre|ostéoblastes", img: "images/chapters/educational/ch6-extra-1.jpg", note: "Physiopathologie du remodelage osseux et ostéoporose"},
+    {match: "osseux|ostéoporose|os|remodelage", img: "images/chapters/educational/ch6-1.jpg", note: "Mécanismes du vieillissement osseux"},
+    {match: "chute|fracture", img: "images/chapters/educational/ch6-2.jpg", note: "Chutes et fractures"},
+    {match: "fragilité|risque", img: "images/chapters/educational/ch6-3.jpg", note: "Facteurs de risque osseux"},
+    {match: "densité|DEXA", img: "images/chapters/educational/ch6-4.jpg", note: "Évaluation densité osseuse"},
+    {match: "prévention|exercice|vitamine", img: "images/chapters/educational/ch6-5.jpg", note: "Prévention et prise en charge"},
+    {match: "physiopath|déséquilibre", img: "images/chapters/educational/ch6-6.jpg", note: "Physiopathologie ostéoporose"}
+  ],
+  "ch7": [
+    {match: "physiopathologie|dégénérescence|cartilage|arthrose|ostéophyte", img: "images/chapters/educational/ch7-extra-1.jpg", note: "Mécanisme de dégénérescence cartilagineuse"},
+    {match: "arthrose|articulaire|cartilage", img: "images/chapters/educational/ch7-1.jpg", note: "Vieillissement articulaire et cartilage"},
+    {match: "ostéophyte|rétrécissement", img: "images/chapters/educational/ch7-2.jpg", note: "Ostéophytes et pincement articulaire"},
+    {match: "genou|hanche|coxarthrose|gonarthrose", img: "images/chapters/educational/ch7-3.jpg", note: "Sites fréquents d'arthrose"},
+    {match: "obésité|risque|traumatisme", img: "images/chapters/educational/ch7-4.jpg", note: "Facteurs de risque arthrose"},
+    {match: "prise en charge|kiné|prothèse", img: "images/chapters/educational/ch7-5.jpg", note: "Prise en charge de l'arthrose"},
+    {match: "physiopath|dégénérescence", img: "images/chapters/educational/ch7-6.jpg", note: "Dégénérescence cartilagineuse"}
+  ],
+  "ch8": [
+    {match: "physiopathologie|mécanisme|nociceptif|neuropathique|douleur", img: "images/chapters/educational/ch8-extra-1.jpg", note: "Mécanismes de la douleur : nociceptif vs neuropathique"},
+    {match: "douleur|évaluation|EVA|ECPA", img: "images/chapters/educational/ch8-1.jpg", note: "Évaluation de la douleur (EVA/ECPA)"},
+    {match: "nociceptif|neuropathique", img: "images/chapters/educational/ch8-2.jpg", note: "Mécanismes de la douleur"},
+    {match: "retentissement|sommeil|mobilité|humeur", img: "images/chapters/educational/ch8-3.jpg", note: "Retentissement de la douleur"},
+    {match: "cycle|syndrome gériatrique", img: "images/chapters/educational/ch8-4.jpg", note: "Cycle vicieux de la douleur"},
+    {match: "prise en charge|holistique|positionnement", img: "images/chapters/educational/ch8-5.jpg", note: "Prise en charge holistique"},
+    {match: "comportementale|non communicant", img: "images/chapters/educational/ch8-6.jpg", note: "Évaluation comportementale"}
+  ],
+  "ch9": [
+    {match: "physiopathologie|plaques|enchevêtrements|hippocampe|Alzheimer|tau|amyloïde", img: "images/chapters/educational/ch9-extra-1.jpg", note: "Physiopathologie Alzheimer : plaques, enchevêtrements et atrophie"},
+    {match: "mnésique|plainte|Alzheimer|NCD", img: "images/chapters/educational/ch9-1.jpg", note: "Plainte mnésique vs trouble neurocognitif"},
+    {match: "dépistage|MMS|MoCA|horloge", img: "images/chapters/educational/ch9-2.jpg", note: "Dépistage cognitif"},
+    {match: "physiopath|plaques|enchevêtrements|hippocampe", img: "images/chapters/educational/ch9-3.jpg", note: "Physiopathologie Alzheimer"},
+    {match: "sous-types|Lewy|vasculaire", img: "images/chapters/educational/ch9-4.jpg", note: "Sous-types de troubles neurocognitifs"},
+    {match: "différentiel|causes réversibles|dépression", img: "images/chapters/educational/ch9-5.jpg", note: "Diagnostic différentiel et causes réversibles"},
+    {match: "approche|famille|soins", img: "images/chapters/educational/ch9-6.jpg", note: "Approche holistique et familiale"}
+  ],
+  "ch10": [
+    {match: "physiopathologie|mécanismes|dépression|atypique|pseudodémence|somatique", img: "images/chapters/educational/ch10-extra-1.jpg", note: "Mécanismes et présentation atypique de la dépression"},
+    {match: "thymique|dépression|atypique|somatique", img: "images/chapters/educational/ch10-1.jpg", note: "Présentation atypique de la dépression"},
+    {match: "GDS|évaluation", img: "images/chapters/educational/ch10-2.jpg", note: "Évaluation GDS-15"},
+    {match: "pseudodémence|réversible", img: "images/chapters/educational/ch10-3.jpg", note: "Pseudodémence vs démence"},
+    {match: "mécanismes|sérotonine|HPA|inflammation", img: "images/chapters/educational/ch10-4.jpg", note: "Mécanismes biologiques"},
+    {match: "impacts|autonomie|chutes|nutrition", img: "images/chapters/educational/ch10-5.jpg", note: "Retentissement sur l'autonomie"},
+    {match: "prise en charge|récupération|écoute", img: "images/chapters/educational/ch10-6.jpg", note: "Prise en charge et récupération"}
+  ],
+  "ch11": [
+    {match: "confusionnel|delirium", img: "images/chapters/educational/ch11-delirium-mecanisme-compact.jpg", note: "Mécanisme du delirium (compact)"},
+    {match: "vulnérabilité|précipitant", img: "images/chapters/educational/ch11-delirium-vulnerabilite-precipitants.jpg", note: "Modèle vulnérabilité-précipitants"},
+    {match: "vulnérabilité|précipitant|confusion", img: "images/chapters/educational/ch11-delirium-vulnerabilite-precipitants-16x9.jpg", note: "Modèle vulnérabilité-précipitants du delirium (large 16:9)"},
+    {match: "chute", img: "images/chapters/educational/ch11-1.jpg", note: "Lien avec chutes"},
+    {match: "médicament|iatrog", img: "images/chapters/educational/ch11-2.jpg", note: "Médicaments déclencheurs"},
+    {match: "cognition|confusion", img: "images/chapters/educational/ch11-3.jpg", note: "Impact cognitif"},
+    {match: "prise en charge|prévention", img: "images/chapters/educational/ch11-4.jpg", note: "Prise en charge et prévention"}
+  ],
+  "ch12": [
+    {match: "chute|risque|multifactoriel", img: "images/chapters/educational/ch12-chutes-multifactoriels-compact.jpg", note: "Risques multifactoriels de chute (compact)"},
+    {match: "chute|risque|multifactoriel", img: "images/chapters/educational/ch12-chutes-multifactoriel-16x9.jpg", note: "Risques multifactoriels de chute (large 16:9)"},
+    {match: "TUG|démarche|Timed", img: "images/chapters/educational/ch12-tug-edu.jpg", note: "Test TUG en étapes"},
+    {match: "fragilité|Fried", img: "images/chapters/educational/ch12-1.jpg", note: "Fragilité"},
+    {match: "chute", img: "images/chapters/educational/ch12-chute-multifactorielle-compact.jpg", note: "Démarche diagnostique chutes"},
+    {match: "prescription|polyméd", img: "images/chapters/educational/ch12-2.jpg", note: "Médicaments"},
+    {match: "nutrition|évaluation", img: "images/chapters/educational/ch12-3.jpg", note: "Nutrition et chutes"},
+    {match: "diagnostic|évaluation", img: "images/chapters/educational/ch12-4.jpg", note: "Évaluation du risque"}
+  ],
+  "ch13": [
+    {match: "immobilisation|alitement", img: "images/chapters/educational/ch13-cascade-immobilisation.jpg", note: "Cascade d'immobilisation"},
+    {match: "immobilisation|alitement|cascade", img: "images/chapters/educational/ch13-cascade-immobilisation-16x9.jpg", note: "Cascade du syndrome d'immobilisation (large 16:9)"},
+    {match: "chute", img: "images/chapters/educational/ch13-1.jpg", note: "Chutes et immobilisation"},
+    {match: "fragilité", img: "images/chapters/educational/ch13-2.jpg", note: "Fragilité"},
+    {match: "nutrition", img: "images/chapters/educational/ch13-3.jpg", note: "Nutrition"},
+    {match: "prescri", img: "images/chapters/educational/ch13-4.jpg", note: "Prescription"},
+    {match: "cognition", img: "images/chapters/educational/ch13-5.jpg", note: "Cognition et delirium"},
+    {match: "prévention|prise en charge", img: "images/chapters/educational/ch13-6.jpg", note: "Prévention et prise en charge"}
+  ],
+  "ch14": [
+    {match: "nutrition|état nutritionnel|MNA", img: "images/chapters/educational/ch14-evaluation-nutritionnelle.jpg", note: "Évaluation nutritionnelle"},
+    {match: "sarcopénie|dénutrition|nutrition", img: "images/chapters/educational/ch14-denutrition-sarcopenie-cycle-16x9.jpg", note: "Cycle de la dénutrition et sarcopénie (16:9)"},
+    {match: "fragilité", img: "images/chapters/educational/ch14-1.jpg", note: "Fragilité"},
+    {match: "chute", img: "images/chapters/educational/ch14-2.jpg", note: "Chutes"},
+    {match: "prescri", img: "images/chapters/educational/ch14-3.jpg", note: "Prescription"},
+    {match: "cognition", img: "images/chapters/educational/ch14-4.jpg", note: "Cognition"},
+    {match: "sarcopénie|dénutrition", img: "images/chapters/educational/ch14-denutrition-cycle-compact.jpg", note: "Sarcopénie et dénutrition"},
+    {match: "diagnostic", img: "images/chapters/educational/ch14-5.jpg", note: "Diagnostic nutritionnel"}
+  ],
+  "ch15": [
+    {match: "vésico|incontinence", img: "images/chapters/educational/ch15-incontinence-classification.jpg", note: "Classification des incontinences"},
+    {match: "chute", img: "images/chapters/educational/ch15-1.jpg", note: "Chutes"},
+    {match: "fragilité", img: "images/chapters/educational/ch15-2.jpg", note: "Fragilité"},
+    {match: "nutrition", img: "images/chapters/educational/ch15-3.jpg", note: "Nutrition"},
+    {match: "prescri", img: "images/chapters/educational/ch15-4.jpg", note: "Prescription"},
+    {match: "cognition", img: "images/chapters/educational/ch15-5.jpg", note: "Cognition"},
+    {match: "évaluation|diagnostic", img: "images/chapters/educational/ch15-6.jpg", note: "Évaluation troubles vésicaux"}
+  ],
+  "ch16": [
+    {match: "prescri|polyméd|iatrog", img: "images/chapters/educational/ch16-prescription-appropriee.jpg", note: "Prescription appropriée"},
+    {match: "prescri|polyméd|iatrog|STOPP|START", img: "images/chapters/educational/ch16-prescription-appropriee-flow-16x9.jpg", note: "Prescription appropriée (STOPP/START, 16:9)"},
+    {match: "chute", img: "images/chapters/educational/ch16-1.jpg", note: "Chute et médicaments"},
+    {match: "delirium|confusion", img: "images/chapters/educational/ch16-2.jpg", note: "Confusion iatrogène"},
+    {match: "fragilité", img: "images/chapters/educational/ch16-3.jpg", note: "Fragilité"},
+    {match: "cognition", img: "images/chapters/educational/ch16-4.jpg", note: "Cognition"},
+    {match: "nutrition", img: "images/chapters/educational/ch16-5.jpg", note: "Nutrition"},
+    {match: "évaluation|risque", img: "images/chapters/educational/ch16-6.jpg", note: "Outils d'évaluation"}
+  ],
+  "ch17": [
+    {match: "palliatif|fin de vie", img: "images/chapters/educational/ch17-soins-palliatifs-decision.jpg", note: "Décision en soins palliatifs"},
+    {match: "palliatif|fin de vie|décision|accompagnement", img: "images/chapters/educational/ch17-palliatif-decision-16x9.jpg", note: "Décision et accompagnement palliatif (16:9)"},
+    {match: "chute", img: "images/chapters/educational/ch17-1.jpg", note: "Chutes"},
+    {match: "fragilité", img: "images/chapters/educational/ch17-2.jpg", note: "Fragilité"},
+    {match: "nutrition", img: "images/chapters/educational/ch17-3.jpg", note: "Nutrition"},
+    {match: "prescri", img: "images/chapters/educational/ch17-4.jpg", note: "Prescription"},
+    {match: "cognition", img: "images/chapters/educational/ch17-5.jpg", note: "Cognition"},
+    {match: "symptôme|douleur|accompagnement", img: "images/chapters/educational/ch17-6.jpg", note: "Symptômes et accompagnement"}
+  ],
+  "ch18": [
+    {match: "dossier|cas", img: "images/chapters/educational/ch19-20-keyfeatures-revision.jpg", note: "Mini-dossiers et key features"},
+    {match: "chute", img: "images/chapters/educational/ch18-1.jpg", note: "Chutes"},
+    {match: "delirium", img: "images/chapters/educational/ch18-2.jpg", note: "Delirium"},
+    {match: "fragilité", img: "images/chapters/educational/ch18-3.jpg", note: "Fragilité"},
+    {match: "prescri", img: "images/chapters/educational/ch18-4.jpg", note: "Prescription"},
+    {match: "nutrition", img: "images/chapters/educational/ch18-5.jpg", note: "Nutrition"},
+    {match: "progressif|mini", img: "images/chapters/educational/ch18-6.jpg", note: "Cas progressifs"}
+  ],
+  "ch19": [
+    {match: "feature|key", img: "images/chapters/educational/ch19-20-keyfeatures-revision.jpg", note: "Key features problems"},
+    {match: "chute", img: "images/chapters/educational/ch19-1.jpg", note: "Chutes"},
+    {match: "delirium", img: "images/chapters/educational/ch19-2.jpg", note: "Delirium"},
+    {match: "fragilité", img: "images/chapters/educational/ch19-3.jpg", note: "Fragilité"},
+    {match: "prescri", img: "images/chapters/educational/ch19-4.jpg", note: "Prescription"},
+    {match: "nutrition", img: "images/chapters/educational/ch19-5.jpg", note: "Nutrition"},
+    {match: "révision|cas", img: "images/chapters/educational/ch19-6.jpg", note: "Révision key features"}
+  ],
+  "ch20": [
+    {match: "question|révision", img: "images/chapters/educational/ch19-20-keyfeatures-revision.jpg", note: "Questions isolées et révision"},
+    {match: "chute", img: "images/chapters/educational/ch20-1.jpg", note: "Chutes"},
+    {match: "delirium", img: "images/chapters/educational/ch20-2.jpg", note: "Delirium"},
+    {match: "fragilité", img: "images/chapters/educational/ch20-3.jpg", note: "Fragilité"},
+    {match: "prescri", img: "images/chapters/educational/ch20-4.jpg", note: "Prescription"},
+    {match: "nutrition", img: "images/chapters/educational/ch20-5.jpg", note: "Nutrition"},
+    {match: "item|connaissances", img: "images/chapters/educational/ch20-6.jpg", note: "Révision ITEMs"}
+  ]
 };
 
