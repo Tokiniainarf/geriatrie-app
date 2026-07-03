@@ -1824,6 +1824,13 @@ input[type="range"] { width: 100px; accent-color: var(--accent); }
   color: #fff; text-align: center; font-weight: 500;
   margin: 0; text-shadow: 0 2px 8px rgba(0,0,0,.2);
 }
+/* Center text for feed cards without media */
+#vFeed .bf-card-content:not(:has(img)):not(:has(video)) {
+  text-align: center;
+}
+#vFeed .bf-card-main {
+  text-align: center;
+}
 /* Center text for feed cards without media (citation, chiffres, pièges, memos etc.) */
 #vFeed .bf-panel-citation,
 #vFeed .bf-panel-chiffre,

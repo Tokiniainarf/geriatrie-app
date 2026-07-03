@@ -434,6 +434,14 @@ function injectEducationalVisuals(chId, cc) {
       currentCount++;
     }
   }
+
+  // For ch1, ensure the key summary "Les deux éléments clefs du bien vieillir" appears at the end as a highlighted box (not inside vitamin D or other sections)
+  if (S.ch === 'ch1') {
+    const keyPointHtml = `<div class="para-card key-point"><p>Les deux éléments clefs du bien vieillir comprennent : alimentation adaptée (ni trop dans la jeunesse, ni trop peu dans la vieillesse) ; maintien ou reprise d\'une activité physique adaptée.</p></div>`;
+    if (!cc.innerHTML.includes('éléments clefs du bien vieillir')) {
+      cc.innerHTML += keyPointHtml;
+    }
+  }
 }
 
 // Helper: create consistent figure wrapper for images OR videos (mp4 support for new mechanism visuals)
