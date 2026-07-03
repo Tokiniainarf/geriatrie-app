@@ -717,6 +717,15 @@ function renderChapter(raw,chId){
     if (/Question|QRM|key.?feature|mini.?dossier|énoncé/i.test(l)) return true; // protect QA/practice content for ch18-20
     return false;
   });
+
+  // Clean embedded side headers like "Connaissances" that leak from page layout into paragraphs (common in ch1 and others)
+  // Also clean copyright, page nums, ▼ Gériatrie markers that sometimes leak
+  lines = lines.map(l => l.replace(/\s{3,}(Connaissances|Points clés|Entraînement|Gériatrie|Rang Rubrique|Intitulé Descriptif)\s*/gi, ' ')
+                          .replace(/\bConnaissances\s+(?=[•\-])/gi, '')
+                          .replace(/▼\s*Gériatrie\s*©\s*\d{4}[^\n]*/gi, '')
+                          .replace(/\s+\d{1,3}\s*$/,'') // trailing page nums
+                          .replace(/\s*ITEM\s+\d+[\s\-–]*/gi, ' ') // stray ITEM refs
+                          .trim());
   // R2 — Filtrer les listes de sections internes (TOC dupliquees dans le corps)
   // Proteger les 40 premieres lignes
   const preambleHeadings = new Set();
@@ -907,7 +916,7 @@ function renderChapter(raw,chId){
       else flushCallout();
     }
 
-    const figM=l.match(/Fig\.\s*(\d+\.\d+)/);
+    const figM=l.match(/Fig\.?\s*(\d+\.\d+)/i);
     if(figM&&typeof FIGURES!=='undefined'){
       flushPara();flushBullets();flushNumList();
       const figId=figM[1];
@@ -1130,6 +1139,12 @@ function renderChapter(raw,chId){
     const outlineHtml = `<details class="ch-outline" aria-label="Plan du chapitre"><summary>Plan du chapitre</summary><ul>${keptSections.slice(0, 8).map(s => `<li><span class="outline-num">${esc(s.num)}</span> ${esc(s.title)}</li>`).join('')}</ul></details>`;
     html = outlineHtml + html;
   }
+
+  // Highlight key summary points like "Les deux éléments clefs du bien vieillir" or specific "points clés" summaries as special callout (avoid turning section titles into boxes)
+  html = html.replace(/<div class="para-card"><p>([^<]*(?:Les deux éléments clefs du bien vieillir|points clés (?:du bien vieillir|sur les|du diabète|sur les vaccins))[^<]*)<\/p><\/div>/gi, '<div class="para-card key-point"><p>$1</p></div>');
+
+  // Final pass to remove any remaining embedded headers inside paragraphs
+  html = html.replace(/>([^<]*?)\s{2,}(Connaissances|Points clés|Gériatrie ©)[^<]{0,30}</gi, '>$1<');
 
   return html||'<div class="empty"><div class="empty-text">Aucun contenu structuré</div></div>';
 }

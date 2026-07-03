@@ -1824,6 +1824,20 @@ input[type="range"] { width: 100px; accent-color: var(--accent); }
   color: #fff; text-align: center; font-weight: 500;
   margin: 0; text-shadow: 0 2px 8px rgba(0,0,0,.2);
 }
+/* Center text for feed cards without media (citation, chiffres, pièges, memos etc.) */
+#vFeed .bf-panel-citation,
+#vFeed .bf-panel-chiffre,
+#vFeed .bf-panel-piege,
+#vFeed .bf-panel-memo,
+#vFeed .bf-panel-stat {
+  text-align: center;
+}
+#vFeed .bf-panel-citation p,
+#vFeed .bf-panel-chiffre p,
+#vFeed .bf-panel-piege p,
+#vFeed .bf-panel-memo p {
+  text-align: center;
+}
 .bf-answer-text {
   font-family: var(--reader); font-size: 1.05rem; line-height: 1.6;
   color: rgba(255,255,255,.95); text-align: left; margin: 0;
@@ -2059,7 +2073,14 @@ input[type="range"] { width: 100px; accent-color: var(--accent); }
   border-radius: 32px;
 }
 .bf-quote-mark { font-size: 4rem; line-height: .5; color: rgba(216,180,254,.35); font-family: Georgia, serif; }
-.bf-quote-text { font-size: 1.2rem; font-style: italic; line-height: 1.65; color: #f5f3ff; margin: 16px 0 20px; }
+.bf-quote-text { font-size: 1.2rem; font-style: italic; line-height: 1.65; color: #f5f3ff; margin: 16px 0 20px; text-align: center; }
+/* Ensure text in feed cards without visual media is centered */
+#vFeed .bf-card-content:not(:has(img)):not(:has(video)) p,
+#vFeed .bf-card-content:not(:has(img)):not(:has(video)) .bf-quote-text,
+#vFeed .bf-card-content:not(:has(img)):not(:has(video)) .bf-trap-wrong p,
+#vFeed .bf-card-content:not(:has(img)):not(:has(video)) .bf-trap-right p {
+  text-align: center !important;
+}
 .bf-quote-author { font-size: .88rem; color: #c4b5fd; font-style: normal; font-weight: 600; }
 .bf-quote-badge {
   display: inline-block; margin-top: 20px; font-size: .65rem; font-weight: 800;
