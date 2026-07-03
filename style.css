@@ -1826,10 +1826,10 @@ input[type="range"] { width: 100px; accent-color: var(--accent); }
 }
 /* Center text for feed cards without media */
 #vFeed .bf-card-content:not(:has(img)):not(:has(video)) {
-  text-align: center;
+  text-align: center !important;
 }
 #vFeed .bf-card-main {
-  text-align: center;
+  text-align: center !important;
 }
 /* Center text for feed cards without media (citation, chiffres, pièges, memos etc.) */
 #vFeed .bf-panel-citation,
