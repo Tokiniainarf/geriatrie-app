@@ -444,6 +444,9 @@ function injectEducationalVisuals(chId, cc) {
   }
 }
 
+// force deploy trigger for GitHub Pages - bad text removed from data, feed centering forced
+
+
 // Helper: create consistent figure wrapper for images OR videos (mp4 support for new mechanism visuals)
 // Designed to illustrate without breaking paragraph flow: full-width clean after headings, or compact where specified
 function createEduVisualWrapper(src, captionText) {
