@@ -1015,7 +1015,7 @@ const BrainFeed = (() => {
             <header class="bf-card-hdr">
               <span class="bf-type-badge">⚡ QUIZ FLASH</span>
             </header>
-            <main class="bf-card-main scrollable">
+            <main class="bf-card-main">
               <h2 class="bf-quiz-q">${esc(card.question)}</h2>
               <div class="bf-quiz-options">${opts}</div>
             </main>
@@ -1140,7 +1140,7 @@ const BrainFeed = (() => {
                 <span class="bf-trap-x">✕</span>
                 <p>${esc(card.trap)}</p>
               </div>
-              <p class="bf-trap-prompt" style="text-align: center; margin-top: 24px; font-size: 0.95rem; color: rgba(255,255,255,0.7); font-style: italic; font-weight: 500;">
+              <p class="bf-trap-prompt" style="text-align: center; margin-top: 8px; font-size: 0.92rem; color: rgba(255,255,255,0.75); font-style: italic; font-weight: 500;">
                 👉 Pourquoi est-ce une erreur et comment la corriger ?
               </p>
             </main>
