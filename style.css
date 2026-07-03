@@ -241,6 +241,12 @@ input { font-family: inherit; font-size: inherit; }
   content: ''; position: absolute; inset: 0;
   background: radial-gradient(circle at 25% 40%, rgba(255,255,255,.5), transparent 55%);
 }
+.hero-main-img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0.35; z-index: 0; border-radius: var(--radius);
+  pointer-events: none;
+}
+[data-theme="dark"] .hero-main-img { opacity: 0.25; }
 .hero-content {
   padding: 18px 20px;
   background: var(--bg-elevated);
@@ -376,7 +382,7 @@ input { font-family: inherit; font-size: inherit; }
 .ch-hero::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 80% 20%, rgba(255,255,255,.12), transparent 50%); }
 .ch-hero-img {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-  opacity: .18; z-index: 0; border-radius: var(--radius);
+  opacity: .28; z-index: 0; border-radius: var(--radius);
   pointer-events: none;
 }
 .ch-num { font-size: 3.5rem; font-weight: 800; opacity: .15; position: absolute; top: 8px; right: 20px; }

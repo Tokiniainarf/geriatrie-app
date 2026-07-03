@@ -432,6 +432,25 @@ const BrainFeed = (() => {
       tags: ['Chiffre clé', c.source]
     }));
 
+    // Attach explanatory visuals (new media only - all original texts preserved)
+    chiffreCle.forEach(c => {
+      if (c.line && /timed up and go|tug/i.test(c.line)) {
+        c.video = 'images/feed/tug-test-explanatory.mp4';
+        c.image = 'images/feed/tug-test-base.jpg';
+      }
+      if (c.line && /chutent au moins une fois par an/i.test(c.line)) {
+        c.image = 'images/feed/fall-risk.jpg';
+      }
+      // Additional explanatory image available
+      if (c.line && /chutent au moins une fois par an/i.test(c.line)) {
+        c.image2 = 'images/feed/fall-assessment.jpg';
+      }
+      if (c.line && /fragilit| vitesse de marche/i.test(c.line)) {
+        c.image = 'images/feed/frailty-walk.jpg';
+        c.video = 'images/feed/frailty-gait-explanatory.mp4';
+      }
+    });
+
     const citation = CITATIONS.map((c, i) => ({
       type: 'citation', id: 'cit-' + i,
       chapter: '', rang: '',
@@ -899,6 +918,8 @@ const BrainFeed = (() => {
             </header>
             <main class="bf-card-main">
               <p class="bf-question-text" style="font-size: 1.15rem;">${esc(card.line)}</p>
+              ${card.video ? `<video src="${card.video}" controls muted loop playsinline style="width:100%; max-height: 380px; border-radius: 10px; margin-top: 10px; background:#000;"></video>` : ''}
+              ${!card.video && card.image ? `<img src="${card.image}" alt="" style="width:100%; border-radius: 10px; margin-top: 10px;">` : ''}
             </main>
             <footer class="bf-card-ftr">
               <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:document.getElementById('bfScroll-${slideIdx}').clientWidth,behavior:'smooth'})">Révéler la réponse ➔</button>
@@ -917,6 +938,8 @@ const BrainFeed = (() => {
                 <span class="bf-stat-number" data-target="${card.value}">${displayVal}</span>
                 <span class="bf-stat-unit">${esc(card.unit)}</span>
               </div>
+              ${card.video ? `<video src="${card.video}" controls muted loop playsinline style="width:100%; max-height: 320px; border-radius: 10px; margin-top: 12px; background:#000;"></video>` : ''}
+              ${!card.video && card.image ? `<img src="${card.image}" alt="" style="width:100%; border-radius: 10px; margin-top: 12px;">` : ''}
             </main>
             <footer class="bf-card-ftr">
               <span class="bf-stat-source">${esc(card.source)}</span>
