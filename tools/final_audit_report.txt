@@ -1,7 +1,7 @@
 === FINAL APP AUDIT ===
 JS load simulation: OK
 BrainFeed deck size: 98
-Type distribution: {"chiffre_cle":13,"quiz_flash":19,"cas_choc":17,"memo_jour":17,"flash":5,"reco":5,"citation":5,"synthesis":3,"case":2,"piege_exam":12}
+Type distribution: {"memo_jour":17,"piege_exam":12,"cas_choc":17,"reco":5,"quiz_flash":19,"citation":5,"chiffre_cle":13,"flash":5,"case":2,"synthesis":3}
 Malformed quiz: 0, Incomplete cas: 0
 Chapter render: no header/footer leaks
 === END ===

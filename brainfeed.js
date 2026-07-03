@@ -37,6 +37,7 @@ const BrainFeed = (() => {
     chiffre_cle: 0.14,
     citation: 0.05,
     piege_exam: 0.15,
+    visual: 0.10,
     flash: 0.05,
     synthesis: 0.03,
     case: 0.02,
@@ -436,10 +437,10 @@ const BrainFeed = (() => {
     chiffreCle.forEach(c => {
       if (c.line && /timed up and go|tug/i.test(c.line)) {
         c.video = 'images/feed/tug-test-explanatory.mp4';
-        c.image = 'images/feed/tug-test-base.jpg';
+        c.image = 'images/feed/illustrative/tug-steps-educational.jpg';
       }
       if (c.line && /chutent au moins une fois par an/i.test(c.line)) {
-        c.image = 'images/feed/fall-risk.jpg';
+        c.image = 'images/feed/illustrative/falls-multifactorial-educational.jpg';
       }
       // Additional explanatory image available
       if (c.line && /chutent au moins une fois par an/i.test(c.line)) {
@@ -448,6 +449,17 @@ const BrainFeed = (() => {
       if (c.line && /fragilit| vitesse de marche/i.test(c.line)) {
         c.image = 'images/feed/frailty-walk.jpg';
         c.video = 'images/feed/frailty-gait-explanatory.mp4';
+      }
+      if (c.line && /fried.*critères|nombre de critères de fried/i.test(c.line)) {
+        c.image = 'images/feed/illustrative/fried-fragilite.jpg';
+      }
+      if (c.line && /polymédication|iatrogénie/i.test(c.line)) {
+        c.image = 'images/feed/illustrative/feed-vis-5.jpg';
+        c.video = 'images/feed/videos/feed-vis-5.mp4';
+      }
+      if (c.line && /sarcopénie|vitesse de marche/i.test(c.line)) {
+        c.image = 'images/feed/illustrative/feed-vis-17.jpg';
+        c.video = 'images/feed/videos/feed-vis-17.mp4';
       }
     });
 
@@ -464,6 +476,30 @@ const BrainFeed = (() => {
       trap: p.trap, explain: p.explain,
       tags: ['Piège EDN']
     }));
+
+    // Attach illustrative media for key mechanisms (new explanatory visuals, texts untouched)
+    piegeExam.forEach(p => {
+      const t = (p.trap || '').toLowerCase();
+      if (t.includes('chute') && t.includes('accident')) {
+        p.video = 'images/feed/illustrative/chute-multifactorielle.mp4';
+        p.image = 'images/feed/illustrative/chute-multifactorielle.jpg';
+      }
+      if (t.includes('delirium') && (t.includes('agitation') || t.includes('benzodiazépine'))) {
+        p.video = 'images/feed/illustrative/delirium-mecanisme.mp4';
+        p.image = 'images/feed/illustrative/delirium-mecanisme.jpg';
+      }
+      if (t.includes('polymédication')) {
+        p.image = 'images/feed/illustrative/polymedication-iatrogene.jpg';
+        p.video = 'images/feed/videos/feed-vis-5.mp4';
+      }
+      if (t.includes('chute') && !t.includes('accident')) {
+        p.image = 'images/feed/illustrative/feed-vis-1.jpg';
+        p.video = 'images/feed/videos/feed-vis-1.mp4';
+      }
+      if (t.includes('sarcopénie') || t.includes('marche')) {
+        p.image = 'images/feed/illustrative/feed-vis-17.jpg';
+      }
+    });
     // Add external pieges-exam.js
     if (typeof PIEGES_EXAM_EXT !== 'undefined') {
       PIEGES_EXAM_EXT.forEach(p => {
@@ -476,7 +512,84 @@ const BrainFeed = (() => {
       });
     }
 
-    return { memoJour, casChoc, quizFlash, chiffreCle, citation, piegeExam, allFlash, srs };
+    // 20+ visual explanation cards for the feed (videos and images to illustrate mechanisms)
+    const visualMedias = [
+      // New 9:16 reel-optimized feed-vis generated (images + videos) - full vertical feel + French captions integrated
+      {media: 'images/feed/illustrative/feed-vis-22.jpg', isVideo: false, title: 'Chutes multifactorielle'},
+      {media: 'images/feed/videos/feed-vis-22.mp4', isVideo: true, title: 'Chutes multifactorielle - Vidéo'},
+      {media: 'images/feed/illustrative/feed-vis-23.jpg', isVideo: false, title: 'Cycle dénutrition-sarcopénie'},
+      {media: 'images/feed/videos/feed-vis-23.mp4', isVideo: true, title: 'Cycle dénutrition - Animation'},
+      {media: 'images/feed/illustrative/feed-vis-24.jpg', isVideo: false, title: 'Causes réversibles du delirium'},
+      {media: 'images/feed/illustrative/feed-vis-25.jpg', isVideo: false, title: 'Critères de Fried (fragilité)'},
+      {media: 'images/feed/videos/feed-vis-25.mp4', isVideo: true, title: 'Critères de Fried - Vidéo'},
+      {media: 'images/feed/illustrative/feed-vis-26.jpg', isVideo: false, title: 'Polymédication et Beers'},
+      // Existing layout-optimized (compact 9/16 for better text flow)
+      {media: 'images/feed/illustrative/delirium-mecanisme-reel.jpg', isVideo: false, title: 'Mécanisme du delirium (compact)'},
+      {media: 'images/feed/videos/delirium-mecanisme-compact.mp4', isVideo: true, title: 'Mécanisme du delirium - Vidéo'},
+      {media: 'images/feed/illustrative/chute-multifactorielle-reel.jpg', isVideo: false, title: 'Chutes multifactoriels (compact)'},
+      {media: 'images/feed/videos/chute-multifactorielle-compact.mp4', isVideo: true, title: 'Chutes multifactoriels - Vidéo'},
+      {media: 'images/feed/illustrative/denutrition-cycle-reel.jpg', isVideo: false, title: 'Cycle de dénutrition (compact)'},
+      {media: 'images/feed/videos/denutrition-cycle-compact.mp4', isVideo: true, title: 'Cycle de dénutrition - Vidéo'},
+      {media: 'images/chapters/educational/ch13-cascade-immobilisation.jpg', isVideo: false, title: 'Cascade d\'immobilisation'},
+      {media: 'images/feed/videos/ch13-immobilisation-cascade-animation.mp4', isVideo: true, title: 'Cascade immobilisation - Animation'},
+      {media: 'images/chapters/educational/ch15-incontinence-classification.jpg', isVideo: false, title: 'Classification des incontinences'},
+      {media: 'images/chapters/educational/ch16-prescription-appropriee.jpg', isVideo: false, title: 'Prescription appropriée'},
+      {media: 'images/chapters/educational/ch17-soins-palliatifs-decision.jpg', isVideo: false, title: 'Décision soins palliatifs'},
+      {media: 'images/chapters/educational/ch19-20-keyfeatures-revision.jpg', isVideo: false, title: 'Key features et révision'},
+      // Keep previous feed-vis for variety
+      {media: 'images/feed/illustrative/feed-vis-1.jpg', isVideo: false, title: 'Chutes multifactorielle'},
+      {media: 'images/feed/videos/feed-vis-1.mp4', isVideo: true, title: 'Chutes multifactorielle - Mécanisme'},
+      {media: 'images/feed/illustrative/feed-vis-2.jpg', isVideo: false, title: 'Mécanisme du delirium'},
+      {media: 'images/feed/videos/feed-vis-2.mp4', isVideo: true, title: 'Mécanisme du delirium'},
+      {media: 'images/feed/illustrative/feed-vis-3.jpg', isVideo: false, title: 'Critères de Fried (fragilité)'},
+      {media: 'images/feed/videos/feed-vis-3.mp4', isVideo: true, title: 'Critères de Fried - Fragilité'},
+      {media: 'images/feed/illustrative/feed-vis-4.jpg', isVideo: false, title: 'Test Timed Up and Go (TUG)'},
+      {media: 'images/feed/videos/feed-vis-4.mp4', isVideo: true, title: 'Test TUG - Étapes et seuils'},
+      {media: 'images/feed/illustrative/feed-vis-5.jpg', isVideo: false, title: 'Polymédication et iatrogénie'},
+      {media: 'images/feed/videos/feed-vis-5.mp4', isVideo: true, title: 'Polymédication - Risques'},
+      {media: 'images/feed/illustrative/feed-vis-6.jpg', isVideo: false, title: 'Vieillissement cellulaire et réserve'},
+      {media: 'images/feed/videos/feed-vis-6.mp4', isVideo: true, title: 'Vieillissement cellulaire'},
+      {media: 'images/feed/illustrative/feed-vis-7.jpg', isVideo: false, title: 'Évaluation gériatrique globale (CGA)'},
+      {media: 'images/feed/videos/feed-vis-7.mp4', isVideo: true, title: 'CGA - Évaluation multidimensionnelle'},
+      {media: 'images/feed/illustrative/feed-vis-8.jpg', isVideo: false, title: 'Déficits sensoriels'},
+      {media: 'images/feed/videos/feed-vis-8.mp4', isVideo: true, title: 'Déficits sensoriels - Conséquences'},
+      {media: 'images/feed/illustrative/feed-vis-9.jpg', isVideo: false, title: 'Nutrition et dénutrition (MNA)'},
+      {media: 'images/feed/videos/feed-vis-9.mp4', isVideo: true, title: 'Nutrition - Dénutrition'},
+      {media: 'images/feed/illustrative/feed-vis-10.jpg', isVideo: false, title: 'Ostéoporose et risque de fracture'},
+      {media: 'images/feed/videos/feed-vis-10.mp4', isVideo: true, title: 'Ostéoporose - Mécanisme'},
+      {media: 'images/feed/illustrative/feed-vis-11.jpg', isVideo: false, title: 'Hypotension orthostatique'},
+      {media: 'images/feed/videos/feed-vis-11.mp4', isVideo: true, title: 'Hypotension orthostatique'},
+      {media: 'images/feed/illustrative/feed-vis-12.jpg', isVideo: false, title: 'Douleur : échelle ECPA'},
+      {media: 'images/feed/videos/feed-vis-12.mp4', isVideo: true, title: 'Douleur - Évaluation ECPA'},
+      {media: 'images/feed/illustrative/feed-vis-13.jpg', isVideo: false, title: 'Incontinence et causes réversibles (DIAPPERS)'},
+      {media: 'images/feed/videos/feed-vis-13.mp4', isVideo: true, title: 'Incontinence - DIAPPERS'},
+      {media: 'images/feed/illustrative/feed-vis-14.jpg', isVideo: false, title: 'Prévention des escarres (Braden)'},
+      {media: 'images/feed/videos/feed-vis-14.mp4', isVideo: true, title: 'Escarres - Prévention Braden'},
+      {media: 'images/feed/illustrative/feed-vis-15.jpg', isVideo: false, title: 'Dépression vs pseudo-démence'},
+      {media: 'images/feed/videos/feed-vis-15.mp4', isVideo: true, title: 'Dépression vs pseudo-démence'},
+      {media: 'images/feed/illustrative/feed-vis-16.jpg', isVideo: false, title: 'Critères de Beers / PIM'},
+      {media: 'images/feed/videos/feed-vis-16.mp4', isVideo: true, title: 'Beers criteria - Risques'},
+      {media: 'images/feed/illustrative/feed-vis-17.jpg', isVideo: false, title: 'Sarcopénie et vitesse de marche'},
+      {media: 'images/feed/videos/feed-vis-17.mp4', isVideo: true, title: 'Sarcopénie - Interventions'},
+      {media: 'images/feed/illustrative/feed-vis-18.jpg', isVideo: false, title: 'Score Tinetti (POMA)'},
+      {media: 'images/feed/videos/feed-vis-18.mp4', isVideo: true, title: 'Score Tinetti - Risque'},
+      {media: 'images/feed/illustrative/feed-vis-19.jpg', isVideo: false, title: 'Causes réversibles du delirium'},
+      {media: 'images/feed/videos/feed-vis-19.mp4', isVideo: true, title: 'Delirium - Causes réversibles'},
+      {media: 'images/feed/illustrative/feed-vis-20.jpg', isVideo: false, title: 'Capacité décisionnelle et éthique'},
+      {media: 'images/feed/videos/feed-vis-20.mp4', isVideo: true, title: 'Capacité et consentement'},
+      {media: 'images/feed/illustrative/feed-vis-21.jpg', isVideo: false, title: 'Sarcopénie - Mécanismes'},
+      {media: 'images/feed/videos/feed-vis-21.mp4', isVideo: true, title: 'Sarcopénie et interventions'}
+    ];
+    const visualExplanations = visualMedias.map((v, i) => ({
+      type: 'visual',
+      id: 'vis-' + (i+1),
+      question: v.title,
+      answer: 'Illustration clé — Visualisez et retenez',
+      media: v.media,
+      isVideo: v.isVideo
+    }));
+
+    return { memoJour, casChoc, quizFlash, chiffreCle, citation, piegeExam, visualExplanations, allFlash, srs };
   }
 
   function buildLegacyPools(allFlash, srs) {
@@ -560,6 +673,7 @@ const BrainFeed = (() => {
       chiffre_cle: pickN(pools.chiffreCle, counts.chiffre_cle),
       citation: pickN(pools.citation, counts.citation),
       piege_exam: pickN(pools.piegeExam, counts.piege_exam),
+      visual: pickN(pools.visualExplanations, counts.visual || 10),
       flash: [], synthesis: [], case: [], reco: []
     };
     const legacy = shuffle(buildLegacyPools(pools.allFlash, pools.srs));
@@ -602,6 +716,26 @@ const BrainFeed = (() => {
     return d.innerHTML;
   }
 
+  function renderVisual(card, slideIdx) {
+    const mediaHtml = card.isVideo 
+      ? `<video src="${card.media}" controls muted loop playsinline style="width:100%;height:100%;object-fit:contain;"></video>`
+      : `<img src="${card.media}" style="width:100%;height:100%;object-fit:contain;">`;
+    return `
+      <div class="bf-horiz-scroll" id="bfScroll-${slideIdx}">
+        <div class="bf-horiz-page page-1" style="padding:0;align-items:stretch;justify-content:center;background:#0a0a0f;height:100dvh;">
+          <div style="width:100%;height:100%;display:flex;flex-direction:column;">
+            <div class="bf-media-container bf-reel-media" style="flex: 1 1 auto; margin:0; border-radius:0; height: 0; min-height: 0; aspect-ratio: 9 / 16; max-height: 82%;">
+              ${mediaHtml}
+            </div>
+            <div class="bf-visual-text" style="padding:5px 12px 7px;background:linear-gradient(transparent, rgba(0,0,0,0.93));color:#fff;text-align:center;flex-shrink:0;">
+              <p style="font-size:0.76rem;margin:0 0 1px;font-weight:600;letter-spacing:0.01em;line-height:1.15;">${esc(card.question)}</p>
+              <p style="font-size:0.62rem;opacity:0.9;margin:0;line-height:1.15;">${esc(card.answer)}</p>
+            </div>
+          </div>
+        </div>
+      </div>`;
+  }
+
   function renderSlide(card, slideIdx) {
     const slide = document.createElement('div');
     slide.className = 'bf-slide';
@@ -615,7 +749,8 @@ const BrainFeed = (() => {
       quiz_flash: renderQuizFlash,
       chiffre_cle: renderChiffreCle,
       citation: renderCitation,
-      piege_exam: renderPiegeExam
+      piege_exam: renderPiegeExam,
+      visual: renderVisual
     };
 
     if (renderers[card.type]) {
@@ -917,9 +1052,9 @@ const BrainFeed = (() => {
               <span class="bf-type-badge">📊 CHIFFRE CLÉ</span>
             </header>
             <main class="bf-card-main">
-              <p class="bf-question-text" style="font-size: 1.15rem;">${esc(card.line)}</p>
-              ${card.video ? `<video src="${card.video}" controls muted loop playsinline style="width:100%; max-height: 380px; border-radius: 10px; margin-top: 10px; background:#000;"></video>` : ''}
-              ${!card.video && card.image ? `<img src="${card.image}" alt="" style="width:100%; border-radius: 10px; margin-top: 10px;">` : ''}
+              ${card.video ? `<div class="bf-media-container"><video src="${card.video}" controls muted loop playsinline></video></div>` : ''}
+              ${!card.video && card.image ? `<div class="bf-media-container"><img src="${card.image}" alt=""></div>` : ''}
+              <p class="bf-question-text" style="font-size: 1.05rem; margin-top: 8px;">${esc(card.line)}</p>
             </main>
             <footer class="bf-card-ftr">
               <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:document.getElementById('bfScroll-${slideIdx}').clientWidth,behavior:'smooth'})">Révéler la réponse ➔</button>
@@ -934,12 +1069,12 @@ const BrainFeed = (() => {
               <span class="bf-type-badge">📊 Valeur</span>
             </header>
             <main class="bf-card-main">
+              ${card.video ? `<div class="bf-media-container"><video src="${card.video}" controls muted loop playsinline></video></div>` : ''}
+              ${!card.video && card.image ? `<div class="bf-media-container"><img src="${card.image}" alt=""></div>` : ''}
               <div class="bf-stat-number-wrap">
                 <span class="bf-stat-number" data-target="${card.value}">${displayVal}</span>
                 <span class="bf-stat-unit">${esc(card.unit)}</span>
               </div>
-              ${card.video ? `<video src="${card.video}" controls muted loop playsinline style="width:100%; max-height: 320px; border-radius: 10px; margin-top: 12px; background:#000;"></video>` : ''}
-              ${!card.video && card.image ? `<img src="${card.image}" alt="" style="width:100%; border-radius: 10px; margin-top: 12px;">` : ''}
             </main>
             <footer class="bf-card-ftr">
               <span class="bf-stat-source">${esc(card.source)}</span>
@@ -1021,6 +1156,8 @@ const BrainFeed = (() => {
             </header>
             <main class="bf-card-main scrollable">
               ${formatRichAnswer(card)}
+              ${card.video ? `<div class="bf-media-container"><video src="${card.video}" controls muted playsinline></video></div>` : ''}
+              ${!card.video && card.image ? `<div class="bf-media-container"><img src="${card.image}" alt=""></div>` : ''}
             </main>
             <footer class="bf-card-ftr">
               <span class="bf-swipe-left-hint">⬅ Revoir le piège</span>
