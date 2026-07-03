@@ -921,9 +921,17 @@
     });
   }
 
+  let graphBgImg = null;
+  function ensureGraphBg(){
+    if(!graphBgImg){
+      graphBgImg = new Image();
+      graphBgImg.src = 'images/chapters/educational/graph-network-overview.jpg';
+    }
+  }
   function draw(){
     const dark = document.documentElement.getAttribute('data-theme') === 'dark';
     ctx.clearRect(0, 0, W, H);
+    ensureGraphBg();
 
     ctx.save();
     const bgGrad = ctx.createLinearGradient(0, 0, W, H);
@@ -931,6 +939,13 @@
     bgGrad.addColorStop(1, dark ? '#0d0f14' : '#eef2f7');
     ctx.fillStyle = bgGrad;
     ctx.fillRect(0, 0, W, H);
+
+    // subtle network overview background for richer carte des liens
+    if(graphBgImg && graphBgImg.complete && graphBgImg.naturalWidth > 10){
+      ctx.globalAlpha = 0.06;
+      ctx.drawImage(graphBgImg, 0, 0, W, H);
+      ctx.globalAlpha = 1;
+    }
 
     ctx.translate(offsetX, offsetY);
     ctx.scale(scale, scale);

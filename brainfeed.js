@@ -514,6 +514,8 @@ const BrainFeed = (() => {
 
     // 20+ visual explanation cards for the feed (videos and images to illustrate mechanisms)
     const visualMedias = [
+      // Enriched with new targeted diagrams for usefulness (Imagine generated)
+      {media: 'images/chapters/educational/chute-multifactorielle-diagram.jpg', isVideo: false, title: 'Chutes multifactorielle - Diagramme explicatif'},
       // New 9:16 reel-optimized feed-vis generated (images + videos) - full vertical feel + French captions integrated
       {media: 'images/feed/illustrative/feed-vis-22.jpg', isVideo: false, title: 'Chutes multifactorielle'},
       {media: 'images/feed/videos/feed-vis-22.mp4', isVideo: true, title: 'Chutes multifactorielle - Vidéo'},

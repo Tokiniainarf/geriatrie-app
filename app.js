@@ -372,6 +372,12 @@ function injectEducationalVisuals(chId, cc) {
   if (blocks.length < 2) {
     blocks = Array.from(cc.querySelectorAll('h3, .para-card, section, div'));
   }
+  // For QA/practice chapters (ch18-20) with very few blocks, don't spam visuals at end
+  const isQAChapter = ['ch18','ch19','ch20'].includes(chId);
+  if (isQAChapter && blocks.length < 4) {
+    // only use targeted matches, skip forced fill
+    blocks = [];
+  }
 
   // Spaced insert of remaining candidates
   let placed = cc.querySelectorAll('figure.edu-visual-wrapper').length;
@@ -404,12 +410,21 @@ function injectEducationalVisuals(chId, cc) {
   }
 
   // Final strong guarantee: append any missing to reach 6 (distinct only)
+  // Improved: properly scan for next unused candidate
   let currentCount = cc.querySelectorAll('figure.edu-visual-wrapper').length;
   let safety = 0;
-  while (currentCount < 6 && safety < 12) {
+  function pickNextUnused(startIdx) {
+    for (let i = 0; i < candidates.length; i++) {
+      const s = candidates[(startIdx + i) % candidates.length];
+      if (!addedSrcs.has(s)) return s;
+    }
+    return null;
+  }
+  const skipForcedFill = isQAChapter && blocks.length === 0;
+  while (currentCount < 6 && safety < 20 && !skipForcedFill) {
     safety++;
-    const src = candidates[currentCount % candidates.length] || candidates[0];
-    if (addedSrcs.has(src)) { currentCount++; continue; } // will force in next if needed
+    let src = pickNextUnused(currentCount);
+    if (!src) break;
     const w = createEduVisualWrapper(src, `Visuel éducatif – ${chId}`);
     if (w) {
       cc.appendChild(w);
@@ -445,6 +460,11 @@ function createEduVisualWrapper(src, captionText) {
     mediaEl.loop = true;
     mediaEl.playsInline = true;
     mediaEl.setAttribute('aria-label', captionText);
+    mediaEl.onerror = function() {
+      if (this.parentNode && this.parentNode.classList.contains('edu-visual-wrapper')) {
+        this.parentNode.style.display = 'none';
+      }
+    };
   } else {
     mediaEl = document.createElement('img');
     mediaEl.src = src;
@@ -694,6 +714,7 @@ function renderChapter(raw,chId){
     if (l.includes('→')) return true;
     if (/^Situations?\s+de\s+départ/i.test(l)) return true;
     if (/^En lien avec/i.test(l)) return true;
+    if (/Question|QRM|key.?feature|mini.?dossier|énoncé/i.test(l)) return true; // protect QA/practice content for ch18-20
     return false;
   });
   // R2 — Filtrer les listes de sections internes (TOC dupliquees dans le corps)

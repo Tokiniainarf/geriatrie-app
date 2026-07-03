@@ -73,11 +73,11 @@ const EDU_VISUALS = {
   ],
   "ch6": [
     {match: "physiopathologie|remodelage|ostéoporose|déséquilibre|ostéoblastes", img: "images/chapters/educational/ch6-extra-1.jpg", note: "Physiopathologie du remodelage osseux et ostéoporose"},
-    {match: "osseux|ostéoporose|os|remodelage", img: "images/chapters/educational/ch6-1.jpg", note: "Mécanismes du vieillissement osseux"},
+    {match: "osseux|ostéoporose|os|remodelage", img: "images/chapters/educational/ch6-bone-aging.mp4", note: "Animation du vieillissement osseux"},
     {match: "chute|fracture", img: "images/chapters/educational/ch6-2.jpg", note: "Chutes et fractures"},
     {match: "fragilité|risque", img: "images/chapters/educational/ch6-3.jpg", note: "Facteurs de risque osseux"},
     {match: "densité|DEXA", img: "images/chapters/educational/ch6-4.jpg", note: "Évaluation densité osseuse"},
-    {match: "prévention|exercice|vitamine", img: "images/chapters/educational/ch6-5.jpg", note: "Prévention et prise en charge"},
+    {match: "prévention|exercice|vitamine", img: "images/chapters/educational/ch6-prevention-exercise.mp4", note: "Prévention par l'exercice"},
     {match: "physiopath|déséquilibre", img: "images/chapters/educational/ch6-6.jpg", note: "Physiopathologie ostéoporose"}
   ],
   "ch7": [
