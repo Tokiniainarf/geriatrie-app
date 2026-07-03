@@ -7,7 +7,9 @@ const CHAPTER_ILL = {"ch1": "images/p031_0.jpg", "ch2": "images/p049_0.jpg", "ch
 const CHAPTER_HERO = {
   "ch1": "images/chapters/ai-heroes/ch1-aging.jpg",
   "ch2": "images/chapters/ai-heroes/ch2-complex.jpg",
+  "ch4": "images/chapters/ai-heroes/ch4-ethics.jpg",
   "ch6": "images/chapters/ai-heroes/ch6-bone.jpg",
+  "ch8": "images/chapters/ai-heroes/ch8-pain.jpg",
   "ch9": "images/chapters/ai-heroes/ch9-cognitive.jpg",
   "ch11": "images/chapters/ai-heroes/ch11-delirium.jpg",
   "ch12": "images/chapters/ai-heroes/ch12-falls.jpg",
