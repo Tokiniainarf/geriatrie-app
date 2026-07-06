@@ -2826,6 +2826,292 @@ Date de l\'évaluation : ${new Date().toLocaleDateString('fr-FR')}
   },
 ];
 
+
+// ─────────────────────────────────────────────────────────────────────────────
+//  MOTEUR DE RENDU INTERACTIF (MEDICALCUL)
+// ─────────────────────────────────────────────────────────────────────────────
+
+const Medicalcul = {
+  currentDomain: 'all',
+  currentSearch: '',
+
+  init() {
+    const searchInput = document.getElementById('calcSearch');
+    if (searchInput) {
+      searchInput.value = this.currentSearch;
+      // Remove any existing listener by cloning and replacing
+      const newSearch = searchInput.cloneNode(true);
+      searchInput.parentNode.replaceChild(newSearch, searchInput);
+      newSearch.addEventListener('input', (e) => {
+        this.currentSearch = e.target.value.toLowerCase().trim();
+        this.renderList();
+      });
+    }
+    this.renderList();
+    this.showListContainer();
+  },
+
+  showListContainer() {
+    const listCont = document.getElementById('calc-list-container');
+    const detailCont = document.getElementById('calc-detail-container');
+    if (listCont) listCont.style.display = 'block';
+    if (detailCont) detailCont.style.display = 'none';
+  },
+
+  filterByDomain(domain, btn) {
+    this.currentDomain = domain;
+    document.querySelectorAll('.calc-filt-btn').forEach(b => b.classList.remove('active'));
+    if (btn) {
+      btn.classList.add('active');
+    } else {
+      // Find the button with this domain name
+      const buttons = document.querySelectorAll('.calc-filt-btn');
+      buttons.forEach(b => {
+        if (b.textContent.includes(domain) || (domain === 'all' && b.textContent === 'Tous')) {
+          b.classList.add('active');
+        }
+      });
+    }
+    this.renderList();
+  },
+
+  renderList() {
+    const container = document.getElementById('calc-list');
+    if (!container) return;
+
+    let filtered = CALCULATEURS;
+
+    // Filter by domain
+    if (this.currentDomain !== 'all') {
+      filtered = filtered.filter(c => c.domaine === this.currentDomain);
+    }
+
+    // Filter by search query
+    if (this.currentSearch) {
+      filtered = filtered.filter(c => 
+        c.nom.toLowerCase().includes(this.currentSearch) || 
+        c.domaine.toLowerCase().includes(this.currentSearch) || 
+        c.description.toLowerCase().includes(this.currentSearch)
+      );
+    }
+
+    if (filtered.length === 0) {
+      container.innerHTML = `
+        <div class="empty">
+          <div class="empty-icon">🔍</div>
+          <div class="empty-text">Aucun calculateur trouvé</div>
+          <div class="empty-hint">Modifiez vos critères de recherche ou de filtre</div>
+        </div>
+      `;
+      return;
+    }
+
+    // Sort alphabetically by name
+    filtered.sort((a, b) => a.nom.localeCompare(b.nom));
+
+    container.innerHTML = filtered.map(c => `
+      <div class="calc-card" onclick="Medicalcul.showDetail('${c.id}')" role="button" tabindex="0">
+        <div class="calc-card-hdr">
+          <div class="calc-card-nom">${typeof esc === 'function' ? esc(c.nom) : c.nom}</div>
+          <span class="calc-badge">${typeof esc === 'function' ? esc(c.domaine) : c.domaine}</span>
+        </div>
+        <div class="calc-card-desc">${typeof esc === 'function' ? esc(c.description) : c.description}</div>
+      </div>
+    `).join('');
+  },
+
+  showDetail(id) {
+    const calc = CALCULATEURS.find(c => c.id === id);
+    if (!calc) return;
+
+    const listCont = document.getElementById('calc-list-container');
+    const detailCont = document.getElementById('calc-detail-container');
+    const detailContent = document.getElementById('calc-detail-content');
+
+    if (listCont) listCont.style.display = 'none';
+    if (detailCont) detailCont.style.display = 'block';
+    window.scrollTo(0, 0);
+
+    const helperEsc = (s) => typeof esc === 'function' ? esc(s) : s;
+
+    let html = `
+      <div class="calc-detail-header">
+        <button class="calc-back-btn" onclick="Medicalcul.showListContainer()">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Retour aux calculateurs
+        </button>
+        <span class="calc-badge">${helperEsc(calc.domaine)}</span>
+      </div>
+      <h2>${helperEsc(calc.nom)}</h2>
+      <p class="calc-desc">${helperEsc(calc.description)}</p>
+    `;
+
+    // Render based on type
+    if (calc.type === 'custom') {
+      html += `<div id="calc-custom-area"></div>`;
+      detailContent.innerHTML = html;
+      const customArea = document.getElementById('calc-custom-area');
+      if (customArea && typeof calc.render === 'function') {
+        calc.render(customArea);
+      }
+      return;
+    }
+
+    if (calc.type === 'checklist') {
+      html += `
+        <div class="calc-form">
+          <div class="calc-group-box">
+            <div class="calc-group-title">Éléments de l'évaluation</div>
+            <div style="display:flex; flex-direction:column; gap:10px; margin-top:8px;">
+              ${calc.items.map((item, idx) => `
+                <label class="check-container">
+                  <input type="checkbox" class="calc-input" data-pts="${item.points || 0}" id="chk_${id}_${idx}">
+                  <span class="checkmark"></span>
+                  ${helperEsc(item.text)}
+                </label>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+    } else if (calc.type === 'radio_group') {
+      html += `
+        <div class="calc-form">
+          ${calc.groups.map((group, gIdx) => `
+            <div class="calc-group-box" style="margin-bottom:12px;">
+              <div class="calc-group-title">${helperEsc(group.question)}</div>
+              <div class="calc-radio-group" style="display:flex; flex-direction:column; gap:8px; margin-top:8px;">
+                ${group.options.map((opt, oIdx) => `
+                  <label class="radio-container" style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                    <input type="radio" name="rad_${id}_${gIdx}" class="calc-input" value="${opt.value}" ${oIdx === 0 ? 'checked' : ''}>
+                    <span>${helperEsc(opt.text)}</span>
+                  </label>
+                `).join('')}
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    } else if (calc.type === 'select') {
+      html += `
+        <div class="calc-form">
+          <div class="calc-group-box">
+            <div class="calc-group-title">Saisie des données</div>
+            <div style="display:flex; flex-direction:column; gap:12px; margin-top:8px;">
+              ${calc.fields.map((field) => `
+                <label style="display:flex; flex-direction:column; gap:4px;">
+                  <span style="font-weight:500; font-size:0.9rem;">${helperEsc(field.label)}</span>
+                  <select id="sel_${id}_${field.id}" class="calc-input" style="width:100%; background:var(--bg-elevated); color:var(--text1); border:1px solid var(--glass-border); border-radius:4px; padding:6px;">
+                    ${field.options.map((opt) => {
+                      const valMatch = opt.match(/^([0-9.]+)\s*—\s*(.*)$/) || opt.match(/^([0-9.]+)\s*:\s*(.*)$/) || [opt, opt, opt];
+                      const val = valMatch[1].trim();
+                      return `<option value="${val}">${helperEsc(opt)}</option>`;
+                    }).join('')}
+                  </select>
+                </label>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+    } else if (calc.type === 'number_result') {
+      html += `
+        <div class="calc-form">
+          <div class="calc-group-box">
+            <div class="calc-group-title">Saisie des valeurs</div>
+            <div style="display:flex; flex-direction:column; gap:12px; margin-top:8px;">
+              ${calc.fields.map((field) => `
+                <label style="display:flex; flex-direction:column; gap:4px;">
+                  <span style="font-weight:500; font-size:0.9rem;">${helperEsc(field.label)}</span>
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <input type="${field.type || 'number'}" id="num_${id}_${field.id}" min="${field.min || 0}" max="${field.max || 100}" placeholder="${field.placeholder || ''}" class="calc-input" style="width:100px; background:var(--bg-elevated); color:var(--text1); border:1px solid var(--glass-border); border-radius:4px; padding:6px;">
+                    ${field.unit ? `<span class="fs-sm" style="color:var(--text2);">${helperEsc(field.unit)}</span>` : ''}
+                  </div>
+                </label>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Add result area
+    html += `
+      <div class="calc-result-area" id="calc-result" style="margin-top:16px;"></div>
+    `;
+
+    detailContent.innerHTML = html;
+
+    // Attach dynamic calculation events
+    const inputs = detailContent.querySelectorAll('.calc-input');
+    const updateResult = () => {
+      let result = null;
+      if (calc.type === 'checklist') {
+        let total = 0;
+        calc.items.forEach((item, idx) => {
+          const chk = document.getElementById(`chk_${id}_${idx}`);
+          if (chk && chk.checked) {
+            total += item.points || 0;
+          }
+        });
+        result = calc.calculer(total);
+      } else if (calc.type === 'radio_group') {
+        let total = 0;
+        calc.groups.forEach((group, gIdx) => {
+          const checkedRadio = detailContent.querySelector(`input[name="rad_${id}_${gIdx}"]:checked`);
+          if (checkedRadio) {
+            total += parseFloat(checkedRadio.value) || 0;
+          }
+        });
+        result = calc.calculer(total);
+      } else if (calc.type === 'select') {
+        const values = {};
+        calc.fields.forEach((field) => {
+          const sel = document.getElementById(`sel_${id}_${field.id}`);
+          if (sel) {
+            values[field.id] = parseFloat(sel.value) || 0;
+          }
+        });
+        result = calc.calculate(values);
+      } else if (calc.type === 'number_result') {
+        const values = {};
+        calc.fields.forEach((field) => {
+          const num = document.getElementById(`num_${id}_${field.id}`);
+          if (num) {
+            values[field.id] = parseFloat(num.value);
+          }
+        });
+        result = calc.calculate(values);
+      }
+
+      const resDiv = document.getElementById('calc-result');
+      if (resDiv && result) {
+        resDiv.innerHTML = `
+          <div class="calc-res-box ${result.cls || result.cat || 'normal'}">
+            <div class="calc-res-title">Score : ${result.score || result.total}</div>
+            <div class="calc-res-desc">${result.interp || result.desc || ''}</div>
+            ${calc.seuils ? `<div class="fs-xs" style="margin-top:8px; opacity:0.8; border-top:1px solid rgba(255,255,255,0.1); padding-top:6px;"><strong>Repères cliniques :</strong> ${helperEsc(calc.seuils)}</div>` : ''}
+          </div>
+        `;
+      } else if (resDiv) {
+        resDiv.innerHTML = '';
+      }
+    };
+
+    inputs.forEach(input => {
+      input.addEventListener('change', updateResult);
+      if (input.type === 'number' || input.type === 'text') {
+        input.addEventListener('input', updateResult);
+      }
+    });
+
+    updateResult();
+  }
+};
+
+window.Medicalcul = Medicalcul;
+
+
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = { CALCULATEURS };
 }
