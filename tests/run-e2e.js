@@ -50,24 +50,65 @@ class MockElement {
     this._html = String(v);
     this._text = v.replace(/<[^>]+>/g, '');
     this.children = [];
-    const regex = /<([a-z0-9-]+)([^>]*)>([^<]*)/gi;
+
+    const stack = [this];
+    const regex = /<(\/?[a-z0-9-]+)([^>]*)>|([^<]+)/gi;
     let match;
     while ((match = regex.exec(v)) !== null) {
-      const tag = match[1];
-      const attrs = match[2];
-      const text = match[3].trim();
-      const el = new MockElement(tag);
-      el.textContent = text;
-      const classMatch = attrs.match(/class=["']([^"']+)["']/);
-      if (classMatch) {
-        classMatch[1].split(/\s+/).forEach(c => el.classList.add(c));
+      if (match[1]) {
+        const tagName = match[1].toLowerCase();
+        const attrs = match[2] || '';
+        if (tagName.startsWith('/')) {
+          const closeTag = tagName.slice(1);
+          while (stack.length > 1 && stack[stack.length - 1].tagName.toLowerCase() !== closeTag) {
+            stack.pop();
+          }
+          if (stack.length > 1) stack.pop();
+        } else {
+          const el = new MockElement(tagName);
+          const classMatch = attrs.match(/class=["']([^"']+)["']/);
+          if (classMatch) {
+            classMatch[1].split(/\s+/).forEach(c => el.classList.add(c));
+          }
+          const idMatch = attrs.match(/id=["']([^"']+)["']/);
+          if (idMatch) {
+            el.id = idMatch[1];
+          }
+          const isSelfClosing = attrs.endsWith('/') || /^(img|br|hr|input|meta|link)$/i.test(tagName);
+          const parent = stack[stack.length - 1];
+          parent.appendChild(el);
+          if (!isSelfClosing) {
+            stack.push(el);
+          }
+        }
+      } else if (match[3]) {
+        const text = match[3].trim();
+        if (text) {
+          const parent = stack[stack.length - 1];
+          if (parent !== this) {
+            parent._text = (parent._text ? parent._text + ' ' : '') + text;
+            parent._html = (parent._html ? parent._html + ' ' : '') + text;
+          }
+        }
       }
-      const idMatch = attrs.match(/id=["']([^"']+)["']/);
-      if (idMatch) {
-        el.id = idMatch[1];
-      }
-      this.children.push(el);
     }
+  }
+  
+  get outerHTML() {
+    const tagName = this.tagName.toLowerCase();
+    const attrs = Object.entries(this.attributes)
+      .map(([k, v]) => `${k}="${v}"`)
+      .join(' ');
+    const classListStr = Array.from(this.classList._list).join(' ');
+    const classAttr = classListStr ? `class="${classListStr}"` : '';
+    const allAttrs = [classAttr, attrs].filter(Boolean).join(' ');
+    const attrPart = allAttrs ? ' ' + allAttrs : '';
+    
+    const isSelfClosing = /^(img|br|hr|input|meta|link)$/i.test(tagName);
+    if (isSelfClosing) {
+      return `<${tagName}${attrPart}>`;
+    }
+    return `<${tagName}${attrPart}>${this.innerHTML}</${tagName}>`;
   }
   
   setAttribute(k, v) { this.attributes[k] = String(v); }

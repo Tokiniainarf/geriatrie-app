@@ -571,6 +571,281 @@ const PHARMO_COMPLETE = [
     contre_indications: 'Occlusion intestinale, perforation, appendicite aiguë ; phosphate rectal : CI insuffisance cardiaque/renale',
     alternatives: 'Fibres si déglutition OK, hydratation, mobilisation, réglage toilettes ; kinesitherapie périnéale'
   }
+,
+
+  {
+    id: 'pc-16',
+    classe: 'anti-ostéoporotiques',
+    medicaments: [
+      {
+        nom: 'Alendronate (Fosamax)',
+        dose_adaptee_sujet_age: '70 mg par semaine PO, à jeun, avec un grand verre d\'eau du robinet, rester en position verticale au moins 30 minutes sans s\'allonger ni manger.',
+        voie: 'PO hebdomadaire',
+        effets_secondaires: 'Œsophagite, reflux gastrique, douleurs musculo-squelettiques ; rare ostéonécrose de la mâchoire ou fracture fémorale atypique (usage long terme).',
+        interactions: 'Calcium, antiacides, fer, nourriture (annulent complètement l\'absorption de l\'alendronate). Respecter 30 min d\'intervalle.',
+        surveillance: 'DFG (contre-indiqué si DFG < 35 ml/min), observance stricte des consignes de prise, hygiène bucco-dentaire.'
+      },
+      {
+        nom: 'Acide zolédronique (Aclasta)',
+        dose_adaptee_sujet_age: 'Perfusion intraveineuse annuelle de 5 mg sur au moins 15-30 minutes, avec hydratation adéquate avant/après.',
+        voie: 'IV annuelle',
+        effets_secondaires: 'Syndrome pseudo-grippal (fièvre, arthralgies, myalgies dans les 3 jours), hypocalcémie transitoire, néphrotoxicité.',
+        interactions: 'Aminosides, diurétiques de l\'anse (↑ risque hypocalcémie et toxicité rénale).',
+        surveillance: 'DFG (contre-indiqué si DFG < 35 ml/min), calcémie et vitamine D pré-perfusion, état dentaire avant traitement.'
+      },
+      {
+        nom: 'Dénosumab (Prolia)',
+        dose_adaptee_sujet_age: '60 mg en injection sous-cutanée unique tous les 6 mois. Non éliminé par le rein (utilisable si IRC).',
+        voie: 'SC tous les 6 mois',
+        effets_secondaires: 'Infections (cellulite), hypocalcémie sévère (surtout si IRC) ; ⚠️ RISQUE MAJEUR de rebond fracturaire à l\'arrêt.',
+        interactions: 'Pas d\'interaction médicamenteuse majeure connue.',
+        surveillance: 'Calcémie (corriger toute hypocalcémie avant injection), prise quotidienne de Calcium + Vitamine D indispensable ; NE JAMAIS ARRÊTER sans relais immédiat par bisphosphonate.'
+      },
+      {
+        nom: 'Vitamine D + Calcium (Cholécalciférol + Carbonate)',
+        dose_adaptee_sujet_age: '800 à 2000 UI/jour de Vitamine D3 + 500 à 1000 mg/jour de Calcium élémentaire en fonction des apports alimentaires.',
+        voie: 'PO quotidien',
+        effets_secondaires: 'Constipation, ballonnements, hypercalcémie, hypercalciurie, lithiase rénale.',
+        interactions: 'Bisphosphonates, fer, fluoroquinolones (chélates, espacer de 2h).',
+        surveillance: 'Calcémie, calciurie, dosage 25-OH vit D si nécessaire (cible gériatrique > 30 ng/ml).'
+      }
+    ],
+    indications_geriatriques: 'Ostéoporose documentée (T-score ≤ -2.5), antécédent de fracture ostéoporotique majeure (hanche, vertèbre), corticothérapie prolongée (prednisone ≥ 5mg/j pendant ≥ 3 mois) associée à un T-score ≤ -1.5 (START D1/D2).',
+    contre_indications: 'Insuffisance rénale sévère (DFG < 30-35 ml/min pour les bisphosphonates) ; hypocalcémie non corrigée ; troubles de la déglutition ou incapacité à rester debout/assis 30 min (alendronate PO).',
+    alternatives: 'Tériparatide (Forsteo) si ≥ 2 fractures vertébrales ; Dénosumab si IRC sévère sous étroite surveillance de la calcémie ; kinésithérapie motrice pour prévention des chutes.'
+  },
+  {
+    id: 'pc-17',
+    classe: 'antiparkinsoniens',
+    medicaments: [
+      {
+        nom: 'Lévodopa + Carbidopa (Sinemet, Modopar)',
+        dose_adaptee_sujet_age: 'Débuter à 50-100 mg 2 à 3 fois par jour, à adapter progressivement par paliers de 50-100 mg/semaine. Prendre à distance des repas riches en protéines.',
+        voie: 'PO',
+        effets_secondaires: 'Hypotension orthostatique, hallucinations, confusion, dyskinésies tardives, nausées, somnolence diurne.',
+        interactions: 'Neuroleptiques (antagonisme d\'effet - exception clozapine, quétiapine) ; fer (↓ absorption lévodopa).',
+        surveillance: 'PA couchée/debout (risque HO), état cognitif, survenue d\'hallucinations (SPCD), mouvements involontaires.'
+      },
+      {
+        nom: 'Pramipexole (Sifrol)',
+        dose_adaptee_sujet_age: 'Débuter à 0.088 mg 3 fois par jour, augmenter très lentement. Agoniste dopaminergique.',
+        voie: 'PO',
+        effets_secondaires: 'Somnolence diurne subite (accès de sommeil), hallucinations, troubles du contrôle des impulsions (jeu pathologique, hypersexualité, achats compulsifs), œdèmes.',
+        interactions: 'Neuroleptiques (antagonisme).',
+        surveillance: 'Troubles du comportement (impulsivité), somnolence, PA (HO).'
+      }
+    ],
+    indications_geriatriques: 'Maladie de Parkinson modérée à sévère entraînant une gêne fonctionnelle (START C1) ; syndrome des jambes sans repos sévère.',
+    contre_indications: 'Démence à corps de Lewy avancée avec hallucinations sévères (préférer lévodopa seule à faible dose) ; psychose active non contrôlée ; BAV non appareillé.',
+    alternatives: 'Monothérapie lévodopa (préférable chez le sujet très âgé car mieux tolérée sur le plan neuropsychiatrique que les agonistes dopaminergiques).'
+  },
+  {
+    id: 'pc-18',
+    classe: 'statines (hypolipémiants)',
+    medicaments: [
+      {
+        nom: 'Atorvastatine (Tahor)',
+        dose_adaptee_sujet_age: '10 à 20 mg/jour le soir. Prudence en prévention primaire au-delà de 75-80 ans. Dose max conseillée 40 mg/jour.',
+        voie: 'PO',
+        effets_secondaires: 'Myalgies, myopathie, élévation des transaminases, risque accru de diabète induit.',
+        interactions: 'Clarithromycine, érythromycine, kétoconazole (inhibition CYP3A4 → ↑↑ risque rhabdomyolyse - STOPP v3) ; jus de pamplemousse.',
+        surveillance: 'CPK si myalgies, bilan hépatique (ALAT) avant traitement et si symptômes, tolérance musculaire.'
+      },
+      {
+        nom: 'Rosuvastatine (Crestor)',
+        dose_adaptee_sujet_age: '5 à 10 mg/jour le soir. Prudence si origine asiatique ou insuffisance rénale.',
+        voie: 'PO',
+        effets_secondaires: 'Myalgies, myopathie, rhabdomyolyse, protéinurie tubulaire transitoire.',
+        interactions: 'Ciclosporine, gemfibrozil (CI) ; anticoagulants oraux (↑ INR).',
+        surveillance: 'CPK et ALAT en cas de symptômes musculaires ou hépatiques.'
+      }
+    ],
+    indications_geriatriques: 'Prévention secondaire cardiovasculaire systématique chez le sujet âgé après AVC ischémique non cardioembolique, coronaropathie ou AOMI stable (START A3). En prévention primaire : bénéfice/risque incertain chez le patient fragile ou après 80 ans.',
+    contre_indications: 'Hépatopathie active ; myopathie active ; association aux macrolides ou fibrates (gemfibrozil) sans étroite surveillance.',
+    alternatives: 'Ézétimibe (10 mg/j) si statine non tolérée ; arrêt des statines si espérance de vie < 1 an ou démence terminale (déprescription).'
+  },
+  {
+    id: 'pc-19',
+    classe: 'inhibiteurs de la pompe à protons (IPP)',
+    medicaments: [
+      {
+        nom: 'Oméprazole (Mopral)',
+        dose_adaptee_sujet_age: '10 à 20 mg/jour (dose minimale efficace). Éviter l\'usage chronique prolongé > 8 semaines sans indication claire (STOPP H2).',
+        voie: 'PO, IV',
+        effets_secondaires: 'Ostéoporose/fractures (usage long terme), hypomagnésémie, carence en B12, colite à Clostridioides difficile, néphrite interstitielle.',
+        interactions: 'Clopidogrel (↓ efficacité du clopidogrel par inhibition CYP2C19 - préférer le pantoprazole) ; chélation du fer et calcium.',
+        surveillance: 'Magnésémie et hémogramme si traitement prolongé ; évaluer la possibilité de déprescription annuelle.'
+      },
+      {
+        nom: 'Pantoprazole (Inipomp)',
+        dose_adaptee_sujet_age: '20 mg/jour (dose de maintenance). Moins d\'interactions CYP que l\'oméprazole.',
+        voie: 'PO, IV',
+        effets_secondaires: 'Idem oméprazole, céphalées, diarrhées.',
+        interactions: 'Pas d\'interaction significative avec le clopidogrel (préféré chez le coronaropathe sous antiagrégant).',
+        surveillance: 'Évaluation régulière de la pertinence du traitement.'
+      }
+    ],
+    indications_geriatriques: 'Gastro-protection systématique associée aux AINS au long cours chez les patients avec antécédents d\'ulcère gastroduodénal ou sous bithérapie antiplaquettaire/anticoagulante (START F1/STOPP I1/I5). Reflux gastro-œsophagien sévère ou œsophagite.',
+    contre_indications: 'Hypersensibilité aux IPP.',
+    alternatives: 'Anti-H2 (famotidine) à dose adaptée à la fonction rénale ; suspension d\'alginate de sodium (Gaviscon) si symptômes mineurs.'
+  },
+  {
+    id: 'pc-20',
+    classe: 'traitements urologiques',
+    medicaments: [
+      {
+        nom: 'Tamsulosine (Josir LP)',
+        dose_adaptee_sujet_age: '0,4 mg/jour le soir après le repas. Alpha-1 bloquant sélectif.',
+        voie: 'PO',
+        effets_secondaires: 'Hypotension orthostatique sévère (chutes), vertiges, asthénie, syndrome de l\'iris disquette (chirurgie de la cataracte).',
+        interactions: 'Antihypertenseurs (synergie d\'effet hypotenseur - STOPP L2).',
+        surveillance: 'Recherche active d\'hypotension orthostatique (PA couchée/debout), examen ophtalmologique pré-opératoire cataracte.'
+      },
+      {
+        nom: 'Mirabégron (Betmiga)',
+        dose_adaptee_sujet_age: '25 à 50 mg/jour. Bêta-3 agoniste. Alternative majeure aux anticholinergiques chez le sujet âgé car sans effet cognitif.',
+        voie: 'PO',
+        effets_secondaires: 'Hypertension artérielle, tachycardie, infections urinaires.',
+        interactions: 'Inhibiteurs du CYP2D6 (métoprolol, flécainide).'
+      },
+      {
+        nom: 'Solifénacine (Vesicare)',
+        dose_adaptee_sujet_age: '5 mg/jour. Anticholinergique vésical (antimuscarinique).',
+        voie: 'PO',
+        effets_secondaires: '⚠️ Charge anticholinergique (ACB=3) : sécheresse buccale, constipation sévère, confusion, rétention d\'urine, aggravation de la démence.',
+        interactions: 'Autres anticholinergiques (risques cumulés - STOPP L1).',
+        surveillance: 'Constipation, résidu post-mictionnel (RPM), évaluation cognitive régulière.'
+      }
+    ],
+    indications_geriatriques: 'Dysurie liée à une hypertrophie bénigne de la prostate (tamsulosine) ; incontinence urinaire par hyperactivité vésicale (mirabégron ou solifénacine après échec de la rééducation).',
+    contre_indications: 'Solifénacine/antimuscariniques : glaucome par fermeture de l\'angle non contrôlé, rétention urinaire aiguë, démence sévère (STOPP L1) ; Tamsulosine : hypotension orthostatique documentée.',
+    alternatives: 'Rééducation périnéale, mictions programmées toutes les 2 heures, étui pénien pour l\'homme.'
+  },
+  {
+    id: 'pc-21',
+    classe: 'hormones thyroïdiennes',
+    medicaments: [
+      {
+        nom: 'Lévothyroxine (Levothyrox)',
+        dose_adaptee_sujet_age: 'Débuter à 12,5–25 µg/jour chez le sujet âgé (surtout si coronaropathe), augmenter très lentement par paliers de 12,5–25 µg toutes les 4–6 semaines. Prendre à jeun 30 minutes avant le petit déjeuner.',
+        voie: 'PO',
+        effets_secondaires: 'Tachycardie, arythmie (FA), angor, ostéoporose (en cas de surdosage).',
+        interactions: 'Calcium, fer, IPP (diminuent l\'absorption digestive de la lévothyroxine).',
+        surveillance: 'TSH à 6-8 semaines après initiation ou changement de dose (cible gériatrique standard 0.5–4.0 mIU/L, peut être élargie 1.0–6.0 si très âgé ou fragile).'
+      }
+    ],
+    indications_geriatriques: 'Hypothyroïdie primaire documentée (TSH élevée avec T4L basse). Éviter le traitement systématique de l\'hypothyroïdie fruste (TSH entre 4 et 10 avec T4L normale) chez les patients très âgés sauf si symptomatiques.',
+    contre_indications: 'Insuffisance surrénale non traitée ; infarctus du myocarde aigu.',
+    alternatives: 'Surveillance simple sans traitement si hypothyroïdie fruste asymptomatique chez le patient fragile.'
+  },
+  {
+    id: 'pc-22',
+    classe: 'anti-goutteux',
+    medicaments: [
+      {
+        nom: 'Allopurinol',
+        dose_adaptee_sujet_age: 'Débuter à 50-100 mg/jour. Augmenter par paliers de 50 mg pour atteindre l\'uricémie cible. Ajuster à la fonction rénale.',
+        voie: 'PO',
+        effets_secondaires: 'Éruptions cutanées (rare mais grave : syndrome de Lyell/DRESS), troubles digestifs, cytopénies.',
+        interactions: 'Azathioprine (CI - ↑ toxicité hématologique majeure).',
+        surveillance: 'Uricémie (cible < 360 µmol/L ou < 6 mg/dL), NFS, fonction rénale (créatinine, DFG).'
+      },
+      {
+        nom: 'Colchicine',
+        dose_adaptee_sujet_age: '0.5 mg à 1 mg maximum le premier jour, puis 0.5 mg/jour. Réduire les doses si insuffisance rénale ou diarrhée.',
+        voie: 'PO',
+        effets_secondaires: 'Diarrhées profuses (signe de surdosage), neuromyopathie, aplasie médullaire.',
+        interactions: 'Macrolides (clarithromycine - CI absolue car inhibition CYP3A4 → surdosage mortel en colchicine), statines (↑ risque myopathie).',
+        surveillance: 'Transit intestinal, NFS, DFG (contre-indiqué si DFG < 10 ml/min sans réduction de dose - STOPP G4).'
+      }
+    ],
+    indications_geriatriques: 'Crise de goutte aiguë (colchicine courte durée - START D4) ; traitement de fond hypouricémiant si crises récidivantes, tophi ou arthropathie uratique (allopurinol - START D5).',
+    contre_indications: 'Colchicine : insuffisance rénale ou hépatique sévère en cas d\'association aux inhibiteurs du CYP3A4 (macrolides, ciclosporine).',
+    alternatives: 'Cure courte d\'AINS (ibuprofène) si DFG > 50 ml/min ; corticothérapie orale courte (prednisone 30 mg/j pendant 3-5 jours) si insuffisance rénale sévère empêchant la colchicine.'
+  },
+  {
+    id: 'pc-23',
+    classe: 'soins palliatifs (fin de vie)',
+    medicaments: [
+      {
+        nom: 'Midazolam (Hypnovel)',
+        dose_adaptee_sujet_age: 'Titration initiale : 1 à 3 mg en injection SC ou IV lente. Entretien : 0,5 à 2 mg/heure en perfusion sous-cutanée ou intraveineuse continue (seringue électrique).',
+        voie: 'SC, IV',
+        effets_secondaires: 'Dépression respiratoire, hypotension, sédation profonde recherchée, réactions paradoxales (rares).',
+        interactions: 'Opioïdes, autres sédatifs (synergie d\'effet recherchée en fin de vie).',
+        surveillance: 'Profondeur de la sédation (Échelle de Ramsay cible 5-6), évaluation de l\'inconfort ou de la douleur (ALGOPLUS/DOLOPLUS).'
+      },
+      {
+        nom: 'Scopolamine (Butylbromure - Buscopan)',
+        dose_adaptee_sujet_age: '0,25 mg à 0,5 mg en injection sous-cutanée toutes les 4 à 6 heures, ou 1 à 2 mg/24 heures en perfusion continue sous-cutanée.',
+        voie: 'SC, IV',
+        effets_secondaires: 'Sécheresse buccale, tachycardie, rétention d\'urine, constipation. Anticholinergique fort (charge cumulative).',
+        interactions: 'Autres anticholinergiques.',
+        surveillance: 'Efficacité sur l\'encombrement bronchique ou les râles terminaux, absence de globe vésical.'
+      },
+      {
+        nom: 'Morphine injectable (SC/IV)',
+        dose_adaptee_sujet_age: 'Patient naïf d\'opioïdes : 2,5 mg à 5 mg SC toutes les 4 heures si besoin. Patient déjà sous opioïdes : injecter 1/6 de la dose quotidienne par voie SC en cas de douleur ou dyspnée aiguë.',
+        voie: 'SC, IV',
+        effets_secondaires: 'Dépression respiratoire, myoclonies, prurit, constipation, nausées.',
+        interactions: 'Sédatifs (midazolam), anticholinergiques (scopolamine).',
+        surveillance: 'Fréquence respiratoire, échelle de douleur, confort global.'
+      }
+    ],
+    indications_geriatriques: 'Sédation profonde et continue maintenue jusqu\'au décès (SPCMD) en cas de détresse respiratoire ou douleur réfractaire (Loi Claeys-Léonetti 2016) ; traitement de l\'encombrement pharyngé terminal (scopolamine) ; ordonnances anticipées en EHPAD.',
+    contre_indications: 'Aucune contre-indication en phase terminale (principe du double effet : soulager la souffrance prévaut sur le risque d\'abréger la vie).',
+    alternatives: 'Soutien psychologique, hypnose, présence familiale, soins de confort non pharmacologiques.'
+  },
+  {
+    id: 'pc-24',
+    classe: 'inhibiteurs de SGLT2 (gliflozines)',
+    medicaments: [
+      {
+        nom: 'Dapagliflozine (Forxiga)',
+        dose_adaptee_sujet_age: '10 mg une fois par jour le matin. Non recommandé pour le contrôle glycémique si DFG < 25 ml/min.',
+        voie: 'PO',
+        effets_secondaires: 'Infections génitales à levures, infections urinaires, déshydratation, hypotension orthostatique, rare acidose cétonique euglycémique.',
+        interactions: 'Diurétiques (↑ risque de déshydratation et d\'hypotension).',
+        surveillance: 'DFG (utilisable dans l\'insuffisance cardiaque jusqu\'à un DFG de 20 ml/min), état d\'hydratation, pression artérielle, hygiène intime.'
+      },
+      {
+        nom: 'Empagliflozine (Jardiance)',
+        dose_adaptee_sujet_age: '10 mg une fois par jour le matin.',
+        voie: 'PO',
+        effets_secondaires: 'Idem dapagliflozine.',
+        interactions: 'Diurétiques, insuline (risque d\'hypoglycémie si associé).',
+        surveillance: 'Fonction rénale, glycémie si diabétique.'
+      }
+    ],
+    indications_geriatriques: 'Insuffisance cardiaque chronique à fraction d\'éjection réduite (ICFER) pour réduire le risque de décès cardiovasculaire et d\'hospitalisation (START A7) ; néphroprotection dans la maladie rénale chronique ; diabète de type 2.',
+    contre_indications: 'Antécédent d\'acidose cétonique ; DFG < 20 ml/min pour l\'insuffisance cardiaque ; risque élevé d\'amputation (artériopathie sévère instable).',
+    alternatives: 'Autres traitements de l\'insuffisance cardiaque (bêta-bloquants, IEC/ARA2/ARNI, diurétiques de l\'anse).'
+  },
+  {
+    id: 'pc-25',
+    classe: 'compléments nutritionnels oraux (CNO)',
+    medicaments: [
+      {
+        nom: 'CNO Liquides Hyperprotidiques Hypercaloriques',
+        dose_adaptee_sujet_age: '1 à 2 flacons par jour, à consommer à distance des repas (en collation à 10h ou 16h ou le soir au coucher) pour ne pas réduire l\'appétit du repas suivant. Consommer frais et par petites gorgées.',
+        voie: 'PO',
+        effets_secondaires: 'Satiété précoce, diarrhée ou nausées en cas d\'ingestion trop rapide.',
+        interactions: 'Pas d\'interaction médicamenteuse.',
+        surveillance: 'Poids du patient (hebdomadaire), observance, tolérance digestive, correction de la dénutrition (HAS 2021).'
+      },
+      {
+        nom: 'CNO Crèmes et Mousses (dysphagie)',
+        dose_adaptee_sujet_age: '1 à 2 pots par jour en collation. Texture adaptée aux patients présentant des troubles de la déglutition ou de la mastication.',
+        voie: 'PO',
+        effets_secondaires: 'Idem liquides.',
+        interactions: 'Aucune.',
+        surveillance: 'Poids, fausses routes, examen de la cavité buccale.'
+      }
+    ],
+    indications_geriatriques: 'Prise en charge de la dénutrition modérée ou sévère chez le patient âgé de 70 ans et plus après échec de l\'enrichissement alimentaire (MNA-SF ≤ 11, IMC < 22 kg/m² ou perte de poids ≥ 10% en 6 mois - HAS 2021).',
+    contre_indications: 'Obstruction digestive ; intolérance totale au lactose ou aux protéines de lait de vache ; phase terminale de fin de vie (sauf confort).',
+    alternatives: 'Enrichissement des repas (poudre de lait, fromage râpé, œufs, beurre dans les purées) ; nutrition entérale par sonde naso-gastrique si dénutrition sévère réfractaire.'
+  }
 ];
 
 if (typeof module !== 'undefined' && module.exports) {

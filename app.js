@@ -58,6 +58,7 @@ function sw(view){
   if(targetView==='erreurs'&&typeof ErrorJournal!=='undefined')ErrorJournal.render();
   if(targetView==='garde')renderGarde();
   if(targetView==='dict')renderDict();
+  if(targetView==='scores'&&typeof Medicalcul!=='undefined')Medicalcul.init();
   if(targetView==='annales') {
     if (view === 'sujets') switchAnnalesMode('sujets');
     else switchAnnalesMode('annales');
@@ -1157,6 +1158,73 @@ function renderChapter(raw,chId){
   // Final pass to remove any remaining embedded headers inside paragraphs
   html = html.replace(/>([^<]*?)\s{2,}(Connaissances|Points clés|Gériatrie ©)[^<]{0,30}</gi, '>$1<');
 
+  // Append NotebookLM/2024 Updates
+  let updatesHtml = '';
+  if (chId === 'ch9') {
+    updatesHtml = `
+      <div class="note-box update-2024" style="margin-top:20px; padding:16px; background:rgba(20, 184, 166, 0.1); border-left:4px solid var(--accent); border-radius:4px;">
+        <h3 style="margin-top:0; color:var(--accent);">💡 Nouvelles Recommandations SFGG 2024 (Prise en charge des SPC)</h3>
+        <p><strong>Nouveau paradigme :</strong> Le symptôme psycho-comportemental (agitation, cris, agressivité) n'est pas la maladie à éteindre par sédation immédiate, mais un signal d'alarme à décoder (expression d'une détresse).</p>
+        <p><strong>Enquête étiologique systématique en urgence :</strong></p>
+        <ul style="padding-left:20px; margin:8px 0;">
+          <li><span class="sit-badge-inline">Douleur</span> : Évaluer via Algoplus ou Doloplus (douleur non contrôlée : arthrose, fracture).</li>
+          <li><span class="sit-badge-inline">Globe</span> : Rechercher une rétention aiguë d'urines (globe vésical).</li>
+          <li><span class="sit-badge-inline">Fécalome</span> : Constipation sévère ou occlusion sous-jacente.</li>
+          <li><span class="sit-badge-inline">Infection</span> : Rechercher une infection silencieuse (pneumopathie, infection urinaire).</li>
+        </ul>
+        <p style="margin-bottom:0; font-size:0.8rem; color:var(--text3);"><em>Source : NotebookLM - BPSD Clinical Management 2024</em></p>
+      </div>
+    `;
+  } else if (chId === 'ch14') {
+    updatesHtml = `
+      <div class="note-box update-2024" style="margin-top:20px; padding:16px; background:rgba(20, 184, 166, 0.1); border-left:4px solid var(--accent); border-radius:4px;">
+        <h3 style="margin-top:0; color:var(--accent);">💡 Critères Diagnostiques de la Dénutrition (HAS 2021)</h3>
+        <p>Diagnostic de la dénutrition chez le sujet âgé (≥ 70 ans) : <strong>1 critère phénotypique + 1 critère étiologique</strong>.</p>
+        <p><strong>Critères Phénotypiques :</strong></p>
+        <ul style="padding-left:20px; margin:8px 0;">
+          <li>Perte de poids ≥ 5% en 1 mois, ou ≥ 10% en 6 mois, ou ≥ 10% par rapport au poids habituel avant le début de la maladie.</li>
+          <li>Indice de Masse Corporelle (IMC) &lt; 22 kg/m².</li>
+          <li>Sarcopénie : diminution de la masse et/ou de la force musculaire.</li>
+        </ul>
+        <p><strong>Critères Étiologiques :</strong></p>
+        <ul style="padding-left:20px; margin:8px 0;">
+          <li>Diminution de la prise alimentaire ≥ 50% pendant plus d'une semaine, ou toute réduction des apports pendant plus de 2 semaines.</li>
+          <li>Absorption réduite (malabsorption, syndrome de grêle court).</li>
+          <li>Situation d'agression (hypercatabolisme avec ou sans syndrome inflammatoire) : pathologie aiguë, cancer, infection, chirurgie.</li>
+        </ul>
+        <p><strong>Dénutrition Sévère :</strong> Si IMC &lt; 20 ou perte de poids ≥ 10% en 1 mois (ou ≥ 15% en 6 mois) ou albuminémie &lt; 30 g/l.</p>
+        <p style="margin-bottom:0; font-size:0.8rem; color:var(--text3);"><em>Source : NotebookLM - HAS Nutrition 2021</em></p>
+      </div>
+    `;
+  } else if (chId === 'ch20') {
+    updatesHtml = `
+      <div class="note-box update-2024" style="margin-top:20px; padding:16px; background:rgba(20, 184, 166, 0.1); border-left:4px solid var(--accent); border-radius:4px;">
+        <h3 style="margin-top:0; color:var(--accent);">💡 Loi Claeys-Leonetti 2016 & Directives Anticipées</h3>
+        <p><strong>Directives Anticipées (DA) :</strong> Déclarations rédigées par toute personne majeure pour préciser ses volontés concernant sa fin de vie (refus ou limitation de traitements). Elles sont <strong>contraignantes</strong> pour le médecin, sauf en cas d'urgence vitale ou si elles apparaissent manifestement inappropriées à la situation médicale (décision collégiale obligatoire).</p>
+        <p><strong>Personne de Confiance :</strong> Désignée par écrit. Son témoignage prévaut sur tout autre témoignage de la famille en cas d'incapacité d'expression du patient.</p>
+        <p><strong>Sédation Profonde et Continue jusqu'au Décès (SPCD) :</strong> Droit pour le patient d'éviter toute souffrance et de ne pas subir d'obstination déraisonnable. Mise en œuvre dans 3 situations cliniques précises :</p>
+        <ol style="padding-left:20px; margin:8px 0;">
+          <li>Patient conscient atteint d'une maladie grave et incurable, dont le pronostic est engagé à court terme, présentant une souffrance réfractaire et <strong>formulant lui-même une demande explicite et réitérée</strong> de sédation ;</li>
+          <li>Patient hors d'état d'exprimer sa volonté, dans le cadre d'un arrêt de traitement de maintien en vie au titre du refus de l'obstination déraisonnable, susceptible d'entraîner une souffrance insupportable ;</li>
+          <li>Patient hors d'état d'exprimer sa volonté, <strong>en phase agonique avancée (fin de vie imminente) avec des souffrances réfractaires documentées</strong>.</li>
+        </ol>
+        <p style="margin-bottom:0; font-size:0.8rem; color:var(--text3);"><em>Source : NotebookLM - Fin de vie Claeys-Leonetti</em></p>
+      </div>
+    `;
+  } else if (chId === 'ch3') {
+    updatesHtml = `
+      <div class="note-box update-2024" style="margin-top:20px; padding:16px; background:rgba(20, 184, 166, 0.1); border-left:4px solid var(--accent); border-radius:4px;">
+        <h3 style="margin-top:0; color:var(--accent);">💡 Grille AGGIR & Outil PATHOS</h3>
+        <p><strong>Grille AGGIR :</strong> Évalue l'autonomie à travers 10 variables discriminantes (physiques et psychiques) : <em>Cohérence, Orientation, Toilette, Habillage, Alimentation, Élimination, Transferts, Déplacements intérieurs, Déplacements extérieurs, Communication</em>.</p>
+        <p><strong>Outil PATHOS :</strong> Évalue les profils de soins requis (ressources médicales et soignantes nécessaires dans l'établissement) à travers 12 profils cliniques. Combiné à AGGIR (le GMG : GIR Moyen Pondéré), il détermine le budget soins des EHPAD.</p>
+        <p style="margin-bottom:0; font-size:0.8rem; color:var(--text3);"><em>Source : NotebookLM - AGGIR et PATHOS</em></p>
+      </div>
+    `;
+  }
+  if (updatesHtml) {
+    html += updatesHtml;
+  }
+
   return html||'<div class="empty"><div class="empty-text">Aucun contenu structuré</div></div>';
 }
 function applyConceptLinks(){
@@ -2235,6 +2303,275 @@ function updStats(){
   if(stats&&S.view==='home')renderHome();
 }
 function installPWA(){if(window.deferredPrompt){window.deferredPrompt.prompt();window.deferredPrompt=null}}
+
+/* ── TRAITEMENTS (THERAPEUTIQUE) ── */
+function switchProtoMode(mode) {
+  const btnProto = document.getElementById('btnSubProtoCliniques');
+  const btnTx = document.getElementById('btnSubTraitements');
+  const tabProto = document.getElementById('subTabProtoCliniques');
+  const tabTx = document.getElementById('subTabTraitements');
+
+  if (!btnProto || !btnTx || !tabProto || !tabTx) return;
+
+  if (mode === 'traitements') {
+    btnProto.classList.remove('active');
+    btnTx.classList.add('active');
+    tabProto.style.display = 'none';
+    tabTx.style.display = 'block';
+    switchTxSubMode('molecules');
+  } else {
+    btnProto.classList.add('active');
+    btnTx.classList.remove('active');
+    tabProto.style.display = 'block';
+    tabTx.style.display = 'none';
+    renderProto();
+  }
+}
+
+function switchTxSubMode(subMode) {
+  const buttons = {
+    molecules: document.getElementById('btnTxMolecules'),
+    interactions: document.getElementById('btnTxInteractions'),
+    effets: document.getElementById('btnTxEffets'),
+    urgence: document.getElementById('btnTxUrgence')
+  };
+  const panels = {
+    molecules: document.getElementById('txSubTabMolecules'),
+    interactions: document.getElementById('txSubTabInteractions'),
+    effets: document.getElementById('txSubTabEffets'),
+    urgence: document.getElementById('txSubTabUrgence')
+  };
+
+  Object.keys(buttons).forEach(k => {
+    if (buttons[k]) {
+      if (k === subMode) buttons[k].classList.add('active');
+      else buttons[k].classList.remove('active');
+    }
+  });
+
+  Object.keys(panels).forEach(k => {
+    if (panels[k]) {
+      if (k === subMode) panels[k].style.display = 'block';
+      else panels[k].style.display = 'none';
+    }
+  });
+
+  if (subMode === 'molecules') renderMeds();
+  else if (subMode === 'interactions') renderInteractions();
+  else if (subMode === 'effets') renderEffets();
+  else if (subMode === 'urgence') renderUrgence();
+}
+
+function renderMeds() {
+  const content = document.getElementById('txContent');
+  if (!content || typeof PHARMO_COMPLETE === 'undefined') return;
+
+  let html = '';
+  PHARMO_COMPLETE.forEach(classeObj => {
+    const className = classeObj.classe || 'Autre';
+    const classInd = classeObj.indications_geriatriques || '';
+    const classCI = classeObj.contre_indications || '';
+    const classAlt = classeObj.alternatives || '';
+
+    if (classeObj.medicaments && Array.isArray(classeObj.medicaments)) {
+      classeObj.medicaments.forEach(med => {
+        const isPim = /benzodiazepine|neuroleptique|antipsychotique|anticholinergique|ains|antidépresseur tricyclique|neuro/i.test(className || med.nom) ||
+                      /oxazepam|alprazolam|lorazepam|zolpidem|zopiclone|haloperidol|risperidone|olanzapine|aripiprazole|clozapine|amitriptyline|imipramine|clomipramine|diclofenac|ibuprofene|ketoprofene|naproxene|piroxicam|meloxicam|celecoxib|indometacine/i.test(med.nom) ||
+                      (med.effets_secondaires && med.effets_secondaires.toLowerCase().includes('chutes')) ||
+                      (med.effets_secondaires && med.effets_secondaires.toLowerCase().includes('confusion'));
+
+        html += `
+          <div class="calc-card med-card" data-class="${esc(className)}" style="border-left: 4px solid ${isPim ? 'var(--danger, #ef4444)' : 'var(--accent, #0891b2)'}">
+            <div class="calc-card-hdr">
+              <span class="calc-card-nom">${esc(med.nom)}</span>
+              <span class="calc-badge">${esc(className.toUpperCase())}</span>
+            </div>
+            ${isPim ? `<div style="display:inline-block; font-size:0.75rem; background:rgba(239,68,68,0.15); color:var(--danger,#ef4444); padding:2px 8px; border-radius:4px; margin-top:4px; font-weight:bold;">⚠️ Molécule Inappropriée (STOPP v3)</div>` : ''}
+            <div class="med-details" style="display:flex; flex-direction:column; gap:8px; margin-top:8px;">
+              ${med.dose_adaptee_sujet_age ? `<div><strong>Posologie gériatrique :</strong> <span class="fs-sm">${esc(med.dose_adaptee_sujet_age)}</span></div>` : ''}
+              ${med.voie ? `<div><strong>Voie :</strong> <span class="fs-sm">${esc(med.voie)}</span></div>` : ''}
+              ${med.effets_secondaires ? `<div><strong>Effets Secondaires :</strong> <span class="fs-sm">${esc(med.effets_secondaires)}</span></div>` : ''}
+              ${med.interactions ? `<div><strong>Interactions :</strong> <span class="fs-sm">${esc(med.interactions)}</span></div>` : ''}
+              ${med.surveillance ? `<div><strong>Surveillance :</strong> <span class="fs-sm">${esc(med.surveillance)}</span></div>` : ''}
+              ${classInd ? `<div style="opacity:0.85;"><strong>Indications de la classe :</strong> <span class="fs-sm">${esc(classInd)}</span></div>` : ''}
+              ${classCI ? `<div style="opacity:0.85; color:var(--danger);"><strong>Contre-indications :</strong> <span class="fs-sm">${esc(classCI)}</span></div>` : ''}
+              ${classAlt ? `<div style="background:rgba(245,158,11,0.1); padding:8px; border-radius:4px; margin-top:4px;"><strong>Alternatives Sûres / START :</strong> <span class="fs-sm">${esc(classAlt)}</span></div>` : ''}
+            </div>
+          </div>
+        `;
+      });
+    }
+  });
+
+  content.innerHTML = html || '<div class="empty">Aucun traitement trouvé.</div>';
+  setupTxMoleculesSearch();
+}
+
+function renderInteractions() {
+  const content = document.getElementById('txContentInteractions');
+  if (!content || typeof INTERACTIONS_CRITIQUES === 'undefined') return;
+
+  content.innerHTML = INTERACTIONS_CRITIQUES.map(item => `
+    <div class="calc-card interaction-card" style="border-left: 4px solid var(--danger, #ef4444); background:rgba(239,68,68,0.03);">
+      <div class="calc-card-hdr">
+        <span class="calc-card-nom" style="color:var(--danger,#ef4444); font-weight:bold;">${esc(item.drugA)} + ${esc(item.drugB)}</span>
+        <span class="calc-badge" style="background:var(--danger,#ef4444); color:white;">RISQUE CRITIQUE</span>
+      </div>
+      <div class="med-details" style="display:flex; flex-direction:column; gap:8px; margin-top:8px;">
+        <div><strong>Risque clinique :</strong> <span class="fs-sm" style="color:var(--danger,#ef4444); font-weight:600;">${esc(item.risque)}</span></div>
+        <div style="background:rgba(16,185,129,0.1); padding:8px; border-radius:4px; border-left:3px solid #10b981; margin-top:4px;">
+          <strong>Conduite à tenir recommandée :</strong> <span class="fs-sm">${esc(item.action)}</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  setupTxInteractionsSearch();
+}
+
+function renderEffets() {
+  const content = document.getElementById('txContentEffets');
+  if (!content || typeof EFFETS_INDESIRABLES === 'undefined') return;
+
+  content.innerHTML = EFFETS_INDESIRABLES.map(item => `
+    <div class="calc-card effet-card" style="border-left: 4px solid var(--warning, #f59e0b);">
+      <div class="calc-card-hdr">
+        <span class="calc-card-nom">${esc(item.medicament)}</span>
+        <span class="calc-badge">${esc(item.classe)}</span>
+      </div>
+      <div class="med-details" style="display:flex; flex-direction:column; gap:8px; margin-top:8px;">
+        <div style="color:var(--text2);"><strong>Effets fréquents :</strong> <span class="fs-sm">${esc(item.effets_frequents)}</span></div>
+        <div style="color:var(--danger);"><strong>Toxicité / Effets graves :</strong> <span class="fs-sm">${esc(item.effets_graves)}</span></div>
+        <div><strong>Surveillance requise :</strong> <span class="fs-sm">${esc(item.surveillance)}</span></div>
+        <div style="background:rgba(20,184,166,0.08); padding:8px; border-radius:4px; margin-top:4px;">
+          <strong>Conduite à tenir :</strong> <span class="fs-sm">${esc(item.conduite_tenir)}</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  setupTxEffetsSearch();
+}
+
+function renderUrgence() {
+  const content = document.getElementById('txContentUrgence');
+  if (!content || typeof MEDICAMENTS_URGENCE === 'undefined') return;
+
+  let html = '';
+  
+  MEDICAMENTS_URGENCE.forEach(item => {
+    html += `
+      <div class="calc-card urg-card" style="border-left: 4px solid #3b82f6;">
+        <div class="calc-card-hdr">
+          <span class="calc-card-nom" style="color:#3b82f6; font-weight:bold;">🚨 ${esc(item.nom || item.title)}</span>
+          <span class="calc-badge" style="background:#3b82f6; color:white;">URGENCE</span>
+        </div>
+        <div class="med-details" style="display:flex; flex-direction:column; gap:8px; margin-top:8px;">
+          ${item.indication ? `<div><strong>Indication :</strong> <span class="fs-sm">${esc(item.indication)}</span></div>` : ''}
+          ${item.posologie ? `<div><strong>Posologie / Protocole d'administration :</strong> <span class="fs-sm">${esc(item.posologie)}</span></div>` : ''}
+          ${item.dilution ? `<div><strong>Dilution / Préparation :</strong> <span class="fs-sm">${esc(item.dilution)}</span></div>` : ''}
+          ${item.surveillance ? `<div><strong>Surveillance critique :</strong> <span class="fs-sm">${esc(item.surveillance)}</span></div>` : ''}
+        </div>
+      </div>
+    `;
+  });
+
+  if (typeof DOSES_URGENCE !== 'undefined') {
+    DOSES_URGENCE.forEach(item => {
+      html += `
+        <div class="calc-card urg-card" style="border-left: 4px solid #6366f1;">
+          <div class="calc-card-hdr">
+            <span class="calc-card-nom">⚡ ${esc(item.nom || item.title || 'Calcul de dose')}</span>
+            <span class="calc-badge" style="background:#6366f1; color:white;">DOSE URGENT</span>
+          </div>
+          <div class="med-details" style="display:flex; flex-direction:column; gap:8px; margin-top:8px;">
+            ${item.classe ? `<div><strong>Classe :</strong> <span class="fs-sm">${esc(item.classe)}</span></div>` : ''}
+            ${item.dose ? `<div><strong>Dose recommandée :</strong> <span class="fs-sm">${esc(item.dose)}</span></div>` : ''}
+            ${item.indications ? `<div><strong>Indications :</strong> <span class="fs-sm">${esc(item.indications)}</span></div>` : ''}
+            ${item.remarques ? `<div><strong>Remarques cliniques :</strong> <span class="fs-sm">${esc(item.remarques)}</span></div>` : ''}
+          </div>
+        </div>
+      `;
+    });
+  }
+
+  content.innerHTML = html || '<div class="empty">Aucune posologie d\'urgence trouvée.</div>';
+  setupTxUrgenceSearch();
+}
+
+function setupTxMoleculesSearch() {
+  const search = document.getElementById('txSearch');
+  if (search) {
+    search.replaceWith(search.cloneNode(true));
+    const newSearch = document.getElementById('txSearch');
+    newSearch.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      document.querySelectorAll('#txContent .med-card').forEach(card => {
+        const text = card.textContent.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        card.style.display = text.includes(query) ? 'block' : 'none';
+      });
+    });
+  }
+}
+
+function setupTxInteractionsSearch() {
+  const search = document.getElementById('txSearchInteractions');
+  if (search) {
+    search.replaceWith(search.cloneNode(true));
+    const newSearch = document.getElementById('txSearchInteractions');
+    newSearch.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      document.querySelectorAll('#txContentInteractions .interaction-card').forEach(card => {
+        const text = card.textContent.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        card.style.display = text.includes(query) ? 'block' : 'none';
+      });
+    });
+  }
+}
+
+function setupTxEffetsSearch() {
+  const search = document.getElementById('txSearchEffets');
+  if (search) {
+    search.replaceWith(search.cloneNode(true));
+    const newSearch = document.getElementById('txSearchEffets');
+    newSearch.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      document.querySelectorAll('#txContentEffets .effet-card').forEach(card => {
+        const text = card.textContent.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        card.style.display = text.includes(query) ? 'block' : 'none';
+      });
+    });
+  }
+}
+
+function setupTxUrgenceSearch() {
+  const search = document.getElementById('txSearchUrgence');
+  if (search) {
+    search.replaceWith(search.cloneNode(true));
+    const newSearch = document.getElementById('txSearchUrgence');
+    newSearch.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      document.querySelectorAll('#txContentUrgence .urg-card').forEach(card => {
+        const text = card.textContent.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        card.style.display = text.includes(query) ? 'block' : 'none';
+      });
+    });
+  }
+}
+
+function filterMeds(classe, btn) {
+  document.querySelectorAll('#txFilters .calc-filt-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  document.querySelectorAll('.med-card').forEach(card => {
+    const medClass = card.getAttribute('data-class') || '';
+    if (classe === 'all' || medClass.toLowerCase().includes(classe.toLowerCase().substring(0, 8))) {
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
 
 /* ── UTILS ── */
 function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}

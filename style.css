@@ -3209,3 +3209,349 @@ button, input, a {
   color: var(--accent); /* Turquoise color */
 }
 
+.sit-badge-inline {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: var(--accent-soft);
+  color: var(--accent);
+  padding: 1px 6px;
+  border-radius: 8px;
+  margin: 0 2px;
+  display: inline-block;
+}
+
+/* ── MEDICALCUL (SCORES & CALCULATEURS) ── */
+#vScores {
+  padding: 10px 14px;
+}
+.calc-toolbar {
+  margin-bottom: 12px;
+}
+.calc-search {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  color: var(--text1);
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease;
+}
+.calc-search:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+.calc-filters {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 2px 12px;
+  margin-bottom: 16px;
+  scrollbar-width: none;
+}
+.calc-filters::-webkit-scrollbar {
+  display: none;
+}
+.calc-filt-btn {
+  white-space: nowrap;
+  padding: 8px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text2);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.calc-filt-btn.active, .calc-filt-btn:hover {
+  background: var(--accent-light) !important;
+  border-color: var(--accent) !important;
+  color: var(--accent-dark) !important;
+}
+.calc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.calc-card {
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.calc-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--glass-border-strong);
+  background: var(--bg-card-hover);
+}
+.calc-card-hdr {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.calc-card-nom {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text1);
+}
+.calc-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: var(--glass-border-strong);
+  color: var(--text2);
+}
+.calc-card-desc {
+  font-size: 0.82rem;
+  color: var(--text3);
+  line-height: 1.4;
+}
+
+/* Calculateur individuel */
+.calc-detail-header {
+  margin-bottom: 20px;
+  position: relative;
+}
+.calc-back-btn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px 0;
+  margin-bottom: 10px;
+}
+.calc-back-btn:hover {
+  text-decoration: underline;
+}
+.calc-desc {
+  font-size: 0.9rem;
+  color: var(--text2);
+  line-height: 1.5;
+  margin-top: 6px;
+}
+.calc-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+/* Checkbox tactiles */
+.check-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s ease;
+}
+.check-container:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--glass-border-strong);
+}
+.check-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.checkmark {
+  height: 20px;
+  width: 20px;
+  background-color: var(--glass-border-strong);
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  position: relative;
+  transition: all 0.2s ease;
+}
+.check-container input:checked ~ .checkmark {
+  background-color: var(--accent);
+}
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 7px;
+  top: 3px;
+  width: 6px;
+  height: 11px;
+  border: solid var(--text-light);
+  border-width: 0 2.5px 2.5px 0;
+  transform: rotate(45deg);
+}
+.check-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Radio buttons tactiles (AGGIR, ADL, etc.) */
+.calc-group-box {
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: var(--shadow-card);
+  margin-bottom: 12px;
+}
+.calc-group-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text1);
+  border-left: 3px solid var(--accent);
+  padding-left: 8px;
+  margin-bottom: 4px;
+}
+.radio-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.radio-container:hover {
+  background: var(--bg-card-hover);
+}
+.radio-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+.radiomark {
+  height: 20px;
+  width: 20px;
+  background-color: var(--glass-border-strong);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 2px;
+  position: relative;
+  transition: all 0.2s ease;
+}
+.radio-container input:checked ~ .radiomark {
+  background-color: var(--accent);
+}
+.radiomark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  top: 6px;
+  left: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-light);
+}
+.radio-container input:checked ~ .radiomark:after {
+  display: block;
+}
+
+/* Binaire Q-Row (Oui/Non) */
+.calc-q-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+}
+.calc-q-text {
+  font-size: 0.9rem;
+  color: var(--text1);
+  font-weight: 500;
+}
+.calc-q-btns {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.radio-btn-label {
+  cursor: pointer;
+}
+.radio-btn-label input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.radio-btn-label span {
+  display: inline-block;
+  padding: 6px 16px;
+  border: 1px solid var(--glass-border-strong);
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text2);
+  transition: all 0.2s ease;
+}
+.radio-btn-label input:checked + span {
+  background: var(--accent);
+  color: var(--text-light);
+  border-color: var(--accent);
+}
+
+/* Zone de résultat */
+.calc-result-area {
+  margin-top: 24px;
+  position: sticky;
+  bottom: 70px;
+  z-index: 10;
+}
+.calc-res-box {
+  padding: 16px 20px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.calc-res-box.normal {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: rgba(16, 185, 129, 0.4);
+}
+.calc-res-box.warning {
+  background: rgba(245, 158, 11, 0.2);
+  border-color: rgba(245, 158, 11, 0.4);
+}
+.calc-res-box.danger {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.4);
+}
+.calc-res-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+  color: var(--text1);
+}
+.calc-res-desc {
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--text2);
+}
+.fs-sm {
+  font-size: 0.75rem;
+  color: var(--text3);
+}
+

@@ -98,6 +98,14 @@
         <span class="qa-icon">📈</span>
         <span class="qa-label">Stats</span>
       </button>
+      <button class="qa-card" onclick="sw('scores')">
+        <span class="qa-icon">🧮</span>
+        <span class="qa-label">Scores</span>
+      </button>
+      <button class="qa-card" onclick="sw('erreurs')">
+        <span class="qa-icon">❌</span>
+        <span class="qa-label">Erreurs</span>
+      </button>
     </div>
     
     <div id="recent" style="display:none"></div>
@@ -223,6 +231,37 @@
     <div id="quizContent" class="quiz-content"></div>
   </div>
 
+  <!-- MEDICALCUL (SCORES & CALCULATEURS) -->
+  <div class="view" id="vScores">
+    <div class="page-hd">
+      <h1>Medicalcul</h1>
+      <p>Calculateurs interactifs et échelles cliniques gériatriques</p>
+    </div>
+    
+    <div id="calc-list-container">
+      <div class="calc-toolbar">
+        <input type="search" class="calc-search" id="calcSearch" placeholder="Rechercher un score (ex: MMS, MNA, Braden)..." autocomplete="off" aria-label="Rechercher un score">
+      </div>
+      <div class="calc-filters">
+        <button class="calc-filt-btn active" onclick="Medicalcul.filterByDomain('all', this)">Tous</button>
+        <button class="calc-filt-btn" onclick="Medicalcul.filterByDomain('Évaluation Gériatrique Standardisée (EGS)', this)" style="border-color:var(--accent); color:var(--accent); font-weight:bold;">EGS (CGA)</button>
+        <button class="calc-filt-btn" onclick="Medicalcul.filterByDomain('Cognition & Humeur', this)">Cognition</button>
+        <button class="calc-filt-btn" onclick="Medicalcul.filterByDomain('Autonomie', this)">Autonomie</button>
+        <button class="calc-filt-btn" onclick="Medicalcul.filterByDomain('Nutrition & Peau', this)">Nutrition & Peau</button>
+        <button class="calc-filt-btn" onclick="Medicalcul.filterByDomain('Équilibre & Marche', this)">Équilibre</button>
+        <button class="calc-filt-btn" onclick="Medicalcul.filterByDomain('Cardiovasculaire', this)">Cardio</button>
+        <button class="calc-filt-btn" onclick="Medicalcul.filterByDomain('Pneumologie', this)">Pneumo</button>
+        <button class="calc-filt-btn" onclick="Medicalcul.filterByDomain('Urgences & Soins Intensifs', this)">Urgences</button>
+        <button class="calc-filt-btn" onclick="Medicalcul.filterByDomain('Évaluation de la Douleur', this)">Douleur</button>
+      </div>
+      <div class="calc-list" id="calc-list"></div>
+    </div>
+
+    <div id="calc-detail-container" style="display:none">
+      <div id="calc-detail-content"></div>
+    </div>
+  </div>
+
   <!-- BRAINFEED -->
   <div class="view" id="vFeed">
     <div class="bf-header">
@@ -301,9 +340,70 @@
 
   <!-- PROTOCOLES -->
   <div class="view" id="vProto">
-    <div class="page-hd"><h1>Protocoles</h1><p>Tous les protocoles médicaux de référence</p></div>
-    <div class="proto-filters" id="protoFilters"></div>
-    <div id="protoContent"></div>
+    <div class="page-hd"><h1>Protocoles & Traitements</h1><p>Protocoles cliniques de référence et guides thérapeutiques</p></div>
+    
+    <div class="sub-tab-switch">
+      <button id="btnSubProtoCliniques" class="active" onclick="switchProtoMode('cliniques')">Protocoles Cliniques</button>
+      <button id="btnSubTraitements" onclick="switchProtoMode('traitements')">Traitements (Thérapeutique)</button>
+    </div>
+
+    <!-- Section Protocoles Cliniques -->
+    <div id="subTabProtoCliniques" class="sub-tab-content">
+      <div class="proto-filters" id="protoFilters"></div>
+      <div id="protoContent"></div>
+    </div>
+
+    <!-- Section Traitements / Thérapeutique -->
+    <div id="subTabTraitements" class="sub-tab-content" style="display:none">
+      <div class="sub-tab-switch tx-inner-switch" style="margin-bottom:12px; display:flex; flex-wrap:wrap; gap:4px; padding:4px; background:rgba(255,255,255,0.05); border-radius:8px;">
+        <button id="btnTxMolecules" class="active" onclick="switchTxSubMode('molecules')" style="font-size:0.8rem; padding:6px 12px; flex:1; min-width:80px;">Médiathèque</button>
+        <button id="btnTxInteractions" onclick="switchTxSubMode('interactions')" style="font-size:0.8rem; padding:6px 12px; flex:1; min-width:80px;">Interactions</button>
+        <button id="btnTxEffets" onclick="switchTxSubMode('effets')" style="font-size:0.8rem; padding:6px 12px; flex:1; min-width:80px;">Effets / Syndromes</button>
+        <button id="btnTxUrgence" onclick="switchTxSubMode('urgence')" style="font-size:0.8rem; padding:6px 12px; flex:1; min-width:80px;">Urgences & Doses</button>
+      </div>
+
+      <!-- Content for Molecules -->
+      <div id="txSubTabMolecules" class="tx-sub-tab-content">
+        <div class="calc-toolbar">
+          <input type="search" class="calc-search" id="txSearch" placeholder="Rechercher une molécule, classe ou indication..." autocomplete="off" aria-label="Rechercher un traitement">
+        </div>
+        <div class="calc-filters" id="txFilters">
+          <button class="calc-filt-btn active" onclick="filterMeds('all', this)">Tous</button>
+          <button class="calc-filt-btn" onclick="filterMeds('Cardiovasculaire', this)">Cardio</button>
+          <button class="calc-filt-btn" onclick="filterMeds('Psychotropes', this)">Psycho</button>
+          <button class="calc-filt-btn" onclick="filterMeds('Antalgiques', this)">Antalgiques</button>
+          <button class="calc-filt-btn" onclick="filterMeds('Anticoagulants', this)">Hémo</button>
+          <button class="calc-filt-btn" onclick="filterMeds('Antibiotiques', this)">Antibio</button>
+          <button class="calc-filt-btn" onclick="filterMeds('Laxatifs', this)">Laxatifs</button>
+          <button class="calc-filt-btn" onclick="filterMeds('Autre', this)">Autres</button>
+        </div>
+        <div class="calc-list" id="txContent"></div>
+      </div>
+
+      <!-- Content for Interactions -->
+      <div id="txSubTabInteractions" class="tx-sub-tab-content" style="display:none">
+        <div class="calc-toolbar">
+          <input type="search" class="calc-search" id="txSearchInteractions" placeholder="Rechercher une interaction (ex: BZD, warfarine)..." autocomplete="off">
+        </div>
+        <div class="calc-list" id="txContentInteractions"></div>
+      </div>
+
+      <!-- Content for Effets Indésirables -->
+      <div id="txSubTabEffets" class="tx-sub-tab-content" style="display:none">
+        <div class="calc-toolbar">
+          <input type="search" class="calc-search" id="txSearchEffets" placeholder="Rechercher un effet indésirable, un syndrome gériatrique ou une molécule..." autocomplete="off">
+        </div>
+        <div class="calc-list" id="txContentEffets"></div>
+      </div>
+
+      <!-- Content for Urgence -->
+      <div id="txSubTabUrgence" class="tx-sub-tab-content" style="display:none">
+        <div class="calc-toolbar">
+          <input type="search" class="calc-search" id="txSearchUrgence" placeholder="Rechercher un traitement d'urgence ou une posologie..." autocomplete="off">
+        </div>
+        <div class="calc-list" id="txContentUrgence"></div>
+      </div>
+    </div>
   </div>
 
   <!-- SETTINGS -->
@@ -406,6 +506,7 @@
 <script src="epreuves-externes.js?v=162"></script>
 <script src="evc-coach.js?v=162"></script>
 <script src="scores-geriatrie.js?v=162"></script>
+<script src="calculateurs.js?v=162"></script>
 <script src="formules-geriatrie.js?v=162"></script>
 <script src="pharmaco-geriatrie.js?v=162"></script>
 <script src="pieges-exam.js?v=162"></script>
@@ -493,6 +594,10 @@
 <script src="guides-geriatrie-quotidien.js?v=162"></script>
 <script src="guides-medecine-legal.js?v=162"></script>
 <script src="medicaments-urgence.js?v=162"></script>
+<script src="interactions-critiques.js?v=162"></script>
+<script src="effets-indesirables.js?v=162"></script>
+<script src="doses-urgence.js?v=162"></script>
+<script src="pharmaco-geriatrie.js?v=162"></script>
 <script src="protocoles-formation.js?v=162"></script>
 <script src="protocoles-legislation.js?v=162"></script>
 <script src="protocoles-qualite.js?v=162"></script>
