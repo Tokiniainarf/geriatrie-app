@@ -1,121 +1,810 @@
+/* ═══════════════════════════════════════════════════════════════
+   MEGA-FLASHCARDS-2 — Généré automatiquement depuis les lots cliniques
+   Sources: Gériatrie 5e éd. + 28 PDFs NotebookLM
+   Chapitres: ch5-ch8
+   ═══════════════════════════════════════════════════════════════ */
+
 const MEGA_FLASHCARDS_2 = [
-  { id: 'mega2-1', chapter: 'ch1', rang: 'A', question: 'PA de 82 ans, 3 chutes en 6 mois, perte de 4 kg : quelles étapes prioritaires de l\'EGM à domicile ?', answer: '1) Recherche causes chutes (médicaments, orthostatisme, vision). 2) Dépistage dénutrition (MNA, albumine). 3) Évaluation cognitive (4AT/MoCa). 4) Bilan fonctionnel (TUG, Lawton). 5) Plan coordonné MT + kiné + ergo + adaptation logement.', tags: ['EGM', 'scénario', 'chute'] },
-  { id: 'mega2-2', chapter: 'ch1', rang: 'B', question: 'Comment expliquer à un patient pourquoi on dose la 25-OH vitamine D avant de supplémenter à forte dose ?', answer: 'Le dosage évite la surdosage (hypercalcémie) et oriente la cible (souvent 30-50 ng/mL). Sans bilan, on peut traiter inutilement ou insuffisamment. Associer calcium alimentaire ou supplément si apports <800 mg/j.', tags: ['vitamine D', 'éducation'] },
-  { id: 'mega2-3', chapter: 'ch1', rang: 'A', question: 'SPPB = 6 chez une femme de 78 ans : implications pronostic et conduite ?', answer: 'Fragilité avérée (≤7). Risque élevé dépendance, hospitalisation, mortalité. Prescrire rééducation équilibre/marche, revue iatrogénie, nutrition, vitamine D. Réévaluer à 3 mois.', tags: ['SPPB', 'fragilité', 'algorithme'] },
-  { id: 'mega2-4', chapter: 'ch1', rang: 'B', question: 'Différentiel : fatigue et lenteur vs dépression chez PA « pré-fragile » ?', answer: 'Fragilité : faiblesse objective (grip, marche lente), perte poids involontaire, épuisement. Dépression : humeur dépressive, anhédonie, idées noires. Les deux coexistent souvent → GDS-15 + critères Fried.', tags: ['différentiel', 'fragilité', 'dépression'] },
-  { id: 'mega2-5', chapter: 'ch1', rang: 'A', question: 'Quels paramètres de suivi après mise en place d\'un programme de prévention des chutes ?', answer: 'Nombre de chutes/6 mois, TUG, Tinetti ou SPPB, EVA douleur, observance vitamine D/exercices, effets indésirables médicaments (orthostatisme). Réévaluation trimestrielle.', tags: ['monitoring', 'prévention', 'chute'] },
-
-  { id: 'mega2-6', chapter: 'ch2', rang: 'A', question: 'Homme de 88 ans hospitalisé pour pneumonie : nouvelle incontinence + agitation nocturne. Diagnostic syndromique et priorité ?', answer: 'Delirium hyperactif sur infection (syndrome gériatrique). Priorité : traiter pneumonie, hydratation, douleur, révision sédatifs/BZD. Non-contention, réorientation, lunettes/appareil. CAM/4AT.', tags: ['scénario', 'delirium', 'syndrome'] },
-  { id: 'mega2-7', chapter: 'ch2', rang: 'B', question: 'Charlson 5 à l\'admission : comment l\'utiliser dans la discussion avec la famille ?', answer: 'Risque mortalité à 10 ans élevé ; utile pour proportionnalité des soins, pas pour refuser soins aigus. Coupler avec fragilité, cognition, objectifs du patient (directives anticipées).', tags: ['Charlson', 'éducation', 'pronostic'] },
-  { id: 'mega2-8', chapter: 'ch2', rang: 'A', question: 'Algorithme prévention du DAFH dès J0 d\'hospitalisation ?', answer: 'Mobilisation précoce quotidienne, déprivation sommeil minimale, correction sensorielle, éviter anticholinergiques/sédation, douleur traitée, hydratation, protocole delirium (HELP). Katz admission vs J+? pour objectif.', tags: ['DAFH', 'algorithme', 'hôpital'] },
-  { id: 'mega2-9', chapter: 'ch2', rang: 'A', question: 'PA polymorbide : insuffisance cardiaque stable mais infection urinaire récurrente. Application du modèle Bouchon ?', answer: 'Facteur 3 = ITU récurrente (précipitant modifiable). Traiter infection, réduire sonde/médicaments favorisants, avant d\'intensifier seulement l\'IC. Éviter de stabiliser chronicités en ignorant le réversible.', tags: ['Bouchon', 'scénario', 'priorisation'] },
-  { id: 'mega2-10', chapter: 'ch2', rang: 'B', question: 'Essai limité de ventilation non invasive : critères de succès/échec à documenter ?', answer: 'Durée fixée (ex. 48-72 h), critères : amélioration gazométrie/confort, capacité expectoration. Échec = épuisement, refus, aggravation → discussion limitation/Soins palliatifs si souhait patient.', tags: ['time-limited', 'éducation', 'éthique'] },
-
-  { id: 'mega2-11', chapter: 'ch3', rang: 'A', question: 'Barthel passe de 85 à 55 après AVC : quelles démarches sociales en parallèle du SSR ?', answer: 'Évaluation GIR (souvent 2-3), dossier MDPH (APA, téléalarme, portage repas), évaluation logement (barres, fauteuil roulant), droit au congé proche aidant. Plan de sortie dès J7 SSR.', tags: ['scénario', 'Barthel', 'MDPH'] },
-  { id: 'mega2-12', chapter: 'ch3', rang: 'B', question: 'Lawton 3/8 mais Katz 6/6 : signification clinique ?', answer: 'Dépendance instrumentale précoce avec ADL préservés = signal fragilité / début déclin. Rechercher cognition, dépression, vision, polymédication. Anticiper aide ménage, transport, gestion médicaments.', tags: ['différentiel', 'Lawton', 'IADL'] },
-  { id: 'mega2-13', chapter: 'ch3', rang: 'A', question: 'GIR 4 : prestations et réévaluation ?', answer: 'APA à domicile ou EHPAD selon projet de vie ; allocation personnalisée d\'autonomie. Réévaluation AGGIR si aggravation (hospitalisation, fracture). GIR 4 = dépendance importante mais pas confinement lit.', tags: ['GIR', 'APA', 'éducation'] },
-  { id: 'mega2-14', chapter: 'ch3', rang: 'A', question: 'Quels outils pour objectiver la dépendance dans un dossier EHPAD à l\'admission ?', answer: 'AGGIR (GIR), échelles ADL (Katz, Barthel), IADL si possible, évaluation cognitive, risque escarre (Braden), risque chute. Alimente projet de soins individualisé (PDS).', tags: ['monitoring', 'EHPAD', 'échelles'] },
-  { id: 'mega2-15', chapter: 'ch3', rang: 'B', question: 'Conjoint aidant épuisé, patient GIR 3 à domicile : options sans hospitalisation ?', answer: 'Répit (accueil de jour, hébergement temporaire), renforcement APA, téléassistance, équipe mobile gériatrique, aide financière (AJPA). Évaluer curatelle/sauvegarde si refus de soins.', tags: ['scénario', 'aidant', 'coordination'] },
-
-  { id: 'mega2-16', chapter: 'ch4', rang: 'A', question: 'Patient conscient refuse transfusion pour raisons personnelles. Conduite selon Leonetti ?', answer: 'Respecter refus après information loyale sur conséquences. Documenter, vérifier directives anticipées et personne de confiance. Soins de confort maintenus. Pas de contrainte si discernement conservé.', tags: ['scénario', 'Leonetti', 'refus'] },
-  { id: 'mega2-17', chapter: 'ch4', rang: 'A', question: 'SPCMD demandée : checklist collégiale Claeys-Leonetti ?', answer: 'Phase terminale, souffrance réfractaire malgré traitements adaptés, discernement patient (ou directives), avis collégial (2e médecin), information équipe/aidants, traçabilité, sédation proportionnée jusqu\'au décès.', tags: ['Claeys-Leonetti', 'algorithme', 'SPCMD'] },
-  { id: 'mega2-18', chapter: 'ch4', rang: 'B', question: 'Différentiel : limitation active vs obstination déraisonnable ?', answer: 'Limitation : arrêt/ non-escalade si charge > bénéfice, pronostic engagé. Obstination déraisonnable = poursuite traitements disproportionnés sans bénéfice. Les deux exigent collégialité et volonté du patient.', tags: ['différentiel', 'éthique'] },
-  { id: 'mega2-19', chapter: 'ch4', rang: 'A', question: 'Démence modérée, gestion financière dangereuse : mesure de protection adaptée ?', answer: 'Curatelle renforcée ou tutelle selon gravité ; sauvegarde de justice si urgence. Mandat de protection future si rédigé avant perte discernement. Toujours mesure la moins restrictive.', tags: ['scénario', 'protection', 'juridique'] },
-  { id: 'mega2-20', chapter: 'ch4', rang: 'B', question: 'Éducation : à quoi servent les directives anticipées chez un PA encore autonome ?', answer: 'Exprimer refus ou acceptation de certains traitements si incapacité future. Désigner personne de confiance. Révisables. Facilitent décisions collégiales et respect de la volonté.', tags: ['directives', 'éducation'] },
-
-  { id: 'mega2-21', chapter: 'ch5', rang: 'A', question: 'PA chutes répétées, acuité visuelle 4/10 non corrigée : plan de prise en charge ?', answer: 'Consultation ophtalmo urgente, correction optique + adaptation domicile (éclairage, contraste). Bilan chutes parallèle (TUG, médicaments). Éducation : porter lunettes, nettoyer verres.', tags: ['scénario', 'vision', 'chute'] },
-  { id: 'mega2-22', chapter: 'ch5', rang: 'A', question: 'Presbyacousie : quand proposer appareillage et quel suivi ?', answer: 'Si gêne conversation, isolement, TV fort volume. Audioprothèse bilatérale si perte significative. Suivi : adaptation 2-4 semaines, entretien, lien avec cognition (réévaluer MoCa si troubles).', tags: ['presbyacousie', 'algorithme', 'monitoring'] },
-  { id: 'mega2-23', chapter: 'ch5', rang: 'B', question: 'Méta morphopsies et baisse AV un œil chez PA 79 ans : diagnostic différentiel urgent ?', answer: 'DMLA humide (anti-VEGF en urgence) vs décollement rétine vs occlusion veineuse. Ophtalmo <48 h. Ne pas attribuer à « l\'âge » seul.', tags: ['différentiel', 'DMLA', 'urgence'] },
-  { id: 'mega2-24', chapter: 'ch5', rang: 'A', question: 'Vertiges positionnels 30 secondes au lever : démarche diagnostique et traitement ?', answer: 'VPPB probable : Dix-Hallpike, manœuvre d\'Epley (kiné/ médecin formé). Éviter antivertigineux prolongés. Éducation : mouvements lents, retour si récidive.', tags: ['VPPB', 'scénario', 'traitement'] },
-  { id: 'mega2-25', chapter: 'ch5', rang: 'B', question: 'Protocole HELP : interventions sensorielles à l\'admission ?', answer: 'Lunettes et appareils auditifs en place, aides auditives fonctionnelles, horloge visible, éclairage nocturne, réduction bruit. Réduit delirium et chutes.', tags: ['HELP', 'sensoriel', 'delirium'] },
-
-  { id: 'mega2-26', chapter: 'ch6', rang: 'A', question: 'Femme 75 ans, fracture vertébrale T12, T-score -2,8 : traitement de fond et suivi ?', answer: 'Bisphosphonate ou dénosumab + Ca/Vit D. Rechercher causes secondaires si Z-score bas. DMO contrôle 1-2 ans. Prévention chutes, éducation position (éviter flexion rachis avec ostéoporose sévère).', tags: ['scénario', 'ostéoporose', 'algorithme'] },
-  { id: 'mega2-27', chapter: 'ch6', rang: 'A', question: 'Alendronate : que dire au patient sur la prise et les effets à surveiller ?', answer: '1x/semaine à jeun, grand verre d\'eau, rester debout 30 min. Signaler douleur œsophagienne, mâchoire, cuisse (fracture atypique). Dentiste avant si extractions.', tags: ['alendronate', 'éducation', 'monitoring'] },
-  { id: 'mega2-28', chapter: 'ch6', rang: 'B', question: 'DFG 38, zolédronate prévu : adaptations et surveillance ?', answer: 'Contre-indication relative si DFG <35 ; hydratation, dose standard souvent 5 mg si ≥35. Surveiller créatinine, calcémie, phosphatémie, symptômes grippe-like J1-3.', tags: ['zolédronate', 'IRC', 'monitoring'] },
-  { id: 'mega2-29', chapter: 'ch6', rang: 'A', question: 'Arrêt dénosumab pour effet indésirable : risque et conduite ?', answer: 'Rebond fractures vertébrales multiples si arrêt brutal. Relais par bisphosphonate oral/IV ou poursuite. Ne pas interrompre sans stratégie. Éducation patient sur compliance 6 mois.', tags: ['dénosumab', 'algorithme', 'iatrogénie'] },
-  { id: 'mega2-30', chapter: 'ch6', rang: 'A', question: 'Post fracture col fémoral J2 : checklist orthogériatrique médicale ?', answer: 'Ostéoporose traitée, Ca/Vit D, antalgie, thromboprophylaxie, délirum, nutrition, mobilisation, révision médicamenteuse, objectif sortie SSR, prévention nouvelle chute.', tags: ['col fémoral', 'scénario', 'orthogériatrie'] },
-
-  { id: 'mega2-31', chapter: 'ch7', rang: 'A', question: 'Gonarthrose, EVA 6 malgré paracétamol et kiné : escalade thérapeutique HAS ?', answer: 'AINS topique ou oral court + IPP si risque digestif ; infiltration corticoïde si épanchement (max 3-4/an). Perte de poids si IMC élevé. PTG si échec et gêne majeure.', tags: ['gonarthrose', 'algorithme', 'traitement'] },
-  { id: 'mega2-32', chapter: 'ch7', rang: 'B', question: 'Genou chaud, fébrile 38,5°C chez PA : arthrose vs arthrite septique ?', answer: 'Septique si fièvre, impotence, CRP élevée, monoarthrite aiguë → ponction urgente. Arthrose : mécanique, modérément inflammatoire. Chondrocalcinose : crises intermittentes.', tags: ['différentiel', 'genou', 'infection'] },
-  { id: 'mega2-33', chapter: 'ch7', rang: 'A', question: 'Avant PTG chez PA 81 ans, évaluation gériatrique pré-opératoire ?', answer: 'Risque cardiaque, anticoagulants, cognition (delirium post-op), nutrition, escarre, aide domicile post sortie, objectifs fonctionnels réalistes, consentement éclairé.', tags: ['PTG', 'scénario', 'préop'] },
-  { id: 'mega2-34', chapter: 'ch7', rang: 'B', question: 'Infiltration genou : information patient sur bénéfices et limites ?', answer: 'Soulagement 6-12 semaines possible, pas curatif. Max 3-4/an pour limiter cartilage. Signaler rougeur/feuille si infection. Continuer kiné et poids.', tags: ['infiltration', 'éducation'] },
-  { id: 'mega2-35', chapter: 'ch7', rang: 'A', question: 'Raideur matinale 45 min + synovite poignets : orientation diagnostique ?', answer: 'Rhumatoid arthritis ou pseudogoutte/polyarthrite inflammatoire, pas arthrose simple. Bilan rhumato (CRP, VS, facteur rhumatoïde), avis spécialisé.', tags: ['différentiel', 'arthrose', 'inflammatoire'] },
-
-  { id: 'mega2-36', chapter: 'ch8', rang: 'A', question: 'PA Alzheimer modéré, cris à la mobilisation, EVA impossible : démarche antalgique ?', answer: 'ECPA ou DOLOPLUS-2 ; traiter causes (escarre, constipation, infection). Paracétamol systématique si doute. Éviter AINS si IRC. Réévaluer score toutes les 4 h si aigu.', tags: ['scénario', 'ECPA', 'algorithme'] },
-  { id: 'mega2-37', chapter: 'ch8', rang: 'A', question: 'DOLOPLUS-2 = 7/16 : conduite et réévaluation ?', answer: 'Douleur probable → paracétamol, causes réversibles, palier 2 si échec (tramadol faible dose). Réévaluer 30 min-1 h après dose. Objectif score <5.', tags: ['DOLOPLUS-2', 'monitoring', 'traitement'] },
-  { id: 'mega2-38', chapter: 'ch8', rang: 'B', question: 'Douleur neuropathique diabète + IRC modérée : choix médicamenteux ?', answer: 'Prégabaline ou gabapentine doses réduites selon DFG ; duloxétine si DFG OK. Éviter morphine forte en 1ère intention. Paracétamol en adjuvant.', tags: ['neuropathique', 'différentiel', 'IRC'] },
-  { id: 'mega2-39', chapter: 'ch8', rang: 'A', question: 'Échelle EVA 8/10 stable sous paracétamol seul : escalade OMS chez PA ?', answer: 'Ajouter palier 2 (tramadol faible dose, codéine prudente) ou AINS court si pas CI. Rechercher cause non traitée. Objectif EVA ≤3. Surveiller sédation, constipation.', tags: ['EVA', 'algorithme', 'OMS'] },
-  { id: 'mega2-40', chapter: 'ch8', rang: 'B', question: 'Éducation aidant : signes de sous-traitement de la douleur chez PA non communicant ?', answer: 'Gémissements, grimaces, protection postures, agitation, refus alimentation, tachycardie. Ne pas attribuer à « comportement ». Signaler à l\'équipe pour réévaluation outil comportemental.', tags: ['douleur', 'éducation', 'aidant'] },
-
-  { id: 'mega2-41', chapter: 'ch9', rang: 'A', question: 'MoCa 22/30, MMSE 26/30 : quelle interprétation et suites ?', answer: 'Troubles cognitifs légers possibles (MoCa plus sensible exécutif). Bilan étiologique : TSH, B12, imagerie si atypique, GDS. Réévaluer à 6 mois. Discuter conduite automobile, aides.', tags: ['scénario', 'MoCa', 'différentiel'] },
-  { id: 'mega2-42', chapter: 'ch9', rang: 'A', question: 'Hallucinations visuelles, fluctuations, rigidité : éviter quels traitements ?', answer: 'Démence Lewy : éviter antipsychotiques classiques (halopéridol) → hypersensibilité, mortalité. Privilégier rivastigmine, quétiapine faible dose si agitation sévère après essai non pharmacologique.', tags: ['Lewy', 'scénario', 'iatrogénie'] },
-  { id: 'mega2-43', chapter: 'ch9', rang: 'B', question: 'Donépézil débuté : paramètres de surveillance à 1 et 3 mois ?', answer: 'Nausées, diarrhée, bradycardie, syncope, poids. ECG si cardiopathie. Efficacité clinique modeste : stabilisation attendue, pas guérison. Réévaluer bénéfice/risque annuellement.', tags: ['donépézil', 'monitoring'] },
-  { id: 'mega2-44', chapter: 'ch9', rang: 'A', question: 'Plaintes mnésiques majeures mais examen normal, « je ne sais pas » aux questions : orientation ?', answer: 'Pseudodémence dépressive probable. GDS-15, essai antidépresseur 6-8 semaines. Si doute, IRM ou avis mémoire. Ne pas diagnostiquer Alzheimer sans déficit objectif.', tags: ['pseudodémence', 'différentiel', 'scénario'] },
-  { id: 'mega2-45', chapter: 'ch9', rang: 'B', question: 'Bradycardie 48/min sous galantamine : conduite ?', answer: 'Arrêt ou réduction ; avis cardiologique si symptômes (syncope). Contre-indication relative si bloc AV. Alternative : mémentine ou arrêt traitement si peu de bénéfice.', tags: ['anticholinestérase', 'algorithme', 'monitoring'] },
-
-  { id: 'mega2-46', chapter: 'ch10', rang: 'A', question: 'GDS-15 = 10, perte poids, insomnie : plan de traitement initial PA ?', answer: 'ISRS demi-dose (sertraline 25 mg ou escitalopram 5 mg), psychoéducation, activité physique adaptée, traiter douleur. Réévaluation 4-6 sem. Surveiller hyponatrémie, chutes. Pas tricycliques.', tags: ['scénario', 'GDS', 'algorithme'] },
-  { id: 'mega2-47', chapter: 'ch10', rang: 'A', question: 'Veuf 84 ans, armes à domicile, GDS 12 : évaluation risque suicide ?', answer: 'Risque élevé (homme, âge, veuvage, dépression). Interroger idéation directement, sécuriser environnement, entourage, suivi rapproché, hospitalisation si danger imminent. Pas laisser seul.', tags: ['suicide', 'scénario', 'urgence'] },
-  { id: 'mega2-48', chapter: 'ch10', rang: 'B', question: 'Hyponatrémie 128 mmol/L 2 semaines après sertraline : lien et conduite ?', answer: 'SIADH possible avec ISRS chez PA. Arrêt ou changement, restriction eau, surveillance Na quotidienne. Correction lente. Réintroduire autre ISRS ou mirtazapine avec prudence.', tags: ['ISRS', 'iatrogénie', 'monitoring'] },
-  { id: 'mega2-49', chapter: 'ch10', rang: 'A', question: 'Dépression + dénutrition + insomnie : pourquoi mirtazapine peut être choisie ?', answer: '15 mg le soir : sommeolence utile, stimulation appétit, peu anticholinergique. Surveiller sédation diurne et prise de poids excessive. Combiner avec psychothérapie/support.', tags: ['mirtazapine', 'scénario', 'traitement'] },
-  { id: 'mega2-50', chapter: 'ch10', rang: 'B', question: 'Éducation famille : dépression n\'est pas « normal à l\'âge » — message clé ?', answer: 'La dépression est une maladie traitable ; isolement et douleur sont facteurs. Le traitement améliore qualité de vie et peut réduire risque suicide. Encourager consultation, observance.', tags: ['dépression', 'éducation'] },
-
-  { id: 'mega2-51', chapter: 'ch11', rang: 'A', question: 'Post-op hanche J1 : somnolence fluctuante, ne répond pas toujours : dépistage et prise en charge ?', answer: '4AT/CAM delirium post-op fréquent. Optimiser analgésie (éviter surdosage opioïdes), oxygène, hydratation, lunettes, mobilisation. Halopéridol 0,5 mg si agitation dangereuse. Pas BZD.', tags: ['scénario', 'delirium', 'post-op'] },
-  { id: 'mega2-52', chapter: 'ch11', rang: 'A', question: '4AT = 5 à l\'admission aux urgences : suites immédiates ?', answer: 'Recherche cause (infection, métabolique, douleur, médicaments), CAM complet, bilan ciblé (NFS, ionogramme, glycémie, ECBU). Mesures non pharmacologiques dès J0.', tags: ['4AT', 'algorithme', 'urgences'] },
-  { id: 'mega2-53', chapter: 'ch11', rang: 'B', question: 'Delirium agité, halopéridol 1 mg IM : surveillance 2 h ?', answer: 'QTc, extrapyramidal, sédation excessive, chute. Dose max cumulée 24 h. Réévaluer cause sous-jacente chaque jour. Sevrage neuroleptique dès stabilisation.', tags: ['halopéridol', 'monitoring'] },
-  { id: 'mega2-54', chapter: 'ch11', rang: 'A', question: 'PA somnolent, peu réactif, pas d\'agitation : piège diagnostique ?', answer: 'Delirium hypoactif (50-75 % cas), souvent confondu avec dépression ou démence. CAM si fluctuation + inattention. Même urgence étiologique et mortalité qu\'hyperactif.', tags: ['hypoactif', 'différentiel', 'scénario'] },
-  { id: 'mega2-55', chapter: 'ch11', rang: 'B', question: 'Mnémotechnique 6D appliquée : nouveau furosémide + constipation + fièvre ?', answer: 'Drogues (iatrogénie), Disease (infection), Douleur/Déshydratation possibles. Corriger cause avant sédation. Révision médicamenteuse, ECBU, hydratation, laxatif.', tags: ['6D', 'scénario', 'étiologie'] },
-
-  { id: 'mega2-56', chapter: 'ch12', rang: 'A', question: 'TUG 24 s, chute avec trauma : bilan post-chute systématique ?', answer: 'Syncope vs mécanique, orthostatisme (PA couché/debout), ECG, ionogramme, glycémie, revue médicaments, Tinetti, vision, RPM si suspicion rétention. Plan prévention personnalisé.', tags: ['scénario', 'TUG', 'post-chute'] },
-  { id: 'mega2-57', chapter: 'ch12', rang: 'A', question: 'Tinetti 17/28 : interventions recommandées ?', answer: 'Kinésithérapie équilibre, renforcement musculaire, adaptation domicile, déprescription psychotropes, vitamine D, correction podologique. Réévaluer Tinetti à 3 mois.', tags: ['Tinetti', 'algorithme', 'prévention'] },
-  { id: 'mega2-58', chapter: 'ch12', rang: 'A', question: 'PAS 110 couché, 85 debout à 3 min, traitement antihypertenseur : conduite ?', answer: 'Hypotension orthostatique symptomatique. Réduire/ décaler antihypertenseur, hydratation, lever progressif, bas de contention si TVP absentes. Rééduquer patient (éducation).', tags: ['orthostatisme', 'scénario', 'traitement'] },
-  { id: 'mega2-59', chapter: 'ch12', rang: 'B', question: 'STRATIFY ≥3 en service de médecine : mesures infirmières ?', answer: 'Bracelet risque chute, environnement dégagé, toilette supervisée, chaussures antidérapantes, alarme, pas de contention. Réévaluation hebdomadaire.', tags: ['STRATIFY', 'éducation', 'hôpital'] },
-  { id: 'mega2-60', chapter: 'ch12', rang: 'A', question: 'Programme exercice à domicile après chute : contenu et monitoring ?', answer: 'Otago ou équivalent : renforcement jambes, équilibre 3x/semaine. Monitoring : nombre chutes, observance, douleur, TUG mensuel 3 mois.', tags: ['HAS', 'exercice', 'monitoring'] },
-
-  { id: 'mega2-61', chapter: 'ch13', rang: 'A', question: 'Braden 11, patient alité, incontinence : plan prévention escarre ?', answer: 'Risque élevé : repositionnement 2-3 h, matelas dynamique, protection talons, soins peau, nutrition 1,2-1,5 g protéines/kg, continence gérée. Documenter lésions quotidiennement.', tags: ['scénario', 'Braden', 'algorithme'] },
-  { id: 'mega2-62', chapter: 'ch13', rang: 'B', question: 'Norton 13 vs Braden 14 : utilisation pratique ?', answer: 'Les deux dépistent risque ; choisir échelle validée de l\'établissement. Score bas = même bundle (mobilisation, nutrition, surfaces). Réévaluer à chaque changement d\'état.', tags: ['Norton', 'monitoring', 'prévention'] },
-  { id: 'mega2-63', chapter: 'ch13', rang: 'A', question: 'Plaque érythématouse non blanchissante sacrum stade I : traitement et surveillance ?', answer: 'Soulager pression, protection barrière, ne pas masser. Photo/référence. Si progression → stade II (perte épiderme). Rechercher cause immobilisation, incontinence.', tags: ['NPUAP', 'scénario', 'traitement'] },
-  { id: 'mega2-64', chapter: 'ch13', rang: 'A', question: 'Immobilisation >3 j post fracture : thromboprophylaxie et alternative ?', answer: 'Énoxaparine 40 mg/j si pas CI + mobilisation précoce dès autorisée. Bas de contention si mobile. Durée selon protocole local et risque thrombotique.', tags: ['énoxaparine', 'algorithme', 'fracture'] },
-  { id: 'mega2-65', chapter: 'ch13', rang: 'B', question: 'Éducation aidant : prévention escarre au fauteuil ?', answer: 'Changer position toutes les 1-2 h, coussin adapté, vérifier plis vêtements, hydratation peau, alimentation suffisante, surveiller rougeurs zones sacrées/talons.', tags: ['escarre', 'éducation', 'domicile'] },
-
-  { id: 'mega2-66', chapter: 'ch14', rang: 'A', question: 'MNA 15, IMC 19, albumine 32 : diagnostic et prise en charge ?', answer: 'Dénutrition avérée (MNA <17). Plan : 30-35 kcal/kg, 1,2-1,5 g prot/kg, CNO 1-2/j, thiamine si réalimentation, causes (dépression, dysphagie, denture). Poids hebdomadaire.', tags: ['scénario', 'MNA', 'algorithme'] },
-  { id: 'mega2-67', chapter: 'ch14', rang: 'B', question: 'Perte 6 % poids en 1 mois sans cause évidente : bilan orienté ?', answer: 'Cancer, dépression, hyperthyroïdie, dysphagie, malabsorption, médicaments, sociale (deuil). NFS, TSH, albumine, évaluation dentaire et déglutition.', tags: ['dénutrition', 'différentiel', 'bilan'] },
-  { id: 'mega2-68', chapter: 'ch14', rang: 'A', question: 'Escarre stade III + albumine 28 : objectifs nutritionnels et suivi ?', answer: '1,5 g prot/kg/j, calories augmentées, CNO hyperprotéinés, zinc si carence. Poids, albumine/préalbumine (interprétation prudente), cicatrisation locale.', tags: ['nutrition', 'escarre', 'monitoring'] },
-  { id: 'mega2-69', chapter: 'ch14', rang: 'A', question: 'Réalimentation après jeûne prolongé chez alcoolique : protocole sécurité ?', answer: 'Thiamine IV/PO 200-300 mg avant glucose, apports progressifs, surveiller K, Mg, P (syndrome renutrition). Hospitalisation si risque élevé.', tags: ['renutrition', 'scénario', 'algorithme'] },
-  { id: 'mega2-70', chapter: 'ch14', rang: 'B', question: 'Dysphagie modérée : expliquer texture IDDSI niveau 4 au patient ?', answer: 'Aliments en purée lisse sans morceaux, faciles à avaler, réduisent fausse route. Liquides épaissis séparément si besoin (niveau liquide distinct). Avis orthophoniste.', tags: ['IDDSI', 'éducation', 'dysphagie'] },
-
-  { id: 'mega2-71', chapter: 'ch15', rang: 'A', question: 'Incontinence urinaire + RPM 350 mL : diagnostic et traitement ?', answer: 'Incontinence par regorgement sur rétention. Traiter obstacle (hypertrophie prostate, anticholinergiques), sonde intermittente si indiqué, éviter anticholinergiques jusqu\'à vidange. Avis urologue.', tags: ['scénario', 'regorgement', 'algorithme'] },
-  { id: 'mega2-72', chapter: 'ch15', rang: 'B', question: 'Solifénacine et confusion nouvelle 1 semaine après : lien et conduite ?', answer: 'Anticholinergique → delirium, rétention. Arrêt, sonde si RPM élevé, alternatives (mirabégron, rééducation). Calculer charge ACB globale.', tags: ['solifénacine', 'iatrogénie', 'différentiel'] },
-  { id: 'mega2-73', chapter: 'ch15', rang: 'A', question: 'Urgenturie sans RPM élevé, PA mobile : première ligne ?', answer: 'Rééducation périnéale, hygiène fluides, réduction café. Mirabégron ou dose faible anticholinergique si échec. Éviter si glaucome angle fermé, démence sévère.', tags: ['urgenturie', 'algorithme', 'traitement'] },
-  { id: 'mega2-74', chapter: 'ch15', rang: 'A', question: 'Sonde urinaire permanente depuis 6 mois à domicile : risques et alternative ?', answer: 'ITU récurrentes, lithiase, mobilité réduite. Privilégier intermittent clean si indication maintenue. Réévaluer indication chaque visite. Éducation hygiène sonde.', tags: ['sonde', 'éducation', 'iatrogénie'] },
-  { id: 'mega2-75', chapter: 'ch15', rang: 'B', question: 'Incontinence fécale chez PA dément institutionnalisé : approche ?', answer: 'Rechercher constipation (cause fréquente), diarrhée, médicaments, impact neurologique. Routine toilette, fibres, laxatifs. Pas de honte — plan soignant et peau.', tags: ['incontinence', 'scénario', 'démence'] },
-
-  { id: 'mega2-76', chapter: 'ch16', rang: 'A', question: 'PA prend zolpidem depuis 2 ans, chutes nocturnes : démarche STOPP ?', answer: 'STOPP : BZD/hypnotique >4 semaines chez PA → sevrage progressif, hygiène sommeil, mélatonine faible dose si besoin. Réévaluer chutes après arrêt.', tags: ['scénario', 'STOPP', 'algorithme'] },
-  { id: 'mega2-77', chapter: 'ch16', rang: 'A', question: 'Post-IDM, pas de bêtabloquant ni statine : cadre START ?', answer: 'Sous-prescription START : bêtabloquant si pas CI, statine haute intensité si tolérée, IEC si FEVI réduite. Justifier si non prescription (allergie, fragilité extrême).', tags: ['START', 'scénario', 'cardio'] },
-  { id: 'mega2-78', chapter: 'ch16', rang: 'A', question: 'ACB score 6 (oxybutynine, amitriptyline, hydroxyzine) : risques et plan ?', answer: 'Risque delirium, chutes, constipation, déclin cognitif. Déprescription progressive : alternatives (mirabégron, ISRS, antihistaminique moins anticholinergique).', tags: ['ACB', 'algorithme', 'déprescription'] },
-  { id: 'mega2-79', chapter: 'ch16', rang: 'B', question: 'DFG 42, metformine 2 g/j : adaptation et surveillance ?', answer: 'Réduire dose (max 1 g/j souvent si 30-45), surveiller DFG 3-6 mois. Arrêt si DFG <30, déshydratation, sepsis. Éducation : arrêt temporaire si gastro ou contraste iodé.', tags: ['metformine', 'monitoring', 'éducation'] },
-  { id: 'mega2-80', chapter: 'ch16', rang: 'A', question: 'Revue annuelle polymédication : structure de consultation ?', answer: 'Liste complète (dont OTC), indication chaque médicament, STOPP/START, interactions, observance, ACB, adaptation DFG. Plan déprescription avec suivi 4-6 sem.', tags: ['polymédication', 'algorithme', 'monitoring'] },
-
-  { id: 'mega2-81', chapter: 'ch17', rang: 'A', question: 'Cancer avancé, dyspnée au repos SpO2 88 % : traitement symptomatique ?', answer: 'Morphine faible dose 2,5 mg SC test puis titration ; position demi-assise ; ventilateur ; anxiolyse si panique. O2 si soulagement ressenti. Traiter causes si réversibles (épanchement).', tags: ['scénario', 'dyspnée', 'palliatif'] },
-  { id: 'mega2-82', chapter: 'ch17', rang: 'A', question: 'Morphine LP 60 mg/12 h, douleur percée 3x/j : calcul dose immédiate ?', answer: 'Dose percée ≈ 60 mg/6 = 10 mg morphine immédiate, répéter q1h si besoin, max 2-3 doses puis ajuster LP (+20-30 %). Journal douleur.', tags: ['percée', 'scénario', 'algorithme'] },
-  { id: 'mega2-83', chapter: 'ch17', rang: 'B', question: 'Famille demande « endormir définitivement » patient terminal : distinction légale ?', answer: 'SPCMD possible si souffrance réfractaire et phase terminale (Claeys-Leonetti), pas euthanasie active. Sédation proportionnée = intermittent. Information collégiale et directives.', tags: ['sédation', 'éducation', 'éthique'] },
-  { id: 'mega2-84', chapter: 'ch17', rang: 'A', question: 'PPS 40 % : implications soins et communication ?', answer: 'Dépendance importante, pronostic mois à quelques mois. Discuter objectifs, soins palliatifs, lieu de fin de vie, anticiper symptômes (douleur, dyspnée). Réévaluer PPS régulièrement.', tags: ['PPS', 'pronostic', 'scénario'] },
-  { id: 'mega2-85', chapter: 'ch17', rang: 'B', question: 'Début morphine palier 3 : prévention constipation — message patient ?', answer: 'Laxatif osmotique + stimulant dès J1, pas seulement si constipation. Boire, marcher si possible. Signaler absence selles >48 h.', tags: ['constipation', 'éducation', 'opioïde'] },
-
-  { id: 'mega2-86', chapter: 'ch18', rang: 'A', question: 'PA 90 ans, confusion aiguë aux urgences : mini-bilan biologique et pourquoi ?', answer: 'NFS, Na/K, créatinine, glycémie, CRP, TSH, B12 si pas récent, ECBU si fièvre. Détecte infection, métabolique, iatrogénie — causes réversibles delirium.', tags: ['scénario', 'bilan', 'urgences'] },
-  { id: 'mega2-87', chapter: 'ch18', rang: 'A', question: 'Voie fracture hanche : rôle du gériatre J0 à J5 ?', answer: 'EGM, déprescription, delirium, nutrition, thromboprophylaxie, objectif mobilisation J1, coordination SSR, ostéoporose, plan sortie. Pas seulement « médecine interne ».', tags: ['orthogériatrie', 'algorithme', 'coordination'] },
-  { id: 'mega2-88', chapter: 'ch18', rang: 'B', question: 'Dossier EVC intégrateur : pourquoi croiser MoCa et GDS ?', answer: 'Distinguer trouble cognitif, dépression, ou les deux (pseudodémence). Oriente traitement et pronostic fonctionnel. Une seule échelle insuffisante.', tags: ['EVC', 'différentiel', 'échelles'] },
-  { id: 'mega2-89', chapter: 'ch18', rang: 'A', question: 'Hypoglycémie 0,45 g/L chez PA polymorbide à domicile : priorisation Bouchon ?', answer: 'Facteur 3 aigu : corriger hypoglycémie, ajuster antidiabétiques, éducation aidant. Ensuite seulement ajuster traitements chronicités. Rechercher cause (jeûne, infection).', tags: ['scénario', 'Bouchon', 'urgence'] },
-  { id: 'mega2-90', chapter: 'ch18', rang: 'A', question: 'Sortie hospitalisation 5 j, PA fragile : checklist transition ?', answer: 'Revue médicaments (ordonnance simplifiée), RDV MT/gériatre <7 j, aide domicile, téléphone aidant, signes alerte, continuité kiné/nutrition. Appel J2-3.', tags: ['sortie', 'algorithme', 'éducation'] },
-
-  { id: 'mega2-91', chapter: 'ch19', rang: 'A', question: 'Marche à petits pas, incontinence, troubles mémoire progressifs : HNT vs Parkinson ?', answer: 'HNT : triade marche magnétique, incontinence, démence, imagerie ventricules dilatés. Parkinson : tremblement repos, rigidité. TDM cérébral, avis neuro, test ponction lombaire/shunt si HNT.', tags: ['différentiel', 'HNT', 'scénario'] },
-  { id: 'mega2-92', chapter: 'ch19', rang: 'A', question: 'Na 122, confusion, thiazidique + ISRS : conduite correction ?', answer: 'Arrêt causal, restriction eau, correction lente (<8-10 mmol/24 h) pour éviter ODS. Surveillance Na q6-12h. Réévaluer indication thiazidique et ISRS.', tags: ['hyponatrémie', 'scénario', 'algorithme'] },
-  { id: 'mega2-93', chapter: 'ch19', rang: 'A', question: 'Chute sans fracture, hémiplégie progressive 3 semaines, anticoagulant : diagnostic ?', answer: 'Hématome sous-dural chronique suspect → scanner urgent. Évacuation neurochirurgicale si symptômes. Ne pas attribuer à AVC sans imagerie.', tags: ['sous-dural', 'scénario', 'urgence'] },
-  { id: 'mega2-94', chapter: 'ch19', rang: 'B', question: 'Rigidité et tremblement après métoclopramide 10 j : traitement ?', answer: 'Parkinsonisme iatrogène : arrêt métoclopramide, symptômes régressent en semaines. Éviter antipsychotiques. Si persistance, avis neuro.', tags: ['parkinson', 'iatrogénie', 'traitement'] },
-  { id: 'mega2-95', chapter: 'ch19', rang: 'A', question: 'K+ 5,8 sous ramipril + spironolactone + AINS : conduite ?', answer: 'Arrêt AINS, réduire/arrêt spironolactone, surveiller K et créatinine. Traitement urgent si ECG anomalies. Réévaluer indication triple association chez PA.', tags: ['hyperkaliémie', 'scénario', 'monitoring'] },
-
-  { id: 'mega2-96', chapter: 'ch20', rang: 'A', question: 'PA 70 ans refuse vaccin grippe : arguments d\'éducation ?', answer: 'Risque complications et hospitalisation augmenté avec âge ; efficacité sur formes sévères ; protection entourage fragile. Contre-indication vraie rare (anaphylaxie œuf sévère selon vaccin).', tags: ['vaccin', 'grippe', 'éducation'] },
-  { id: 'mega2-97', chapter: 'ch20', rang: 'B', question: 'Pneumocoque : quand revoir schéma après vaccination il y a 10 ans ?', answer: 'Selon calendrier vigile et antécédents (asplénie, immunodépression). PA standard ≥65 : rappel selon recommandations en vigueur (PCV puis PPSV ou séquence unique). Vérifier HAS/calendrier annuel.', tags: ['pneumocoque', 'algorithme', 'prévention'] },
-  { id: 'mega2-98', chapter: 'ch20', rang: 'A', question: '12 médicaments chroniques, 3 prescripteurs : organisation revue annuelle ?', answer: 'Pharmacien ou gériatre coordonne, une liste unique, contact prescripteurs, STOPP/START, objectifs déprescription, téléphone patient/aidant. Hyperpolymédiation = ≥10.', tags: ['polymédication', 'scénario', 'coordination'] },
-  { id: 'mega2-99', chapter: 'ch20', rang: 'A', question: 'PA fragile 92 ans, PAS 155, bien toléré : cible tension et monitoring ?', answer: 'Cible souple souvent 130-145 systolique si autonomie limitée. Éviter hypotension orthostatique. Mesure domicile, adapter si chutes, delirium, DFG baisse.', tags: ['HTA', 'scénario', 'monitoring'] },
-  { id: 'mega2-100', chapter: 'ch20', rang: 'B', question: 'Équipe pluridisciplinaire gérontologie vs consultation gériatre : rôle respectif ?', answer: 'Gérontologie : évaluation sociale, ergo, psycho, coordination (EHPAD, domicile). Gériatre : diagnostic médical, polymédication, syndromes gériatriques, orientation soins. Complémentaires.', tags: ['gérontologie', 'gériatrie', 'éducation'] }
+  {
+    id: 3501,
+    chapter: "ch11",
+    rang: "A",
+    question: "Quelle est la définition clinique du syndrome confusionnel (delirium) ?",
+    answer: "C'est une altération aiguë (s'installant en quelques heures ou jours) et fluctuante de la conscience, de l'attention et des fonctions cognitives. Il s'agit d'une décompensation cérébrale diffuse secondaire à une agression aiguë de l'organisme (affection médicale générale, traumatisme, intoxication ou sevrage médicamenteux) survenant sur un terrain vulnérable. C'est une urgence médicale gériatrique réversible.",
+    tags: ["confusion", "delirium", "définition", "urgence"]
+  },
+    {
+    id: 3502,
+    chapter: "ch11",
+    rang: "A",
+    question: "Quels sont les 4 critères diagnostiques de la Confusion Assessment Method (CAM) ?",
+    answer: "1. Début aigu et évolution fluctuante (changement par rapport au fonctionnement de base). 2. Inattention (difficultés à focaliser, maintenir ou orienter l'attention). 3. Désorganisation de la pensée (discours décousu, incohérent, digressions). 4. Altération du niveau de conscience (hypervigilance, somnolence, stupeur ou coma).",
+    tags: ["CAM", "confusion", "diagnostic", "attention"]
+  },
+    {
+    id: 3503,
+    chapter: "ch11",
+    rang: "A",
+    question: "Comment interpréter la CAM pour poser le diagnostic de syndrome confusionnel ?",
+    answer: "Le diagnostic clinique de syndrome confusionnel selon la CAM requiert obligatoirement la présence concomitante du critère 1 (début aigu et fluctuant) ET du critère 2 (inattention), associés à au moins un critère parmi le critère 3 (désorganisation de la pensée) OU le critère 4 (altération du niveau de conscience).",
+    tags: ["CAM", "confusion", "diagnostic", "seuils"]
+  },
+    {
+    id: 3504,
+    chapter: "ch11",
+    rang: "A",
+    question: "Quelle est la principale différence entre le syndrome confusionnel hyperactif et hypoactif ?",
+    answer: "La confusion hyperactive associe une agitation motrice, une logorrhée, une irritabilité, des hallucinations (souvent visuelles ou terrifiantes) et des conduites agressives (facile à identifier). La confusion hypoactive est caractérisée par une somnolence, une léthargie, un ralentissement psychomoteur majeur, un mutisme et un repli relationnel complet. Une forme mixte (alternance des deux phases) est également fréquente.",
+    tags: ["confusion hyperactive", "confusion hypoactive", "sémiologie", "agitation"]
+  },
+    {
+    id: 3505,
+    chapter: "ch11",
+    rang: "A",
+    question: "Pourquoi le syndrome confusionnel hypoactif est-il fréquemment sous-diagnostiqué et plus grave ?",
+    answer: "Il est sous-diagnostiqué car le patient est calme, ne perturbe pas le fonctionnement du service, et son état de somnolence ou de repli est souvent attribué à tort à la fatigue ou à la démence. Il est plus grave car le retard diagnostique retarde la prise en charge de la cause sous-jacente, et le patient est exposé à un risque accru de complications d'décubitus (escarres, déshydratation, phlébites, dénutrition). Son pronostic de mortalité est supérieur à celui de la forme hyperactive.",
+    tags: ["confusion hypoactive", "sous-diagnostic", "complications", "pronostic"]
+  },
+    {
+    id: 3506,
+    chapter: "ch11",
+    rang: "A",
+    question: "Comment le modèle de Bouchon (1+2+3) s'applique-t-il au syndrome confusionnel ?",
+    answer: "C'est l'exemple type de la décompensation en cascade : le syndrome confusionnel survient par l'intrication de : 1. Le vieillissement cérébral physiologique (baisse de la réserve cognitive liée à l'âge). 2. Une maladie d'organe préexistante (démence sous-jacente, séquelle d'AVC). 3. Un facteur précipitant aigu (infection, médicament, globe urinaire) qui rompt l'équilibre précaire et déclenche la crise. Plus le terrain (1+2) est altéré, plus le déclencheur (3) nécessaire pour provoquer la confusion est minime.",
+    tags: ["Bouchon", "confusion", "décompensation", "terrain", "déclencheur"]
+  },
+    {
+    id: 3507,
+    chapter: "ch11",
+    rang: "A",
+    question: "Quels sont les 5 principaux facteurs prédisposants (terrain) de confusion chez le sujet âgé ?",
+    answer: "1. L'existence d'un trouble neurocognitif majeur préexistant (démence), multipliant le risque par 2 à 5. 2. L'âge supérieur à 75 ou 80 ans. 3. Les déficits sensoriels sévères (visuel et auditif non corrigés). 4. La dépendance fonctionnelle majeure (ADL bas) et la polymorbidité (Charlson élevé). 5. Un antécédent de syndrome confusionnel lors d'une hospitalisation antérieure.",
+    tags: ["facteurs prédisposants", "terrain", "démence", "vulnérabilité"]
+  },
+    {
+    id: 3508,
+    chapter: "ch11",
+    rang: "A",
+    question: "Quels sont les 5 principaux facteurs précipitants (déclencheurs) somatiques de confusion ?",
+    answer: "1. Une infection aiguë (infection urinaire fébrile ou non, pneumopathie, érysipèle, cholécystite). 2. Une rétention aiguë d'urine (globe vésical) ou un fécalome (épines irritatives). 3. Une déshydratation aiguë et des troubles métaboliques (hyponatrémie, hypoglycémie, hypercalcémie). 4. Une douleur aiguë non soulagée (notamment postopératoire ou fracturaire). 5. Un événement cardio-vasculaire aigu (silent infarctus du myocarde, AVC, insuffisance cardiaque).",
+    tags: ["facteurs précipitants", "épines irritatives", "infection", "globe urinaire", "fécalome"]
+  },
+    {
+    id: 3509,
+    chapter: "ch11",
+    rang: "A",
+    question: "Quels médicaments d'usage courant sont considérés comme des facteurs précipitants majeurs de confusion ?",
+    answer: "1. Les molécules anticholinergiques (antihistaminiques, antiparkinsoniens, antispasmodiques). 2. Les psychotropes, en premier lieu les benzodiazépines (effet sédatif et désorientant). 3. Les antalgiques de palier II ou III (opioïdes). 4. Les corticoïdes systémiques. 5. Les médicaments cardiovasculaires provoquant une hypotension ou une bradycardie (diurétiques, bêta-bloquants). Le risque est majoré par l'introduction récente ou le surdosage d'une molécule.",
+    tags: ["iatrogénie", "médicaments", "anticholinergiques", "benzodiazépines", "opioïdes"]
+  },
+    {
+    id: 3510,
+    chapter: "ch11",
+    rang: "B",
+    question: "Quelle est la physiopathologie suspectée du syndrome confusionnel (neurotransmetteurs) ?",
+    answer: "La physiopathologie est multifactorielle et caractérisée par une altération globale du métabolisme cérébral. Le mécanisme principal associe : 1. Un déficit de la transmission cholinergique (baisse de l'acétylcholine cérébrale). 2. Une hyperactivité dopaminergique relative. 3. Une altération d'autres systèmes (sérotonine, GABA, noradrénaline). 4. Une neuroinflammation induite par des cytokines périphériques traversant la barrière hémato-encéphalique lors d'une agression aiguë (infection, chirurgie).",
+    tags: ["physiopathologie", "acétylcholine", "dopamine", "neuroinflammation"]
+  },
+    {
+    id: 3511,
+    chapter: "ch11",
+    rang: "A",
+    question: "Comment différencier cliniquement un syndrome confusionnel d'un trouble neurocognitif majeur (démence) ?",
+    answer: "Le syndrome confusionnel a un début brutal (heures/jours), une évolution fluctuante (sundowning), perturbe l'attention au premier plan, altère la vigilance/conscience, et est réversible après traitement. La démence a un début insidieux et progressif, une évolution stable et continue, préserve l'attention et la conscience jusqu'aux stades terminaux, et est irréversible. L'apparition d'une confusion fluctuante chez un patient dément signe une confusion surajoutée.",
+    tags: ["confusion", "démence", "diagnostic différentiel", "attention", "vigilance"]
+  },
+    {
+    id: 3512,
+    chapter: "ch11",
+    rang: "A",
+    question: "Comment différencier cliniquement un syndrome confusionnel d'un épisode dépressif majeur ?",
+    answer: "Dans le syndrome confusionnel, le début est brutal, l'attention est profondément perturbée, le discours est décousu/incohérent, la vigilance est fluctuante ou altérée, et des hallucinations visuelles sont fréquentes. Dans la dépression, le début est progressif (semaines), l'attention est préservée (bien que le patient manque de concentration), le discours est cohérent mais ralenti, la conscience est normale et l'humeur est uniformément douloureuse ou apathique.",
+    tags: ["confusion", "dépression", "diagnostic différentiel", "vigilance"]
+  },
+    {
+    id: 3513,
+    chapter: "ch11",
+    rang: "B",
+    question: "Quelle est la valeur de l'électroencéphalogramme (EEG) dans le diagnostic du syndrome confusionnel ?",
+    answer: "L'EEG montre typiquement un ralentissement diffus de l'activité électrique de fond (ondes thêta ou delta). Il a un double intérêt : 1. Confirmer l'encéphalopathie diffuse en cas de doute clinique (par exemple dans les formes hypoactives pures). 2. Éliminer un diagnostic différentiel urgent comme un état de mal épileptique non convulsif (qui montre des décharges paroxystiques continues). L'EEG est normal dans la démence légère à modérée.",
+    tags: ["EEG", "diagnostic", "ondes delta", "épilepsie non convulsive"]
+  },
+    {
+    id: 3514,
+    chapter: "ch11",
+    rang: "A",
+    question: "Quels examens de biologie médicale de première intention faut-il prescrire en urgence devant une confusion ?",
+    answer: "Le bilan biologique d'urgence comprend : une NFS (recherche de syndrome infectieux), une CRP, un ionogramme sanguin (natrémie, kaliémie), une glycémie (éliminer une hypoglycémie/hyperglycémie), une créatininémie avec DFG, une calcémie (recherche d'hypercalcémie), et une bandelette urinaire (complétée par ECBU si positive). Un ECG est systématique pour éliminer un IDM indolore ou un trouble du rythme précipitant.",
+    tags: ["biologie", "urgence", "bandelette urinaire", "natrémie", "ECG"]
+  },
+    {
+    id: 3515,
+    chapter: "ch11",
+    rang: "A",
+    question: "Quand faut-il réaliser une imagerie cérébrale (TDM ou IRM) en urgence devant une confusion ?",
+    answer: "L'imagerie cérébrale n'est pas systématique. Elle est indiquée d'urgence en cas de : 1. Notion de traumatisme crânien récent ou chute non documentée (suspicion d'hématome sous-dural ou extradural). 2. Apparition de signes neurologiques focaux à l'examen clinique (suspicion d'AVC ou d'abcès). 3. Confusion persistante et inexpliquée après élimination et traitement de toutes les causes évidentes infectieuses, médicamenteuses et métaboliques.",
+    tags: ["scanner", "IRM cérébrale", "traumatisme crânien", "signes focaux", "urgences"]
+  },
+    {
+    id: 3516,
+    chapter: "ch11",
+    rang: "A",
+    question: "Quelles sont les 3 priorités absolues de la prise en charge initiale en urgence d'une confusion ?",
+    answer: "1. Gérer l'urgence vitale : assurer la liberté des voies aériennes, une oxygénothérapie si saturation < 95 %, corriger une hypotension, éliminer une hypoglycémie (dextro systématique). 2. Traquer et traiter immédiatement les causes réversibles évidentes (globe, fécalome, douleur, arrêt des psychotropes). 3. Assurer la sécurité du patient sans recourir aux contentions physiques (surveillance continue, environnement calme, présence d'un proche).",
+    tags: ["urgences", "priorités", "hypoglycémie", "oxygénothérapie", "sécurité"]
+  },
+    {
+    id: 3517,
+    chapter: "ch11",
+    rang: "A",
+    question: "Quel geste simple et systématique permet d'éliminer deux 'épines irritatives' urinaires et digestives ?",
+    answer: "L'examen clinique attentif du patient confus doit systématiquement comprendre : 1. La palpation abdominale à la recherche d'une matité sus-pubienne signant un globe vésical (rétention aiguë d'urine), à confirmer par un bladder scan. 2. Un toucher rectal à la recherche d'une ampoule rectale comblée par des matières dures signant un fécalome. Le traitement de ces deux épines (sondage urinaire ou évacuation du fécalome) permet souvent de résoudre la confusion.",
+    tags: ["globe urinaire", "fécalome", "toucher rectal", "épines irritatives", "examen clinique"]
+  },
+    {
+    id: 3518,
+    chapter: "ch11",
+    rang: "A",
+    question: "Quelles sont les mesures non médicamenteuses fondamentales à mettre en place dans la chambre du patient confus ?",
+    answer: "1. Reorienter le patient : installer une horloge et un calendrier visibles, une chambre avec fenêtre sur le jour. 2. Assurer les aides sensorielles : remettre rapidement les lunettes et les prothèses auditives en état de marche. 3. Structurer l'environnement : chambre calme, éclairage tamisé la nuit pour éviter le noir total anxiogène, limitation des allées et venues, présence familière des proches rassurant le patient. 4. Favoriser la mobilisation précoce et l'hydratation régulière.",
+    tags: ["mesures non médicamenteuses", "orientation", "aides sensorielles", "chambre", "environnement"]
+  },
+    {
+    id: 3519,
+    chapter: "ch11",
+    rang: "A",
+    question: "Pourquoi faut-il absolument éviter la contention physique (restraints) chez un patient confus ?",
+    answer: "La contention physique est un facteur de gravité majeur : elle majore l'agitation, l'anxiété et le sentiment de persécution du patient, augmentant l'intensité et la durée de la confusion. De plus, elle expose à des complications graves : strangulation, traumatismes par tentative de déliaison, majoration du risque d'escarres, d'incontinence et de déconditionnement musculaire, et est associée à une augmentation des chutes graves lors des tentatives de levée.",
+    tags: ["contention physique", "danger", "agitation", "escarres", "éthique"]
+  },
+    {
+    id: 3520,
+    chapter: "ch11",
+    rang: "A",
+    question: "Dans quelles situations exceptionnelles et sous quelles règles peut-on prescrire des contentions physiques ?",
+    answer: "La contention physique ne peut être utilisée qu'en ultime recours, uniquement en cas de danger immédiat et grave pour l'intégrité physique du patient ou d'autrui (ex: risque d'arrachage de dispositifs vitaux comme un cathéter central ou une sonde d'intubation), après échec de toutes les alternatives. Elle doit faire l'objet d'une prescription médicale écrite, datée, spécifiant le motif, limitée dans le temps (maximum 24h, réévaluée toutes les 4h), avec une surveillance infirmière horaire.",
+    tags: ["contention physique", "législation", "prescription", "surveillance", "sécurité"]
+  },
+    {
+    id: 3521,
+    chapter: "ch11",
+    rang: "A",
+    question: "Quelle est la place des traitements médicamenteux sédatifs dans la prise en charge du syndrome confusionnel ?",
+    answer: "Le traitement médicamenteux de la confusion est purement symptomatique et non systématique. Il est réservé uniquement aux patients présentant une confusion hyperactive avec une agitation sévère, des hallucinations délirantes anxiogènes ou une agressivité mettant en danger le patient ou les soignants, après échec des mesures comportementales. L'objectif est de sédater minimalement le patient sans aggraver la confusion.",
+    tags: ["sédatifs", "agitation", "SCPD", "psychotropes", "symptomatique"]
+  },
+    {
+    id: 3522,
+    chapter: "ch11",
+    rang: "A",
+    question: "Quelle molécule antipsychotique est recommandée en première intention dans la confusion avec agitation sévère et à quelle dose ?",
+    answer: "L'halopéridol (neuroleptique typique) à très faible dose (0,5 à 1 mg par jour en 1 ou 2 prises, par voie orale ou IM si nécessaire) est recommandé en première intention. La dose cumulée quotidienne ne doit généralement pas dépasser 2 mg chez le sujet âgé très fragile. Le traitement doit être arrêté dès la disparition de l'agitation aiguë (durée de prescription minimale, souvent < 7 jours).",
+    tags: ["halopéridol", "antipsychotiques", "posologie", "agitation", "première intention"]
+  },
+    {
+    id: 3523,
+    chapter: "ch11",
+    rang: "A",
+    question: "Quelle est la contre-indication majeure de l'halopéridol dans le traitement symptomatique de la confusion ?",
+    answer: "L'halopéridol est formellement contre-indiqué chez les patients atteints de la maladie de Parkinson ou d'une maladie à corps de Lewy, en raison du risque majeur d'aggravation dramatique et irréversible du syndrome extrapyramidal, de troubles végétatifs, ou de syndrome malin des neuroleptiques. Chez ces patients, si un sédatif est requis, on privilégiera de faibles doses d'atypiques comme la quétiapine ou la clozapine.",
+    tags: ["halopéridol", "contre-indication", "Parkinson", "Lewy", "extrapyramidal"]
+  },
+    {
+    id: 3524,
+    chapter: "ch11",
+    rang: "A",
+    question: "Dans quelles situations cliniques spécifiques les benzodiazépines sont-elles recommandées pour traiter une confusion ?",
+    answer: "Les benzodiazépines aggravent généralement la confusion et augmentent le risque de sédation excessive, de dépression respiratoire et de chute. Elles sont formellement déconseillées sauf dans deux indications précises : 1. La confusion secondaire à un sevrage aigu en benzodiazépines. 2. La confusion liée à un sevrage alcoolique aigu (prévention et traitement du delirium tremens). On privilégiera alors une molécule de demi-vie courte comme l'oxazépam.",
+    tags: ["benzodiazépines", "sevrage alcoolique", "delirium tremens", "oxazépam"]
+  },
+    {
+    id: 3525,
+    chapter: "ch11",
+    rang: "A",
+    question: "Comment le syndrome confusionnel impacte-t-il le pronostic vital et fonctionnel à court et moyen terme ?",
+    answer: "Le syndrome confusionnel est un facteur pronostique péjoratif majeur indépendant. À court terme, il multiplie par 2 le risque de mortalité hospitalière et majore le risque d'escarres, de dénutrition, de chutes et d'infections nosocomiales. À moyen terme (6 mois), il est associé à un risque élevé d'institutionnalisation en EHPAD, à une perte d'autonomie persistante (baisse des ADL) et à l'accélération d'un déclin cognitif.",
+    tags: ["pronostic", "mortalité", "déclin fonctionnel", "institutionnalisation"]
+  },
+    {
+    id: 3526,
+    chapter: "ch11",
+    rang: "B",
+    question: "Quel est le lien entre le syndrome confusionnel postopératoire et la survenue ultérieure d'un déclin cognitif à long terme ?",
+    answer: "La survenue d'un syndrome confusionnel postopératoire (fréquent après chirurgie cardiaque ou orthopédique majeure) est fortement corrélée à un déclin cognitif accéléré persistant. La confusion peut révéler une démence infra-clinique non encore diagnostiquée (rupture de la réserve cognitive). De plus, l'épisode confusionnel lui-même (via la neuroinflammation et le stress oxydatif prolongé) semble aggraver les lésions neuronales sous-jacentes.",
+    tags: ["postopératoire", "déclin cognitif", "neuroinflammation", "démence", "chirurgie"]
+  },
+    {
+    id: 3527,
+    chapter: "ch11",
+    rang: "B",
+    question: "Quelle est la prévalence du syndrome confusionnel chez les personnes âgées hospitalisées en médecine vs en chirurgie orthopédique ?",
+    answer: "La prévalence est élevée et varie selon le service : elle est estimée entre 15 et 30 % chez les patients de plus de 75 ans hospitalisés dans des services de médecine aiguë. En chirurgie orthopédique programmée ou en urgence (fracture du col du fémur), la prévalence du syndrome confusionnel postopératoire atteint 35 à 50 %, justifiant des protocoles de prévention systématiques.",
+    tags: ["prévalence", "statistiques", "chirurgie", "orthopédie", "médecine"]
+  },
+    {
+    id: 3528,
+    chapter: "ch11",
+    rang: "A",
+    question: "Quelles mesures préventives systématiques permettent de réduire de 40 % l'incidence de la confusion à l'hôpital ?",
+    answer: "La mise en place de protocoles de soins standardisés multidisciplinaires (comme le programme HELP) ciblant les facteurs de risque modifiables : 1. Réorientation quotidienne. 2. Mobilisation précoce (lever J1 post-op). 3. Stimulation cognitive. 4. Protocoles de sommeil (pas de soins perturbateurs la nuit, boissons chaudes). 5. Hydratation et nutrition assistées. 6. Correction systématique des déficits sensoriels. 7. Réduction maximale de la iatrogénie.",
+    tags: ["prévention", "HELP", "iatrogénie", "sommeil", "mobilisation"]
+  },
+    {
+    id: 3529,
+    chapter: "ch11",
+    rang: "A",
+    question: "Qu'est-ce que l'inattention gériatrique et comment la tester cliniquement au lit du malade ?",
+    answer: "L'inattention est le critère diagnostique pivot de la confusion. Elle correspond à l'incapacité du patient à maintenir son attention sur une tâche simple. On la teste au lit du malade par : 1. L'épellation à l'envers du mot 'MONDE' (O-D-N-O-M). 2. La récitation à l'envers des mois de l'année en partant de décembre (décembre, novembre, octobre...). 3. La soustraction itérative de 7 à partir de 100. Toute hésitation majeure, omission ou blocage traduit une inattention pathologique.",
+    tags: ["inattention", "attention", "diagnostic clinique", "sémiologie", "MONDE"]
+  },
+    {
+    id: 3530,
+    chapter: "ch11",
+    rang: "A",
+    question: "Comment se manifeste la fluctuation nycthémérale (sundowning) dans le syndrome confusionnel ?",
+    answer: "C'est l'aggravation typique des symptômes confusionnels en fin d'après-midi ou au début de la nuit (syndrome du coucher de soleil). Le patient, relativement calme et cohérent en matinée, présente une recrudescence de l'agitation, de la désorientation temporo-spatiale, de l'anxiété et des hallucinations à mesure que la lumière naturelle décline. Cela est favorisé par la fatigue, la baisse des repères visuels et les perturbations du rythme circadien.",
+    tags: ["sundowning", "fluctuation", "coucher de soleil", "sémiologie"]
+  },
+    {
+    id: 3531,
+    chapter: "ch11",
+    rang: "A",
+    question: "Pourquoi l'anxiolytique de type hydroxyzine (Atarax) doit-il être proscrit chez le sujet âgé confus ?",
+    answer: "L'hydroxyzine est un antihistaminique H1 de première génération doté d'effets anticholinergiques systémiques et centraux extrêmement puissants. Sa prescription chez le sujet âgé, particulièrement s'il présente déjà un syndrome confusionnel ou des troubles cognitifs, majore de manière critique la confusion, aggrave les troubles de la vigilance, et favorise la survenue d'effets indésirables physiques (globe urinaire, fécalome).",
+    tags: ["hydroxyzine", "anticholinergiques", "contre-indication", "iatrogénie", "danger"]
+  },
+    {
+    id: 3532,
+    chapter: "ch11",
+    rang: "A",
+    question: "Quel est le risque de rétention aiguë d'urine sous neuroleptiques ou anticholinergiques gériatriques ?",
+    answer: "Ces médicaments bloquent les récepteurs muscariniques du muscle détrusor de la vessie, diminuant sa contractilité. Chez le sujet âgé (particulièrement l'homme avec hypertrophie bénigne de la prostate), cela peut provoquer une rétention aiguë d'urine avec formation d'un globe vésical douloureux, qui va agir comme une épine irritative majeure et aggraver ou pérenniser le syndrome confusionnel initial.",
+    tags: ["rétention d'urine", "globe urinaire", "neuroleptiques", "anticholinergiques", "iatrogénie"]
+  },
+    {
+    id: 3533,
+    chapter: "ch11",
+    rang: "A",
+    question: "Quel est l'impact de la déshydratation ou des troubles ioniques (hyponatrémie) sur la survenue d'une confusion ?",
+    answer: "Le cerveau sénescent est extrêmement sensible aux variations d'osmolarité et d'hydratation intracellulaire. La déshydratation intracellulaire et l'hyponatrémie (provoquant un œdème cérébral astrogliocitaire) altèrent directement la neurotransmission et la perméabilité de la barrière hémato-encéphalique, déclenchant fréquemment une confusion mentale fluctuante, parfois associée à des crises convulsives ou des troubles de la marche.",
+    tags: ["déshydratation", "hyponatrémie", "métabolique", "physiopathologie"]
+  },
+    {
+    id: 3534,
+    chapter: "ch11",
+    rang: "A",
+    question: "Comment s'organise la surveillance clinique d'un patient confus à l'hôpital ?",
+    answer: "La surveillance doit être formalisée et régulière, associant : 1. L'évaluation de la vigilance et de l'agitation par des échelles validées (ex: échelle RASS). 2. La surveillance des constantes vitales (PA, FC, température, saturation en O2). 3. Le suivi strict de la diurèse et du transit (recherche quotidienne de globe et de constipation). 4. L'évaluation de la douleur (auto-évaluation ou hétéro-évaluation par Doloplus). 5. La surveillance de l'hydratation et des apports nutritionnels.",
+    tags: ["surveillance", "infirmier", "constantes vitales", "RASS", "Doloplus"]
+  },
+    {
+    id: 3535,
+    chapter: "ch11",
+    rang: "A",
+    question: "Pourquoi le fécalome est-il une cause fréquente et réversible de syndrome confusionnel ?",
+    answer: "Le fécalome (accumulation de matières fécales déshydratées et durcies dans le rectum) provoque une distension rectale chronique douloureuse qui stimule le système nerveux sympathique et induit un stress métabolique et neurologique majeur (épine irritative). Cette situation douloureuse non exprimée par le patient dément ou confus déclenche ou entretient la confusion. Son évacuation (lavements, extraction digitale) permet une résolution rapide des symptômes.",
+    tags: ["fécalome", "épine irritative", "constipation", "toucher rectal", "résolution"]
+  },
+    {
+    id: 3536,
+    chapter: "ch11",
+    rang: "A",
+    question: "Quelle est la durée habituelle de résolution d'un syndrome confusionnel après traitement du facteur précipitant ?",
+    answer: "Dans la majorité des cas, si la cause sous-jacente (l'épine irritative) est identifiée et traitée rapidement, le syndrome confusionnel régresse en quelques jours (48 à 72 heures). Cependant, chez les patients très âgés, fragiles ou ayant un trouble neurocognitif majeur préexistant, la confusion peut persister sous une forme atténuée ou fluctuante pendant plusieurs semaines, voire plusieurs mois, retardant la rééducation.",
+    tags: ["résolution", "évolution", "pronostic", "durée"]
+  },
+    {
+    id: 3537,
+    chapter: "ch11",
+    rang: "B",
+    question: "Quel est le risque de survenue de syndrome confusionnel en réanimation (delirium de réanimation) ?",
+    answer: "Le delirium en réanimation concerne plus de 50 à 80 % des patients âgés ventilés. Il est favorisé par la sévérité de l'atteinte somatique, l'utilisation de sédatifs perfusés (benzodiazépines, propofol), l'environnement hyper-technologique (privation sensorielle, alarmes sonores continues, absence de repères jour/nuit) et l'immobilisation stricte. Il est associé à une augmentation majeure de la durée de ventilation, du séjour en réanimation et de la mortalité à 6 mois.",
+    tags: ["réanimation", "delirium", "ventilation mécanique", "environnement", "mortalité"]
+  },
+    {
+    id: 3538,
+    chapter: "ch11",
+    rang: "A",
+    question: "Quels signes cliniques de gravité doivent faire craindre une issue fatale devant un syndrome confusionnel ?",
+    answer: "Les signes de gravité majeurs sont : 1. Des troubles de la déglutition sévères (risque de pneumopathie d'inhalation). 2. Un état d'agitation extrême rebelle provoquant un épuisement cardiovasculaire ou une déshydratation rapide. 3. Une altération profonde et persistante de la vigilance (stupeur, coma). 4. La survenue de défaillances viscérales associées (insuffisance rénale aiguë, hypoxémie sévère, collapsus hémodynamique).",
+    tags: ["signes de gravité", "dégression", "inhalation", "pronostic vital"]
+  },
+    {
+    id: 3539,
+    chapter: "ch11",
+    rang: "B",
+    question: "Quel est l'impact du syndrome confusionnel sur la durée de séjour hospitalier et le risque d'institutionnalisation ?",
+    answer: "La survenue d'une confusion double en moyenne la durée d'hospitalisation du patient âgé (en raison des complications nosocomiales et du retard à la rééducation). Elle multiplie également par 3 le risque d'être orienté vers un hébergement définitif en EHPAD à la sortie de l'hôpital, car elle révèle ou précipite une perte d'autonomie fonctionnelle que l'entourage familial ne peut plus gérer à domicile.",
+    tags: ["durée de séjour", "institutionnalisation", "impact médico-économique", "autonomie"]
+  },
+    {
+    id: 3540,
+    chapter: "ch11",
+    rang: "A",
+    question: "Comment impliquer l'entourage (aidants/famille) dans la prévention et la gestion du syndrome confusionnel hospitalier ?",
+    answer: "La présence des proches doit être encouragée (horaires de visite élargis). La famille peut aider en : 1. Reorientant le patient de manière douce (rappeler le jour, le lieu, la raison de l'hospitalisation). 2. Apportant des objets familiers (photos, réveil personnel). 3. Participant à l'alimentation et à l'hydratation (repas plus chaleureux). 4. Alertant immédiatement les soignants en cas de changement brutal de comportement ou de somnolence inhabituelle.",
+    tags: ["famille", "aidant", "HELP", "hospitalisation", "reorientation"]
+  },
+    {
+    id: 3541,
+    chapter: "ch11",
+    rang: "A",
+    question: "Pourquoi l'hypoxémie (insuffisance respiratoire, décompensation de BPCO) provoque-t-elle une confusion ?",
+    answer: "L'apport d'oxygène au cerveau est critique pour la synthèse des neurotransmetteurs (notamment l'acétylcholine) et le maintien de la pompe sodium-potassium neuronale. Une hypoxémie aiguë altère immédiatement le métabolisme neuronal cortical et sous-cortical, déclenchant une encéphalopathie hypoxique se manifestant cliniquement par un syndrome confusionnel, souvent hyperactif ou agressif. L'oxygénothérapie est le traitement étiologique immédiat.",
+    tags: ["hypoxémie", "BPCO", "physiopathologie", "oxygénothérapie"]
+  },
+    {
+    id: 3542,
+    chapter: "ch11",
+    rang: "A",
+    question: "Quel est le lien entre le syndrome confusionnel et le risque iatrogène d'escarres et de dénutrition ?",
+    answer: "Le patient confus, qu'il soit hyperactif (s'agitant dans son lit, provoquant des forces de cisaillement sur la peau) ou hypoactif (somnolent, immobile), présente un risque très élevé d'escarres. De plus, la confusion perturbe la prise des repas et l'hydratation (le patient refusant de manger, oubliant de boire ou présentant des troubles de déglutition), conduisant rapidement à une déshydratation et à une dénutrition protéino-énergétique aiguë.",
+    tags: ["escarres", "dénutrition", "immobilisation", "complications nosocomiales"]
+  },
+    {
+    id: 3543,
+    chapter: "ch11",
+    rang: "B",
+    question: "Pourquoi le syndrome de sevrage alcoolique (delirium tremens) doit-il être suspecté chez tout patient hospitalisé confus ?",
+    answer: "Une hospitalisation imprévue (fracture, infection) impose un sevrage alcoolique brutal chez un patient ayant une consommation chronique non déclarée. Le delirium tremens survient typiquement 48 à 72 heures après l'admission. Il associe une confusion mentale sévère avec des hallucinations zoopsiques terrifiantes (animaux, insectes), une agitation psychomotrice extrême et un syndrome d'hyperactivité végétative (fièvre, sueurs profuses, tachycardie, HTA). Il impose un traitement urgent par réhydratation et benzodiazépines.",
+    tags: ["delirium tremens", "sevrage alcoolique", "zoopsies", "urgence médicale", "sueur"]
+  },
+    {
+    id: 3544,
+    chapter: "ch11",
+    rang: "B",
+    question: "Quelles sont les causes métaboliques de confusion à rechercher en dehors des troubles ioniques ?",
+    answer: "Il faut rechercher systématiquement : 1. Une encéphalopathie hépatique (insuffisance hépatocellulaire, cirrhose, favorisée par une constipation ou une hémorragie digestive). 2. Une encéphalopathie urémique (insuffisance rénale terminale ou bloc obstructif). 3. Une décompensation diabétique (acidocétose ou syndrome d'hyperosmolarité sans cétose). 4. Une encéphalopathie de Gayet-Wernicke (carence sévère en vitamine B1 chez l'alcoolique ou le dénutri).",
+    tags: ["métabolique", " Gayet-Wernicke", "encéphalopathie urémique", "diagnostic différentiel"]
+  },
+    {
+    id: 3545,
+    chapter: "ch11",
+    rang: "A",
+    question: "Comment adapter l'alimentation et l'hydratation d'un patient confus qui refuse de s'alimenter ?",
+    answer: "Il faut éviter d'insister de manière directive ou d'utiliser la force, ce qui majore l'agitation. On propose des aliments faciles à manger ('manger-mains' ou finger food), des textures adaptées en cas de troubles de déglutition (eau gélifiée, purées), des collations fractionnées riches en calories et protéines au cours de la journée. Si le refus persiste et menace le pronostic vital, une hydratation sous-cutanée (hypodermoclyse) ou une sonde naso-gastrique temporaire peut être discutée collégialement.",
+    tags: ["nutrition", "manger-mains", "hypodermoclyse", "soins"]
+  },
+    {
+    id: 3546,
+    chapter: "ch11",
+    rang: "A",
+    question: "Quels sont les critères de sortie de l'hôpital d'un patient ayant présenté un syndrome confusionnel ?",
+    answer: "La sortie de l'hôpital ne doit être envisagée que si : 1. Le syndrome confusionnel est totalement ou quasi-totalement résolu, avec retour à l'état cognitif antérieur stable. 2. La cause précipitante (l'infection, le globe, la iatrogénie) est guérie ou contrôlée. 3. L'évaluation de l'autonomie montre que le retour à domicile est sécurisé avec des aides suffisantes, ou qu'une orientation en SSR est organisée si une rééducation de la marche est requise.",
+    tags: ["critères de sortie", "orientation", "sécurité", "SSR"]
+  },
+    {
+    id: 3547,
+    chapter: "ch11",
+    rang: "A",
+    question: "Comment le manque de sommeil et la désorientation sensorielle à l'hôpital favorisent-ils la confusion ?",
+    answer: "L'environnement hospitalier aigu (lumières allumées la nuit, bruits des alarmes et des chariots, soins infirmiers nocturnes répétatifs) déstructure le cycle veille-sommeil du patient âgé. De plus, l'absence de ses repères sensoriels (perte de ses lunettes, prothèses auditives non fonctionnelles) plonge le patient dans un état d'isolement et d'incertitude perceptuelle, favorisant les fausses interprétations et le délire de persécution.",
+    tags: ["sommeil", "désorientation sensorielle", "environnement hospitalier", "iatrogénie"]
+  },
+    {
+    id: 3548,
+    chapter: "ch11",
+    rang: "B",
+    question: "Qu'est-ce que le score CAM-ICU et quelle est son utilité ?",
+    answer: "Le CAM-ICU (Confusion Assessment Method for the Intensive Care Unit) est l'adaptation de la CAM pour les patients hospitalisés en réanimation, particulièrement ceux qui sont intubés et incapables de communiquer verbalement. Il repose sur des évaluations non verbales simples (ex: serrer la main du soignant à la prononciation d'une lettre précise pour évaluer l'attention). Il permet une détection précoce du delirium de réanimation.",
+    tags: ["CAM-ICU", "réanimation", "inattention", "non verbal", "évaluation"]
+  },
+    {
+    id: 3549,
+    chapter: "ch11",
+    rang: "A",
+    question: "Pourquoi la douleur non soulagée est-elle une cause majeure et évitable de syndrome confusionnel postopératoire ?",
+    answer: "La douleur aiguë provoque une activation majeure de l'axe hypothalamo-hypophysaire, entraînant une hypercortisolémie, une augmentation du tonus sympathique et une libération de cytokines pro-inflammatoires systémiques. Ce stress métabolique aigu perturbe directement la transmission cholinergique cérébrale. Un contrôle rigoureux de la douleur postopératoire (par des antalgiques non iatrogènes, en évitant les surdosages en opioïdes) réduit drastiquement l'incidence de la confusion.",
+    tags: ["douleur postopératoire", "confusion", "physiopathologie", "cortisol", "antalgie"]
+  },
+    {
+    id: 3550,
+    chapter: "ch11",
+    rang: "A",
+    question: "Quelles sont les recommandations de la HAS (2009) concernant la prise en charge de la confusion gériatrique ?",
+    answer: "Les recommandations de la HAS imposent : 1. Le dépistage systématique des patients à risque dès l'admission. 2. Le diagnostic clinique basé sur la CAM. 3. La recherche et le traitement immédiat de la cause (facteur 3). 4. La mise en place prioritaire de mesures environnementales et de réorientation non médicamenteuses. 5. La prescription restrictive des antipsychotiques à faible dose et courte durée, et la proscription des contentions physiques en dehors de situations exceptionnelles.",
+    tags: ["HAS", "recommandations", "confusion", "législation", "bonnes pratiques"]
+  },
+    {
+    id: 3551,
+    chapter: "ch12",
+    rang: "A",
+    question: "Quelle est la définition clinique d'une chute chez la personne âgée ?",
+    answer: "La chute se définit comme un événement involontaire entraînant le patient au sol ou sur une surface située à un niveau inférieur à sa position initiale, sans perte de connaissance initiale ni cause traumatique majeure évidente (comme un accident de la voie publique). C'est un syndrome gériatrique multifactoriel majeur.",
+    tags: ["chute", "définition", "gériatrie"]
+  },
+    {
+    id: 3552,
+    chapter: "ch12",
+    rang: "B",
+    question: "Quelle est la prévalence annuelle des chutes chez les personnes âgées de plus de 65 ans vs plus de 80 ans ?",
+    answer: "La fréquence des chutes augmente de façon exponentielle avec l'âge : environ 30 % (soit 1 sur 3) des personnes âgées de plus de 65 ans vivant à domicile chutent au moins une fois par an. Ce taux atteint 50 % (soit 1 sur 2) chez les personnes âgées de plus de 80 ans, et est encore supérieur pour les patients vivant en institution (EHPAD).",
+    tags: ["chute", "prévalence", "statistiques", "EHPAD"]
+  },
+    {
+    id: 3553,
+    chapter: "ch12",
+    rang: "B",
+    question: "Comment le vieillissement physiologique modifie-t-il la marche et l'équilibre (modifications normales) ?",
+    answer: "Le vieillissement normal de la marche se caractérise par : 1. Une diminution modérée de la vitesse de marche et de la longueur du pas. 2. Une augmentation du temps de double appui au sol (assurant une meilleure stabilité). 3. Une réduction de l'oscillation des bras. 4. Une posture légèrement penchée vers l'avant. 5. Une diminution de la sensibilité proprioceptive et de la force musculaire des membres inférieurs, limitant les capacités de rattrapage en cas d'obstacle.",
+    tags: ["marche normale", "vieillissement physiologique", "posture", "proprioception"]
+  },
+    {
+    id: 3554,
+    chapter: "ch12",
+    rang: "B",
+    question: "Quels sont les 3 principaux systèmes sensoriels impliqués dans le maintien de l'équilibre et comment les tester ?",
+    answer: "1. Le système visuel (acuité, champ visuel, sensibilité aux contrastes), testé par l'examen de la vision. 2. Le système vestibulaire (détection des accélérations angulaires et linéaires de la tête), testé par la recherche de nystagmus ou de vertiges lors des mouvements de tête. 3. Le système proprioceptif (sensibilité profonde des articulations et des muscles, en particulier des chevilles), testé par le test de Romberg (fermeture des yeux debout) et la sensibilité au diapason sur les malléoles.",
+    tags: ["équilibre", "sensoriel", "Romberg", "proprioception", "vision"]
+  },
+    {
+    id: 3555,
+    chapter: "ch12",
+    rang: "A",
+    question: "Comment se définit une 'chute grave' chez la personne âgée (critères de gravité) ?",
+    answer: "Une chute est qualifiée de grave si elle présente au moins l'un des critères suivants : 1. Une conséquence traumatique sévère (fracture, traumatisme crânien, plaie nécessitant suture). 2. Une station prolongée au sol (> 1 heure) en raison de l'impossibilité de se relever. 3. Un caractère répété (au moins 2 chutes sur une période de 6 mois). 4. La survenue d'un syndrome post-chute en phase aiguë.",
+    tags: ["chute grave", "gravité", "fracture", "long lie", "chutes à répétition"]
+  },
+    {
+    id: 3556,
+    chapter: "ch12",
+    rang: "A",
+    question: "Quelles sont les conséquences traumatiques physiques les plus fréquentes d'une chute chez le sujet âgé ?",
+    answer: "Environ 5 à 10 % des chutes entraînent une complication traumatique majeure : 1. Une fracture osseuse, dominée par la fracture de l'extrémité supérieure du fémur (col du fémur) et la fracture de Pouteau-Colles (poignet). 2. Les traumatismes crâniens, particulièrement graves chez les patients sous traitement anticoagulant ou antiagrégant (risque d'hématome sous-dural). 3. Les plaies cutanées et hématomes étendus (favorisés par la fragilité cutanée ou dermatoporose).",
+    tags: ["traumatisme", "fracture", "col fémoral", "anticoagulants", "hématome"]
+  },
+    {
+    id: 3557,
+    chapter: "ch12",
+    rang: "A",
+    question: "Qu'est-ce que le 'syndrome de station prolongée au sol' (long lie syndrome) et son seuil temporel ?",
+    answer: "Le long lie syndrome se définit par une durée passée au sol après une chute supérieure à 1 heure, due à l'impuissance du patient à se relever seul (faiblesse musculaire, fracture, syndrome post-chute). C'est un facteur de gravité indépendant majeur associé à une augmentation drastique de la morbidité et de la mortalité à 1 an (multipliée par 2), même en l'absence de fracture.",
+    tags: ["long lie", "station prolongée au sol", "gravité", "mortalité"]
+  },
+    {
+    id: 3558,
+    chapter: "ch12",
+    rang: "A",
+    question: "Quelles sont les complications métaboliques et viscérales d'une station prolongée au sol (conséquences médicales) ?",
+    answer: "Une station prolongée au sol entraîne des complications graves : 1. Une rhabdomyolyse (destruction des fibres musculaires comprimées). 2. Une déshydratation aiguë et une insuffisance rénale fonctionnelle (le patient ne pouvant boire). 3. Une hypothermie (surtout si le sol est froid). 4. Des pneumopathies d'inhalation (fausses routes en position allongée). 5. Des escarres de décubitus aiguës aux points d'appui osseux. 6. Une détresse psychologique intense.",
+    tags: ["rhabdomyolyse", "insuffisance rénale", "hypothermie", "inhalation", "escarres"]
+  },
+    {
+    id: 3559,
+    chapter: "ch12",
+    rang: "A",
+    question: "Pourquoi la rhabdomyolyse complique-t-elle la station prolongée au sol et comment la diagnostiquer ?",
+    answer: "La compression prolongée et continue des masses musculaires contre le sol dur provoque une ischémie et une nécrose des myocytes. Lors de la reperfusion ou de la libération, de grandes quantités de myoglobine, de potassium et de créatine phosphokinase (CPK) sont libérées dans la circulation. La myoglobine est néphrotoxique et peut boucher les tubules rénaux. Le diagnostic repose sur un dosage de la CPK plasmatique (> 5 fois la normale) et la surveillance de la fonction rénale et de la kaliémie.",
+    tags: ["rhabdomyolyse", "CPK", "myoglobine", "insuffisance rénale", "compressive"]
+  },
+    {
+    id: 3560,
+    chapter: "ch12",
+    rang: "A",
+    question: "Quelle est la différence clinique entre une chute d'origine mécanique et une chute d'origine non mécanique (malaise/syncope) ?",
+    answer: "La chute mécanique est accidentelle, provoquée par un facteur environnemental clair (trébucher sur un tapis, sol glissant), chez un patient conscient qui décrit précisément les circonstances et tente de se rattraper (présence de lésions de défense sur les mains). La chute non mécanique survient sans cause environnementale évidente, souvent brutale, secondaire à un malaise (perte de connaissance transitoire, syncope) ou à un déficit moteur transitoire ; le patient ne peut expliquer la chute et ne présente pas de réflexe de défense.",
+    tags: ["chute mécanique", "syncope", "malaise", "diagnostic différentiel", "réflexes de défense"]
+  },
+    {
+    id: 3561,
+    chapter: "ch12",
+    rang: "A",
+    question: "Comment se définit la syncope et comment la distinguer d'une simple chute fortuite ?",
+    answer: "La syncope est une perte de connaissance transitoire, de début rapide, de courte durée, spontanément et complètement résolutive, liée à une hypoperfusion cérébrale globale et passagère. Elle se distingue d'une simple chute par la notion d'amnésie de l'impact au sol, l'absence de souvenir de la chute elle-même, et parfois la description par des témoins d'un état d'inconscience (hypotonie, absence de réponse, pâleur) avant ou pendant la chute.",
+    tags: ["syncope", "perte de connaissance", "hypoperfusion cérébrale", "diagnostic différentiel"]
+  },
+    {
+    id: 3562,
+    chapter: "ch12",
+    rang: "A",
+    question: "Quels sont les principaux facteurs prédisposants (intrinsèques) de chutes chez le sujet âgé ?",
+    answer: "1. Les troubles de la marche et de l'équilibre (arthrose des membres inférieurs, séquelles d'AVC, syndrome parkinsonien). 2. La sarcopénie et la faiblesse musculaire des quadriceps. 3. Les déficits sensoriels (baisse d'acuité visuelle, cataracte, presbyacousie). 4. Les troubles neurocognitifs (démence, altération du jugement). 5. Les neuropathies périphériques (diabète) altérant la proprioception. 6. Des pathologies cardiovasculaires chroniques (arythmies, insuffisance cardiaque).",
+    tags: ["facteurs intrinsèques", "terrain", "sarcopénie", "proprioception", "démence"]
+  },
+    {
+    id: 3563,
+    chapter: "ch12",
+    rang: "A",
+    question: "Quels sont les principaux facteurs précipitants (extrinsèques et iatrogènes) de chutes chez le sujet âgé ?",
+    answer: "1. Les facteurs iatrogènes (introduction récente ou modification de posologie de psychotropes, d'antihypertenseurs, de diurétiques). 2. Une affection médicale aiguë intercurrente (infection, confusion, déshydratation, trouble du rythme). 3. Les facteurs extrinsèques environnementaux : mauvais éclairage, tapis non fixés, fils électriques au sol, chaussures inadaptées (talons, semelles glissantes), absence de barres d'appui dans la salle de bain.",
+    tags: ["facteurs précipitants", "environnement", "iatrogénie", "médicaments", "obstacles"]
+  },
+    {
+    id: 3564,
+    chapter: "ch12",
+    rang: "A",
+    question: "Quels médicaments augmentent significativement le risque de chute par mécanisme neurologique ou cardiovasculaire ?",
+    answer: "1. Les psychotropes (benzodiazépines, neuroleptiques, antidépresseurs), qui altèrent la vigilance, ralentissent les réflexes de rattrapage et provoquent une rigidité extrapyramidale ou une somnolence. 2. Les antihypertenseurs (particulièrement les vasodilatateurs et les diurétiques), qui provoquent ou majorent une hypotension orthostatique. 3. Les médicaments anticholinergiques (troubles visuels parmydriase et confusion). 4. Les hypoglycémiants (insuline, sulfamides) par risque d'hypoglycémie aiguë.",
+    tags: ["iatrogénie", "chutes", "psychotropes", "antihypertenseurs", "diurétiques", "danger"]
+  },
+    {
+    id: 3565,
+    chapter: "ch12",
+    rang: "A",
+    question: "Qu'est-ce que le syndrome post-chute (SPC) et quelle est sa physiopathologie ?",
+    answer: "Le syndrome post-chute est une complication psychomotrice grave survenant rapidement après une chute (dans les heures ou jours). Il correspond à une sidération des automatismes de l'équilibre et de la marche, d'origine principalement psychologique (anxiété majeure de la chute, perte de confiance) associée à un déconditionnement moteur rapide. C'est une urgence gériatrique réversible si elle est traitée précocement par rééducation.",
+    tags: ["syndrome post-chute", "psychomotrice", "sidération", "anxiété", "urgence"]
+  },
+    {
+    id: 3566,
+    chapter: "ch12",
+    rang: "A",
+    question: "Quels sont les signes cliniques caractéristiques du syndrome post-chute en phase aiguë (astasia-abasia) ?",
+    answer: "1. Lors de la station debout (astasie) : une rétropulsion majeure (le patient jette son corps en arrière, tronc raide, appui sur les talons, orteils décollés du sol) avec peur panique du vide. 2. Lors de la marche (abasie) : impossibilité d'initier le pas (freezing), marche à petits pas glissés, élargissement important de la base de sustentation, le patient s'agrippant au soignant ou aux meubles. 3. Sur le plan psychologique : anxiété extrême, refus de se lever (clinophilie de protection).",
+    tags: ["astasia-abasia", "rétropulsion", "syndrome post-chute", "marche", "anxiété"]
+  },
+    {
+    id: 3567,
+    chapter: "ch12",
+    rang: "A",
+    question: "Qu'est-ce que la rétropulsion et comment se manifeste-t-elle lors de l'examen clinique de la marche ?",
+    answer: "La rétropulsion est un trouble postural caractérisé par un déplacement anormal du centre de gravité du corps vers l'arrière. Cliniquement, en station debout, le patient a tendance à basculer vers l'arrière, les genoux en extension et les chevilles en flexion dorsale. Lors du demi-tour ou d'une légère poussée sternale, il présente un recul incontrôlé de plusieurs pas (rétropulsion) ou chute en arrière sans réaction de rattrapage efficace.",
+    tags: ["rétropulsion", "équilibre", "examen clinique", "posture"]
+  },
+    {
+    id: 3568,
+    chapter: "ch12",
+    rang: "A",
+    question: "Comment se déroule le test du 'Timed Up and Go' (TUG) et quels sont les seuils d'interprétation ?",
+    answer: "Le patient, assis sur une chaise avec accoudoirs, doit se lever au signal, marcher 3 mètres en ligne droite à son rythme habituel, faire demi-tour, revenir à la chaise et se rasseoir. On chronomètre le temps total. Un temps < 10 secondes indique une mobilité normale. Un temps entre 10 et 20 secondes traduit une fragilité modérée de l'équilibre. Un temps > 20 secondes indique un trouble de la marche sévère et un risque élevé de chute.",
+    tags: ["TUG", "timed up and go", "évaluation", "marche", "seuil"]
+  },
+    {
+    id: 3569,
+    chapter: "ch12",
+    rang: "A",
+    question: "Qu'est-ce que le test de la station unipodale (One-legged stance test) et son seuil prédictif de chute ?",
+    answer: "Ce test consiste à demander au patient de se tenir debout sur un seul pied (sans appui des bras) pendant le temps le plus long possible. Le test est réalisé des deux côtés. Une incapacité à maintenir la station unipodale pendant au moins 5 secondes est un facteur prédictif indépendant majeur de risque de chute et de survenue de fractures de fragilité.",
+    tags: ["station unipodale", "équilibre", "évaluation", "risque de chute", "seuil"]
+  },
+    {
+    id: 3570,
+    chapter: "ch12",
+    rang: "B",
+    question: "Qu'est-ce que le score Tinetti (POMA) et comment interpréter ses résultats pour le risque de chute ?",
+    answer: "Le test de Tinetti (Performance-Oriented Mobility Assessment) évalue séparément l'équilibre (sur 16 points : station assise, lever, équilibre immédiat, poussée sternale, yeux fermés, demi-tour) et la marche (sur 12 points : initiation, longueur/hauteur du pas, symétrie, continuité, trajectoire). Un score total inférieur à 19/28 indique un risque de chute très élevé (multiplié par 5). Un score entre 19 et 24 indique un risque modéré.",
+    tags: ["Tinetti", "POMA", "équilibre", "marche", "évaluation"]
+  },
+    {
+    id: 3571,
+    chapter: "ch12",
+    rang: "A",
+    question: "Quelle est la définition et la mesure clinique de l'hypotension orthostatique (HO) selon les recommandations ?",
+    answer: "L'hypotension orthostatique se définit comme une diminution de la pression artérielle systolique (PAS) d'au moins 20 mmHg et/ou de la pression artérielle diastolique (PAD) d'au moins 10 mmHg, survenant dans les 3 minutes suivant le passage en position debout. Chez le patient hypertendu, une baisse de PAS >= 30 mmHg est requise pour poser le diagnostic.",
+    tags: ["hypotension orthostatique", "définition", "mesure", "pression artérielle"]
+  },
+    {
+    id: 3572,
+    chapter: "ch12",
+    rang: "A",
+    question: "Quel est le protocole rigoureux de mesure de la pression artérielle pour rechercher une hypotension orthostatique ?",
+    answer: "Le protocole de l'active standing test impose : 1. Faire allonger le patient au calme pendant au moins 5 à 10 minutes, puis mesurer sa PA et sa fréquence cardiaque (FC) de repos en position couchée. 2. Demander au patient de se lever activement et rester debout immobile. 3. Mesurer la PA et la FC debout à 1 minute, 2 minutes et 3 minutes après le lever (et prolonger à 5 minutes en cas de suspicion d'HO retardée).",
+    tags: ["active standing test", "hypotension orthostatique", "protocole", "mesure"]
+  },
+    {
+    id: 3573,
+    chapter: "ch12",
+    rang: "A",
+    question: "Quelles sont les causes les plus fréquentes d'hypotension orthostatique chez le sujet âgé ?",
+    answer: "1. Les causes iatrogènes (surdosage ou prescription inadaptée de diurétiques, d'antihypertenseurs, de dérivés nitrés, d'alpha-bloquants prostatiques, de neuroleptiques ou d'antidépresseurs). 2. L'hypovolémie relative par déshydratation aiguë ou anémie. 3. La neuropathie autonome (diabète, maladie de Parkinson, démence à corps de Lewy, amylose). 4. Le déconditionnement physique lié à un alitement prolongé.",
+    tags: ["hypotension orthostatique", "étiologies", "iatrogénie", "déshydratation", "Parkinson"]
+  },
+    {
+    id: 3574,
+    chapter: "ch12",
+    rang: "A",
+    question: "Quelles sont les mesures hygiéno-diététiques et physiques recommandées en première intention pour lutter contre l'HO ?",
+    answer: "1. Éducation thérapeutique : apprendre au patient à décomposer le lever (s'asseoir au bord du lit 1 min avant de se lever), éviter les levers brusques. 2. Assurer une hydratation abondante (1,5 L/jour) et augmenter modérément l'apport en sel (sauf contre-indication cardiaque). 3. Éviter les repas trop copieux et chauds (hypotension postprandiale) et l'alcool. 4. Porter des bas ou collants de contention veineuse de classe II ou III et une ceinture abdominale. 5. Surélever la tête du lit de 15 à 20 degrés.",
+    tags: ["hypotension orthostatique", "mesures physiques", "contention veineuse", "éducation"]
+  },
+    {
+    id: 3575,
+    chapter: "ch12",
+    rang: "B",
+    question: "Quels traitements médicamenteux peuvent être prescrits en cas d'hypotension orthostatique réfractaire aux mesures physiques ?",
+    answer: "Si les mesures non médicamenteuses bien conduites sont insuffisantes et que l'HO reste symptomatique (malaises, chutes), on peut prescrire : 1. La midodrine (agoniste alpha-1 adrénergique périphérique), qui augmente les résistances vasculaires systémiques. 2. La fludrocortisone (minéralocorticoïde), qui favorise la rétention hydrosodée et augmente la volémie (attention au risque d'insuffisance cardiaque, d'HTA couchée et d'hypokaliémie).",
+    tags: ["midodrine", "fludrocortisone", "hypotension orthostatique", "traitement médicamenteux"]
+  },
+    {
+    id: 3576,
+    chapter: "ch12",
+    rang: "A",
+    question: "Qu'est-ce que la sarcopénie et quels sont ses trois critères diagnostiques (EWGSOP2) ?",
+    answer: "La sarcopénie est un syndrome gériatrique caractérisé par un déclin progressif de la masse et de la force musculaires squelettiques. Selon le consensus européen EWGSOP2, le diagnostic repose sur : 1. Une baisse de la force musculaire (critère de suspicion). 2. Une baisse de la quantité ou de la qualité de la masse musculaire (critère de confirmation). 3. Une baisse des performances physiques (critère de sévérité).",
+    tags: ["sarcopénie", "EWGSOP2", "muscle", "définition", "diagnostic"]
+  },
+    {
+    id: 3577,
+    chapter: "ch12",
+    rang: "A",
+    question: "Comment évaluer la force musculaire (handgrip) et la masse musculaire en pratique clinique pour la sarcopénie ?",
+    answer: "1. La force musculaire est mesurée cliniquement par un dynamomètre de préhension manuelle (test de handgrip), avec des seuils pathologiques < 27 kg chez l'homme et < 16 kg chez la femme. 2. La masse musculaire est évaluée de façon précise par absorptiométrie biphotonique à rayons X (DEXA) ou par impédancemétrie. 3. La performance physique est évaluée par la vitesse de marche sur 4 mètres (pathologique si <= 0,8 m/s).",
+    tags: ["handgrip", "dynamomètre", "sarcopénie", "DEXA", "marche"]
+  },
+    {
+    id: 3578,
+    chapter: "ch12",
+    rang: "A",
+    question: "Quel est l'intérêt d'une supplémentation en vitamine D chez une personne âgée chuteuse, même sans ostéoporose ?",
+    answer: "La vitamine D possède des récepteurs spécifiques sur les cellules musculaires squelettiques (myocytes). La carence en vitamine D (très fréquente chez le sujet âgé) provoque une myopathie proximale (faiblesse des ceintures, instabilité). Une supplémentation systématique (visant une concentration de 25-OH-vitamine D > 30 ng/ml) améliore directement la force musculaire et l'équilibre, réduisant le risque de chute d'environ 20 %, indépendamment de son effet osseux.",
+    tags: ["vitamine D", "sarcopénie", "chute", "muscle", "prévention"]
+  },
+    {
+    id: 3579,
+    chapter: "ch12",
+    rang: "A",
+    question: "Quel bilan paraclinique minimal est indiqué chez un patient âgé après une première chute sans cause évidente ?",
+    answer: "Le bilan initial comprend : 1. Une biologie standard : NFS (anémie), CRP (infection), glycémie (hypoglycémie), ionogramme sanguin et créatininémie (déshydratation, hyponatrémie), calcémie, dosage de la 25-OH-vitamine D. 2. Un électrocardiogramme (ECG) de repos à la recherche d'un trouble de conduction ou du rythme cardiaque silencieux.",
+    tags: ["bilan paraclinique", "chute", "biologie", "ECG"]
+  },
+    {
+    id: 3580,
+    chapter: "ch12",
+    rang: "A",
+    question: "Quand faut-il réaliser un enregistrement ECG de longue durée (Holter) ou une échocardiographie après une chute ?",
+    answer: "Ces examens cardiologiques sont indiqués si l'interrogatoire ou l'examen oriente vers une cause cardiaque : 1. Notion de malaise ou de perte de connaissance brutale précédant immédiatement la chute. 2. Présence de palpitations ou de dyspnée inexpliquées. 3. Anomalie à l'ECG de repos (bloc conductif, bradycardie < 50 bpm, passage en ACFA). 4. Présence d'un souffle cardiaque systolique (suspicion de rétrécissement aortique serré).",
+    tags: ["Holter ECG", "échocardiographie", "rétrécissement aortique", "syncope", "chute"]
+  },
+    {
+    id: 3581,
+    chapter: "ch12",
+    rang: "A",
+    question: "Quels examens d'imagerie cérébrale sont requis en urgence après une chute avec traumatisme crânien sous anticoagulants ?",
+    answer: "Un scanner cérébral sans injection de contraste (TDM cérébrale) doit être réalisé en urgence chez tout patient âgé sous anticoagulant (AVK, AOD) ou antiagrégant plaquettaire ayant présenté une chute avec traumatisme crânien (ou suspecté tel), même en l'absence de perte de connaissance initiale et en l'absence de tout signe de focalisation neurologique. Le risque d'hémorragie intracrânienne à début retardé (hématome sous-dural) est majeur.",
+    tags: ["scanner cérébral", "anticoagulants", "traumatisme crânien", "hématome sous-dural", "urgences"]
+  },
+    {
+    id: 3582,
+    chapter: "ch12",
+    rang: "B",
+    question: "Quelles sont les caractéristiques cliniques d'un hématome sous-dural chronique et son délai de survenue post-traumatique ?",
+    answer: "L'hématome sous-dural chronique est secondaire à la rupture des veines ponts dans l'espace sous-dural après un traumatisme souvent mineur ou oublié. Le délai de survenue clinique varie de 3 semaines à plusieurs mois après la chute. La présentation est insidieuse et fluctuante, associant : céphalées progressives, ralentissement psychomoteur, syndrome confusionnel fluctuant, troubles de la marche (chutes à répétition) et parfois déficit moteur focal intermittent.",
+    tags: ["hématome sous-dural chronique", "traumatisme crânien", "sémiologie", "délai", "neurologie"]
+  },
+    {
+    id: 3583,
+    chapter: "ch12",
+    rang: "A",
+    question: "Comment organiser la prévention des chutes au domicile du patient (évaluation environnementale) ?",
+    answer: "L'évaluation se fait au mieux par un ergothérapeute à domicile : 1. Supprimer les obstacles (tapis non fixés, fils électriques traversants, meubles encombrants). 2. Améliorer l'éclairage (veilleuses la nuit dans le couloir entre le lit et les toilettes). 3. Adapter la salle de bain (remplacer la baignoire par une douche à l'italienne, installer un siège de douche et des barres d'appui, poser un revêtement antidérapant au sol). 4. Installer des rampes d'escalier bilatérales.",
+    tags: ["ergothérapie", "domicile", "environnement", "prévention des chutes", "tapis"]
+  },
+    {
+    id: 3584,
+    chapter: "ch12",
+    rang: "A",
+    question: "Quel est le rôle de la rééducation fonctionnelle (kinésithérapie) après une chute ou dans le syndrome post-chute ?",
+    answer: "La rééducation doit être précoce et intensive : 1. Travail du relever du sol (apprendre les étapes pour se relever seul en s'appuyant sur les genoux). 2. Renforcement musculaire des quadriceps et des stabilisateurs de la cheville. 3. Exercices d'équilibre et de transfert de poids. 4. Dans le syndrome post-chute : verticalisation précoce (lutter contre la rétropulsion en projetant le tronc vers l'avant, appui plantaire antérieur) et réassurance verbale systématique.",
+    tags: ["kinésithérapie", "rééducation", "syndrome post-chute", "relever du sol"]
+  },
+    {
+    id: 3585,
+    chapter: "ch12",
+    rang: "A",
+    question: "Pourquoi l'évaluation de la vision (cataracte, DMLA, verres progressifs) est-elle essentielle dans la prévention des chutes ?",
+    answer: "Une bonne vision permet la détection des obstacles au sol et l'anticipation des variations de relief. La correction chirurgicale de la cataracte bilatérale ou le traitement d'une DMLA réduit significativement le risque de chute. De plus, il faut être vigilant avec les verres progressifs : ils altèrent la perception des distances et du relief vers le bas lors de la descente d'escaliers ou de la marche en extérieur, augmentant le risque de trébuchement.",
+    tags: ["vision", "cataracte", "verres progressifs", "obstacles", "chute"]
+  },
+    {
+    id: 3586,
+    chapter: "ch12",
+    rang: "B",
+    question: "Qu'est-ce que l'instabilité posturale liée à l'âge et comment la rééduquer ?",
+    answer: "L'instabilité posturale correspond à une altération des réflexes d'ajustement postural nécessaires pour maintenir la projection du centre de gravité dans la base de sustentation lors d'un mouvement ou d'une perturbation. La rééducation repose sur l'entraînement sur plateformes instables (proprioception), le travail des stratégies de rattrapage (stratégies de cheville et de hanche) et le taï-chi, qui a démontré une excellente efficacité pour réduire les chutes.",
+    tags: ["instabilité posturale", "équilibre", "rééducation", "taï-chi"]
+  },
+    {
+    id: 3587,
+    chapter: "ch12",
+    rang: "A",
+    question: "Quel est le lien entre les troubles cognitifs (TNC) et le risque de chute chez la personne âgée ?",
+    answer: "La présence d'un TNC majeur double le risque de chute. Les mécanismes associent : 1. Une altération du jugement et une prise de risque (anosognosie des limites physiques). 2. Une baisse de l'attention partagée (difficulté à gérer la double tâche, comme marcher et parler simultanément). 3. Des lésions neurologiques touchant directement les voies motrices et de l'équilibre. 4. L'utilisation fréquente de médicaments psychotropes iatrogènes.",
+    tags: ["TNC", "démence", "chute", "double tâche", "jugement"]
+  },
+    {
+    id: 3588,
+    chapter: "ch12",
+    rang: "A",
+    question: "Quels sont les dispositifs d'aide à la marche (cannes, déambulateurs) et leurs indications d'utilisation ?",
+    answer: "1. La canne simple : indiquée en cas d'arthrose unilatérale légère ou d'instabilité mineure, tenue du côté opposé à l'articulation douloureuse. 2. La canne tripode ou quadripode : offre une plus grande base d'appui mais ralentit la marche. 3. Le déambulateur (cadre de marche ou rollator à roues) : indiqué en cas d'instabilité majeure, de faiblesse bilatérale des membres inférieurs ou de peur de tomber. Il nécessite des fonctions cognitives suffisantes pour être manipulé en sécurité.",
+    tags: ["aides à la marche", "déambulateur", "canne", "rééducation", "sécurité"]
+  },
+    {
+    id: 3589,
+    chapter: "ch12",
+    rang: "B",
+    question: "Qu'est-ce que la téléassistance et son rôle pour limiter les conséquences d'une chute à domicile ?",
+    answer: "La téléassistance consiste en un dispositif portatif (médaillon ou montre avec bouton d'alerte) relié à une centrale d'écoute disponible 24h/24. En cas de chute, le patient appuie sur le bouton pour déclencher un appel d'urgence et l'intervention des proches ou des secours. Certains modèles intègrent des détecteurs automatiques de chute lourde. C'est le moyen le plus efficace pour éviter le syndrome de station prolongée au sol et ses complications vitales.",
+    tags: ["téléassistance", "long lie", "sécurité", "domicile", "social"]
+  },
+    {
+    id: 3590,
+    chapter: "ch12",
+    rang: "A",
+    question: "Comment évaluer le risque de fracture du col fémoral après une chute (rôle de l'ostéoporose et de la DMO) ?",
+    answer: "Le risque dépend de la violence de l'impact, de la présence d'un amortisseur (masse grasse trochantérienne) et de la résistance osseuse. Cette dernière est évaluée par l'ostéodensitométrie osseuse (DMO) mesurant le T-score. Un T-score <= -2,5 définit l'ostéoporose. Devant toute personne âgée chuteuse ou à risque de chute, la recherche d'une ostéoporose par DMO est recommandée pour discuter d'un traitement protecteur (bisphosphonates) afin de prévenir une fracture lors d'une chute ultérieure.",
+    tags: ["DMO", "ostéoporose", "col fémoral", "fracture", "chute"]
+  },
+    {
+    id: 3591,
+    chapter: "ch12",
+    rang: "A",
+    question: "Quelle est la prise en charge immédiate d'une suspicion de fracture de l'extrémité supérieure du fémur (ESF) ?",
+    answer: "1. Immobilisation stricte du patient au lit, interdiction absolue d'appui. 2. Antalgie rapide et puissante de première intention (souvent par bloc fémoral ou bloc ilio-fascial réalisé par les urgentistes, associé à du paracétamol et des morphiniques). 3. Bilan préopératoire d'urgence (biologie, ECG, radiographie du bassin de face et de la hanche de face et de profil). 4. Pose d'une voie veineuse périphérique et hydratation.",
+    tags: ["fracture du col", "bloc fémoral", "antalgie", "urgences", "immobilisation"]
+  },
+    {
+    id: 3592,
+    chapter: "ch12",
+    rang: "B",
+    question: "Quel est le délai chirurgical recommandé pour la prise en charge d'une fracture du col fémoral et pourquoi ?",
+    answer: "La chirurgie (par arthroplastie/prothèse de hanche ou ostéosynthèse) doit être réalisée dans un délai idéalement inférieur à 24 heures, et au maximum dans les 48 heures suivant l'admission. Raccourcir ce délai réduit drastiquement les complications liées à l'alitement (escarres, confusion, phlébites, infections urinaires et pulmonaires), diminue la mortalité à 30 jours et améliore la récupération fonctionnelle à long terme.",
+    tags: ["délai chirurgical", "fracture du col", "complications d'alitement", "pronostic"]
+  },
+    {
+    id: 3593,
+    chapter: "ch12",
+    rang: "A",
+    question: "Quelles complications postopératoires précoces et tardives faut-il prévenir après chirurgie d'une fracture du col fémoral ?",
+    answer: "1. Précoces : confusion mentale postopératoire, rétention d'urine ou globe, dénutrition, hématome de paroi, infection du site opératoire, thrombose veineuse profonde. 2. Tardives : luxation de prothèse (nécessitant l'éducation aux mouvements interdits : pas d'adduction, pas de rotation interne), descellement, perte d'autonomie persistante. La prévention associe anticoagulation préventive, lever précoce (J1) avec appui, et rééducation.",
+    tags: ["luxation de prothèse", "complications postopératoires", "anticoagulation", "lever précoce"]
+  },
+    {
+    id: 3594,
+    chapter: "ch12",
+    rang: "A",
+    question: "Qu'est-ce que le syndrome d'immobilisation (alitement prolongé) et quelles sont ses causes principales ?",
+    answer: "Le syndrome d'immobilisation correspond à l'ensemble des complications physiques, métaboliques et psychologiques secondaires à un alitement ou un maintien au fauteuil prolongé (supérieur à quelques jours). Ses causes principales en gériatrie sont les fractures de membres, les syndromes confusionnels sévères, les états infectieux aigus (pneumonies, pyélonéphrites), les accidents vasculaires cérébraux et le syndrome post-chute.",
+    tags: ["syndrome d'immobilisation", "alitement", "décubitus", "étiologies"]
+  },
+    {
+    id: 3595,
+    chapter: "ch12",
+    rang: "A",
+    question: "Quelles sont les complications thromboemboliques du syndrome d'immobilisation et comment les prévenir ?",
+    answer: "L'immobilité prolongée entraîne une stase veineuse majeure dans les membres inférieurs qui, associée à un état d'hypercoagulabilité fréquent, favorise la survenue de thromboses veineuses profondes (phlébites) et leur complication majeure, l'embolie pulmonaire. La prévention repose sur : 1. La prescription systématique d'une anticoagulation préventive (HBPM ou AOD) adaptée au poids et à la fonction rénale. 2. Le lever et la déambulation les plus précoces possibles. 3. Le port de bas de contention veineuse.",
+    tags: ["thrombose veineuse", "embolie pulmonaire", "anticoagulation", "stase veineuse", "immobilisation"]
+  },
+    {
+    id: 3596,
+    chapter: "ch12",
+    rang: "A",
+    question: "Quelles sont les complications cutanées (escarres) du syndrome d'alitement et leur prévention ?",
+    answer: "L'escarre est une lésion ischémique de la peau et des tissus sous-jacents provoquée par une pression prolongée et continue entre une saillie osseuse (sacrum, talons) et le lit. La prévention impose : 1. L'utilisation d'un matelas à air dynamique d'aide à la prévention (matelas anti-escarres). 2. Le changement régulier de position (toutes les 2 à 3 heures) pour mobiliser les points d'appui. 3. La friction protectrice douce (huile) des zones à risque (sans massage fort). 4. La prise en charge de l'incontinence et de la dénutrition.",
+    tags: ["escarres", "décubitus", "matelas anti-escarres", "ischémie", "prévention"]
+  },
+    {
+    id: 3597,
+    chapter: "ch12",
+    rang: "A",
+    question: "Quelles sont les complications respiratoires et digestives associées à l'immobilisation prolongée ?",
+    answer: "1. Respiratoires : encombrement bronchique par défaut de toux efficace, atélectasies de décubitus, et pneumopathies d'inhalation (fausses routes favorisées par la position allongée lors des repas). 2. Digestives : ralentissement du péristaltisme intestinal provoquant une constipation opiniâtre et favorisant la formation d'un fécalome obstructif douloureux.",
+    tags: ["pneumopathie", "inhalation", "constipation", "fécalome", "complications"]
+  },
+    {
+    id: 3598,
+    chapter: "ch12",
+    rang: "A",
+    question: "Comment prévenir le déconditionnement cardiovasculaire et la perte de masse musculaire lors d'un alitement prolongé ?",
+    answer: "L'alitement prolongé provoque une atrophie musculaire rapide (perte de 1 à 2 % de force musculaire par jour d'alitement) et un déconditionnement cardiaque (perte du baroréflexe, hypotension orthostatique au lever). La prévention repose sur la mobilisation passive puis active au lit réalisée par le kinésithérapeute, le redressement progressif du buste, et la verticalisation au fauteuil dès que l'état médical le permet, associée à des apports protéino-énergétiques suffisants.",
+    tags: ["déconditionnement", "atrophie musculaire", "kinésithérapie", "verticalisation"]
+  },
+    {
+    id: 3599,
+    chapter: "ch12",
+    rang: "B",
+    question: "Qu'est-ce que l'échelle de Braden et son utilité dans la prévention des escarres chez le patient immobilisé ?",
+    answer: "L'échelle de Braden est un outil clinique d'évaluation du risque de développer des escarres. Elle évalue 6 sous-échelles : perception sensorielle, humidité de la peau, activité physique, mobilité, état nutritionnel, friction et cisaillement. Le score total varie de 6 à 23. Un score inférieur ou égal à 16 (ou <= 12 pour un risque très élevé) impose la mise en place immédiate d'un protocole de prévention strict (matelas adapté, changements de position).",
+    tags: ["Braden", "escarres", "évaluation du risque", "décubitus"]
+  },
+    {
+    id: 3600,
+    chapter: "ch12",
+    rang: "A",
+    question: "Comment s'organise le retour à domicile (ou en institution) d'un patient âgé après une hospitalisation pour chute grave ?",
+    answer: "Le retour à domicile nécessite une planification coordonnée : 1. Une évaluation ergothérapeutique pour sécuriser le logement. 2. Le renforcement des aides humaines : passage d'infirmiers (gestion des médicaments), d'aides-soignants (aide à la toilette), auxiliaires de vie (repas, courses). 3. La poursuite de la kinésithérapie de la marche à domicile. 4. L'installation de la téléassistance. 5. La réévaluation régulière des traitements par le médecin traitant.",
+    tags: ["retour à domicile", "coordination", "aides à domicile", "social", "ergothérapie"]
+  }
 ];
+
+if (typeof module !== 'undefined' && module.exports) { module.exports = { MEGA_FLASHCARDS_2 }; }

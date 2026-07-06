@@ -1,4 +1,4 @@
-const CACHE_NAME = 'geriatrie-v167';
+const CACHE_NAME = 'geriatrie-v169';
 const CORE = [
   './',
   './index.html',
@@ -198,3 +198,4 @@ self.addEventListener('fetch', e => {
     }).catch(() => caches.match(e.request))
   );
 });
+

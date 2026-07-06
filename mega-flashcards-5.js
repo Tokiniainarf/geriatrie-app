@@ -1,121 +1,810 @@
+/* ═══════════════════════════════════════════════════════════════
+   MEGA-FLASHCARDS-5 — Généré automatiquement depuis les lots cliniques
+   Sources: Gériatrie 5e éd. + 28 PDFs NotebookLM
+   Chapitres: ch17-ch20
+   ═══════════════════════════════════════════════════════════════ */
+
 const MEGA_FLASHCARDS_5 = [
-  { id: 'mega5-1', chapter: 'ch1', rang: 'A', question: 'Mnémotechnique EGM : les 6 « M » à ne pas oublier à l\'oral ?', answer: 'Médical, Mobilité (fonction), Mémoire (cognition), Moral (affectif), Milieu (social/environnement), Médicaments (iatrogénie). Oublier « Milieu » = plan incomplet et réhospitalisation.', tags: ['EGM', 'mnémotechnique', 'EVC'] },
-  { id: 'mega5-2', chapter: 'ch1', rang: 'A', question: 'Présentation atypique fragilité : IMC normal, marche lente seule — piège diagnostique ?', answer: 'Sarcopénie normopondérée (« skinny fat ») : masse grasse ↑, masse musculaire ↓. Grip + SPPB obligatoires ; albumine et apports protéiques. Ne pas rassurer sur le poids seul.', tags: ['sarcopénie', 'atypique', 'piège'] },
-  { id: 'mega5-3', chapter: 'ch1', rang: 'B', question: 'Red flag EGM domicile : PA refuse ouverture porte + odeur urines + courrier entassé — conduite ?', answer: 'Syndrome de Diogène ou négligence auto-soins. Évaluer danger immédiat, capacité juridique, signalement si maltraitance/insalubrité. CCAS, équipe mobile, mesure protection si incapacité.', tags: ['Diogène', 'red flag', 'social'] },
-  { id: 'mega5-4', chapter: 'ch1', rang: 'A', question: 'Différentiel : fatigue vs hypothyroïdie vs dépression vs anémie chez PA « pré-fragile » — ordre bilan minimal ?', answer: 'NFS, ferritine, TSH, créatinine, glycémie, GDS-15. Fatigue isolée n\'est jamais « normal à 85 ans » sans exclusion causes réversibles.', tags: ['différentiel', 'fatigue', 'bilan'] },
-  { id: 'mega5-5', chapter: 'ch1', rang: 'B', question: 'Mnémotechnique Fried : 5 critères en anglais F-W-E-S-A ?', answer: 'Fatigue, Weight loss (involontaire), Exhaustion (épuisement), Slowness (marche lente), Activity low (activité physique basse) + grip en pratique. ≥3 = fragilité phénotypique.', tags: ['Fried', 'mnémotechnique', 'fragilité'] },
-
-  { id: 'mega5-6', chapter: 'ch2', rang: 'A', question: 'Syndrome gériatrique rare à l\'hôpital : « failure to thrive » sans cause organique unique — définition ?', answer: 'Déclin global (poids, fonction, engagement) multifactoriel : dénutrition, dépression, douleur non traitée, isolement, iatrogénie. EGM complète ; pas arrêt après un seul bilan négatif.', tags: ['failure to thrive', 'syndrome', 'atypique'] },
-  { id: 'mega5-7', chapter: 'ch2', rang: 'A', question: 'Red flag : PA hospitalisé pour « gastro » avec seulement nausées — delirium silencieux ?', answer: 'Delirium hypoactif souvent non diagnostiqué (somnolence, immobilité). 4AT/CAM systématique si >65 ans hospitalisé. Confondre avec démence ou fatigue = retard traitement précipitant.', tags: ['delirium', 'hypoactif', 'red flag'] },
-  { id: 'mega5-8', chapter: 'ch2', rang: 'B', question: 'Mnémotechnique causes delirium : « DIMES » (version anglaise classique) adaptée FR ?', answer: 'Drogues/médicaments, Infection, Métabolique (Na, Ca, glycémie), Environment (sensoriel, isolement), Stroke/subdural, autres (douleur, constipation, rétention). Iatrogénie en tête chez PA.', tags: ['delirium', 'mnémotechnique', 'causes'] },
-  { id: 'mega5-9', chapter: 'ch2', rang: 'A', question: 'Différentiel : déclin fonctionnel aigu vs décompensation chronique stable — critère temporel clé ?', answer: 'Aigu = jours à semaines (infection, médicament, fracture occulte). Chronique = mois (Parkinson, démence). Date de référence « dernière autonomie habituelle » indispensable au dossier.', tags: ['DAFH', 'différentiel', 'raisonnement'] },
-  { id: 'mega5-10', chapter: 'ch2', rang: 'A', question: 'Iatrogénie atypique : cascade laxatifs → diarrhée → déshydratation → confusion sans constipation initiale documentée ?', answer: 'Rechercher prescription laxative « de confort » en EHPAD, interaction opioïde + ACB. Facteur 3 = arrêt laxatif + hydratation avant neuroleptique pour confusion.', tags: ['iatrogénie', 'cascade', 'atypique'] },
-
-  { id: 'mega5-11', chapter: 'ch3', rang: 'A', question: 'Présentation atypique : GIR 6 officiel mais aidant fait 100 % des courses et médicaments — concept ?', answer: 'Dépendance masquée / vulnérabilité IADL. Lawton et entretien aidant > GIR administratif seul. Anticiper décompensation si aidant absent (hospitalisation aidant).', tags: ['Lawton', 'GIR', 'atypique'] },
-  { id: 'mega5-12', chapter: 'ch3', rang: 'B', question: 'Red flag aidant : enfant unique épuisé refuse toute aide extérieure « par fierté » — risque ?', answer: 'Maltraitance par omission, burn-out aidant, négligence PA. Zarit, proposition répit graduée, MDPH. Signalement si danger avéré ; curatelle si finances bloquées.', tags: ['aidant', 'red flag', 'éthique'] },
-  { id: 'mega5-13', chapter: 'ch3', rang: 'A', question: 'Mnémotechnique Katz 6 ADL : phrase « THEDAF » en français ?', answer: 'Toilette, Habillage, Élimination (continence), Déplacements, Alimentation, Fauteuil/lit (transferts). Chaque item indépendant ou dépendant — pas de score moyen.', tags: ['Katz', 'mnémotechnique', 'ADL'] },
-  { id: 'mega5-14', chapter: 'ch3', rang: 'A', question: 'Différentiel : perte autonomie motrice vs psychiatrique (dépression sévère immobilisation) ?', answer: 'Dépression : ralentissement psychomoteur, anhédonie, plaintes somatiques ; examen neuro souvent normal. GDS-15, essai activation + ISRS. Amélioration fonctionnelle possible en 4-8 sem.', tags: ['dépression', 'différentiel', 'immobilisation'] },
-  { id: 'mega5-15', chapter: 'ch3', rang: 'B', question: 'Atypique : PA GIR 1 en EHPAD mais sorties seul en fauteuil sans escorte — qui décide ?', answer: 'Évaluer discernement et risque tiers. Si capacité : liberté avec information risques. Si démence : curateur/tuteur, PDS sécurité. Pas contention systématique ; traçabilité.', tags: ['EHPAD', 'autonomie', 'médico-légal'] },
-
-  { id: 'mega5-16', chapter: 'ch4', rang: 'A', question: 'Red flag éthique : famille demande arrêt nutrition chez PA conscient qui mange encore — cadre ?', answer: 'Refus alimentation volontaire avec discernement = respecter après information (Leonetti). Si démence : directives, personne confiance, pas arrêt forcé sans collégialité. Distinction dépression traitable vs fin de vie.', tags: ['nutrition', 'refus', 'red flag'] },
-  { id: 'mega5-17', chapter: 'ch4', rang: 'A', question: 'Mnémotechnique collégialité limitation : « PICT » ?', answer: 'Pronostic engagé, Intérêt du patient, Charge > bénéfice, Traçabilité (avis 2e médecin, date). S\'ajoute : directives anticipées, personne de confiance.', tags: ['limitation', 'mnémotechnique', 'collégialité'] },
-  { id: 'mega5-18', chapter: 'ch4', rang: 'B', question: 'Atypique : patient sous tutelle demande lui-même euthanasie active — réponse France ?', answer: 'Non légale. Tuteur ne peut pas demander euthanasie. Explorer souffrance (douleur, dépression), soins palliatifs, SPCMD si critères. Psychiatrie si trouble mental traitable.', tags: ['tutelle', 'éthique', 'atypique'] },
-  { id: 'mega5-19', chapter: 'ch4', rang: 'A', question: 'Différentiel : discernement altéré vs refus culturel/religieux de transfusion — évaluation capacité ?', answer: 'Discernement = comprendre, apprécier, raisonner, communiquer choix. Refus cohérent stable ≠ incapacité. Aide psychiatrique si doute ; ne pas confondre avec démence.', tags: ['discernement', 'différentiel', 'transfusion'] },
-  { id: 'mega5-20', chapter: 'ch4', rang: 'A', question: 'Red flag médico-légal : certificat « incapable » rédigé sans examen direct du patient ?', answer: 'Faute si fausse déclaration. Examen clinique obligatoire pour mesure protection. Distinguer incapacité civile (juge) et altération discernement médical (certificat argumenté).', tags: ['certificat', 'red flag', 'juridique'] },
-
-  { id: 'mega5-21', chapter: 'ch5', rang: 'A', question: 'Présentation atypique chutes : acuité visuelle corrigée 10/10 mais glaucome champ restreint non connu ?', answer: 'Chutes en obstacle, marche hésitante, côté. Champ visuel, consultation ophtalmo récente. DMLA sèche + contraste bas = risque même AV « normale ».', tags: ['vision', 'chute', 'atypique'] },
-  { id: 'mega5-22', chapter: 'ch5', rang: 'A', question: 'Red flag auditif : PA « entend bien » mais famille parle à voix haute + TV volume max — test rapide ?', answer: 'Whisper test, audiométrie de dépistage. Presbyacousie sous-estimée ; lien cognition (MoCa baisse réversible partiellement avec appareillage).', tags: ['audition', 'red flag', 'dépistage'] },
-  { id: 'mega5-23', chapter: 'ch5', rang: 'B', question: 'Mnémotechnique vertige périphérique vs central : « HINTS » (si formation avancée) — version simple EVC ?', answer: 'Périphérique : vertige rotatoire intense bref, nystagmus fatigable, pas de déficit neuro. Central : nystagmus directionnel non fatigable, skew, déficit focal, céphalée atypique → imagerie.', tags: ['vertige', 'mnémotechnique', 'différentiel'] },
-  { id: 'mega5-24', chapter: 'ch5', rang: 'A', question: 'Atypique : chutes nocturnes uniquement — causes sensorielles spécifiques ?', answer: 'Déficit vision crépusculaire, pas d\'éclairage trajet toilette, hypotension nocturne, sonde ou miction urgente. Lunettes au lit, veilleuse, urinal, revue alpha-bloquants.', tags: ['chute', 'nocturne', 'sensoriel'] },
-  { id: 'mega5-25', chapter: 'ch5', rang: 'B', question: 'Différentiel : otite séreuse vs presbyacousie chez PA confusion récente ?', answer: 'Otite séreuse = hypoacousie conductive réversible (surdité subite perception). Examen otoscope, audiogramme. Traiter avant d\'attribuer à démence.', tags: ['audition', 'différentiel', 'réversible'] },
-
-  { id: 'mega5-26', chapter: 'ch6', rang: 'A', question: 'Red flag ostéoporose : fracture vertébrale sur radio thorax « pour pneumonie » — conduite ?', answer: 'Rechercher douleur rachis, perte taille, cyphose. DMO, Ca, PTH, myélome si atypique. Traiter ostéoporose ; pas seulement antibiotique pneumonie.', tags: ['fracture', 'red flag', 'dépistage'] },
-  { id: 'mega5-27', chapter: 'ch6', rang: 'A', question: 'Mnémotechnique causes secondaires ostéoporose : « CHOMPS » (anglais) — 6 familles FR ?', answer: 'Corticothérapie, Hyperthyroïdie/hyperparathyroïdie, Ostéomalacie, Myélome/métastases, Puberté/ménopause (hypogonadisme), Séjour immobilisation/malabsorption.', tags: ['ostéoporose', 'mnémotechnique', 'secondaire'] },
-  { id: 'mega5-28', chapter: 'ch6', rang: 'B', question: 'Atypique : douleur hanche mécanique mais radio normale — diagnostic occulte ?', answer: 'Fracture stress, nécrose tête fémorale précoce, ostéoporose sévère. IRM si suspicion forte. Ne pas retarder PTG si impotence fonctionnelle.', tags: ['hanche', 'atypique', 'imagerie'] },
-  { id: 'mega5-29', chapter: 'ch6', rang: 'A', question: 'Différentiel : douleur lombaire + fièvre basse vs fracture vs spondylodiscite ?', answer: 'Spondylodiscite : douleur nocturne, fièvre, CRP ↑, terrain diabète/sonde. IRM urgence. Fracture mécanique post-effort sans fièvre. Scanner/IRM selon gravité.', tags: ['rachis', 'différentiel', 'infection'] },
-  { id: 'mega5-30', chapter: 'ch6', rang: 'A', question: 'Red flag bisphosphonate : douleur cuisse prodromique avant fracture atypique — action ?', answer: 'Arrêt bisphosphonate, radio/IRM fémur complet, avis orthopédie. Fracture complète souvent sur prodromes ignorés.', tags: ['bisphosphonate', 'red flag', 'fracture'] },
-
-  { id: 'mega5-31', chapter: 'ch7', rang: 'A', question: 'Présentation atypique : monoarthrite genou aigu PA 80 ans — goutte vs septic arthritis vs pseudogoutte ?', answer: 'Ponction synoviale obligatoire si fièvre, impotence, CRP élevée. Septique = urgence. Cristaux urate vs CPPD. Antibiothérapie si doute jusqu\'à preuve.', tags: ['monoarthrite', 'red flag', 'différentiel'] },
-  { id: 'mega5-32', chapter: 'ch7', rang: 'B', question: 'Mnémotechnique PTG indications : « douleur au repos + limitation + échec médical » — piège EVC ?', answer: 'Ne pas opérer seulement sur radio sévère si patient peu symptomatique. Inverse : douleur invalidante avec radio modérée peut indiquer PTG après bilan gériatrique.', tags: ['PTG', 'mnémotechnique', 'indication'] },
-  { id: 'mega5-33', chapter: 'ch7', rang: 'A', question: 'Atypique : polyarthralgies + rash malar + fatigue — lupus vs polymyalgie rhumatismale ?', answer: 'PMR : raideur matinale >45 min, CRP très élevée, pas de rash. Lupus : photosensibilité, atteinte rénale. Âge >50 : PMR + céphalées = recherche Horton (urgence).', tags: ['PMR', 'Horton', 'différentiel'] },
-  { id: 'mega5-34', chapter: 'ch7', rang: 'A', question: 'Red flag corticothérapie PMR : céphalées + claudication mâchoire — diagnostic ?', answer: 'Artérite à cellules géantes (Horton). Risque cécité. Prednisone forte dose immédiate, biopsie artère temporale. Ne pas attendre biopsie pour traiter si suspicion forte.', tags: ['Horton', 'red flag', 'urgence'] },
-  { id: 'mega5-35', chapter: 'ch7', rang: 'B', question: 'Différentiel : lombalgie mécanique vs fracture ostéoporotique vs métastase ?', answer: 'Métastase : douleur nocturne, antécédent cancer, perte poids. Fracture : trauma mineur, cyphose. Scanner osseux/IRM si drapeau rouge (âge >70, cancer, fièvre, déficit neuro).', tags: ['lombalgie', 'différentiel', 'cancer'] },
-
-  { id: 'mega5-36', chapter: 'ch8', rang: 'A', question: 'Douleur atypique PA : « pas mal » mais grimaces à la mobilisation — quel outil ?', answer: 'ECPA, DOLOPLUS-2, PAINAD si démence. Douleur sous-déclarée fréquente (peur, stoïcisme). Observer transferts, sommeil, agitation.', tags: ['douleur', 'atypique', 'échelles'] },
-  { id: 'mega5-37', chapter: 'ch8', rang: 'A', question: 'Red flag opioïde : somnolence + myosis + respiration lente — antidote et surveillance ?', answer: 'Naloxone 0,4 mg IV/IM répétable, O2, scope. Chez PA opioïde chronique : titration prudente (sevrage douloureux). Prévenir famille domicile si doses élevées.', tags: ['opioïde', 'red flag', 'naloxone'] },
-  { id: 'mega5-38', chapter: 'ch8', rang: 'B', question: 'Mnémotechnique paliers OMS : rappel 1-2-3 et erreur gériatrique fréquente ?', answer: '1 paracétamol, 2 faible opioïde (tramadol prudent), 3 morphine. Erreur : sauter palier 1 ou associer AINS + anticoagulant + IRC pour arthrose.', tags: ['OMS', 'mnémotechnique', 'palier'] },
-  { id: 'mega5-39', chapter: 'ch8', rang: 'A', question: 'Différentiel : douleur abdominale PA sous opioïdes vs iléus vs appendicite atypique ?', answer: 'Iléus : distension, vomissements, silence auscultatoire, ACB élevé. Appendicite PA : douleur atypique, retard diagnostic. Radio abdomen, NFS, lactates si sepsis.', tags: ['douleur', 'abdominal', 'différentiel'] },
-  { id: 'mega5-40', chapter: 'ch8', rang: 'A', question: 'Atypique : douleur « jambe » ischémique vs sciatique vs thrombose — signes distinctifs ?', answer: 'Ischémie aiguë : 6 P (pain, pulseless, pallor, paresthesia, paralysis, poikilothermia) urgence. TVP : œdème unilatéral, Homans non fiable. Sciatique : Lasègue, trajet nerveux.', tags: ['jambe', 'différentiel', 'urgence'] },
-
-  { id: 'mega5-41', chapter: 'ch9', rang: 'A', question: 'Présentation atypique démence : apathie + lenteur sans plainte mémoire — quel syndrome ?', answer: 'Démence fronto-temporale comportementale ou dépression majeure mimant démence. IRM, neuropsy. FTD : désinhibition, compulsions alimentaires, jeune parfois mais possible tardif.', tags: ['FTD', 'atypique', 'différentiel'] },
-  { id: 'mega5-42', chapter: 'ch9', rang: 'A', question: 'Red flag antipsychotique : rigidité + fièvre + CPK ↑ sur PA Alzheimer — diagnostic ?', answer: 'Syndrome malin des neuroleptiques ou Lewy avec neuroleptique. Arrêt immédiat agent, hospitalisation, dantrolène/bromocriptine si NMS. Lewy : éviter halopéridol à vie.', tags: ['NMS', 'Lewy', 'red flag'] },
-  { id: 'mega5-43', chapter: 'ch9', rang: 'B', question: 'Mnémotechnique démence réversible : « VITAMIN » (anglais) — causes FR examen ?', answer: 'Vitamine B12/folate, Infection (méningite, neurosyphilis), Tumeur/hydrocephalus, Alcool/Wernicke, Métabolique (hypothyroïdie), Injury (hématome sous-dural), Neurodégénératif si non réversible.', tags: ['démence', 'mnémotechnique', 'réversible'] },
-  { id: 'mega5-44', chapter: 'ch9', rang: 'A', question: 'Différentiel : fluctuations horaires cognition + hallucinations visuelles — Lewy vs delirium ?', answer: 'Lewy : chronique, parkinsonisme, hypersensibilité neuroleptiques. Delirium : aigu, cause précipitante (infection). Coexistence fréquente : traiter delirium sans neuroleptique si Lewy connu.', tags: ['Lewy', 'delirium', 'différentiel'] },
-  { id: 'mega5-45', chapter: 'ch9', rang: 'A', question: 'Atypique : trouble langage isolé post-AVC mimant dégénératif — quel terme ?', answer: 'Aphasie progressive primaire ou séquelle AVC hémisphère dominant. IRM aigu vs chronique. Pas anticholinestérase sans diagnostic Alzheimer confirmé.', tags: ['aphasie', 'AVC', 'atypique'] },
-
-  { id: 'mega5-46', chapter: 'ch10', rang: 'A', question: 'Dépression atypique PA : plaintes somatiques dominantes sans tristesse verbalisée — piège ?', answer: 'Dépression « masquée » : douleurs, anorexie, insomnie. GDS-15 + entretien aidant. Réponse aux ISRS peut confirmer rétrospectivement.', tags: ['dépression', 'atypique', 'somatisation'] },
-  { id: 'mega5-47', chapter: 'ch10', rang: 'A', question: 'Red flag suicide PA : visite médecin « pour ordonnance » calme après dépression longue — conduite ?', answer: 'Contrat de sécurité insuffisant seul. Risque libération anxieuse (décision prise). Évaluer plan, moyens, hospitalisation si risque. Ne pas se contenter d\'ordonnance sans suivi <48 h.', tags: ['suicide', 'red flag', 'urgence'] },
-  { id: 'mega5-48', chapter: 'ch10', rang: 'B', question: 'Mnémotechnique ISRS effets indésirables gériatriques : « SCHN » ?', answer: 'Syndrome hyponatrémique (SIADH), Chutes (sédation), Hémorragie (SSRI + anticoagulant), Nausées/QT (selon molécule). Démarrer demi-dose, réévaluer Na à 2 sem.', tags: ['ISRS', 'mnémotechnique', 'effets'] },
-  { id: 'mega5-49', chapter: 'ch10', rang: 'A', question: 'Différentiel : délire persécutif tardif vs psychose démence vs intoxication anticholinergique ?', answer: 'Intoxication : mydriase, rétention, confusion aiguë, ACB élevé. Psychose démence : chronique, fluctuations. Délire tardif : surajouté, traitement antipsychotique prudent après bilan organique.', tags: ['psychose', 'différentiel', 'ACB'] },
-  { id: 'mega5-50', chapter: 'ch10', rang: 'A', question: 'Atypique : agitation nocturne seule sans dépression diurne — causes organiques à écarter ?', answer: 'Syndrome jambes sans repos, apnée sommeil, douleur, nycturie, delirium nocturne, BZD rebond. Polysomnographie si récurrent ; pas antipsychotique en première intention.', tags: ['agitation', 'nocturne', 'différentiel'] },
-
-  { id: 'mega5-51', chapter: 'ch11', rang: 'A', question: 'Delirium hypoactif : score CAM positif avec patient « juste fatigué » — prévalence et risque ?', answer: 'Jusqu\'à 50 % delirium hypoactif. Mortalité élevée si non traité. Mobilisation, traitement cause, éviter benzodiazépines. 4AT ≥4 = enquête systématique.', tags: ['delirium', 'hypoactif', 'CAM'] },
-  { id: 'mega5-52', chapter: 'ch11', rang: 'A', question: 'Red flag : agitation delirium + QTc >500 ms sous quetiapine + macrolide — action ?', answer: 'Arrêt quetiapine/macrolide si possible, ECG continu, magnésium, alternative antibiotique. Torsades de pointes. Préférer non pharmacologique delirium.', tags: ['delirium', 'QTc', 'red flag'] },
-  { id: 'mega5-53', chapter: 'ch11', rang: 'B', question: 'Mnémotechnique prévention delirium HELP : 6 lettres en anglais — équivalent FR oral ?', answer: 'Hydratation, Élimination douleur, Lunettes/appareils, Pas de médicaments inutiles (déprescription), Mobilisation, Sommeil protégé. Protocole multicomposant, pas médicament seul.', tags: ['HELP', 'mnémotechnique', 'prévention'] },
-  { id: 'mega5-54', chapter: 'ch11', rang: 'A', question: 'Différentiel : delirium vs démence aiguë vs encéphalopathie hépatique chez cirrhotique PA ?', answer: 'Encéphalopathie : asterixis, ammoniémie, infection trigger. Delirium : aigu, fluctuant, CAM+. Démence : chronique, pas de fluctuation majeure 24 h. Traiter infection + lactulose si hépatique.', tags: ['delirium', 'différentiel', 'hépatique'] },
-  { id: 'mega5-55', chapter: 'ch11', rang: 'A', question: 'Atypique : delirium persistant 3 mois — encore delirium ou nouveau diagnostic ?', answer: 'Delirium >3 mois = atypique ; rechercher démence révélée, NPH, tumeur, dépression. IRM cérébrale, EGM complète. Ne pas étiqueter « démence » sans bilan.', tags: ['delirium', 'persistant', 'différentiel'] },
-
-  { id: 'mega5-56', chapter: 'ch12', rang: 'A', question: 'Chute avec syncope sans prodrome + bifascicularule — red flag cardiaque ?', answer: 'Bloc AV haut grade, arythmie ventriculaire. Holter, écho, avis cardio. Pacemaker si indication. Ne pas attribuer à orthostatisme seul.', tags: ['syncope', 'cardiaque', 'red flag'] },
-  { id: 'mega5-57', chapter: 'ch12', rang: 'A', question: 'Mnémotechnique causes chutes : « STeADI » (CDC) — version FR 5 piliers ?', answer: 'Syndromes (4+), Troubles marche/équilibre, Environnement, Drogues/médicaments, Incontinence/urgence mictionnelle. Évaluation multifactorielle obligatoire HAS.', tags: ['chute', 'mnémotechnique', 'évaluation'] },
-  { id: 'mega5-58', chapter: 'ch12', rang: 'B', question: 'Atypique : chutes répétées sans fracture avec Hb basse progressive — lien ?', answer: 'Anémie chronique → fatigue, orthostatisme, troubles cognition. NFS systématique bilan chutes. Saignement occulte si fer bas.', tags: ['chute', 'anémie', 'atypique'] },
-  { id: 'mega5-59', chapter: 'ch12', rang: 'A', question: 'Différentiel : chute vs épilepsie vs hypoglycémie vs AIT — témoins interrogatoire ?', answer: 'Épilepsie : perte conscience brève, morsure langue, post-critique. Hypoglycémie : sueurs, palpitations, diabète. AIT : déficit focal transitoire. Glycémie capillaire à chaque chute diabétique.', tags: ['chute', 'différentiel', 'épilepsie'] },
-  { id: 'mega5-60', chapter: 'ch12', rang: 'A', question: 'Red flag post-chute : « je vais bien » + hématome temporal sous anticoagulant — conduite ?', answer: 'Scanner cérébral même GCS 15. Hématome sous-dural chronique PA peut être retardé. Surveillance 24 h, consignes aidant signes neuro.', tags: ['trauma', 'anticoagulant', 'red flag'] },
-
-  { id: 'mega5-61', chapter: 'ch13', rang: 'A', question: 'Escarre stade I invisible sur peau foncée — signe précoce à chercher ?', answer: 'Douleur, chaleur locale, texture indurée, erythème non blanchissant sous pression. Échelle Braden + inspection talons/sacrum systématique. Ne pas attendre plaie ouverte.', tags: ['escarre', 'atypique', 'Braden'] },
-  { id: 'mega5-62', chapter: 'ch13', rang: 'A', question: 'Red flag TVP : douleur mollet + D-dimères élevés mais Wells faible — piège PA alité ?', answer: 'PA alité longue : D-dimères souvent hauts sans TVP. Écho-Doppler si suspicion clinique. Signe Homers non fiable. Cancer + jambe gonflée = imagerie.', tags: ['TVP', 'red flag', 'diagnostic'] },
-  { id: 'mega5-63', chapter: 'ch13', rang: 'B', question: 'Mnémotechnique Wells TVP : critères majeurs mémorisables oral ?', answer: 'Cancer actif, paralysie/immobilisation plâtre, lit >3 j post-op, douleur ligne veineuse, œdème unilatéral, catégorie clinique. Score guide imagerie vs D-dimères.', tags: ['TVP', 'mnémotechnique', 'Wells'] },
-  { id: 'mega5-64', chapter: 'ch13', rang: 'A', question: 'Atypique : escarre sacrée « propre » avec fièvre et confusion — complication ?', answer: 'Ostéomyélite, sepsis cutané. Hémocultures, IRM os, antibiothérapie prolongée. Escarre = porte entrée ; pas seulement soins locaux.', tags: ['escarre', 'sepsis', 'atypique'] },
-  { id: 'mega5-65', chapter: 'ch13', rang: 'A', question: 'Différentiel : cellulite jambe vs lymphœdème vs insuffisance veineuse vs DVT ?', answer: 'DVT : douleur mollet, chaleur, œdème unilatéral aigu. Cellulite : érythème étendu, fièvre. Lymphœdème : chronique bilatéral souvent. Écho si doute DVT avant compression.', tags: ['jambe', 'différentiel', 'TVP'] },
-
-  { id: 'mega5-66', chapter: 'ch14', rang: 'A', question: 'Dénutrition atypique : albumine normale + perte muscle (sarcopénie) — quel outil ?', answer: 'MNA, apports protéiques, grip, circonférence cuisse. Albumine = marqueur inflammation, pas nutrition seule. Protéines 1,2-1,5 g/kg si pas contre-indication rénale.', tags: ['dénutrition', 'albumine', 'atypique'] },
-  { id: 'mega5-67', chapter: 'ch14', rang: 'A', question: 'Red flag renutrition : K+ bas + thiamine non donnée avant glucose IV — risque ?', answer: 'Syndrome de renutrition inapproprié : hypophosphatémie, arythmie, décès. Thiamine avant glucides, surveillance K Mg P 72 h. PA à risque : MNA <17, jeûne prolongé.', tags: ['renutrition', 'red flag', 'thiamine'] },
-  { id: 'mega5-68', chapter: 'ch14', rang: 'B', question: 'Mnémotechnique MNA seuils : rappel interprétation 0-30 ?', answer: '<17 dénutrition, 17-23,5 risque, ≥24 normal. Compléter par poids, IMC, perte involontaire 3 mois. Pas seule question appétit.', tags: ['MNA', 'mnémotechnique', 'dénutrition'] },
-  { id: 'mega5-69', chapter: 'ch14', rang: 'A', question: 'Différentiel : dysphagie haute (oropharyngée) vs basse (œsophagienne) — signes ?', answer: 'Haute : fausses routes, toux liquides, résidus bouche. Basse : blocage solides, régurgitation, perte poids. AVK : avis orthophoniste ; endoscopie si basse.', tags: ['dysphagie', 'différentiel', 'examen'] },
-  { id: 'mega5-70', chapter: 'ch14', rang: 'A', question: 'Atypique : hyperphagie + perte poids — causes gériatriques ?', answer: 'Hyperthyroïdie, diabète déséquilibré, cancer, malabsorption. Ne pas féliciter « bon appétit » sans poids. Bilan thyroïde, HbA1c, NFS, imagerie si drapeau rouge.', tags: ['hyperphagie', 'atypique', 'différentiel'] },
-
-  { id: 'mega5-71', chapter: 'ch15', rang: 'A', question: 'Incontinence urinaire soudaine chez homme cognitif — cause réversible prioritaire ?', answer: 'Rétention avec regorgement (RPM élevé), infection, constipation, médicament (diurétique horaire). Échographie vésicale post-miction. Pas anticholinergique avant RPM.', tags: ['incontinence', 'rétention', 'red flag'] },
-  { id: 'mega5-72', chapter: 'ch15', rang: 'A', question: 'Red flag hématurie PA anticoagulé « sans douleur » — ne pas attribuer à ?', answer: 'Cancer vessie/prostate, lithiase, infection. Cystoscopie selon âge et facteurs risque. Anticoagulation ne dispense pas du bilan urologique.', tags: ['hématurie', 'red flag', 'cancer'] },
-  { id: 'mega5-73', chapter: 'ch15', rang: 'B', question: 'Mnémotechnique types incontinence : « STOU » (stress, urge, overflow, functional) — FR ?', answer: 'Stress (effort), Urge (impériosités), Overflow (regorgement), fonctionnelle (accessibilité toilettes). Mixte fréquent ; traitement selon type dominant.', tags: ['incontinence', 'mnémotechnique', 'types'] },
-  { id: 'mega5-74', chapter: 'ch15', rang: 'A', question: 'Atypique : incontinence fécale seule sans urinaire — causes neuro et médicamenteuses ?', answer: 'Lésion sacrée, Parkinson, AVC, démence, impaction fécale, antibiotiques (Clostridium). Toucher rectal systématique. Pas seulement « couche » sans bilan.', tags: ['incontinence', 'fécale', 'atypique'] },
-  { id: 'mega5-75', chapter: 'ch15', rang: 'A', question: 'Différentiel : ITU sans symptômes vs incontinence nouvelle — traiter asymptomatique ?', answer: 'Bactériurie asymptomatique PA : pas antibiotique sauf grossesse ou chirurgie uro (exceptions). Incontinence nouvelle = chercher ITU symptomatique, delirium, rétention.', tags: ['ITU', 'différentiel', 'antibiotique'] },
-
-  { id: 'mega5-76', chapter: 'ch16', rang: 'A', question: 'Interaction rare : méthotrexate hebdo + triméthoprime — conséquence ?', answer: 'Pancytopénie, mucite, toxicité MTX majeure (inhibition dihydrofolate réductase). Éviter TMP-SMX ; si indispensable, surveillance NFS étroite. Piège polymédication rhumato.', tags: ['méthotrexate', 'interaction', 'red flag'] },
-  { id: 'mega5-77', chapter: 'ch16', rang: 'A', question: 'Mnémotechnique STOPP critères fréquents examen : « BZD, ACB, AINS si IRC, double anticoagulant » — suite ?', answer: 'IPP sans indication, inhibiteur acétylcholinestérase + anticholinergique, sulfonyurées longue durée hypoglycémie. Une molécule par cycle déprescription.', tags: ['STOPP', 'mnémotechnique', 'déprescription'] },
-  { id: 'mega5-78', chapter: 'ch16', rang: 'B', question: 'Atypique : hyperkaliémie sans IEC récent — médicaments oubliés ?', answer: 'Spironolactone, triméthoprime, AINS, héparine, succinylcholine. Potassium suppléments + IRC. ECG urgent si K >6.', tags: ['hyperkaliémie', 'atypique', 'interaction'] },
-  { id: 'mega5-79', chapter: 'ch16', rang: 'A', question: 'Différentiel : confusion nouvelle vs effet médicament — test pharmacologique ?', answer: 'Chronologie introduction/augmentation dose, ACB score, régression après arrêt (48 h-7 j). Une molécule à la fois si possible. Anticholinergiques en tête.', tags: ['iatrogénie', 'différentiel', 'ACB'] },
-  { id: 'mega5-80', chapter: 'ch16', rang: 'A', question: 'Red flag cascade : opioïde → laxatif → diarrhée → déshydratation → IEC arrêté → HTA + confusion ?', answer: 'Cascade typique EVC. Cartographie médicaments, arrêt laxatif excessif, hydratation, réévaluer chaque lien. Pharmacien conciliation sortie.', tags: ['cascade', 'red flag', 'polymédication'] },
-
-  { id: 'mega5-81', chapter: 'ch17', rang: 'A', question: 'Dyspnée terminale sans wheezing : morphine faible dose — red flag surdosage ?', answer: 'Somnolence excessive, myosis, FR <8/min. Tituler 2,5 mg morphine SC test. Famille informée double effet. Pas euthanasie ; soulagement symptomatique.', tags: ['dyspnée', 'morphine', 'palliatif'] },
-  { id: 'mega5-82', chapter: 'ch17', rang: 'A', question: 'Atypique : patient palliatif demande « arrêt de tout » incluant analgésie — discernement ?', answer: 'Distinguer refus traitement curatif vs refus soulagement. Douleur non traitée = souffrance réfractable évitabl. Entretien motivation, dépression traitable. Documenter.', tags: ['refus', 'palliatif', 'éthique'] },
-  { id: 'mega5-83', chapter: 'ch17', rang: 'B', question: 'Mnémotechnique critères SPCMD Claeys-Leonetti : 4 piliers oral ?', answer: 'Phase terminale, Souffrance réfractaire, Essais thérapeutiques adaptés épuisés, Collégialité + directives/discernement. Sédation jusqu\'au décès intention secondaire seulement.', tags: ['SPCMD', 'mnémotechnique', 'Leonetti'] },
-  { id: 'mega5-84', chapter: 'ch17', rang: 'A', question: 'Red flag fin de vie : agitation terminale non soulagée — causes réversibles ?', answer: 'Rétention urinaire, constipation, douleur, delirium hyperactif, anxiété. Sonde vésicale, laxatif, morphine titration. Midazolam si réfractaire après causes traitées.', tags: ['agitation', 'palliatif', 'red flag'] },
-  { id: 'mega5-85', chapter: 'ch17', rang: 'A', question: 'Différentiel : douleur vs myoclonies vs convulsions en fin de vie sous opioïdes ?', answer: 'Myoclonies opioïdes : switch morphine → oxycodone/méthadone, hydratation. Convulsions : métastases, hyponatrémie. Pas augmenter morphine aveuglément si myoclonies.', tags: ['opioïde', 'différentiel', 'palliatif'] },
-
-  { id: 'mega5-86', chapter: 'ch18', rang: 'A', question: 'EVC : PA arrive avec « chute » — red flag ne pas conclure trop vite ?', answer: 'Syncope cardiaque, AIT, fracture hanche occulte, hématome sous-dural, hypoglycémie. Anamnèse témoin, ECG, glycémie, radio bassin si douleur. Synthèse syndromique en ouverture.', tags: ['EVC', 'chute', 'red flag'] },
-  { id: 'mega5-87', chapter: 'ch18', rang: 'A', question: 'Mnémotechnique structure oral EVC 20 min : « Annonce – Histoire – Examen – Hypothèses – Plan » — variante HAS ?', answer: 'Situation, Anamnèse ciblée, Examen, Problèmes/syndromes, Examens complémentaires proposés, Prise en charge coordonnée, Éthique/directives. Clôture questions jury.', tags: ['EVC', 'mnémotechnique', 'structure'] },
-  { id: 'mega5-88', chapter: 'ch18', rang: 'B', question: 'Piège jury : oublier de proposer qui coordonne après votre plan ?', answer: 'MT pivot, IDE, kiné, pharmacien, assistante sociale, aidant. RDV contrôle daté, signes d\'alerte écrits. Sans coordinateur = plan non crédible.', tags: ['EVC', 'coordination', 'piège'] },
-  { id: 'mega5-89', chapter: 'ch18', rang: 'A', question: 'Atypique EVC : jeune gériatre face à PA 95 ans robuste — erreur de sur-investigation ?', answer: 'Adapter intensité au pronostic et objectifs patient. Dépistage cancer agressif, réanimation non souhaitée = disproportion. EGM même robuste si polymorbidité.', tags: ['EVC', 'proportionnalité', 'atypique'] },
-  { id: 'mega5-90', chapter: 'ch18', rang: 'A', question: 'Différentiel urgence gériatrique : « faiblesse aiguë » 10 causes à évoquer rapidement oral ?', answer: 'AVC, infection, déshydratation, médicament, arythmie, IAM silencieux, hypoglycémie, anémie aiguë, hypercalcémie, rétention urinaire. Glycémie + ECG + NFS en première ligne.', tags: ['urgence', 'différentiel', 'faiblesse'] },
-
-  { id: 'mega5-91', chapter: 'ch19', rang: 'A', question: 'Hyponatrémie chronique symptomatique : correction max 24 h ?', answer: '8-10 mEq/L/24 h (risque myélinolyse si correction rapide). Hypertonique 3 % prudent si convulsions. Cause : SIADH, thiazidiques, ISRS, polydipsie.', tags: ['hyponatrémie', 'red flag', 'urgence'] },
-  { id: 'mega5-92', chapter: 'ch19', rang: 'A', question: 'Red flag : confusion + Na 120 + osmolarité urinaire élevée — thiazidique ou ISRS ?', answer: 'SIADH médicamenteuse fréquente PA. Arrêt causal, restriction eau, surveillance. Ne pas corriger trop vite.', tags: ['SIADH', 'hyponatrémie', 'iatrogénie'] },
-  { id: 'mega5-93', chapter: 'ch19', rang: 'B', question: 'Mnémotechnique hypercalcémie symptômes : « stones, bones, groans, moans » — FR ?', answer: 'Lithiases, os (douleur), abdomen (constipation, nausées), psychique (confusion, moans). Hydratation IV, bisphosphonate si sévère.', tags: ['hypercalcémie', 'mnémotechnique', 'symptômes'] },
-  { id: 'mega5-94', chapter: 'ch19', rang: 'A', question: 'Atypique : fièvre sans foyer PA très âgé — sources gériatriques ?', answer: 'ITU, pneumonie atypique, endocardite, prothèse infectée, médicament (anticholinergique hyperthermie), NMS, thyroïtoxique. Hémocultures, ECBU, radio thorax systématiques.', tags: ['fièvre', 'atypique', 'différentiel'] },
-  { id: 'mega5-95', chapter: 'ch19', rang: 'A', question: 'Différentiel : coma PA : hypoglycémie vs AVC vs intoxication vs méningite — geste immédiat ?', answer: 'Glycémie capillaire immédiate, thiamine avant glucose si alcoolisme, GCS, scanner si trauma/signes focal. Naloxone si opioïde suspect.', tags: ['coma', 'différentiel', 'urgence'] },
-
-  { id: 'mega5-96', chapter: 'ch20', rang: 'A', question: 'Vaccin vivant atténué (zostervax ancien) vs Shingrix — erreur en immunodépression ?', answer: 'Vaccins vivants CI si immunodépression forte. Shingrix inactivé préféré ≥50 ans. Grippe haute dose ≥65 ans. Pneumocoque 20-valent selon calendrier.', tags: ['vaccin', 'red flag', 'immunosuppression'] },
-  { id: 'mega5-97', chapter: 'ch20', rang: 'A', question: 'Mnémotechnique dépistage à personnaliser : « espérance de vie + fragilité + volonté » — exemple colon ?', answer: 'Charlson élevé + CFS 7-8 : discuter arrêt FIT/coloscopie. Bénéfice retardé >10 ans. Documenter décision partagée, pas dépistage par défaut.', tags: ['dépistage', 'mnémotechnique', 'proportionnalité'] },
-  { id: 'mega5-98', chapter: 'ch20', rang: 'B', question: 'Atypique : PA fragile refuse tous vaccins — alternative protection ?', answer: 'Information risque bénéfice, entourage vacciné (cocooning), hygiène mains, traitement précoce grippe si contact. Respecter refus capable ; pas contrainte.', tags: ['vaccin', 'refus', 'prévention'] },
-  { id: 'mega5-99', chapter: 'ch20', rang: 'A', question: 'Red flag prévention chutes : vitamine D méga-dose sans Ca ni surveillance ?', answer: 'Hypercalcémie, lithiases, confusion. Cible 800-1000 UI/j maintenance ; bolus selon déficit avec Ca et contrôle Ca/25-OH D.', tags: ['vitamine D', 'red flag', 'prévention'] },
-  { id: 'mega5-100', chapter: 'ch20', rang: 'A', question: 'Différentiel : fatigue post-vaccin vs réaction adverse grave chez PA — signes alarme ?', answer: 'Syncope (chute), anaphylaxie, Guillain-Barré rare. Fièvre 24-48 h banale. Chute post-vaccin station = surveillance orthostatisme, hydratation.', tags: ['vaccin', 'différentiel', 'effets'] }
+  {
+    id: 3801,
+    chapter: "ch17",
+    rang: "A",
+    question: "Quelle est la définition des soins palliatifs selon la Société Française d'Accompagnement et de Soins Palliatifs (SFAP) ?",
+    answer: "Soins actifs et continus pratiqués par une équipe interdisciplinaire visant à soulager la douleur, à apaiser la souffrance psychique, à sauvegarder la dignité de la personne malade et à soutenir son entourage dans le cadre d'une maladie grave, évolutive ou terminale.",
+    tags: ["Soins palliatifs", "Définition", "Accompagnement"]
+  },
+    {
+    id: 3802,
+    chapter: "ch17",
+    rang: "A",
+    question: "Quels sont les quatre stades ou phases décrits pour les situations palliatives ?",
+    answer: "1. Phase de stade palliatif actif (survie de plusieurs années avec traitements oncologiques actifs).\n2. Phase de stade palliatif symptomatique (survie de plusieurs mois, traitements de confort).\n3. Phase de stade terminal (survie de quelques semaines, questionnement sur l'alimentation/hydratation).\n4. Phase agonique (survie de quelques heures à quelques jours, traitement exclusif des symptômes d'inconfort).",
+    tags: ["Soins palliatifs", "Stades", "Pronostic"]
+  },
+    {
+    id: 3803,
+    chapter: "ch17",
+    rang: "A",
+    question: "Quelles sont les dispositions majeures de la loi Claeys-Leonetti du 2 février 2016 ?",
+    answer: "1. Droit pour le patient de refuser ou d'interrompre tout traitement (obstination déraisonnable).\n2. Directives anticipées s'imposant au médecin (sauf urgence vitale ou manifeste inappropriation).\n3. Personne de confiance désignée par écrit dont le témoignage prévaut sur tout autre avis.\n4. Droit à la sédation profonde et continue maintenue jusqu'au décès (SPCMD) sous conditions.",
+    tags: ["Soins palliatifs", "Loi Claeys-Leonetti", "Cadre légal"]
+  },
+    {
+    id: 3804,
+    chapter: "ch17",
+    rang: "A",
+    question: "Qu'est-ce que l'obstination déraisonnable (ou acharnement thérapeutique) selon le code de déontologie médicale ?",
+    answer: "La poursuite d'actes diagnostiques ou thérapeutiques qui apparaissent inutiles, disproportionnés ou n'ayant d'autre effet que le seul maintien artificiel de la vie. La loi Claeys-Leonetti impose leur arrêt ou leur limitation dans ce contexte.",
+    tags: ["Obstination déraisonnable", "LATA", "Éthique"]
+  },
+    {
+    id: 3805,
+    chapter: "ch17",
+    rang: "A",
+    question: "Quelle est la définition de la sédation profonde et continue maintenue jusqu'au décès (SPCMD) ?",
+    answer: "Pratique médicale consistant à administrer des agents sédatifs (souvent midazolam) associés à des antalgiques (morphine) pour altérer profondément la conscience du patient de façon continue jusqu'au décès, dans le but de soulager une souffrance réfractaire en phase terminale.",
+    tags: ["SPCMD", "Sédation", "Fin de vie"]
+  },
+    {
+    id: 3806,
+    chapter: "ch17",
+    rang: "B",
+    question: "Quelles sont les trois indications cliniques autorisant une SPCMD selon la loi ?",
+    answer: "1. Patient atteint d'une affection grave et incurable en phase terminale, présentant une souffrance réfractaire aux traitements.\n2. Patient en phase terminale décidant d'arrêter un traitement maintenant sa vie, ce qui entraîne une souffrance réfractaire à court terme.\n3. Patient hors d'état d'exprimer sa volonté, en situation d'obstination déraisonnable, lors de la décision collégiale d'arrêt des traitements de survie.",
+    tags: ["SPCMD", "Indications", "Éthique"]
+  },
+    {
+    id: 3807,
+    chapter: "ch17",
+    rang: "A",
+    question: "Quel est le premier traitement médicamenteux de référence pour la sédation en phase palliative (SPCMD) et quelle est sa posologie initiale ?",
+    answer: "Le Midazolam (Hypnovel) par voie sous-cutanée (SC) ou intraveineuse (IV).\n- Dose de charge initiale : 1 à 3 mg en injection lente, répétée si nécessaire toutes les 10-15 minutes pour obtenir la sédation.\n- Dose d'entretien : 0,5 à 2 mg/heure en seringue électrique ou perfusion continue.",
+    tags: ["Midazolam", "SPCMD", "Posologie"]
+  },
+    {
+    id: 3808,
+    chapter: "ch17",
+    rang: "A",
+    question: "Quelle échelle clinique est utilisée pour surveiller la profondeur de la sédation en soins palliatifs ?",
+    answer: "L'échelle de Ramsay. Elle comporte 6 stades :\n- Ramsay 1 : Patient éveillé, anxieux ou agité.\n- Ramsay 2 à 4 : Patient coopérant à somnolent.\n- Ramsay 5 : Réponse lente au stimulus physique.\n- Ramsay 6 : Aucune réponse. La cible lors d'une SPCMD est d'obtenir un score de Ramsay de 5 ou 6.",
+    tags: ["Échelle de Ramsay", "Sédation", "Surveillance"]
+  },
+    {
+    id: 3809,
+    chapter: "ch17",
+    rang: "A",
+    question: "Comment définit-on le « double effet » en médecine palliative ?",
+    answer: "L'administration d'un traitement antalgique ou sédatif (comme la morphine ou le midazolam) à doses ajustées pour soulager la souffrance du patient en phase terminale, avec le consentement d'accepter comme effet secondaire non recherché l'abréviation possible de la vie.",
+    tags: ["Double effet", "Antalgie", "Éthique"]
+  },
+    {
+    id: 3810,
+    chapter: "ch17",
+    rang: "A",
+    question: "Quelles sont les caractéristiques des directives anticipées en France ?",
+    answer: "Document écrit, daté et signé par le patient exprimant ses volontés de fin de vie. Elles sont valables sans limitation de durée, modifiables ou révocables à tout moment. Elles s'imposent au médecin pour toute décision d'investigation ou de traitement.",
+    tags: ["Directives anticipées", "Fin de vie", "Droit"]
+  },
+    {
+    id: 3811,
+    chapter: "ch17",
+    rang: "B",
+    question: "Quelles sont les deux exceptions permettant à un médecin de déroger aux directives anticipées du patient ?",
+    answer: "1. En cas d'urgence vitale, pendant le temps nécessaire à l'évaluation complète de la situation.\n2. Lorsque les directives anticipées apparaissent manifestement inappropriées ou non conformes à la situation médicale du patient. Dans ce cas, la décision de dérogation doit être prise à l'issue d'une procédure collégiale inscrite au dossier.",
+    tags: ["Directives anticipées", "Exceptions", "Législation"]
+  },
+    {
+    id: 3812,
+    chapter: "ch17",
+    rang: "A",
+    question: "Qu'est-ce que la personne de confiance et comment est-elle désignée ?",
+    answer: "Personne majeure désignée par écrit par le patient pour l'accompagner dans son parcours de soins et être consultée en priorité si le patient devient hors d'état d'exprimer sa volonté. Sa désignation est révocable à tout moment, et son témoignage l'emporte sur tout autre témoignage (famille).",
+    tags: ["Personne de confiance", "Cadre juridique", "Droit"]
+  },
+    {
+    id: 3813,
+    chapter: "ch17",
+    rang: "A",
+    question: "Quelle est la différence majeure entre le rôle de la personne de confiance et celui de la famille ou des proches ?",
+    answer: "Le témoignage de la personne de confiance prévaut sur tous les autres témoignages (famille, proches, tiers). Le médecin a l'obligation légale de la consulter en premier si le patient ne peut plus s'exprimer, tandis que l'avis de la famille n'est que consultatif.",
+    tags: ["Personne de confiance", "Famille", "Éthique"]
+  },
+    {
+    id: 3814,
+    chapter: "ch17",
+    rang: "A",
+    question: "Quelle est la définition des râles terminaux et quelle est leur physiopathologie ?",
+    answer: "Bruit respiratoire caractéristique de l'agonie lié à l'accumulation de sécrétions salivaires et bronchiques dans les voies aériennes supérieures que le patient très faible ne peut plus expectorer ou déglutir. Souvent plus impressionnant pour l'entourage que douloureux pour le patient.",
+    tags: ["Râles terminaux", "Agonie", "Physiopathologie"]
+  },
+    {
+    id: 3815,
+    chapter: "ch17",
+    rang: "A",
+    question: "Quel traitement pharmacologique est recommandé pour réduire l'encombrement pharyngé et les râles terminaux ?",
+    answer: "Le butylbromure de scopolamine (Buscopan) ou la scopolamine injectable.\n- Posologie : 0,25 mg à 0,5 mg par voie sous-cutanée (SC) toutes les 4 à 6 heures, ou 1 à 2 mg/24h en perfusion sous-cutanée continue. Ce traitement anticholinergique réduit la production de sécrétions si introduit précocement.",
+    tags: ["Scopolamine", "Râles terminaux", "Anticholinergique"]
+  },
+    {
+    id: 3816,
+    chapter: "ch17",
+    rang: "A",
+    question: "Pourquoi l'aspiration bronchique est-elle déconseillée en phase agonique pour traiter les râles terminaux ?",
+    answer: "L'aspiration endotrachéale ou bronchique est invasive, douloureuse, source d'anxiété et de réflexe tussigène, et stimule par irritation la production de sécrétions réactionnelles. Elle doit être évitée en fin de vie au profit du traitement anticholinergique (scopolamine) et de soins de bouche.",
+    tags: ["Râles terminaux", "Aspiration", "Soins de confort"]
+  },
+    {
+    id: 3817,
+    chapter: "ch17",
+    rang: "B",
+    question: "Quel positionnement physique du patient agonique permet de limiter l'encombrement et les râles respiratoires ?",
+    answer: "Mettre le patient en position de décubitus latéral (gauche ou droit) ou surélever légèrement la tête du lit. Cela favorise le drainage passif des sécrétions et libère le carrefour pharyngé.",
+    tags: ["Râles terminaux", "Positionnement", "Confort"]
+  },
+    {
+    id: 3818,
+    chapter: "ch17",
+    rang: "A",
+    question: "Comment définit-on la douleur réfractaire en soins palliatifs ?",
+    answer: "Douleur qui ne peut être soulagée de façon satisfaisante par aucun traitement disponible, administré à doses maximales tolérées, sans induire d'effets secondaires inacceptables. Elle constitue l'indication majeure de la sédation palliative.",
+    tags: ["Douleur réfractaire", "Sédation", "Définition"]
+  },
+    {
+    id: 3819,
+    chapter: "ch17",
+    rang: "A",
+    question: "Quel est le traitement antalgique de première intention pour la dyspnée terminale chez un patient non intubé ?",
+    answer: "La Morphine par voie sous-cutanée (SC) ou intraveineuse (IV).\n- Posologie chez le patient naïf d'opioïdes : 1 à 2 mg SC ou IV toutes les 4 heures. La morphine agit comme un puissant bronchodilatateur central et diminue la sensation d'étouffement.",
+    tags: ["Morphine", "Dyspnée terminale", "Posologie"]
+  },
+    {
+    id: 3820,
+    chapter: "ch17",
+    rang: "B",
+    question: "Quels soins non pharmacologiques indispensables doivent être apportés à la bouche d'un patient agonique ?",
+    answer: "Des soins de bouche réguliers (toutes les 2 à 4 heures) à l'aide de compresses humides, d'eau de rose ou de brumisateurs pour hydrater la muqueuse buccale desséchée. Éviter les bâtonnets glycérinés citronnés qui agressent la muqueuse.",
+    tags: ["Soins de bouche", "Agonie", "Confort"]
+  },
+    {
+    id: 3821,
+    chapter: "ch17",
+    rang: "A",
+    question: "Comment adapter l'hydratation artificielle en phase terminale de fin de vie ?",
+    answer: "L'hydratation artificielle systématique n'est pas recommandée en phase agonique car elle majore le risque d'encombrement bronchique, d'œdème aigu du poumon (OAP) et d'ascite, sans améliorer la sensation de soif (qui relève des soins de bouche). Elle doit être arrêtée ou réduite au strict minimum.",
+    tags: ["Hydratation artificielle", "LATA", "Agonie"]
+  },
+    {
+    id: 3822,
+    chapter: "ch17",
+    rang: "A",
+    question: "Qu'est-ce qu'une ordonnance de protocole anticipé en soins palliatifs (notamment en EHPAD) ?",
+    answer: "Prescription médicale rédigée à l'avance par le médecin traitant, détaillant les posologies et les modalités d'administration des molécules de détresse (morphine, midazolam, scopolamine) à utiliser en urgence par l'infirmière en cas de survenue d'un symptôme inconfortable aigu.",
+    tags: ["Protocoles anticipés", "EHPAD", "Urgences"]
+  },
+    {
+    id: 3823,
+    chapter: "ch17",
+    rang: "B",
+    question: "Quelle est la définition de la souffrance existentielle en soins palliatifs ?",
+    answer: "Souffrance liée à la perte de sens de la vie, au sentiment d'inutilité, à l'angoisse de la mort ou à l'isolement social. Elle nécessite un accompagnement psychologique, spirituel et relationnel, et peut parfois être qualifiée de souffrance réfractaire.",
+    tags: ["Souffrance existentielle", "Psychologie", "Éthique"]
+  },
+    {
+    id: 3824,
+    chapter: "ch17",
+    rang: "B",
+    question: "Quel est le rôle d'une équipe mobile de soins palliatifs (EMSP) ?",
+    answer: "Équipe interdisciplinaire hospitalière ou territoriale (médecins, infirmiers, psychologues) intervenant en soutien des équipes soignantes de première ligne pour donner des avis spécialisés (évaluation douleur, sédation, questions éthiques) sans se substituer à elles.",
+    tags: ["EMSP", "Pluridisciplinaire", "Organisation"]
+  },
+    {
+    id: 3825,
+    chapter: "ch17",
+    rang: "B",
+    question: "Comment évaluer la douleur chez un patient atteint de démence sévère en fin de vie ?",
+    answer: "Utiliser une échelle d'hétéro-évaluation comportementale comme l'échelle ALGOPLUS (comportant 5 items comportementaux : expression du visage, regard, plaintes, attitude corporelle, comportement atypique). Un score ≥ 2/5 signe une douleur probable.",
+    tags: ["ALGOPLUS", "Hétéro-évaluation", "Douleur"]
+  },
+    {
+    id: 3826,
+    chapter: "ch17",
+    rang: "A",
+    question: "Quelle est la règle d'utilisation des neuroleptiques en cas de délire ou d'hallucinations en soins palliatifs ?",
+    answer: "Utiliser l'Halopéridol (Haldol) à très faible dose (0.5 à 1 mg par jour) par voie SC ou PO si l'agitation ou les hallucinations génèrent une anxiété majeure ou mettent le patient en danger. Éviter les benzodiazépines en monothérapie (effet paradoxal d'agitation).",
+    tags: ["Halopéridol", "Confusion", "Symptômes"]
+  },
+    {
+    id: 3827,
+    chapter: "ch17",
+    rang: "A",
+    question: "Quelles sont les contre-indications physiologiques absolues à l'alimentation entérale par sonde en phase agonique ?",
+    answer: "L'iléus paralytique, l'occlusion intestinale mécanique non opérable, et la phase de défaillance multiviscérale de l'agonie. L'alimentation forcée majore alors le risque de reflux, d'inhalation pulmonaire et de souffrance abdominale.",
+    tags: ["Alimentation entérale", "LATA", "Agonie"]
+  },
+    {
+    id: 3828,
+    chapter: "ch17",
+    rang: "B",
+    question: "Qu'est-ce que le congé de solidarité familiale en France ?",
+    answer: "Droit pour tout salarié de s'absenter pour accompagner un proche (ascendant, descendant, frère/sœur, personne de confiance) dont le pronostic vital est engagé. Il est d'une durée maximale de 3 mois et peut être indemnisé par l'allocation d'accompagnement.",
+    tags: ["Congé de solidarité", "Famille", "Droit"]
+  },
+    {
+    id: 3829,
+    chapter: "ch17",
+    rang: "A",
+    question: "Quelles molécules de détresse constituent la « trousse d'urgence » palliative à domicile ?",
+    answer: "1. Morphine (douleur, dyspnée).\n2. Midazolam (sédation, crises convulsives, anxiété aiguë).\n3. Scopolamine (râles terminaux, sécrétions).\n4. Halopéridol (nausées, hallucinations, délire).",
+    tags: ["Trousse d'urgence", "Soins à domicile", "Médicaments"]
+  },
+    {
+    id: 3830,
+    chapter: "ch17",
+    rang: "A",
+    question: "Pourquoi la voie sous-cutanée (SC) est-elle privilégiée par rapport à la voie intraveineuse (IV) en fin de vie à domicile ?",
+    answer: "La voie SC est simple à poser et à maintenir (pas de risque de perte de capital veineux), moins douloureuse, expose à moins de complications infectieuses locales, et permet l'administration continue ou discontinue de la plupart des molécules de soins palliatifs.",
+    tags: ["Voie sous-cutanée", "Perfusion", "Pratique"]
+  },
+    {
+    id: 3831,
+    chapter: "ch17",
+    rang: "B",
+    question: "Comment ajuster le traitement par antalgiques patch (Fentanyl, Buprénorphine) en phase agonique ?",
+    answer: "Maintenir les patchs existants à l'identique (l'arrêt brutal expose à un syndrome de sevrage douloureux). En cas de douleur aiguë transitoire (douleur d'accès rapide), réaliser des intercurrences par morphine d'action rapide sous-cutanée.",
+    tags: ["Patchs", "Antalgiques", "Agonie"]
+  },
+    {
+    id: 3832,
+    chapter: "ch17",
+    rang: "B",
+    question: "Quelle est la définition légale de l'euthanasie active ?",
+    answer: "Acte commis délibérément par un tiers (généralement un professionnel de santé) consistant à administrer une substance létale à un patient dans l'intention de provoquer sa mort pour abréger ses souffrances. Actuellement interdite par le code pénal français.",
+    tags: ["Euthanasie", "Cadre légal", "Éthique"]
+  },
+    {
+    id: 3833,
+    chapter: "ch17",
+    rang: "B",
+    question: "Comment réagir cliniquement et sur le plan éthique face à une demande d'euthanasie formulée par un patient ?",
+    answer: "1. Écouter activement sans juger pour comprendre le sens de la demande (souffrance physique mal contrôlée, angoisse, sentiment d'inutilité).\n2. Réévaluer l'antalgie et le confort du patient.\n3. Expliquer le cadre légal français (refus d'obstination déraisonnable, sédation SPCMD).\n4. Réunir l'équipe mobile de soins palliatifs.",
+    tags: ["Demande d'euthanasie", "Éthique", "Communication"]
+  },
+    {
+    id: 3834,
+    chapter: "ch17",
+    rang: "B",
+    question: "Qu'est-ce que le suicide assisté et comment se distingue-t-il de l'euthanasie ?",
+    answer: "Pratique consistant à fournir au patient les moyens (médicaments létaux) de mettre fin à sa propre vie, le patient réalisant lui-même l'acte final d'ingestion ou d'injection. Dans l'euthanasie, c'est le médecin qui injecte la substance.",
+    tags: ["Suicide assisté", "Définition", "Éthique"]
+  },
+    {
+    id: 3835,
+    chapter: "ch17",
+    rang: "A",
+    question: "Quelles sont les principales causes de nausées et vomissements en soins palliatifs ?",
+    answer: "1. Constipation ou occlusion intestinale haute.\n2. Iatrogénie médicamenteuse (morphiniques au début, chimiothérapie).\n3. Hypertension intracrânienne (métastases cérébrales).\n4. Troubles métaboliques (hypercalcémie, insuffisance rénale).",
+    tags: ["Nausées", "Symptômes", "Physiopathologie"]
+  },
+    {
+    id: 3836,
+    chapter: "ch17",
+    rang: "A",
+    question: "Quel antiémétique de référence est recommandé pour traiter les nausées induites par les morphiniques ?",
+    answer: "L'Halopéridol (Haldol) à faible dose (0,5 à 1 mg x2/jour) ou la Métoclopramide (Primpéran). L'halopéridol bloque les récepteurs dopaminergiques centraux de la zone gâchette chimioréceptrice (CTZ).",
+    tags: ["Halopéridol", "Nausées", "Morphine"]
+  },
+    {
+    id: 3837,
+    chapter: "ch17",
+    rang: "B",
+    question: "Comment prévenir la constipation induite par les opioïdes en soins palliatifs ?",
+    answer: "Co-prescrire systématiquement et dès l'initiation de la morphine un laxatif osmotique (Macrogol, Lactulose) ou lubrifiant. Éviter les laxatifs stimulants (sauf échec) et adapter selon le transit du patient.",
+    tags: ["Constipation", "Opioïdes", "Laxatifs"]
+  },
+    {
+    id: 3838,
+    chapter: "ch17",
+    rang: "B",
+    question: "Quelle est la définition d'un symptôme réfractaire ?",
+    answer: "Symptôme dont la détresse ne peut être soulagée par aucun traitement standard, administré à doses maximales tolérées, sans induire d'effets secondaires délétères ou d'altération inacceptable de la conscience.",
+    tags: ["Symptôme réfractaire", "Sédation", "Clinique"]
+  },
+    {
+    id: 3839,
+    chapter: "ch17",
+    rang: "B",
+    question: "Qu'est-ce que la sédation proportionnée en soins palliatifs ?",
+    answer: "Sédation transitoire ou intermittente de faible profondeur, visant à soulager un symptôme particulièrement intolérable (ex : lors de la réfection d'un pansement douloureux ou d'une crise d'angoisse nocturne) sans altérer définitivement la conscience.",
+    tags: ["Sédation proportionnée", "Douleur", "Pratique"]
+  },
+    {
+    id: 3840,
+    chapter: "ch17",
+    rang: "B",
+    question: "Qu'impose la loi concernant la nutrition artificielle chez un patient en fin de vie végétative chronique ?",
+    answer: "La nutrition artificielle constitue un traitement qui peut être suspendu ou limité s'il apparaît disproportionné ou inutile (obstination déraisonnable). La décision d'arrêt doit résulter d'une procédure collégiale approfondie avec la famille.",
+    tags: ["Nutrition artificielle", "Cadre légal", "Éthique"]
+  },
+    {
+    id: 3841,
+    chapter: "ch17",
+    rang: "A",
+    question: "Qu'est-ce que l'échelle Doloplus-2 et quand l'utiliser ?",
+    answer: "Échelle d'hétéro-évaluation comportementale de la douleur chez le sujet âgé présentant des troubles cognitifs sévères ou des difficultés de communication. Évalue 10 items (soma, psychomotricité, psychosocial). Un score ≥ 5/20 traduit la présence de douleur.",
+    tags: ["Doloplus-2", "Hétéro-évaluation", "Douleur"]
+  },
+    {
+    id: 3842,
+    chapter: "ch17",
+    rang: "B",
+    question: "Comment prendre en charge un prurit intolérable chez un patient en soins palliatifs oncologiques ?",
+    answer: "Rechercher la cause (insuffisance rénale/urée, cholestase, iatrogénie morphinique). Antihistaminique ou corticoïdes de faible dose. Soins hydratants cutanés réguliers pour limiter les lésions de grattage.",
+    tags: ["Prurit", "Soins de confort", "Symptômes"]
+  },
+    {
+    id: 3843,
+    chapter: "ch17",
+    rang: "B",
+    question: "Quel est le rôle du psychologue au sein d'une unité de soins palliatifs (USP) ?",
+    answer: "Apporter un soutien psychologique au patient pour aborder l'anxiété de la mort et le travail de deuil, soutenir la famille et les proches, et aider l'équipe soignante à analyser ses propres pratiques lors de groupes de parole.",
+    tags: ["Psychologue", "USP", "Deuil"]
+  },
+    {
+    id: 3844,
+    chapter: "ch17",
+    rang: "A",
+    question: "Quelle est la définition clinique de l'agonie ?",
+    answer: "Dernière phase de la vie caractérisée par la défaillance progressive et irréversible des grandes fonctions vitales (respiratoire, circulatoire, neurologique). S'accompagne fréquemment de troubles de la conscience, de marbrures et d'un encombrement respiratoire.",
+    tags: ["Agonie", "Clinique", "Fin de vie"]
+  },
+    {
+    id: 3845,
+    chapter: "ch17",
+    rang: "B",
+    question: "Quelle est la règle d'arrêt des examens complémentaires biologiques et radiologiques en phase agonique ?",
+    answer: "Arrêt systématique de tous les examens complémentaires invasifs ou non indispensables (prises de sang, imagerie, constantes de monitoring). Seule l'évaluation clinique du confort (ALGOPLUS, Ramsay, faciès) doit être maintenue.",
+    tags: ["Agonie", "Examens complémentaires", "LATA"]
+  },
+    {
+    id: 3846,
+    chapter: "ch17",
+    rang: "B",
+    question: "Qu'est-ce qu'une décision de limitation ou d'arrêt des traitements actifs (LATA) ?",
+    answer: "Décision médicale pluridisciplinaire consistant à ne pas débuter ou à interrompre des thérapeutiques jugées disproportionnées (ex: dialyse, réanimation, ventilation mécanique, antibiotiques) pour se concentrer exclusivement sur les soins de confort.",
+    tags: ["LATA", "Obstination déraisonnable", "Éthique"]
+  },
+    {
+    id: 3847,
+    chapter: "ch17",
+    rang: "B",
+    question: "Quelles personnes composent l'assemblée lors d'une procédure collégiale de LATA ?",
+    answer: "Le médecin responsable du patient, au moins un autre médecin consultant externe à l'équipe de soins, l'équipe soignante (infirmiers, aides-soignants), et l'avis écrit du patient (directives anticipées) ou les témoignages de la personne de confiance/famille.",
+    tags: ["Procédure collégiale", "LATA", "Législation"]
+  },
+    {
+    id: 3848,
+    chapter: "ch17",
+    rang: "B",
+    question: "Comment accompagner spirituellement un patient en fin de vie à l'hôpital ?",
+    answer: "Respecter les croyances et pratiques religieuses du patient. Faciliter l'accès à l'aumônerie de l'établissement ou à un représentant du culte de son choix si le patient ou sa famille en formule la demande.",
+    tags: ["Spiritualité", "Accompagnement", "Dignité"]
+  },
+    {
+    id: 3849,
+    chapter: "ch17",
+    rang: "A",
+    question: "Quelle est la règle clinique concernant l'oxygénothérapie chez un patient dyspnéique en phase agonique ?",
+    answer: "L'administration d'oxygène au masque ou aux lunettes n'améliore pas systématiquement la dyspnée terminale si le patient présente une hypoxie réfractaire de défaillance. Préférer la morphine (antidyspnéique de référence) et rafraîchir l'air ambiant avec un ventilateur.",
+    tags: ["Oxygénothérapie", "Dyspnée terminale", "Agonie"]
+  },
+    {
+    id: 3850,
+    chapter: "ch17",
+    rang: "A",
+    question: "Pourquoi la réévaluation clinique fréquente (toutes les 15 à 30 min initialement) est-elle requise lors d'une titration médicamenteuse de détresse ?",
+    answer: "Pour ajuster au plus près les doses de sédatifs (midazolam) ou d'antalgiques (morphine) en fonction du niveau de sédation (Ramsay) ou du confort (ALGOPLUS), afin d'éviter le sous-dosage (souffrance persistante) et le surdosage toxique.",
+    tags: ["Titration", "Surveillance", "Sécurité"]
+  },
+    {
+    id: 3851,
+    chapter: "ch18",
+    rang: "A",
+    question: "Quelle est la définition de la polymédication en gériatrie et à partir de quel seuil est-elle qualifiée de majeure ?",
+    answer: "La prise quotidienne de ≥ 5 molécules différentes. Elle est qualifiée de polymédication majeure ou sévère à partir de ≥ 10 molécules par jour, augmentant drastiquement le risque iatrogénique et d'interactions médicamenteuses.",
+    tags: ["Polymédication", "Iatrogénie", "Définition"]
+  },
+    {
+    id: 3852,
+    chapter: "ch18",
+    rang: "A",
+    question: "Quels sont les principaux critères de prescription inappropriée selon la liste STOPP/START v3 chez le sujet âgé ?",
+    answer: "La liste STOPP (Screening Tool of Older Persons' Prescriptions) répertorie les médicaments à éviter (inappropriés) en raison d'un rapport bénéfice/risque défavorable (ex : anticholinergiques, BZD demi-vie longue). La liste START (Screening Tool to Alert to Right Treatment) liste les omissions de prescription (médicaments indiqués mais oubliés).",
+    tags: ["STOPP/START", "Prescription", "Iatrogénie"]
+  },
+    {
+    id: 3853,
+    chapter: "ch18",
+    rang: "A",
+    question: "Quel est le risque majeur lié à la co-prescription de benzodiazépines et de morphiniques chez le patient âgé ?",
+    answer: "Un risque de dépression respiratoire synergique sévère, de sédation excessive, de troubles cognitifs aigus (syndrome confusionnel) et de chutes. L'association doit être évitée ou faire l'objet d'une surveillance renforcée.",
+    tags: ["Benzodiazépines", "Morphine", "Interactions"]
+  },
+    {
+    id: 3854,
+    chapter: "ch18",
+    rang: "A",
+    question: "Quels sont les critères cliniques justifiant une déprescription de statine en prévention primaire chez le sujet très âgé ?",
+    answer: "L'absence d'antécédent cardiovasculaire documenté (prévention primaire), un âge supérieur à 80-85 ans, une espérance de vie estimée à moins d'un an, ou la présence d'une démence avancée et d'une fragilité majeure (critère de déprescription STOPP).",
+    tags: ["Statines", "Déprescription", "Prévention primaire"]
+  },
+    {
+    id: 3855,
+    chapter: "ch18",
+    rang: "A",
+    question: "Pourquoi les anticholinergiques urinaires (comme la solifénacine) sont-ils considérés comme inappropriés chez le sujet atteint de troubles cognitifs ?",
+    answer: "Ils traversent la barrière hémato-encéphalique et bloquent les récepteurs muscariniques centraux, aggravant significativement le déclin cognitif, favorisant les hallucinations et le syndrome confusionnel, tout en induisant des effets périphériques délétères (constipation, globe vésical, tachycardie).",
+    tags: ["Anticholinergiques", "Troubles cognitifs", "Iatrogénie"]
+  },
+    {
+    id: 3856,
+    chapter: "ch18",
+    rang: "B",
+    question: "Qu'est-ce que l'indice de charge anticholinergique (score ACB) et comment l'interpréter ?",
+    answer: "Score évaluant l'exposition cumulative d'un patient aux médicaments anticholinergiques (chaque molécule est notée de 1 à 3). Un score total ACB ≥ 3 est associé à un risque significativement accru de déclin cognitif, de confusion et de mortalité globale chez le sujet âgé.",
+    tags: ["Score ACB", "Anticholinergiques", "Iatrogénie"]
+  },
+    {
+    id: 3857,
+    chapter: "ch18",
+    rang: "A",
+    question: "Quelle est la définition de la dépendance iatrogène et comment la prévenir à l'hôpital ?",
+    answer: "Perte d'autonomie fonctionnelle induite par l'hospitalisation et les pratiques médicales (alitement prolongé, contention physique, prescriptions inappropriées, déshydratation). Prévention : lever précoce, maintien de l'activité physique, limitation des sédatifs.",
+    tags: ["Dépendance iatrogène", "Hospitalisation", "Prévention"]
+  },
+    {
+    id: 3858,
+    chapter: "ch18",
+    rang: "B",
+    question: "Quel est le rôle du médecin coordonnateur en EHPAD ?",
+    answer: "Médecin salarié de l'établissement assurant la coordination des soins des résidents, l'élaboration du projet de soins personnalisé, l'avis sur les admissions, la formation des équipes soignantes et la gestion des épidémies, sans réaliser de prescriptions médicales directes (sauf urgence).",
+    tags: ["Médecin coordonnateur", "EHPAD", "Coordination"]
+  },
+    {
+    id: 3859,
+    chapter: "ch18",
+    rang: "A",
+    question: "Quelles sont les aides à domicile finançables par l'Allocation Personnalisée d'Autonomie (APA) ?",
+    answer: "1. Heures d'auxiliaire de vie (aide à la toilette, habillage, préparation des repas).\n2. Portage de repas à domicile.\n3. Téléassistance et systèmes d'alerte.\n4. Travaux d'adaptation du logement (barres d'appui, douches adaptées).",
+    tags: ["APA", "Aides à domicile", "Autonomie"]
+  },
+    {
+    id: 3860,
+    chapter: "ch18",
+    rang: "A",
+    question: "Quelle structure territoriale coordonne le parcours de santé complexe des personnes âgées (dispositif DAC) ?",
+    answer: "Le Dispositif d'Appui à la Coordination (DAC). Il réunit les anciens réseaux de santé, les MAIA et les CLIC pour offrir un guichet unique d'appui aux professionnels de santé face aux situations complexes (maintien à domicile difficile, rupture de parcours).",
+    tags: ["DAC", "Coordination", "Réseau de soins"]
+  },
+    {
+    id: 3861,
+    chapter: "ch18",
+    rang: "B",
+    question: "Comment se déroule l'évaluation multidimensionnelle pour l'attribution de l'APA à domicile ?",
+    answer: "Une équipe médico-sociale du département (composée d'une infirmière ou d'une assistante sociale) se rend au domicile du patient pour évaluer sa dépendance à l'aide de la grille AGGIR, déterminer son GIR (1 à 4 requis pour l'APA) et élaborer un plan d'aide personnalisé.",
+    tags: ["APA", "Grille AGGIR", "Évaluation"]
+  },
+    {
+    id: 3862,
+    chapter: "ch18",
+    rang: "A",
+    question: "Qu'est-ce que l'HAD (Hospitalisation À Domicile) et quelles sont ses conditions d'admission chez une personne âgée ?",
+    answer: "Structure d'hospitalisation à part entière permettant de réaliser des soins médicaux et paramédicaux complexes au domicile du patient. Conditions : accord du médecin traitant, présence d'un entourage aidant ou d'aides suffisantes, critères médicaux (soins continus).",
+    tags: ["HAD", "Hospitalisation", "Soins complexes"]
+  },
+    {
+    id: 3863,
+    chapter: "ch18",
+    rang: "A",
+    question: "Pourquoi les diurétiques de l'anse (furosémide) exposent-ils à un risque élevé de déshydratation et de chutes chez le sujet âgé ?",
+    answer: "Ils augmentent la diurèse, ce qui peut provoquer une hypovolémie, une hypotension orthostatique (HO) à l'origine de chutes, et des troubles hydro-électrolytiques (hypokaliémie, hyponatrémie) altérant la vigilance. Les doses doivent être minimales.",
+    tags: ["Furosémide", "Déshydratation", "Hypotension orthostatique"]
+  },
+    {
+    id: 3864,
+    chapter: "ch18",
+    rang: "B",
+    question: "Qu'est-ce que le syndrome de glissement gériatrique et comment l'identifier ?",
+    answer: "État de décompensation gériatrique rapide se caractérisant par un refus alimentaire et hydrique total, un mutisme, un refus de soins, et un repli sur soi, survenant après un intervalle libre après un stress physique ou psychique (chute, deuil). C'est une urgence gériatrique à pronostic sombre.",
+    tags: ["Syndrome de glissement", "Psychogériatrie", "Urgence"]
+  },
+    {
+    id: 3865,
+    chapter: "ch18",
+    rang: "A",
+    question: "Quelle est la règle d'or pour introduire ou arrêter un médicament psychotrope chez le sujet âgé ?",
+    answer: "Titration progressive : débuter à 1/4 ou 1/2 de la dose adulte usuelle et augmenter par paliers hebdomadaires. À l'arrêt, le sevrage doit être lent et dégressif sur plusieurs semaines pour éviter le rebond anxieux ou confusionnel.",
+    tags: ["Psychotropes", "Prescription", "Sevrage"]
+  },
+    {
+    id: 3866,
+    chapter: "ch18",
+    rang: "B",
+    question: "Quels professionnels composent l'équipe pluridisciplinaire d'un EHPAD ?",
+    answer: "Médecin coordonnateur, infirmière référente (IDEC), infirmières (IDE), aides-soignantes (AS), psychologue, ergothérapeute/psychomotricien, animateur et agents de service.",
+    tags: ["EHPAD", "Pluridisciplinaire", "Organisation"]
+  },
+    {
+    id: 3867,
+    chapter: "ch18",
+    rang: "A",
+    question: "Comment évaluer le risque de syndrome confusionnel lors d'une transition hôpital-EHPAD ?",
+    answer: "La rupture de repères spatio-temporels est un facteur précipitant majeur de confusion. Il faut transmettre un dossier médical complet, maintenir l'entourage, apporter des repères familiers (photos, objets), et assurer la continuité du traitement antalgique.",
+    tags: ["Syndrome confusionnel", "EHPAD", "Transition de soins"]
+  },
+    {
+    id: 3868,
+    chapter: "ch18",
+    rang: "A",
+    question: "Quel est le risque de la coprescription d'AINS et d'IEC chez le patient âgé de plus de 75 ans ?",
+    answer: "Le risque de déclencher une insuffisance rénale aiguë fonctionnelle sévère (synergie délétère sur le néphron : l'AINS vasoconstricte l'artériole afférente et l'IEC vasodilate l'artériole efférente, effondrant la pression de filtration glomérulaire).",
+    tags: ["AINS", "IEC", "Insuffisance rénale"]
+  },
+    {
+    id: 3869,
+    chapter: "ch18",
+    rang: "B",
+    question: "Qu'est-ce que le SSIAD (Service de Soins Infirmiers À Domicile) ?",
+    answer: "Service assurant sur prescription médicale des prestations de soins d'hygiène et de confort (toilette, soins infirmiers) au domicile des personnes âgées dépendantes, visant à prévenir l'hospitalisation ou à faciliter le retour à domicile.",
+    tags: ["SSIAD", "Soins d'hygiène", "Maintien à domicile"]
+  },
+    {
+    id: 3870,
+    chapter: "ch18",
+    rang: "B",
+    question: "Comment la dénutrition majore-t-elle le risque d'effets indésirables des médicaments fortement liés aux protéines plasmatiques ?",
+    answer: "La dénutrition s'accompagne d'une hypoalbuminémie. Les molécules fortement liées à l'albumine (ex : anticoagulants oraux, phénytoïne) se retrouvent en proportion libre accrue dans le sang, ce qui augmente leur activité thérapeutique et leur toxicité.",
+    tags: ["Albumine", "Pharmacocinétique", "Dénutrition"]
+  },
+    {
+    id: 3871,
+    chapter: "ch18",
+    rang: "B",
+    question: "Qu'est-ce que la déprescription active et quels en sont les trois grands principes ?",
+    answer: "Processus d'arrêt ou de réduction de dose des médicaments inappropriés.\n- Principes :\n1. Identifier tous les médicaments prescrits et leurs indications.\n2. Évaluer le rapport bénéfice/risque individuel de chaque molécule.\n3. Planifier l'arrêt progressif sous étroite surveillance.",
+    tags: ["Déprescription", "Polymédication", "Iatrogénie"]
+  },
+    {
+    id: 3872,
+    chapter: "ch18",
+    rang: "A",
+    question: "Quelles sont les complications majeures de la polymédication en EHPAD ?",
+    answer: "1. Augmentation des effets indésirables (chutes, confusion, insuffisance rénale).\n2. Erreurs d'administration et défaut d'observance.\n3. Risque d'interactions médicamenteuses cumulatives.\n4. Surcoût financier et altération de la qualité de vie.",
+    tags: ["Polymédication", "EHPAD", "Complications"]
+  },
+    {
+    id: 3873,
+    chapter: "ch18",
+    rang: "B",
+    question: "Quels sont les signes d'alerte cliniques de la iatrogénie médicamenteuse à domicile ?",
+    answer: "Baisse inexpliquée de la vigilance, ralentissement psychomoteur, survenue récente d'une anorexie, troubles de la marche ou chutes répétées, constipation opiniâtre ou hypotension orthostatique documentée.",
+    tags: ["Iatrogénie", "Signes d'alerte", "Sécurité"]
+  },
+    {
+    id: 3874,
+    chapter: "ch18",
+    rang: "B",
+    question: "Qu'est-ce que la conciliation médicamenteuse et quand doit-elle être réalisée ?",
+    answer: "Démarche de sécurisation consistant à croiser la liste des médicaments habituels du patient avec les nouvelles ordonnances lors des transitions de soins (admission, sortie de l'hôpital) pour détecter et corriger les divergences et les erreurs.",
+    tags: ["Conciliation médicamenteuse", "Sécurisation", "Transition de soins"]
+  },
+    {
+    id: 3875,
+    chapter: "ch18",
+    rang: "B",
+    question: "Comment repérer et prendre en charge une automédication par AINS chez un patient âgé arthrosique ?",
+    answer: "Interroger activement le patient sur la prise d'antalgiques en vente libre. Expliquer le risque d'ulcère, d'insuffisance rénale et d'HTA. Proposer des alternatives sûres (paracétamol, AINS locaux, rééducation physique, canne).",
+    tags: ["AINS", "Automédication", "Sécurité"]
+  },
+    {
+    id: 3876,
+    chapter: "ch18",
+    rang: "A",
+    question: "Pourquoi les antidépresseurs tricycliques (Imipramine, Amitriptyline) sont-ils contre-indiqués chez le sujet âgé ?",
+    answer: "Ils possèdent une charge anticholinergique extrêmement forte (ACB=3) et bloquent les récepteurs alpha-adrénergiques, exposant le sujet âgé à une hypotension orthostatique sévère, à une confusion mentale et à des troubles du rythme cardiaque.",
+    tags: ["Antidépresseurs", "Tricycliques", "Iatrogénie"]
+  },
+    {
+    id: 3877,
+    chapter: "ch18",
+    rang: "A",
+    question: "Quel est le risque de prescrire des neuroleptiques pour une agitation modérée en cas de maladie d'Alzheimer ?",
+    answer: "Ils augmentent le risque d'accident vasculaire cérébral (AVC) et de mortalité globale chez les patients atteints de démence. Leur utilisation doit être limitée aux troubles comportementaux sévères mettant le patient en danger.",
+    tags: ["Neuroleptiques", "Alzheimer", "Sécurité"]
+  },
+    {
+    id: 3878,
+    chapter: "ch18",
+    rang: "B",
+    question: "Qu'est-ce que la grille AGGIR et quelles sont ses variables discriminantes ?",
+    answer: "Grille d'évaluation de l'autonomie comportant 10 variables physiques et mentales clés (cohérence, orientation, toilette, habillage, alimentation, continence, transferts, déplacement intérieur, déplacement extérieur, communication à distance).",
+    tags: ["AGGIR", "Variables", "Autonomie"]
+  },
+    {
+    id: 3879,
+    chapter: "ch18",
+    rang: "B",
+    question: "Quelle est la définition clinique d'un aidant familial ou proche aidant ?",
+    answer: "Personne non professionnelle qui vient en aide de manière régulière et fréquente à un proche dépendant de son entourage pour réaliser tout ou partie des actes de la vie quotidienne.",
+    tags: ["Proche aidant", "Définition", "Social"]
+  },
+    {
+    id: 3880,
+    chapter: "ch18",
+    rang: "B",
+    question: "Qu'est-ce que le « fardeau de l'aidant » et comment l'évaluer en consultation ?",
+    answer: "Souffrance psychologique, physique et épuisement de l'aidant principal lié à l'accompagnement constant du patient dépendant. Évalué par l'échelle de Zarit (score sur 88, fardeau sévère si > 55) pour prévenir l'effondrement de l'aidant.",
+    tags: ["Échelle de Zarit", "Fardeau de l'aidant", "Épuisement"]
+  },
+    {
+    id: 3881,
+    chapter: "ch18",
+    rang: "B",
+    question: "Qu'est-ce que l'accueil de jour pour les patients atteints de maladie d'Alzheimer ?",
+    answer: "Structure accueillant les patients une à plusieurs journées par semaine pour proposer des activités thérapeutiques de stimulation cognitive et sociale, tout en offrant une période de répit indispensable pour l'aidant familial.",
+    tags: ["Accueil de jour", "Alzheimer", "Répit"]
+  },
+    {
+    id: 3882,
+    chapter: "ch18",
+    rang: "B",
+    question: "Quelles sont les aides financières disponibles en France pour l'hébergement permanent en EHPAD ?",
+    answer: "1. L'APA en établissement (aide pour le tarif dépendance).\n2. L'Aide Sociale à l'Hébergement (ASH) départementale (sous conditions de ressources et récupération).\n3. L'aide au logement (APL/ALS) de la CAF.",
+    tags: ["EHPAD", "Aides financières", "Social"]
+  },
+    {
+    id: 3883,
+    chapter: "ch18",
+    rang: "A",
+    question: "Pourquoi les IPP (Oméprazole) doivent-ils être évités au long cours sans indication claire chez le sujet âgé ?",
+    answer: "Leur usage chronique expose à une malabsorption du calcium (risque fracturaire accru), du magnésium (hypomagnésémie), de la vitamine B12, et augmente le risque de pneumopathies communautaires et de colite à Clostridioides difficile.",
+    tags: ["IPP", "Iatrogénie", "STOPP"]
+  },
+    {
+    id: 3884,
+    chapter: "ch18",
+    rang: "B",
+    question: "Comment évaluer l'observance thérapeutique d'un sujet âgé vivant seul à domicile ?",
+    answer: "Interroger le patient et l'aidant, compter les boîtes restantes lors des visites, analyser les dates de délivrance de la pharmacie, et proposer l'installation d'un pilulier semainier préparé par l'infirmière.",
+    tags: ["Observance", "Pilulier", "Maintien à domicile"]
+  },
+    {
+    id: 3885,
+    chapter: "ch18",
+    rang: "B",
+    question: "Qu'est-ce que la « cascade médicamenteuse » et comment l'illustrer ?",
+    answer: "Prescription d'un nouveau médicament pour traiter un effet secondaire non reconnu d'un traitement préexistant (ex : introduire un anti-secrétoire urinaire pour traiter une incontinence induite par un diurétique).",
+    tags: ["Cascade médicamenteuse", "Iatrogénie", "Clinique"]
+  },
+    {
+    id: 3886,
+    chapter: "ch18",
+    rang: "A",
+    question: "Pourquoi la clarithromycine est-elle fortement déconseillée en association avec la colchicine chez le sujet âgé ?",
+    answer: "La clarithromycine bloque le CYP3A4 et la glycoprotéine P, inhibant le métabolisme de la colchicine. Cette interaction majeure provoque une accumulation toxique de colchicine à l'origine d'aplasie médullaire et de rhabdomyolyse mortelle (STOPP G4).",
+    tags: ["Colchicine", "Clarithromycine", "Interactions"]
+  },
+    {
+    id: 3887,
+    chapter: "ch18",
+    rang: "B",
+    question: "Qu'est-ce que le plan personnalisé de santé (PPS) dans le cadre du parcours de soins ?",
+    answer: "Document rédigé par le médecin traitant en concertation avec les professionnels du DAC, détaillant les actions médicales, paramédicales et sociales à mettre en œuvre pour stabiliser la situation d'un patient fragile.",
+    tags: ["PPS", "Parcours de soins", "Coordination"]
+  },
+    {
+    id: 3888,
+    chapter: "ch18",
+    rang: "B",
+    question: "Quelle est la définition d'un hébergement temporaire en EHPAD ?",
+    answer: "Accueil d'une personne âgée pour une durée limitée (maximum 3 mois) visant à faire face à une indisponibilité de l'aidant familial, à une transition difficile après hospitalisation, ou à évaluer l'adaptation avant entrée définitive.",
+    tags: ["Hébergement temporaire", "EHPAD", "Répit"]
+  },
+    {
+    id: 3889,
+    chapter: "ch18",
+    rang: "B",
+    question: "Comment la baisse de la fonction rénale liée à l'âge modifie-t-elle la prescription d'allopurinol ?",
+    answer: "L'allopurinol et son métabolite actif sont éliminés par le rein. En cas de baisse du DFG, il faut réduire les doses initiales (débuter à 50-100 mg/j) et titrer progressivement sous contrôle biologique de l'uricémie pour éviter le syndrome de Lyell/DRESS.",
+    tags: ["Allopurinol", "Insuffisance rénale", "Posologie"]
+  },
+    {
+    id: 3890,
+    chapter: "ch18",
+    rang: "B",
+    question: "Quelles sont les aides techniques d'ergothérapie indispensables pour prévenir les chutes à domicile ?",
+    answer: "Rehausseur de toilettes, tapis antidérapants dans la douche, chaise de douche, barres d'appui murales et éclairage à détection de mouvement pour les trajets nocturnes.",
+    tags: ["Ergothérapie", "Prévention des chutes", "Maintien à domicile"]
+  },
+    {
+    id: 3891,
+    chapter: "ch18",
+    rang: "B",
+    question: "Qu'est-ce que la garde itinérante de nuit à domicile ?",
+    answer: "Service d'auxiliaires de vie réalisant des passages courts programmés (15 à 30 min) ou à la demande durant la nuit pour aider au coucher, au lever, ou pour assurer la sécurité lors des mictions nocturnes.",
+    tags: ["Garde de nuit", "Maintien à domicile", "Autonomie"]
+  },
+    {
+    id: 3892,
+    chapter: "ch18",
+    rang: "B",
+    question: "Comment le médecin doit-il réévaluer l'indication d'un neuroleptique prescrit pour troubles du comportement ?",
+    answer: "Réaliser une tentative d'arrêt ou de décroissance progressive toutes les 4 à 12 semaines. L'efficacité sur les SPCD doit être pesée face aux effets parkinsoniens, cognitifs et au surrisque cardiovasculaire.",
+    tags: ["Neuroleptiques", "Réévaluation", "Sécurité"]
+  },
+    {
+    id: 3893,
+    chapter: "ch18",
+    rang: "A",
+    question: "Pourquoi les antidiabétiques sulfamides exposent-ils à un risque élevé d'hypoglycémies prolongées ?",
+    answer: "Ils stimulent directement la sécrétion d'insuline de façon indépendante de la glycémie. Chez le sujet âgé, leur élimination rénale ralentie prolonge la durée de l'hypoglycémie, qui peut mimer un AVC ou une démence. Préférer les inhibiteurs de SGLT2 ou DPP4.",
+    tags: ["Sulfamides", "Hypoglycémie", "STOPP"]
+  },
+    {
+    id: 3894,
+    chapter: "ch18",
+    rang: "B",
+    question: "Quel est l'objectif du plan d'accompagnement et de soins personnalisé (PASP) en EHPAD ?",
+    answer: "Document rédigé par l'équipe d'EHPAD à l'admission du résident, intégrant ses habitudes de vie, ses souhaits de confort, ses capacités physiques et cognitives, et détaillant les soins quotidiens adaptés.",
+    tags: ["PASP", "EHPAD", "Personnalisation"]
+  },
+    {
+    id: 3895,
+    chapter: "ch18",
+    rang: "B",
+    question: "Comment adapter la posologie des anticoagulants oraux directs (AOD) chez le sujet âgé ?",
+    answer: "Réduire les doses d'Apixaban (à 2.5 mg x2/j) ou de Dabigatran si présence de ≥ 2 critères : âge ≥ 80 ans, poids ≤ 60 kg, créatininémie ≥ 133 µmol/L (ou DFG 30-50 ml/min pour le Dabigatran).",
+    tags: ["AOD", "Posologie", "Insuffisance rénale"]
+  },
+    {
+    id: 3896,
+    chapter: "ch18",
+    rang: "A",
+    question: "Pourquoi la co-prescription de spironolactone et d'IEC nécessite-t-elle une surveillance biologique stricte ?",
+    answer: "Cette association bloque la sécrétion d'aldostérone et la filtration rénale, exposant à un risque majeur d'hyperkaliémie sévère et d'insuffisance rénale aiguë. Une surveillance du potassium et de la créatinine à J3, J7 et J30 est requise.",
+    tags: ["Spironolactone", "IEC", "Hyperkaliémie"]
+  },
+    {
+    id: 3897,
+    chapter: "ch18",
+    rang: "B",
+    question: "Qu'est-ce que la téléassistance gériatrique et comment l'installer ?",
+    answer: "Dispositif électronique portatif (médaillon ou bracelet) relié à un émetteur téléphonique. En cas de chute ou de détresse, une simple pression alerte une plateforme d'assistance disponible 24h/24.",
+    tags: ["Téléassistance", "Chutes", "Maintien à domicile"]
+  },
+    {
+    id: 3898,
+    chapter: "ch18",
+    rang: "B",
+    question: "Quel est le rôle du conseil de la vie sociale (CVS) en EHPAD ?",
+    answer: "Instance consultative obligatoire permettant aux résidents et à leurs familles de s'exprimer et de faire des propositions sur le fonctionnement de l'établissement (repas, animations, tarifs, travaux).",
+    tags: ["CVS", "EHPAD", "Droits des usagers"]
+  },
+    {
+    id: 3899,
+    chapter: "ch18",
+    rang: "A",
+    question: "Pourquoi la buprénorphine ou le fentanyl transdermiques sont-ils préférables à la morphine orale en cas d'insuffisance rénale sévère ?",
+    answer: "La morphine produit des métabolites actifs neurotoxiques (M6G, M3G) qui s'accumulent en cas d'insuffisance rénale. Le fentanyl et la buprénorphine ont un métabolisme principalement hépatique sans métabolites actifs cumulatifs.",
+    tags: ["Morphine", "Fentanyl", "Insuffisance rénale"]
+  },
+    {
+    id: 3900,
+    chapter: "ch18",
+    rang: "B",
+    question: "Comment organiser le retour à domicile après une hospitalisation complexe pour syndrome confusionnel résolu ?",
+    answer: "Assurer la présence d'un proche à la sortie, coordonner le passage infirmier pour la préparation du pilulier, programmer une réévaluation cognitive à distance (3 mois), et maintenir l'environnement familier du patient.",
+    tags: ["Retour à domicile", "Transition de soins", "Confusion"]
+  }
 ];
+
+if (typeof module !== 'undefined' && module.exports) { module.exports = { MEGA_FLASHCARDS_5 }; }
