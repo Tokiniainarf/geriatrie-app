@@ -2834,6 +2834,7 @@ Date de l\'évaluation : ${new Date().toLocaleDateString('fr-FR')}
 const Medicalcul = {
   currentDomain: 'all',
   currentSearch: '',
+  currentResultText: '',
 
   init() {
     const searchInput = document.getElementById('calcSearch');
@@ -2875,6 +2876,128 @@ const Medicalcul = {
     this.renderList();
   },
 
+  isFavorite(id) {
+    try {
+      const favs = JSON.parse(localStorage.getItem('medicalcul_favorites')) || [];
+      return favs.includes(id);
+    } catch (e) {
+      return false;
+    }
+  },
+
+  toggleFavorite(id, event) {
+    if (event) {
+      event.stopPropagation();
+    }
+    try {
+      let favs = JSON.parse(localStorage.getItem('medicalcul_favorites')) || [];
+      const idx = favs.indexOf(id);
+      if (idx > -1) {
+        favs.splice(idx, 1);
+      } else {
+        favs.push(id);
+      }
+      localStorage.setItem('medicalcul_favorites', JSON.stringify(favs));
+      
+      // Update UI button in detail view if it exists
+      const btn = document.getElementById(`btn-fav-${id}`);
+      if (btn) {
+        const isFav = favs.includes(id);
+        btn.innerHTML = isFav ? '⭐ Favori' : '☆ Épingler';
+        btn.style.color = isFav ? '#eab308' : '';
+      }
+      
+      this.renderList();
+    } catch (e) {
+      console.error(e);
+    }
+  },
+
+  resetCalculator(id) {
+    this.showDetail(id);
+  },
+
+  copyResultToClipboard(id) {
+    const resDiv = document.getElementById('calc-result') || document.getElementById('acb-result');
+    if (!resDiv || !resDiv.querySelector('.calc-res-box')) {
+      alert("Veuillez d'abord remplir le questionnaire pour générer un résultat.");
+      return;
+    }
+    
+    const calc = CALCULATEURS.find(c => c.id === id);
+    const titleText = resDiv.querySelector('.calc-res-title')?.innerText || '';
+    const descText = resDiv.querySelector('.calc-res-desc')?.innerText || resDiv.querySelector('.calc-res-box > div:last-child')?.innerText || '';
+    
+    // For EGS report, there is a textarea, let's copy its content instead if it exists
+    const egsTextarea = document.getElementById('egs-report-text');
+    let textToCopy = '';
+    if (egsTextarea) {
+      textToCopy = egsTextarea.value;
+    } else {
+      textToCopy = `[Gériatrie - ${calc ? calc.nom : id}]\n${titleText}\n${descText}`.trim();
+    }
+    
+    const el = document.createElement('textarea');
+    el.value = textToCopy;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    
+    // Animate copy button
+    const btn = document.querySelector('.calc-copy-btn');
+    if (btn) {
+      const oldText = btn.innerHTML;
+      btn.innerHTML = '✅ Copié !';
+      btn.style.background = 'var(--green)';
+      btn.style.borderColor = 'var(--green)';
+      btn.style.color = '#ffffff';
+      setTimeout(() => {
+        btn.innerHTML = oldText;
+        btn.style.background = '';
+        btn.style.borderColor = '';
+        btn.style.color = '';
+      }, 1500);
+    }
+  },
+
+  renderCalcCardHtml(c, isStarred) {
+    const helperEsc = (s) => typeof esc === 'function' ? esc(s) : s;
+    const domainIcons = {
+      'Évaluation Gériatrique Standardisée (EGS)': '📋',
+      'Cognition & Humeur': '🧠',
+      'Autonomie': '🚶',
+      'Nutrition & Peau': '🍏',
+      'Équilibre & Marche': '⚖️',
+      'Cardiovasculaire': '🫀',
+      'Pneumologie': '🫁',
+      'Urgences & Soins Intensifs': '🚨',
+      'Évaluation de la Douleur': '🩹'
+    };
+    const icon = domainIcons[c.domaine] || '🧮';
+    
+    return `
+      <div class="calc-card" onclick="Medicalcul.showDetail('${c.id}')" role="button" tabindex="0" style="display:flex; flex-direction:column; justify-content:space-between; position:relative; background:var(--bg-card); border:1px solid var(--glass-border); border-radius:12px; padding:16px; transition:all 0.2s ease; cursor:pointer;">
+        <div>
+          <div class="calc-card-hdr" style="display:flex; justify-content:space-between; align-items:flex-start; gap:8px; margin-bottom:8px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="font-size:1.25rem; background:var(--accent-soft); width:32px; height:32px; display:flex; align-items:center; justify-content:center; border-radius:8px;">${icon}</span>
+              <div class="calc-card-nom" style="font-size:0.95rem; font-weight:700; color:var(--text); line-height:1.2;">${helperEsc(c.nom)}</div>
+            </div>
+            <button class="calc-star-btn" onclick="Medicalcul.toggleFavorite('${c.id}', event)" style="font-size:1.15rem; background:none; border:none; padding:4px; color:${isStarred ? '#eab308' : 'var(--text3)'}; cursor:pointer; line-height:1; transition:transform 0.15s ease;" title="${isStarred ? 'Retirer des favoris' : 'Épingler'}">
+              ${isStarred ? '★' : '☆'}
+            </button>
+          </div>
+          <div class="calc-card-desc" style="font-size:0.8rem; color:var(--text2); line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; text-overflow:ellipsis;">${helperEsc(c.description)}</div>
+        </div>
+        <div style="margin-top:10px; display:flex; justify-content:space-between; align-items:center;">
+          <span class="calc-badge" style="background:var(--accent-soft); color:var(--accent); font-size:0.68rem; font-weight:700; padding:1px 6px; border-radius:4px; border:1px solid var(--glass-border);">${helperEsc(c.domaine.split(' ')[0])}</span>
+          <span style="font-size:0.75rem; color:var(--accent); font-weight:600; display:flex; align-items:center; gap:2px;">Ouvrir ➔</span>
+        </div>
+      </div>
+    `;
+  },
+
   renderList() {
     const container = document.getElementById('calc-list');
     if (!container) return;
@@ -2888,19 +3011,19 @@ const Medicalcul = {
 
     // Filter by search query
     if (this.currentSearch) {
-      filtered = filtered.filter(c => 
-        c.nom.toLowerCase().includes(this.currentSearch) || 
-        c.domaine.toLowerCase().includes(this.currentSearch) || 
+      filtered = filtered.filter(c =>
+        c.nom.toLowerCase().includes(this.currentSearch) ||
+        c.domaine.toLowerCase().includes(this.currentSearch) ||
         c.description.toLowerCase().includes(this.currentSearch)
       );
     }
 
     if (filtered.length === 0) {
       container.innerHTML = `
-        <div class="empty">
-          <div class="empty-icon">🔍</div>
-          <div class="empty-text">Aucun calculateur trouvé</div>
-          <div class="empty-hint">Modifiez vos critères de recherche ou de filtre</div>
+        <div class="empty" style="text-align:center; padding:40px 20px; background:var(--bg-card); border-radius:12px; border:1px dashed var(--glass-border);">
+          <div class="empty-icon" style="font-size:2.5rem; margin-bottom:12px;">🔍</div>
+          <div class="empty-text" style="font-weight:700; color:var(--text); margin-bottom:4px;">Aucun calculateur trouvé</div>
+          <div class="empty-hint" style="font-size:0.85rem; color:var(--text2);">Modifiez vos critères de recherche ou de filtre</div>
         </div>
       `;
       return;
@@ -2909,15 +3032,46 @@ const Medicalcul = {
     // Sort alphabetically by name
     filtered.sort((a, b) => a.nom.localeCompare(b.nom));
 
-    container.innerHTML = filtered.map(c => `
-      <div class="calc-card" onclick="Medicalcul.showDetail('${c.id}')" role="button" tabindex="0">
-        <div class="calc-card-hdr">
-          <div class="calc-card-nom">${typeof esc === 'function' ? esc(c.nom) : c.nom}</div>
-          <span class="calc-badge">${typeof esc === 'function' ? esc(c.domaine) : c.domaine}</span>
+    // Get favorites
+    let favs = [];
+    try {
+      favs = JSON.parse(localStorage.getItem('medicalcul_favorites')) || [];
+    } catch (e) {}
+
+    let html = '';
+    
+    // Show Favorites section at the top
+    if (this.currentDomain === 'all' && !this.currentSearch && favs.length > 0) {
+      const favCalcs = filtered.filter(c => favs.includes(c.id));
+      if (favCalcs.length > 0) {
+        html += `
+          <div class="calc-fav-section" style="margin-bottom:20px;">
+            <div style="font-size:0.85rem; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px; display:flex; align-items:center; gap:6px;">
+              <span>⭐ Favoris épinglés</span>
+              <span style="background:var(--accent-soft); color:var(--accent); font-size:0.75rem; padding:1px 6px; border-radius:10px;">${favCalcs.length}</span>
+            </div>
+            <div class="calc-grid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:12px; margin-bottom:16px;">
+              ${favCalcs.map(c => this.renderCalcCardHtml(c, true)).join('')}
+            </div>
+            <div style="border-bottom: 1px dashed var(--glass-border); margin:20px 0 16px;"></div>
+          </div>
+        `;
+      }
+    }
+
+    const titleText = this.currentDomain === 'all' ? 'Tous les calculateurs' : this.currentDomain;
+    html += `
+      <div class="calc-all-section">
+        <div style="font-size:0.85rem; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px;">
+          ${titleText} (${filtered.length})
         </div>
-        <div class="calc-card-desc">${typeof esc === 'function' ? esc(c.description) : c.description}</div>
+        <div class="calc-grid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:12px;">
+          ${filtered.map(c => this.renderCalcCardHtml(c, favs.includes(c.id))).join('')}
+        </div>
       </div>
-    `).join('');
+    `;
+
+    container.innerHTML = html;
   },
 
   showDetail(id) {
@@ -2933,22 +3087,39 @@ const Medicalcul = {
     window.scrollTo(0, 0);
 
     const helperEsc = (s) => typeof esc === 'function' ? esc(s) : s;
+    const isFav = this.isFavorite(id);
 
     let html = `
-      <div class="calc-detail-header">
-        <button class="calc-back-btn" onclick="Medicalcul.showListContainer()">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-          Retour aux calculateurs
+      <div class="calc-detail-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:20px; border-bottom:1px solid var(--glass-border); padding-bottom:12px;">
+        <button class="calc-back-btn" onclick="Medicalcul.showListContainer()" style="display:flex; align-items:center; gap:6px; color:var(--accent); font-weight:600; padding:6px 12px; border-radius:8px; background:var(--bg-card); border:1px solid var(--glass-border);">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right:2px;"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Retour
         </button>
-        <span class="calc-badge">${helperEsc(calc.domaine)}</span>
+        <div class="calc-detail-actions" style="display:flex; gap:8px; align-items:center;">
+          <button class="calc-action-btn" onclick="Medicalcul.resetCalculator('${id}')" style="display:flex; align-items:center; gap:6px; font-size:0.85rem; padding:6px 12px; border-radius:8px; background:var(--bg-card); border:1px solid var(--glass-border); color:var(--text2); transition:all 0.2s ease;" title="Réinitialiser le calculateur">
+            🔄 Réinitialiser
+          </button>
+          <button class="calc-action-btn" id="btn-fav-${id}" onclick="Medicalcul.toggleFavorite('${id}', event)" style="display:flex; align-items:center; gap:6px; font-size:0.85rem; padding:6px 12px; border-radius:8px; background:var(--bg-card); border:1px solid var(--glass-border); color:${isFav ? '#eab308' : 'var(--text2)'}; transition:all 0.2s ease;" title="Ajouter aux favoris">
+            ${isFav ? '⭐ Favori' : '☆ Épingler'}
+          </button>
+        </div>
       </div>
-      <h2>${helperEsc(calc.nom)}</h2>
-      <p class="calc-desc">${helperEsc(calc.description)}</p>
+      
+      <div class="calc-title-sec" style="margin-bottom:20px;">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+          <span class="calc-badge" style="background:var(--accent-soft); color:var(--accent); border:1px solid var(--glass-border); font-weight:600; font-size:0.75rem; border-radius:6px; padding:2px 8px;">${helperEsc(calc.domaine)}</span>
+        </div>
+        <h2 style="font-size:1.4rem; font-weight:800; color:var(--text); margin:0;">${helperEsc(calc.nom)}</h2>
+        <p class="calc-desc" style="color:var(--text2); font-size:0.9rem; margin-top:6px; line-height:1.45;">${helperEsc(calc.description)}</p>
+      </div>
     `;
 
     // Render based on type
     if (calc.type === 'custom') {
       html += `<div id="calc-custom-area"></div>`;
+      html += `
+        <div class="calc-result-area" id="calc-result" style="margin-top:16px;"></div>
+      `;
       detailContent.innerHTML = html;
       const customArea = document.getElementById('calc-custom-area');
       if (customArea && typeof calc.render === 'function') {
@@ -3001,7 +3172,7 @@ const Medicalcul = {
               ${calc.fields.map((field) => `
                 <label style="display:flex; flex-direction:column; gap:4px;">
                   <span style="font-weight:500; font-size:0.9rem;">${helperEsc(field.label)}</span>
-                  <select id="sel_${id}_${field.id}" class="calc-input" style="width:100%; background:var(--bg-elevated); color:var(--text1); border:1px solid var(--glass-border); border-radius:4px; padding:6px;">
+                  <select id="sel_${id}_${field.id}" class="calc-input" style="width:100%; background:var(--bg-elevated); color:var(--text); border:1px solid var(--glass-border); border-radius:4px; padding:6px;">
                     ${field.options.map((opt) => {
                       const valMatch = opt.match(/^([0-9.]+)\s*—\s*(.*)$/) || opt.match(/^([0-9.]+)\s*:\s*(.*)$/) || [opt, opt, opt];
                       const val = valMatch[1].trim();
@@ -3024,7 +3195,7 @@ const Medicalcul = {
                 <label style="display:flex; flex-direction:column; gap:4px;">
                   <span style="font-weight:500; font-size:0.9rem;">${helperEsc(field.label)}</span>
                   <div style="display:flex; align-items:center; gap:8px;">
-                    <input type="${field.type || 'number'}" id="num_${id}_${field.id}" min="${field.min || 0}" max="${field.max || 100}" placeholder="${field.placeholder || ''}" class="calc-input" style="width:100px; background:var(--bg-elevated); color:var(--text1); border:1px solid var(--glass-border); border-radius:4px; padding:6px;">
+                    <input type="${field.type || 'number'}" id="num_${id}_${field.id}" min="${field.min || 0}" max="${field.max || 100}" placeholder="${field.placeholder || ''}" class="calc-input" style="width:100px; background:var(--bg-elevated); color:var(--text); border:1px solid var(--glass-border); border-radius:4px; padding:6px;">
                     ${field.unit ? `<span class="fs-sm" style="color:var(--text2);">${helperEsc(field.unit)}</span>` : ''}
                   </div>
                 </label>
@@ -3087,12 +3258,20 @@ const Medicalcul = {
       const resDiv = document.getElementById('calc-result');
       if (resDiv && result) {
         resDiv.innerHTML = `
-          <div class="calc-res-box ${result.cls || result.cat || 'normal'}">
-            <div class="calc-res-title">Score : ${result.score || result.total}</div>
-            <div class="calc-res-desc">${result.interp || result.desc || ''}</div>
-            ${calc.seuils ? `<div class="fs-xs" style="margin-top:8px; opacity:0.8; border-top:1px solid rgba(255,255,255,0.1); padding-top:6px;"><strong>Repères cliniques :</strong> ${helperEsc(calc.seuils)}</div>` : ''}
+          <div class="calc-res-box ${result.cls || result.cat || 'normal'}" style="position:relative; margin-top:20px;">
+            <div class="calc-res-title" style="font-size:1.2rem; font-weight:800; display:flex; justify-content:space-between; align-items:center; color:var(--text);">
+              <span>Score : ${result.score || result.total}</span>
+              <button class="calc-copy-btn" onclick="Medicalcul.copyResultToClipboard('${id}')" style="font-size:0.75rem; background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.25); color:var(--text); padding:4px 10px; border-radius:6px; display:flex; align-items:center; gap:4px; font-weight:700; transition:all 0.2s ease;">
+                📋 Copier
+              </button>
+            </div>
+            <div class="calc-res-desc" style="font-size:0.9rem; margin-top:6px; line-height:1.4; color:var(--text);">${result.interp || result.desc || ''}</div>
+            ${calc.seuils ? `<div class="fs-xs" style="margin-top:8px; opacity:0.85; border-top:1px solid rgba(255,255,255,0.15); padding-top:6px; font-size:0.75rem; color:var(--text);"><strong>Repères cliniques :</strong> ${helperEsc(calc.seuils)}</div>` : ''}
           </div>
         `;
+        
+        // Save to global property for copying
+        Medicalcul.currentResultText = `[Gériatrie - ${calc.nom}]\nScore : ${result.score || result.total}\nInterprétation : ${result.interp || result.desc || ''}`;
       } else if (resDiv) {
         resDiv.innerHTML = '';
       }

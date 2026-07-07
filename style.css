@@ -3223,10 +3223,10 @@ button, input, a {
 
 /* ── MEDICALCUL (SCORES & CALCULATEURS) ── */
 #vScores {
-  padding: 10px 14px;
+  padding: 14px 16px;
 }
 .calc-toolbar {
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 .calc-search {
   width: 100%;
@@ -3234,12 +3234,15 @@ button, input, a {
   background: var(--bg-card);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-sm);
-  color: var(--text1);
+  color: var(--text);
   font-size: 0.95rem;
-  transition: border-color 0.2s ease;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-card);
 }
 .calc-search:focus {
   border-color: var(--accent);
+  background: var(--bg-card-hover);
+  box-shadow: 0 0 12px var(--accent-glow);
   outline: none;
 }
 .calc-filters {
@@ -3247,7 +3250,7 @@ button, input, a {
   gap: 8px;
   overflow-x: auto;
   padding: 4px 2px 12px;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   scrollbar-width: none;
 }
 .calc-filters::-webkit-scrollbar {
@@ -3255,7 +3258,7 @@ button, input, a {
 }
 .calc-filt-btn {
   white-space: nowrap;
-  padding: 8px 14px;
+  padding: 8px 16px;
   background: var(--bg-card);
   border: 1px solid var(--glass-border);
   border-radius: 20px;
@@ -3263,12 +3266,24 @@ button, input, a {
   font-weight: 600;
   color: var(--text2);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
-.calc-filt-btn.active, .calc-filt-btn:hover {
-  background: var(--accent-light) !important;
+.calc-filt-btn:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--glass-border-strong);
+}
+.calc-filt-btn.active {
+  background: var(--accent) !important;
   border-color: var(--accent) !important;
-  color: var(--accent-dark) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+[data-theme="dark"] .calc-filt-btn.active {
+  color: var(--bg-deep) !important;
+  font-weight: 700;
 }
 .calc-list {
   display: flex;
@@ -3282,12 +3297,13 @@ button, input, a {
   padding: 14px 16px;
   box-shadow: var(--shadow-card);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .calc-card:hover {
   transform: translateY(-2px);
   border-color: var(--glass-border-strong);
   background: var(--bg-card-hover);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 .calc-card-hdr {
   display: flex;
@@ -3299,7 +3315,7 @@ button, input, a {
 .calc-card-nom {
   font-size: 1rem;
   font-weight: 700;
-  color: var(--text1);
+  color: var(--text);
 }
 .calc-badge {
   font-size: 0.7rem;
@@ -3313,7 +3329,7 @@ button, input, a {
 }
 .calc-card-desc {
   font-size: 0.82rem;
-  color: var(--text3);
+  color: var(--text2);
   line-height: 1.4;
 }
 
@@ -3331,6 +3347,9 @@ button, input, a {
   cursor: pointer;
   padding: 6px 0;
   margin-bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 .calc-back-btn:hover {
   text-decoration: underline;
@@ -3365,6 +3384,11 @@ button, input, a {
   background: var(--bg-card-hover);
   border-color: var(--glass-border-strong);
 }
+.check-container:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: 0 0 10px var(--accent-glow);
+}
 .check-container input {
   position: absolute;
   opacity: 0;
@@ -3393,9 +3417,12 @@ button, input, a {
   top: 3px;
   width: 6px;
   height: 11px;
-  border: solid var(--text-light);
+  border: solid #ffffff;
   border-width: 0 2.5px 2.5px 0;
   transform: rotate(45deg);
+}
+[data-theme="dark"] .checkmark:after {
+  border-color: var(--bg-deep);
 }
 .check-container input:checked ~ .checkmark:after {
   display: block;
@@ -3416,7 +3443,7 @@ button, input, a {
 .calc-group-title {
   font-size: 0.95rem;
   font-weight: 700;
-  color: var(--text1);
+  color: var(--text);
   border-left: 3px solid var(--accent);
   padding-left: 8px;
   margin-bottom: 4px;
@@ -3425,13 +3452,22 @@ button, input, a {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  padding: 10px 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all 0.2s ease;
+  background: var(--bg-card);
+  user-select: none;
 }
 .radio-container:hover {
   background: var(--bg-card-hover);
+  border-color: var(--glass-border-strong);
+}
+.radio-container:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: 0 0 10px var(--accent-glow);
 }
 .radio-container input {
   position: absolute;
@@ -3460,7 +3496,10 @@ button, input, a {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--text-light);
+  background: #ffffff;
+}
+[data-theme="dark"] .radiomark:after {
+  background: var(--bg-deep);
 }
 .radio-container input:checked ~ .radiomark:after {
   display: block;
@@ -3476,10 +3515,15 @@ button, input, a {
   background: var(--bg-card);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
+}
+.calc-q-row:has(input:checked[value="1"]), .calc-q-row:has(input:checked[value="true"]) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
 }
 .calc-q-text {
   font-size: 0.9rem;
-  color: var(--text1);
+  color: var(--text);
   font-weight: 500;
 }
 .calc-q-btns {
@@ -3500,16 +3544,21 @@ button, input, a {
   display: inline-block;
   padding: 6px 16px;
   border: 1px solid var(--glass-border-strong);
-  border-radius: 4px;
+  border-radius: 6px;
   font-size: 0.8rem;
   font-weight: 700;
   color: var(--text2);
   transition: all 0.2s ease;
+  background: var(--bg-card);
 }
 .radio-btn-label input:checked + span {
   background: var(--accent);
-  color: var(--text-light);
+  color: #ffffff;
   border-color: var(--accent);
+  box-shadow: 0 2px 8px var(--accent-glow);
+}
+[data-theme="dark"] .radio-btn-label input:checked + span {
+  color: var(--bg-deep);
 }
 
 /* Zone de résultat */
@@ -3522,36 +3571,48 @@ button, input, a {
 .calc-res-box {
   padding: 16px 20px;
   border-radius: var(--radius-md);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
   transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 .calc-res-box.normal {
-  background: rgba(16, 185, 129, 0.2);
-  border-color: rgba(16, 185, 129, 0.4);
+  background: rgba(5, 150, 105, 0.22);
+  border-color: rgba(5, 150, 105, 0.45);
 }
 .calc-res-box.warning {
-  background: rgba(245, 158, 11, 0.2);
-  border-color: rgba(245, 158, 11, 0.4);
+  background: rgba(217, 119, 6, 0.22);
+  border-color: rgba(217, 119, 6, 0.45);
 }
 .calc-res-box.danger {
-  background: rgba(239, 68, 68, 0.2);
-  border-color: rgba(239, 68, 68, 0.4);
+  background: rgba(220, 38, 38, 0.22);
+  border-color: rgba(220, 38, 38, 0.45);
 }
 .calc-res-title {
   font-size: 1.25rem;
   font-weight: 800;
   margin-bottom: 6px;
-  color: var(--text1);
+  color: var(--text);
 }
 .calc-res-desc {
   font-size: 0.9rem;
   line-height: 1.45;
-  color: var(--text2);
+  color: var(--text);
 }
 .fs-sm {
   font-size: 0.75rem;
   color: var(--text3);
+}
+.calc-star-btn:hover {
+  transform: scale(1.2);
+}
+.calc-action-btn:hover {
+  border-color: var(--glass-border-strong) !important;
+  background: var(--bg-card-hover) !important;
+}
+.calc-copy-btn:hover {
+  background: rgba(255, 255, 255, 0.25) !important;
+  transform: scale(1.02);
 }
 
