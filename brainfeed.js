@@ -168,7 +168,6 @@ const BrainFeed = (() => {
     if (typeof FLASHCARDS_MEMOS !== 'undefined') all.push(...FLASHCARDS_MEMOS);
     if (typeof FLASHCARDS_EXPANDED !== 'undefined') all.push(...FLASHCARDS_EXPANDED);
     if (typeof MEGA_FLASHCARDS !== 'undefined') all.push(...MEGA_FLASHCARDS);
-    if (typeof REVISION_FLASHCARDS !== 'undefined') all.push(...REVISION_FLASHCARDS);
     if (typeof EVC_FLASHCARDS !== 'undefined') all.push(...EVC_FLASHCARDS);
     if (typeof MEGA_FLASHCARDS_2 !== 'undefined') all.push(...MEGA_FLASHCARDS_2);
     if (typeof MEGA_FLASHCARDS_3 !== 'undefined') all.push(...MEGA_FLASHCARDS_3);
