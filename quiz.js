@@ -166,10 +166,16 @@ const QuizMode = (() => {
     if (typeof FLASHCARDS_MEMOS !== 'undefined') allFlash.push(...FLASHCARDS_MEMOS);
     if (typeof FLASHCARDS_EXPANDED !== 'undefined') allFlash.push(...FLASHCARDS_EXPANDED);
     if (typeof MEGA_FLASHCARDS !== 'undefined') allFlash.push(...MEGA_FLASHCARDS);
-    for (let n = 2; n <= 10; n++) {
-      const g = globalThis['MEGA_FLASHCARDS_' + n];
-      if (typeof g !== 'undefined') allFlash.push(...g);
-    }
+    if (typeof MEGA_FLASHCARDS_2 !== 'undefined') allFlash.push(...MEGA_FLASHCARDS_2);
+    if (typeof MEGA_FLASHCARDS_3 !== 'undefined') allFlash.push(...MEGA_FLASHCARDS_3);
+    if (typeof MEGA_FLASHCARDS_4 !== 'undefined') allFlash.push(...MEGA_FLASHCARDS_4);
+    if (typeof MEGA_FLASHCARDS_5 !== 'undefined') allFlash.push(...MEGA_FLASHCARDS_5);
+    if (typeof MEGA_FLASHCARDS_6 !== 'undefined') allFlash.push(...MEGA_FLASHCARDS_6);
+    if (typeof MEGA_FLASHCARDS_7 !== 'undefined') allFlash.push(...MEGA_FLASHCARDS_7);
+    if (typeof MEGA_FLASHCARDS_8 !== 'undefined') allFlash.push(...MEGA_FLASHCARDS_8);
+    if (typeof MEGA_FLASHCARDS_9 !== 'undefined') allFlash.push(...MEGA_FLASHCARDS_9);
+    if (typeof MEGA_FLASHCARDS_10 !== 'undefined') allFlash.push(...MEGA_FLASHCARDS_10);
+    if (typeof EVC_FLASHCARDS !== 'undefined') allFlash.push(...EVC_FLASHCARDS);
     allFlash.forEach(fc => {
       q.push({
         type: 'flash', category: 'flash', flashId: fc.id, chapter: fc.chapter, rang: fc.rang,
