@@ -1,0 +1,2382 @@
+[
+  {
+    "id": 3001,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Définition du vieillissement physiologique ?",
+    "answer": "Ensemble des processus physiologiques lents et progressifs qui modifient la structure et les fonctions de l'organisme à partir de l'âge mûr. Il est la résultante de facteurs génétiques, environnementaux et stochastiques (aléatoires). Il diminue la réserve fonctionnelle de l'organisme sans pour autant provoquer d'insuffisance d'organe au repos, mais il constitue un facteur de vulnérabilité face à un stress aigu.",
+    "tags": [
+      "vieillissement",
+      "physiologie",
+      "définition"
+    ]
+  },
+  {
+    "id": 3002,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Définition de la gérontologie ?",
+    "answer": "Étude du vieillissement dans tous ses aspects : biomédical, sociologique, psychologique, démographique, économique et culturel. C'est un champ multidisciplinaire situé au carrefour des sciences médicales et humaines, qui étudie le processus de vieillissement individuel et populationnel.",
+    "tags": [
+      "gérontologie",
+      "définition"
+    ]
+  },
+  {
+    "id": 3003,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Définition de la gériatrie ?",
+    "answer": "Médecine des personnes âgées. Spécialité médicale (reconnue en France par un DES depuis 2017) prenant en charge les patients âgés polypathologiques et fragiles. Elle repose sur une approche globale (médicale, psychologique, sociale et fonctionnelle) et sur l'Évaluation Gériatrique Standardisée (EGS).",
+    "tags": [
+      "gériatrie",
+      "définition"
+    ]
+  },
+  {
+    "id": 3004,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Définition de l'âgisme et son impact clinique ?",
+    "answer": "Attitude de discrimination négative ou d'a priori négatifs envers les personnes âgées du seul fait de leur grand âge. En médecine, il peut mener à un rejet de soins lourds (réanimation, chirurgie invasive) sans évaluation objective du rapport bénéfice/risque. L'approche gériatrique objective s'y oppose en évaluant l'autonomie, les comorbidités et la qualité de vie future.",
+    "tags": [
+      "âgisme",
+      "éthique"
+    ]
+  },
+  {
+    "id": 3005,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Seuils chronologiques de la vieillesse en France et selon l'OMS ?",
+    "answer": "1. À partir de 60 ans pour l'octroi des prestations sociales en France (ex: APA). 2. À partir de 65 ans selon l'OMS pour définir une personne âgée. 3. À partir de 75 ans pour le risque accru de perte d'autonomie et de fragilité (seuil d'entrée habituel en service de gériatrie, avec une moyenne d'âge supérieure à 80 ans).",
+    "tags": [
+      "vieillesse",
+      "seuil",
+      "démographie"
+    ]
+  },
+  {
+    "id": 3006,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Différence entre espérance de vie (EV) et espérance de vie sans incapacité (EVSI) ?",
+    "answer": "L'espérance de vie (EV) est le nombre moyen d'années qu'il reste à vivre à un âge donné sous les conditions de mortalité actuelles. L'espérance de vie sans incapacité (EVSI) ou espérance de vie en bonne santé est le nombre d'années qu'une personne peut s'attendre à vivre sans limitation d'activité ni handicap. L'objectif gériatrique est de rapprocher l'EVSI de l'EV totale.",
+    "tags": [
+      "espérance de vie",
+      "EVSI",
+      "démographie"
+    ]
+  },
+  {
+    "id": 3007,
+    "chapter": "ch1",
+    "rang": "B",
+    "question": "Données épidémiologiques clés de l'espérance de vie en France en 2020 ?",
+    "answer": "L'espérance de vie à la naissance est de 85,2 ans pour les femmes et de 79,2 ans pour les hommes. À 60 ans, elle est de 27 ans chez les femmes et de 23 ans chez les hommes. L'espérance de vie augmente globalement de 1,3 an tous les 10 ans en France, s'accompagnant d'une réduction du temps vécu en incapacité sévère.",
+    "tags": [
+      "espérance de vie",
+      "épidémiologie",
+      "France"
+    ]
+  },
+  {
+    "id": 3008,
+    "chapter": "ch1",
+    "rang": "B",
+    "question": "Conséquences économiques et sociales du vieillissement démographique ?",
+    "answer": "1. Économiques : Augmentation des dépenses de santé, des coûts des prestations sociales (Allocation Personnalisée d'Autonomie - APA) et des besoins de places en EHPAD/USLD. C'est aussi le développement de la 'silver économie' (gérontotechnologies, services à la personne). 2. Sociales : Rôle accru des aidants proches, familles multigénérationnelles et participation des jeunes retraités à la vie bénévole et politique.",
+    "tags": [
+      "démographie",
+      "économie",
+      "société"
+    ]
+  },
+  {
+    "id": 3009,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Concept de 'vieillissement réussi' (successful aging) et piliers de prévention ?",
+    "answer": "Vieillissement caractérisé par une faible diminution des capacités fonctionnelles et le maintien de réserves importantes, permettant de faire face à des stress majeurs. Ses piliers sont : la préservation du capital intellectuel et physique, la prévention des maladies (vaccinations, risque cardiovasculaire) et la prise en charge précoce des troubles de la marche, de l'état nutritionnel et sensoriel.",
+    "tags": [
+      "vieillissement réussi",
+      "prévention"
+    ]
+  },
+  {
+    "id": 3010,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Notions de vulnérabilité et de réserve fonctionnelle chez le patient âgé ?",
+    "answer": "La réserve fonctionnelle est l'écart entre le niveau de fonctionnement basal d'un organe et son seuil d'insuffisance symptomatique. Le vieillissement et les maladies chroniques réduisent cette réserve. La vulnérabilité est la conséquence directe de cette diminution : au repos, le patient est asymptomatique, mais au moindre stress (infection, déshydratation), la réserve est dépassée, déclenchant une décompensation d'organe.",
+    "tags": [
+      "vulnérabilité",
+      "réserve fonctionnelle"
+    ]
+  },
+  {
+    "id": 3011,
+    "chapter": "ch1",
+    "rang": "B",
+    "question": "Mécanisme biologique du vieillissement : Instabilité génomique ?",
+    "answer": "Accumulation progressive de lésions de l'ADN nucléaire et mitochondrial avec l'âge. Ces lésions découlent de facteurs endogènes (réplication cellulaire défaillante, radicaux libres) et exogènes (expositions environnementales). Avec l'âge, les mécanismes de réparation de l'ADN s'altèrent, entraînant une perte de l'intégrité génomique et un risque de dysfonctionnement cellulaire.",
+    "tags": [
+      "biologie",
+      "génétique",
+      "instabilité génomique"
+    ]
+  },
+  {
+    "id": 3012,
+    "chapter": "ch1",
+    "rang": "B",
+    "question": "Mécanisme biologique du vieillissement : Attrition/raccourcissement des télomères ?",
+    "answer": "Les télomères sont des séquences répétitives non codantes (GGGTTA) aux extrémités des chromosomes, protégeant la chromatine. À chaque division cellulaire, les télomères raccourcissent. Quand ils atteignent une taille critique, la cellule entre en sénescence ou meurt (limite de Hayflick). La longueur des télomères est de 9 kilobases à la naissance, et leur attrition rapide est liée aux maladies dégénératives.",
+    "tags": [
+      "biologie",
+      "télomères",
+      "Hayflick"
+    ]
+  },
+  {
+    "id": 3013,
+    "chapter": "ch1",
+    "rang": "B",
+    "question": "Rôle de la télomérase et ses limites chez l'Homme ?",
+    "answer": "La télomérase est une enzyme capable de restaurer la longueur des télomères en ajoutant des séquences répétitives d'ADN. Elle est active principalement dans les cellules souches et les cellules germinales, mais inactive dans la majorité des cellules somatiques humaines adultes. L'activation artificielle de la télomérase pose un risque de cancérisation (prolifération cellulaire incontrôlée).",
+    "tags": [
+      "biologie",
+      "télomérase"
+    ]
+  },
+  {
+    "id": 3014,
+    "chapter": "ch1",
+    "rang": "B",
+    "question": "Mécanisme biologique du vieillissement : Altérations épigénétiques ?",
+    "answer": "Modifications de l'activité des gènes sans modification de la séquence d'ADN, transmissibles lors des divisions. Elles incluent les variations de la méthylation de l'ADN, l'acétylation des histones et le remodelage de la chromatine. Contrairement aux mutations génétiques, les altérations épigénétiques sont réversibles et fortement influencées par l'environnement et le mode de vie.",
+    "tags": [
+      "biologie",
+      "épigénétique"
+    ]
+  },
+  {
+    "id": 3015,
+    "chapter": "ch1",
+    "rang": "B",
+    "question": "Mécanisme biologique du vieillissement : Perte de protéostasie ?",
+    "answer": "Altération du maintien de l'intégrité et du repliement correct des protéines cellulaires. Sous l'effet du stress oxydatif ou de la température, les protéines se replient mal, s'agrègent et deviennent toxiques. Ce défaut de clairance des protéines anormales (par autophagie ou protéasome) est impliqué dans les cancers et les maladies neurodégénératives (Alzheimer, Parkinson).",
+    "tags": [
+      "biologie",
+      "protéostasie",
+      "protéine"
+    ]
+  },
+  {
+    "id": 3016,
+    "chapter": "ch1",
+    "rang": "B",
+    "question": "Mécanisme du vieillissement : Dérégulation de la détection des nutriments (voie mTOR/TOR) ?",
+    "answer": "La protéine kinase TOR (mTOR chez les mammifères) régule la synthèse protéique, la croissance et l'autophagie en réponse aux niveaux d'acides aminés et d'énergie. Avec le vieillissement, cette détection se dérégule : l'activation persistante de mTOR bloque l'autophagie (nettoyage cellulaire) et favorise l'insulinorésistance, l'obésité et le diabète de type 2.",
+    "tags": [
+      "biologie",
+      "mTOR",
+      "nutriments"
+    ]
+  },
+  {
+    "id": 3017,
+    "chapter": "ch1",
+    "rang": "B",
+    "question": "Mécanisme biologique du vieillissement : Dysfonction mitochondriale ?",
+    "answer": "Diminution progressive de l'efficacité de la chaîne respiratoire mitochondriale avec l'âge. Cela entraîne une baisse de la production d'ATP et une augmentation de la production d'espèces réactives de l'oxygène (radicaux libres). Ces radicaux libres causent des dommages secondaires à l'ADN mitochondrial, aux membranes lipidiques et aux protéines, accélérant le déclin cellulaire.",
+    "tags": [
+      "biologie",
+      "mitochondrie",
+      "radicaux libres"
+    ]
+  },
+  {
+    "id": 3018,
+    "chapter": "ch1",
+    "rang": "B",
+    "question": "Mécanisme biologique du vieillissement : Sénescence cellulaire et phénotype sécrétoire (SASP) ?",
+    "answer": "Arrêt irréversible du cycle cellulaire en réponse à des dommages à l'ADN. Les cellules sénescentes ne se divisent plus mais restent métaboliquement actives. Elles acquièrent un phénotype sécrétoire associé à la sénescence (SASP) caractérisé par la sécrétion de cytokines et chimiokines pro-inflammatoires, ce qui altère les tissus voisins et propage la sénescence.",
+    "tags": [
+      "biologie",
+      "sénescence",
+      "SASP"
+    ]
+  },
+  {
+    "id": 3019,
+    "chapter": "ch1",
+    "rang": "B",
+    "question": "Concept d'inflamm-aging (inflammation à bas bruit liée à l'âge) ?",
+    "answer": "État pro-inflammatoire systémique, chronique et de bas grade caractérisé par l'augmentation des cytokines circulantes (comme l'IL-6, le TNF-alpha et l'IL-1) chez le sujet âgé. Il est favorisé par la sénescence cellulaire massive (sécrétion SASP) et l'activation du système immunitaire inné, contribuant aux maladies chroniques (athérosclérose, sarcopénie, déclin cognitif).",
+    "tags": [
+      "inflamm-aging",
+      "inflammation",
+      "immunologie"
+    ]
+  },
+  {
+    "id": 3020,
+    "chapter": "ch1",
+    "rang": "B",
+    "question": "Mécanisme biologique du vieillissement : Épuisement des cellules souches ?",
+    "answer": "Diminution du potentiel de régénération et de division des cellules souches adultes avec l'âge. Ses manifestations cliniques majeures sont l'immunosénescence (épuisement des cellules souches hématopoïétiques, restriction du répertoire T) et des maladies dégénératives comme l'ostéoporose (cellules souches mésenchymateuses), la sarcopénie et l'athérome.",
+    "tags": [
+      "biologie",
+      "cellules souches",
+      "régénération"
+    ]
+  },
+  {
+    "id": 3021,
+    "chapter": "ch1",
+    "rang": "B",
+    "question": "Mécanisme biologique du vieillissement : Altération des communications intercellulaires ?",
+    "answer": "Dysfonctionnement des voies de communication hormonales, neuroendocriniennes et neuronales avec l'âge. Il se traduit par une résistance hormonale (insuline, IGF-1), des anomalies de signalisation rénine-angiotensine, un déclin de la plasticité neuronale et une immunosénescence favorisant une susceptibilité accrue aux infections et aux maladies auto-immunes.",
+    "tags": [
+      "biologie",
+      "communication intercellulaire"
+    ]
+  },
+  {
+    "id": 3022,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Quels sont les 5 critères de fragilité de Fried ?",
+    "answer": "1. Perte de poids involontaire dans l'année écoulée (≥ 4,5 kg ou ≥ 5 %). 2. Sensation subjective d'épuisement/fatigue (évaluée par questionnaire). 3. Diminution de l'activité physique hebdomadaire. 4. Diminution de la vitesse de marche (mesurée sur 4 mètres). 5. Diminution de la force musculaire de préhension (mesurée par hand grip).",
+    "tags": [
+      "fragilité",
+      "Fried",
+      "dépistage"
+    ]
+  },
+  {
+    "id": 3023,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Seuils et mesure de la vitesse de marche dans le phénotype de Fried ?",
+    "answer": "La vitesse de marche est mesurée sur une distance de 4 mètres, à allure normale. Le seuil de fragilité est défini par une vitesse de marche inférieure à 0,8 m/s (soit un temps supérieur à 5 secondes pour parcourir les 4 mètres), ajusté selon le sexe et la taille du patient. C'est un marqueur fort de déclin fonctionnel et de mortalité.",
+    "tags": [
+      "marche",
+      "vitesse",
+      "Fried"
+    ]
+  },
+  {
+    "id": 3024,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Seuils et mesure de la force de préhension (hand grip) dans le phénotype de Fried ?",
+    "answer": "La force de préhension est mesurée à l'aide d'un dynamomètre manuel de type Jamar. Le patient doit serrer l'appareil avec sa force maximale (bras dominant). Le seuil de fragilité est défini par les 20 % les plus bas de la population de référence, ajusté selon le sexe et l'indice de masse corporelle (IMC) (ex. < 30 kg chez l'homme, < 18 kg chez la femme).",
+    "tags": [
+      "force musculaire",
+      "hand grip",
+      "Fried"
+    ]
+  },
+  {
+    "id": 3025,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Différence entre sujets robustes, pré-fragiles et fragiles selon Fried ?",
+    "answer": "La classification repose sur le nombre de critères de Fried validés par le patient : 1. Sujet robuste : aucun des 5 critères n'est présent. 2. Sujet pré-fragile : présence de 1 ou 2 critères (risque de transition vers la fragilité). 3. Sujet fragile : présence d'au moins 3 critères sur 5 (risque majeur d'hospitalisation, d'institutionnalisation et de décès).",
+    "tags": [
+      "fragilité",
+      "Fried",
+      "classification"
+    ]
+  },
+  {
+    "id": 3026,
+    "chapter": "ch1",
+    "rang": "B",
+    "question": "Modèle de fragilité de Rockwood (index de déficit accumulé) ?",
+    "answer": "Modèle quantitatif alternatif au phénotype de Fried. Il considère la fragilité comme le résultat de l'accumulation de déficits multidimensionnels (symptômes, signes cliniques, maladies, incapacités). L'index de fragilité est le ratio entre le nombre de déficits présents chez le patient et le nombre total de déficits possibles évalués (souvent 30 à 70 variables).",
+    "tags": [
+      "fragilité",
+      "Rockwood",
+      "déficits"
+    ]
+  },
+  {
+    "id": 3027,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Différence clinique entre vieillissement normal, fragilité et dépendance ?",
+    "answer": "1. Vieillissement normal : diminution de la réserve fonctionnelle mais patient autonome et résistant aux stress mineurs. 2. Fragilité : syndrome clinique caractérisé par une vulnérabilité accrue aux stress mineurs, potentiellement réversible. 3. Dépendance (ou perte d'autonomie) : incapacité fonctionnelle installée nécessitant l'aide d'un tiers pour les actes de la vie quotidienne.",
+    "tags": [
+      "fragilité",
+      "dépendance",
+      "vieillissement"
+    ]
+  },
+  {
+    "id": 3028,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Réversibilité de la fragilité et types d'interventions ciblées ?",
+    "answer": "Contrairement à la dépendance installée, la fragilité est un état dynamique et réversible. Les interventions efficaces sont pluridisciplinaires : 1. Renforcement musculaire et réentraînement à l'effort (activité physique adaptée). 2. Supplémentation nutritionnelle protéino-énergétique et correction des carences (vitamine D). 3. Revue de la prescription médicale (réduction de la iatrogénie).",
+    "tags": [
+      "fragilité",
+      "réversibilité",
+      "prise en charge"
+    ]
+  },
+  {
+    "id": 3029,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Modifications de la composition corporelle et métaboliques liées à l'âge ?",
+    "answer": "1. Diminution de la masse maigre (en particulier musculaire : sarcopénie). 2. Augmentation proportionnelle et redistribution de la masse grasse, en particulier viscérale (abdominale). 3. Légère augmentation de la résistance à l'insuline (insulinorésistance) favorisant l'intolérance au glucose. 4. Diminution de l'eau corporelle totale (majore le risque de déshydratation).",
+    "tags": [
+      "composition corporelle",
+      "sarcopénie",
+      "métabolisme"
+    ]
+  },
+  {
+    "id": 3030,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Vieillissement cardiovasculaire : Rigidité artérielle et conséquences ?",
+    "answer": "Modifications de la matrice extracellulaire (désorganisation de l'élastine, glycation non enzymatique du collagène) entraînant la perte d'élasticité des gros troncs artériels. Conséquences : diminution de l'amortissement du flux systolique, augmentation de la pression artérielle systolique (PAS) et de la pression pulsée (PP = PAS - PAD) et accélération de l'onde de pouls réfléchie aortique.",
+    "tags": [
+      "cardiovasculaire",
+      "rigidité artérielle",
+      "HTA"
+    ]
+  },
+  {
+    "id": 3031,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Vieillissement cardiovasculaire : Trouble de la relaxation myocardique ?",
+    "answer": "Altération du fonctionnement des myocytes par défaut de recapture du calcium par le réticulum endoplasmique, entraînant un défaut de compliance myocardique en début de diastole. Le remplissage passif du ventricule gauche en début de diastole est diminué, obligeant l'organisme à mettre en place un mécanisme compensateur basé sur la systole auriculaire tardive.",
+    "tags": [
+      "cardiovasculaire",
+      "diastole",
+      "relaxation"
+    ]
+  },
+  {
+    "id": 3032,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Rôle de la systole auriculaire après 80 ans et flux mitral Doppler ?",
+    "answer": "Chez le jeune, le remplissage diastolique repose à 90 % sur la phase passive (onde E prédominante au Doppler). Après 80 ans, le trouble de la relaxation ventriculaire inversera le rapport (onde A de la systole auriculaire prédominante, rapport E/A < 1). En cas de fibrillation atriale, la perte de la contraction auriculaire supprime cette compensation et provoque une décompensation cardiaque.",
+    "tags": [
+      "cardiovasculaire",
+      "Doppler",
+      "fibrillation atriale"
+    ]
+  },
+  {
+    "id": 3033,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Vieillissement cardiaque : Fréquence cardiaque maximale et paramètres inchangés ?",
+    "answer": "La fréquence cardiaque maximale à l'effort diminue avec l'âge (environ 220 - âge), réduisant la tolérance à l'effort et augmentant la sensibilité à l'ischémie. Les paramètres de repos qui restent strictement inchangés au cours du vieillissement physiologique sont le débit cardiaque de repos, la fréquence cardiaque de repos et la fraction d'éjection du ventricule gauche (FEVG).",
+    "tags": [
+      "cardiovasculaire",
+      "fréquence cardiaque",
+      "débit cardiaque"
+    ]
+  },
+  {
+    "id": 3034,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Effets du vieillissement sur l'appareil respiratoire ?",
+    "answer": "Diminution de la compliance pulmonaire (perte d'élasticité alvéolaire) et de la compliance thoracique (enraidissement costovertébral). Il en résulte une diminution du volume expiratoire maximal par seconde (VEMS) et de la capacité vitale, ainsi qu'une baisse de la force des muscles respiratoires. Les réserves ventilatoires sont diminuées face à un stress aigu.",
+    "tags": [
+      "respiratoire",
+      "compliance",
+      "vieillissement"
+    ]
+  },
+  {
+    "id": 3035,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Effets du vieillissement sur l'appareil urinaire et le rein ?",
+    "answer": "Réduction de la masse rénale (surtout corticale) avec perte de 20 à 40 % des glomérules fonctionnels à 70 ans. Le débit de filtration glomérulaire (DFG) diminue en moyenne de 0,5 à 1 mL/min/1,73 m² par an à partir de 50 ans. On observe aussi une diminution de la capacité de concentration et de dilution des urines, limitant l'adaptation aux pertes d'eau et de sel.",
+    "tags": [
+      "rénal",
+      "DFG",
+      "glomérule"
+    ]
+  },
+  {
+    "id": 3036,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Le piège de la créatininémie isolée chez le patient âgé ?",
+    "answer": "La créatinine sérique dépend directement de la masse musculaire. En raison de la sarcopénie physiologique et de la dénutrition fréquente chez la personne âgée fragile, la production endogène de créatinine est très faible. Une créatininémie normale (ex: 70 µmol/L) peut donc masquer une insuffisance rénale sévère. Il faut toujours calculer le DFG estimé (formule CKD-EPI).",
+    "tags": [
+      "rénal",
+      "créatinine",
+      "piège"
+    ]
+  },
+  {
+    "id": 3037,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Effets du vieillissement sur l'appareil digestif ?",
+    "answer": "1. Diminution du flux salivaire et modifications bucco-dentaires (risques de dénutrition). 2. Hypochlorhydrie gastrique par diminution de la sécrétion acide des cellules pariétales. 3. Ralentissement du péristaltisme intestinal (constipation). 4. Diminution de la masse et du débit sanguin hépatiques, ralentissant le métabolisme de premier passage des médicaments.",
+    "tags": [
+      "digestif",
+      "foie",
+      "constipation"
+    ]
+  },
+  {
+    "id": 3038,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Vieillissement du système nerveux central : Sommeil et soif ?",
+    "answer": "1. Sommeil : réduction de l'efficacité, déstructuration (diminution du sommeil lent profond, réveils nocturnes fréquents). 2. Soif : diminution de la sensation de soif par perte de sensibilité des osmorécepteurs centraux et modifications de l'arginine-vasopressine. Cela expose directement le patient âgé à une déshydratation non perçue lors de fortes chaleurs ou de fièvre.",
+    "tags": [
+      "neurologie",
+      "sommeil",
+      "soif"
+    ]
+  },
+  {
+    "id": 3039,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Vieillissement du système nerveux autonome et baroréflexe ?",
+    "answer": "On observe une diminution de la sensibilité des récepteurs aux catécholamines avec augmentation compensatrice des catécholamines circulantes. Le fonctionnement de la boucle baroréflexe est altéré, réduisant la vasoconstriction reflexe lors du passage à la station debout. Cela favorise l'hypotension orthostatique (chute de la PA systolique ≥ 20 mmHg lors du lever).",
+    "tags": [
+      "neurologie",
+      "baroréflexe",
+      "hypotension orthostatique"
+    ]
+  },
+  {
+    "id": 3040,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Vieillissement du système nerveux périphérique et proprioception ?",
+    "answer": "Diminution de la sensibilité proprioceptive (perte de fibres nerveuses sensorielles myélinisées, augmentation des temps de conduction nerveuse). Cette altération de la sensibilité profonde diminue la perception de la position du corps dans l'espace, favorisant directement l'instabilité posturale et augmentant le risque de chute.",
+    "tags": [
+      "neurologie",
+      "proprioception",
+      "chute"
+    ]
+  },
+  {
+    "id": 3041,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Vieillissement de l'appareil locomoteur : Muscle, os, cartilage ?",
+    "answer": "1. Muscle : perte de masse et de force musculaire (sarcopénie), principalement par diminution des fibres de type II (rapides). 2. Os : diminution de la densité minérale osseuse (ostéopénie/ostéoporose) et baisse de la résistance mécanique. 3. Cartilage : amincissement, déshydratation, diminution du nombre de chondrocytes, favorisant l'arthrose.",
+    "tags": [
+      "locomoteur",
+      "sarcopénie",
+      "ostéoporose"
+    ]
+  },
+  {
+    "id": 3042,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Effets du vieillissement sur la peau et les phanères ?",
+    "answer": "Atrophie cutanée par dégradation du tissu élastique, amincissement du derme et aplanissement de la jonction dermo-épidermique. On observe une diminution de l'activité des glandes sébacées et sudoripares (sécheresse cutanée ou xérose) et une baisse des mélanocytes (grisonnement des cheveux, taches séniles). La peau est plus fragile et sensible aux forces de cisaillement (escarres).",
+    "tags": [
+      "peau",
+      "phanères",
+      "escarre"
+    ]
+  },
+  {
+    "id": 3043,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Effets du vieillissement sur l'œil et la vision ?",
+    "answer": "1. Presbytie : diminution physiologique du pouvoir d'accommodation liée à la perte d'élasticité du cristallin, gênant la lecture de près. 2. Cataracte : opacification progressive du cristallin avec baisse de l'acuité visuelle et photophobie. 3. Diminution de la sensibilité aux contrastes et adaptation plus lente aux variations de luminosité (facteurs de chute).",
+    "tags": [
+      "vision",
+      "presbytie",
+      "cataracte"
+    ]
+  },
+  {
+    "id": 3044,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Presbyacousie : Définition, caractéristiques et impact cognitif ?",
+    "answer": "Baisse progressive, bilatérale et symétrique de l'audition liée à l'âge, portant préférentiellement sur les fréquences aiguës (gêne la compréhension de la parole en milieu bruyant). Si elle n'est pas corrigée par appareillage auditif précoce, la presbyacousie favorise l'isolement social, le repli sur soi, l'état dépressif et constitue un facteur de risque indépendant de déclin cognitif.",
+    "tags": [
+      "ORL",
+      "audition",
+      "presbyacousie"
+    ]
+  },
+  {
+    "id": 3045,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Vieillissement du système immunitaire (immunosénescence) ?",
+    "answer": "1. Immunité innée : état pro-inflammatoire chronique à bas bruit ('inflamm-aging'). 2. Immunité adaptative : involution du thymus entraînant une baisse de production des lymphocytes T naïfs et une restriction du répertoire T. On observe aussi une diminution de l'affinité des anticorps produits, ce qui explique la susceptibilité accrue aux infections et la moindre réponse vaccinale.",
+    "tags": [
+      "immunologie",
+      "immunosénescence",
+      "infection"
+    ]
+  },
+  {
+    "id": 3046,
+    "chapter": "ch1",
+    "rang": "B",
+    "question": "Régimes restrictifs chez la personne âgée : Pourquoi sont-ils à proscrire ?",
+    "answer": "La restriction calorique volontaire ou les régimes hypocalcifants stricts exposent le patient âgé à une perte de masse maigre (musculaire) rapide et souvent définitive (sarcopénie accélérée). Lors de la reprise de poids, celle-ci se fait principalement sous forme de masse grasse. Les régimes hypocaloriques et restrictifs (sans sel, sans cholestérol) sont à proscrire sauf indication médicale stricte.",
+    "tags": [
+      "nutrition",
+      "régime",
+      "sarcopénie"
+    ]
+  },
+  {
+    "id": 3047,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Rôle de l'activité physique dans la prévention du vieillissement pathologique ?",
+    "answer": "L'activité physique régulière est la seule intervention validée pour ralentir la perte de masse et de fonction musculaire liée à l'âge. Elle améliore la sensibilité à l'insuline (lutte contre l'insulinorésistance), préserve les réserves cardiorespiratoires, maintient la densité minérale osseuse et la plasticité neuronale cérébrale, réduisant significativement le risque de chutes.",
+    "tags": [
+      "activité physique",
+      "prévention",
+      "sarcopénie"
+    ]
+  },
+  {
+    "id": 3048,
+    "chapter": "ch1",
+    "rang": "B",
+    "question": "Médecine anti-âge : Efficacité démontrée des antioxydants et hormones ?",
+    "answer": "Toutes les grandes études contrôlées à long terme testant des suppléments antioxydants (vitamine E, C, A, Ginkgo Biloba) ou des traitements hormonaux (DHEA, hormone de croissance) ont été négatives quant à l'allongement de l'espérance de vie, la prévention cardiovasculaire ou le déclin cognitif. De plus, ces hormones présentent des risques tumoraux ou métaboliques. Seul le traitement substitutif de la ménopause a des indications précises.",
+    "tags": [
+      "anti-âge",
+      "antioxydants",
+      "hormone"
+    ]
+  },
+  {
+    "id": 3049,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Rôle de la vitamine D chez les personnes de plus de 80 ans ?",
+    "answer": "L'administration systématique de vitamine D (qui agit comme une hormone) présente un intérêt majeur chez les personnes âgées de plus de 80 ans (souvent carencées par manque d'ensoleillement et de synthèse cutanée). Elle permet la prévention de l'ostéoporose (en favorisant l'absorption du calcium) et de la sarcopénie (récepteurs musculaires à la vitamine D), diminuant le risque de chute de 20 %.",
+    "tags": [
+      "vitamine D",
+      "ostéoporose",
+      "chute"
+    ]
+  },
+  {
+    "id": 3050,
+    "chapter": "ch1",
+    "rang": "A",
+    "question": "Régime méditerranéen et oméga-3 chez la personne âgée ?",
+    "answer": "Le régime méditerranéen (riche en fruits, légumes, huile d'olive, poisson et pauvre en graisses saturées) a montré un effet protecteur significatif vis-à-vis des pathologies cardiovasculaires, des cancers et des troubles neurocognitifs. Les acides gras oméga-3 (acides gras polyinsaturés présents dans les poissons gras) ont également un effet bénéfique documenté sur la préservation des fonctions cognitives.",
+    "tags": [
+      "régime méditerranéen",
+      "oméga-3",
+      "cognition"
+    ]
+  },
+  {
+    "id": 3051,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Définition et objectifs du raisonnement gériatrique ?",
+    "answer": "Démarche diagnostique et thérapeutique spécifique au patient âgé, visant à analyser la complexité d'une situation aiguë en démêlant ce qui relève du vieillissement physiologique, des maladies chroniques sous-jacentes et des facteurs précipitants aigus. L'objectif est d'éviter le surdiagnostic/surtraitement iatrogène et d'agir sur les facteurs réversibles pour préserver l'autonomie.",
+    "tags": [
+      "raisonnement gériatrique",
+      "diagnostic"
+    ]
+  },
+  {
+    "id": 3052,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Le modèle de décompensation gériatrique de Jean-Pierre Bouchon (1+2+3) ?",
+    "answer": "Modèle théorique expliquant la survenue d'une décompensation d'organe chez la personne âgée par la combinaison de trois facteurs : Le Facteur 1 (vieillissement de l'organe concerné), le Facteur 2 (maladie chronique affectant cet organe) et le Facteur 3 (facteur précipitant aigu, intrinsèque ou extrinsèque au patient). L'interaction de ces facteurs fait franchir le seuil d'insuffisance d'organe.",
+    "tags": [
+      "Bouchon",
+      "décompensation",
+      "modèle"
+    ]
+  },
+  {
+    "id": 3053,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Définition du Facteur 1 (vieillissement) dans le modèle de Bouchon ?",
+    "answer": "Représente le déclin progressif et physiologique de la réserve fonctionnelle de l'organe avec l'avancée en âge. À lui seul, le Facteur 1 n'atteint jamais le seuil d'insuffisance fonctionnelle au repos et ne peut expliquer une symptomatologie aiguë. Cependant, il réduit la marge d'adaptation face aux agressions.",
+    "tags": [
+      "Bouchon",
+      "F1",
+      "vieillissement"
+    ]
+  },
+  {
+    "id": 3054,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Définition du Facteur 2 (maladie chronique) dans le modèle de Bouchon ?",
+    "answer": "Représente l'effet d'une ou plusieurs pathologies chroniques d'organe (ex. cardiopathie ischémique, BPCO, arthrose, insuffisance rénale). Ce facteur accélère la perte de réserve fonctionnelle de l'organe et rapproche le patient du seuil d'insuffisance symptomatique, augmentant considérablement sa vulnérabilité.",
+    "tags": [
+      "Bouchon",
+      "F2",
+      "maladie chronique"
+    ]
+  },
+  {
+    "id": 3055,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Définition du Facteur 3 (facteur précipitant) dans le modèle de Bouchon ?",
+    "answer": "Représente l'événement aigu (stress physique ou psychologique) qui rompt l'équilibre précaire du patient et le fait basculer dans l'insuffisance d'organe symptomatique. Ce facteur peut être intrinsèque (infection, infarctus, déshydratation) ou extrinsèque (iatrogénie, déménagement, deuil). C'est la cible thérapeutique prioritaire car il est souvent réversible.",
+    "tags": [
+      "Bouchon",
+      "F3",
+      "facteur précipitant"
+    ]
+  },
+  {
+    "id": 3056,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Pourquoi le vieillissement physiologique seul n'explique jamais une symptomatologie aiguë ?",
+    "answer": "Le vieillissement physiologique se traduit par une baisse de la réserve fonctionnelle mais ne provoque jamais d'insuffisance d'organe au repos. Ainsi, attribuer une confusion, une dyspnée, une baisse de mémoire ou une chute au seul fait que le patient est 'vieux' (âgisme) est une erreur médicale. Ces symptômes révèlent toujours l'association d'une pathologie sous-jacente ou d'un facteur aigu.",
+    "tags": [
+      "Bouchon",
+      "symptomatologie",
+      "âgisme"
+    ]
+  },
+  {
+    "id": 3057,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Quelle est la formule d'architecture gériatrique de la décompensation et son interprétation ?",
+    "answer": "La formule d'architecture gériatrique est : (1 + 2) x 3 = Décompensation. Elle illustre que l'état basal du patient, résultant du vieillissement (1) et des comorbidités chroniques (2), définit la vulnérabilité globale. Le facteur précipitant aigu (3) agit comme un multiplicateur de cette vulnérabilité. Plus la réserve fonctionnelle de base (1+2) est basse, plus un facteur précipitant (3) minime suffit à déclencher la décompensation.",
+    "tags": [
+      "Bouchon",
+      "décompensation",
+      "formule"
+    ]
+  },
+  {
+    "id": 3058,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Relation entre réserve fonctionnelle et intensité du Facteur 3 ?",
+    "answer": "Il existe une relation inversement proportionnelle : plus les réserves fonctionnelles du patient (déterminées par F1 + F2) sont altérées, plus le facteur précipitant (F3) requis pour déclencher la décompensation clinique est minime. Ainsi, chez un patient très fragile, une simple infection urinaire ou une constipation de quelques jours (F3 minime) peut provoquer un delirium ou une chute.",
+    "tags": [
+      "Bouchon",
+      "F3",
+      "réserve fonctionnelle"
+    ]
+  },
+  {
+    "id": 3059,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Exemples majeurs de Facteurs 3 intrinsèques à rechercher systématiquement ?",
+    "answer": "1. Infections (urinaires, pulmonaires, cutanées). 2. Pathologies cardiovasculaires (infarctus silencieux, poussée d'HTA, FA rapide). 3. Troubles métaboliques (déshydratation, hyponatrémie, hypokalémie, hypoglycémie). 4. Obstacles physiques (fécalome, globe urinaire). 5. Douleur non exprimée. 6. Traumatismes silencieux (fractures).",
+    "tags": [
+      "Bouchon",
+      "F3",
+      "facteurs intrinsèques"
+    ]
+  },
+  {
+    "id": 3060,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Exemples majeurs de Facteurs 3 extrinsèques à rechercher systématiquement ?",
+    "answer": "1. Iatrogénie médicamenteuse (introduction d'un anticholinergique, d'un psychotrope, d'un diurétique). 2. Changements d'environnement (hospitalisation récente, entrée en institution, déménagement). 3. Stress psychologique majeur (deuil, isolement social). 4. Mauvais ajustements ergonomiques (obstacles au sol, chaussures inadaptées).",
+    "tags": [
+      "Bouchon",
+      "F3",
+      "facteurs extrinsèques"
+    ]
+  },
+  {
+    "id": 3061,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Définition de la cascade gériatrique (cercle vicieux gériatrique) ?",
+    "answer": "Enchaînement en série de décompensations d'organes vulnérables initié par un facteur précipitant. La perte de fonction d'un premier système altère le fonctionnement d'autres systèmes fragiles, créant un effet domino auto-entretenu. Exemple : Chute → hospitalisation → alitement → confusion/escarres → dénutrition → perte définitive d'autonomie. La rupture précoce de ce cercle vicieux est l'objectif des soins gériatriques.",
+    "tags": [
+      "cascade gériatrique",
+      "cercle vicieux",
+      "décompensation"
+    ]
+  },
+  {
+    "id": 3062,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Application du modèle de Bouchon à un syndrome confusionnel sous anticholinergiques ?",
+    "answer": "1. Facteur 1 (vieillissement) : diminution physiologique de l'attention et des neurones cholinergiques centraux. 2. Facteur 2 (maladie chronique) : maladie d'Alzheimer débutante diminuant les réserves cognitives. 3. Facteur 3 (précipitant) : introduction d'un antihistaminique anticholinergique pour anxiété. La réserve cholinergique s'effondre, déclenchant un delirium aigu.",
+    "tags": [
+      "Bouchon",
+      "confusion",
+      "anticholinergique"
+    ]
+  },
+  {
+    "id": 3063,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Application du modèle de Bouchon à un OAP déclenché par une fibrillation atriale ?",
+    "answer": "1. Facteur 1 (vieillissement) : trouble de la relaxation ventriculaire gauche par diminution de la compliance myocardique diastolique. 2. Facteur 2 (maladie chronique) : cardiopathie hypertensive chronique. 3. Facteur 3 (précipitant) : passage aigu en fibrillation atriale avec perte de la systole auriculaire. Le ventricule gauche ne se remplit plus, déclenchant un OAP.",
+    "tags": [
+      "Bouchon",
+      "OAP",
+      "fibrillation atriale"
+    ]
+  },
+  {
+    "id": 3064,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Définition de la polypathologie (multimorbidité) chez la personne âgée ?",
+    "answer": "Présence simultanée d'au moins 5 pathologies chroniques distinctes chez un même individu. C'est une caractéristique majeure de la gériatrie clinique (concerne la majorité des patients de plus de 80 ans). Elle complexifie la démarche diagnostique et thérapeutique en raison de l'intrication des symptômes et des risques d'interactions médicamenteuses.",
+    "tags": [
+      "polypathologie",
+      "comorbidités",
+      "définition"
+    ]
+  },
+  {
+    "id": 3065,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Conséquences cliniques de la polypathologie sur la démarche diagnostique ?",
+    "answer": "La polypathologie modifie la sémiologie classique : 1. Multi-symptomatologie (le patient exprime plusieurs plaintes intriquées). 2. Masquage d'une pathologie par une autre (ex: la douleur arthrosique limite la marche et masque une angine de poitrine d'effort). 3. Difficulté à hiérarchiser les priorités diagnostiques. Elle nécessite une approche holistique.",
+    "tags": [
+      "polypathologie",
+      "sémiologie",
+      "diagnostic"
+    ]
+  },
+  {
+    "id": 3066,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Concept de 'symptomatologie d'emprunt' (sémiologie atypique) ?",
+    "answer": "Fait qu'une pathologie aiguë s'exprime cliniquement par la décompensation d'un autre organe, qui est le plus vulnérable du corps, plutôt que par les signes spécifiques de la maladie. Chez le sujet âgé fragile, le cerveau (confusion), le système postural (chute) et la vessie (incontinence) sont les principaux organes d'emprunt qui décompensent face à n'importe quelle agression.",
+    "tags": [
+      "symptomatologie d'emprunt",
+      "sémiologie atypique"
+    ]
+  },
+  {
+    "id": 3067,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Exemple clinique de symptomatologie d'emprunt : L'infection urinaire ?",
+    "answer": "Au lieu de présenter une dysurie et une pollakiurie classiques, le patient âgé fragile atteint d'une infection urinaire aiguë peut se présenter uniquement avec un syndrome confusionnel aigu (delirium), une perte soudaine de la marche ou des chutes répétées, sans aucun point d'appel urinaire évident.",
+    "tags": [
+      "sémiologie atypique",
+      "infection urinaire",
+      "confusion"
+    ]
+  },
+  {
+    "id": 3068,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Exemple clinique de symptomatologie d'emprunt : L'infarctus du myocarde ?",
+    "answer": "Chez la personne âgée très âgée ou diabétique, l'infarctus du myocarde (IDM) est fréquemment indolore (absence de douleur thoracique rétrosternale typique). Il peut se manifester uniquement par une confusion mentale aiguë, des chutes inexpliquées, une asthénie majeure ou une décompensation cardiaque brutale (OAP).",
+    "tags": [
+      "sémiologie atypique",
+      "infarctus",
+      "IDM"
+    ]
+  },
+  {
+    "id": 3069,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Exemple clinique de symptomatologie d'emprunt : Le globe urinaire ou fécalome ?",
+    "answer": "La rétention aiguë d'urines (globe) ou la constipation opiniâtre avec fécalome se manifestent fréquemment chez le patient dément par un tableau d'agitation motrice et verbale aiguë, voire de confusion mentale, plutôt que par des plaintes abdominales, le patient étant incapable d'exprimer sa gêne locale.",
+    "tags": [
+      "sémiologie atypique",
+      "fécalome",
+      "globe urinaire"
+    ]
+  },
+  {
+    "id": 3070,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Exemple clinique de symptomatologie d'emprunt : L'embolie pulmonaire ?",
+    "answer": "L'embolie pulmonaire chez le sujet âgé très fragile peut survenir sans douleur thoracique ni hémoptysie. Elle se révèle souvent par une dyspnée aiguë isolée, une tachycardie inexpliquée, ou une confusion mentale secondaire à l'hypoxie cérébrale, sans fièvre ni signes de thrombose veineuse cliniques évidents.",
+    "tags": [
+      "sémiologie atypique",
+      "embolie pulmonaire",
+      "dyspnée"
+    ]
+  },
+  {
+    "id": 3071,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Définition de la polymédication (polymédicamentation) chez la personne âgée ?",
+    "answer": "Consommation quotidienne et régulière d'au moins 5 molécules chimiques différentes par jour chez une même personne. C'est le principal facteur de risque indépendant de iatrogénie médicamenteuse chez la personne âgée. Elle impose des réévaluations régulières des prescriptions pour éliminer les médicaments inutiles.",
+    "tags": [
+      "polymédication",
+      "iatrogénie",
+      "définition"
+    ]
+  },
+  {
+    "id": 3072,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Risques cliniques induits directement par la polymédication ?",
+    "answer": "1. Augmentation exponentielle du risque d'interactions médicamenteuses. 2. Risque de surdosage et de toxicité cumulative (notamment rénale). 3. Risque accru de chutes, de confusion et de déshydratation. 4. Diminution de l'observance thérapeutique par complexité des prises. 5. Coût financier et organisationnel pour le patient et le système de santé.",
+    "tags": [
+      "polymédication",
+      "interactions",
+      "chute"
+    ]
+  },
+  {
+    "id": 3073,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Modifications pharmacocinétiques liées à l'âge (absorption, distribution, élimination) ?",
+    "answer": "1. Absorption : peu modifiée, mais pH gastrique augmenté. 2. Distribution : augmentation de la demi-vie des molécules lipophiles (stockage dans la masse grasse accrue, ex. benzodiazépines) et hausse de la fraction libre des molécules hydrophiles (baisse de l'eau corporelle et de l'albumine). 3. Élimination : diminution de la clairance rénale (baisse du DFG) prolongeant la durée d'action.",
+    "tags": [
+      "pharmacocinétique",
+      "clairance",
+      "benzodiazépine"
+    ]
+  },
+  {
+    "id": 3074,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Modifications pharmacodynamiques liées à l'âge ?",
+    "answer": "On observe une sensibilité accrue des récepteurs cibles à certains médicaments, en particulier au niveau du système nerveux central. Par exemple, à dose égale, les benzodiazépines, les neuroleptiques et les opioïdes provoquent des effets sédatifs, confusionnels et moteurs (syndrome extrapyramidal, chutes) beaucoup plus marqués chez le sujet âgé.",
+    "tags": [
+      "pharmacodynamie",
+      "sensibilité",
+      "système nerveux"
+    ]
+  },
+  {
+    "id": 3075,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Qu'est-ce que l'Évaluation Gériatrique Standardisée (EGS) ?",
+    "answer": "Démarche diagnostique globale, multidimensionnelle et interdisciplinaire visant à identifier les problèmes médicaux, les capacités fonctionnelles, les troubles cognitifs, l'état nutritionnel et la situation sociale du patient âgé fragile. Elle permet d'établir un plan personnalisé de soins et de suivi pour optimiser l'autonomie.",
+    "tags": [
+      "EGS",
+      "évaluation",
+      "multidimensionnel"
+    ]
+  },
+  {
+    "id": 3076,
+    "chapter": "ch2",
+    "rang": "B",
+    "question": "Indications cliniques d'une Évaluation Gériatrique Standardisée (EGS) ?",
+    "answer": "L'EGS est indiquée chez le sujet âgé de plus de 75 ans identifié comme fragile (ex. score de Fried ≥ 3, chutes répétées, plainte mnésique, perte de poids involontaire, polymédication) afin de guider des décisions thérapeutiques complexes (chirurgie lourde, chimiothérapie oncologique) ou d'anticiper une perte d'autonomie à domicile.",
+    "tags": [
+      "EGS",
+      "indications",
+      "fragilité"
+    ]
+  },
+  {
+    "id": 3077,
+    "chapter": "ch2",
+    "rang": "B",
+    "question": "Composition et rôles de l'équipe pluridisciplinaire réalisant l'EGS ?",
+    "answer": "1. Médecin gériatre : coordonne l'évaluation, gère l'aspect médical, la révision thérapeutique et la synthèse. 2. Infirmier(e) : réalise les tests d'autonomie, de risque d'escarre, et évalue les paramètres biologiques. 3. Assistant(e) social(e) : évalue les ressources financières, l'aidant et organise les aides à domicile ou le placement.",
+    "tags": [
+      "EGS",
+      "équipe pluridisciplinaire",
+      "gériatre"
+    ]
+  },
+  {
+    "id": 3078,
+    "chapter": "ch2",
+    "rang": "B",
+    "question": "Évaluation cognitive dans l'EGS : MMS et MoCa ?",
+    "answer": "1. Mini-Mental State Examination (MMSE) : score sur 30, test de dépistage global rapide (orientation, mémoire, rappel). 2. Montreal Cognitive Assessment (MoCa) : score sur 30, plus sensible aux fonctions exécutives et visuospatiales (trail making, horloge), recommandé si plainte mnésique avec MMSE faussement rassurant.",
+    "tags": [
+      "EGS",
+      "MMSE",
+      "MoCa"
+    ]
+  },
+  {
+    "id": 3079,
+    "chapter": "ch2",
+    "rang": "B",
+    "question": "Évaluation fonctionnelle dans l'EGS : ADL et IADL ?",
+    "answer": "1. Activities of Daily Living (ADL de Katz) : score sur 6, évalue l'indépendance pour les activités de base (toilette, habillage, transferts, continence, repas). 2. Instrumental ADL (IADL de Lawton) : évalue les fonctions élaborées nécessaires à la vie autonome à domicile (téléphone, transports, médicaments, budget).",
+    "tags": [
+      "EGS",
+      "ADL",
+      "IADL"
+    ]
+  },
+  {
+    "id": 3080,
+    "chapter": "ch2",
+    "rang": "B",
+    "question": "Évaluation de l'équilibre et du risque de chute dans l'EGS ?",
+    "answer": "1. Test de l'appui unipodal : capacité à tenir sur un pied ≥ 5 secondes (si < 5s : risque de chute élevé). 2. Timed Up and Go (TUG) : temps pour se lever d'une chaise, marcher 3 m, faire demi-tour et se rasseoir (si > 20s : risque élevé). 3. Échelle de Tinetti : évalue l'équilibre (/16) et la marche (/12).",
+    "tags": [
+      "EGS",
+      "chute",
+      "TUG"
+    ]
+  },
+  {
+    "id": 3081,
+    "chapter": "ch2",
+    "rang": "B",
+    "question": "Évaluation nutritionnelle dans l'EGS : IMC et MNA ?",
+    "answer": "1. Indice de Masse Corporelle (IMC) : seuil de dénutrition fixé à < 21 kg/m² chez le sujet de plus de 70 ans. 2. Mini Nutritional Assessment (MNA) : questionnaire complet (/30) ou simplifié (/14) évaluant les ingesta, la perte de poids récente, la mobilité et le stress psychologique. Un score MNA < 17 signe une dénutrition.",
+    "tags": [
+      "EGS",
+      "nutrition",
+      "MNA"
+    ]
+  },
+  {
+    "id": 3082,
+    "chapter": "ch2",
+    "rang": "B",
+    "question": "Évaluation de l'humeur dans l'EGS : Rôle de la GDS-15 ?",
+    "answer": "La Geriatric Depression Scale (GDS-15) est un auto-questionnaire de 15 questions oui/non, expurgé des items somatiques (fatigue, douleurs) qui peuvent fausser le diagnostic chez le sujet âgé polypathologique. Un score supérieur à 5 sur 15 indique une suspicion forte d'état dépressif et impose une confirmation clinique.",
+    "tags": [
+      "EGS",
+      "dépression",
+      "GDS-15"
+    ]
+  },
+  {
+    "id": 3083,
+    "chapter": "ch2",
+    "rang": "B",
+    "question": "Évaluation psychiatrique/neuropsychiatrique dans l'EGS : Confusion ?",
+    "answer": "Recherche systématique d'un syndrome confusionnel aigu à l'aide de la Confusion Assessment Method (CAM) qui évalue 4 critères (début aigu, inattention, pensée désorganisée, vigilance altérée). Elle permet de distinguer la confusion (aiguë, réversible) d'un trouble neurocognitif majeur (chronique, progressif).",
+    "tags": [
+      "EGS",
+      "confusion",
+      "CAM"
+    ]
+  },
+  {
+    "id": 3084,
+    "chapter": "ch2",
+    "rang": "B",
+    "question": "Évaluation cutanée dans l'EGS : Norton et Braden ?",
+    "answer": "Scores permettant de quantifier le risque d'escarres chez les patients alités ou assis. 1. Échelle de Norton (évalue état physique, mental, activité, mobilité, incontinence). 2. Échelle de Braden (évalue perception, humidité, activité, mobilité, nutrition, friction). Un score de Braden ≤ 12 indique un risque élevé d'escarres.",
+    "tags": [
+      "EGS",
+      "escarre",
+      "Braden"
+    ]
+  },
+  {
+    "id": 3085,
+    "chapter": "ch2",
+    "rang": "B",
+    "question": "Évaluation des comorbidités dans l'EGS : Score de Charlson ?",
+    "answer": "L'index de comorbidité de Charlson est un score cumulatif attribuant des poids (de 1 à 6) à 17 pathologies chroniques majeures (infarctus, démence, cancer, IRC...). Il permet d'estimer l'espérance de vie à 10 ans et d'adapter l'agressivité des traitements (ex. chimiothérapie) selon la survie globale prévisible.",
+    "tags": [
+      "EGS",
+      "comorbidités",
+      "Charlson"
+    ]
+  },
+  {
+    "id": 3086,
+    "chapter": "ch2",
+    "rang": "B",
+    "question": "Évaluation thérapeutique dans l'EGS : Iatrogénie et rein ?",
+    "answer": "Analyse exhaustive de l'ordonnance (recherche d'interactions, de doublons, de médicaments potentiellement inappropriés - MPI) associée au calcul du débit de filtration glomérulaire (DFG) par la formule CKD-EPI. La fonction rénale est le paramètre biologique clé pour l'ajustement des doses en gériatrie.",
+    "tags": [
+      "EGS",
+      "posologie",
+      "iatrogénie"
+    ]
+  },
+  {
+    "id": 3087,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Spécificités de la prise en charge thérapeutique en gériatrie ?",
+    "answer": "Elle repose sur une approche globale individualisée débouchant sur un projet de soins validé avec le patient et son entourage. Elle privilégie la préservation de l'autonomie et de la qualité de vie aux objectifs purement biologiques (ex. HTA tolérée si pas d'orthostatisme, HbA1c ciblée plus haute chez le fragile).",
+    "tags": [
+      "prise en charge",
+      "projet de soins",
+      "autonomie"
+    ]
+  },
+  {
+    "id": 3088,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Règle de prescription gériatrique : 'Start low, go slow' et ses exceptions ?",
+    "answer": "Principe d'introduction des traitements chez le sujet âgé : commencer par une dose très faible (souvent la moitié ou le quart de la dose de l'adulte) et augmenter très progressivement. L'exception majeure concerne les situations aiguës infectieuses : l'antibiothérapie doit être d'emblée efficace et à pleine dose (adaptée au poids).",
+    "tags": [
+      "prescription",
+      "start low",
+      "exception"
+    ]
+  },
+  {
+    "id": 3089,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Prescription d'antibiotiques chez le sujet âgé : Pourquoi ne pas sous-doser ?",
+    "answer": "Dans l'infection bactérienne aiguë (ex: pneumonie, pyélonéphrite), le sous-dosage antibiotique par peur de la toxicité rénale est une cause majeure d'échec thérapeutique et de mortalité. Il faut prescrire d'emblée à dose efficace (adaptée au poids) tout en surveillant la fonction rénale et en adaptant l'intervalle si nécessaire.",
+    "tags": [
+      "prescription",
+      "antibiotique",
+      "posologie"
+    ]
+  },
+  {
+    "id": 3090,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Critères de Beers : Définition et exemples de médicaments potentiellement inappropriés ?",
+    "answer": "Liste de médicaments dont le rapport bénéfice/risque est défavorable chez les personnes de plus de 65 ans. Établie par la Société Américaine de Gériatrie (AGS). Exemples : 1. Benzodiazépines à demi-vie longue. 2. AINS oraux prolongés. 3. Anticholinergiques (amitriptyline, hydroxyzine). 4. Neuroleptiques en dehors de l'agitation sévère.",
+    "tags": [
+      "Beers",
+      "médicaments inappropriés",
+      "AGS"
+    ]
+  },
+  {
+    "id": 3091,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Critères STOPP/START : Définition et différence avec Beers ?",
+    "answer": "Outil européen de dépistage de la prescription inappropriée. 1. Critères STOPP (Screening Tool of Older Persons' Prescriptions) : lister les médicaments potentiellement inappropriés à arrêter. 2. Critères START (Screening Tool to Alert to Right Treatment) : lister les médicaments fortement indiqués mais omis (ex: anticoagulant en FA).",
+    "tags": [
+      "STOPP/START",
+      "prescription",
+      "MPI"
+    ]
+  },
+  {
+    "id": 3092,
+    "chapter": "ch2",
+    "rang": "B",
+    "question": "Concept de cascade iatrogénique et exemple clinique ?",
+    "answer": "Situation où l'effet indésirable d'un premier médicament est confondu avec une nouvelle pathologie, conduisant à la prescription d'un second médicament inutile. Exemple : Prescription d'AINS → HTA iatrogène → prescription d'un antihypertenseur → hypotension orthostatique → chute et fracture du col fémoral.",
+    "tags": [
+      "cascade iatrogénique",
+      "iatrogénie",
+      "AINS"
+    ]
+  },
+  {
+    "id": 3093,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Risques liés aux médicaments anticholinergiques et échelle ACB ?",
+    "answer": "Les anticholinergiques bloquent les récepteurs muscariniques centraux et périphériques. Risques : confusion aiguë, rétention d'urines (globe), constipation sévère, sécheresse buccale, mydriase. L'échelle ACB (Anticholinergic Cognitive Burden) quantifie cette charge (score ≥ 3 associé à un risque accru de déclin cognitif).",
+    "tags": [
+      "anticholinergique",
+      "ACB",
+      "confusion"
+    ]
+  },
+  {
+    "id": 3094,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Dangers des benzodiazépines chez la personne âgée ?",
+    "answer": "Risques majeurs de : 1. Chutes et fractures (par effet myorelaxant et sédation). 2. Troubles mnésiques et déclin cognitif. 3. Syndrome confusionnel (delirium) ou sédation excessive. 4. Troubles respiratoires (dépression respiratoire, apnées). Le sevrage progressif doit toujours être programmé.",
+    "tags": [
+      "benzodiazépine",
+      "chute",
+      "confusion"
+    ]
+  },
+  {
+    "id": 3095,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Dangers des anti-inflammatoires non stéroïdiens (AINS) chez la personne âgée ?",
+    "answer": "Risques majeurs de : 1. Insuffisance rénale aiguë (par blocage des prostaglandines rénales). 2. Décompensation d'insuffisance cardiaque (par rétention hydrosodée). 3. Hémorragie digestive haute ou ulcère gastroduodénal. 4. Poussée hypertensive. Les AINS oraux sont contre-indiqués chez le sujet très âgé fragile.",
+    "tags": [
+      "AINS",
+      "insuffisance rénale",
+      "insuffisance cardiaque"
+    ]
+  },
+  {
+    "id": 3096,
+    "chapter": "ch2",
+    "rang": "B",
+    "question": "Formule de clairance de créatinine recommandée pour adapter les doses chez la PA ?",
+    "answer": "Pour l'adaptation posologique des médicaments, les recommandations internationales privilégient l'estimation du DFG par la formule CKD-EPI. La formule historique de Cockcroft-Gault sous-estime la fonction rénale chez le sujet très âgé dénutri et n'est plus recommandée par la HAS pour définir le stade d'IRC.",
+    "tags": [
+      "DFG",
+      "CKD-EPI",
+      "Cockcroft-Gault"
+    ]
+  },
+  {
+    "id": 3097,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Spécificités de la douleur chez le sujet âgé ?",
+    "answer": "La douleur est fréquente (arthrose, neuropathie) mais sous-déclarée par le patient (croyance erronée que la douleur est normale avec l'âge) et sous-évaluée par les soignants. Elle a un retentissement fonctionnel et psychique majeur (chutes, dépression, dénutrition). Elle doit être dépistée activement.",
+    "tags": [
+      "douleur",
+      "symptomatologie",
+      "retentissement"
+    ]
+  },
+  {
+    "id": 3098,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Évaluation de la douleur chez le patient âgé non communicant : Quelles échelles ?",
+    "answer": "On utilise des échelles d'hétéro-évaluation comportementale : 1. Échelle ECPA (Échelle Comportementale pour Personnes Âgées) : évalue l'expression faciale, le comportement pendant les soins, la position corporelle. 2. Échelle DOLOPLUS-2 : évalue les plaintes somatiques, les réactions psychomotrices et les modifications comportementales.",
+    "tags": [
+      "douleur",
+      "ECPA",
+      "DOLOPLUS-2"
+    ]
+  },
+  {
+    "id": 3099,
+    "chapter": "ch2",
+    "rang": "B",
+    "question": "Rôle du médecin traitant et de la concertation pluridisciplinaire en gériatrie ?",
+    "answer": "Le médecin traitant est le pivot du suivi longitudinal à domicile et le garant de la cohérence globale. En milieu hospitalier gériatrique, la concertation pluridisciplinaire (médecin, kiné, ergo, infirmiers, assistante sociale) permet de confronter les avis pour élaborer un projet de sortie réaliste et sécurisé.",
+    "tags": [
+      "concertation pluridisciplinaire",
+      "médecin traitant",
+      "EGS"
+    ]
+  },
+  {
+    "id": 3100,
+    "chapter": "ch2",
+    "rang": "A",
+    "question": "Définition du vieillissement pathologique (vs normal) ?",
+    "answer": "Le vieillissement pathologique désigne l'accélération du déclin fonctionnel sous l'effet de maladies chroniques non stabilisées ou de facteurs de stress répétés (ex: chutes à répétition, démence, dénutrition sévère). Contrairement au vieillissement normal, il conduit rapidement à une perte d'autonomie et à la dépendance.",
+    "tags": [
+      "vieillissement pathologique",
+      "dépendance",
+      "déclin"
+    ]
+  },
+  {
+    "id": 3101,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Définition de l'autonomie en gériatrie ?",
+    "answer": "Capacité à se gouverner soi-même, à prendre des décisions concernant sa propre vie et à choisir ses actions de manière lucide. Elle relève de la dimension cognitive et juridique. Une personne peut être physiquement dépendante (ex: paraplégique en fauteuil) mais intellectuellement autonome.",
+    "tags": [
+      "autonomie",
+      "définition"
+    ]
+  },
+  {
+    "id": 3102,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Définition de l'indépendance fonctionnelle en gériatrie ?",
+    "answer": "Capacité d'une personne à réaliser seule, sans l'aide d'un tiers, les actes de la vie quotidienne. Elle relève de la dimension physique et motrice. La dépendance est le contraire de l'indépendance (incapacité à réaliser ces actes seul).",
+    "tags": [
+      "indépendance",
+      "dépendance",
+      "définition"
+    ]
+  },
+  {
+    "id": 3103,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Différence entre dépendance fonctionnelle, cognitive et sociale ?",
+    "answer": "1. Dépendance fonctionnelle : incapacité physique à réaliser les gestes de base (toilette, marche). 2. Dépendance cognitive : perte de la capacité de jugement, d'orientation ou de cohérence, empêchant les choix lucides. 3. Dépendance sociale : isolement et absence de réseau d'aide (aidants) pour pallier les déficits.",
+    "tags": [
+      "dépendance",
+      "cognitif",
+      "social"
+    ]
+  },
+  {
+    "id": 3104,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Qu'est-ce que les Activités de la Vie Quotidienne (AVQ ou ADL) ?",
+    "answer": "Activités physiques élémentaires de survie au quotidien, mesurées par l'index de Katz. Elles comprennent : la toilette, l'habillage, l'aller aux WC, les transferts (se lever/se coucher), la continence (urinaire et fécale) et l'alimentation (manger seul). Elles se perdent tardivement.",
+    "tags": [
+      "ADL",
+      "AVQ",
+      "katz"
+    ]
+  },
+  {
+    "id": 3105,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "L'index d'autonomie ADL de Katz : Les 6 domaines évalués ?",
+    "answer": "Évalue l'indépendance sur 6 items binaires (1 pt si autonome, 0 pt si besoin d'aide totale ou partielle) : 1. Toilette. 2. Habillage. 3. Aller aux WC. 4. Transferts (lit-fauteuil). 5. Continence. 6. Alimentation. Le score total varie de 0 (dépendance complète) à 6 (indépendance totale).",
+    "tags": [
+      "katz",
+      "ADL",
+      "domaines"
+    ]
+  },
+  {
+    "id": 3106,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Interprétation clinique du score ADL de Katz ?",
+    "answer": "Un score ADL de 6 indique une autonomie complète pour les actes physiques essentiels. Un score inférieur à 3 indique une dépendance sévère (confinement lit/fauteuil ou démence avancée) nécessitant des aides lourdes. C'est un marqueur pronostique fort de survie et d'admission en EHPAD.",
+    "tags": [
+      "katz",
+      "ADL",
+      "score"
+    ]
+  },
+  {
+    "id": 3107,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Qu'est-ce que les Activités Instrumentales de la Vie Quotidienne (AVQ-I ou IADL) ?",
+    "answer": "Activités complexes nécessaires pour vivre de manière autonome à domicile. Elles comprennent : l'utilisation du téléphone, les courses, la préparation des repas, le ménage, la gestion du linge, l'utilisation des transports, la gestion des médicaments et la gestion du budget (échelle de Lawton).",
+    "tags": [
+      "IADL",
+      "AVQ-I",
+      "Lawton"
+    ]
+  },
+  {
+    "id": 3108,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Échelle IADL de Lawton et Brody : Items évalués (version standard vs version 4 items) ?",
+    "answer": "La version complète évalue 8 domaines chez la femme, 5 chez l'homme. En pratique clinique française, on utilise souvent la version simplifiée à 4 items discriminants : 1. Capacité à téléphoner. 2. Utilisation des moyens de transport. 3. Prise de médicaments. 4. Gestion du budget.",
+    "tags": [
+      "IADL",
+      "Lawton",
+      "score"
+    ]
+  },
+  {
+    "id": 3109,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Ordre séquentiel de perte de l'autonomie : IADL vs ADL ?",
+    "answer": "Les activités instrumentales (IADL, complexes et cognitives) se perdent toujours en premier lors du vieillissement pathologique ou d'une démence débutante (ex. erreurs de médicaments, gestion du budget difficile). Les activités de base de survie (ADL, physiques) se perdent plus tardivement.",
+    "tags": [
+      "autonomie",
+      "déclin",
+      "chronologie"
+    ]
+  },
+  {
+    "id": 3110,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Qu'est-ce que la grille AGGIR et quels sont ses buts ?",
+    "answer": "Grille nationale française d'évaluation multidimensionnelle de la perte d'autonomie physique et psychique. Ses buts sont : 1. Évaluer le niveau de dépendance du patient. 2. Déterminer le GIR (Groupe Iso-Ressources). 3. Servir de base réglementaire pour l'attribution de l'APA.",
+    "tags": [
+      "AGGIR",
+      "GIR",
+      "APA"
+    ]
+  },
+  {
+    "id": 3111,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "AGGIR : Différence entre variables discriminantes et variables illustratives ?",
+    "answer": "La grille AGGIR comporte 17 variables au total. 1. Les 10 variables discriminantes évaluent l'autonomie physique et mentale et servent au calcul du GIR. 2. Les 7 variables illustratives évaluent la vie domestique et sociale (cuisine, ménage, loisirs) et guident l'élaboration du plan d'aide sans modifier le GIR.",
+    "tags": [
+      "AGGIR",
+      "variables",
+      "GIR"
+    ]
+  },
+  {
+    "id": 3112,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Les 10 variables discriminantes de la grille AGGIR ?",
+    "answer": "1. Cohérence (conversation sensée). 2. Orientation (temps/lieu). 3. Toilette (hygiène corporelle). 4. Habillage (haut/bas). 5. Alimentation (manger). 6. Élimination (urine/selles). 7. Transferts (se lever/coucher/s'asseoir). 8. Déplacement intérieur. 9. Déplacement extérieur. 10. Communication à distance (téléphone).",
+    "tags": [
+      "AGGIR",
+      "variables discriminantes"
+    ]
+  },
+  {
+    "id": 3113,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Cotation des variables dans la grille AGGIR ?",
+    "answer": "Chaque variable est cotée de manière ternaire : 1. Cotation A : la personne fait seule, totalement, habituellement et correctement le geste. 2. Cotation B : la personne fait partiellement, ou non habituellement, ou non correctement. 3. Cotation C : la personne ne fait pas du tout.",
+    "tags": [
+      "AGGIR",
+      "cotation",
+      "score"
+    ]
+  },
+  {
+    "id": 3114,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "AGGIR : Définition et cotation de la variable 'Cohérence' ?",
+    "answer": "Évalue la capacité du patient à converser et à se comporter de façon logique et sensée par rapport aux normes sociales. Coter C si le patient présente des troubles cognitifs ou du comportement majeurs (agitation, déambulation erratique, propos incohérents) perturbant gravement la communication.",
+    "tags": [
+      "AGGIR",
+      "cohérence",
+      "cognition"
+    ]
+  },
+  {
+    "id": 3115,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "AGGIR : Définition et cotation de la variable 'Orientation' ?",
+    "answer": "Évalue la capacité du patient à se repérer dans le temps (heure, jour, saison, année) et dans l'espace (reconnaissance des lieux familiers, repérage dans son domicile). Coter C si le patient est complètement désorienté et nécessite une surveillance constante pour éviter l'errance.",
+    "tags": [
+      "AGGIR",
+      "orientation",
+      "temps/lieu"
+    ]
+  },
+  {
+    "id": 3116,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "AGGIR : Définition et cotation de la variable 'Transferts' ?",
+    "answer": "Évalue la capacité physique du patient à se lever du lit, à se coucher, à s'asseoir sur une chaise et à passer d'une de ces positions à une autre, de manière autonome. Coter C si le patient nécessite l'aide physique permanente d'un tiers ou d'un lève-personne pour ces transferts.",
+    "tags": [
+      "AGGIR",
+      "transfert",
+      "mobilité"
+    ]
+  },
+  {
+    "id": 3117,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "AGGIR : Définition et cotation de la variable 'Toilette' ?",
+    "answer": "Évalue la capacité du patient à assurer l'hygiène de son corps. On cote séparément la toilette du haut (visage, bras) et du bas (régions intimes, jambes). La cotation globale est A si les deux sont A, C si les deux sont C (ou si besoin d'aide complète), et B dans les autres cas.",
+    "tags": [
+      "AGGIR",
+      "toilette",
+      "hygiène"
+    ]
+  },
+  {
+    "id": 3118,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "AGGIR : Définition et cotation de la variable 'Habillage' ?",
+    "answer": "Évalue la capacité à s'habiller et à se déshabiller. On évalue séparément : le haut (passer les bras, la tête), le moyen (fermer, boutonner) et le bas (pantalon, chaussettes, chaussures). Cotation globale : A si les trois sont A, C si les trois sont C, B dans les autres cas.",
+    "tags": [
+      "AGGIR",
+      "habillage",
+      "vêtement"
+    ]
+  },
+  {
+    "id": 3119,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "AGGIR : Définition et cotation de la variable 'Alimentation' ?",
+    "answer": "Évalue uniquement la capacité du patient à manger les aliments préparés et servis devant lui (porter la nourriture à sa bouche, mâcher, avaler). Elle n'évalue pas la préparation du repas (cuisine, qui est une variable illustrative). Coter C si le patient doit être alimenté à la cuillère ou par sonde.",
+    "tags": [
+      "AGGIR",
+      "alimentation",
+      "nutrition"
+    ]
+  },
+  {
+    "id": 3120,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "AGGIR : Définition et cotation de la variable 'Élimination' ?",
+    "answer": "Évalue la capacité du patient à assurer l'hygiène de l'élimination urinaire et fécale. On évalue séparément la continence et l'utilisation de protections. Coter C en cas d'incontinence double (urinaire et fécale) totale nécessitant un change complet par un tiers.",
+    "tags": [
+      "AGGIR",
+      "élimination",
+      "incontinence"
+    ]
+  },
+  {
+    "id": 3121,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "AGGIR : Définition et cotation de la variable 'Déplacement intérieur' ?",
+    "answer": "Évalue la capacité du patient à se déplacer seul et de manière autonome à l'intérieur de son lieu de vie habituel (chambre, couloirs, salon), y compris avec une aide technique (canne, déambulateur) ou en fauteuil roulant autonome. Coter C si le patient est grabataire ou incapable de se propulser.",
+    "tags": [
+      "AGGIR",
+      "déplacement",
+      "mobilité"
+    ]
+  },
+  {
+    "id": 3122,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "AGGIR : Définition et cotation de la variable 'Déplacement extérieur' ?",
+    "answer": "Évalue la capacité du patient à se déplacer seul au-delà de son lieu de vie (dans le jardin, dans la rue, chez le commerçant voisin). Coter C si le patient ne sort jamais seul en raison d'un risque élevé de chute, de désorientation spatiale ou de handicap moteur sévère.",
+    "tags": [
+      "AGGIR",
+      "déplacement extérieur",
+      "mobilité"
+    ]
+  },
+  {
+    "id": 3123,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "AGGIR : Définition et cotation de la variable 'Communication à distance' ?",
+    "answer": "Évalue la capacité du patient à utiliser de façon autonome les moyens de communication disponibles (téléphone, téléalarme, sonnette en établissement) pour alerter en cas de besoin. Coter C si le patient est incapable de composer un numéro d'urgence ou d'appuyer sur son médaillon d'appel.",
+    "tags": [
+      "AGGIR",
+      "communication",
+      "téléalarme"
+    ]
+  },
+  {
+    "id": 3124,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Signification du concept de GIR (Groupe Iso-Ressources) ?",
+    "answer": "Niveau de perte d'autonomie physique et mentale d'une personne âgée, déterminé par le traitement des 10 variables discriminantes de la grille AGGIR par un logiciel national. Il existe 6 niveaux de GIR. Le GIR permet de classer les résidents pour adapter les ressources en personnel soignant.",
+    "tags": [
+      "GIR",
+      "AGGIR",
+      "classification"
+    ]
+  },
+  {
+    "id": 3125,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Définition clinique et caractéristiques du GIR 1 ?",
+    "answer": "Niveau de dépendance le plus lourd. Concerne les personnes confinées au lit ou au fauteuil, dont les fonctions cognitives sont gravement altérées et qui nécessitent la présence indispensable et continue d'intervenants pour tous les actes de la vie quotidienne et de soins.",
+    "tags": [
+      "GIR 1",
+      "dépendance lourde",
+      "grabataire"
+    ]
+  },
+  {
+    "id": 3126,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Définition clinique et caractéristiques du GIR 2 ?",
+    "answer": "Concerne deux groupes de personnes : 1. Celles qui sont confinées au lit ou au fauteuil, dont les fonctions mentales sont préservées, mais qui nécessitent une aide pour la toilette, l'habillage. 2. Celles qui peuvent se déplacer mais dont les fonctions cognitives sont altérées (errance, troubles majeurs du comportement).",
+    "tags": [
+      "GIR 2",
+      "dépendance",
+      "démence"
+    ]
+  },
+  {
+    "id": 3127,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Définition clinique et caractéristiques du GIR 3 ?",
+    "answer": "Concerne les personnes ayant conservé leur autonomie mentale et une partie de leur autonomie physique, mais qui nécessitent quotidiennement et plusieurs fois par jour des aides pour la toilette, l'habillage, les éliminations urinaires et fécales.",
+    "tags": [
+      "GIR 3",
+      "dépendance partielle"
+    ]
+  },
+  {
+    "id": 3128,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Définition clinique et caractéristiques du GIR 4 ?",
+    "answer": "Concerne les personnes qui ne peuvent pas assurer seules leur transfert du lit ou de la chaise, mais qui, une fois levées, peuvent se déplacer à l'intérieur du domicile. Elles ont besoin d'aide pour la toilette et l'habillage. Concerne aussi les personnes sans troubles moteurs mais qui ont besoin d'aide pour s'alimenter.",
+    "tags": [
+      "GIR 4",
+      "dépendance modérée"
+    ]
+  },
+  {
+    "id": 3129,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Définition clinique et caractéristiques du GIR 5 ?",
+    "answer": "Concerne les personnes qui sont globalement indépendantes pour leurs déplacements et leurs activités physiques de base (ADL), mais qui nécessitent une aide ponctuelle pour la toilette, la préparation des repas ou le ménage (les activités instrumentales).",
+    "tags": [
+      "GIR 5",
+      "indépendance relative"
+    ]
+  },
+  {
+    "id": 3130,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Définition clinique et caractéristiques du GIR 6 ?",
+    "answer": "Niveau de dépendance le plus faible. Concerne les personnes totalement indépendantes pour l'ensemble des actes discriminants de la vie quotidienne (ADL). Elles n'ont besoin d'aucune aide humaine pour la toilette, l'habillage, les repas ou les déplacements.",
+    "tags": [
+      "GIR 6",
+      "autonomie",
+      "indépendance"
+    ]
+  },
+  {
+    "id": 3131,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Quels GIR ouvrent droit à l'APA (Allocation Personnalisée d'Autonomie) ?",
+    "answer": "Seuls les patients classés dans les GIR 1, 2, 3 et 4 peuvent bénéficier de l'APA. Les patients en GIR 5 et 6 ne sont pas éligibles à l'aide financière de l'APA (ils peuvent cependant solliciter des aides de leur caisse de retraite pour le ménage ou le portage de repas).",
+    "tags": [
+      "GIR",
+      "APA",
+      "droit"
+    ]
+  },
+  {
+    "id": 3132,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Différence entre APA à domicile et APA en établissement ?",
+    "answer": "1. APA à domicile : finance un plan d'aide personnalisé (heures d'auxiliaire de vie, portage de repas, aménagement du domicile, accueil de jour). 2. APA en établissement : finance une partie du tarif dépendance facturé par l'EHPAD (différence entre le tarif dépendance du GIR du résident et celui du GIR 5-6 restant à sa charge).",
+    "tags": [
+      "APA",
+      "domicile",
+      "EHPAD"
+    ]
+  },
+  {
+    "id": 3133,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Conditions administratives d'obtention de l'APA en France ?",
+    "answer": "1. Être âgé d'au moins 60 ans. 2. Résider en France de manière stable et régulière. 3. Présenter une perte d'autonomie classée en GIR 1, 2, 3 ou 4. L'APA n'est pas soumise à condition de ressources, mais le montant versé est modulé selon les revenus du bénéficiaire (ticket modérateur).",
+    "tags": [
+      "APA",
+      "conditions",
+      "ressources"
+    ]
+  },
+  {
+    "id": 3134,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Rôle de l'équipe médico-sociale (EMS) départementale pour l'APA ?",
+    "answer": "L'EMS du Conseil Départemental (composée d'un travailleur social et/ou d'un médecin) se rend au domicile du demandeur pour : 1. Évaluer la perte d'autonomie (remplir la grille AGGIR). 2. Évaluer les besoins du patient et de son aidant. 3. Proposer un plan d'aide personnalisé (nombre d'heures requis).",
+    "tags": [
+      "APA",
+      "évaluation",
+      "travailleur social"
+    ]
+  },
+  {
+    "id": 3135,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Qu'est-ce que le plan d'aide personnalisé de l'APA ?",
+    "answer": "Document contractuel élaboré par l'équipe médico-sociale décrivant les aides humaines et techniques financées pour maintenir le patient à domicile (ex. 30 heures d'aide à domicile/mois, téléassistance, aménagement douche). Le montant maximum du plan d'aide est plafonné selon le GIR du patient.",
+    "tags": [
+      "APA",
+      "plan d'aide",
+      "financement"
+    ]
+  },
+  {
+    "id": 3136,
+    "chapter": "ch3",
+    "rang": "B",
+    "question": "Rôle du proche aidant (aidant principal) et notion de fardeau ?",
+    "answer": "L'aidant proche (conjoint, enfant) assure la majorité de l'aide non professionnelle à domicile. Le 'fardeau' ou charge de l'aidant désigne le retentissement physique, psychologique, financier et social lié à cette prise en charge. L'épuisement de l'aidant est une cause majeure d'hospitalisation ou d'institutionnalisation en urgence.",
+    "tags": [
+      "aidant",
+      "fardeau",
+      "épuisement"
+    ]
+  },
+  {
+    "id": 3137,
+    "chapter": "ch3",
+    "rang": "B",
+    "question": "L'échelle de Zarit : But, structure et interprétation ?",
+    "answer": "Questionnaire d'évaluation de la charge de l'aidant comportant 22 items cotés de 0 à 4. Le score total varie de 0 à 88. Interprétation : < 21 : charge légère ; 21-40 : charge modérée ; 41-60 : charge sévère ; > 60 : épuisement majeur. Un score élevé impose des mesures de répit (accueil de jour, relais).",
+    "tags": [
+      "Zarit",
+      "aidant",
+      "score"
+    ]
+  },
+  {
+    "id": 3138,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Qu'est-ce que le Plan Personnalisé de Santé (PPS) ?",
+    "answer": "Document de coordination pluridisciplinaire élaboré pour les patients âgés complexes (en lien avec le dispositif DAC). Il liste les objectifs de soins, les interventions médicales et médico-sociales planifiées, les professionnels impliqués et les souhaits du patient pour éviter les hospitalisations répétées.",
+    "tags": [
+      "PPS",
+      "coordination",
+      "soins"
+    ]
+  },
+  {
+    "id": 3139,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Différence entre perte d'autonomie transitoire et installée ?",
+    "answer": "1. Transitoire : perte fonctionnelle aiguë liée à une pathologie intercurrente réversible (ex. grippe, confusion, post-opératoire). Elle doit être stimulée par la rééducation précoce. 2. Installée : incapacité chronique liée à des séquelles non modifiables (ex. AVC majeur, démence avancée) nécessitant une aide pérenne.",
+    "tags": [
+      "autonomie",
+      "aigu",
+      "chronique"
+    ]
+  },
+  {
+    "id": 3140,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Qu'est-ce que la dépendance iatrogène d'hospitalisation ?",
+    "answer": "Perte d'autonomie physique ou cognitive acquise par le patient âgé au cours d'un séjour hospitalier, indépendante de la maladie ayant motivé l'admission. Elle est favorisée par l'alitement injustifié, la pose de sondes/perfusions limitant la mobilité, l'introduction de psychotropes et l'absence de repères.",
+    "tags": [
+      "iatrogénie",
+      "hospitalisation",
+      "dépendance iatrogène"
+    ]
+  },
+  {
+    "id": 3141,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Mesures de prévention de la dépendance iatrogène à l'hôpital ?",
+    "answer": "1. Lever précoce systématique (dès le premier jour si possible). 2. Limitation des dispositifs invasifs (éviter perfusions inutiles, sondes urinaires systématiques). 3. Kinésithérapie de marche précoce. 4. Repères temporels (calendrier, montre). 5. Éviter la prescription d'anxiolytiques ou de neuroleptiques sédatifs.",
+    "tags": [
+      "prévention",
+      "hospitalisation",
+      "lever précoce"
+    ]
+  },
+  {
+    "id": 3142,
+    "chapter": "ch3",
+    "rang": "B",
+    "question": "Rôle de l'ergothérapeute dans le maintien à domicile de la personne âgée ?",
+    "answer": "L'ergothérapeute évalue le patient dans son environnement réel et propose des adaptations : 1. Suppression des obstacles (tapis, fils électriques). 2. Aménagement de la salle de bain (siège de douche, barres d'appui). 3. Apprentissage de l'utilisation d'aides techniques pour sécuriser les transferts et préserver l'autonomie.",
+    "tags": [
+      "ergothérapeute",
+      "adaptation",
+      "domicile"
+    ]
+  },
+  {
+    "id": 3143,
+    "chapter": "ch3",
+    "rang": "B",
+    "question": "Aides techniques d'aide à la mobilité et leur prescription ?",
+    "answer": "1. Déambulateur (cadre de marche ou rollator à roues) : indiqué si instabilité posturale majeure ou faiblesse musculaire bilatérale. 2. Canne simple ou tripode : indiquée si appui douloureux unilatéral ou besoin de réassurance. La prescription médicale permet un remboursement par la Sécurité Sociale.",
+    "tags": [
+      "aide technique",
+      "déambulateur",
+      "prescrire"
+    ]
+  },
+  {
+    "id": 3144,
+    "chapter": "ch3",
+    "rang": "B",
+    "question": "Téléassistance et géronto-technologies au service du maintien à domicile ?",
+    "answer": "Dispositifs électroniques visant à sécuriser la personne âgée vivant seule à domicile : 1. Médaillon ou montre de téléassistance (bouton poussoir pour contacter une centrale 24h/24 en cas de chute). 2. Détecteurs automatiques de chute (capteurs accélérométriques). 3. Chemins lumineux pour éviter les chutes nocturnes.",
+    "tags": [
+      "téléassistance",
+      "gérontechnologie",
+      "chute"
+    ]
+  },
+  {
+    "id": 3145,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Impact du déclin cognitif sur l'autonomie instrumentale ?",
+    "answer": "Les troubles des fonctions exécutives et de la mémoire altèrent précocement les IADL. Le patient fait des erreurs dans la prise de ses médicaments (observance), ne parvient plus à gérer ses comptes bancaires (risques d'abus financier) ou commet des imprudences en cuisine (oublis du gaz), nécessitant une protection.",
+    "tags": [
+      "cognition",
+      "IADL",
+      "fonctions exécutives"
+    ]
+  },
+  {
+    "id": 3146,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Rôle de l'infirmière d'évaluation gériatrique en ambulatoire ?",
+    "answer": "Elle réalise l'évaluation initiale au domicile ou en consultation, applique les échelles validées (ADL, Braden, MNA), observe l'environnement physique et l'organisation des aides, et assure le lien avec l'équipe de gériatrie et le médecin traitant pour ajuster le plan d'aide.",
+    "tags": [
+      "infirmière",
+      "EGS",
+      "ambulatoire"
+    ]
+  },
+  {
+    "id": 3147,
+    "chapter": "ch3",
+    "rang": "B",
+    "question": "Rôle du DAC (Dispositif d'Appui à la Coordination) ?",
+    "answer": "Guichet unique départemental destiné aux professionnels de santé pour la gestion des situations gériatriques complexes à domicile. Le DAC coordonne les différents acteurs (médicaux, sociaux), propose des évaluations multidisciplinaires et organise la continuité des soins pour éviter les ruptures de prise en charge.",
+    "tags": [
+      "DAC",
+      "coordination",
+      "complexité"
+    ]
+  },
+  {
+    "id": 3148,
+    "chapter": "ch3",
+    "rang": "B",
+    "question": "Accueil de jour : Indications et objectifs ?",
+    "answer": "Structure accueillant les patients atteints de troubles neurocognitifs (Alzheimer) 1 à plusieurs jours par semaine. Objectifs : 1. Pour le patient : stimuler les capacités cognitives et sociales via des ateliers. 2. Pour le proche aidant : offrir un temps de répit indispensable pour prévenir son épuisement.",
+    "tags": [
+      "accueil de jour",
+      "répit",
+      "aidant"
+    ]
+  },
+  {
+    "id": 3149,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Hébergement temporaire : Définition et objectifs ?",
+    "answer": "Placement de courte durée (maximum 3 mois) en EHPAD. Objectifs : 1. Répit de l'aidant (ex: vacances, hospitalisation de l'aidant). 2. Transition après une hospitalisation aiguë pour consolider l'autonomie avant le retour à domicile. 3. Évaluation de la tolérance à la vie en collectivité.",
+    "tags": [
+      "hébergement temporaire",
+      "répit",
+      "EHPAD"
+    ]
+  },
+  {
+    "id": 3150,
+    "chapter": "ch3",
+    "rang": "A",
+    "question": "Différence conceptuelle entre handicap précoce et perte d'autonomie liée à l'âge ?",
+    "answer": "1. Handicap précoce (survenu avant 60 ans) : relève de la législation sur le handicap (MDPH, PCH), orientée vers la compensation sociale et l'insertion. 2. Perte d'autonomie (après 60 ans) : relève du Conseil Départemental (grille AGGIR, APA), orientée vers l'aide aux gestes de la vie quotidienne.",
+    "tags": [
+      "handicap",
+      "autonomie",
+      "MDPH"
+    ]
+  },
+  {
+    "id": 3151,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Les 4 grands principes de l'éthique médicale en gériatrie ?",
+    "answer": "1. Autonomie : respect de la liberté de choix et de décision du patient lucide. 2. Bienfaisance : agir au mieux des intérêts du patient pour sa santé et sa qualité de vie. 3. Non-malfaisance : ne pas causer de tort inutile (refus de l'acharnement). 4. Justice : équité dans l'accès aux soins et aux ressources.",
+    "tags": [
+      "éthique",
+      "principes",
+      "autonomie"
+    ]
+  },
+  {
+    "id": 3152,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Loi Kouchner du 4 mars 2002 : Quels apports majeurs ?",
+    "answer": "Loi relative aux droits des malades. Dispositions majeures : 1. Droit à l'information complète, claire et loyale. 2. Consentement libre et éclairé obligatoire pour tout acte. 3. Droit d'accès direct au dossier médical. 4. Droit de désigner une personne de confiance. 5. Droit au secret professionnel.",
+    "tags": [
+      "Kouchner",
+      "droits",
+      "consentement"
+    ]
+  },
+  {
+    "id": 3153,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Recueil du consentement chez le patient avec troubles cognitifs ?",
+    "answer": "L'altération cognitive n'annule pas le droit au consentement. Le médecin doit s'efforcer de recueillir l'assentiment du patient en adaptant son langage. Si le patient est incapable d'exprimer sa volonté, le médecin consulte la personne de confiance, la famille ou le tuteur légal pour prendre la décision.",
+    "tags": [
+      "consentement",
+      "cognition",
+      "éthique"
+    ]
+  },
+  {
+    "id": 3154,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Rôle de la personne de confiance (Loi Kouchner) ?",
+    "answer": "Personne désignée par écrit par le patient pour l'accompagner dans ses démarches médicales. Si le patient devient incapable d'exprimer sa volonté (ex. coma, démence sévère), la personne de confiance est consultée en priorité par l'équipe médicale. Son avis est consultatif et non décisionnel (le médecin décide in fine).",
+    "tags": [
+      "personne de confiance",
+      "loi",
+      "consentement"
+    ]
+  },
+  {
+    "id": 3155,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Différence entre personne de confiance et personne à prévenir ?",
+    "answer": "1. Personne de confiance : rôle juridique consultatif sur les décisions médicales de fin de vie ou de soins si le patient ne peut plus s'exprimer. 2. Personne à prévenir : simple contact administratif ou familial prévenu en cas de transfert ou de décès, sans aucun rôle décisionnel ou consultatif légal.",
+    "tags": [
+      "personne de confiance",
+      "personne à prévenir"
+    ]
+  },
+  {
+    "id": 3156,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Force juridique de l'avis de la personne de confiance ?",
+    "answer": "L'avis de la personne de confiance prévaut sur tout autre avis non médical (famille, proches). Cependant, cet avis n'a pas de valeur coercitive : il est consultatif pour le médecin. Le médecin reste le seul décideur de la conduite à tenir, en s'appuyant sur l'avis médical et la volonté du patient.",
+    "tags": [
+      "personne de confiance",
+      "décision"
+    ]
+  },
+  {
+    "id": 3157,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Désignation de la personne de confiance : Qui et comment ?",
+    "answer": "Toute personne majeure peut désigner une personne de confiance (parent, proche, médecin traitant). La désignation doit être faite par écrit, datée et signée. En cas d'hospitalisation, elle est proposée systématiquement à l'admission. La désignation est révocable et modifiable par écrit à tout moment.",
+    "tags": [
+      "personne de confiance",
+      "désignation"
+    ]
+  },
+  {
+    "id": 3158,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Durée de validité de la désignation de la personne de confiance ?",
+    "answer": "1. En cas d'hospitalisation : la désignation est valable uniquement pour la durée de l'hospitalisation en cours, sauf si le patient en dispose autrement par écrit. 2. En médecine de ville ou en EHPAD : elle est valable sans limitation de durée, jusqu'à ce que le patient l'annule ou la modifie.",
+    "tags": [
+      "personne de confiance",
+      "validité"
+    ]
+  },
+  {
+    "id": 3159,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Qu'est-ce que les directives anticipées (DA) ?",
+    "answer": "Document écrit par lequel une personne majeure exprime ses souhaits concernant sa fin de vie (refus de l'acharnement, limitation de traitements) pour le cas où elle serait un jour hors d'état d'exprimer sa volonté. Elles permettent de guider les décisions médicales le moment venu.",
+    "tags": [
+      "directives anticipées",
+      "fin de vie"
+    ]
+  },
+  {
+    "id": 3160,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Loi Claeys-Leonetti du 2 février 2016 : Avancées sur les directives anticipées ?",
+    "answer": "La loi a rendu les directives anticipées opposables au médecin (leur respect s'impose à lui). De plus, leur durée de validité est devenue illimitée (les directives écrites il y a 10 ans restent valables, mais révisables et révocables à tout moment). Le médecin doit obligatoirement rechercher leur existence.",
+    "tags": [
+      "Claeys-Leonetti",
+      "directives anticipées",
+      "loi"
+    ]
+  },
+  {
+    "id": 3161,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Dans quels cas le médecin peut-il déroger aux directives anticipées ?",
+    "answer": "Uniquement dans deux situations exceptionnelles : 1. En cas d'urgence vitale (le temps d'évaluer la situation médicale). 2. Si les directives anticipées apparaissent manifestement inappropriées ou non conformes à la situation médicale réelle du patient. Le médecin doit alors engager une procédure collégiale et motiver sa décision.",
+    "tags": [
+      "directives anticipées",
+      "dérogation",
+      "procédure collégiale"
+    ]
+  },
+  {
+    "id": 3162,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Formalisme de rédaction des directives anticipées ?",
+    "answer": "Il n'y a pas de formalisme strict (un écrit sur papier libre daté et signé suffit). La HAS propose deux modèles types : le Modèle 1 (pour les personnes en fin de vie ou atteintes d'une maladie grave) et le Modèle 2 (pour les personnes en bonne santé souhaitant anticiper). Deux témoins doivent co-signer si le patient ne peut pas écrire.",
+    "tags": [
+      "directives anticipées",
+      "rédaction",
+      "HAS"
+    ]
+  },
+  {
+    "id": 3163,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Directives anticipées chez le patient sous tutelle ?",
+    "answer": "Le majeur sous tutelle peut rédiger ses directives anticipées. Toutefois, il doit obtenir l'autorisation du juge des tutelles ou du conseil de famille s'il souhaite désigner son tuteur comme personne de confiance. Les directives anticipées du majeur sous tutelle restent opposables au médecin.",
+    "tags": [
+      "directives anticipées",
+      "tutelle",
+      "majeur protégé"
+    ]
+  },
+  {
+    "id": 3164,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Où conserver les directives anticipées pour en assurer l'accès ?",
+    "answer": "Elles doivent être facilement accessibles en cas d'urgence : 1. Enregistrées dans Mon Espace Santé (Dossier Médical Partagé - DMP, qui est consultable par les médecins hospitaliers via le registre national). 2. Remises au médecin traitant. 3. Signalées ou confiées à la personne de confiance.",
+    "tags": [
+      "directives anticipées",
+      "conservation",
+      "DMP"
+    ]
+  },
+  {
+    "id": 3165,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Définition légale de l'obstination déraisonnable ?",
+    "answer": "Poursuite ou mise en œuvre de traitements et d'investigations qui apparaissent inutiles, disproportionnés ou n'ayant d'autre effet que le seul maintien artificiel de la vie d'un patient en fin de vie. La loi française interdit formellement l'obstination déraisonnable (acharnement thérapeutique).",
+    "tags": [
+      "obstination déraisonnable",
+      "fin de vie",
+      "loi"
+    ]
+  },
+  {
+    "id": 3166,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Nutrition et hydratation artificielles en fin de vie : Statut juridique ?",
+    "answer": "La loi française (Loi Leonetti) considère la nutrition et l'hydratation artificielles comme des traitements médicaux et non comme des soins de base. À ce titre, elles peuvent être suspendues ou refusées dans le cadre du refus de l'obstination déraisonnable, après décision collégiale.",
+    "tags": [
+      "nutrition artificielle",
+      "hydratation",
+      "fin de vie"
+    ]
+  },
+  {
+    "id": 3167,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Qu'est-ce que la procédure collégiale en fin de vie ?",
+    "answer": "Démarche obligatoire engagée lorsque le patient est hors d'état d'exprimer sa volonté et qu'il faut décider d'une limitation ou d'un arrêt de traitement. Le médecin en charge doit mener cette concertation avec l'équipe soignante (infirmiers) et un médecin consultant externe indépendant.",
+    "tags": [
+      "procédure collégiale",
+      "fin de vie",
+      "décision"
+    ]
+  },
+  {
+    "id": 3168,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Rôle et étapes de la procédure collégiale ?",
+    "answer": "1. Recenser les directives anticipées et consulter la personne de confiance ou la famille. 2. Réunir l'équipe soignante et le médecin consultant. 3. Analyser la situation médicale et le pronostic. 4. Rédiger un compte-rendu motivé dans le dossier médical. La décision finale reste de la responsabilité du médecin en charge.",
+    "tags": [
+      "procédure collégiale",
+      "décision",
+      "dossier médical"
+    ]
+  },
+  {
+    "id": 3169,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Définition de la sédation profonde et continue jusqu'au décès (SPCMD) ?",
+    "answer": "Administration de médicaments sédatifs (principalement midazolam) visant à abolir la conscience du patient de manière profonde et irréversible, associée à un arrêt de tous les traitements de maintien en vie (y compris hydratation), maintenue jusqu'au décès. C'est un droit légal encadré.",
+    "tags": [
+      "SPCMD",
+      "sédation",
+      "fin de vie"
+    ]
+  },
+  {
+    "id": 3170,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Conditions d'accès à la sédation profonde et continue (SPCMD) ?",
+    "answer": "Elle est de droit à la demande du patient dans trois situations : 1. Patient atteint d'une maladie grave et incurable, dont le pronostic vital est engagé à court terme (quelques jours) et présentant une souffrance réfractaire aux traitements. 2. Arrêt d'un traitement de maintien en vie mettant en jeu le pronostic vital à court terme. 3. Patient hors d'état d'exprimer sa volonté avec arrêt de traitement au titre de l'obstination déraisonnable.",
+    "tags": [
+      "SPCMD",
+      "conditions",
+      "souffrance"
+    ]
+  },
+  {
+    "id": 3171,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Différence éthique et légale entre sédation profonde (SPCMD) et euthanasie ?",
+    "answer": "1. SPCMD : intention de soulager une souffrance réfractaire en endormant le patient, le décès survenant par l'évolution naturelle de la maladie (légal en France). 2. Euthanasie : intention de provoquer délibérément la mort par l'injection d'un produit létal (illégal en France, passible de sanctions pénales).",
+    "tags": [
+      "SPCMD",
+      "euthanasie",
+      "éthique"
+    ]
+  },
+  {
+    "id": 3172,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Molécule de référence et protocole pour induire la sédation profonde ?",
+    "answer": "La molécule de référence est le Midazolam (benzodiazépine injectable à action rapide). Le protocole HAS préconise une titration intraveineuse (ou sous-cutanée si pas de VVP) : dose de charge (2 à 5 mg IV) suivie d'une perfusion continue adaptée à la profondeur de la sédation (évaluée par l'échelle de Richmond - RASS).",
+    "tags": [
+      "midazolam",
+      "sédation",
+      "HAS"
+    ]
+  },
+  {
+    "id": 3173,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Gestion des râles terminaux en fin de vie ?",
+    "answer": "Les râles terminaux (encombrement bronchique) sont liés à l'accumulation de sécrétions salivaires chez le patient inconscient. Traitement : 1. Mesures non médicamenteuses : positionnement en décubitus latéral. 2. Médicamenteux : Scopolamine injectable sous-cutanée (anticholinergique asséchant). Éviter les aspirations bronchiques douloureuses.",
+    "tags": [
+      "râle terminal",
+      "scopolamine",
+      "fin de vie"
+    ]
+  },
+  {
+    "id": 3174,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Qu'est-ce que les soins palliatifs en gériatrie ?",
+    "answer": "Soins actifs et continus dispensés par une équipe pluridisciplinaire visant à soulager la douleur, apaiser la souffrance psychique, sauvegarder la dignité du patient en fin de vie et accompagner son entourage. Ils s'opposent à l'acharnement et à l'euthanasie et incluent des soins de confort quotidiens.",
+    "tags": [
+      "soins palliatifs",
+      "confort",
+      "fin de vie"
+    ]
+  },
+  {
+    "id": 3175,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Droit universel d'accès aux soins palliatifs en France ?",
+    "answer": "Toute personne malade dont l'état le requiert a le droit d'accéder à des soins palliatifs et à un accompagnement, que ce soit à domicile, en EHPAD ou à l'hôpital. L'absence de structure spécialisée locale ne peut justifier un défaut de prise en charge de la douleur ou de la détresse en fin de vie.",
+    "tags": [
+      "soins palliatifs",
+      "loi",
+      "droits"
+    ]
+  },
+  {
+    "id": 3176,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Les trois principaux régimes de protection juridique des majeurs en France ?",
+    "answer": "1. Sauvegarde de justice (mesure d'urgence et temporaire). 2. Curatelle (mesure d'assistance pour les actes importants). 3. Tutelle (mesure de représentation complète pour tous les actes de la vie civile). Ces mesures sont prononcées par le Juge des Contentieux de la Protection (JCPM) sur expertise médicale.",
+    "tags": [
+      "protection juridique",
+      "tutelle",
+      "curatelle"
+    ]
+  },
+  {
+    "id": 3177,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Sauvegarde de justice : Définition, durée et effets ?",
+    "answer": "Mesure de protection juridique légère et temporaire (durée maximale de 1 an, renouvelable 1 fois). Le patient conserve l'exercice de ses droits civils, mais ses actes financiers ou patrimoniaux excessifs commis pendant cette période peuvent être annulés ou réduits par le juge (action en rescision).",
+    "tags": [
+      "sauvegarde de justice",
+      "durée",
+      "droits"
+    ]
+  },
+  {
+    "id": 3178,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Curatelle : Définition, curatelle simple vs curatelle renforcée ?",
+    "answer": "Mesure d'assistance pour le majeur qui a besoin d'être conseillé dans les actes importants. 1. Curatelle simple : le patient gère ses revenus et actes courants seul ; le curateur doit signer avec lui pour les actes de disposition (vente). 2. Curatelle renforcée : le curateur perçoit directement les revenus du patient et règle ses dépenses.",
+    "tags": [
+      "curatelle",
+      "curateur",
+      "assistance"
+    ]
+  },
+  {
+    "id": 3179,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Tutelle : Définition, rôle du tuteur et limites ?",
+    "answer": "Régime de protection le plus protecteur (représentation). Un tuteur est désigné pour réaliser tous les actes de la vie civile au nom du majeur protégé. Limite majeure : les décisions relatives à la personne (consentement aux soins, choix du lieu de vie) restent en priorité du ressort du majeur s'il peut l'exprimer.",
+    "tags": [
+      "tutelle",
+      "tuteur",
+      "représentation"
+    ]
+  },
+  {
+    "id": 3180,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Mandat de protection future : Définition et intérêt en gériatrie ?",
+    "answer": "Contrat par lequel une personne anticipe sa propre vulnérabilité en désignant à l'avance le mandataire chargé de gérer ses biens et/ou sa personne le jour où elle ne pourra plus le faire. Il évite le recours à une tutelle ou curatelle judiciaire plus lourde. Utile au stade précoce des démences.",
+    "tags": [
+      "mandat de protection future",
+      "anticipation",
+      "démence"
+    ]
+  },
+  {
+    "id": 3181,
+    "chapter": "ch4",
+    "rang": "B",
+    "question": "Rôle du Juge des Contentieux de la Protection des Majeurs (JCPM) ?",
+    "answer": "Le JCPM (anciennement juge des tutelles) est le magistrat spécialisé chargé d'ouvrir, de réviser ou de clôturer les mesures de protection juridique. Il nomme les tuteurs/curateurs (en privilégiant la famille), arbitre les conflits et autorise les actes graves de disposition (vente de la résidence principale).",
+    "tags": [
+      "JCPM",
+      "juge",
+      "tutelle"
+    ]
+  },
+  {
+    "id": 3182,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Habilitation familiale : Définition et différence avec la tutelle ?",
+    "answer": "Alternative simplifiée aux mesures de tutelle/curatelle, permettant aux membres de la famille proche (conjoint, enfants) de représenter un parent vulnérable pour les actes courants ou de disposition, après autorisation unique du juge, sans le contrôle annuel du greffe.",
+    "tags": [
+      "habilitation familiale",
+      "famille",
+      "représentation"
+    ]
+  },
+  {
+    "id": 3183,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Mesures d'urgence : Sauvegarde de justice médicale vs judiciaire ?",
+    "answer": "1. Médicale : déclaration immédiate faite par le médecin de l'établissement au procureur de la République (protection immédiate lors d'une hospitalisation). 2. Judiciaire : prononcée par le juge des tutelles en attente de l'instruction d'une mesure de tutelle ou de curatelle permanente.",
+    "tags": [
+      "sauvegarde",
+      "médical",
+      "procureur"
+    ]
+  },
+  {
+    "id": 3184,
+    "chapter": "ch4",
+    "rang": "B",
+    "question": "Comment rédiger un Certificat Médical Circonstancié (CMC) pour une protection juridique ?",
+    "answer": "Document officiel décrivant précisément l'altération des facultés mentales ou physiques empêchant le patient de défendre ses intérêts. Il doit être rédigé par un médecin spécialiste inscrit sur une liste établie par le procureur de la République. Le CMC doit préciser le caractère réversible ou non de l'altération.",
+    "tags": [
+      "CMC",
+      "certificat",
+      "procureur"
+    ]
+  },
+  {
+    "id": 3185,
+    "chapter": "ch4",
+    "rang": "B",
+    "question": "Qui peut solliciter l'ouverture d'une mesure de protection juridique ?",
+    "answer": "L'ouverture peut être demandée au juge par : 1. Le majeur lui-même ou son conjoint. 2. Un membre de la famille. 3. La personne de confiance. 4. Le procureur de la République, saisi par le rapport social/médical d'un tiers (ex: signalement hospitalier ou EHPAD).",
+    "tags": [
+      "protection juridique",
+      "sollicitation",
+      "juge"
+    ]
+  },
+  {
+    "id": 3186,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Consentement aux soins chirurgicaux chez le patient sous tutelle ?",
+    "answer": "Si le patient sous tutelle ne peut exprimer sa volonté, le tuteur donne son accord pour l'intervention. En cas de refus du tuteur mettant en jeu le pronostic vital, le médecin réalise l'acte d'urgence. En cas de désaccord persistant non urgent, le médecin peut saisir le juge des tutelles pour arbitrage.",
+    "tags": [
+      "tutelle",
+      "chirurgie",
+      "consentement"
+    ]
+  },
+  {
+    "id": 3187,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Entrée en EHPAD d'un majeur protégé : Qui prend la décision ?",
+    "answer": "La décision de l'entrée en EHPAD relève de la liberté individuelle et du consentement de la personne protégée (loi ASV 2015). Le tuteur ne peut imposer le placement si le majeur s'y oppose et exprime sa volonté, sauf si le maintien à domicile présente un danger grave et immédiat validé par le juge.",
+    "tags": [
+      "EHPAD",
+      "tutelle",
+      "consentement"
+    ]
+  },
+  {
+    "id": 3188,
+    "chapter": "ch4",
+    "rang": "B",
+    "question": "Liberté d'aller et venir en EHPAD : Cadre éthique et limites ?",
+    "answer": "Principe fondamental protégeant le résident contre l'enfermement. La restriction de circulation (ex. unités de vie fermées, digicodes) n'est légale que si elle est justifiée médicalement par un risque d'errance dangereuse (maladie d'Alzheimer), proportionnée et inscrite dans le projet personnalisé.",
+    "tags": [
+      "liberté d'aller et venir",
+      "EHPAD",
+      "éthique"
+    ]
+  },
+  {
+    "id": 3189,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Définition de la contention physique en gériatrie et risques associés ?",
+    "answer": "Utilisation de dispositifs (ceinture de fauteuil, barrières de lit complètes) limitant la liberté de mouvement du patient. Risques majeurs : strangulation, escarres, agitation réactionnelle, déconditionnement musculaire rapide, traumatismes par enjambement des barrières. Elle doit être évitée au maximum.",
+    "tags": [
+      "contention physique",
+      "risques",
+      "escarre"
+    ]
+  },
+  {
+    "id": 3190,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Réglementation stricte de la contention physique en EHPAD/Hôpital ?",
+    "answer": "La contention est soumise à des règles strictes : 1. Prescription médicale obligatoire, motivée et limitée dans le temps (max 24h renouvelable). 2. Consentement du patient ou information de la personne de confiance. 3. Surveillance horaire notée dans le dossier. 4. Évaluation quotidienne des alternatives.",
+    "tags": [
+      "contention",
+      "prescription",
+      "surveillance"
+    ]
+  },
+  {
+    "id": 3191,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Qu'est-ce que la bientraitance gériatrique (HAS 2024) ?",
+    "answer": "Démarche collective et continue visant à adapter les soins et l'accompagnement aux besoins et souhaits de la personne âgée en Espace de Vie Collective (EVC). Elle repose sur l'écoute active, le respect de la dignité, du rythme de vie du résident et la recherche permanente de son consentement aux actes du quotidien.",
+    "tags": [
+      "bientraitance",
+      "HAS",
+      "EVC"
+    ]
+  },
+  {
+    "id": 3192,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Définition de la maltraitance chez la personne âgée (active vs passive) ?",
+    "answer": "Tout acte ou omission qui porte atteinte à la dignité, à l'intégrité physique ou psychique d'une personne vulnérable. 1. Active : violences physiques, injures, spoliation financière. 2. Passive (plus fréquente) : négligence involontaire (retards de changes, défaut d'hydratation, isolement social).",
+    "tags": [
+      "maltraitance",
+      "négligence",
+      "définition"
+    ]
+  },
+  {
+    "id": 3193,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Signes cliniques évocateurs de maltraitance ou de négligence grave ?",
+    "answer": "1. Ecchymoses inexpliquées (en particulier aux bras, évoquant des contentions forcées). 2. Escarres multiples ou non soignées. 3. Déshydratation ou perte de poids inexpliquée. 4. Repli sur soi, mutisme ou terreur du patient en présence de certains soignants ou proches. 5. Refus répété de visites familiales.",
+    "tags": [
+      "maltraitance",
+      "clinique",
+      "ecchymose"
+    ]
+  },
+  {
+    "id": 3194,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Le numéro national 3977 contre la maltraitance ?",
+    "answer": "Numéro de téléphone national unique destiné à l'écoute et au signalement des situations de maltraitance envers les personnes âgées et les adultes en situation de handicap. Il est accessible aux professionnels de santé, aux familles et aux victimes et permet le déclenchement d'enquêtes médico-sociales.",
+    "tags": [
+      "3977",
+      "maltraitance",
+      "signalement"
+    ]
+  },
+  {
+    "id": 3195,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Quand et comment effectuer un signalement au procureur de la République ?",
+    "answer": "Le signalement au procureur de la République est obligatoire en cas de suspicion de maltraitance active, de violences physiques, d'abus de faiblesse financier flagrant ou de danger grave et imminent pour la sécurité du patient vulnérable. Il se fait par courrier motivé décrivant les faits constatés.",
+    "tags": [
+      "procureur",
+      "signalement",
+      "abus de faiblesse"
+    ]
+  },
+  {
+    "id": 3196,
+    "chapter": "ch4",
+    "rang": "B",
+    "question": "Secret professionnel vs signalement de maltraitance d'un patient vulnérable ?",
+    "answer": "L'article 226-14 du Code Pénal lève l'obligation de secret professionnel pour le médecin ou le professionnel de santé qui signale des sévices ou privations constatés chez une personne vulnérable (personne âgée incapable de se protéger en raison de son état physique ou mental). Le signalement est protégé par la loi.",
+    "tags": [
+      "secret professionnel",
+      "code pénal",
+      "levée du secret"
+    ]
+  },
+  {
+    "id": 3197,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Charte des droits et libertés de la personne âgée en situation de handicap ou de dépendance ?",
+    "answer": "Texte de référence (rédigé par la FNG et le ministère) affirmant les droits fondamentaux des aînés : droit à la citoyenneté, à l'information, au choix du lieu de vie, à des soins de qualité sans discrimination d'âge, au respect de la vie privée et à l'accompagnement de la fin de vie.",
+    "tags": [
+      "charte",
+      "droits",
+      "FNG"
+    ]
+  },
+  {
+    "id": 3198,
+    "chapter": "ch4",
+    "rang": "B",
+    "question": "Rôle et intérêt de la réunion éthique pluridisciplinaire en institution ?",
+    "answer": "Concertation de l'équipe (soignants, gériatres, psychologues) pour discuter de cas cliniques complexes où les principes d'éthique se confrontent (ex. résident dément refusant de s'alimenter, risque de fugue vs liberté d'aller et venir). Elle permet d'élaborer une décision collégiale éthiquement acceptable.",
+    "tags": [
+      "éthique",
+      "concertation pluridisciplinaire",
+      "EHPAD"
+    ]
+  },
+  {
+    "id": 3199,
+    "chapter": "ch4",
+    "rang": "B",
+    "question": "Définition légale de la personne vulnérable en droit pénal français ?",
+    "answer": "Personne dont la particulière vulnérabilité, due à son âge, à une maladie, à une infirmité, à une déficience physique ou psychique, ou à un état de grossesse, est apparente ou connue de l'auteur de l'infraction. La vulnérabilité constitue une circonstance aggravante pour les délits et crimes commis à son encontre.",
+    "tags": [
+      "vulnérabilité",
+      "droit pénal",
+      "loi"
+    ]
+  },
+  {
+    "id": 3200,
+    "chapter": "ch4",
+    "rang": "A",
+    "question": "Rôle du Conseil de la Vie Sociale (CVS) en EHPAD ?",
+    "answer": "Organe de représentation obligatoire des résidents et de leurs familles au sein de l'établissement. Il est consulté sur le règlement de fonctionnement, les projets de travaux, les animations, la restauration et l'organisation quotidienne. C'est un outil majeur pour la démocratie en collectivité.",
+    "tags": [
+      "CVS",
+      "EHPAD",
+      "participation"
+    ]
+  }
+]

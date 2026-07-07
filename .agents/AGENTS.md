@@ -1,0 +1,2 @@
+### OCR-Resilient Document Structure Matching
+* When generating chapter outlines or matching section headers against the Table of Contents (TOC), avoid using exact string equality. Section titles in OCR text are often truncated by column layouts or page boundaries. Implement prefix-based matching (e.g., matching on the Roman numeral or section number alone) to reliably pair body headings with TOC entries.

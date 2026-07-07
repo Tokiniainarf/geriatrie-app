@@ -1,0 +1,397 @@
+=== Page 1 ===
+L'Antibiotherapie de
+Precision chez
+I'Adulte
+Les 4 piliers du Bon Usage:Regles,Classes, Fonction Renale et Durees
+100%
+100%
+100%
+100%
+1. Regles
+3. Rein
+2.Classes
+4.Durees
+SynthesedesrecommandationsSPILF&HAS.
+SNotebookLM
+
+=== Page 2 ===
+f Clinique : Le <
+L'lmperatif
+Bon Usage
+Limiter I'lmpact Ecologique
+NePasPrescrire
+Desescalader&Raccourcir
+(Origine Virale)
+Tout antibiotique impacte les
+Reévaluation systematique a
+Fievreisolee
+flores commensales (digestive
+48-72h.Privilegier la
+Rhinopharyngite & Angine
+respiratoire, cutanee).La
+monotherapie,ciblerlespectre
+virale
+pression de sélection génere
+leplusétroitpossible,etréduire
+Grippe &Bronchiteaigue
+des résistances.
+les durees.
+Eviterlelargespectre
+Bacteriurie asymptomatique
+(horsgrossesse)
+probabiliste.
+Toute fievre n'est pas bacterienne. L'utilisation des TROD (TDR angine, BU cystite)
+estlepremierfiltreincontournable.
+NotebookLM
+
+=== Page 3 ===
+Pilier 1:L'Algorithme de Prescription
+1. Diagnostic
+2. Traitement
+3.Evaluation
+4.Traitement
+Précis
+Probabiliste
+48-72h
+Documente
+Priseencompte
+Etape critique.
+Prelevements
+Desescalade.
+microbiologiques
+duterrain,BMR
+Evolution clinique
+hospitalisation
+avanttraitement
+Ciblagespecifique
++ resultats
+(ECBU,
+récente,ou
+dupathogeneavec
+microbiologiques.
+hemocultures)
+voyagedansles3
+lespectreleplus
+mois.
+etroit.
+Traceecrite
+Utilisation des
+obligatoire dansle
+TROD.
+dossier.
+SNotebookLM
+
+=== Page 4 ===
+La Voie d'Administration : Preserver le Capital Veineux
+Sous-Cutanee
+Intra-Veineuse
+Per Os (PO) :
+(SC)：I'Alternative
+(IV) : L'Urgence
+Le Standard
+Geriatrique
+Indiquee pour choc
+Voie privilegiee. Exige
+Indiquee siaccesIV
+une deglutition et une
+septique, infections
+impossibleoutroubles
+severes, ou endocardites.
+absorption digestive
+cognitifs (maintiena
+intactes.
+endocardites.
+domicile,evite
+I'arrachement)
+Regleabsolue:RelaisPO
+Attentionauxinteractions
+de la
+leplusprecocepossible
+Molecules cles :
+des stabilite clinique.
+Ceftriaxone,Ertapeneme.
+polymedication
+(fréquente chez le sujet
+Protocole:Perfusionlente
+agé).
+(30a60minutes).Hors
+AMMmaisrecommande
+SPILF/SFGG
+SNotebookLM
+
+=== Page 5 ===
+Pilier 2: L'Arsenal Thérapeutique (Le Modele BAMFS)
+-Beta-lactamines
+-Aminosides.
+(Amoxicilline,C3G
+(Amikacine,
+Carbapenemes).
+Gentamicine)
+AlerteResistanceE.coli
+Lesocle
+L'artillerielourde.
+therapeutique
+DanslessouchesE.coli
+BLSE,laresistanceaux
+-Macrolides.
+Fluoroquinolones atteint
+(Azithromycine)
+78.8%et100%pour
+La couverture
+I'Amoxicilline.
+atypique.
+-Fluoroquinolones
+-Sulfamides.
+(Ciprofloxacine).
+(Cotrimoxazole)
+Haute biodisponibilite
+Relais oral cible.
+fort impact
+ecologique.
+SNotebookLM
+
+=== Page 6 ===
+Pharmacodynamie:LeComportement dela Molecule
+Temps-Dependant(ATB-TD)
+Concentration-Dependant(ATB-CD)
+Cmax
+Concentration
+Concentration
+CMl(ConcentrationMinimaleInhibitrice)
+CMI(ConcentrationMinimaleInhibitrice
+Temps
+Temps
+L'efficacité depend dutemps passe
+L'efficacitedependdupicdeconcentration
+au-dessusdelaCMl
+(Cmax)parrapportalaCMI.
+Ex:Béta-lactamines.
+Ex:Aminosides,Fluoroquinolones.
+Ce comportement dicte I'adaptation posologique absolue en cas d'insuffisance renale.
+SNotebookLM
+
+=== Page 7 ===
+Matrice de Décision des Classes d'Antibiotiques
+Impact
+Risque
+Classe
+Mecanisme
+IndicationCle
+Ecologique
+Geriatrique
+Temps-
+1erelignePAC
+Beta-lactamines
+Faible
+Faibletoxicite
+dependant
+（Amoxicilline)
+Haute
+Concentration-
+Choc septique
+Moderé
+Aminosides
+nephrotoxicite
+dependant
+(enassociation)
+(durée courte)
+Tres Fort
+RelaisPOcible
+Concentration-
+Tendinopathies,
+Fluoroquinolones
+(Proscrit en
+(haute
+dependant
+confusion
+probabiliste)
+biodisponibilite
+Infections
+Sulfamides
+Temps-
+Adaptation
+Modére
+urinaires
+(Cotrimoxazole)
+dependant
+rénale stricte
+masculines
+S NotebookLM
+
+=== Page 8 ===
+Pilier 3 : La Physiologie Ineluctable (Le Rein Agé)
+Declin Physiologique
+30
+La masse renale et le flux sanguin diminuent
+Percentage of sclerotic glomeruli
+25
+d'environ 1% par an a partir de la quarantaine.
+male
+female
+20
+Variabilite Cinetique
+L'absorption peut étre retardee, I'albuminemie
+15
+baisse,et I'eau totale diminue,entrainant de
+fortes variations du Volume de
+10
+Distribution (Vd).
+Consequence Clinique
+Les antibiotiques nephrotoxiques (ex:
+0-10
+21-30
+11-20
+61-70
+71-80
+31-4041-5051-60
+>80
+Aminosides) doivent étre évités a tout prix ou
+Age(years)
+soumis a un suivi therapeutique strict.
+SNotebookLM
+
+=== Page 9 ===
+MesurerleDeclin:Cockcroft-GaultvsCKD-EPl
+La Formule de Cockcroft-Gault (ClCr)
+L'Equation CKD-EPl
+Outil exclusif pourI'adaptation
+Outilpourévaluerlestadedela
+posologiquedesmedicaments.
+maladie renale chronique (DFG)
+Si IMC < 3O : Utiliser le Poids
+Ajusté a la surface corporelle.
+Réel (PR)。
+SiIMC >= 3O:Utiliser le Poids
+Ajuste.
+Regle d'Or:La creatirinemie seule n'est PAS un marqueur fiable chez
+lesujet age.Toujours estimerla clairance.
+AdaptationdelaposologieindispensablesiCiCr<60mL/min
+SNotebookLM
+
+=== Page 10 ===
+La Logique d'Ajustement Posologique
+PatientavecCICr<60mL/min
+AntibiotiqueTemps-Dependant
+Antibiotique Concentration-Dependant
+(ex:Beta-lactamines, Penicillines)
+(ex:Aminosides,Fluoroquinolones)
+Logique : Maintenir le taux résiduel au-dessus
+Logique : Obtenir le pic Cmax massif, mais
+de la CMl sans accumuler le produit.
+laisser le temps au rein de clarifier la toxine.
+BAISSERLADOSEUNITAIRE
+ESPACERLESADMINISTRATIONS
+(Conserverlememerythmed'administration)
+(Conserverlamemedoseunitaire)
+SNotebookLM
+
+=== Page 11 ===
+Pilier4:LaRevolutiondesTraitementsCourts
+L'adage《 Terminez
+Cas d'école: Spondylodiscite
+votre boite》est
+Protocolecourt
+Protocolelong
+VS
+obsolete.
+(6semaines)
+(12semaines)
+Taux de succes :
+Taux de succes :
+Destraitementspluslongsne
+%6'06
+previennentpaslaresistance;ilsla
+%6'06
+CAUSENT par une pression de
+Unedureediviseepardeuxsansaucune
+selection prolongée sur la flore.
+perte d'efficacite clinique.
+Regle d'or:
+Une duree>7jours est tres rarement justifiee en pratique courante,hors infections specifiques
+(osteo-articulaires,endocardites,prostatites)
+NotebookLM
+
+=== Page 12 ===
+ArbreDecisionnel desDurees:PACdeI'Adulte
+Debut de
+I'antibiotherapie
+Criteresde stabilite
+Criteres de stabilite
+ARRETMAXIMUM:
+obtenus?
+obtenusentreJ3et
+Dureetotale
+(Apyrexie,FC<100FR
+J5？
+7JOURS
+<24,Sp02>90%)
+ARRET:
+ARRET:
+Dureetotale
+Dureetotale5JOURS
+3JOURS
+Duree ciblepourle sujetage
+Un traitement>7 jours
+n'est justifie qu'en cas
+decomplication(abces
+epanchementpleural).
+S NotebookLM
+
+=== Page 13 ===
+Matrice des Durées : Infections Urinaires
+InfectionUrinaire
+Cystite Aigue
+Pyelonephrite Aigue
+Masculine(Prostatite)
+C3GIVou
+Fosfomycine-trometamol :
+Standard (FQ,
+Fluoroguinolone:
+DoseUnique (J1).
+Cotrimoxazole, B-lact) :
+7Jours.
+Si risque de complication :
+14Jours.
+J1-J3-J5
+Autres antibiotiques
+Uropathiesous-jacente
+Pivmecillinam:3Jours.
+(relaisP0):10a14
+non corrigee:21Jours
+Jours.
+Amoxicilline/
+Nitrofurantoine:7Jours
+(Nitrocontre-
+indiqueesiCICr<45)
+SNotebookLM
+
+=== Page 14 ===
+Synthese : L'Ordonnance de Précision
+1. Indication (Regles)
+2.Molecule(BAMFS)
+Origine bacterienne confirmee
+Spectre le plus étroit?
+Prelevementsrealises?
+Faible impact écologique?
+Spectre le plus étoit?
+Faible impact écologique?
+4. Duree (Temps)
+Stabilite clinique atteinte ?
+3. Posologie (Rein)
+Arretpossible a3,5ou7jours?
+ClCrCockcroftévaluee?
+Dosebaissee(TD)ou
+intervalle espace(CD)?
+SNotebookLM
+
+=== Page 15 ===
+LeMotdelaFin
+‘La precision remplace la
+Le spectre étroit
+durée. I
+remplace la couverture large.
+L'antibiotherapie moderne est une intervention chirurgicaleciblee,pas un tapis de
+bombes. Evaluez le rein, a choisissez la molécule, frappez fort, et retirez-vous vite.
+Recommandations:SPILF(Societe de Pathologie Infectieuse deLangueFrancaise),HAS
+(HauteAutoritede Sante),SFGG (SociéteFrancaisede Geriatrieet Gérontologie).
+SNotebookLM

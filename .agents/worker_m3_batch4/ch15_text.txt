@@ -1,0 +1,558 @@
+--- Page 268 ---
+Connaissances
+298 Consultation et suivi d'un patient ayant des troubles cognitifs.
+345 Situation de handicap (en cas de handicap d'étiologie neurologique).
+355 Organisation de la sortie d'hospitalisation.
+Items, objectifs pédagogiques, hiérarchisation des connaissances
+ITEM 125 – Troubles de la miction et incontinence urinaire de l'adulte et du sujet âgé
+Rang Rubrique Intitulé Descriptif
+A Diagnostic Définition des symptômes du bas Définition et description clinique des
+positif appareil urinaire SBAU (= LUTS SBAU, des 3 phases du cycle mictionnel
+anglo-saxon) (examen clinique, (remplissage, vidange, post-vidange)
+démarche diagnostique)
+A Définition Définitions de l'incontinence urinaire
+B Définition Définitions des types d'incontinence Tous les 9 types de l'ICI 2017, focus sur IUE,
+(homme et femme) IUU, IUF et OU par rétention chronique y
+compris IU par regorgement
+B Diagnostic Diagnostic positif d'une l'inconti- Interrogatoire, le stress test et le test de
+positif nence urinaire d'effort (IUE) et d'une remplissage vésical, questionnaire de Sand-
+incontinence urinaire sur urgenturies vick USP pad test, principe des question-
+(IUU), quantification, retentissement naires de QDV
+B Prévalence, Prévalence avec l'âge de l'IUE, de l'IUU Augmentation avec l'âge, fréquence H et
+épidémiologie et de l'incontinence urinaire mixte F, modification du type avec l'âge, facteurs
+(IUM), facteurs de risque homme/ de risques démontrés et surtout facteur de
+femme, sujet âgé (DIAPPERS) risque modifiables
+242 B Éléments Connaître les mécanismes physiopa- Insuffisance sphinctérienne, hypermobilité
+physiopatho- thologiques de l'incontinence urinaire (femme), insuffisance sphinctérienne
+logiques d'effort, de l'urgence mictionnelle de l'homme, mécanismes en cause dans
+l'IUU : obstruction /IUU neurogène/IUU
+idiopathique
+B Diagnostic Connaître les signes d'alerte devant Infection, corps étranger, tumeurs, maladie
+faire rechercher une cause grave neurologique
+d'incontinence
+A Diagnostic Bilan de première ligne d'une IU ECBU, cytodiagnostic urinaire, débimétrie,
+(après diagnostic, quantification et mesure de résidu
+retentissement)
+B Examens com- Indication et apport des examens d'imagerie devant des troubles mictionnels,
+plémentaires dysurie, incontinence urinaire
+B Diagnostic Bilan étiologique et principe théra- (La pollakiurie est traitée dans l'IUU, qui est
+peutiques d'une nycturie une forme de syndrome d'hyperactivité)
+A Étiologie Principales étiologies de la dysurie de l'homme et de la femme
+B Prise en charge Principe de traitement des principales étiologies de dysurie chez l'homme et chez la
+femme
+ITEM 347 – Rétention aiguë d'urines
+Rang Rubrique Intitulé
+A Définition Connaître la définition de la rétention aiguë d'urine
+B Éléments physio- Connaître la physiopathologie de la rétention aiguë d'urine
+pathologiques
+A Étiologie Connaître les principales causes de rétention aiguë d'urine
+▼
+
+--- Page 269 ---
+Raisonner sur les troubles vésico-sphinctériens
+Rang Rubrique Intitulé
+A Diagnostic positif Connaître les éléments cliniques de la rétention aiguë d'urine
+B Diagnostic positif Connaître les présentations cliniques atypiques de rétention aiguë d'urine
+A Diagnostic positif Connaître les signes cliniques distinguant la rétention aiguë d'urine de l'anurie
+A Examens Connaître le bilan initial d'une rétention d'urine
+complémentaires
+A Examens Connaître les indications et les examens biologiques et d'imagerie de première
+complémentaires intention
+A Identifier une Connaître les éléments de gravité en cas de rétention aiguë d'urine
+urgence
+B Prise en charge Connaître les indications respectives du sondage vésical et du cathétérisme
+sus-pubien
+A Prise en charge Connaître la prise en charge en urgence de la rétention aiguë d'urine
+I. Pour comprendre l'incontinence urinaire
+A. Définitions
+A L'incontinence urinaire (IU) est définie comme une perte involontaire d'urines par l'urètre :
+• soit à l'effort (rire, toux, éternuement, sport et autres activités physiques) et non précédée
+de la sensation de besoin : c'est l'incontinence urinaire d'effort (IUE) ;
+• soit précédée par un besoin d'emblée urgent et non inhibé : c'est l'incontinence urinaire
+sur urgenturie (IUU) ou par hyperactivité vésicale ;
+• soit aux deux moments : c'est l'incontinence urinaire mixte (IUM).
+L'IU est un authentique handicap, un syndrome gériatrique et l'une des six causes de dépen-
+dance iatrogène acquise à l'hôpital (cf. chapitre 3 et chapitre 16).
+Les quatre écueils à éviter quant à l'incontinence urinaire
+de la personne âgée
+• Considérer que l'incontinence urinaire est normale chez le patient âgé [103].
+• Ne pas aborder le sujet lors d'une consultation gériatrique [295], en particulier chez le patient polypa-
+thologique [267], polymédiqué [266] et en particulier en présence de troubles neurocognitifs majeurs
+[298] ; elle n'est pas toujours spontanément signalée alors qu'elle représente parfois le principal handi-
+cap ressenti par le patient.
+• Oublier, en cas d'incontinence urinaire aiguë ou récente, qu'il faut éliminer en premier lieu une réten-
+tion aiguë d'urines avec miction par regorgement.
+• Penser qu'il n'existe aucune prise en charge efficace pour l'incontinence urinaire, et manquer ainsi une
+démarche clinique et thérapeutique structurée.
+→ Il faut systématiquement poser la question d'une incontinence urinaire lors d'une première consulta-
+tion gériatrique.
+▼
+
+--- Page 270 ---
+Connaissances
+Rechercher une incontinence urinaire
+La recherche d'une incontinence urinaire est un élément indispensable de la prise en charge des patients
+âgés, au même titre que l'évaluation des comorbidités, des traitements et de la qualité de vie, auquel l'IU
+peut être liée, comme une cause ou une conséquence.
+Quand ?
+• Lors d'une première consultation ou hospitalisation.
+• Lors de consultations de suivi [266, 267, 279, 295, 345].
+• Lors d'une entrée et une sortie d'hospitalisation pour permettre le retour à domicile dans de bonnes
+conditions [131, 355].
+• Après une période de décubitus prolongé [276].
+Comment ?
+• En récupérant des informations objectives [131].
+• En impliquant si besoin l'aidant principal [330], le médecin référent et tous les soignants impliqués
+dans l'accompagnement du patient.
+• En examinant le patient.
+Pourquoi ?
+• Afin de comprendre les causes et de rechercher un facteur précipitant [23, 103, 348].
+• Afin de cibler les interventions utiles et faisables.
+• Afin d'évaluer le besoin d'aides spécifiques du patient (mise en place ou adaptation des aides).
+• Afin de soutenir le patient et/ou l'aidant principal.
+• Afin de prévenir les complications [86].
+B. Épidémiologie et facteurs de risque de l'incontinence
+urinaire
+B L'incontinence urinaire touche au moins 20 % des patients âgés. La prévalence de l'IU varie
+en fonction de l'âge, du niveau socio-économique, du surpoids et des autres comorbidités, et
+de l'activité physique. Son incidence augmente avec l'hospitalisation. La rétention urinaire et
+le sondage vésical sont des facteurs de risque d'incontinence urinaire.
+L'IU constitue un authentique handicap et représente un facteur de risque de :
+• lésions cutanées ;
+• infection urinaire ;
+• chute ;
+• déclin fonctionnel ;
+• altération de la qualité de vie ;
+• entrée en institution.
+A Le vieillissement est associé à :
+• une augmentation de la fréquence de l'IU ;
+• une modification de typologie de l'IU :
+– augmentation de l'IUM ;
+– diminution de l'IUE isolée ;
+– association possible à une incontinence fécale ;
+– par ailleurs, augmentation de la rétention urinaire (cf. infra) ;
+• une augmentation de la sévérité et de la gravité de l'IU, contrastant avec un sous-diagnos-
+tic fréquent.
+
+--- Page 271 ---
+Raisonner sur les troubles vésico-sphinctériens
+C. Physiopathologie (encadré 15.1)
+Encadré 15.1
+Comprendre la miction
+B Pour uriner, il faut :
+• un détrusor stable et compliant réalisant la contraction ;
+• des sphincters compétents ;
+• un urètre sans obstacle ;
+• un système nerveux fonctionnel assurant l'inhibition du réflexe mictionnel permettant une bonne synergie
+entre la contraction du détrusor et la relaxation sphinctérienne ;
+• des urines ne contenant pas d'éléments pouvant obstruer l'urètre (de type caillot).
+La continence est un phénomène réflexe à contrôle volontaire, dépendant du système nerveux central et
+périphérique (structures inhibitrices et activatrices supra-pontiques, sympathique thoraco-lombaire, nerf
+pudendal, parasympathique sacré ; fig. 15.1), mais aussi du détrusor (muscle lisse de la paroi vésicale), de
+l'urothélium, de la musculature périnéale lisse et striée, sous l'influence du système hormonal.
+En conditions normales, chez une personne continente, le tonus sympathique entraîne la contraction du
+sphincter lisse et l'inhibition de la contraction du détrusor. Si elle décide d'uriner, les structures encéphaliques
+lèvent leur inhibition sur le pont avec :
+1. diminution du tonus sympathique → relaxation du sphincter lisse ;
+2. activation du tonus parasympathique → contraction du détrusor ;
+3. relaxation du sphincter strié (nerf pudendal).
+L'ensemble permettant une miction volontaire, rapide, facile et complète.
+Centre thoracolombaire sympathique
+Centre sacré parasympathique
+Remplissage vésical Miction
+Centre sacré somatique (volontaire)
+Nerf hypo- Nerf hypo-
+gastrique gastrique
+–
++
+Nerf Nerf
+pelvien + pelvien
++ –
+Nerf Nerf
+pudendal pudendal
+Fig. 15.1. B Distribution périphérique de l'innervation vésicale.
+(Source : Médecine physique et de réadaptation, 7e édition, par le Collège français des enseignants universitaires de
+médecine physique et de réadaptation. Issy-les-Moulineaux : Elsevier Masson ; 2021, d'après Buzelin J-M. Urodyna-
+mique du bas appareil urinaire. Paris : Masson ; 1984.)
+
+--- Page 272 ---
+Connaissances
+Vieillissement du bas appareil urinaire
+B Impact variable selon les individus, comprenant :
+• diminution de la contractilité du détrusor ;
+• augmentation des contractions non inhibées du détrusor (CNID) ;
+• diminution de la sensibilité vésicale ;
+• diminution des pressions urétrales chez la femme.
+II. Démarche diagnostique
+A En présence d'une incontinence urinaire, la démarche diagnostique doit être structurée.
+Une partie de la démarche diagnostique doit être réalisée par le gériatre, tandis que certains
+points doivent faire adresser le patient à un avis expert.
+Le rôle du gériatre est avant tout clinique : il doit d'abord éliminer une rétention aiguë d'urines
+puis une IU transitoire et réversible (IUTR) (cf. infra tableau 15.1 et mise en situation clinique).
+A. Éliminer une rétention aiguë d'urines
+La rétention aiguë d'urines (RAU) peut se révéler par une IU permanente par mictions par
+rengorgement. La RAU est grave et représente une urgence [22, 99]. La rétention urinaire
+est un facteur de risque d'incontinence urinaire secondaire, mais également de confusion, de
+syndrome d'immobilisation et d'infection urinaire.
+La capacité vésicale varie de 300 à 500 ml. Ce volume peut augmenter de 500 à plus de
+1 000 ml en cas de RAU.
+La RAU répond à deux mécanismes principaux : obstacle sous-vésical et défaut de contractilité
+vésicale.
+Dans ce cadre, le fécalome est à rechercher en priorité, pouvant provoquer un obstacle méca-
+nique ou représentant une épine irritative intrarectale inhibant la miction.
+Autres principales causes d'obstacle sous-vésical :
+• pathologie prostatique (hypertrophie bénigne, infection urinaire masculine) ;
+• sténose de l'urètre ;
+• prolapsus génital chez la femme ;
+• pathologies neurologiques médullaires entraînant une dyssynergie vésico-sphinctériennes ;
+• caillotage vésical.
+Autres causes principales de défaut de contractilité vésicale :
+• pathologies neurologiques : syndrome de la queue de cheval, AVC, polyneuropathies, syn-
+dromes parkinsoniens ;
+• iatrogénie : en particulier tous les traitements ayant des propriétés anticholinergiques dont
+opiacés, antidépresseurs, neuroleptiques, antihistaminiques H1, antiparkinsonien.
+B. Détecter une incontinence urinaire transitoire réversible
+(IUTR)
+Une des spécificités de l'IU chez la personne âgée est la place que jouent les facteurs précipi-
+tants pouvant engendrer une IU aiguë. Dans ce contexte, l'IU peut être réversible dès lors que
+l'on identifie et traite rapidement ces causes curables répertoriées sous l'acronyme DIAPPERS
+(tableau 15.1), acronyme anglais proche de diaper, qui signifie « couche ».
+
+--- Page 273 ---
+Raisonner sur les troubles vésico-sphinctériens
+Tableau 15.1. A Facteurs précipitants réversibles d'une
+incontinence urinaire à rechercher absolument et à corri-
+ger devant toute IU aiguë.
+Delirium (confusion)
+Infection urinaire symptomatique
+Atrophie vaginale
+Causes Psychologiques
+Causes Pharmacologiques
+Excès de diurèse
+Restriction de mobilité
+Selles (constipation)
+« DIAPPERS »
+– D : Delirium (syndrome confusionnel). Toute confusion ou aggravation de troubles cognitifs ou troubles du
+comportement (en particulier agitation) doit faire rechercher une RAU se révélant par une IU permanente par
+mictions par rengorgement (syndrome confusionnel favorisé par la douleur et l'inconfort liés au globe vésical).
+À l'opposé, le syndrome confusionnel peut favoriser la survenue d'une incontinence urinaire.
+– I : Infection urinaire symptomatique, à différencier des bactériuries asymptomatiques [96].
+– A : La carence hormonale liée au vieillissement est souvent associée à des manifestations d'hyperactivité vési-
+cale, mais n'est jamais la seule cause de l'IU. Son traitement fait partie du traitement de première ligne de
+l'incontinence chez la femme âgée.
+– P : Les causes psychologiques, telles que la dépression voire l'anxiété (en particulier en présence de troubles
+neurocognitifs sous-jacents), peuvent favoriser une IU. À l'opposé, une IU peut favoriser la survenue d'une
+dépression.
+– P : La polymédication et la iatrogénie médicamenteuse sont souvent incriminées dans la genèse de l'IUTR
+(fig. 15.2).
+– E : Un excès de diurèse peut favoriser une IU. Il peut être lié à une augmentation des apports (perfusion), aux
+diurétiques, à une hyperglycémie ou à une hypercalcémie.
+– R : La restriction de mobilité est une cause d'IU dite fonctionnelle. À l'hôpital, elle peut être induite par des
+contentions physiques, par l'absence d'aide adéquate aux déplacements ou encore par les difficultés d'accès
+aux toilettes.
+– S : La constipation [1] est une cause d'IU sous-estimée. Elle peut être masquée par une incontinence fécale [7].
+C. Prendre en compte les comorbidités et les traitements
+médicamenteux
+B Passées ces deux étapes, la présence d'une IU impose de réévaluer les comorbidités du
+patient (fig. 15.2), ces dernières devant être prises en charge avant le traitement symptoma-
+tique de l'IU. De la même façon, tous les médicaments favorisant potentiellement une IU
+doivent être réévalués.
+D. Préciser les circonstances de l'IU
+A L'étape clinique suivante peut être toujours du ressort du gériatre et permet de préciser les
+circonstances de l'IU :
+• préciser les antécédents en rapport avec l'IU : sondage vésical à demeure (en particu-
+lier laissé en place plus de 48 heures), pathologie neurologique centrale ou périphérique,
+dysautonomie, RAU, irradiation/chirurgie pelvienne, traumatisme obstétrical, tabagisme,
+faisant discuter des explorations complémentaires ;
+
+--- Page 274 ---
+Connaissances
+Comorbidités Mécanisme Traitements
+Antagonistes alpha-
+Asthme, BPCO, Incontinence urinaire
+adrénergiques, inhibiteurs de
+surpoids, diabète d'effort
+l'enzyme de conversion
+Anticholinergiques, inhibiteurs
+AVC, constipation,
+Rétention urinaire calciques, neuroleptiques,
+diabète
+gabapentine, pregabaline
+AVC, maladiede Parkinson,
+Constipation Anticholinergiques
+diabète
+Pathologies neurologiques Incontinence urinaire Anticholinestérasiques, inhibiteurs
+encéphaliques ou médullaires sur urgenturie de la recapture de la sérotonine
+Diabète, OMI, insuffisance
+Polyurie Lithium, diurétiques
+cardiaque, SAOS
+Causes de restriction de
+Incontinence urinaire Iatrogénie hospitalière :
+mobilité : pathologies
+fonctionnelle barrières, perfusion, etc.
+neurologies, orthopédiques
+Fig. 15.2. B Liste des comorbidités et des classes pharmacologiques pouvant contribuer à la survenue
+d'une incontinence urinaire.
+248 Pour faciliter la compréhension, les comorbidités et les classes pharmacologiques ont été associées au mécanisme
+d'IU sans qu'il n'y ait forcément de lien entre la classe pharmacologique et la pathologie sur une même ligne.
+• rechercher les signes associés à l'IU : dysurie, nycturie, pollakiurie, douleur, hématurie,
+infections urinaires récurrentes, suspicion de fistule ;
+• examen clinique neurologique, évaluation cognitive, examen gynécologique et périnéal
+(organes génitaux externes, toucher rectal, testing du sphincter anal et de la sensibilité
+périnéale) ;
+• si BladderScan, réalisation d'un résidu post-mictionnel, pathologique à plus de 100 ml.
+Une fois cette étape clinique effectuée et l'IU confirmée :
+• préciser le type d'IU, dont le mécanisme oriente vers l'étiopathogénie des troubles
+(tableau 15.2) ;
+• préciser l'importance de l'IU par questionnaires de symptômes (USP®) et de qualité de vie
+(CONTILIFE®).
+• réaliser un catalogue mictionnel (cf. encadré).
+Catalogue mictionnel
+– Fait par le patient.
+– Au mieux sur 3 jours.
+– Détermine la diurèse diurne et nocturne en notant l'heure et la quantité de chaque miction, ainsi que les fuites
+éventuelles et leurs circonstances d'apparition.
+– Peut orienter vers une hyperactivité vésicale (pollakiurie, nycturie, urgenturie, faible capacité vésicale).
+– Évalue la compliance du patient au traitement et sa compréhension des consignes.
+
+--- Page 275 ---
+Raisonner sur les troubles vésico-sphinctériens
+Tableau 15.2. B Approche par type d'incontinence.
+Type d'IU Mécanisme Niveau lésionnel Étiologie
+Sur urgenturie Contractions non SNC Encéphalique : AVC, HPN, maladie de Parkinson…
+inhibées du détrusor Médullaire : myélopathie cervico-arthrosique,
+Trouble de la sensibilité autres compressions médullaires, myélite
+du détrusor (infectieuse, radique, inflammatoire), ischémie
+Trouble de la médullaire
+compliance
+SNA Diabète
+Vessie Infection, lithiase, tumeur vésicale, cystopathie
+diabétique
+Sous-vésical Obstacle sous-vésical : sténose urétrale,
+hypertrophie bénigne de la prostate, prolapsus
+D'effort Insuffisance SNC Atteinte du cône terminal
+sphinctérienne,
+SNP Syndrome de la queue de cheval
+cervico-cystoptose,
+Atteinte plexique : irradiation de cancers
+hypermobilité urétrale
+pelviens…
+(HMU)
+Neuropathies périphériques : neuropathie
+Insuffisance de la
+pudendale d'étirement (constipation chronique,
+musculature périnéale
+traumatismes obstétricaux), diabète…
+SNA Diabète, atrophie multisystématisée
+Vessie Extrophie vésicale
+Sous-vésical Lésion directe du sphincter urétral : chirurgie
+périnéale, prostatectomie, traumatisme périnéal
+direct
+SNC : système nerveux central ; SNA : système nerveux autonome ; SNP : système nerveux périphérique ; HPN : hydrocéphalie à pression
+normale ; AVC : accident vasculaire cérébral.
+B Le patient peut ensuite être adressé en consultation pour avis expert avec complément
+d'examen clinique (recherche d'une atrophie vulvo-vaginale, d'un prolapsus, de fuites urinaires
+à l'effort de toux et de poussée, d'une hypermobilité de l'urètre), puis discussion d'examens
+complémentaires au cas par cas :
+• dont les indications ne diffèrent pas de l'adulte jeune (cf. référentiels du Collège français
+des urologues et du Collège français des enseignants universitaires de médecine physique
+et de réadaptation) ;
+• décidés selon le retentissement de l'IU, le désir de traitement par le patient et son entou-
+rage et le bénéfice attendu de la prise en charge.
+
+--- Page 276 ---
+Connaissances
+Mise en situation
+Apparition d'une incontinence urinaire chez une patiente
+lors d'une consultation de suivi
+Vous revoyez en consultation de suivi tous les 6 mois, une patiente de 90 ans pour des TNC mineurs
+avec dépression, une cardiopathie hypertensive, rythmique (fibrillation atriale) compliquée de deux
+épisodes d'insuffisance cardiaque aiguë depuis un an, un diabète de type 2, de l'arthrose. Cette
+patiente est autonome à domicile. Elle prend un antidépresseur (citalopram, inhibiteur de recapture
+de la sérotonine), un anticoagulant oral direct (apixaban), un bêtabloqueur (bisoprolol), un diurétique
+de l'anse (furosémide) et du paracétamol. La patiente décrit l'apparition d'une incontinence urinaire
+[103] depuis quelques semaines, très invalidante.
+Dans la mesure où l'incontinence est nouvelle, il faut commencer par éliminer une rétention urinaire
+[97] et des mictions par regorgement [23], par l'examen clinique et un BladderScan, puis rechercher un
+facteur précipitant. Les antécédents et traitements habituels ne sont pas suspects en premier lieu, sous
+réserve de l'absence de modification de posologie. Parmi les facteurs repris sous l'acronyme DIAPPERS,
+quatre sont recherchés en priorité.
+1. Infection urinaire symptomatique chez cette patiente diabétique.
+2. Toute modification posologique et en particulier introduction nouvelle [348], à la recherche de
+médicament anticholinergique. L'antidépresseur n'est pas en cause dans la mesure où il précédait
+la survenue de l'UE.
+3. La constipation et le fécalome chez cette patiente avec diabète et pathologie neurologique.
+4. L'excès de diurèse est la piste privilégiée : d'une part lié à un déséquilibre du diabète entraînant
+une diurèse osmotique et, d'autre part, lié au diurétique. L'augmentation de ce dernier sur un
+épisode de dyspnée a finalement expliqué le tableau.
+Si l'IU régresse avec la correction du facteur précipitant, la démarche diagnostique peut s'arrêter à ce
+stade. Si elle persiste, la démarche de prise en charge d'une IU est initiée.
+III. Prise en charge multidisciplinaire
+A. Rétention aiguë d'urines
+A La prise en charge est une urgence thérapeutique et consiste en un drainage vésical par
+cathétérisme urétral ou sus-pubien (fig. 15.3).
+Dans le même temps, les facteurs précipitants type fécalome sont corrigés.
+B. Incontinences urinaires
+1. IU transitoire et réversible
+Le traitement repose sur la correction du facteur précipitant (reprendre la liste DIAPPERS).
+
+--- Page 277 ---
+Raisonner sur les troubles vésico-sphinctériens
+Fig. 15.3. A Évaluation et traitement de l'incontinence urinaire et de la rétention aiguë d'urine de la
+personne âgée
+ADL : Activity of Daily Living ; IUU : incontinence urinaire par urgenturie ; IUTR : incontinence urinaire transitoire
+et réversible ; IUE : incontinence urinaire d'effort ; IUM : incontinence urinaire mixte ; MHU : mesure du handicap
+urinaire ; RPM : résidu post-mictionnel.
+2. Principes thérapeutiques quel que soit le type d'IU
+B Le traitement de première intention est la mise en place de mictions programmées en
+dehors de tout besoin urinaire et à intervalles réguliers (toutes les 4 heures excepté la nuit) pour
+valoriser le fait d'uriner de façon volontaire et autonome.
+• La mise en place d'une protection ou d'une sonde vésicale en l'absence de rétention uri-
+naire ne fait pas partie du traitement de première intention devant une IU.
+• En cas d'échec, une analyse des freins à la continence doit être réalisée (WC trop bas ou
+non accessibles, habillement, etc.).
+• Le traitement médicamenteux est un traitement de deuxième intention chez les patients
+âgés fragiles. Peu d'études interventionnelles ont été réalisées chez ces patients.
+
+--- Page 278 ---
+Connaissances
+• Il n'existe pas de traitement médicamenteux de l'IU d'effort. Les options chirurgicales sont
+détaillées dans la figure 15.3.
+• En cas d'échec des mesures proposées, il peut être proposé des mesures palliatives : protec-
+tions, étui pénien.
+3. Incontinence urinaire par urgenturie (hyperactivité vésicale)
+Les traitements de l'IUU sont largement validés chez l'adulte jeune, tandis qu'il existe peu
+d'études de bonne qualité méthodologique en population gériatrique.
+Traitement non médicamenteux
+Neuromodulation périphérique des racines sacrées par stimulation du nerf tibial postérieur
+(dispositif transcutané de stimulation électrique à la cheville) :
+• réalisée par le patient ou son aidant au domicile, une fois par jour à heure fixe ;
+• non utilisable en cas de pacemaker ou de troubles cognitifs invalidants chez un patient sans
+aidant.
+Traitement médicamenteux
+Anticholinergiques vésicaux en première intention (oxybutinine, trospium, solifénacine, féso-
+térodine), à réserver à des patients sélectionnés (fig. 15.3), principalement en l'absence de
+troubles cognitifs et de risque de chute.
+Il nécessite une réévaluation de la tolérance (fonction cognitive, rétention urinaire) compte tenu
+des effets secondaires périphériques (xérostomie, constipation, troubles de l'accommodation,
+rétention urinaire) et centraux (vertiges, chutes, troubles cognitifs, syndrome confusionnel).
+Mise en situation
+Agitation chez un patient suivi pour des troubles
+neurocognitifs majeurs
+Vous êtes appelé en chirurgie pour un patient de 90 ans, suivi pour des troubles neurocognitifs majeurs
+(TNCM), une hypertension artérielle, une cardiopathie ischémique, une fibrillation atriale, une hyper-
+trophie bénigne de prostate, une constipation. Ce patient vit habituellement à domicile sans trouble du
+comportement. Dans les suites d'une fracture du fémur opérée 48 heures auparavant, le patient a pré-
+senté un état d'agitation depuis 24 heures pour lequel une contention physique des quatre membres
+a été mise en place [244], associée à une sédation par neuroleptiques en injections intramusculaires. À
+votre arrivée, le patient est somnolent, grimaçant, et tousse. En plus de ses traitements habituels, vous
+notez un neuroleptique, une héparine de bas poids moléculaire à dose préventive, de la morphine en
+injection sous-cutanée [258, 259]. Le patient a arraché une perfusion de 500 cc de glucose 5 %.
+Le diagnostic est celui de syndrome confusionnel, sous la forme hyperactive avec agitation [114, 119].
+Les facteurs déclenchants sont nombreux, mais l'approche va prioriser la recherche d'une douleur pos-
+topératoire [34] mal contrôlée, d'une anémie aiguë, d'une récidive d'infarctus du myocarde voire d'un
+accident vasculaire cérébral, sans oublier le sevrage intempestif d'une benzodiazépine ou apparenté.
+Mais la principale piste est la rétention aiguë d'urines [97, 99, 106] chez ce patient :
+❯ avec TNCM, une hypertrophie bénigne de prostate et une constipation chronique ;
+❯ avec une présentation douloureuse ;
+▲
+
+--- Page 279 ---
+Raisonner sur les troubles vésico-sphinctériens
+❯ ayant reçu des traitements à propriétés anticholinergiques [348] pendant le bloc opératoire (prin-
+cipalement atropine avec néostigmine en décurarisation et neuroleptiques en prévention des nau-
+sées-vomissements postopératoires et, à un moindre degré, morphiniques) et probablement un
+sondage urinaire transitoire ;
+❯ ayant encore reçu ensuite des traitements à propriétés anticholinergiques [348] : principalement
+neuroleptique pour son agitation et, à un moindre degré, morphinique pour ses douleurs.
+L'examen clinique va confirmer le globe vésical sous la forme d'une voussure sus-pubienne sensible [99,
+106], mate à la percussion. Le toucher rectal systématique permettra d'évacuer un volumineux fécalome
+et confirmera l'hypertrophie bénigne de prostate. Le BladderScan trouvera un volume vésical à 800 ml.
+La prise en charge va comprendre :
+❯ sondage urinaire évacuateur, sans laisser de sonde à demeure mais en expliquant la nécessité de
+surveiller la diurèse voire le volume vésical si l'équipe dispose d'un BladderScan ;
+❯ installation systématique du patient aux toilettes ou sur chaise percée toutes les 4 heures, ou en cas
+de demande du patient pour uriner ou de volume vésical > 400–500 ml. En cas d'échec, répéter le
+sondage évacuateur ;
+❯ arrêt de la contention physique et chimique (arrêt de la sédation avant pneumonie d'inhalation,
+car inhalation en cours : toux) en expliquant la démarche et les raisons probables de l'agitation à
+l'équipe de soins. Et en intégrant une mobilisation rapide ;
+❯ rassurer, mobiliser et hydrater le patient. Le diagnostic de confusion sera expliqué au patient et la
+gravité sera expliquée à la famille [327, 330] ;
+❯ corriger les facteurs ayant participé à la RAU : extraction du fécalome et traitement par laxatif (systé-
+matique en cas de morphiniques), arrêt des anticholinergiques dont les neuroleptiques. Le rapport
+risque/bénéfice des morphiniques est revu selon la douleur, en faveur du maintien. La recherche
+d'une infection urinaire (favorisée par un sondage au bloc opératoire) dépendra de la clinique ;
+❯ sans oublier de réaliser ECG (infarctus, hyperkaliémie [185]), hémoglobine, créatinine [199], potas-
+sium, natrémie, protides, urée (état d'hydratation) ;
+❯ il sera prudent de repasser le voir le lendemain.
+▲
+clés
+L'IU est une cause fréquente de handicap.
+L'IU est un syndrome gériatrique d'origine multifactorielle, dont la fréquence est augmentée avec l'âge
+et majorée en cas d'hospitalisation. C'est un facteur de risque de déclin fonctionnel, de chute, d'infection
+urinaire, d'altération de la qualité de vie et d'entrée en institution.
+En présence d'une IU chez un patient âgé, la démarche diagnostique consiste à :
+• éliminer une rétention aiguë d'urines ;
+• éliminer une incontinence urinaire transitoire réversible et chercher l'acronyme « DIAPPERS » :
+– Délire (syndrome confusionnel) ;
+– Infection urinaire ;
+– Atrophie vaginale ;
+– causes Psychologiques ;
+– causes Pharmacologiques ;
+– Excès de diurèse ;
+– Restriction de mobilité (incontinence fonctionnelle par impossibilité de se rendre aux toilettes si
+urgenturie) ;
+– Selles (constipation) ;
+• prendre en compte les comorbidités et les traitements médicamenteux ;
+• préciser les circonstances de survenue de l'IU.
+Une fois cette démarche réalisée, la prise en charge, avant un avis spécialisé éventuel, commence par :
+• la correction du facteur précipitant ;
+• la mise en place de mictions programmées.
+stnioP
+
+--- Page 280 ---
+This page intentionally left blank
+
+--- Page 281 ---
+Apprendre à prescrire
+chez le patient âgé
+Prendre la décision thérapeutique adaptée à la complexité de chaque patient âgé, comprendre et
+appréhender le risque iatrogène
+I. Introduction à la prescription chez le patient âgé : notion de risque iatrogène et d'événement
+indésirable médicamenteux
+II. Thérapeutique médicamenteuse chez le patient âgé
+Bon usage des psychotropes
+I. Généralités
+II. Antidépresseurs
+III. Benzodiazépines et molécules apparentées
+IV. Antipsychotiques
+Savoir quand et comment transfuser un patient âgé en concentrés de globules rouges
+I. Généralités
+II. Indications de la transfusion chez un patient âgé
+III. Savoir évaluer la tolérance d'une anémie chez un patient âgé
+IV. Étapes de l'acte transfusionnel
+V. Savoir prescrire et surveiller une transfusion chez le patient âgé
+Prendre la décision thérapeutique adaptée à la
+complexité de chaque patient âgé, comprendre
+et appréhender le risque iatrogène
+Situations de départ
+En lien avec la définition et avec le diagnostic :
+264 Adaptation des traitements sur un terrain particulier (insuffisant rénal, insuffisant
+hépatique, personne âgée…).
+266 Consultation de suivi d'un patient polymédiqué.
+295 Consultation de suivi gériatrique.
+298 Consultation et suivi d'un patient ayant des troubles cognitifs.
+322 Vaccinations de l'adulte et de l'enfant.
+331 Découverte d'un aléa thérapeutique ou d'une erreur médicale.
+342 Rédaction d'une ordonnance/d'un courrier médical.
+343 Refus de traitement et de prise en charge recommandés.
+348 Suspicion d'un effet indésirable des médicaments ou d'un soin.
+352 Expliquer un traitement au patient.
+354 Évaluation de l'observance thérapeutique.
+355 Organisation de la sortie d'hospitalisation.
+En lien avec la prise en charge en urgence :
+1 Constipation.
+10 Méléna/rectorragie.
+Gériatrie
+© 2021, Elsevier Masson SAS. Tous droits réservés

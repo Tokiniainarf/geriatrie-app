@@ -1,0 +1,734 @@
+--- Page 228 ---
+Connaissances
+Éviter le syndrome d'immobilisation
+Mobiliser les patients est un élément indispensable de la prise en charge des patients âgés. Le syndrome
+d'immobilisation est à considérer comme une pathologie en soi liée à la dépendance, à prendre en charge
+avec les comorbidités, les traitements, et en considérant l'autonomie préalable.
+Quand ?
+• Tout le temps !
+• Dès l'admission lors d'une hospitalisation (+++).
+• Lors d'une sortie d'hospitalisation pour permettre le retour à domicile dans de bonnes conditions [131,
+355].
+Comment ?
+• En éduquant tous les soignants médicaux et paramédicaux à la mobilisation systématique quotidienne
+des patients âgés.
+• En faisant de la mobilisation du patient une prescription thérapeutique.
+• En impliquant le patient et si besoin l'aidant principal [330] pendant l'hospitalisation et lors du retour
+à domicile.
+Pourquoi ?
+• Préserver l'autonomie [31].
+• Prévenir les complications [86].
+B. Épidémiologie
+• B La grande majorité (90 %) des patients alités de façon prolongée a plus de 60 ans.
+• On estime qu'environ 5 à 10 % des sujets de plus de 85 ans sont incapables de se mouvoir
+seul.
+• À domicile, l'incidence annuelle de la perte de la mobilité est de l'ordre de 3 à 4 %. Ce taux
+croît rapidement dans les groupes de sujets les plus âgés.
+• 40 % des résidents d'EHPAD restent au lit ou au fauteuil toute la journée, ayant souvent
+perdu la capacité de marche.
+II. Enquête étiologique
+A Les causes du syndrome d'immobilisation sont listées dans le tableau 13.1. Ces causes sont
+souvent associées. La réduction du risque de syndrome d'immobilisation suppose la prise en
+charge des différentes causes et leur prévention.
+
+--- Page 229 ---
+Prévenir et prendre en charge un syndrome d'immobilisation
+Tableau 13.1. A Causes du syndrome d'immobilisation.
+Pathologie musculosquelettique Arthrose, complication de l'ostéoporose (fracture du col du fémur, fractures
+vertébrales), hallux valgus, arthrite, chute à répétition
+Pathologie neurologique AVC, neuropathies, Parkinson, maladie d'Alzheimer, maladie à corps de
+Lewy…
+Pathologie cardiovasculaire Insuffisance cardiaque, syndrome coronarien aigu, hypotension orthostatique
+Pathologie pulmonaire Pneumopathie aiguë, insuffisance respiratoire
+Facteurs sensoriels Cécité
+Pathologie psychiatrique Dépression, anxiété, délire de persécution, peur de tomber
+Environnementale et sociale Contention physique, iatrogénie hospitalière (sonde urinaire, perfusions,
+recours inapproprié aux ridelles…), manque d'aide humaine, ergonomie
+inadaptée, maltraitance
+Douleurs aiguës ou chroniques Plaie, maladie cancéreuse, pathologie viscérale aiguë, douleur neurogène
+Iatrogénie médicamenteuse Psychotropes, traitement favorisant le risque de chute et la peur de tomber
+Autres Dépression, sarcopénie, cachexie, dénutrition sévère, déconditionnement
+après alitement prolongé, dénutrition, pathologie somatique aiguë, situations
+post-chirurgicales…
+III. Évaluation : connaître les conséquences du
+syndrome d'immobilisation pour les prévenir
+Les conséquences de l'alitement ne sont pas spécifiques de la personne âgée, mais elles sont
+plus précoces, plus fréquentes et plus graves dans cette population en raison de l'altération
+des capacités de réserve liée à l'âge et aggravée par les comorbidités.
+Leur prévention doit donc être l'objet d'un effort tout particulier de la part de l'ensemble de
+l'équipe soignante.
+Réduire le temps d'immobilisation réduit le risque de complications.
+Il faut différencier, même si elles s'associent, les conséquences qui impactent les capacités
+physiologiques de la personne âgée et entraînent une désadaptation, de celles qui sont liées à
+des complications surajoutées.
+A. Désadaptation liée au syndrome d'immobilisation
+Elle comprend une désadaptation :
+• psychomotrice ;
+• cardiovasculaire ;
+• musculaire, avec 
+• des capacités d'endurance (conséquence des deux précédentes).
+1. Désadaptation psychomotrice
+Il s'agit d'une urgence gériatrique (cf. chapitre 12). On observe des troubles de la posture
+statique à type de rétropulsion et une perte des automatismes de la marche, souvent dans un
+contexte d'anxiété et de peur de tomber, d'altération cognitive et/ou de confusion.
+Dans ce syndrome, le patient en position assise a une attitude projetée vers l'arrière. Il glisse
+du fauteuil et son maintien impose parfois le recours à une contention pelvienne. Sa marche
+
+--- Page 230 ---
+Connaissances
+est également difficile du fait de la forte rétropulsion et d'une astasie-abasie. Il existe une
+hypertonie réactionnelle à la mobilisation passive et une disparition des réactions normales
+d'équilibration lors de la poussée. L'examen clinique, notamment neurologique et rhumato-
+logique, est par ailleurs normal ou du moins ne retrouve pas d'autre cause aux troubles de la
+posture et de la marche.
+2. Désadaptation cardiovasculaire
+L'immobilisation, tout comme la diminution ou l'arrêt de l'activité physique, entraîne une
+désafférentation du système nerveux autonome. Conséquence de cette dysautonomie fonc-
+tionnelle, l'hypotension orthostatique [43] est une complication fréquente survenant après
+quelques jours d'alitement. Elle est liée d'une part à la désadaptation de la boucle baroréflexe,
+notamment la diminution de sensibilité des barorécepteurs carotidiens, mais est aussi souvent
+favorisée par l'existence de varices et l'augmentation de la stase veineuse (faisant suite à la
+baisse du tonus musculaire). Elle peut être liée :
+• aux causes de l'immobilisation, telles que la déshydratation, l'utilisation de traitements
+antihypertenseurs, neuroleptiques ou diurétiques [348], qui ont pu rendre la station debout
+difficile ou entraîner une chute [27] ;
+• mais aussi aux conséquences de cette immobilisation (cf. infra).
+204 Mise en situation
+Un syndrome d'immobilisation anodin…
+Vous voyez en consultation une patiente de 89 ans, accompagnée par sa fille qui vous dit que sa mère
+se dit de plus en plus fatiguée [21], qu'elle ne fait plus aucun effort, et qu'elle passe maintenant qua-
+siment toutes ses journées allongée dans son lit qu'elle refuse de quitter depuis maintenant un mois.
+Cela a commencé comme des petites sensations vertigineuses [64] lorsqu'elle était debout depuis long-
+temps ou lorsqu'elle se levait brutalement. Maintenant, dès qu'elle se lève, elle a du mal à tenir debout
+et dit avoir les jambes lourdes [76] et sa fille pense qu'il est maintenant raisonnable de la laisser au lit
+puisqu'elle ne veut pas qu'elle chute à nouveau [27], ce qu'elle a fait deux fois. Cette patiente est suivie
+pour une hypertension artérielle [42], une dépression, des troubles neurocognitifs débutants [131],
+et tout cela semble normal à son médecin référent au vu de ses ennuis de santé et de son grand âge.
+La description d'une intolérance à l'orthostatisme est très évocatrice d'une hypotension orthostatique
+[43], qui semble bien être responsable du syndrome d'immobilisation. L'aggravation de cette hypoten-
+sion orthostatique peut être liée à la progression d'un facteur causal et/ou à la désadaptation cardio-
+vasculaire induite, entraînant un cercle vicieux. Tout l'enjeu de la consultation est donc de comprendre
+ce qui se cache d'une part derrière cette hypotension orthostatique et, d'autre part et surtout, derrière
+l'asthénie.
+1. L'asthénie pourrait être liée à une composante dépressive [123], à rechercher, mais qui pourrait
+aussi être secondaire à la dégradation de la situation. Elle pourrait aussi être liée et confondue
+avec de l'apathie [117], et être comportementale dans le cadre des troubles neurocognitifs. Mais la
+cassure dans l'évolution doit absolument faire rechercher une autre cause organique.
+2. Il faut avoir le poids de la patiente et en rechercher des variations : en moins pour une altération
+de l'état général, en plus pour de l'insuffisance cardiaque. La patiente a perdu 3 kg.
+▲
+
+--- Page 231 ---
+Prévenir et prendre en charge un syndrome d'immobilisation
+3. La recherche d'hypotension orthostatique est positive et reproduit la symptomatologie décrite. La
+pression artérielle de base est à 100/50 mmHg, la fréquence cardiaque à 85/min.
+4. L'ECG est nécessaire pour chercher une séquelle d'infarctus du myocarde (il y a 1 mois) ou une
+fibrillation atriale. L'examen des conjonctives montre une pâleur.
+5. Finalement, la séquence semble être une anémie responsable d'une asthénie, avec hypotension
+orthostatique, puis syndrome d'immobilisation, aggravé par la désafférentation cardiovasculaire.
+Anémie qui nécessite une hospitalisation, car mal tolérée avec hypotension orthostatique et plu-
+sieurs chutes. L'hémoglobine à l'entrée est finalement à 7 g/dl [217] et la patiente présente une
+anémie ferriprive.
+3. Perte de la masse musculaire
+Une augmentation de la masse grasse et une diminution de la masse maigre (masse osseuse,
+organes et tissu musculaire) sont observées au cours du vieillissement (cf. chapitres Vieillissement
+et Dénutrition). La sarcopénie (du grec sarx, « chair », et penia, « manque »), définie par une
+diminution de la masse et de la force musculaires et/ou des performances motrices traduites
+au mieux par la vitesse de marche, peut être majorée de manière rapide par des périodes d'ali-
+tement ou des maladies s'accompagnant de cachexie. Chez la personne âgée, plus que chez
+le sujet jeune, la récupération de la masse musculaire au décours de l'alitement est souvent
+compromise du fait d'une résistance anabolique partielle du tissu musculaire. En situation
+d'hospitalisation, dans un contexte d'hypercatabolisme (infection, période postopératoire,
+néoplasie…) et de réduction des prises alimentaires liées à l'inflammation, la douleur ou la
+dépression, la baisse de la masse musculaire et de la force est encore plus importante [74].
+B Un alitement de 10 jours chez la personne âgée, à l'exclusion de toute maladie cachexiante,
+entraîne :
+• une balance azotée négative ;
+• une diminution de 30 % de la synthèse protidique dans le muscle ;
+• une diminution de la masse maigre d'environ 1,5 kg, touchant préférentiellement les
+muscles des membres inférieurs (– 0,95 kg), ce qui explique le retentissement rapide sur la
+capacité motrice ;
+• une diminution de la force quadricipitale d'environ 15 %.
+La figure 13.2 illustre qu'au cours du vieillissement, la perte de la puissance musculaire (puis-
+sance = travail divisé par le temps = force multipliée par la vitesse) est plus rapide que la perte
+de la force musculaire et que la masse musculaire. Les performances fonctionnelles et les capa-
+cités à réaliser des tâches motrices sont limitées initialement du fait de la perte de la puissance
+musculaire, puis par la perte de la force, avant que ne soit objectivable la perte de la masse
+musculaire. L'alitement exacerbe ces phénomènes d'autant plus que la personne est âgée.
+Ces phénomènes expliquent pourquoi chez la personne très âgée qui est proche des seuils cri-
+tiques de capacité de marche et de performance motrice (vitesse de marche < 0,8 ou < 1 m/s),
+un alitement, même de courte durée, peut occasionner un déconditionnement moteur signi-
+ficatif à l'origine d'un déclin fonctionnel voire d'une dépendance. La perte de la masse mus-
+culaire est par ailleurs souvent favorisée par des prises alimentaires réduites dans le contexte
+de l'immobilisation.
+▲
+
+--- Page 232 ---
+Connaissances
+ment
+Période
+d'alite
+Masse musculaire
+Lever de chaise, monter d'escalier
+Force musculaire
+Vitesse de marche, équilibre
+Puissance musculaire
+50 100
+Âge (années)
+4. Perte des capacités en endurance
+Une capacité aérobie minimale est nécessaire pour réaliser les activités de base de la vie
+quotidienne comme monter les escaliers, faire les courses ou le ménage. Chez les adultes
+jeunes, il existe d'importantes différences d'aptitude à la pratique d'une activité d'endurance
+qui expliquent que certains sont des sportifs de haut niveau et d'autres des personnes aux
+performances modestes. Toutefois aucun adulte jeune n'est limité dans ses activités de la vie
+quotidienne du fait de ses faibles performances en endurance. Au fil des années, la capacité
+maximale à consommer de l'oxygène (VO ) diminue en moyenne de 5 à 10 % par décennie
+2max
+(fig. 13.3).
+Pour une personne âgée en perte d'autonomie, l'enjeu n'est plus la performance sportive
+mais la simple capacité à se déplacer. Certaines personnes âgées ont une VO bas ou proche
+2max
+d'un seuil minimal pour réaliser une activité telle que la marche, en endurance. Ces personnes
+risquent lors d'une perte d'entraînement provoquée par un alitement prolongé ou lors d'une
+enuej
+etluda
+tejus
+nu
+à
+troppar
+rap
+%
+Fig. 13.2. A Liens entre masse, force et puissance musculaires, et alitement.
+Capacité en endurance (VO max), immobilisation et vieillissement
+30 Immobilisation
+20 Seuil de capacité de marche en endurance
+20−29 30−39 40−49 50−59 60−69 70+
+Âge
+Sujet ayant des capacités élevées en endurance (réserves élevées)
+Sujet moyen
+Sujet aux faibles réserves (performances basses, sujet fragile)
+Impact de l'immobilisation sur les capacités en endurance
+)gk/nim/lm(
+xam
+OV
+Fig. 13.3. B Diminution moyenne des capacités en endurance d'une personne au cours de sa vie.
+
+--- Page 233 ---
+Prévenir et prendre en charge un syndrome d'immobilisation
+Avant immobilisation
+Après immobilisation
+VO2 max = 20 ml/mn/kg (exemple d'une baisse de 20 % du VO2 max)
+100 % VO2 max = 16 ml/mn/kg
+100 %
+Marche à 5 km/h
+70 % 87.5 % 14 ml/mn/kg
+Habillage/toilette
+60 % 75 % 12 ml/mn/kg
+Repos assis
+15 % ≈ 22 % 3,5 ml/mn/kg = 1 MET
+% de VO2 max % de VO2 max VO2 d'activités
+motrices
+Fig. 13.4. B Exemple d'une personne ayant des capacités de base en endurance modeste, exposée à
+un déconditionnement physique à l'occasion d'un alitement.
+Après l'alitement prolongé, la personne a perdu 20 % de ses capacités en endurance et devra mobiliser 87,5 % de
+ses capacités maximales pour marcher à 5 km/h contre 70 % précédemment, soit avec plus de fatigue.
+augmentation de leur comportement sédentaire de passer en deçà du seuil minimal et de
+perdre ainsi leur indépendance motrice (fig. 13.4).
+Le maintien d'une capacité aérobie élevée est donc indispensable pour prévenir l'entrée dans
+la dépendance et pour garder des capacités de récupération élevées après un épisode de
+stress. La réserve en endurance (VO au-dessus des minima nécessaires pour réaliser sans dif-
+ficulté les tâches motrices simples comme la marche) détermine ainsi le retentissement d'un
+déconditionnement à l'occasion d'un alitement.
+La VO , comme chez l'adulte jeune, est améliorable par un entraînement spécifique. Quel
+2max
+que soit le niveau initial, il est possible de progresser d'environ 20 %. Le très faible niveau
+d'entraînement de base des personnes âgées sédentaires laisse même souvent espérer des
+marges de progression supérieures.
+B. Complications liées au syndrome d'immobilisation
+A L'ensemble des complications, dont certaines peuvent apparaître immédiatement ou
+d'autres de manière plus tardive, est repris dans la figure 13.1 :
+• précocement, en quelques heures ou quelques jours : syndrome de désadaptation psycho-
+motrice, thrombose veineuse et embolie pulmonaire, troubles de la déglutition et encom-
+brement bronchique, plaie dont escarre, rhabdomyolyse avec ses conséquences, confusion,
+déshydratation ;
+• plus tardivement, après quelques jours ou semaines : dysautonomie avec hypotension
+orthostatique, infection pulmonaire ou urinaire, dénutrition, globe, fécalome (fig. 13.5),
+attitudes vicieuses, rétractions tendineuses, dépression et déclin fonctionnel, ostéoporose.
+La survenue de ces complications amorce souvent un déclin fonctionnel rapide qui lui-même
+favorise un syndrome d'immobilisation et précipite l'entrée dans la dépendance.
+Le retentissement psychologique est important et ne doit pas être sous-estimé.
+L'immobilisation est une expérience psychologique éprouvante chez la personne âgée. La
+confrontation à la dépendance pour réaliser les activités de la vie quotidienne génère chez
+la personne âgée des manifestations psychologiques diverses. L'inquiétude et le sentiment
+d'un risque de mort imminente peuvent occasionner des décompensations anxieuses, une
+
+--- Page 234 ---
+Connaissances
+208 Fig. 13.5. A Fécalome sur une radiographie d'abdomen sans préparation (A) et sur une coupe de
+tomodensitométrie abdominopelvienne (B).
+confusion d'autant plus que la personne souffre de troubles neurocognitifs préexistants ou
+que ses réserves psychologiques sont faibles.
+Les complications digestives sont fréquentes et souvent négligées, alors qu'elles sont
+sources de complications et d'inconfort. L'anorexie, favorisée par la mauvaise installation
+au moment du repas, la confusion, l'inconfort, l'anxiété, justifie un plan de soins nutritionnel
+(cf. chapitre 14) [30]. Les troubles de la déglutition sont fréquents et graves car exposant les
+patients à des pneumopathies d'inhalation pouvant engager le pronostic vital [62]. Ils doivent
+être dépistés (test à l'eau, avis orthophonique) et les mesures nécessaires doivent être mises en
+place, comprenant l'adaptation des textures alimentaires (avis diététique). Le ralentissement
+du transit intestinal est à l'origine d'une constipation et de fécalome [1]. La stase stercorale
+et la baisse de l'hydratation occasionnent un ballonnement abdominal qui participe à l'ano-
+rexie. La constipation, associée en particulier à une hypokaliémie affectant la musculature lisse
+intestinale, peut aboutir à un syndrome d'Ogilvie (fig. 13.6). Enfin, la survenue de gastrite ou
+d'ulcère gastroduodénal dit « de stress », souvent indolore, est fréquente en cas d'alitement
+prolongé et doit être évoquée devant l'apparition d'une anémie [217] ou d'un saignement
+extériorisé [10, 13, 14].
+1. FOCUS – Risque de complications thromboemboliques [248]
+• La thrombose veineuse profonde (TVP) proximale est une affection grave, susceptible de
+s'étendre, de se compliquer d'embolie pulmonaire et/ou de syndrome post-thrombotique,
+et de récidiver.
+• L'incidence des TVP augmente avec l'âge.
+• L'immobilisation est l'un des principaux facteurs de risque de thrombose veineuse, multi-
+pliant le risque par 3 à 5.
+
+--- Page 235 ---
+Prévenir et prendre en charge un syndrome d'immobilisation
+Fig. 13.6. A Syndrome d'Ogilvie.
+• La démarche diagnostique doit prendre en compte le terrain, les données de l'examen
+clinique et intégrer un score de probabilité clinique. Le diagnostic de TVP repose sur l'écho-
+doppler veineux.
+Prophylaxie des TVP
+Trois axes : anticoagulant à dose préventive, compression veineuse et mobilisation précoce des
+patients.
+Traitement pharmacologique préventif des TVP (recommandations AFSSAP,
+2009)
+Dans les situations médicales, un traitement préventif systématique par héparines de bas poids
+moléculaire (HBPM), pentasaccharide ou héparine non fractionnée (HNF) est recommandé :
+• chez les patients de plus de 40 ans en perte d'autonomie aiguë ;
+• hospitalisés pour une durée prévue de plus de 3 jours ;
+• dans un contexte de pathologie aiguë, décompensation cardiaque ou respiratoire, accident
+vasculaire cérébral (AVC) ou syndrome coronarien aigu ;
+• ou dans un contexte d'infection, affection rhumatologique ou digestive inflammatoire
+quand ces situations sont associées à un facteur de risque supplémentaire de maladie
+thromboembolique dont un âge > 75 ans (les autres facteurs de risque étant cancer, anté-
+cédent thromboembolique veineux, traitement hormonal, syndrome myéloprolifératif).
+Pour les situations chirurgicales, une thromboprophylaxie systématique est recommandée dans
+un contexte chirurgical orthopédique ou abdominal notamment dans la chirurgie orthopé-
+dique dite majeure (prothèse de hanche, de genou) et chez les sujets de plus de 85 ans — les
+mêmes molécules hépariniques sont indiquées et les anticoagulants oraux directs peuvent
+aussi être utilisés dans les situations de chirurgie orthopédique programmée.
+Compression veineuse élastique (HAS 2010)
+Contention de classe 2, 15 à 20 mmHg à la cheville :
+• suggérée dans tous les cas, surtout en cas de contre-indication au traitement médicamenteux ;
+• en contexte médical, recommandée dans les situations à risque, notamment en cas d'ali-
+tement pour une infection avec fièvre prolongée, un cancer à risque de thrombose, une
+
+--- Page 236 ---
+Connaissances
+insuffisance cardiaque ou un antécédent de thrombose veineuse. La compression est utile
+en complément du traitement anticoagulant ou seule lorsque ce traitement n'est pas indi-
+qué. En revanche, l'utilisation d'une compression après un AVC n'a pas démontré son
+intérêt ;
+• en contexte chirurgical, l'utilisation d'une compression est recommandée en cas de geste
+à risque thromboembolique veineux, en association au traitement anticoagulant ou seule
+lorsque ce traitement est contre-indiqué.
+Une compression médicale en prophylaxie de thrombose veineuse pour des personnes âgées
+alitées au long cours comme les résidents d'EHPAD ou d'unités de soins de longue durée
+(USLD) très dépendants n'a pas fait la preuve de son utilité. En revanche, chez ces patients, une
+anticoagulation préventive doit être prescrite en cas d'événement aigu, médical ou chirurgical,
+pro-thrombotique.
+2. FOCUS – Risque d'escarre [86]
+Une escarre est une lésion cutanée d'origine ischémique pouvant compliquer un syndrome
+d'immobilisation. Elle est favorisée par la compression des tissus mous entre les reliefs osseux
+et le plan du lit ou du sol lorsque le patient est resté à terre (encadré 13.1). Les deux principales
+localisations sont le sacrum et le talon.
+Prévalence
+• B Concerne 300 000 patients en France.
+• Particulièrement fréquente chez les patients âgés de plus de 70 ans.
+• Prévalence à l'hôpital d'environ 9 % ; 4 % en EHPAD.
+Encadré 13.1
+Physiopathologie
+Comprendre la formation d'une escarre
+A La compréhension des mécanismes physiopathologiques qui la favorisent (illustrés par la figure 13.7)
+permet de mieux assurer sa prévention et son traitement. La pression s'exerce sur les tissus mous selon des
+forces d'appui perpendiculaire aux plans cutanés, mais aussi des forces de cisaillement oblique et de
+frictions.
+B La microcirculation des tissus reste possible lorsque la pression hydrostatique de 32 mmHg au niveau de
+l'artériole n'est pas dépassée par la compression externe (fig. 13.8A). Dans le cas contraire, la diminution du
+débit sanguin (voire l'ischémie qui reste réversible dans sa phase initiale) peut survenir. Lorsque cette pression
+> 32 mmHg perdure et/ou se répète, des phénomènes inflammatoires favorisant la formation de thrombus
+vasculaires et responsables de l'occlusion des vaisseaux sanguins apparaissent. L'anoxie qui en résulte conduit,
+plus ou moins rapidement, à la nécrose des tissus cutanés et sous-cutanés et à la formation de l'escarre
+(fig. 13.8B). Les pressions les plus élevées se situent en regard des proéminences osseuses à l'interface os/
+muscle. Elles peuvent être quatre fois plus élevées à proximité de l'os, conduisant à une destruction plus
+importante des tissus en profondeur qu'en surface (fig. 13.8C).
+La gravité de l'hyperpression est conditionnée par sa durée, son sens d'application sur les tissus et la
+macération. Comme le montre la figure 13.8D, en position assise la pression au niveau des ischions est
+comprise entre 100 et 200 mmHg, de sorte que le danger apparaît plus rapidement qu'en décubitus strict,
+position dans laquelle les pressions d'interface sont deux fois moindres. Les forces de friction qui surviennent
+lorsque l'on remonte le patient dans le lit sont plus dangereuses que les forces d'appui. Les forces de cisaille-
+ment sont les plus ischémiantes. Elles se produisent au niveau de la région sacrée lorsque l'on relève le dossier
+du lit pour placer le patient en position demi-assise. Cette position entraîne un étirement et/ou une plicature
+des vaisseaux en profondeur. Enfin, la macération majore les effets délétères de la pression, des frictions et
+du cisaillement.
+
+--- Page 237 ---
+Prévenir et prendre en charge un syndrome d'immobilisation
+Frictions
+Cisaillement
+Forces d'appui Forces d'appui
+Pressions en décubitus dorsal Pressions en position demi-assise
+Fig. 13.7. A Pression en fonction du positionnement du patient.
+A. Pressions en décubitus dorsal. B. Pressions en positions demi-assise.
+(Source : d'après Entretiens de Médecine Physique et Réadaptation. Congrès Montpellier 2006.)
+Pression élevée et soutenue
+arteriole
+32 mmHg Mort cellulaire et tissulaire
+du débit capillaire
+= Ischémie
+Capillaire 16–33 Œdème CAPILLAIRE
+Thrombose capillaire et
+12 Extravasation de liquide dans le occlusion lymphatique
+secteur interstitiel
+veinuie
+de la perméabilité du
+capillaire
+A B
+Pression mmHg
+Os 400
+Muscle
+Graisse 300 dangereux
+Peau 200 1
+2 fauteuil
+acceptable 3 lit
+C D 0 2 4 6 8 10 12 14 16 18
+Heures
+Fig. 13.8. B Physiopathogénie de l'escarre.
+A. Mesure de la pression hydrostatique au niveau de l'unité vasculaire fonctionnelle. B. Mécanismes physiopatho-
+logiques impliqués dans la genèse de l'escarre. C. Distributions des pressions à travers les différents tissus selon
+un cône de pression. Dommages plus importants en profondeur. D. Tolérance des tissus en fonction de l'intensité
+et de la durée des pressions.
+(Source : Journée de Montpellier. Escarres. Colin D, Barrois B, Pelissier. Paris : Masson ; 1998. Grey JE, Harding NC.
+Pressure ulceration. In : Pathy J, Sainclair AL, Morley JE (eds). Principles and practice medecine. 4th ed. Wiley & Sons ;
+2006 (modifié).)
+
+--- Page 238 ---
+Connaissances
+Facteurs de risque d'escarre
+A Multiples et souvent associés, ils sont listés dans le tableau 13.2.
+La prévention des escarres nécessite la prise en charge précoce des facteurs prédisposants et
+précipitants dont les principaux sont :
+• facteurs prédisposants :
+– diabète [208] ;
+– artériopathie oblitérante ;
+– dénutrition [30] ;
+– anémie [217] ;
+• facteurs précipitants : leur survenue augmente fortement le risque d'escarre à très court
+terme. La correction de ces facteurs est urgente :
+– hyperthermie [44] ;
+– hypotension ;
+– troubles de la conscience [43] ;
+– incontinence via la macération [103] ;
+– diarrhée [2].
+L'âge ne constitue pas en soi un facteur de risque indépendant d'escarre mais celles-ci sont
+plus fréquentes chez les patients âgés car ils ont plus de comorbidités, un niveau de dépen-
+dance plus élevée, une polymédication, une dénutrition, des troubles de la continence et une
+vulnérabilité de la peau et du tissu sous-cutané.
+Tableau 13.2. A Facteurs de risque d'escarre.
+Alitement prolongé L'hémi-/para-/tétraplégie
+La spasticité favorise les attitudes vicieuses et augmente l'appui en certains points
+du corps
+Le pied équin favorise l'escarre talonnière
+Maladie aiguë L'hyperthermie, l'hypercatabolisme, la déshydratation, le collapsus, la désaturation,
+l'anémie, l'hypotension, certains médicaments (antihypertenseurs, sédatifs,
+vasodilatateurs, anti-inflammatoires, chimiothérapie, corticoïdes…)
+Iatrogénie hospitalière (brancardage, perfusion, contention…)
+Pathologies orthopédiques Fracture du col du fémur, douleurs
+Immobilité durant le 90 % des personnes âgées ont moins de 20 mouvements par nuit
+sommeil
+Obésité En raison d'une perte de mobilité et macération
+Dénutrition Le risque d'escarre est multiplié par 2
+Maladie vasculaire Troubles de la macrocirculation (dyslipidémie, tabac…) et de la microcirculation
+(diabète) favorisent les escarres talonnières surtout en distalité (mesure de l'index de
+pression systolique +++)
+Troubles de la sensibilité L'altération des voies sensitives (neuropathies périphériques), certains médicaments,
+analgésiques, antalgiques, sédatifs peuvent modifier la perception de la douleur
+Maladies chroniques Certaines pathologies sont particulièrement impliquées : le diabète, l'insuffisance
+respiratoire chronique (BPCO), les maladies cardiovasculaires, l'anémie
+Fin de vie L'escarre traduit alors une défaillance multisystémique. Leur apparition est souvent très
+rapide. Ils siègent sur des localisations inhabituelles et sont peu sensibles aux soins
+Identification des patients à risque d'escarre
+B L'identification des patients à risque nécessite une évaluation globale. De nombreuses échelles
+de risque ont été développées pour évaluer le risque d'escarre. Les plus utilisées sont les échelles
+de Braden (tableau 13.3) et de Norton (tableau 13.4). Ces outils permettent :
+
+--- Page 239 ---
+Prévenir et prendre en charge un syndrome d'immobilisation
+Tableau 13.3. B Échelle de Braden.
+Perception sensorielle Humidité Activité
+1 Absente 1 Constante 1 Alité
+2 Très limitée 2 Très humide 2 Fauteuil
+3 Légèrement limitée 3 parfois humide 3 Marche rare
+4 Non altérée 4 Rarement humide 4 Marche fréquente
+Mobilité Nutrition Frictions/Cisaillements
+1 Immobile 1 Très pauvre 1 Problème
+2 Très limitée 2 Inadéquate 2 Problème potentiel
+3 Légèrement limitée 3 Adéquate 3 Pas de problème
+4 Non altérée 4 Excellente
+Tableau 13.4. B Échelles de Norton.
+Score > 14 : sans risque. Score < 14 : risque.
+État général État mental Activité autonome Mobilité Incontinence
+Bon Bon Sans aide Totale Aucune
+4 4 4 4 4
+Moyen Apathique Marche avec aide Diminuée Occasionnelle
+3 3 3 3 3
+Mauvais Confus Assis au fauteuil Très limité Urinaire ou fécale
+2 2 2 2 2
+Très mauvais Inconscient Totalement alité Immobile Urinaire et fécale
+1 1 1 1 1
+Score = … + … + … + … + …
+Total = …
+• de grader le risque ;
+• avec une valeur prédictive le plus souvent supérieure au jugement clinique ;
+• de mettre en place des mesures préventives adaptées ;
+• de respecter les règles de bonne pratique (recommandations ANAES, 2001).
+Stades de l'escarre (fig. 13.9 à 13.12)
+Stade 1
+A Érythème ne blanchissant pas à la pression, sans effraction cutanée (décoloration de la
+peau, chaleur, œdème, induration plus ou moins importante, pouvant aussi être des indica-
+teurs, en particulier chez les individus à peau foncée).
+Stade 2
+Lésion cutanée partielle intéressant l'épiderme, le derme ou les deux. L'ulcération est superfi-
+cielle et se présente comme une abrasion ou une phlyctène.
+Stade 3
+Lésion cutanée intéressant toutes les couches de la peau, entraînant une souffrance ou une
+nécrose du tissu sous-cutané pouvant s'étendre au-dessous, mais ne dépassant pas le fascia
+des muscles sous-jacents.
+
+--- Page 240 ---
+Connaissances
+A
+B C
+Fig. 13.9. A Escarres de stade 1.
+A B C
+D E
+Fig. 13.10. A Escarres de stade 2.
+A à C. Désépidermisation ou phlyctènes. D et E. Phlyctènes hémorragiques.
+
+--- Page 241 ---
+Prévenir et prendre en charge un syndrome d'immobilisation
+A B
+C
+Fig. 13.11. A Escarres de stade 3.
+A à C. Ulcérations superficielles avec fibrine.
+A B
+Fig. 13.12. A Escarres de stade 4.
+C A à C. Ulcérations profondes.
+
+--- Page 242 ---
+Connaissances
+Stade 4
+Destruction extensive dépassant le fascia, nécrose des tissus ou souffrance tissulaire au niveau
+du muscle, de l'os ou des structures sous-jacentes, avec ou sans perte de substance cutanée
+complète.
+Mesures de prévention de l'escarre sur patient immobilisé
+La prévention des escarres repose sur les points suivants :
+• soins de nursing ;
+• utilisation de dispositifs et matériels d'aide à la prévention ;
+• installation au fauteuil ;
+• optimisation des apports nutritionnels.
+Soins de nursing
+• Identification des patients à risque.
+• Surveillance cutanée pluriquotidienne au niveau des points d'appui et hydratation de la
+peau.
+• Effleurages des zones à risque, à mains nues ou avec un topique gras, hydratant, vasodila-
+tateur (huiles hyper-hydrogénées) en évitant les massages et pétrissages qui aggravent les
+dommages.
+• Changements de positions toutes les 2 ou 3 heures pour les patients qui ne peuvent se
+mouvoir (décubitus dorsal : 3 heures, décubitus latéral ou position de trois quarts arrière :
+2 heures).
+• Protection des zones à risque (condyles fémoraux, malléoles, talons…) avec des dispositifs
+susceptibles de diminuer les frictions et les cisaillements.
+• Lutte contre la macération.
+• Précautions : hygiène de la peau, éviction des corps étrangers dans le lit et vigilance vis-à-vis
+des plis au niveau des draps.
+• Enfin, utilisation rationnelle des dispositifs d'aide à la prévention.
+Utilisation de dispositifs d'aide à la prévention
+Le choix d'un support d'aide à la prévention des escarres dépend du but recherché (prévention
+primaire, secondaire ou aide au traitement), du niveau de risque du patient et de la durée quo-
+tidienne de l'alitement, de la possibilité ou non de mettre en place un plan de positionnement,
+du rapport coût/efficacité.
+Matelas et surmatelas
+Les matelas et surmatelas se différencient avant tout par leur épaisseur (surmatelas 5–15 cm,
+matelas 15–21 cm). Ils peuvent être séparés en deux groupes en fonction du concept, de leur
+mode d'action et de leur efficacité :
+• supports statiques, qui réduisent les pressions en augmentant la surface d'appui ; fabriqués
+à partir de matériaux conformables (mousse, modules à eau ou à air statique) ; destinés aux
+patients à faible risque, alités moins de 15 heures par jour ;
+• supports dynamiques, composés de cellules gonflées avec de l'air par l'intermédiaire d'un
+moteur électrique, de façon continue ou avec des pressions alternées ; indiqués si le malade
+reste alité plus de 20 heures par jour.
+
+--- Page 243 ---
+Prévenir et prendre en charge un syndrome d'immobilisation
+Lits fluidisés
+Ils sont réservés aux services de réanimation ou aux services de « grands brûlés ».
+Autres dispositifs
+Pour la région talonnière, l'efficacité des matelas est moins bonne que pour le sacrum ou le
+trochanter. Il est donc proposé d'utiliser des talonnières ou des fonds de lit pour alléger l'appui.
+Ces dispositifs sont conçus dans différents matériaux (mousse, air statique, microbilles).
+Installation au fauteuil
+L'installation correcte au fauteuil revêt une importance majeure car, dans cette position, il y a
+un risque d'escarres ischiatiques. Certaines règles doivent être respectées :
+• hauteur de l'assise adaptée à la taille du patient, de sorte que les pieds du patient soient
+en contact avec le sol (ou le repose-pied) et que la flexion de hanche et de genou soit
+d'environ 90° ;
+• l'assise du fauteuil à angle droit avec le dossier ;
+• en évitant la bascule du bassin vers l'arrière ou son inclinaison latérale ;
+• tronc droit.
+L'utilisation d'un coussin sur le fauteuil de chambre ou sur le fauteuil roulant permet de réduire
+le risque d'escarres et améliore le confort du patient. Un grand nombre de produits sont
+disponibles.
+Optimisation des apports nutritionnels (cf. chapitre 14) [30]
+• Pas d'étude avec des niveaux de preuve suffisants pour affirmer qu'une supplémentation
+nutritionnelle permet de prévenir les escarres.
+• Respecter les préconisations de patients dénutris.
+• Majorer les apports en présence d'escarres constituées.
+IV. Prévention du syndrome d'immobilisation
+La prévention du syndrome d'immobilisation repose sur un travail pluridisciplinaire fondé
+sur des protocoles de soins validés, la formation des équipes et l'entretien d'une motiva-
+tion générale d'équipe. Le médecin et le cadre de l'unité de soins doivent entretenir cette
+dynamique.
+Principe de la prévention des complications du syndrome d'immobilisation
+– Travail pluridisciplinaire fondé sur des protocoles de soins validés et l'entretien d'une motivation générale
+d'équipe.
+– Limiter les circonstances d'immobilisation au lit, notamment les hospitalisations et leur durée.
+– Favoriser la mobilisation précoce hors du lit (patient levé au fauteuil, habillé, favoriser la marche, pas de
+contention, limiter les perfusions et sondes).
+– Limiter le risque thromboembolique (mobilisation active des membres inférieurs, massages, exercices respi-
+ratoires pluriquotidiens, bas de contention adaptés, héparinothérapie préventive).
+– Encourager les apports nutritionnels et hydriques adaptés (35 kcal/kg par jour, 1,5 à 2 litres d'eau par jour).
+– Limiter les risques ostéoarticulaires (mobilisation précoce, entretien articulaire, positionnement correct,
+exercices musculaires isométriques contre l'amyotrophie, alternance de positionnement, mise au fauteuil puis
+debout dès que possible).
+– Encourager le soutien psychologique (familial et équipe soignante) et le maintien des stimulations senso-
+rielles et repères temporo-spatiaux (lumière, téléphone, calendrier).
+– Lutter contre la douleur.
+– Limiter la constipation (hydratation, massages abdominaux, laxatifs).
+
+--- Page 244 ---
+Connaissances
+Mise en situation
+Chute compliquée d'un décubitus prolongé
+Vous recevez aux urgences une patiente de 90 ans, retrouvée confuse par terre dans son EHPAD au
+matin [27]. La dernière fois qu'elle a été vue remonte à la veille au soir, lorsqu'elle s'est couchée, soit
+12 heures auparavant. Aucun témoin. Cette patiente, habituellement déambulante et souriante, est
+suivie pour des TNC majeurs [131] dans le cadre d'une maladie d'Alzheimer (dernier MMS 8 il y a 1 an).
+Ses autres antécédents sont : hypertension artérielle sous inhibiteur calcique, dépression [123] bien équi-
+librée sous inhibiteur de recapture de la sérotonine, canal lombaire étroit sous paracétamol. En l'absence
+d'information, l'examen clinique va être déterminant.
+1. Les constantes montrent une pression artérielle à 98/45 mmHg [43], sans marbrures, la fréquence car-
+diaque est à 110/min, la température à 38,1 °C [44], la saturation à 89 %. Oxygénothérapie en urgence.
+Perfusion car valeurs de pression artérielle anormalement basses pour une hypertendue.
+2. La recherche de complications menaçant le pronostic vital est immédiate :
+❯ comprendre la désaturation, en envisageant pneumopathie d'inhalation, embolie pulmonaire,
+insuffisance cardiaque aiguë en priorité. L'examen note un foyer de crépitants en base droite et des
+restes alimentaires sur la chemise de nuit. Probable trouble de la déglutition avec pneumopathie
+d'inhalation. Mise à jeun pour l'instant mais surveiller la nutrition pour limiter la période de jeûne
+au minimum ;
+❯ reconnaître le syndrome confusionnel [119] chez cette patiente différente de son état habituel
+après contact avec l'EHPAD. Enquête exhaustive sans oublier la recherche d'un globe, d'un fécal-
+ome [4] et de douleur. Désaturation et déficit neurologique en pistes étiologiques prioritaires ;
+❯ rechercher des signes de localisation neurologiques [121], évoquant soit un AVC responsable de
+la chute dans la nuit, soit un hématome intracrânien (le plus souvent sous-dural) conséquence
+d'un traumatisme crânien. Malgré la confusion, la patiente mobilise moins son hémicorps gauche.
+Indication à faire une imagerie cérébrale en urgence, idéalement IRM avec avis neurovasculaire ou,
+au moins, une TDM cérébrale ;
+❯ rechercher d'autres complications graves :
+• douleurs à la pression des masses musculaires sur les points d'appui, et une plaie sacrée avec
+dermabrasion. Probable rhabdomyolyse [77] et escarre [86]. On n'oubliera pas le tétanos en cas
+de plaie ;
+• sillon gingivo-lingual sec : déshydratation. On hydrate avec du NaCl 9 ‰ en attendant la biolo-
+gie en attente ;
+• ECG systématique et urgent [185] pour chercher des signes d'hyperkaliémie [201], un trouble du
+rythme, des arguments pour une embolie pulmonaire ou un infarctus du myocarde ;
+• observation puis mobilisation de toutes les articulations [67] à la recherche d'une douleur en
+faveur d'une fracture.
+La patiente est transférée en gériatrie aiguë, installée sur un matelas à air dynamique car risque d'alite-
+ment plus de 20 heures par jour [246] du fait du déficit neurologique, avec un diagnostic de chute sur AVC
+ischémique étendu avec éléments hémorragiques, compliquée d'une confusion, d'une pneumopathie
+d'inhalation, d'une rhabdomyolyse (CPK 1 200 UI/l) avec insuffisance rénale (déshydratation) et hyperka-
+liémie modérée (5,7 mmol/l).
+
+--- Page 245 ---
+Prévenir et prendre en charge un syndrome d'immobilisation
+clés
+L'immobilisation d'une personne âgée est toujours grave car elle l'expose à un déclin fonctionnel rapide et
+à une surmortalité. C'est en ce sens qu'elle doit être considérée comme un syndrome. Retenir qu'un patient
+âgé alité est une situation anormale dont il faut vérifier la justification.
+Principales complications d'une immobilisation prolongée :
+• fonte musculaire et diminution de la force et des capacités en endurance ;
+• désadaptation psychomotrice, cardiovasculaire, musculaire ;
+• anorexie, constipation, troubles de la déglutition ;
+• complications thromboemboliques ;
+• anxiété, dépression, confusion ;
+• escarres.
+La prévention des complications doit donc être l'objet d'un effort tout particulier de la part de l'en-
+semble de l'équipe soignante :
+• prévention de la maladie thromboembolique veineuse ;
+• évaluation du risque d'escarres ;
+• mobilisation au lit, positionnements, lever précoce au fauteuil ;
+• hydratation 1,5 litre par jour, optimisation des apports alimentaires ;
+• favoriser l'orientation temporelle et spatiale.
+Les escarres représentent une complication grave du syndrome d'immobilisation, dont la prévention
+repose sur :
+• soins de nursing ;
+• utilisation de dispositifs et matériels d'aide à la prévention ;
+• installation au fauteuil ;
+• optimisation des apports nutritionnels.
+stnioP
+
+--- Page 246 ---
+This page intentionally left blank
+
+--- Page 247 ---
+Évaluer l'état nutritionnel
+et en comprendre
+l'importance
+I. Généralités
+II. Nutrition normale dans le grand âge
+III. Troubles nutritionnels et dénutrition
+IV. Prise en charge nutritionnelle chez la personne âgée
+Situations de départ
+En lien avec la définition et avec le diagnostic :
+17 Amaigrissement.
+30 Dénutrition/malnutrition.
+51 Obésité et surpoids.
+211 Hypoprotidémie.
+En lien avec la prise en charge en urgence :
+27 Chute de la personne âgée.
+86 Escarre.
+En lien avec la démarche étiologique :
+31 Perte d'autonomie progressive.
+131 Trouble de mémoire/déclin cognitif.
+62 Troubles de la déglutition ou fausse route.
+119 Confusion mentale/désorientation.
+266 Consultation de suivi d'un patient polymédiqué.
+267 Consultation de suivi d'un patient polymorbide.
+270 Demande d'amaigrissement.
+295 Consultation de suivi gériatrique.
+298 Consultation et suivi d'un patient ayant des troubles cognitifs.
+300 Consultation préanesthésique.
+324 Modification thérapeutique du mode de vie (sommeil, activité physique,
+alimentation…).
+353 Identifier une situation de déconditionnement à l'effort.
+Item, objectifs pédagogiques, hiérarchisation des connaissances
+ITEM 252 – Troubles nutritionnels chez le sujet âgé
+Rang Rubrique Intitulé
+B Éléments Conséquences du déséquilibre nutritionnel et de dénutrition chez la
+physiopathologiques personne âgée
+A Définition Besoins nutritionnels principaux de la personne âgée
+B Éléments Principaux facteurs de risque et prévention de dénutrition de la personne
+physiopathologiques âgée
+Gériatrie
+© 2021, Elsevier Masson SAS. Tous droits réservés
+▼

@@ -1,0 +1,269 @@
+=== PAGE 1 ===
+Fragilite
+L'Ostéoporose du Sujet Agé :
+Structurelle
+LeParcoursDecisionnel
+DIAGNOSTIC
+Fragilite
+Structurelle
+CLINIQUE
+Fiche reflexe EvC : du diagnostic clinique
+au cycle thérapeutique
+EVALUATION DU RISQUE
+Reponse
+(FRAX,T-SCOREDXA)
+Therapeutique
+TRAITEMENT
+ANTI-RESORPTIF
+Bisphosphonates
+RISQUE
+ELEVE
+Denosumab
+DECISION
+THERAPEUTIQUE
+SUIVI &
+RISQUE
+REEVALUATION
+FAIBLE
+ADAPTATION
+Fragilite
+OUARRET
+Structurelle
+TRAITEMENT
+Bilan Biologique
+OSTEOFORMATEUR
+&Etiologique
+Teriparatide ----
+Cycle de
+Remodelage
+Seuil
+Abaloparatide---
+de Fracture
+Carences&Causes
+Secondaires
+SNotebookLM
+=== PAGE 2 ===
+Les 4 Ecueils Gériatriques (Pieges EVC)
+Ce quil faut absolument proscrire lors de la premiere consultation.
+Realite Clinique
+Mythe
+Mythe
+Realite Clinique
+S'arreter au diagnostic
+Pathologie a rechercher
+Considererl'osteoporose
+Toujours rechercher
+d'osteoporose.
+commenormale liee
+systematiquement.
+une autre osteopathie
+a l'age.
+fragilisante associee.
+Realite Clinique
+Mythe
+Mythe
+Realite Clinique
+Rechercheciblee
+Nepasypenser chez le
+Se limiter au Calcium
+Ils sont unprerequis,
++ Vitamine D.
+particulierement chez
+patientasymptomatique
+maisilfautévaluerles
+le chuteur.
+traitements specifiques
+Calcium +
+Traitements
+Vitamine D
+Specifiques
+SNotebookLM
+=== PAGE 3 ===
+DefinirleSeuilFracturaire
+Un traumatisme a basse énergie definit la fragilite, avec des exceptions anatomiques strictes.
+ExceptionsAnatomiques
+Craneet Face
+Seuil Fracturaire
+Rachiscervical
+3 premieres vertebres
+thoraciques
+Doigts et orteils
+Traumatismeabasseénergie=inferieur
+ouegalaunechutedesahauteur
+SNotebookLM
+=== PAGE 4 ===
+Cartographie des 5 Fractures Séveres
+Fractures associees a une surmortalite et
+temoignant d'une fragilite osseuse majeure.
+FESH
+(Extremitesuperieure
+FESF
+de I'humerus)
+(Extremitesuperieure
+dufemur)
+Vertebres
+FEIF
+Extremiteinferieure
+Pelvis
+du femur)
+SNotebookLM
+=== PAGE 5 ===
+Signes d'Alerteet Indicationsdela DXA
+Quand prescrire I'osteodensitométrie (Criteres de remboursement HAs)
+Femmes
+Traitements&
+Signes
+Menopausees
+Pathologies
+d'Osteoporose
+Criteres
+Inducteurs
+specifiques)
+Corticotherapiesystemique
+Fracture vertebrale ou
+ATCDdeFESFchezun
+(> 7,5 mg/j d'équivalent
+peripherique sans
+parent du 1er degre.
+traumatisme majeur
+prednisone pour≥ 3 mois)
+IMC< 19 kg/m²
+Hyperthyroidie,
+AlerteEVC:Diminutionde
+hypercorticisme,
+Menopause precoce
+taille inexpliquee≥4 cm
+hyperparathyroidie
+(< 40 ans)
+(historique)0U≥2cm
+hypogonadisme.
+(prospective)/Cyphose.
+SNotebookLM
+=== PAGE 6 ===
+LePanneaudeControleBiologique
+Bilan de 1ere intention pour éliminer une osteoporose secondaire (Piege EvC n2)
+Test Tube Dashboard
+CRP&Electrophorese
+Calcemie&
+Creatininemie
+Vitamine D
+(±) TSH
+Phosphoremie
+desprotides (EPP)
+(avecclairance)
+(25-OH-D3)
+Elimine:
+Elimine:
+MElimine:
+VElimine:
+Elimine:
+Myelome/Rhumatisme
+InsuffisanceRenale
+Osteomalacie
+Hyperparathyroidie
+Dysthyroidie
+inflammatoire
+primitive
+Chronique (IRC)
+SNotebookLM
+=== PAGE 7 ===
+La Distinction Fondamentale du T-Score
+Ne confondez pas le diagnostic densitometrique et I'indication therapeutique.
+DiagnosticOMs
+-2
+-1
+-3
+Osteoporosedensitometrique:T-Score≤-2.5
+Seuil Therapeutique
+-2
+Le seuil d'indicationd'untraitementdepend
+durisquefracturaire (ATCD,typedefracture)
+Il peut debuter des -1.
+SNotebookLM
+=== PAGE 8 ===
+La Matrice de Décision Thérapeutique
+Croisement du T-Score et du contexte fracturaire.
+Y-Axis
+Objectifcibledutraitement:
+remonter>-2.5ou-2
+Aucunefracture
+(avecFDR)
+Fracture
+non-severe
+Fracture
+Sévere
+X-Axis
+-2
+SNotebookLM
+=== PAGE 9 ===
+Le Prérequis Absolu : Le Statut Vitaminocalcique
+La normalisation est indispensable pour I'efficacite des anti-ostéoporotiques.
+<10 ng/ml :
+10a20ng/ml :
+20a30ng/ml:
+Dose de charge =4ampoules
+Dosedecharge=3ampoules
+Dosedecharge=2ampoules
+espaceesde15jours.
+espaceesde15jours.
+espaceesde15jours
+>30ng/ml
+(75nmol/l)
+Relais par traitement quotidien
+outrimestrielavie.
+SNotebookLM
+=== PAGE 10 ===
+Le Cycle Stratégique Thérapeutique
+Lignes de traitement et boucle de reévaluation (3 a 5 ans).
+Initiation(Lignesdetraitement)
+La Reévaluation (3a5 ans)
+-OptionA:Bisphosphonate
+(Standard 1ere ligne).
+-Survenue d'unefracture/recidive
+-Option B:Teriparatide (18 mois max,
+-SurDMO (ValeurduT-score,absence
+puis relais Bisphosphonate/Denosumab)
+de perte osseuse).
+-Option C:Denosumab
+(puisrelaisBisphosphonate1an)
+La Surveillance
+Prise en compte duterrain
+(cognition,autonomie)et du
+risque de chute.
+SNotebookLM
+=== PAGE 11 ===
+Blueprint Synthese : Le Parcours Osteoporose
+Fiche réflexe intégrée pour I'épreuve EvC.
+L'Alerte
+L'Investigation
+La Decision
+LAction
+T-score
+Decision
+Alert
+Tiinal T-Score
+T-score
+Matrice T-Score
+Bilande1ereintention
+Chute/Traumatisme
+Normalisation
+basse énergie.
+(CRPEPPCa,PCreat,
+(≤-1 si severe, ≤-2 si
+Vitamine D-→
+Chercherlafracture
+VitD)+DXA selon
+non-severe,≤-3si
+Traitement de 1ere
+sévere (FESF,FEIF
+indications (Taille
+asymptomatique)
+ligne→Reevaluation
+Humerus,Vertebre,
+Cortico,IMC<19)
+a3-5 ans.
+T-score
+Declsion
+Alert
+Pelvis).
+SNotebookLM

@@ -1,0 +1,82 @@
+[
+  {
+    "id": 2001,
+    "chapter": "ch11",
+    "rang": "A",
+    "question": "Qu'est-ce que le Modèle de Bouchon (équation de la vulnérabilité) pour le syndrome confusionnel ?",
+    "answer": "C'est l'équation de la décompensation : Terrain (1: Vieillissement physiologique, baisse de la réserve cérébrale) + Comorbidités (2: Maladies chroniques, TNC, dénutrition, polymédication) + Épine irritative (3: Stress aigu, facteur précipitant). La crise est le produit de l'accumulation, et le traitement exige de traquer le 3 tout en gérant le 1+2.",
+    "tags": ["confusion", "syndrome confusionnel", "Modèle de Bouchon", "décompensation", "EVC"]
+  },
+  {
+    "id": 2002,
+    "chapter": "ch11",
+    "rang": "A",
+    "question": "Comment la réserve cognitive influence-t-elle le point de bascule vers le syndrome confusionnel ?",
+    "answer": "Plus la réserve cognitive est faible, plus le facteur précipitant requis est mineur. Chez un sujet sain (réserve intacte), un facteur majeur est requis (ex: AVC massif, choc septique). Chez un sujet âgé/comorbide (réserve limitée), un facteur mineur suffit (ex: changement de posologie, simple globe vésical, infection urinaire bénigne).",
+    "tags": ["réserve cognitive", "confusion", "syndrome confusionnel", "facteur précipitant", "EVC"]
+  },
+  {
+    "id": 2003,
+    "chapter": "ch8",
+    "rang": "A",
+    "question": "Qu'est-ce que le paradoxe physiopathologique de la douleur chez le sujet âgé ?",
+    "answer": "Il associe une augmentation du seuil de détection (la douleur met plus de temps à être perçue en raison de la démyélinisation des fibres périphériques et de la baisse des neurotransmetteurs nociceptifs) et une diminution du seuil de tolérance (une fois perçue, la douleur est moins bien tolérée suite à la baisse des récepteurs morphiniques, de la sérotonine/noradrénaline et à la sensibilisation centrale).",
+    "tags": ["douleur", "physiopathologie", "seuil de détection", "seuil de tolérance", "EVC"]
+  },
+  {
+    "id": 2004,
+    "chapter": "ch8",
+    "rang": "B",
+    "question": "Comment la tolérance à la douleur évolue-t-elle chez les patients atteints de troubles neurocognitifs (TNC) ?",
+    "answer": "Les processus physiopathologiques sont identiques (détection retardée, tolérance diminuée), mais la tolérance au seuil douloureux est corrélée au score du MMS. De plus, les réactions comportementales face à la douleur sont souvent accentuées.",
+    "tags": ["douleur", "TNC", "MMS", "comportement", "EVC"]
+  },
+  {
+    "id": 2005,
+    "chapter": "ch8",
+    "rang": "A",
+    "question": "Quels sont les six écueils diagnostiques à éviter dans la prise en charge de la douleur gériatrique ?",
+    "answer": "1. Considérer la douleur comme normale avec l'âge (réflexe: expliquer les solutions). 2. Ignorer la douleur chez le non-communicant (réflexe: évaluer le comportement). 3. Manquer les symptômes équivalents (réflexe: traquer insomnie/anxiété/agitation). 4. Négliger l'automédication iatrogène (réflexe: interroger sur les AINS). 5. Se limiter au Palier 1 (réflexe: évaluer l'escalade et le non-médicamenteux). 6. Prescrire sans anticiper la tolérance (réflexe: prévenir les effets secondaires).",
+    "tags": ["douleur", "diagnostic", "écueils", "pièges", "EVC"]
+  },
+  {
+    "id": 2006,
+    "chapter": "ch8",
+    "rang": "A",
+    "question": "Quels sont les équivalents sémiologiques et les conséquences fonctionnelles de la douleur chez le sujet âgé (la face cachée de la douleur) ?",
+    "answer": "La plainte localisée peut être absente (ex: 30% d'infarctus indolores). La douleur se manifeste par des équivalents sémiologiques (anxiété, agitation, confusion, insomnie) et entraîne des conséquences fonctionnelles majeures (troubles de la marche, chutes, déclin cognitif rapide, perte d'autonomie brutale).",
+    "tags": ["douleur", "sémiologie atypique", "chutes", "confusion", "EVC"]
+  },
+  {
+    "id": 2007,
+    "chapter": "ch8",
+    "rang": "A",
+    "question": "Devant un syndrome confusionnel, un globe urinaire ou un fécalome chez un sujet âgé, quel est le réflexe clinique systématique ?",
+    "answer": "La douleur doit être systématiquement suspectée et traitée. Ces situations (globe urinaire, fécalome) agissent comme des épines irritatives majeures et sont extrêmement douloureuses, provoquant ou aggravant le syndrome confusionnel.",
+    "tags": ["douleur", "syndrome confusionnel", "globe urinaire", "fécalome", "EVC"]
+  },
+  {
+    "id": 2008,
+    "chapter": "ch1",
+    "rang": "B",
+    "question": "Quels sont les trois groupes de mécanismes cellulaires et moléculaires impliqués dans le processus de vieillissement ?",
+    "answer": "1. Mécanismes moléculaires primaires (instabilité génomique, attrition des télomères, altérations épigénétiques, perte de protéostasie). 2. Mécanismes antagonistes en réponse aux lésions (sénescence cellulaire, dysfonction mitochondriale, dérégulation de la sensibilité aux nutriments). 3. Facteurs intégratifs (épuisement des cellules souches, altérations de la communication intercellulaire).",
+    "tags": ["vieillissement", "biologie", "cellulaire", "télomères", "sénescence"]
+  },
+  {
+    "id": 2009,
+    "chapter": "ch1",
+    "rang": "B",
+    "question": "Qu'est-ce qu'un télomère et quelle est sa longueur typique à la naissance chez l'homme ?",
+    "answer": "C'est la partie extrême des chromosomes composée d'une séquence d'ADN répétitive non codante (répétition de la séquence GGGTTA) qui se raccourcit à chaque division cellulaire (limite de réplication). Sa longueur est fixée à la naissance à environ 9 kilobases.",
+    "tags": ["télomères", "ADN", "chromosome", "vieillissement"]
+  },
+  {
+    "id": 2010,
+    "chapter": "ch6",
+    "rang": "A",
+    "question": "Quels sont les quatre écueils cliniques à éviter absolument concernant l'ostéoporose chez la personne âgée ?",
+    "answer": "1. Considérer que l'ostéoporose est normale chez le patient âgé. 2. En présence d'ostéoporose, ne pas rechercher une autre ostéopathie fragilisante. 3. Ne pas y penser chez le patient asymptomatique (notamment chuteur ou à risque de chute). 4. Se limiter à une supplémentation vitaminocalcique sans évaluer les traitements spécifiques (ex: bisphosphonates).",
+    "tags": ["ostéoporose", "écueils", "chute", "gériatrie", "diagnostic"]
+  }
+]

@@ -1,0 +1,512 @@
+--- PAGE 142 ---
+Connaissances
+Item, objectifs pédagogiques, hiérarchisation des connaissances
+ITEM 134 – Bases neurophysiologiques, mécanismes physiopathologiques d'une douleur aiguë et
+d'une douleur chronique
+Rang Rubrique Intitulé Descriptif
+A Définition Définition OMS de la douleur
+B Éléments Bases neurophysiologiques Expliquer les mécanismes de la douleur aiguë et
+physiopatho- de la douleur chronique, les systèmes de contrôles de la douleur
+logiques
+A Diagnostic Savoir mener l'interrogatoire Localisation, irradiation, caractéristiques, antécé-
+positif d'un patient douloureux dents, facteurs aggravants ou améliorants, retentisse-
+ment psychologique…
+A Diagnostic Reconnaître une douleur Savoir évaluer les composantes et conséquences
+positif aiguë et chronique chez d'une douleur
+l'adulte
+B Prévalence, Douleur aiguë en ville et à Notion de prévalence, de sous-estimation fréquente
+épidémio- l'hôpital, douleur chronique
+logie
+A Diagnostic Reconnaître et évaluer une Connaître les outils et échelles d'évaluation de
+positif douleur aiguë et chronique la douleur chez l'adulte communicant et non
+chez l'adulte communicant (connaître le principe des échelles
+d'hétéroévaluation)
+A Diagnostic Les douleurs par excès de Connaître les principales étiologies des douleurs
+116 positif nociception nociceptives
+A Diagnostic Les douleurs neuropathiques Connaître les principales étiologies, les caractéris-
+positif tiques cliniques des douleurs neuropathiques
+A Diagnostic Les douleurs du cancer Connaître les différents types de douleur du cancer
+positif et particularités de prise en charge
+A Diagnostic Les douleurs de la personne Connaître les principales étiologies, les outils spéci-
+positif âgée fiques d'évaluation de la douleur de la personne âgée
+A Diagnostic Les douleurs nociplastiques : Reconnaître une douleur nociplastique/fonctionnelle
+positif fibromyalgie, syndrome de et savoir l'expliquer aux patients
+l'intestin irritable
+I. Définition de la douleur
+A La douleur a été définie par l'International Association for the Study of Pain (IASP) en 1979
+comme une « expérience sensorielle et émotionnelle désagréable associée à une lésion
+tissulaire réelle ou potentielle ou décrite en des termes évoquant une telle lésion ».
+Cette définition rend compte des différentes composantes de la douleur :
+• sensori-discriminative : notamment la mesure de l'intensité, de la durée et la recherche des
+localisations douloureuses ;
+• affectivo-émotionelle : elle traduit la tonalité désagréable, pénible de la sensation doulou-
+reuse, qui peut entraîner des phénomènes d'anxiété et/ou de dépression ;
+• comportementale : c'est-à-dire les manifestations observables verbales et non verbales et
+l'influence de l'entourage du patient douloureux ;
+• cognitive : c'est-à-dire le traitement de l'information au niveau cérébral, en particulier la
+mémorisation et l'interprétation de la douleur.
+--- PAGE 143 ---
+Évaluer la douleur et en comprendre le retentissement
+Les six écueils à éviter dans la douleur de la personne âgée
+• Considérer que la douleur est normale chez le patient âgé [35] et ne pas lui expliquer qu'il y a des solu-
+tions thérapeutiques.
+• Ne pas envisager une douleur chez le patient non communiquant, en particulier avec une modification
+psychologique, fonctionnelle ou comportementale [119].
+• Ne pas reconnaître tous les symptômes équivalents.
+• Négliger le risque d'automédication iatrogène.
+• Se limiter à un antalgique de palier 1.
+• Élaborer un plan de soins thérapeutique antalgique sans anticiper et informer sur la mauvaise tolérance
+et les effets secondaires.
+Penser à la douleur chez le patient âgé
+La recherche d'une douleur est un élément important de la prise en charge des patients âgés, car il s'agit
+d'un symptôme fréquent, lié aux comorbidités ou à leurs conséquences, lié au risque iatrogène des traite-
+ments, et à la qualité de vie que la douleur altère souvent. L'une des complexités de la prise en charge de la
+douleur chez la personne âgée tient à la tolérance des antalgiques.
+Quand ?
+• Lors d'une première consultation ou en hospitalisation.
+• Lors de consultations de suivi [266, 267, 279, 295].
+• En cas de syndrome confusionnel [119].
+• Lors d'une cassure dans l'évolution d'un patient avec trouble neurocognitif majeur [298].
+• Après une chute [27].
+• Devant toute perte d'autonomie [31].
+• Lors d'une mobilisation, d'une toilette ou d'un soin [258].
+• Lors d'une sortie d'hospitalisation pour permettre le retour à domicile dans de bonnes conditions [131, 355].
+Comment ?
+• En récupérant des informations objectives [131].
+• En connaissant les symptômes atypiques associés à la douleur et en utilisant des échelles d'évaluation
+adaptées [259, 260].
+• En impliquant si besoin l'aidant principal [330], le médecin référent et tous les soignants impliqués
+dans l'accompagnement du patient.
+Pourquoi ?
+• Afin de gérer sans tarder les douleurs aiguës se manifestant par des symptômes aspécifiques [259].
+• Afin de prévenir la douleur liée aux soins [258].
+• Afin de comprendre les causes d'une perte d'autonomie du patient [31, 131, 260, 345].
+• Afin de cibler les interventions utiles et faisables.
+• Afin d'évaluer le besoin d'aides spécifiques du patient (mise en place ou adaptation des aides).
+• Afin de choisir les antalgiques selon les comorbidités et la polymédication [266, 267].
+La prise en charge de la douleur doit être considérée comme un syndrome à prendre en charge
+indépendamment de la pathologie aiguë et des comorbidités du patient. La thérapeutique doit
+être envisagée au vu de la tolérance et des interactions avec les traitements préexistants sur
+l'ordonnance.
+--- PAGE 144 ---
+Connaissances
+II. Particularités de la douleur chez la personne âgée
+A. Prévalence de la douleur chez la personne âgée
+B Le constat est sans appel quant à la douleur chez le patient âgé :
+• la douleur augmente avec l'âge ;
+• la douleur est fréquente : 52 % des patients de plus 75 ans ont une douleur chronique ;
+• la douleur est insuffisamment évaluée ;
+• la douleur est insuffisamment traitée, notamment :
+– dans les établissements hébergeant des personnes âgées dépendantes ;
+– chez les personnes âgées ayant des troubles de la communication verbale.
+B. Effet de l'âge sur le phénomène douloureux
+Il existe des modifications de la sensibilité douloureuse avec l'âge, quelles que soient les com-
+posantes (inflammatoire ou neuropathique), entraînant globalement une augmentation de la
+sensibilité à la douleur malgré deux phénomènes concomitants mais contradictoires :
+• augmentation du seuil de détection de la douleur due à une démyélinisation des fibres
+périphériques, diminution des neurotransmetteurs impliqués dans la nociception ;
+• diminution du seuil de tolérance par diminution du nombre de récepteurs morphiniques,
+des neurotransmetteurs, 5-HT et noradrénaline, dans les circuits modulateurs descendants,
+et modification de la plasticité centrale, ce qui entraîne une sensibilisation.
+C. Cas particulier de la personne âgée avec trouble
+neurocognitif
+• Seuils de douleurs et processus douloureux identiques aux autres personnes âgées.
+• Mais tolérance supérieure au seuil douloureux et corrélée au score du Mini Mental State.
+• Réactions comportementales aux stimuli nociceptifs parfois accentuées par perte du pro-
+cessus d'anticipation. Toute modification du comportement chez un patient ayant des
+troubles neurocognitifs doit faire rechercher une douleur.
+D. Douleur sur trouble psychologique
+D'autres patients vont exprimer une souffrance morale ou psychologique à travers des
+plaintes douloureuses.
+Il peut s'agir d'hypochondrie, de somatisations ou encore le cas particulier de la dépression
+masquée (cf. chapitre 10). Dans ce dernier cas, classiquement les douleurs sont de différents
+types, de localisation variable dans le temps et d'horaires aléatoires. De plus les traitements
+antalgiques usuels sont souvent inefficaces.
+E. Sémiologie de la douleur chez la personne âgée
+A Le plus souvent les personnes âgées peuvent exprimer leur état douloureux.
+Certaines personnes âgées ne peuvent pas communiquer (troubles phasiques, troubles cogni-
+tifs importants, troubles de la compréhension, syndrome confusionnel…) et vont alors présen-
+ter des comportements douloureux parfois pris à tort pour des troubles du comportement liés
+au trouble neurocognitif.
+--- PAGE 145 ---
+Évaluer la douleur et en comprendre le retentissement
+On note six comportements douloureux spécifiques de la personne âgée, ayant chacun des
+expressions symptomatiques propres (tableau 8.1).
+Tableau 8.1. A Les six comportements douloureux et leurs expressions symptomatiques chez la personne âgée.
+Ces comportements sont repris dans les échelles comportementales de la douleur (cf. infra).
+Expressions faciales Grimaces, froncements de sourcils, front crispé…
+Verbalisation, vocalisation Gémissements, soupirs, appels, cris…
+Mouvements du corps Protection, changement de mobilité, rigidité, déambulation
+incessante…
+Changements dans les relations sociales Agressivité, résistance aux soins, diminution de socialisation…
+Changements dans les activités Refus alimentaire, modification du sommeil
+Changements de l'état psychique Irritabilité, confusion, pleurs…
+III. Démarche diagnostique devant une douleur
+du patient âgé
+Démarche
+A. Faire le diagnostic de douleur.
+B. Analyser la douleur.
+C. Rechercher les conséquences de la douleur.
+D. Évaluer l'intensité de la douleur.
+E. Prise en charge de la douleur.
+A. Faire le diagnostic de douleur d'un patient âgé
+La douleur peut être évoquée à partir :
+• d'une plainte douloureuse [4, 5, 67, 71, 72, 97, 161] ;
+• d'un équivalent sémiologique : en particulier anxiété [116], agitation [114], confusion
+[119], insomnie [135] ;
+• d'une conséquence de la douleur : trouble de la marche [66], trouble attentionnel [129],
+déclin cognitif [131], perte d'autonomie [31] ; parfois, la douleur peut mimer un déficit
+neurologique [121].
+Certaines étiologies de douleurs aiguës ou d'équivalent sémiologique représentent des
+urgences diagnostiques :
+• douleur thoracique [161], ou plus fréquemment dyspnée d'effort ou tableau digestif en
+faveur d'un infarctus du myocarde ;
+• douleur thoracique [161] ou dyspnée ou tachycardie en faveur d'une embolie pulmonaire ;
+• douleur abdominale [4] faisant évoquer sur un terrain vasculaire ou emboligène une isché-
+mie mésentérique ;
+• douleur pelvienne dans le cas d'un globe vésical [97] ou d'une constipation ;
+• douleur « rhumatologique » sur lésions fracturaires osseuses post-traumatiques ou non.
+--- PAGE 146 ---
+Connaissances
+B. Analyser la douleur : caractéristiques de la douleur
+d'un patient âgé
+Devant un phénomène douloureux, les trois caractéristiques suivantes doivent être recherchées.
+1. Type de douleur
+Il existe des douleurs nociceptives, neuropathiques et psychogènes.
+La douleur neuropathique est la conséquence directe d'une lésion ou d'une maladie affectant
+le système de nociception et se traduit par des brûlures, des picotements, des décharges élec-
+triques ou une sensation d'engourdissement.
+2. Horaire de la douleur
+Constante, à prédominance matinale (dérouillage mécanique) ou vespérale (caractère inflam-
+matoire), liée à certains soins.
+3. Durée de la douleur
+Douleur aiguë
+Évolue depuis moins de 3 mois, souvent unifactorielle. Il s'agit d'un signe d'alarme utile pour
+l'intégrité de l'organisme.
+Douleur chronique
+Évolue depuis plus de 3 mois, souvent plurifactorielle, souvent intriquée avec des composantes
+psychosociales. Elle est inutile et est plutôt destructrice physiquement, psychologiquement et
+socialement (tableau 8.2).
+Tableau 8.2. A Caractéristiques de la douleur aiguë et de la douleur chronique.
+Douleur aiguë Douleur chronique
+Signal d'alarme, utile, protectrice Inutile, détruit physiquement, psychologiquement,
+socialement
+Douleur transitoire Douleur permanente, récurrente ou répétitive, > 3 mois
+Mécanisme générateur unifactoriel Mécanismes générateurs plurifactoriels
+Réponses végétatives réactionnelles : tachycardie, Réponses conditionnées
+polypnée, mydriase, sueurs
+Impact psychologique : anxiété, stress réversibles Impact psychologique : dépression souvent minimisée
+Traitement étiologique et antalgique ; Traitement antalgique et réadaptatif : aménagements pour
+assistance psychologique simple gérer la douleur persistante
+C. Rechercher les conséquences de la douleur
+Les conséquences peuvent représenter le motif de consultation. Elles dépendent des comorbi-
+tés et des traitements associés, de l'état fonctionnel et sont d'ordre :
+• physiques, en particulier fonctionnelles ;
+• psychologiques et cognitives ;
+• iatrogènes : traitement antalgique insuffisant, mauvaise tolérance des antalgiques utilisés
+[348] ou interactions médicamenteuses avec les traitements usuels.
+--- PAGE 147 ---
+Évaluer la douleur et en comprendre le retentissement
+Il est important d'expliquer que le traitement de la douleur pourra améliorer partiellement ou
+complètement les symptômes qui en sont la conséquence.
+D. Évaluer l'intensité de la douleur (cf. infra, fig. 8.5)
+De principe, le patient est le meilleur expert de sa douleur.
+Recommandations de l'évaluation de la douleur de la personne âgée
+1. Cibler les situations potentiellement douloureuses.
+2. Débuter par une autoévaluation, quel que soit le niveau cognitif.
+3. En cas d'échec, observer les comportements à l'aide d'une échelle d'hétéroévaluation.
+4. Rechercher l'aide de personnes connaissant bien le patient : famille, aidants.
+5. En cas de doute, pratiquer un test antalgique.
+6. Réévaluer régulièrement le patient.
+Il existe deux types d'échelle d'évaluation :
+• les autoévaluations, qui exigent de la part du patient une bonne compréhension de la
+consigne donnée ;
+• les héteroévaluations remplies par un cotateur externe (soignants, entourage…), indé-
+pendamment de la participation du patient, et qui nécessitent une formation préalable au
+remplissage.
+1. Échelles d'autoévaluation
+Il en existe plusieurs : échelle visuelle analogique (EVA) (fig. 8.1), échelle numérique (EN),
+échelle verbale simple (EVS, fig. 8.2), échelle faciale. Chez la personne âgée, l'EVS est l'échelle
+de référence car elle est la plus simple et ne nécessite pas de capacité d'abstraction de la part
+du patient. Elle est sensible au changement.
+EVA : ÉCHELLE VISUELLE ANALOGIQUE
+Face patient
+douleur
+pas de
+maximale
+douleur
+imaginable
+Face de mesure
+10 9 8 7 6 5 4 3 2 1 0
+Fig. 8.1. A Échelle visuelle analogique.
+--- PAGE 148 ---
+Connaissances
+0 : Pas de douleur
+1 : Douleur faible
+2 : Douleur modérée
+3 : Douleur intense
+4 : Douleur extrêmement intense
+Fig. 8.2. A Échelle visuelle simple.
+2. Échelles d'hétéroévaluation
+La plupart ont été développées pour les personnes âgées ayant des troubles cognitifs et/ou
+troubles de la communication verbale (syndrome confusionnel, aphasie, trouble de la compré-
+hension, troubles cognitifs). Elles s'appuient sur les comportements douloureux de la personne
+âgée et leurs expressions symptomatiques (cf. tableau 8.1).
+L'échelle Algoplus a été spécifiquement développée chez des patients âgés ayant des troubles
+de la communication verbale par un collectif d'experts pluriprofessionnels français. Il existe
+d'autres échelles d'hétéroévaluation : DOLOPLUS, qui est plutôt réservée à l'évaluation des
+douleurs chroniques, ECPA.
+Algoplus (fig. 8.3)
+• Cinq items cotés 0 (« non ») ou 1 (« oui »).
+• Score seuil validé à 2/5 pour justifier d'un traitement antalgique.
+• Temps de passation : moins d'une minute.
+• Validée pour les douleurs aiguës mais reste pertinente pour les douleurs chroniques.
+• Validée également chez des patients avec troubles cognitifs et/ou dépression.
+Evaluation de la douleur Identification du patient
+Echelle d'évaluation comportementale
+de la douleur aiguë chez la personne âgée
+ANNEXE 6
+présentant des troubles
+de la communication verbale
+Date de l'évaluation de la douleur ....../ ....../ ...... ....../ ....../ ...... ....../ ....../ ...... ....../ ....../ ...... ....../ ....../ ...... ....../ ....../ ......
+Heure .......h ....... .......h ....... .......h ....... .......h ....... .......h ....... .......h .......
+OUI NON OUI NON OUI NON OUI NON OUI NON OUI NON
+1 Visage
+Froncement des sourcils, grimaces, crispation,
+mâchoires serrées, visage figé.
+2 Regard
+Regard inattentif, fixe, lointain ou suppliant,
+pleurs, yeux fermés.
+3 Plaintes
+«Aie», «Ouille», «J'ai mal», gémissements,
+cris.
+4 Corps
+Retrait ou protection d'une zone, refus de
+mobilisation, attitudes figées.
+5 Comportements
+Agitation ou agressivité, agrippement.
+Total OUI /5 /5 /5 /5 /5 /5
+Professionnel de santé ayant réalisé Médecin Médecin Médecin Médecin Médecin Médecin
+l'évaluation IDE IDE IDE IDE IDE IDE
+AS AS AS AS AS AS
+Autre Autre Autre Autre Autre Autre
+Paraphe Paraphe Paraphe Paraphe Paraphe Paraphe
+Fig. 8.3. A Échelle Algoplus.
+(Source : Association Doloplus : www.doloplus.fr.)
+--- PAGE 149 ---
+Évaluer la douleur et en comprendre le retentissement
+Questionnaire DN4
+B Le questionnaire DN4 (fig. 8.4) doit être utilisé en cas de suspicion de douleur neuro-
+pathique, évoquée dans un contexte (par exemple, pathologie neurologique, diabète, dou-
+leurs postopératoires, résistance aux antalgiques usuels) ou une sémiologie (par exemple,
+trajet sciatique ou neuropathique, sensation de cuisson, dysesthésie, allodynie, douleur fan-
+tôme) évocateurs.
+• Échelle faite de 4 questions et 10 items (réponses « oui »/« non ») à partir de l'interrogatoire
+et de l'examen du patient.
+• Un score seuil ≥ 4/10 est en faveur d'une douleur neuropathique.
+Questionnaire DN4
+Répondez au quatre questions ci-dessous en cochant une seule case
+pour chaque item.
+INTERROGATOIRE DU PATIENT
+Question 1: La douleur présente-t-elle une ou plusieurs des
+caractéristiques suivantes?
+Oui Non
+1.Brûlure
+2.Sensation de froid douloureux
+3.Décharges électriques
+Question 2: La douleur est-elle associée dans la
+même région à un ou plusieurs des
+symptômes suivants?
+Oui Non
+4.Fourmillements
+5.Picotements
+6.Engourdissements
+7.Démangeaisons
+EXAMEN DU PATIENT
+Question 3: La douleur est-elle localisée dans un territoire où
+l'examen met en évidence:
+Oui Non
+8.Hypoesthésie au tact
+9.Hypoesthésie à la piqûre
+Question 4 : La douleur est-elle provoquée
+ou augmentée par :
+Oui Non
+10.Le frottement
+Oui = 1 point Non = 0 point Score du patient = /10
+Fig. 8.4. B Questionnaire DN4.
+(Source : Bouhassira D. et al. Development and validation of the Neuropathic Pain Symptom Inventory. Pain,
+2004 ;108(3):248–57.)
+--- PAGE 150 ---
+Connaissances
+Essayer d'obtenir une auto-évaluation de la douleur :
+Cette auto-évaluation est-elle fiable?
+NON OUI
+Hétéro-évaluation confirmer
+échelle brève:ex Algoplus® les résultats par hétéro-évaluation
+(échelle brève)
+Algoplus® < 2 Algoplus® ≥ 2 EN ≥3 or EVS* ≥2 EN <3 or EVS* <2
+Échelles longues :
+Doloplus®, ECPA, Analgésie
+Analgésie
+Pacslac...
+Surveillance
+Analgésie? Réévaluer Réévaluer
+Fig. 8.5. A Algorithme décisionnel pour une évaluation de la douleur chez la personne âgée.
+E. Principes de la prise en charge de la douleur d'un patient
+âgé
+A L'objectif du traitement est d'obtenir une analgésie puissante pour éviter le cercle vicieux
+(douleur + mémoire = mémoire de la douleur), en évitant les effets secondaires des antalgiques.
+IV. Traitements de la douleur
+Le traitement de la douleur repose sur quatre points :
+• traitement étiologique ;
+• traitement non médicamenteux ;
+• traitement médicamenteux ;
+• réévaluation de l'efficacité du traitement.
+A. Traitement étiologique
+Il ne doit pas retarder le traitement symptomatique de la douleur, mais représente parfois
+l'urgence vitale et l'essentiel du traitement pour obtenir l'antalgie, par exemple :
+• désobstruction coronaire dans un infarctus du myocarde ;
+• vasodilatateur coronaire dans l'angor ;
+• prothèse de hanche pour une fracture cervicale de l'extrémité supérieure du fémur.
+B. Traitements non médicamenteux
+Peuvent être envisagés comme alternative ou complément hors urgence :
+• acupuncture, ostéopathie ;
+• stimulation électrique ;
+• relaxation, sophrologie, musicothérapie, hypnose.
+--- PAGE 151 ---
+Évaluer la douleur et en comprendre le retentissement
+C. Traitements médicamenteux
+1. Pour les douleurs nociceptives
+Il faut tenir compte des trois paliers des antalgiques de l'OMS :
+• palier 1 : paracétamol (principalement) ;
+• palier 2 :
+– opioïdes faibles (tramadol, poudre d'opium, dihydrocodéine, codéine) ;
+– nécessitent une titration (« start slow, go slow ») ;
+– à éviter chez la personne âgée du fait de leurs effets secondaires (confusion ++ , consti-
+pation, rétention urinaire, nausées/vomissements...) ;
+– cas particulier : le tramadol est un antalgique ayant des propriétés sérotoninergiques
+avec des effets communs aux autres ISRS qu'il ne faut donc pas lui associer (nausées,
+syndrome sérotoninergique…). Il présente l'avantage d'être efficace sur les douleurs
+nociceptives et neuropathiques. Il peut être utilisé en privilégiant une titration en com-
+mençant à 10 à 15 mg matin et soir grâce à l'utilisation de la forme pédiatrique buvable.
+Mais sa mauvaise tolérance et le risque de dépendance en limitent les possibilités chez
+le patient âgé, en particulier en présente de troubles neurocognitifs ;
+• palier 3 : opioïdes forts (morphiniques, agonistes morphiniques) ; ils nécessitent une titra-
+tion (« start slow, go slow »).
+Principaux effets secondaires des morphiniques
+– Constipation [1], nécessitant des mesures préventives systématiques pendant tout le traitement (par exemple,
+mesures hygiéno-diététiques et association de deux laxatifs).
+– Rétention urinaire [97], justifiant de diminuer les doses ou d'arrêter le traitement en plus des mesures
+spécifiques.
+– Nausées/vomissements [12], qui peuvent survenir en début de traitement, justifiant d'un bref traitement par
+antiémétisant (2 ou 3 jours).
+– Hallucination et/ou délire et/ou confusion [119], justifiant une diminution des doses voire un arrêt de
+traitement.
+– Troubles de la vigilance dans le cadre d'un surdosage, justifiant d'un arrêt de traitement s'ils sont importants
+voire de la mise en route d'un traitement antagoniste (naloxone).
+– Prurit [88], fréquent, nécessitant de faire une rotation des différents opiacés.
+– Dépression respiratoire dans le cadre d'un surdosage.
+2. Pour les douleurs neuropathiques
+B Les principales classes thérapeutiques sont :
+• certains antiépileptiques (gabapentine, prégabaline) ;
+• les antidépresseurs tricycliques (à éviter chez les personnes âgées) et certains inhibiteurs
+sélectifs de la recapture de la sérotonine (ISRS).
+Dans certaines situations complexes, il peut être associé un traitement antalgique de palier 1
+ou 2.
+D. Réévaluation
+A La réévaluation doit faire partie de la prise en charge de la douleur.
+Elle doit être programmée et dépend de la molécule et de la voie d'administration : de quelques
+minutes lors d'une titration morphinique intraveineuse, à plusieurs heures.
+Elle repose sur la surveillance de la symptomatologie du patient et sur l'utilisation d'échelles
+d'auto- ou d'hétéroévaluations.
+--- PAGE 152 ---
+Connaissances
+clés
+• De manière générale, la douleur chez la personne âgée reste sous-évaluée et insuffisamment traitée.
+• La sémiologie ou les circonstances de découverte peuvent être très variées et l'approche doit être systé-
+matique, notamment chez les patients non communiquants.
+• En présence d'une douleur, la démarche suit différentes étapes :
+– la première est de la caractériser (type, horaire, durée ancienneté) ;
+– la seconde est d'en rechercher les conséquences ;
+– la troisième est d'en évaluer l'intensité. Dans ce cadre les échelles d'évaluation de la douleur peuvent
+être utiles et l'outil d'évaluation choisi dépendra des capacités du patient âgé à répondre.
+• Le traitement de la douleur repose sur quatre points :
+– traitement étiologique ;
+– traitement non médicamenteux ;
+– traitement médicamenteux ;
+– réévaluation de l'efficacité du traitement.
+• La morphine est l'antalgique de référence pour les douleurs sévères. Ses principaux effets secon-
+daires comprennent :
+– constipation ;
+– rétention urinaire ;
+– nausées/vomissements ;
+– hallucination et/ou délire et/ou confusion ;
+– troubles de la vigilance et dépression respiratoire en cas de surdosage ;
+– prurit.
+stnioP
+Mise en situation
+Douleur aiguë aux urgences [71, 259]
+Vous recevez aux urgences une patiente de 91 ans, adressée par son EHPAD pour chute. Elle est agitée, incon-
+fortable, elle gémit, grimace, refuse de se laisser approcher. La lettre mentionne dans les antécédents une
+maladie d'Alzheimer avec un dernier MMS il y a deux ans à 12/30, une dépression et des éléments comporte-
+mentaux améliorés par un inhibiteur de recapture de la sérotonine. La patiente a été retrouvée au sol [27].
+❯ La présentation clinique est évocatrice d'une douleur aiguë [259], avec possible syndrome confu-
+sionnel surajouté [119]. L'autoévaluation est inenvisageable, mais l'utilisation de l'échelle Algoplus
+permet de coter la douleur de la patiente à 4/5 et de considérer la douleur comme sévère (≥ 3/5).
+❯ L'examen clinique va rechercher en priorité une complication traumatique de la chute, et pourra
+être réalisé d'emblée ou après obtention de l'antalgie.
+❯ En raison d'une douleur sévère aiguë, il faut débuter une titration morphinique, au mieux par la
+mise en place d'une voie veineuse périphérique, à la dose de 1 mg toutes les 3 à 5 minutes. Malgré
+le risque de confusion et de rétention aiguë d'urines, le rapport risque-bénéfice est en faveur de
+l'utilisation de la morphine par voie intraveineuse. Il faudra surveiller les mictions (en se méfiant
+des mictions par rengorgement) et le transit.
+❯ Les critères de réévaluation de la douleur seront les symptômes, qui représentent quatre critères de
+l'échelle Algoplus.
+❯ Une fois la douleur mieux contrôlée, l'examen clinique montrera une probable fracture de l'extré-
+mité supérieure du fémur, dont l'intervention chirurgicale participera à l'obtention d'une antalgie.
+Il cherchera aussi des étiologies graves de chute (AVC, infarctus du myocarde) ou des complications
+autres (fécalome, escarre, globe vésical) [27] (cf. chapitre 12).
+❯ La patiente devra être opérée au plus tôt, au plus tard dans les 48 heures de son admission.
+--- PAGE 153 ---
+Raisonner devant une
+plainte mnésique et un
+trouble neurocognitif
+I. Généralités
+II. Démarche diagnostique devant une plainte mnésique du patient âgé
+III. Diagnostic étiologique
+IV. Prise en charge et traitement des troubles neurocognitifs majeurs du patient âgé
+Situations de départ
+En lien avec la définition et avec le diagnostic :
+31 Perte d'autonomie progressive.
+131 Troubles de mémoire/déclin cognitif.
+298 Consultation et suivi d'un patient ayant des troubles cognitifs.
+330 Accompagnement global d'un aidant.
+352 Expliquer un traitement au patient.
+En lien avec la prise en charge en urgence :
+27 Chute de la personne âgée.
+62 Troubles de la déglutition ou fausse route.
+114 Agitation.
+116 Anxiété.
+119 Confusion/désorientation.
+122 Hallucinations.
+En lien avec la démarche étiologique :
+17 Amaigrissement.
+27 Chute de la personne âgée.
+30 Dénutrition/malnutrition.
+31 Perte d'autonomie progressive.
+50 Malaise/perte de connaissance.
+66 Apparition d'une difficulté à la marche.
+114 Agitation.
+116 Anxiété.
+117 Apathie.
+121 Déficit neurologique sensitif/moteur.
+123 Humeur triste/douleur morale.
+124 Idées délirantes.
+128 Tremblements.
+129 Troubles de l'attention.
+130 Troubles de l'équilibre.
+134 Trouble du langage.
+135 Trouble du sommeil, insomnie ou hypersomnie.
+178 Demande/prescription raisonnée et choix d'un examen diagnostique.
+Gériatrie
+© 2021, Elsevier Masson SAS. Tous droits réservés

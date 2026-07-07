@@ -1,0 +1,413 @@
+=== PAGE 1 ===
+ALERT EVC:Maitriserles specificites de
+l'evaluation de la douleur chez le sujet age
+EVC
+(echelles,communication,atypies).
+Chapitre 8 : Evaluation et Prise en Charge
+de la Douleur en Geriatrie
+Focus
+sPratiqueClinique&Preparation EVC
+Base sur les recommandations HAS et la démarche d'Evaluation Gériatrique Standardiseée (EGS)
+SNotebookLM
+=== PAGE 2 ===
+Le Mindset EvC : Ce que le Jury Attend
+Pilier2:Prevention
+Pilier 1:Medical
+Pilier3:Prise en
+latrogenique
+(Diagnostic&
+Charge Globale
+Therapeutique)
+Application stricte dela regle
+Inscrireladouleurdanslecadre
+Start slow, go slow.
+de l'Evaluation Geriatrique
+Reconnaitrela semiologie
+Standardisée (EGS)
+atypique de la douleur
+Eviter la cascade iatrogenique et
+aigue/chronique.
+anticiperles effets secondaires
+PreserverI'autonomie etle
+(prescriptiondelaxatifs
+devenir social.
+Traiter la cause sous-jacente
+systematique avec les
+(ex:fracture).
+morphiniques).
+Evc Focus:Approche Holistique&Devenir
+EVC Focus:Identification Precise
+Evc Focus:Anticipation&Securite
+EVCRedFlag
+Lesrecommandationsde laHAS
+(HauteAutoritedeSante)font
+autorite absolue pourla correction
+desDossiersProgressifs.
+SNotebookLM
+=== PAGE 3 ===
+LeParadoxePhysiopathologiquedu Sujet Age
+Augmentation du
+Diminution du seuil
+seuil de detection :
+de tolerance :
+Demyelinisation des fibres
+Diminution des recepteurs
+peripheriques et diminution
+morphinigues,baisse dela
+des neurotransmetteurs
+sérotonine (5-HT)et
+nociceptifs
+noradrenaline,et modification
+de la plasticite centrale.
+Ladouleurmetplusdetemps
+a etrepercue.
+Une fois percue, la douleur est
+moinsbientolerée
+(sensibilisation)
+FocusTroublesNeurocognitifs(TNC):
+Processus identiques, mais la tolerance au seuil douloureux est correlee au score du MMs
+Les reactionscomportementalessont souventaccentuees.
+EvcFocus:ComprehensiondesMecanismes
+SNotebookLM
+=== PAGE 4 ===
+Les 6 Ecueils Diagnostiques a Eviter
+Reflexe:Evaluer
+Erreur 1 :
+Reflexe:
+Erreur 2:
+Erreur3:
+Reflexe:Traquer
+Expliquerqu'ily
+Manquer les
+Considerer la
+Ignorer la
+toute
+I'insomnie,
+douleurcomme
+modification
+douleur chez le
+a toujours des
+symptomes
+I'anxiete, et
+equivalents.
+solutions
+normale avec
+comportementale
+non-
+I'agitation.
+I'age.
+therapeutiques.
+communicant.
+ou fonctionnelle
+(confusion).
+Les ecus 1:considerer la douleur comme normale
+Reflexe 2:Evaluertoute modification
+Lesentflexe3:Traguerl'insomnie,lanxiete,et
+avec I'age avec I'age.
+comportementaleoufonctionnelle (confusion)
+I'agitation.
+Reflexe:
+Reflexe:Evaluer
+Erreur 6:
+Erreur 4:
+Erreur 5:
+Reflexe:
+Negliger
+Interroger
+Se limiter au
+lebesoinreel
+Prescrire sans
+Elaborerun plan
+I'automedication
+Palier 1.
+d'escalade
+anticiper la
+systematiquement
+de soins incluant
+iatrogene.
+tolerance.
+surI'usage cache
+antalgique et de
+laprevention des
+d'AINS.
+methodes non
+effets
+medicamenteuses.
+secondaires.
+Evaluer le besoin reel d'escalade antalgiqueetde
+Neglieger:le conistant aolicationiatrogene sur
+Elaborer seur un plan de soins incluant la prevention
+methodes non medicamenteuses.
+I'usage cache d'AlNs.
+deseffetssecondaires.
+EVCFocus:Pieges&ReflerNotebookLM
+=== PAGE 5 ===
+La Sémiologie Atypique:
+EvCFocus
+La FaceCachee delaDouleur
+Face aun syndrome confusionnel
+unglobe urinaire ou un fecalome,la
+douleurdoitetresystematiquement
+suspecteeettraitée.
+La PartieVisible (PlainteClassique)
+Plainte douloureuse localisee (parfois absente
+ex:30% des infarctus sans douleur).
+La BaseImmergee
+(EquivalentsetConsequences)
+Equivalents Semiologiques:
+Consequences Fonctionnelles:
+Anxiete,agitation,confusion,
+Troubles delamarche,chutes,declin
+insomnie.
+cognitif rapide,perted'autonomie
+brutale.
+SNotebookLM
+=== PAGE 6 ===
+L'Algorithme de Décision pour I'Evaluation (Le Reflexe EVC)
+EvC Focus:
+Etape 1 : Tenter une Auto-evaluation en premiere intention,
+quel que soit le niveau cognitif.
+Faceaun syndromeconfusionnel,
+ladouleurdoitetresystematique
+ment suspectee et traitee.
+NON
+(Troublescognitifs
+Etape 2:
+aphasie,confusion
+OUI
+L'auto-evaluation
+est-ellefiable?
+Utiliser EVS.
+UtiliserHetero-evaluationbreve
+Seuild'analgesie:EVS≥2ouEN≥3.
+Etape 3: Utiliser Algoplus
+Seuil d'analgesie: Score≥2.
+Toujours reevaluer apres antalgie
+SNotebookLM
+=== PAGE 7 ===
+EVC
+EvC Focus
+Auto-éevaluation:Le Standard EVS
+Facea un syndrome
+(Echelle Verbale Simple)
+confusionnel, un globe
+urinaire ou unfecalome,
+ladouleurdoitetre
+systematiguement
+suspectee ettraitee
+O:Pas de
+4:Extremement
+1: Faible
+2:Moderee
+3:Intense
+douleur
+intense
+Le Piege EvC:
+douleur
+pas de
+maximale
+douleur
+PourquoiI'Evs?
+imaginable
+C'est I'échelle de reférence chez la personne agee. Elle est
+Ne forcez pas I'utilisation de
+simple, sensible au changement, et ne nécessite aucune capacité
+I'EVA(EchelleVisuelle
+Analogique)chezunpatient
+d'abstraction de la part du patient.
+presentant destroubles
+cognitifs legers:privilegiez
+I'EVS.
+NotebookLM
+=== PAGE 8 ===
+Hetero-évaluation : L'Echelle Algoplus
+ALSOpLus
+ECHELLE
+Developpee specifiquement pour les patients avec troubles de la communication
+verbale (démence, confusion, aphasie). Evaluation rapide (< 1 minute).
+Criteres d'Evaluation Comportementale
+1. Visage (Froncement, grimace)
+OUI
+NON
+2. Regard (Inattentif, pleurs)
+NON
+3. Plaintes (Aie', gémissements)
+NON
+4. Corps (Retrait, refus de mobilisation)
+OUI
+NON
+Evc Focus
+5. Comportements (Agitation, agrippement)
+OUI
+NON
+Lepiegedel'ealouement
+nousaxommzmantiques
+Seuil Thérapeutique EvC: Un score ≥ 2/5 justifie
+chagetrais ou les troubles
+plus fannans les criteres
+I'instauration immédiate d'un traitement antalgique
+examEvC.
+SNotebookLM
+=== PAGE 9 ===
+Douleur Neuropathique:Le Questionnaire DN4
+A utiliser en cas de suspicion (diabete, zona, trajet sciatique, resistance aux
+antalgiques usuels).
+Interrogatoire(Symptomes)
+Examen(Signes Cliniques)
+Bralure
+Hypoesthesieautact
+Sensationdefroiddouloureux
+Hypoesthesie alapiqure
+Douleurprovoquéepar le
+Dechargesélectriques
+EvCFocus
+frottement (allodynie)
+LescoreDN4permetde
+Fourmillements
+distinguer rapidement une
+douleur neuropathique
+Picotements
+d'une douleur nociceptive,
+orientant ainsi la prise en
+Engourdissements
+charge therapeutique
+specifique.
+Demangeaisons
+Unscore<4nexclutpas
+formellement une
+DiagnosticPositif:Score≥4/10 est enfaveur
+douleur neuropathique
+mais rend le diagnostic
+d'une douleur neuropathique
+moinsprobable.
+SNotebookLM
+=== PAGE 10 ===
+Strategie Therapeutique:Les Paliers de I'OMs Adaptes
+Palier3 (DouleursSeveres)
+Morphine
+Antalgiguedereferencepourles douleurs intenses.
+Tolerance superieure au Palier2 si bien manie,mais
+necessite une stricte preventioniatrogenique.
+Palier2(SousHauteSurveillance)
+Opioidesfaibles (Tramadol, codeine).
+Aévitersi possible en raisondes effets
+secondaires (confusion,constipation)
+Titration obligatoire ("start slow,go slow").
+Palier1(Privilegie)
+EVCFocus
+Paracetamol
+LepiegedeI'analgesieinapproprieechez les
+Toujours adapter au poids.
+personnesagees:privilegierlePalier1,éviter
+Dosemaximale stricte:3g/jour chezlesujet age.
+lePalier2,etpasserdirectement auPalier3si
+necessaire,avec une titration rigoureuse.
+SNotebookLM
+=== PAGE 11 ===
+Palier 2: Le Piege du Tramadol
+Focus
+Caution Profile Card
+Bien qu'efficace sur les douleurs nociceptives et neuropathiques, son profil de
+tolerance est critique chez le sujet age.
+Regle de Titration : Debuter par la forme pediatrique buvable (1o a 15 mg matin et
+soir).
+LesRisquesMajeurs(EVCTraps):
+-Proprietes sérotoninergiques:Contre-indicationabsolueavecles
+antidepresseursIsRs->RisquemorteldeSyndromeSerotoninergique.
+- Mauvaise tolerance neurologique : Haut risque de declencher un syndrome
+confusionnel, surtout chez le patient dement.
+Q - Effets anticholinergiques : Retention urinaire, nausees.
+EvcFocus:Laregled'orchezlesujetage estlaprudenceextreme
+avec le Tramadol.Laformebuvablepediatriquepermetunetitration
+fine indispensable pour limiter les risques iatrogenes graves.
+SNotebookLM
+=== PAGE 12 ===
+Focus Palier 3:Manierla Morphine en Situation Aigue
+Le rapport bénefice/risque est en faveur de la morphine IV pour les douleurs seéveres
+aigues (ex: fracture du col du fémur, score Algoplus a 4/5).
+Protocolede Titration IV:
+Dose:1mg
+Intervalle:Toutesles3a5minutes
+Objectif :
+ObtenirIl'antalgie
+rapide avant
+I'examenclinique
+approfondi oula
+mobilisation.
+Surveillance clinique continue pendant la titration.
+EvcFocus:Latitration IVest la clede I'efficaciteetdela
+securitedela morphineenaigu.Une surveillance
+rigoureuse (frequencerespiratoire,sedation)est
+imperativea chaquedose.
+SiNotebookLM
+=== PAGE 13 ===
+Matrice de Prevention latrogenique : Effets Secondaires des Morphiniques
+EffetSecondaire
+Action EvC Obligatoire
+Prevention systematique.Mesures
+Constipation
+hygiéno-dietétiques + 2 laxatifs d'emblée.
+Diminuer les doses ou arret.
+RetentionUrinaire
+Surveiller le globe vesical.
+Nausees/Vomissements (debutdettt)
+Bref traitement antiémetique (2-3 jours). 
+000
+Confusion/Delire/Hallucination
+Diminution des doses ou arret.
+Depression Respiratoire/Tr.Vigilance
+Traitement antagoniste immediat
+(Surdosage)
+(Naloxone).
+EvcFocus:Lapreventioniatrogeniqueestunenjeumajeurde I'EvC
+Maitriser cette matriceest indispensablepoursecuriserlaprescription
+demorphiniqueseteviterlescomplicationsgraves.
+SNotebookLM
+=== PAGE 14 ===
+L'lntégration Gériatrique : Le Modele de Bouchon (1+2+3)
+2.Affection
+1.Vieillissement
+3.Facteur
+Normal :
+Chronique :
+Precipitant :
+Decompensation
+Diminution des
+Comorbidites
+La Douleur Aigue
+réserves
+(ex: arthrose,
+(ex: chute,
+fonctionnelles
+neuropathie
+infection urinaire)
+(ex: seuil de
+diabetique).
+détection altere)
+EvcFocus:
+Lareconnaissanceetlapriseen
+La Cascade :La douleur non traitee agit comme le Facteur3 parfait.
+charge rapide du facteur
+Elle precipite le patient dans la perte d'autonomie, I'immobilisation, la
+precipitant (douleuraigue)sont
+essentiellespourbriserle cyclede
+confusion et la dependance. Traiter la douleur, c'est stopper la cascade.
+decompensationengeriatrieet
+prevenirlacascadeiatrogene.
+NotebookLM
+=== PAGE 15 ===
+Synthese EVC : La Checklist Parfaite du Dossier Douleur
+1. Rechercher I'atypie : ldentifier la plainte, ou la modification
+comportementale/fonctionnelle (confusion, chute).
+2. Evaluer : Utiliser I'EvVS (auto) ou Algoplus (hetero, seuil ≥ 2/5).
+3. Traiter la cause : Chercher I'étiologie (globe, fecalome, fracture).
+4. Prescrire adapte : Paracetamol (max 3g), prudence extreme
+Tramadol (ISRS), Titration Morphine (1mg/5min IV).
+5. Co-prescrire: Toujours associer des laxatifs avec les morphiniques
+6. Reevaluer : Controler I'efficacite et la tolerance clinique.
+7. Integrer (EGs) : Revoir I'autonomie, la nutrition et le devenir social
+post-crise.
+EvcFocus:Cettechecklistsynthetiqueest I'outilultimepour
+garantir une prise en charge complete et securisee de la douleur
+chez le patient age,minimisant les risques iatrogenes
+SNotebookLM

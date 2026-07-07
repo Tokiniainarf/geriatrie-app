@@ -1,4 +1,4 @@
-const CACHE_NAME = 'geriatrie-v169';
+const CACHE_NAME = 'geriatrie-v175';
 const CORE = [
   './',
   './index.html',
@@ -162,6 +162,7 @@ const CORE = [
   "./sujets-evc-fin.js",
   "./guides-geriatrie-cardio-avancee.js",
   "./sujets-evc-items.js",
+  "./flashcards-evc.js",
   './erreurs-journal.js',
   './manifest.json',
   './icons/icon-192.png',
@@ -198,4 +199,5 @@ self.addEventListener('fetch', e => {
     }).catch(() => caches.match(e.request))
   );
 });
+
 

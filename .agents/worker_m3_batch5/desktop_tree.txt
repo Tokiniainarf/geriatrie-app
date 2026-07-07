@@ -1,0 +1,33 @@
+Tree for C:\Users\tokin\Desktop\GERIARTRIE:
+Directory: C:\Users\tokin\Desktop\GERIARTRIE
+  [D] NOTEBOOK LM
+  [F] Gériatrie 5e éd❤️.pdf
+Directory: C:\Users\tokin\Desktop\GERIARTRIE\NOTEBOOK LM
+  [F] 2024_BPSD_Clinical_Management.pdf
+  [F] Architecture_Gériatrique.pdf
+  [F] Bientraitance_en_Lumière.pdf
+  [F] Blueprint_des_Chutes_Gériatriques.pdf
+  [F] Clinical_Hydration_Blueprint.pdf
+  [F] Clinical_Palliative_Ethics.pdf
+  [F] Decoding_Geriatric_Biology.pdf
+  [F] EVC_Geriatric_Pain_Protocol.pdf
+  [F] EVC_Sensory_Deficit_Mastery.pdf
+  [F] Geriatric_Assessment_Blueprint.pdf
+  [F] Geriatric_Clinical_Blueprint.pdf
+  [F] Geriatric_Complexity_Blueprint.pdf
+  [F] Geriatric_Delirium_Management.pdf
+  [F] Geriatric_Mood_Disorder_Algorithm.pdf
+  [F] Geriatric_Neurocognitive_Blueprint.pdf
+  [F] Geriatric_Nutrition_Protocol.pdf
+  [F] Geriatric_Osteoarthritis_Masterclass.pdf
+  [F] Geriatric_Sensory_Management.pdf
+  [F] Geriatric_Urinary_Clinical_Dashboard.pdf
+  [F] L_Architecture_de_l_Autonomie.pdf
+  [F] L_Urgence_du_Syndrome_d_Immobilisation.pdf
+  [F] Osteoporosis_Clinical_Blueprint.pdf
+  [F] Precision_Antibiotic_Dashboard.pdf
+  [F] Safe_Geriatric_Prescribing (1).pdf
+  [F] Safe_Geriatric_Prescribing.pdf
+  [F] Stratégie_BPCO_EVC.pdf
+  [F] The_Clinical_Dashboard.pdf
+  [F] Éthique_et_Protection_Gériatrique.pdf

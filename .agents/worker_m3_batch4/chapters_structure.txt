@@ -1,0 +1,157 @@
+
+=== Structure of ch13 ===
+Found 25 headings:
+B. Épidémiologie
+II. Enquête étiologique
+III. Évaluation : connaître les conséquences du
+A. Désadaptation liée au syndrome d'immobilisation
+1. Désadaptation psychomotrice
+2. Désadaptation cardiovasculaire
+1. L'asthénie pourrait être liée à une composante dépressive [123], à rechercher, mais qui pourrait
+2. Il faut avoir le poids de la patiente et en rechercher des variations : en moins pour une altération
+3. La recherche d'hypotension orthostatique est positive et reproduit la symptomatologie décrite. La
+4. L'ECG est nécessaire pour chercher une séquelle d'infarctus du myocarde (il y a 1 mois) ou une
+5. Finalement, la séquence semble être une anémie responsable d'une asthénie, avec hypotension
+3. Perte de la masse musculaire
+4. Perte des capacités en endurance
+B. Complications liées au syndrome d'immobilisation
+1. FOCUS – Risque de complications thromboemboliques [248]
+2. FOCUS – Risque d'escarre [86]
+A. Pressions en décubitus dorsal. B. Pressions en positions demi-assise.
+A. Mesure de la pression hydrostatique au niveau de l'unité vasculaire fonctionnelle. B. Mécanismes physiopatho-
+IV. Prévention du syndrome d'immobilisation
+1. Les constantes montrent une pression artérielle à 98/45 mmHg [43], sans marbrures, la fréquence car-
+2. La recherche de complications menaçant le pronostic vital est immédiate :
+I. Généralités
+II. Nutrition normale dans le grand âge
+III. Troubles nutritionnels et dénutrition
+IV. Prise en charge nutritionnelle chez la personne âgée
+
+=== Structure of ch14 ===
+Found 39 headings:
+I. Généralités
+II. Nutrition normale dans le grand âge
+A. Dépenses énergétiques chez la personne âgée
+B. Besoins nutritionnels chez la personne âgée
+1. Macronutriments
+2. Eau
+3. Fibres
+4. Micronutriments
+III. Troubles nutritionnels et dénutrition
+A. Obésité de la personne âgée
+1. Traitement antalgique adapté et traitement symptomatique de son arthrose permettant d'aug-
+2. Mesures nutritionnelles qui ne peuvent être envisagées qu'après avoir recherché une dénutrition
+3. La surveillance nutritionnelle sera essentielle sur le poids et l'albuminémie chaque mois, tout
+B. Dénutrition de la personne âgée
+1. Prévalence
+2. Démarche diagnostique
+IV. Prise en charge nutritionnelle chez la personne âgée
+A. Prise en charge de l'obésité de la personne âgée
+B. Prévention de la dénutrition
+1. Enquête alimentaire
+2. Activité physique
+3. Hygiène bucco-dentaire
+C. Prise en charge de la dénutrition
+1. Évaluation clinique globale
+2. Objectifs protéino-énergétiques
+3. Choix des modalités de prise en charge nutritionnelle
+4. Prise en charge nutritionnelle orale
+1. Les conseils diététiques et l'alimentation enrichie sont à mettre en place en première intention en cas
+2. Les conseils diététiques et l'alimentation enrichie et les compléments nutritionnels oraux sont à
+5. Nutritions entérale et parentérale
+6. Surveillance de la prise en charge nutritionnelle
+1. Il faut commencer par déterminer le statut nutritionnel. Cette patiente est dénutrie :
+2. Il faut ensuite déterminer les objectifs caloriques et protidiques : doit avoir 35 kcal/kg par jour soit
+3. Il faut déterminer les moyens pour arriver à atteindre ces objectifs :
+4. Il faut surveiller la mise en place des mesures nutritionnelles : ingestas, appétit.
+5. Dans le même temps, il faut mobiliser la patiente et préserver une activité physique minimale : mise
+I. Pour comprendre l'incontinence urinaire
+II. Démarche diagnostique
+III. Prise en charge multidisciplinaire
+
+=== Structure of ch15 ===
+Found 33 headings:
+I. Pour comprendre l'incontinence urinaire
+A. Définitions
+B. Épidémiologie et facteurs de risque de l'incontinence
+C. Physiopathologie (encadré 15.1)
+1. diminution du tonus sympathique → relaxation du sphincter lisse ;
+2. activation du tonus parasympathique → contraction du détrusor ;
+3. relaxation du sphincter strié (nerf pudendal).
+II. Démarche diagnostique
+A. Éliminer une rétention aiguë d'urines
+B. Détecter une incontinence urinaire transitoire réversible
+C. Prendre en compte les comorbidités et les traitements
+D. Préciser les circonstances de l'IU
+1. Infection urinaire symptomatique chez cette patiente diabétique.
+2. Toute modification posologique et en particulier introduction nouvelle [348], à la recherche de
+3. La constipation et le fécalome chez cette patiente avec diabète et pathologie neurologique.
+4. L'excès de diurèse est la piste privilégiée : d'une part lié à un déséquilibre du diabète entraînant
+III. Prise en charge multidisciplinaire
+A. Rétention aiguë d'urines
+B. Incontinences urinaires
+1. IU transitoire et réversible
+2. Principes thérapeutiques quel que soit le type d'IU
+3. Incontinence urinaire par urgenturie (hyperactivité vésicale)
+I. Introduction à la prescription chez le patient âgé : notion de risque iatrogène et d'événement
+II. Thérapeutique médicamenteuse chez le patient âgé
+I. Généralités
+II. Antidépresseurs
+III. Benzodiazépines et molécules apparentées
+IV. Antipsychotiques
+I. Généralités
+II. Indications de la transfusion chez un patient âgé
+III. Savoir évaluer la tolérance d'une anémie chez un patient âgé
+IV. Étapes de l'acte transfusionnel
+V. Savoir prescrire et surveiller une transfusion chez le patient âgé
+
+=== Structure of ch16 ===
+Found 48 headings:
+I. Introduction à la prescription chez le patient
+A. Rappels de pharmacologie
+B. Effets indésirables médicamenteux et iatrogénie
+1. Définitions d'un effet indésirable médicamenteux (EIM)
+2. Conséquences des EIM chez les patients âgés
+C. Prescription médicamenteuse inappropriée
+1. Vous hésitez en raison de l'antécédent d'œdème pulmonaire aigu, d'un possible trouble de la relaxa-
+2. Vous n'hésitez pas du tout et vous prescrivez un soluté de remplissage par du NaCl 9 ‰ 500 cc dont
+1. L'anticoagulation est indiquée [248] sans aucun doute. Il faut donc revoir les raisons pour lesquelles
+2. Concernant le traitement habituel, trois points doivent être réévalués :
+3. Concernant le traitement anticoagulant de la fibrillation atriale : soit il existe une contre-indication
+4. Tout repose sur la compréhension des chutes : dans ce cas, la mise en évidence de troubles atten-
+5. Par contre, la coprescription aspirine et AOD représente un surrisque hémorragique et n'est pas
+6. Reste à expliquer les modifications et convaincre le patient et son entourage, évaluer l'observance,
+II. Thérapeutique médicamenteuse chez le patient âgé
+A. Identifier les patients à risque d'EIM avant de prescrire
+1. Facteurs pharmacologiques liés à l'âge
+2. Facteurs liés aux comorbidités et aux syndromes gériatriques
+3. Facteurs liés à la polymédication, risques d'interactions
+4. Facteurs liés au contexte aigu
+1. Le rapport risque/bénéfice entre la poursuite (en prévention des complications thromboemboliques
+2. La prise en charge du traitement anticoagulant est rappelée dans l'encadré 16.1 et initiée
+3. La recherche des causes du surdosage en warfarine doit être initiée dans le même temps. Elle doit
+A. Hématome du psoas gauche. B. Hématome intracérébral.
+1. L'urgence est d'abord de regarder le retentissement de la canicule, d'éliminer un coup de chaleur
+2. L'urgence est ensuite à comprendre l'étiologie de la confusion, confirmée par votre examen cli-
+3. Le diagnostic étiologique de l'hyponatrémie [202] va reposer sur le calcul de l'osmolarité plasma-
+1. La bonne nouvelle est qu'elle ne semble pas confuse et que vous pouvez reprendre au calme l'inter-
+2. La priorité est à la confirmation de l'hémorragie digestive, probablement haute, avec forte suspi-
+3. L'asthénie, l'anorexie et l'amaigrissement sont apparus après la prescription de l'AINS, et sont liés
+B. Décider de prescrire chez un patient âgé (hors contexte
+1. Partager la décision thérapeutique avec le patient et son
+L. 1110-4 al. 6) ;
+2. Diminuer le risque associé à la prescription médicamenteuse
+3. Anticiper le risque de mauvaise observance
+C. Everett Koop.
+C. S'inscrire dans une démarche et utiliser des outils
+1. Alertes du réflexe iatrogénique
+2. Prévention et utilisation d'outils pour réduire le risque d'EIM
+3. Éducation thérapeutique
+4. Conciliation médicamenteuse
+5. Outil STOPP-START
+6. Revue de morbi-mortalité (RMM, référence HAS)
+7. Comité de retour d'expérience (CREX)
+I. Généralités
+II. Antidépresseurs
+III. Benzodiazépines et molécules apparentées
+IV. Antipsychotiques

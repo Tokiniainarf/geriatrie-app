@@ -1,0 +1,850 @@
+--- PAGE 100 ---
+Connaissances
+Item, objectifs pédagogiques, hiérarchisation des connaissances
+ITEM 128 – Ostéopathies fragilisantes
+Rang Rubrique Intitulé Descriptif
+A Définition Connaître la définition de Définition OMS
+l'ostéoporose (densitomé-
+trique et fractures)
+B Prévalence, Connaître l'épidémiologie des Connaître le sex-ratio
+épidémiologie fractures ostéoporotiques
+B Éléments Connaître la physiopathologie Carence œstrogénique, héritabi-
+physiopathologiques de l'ostéoporose primitive lité et activités en charge, DMO,
+vieillissement et antécédents de
+fractures
+Hyperparathyroïdie secondaire
+A Étiologie Connaître les causes d'ostéoporose primitive et secondaire
+A Diagnostic positif Connaître les indications de l'ostéodensitométrie et des autres
+examens d'imagerie
+A Diagnostic positif Connaître le bilan biologique de première intention
+A Prise en charge Connaître les différentes mesures hygiéno-diététiques
+B Prise en charge Connaître les principes du traitement médicamenteux d'une
+ostéoporose
+B Examens Connaître la sémiologie en radiographie d'une fracture
+complémentaires ostéoporotique
+A Contenu multimédia Exemple d'ostéoporose avec fracture vertébrale sur une radiographie
+B Contenu multimédia Exemple d'ostéoporose avec fracture vertébrale sur une IRM*
+A Définition Définition de l'ostéomalacie
+A Diagnostic positif Connaître les signes cliniques et biologiques devant faire évoquer le
+diagnostic d'ostéomalacie
+I. Définitions de l'ostéoporose
+A L'ostéoporose est une maladie diffuse du squelette, caractérisée par une réduction de la
+densité minérale osseuse et une altération de la micro-architecture et de la qualité osseuse qui
+diminuent la résistance osseuse et entraînent un risque accru de fracture.
+Pour l'Organisation mondiale de la santé, l'ostéoporose densitométrique est définie par un
+T-score ≤ – 2,5 (cf. infra).
+Les quatre écueils à éviter dans l'ostéoporose de la personne âgée
+• Considérer que l'ostéoporose est normale chez le patient âgé [103].
+• En sa présence, ne pas rechercher une autre ostéopathie fragilisante.
+• Ne pas y penser chez le patient asymptomatique, en particulier chuteur ou à risque de chute.
+• Se limiter à une supplémentation vitaminocalcique sans évaluer les traitements spécifiques.
+→ Il faut systématiquement envisager le diagnostic d'ostéoporose lors d'une première consultation
+gériatrique.
+--- PAGE 101 ---
+Du vieillissement osseux aux pathologies osseuses
+Ostéoporose et ostéopathies fragilisantes
+La recherche d'une ostéoporose primitive ou d'une autre ostéopathie fragilisante est un élément impor-
+tant de la prise en charge des patients âgés, dans le cadre de l'évaluation des comorbidités, des traitements,
+et de la qualité de vie à laquelle l'ostéoporose peut être liée à travers les fractures, leurs douleurs et leurs
+conséquences. L'une des complexités de la prise en charge de l'ostéoporose tient au projet thérapeutique
+qui dépend de différents facteurs gériatriques et de l'espérance de vie.
+Quand ?
+• Lors d'une première consultation [295] ou à la fin d'une hospitalisation [306].
+• Lors de consultations de suivi [266, 267, 279, 295].
+• Après une chute [27, 228], devant un trouble de l'équilibre [130], de la marche [66].
+• Après une fracture [71, 72, 173, 175].
+• En présence d'une hypercalcémie, à la recherche d'une autre ostéopathie fragilisante [200].
+Comment ?
+• En récupérant des informations objectives [131].
+• En impliquant si besoin l'aidant principal [330], le médecin référent et tous les soignants impliqués dans
+l'accompagnement du patient.
+• En examinant le patient dans un contexte traumatique [173, 175] pour ne pas oublier cette prise en
+charge au décours.
+Pourquoi ?
+• Afin de prévenir la fracture ou la récidive de fracture [306].
+• Afin de prévenir le risque de chute [27].
+• Afin de cibler les interventions utiles et faisables.
+• Afin de préserver la qualité de vie.
+II. Bases physiologiques du vieillissement osseux
+L'os est en perpétuel remodelage, se résorbant et se formant sans cesse. La résorption osseuse
+est assurée par des cellules multinucléées dénommées ostéoclastes. La formation osseuse est
+assurée par les ostéoblastes formant le tissu ostéoïde qui se minéralise ensuite sous l'action de la
+vitamine D et du calcium. Il existe un équilibre entre résorption osseuse et formation osseuse en
+faveur de la formation osseuse pendant la période d'acquisition du pic de masse osseuse puis,
+après un plateau, en faveur de la résorption osseuse chez les personnes âgées (tableau 6.1).
+Il existe une grande variabilité interindividuelle du capital osseux au début de la vie adulte.
+Trois mécanismes essentiels s'associent chez une personne pour expliquer la survenue d'une
+ostéoporose :
+• l'acquisition d'un pic de masse osseuse faible au cours de la croissance ;
+• la perte osseuse accrue à l'âge adulte ;
+• la perte osseuse liée aux modifications du statut hormonal et de la ménopause, aboutissant
+à une ostéoporose plus fréquente chez la femme.
+Notion de seuil fracturaire
+B La perte de masse osseuse et les altérations de la qualité osseuse entraînent une diminution
+de la résistance biomécanique de l'os qui, lorsqu'elle atteint un certain seuil, appelé seuil frac-
+turaire, augmente le risque fracturaire en cas de traumatisme à basse énergie (fracture non
+traumatique ou de fragilité). Ceci explique qu'après une fracture de fragilité, le risque de
+nouvelle fracture est plus élevé qu'en l'absence de fracture prévalente, ce risque étant dépen-
+dant du nombre de fractures prévalentes.
+--- PAGE 102 ---
+Connaissances
+Tableau 6.1. B Évolution du capital osseux selon les différentes étapes de la vie.
+Adolescence Adulte jeune Adulte vieillissant Sujet âgé > 75 ans
+Phase prépubertaire
+(+++)
+Formation du capital osseux Maturation Perte progressive de masse Femme : perte non linéaire
+Croissance Masse osseuse maximale osseuse (ménopause) de 40 % de la
+Facteurs : 35–40 ans Étape constante mais masse osseuse entre 20 et
+– génétiques variable selon le sexe 80 ans, surtout spongieuse
+– nutritionnels (Ca2 +, Début : Homme : perte linéaire de
+protéines) – 40 à 45 ans chez la 30 % de la masse osseuse
+– mécaniques (activité femme avec accélération entre 20 et 80 ans, surtout
+physique en charge) les 5 à 10 ans suivant la spongieuse
+– toxiques (alcool, tabac, ménopause
+médicaments) – 50 à 60 ans chez
+l'homme
+Apposition sous-périostée Discret épaississement Amincissement progressif 1. Perte osseuse rapide de
+pour l'os cortical des corticales des corticales la femme en période
+Activité des cartilages de Augmentation Raréfaction de l'os post-ménopausique :
+conjugaison pour le secteur progressive de la spongieux – ↑ activité des ostéoclastes
+spongieux densité minérale sous Concerne tous les os – ↑ remodelage avec perte
+l'effet de la croissance osseuse à chaque cycle
+(90 à 95 %) et de la – se traduit par une
+maturation (5 à 10 %) perforation des travées
+osseuses, une raréfaction
+de l'os trabéculaire et une
+altération de l'architecture
+76 osseuse
+2. Perte osseuse lente des
+personnes très âgées après
+75 ans :
+– ↓ activité des ostéoblastes
+– se traduit par une
+diminution de l'épaisseur
+des travées et une
+diminution des corticales
+osseuses
+III. Facteurs de risque d'ostéoporose
+A Pour rappel, les facteurs de risque concernent l'ostéoporose primitive (liée au vieillissement
+et/ou la carence œstrogénique), tandis que les étiologies concernent les ostéopathies fragili-
+santes autres qu'ostéoporose primitive (cf. infra, IV.). Cependant, des antécédents de patho-
+logie ou de traitement peuvent représenter des facteurs de risque d'ostéoporose.
+L'âge est un facteur de risque d'ostéoporose mais n'est cependant pas suffisant pour atteindre
+le seuil fracturaire. À l'âge doit donc s'associer un ou plusieurs autres facteurs de risque.
+L'ostéoporose peut aussi être secondaire à une autre étiologie. Parmi ces facteurs surajoutés,
+il faut particulièrement noter :
+• la carence œstrogénique chez la femme : ménopause essentiellement, d'autant plus
+qu'elle est précoce (< 40 ans), quelle que soit son origine (naturelle ou par ovariectomie),
+et la nulliparité ;
+• le caractère familial, dont l'origine caucasienne ou asiatique : la variance de la masse
+osseuse dépend de facteurs génétiques dans une proportion de 70 à 80 % ;
+--- PAGE 103 ---
+Du vieillissement osseux aux pathologies osseuses
+• la sédentarité : une faible activité physique, l'immobilisation ou l'alitement prolongé
+induisent une perte osseuse. À l'opposé, une activité physique régulière, « en charge »,
+augmente le gain de masse osseuse au cours de la croissance et contribue à préserver le
+capital osseux à l'âge adulte ;
+• un faible poids (IMC < 19 kg/m2), la dénutrition, les faibles apports en calcium, vita-
+mine D, vitamine C ;
+• la prise de toxiques osseux : tabagisme, corticoïdes, alcool, anti-androgènes, anti-aroma-
+tases, anti-œstrogènes, diurétiques hypercalciuriants ;
+• antécédents pathologiques (cf. infra, IV.), en particulier hyperparathyroïdie.
+IV. Épidémiologie et facteurs de risque de fracture
+ostéoporotique
+B Le coût global de l'ostéoporose est estimé à plus de 4,5 milliards d'euros par an en France,
+dont la moitié porté par les fractures de l'extrémité supérieure du fémur (FESF). L'incidence des
+fractures ostéoporotiques est environ trois fois plus importante chez les femmes. En France,
+chaque année surviennent environ :
+• 35 000 fractures du poignet (Pouteau-Colles) ;
+• 50 000 FESF ;
+• 50 000 à 75 000 fractures vertébrales (diagnostiquées une fois sur trois).
+A. Notion de risque fracturaire
+A Le risque fracturaire, ou déterminants de la fracture, repose sur l'ensemble des éléments qui
+contribuent :
+• à l'ostéoporose et au seuil fracturaire, en pratique fondé sur :
+– l'âge ;
+– un antécédent de fracture ;
+– la valeur de la densité osseuse mesurée par absorptiométrie biphotonique à rayons X ;
+• au risque et au mécanisme de chute [27] (cf. chapitre 12).
+C'est dans la précision de ce risque que le score FRAX peut être utilisé.
+B. Définition d'une fracture sévère
+La définition des fractures sévères repose sur deux critères :
+• elles sont associées à une augmentation significative de la morbimortalité
+• elles témoignent d'une fragilité osseuse quand elles surviennent après un traumatisme de
+basse énergie.
+Ainsi, la liste des fractures sévère comprend les fractures :
+• de l'extrémité supérieure du fémur (FESF) (fig. 6.1) ;
+• de l'extrémité inférieure du fémur (FEIF) (fig. 6.2) ;
+• de l'extrémité supérieure de l'humérus (FESH) (fig. 6.3) ;
+• de vertèbres (fig. 6.4) ;
+• du pelvis.
+--- PAGE 104 ---
+Connaissances
+Fig. 6.1. A Fracture pertrochantérienne gauche.
+Fig. 6.2. A Fracture de l'extrémité inférieure du fémur.
+Fig. 6.3. A Fracture de l'extrémité supérieure de l'humérus.
+--- PAGE 105 ---
+Du vieillissement osseux aux pathologies osseuses
+Fig. 6.4. A Fractures vertébrales L3 et L2 avant et après cimentoplastie (image TDM avant cimento-
+plastie puis contrôle radiographique montrant une fuite de ciment).
+Les fractures du tibia proximal et de trois côtes ne figurent plus dans la liste car elles sont rares
+dans les conditions de faible traumatisme.
+Sauf exception (densité osseuse normale), un traitement anti-ostéoporotique est le plus sou-
+vent indiqué (cf. infra).
+Points clés sur les fractures vertébrales
+B Moins de 50 % des patients souffrant d'une fracture vertébrale consultent un médecin, ce qui explique
+l'incertitude importante de l'estimation. Seules les radiographies permettent de diagnostiquer une frac-
+ture vertébrale. Les conséquences morbides des fractures vertébrales sont pourtant nombreuses : dou-
+leurs chroniques, troubles posturaux, réduction de la capacité pulmonaire totale, altération significative
+de la qualité de vie ; elles sont plus marquées en cas de fractures vertébrales multiples.
+Indication de radiographie du rachis pour suspicion de fracture vertébrale :
+• après la ménopause ou après 60 ans chez l'homme ;
+• douleur vertébrale aiguë [72, 175] ;
+• diminution de taille inexpliquée ≥ 4 cm ;
+• ou diminution ≥ 2 cm prospective ;
+• ou modification de la courbure rachidienne (cyphose) ;
+• en particulier si corticothérapie ou inhibiteurs de l'aromatase (fragilité osseuse trabéculaire).
+--- PAGE 106 ---
+Connaissances
+Points clés sur les fractures de l'extrémité supérieure du fémur
+B Compte tenu du vieillissement attendu de la population française, le nombre de FESF devrait tripler
+d'ici 2050. Cependant, les estimations récentes montrent une moindre augmentation du nombre de FESF,
+en raison d'une tendance à la réduction du risque relatif de FESF par tranche d'âge chez la femme après
+40 ans, alors que ce risque relatif augmente chez l'homme.
+Témoin des comorbidités associées, le pronostic à 1 an des FESF est grave, en particulier chez l'homme :
+• 15 à 20 % de mortalité ;
+• 20 à 25 % d'institutionnalisation ;
+• 40 à 60 % de perte importante d'autonomie, essentiellement motrice.
+C. En pratique
+A Toute fracture survenant après un traumatisme à bas niveau d'énergie (inférieur ou égal à
+une chute de sa hauteur) et après l'âge de 50 ans doit faire évoquer une ostéoporose !…
+… sauf en cas de fracture d'os indemnes d'ostéoporose :
+• crâne, face ;
+• rachis cervical ;
+• trois premières vertèbres thoraciques ;
+• doigts et orteils.
+D. Facteurs de risque de fracture ostéoporotique
+L'enjeu actuel du traitement de l'ostéoporose est d'identifier chez les patients ostéoporotiques
+les individus à risque de fracture devant bénéficier d'un traitement anti-ostéoporotique. Les
+quatre principaux facteurs de risque de fracture ostéoporotique sont :
+• l'âge > 60 ans ;
+• un antécédent personnel de fracture ostéoporotique, ce d'autant qu'il s'agit d'une
+fracture sévère, qui augmente significativement le risque de survenue d'une nouvelle frac-
+ture, indépendamment de la valeur de la DMO ;
+• la survenue d'une chute [27] et le risque de chute, particulièrement chez les personnes
+âgées. La démarche devant une chute doit donc être entreprise de manière très rigoureuse
+(cf. chapitre 12), afin de mettre en place une intervention qui limitera le risque de récidive ;
+• la diminution de la densité minérale osseuse (DMO) est le déterminant principal du
+risque de fracture ostéoporotique. Les études épidémiologiques montrent qu'une diminu-
+tion d'un écart-type de la DMO par rapport à la moyenne pour l'âge multiplie par deux le
+risque de fracture. Cependant, la valeur de la DMO ne permet d'expliquer qu'une partie de
+ce risque et il existe un important chevauchement des valeurs de DMO entre les sujets avec
+et sans fracture.
+B Il existe d'autres facteurs de risque de fracture (HAS) :
+• antécédent de corticothérapie systémique ;
+• antécédent de FESF chez un parent du premier degré ;
+• masse corporelle < 19 kg/m2 ;
+• ménopause précoce (< 40 ans) ;
+• tabagisme ;
+• alcoolisme ;
+• baisse de l'acuité visuelle ;
+• troubles neuromusculaires et orthopédiques.
+--- PAGE 107 ---
+Du vieillissement osseux aux pathologies osseuses
+V. Démarche diagnostique de l'ostéoporose et des
+ostéopathies fragilisantes
+A Cf. figure 6.5.
+1 Dépister l'ostéoporose chez un
+patient âgé asymptomatique Facteurs de risque d'ostéoporose
+Causes de carence œstrogénique
+Recenser les facteurs Antécédents familiaux
+de risque d'ostéoporose Sédentarité, immobilisation
+Facteurs nutritionnels
+Antécédents de pathologie
+2 Diagnostiquer l'ostéoporose Iatrogénie et toxique osseux
+chez un patient âgé
+Décider la réalisation Ostéodensitométrie
+d'un examen Radiographie vertébrales selon la taille
+3 Ostéoporose confirmée
+chez un patient âgé Ostéopathies fragilisantes Bilan
+Hyperparathyroïdie, autre endocrinopathie CRP
+Éliminer une ostéoporose secondaire Myélome EPP
+Hémochromatose Ca2+, phosphates
+Pathologie digestive, malabsorption Créatinine
+Rhumatismes inflammatoires chroniques Vitamine D
+4 Ostéoporose primitive confirmée Insuffisance rénale chronique ±TSH
+chez un patient âgé Maladies raresd
+• Évaluation gériatrique du patient âgé
+• Évaluation du risque de chute
+• Évaluation du risque fracturaire 1. L'évaluation gériatrique + 3. Risque fracturaire ± FRAX
+standardisée
++ Principalement :
+• Âge
+5 optio É n v s a l t u h a é t r i a o p n e d u e ti s ques 2. Chute • f A ra n c té tu c r é e d ents de
+• DMO
+• Facteurs de risque
+• Caractère sévère de la fracture de chutes
+• Rapport risque/bénéfice thérapeutique
+• Organisation de la surveillance
+• Réévaluation en fin de cycle thérapeutique
+Fig. 6.5. A Démarche diagnostique et thérapeutique devant une suspicion d'ostéoporose chez un
+patient âgé asymptomatique.
+A. Faire le diagnostic positif d'ostéoporose
+Le diagnostic d'ostéoporose repose sur la constatation :
+• de l'existence de facteurs de risque d'ostéoporose ou d'une fracture ostéoporotique
+suspectée devant une fracture « non traumatique » ou après traumatisme de faible énergie
+(intensité inférieure ou égale à une chute de sa hauteur) ;
+• et/ou d'une densité osseuse basse mesurée par densitométrie osseuse double énergie à
+rayons X (dual X-ray absorptiometry [DXA], ou ostéodensitométrie) (encadré 6.1).
+Plus récemment, le Groupe de recherche et d'information sur les ostéoporoses (GRIO – recom-
+mandations 2018) a proposé d'ajouter l'antécédent de chute dans la dernière année comme
+facteur devant faire rechercher une ostéoporose ostéodensitométrique, la chute étant un fac-
+teur de risque de fracture indépendant de la densité osseuse.
+La densité minérale osseuse (DMO) chez la personne âgée
+• B Doit être mesurée au niveau de l'extrémité supérieure du fémur car la mesure au
+niveau du rachis n'est pas conseillée, souvent faussée par l'arthrose vertébrale, très fré-
+quente chez la personne âgée.
+• Est une méthode précise (1 à 2 %), reproductible (coefficient de variation : 0,5 à 1 %),
+non irradiante.
+--- PAGE 108 ---
+Connaissances
+Encadré 6.1
+Indications et remboursement de l'ostéodensitométrie (HAS, 2011)
+L'ostéodensitométrie doit être réalisée dès que l'on évoque la possibilité d'une ostéoporose. Donc la mesure de
+la DMO n'est utile que chez les personnes présentant des facteurs de risque d'ostéoporose, dont dépendent
+ces indications. L'ostéodensitométrie est remboursée par l'assurance maladie dans les situations suivantes.
+En cas de signes d'ostéoporose
+• Découverte ou confirmation radiologique d'une fracture vertébrale (déformation du corps vertébral, [65,
+227, 228]) sans contexte traumatique ni tumoral évident.
+• Antécédent personnel de fracture périphérique survenue sans traumatisme majeur (sont exclues de ce
+cadre les fractures du crâne, des orteils, des doigts et du rachis cervical).
+En cas de pathologie ou traitement potentiellement inducteur d'ostéoporose
+• Lors d'une corticothérapie systémique (de préférence au début) prescrite pour une durée d'au moins 3 mois
+consécutifs, à une dose > 7,5 mg par jour d'équivalent prednisone.
+• Antécédent documenté de pathologie ou de traitement inducteur d'ostéoporose : hyperthyroïdie évolutive
+non traitée, hypercorticisme, hyperparathyroïdie primitive, hypogonadisme prolongé (incluant l'androgé-
+noprivation par orchidectomie ou médicamenteuse [traitement prolongé par un analogue de la GnRH]) et
+ostéogenèse imparfaite.
+Chez les femmes ménopausées
+• Antécédents de fracture du col fémoral sans traumatisme majeur chez un parent au premier degré.
+• Indice de masse corporelle < 19 kg/m2.
+• Ménopause avant 40 ans quelle qu'en soit la cause.
+• Antécédent de corticothérapie prolongée (> 3 mois) à la dose de corticoïde équivalent prednisone > 7,5 mg
+par jour.
+• Est exprimée en g/cm2 ou en valeur relative (%) ou déviations standards (DS) par rapport à
+un sujet de même sexe et de même âge (Z-score) ou bien par rapport à un sujet de même
+sexe et âgé de 25 à 40 ans (T-score).
+• Est très prédictive du risque fracturaire ultérieur : toute diminution de 10 % ou d'une
+déviation standard de la DMO multiplie par deux le risque fracturaire.
+Interpréter la DMO
+Ne pas confondre (+++) :
+• l'ostéoporose densitométrique définie par l'OMS par un T-score ≤ – 2,5 ;
+et :
+• le seuil de DMO qui indique un traitement anti-ostéoporotique selon le risque fracturaire,
+dépendant d'autres facteurs tels que les antécédents de fracture et des autres facteurs ci-
+dessous (cf. fig. 6.2).
+B. Éliminer une étiologie d'ostéopathie fragilisante autre
+que l'ostéoporose primitive
+A Parmi la liste des étiologies, les quatre premières sont à rechercher en priorité chez le
+patient âgé.
+• Carence en vitamine D.
+• Hyperparathyroïdie : le plus souvent secondaire (parathormone élevée et calcémie nor-
+male ou basse) à des apports calciques ou en vitamine D insuffisants (carence alimentaire,
+exposition solaire insuffisante, insuffisance rénale), plus rarement primitive (calcémie élevée
+et parathormone normale ou haute).
+--- PAGE 109 ---
+Du vieillissement osseux aux pathologies osseuses
+• Myélome ou métastases osseuses.
+• Immobilisation, sédentarité.
+• Insuffisance rénale chronique : au-delà de la carence en vitamine D, donne des anomalies
+du tissu osseux.
+• Pathologies endocriniennes : hyperthyroïdie, hypercorticisme, hypogonadisme, acroméga-
+lie, insuffisance antéhypophysaire.
+• Alcoolisme chronique, hémochromatose.
+• Maladies de l'appareil digestif et malabsorption : gastrectomie, résections intestinales éten-
+dues, entérocolopathies inflammatoires, syndromes de malabsorption, maladie cœliaque,
+intolérance au lactose.
+• Rhumatismes inflammatoires chroniques : polyarthrite rhumatoïde, spondylarthropathies.
+• Maladies rares : ostéogenèse imparfaite, mastocytose, Ehler-Danlos, Marfan, hypercalciu-
+rie, carence en vitamine C.
+• Iatrogène : diurétiques hypercalciuriants, inhibiteurs de la pompe à protons.
+La recherche d'arguments pour une ostéopathie fragilisante autre qu'ostéoporose primitive et
+en particulier cancéreuse repose sur les données cliniques et paracliniques :
+• antécédents et traitements ;
+• anamnèse à la recherche de fracture spontanée [71, 72], d'altération de l'état général ;
+• examen clinique à la recherche de signes de pathologies cancéreuses, de maladies endocri-
+niennes, rhumatologiques ou digestives ;
+• anomalies biologiques telles qu'anémie, hyperprotidémie, pic d'immunoglobuline,
+insuffisance rénale, hypercalcémie, syndrome inflammatoire, dysthyroïdie. Le
+bilan biologique minimume comporte donc CRP [203], électrophorèse des protides,
+calcémie [200], phosphorémie, créatininémie et calcul de la clairance de la créatinine, NFS,
+dosage de la vitamine D totale (D2 + D3) systématique (une DMO basse ou une fracture
+peut être liée à une ostéomalacie ET la normalisation du statut vitaminocalcique est un
+prérequis pour optimiser l'efficacité des traitements anti-ostéoporotiques) ± TSH ;
+• anomalies d'imagerie [227, 228], telles qu'ostéolyse sur des radiographies standards ou
+faites pour fracture, fracture vertébrale située au-dessus de la troisième vertèbre dorsale,
+avec atteinte du mur vertébral et de l'arc postérieur, en particulier les pédicules.
+Mise en situation
+Approche de l'ostéoporose chez un patient âgé fracturé [27, 306]
+Vous prenez en charge aux urgences une patiente de 85 ans pour fracture de l'extrémité supérieure du
+fémur droit. Vous notez dans les antécédents une dépression, une cardiopathie hypertensive compli-
+quée de deux épisodes d'œdème aigu pulmonaire, un diabète de type 2, de l'arthrose et une artérite
+temporale il y a 5 ans traitée par corticothérapie à dose régressive 18 mois, dont elle garde encore 5 mg
+par jour. Elle prend en plus un antidépresseur (citalopram, inhibiteur de recapture de la sérotonine), un
+inhibiteur calcique (amlodipine), du paracétamol.
+❯ À ce stade, la problématique de l'ostéoporose et de son traitement n'est pas au premier plan ; il
+faut gérer l'urgence et préparer la patiente à l'intervention chirurgicale, en gérant toutes les pro-
+blématiques liées (douleur, anémie, prévention de l'insuffisance cardiaque aiguë, prévention de la
+confusion, etc.). L'enjeu sera, selon l'évolution, de ne pas oublier l'ostéoporose chez cette patiente
+présentant des facteurs de risque d'ostéoporose, et d'organiser la sortie d'hospitalisation.
+❯ À l'arrivée aux urgences, l'enquête sur la chute et son étiologie [27] doit être entreprise en urgence,
+en cherchant une cause grave comme une syncope [50], un a ccident vasculaire cérébral, une crise
+▲
+--- PAGE 110 ---
+Connaissances
+convulsive, un infarctus du myocarde, avec ECG préopératoire systématique [159, 185]. La patiente
+décrit une douleur brutale spontanée de la hanche alors qu'elle était debout, la faisant chuter. La
+découverte d'une fracture spontanée, sans traumatisme, évoque en priorité une fracture patholo-
+gique et doit faire rechercher une ostéopathie fragilisante en lien avec une pathologie cancéreuse.
+L'interrogatoire reprend les principaux facteurs de risque de cancer, cherche une altération de
+l'état général que confirme la patiente, et des éléments d'orientation sur le type de cancer. La
+lecture de la radiographie de hanche montre une géode importante autour du foyer de fracture
+cervicale Garden 4.
+❯ En préopératoire, la suspicion de fracture pathologique et de pathologie cancéreuse justifie :
+• de rechercher une anémie, une hypercalcémie, une hyperprotidémie ;
+• d'avertir le chirurgien pour faire une biopsie lors du geste chirurgical.
+La suite de la prise en charge sera plus axée vers la prise en charge de la maladie cancéreuse.
+VI. Stratégie thérapeutique de l'ostéoporose
+A. Indications thérapeutiques
+B En 2018, le Groupe de recherche et d'information sur les ostéoporoses (GRIO) recomman-
+dait :
+1. la réalisation d'une ostéodensitométrie quel que soit le type de fracture sévère ou
+non sévère. En cas de fracture sévère, les objectifs de l'ostéodensitométrie sont :
+– quantifier la fragilité osseuse ;
+– vérifier que le T-score est < – 1 ;
+– planifier le suivi thérapeutique ;
+2. l'introduction d'un traitement anti-ostéoporotique (fig. 6.6) :
+– en cas de T-score ≤ – 1 en cas d'antécédent de fracture sévère (FESF, par exemple) ;
+– en cas de T-score ≤ – 2 en cas de fracture non sévère (poignet, par exemple) ;
+– en cas de T-score ≤ – 3 en l'absence de fracture.
+Traitements utilisables pour l'ostéoporose de la personne âgée
+– Calcium, vitamine D → Oui.
+– Bisphosphonates → Oui.
+– Dénosumab → Oui.
+– Tériparatide → Oui.
+– Raloxifène → Pas après 70 ans (non abordé).
+– Traitement hormonal substitutif → Pas d'indication (non abordé).
+▲
+--- PAGE 111 ---
+Du vieillissement osseux aux pathologies osseuses
+Absence de
+fracture et
+En fonction Fractures
+facteurs de
+du T score sévères (fémur, Fractures
+risque
+(ausite le plus vertèbres, non sévères
+d'ostéoporose
+bas) humérus, bassin)
+ou de chutes
+multiples
+Avis du Pas de Pas de
+T> –1
+spécialiste traitement traitement
+Avis du Pas de
+T≤–1 et >–2 Traitement
+spécialiste traitement
+Avis du
+T≤–2 et >–3 Traitement Traitement
+spécialiste
+T≤–3 Traitement Traitement Traitement
+Fig. 6.6. B Indications des traitements anti-ostéoporotiques (recommandations du GRIO,
+2018).
+B. Traitements médicamenteux de l'ostéoporose
+1. Calcium, vitamine D
+• Efficacité pour prévenir les fractures non vertébrales chez des personnes âgées carencées,
+vivant en institution ou confinées à domicile.
+• Efficacité en partie liée à un effet sur la prévention des chutes.
+• Efficacité établie avec une dose de calcium d'au moins 1 000 mg par jour et une dose de
+vitamine D d'au moins 800 UI par jour. Chez les personnes âgées en institution, des doses
+séquentielles de vitamine D3 peuvent être prescrites : 50 000 UI tous les mois ou 100 000 à
+200 000 UI tous les 3 mois en solution buvable, par exemple. Chez les personnes âgées non
+institutionnalisées, les apports en calcium et vitamine D ne permettent pas de prévenir les
+fractures. Toutefois, en cas d'ostéoporose, la prescription d'un traitement par calcium et
+vitamine D aux doses précisées ci-dessus doit être systématique, sauf cas particulier, dans
+la mesure où l'efficacité des médicaments anti-ostéoporotiques n'a été montrée qu'en cas
+de normalisation du statut vitaminocalcique.
+• Pour le calcium, privilégier les apports naturels (au moins un produit laitier à chaque repas)
+car le calcium per os est mal toléré (nausées constipation), source de mauvaise observance,
+et favoriser la boisson d'eaux fortement minéralisées (Hépar, Contrexéville par exemple).
+• En cas de carence en vitamine D, une recharge du stock vitaminique afin d'atteindre un
+taux de 25(OH)-vitamine D ≥ + 30 ng/ml est indiquée en utilisant par exemple le proto-
+cole de Souberbielle :
+– 4 ampoules de 100 000 ou 80 000 U espacées de 15 jours si 25(OH)-D < 10 ng/ml
+(25 mmol/l) ;
+– 3 ampoules espacées de 15 jours si 25(OH)-D comprise entre 10 et 20 ng/ml (25 à
+50 mmol/l) ;
+– 2 ampoules espacées de 15 jours si 25(OH)-D comprise entre 20 et 30 ng/ml (50 à
+75 mmol).
+• Avec relais par un traitement quotidien ou trimestriel à vie, aux doses précisées ci-dessus.
+--- PAGE 112 ---
+Connaissances
+2. Bisphosphonates
+• Prescription de première intention dans l'ostéoporose de la personne âgée.
+• Action anti-ostéoclastique.
+• Efficacité pour :
+– augmenter la densité minérale osseuse ;
+– diminuer le risque de fracture vertébrale et non vertébrale.
+• Contre-indiqués en cas d'insuffisance rénale sévère (clairance de la créatinine < 30 ml/min,
+voire 35 ml/min pour le zolédronate) et en cas d'hypocalcémie.
+Plusieurs molécules ont une indication dans l'ostéoporose et plusieurs modalités d'admi-
+nistration sont disponibles :
+• une prise hebdomadaire : alendronate 1 cp. à 70 mg, risédronate 1 cp. à 35 mg ;
+• une prise mensuelle : risédronate 2 cp. à 75 mg (2 jours consécutifs) ;
+• une prise annuelle : zolédronate 4 mg en perfusion veineuse d'au moins 20 minutes ;
+L'alendronate et le résidronate sont indiqués dans la prévention de l'ostéoporose induite par
+les corticoïdes. Ces médicaments sont remboursés dans le traitement de l'ostéoporose chez la
+femme ménopausée et chez l'homme à haut risque de fracture.
+Les principaux effets secondaires des bisphosphonates et leur prévention sont résumés dans
+le tableau 6.2.
+Tableau 6.2. B Effets indésirables des bisphosphonates.
+Effet indésirable Fréquence Prévention
+Syndrome pseudo-grippal Très fréquent pour forme IV Paracétamol
+Toxicité digestive (contact direct de la Fréquente Prise à jeun et en position assise avec 1
+muqueuse) grand verre d'eau non minéralisée (l'apport
+concomitant de calcium entraîne une réduction
+de l'absorption digestive du bisphosphonate et
+réduit donc son efficacité)
+Puis rester assis ou debout après la prise
+Ostéonécrose de la mâchoire Exceptionnelle Bilan et soins dentaires avant traitement
+Fractures atypiques fémorales (trait de Exceptionnelles Arrêt définitif
+fracture perpendiculaire)
+3. Dénosumab
+• Anticorps anti-RANK ligand : ce traitement inhibe la résorption osseuse en inhibant l'action
+de RANK ligand sur le récepteur RANK des ostéoclastes.
+• Réduit de 68 % l'incidence des fractures vertébrales, de 20 % l'incidence des fractures non
+vertébrales et de 40 % l'incidence des fractures de hanche.
+• Administration par injection sous-cutanée de 60 mg tous les 6 mois pendant 3 ans.
+• Indiqué dans le traitement de l'ostéoporose post-ménopausique chez les patientes à risque
+élevé de fracture, en seconde intention en relais des bisphosphonates ou en cas de contre-
+indication aux bisphosphonates (clairance de créatinine comprise en 15 et 30 ml/min).
+• Peut être prescrit en cas d'insuffisance rénale (clairance de créatinine ≥ 15 ml/min) sans
+modification de posologie.
+• À l'arrêt du traitement par dénosumab, il existe une accélération du remodelage qui expose
+rapidement à nouveau à un risque fracturaire, nécessitant un relais pendant un an par un
+bisphosphonate.
+--- PAGE 113 ---
+Du vieillissement osseux aux pathologies osseuses
+• Comme les bisphosphonates, le dénosumab est contre-indiqué en cas d'hypocalcémie, peut
+induire une ostéonécrose de la mâchoire et exceptionnellement des fractures atypiques de
+hanche (imposant dès lors les mêmes précautions d'emploi que les bisphosphonates).
+4. Parathormone PTH ou tériparatide
+1–34
+• Équivalent de la parathormone recombinante.
+• Stimule la formation osseuse : c'est la seule molécule ayant cette action actuellement.
+• Prévient les fractures vertébrales (– 65 %) et périphériques (– 53 % pour les fractures du
+col).
+• Administré par voie sous-cutanée quotidienne (20 μg par jour), pour une durée de traite-
+ment au maximum de 18 mois.
+• Remboursé uniquement en présence d'au moins deux fractures vertébrales. Dans cette
+indication, il est considéré comme un traitement de première intention dans les recomman-
+dations du GRIO de 2018. Le traitement sera relayé après 18 mois par un traitement par
+un anti-résorbeur (bisphosphonate ou en seconde intention dénosumab) en l'absence de
+contre-indication — le traitement peut être poursuivi 24 mois mais ne sera remboursé que
+18 mois.
+• Les contre-indications sont : maladie de Paget, ostéomalacie, antécédents de radiothéra-
+pie ou de tumeur osseuse, hypercalcémie, hyperparathyroïdie primaire, insuffisance rénale
+sévère.
+• Les principaux effets secondaires sont des céphalées, des nausées, des hypotensions
+orthostatiques. Une hypercalcémie asymptomatique transitoire survient dans 20 % des cas
+dans les heures qui suivent l'injection.
+C. Stratégie thérapeutique de l'ostéoporose
+1. B En premier lieu, toujours penser à :
+– calcium et vitamine D ;
+– mesures générales.
+2. Choisir un traitement de l'ostéoporose.
+3. Prescrire un cycle de 3 à 5 ans selon la molécule (fig. 6.7).
+4. Anticiper les séquences thérapeutiques (après dénosumab ou tériparatide).
+5. Assurer le suivi.
+6. Anticiper la réévaluation.
+1. Mesures générales devant être associées aux traitements
+médicamenteux
+• Suppression des facteurs de risque modifiables (alcoolisme, tabagisme).
+• Activité physique en charge (programmes spécifiques d'exercices physiques adaptés aux
+patients ostéoporotiques).
+• Prévention des chutes (+++) (cf. chapitre 12).
+• Port d'un protecteur de hanche : efficacité limitée par mauvaise observance.
+--- PAGE 114 ---
+Connaissances
+2. Choix du traitement de l'ostéoporose (recommandations du GRIO
+2018)
+En cas de :
+• fracture sévère ;
+• ou de DMO très basse (T-score < – 3) ;
+• ou de comorbidités avec polymédication (notamment troubles mnésiques avec risque de
+défaut d'observance des traitements oraux) ;
+… utiliser en première intention un traitement injectable en l'absence de contre-indication,
+en privilégiant :
+• acide zolédronique après FESF ;
+• tériparatide en présence d'au moins deux fractures vertébrales ;
+• dénosumab quand la clairance de la créatinine est comprise entre 15 et 30 ml/min.
+Dans les autres situations, les bisphosphonates oraux constituent le traitement de première
+intention, le dénosumab pouvant être donné en relais des bisphosphonates ou en première
+intention en cas de clairance de la créatinine comprise entre 15 et 30 ml/min. Le traitement
+de l'ostéoporose chez le patient insuffisant rénal chronique avec une clairance < 30 ml/min
+nécessite un avis d'expert, car il peut s'agir d'ostéoporose ou d'atteinte plus spécifique du
+métabolisme osseux.
+3. Séquences thérapeutiques (fig. 6.7)
+• Le tériparatide après 18 mois devra être relayé par un traitement anti-résorbeur (bisphos-
+phonate ou en seconde intention dénosumab).
+• Le dénosumab, vu l'accélération du remodelage et le risque de fracture qui accompagne
+son arrêt, devra être relayé par au moins 1 an de bisphosphonates.
+Indication thérapeutique Cycle thérapeutique de 3 à 5 ans
+Absence de contre-indication
+Prise en compte : 1. Bisphosphonate
+• Terrain (cognitif, autonomie) Ou : 2. Tériparatide, 18 mois, puis bisphosphonate ou dénosumab
+• Risque de chute Ou : 3. Dénosumab, puis bisphosphonate pendant 1 an
+Objectifs → Réduire le risque fracturaire
+1. Sur fracture/récidive fracturaire
+2. Sur DMO :
+DMO • Valeur avec risque fracturaire tolérable
+initiale • Pas de perte osseuse Discuter nouveau cycle
+• Pour T-score< -3 → Objectif : > -2,5 ou -2
+Arrêt de traitement si :
+• Pas de nouvelle fracture
+Réévaluation • Pas de nouveau facteur de risque
+• DMO :
+À prévoir à 2 ou 3 ans - Pas de perte osseuse
+Sans interrompre le cycle en cours - T-scorecible atteint
+• Nouvelles fractures ?
+• Objectifs de DMO ?
+• Morphologie du rachis ?
+• CTX sérique (peu réalisé en gériatrie)
+Fig. 6.7. B Organisation d'un cycle thérapeutique de l'ostéoporose primitive chez la personne âgée.
+4. Quand prescrire une deuxième séquence de 3 à 5 ans ?
+• Survenue de fracture sous traitement.
+• Nouveaux facteurs de risque de fracture ajoutés.
+• Diminution significative de la DMO à l'un des deux sites (≥ 0,03 g/cm2) ou en cas de per-
+sistance d'un T-score abaissé (≤ – 2,5).
+--- PAGE 115 ---
+Du vieillissement osseux aux pathologies osseuses
+VII. Prévention de l'ostéoporose
+Le risque de fracture ostéoporotique est directement corrélé à la diminution de la masse
+osseuse qui, elle-même, dépend du capital osseux acquis en fin de croissance et de la quantité
+de tissu osseux perdue ultérieurement. Le risque de fracture est aussi relié à d'autres facteurs
+non osseux comme le risque de chute. La prévention de l'ostéoporose et des fractures ostéo-
+porotiques consiste idéalement à optimiser le pic de masse osseuse de fin de croissance et à
+ralentir ou empêcher la perte osseuse qui survient ultérieurement, sécuriser l'environnement
+et réduire le risque de chute.
+La prévention de l'ostéoporose primitive fait appel à diverses mesures visant à corriger les fac-
+teurs de risque modifiables. Ces mesures doivent être mises en œuvre à différents moments de
+la vie : apports alimentaires riches en calcium et, d'une façon plus générale, alimentation équi-
+librée avec apports suffisants en protides, prévention ou arrêt du tabagisme et de l'alcoolisme,
+détection et correction des carences en vitamine D et en calcium, activité physique régulière.
+Chez les femmes ayant une ménopause précoce ou chirurgicale, le THS de la ménopause doit
+être discuté s'il existe des troubles du climatère et en l'absence de contre-indication.
+Prise en charge de l'ostéoporose cortisonique
+B Les corticoïdes induisent une ostéoporose par plusieurs mécanismes :
+• répression des ostéoblastes ;
+• stimulation des ostéoclastes par hyperparathyroïdisme secondaire ;
+• diminution de l'absorption calcique ;
+• diminution de la synthèse des dérivés actifs de la vitamine D ;
+• diminution des hormones sexuelles par freination de l'axe hypothalamo-hypophysaire.
+Ils favorisent les fractures par augmentation du risque de chute secondaire à l'atteinte musculaire. Les
+fractures peuvent être graves chez des patients fragilisés par la maladie qui a justifié la prescription de cor-
+tisone : un asthmatique peut aggraver son insuffisance respiratoire si des fractures de côtes l'empêchent
+de tousser, une patiente polyarthritique peut avoir une perte de mobilité sévère après une fracture du col.
+En cas de prise prolongée de glucocorticoïdes, le GRIO recommande de prévenir les fractures par la pres-
+cription d'un traitement anti-ostéoporotique chez les femmes ménopausées et les hommes de plus de
+60 ans quand le risque de fracture est élevé, c'est-à-dire dans quatre situations :
+• T-score ≤ – 2,5 sur au moins un site ;
+• antécédent personnel de fracture par fragilité osseuse après 50 ans ;
+• âge ≥ 70 ans ;
+• corticothérapie avec une posologie ≥ 7,5 mg équivalent prednisone pour une durée > 3 mois.
+Dans tous les cas peuvent être prescrits des bisphosphonates. Le tériparatide peut être prescrit en pre-
+mière intention chez les patients à risque élevé de fracture mais n'est remboursé qu'en présence d'au
+moins deux fractures vertébrales prévalentes.
+--- PAGE 116 ---
+Connaissances
+clés
+Toute fracture survenant après un traumatisme à bas niveau d'énergie doit faire évoquer une ostéoporose.
+Le risque fracturaire et les facteurs de risque de fracture ostéoporotique comprennent les éléments
+suivants :
+• âge ;
+• antécédent de fracture ;
+• valeur de la densité osseuse ;
+• risque de chute.
+La liste des fractures sévères comprend :
+• fémur (extrémité supérieure et extrémité inférieure) ;
+• humérus (extrémité supérieure) ;
+• vertèbres ;
+• pelvis.
+La démarche diagnostique de l'ostéoporose comprend :
+• le recensement des facteurs de risque d'ostéoporose ;
+• la réalisation d'examens pour confirmer le diagnostic ;
+• l'élimination d'une ostéoporose secondaire (myélome, métastase osseuse) ;
+• l'évaluation gériatrique (globale, risque de chutes, risque fracturaire) ;
+• l'évaluation des options thérapeutiques.
+Prise en charge thérapeutique :
+1. En premier lieu, toujours penser à :
+– calcium et vitamine D ;
+– mesures générales, dont la prévention de la chute.
+2. Choisir un traitement de l'ostéoporose parmi :
+– bisphosphonates ;
+– dénosumab ;
+– tériparatide.
+3. Prescrire un cycle de 3 à 5 ans selon la molécule.
+4. Anticiper les séquences thérapeutiques (après dénosumab ou tériparatide).
+5. Assurer le suivi.
+6. Anticiper la réévaluation.
+stnioP
+--- PAGE 117 ---
+Du vieillissement
+articulaire à l'arthrose
+Généralités
+I. Définition, épidémiologie
+II. Physiopathologie
+III. Facteurs de risque de l'arthrose
+IV. Particularités gériatriques de l'arthrose
+Coxarthrose
+I. Motif de consultation : quand évoquer le diagnostic ?
+II. Évaluation
+III. Examen clinique de la hanche
+IV. Éliminer les diagnostics différentiels
+V. Démarche diagnostique et examens complémentaires
+VI. Traitement médical et chirurgical
+Gonarthrose
+I. Épidémiologie, clinique, imagerie, pronostic
+II. Diagnostics différentiels et pièges diagnostiques
+III. Traitement
+Arthrose digitale
+I. Quand évoquer le diagnostic ?
+II. Examen clinique de la main
+III. Examens complémentaires
+IV. Pronostic
+V. Traitement
+Situations de départ
+En lien avec la définition et avec le diagnostic :
+27 Chute de la personne âgée.
+67 Douleurs articulaires.
+68 Boiterie.
+70 Déformation articulaire.
+71 Douleur d'un membre (supérieur ou inférieur).
+En lien avec la prise en charge en urgence :
+31 Perte d'autonomie progressive.
+250 Prescrire des antalgiques.
+259 Évaluation et prise en charge de la douleur aiguë.
+En lien avec la démarche étiologique :
+27 Chute de la personne âgée.
+35 Douleur chronique.
+51 Obésité/surpoids.
+66 Apparition d'une difficulté à la marche.
+71 Douleur d'un membre (supérieur ou inférieur).
+72 Douleur du rachis (cervical, dorsal ou lombaire).
+130 Trouble de l'équilibre.
+178 Demande/prescription raisonnée et choix d'un examen diagnostique.
+186 Syndrome inflammatoire aigu ou chronique.
+Gériatrie
+© 2021, Elsevier Masson SAS. Tous droits réservés
+--- PAGE 118 ---
+Connaissances
+228 Découverte d'une anomalie osseuse et articulaire à l'examen d'imagerie
+médicale.
+245 Prescription d'un appareillage simple.
+247 Prescription d'une rééducation.
+260 Évaluation et prise en charge de la douleur chronique.
+267 Consultation de suivi d'un patient polymorbide.
+277 Consultation de suivi d'un patient présentant une lombalgie aiguë ou chronique.
+279 Consultation de suivi d'une pathologie chronique.
+295 Consultation de suivi gériatrique.
+298 Consultation et suivi d'un patient ayant des troubles cognitifs.
+334 Demande de traitement et investigation inappropriés.
+345 Situation de handicap.
+352 Expliquer un traitement au patient.
+Item, objectifs pédagogiques, hiérarchisation des connaissances
+ITEM 129 – Arthrose
+Rang Rubrique Intitulé Descriptif
+A Définition Définition générale de l'arthrose, Connaître la définition tissulaire de
+principales localisations l'arthrose (maladie du cartilage puis des
+autres tissus articulaires) ; Localisations
+arthrosiques, association à la sédentarité
+et maladies cardiovasculaires
+B Prévalence, Prévalence de l'arthrose Prévalence globale de l'arthrose
+épidémiologie
+92 B Prévalence, Épidémiologie des localisations Connaître les prévalences des princi-
+épidémiologie arthrosiques pales localisations arthrosiques (hanche,
+genou et mains)
+B Éléments physio- Connaître la physiopathologie de Notion de base sur la composition du
+pathologiques l'arthrose cartilage normal
+Déséquilibre formation/destruction
+du cartilage arthrosique, inflammation
+articulaire de bas grade
+Mécanismes de la douleur arthrosique
+A Étiologie Principaux facteurs de risque de Connaître les facteurs de risque princi-
+l'arthrose paux d'arthrose (obésité, âge, trauma-
+tisme) et les phénotypes cliniques
+B Étiologie Étiologie des arthroses secondaires Connaître les causes d'arthrose
+et génétiques secondaires
+Connaître l'existence des arthroses
+génétiques liées à des maladies géné-
+tiques rares
+A Diagnostic positif Diagnostic d'une coxarthrose, d'une Savoir quand évoquer ces diagnostics
+gonarthrose ou d'une arthrose d'arthrose, connaître l'examen clinique
+digitale de chaque localisation (topographie,
+horaire des douleurs, examen physique,
+retentissement fonctionnel avec indice
+de Lequesne)
+A Diagnostic positif Diagnostic différentiel des princi- Connaître les diagnostics différentiels
+pales localisations arthrosiques : de chaque localisation d'arthrose et
+coxarthrose, gonarthrose, arthrose comment les rechercher cliniquement
+digitale
+▼
+--- PAGE 119 ---
+Du vieillissement articulaire à l'arthrose
+Rang Rubrique Intitulé Descriptif
+A Examens Arthrose : indication de l'imagerie : Connaître les indications d'imagerie
+complémentaires coxarthrose, gonarthrose, arthrose devant une suspicion d'arthrose
+digitale
+A Examens Connaître la sémiologie générale en radiographie de l'arthrose : coxarthrose,
+complémentaires gonarthrose, arthrose digitale
+A Contenu Exemple de radiographie de coxarthrose
+multimédia
+A Contenu Exemple de radiographie de gonarthrose
+multimédia
+A Contenu Exemple de radiographie d'arthrose des articulations interphalangiennes
+multimédia distales
+B Examens Connaître la sémiologie particu- Localisations arthrosiques, association
+complémentaires lière en radiographie de l'arthrose à la sédentarité et maladies cardio-
+en fonction des différentes vasculaires des mains et des poignets,
+localisations de la colonne cervicale, de la colonne
+lombaire
+A Diagnostic positif Diagnostics différentiels d'arthrose Connaître les diagnostics différentiels de
+chaque localisation d'arthrose et com-
+ment les éliminer (IRM pour la hanche
+et le genou)
+B Suivi et/ou Savoir évaluer une arthrose* Connaître les noms des questionnaires
+pronostic dédiés à l'évaluation de l'arthrose symp-
+tomatique (WOMAC, KOOS)
+B Examens Résultats sanguins et analyse du Savoir qu'il n'y a pas de syndrome
+complémentaires liquide articulaire de l'arthrose inflammatoire biologique dans
+l'arthrose primitive et que le liquide est
+mécanique, stérile, sans microcristaux
+B Diagnostic positif Arthropathie destructrice rapide : Connaître la définition d'une CDR, son
+coxarthrose, gonarthrose évolution et savoir la rechercher et la
+diagnostiquer
+Gonarthrose destructrice rapide, son
+évolution et savoir la rechercher et la
+diagnostiquer
+B Diagnostic positif Arthrose digitale érosive Connaître la définition d'une arthrose
+digitale érosive, son évolution et savoir
+la rechercher et la diagnostiquer
+B Diagnostic positif Coxarthroses et gonarthroses Connaître les principales causes
+secondaires de coxarthroses et gonarthroses
+secondaires
+B Prise en charge Connaître les principes du trai- Connaître les principes de traitement
+tement de la coxarthrose, gonar- médical pharmacologique et non phar-
+throse et arthrose digitale macologique de chaque localisation
+arthrosique
+A Diagnostic positif Arthrose de l'épaule Savoir diagnostiquer une arthrose de
+l'épaule
+▼

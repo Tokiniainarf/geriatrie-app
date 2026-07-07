@@ -1,0 +1,554 @@
+--- PAGE 86 ---
+Connaissances
+Items, objectifs pédagogiques, hiérarchisation des connaissances
+ITEM 81 – Altération chronique de la vision
+Rang Rubrique Intitulé Descriptif
+A Étiologie Connaître les principales étiologies d'alté- Interrogatoire et examen
+ration chronique de la vision clinique
+B Diagnostic positif Connaître la séméiologie et les moyens de dépistage d'un syndrome
+maculaire*
+A Diagnostic positif Savoir interpréter un réflexe photomoteur direct et consensuel*
+A Contenu multimédia Savoir interpréter un réflexe photomoteur direct et consensuel*
+B Examens Connaître les principaux examens com- Atteinte du segment
+complémentaires plémentaires en ophtalmologie et leurs antérieur, du nerf optique, de
+indications* la rétine (AV, angiographie,
+OCT maculaire, ERG)
+A Définition Connaître la définition de la DMLA
+B Prévalence, Connaître l'épidémiologie de la DMLA
+épidémiologie
+B Diagnostic positif Connaître les pathologies maculaires chroniques hors DMLA (membrane
+épirétinienne, trou maculaire, œdème maculaire)*
+A Définition Connaître la définition de la cataracte, ses principales causes, et les moda-
+lités de diagnostic clinique
+B Prévalence, Connaître l'épidémiologie de la cataracte
+60 épidémiologie
+B Étiologie Connaître les grandes familles médica- Atteinte de la rétine, du
+menteuses à l'origine d'une altération cristallin ou du nerf optique
+chronique de la vision
+ITEM 89 – Altération de la fonction auditive
+Rang Rubrique Intitulé Descriptif
+A Définition Définition d'un test auditif tonal
+A Définition Connaître les grands types de surdité
+B Diagnostic positif Connaître les critères des tests acoumétriques
+B Examens Connaître les principes de réalisation d'une audiométrie tonale,
+complémentaires vocale
+B Examens Connaître les principes de l'impédancemétrie
+complémentaires
+B Examens Connaître les principes d'un test auditif objectif par PEA*
+complémentaires
+A Diagnostic positif Connaître les caractéristiques de surdités de transmission
+B Examens Indication des examens d'imagerie devant une surdité de
+complémentaires transmission*
+B Examens Connaître l'utilité de la tympanométrie dans le diagnostic des surdités
+complémentaires de transmission*
+▼
+--- PAGE 87 ---
+Altération chronique de la vision et de l'audition
+Rang Rubrique Intitulé Descriptif
+A Étiologie Connaître les étiologies (Otospongiose) (Séquelles d'otite
+principales des surdités de chronique) (Fracture du rocher)
+transmission (Bouchon de cérumen) (Origine
+infectieuse, séro-muqueuse : OSM)
+A Diagnostic positif Connaître les caractéristiques de Dont celle de la personne âgée
+surdité de perception (presbyacousie)
+A Examens Indication des examens d'imagerie devant une surdité de perception
+complémentaires
+B Examens Indication des examens d'ima- Couple TDM (os temporal)-IRM
+complémentaires gerie devant une surdité de (os temporal + encéphale)
+perception chez l'enfant*
+A Étiologie Connaître les étiologies princi- (Surdité brusque) (Autres étiolo-
+pales des surdités de perception gies) (Neurinome du VIII) (Surdi-
+tés génétiques) (Presbyacousie)
+(Traumatisme sonore, ototoxicité)
+B Diagnostic positif Connaître les particularités des surdités de perception de l'enfant*
+I. Généralités
+A Les déficits neurosensoriels de la personne âgée peuvent être liés au vieillissement et/ou à
+des pathologies fréquentes avec l'âge. La compréhension et la prise en compte de ces déficits
+sont importantes puisqu'ils peuvent retentir sur l'autonomie et la qualité de vie. Ainsi, dans le
+cadre de la prise en charge globale du patient âgé, l'évaluation des troubles sensoriels est une
+étape systématique indispensable.
+Nous ne traiterons dans ce chapitre que des déficits de l'audition et de la vision. Le goût
+et l'odorat peuvent aussi être altérés par le vieillissement, avec des conséquences cliniques
+notables (par exemple, modifications des appétences alimentaires ou augmentation du risque
+de dénutrition) mais ne sont volontairement pas traités ici.
+La presbyacousie est une altération de l'audition liée à l'âge et représente une des causes de
+surdité de la personne âgée.
+La baisse d'acuité visuelle progressive chez la personne âgée est principalement liée à trois
+étiologies : cataracte, dégénérescence maculaire liée à l'âge et glaucome.
+Les atteintes de l'audition et de la vision, essentielles pour la communication, l'interaction et
+l'acquisition d'informations, peuvent avoir des répercussions sur le plan personnel, familial,
+professionnel et social :
+• altération de la qualité de vie ;
+• isolement social ;
+• 
+• association fréquente avec dépression et troubles cognitifs, et majoration possible de leurs
+symptômes.
+Particularités gériatriques et approche du handicap sensoriel
+Une atteinte auditive et/ou visuelle est particulièrement fréquente chez la personne âgée. Elle
+représente rarement le motif de consultation [131, 140] et doit donc être abordée systémati-
+quement sous deux angles :
+1. Avez-vous consulté ou êtes-vous bien suivi par un ORL et/ou un ophtalmologue ?
+2. Avec cette prise en charge, comment entendez-vous et voyez-vous ?
+▼
+--- PAGE 88 ---
+Connaissances
+Ce point est particulièrement pertinent en présence de chutes [27], troubles cognitifs [131,
+298] ou de perte d'autonomie [31], et il faut le rechercher systématiquement par l'interro-
+gatoire et l'examen clinique, et ceci d'autant plus que le patient est habitué à vivre avec son
+handicap [345] et ne le mentionnera pas ou en minimisera l'importance.
+Dans ce cas, la démarche gériatrique est celle de l'EGS (cf. chapitre 1) et comprend :
+• préciser le motif de consultation ;
+• évaluer les comorbidités [267], en particulier l'état cognitif et thymique ;
+• évaluer l'autonomie [31] et l'adéquation du niveau d'aides [355] ;
+• évaluer les risques associés aux déficits : l'isolement sensoriel auditif et visuel peut repré-
+senter une mise en danger du patient, à travers les difficultés à voir un obstacle et le risque
+de chute, ou le fait de ne pas entendre une alerte ;
+• évaluer les traitements habituels [266], leurs indications et posologies à la lumière de la
+fonction rénale et des interactions, ainsi que leur galénique à la lumière des difficultés en
+particulier visuelles que le patient pourrait avoir pour prendre ses traitements [354].
+Les objectifs de la consultation gériatrique, lorsque le patient présente un handicap sensoriel
+auditif et/ou visuel, seront de :
+• prioriser les pathologies à prendre en charge selon le motif de consultation et les
+comorbidités ;
+• et spécifiquement pour ce handicap :
+– évaluer le retentissement ;
+– évaluer la nécessité d'une (ré)évaluation par un ORL ou un ophtalmologue ;
+– aborder les solutions complémentaires pour éviter l'isolement social (livres enregistrés,
+casques d'audition…, cf. infra) ;
+– choisir les traitements selon les comorbidités, en anticipant les interactions médicamen-
+teuses et les difficultés de prises ;
+– choisir les aides nécessaires au patient dans sa globalité, en particulier en tenant compte
+de l'existence éventuelle de ce handicap sensoriel.
+Six écueils à éviter dans le déficit sensoriel auditif et visuel de la personne âgée
+• Considérer que l'isolement sensoriel est inéluctable chez le patient âgé [67].
+• Négliger l'impact thymique et cognitif de l'isolement sensoriel.
+• Ne pas éliminer un bouchon de cérumen en cas de déficit sensoriel auditif.
+• Ne pas dépister un isolement sensoriel en cas de chute [27].
+• Ne pas dépister un isolement sensoriel en cas de troubles cognitifs.
+• Ne pas veiller à maintenir l'appareillage auditif et visuel en cas de confusion.
+Déficits auditif et visuel
+La recherche d'un déficit sensoriel est un élément important de la prise en charge des patients âgés, dans
+le cadre de l'évaluation des comorbidités, des traitements et de la qualité de vie, à laquelle il est très associé
+par le retentissement fonctionnel.
+Quand ?
+• Lors d'une première consultation [295].
+• Lors d'une consultation pour chute [27, 228], perte d'autonomie [31], situation de handicap [345],
+trouble de la marche [66], trouble thymique, plainte mnésique [298], dans les suites d'un syndrome
+confusionnel [119].
+• En cas d'évolution lors de consultations de suivi [266, 267, 279, 295].
+▼
+--- PAGE 89 ---
+Altération chronique de la vision et de l'audition
+Comment ?
+• En récupérant des informations objectives [131].
+• En impliquant si besoin l'aidant principal [330], le médecin référent et tous les soignants impliqués
+dans l'accompagnement du patient.
+• En cherchant et quantifiant le retentissement fonctionnel.
+Pourquoi ?
+• Afin d'améliorer l'autonomie.
+• Afin de favoriser les échanges, la vie familiale et sociale, la stimulation cognitive, en particulier en cas de
+troubles cognitifs [131].
+• Afin de prévenir le risque de chute [27].
+• Afin de cibler, via un avis expert ORL ou ophtalmologique, les interventions utiles et faisables.
+• Afin d'envisager et d'organiser une sanction chirurgicale (cataracte) ou un appareillage si nécessaire.
+II. Déficit auditif
+B La prévalence des troubles de l'audition est très élevée dans la population âgée :
+• un tiers des personnes âgées ≥ + 65 ans, 40 % des personnes > 75 ans et 60 % des per-
+sonnes > 85 ans ;
+• 4 à 6 millions de personnes sont malentendantes en France ; les deux tiers ont plus de
+65 ans.
+A La presbyacousie est :
+• l'étiologie de surdité la plus fréquente chez la personne âgée ;
+• conséquence du vieillissement des structures sensorielles de l'oreille interne (cellules senso-
+rielles de l'organe de Corti) et des voies auditives du système nerveux central, et donc liée
+à l'âge, habituellement à partir de 50 ans ;
+• d'une grande variabilité interindividuelle (impact de l'exposition au bruit et des facteurs
+génétiques).
+Les caractéristiques de la perte d'audition dans la presbyacousie sont :
+• atteinte progressive, bilatérale, symétrique ;
+• prédominant dans les aigus ;
+• surdité de perception.
+A. Symptômes de la presbyacousie
+L'installation insidieuse affecte les deux oreilles de manière à peu près symétrique, la gêne
+est surtout ressentie pour les fréquences aiguës avec une altération de la discrimination du
+langage.
+Les premiers symptômes de la presbyacousie sont :
+• difficulté à comprendre ses interlocuteurs dans les situations bruyantes (difficulté à
+suivre une conversation de groupe ou, d'une façon plus générale, dans un milieu bruyant,
+c'est le classique signe du « cocktail »), conduisant le patient à faire souvent répéter ses
+interlocuteurs et à moins participer aux discussions [345] ;
+• intolérance aux sons forts (la personne supporte mal les ambiances bruyantes). Alors
+même qu'elle ne comprend plus les conversations courantes, elle ressent douloureusement
+la perception de mots prononcés à haute et intelligible voix au creux de son oreille. Ceci
+traduit le phénomène de recrutement ;
+• difficultés à entendre la télévision, ce qui conduit à augmenter le son ;
+▼
+--- PAGE 90 ---
+Connaissances
+• impression d'avoir « les oreilles bouchées » ;
+• hypoacousie souvent signalée par l'entourage, alors que le patient ne se plaint pas.
+Évolution
+La dégradation est ensuite lente, entraînant une gêne sociale puis une gêne familiale grandis-
+sante et pouvant, à terme, conduire à l'isolement et au repli sur soi. Le handicap auditif peut
+être à l'origine d'un véritable état dépressif réactionnel, d'autant qu'il s'y associe parfois des
+acouphènes gênants, bilatéraux, à type de sifflement.
+On décrit trois stades à la presbyacousie :
+1. infraclinique : l'unique trouble est une perte d'intelligibilité dans le bruit. L'audiogramme
+tonal est normal sur les graves et objective une perte inférieure à 30 dB sur la fréquence
+2 000 Hz ;
+2. retentissement social : la gêne auditive est nette. Le patient doit faire répéter et demande
+qu'on élève la voix. La perte atteint ou dépasse 30 dB sur la fréquence 2 000 Hz. La prise
+en charge est impérative ;
+3. isolement : le patient non traité communique de moins en moins.
+B. Démarche diagnostique
+En présence d'un déficit auditif d'une personne âgée, une partie de la démarche diagnostique
+doit être réalisée par le gériatre, tandis que certains points doivent faire adresser le patient à
+un avis expert ORL.
+Le rôle du gériatre est avant tout clinique et il doit d'abord confirmer une atteinte bilatérale,
+d'évolution progressive, ayant les caractéristiques de la presbyacousie.
+1. Éliminer un diagnostic différentiel de la presbyacousie
+La plupart des diagnostics de surdité nécessitent une audiométrie, mais trois diagnostics diffé-
+rentiels doivent être évoqués et les deux premiers doivent être recherchés dès la consultation
+de gériatrie :
+• bouchon de cérumen +++ (attention : peut être bilatéral), recherché par examen otosco-
+pique qui est par ailleurs habituellement normal en cas de presbyacousie ;
+• atteinte cognitive au sein de l'EGS : à évoquer en cas d'altération importante de l'intelli-
+gibilité en vocal ;
+• schwannome de l'acoustique : à évoquer devant toute surdité unilatérale, en particu-
+lier en cas d'association avec acouphènes, sensations vertigineuses, troubles de l'équilibre
+[130] et, plus rarement, atteinte du nerf facial.
+Sans négliger l'incapacité à utiliser correctement un appareillage auditif pour des raisons
+cognitives ou physiques.
+2. Rechercher et prévenir des facteurs aggravants ou précipitants
+La prévention de l'aggravation d'une presbyacousie repose sur le traitement ou l'éviction de
+différents facteurs surajoutés, dont certains iatrogènes, dont le risque est majoré par l'insuffi-
+sance rénale (tableau 5.1 et encadré).
+--- PAGE 91 ---
+Altération chronique de la vision et de l'audition
+Tableau 5.1. A Facteurs aggravant une presbyacousie.
+Troubles métaboliques Diabète, dyslipidémie, hypertension artérielle
+Exposition au bruit Professionnelle ou loisirs
+Iatrogénie ototoxique Par voie générale Aminosides
+Érythromycine
+Vancomycine
+Diurétiques de l'anse
+Sels de platine
+Aspirine (doses élevées)
+Par voie locale par pénétration dans la caisse du Aminoside
+tympan sur perforation tympanique Glycopeptide
+Antiseptique
+Excipient
+Règles de prescription chez la personne âgée pour éviter l'ototoxicité
+• B Avant de prescrire un médicament ototoxique, vérifier l'état auditif et d'éventuels traitements oto-
+toxiques antérieurement reçus.
+• Ne jamais utiliser d'aminosides en l'absence d'indication formelle.
+• En cas d'insuffisance rénale, adapter les doses à la fonction rénale avec recours aux dosages plasma-
+tiques quand disponibles (sauf aminosides).
+• Avant de prescrire des gouttes auriculaires, s'enquérir de l'état de la membrane tympanique.
+3. Audiométrie (fig. 5.1)
+A Le patient est ensuite adressé en consultation ORL pour avis et réalisation d'une audiométrie :
+• elle apprécie les possibilités d'appareillage et permet le suivi, avec des tests mesurant le
+gain prothétique ;
+• audiométrie tonale : surdité de perception bilatérale, symétrique, prédominant sur les fré-
+quences aiguës en cas de presbyacousie ;
+• audiométrie vocale (fondée sur la répétition de listes de mots) : apprécie le retentissement
+sur l'intelligibilité de la parole, la gêne sociale, les suppléances du patient et ses capacités
+attentionnelles.
+Surdité
+Unilatérale Bilatérale
+Récente Ancienne Récente Ancienne
+Surdité
+Neurinome Traumatisme Ototoxicité Presbyacousie
+de perception Ototoxicité Accident vasculaire labyrinthique Exposition au bruit
+Traumatisme Malformation congénitale Ototoxicité
+Fracture du rocher Maladie de Ménière
+Lésions congénitales ou
+héréditaires de la cochlée
+Surdité
+Bouchon de Séquelle d’otite Otite moyenne Otosclérose
+de transmission cérumen (perforation, cholestéatome, aiguë Bouchon de cérumen
+Otite externe tympanosclérose)
+Otite moyenne Tumeur (oreille moyenne)
+Corps étranger Otosclérose
+Fig. 5.1. B Différentes causes de surdité (non spécifiquement gériatriques).
+--- PAGE 92 ---
+Connaissances
+C. Principes de prise en charge thérapeutique
+• La plus précoce possible.
+• L'approche gériatrique place la déficience auditive et le handicap qui en résulte au sein
+de l'évaluation globale du patient, avec l'importance d'une prise en charge précoce pour
+conserver un niveau de communication satisfaisant, préserver les interactions familiales et
+sociales et limiter l'impact sur les fonctions cognitives.
+• Le diagnostic est fait par l'ORL, qui évalue la possibilité et prescrit le port d'un appareillage
+prothétique auditif (encadré 5.1).
+• Le choix et le contrôle de l'appareillage sont du ressort de l'audioprothésiste.
+• Il n'y a pas de traitement médicamenteux ou curatif de la presbyacousie.
+Encadré 5.1
+Appareillage auditif
+• B Indiqué dès que la perte dépasse :
+– 30 dB sur les fréquences conversationnelles (1 000 et 2 000 Hz) ;
+– 30 % en audiométrie vocale sur la meilleure oreille.
+• Améliore la communication mais ne permet pas un retour à une audition normale (en avertir le patient).
+• Doit être précoce, car l'adaptation du patient se fait d'autant mieux qu'il est moins âgé et que sa surdité
+est moins marquée.
+• Doit être bilatéral pour favoriser la stéréophonie qui permet une meilleure localisation spatiale et une
+meilleure discrimination verbale en milieu bruyant.
+• Doit être porté toute la journée du lever au coucher.
+• Doit être porté plusieurs semaines et réglé par l'audioprothésiste pour atteindre son objectif.
+B Plusieurs types d'aides auditives sont disponibles. Elles diffèrent par l'emplacement de
+l'électronique amplificatrice : intraconduit, intraconque, contours d'oreille ou sur les branches
+de lunettes. La miniaturisation et le positionnement éventuel dans le conduit auditif externe
+rendent les prothèses plus discrètes mais aussi plus coûteuses. Les aides auditives sont
+aujourd'hui numériques, ce qui ouvre des perspectives importantes en termes de qualité de
+traitement du signal.
+Le suivi du patient presbyacousique est effectué conjointement par le médecin traitant, l'ORL,
+l'audioprothésiste ; un orthophoniste peut contribuer à améliorer la compréhension et la
+communication.
+Il est important de former et éduquer le patient mais aussi les aidants naturels et professionnels
+(domicile ou EHPAD) aux risques éventuels liés à l'atteinte auditive dans certaines situations
+de la vie quotidienne, notamment la conduite automobile (difficultés en cas de phénomènes
+distracteurs visuels ou auditifs).
+Les situations où le bénéfice de l'appareillage est limité :
+• sévérité de l'atteinte auditive (aux limites des possibilités des aides auditives convention-
+nelles les plus puissantes) : discuter un implant cochléaire ;
+• mauvaise utilisation des appareils (capacités visuelles, cognitives et physiques du patient)
+pour :
+– changements de piles ;
+– utilisation des chargeurs ;
+– insertion des embouts dans les oreilles ;
+– nettoyage des embouts…
+--- PAGE 93 ---
+Altération chronique de la vision et de l'audition
+III. Déficit visuel
+A La cécité est définie par une acuité visuelle de 1/20 ou moins sur le meilleur œil après cor-
+rection. On considère qu'une personne est malvoyante si son acuité visuelle est comprise entre
+4/10 et 1/20 au meilleur œil après correction.
+B En France, les déficients visuels sont majoritairement des personnes âgées :
+• 60 % ont plus 60 ans ;
+• 40 % ont plus de 75 ans.
+A. Déficit visuel et comorbidités
+A L'approche gériatrique place la recherche d'une déficience visuelle et du handicap qui en
+résulte au sein de l'EGS (cf. chapitre 1), en particulier chez les patients à risque de chute [27],
+avec l'importance d'une prise en charge précoce pour conserver un niveau d'autonomie satis-
+faisant, préserver les interactions familiales et sociales et limiter l'impact sur les fonctions
+cognitives.
+B. Quatre principales pathologies ayant un retentissement
+sur la vision
+1. Cataracte
+La cataracte aboutit à l'opacité partielle ou totale du cristallin. Cette opacification peut être
+congénitale, traumatique, toxique (UV, radiations ionisantes…), diabétique ou liée à l'âge.
+2. Glaucome
+Le glaucome entraîne une augmentation de la pression oculaire qui évolue le plus souvent
+de façon insidieuse et indolore et comprime le nerf optique. Non traitée, cette hyperpres-
+sion entraîne une perte progressive du champ visuel après destruction lente du nerf optique
+pouvant aboutir à la perte totale de la vue. C'est une affection qui touche de préférence les
+personnes de plus de 40 ans. Elle est très fréquente et sa prévalence augmente avec l'âge.
+L'œil est blanc non douloureux, les pupilles sont normalement réactives et l'acuité visuelle est
+conservée pendant longtemps.
+Les trois signes principaux de la maladie sont :
+• augmentation de la pression intraoculaire au-dessus de 21 mmHg (avec un angle irido-
+cornéen ouvert en gonioscopie) ;
+• excavation de la papille : la mesure de l'épaisseur de la papille par tomographie en cohé-
+rence optique (OCT) montre très précocement l'atteinte glaucomateuse ;
+• altération du champ visuel.
+À partir de l'âge de 50 ans, il est recommandé de consulter régulièrement un ophtalmologiste
+qui dépiste l'hypertonie oculaire. Cependant, il est possible de présenter un glaucome avec
+pression intraoculaire normale ; c'est pourquoi l'examen doit être complété par une OCT.
+3. Dégénérescence maculaire liée à l'âge (DMLA)
+Première cause de cécité des personnes âgées de plus de 50 ans (1 million de patients en
+France, 25 % des patients de plus de 75 ans, tableau 5.2), il s'agit d'une perte de la vision
+--- PAGE 94 ---
+Connaissances
+Tableau 5.2. B Facteurs de risque de DMLA.
+Âge
+Tabagisme
+Hypertension artérielle
+Obésité
+Exposition solaire
+Prédisposition génétique (facteurs familiaux)
+centrale par détérioration de la macula qui entraîne progressivement une perte de la lecture,
+de la reconnaissance des visages…
+Les symptômes habituels sont une baisse progressive de la vision globale (« les lunettes ne
+vont plus »), mais certains patients voient des images déformées (lignes déformées à la grille
+d'Amsler) ou des trous visuels (scotomes).
+Stade initial, ou maculopathie liée à l'âge
+• Absence de symptôme.
+• Diagnostic au fond d'œil qui objective les « drusen » (accumulation de dépôts sur la rétine)
+et les anomalies de l'épithélium pigmentaire rétinien.
+• N'évolue pas obligatoirement vers une forme plus sévère.
+Forme atrophique, dite « sèche »
+• Premiers symptômes : gêne à la lecture ou à l'écriture, ou baisse progressive de l'acuité
+visuelle.
+• Évolue en général lentement, permettant aux patients atteints de conserver longtemps une
+vision relativement satisfaisante, malgré une gêne pour les activités nécessitant la recon-
+naissance des détails.
+Forme exsudative ou néovasculaire, dite « humide »
+• Caractérisée par le développement de vaisseaux (« néovaisseaux ») dans la région macu-
+laire. Ces vaisseaux anormaux sont fragiles et laissent diffuser du sérum, entraînant un
+décollement séreux, ou du sang, entraînant une hémorragie.
+• Évolution dépendant du type et de la localisation de ces vaisseaux anormaux, de la surve-
+nue éventuelle de soulèvements rétiniens, d'hémorragies, et de la réponse aux traitements.
+• Premiers signes d'alerte : déformations des lignes droites, diminution brutale d'acuité
+visuelle ou des contrastes, tache sombre centrale.
+• Doivent entraîner une consultation rapide par un médecin ophtalmologiste car les traite-
+ments sont d'autant plus efficaces que le diagnostic est posé tôt.
+4. Rétinopathie diabétique
+Altération progressive de la rétine liée à une microangiopathie du diabète aboutissant à la
+baisse de la vision. Elle est le plus souvent mise en évidence par le médecin ophtalmologiste
+lors de visites de routine ou lors du suivi régulier du patient diabétique. Le traitement est celui
+du diabète, parfois complété par des traitements locaux (laser) en fonction du stade de la
+rétinopathie.
+--- PAGE 95 ---
+Altération chronique de la vision et de l'audition
+C. Cécités vasculaires, plus rares
+1. Cécité corticale
+B Bien que rare, elle peut survenir soit lors d'un accident hémorragique (complication d'un
+traitement anticoagulant, angiopathie amyloïde), soit par une occlusion artérielle responsable
+d'un infarctus cérébral postérieur bilatéral. Le diagnostic est difficile car le patient est anoso-
+gnosique, conservant ses réflexes pupillaires et un fond d'œil normal. C'est le trouble du
+comportement et la perte de repère spatial brutal qui doit orienter le clinicien.
+2. Artérite temporale (maladie de Horton)
+Panartérite inflammatoire, subaiguë, segmentaire et plurifocale, la forme typique d'artérite
+temporale comporte classiquement des algies temporales, unilatérales, prenant leur source au
+niveau d'une artère temporale qui n'est plus pulsatile, mais réduite à un cordon dur, doulou-
+reux et parfois inflammatoire. La perte brutale de la vision peut être une forme de découverte
+si les symptômes d'alerte (amaurose transitoire) n'ont pas permis d'évoquer le diagnostic et
+d'initier une corticothérapie. Il peut s'agir d'une névrite optique ischémique, d'une névrite
+optique rétrobulbaire aiguë ischémique (à fond d'œil normal) ou, plus rarement, d'une cécité
+corticale.
+3. Thrombose de l'artère ou de la veine centrale de la rétine
+Recherche des facteurs thrombogènes actifs persistants, en particulier la présence d'un
+syndrome des anticorps antiphospholipides (normalement diagnostiqué bien avant un âge
+gériatrique).
+D. Démarche diagnostique
+A En présence d'un déficit visuel, une partie de la démarche diagnostique doit être réalisée
+par le gériatre, tandis que certains points doivent faire adresser le patient en consultation
+d'ophtalmologie.
+Le rôle du gériatre est avant tout clinique, et il doit d'abord confirmer le déficit visuel, soit
+dans le cadre d'une pathologie connue, soit dans le cadre d'un déficit débutant, nié ou mini-
+misé. Cette approche est essentielle dans la prise en charge d'un patient avec diabète [281],
+thrombophilie, terrain vasculaire [267], troubles neurocognitifs [298] ou adressé pour chute
+[27]. Elle permet d'anticiper la récidive de chute ou les risques d'accidents domestiques [325].
+1. Éliminer un diagnostic différentiel ou une étiologie inhabituelle de
+déficit visuel progressif
+• Alexie dans le cadre de troubles neurocognitifs majeurs (TNCM).
+• Cécité corticale : l'examen clinique peut être particulièrement difficile en cas de TNCM et
+de syndrome confusionnel, mais doit faire rechercher dans un contexte aigu ou dans ses
+suites une cécité corticale dans les suites d'un AVC [121].
+Il faut également connaître le syndrome de Charles Bonnet : hallucinations visuelles [122]
+concernant habituellement des personnes âgées avec une atteinte visuelle d'origine ophtal-
+mique (DMLA, glaucome…) sans lien avec une atteinte cognitive et/ou psychiatrique sous-
+jacente. Il peut s'agir d'hallucinations élémentaires ou complexes (personnages, animaux…) ;
+classiquement, le patient en a conscience et n'éprouve pas d'anxiété particulière. La baisse de
+luminosité favoriserait leur survenue. Il n'y a habituellement pas d'indication à un traitement
+médicamenteux et les antipsychotiques sont inefficaces. Le traitement est celui de la cause.
+--- PAGE 96 ---
+Connaissances
+2. Examen clinique, comorbidités et traitements médicamenteux
+L'interrogatoire et l'examen clinique vont cibler :
+• les comorbidités en particulier cardiovasculaires, et vérifier l'adéquation des traitements et
+des objectifs (pression artérielle, hémoglobine glyquée, voire LDL) ;
+• l'évaluation des fonctions cognitives, au sein de l'EGS (cf. chapitre 1).
+Le patient est ensuite adressé en consultation d'ophtalmologie pour avis, avec explorations
+spécifiques.
+Mise en situation
+Vous prenez en charge dans un service de gériatrie un patient de 87 ans qui est passé par les urgences
+pour une chute traumatique sans autre complication qu'un syndrome post-chute assez important pour
+qu'il ne puisse retourner au domicile où il vit avec son épouse, le couple étant habituellement auto-
+nome. D'après son épouse, ce patient a chuté trois fois dans les 3 derniers mois [27], sans symptôme
+associé, deux fois en se levant pour uriner la nuit et la dernière fois dans la rue en essayant d'éviter un
+piéton qu'il n'avait pas vu venir. Le patient a peu d'antécédents : hypertension artérielle traitée par un
+diurétique thiazidique et un inhibiteur calcique, troubles cognitifs ayant été signalés par l'épouse il y a
+quelques mois et que le médecin traitant a mis sur le compte d'une probable maladie d'Alzheimer débu-
+tante intriquée avec des éléments dépressifs, sans qu'il n'y ait eu de bilan neurocognitif plus poussé.
+Une IRM cérébrale a été faite et n'a pas retrouvé autre chose qu'une leucopathie vasculaire modérée.
+70 ❯ Le bilan de chute va mettre en évidence une hypotension orthostatique pour laquelle son traite-
+ment antihypertenseur va être adapté à la baisse, mais les circonstances des chutes ne sont pas très
+évocatrices de ce diagnostic étiologique.
+❯ Dans le cadre du bilan gériatrique, vous vous rendez compte que le dysfonctionnement cognitif se
+manifeste principalement par des troubles attentionnels [129] avec des performances mnésiques
+objectives normales. Vous constatez rapidement que les échanges oraux, notamment les réponses
+à l'interrogatoire, sont plus performants quand l'interlocuteur est un homme et qu'on lève un peu
+la voix. Le patient vous signale d'ailleurs que cela l'ennuie beaucoup car il a plus de mal qu'avant à
+écouter sa radio et ses émissions de télévision préférées, et qu'il va beaucoup moins aux réunions
+de son club du troisième âge car il les trouve trop bruyantes et fatigantes.
+❯ Avec une rééducation précoce par kinésithérapeute et psychomotricien, le syndrome post-chute
+s'améliore et le patient reprend une autonomie de marche correcte en quelques jours. Malgré tout,
+il chute une fois dans le service en butant contre le pied d'une chaise dans sa chambre et sa marche
+reste précautionneuse dans cet environnement peu connu pour lui. Un examen grossier de la vision
+détecte clairement une acuité visuelle déficitaire que le patient fait remonter à quelques mois.
+Au total, ce patient est sorti rapidement du service car la reprise de l'autonomie et l'aide de son épouse
+rendaient raisonnable le retour au domicile, avec une poursuite de la rééducation. Mais il a surtout été
+rapidement revu en hôpital de jour pour complément du bilan gériatrique avec avis ORL et ophtalmo-
+logique, qui ont permis de confirmer une presbyacousie marquée et une cataracte bilatérale évoluée.
+Le suivi a permis de vérifier que l'appareillage auditif était bien supporté et que, surtout, les troubles
+de l'attention et donc les performances cognitives se sont nettement améliorés avec une reprise des
+activités sociales. Il a aussi été opéré en deux fois et sur quelques mois de la cataracte en débutant par
+l'œil le plus atteint, ce qui a entraîné une amélioration sensible de la vitesse de marche et l'absence de
+récidive de chute.
+--- PAGE 97 ---
+Altération chronique de la vision et de l'audition
+clés
+• Rechercher une presbyacousie si le patient :
+– parle fort ;
+– fait souvent répéter ;
+– comprend mal les conversations en groupe ;
+– augmente le volume de la télévision ;
+– se plaint de troubles cognitifs ;
+– a l'impression d'avoir les oreilles bouchées.
+• Rechercher les principales conséquences d'une presbyacousie :
+– symptômes dépressifs ;
+– communication difficile ;
+– isolement social ;
+– 
+– troubles cognitifs ;
+– acouphènes, vertiges.
+• Le handicap visuel doit être recherché systématiquement en particulier chez les patients avec TNC
+ou faisant des chutes à répétition. Les quatre maladies de l'œil le plus fréquemment responsables de
+handicap visuel de la personne âgée sont :
+– cataracte ;
+– DMLA ;
+– rétinopathie diabétique ;
+– glaucome.
+stnioP
+--- PAGE 98 ---
+This page intentionally left blank
+--- PAGE 99 ---
+Du vieillissement osseux
+aux pathologies osseuses
+I. Définitions de l'ostéoporose
+II. Bases physiologiques du vieillissement osseux
+III. Facteurs de risque d'ostéoporose
+IV. Épidémiologie et facteurs de risque de fracture ostéoporotique
+V. Démarche diagnostique de l'ostéoporose et des ostéopathies fragilisantes
+VI. Stratégie thérapeutique de l'ostéoporose
+VII. Prévention de l'ostéoporose
+Situations de départ
+En lien avec la définition et avec le diagnostic :
+27 Chute de la personne âgée.
+306 Dépistage et prévention de l'ostéoporose.
+En lien avec la prise en charge en urgence :
+31 Perte d'autonomie progressive.
+34 Douleur aiguë postopératoire.
+250 Prescrire des antalgiques.
+269 Évaluation et prise en charge de la douleur aiguë.
+En lien avec la démarche étiologique :
+27 Chute de la personne âgée.
+66 Apparition d'une difficulté à la marche.
+71 Douleur d'un membre (supérieur ou inférieur).
+72 Douleur du rachis (cervical, dorsal ou lombaire).
+130 Trouble de l'équilibre.
+173 Traumatisme des membres.
+175 Traumatisme rachidien.
+178 Demande/prescription raisonnée et choix d'un examen diagnostique.
+200 Dyscalcémie.
+227 Découverte d'une anomalie osseuse et articulaire à l'examen d'imagerie médicale.
+260 Évaluation et prise en charge de la douleur chronique.
+267 Consultation de suivi d'un patient polymorbide.
+279 Consultation de suivi d'une pathologie chronique.
+295 Consultation de suivi gériatrique.
+298 Consultation et suivi d'un patient ayant des troubles cognitifs.
+334 Demande de traitement et investigation inappropriés.
+352 Expliquer un traitement au patient.
+Gériatrie
+© 2021, Elsevier Masson SAS. Tous droits réservés

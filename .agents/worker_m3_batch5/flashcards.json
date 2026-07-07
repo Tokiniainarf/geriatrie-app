@@ -1,0 +1,2402 @@
+[
+  {
+    "id": 3801,
+    "chapter": "ch17",
+    "rang": "A",
+    "question": "Quelle est la définition des soins palliatifs selon la Société Française d'Accompagnement et de Soins Palliatifs (SFAP) ?",
+    "answer": "Soins actifs et continus pratiqués par une équipe interdisciplinaire visant à soulager la douleur, à apaiser la souffrance psychique, à sauvegarder la dignité de la personne malade et à soutenir son entourage dans le cadre d'une maladie grave, évolutive ou terminale.",
+    "tags": [
+      "Soins palliatifs",
+      "Définition",
+      "Accompagnement"
+    ]
+  },
+  {
+    "id": 3802,
+    "chapter": "ch17",
+    "rang": "A",
+    "question": "Quels sont les quatre stades ou phases décrits pour les situations palliatives ?",
+    "answer": "1. Phase de stade palliatif actif (survie de plusieurs années avec traitements oncologiques actifs).\n2. Phase de stade palliatif symptomatique (survie de plusieurs mois, traitements de confort).\n3. Phase de stade terminal (survie de quelques semaines, questionnement sur l'alimentation/hydratation).\n4. Phase agonique (survie de quelques heures à quelques jours, traitement exclusif des symptômes d'inconfort).",
+    "tags": [
+      "Soins palliatifs",
+      "Stades",
+      "Pronostic"
+    ]
+  },
+  {
+    "id": 3803,
+    "chapter": "ch17",
+    "rang": "A",
+    "question": "Quelles sont les dispositions majeures de la loi Claeys-Leonetti du 2 février 2016 ?",
+    "answer": "1. Droit pour le patient de refuser ou d'interrompre tout traitement (obstination déraisonnable).\n2. Directives anticipées s'imposant au médecin (sauf urgence vitale ou manifeste inappropriation).\n3. Personne de confiance désignée par écrit dont le témoignage prévaut sur tout autre avis.\n4. Droit à la sédation profonde et continue maintenue jusqu'au décès (SPCMD) sous conditions.",
+    "tags": [
+      "Soins palliatifs",
+      "Loi Claeys-Leonetti",
+      "Cadre légal"
+    ]
+  },
+  {
+    "id": 3804,
+    "chapter": "ch17",
+    "rang": "A",
+    "question": "Qu'est-ce que l'obstination déraisonnable (ou acharnement thérapeutique) selon le code de déontologie médicale ?",
+    "answer": "La poursuite d'actes diagnostiques ou thérapeutiques qui apparaissent inutiles, disproportionnés ou n'ayant d'autre effet que le seul maintien artificiel de la vie. La loi Claeys-Leonetti impose leur arrêt ou leur limitation dans ce contexte.",
+    "tags": [
+      "Obstination déraisonnable",
+      "LATA",
+      "Éthique"
+    ]
+  },
+  {
+    "id": 3805,
+    "chapter": "ch17",
+    "rang": "A",
+    "question": "Quelle est la définition de la sédation profonde et continue maintenue jusqu'au décès (SPCMD) ?",
+    "answer": "Pratique médicale consistant à administrer des agents sédatifs (souvent midazolam) associés à des antalgiques (morphine) pour altérer profondément la conscience du patient de façon continue jusqu'au décès, dans le but de soulager une souffrance réfractaire en phase terminale.",
+    "tags": [
+      "SPCMD",
+      "Sédation",
+      "Fin de vie"
+    ]
+  },
+  {
+    "id": 3806,
+    "chapter": "ch17",
+    "rang": "B",
+    "question": "Quelles sont les trois indications cliniques autorisant une SPCMD selon la loi ?",
+    "answer": "1. Patient atteint d'une affection grave et incurable en phase terminale, présentant une souffrance réfractaire aux traitements.\n2. Patient en phase terminale décidant d'arrêter un traitement maintenant sa vie, ce qui entraîne une souffrance réfractaire à court terme.\n3. Patient hors d'état d'exprimer sa volonté, en situation d'obstination déraisonnable, lors de la décision collégiale d'arrêt des traitements de survie.",
+    "tags": [
+      "SPCMD",
+      "Indications",
+      "Éthique"
+    ]
+  },
+  {
+    "id": 3807,
+    "chapter": "ch17",
+    "rang": "A",
+    "question": "Quel est le premier traitement médicamenteux de référence pour la sédation en phase palliative (SPCMD) et quelle est sa posologie initiale ?",
+    "answer": "Le Midazolam (Hypnovel) par voie sous-cutanée (SC) ou intraveineuse (IV).\n- Dose de charge initiale : 1 à 3 mg en injection lente, répétée si nécessaire toutes les 10-15 minutes pour obtenir la sédation.\n- Dose d'entretien : 0,5 à 2 mg/heure en seringue électrique ou perfusion continue.",
+    "tags": [
+      "Midazolam",
+      "SPCMD",
+      "Posologie"
+    ]
+  },
+  {
+    "id": 3808,
+    "chapter": "ch17",
+    "rang": "A",
+    "question": "Quelle échelle clinique est utilisée pour surveiller la profondeur de la sédation en soins palliatifs ?",
+    "answer": "L'échelle de Ramsay. Elle comporte 6 stades :\n- Ramsay 1 : Patient éveillé, anxieux ou agité.\n- Ramsay 2 à 4 : Patient coopérant à somnolent.\n- Ramsay 5 : Réponse lente au stimulus physique.\n- Ramsay 6 : Aucune réponse. La cible lors d'une SPCMD est d'obtenir un score de Ramsay de 5 ou 6.",
+    "tags": [
+      "Échelle de Ramsay",
+      "Sédation",
+      "Surveillance"
+    ]
+  },
+  {
+    "id": 3809,
+    "chapter": "ch17",
+    "rang": "A",
+    "question": "Comment définit-on le « double effet » en médecine palliative ?",
+    "answer": "L'administration d'un traitement antalgique ou sédatif (comme la morphine ou le midazolam) à doses ajustées pour soulager la souffrance du patient en phase terminale, avec le consentement d'accepter comme effet secondaire non recherché l'abréviation possible de la vie.",
+    "tags": [
+      "Double effet",
+      "Antalgie",
+      "Éthique"
+    ]
+  },
+  {
+    "id": 3810,
+    "chapter": "ch17",
+    "rang": "A",
+    "question": "Quelles sont les caractéristiques des directives anticipées en France ?",
+    "answer": "Document écrit, daté et signé par le patient exprimant ses volontés de fin de vie. Elles sont valables sans limitation de durée, modifiables ou révocables à tout moment. Elles s'imposent au médecin pour toute décision d'investigation ou de traitement.",
+    "tags": [
+      "Directives anticipées",
+      "Fin de vie",
+      "Droit"
+    ]
+  },
+  {
+    "id": 3811,
+    "chapter": "ch17",
+    "rang": "B",
+    "question": "Quelles sont les deux exceptions permettant à un médecin de déroger aux directives anticipées du patient ?",
+    "answer": "1. En cas d'urgence vitale, pendant le temps nécessaire à l'évaluation complète de la situation.\n2. Lorsque les directives anticipées apparaissent manifestement inappropriées ou non conformes à la situation médicale du patient. Dans ce cas, la décision de dérogation doit être prise à l'issue d'une procédure collégiale inscrite au dossier.",
+    "tags": [
+      "Directives anticipées",
+      "Exceptions",
+      "Législation"
+    ]
+  },
+  {
+    "id": 3812,
+    "chapter": "ch17",
+    "rang": "A",
+    "question": "Qu'est-ce que la personne de confiance et comment est-elle désignée ?",
+    "answer": "Personne majeure désignée par écrit par le patient pour l'accompagner dans son parcours de soins et être consultée en priorité si le patient devient hors d'état d'exprimer sa volonté. Sa désignation est révocable à tout moment, et son témoignage l'emporte sur tout autre témoignage (famille).",
+    "tags": [
+      "Personne de confiance",
+      "Cadre juridique",
+      "Droit"
+    ]
+  },
+  {
+    "id": 3813,
+    "chapter": "ch17",
+    "rang": "A",
+    "question": "Quelle est la différence majeure entre le rôle de la personne de confiance et celui de la famille ou des proches ?",
+    "answer": "Le témoignage de la personne de confiance prévaut sur tous les autres témoignages (famille, proches, tiers). Le médecin a l'obligation légale de la consulter en premier si le patient ne peut plus s'exprimer, tandis que l'avis de la famille n'est que consultatif.",
+    "tags": [
+      "Personne de confiance",
+      "Famille",
+      "Éthique"
+    ]
+  },
+  {
+    "id": 3814,
+    "chapter": "ch17",
+    "rang": "A",
+    "question": "Quelle est la définition des râles terminaux et quelle est leur physiopathologie ?",
+    "answer": "Bruit respiratoire caractéristique de l'agonie lié à l'accumulation de sécrétions salivaires et bronchiques dans les voies aériennes supérieures que le patient très faible ne peut plus expectorer ou déglutir. Souvent plus impressionnant pour l'entourage que douloureux pour le patient.",
+    "tags": [
+      "Râles terminaux",
+      "Agonie",
+      "Physiopathologie"
+    ]
+  },
+  {
+    "id": 3815,
+    "chapter": "ch17",
+    "rang": "A",
+    "question": "Quel traitement pharmacologique est recommandé pour réduire l'encombrement pharyngé et les râles terminaux ?",
+    "answer": "Le butylbromure de scopolamine (Buscopan) ou la scopolamine injectable.\n- Posologie : 0,25 mg à 0,5 mg par voie sous-cutanée (SC) toutes les 4 à 6 heures, ou 1 à 2 mg/24h en perfusion sous-cutanée continue. Ce traitement anticholinergique réduit la production de sécrétions si introduit précocement.",
+    "tags": [
+      "Scopolamine",
+      "Râles terminaux",
+      "Anticholinergique"
+    ]
+  },
+  {
+    "id": 3816,
+    "chapter": "ch17",
+    "rang": "A",
+    "question": "Pourquoi l'aspiration bronchique est-elle déconseillée en phase agonique pour traiter les râles terminaux ?",
+    "answer": "L'aspiration endotrachéale ou bronchique est invasive, douloureuse, source d'anxiété et de réflexe tussigène, et stimule par irritation la production de sécrétions réactionnelles. Elle doit être évitée en fin de vie au profit du traitement anticholinergique (scopolamine) et de soins de bouche.",
+    "tags": [
+      "Râles terminaux",
+      "Aspiration",
+      "Soins de confort"
+    ]
+  },
+  {
+    "id": 3817,
+    "chapter": "ch17",
+    "rang": "B",
+    "question": "Quel positionnement physique du patient agonique permet de limiter l'encombrement et les râles respiratoires ?",
+    "answer": "Mettre le patient en position de décubitus latéral (gauche ou droit) ou surélever légèrement la tête du lit. Cela favorise le drainage passif des sécrétions et libère le carrefour pharyngé.",
+    "tags": [
+      "Râles terminaux",
+      "Positionnement",
+      "Confort"
+    ]
+  },
+  {
+    "id": 3818,
+    "chapter": "ch17",
+    "rang": "A",
+    "question": "Comment définit-on la douleur réfractaire en soins palliatifs ?",
+    "answer": "Douleur qui ne peut être soulagée de façon satisfaisante par aucun traitement disponible, administré à doses maximales tolérées, sans induire d'effets secondaires inacceptables. Elle constitue l'indication majeure de la sédation palliative.",
+    "tags": [
+      "Douleur réfractaire",
+      "Sédation",
+      "Définition"
+    ]
+  },
+  {
+    "id": 3819,
+    "chapter": "ch17",
+    "rang": "A",
+    "question": "Quel est le traitement antalgique de première intention pour la dyspnée terminale chez un patient non intubé ?",
+    "answer": "La Morphine par voie sous-cutanée (SC) ou intraveineuse (IV).\n- Posologie chez le patient naïf d'opioïdes : 1 à 2 mg SC ou IV toutes les 4 heures. La morphine agit comme un puissant bronchodilatateur central et diminue la sensation d'étouffement.",
+    "tags": [
+      "Morphine",
+      "Dyspnée terminale",
+      "Posologie"
+    ]
+  },
+  {
+    "id": 3820,
+    "chapter": "ch17",
+    "rang": "B",
+    "question": "Quels soins non pharmacologiques indispensables doivent être apportés à la bouche d'un patient agonique ?",
+    "answer": "Des soins de bouche réguliers (toutes les 2 à 4 heures) à l'aide de compresses humides, d'eau de rose ou de brumisateurs pour hydrater la muqueuse buccale desséchée. Éviter les bâtonnets glycérinés citronnés qui agressent la muqueuse.",
+    "tags": [
+      "Soins de bouche",
+      "Agonie",
+      "Confort"
+    ]
+  },
+  {
+    "id": 3821,
+    "chapter": "ch17",
+    "rang": "A",
+    "question": "Comment adapter l'hydratation artificielle en phase terminale de fin de vie ?",
+    "answer": "L'hydratation artificielle systématique n'est pas recommandée en phase agonique car elle majore le risque d'encombrement bronchique, d'œdème aigu du poumon (OAP) et d'ascite, sans améliorer la sensation de soif (qui relève des soins de bouche). Elle doit être arrêtée ou réduite au strict minimum.",
+    "tags": [
+      "Hydratation artificielle",
+      "LATA",
+      "Agonie"
+    ]
+  },
+  {
+    "id": 3822,
+    "chapter": "ch17",
+    "rang": "A",
+    "question": "Qu'est-ce qu'une ordonnance de protocole anticipé en soins palliatifs (notamment en EHPAD) ?",
+    "answer": "Prescription médicale rédigée à l'avance par le médecin traitant, détaillant les posologies et les modalités d'administration des molécules de détresse (morphine, midazolam, scopolamine) à utiliser en urgence par l'infirmière en cas de survenue d'un symptôme inconfortable aigu.",
+    "tags": [
+      "Protocoles anticipés",
+      "EHPAD",
+      "Urgences"
+    ]
+  },
+  {
+    "id": 3823,
+    "chapter": "ch17",
+    "rang": "B",
+    "question": "Quelle est la définition de la souffrance existentielle en soins palliatifs ?",
+    "answer": "Souffrance liée à la perte de sens de la vie, au sentiment d'inutilité, à l'angoisse de la mort ou à l'isolement social. Elle nécessite un accompagnement psychologique, spirituel et relationnel, et peut parfois être qualifiée de souffrance réfractaire.",
+    "tags": [
+      "Souffrance existentielle",
+      "Psychologie",
+      "Éthique"
+    ]
+  },
+  {
+    "id": 3824,
+    "chapter": "ch17",
+    "rang": "B",
+    "question": "Quel est le rôle d'une équipe mobile de soins palliatifs (EMSP) ?",
+    "answer": "Équipe interdisciplinaire hospitalière ou territoriale (médecins, infirmiers, psychologues) intervenant en soutien des équipes soignantes de première ligne pour donner des avis spécialisés (évaluation douleur, sédation, questions éthiques) sans se substituer à elles.",
+    "tags": [
+      "EMSP",
+      "Pluridisciplinaire",
+      "Organisation"
+    ]
+  },
+  {
+    "id": 3825,
+    "chapter": "ch17",
+    "rang": "B",
+    "question": "Comment évaluer la douleur chez un patient atteint de démence sévère en fin de vie ?",
+    "answer": "Utiliser une échelle d'hétéro-évaluation comportementale comme l'échelle ALGOPLUS (comportant 5 items comportementaux : expression du visage, regard, plaintes, attitude corporelle, comportement atypique). Un score ≥ 2/5 signe une douleur probable.",
+    "tags": [
+      "ALGOPLUS",
+      "Hétéro-évaluation",
+      "Douleur"
+    ]
+  },
+  {
+    "id": 3826,
+    "chapter": "ch17",
+    "rang": "A",
+    "question": "Quelle est la règle d'utilisation des neuroleptiques en cas de délire ou d'hallucinations en soins palliatifs ?",
+    "answer": "Utiliser l'Halopéridol (Haldol) à très faible dose (0.5 à 1 mg par jour) par voie SC ou PO si l'agitation ou les hallucinations génèrent une anxiété majeure ou mettent le patient en danger. Éviter les benzodiazépines en monothérapie (effet paradoxal d'agitation).",
+    "tags": [
+      "Halopéridol",
+      "Confusion",
+      "Symptômes"
+    ]
+  },
+  {
+    "id": 3827,
+    "chapter": "ch17",
+    "rang": "A",
+    "question": "Quelles sont les contre-indications physiologiques absolues à l'alimentation entérale par sonde en phase agonique ?",
+    "answer": "L'iléus paralytique, l'occlusion intestinale mécanique non opérable, et la phase de défaillance multiviscérale de l'agonie. L'alimentation forcée majore alors le risque de reflux, d'inhalation pulmonaire et de souffrance abdominale.",
+    "tags": [
+      "Alimentation entérale",
+      "LATA",
+      "Agonie"
+    ]
+  },
+  {
+    "id": 3828,
+    "chapter": "ch17",
+    "rang": "B",
+    "question": "Qu'est-ce que le congé de solidarité familiale en France ?",
+    "answer": "Droit pour tout salarié de s'absenter pour accompagner un proche (ascendant, descendant, frère/sœur, personne de confiance) dont le pronostic vital est engagé. Il est d'une durée maximale de 3 mois et peut être indemnisé par l'allocation d'accompagnement.",
+    "tags": [
+      "Congé de solidarité",
+      "Famille",
+      "Droit"
+    ]
+  },
+  {
+    "id": 3829,
+    "chapter": "ch17",
+    "rang": "A",
+    "question": "Quelles molécules de détresse constituent la « trousse d'urgence » palliative à domicile ?",
+    "answer": "1. Morphine (douleur, dyspnée).\n2. Midazolam (sédation, crises convulsives, anxiété aiguë).\n3. Scopolamine (râles terminaux, sécrétions).\n4. Halopéridol (nausées, hallucinations, délire).",
+    "tags": [
+      "Trousse d'urgence",
+      "Soins à domicile",
+      "Médicaments"
+    ]
+  },
+  {
+    "id": 3830,
+    "chapter": "ch17",
+    "rang": "A",
+    "question": "Pourquoi la voie sous-cutanée (SC) est-elle privilégiée par rapport à la voie intraveineuse (IV) en fin de vie à domicile ?",
+    "answer": "La voie SC est simple à poser et à maintenir (pas de risque de perte de capital veineux), moins douloureuse, expose à moins de complications infectieuses locales, et permet l'administration continue ou discontinue de la plupart des molécules de soins palliatifs.",
+    "tags": [
+      "Voie sous-cutanée",
+      "Perfusion",
+      "Pratique"
+    ]
+  },
+  {
+    "id": 3831,
+    "chapter": "ch17",
+    "rang": "B",
+    "question": "Comment ajuster le traitement par antalgiques patch (Fentanyl, Buprénorphine) en phase agonique ?",
+    "answer": "Maintenir les patchs existants à l'identique (l'arrêt brutal expose à un syndrome de sevrage douloureux). En cas de douleur aiguë transitoire (douleur d'accès rapide), réaliser des intercurrences par morphine d'action rapide sous-cutanée.",
+    "tags": [
+      "Patchs",
+      "Antalgiques",
+      "Agonie"
+    ]
+  },
+  {
+    "id": 3832,
+    "chapter": "ch17",
+    "rang": "B",
+    "question": "Quelle est la définition légale de l'euthanasie active ?",
+    "answer": "Acte commis délibérément par un tiers (généralement un professionnel de santé) consistant à administrer une substance létale à un patient dans l'intention de provoquer sa mort pour abréger ses souffrances. Actuellement interdite par le code pénal français.",
+    "tags": [
+      "Euthanasie",
+      "Cadre légal",
+      "Éthique"
+    ]
+  },
+  {
+    "id": 3833,
+    "chapter": "ch17",
+    "rang": "B",
+    "question": "Comment réagir cliniquement et sur le plan éthique face à une demande d'euthanasie formulée par un patient ?",
+    "answer": "1. Écouter activement sans juger pour comprendre le sens de la demande (souffrance physique mal contrôlée, angoisse, sentiment d'inutilité).\n2. Réévaluer l'antalgie et le confort du patient.\n3. Expliquer le cadre légal français (refus d'obstination déraisonnable, sédation SPCMD).\n4. Réunir l'équipe mobile de soins palliatifs.",
+    "tags": [
+      "Demande d'euthanasie",
+      "Éthique",
+      "Communication"
+    ]
+  },
+  {
+    "id": 3834,
+    "chapter": "ch17",
+    "rang": "B",
+    "question": "Qu'est-ce que le suicide assisté et comment se distingue-t-il de l'euthanasie ?",
+    "answer": "Pratique consistant à fournir au patient les moyens (médicaments létaux) de mettre fin à sa propre vie, le patient réalisant lui-même l'acte final d'ingestion ou d'injection. Dans l'euthanasie, c'est le médecin qui injecte la substance.",
+    "tags": [
+      "Suicide assisté",
+      "Définition",
+      "Éthique"
+    ]
+  },
+  {
+    "id": 3835,
+    "chapter": "ch17",
+    "rang": "A",
+    "question": "Quelles sont les principales causes de nausées et vomissements en soins palliatifs ?",
+    "answer": "1. Constipation ou occlusion intestinale haute.\n2. Iatrogénie médicamenteuse (morphiniques au début, chimiothérapie).\n3. Hypertension intracrânienne (métastases cérébrales).\n4. Troubles métaboliques (hypercalcémie, insuffisance rénale).",
+    "tags": [
+      "Nausées",
+      "Symptômes",
+      "Physiopathologie"
+    ]
+  },
+  {
+    "id": 3836,
+    "chapter": "ch17",
+    "rang": "A",
+    "question": "Quel antiémétique de référence est recommandé pour traiter les nausées induites par les morphiniques ?",
+    "answer": "L'Halopéridol (Haldol) à faible dose (0,5 à 1 mg x2/jour) ou la Métoclopramide (Primpéran). L'halopéridol bloque les récepteurs dopaminergiques centraux de la zone gâchette chimioréceptrice (CTZ).",
+    "tags": [
+      "Halopéridol",
+      "Nausées",
+      "Morphine"
+    ]
+  },
+  {
+    "id": 3837,
+    "chapter": "ch17",
+    "rang": "B",
+    "question": "Comment prévenir la constipation induite par les opioïdes en soins palliatifs ?",
+    "answer": "Co-prescrire systématiquement et dès l'initiation de la morphine un laxatif osmotique (Macrogol, Lactulose) ou lubrifiant. Éviter les laxatifs stimulants (sauf échec) et adapter selon le transit du patient.",
+    "tags": [
+      "Constipation",
+      "Opioïdes",
+      "Laxatifs"
+    ]
+  },
+  {
+    "id": 3838,
+    "chapter": "ch17",
+    "rang": "B",
+    "question": "Quelle est la définition d'un symptôme réfractaire ?",
+    "answer": "Symptôme dont la détresse ne peut être soulagée par aucun traitement standard, administré à doses maximales tolérées, sans induire d'effets secondaires délétères ou d'altération inacceptable de la conscience.",
+    "tags": [
+      "Symptôme réfractaire",
+      "Sédation",
+      "Clinique"
+    ]
+  },
+  {
+    "id": 3839,
+    "chapter": "ch17",
+    "rang": "B",
+    "question": "Qu'est-ce que la sédation proportionnée en soins palliatifs ?",
+    "answer": "Sédation transitoire ou intermittente de faible profondeur, visant à soulager un symptôme particulièrement intolérable (ex : lors de la réfection d'un pansement douloureux ou d'une crise d'angoisse nocturne) sans altérer définitivement la conscience.",
+    "tags": [
+      "Sédation proportionnée",
+      "Douleur",
+      "Pratique"
+    ]
+  },
+  {
+    "id": 3840,
+    "chapter": "ch17",
+    "rang": "B",
+    "question": "Qu'impose la loi concernant la nutrition artificielle chez un patient en fin de vie végétative chronique ?",
+    "answer": "La nutrition artificielle constitue un traitement qui peut être suspendu ou limité s'il apparaît disproportionné ou inutile (obstination déraisonnable). La décision d'arrêt doit résulter d'une procédure collégiale approfondie avec la famille.",
+    "tags": [
+      "Nutrition artificielle",
+      "Cadre légal",
+      "Éthique"
+    ]
+  },
+  {
+    "id": 3841,
+    "chapter": "ch17",
+    "rang": "A",
+    "question": "Qu'est-ce que l'échelle Doloplus-2 et quand l'utiliser ?",
+    "answer": "Échelle d'hétéro-évaluation comportementale de la douleur chez le sujet âgé présentant des troubles cognitifs sévères ou des difficultés de communication. Évalue 10 items (soma, psychomotricité, psychosocial). Un score ≥ 5/20 traduit la présence de douleur.",
+    "tags": [
+      "Doloplus-2",
+      "Hétéro-évaluation",
+      "Douleur"
+    ]
+  },
+  {
+    "id": 3842,
+    "chapter": "ch17",
+    "rang": "B",
+    "question": "Comment prendre en charge un prurit intolérable chez un patient en soins palliatifs oncologiques ?",
+    "answer": "Rechercher la cause (insuffisance rénale/urée, cholestase, iatrogénie morphinique). Antihistaminique ou corticoïdes de faible dose. Soins hydratants cutanés réguliers pour limiter les lésions de grattage.",
+    "tags": [
+      "Prurit",
+      "Soins de confort",
+      "Symptômes"
+    ]
+  },
+  {
+    "id": 3843,
+    "chapter": "ch17",
+    "rang": "B",
+    "question": "Quel est le rôle du psychologue au sein d'une unité de soins palliatifs (USP) ?",
+    "answer": "Apporter un soutien psychologique au patient pour aborder l'anxiété de la mort et le travail de deuil, soutenir la famille et les proches, et aider l'équipe soignante à analyser ses propres pratiques lors de groupes de parole.",
+    "tags": [
+      "Psychologue",
+      "USP",
+      "Deuil"
+    ]
+  },
+  {
+    "id": 3844,
+    "chapter": "ch17",
+    "rang": "A",
+    "question": "Quelle est la définition clinique de l'agonie ?",
+    "answer": "Dernière phase de la vie caractérisée par la défaillance progressive et irréversible des grandes fonctions vitales (respiratoire, circulatoire, neurologique). S'accompagne fréquemment de troubles de la conscience, de marbrures et d'un encombrement respiratoire.",
+    "tags": [
+      "Agonie",
+      "Clinique",
+      "Fin de vie"
+    ]
+  },
+  {
+    "id": 3845,
+    "chapter": "ch17",
+    "rang": "B",
+    "question": "Quelle est la règle d'arrêt des examens complémentaires biologiques et radiologiques en phase agonique ?",
+    "answer": "Arrêt systématique de tous les examens complémentaires invasifs ou non indispensables (prises de sang, imagerie, constantes de monitoring). Seule l'évaluation clinique du confort (ALGOPLUS, Ramsay, faciès) doit être maintenue.",
+    "tags": [
+      "Agonie",
+      "Examens complémentaires",
+      "LATA"
+    ]
+  },
+  {
+    "id": 3846,
+    "chapter": "ch17",
+    "rang": "B",
+    "question": "Qu'est-ce qu'une décision de limitation ou d'arrêt des traitements actifs (LATA) ?",
+    "answer": "Décision médicale pluridisciplinaire consistant à ne pas débuter ou à interrompre des thérapeutiques jugées disproportionnées (ex: dialyse, réanimation, ventilation mécanique, antibiotiques) pour se concentrer exclusivement sur les soins de confort.",
+    "tags": [
+      "LATA",
+      "Obstination déraisonnable",
+      "Éthique"
+    ]
+  },
+  {
+    "id": 3847,
+    "chapter": "ch17",
+    "rang": "B",
+    "question": "Quelles personnes composent l'assemblée lors d'une procédure collégiale de LATA ?",
+    "answer": "Le médecin responsable du patient, au moins un autre médecin consultant externe à l'équipe de soins, l'équipe soignante (infirmiers, aides-soignants), et l'avis écrit du patient (directives anticipées) ou les témoignages de la personne de confiance/famille.",
+    "tags": [
+      "Procédure collégiale",
+      "LATA",
+      "Législation"
+    ]
+  },
+  {
+    "id": 3848,
+    "chapter": "ch17",
+    "rang": "B",
+    "question": "Comment accompagner spirituellement un patient en fin de vie à l'hôpital ?",
+    "answer": "Respecter les croyances et pratiques religieuses du patient. Faciliter l'accès à l'aumônerie de l'établissement ou à un représentant du culte de son choix si le patient ou sa famille en formule la demande.",
+    "tags": [
+      "Spiritualité",
+      "Accompagnement",
+      "Dignité"
+    ]
+  },
+  {
+    "id": 3849,
+    "chapter": "ch17",
+    "rang": "A",
+    "question": "Quelle est la règle clinique concernant l'oxygénothérapie chez un patient dyspnéique en phase agonique ?",
+    "answer": "L'administration d'oxygène au masque ou aux lunettes n'améliore pas systématiquement la dyspnée terminale si le patient présente une hypoxie réfractaire de défaillance. Préférer la morphine (antidyspnéique de référence) et rafraîchir l'air ambiant avec un ventilateur.",
+    "tags": [
+      "Oxygénothérapie",
+      "Dyspnée terminale",
+      "Agonie"
+    ]
+  },
+  {
+    "id": 3850,
+    "chapter": "ch17",
+    "rang": "A",
+    "question": "Pourquoi la réévaluation clinique fréquente (toutes les 15 à 30 min initialement) est-elle requise lors d'une titration médicamenteuse de détresse ?",
+    "answer": "Pour ajuster au plus près les doses de sédatifs (midazolam) ou d'antalgiques (morphine) en fonction du niveau de sédation (Ramsay) ou du confort (ALGOPLUS), afin d'éviter le sous-dosage (souffrance persistante) et le surdosage toxique.",
+    "tags": [
+      "Titration",
+      "Surveillance",
+      "Sécurité"
+    ]
+  },
+  {
+    "id": 3851,
+    "chapter": "ch18",
+    "rang": "A",
+    "question": "Quelle est la définition de la polymédication en gériatrie et à partir de quel seuil est-elle qualifiée de majeure ?",
+    "answer": "La prise quotidienne de ≥ 5 molécules différentes. Elle est qualifiée de polymédication majeure ou sévère à partir de ≥ 10 molécules par jour, augmentant drastiquement le risque iatrogénique et d'interactions médicamenteuses.",
+    "tags": [
+      "Polymédication",
+      "Iatrogénie",
+      "Définition"
+    ]
+  },
+  {
+    "id": 3852,
+    "chapter": "ch18",
+    "rang": "A",
+    "question": "Quels sont les principaux critères de prescription inappropriée selon la liste STOPP/START v3 chez le sujet âgé ?",
+    "answer": "La liste STOPP (Screening Tool of Older Persons' Prescriptions) répertorie les médicaments à éviter (inappropriés) en raison d'un rapport bénéfice/risque défavorable (ex : anticholinergiques, BZD demi-vie longue). La liste START (Screening Tool to Alert to Right Treatment) liste les omissions de prescription (médicaments indiqués mais oubliés).",
+    "tags": [
+      "STOPP/START",
+      "Prescription",
+      "Iatrogénie"
+    ]
+  },
+  {
+    "id": 3853,
+    "chapter": "ch18",
+    "rang": "A",
+    "question": "Quel est le risque majeur lié à la co-prescription de benzodiazépines et de morphiniques chez le patient âgé ?",
+    "answer": "Un risque de dépression respiratoire synergique sévère, de sédation excessive, de troubles cognitifs aigus (syndrome confusionnel) et de chutes. L'association doit être évitée ou faire l'objet d'une surveillance renforcée.",
+    "tags": [
+      "Benzodiazépines",
+      "Morphine",
+      "Interactions"
+    ]
+  },
+  {
+    "id": 3854,
+    "chapter": "ch18",
+    "rang": "A",
+    "question": "Quels sont les critères cliniques justifiant une déprescription de statine en prévention primaire chez le sujet très âgé ?",
+    "answer": "L'absence d'antécédent cardiovasculaire documenté (prévention primaire), un âge supérieur à 80-85 ans, une espérance de vie estimée à moins d'un an, ou la présence d'une démence avancée et d'une fragilité majeure (critère de déprescription STOPP).",
+    "tags": [
+      "Statines",
+      "Déprescription",
+      "Prévention primaire"
+    ]
+  },
+  {
+    "id": 3855,
+    "chapter": "ch18",
+    "rang": "A",
+    "question": "Pourquoi les anticholinergiques urinaires (comme la solifénacine) sont-ils considérés comme inappropriés chez le sujet atteint de troubles cognitifs ?",
+    "answer": "Ils traversent la barrière hémato-encéphalique et bloquent les récepteurs muscariniques centraux, aggravant significativement le déclin cognitif, favorisant les hallucinations et le syndrome confusionnel, tout en induisant des effets périphériques délétères (constipation, globe vésical, tachycardie).",
+    "tags": [
+      "Anticholinergiques",
+      "Troubles cognitifs",
+      "Iatrogénie"
+    ]
+  },
+  {
+    "id": 3856,
+    "chapter": "ch18",
+    "rang": "B",
+    "question": "Qu'est-ce que l'indice de charge anticholinergique (score ACB) et comment l'interpréter ?",
+    "answer": "Score évaluant l'exposition cumulative d'un patient aux médicaments anticholinergiques (chaque molécule est notée de 1 à 3). Un score total ACB ≥ 3 est associé à un risque significativement accru de déclin cognitif, de confusion et de mortalité globale chez le sujet âgé.",
+    "tags": [
+      "Score ACB",
+      "Anticholinergiques",
+      "Iatrogénie"
+    ]
+  },
+  {
+    "id": 3857,
+    "chapter": "ch18",
+    "rang": "A",
+    "question": "Quelle est la définition de la dépendance iatrogène et comment la prévenir à l'hôpital ?",
+    "answer": "Perte d'autonomie fonctionnelle induite par l'hospitalisation et les pratiques médicales (alitement prolongé, contention physique, prescriptions inappropriées, déshydratation). Prévention : lever précoce, maintien de l'activité physique, limitation des sédatifs.",
+    "tags": [
+      "Dépendance iatrogène",
+      "Hospitalisation",
+      "Prévention"
+    ]
+  },
+  {
+    "id": 3858,
+    "chapter": "ch18",
+    "rang": "B",
+    "question": "Quel est le rôle du médecin coordonnateur en EHPAD ?",
+    "answer": "Médecin salarié de l'établissement assurant la coordination des soins des résidents, l'élaboration du projet de soins personnalisé, l'avis sur les admissions, la formation des équipes soignantes et la gestion des épidémies, sans réaliser de prescriptions médicales directes (sauf urgence).",
+    "tags": [
+      "Médecin coordonnateur",
+      "EHPAD",
+      "Coordination"
+    ]
+  },
+  {
+    "id": 3859,
+    "chapter": "ch18",
+    "rang": "A",
+    "question": "Quelles sont les aides à domicile finançables par l'Allocation Personnalisée d'Autonomie (APA) ?",
+    "answer": "1. Heures d'auxiliaire de vie (aide à la toilette, habillage, préparation des repas).\n2. Portage de repas à domicile.\n3. Téléassistance et systèmes d'alerte.\n4. Travaux d'adaptation du logement (barres d'appui, douches adaptées).",
+    "tags": [
+      "APA",
+      "Aides à domicile",
+      "Autonomie"
+    ]
+  },
+  {
+    "id": 3860,
+    "chapter": "ch18",
+    "rang": "A",
+    "question": "Quelle structure territoriale coordonne le parcours de santé complexe des personnes âgées (dispositif DAC) ?",
+    "answer": "Le Dispositif d'Appui à la Coordination (DAC). Il réunit les anciens réseaux de santé, les MAIA et les CLIC pour offrir un guichet unique d'appui aux professionnels de santé face aux situations complexes (maintien à domicile difficile, rupture de parcours).",
+    "tags": [
+      "DAC",
+      "Coordination",
+      "Réseau de soins"
+    ]
+  },
+  {
+    "id": 3861,
+    "chapter": "ch18",
+    "rang": "B",
+    "question": "Comment se déroule l'évaluation multidimensionnelle pour l'attribution de l'APA à domicile ?",
+    "answer": "Une équipe médico-sociale du département (composée d'une infirmière ou d'une assistante sociale) se rend au domicile du patient pour évaluer sa dépendance à l'aide de la grille AGGIR, déterminer son GIR (1 à 4 requis pour l'APA) et élaborer un plan d'aide personnalisé.",
+    "tags": [
+      "APA",
+      "Grille AGGIR",
+      "Évaluation"
+    ]
+  },
+  {
+    "id": 3862,
+    "chapter": "ch18",
+    "rang": "A",
+    "question": "Qu'est-ce que l'HAD (Hospitalisation À Domicile) et quelles sont ses conditions d'admission chez une personne âgée ?",
+    "answer": "Structure d'hospitalisation à part entière permettant de réaliser des soins médicaux et paramédicaux complexes au domicile du patient. Conditions : accord du médecin traitant, présence d'un entourage aidant ou d'aides suffisantes, critères médicaux (soins continus).",
+    "tags": [
+      "HAD",
+      "Hospitalisation",
+      "Soins complexes"
+    ]
+  },
+  {
+    "id": 3863,
+    "chapter": "ch18",
+    "rang": "A",
+    "question": "Pourquoi les diurétiques de l'anse (furosémide) exposent-ils à un risque élevé de déshydratation et de chutes chez le sujet âgé ?",
+    "answer": "Ils augmentent la diurèse, ce qui peut provoquer une hypovolémie, une hypotension orthostatique (HO) à l'origine de chutes, et des troubles hydro-électrolytiques (hypokaliémie, hyponatrémie) altérant la vigilance. Les doses doivent être minimales.",
+    "tags": [
+      "Furosémide",
+      "Déshydratation",
+      "Hypotension orthostatique"
+    ]
+  },
+  {
+    "id": 3864,
+    "chapter": "ch18",
+    "rang": "B",
+    "question": "Qu'est-ce que le syndrome de glissement gériatrique et comment l'identifier ?",
+    "answer": "État de décompensation gériatrique rapide se caractérisant par un refus alimentaire et hydrique total, un mutisme, un refus de soins, et un repli sur soi, survenant après un intervalle libre après un stress physique ou psychique (chute, deuil). C'est une urgence gériatrique à pronostic sombre.",
+    "tags": [
+      "Syndrome de glissement",
+      "Psychogériatrie",
+      "Urgence"
+    ]
+  },
+  {
+    "id": 3865,
+    "chapter": "ch18",
+    "rang": "A",
+    "question": "Quelle est la règle d'or pour introduire ou arrêter un médicament psychotrope chez le sujet âgé ?",
+    "answer": "Titration progressive : débuter à 1/4 ou 1/2 de la dose adulte usuelle et augmenter par paliers hebdomadaires. À l'arrêt, le sevrage doit être lent et dégressif sur plusieurs semaines pour éviter le rebond anxieux ou confusionnel.",
+    "tags": [
+      "Psychotropes",
+      "Prescription",
+      "Sevrage"
+    ]
+  },
+  {
+    "id": 3866,
+    "chapter": "ch18",
+    "rang": "B",
+    "question": "Quels professionnels composent l'équipe pluridisciplinaire d'un EHPAD ?",
+    "answer": "Médecin coordonnateur, infirmière référente (IDEC), infirmières (IDE), aides-soignantes (AS), psychologue, ergothérapeute/psychomotricien, animateur et agents de service.",
+    "tags": [
+      "EHPAD",
+      "Pluridisciplinaire",
+      "Organisation"
+    ]
+  },
+  {
+    "id": 3867,
+    "chapter": "ch18",
+    "rang": "A",
+    "question": "Comment évaluer le risque de syndrome confusionnel lors d'une transition hôpital-EHPAD ?",
+    "answer": "La rupture de repères spatio-temporels est un facteur précipitant majeur de confusion. Il faut transmettre un dossier médical complet, maintenir l'entourage, apporter des repères familiers (photos, objets), et assurer la continuité du traitement antalgique.",
+    "tags": [
+      "Syndrome confusionnel",
+      "EHPAD",
+      "Transition de soins"
+    ]
+  },
+  {
+    "id": 3868,
+    "chapter": "ch18",
+    "rang": "A",
+    "question": "Quel est le risque de la coprescription d'AINS et d'IEC chez le patient âgé de plus de 75 ans ?",
+    "answer": "Le risque de déclencher une insuffisance rénale aiguë fonctionnelle sévère (synergie délétère sur le néphron : l'AINS vasoconstricte l'artériole afférente et l'IEC vasodilate l'artériole efférente, effondrant la pression de filtration glomérulaire).",
+    "tags": [
+      "AINS",
+      "IEC",
+      "Insuffisance rénale"
+    ]
+  },
+  {
+    "id": 3869,
+    "chapter": "ch18",
+    "rang": "B",
+    "question": "Qu'est-ce que le SSIAD (Service de Soins Infirmiers À Domicile) ?",
+    "answer": "Service assurant sur prescription médicale des prestations de soins d'hygiène et de confort (toilette, soins infirmiers) au domicile des personnes âgées dépendantes, visant à prévenir l'hospitalisation ou à faciliter le retour à domicile.",
+    "tags": [
+      "SSIAD",
+      "Soins d'hygiène",
+      "Maintien à domicile"
+    ]
+  },
+  {
+    "id": 3870,
+    "chapter": "ch18",
+    "rang": "B",
+    "question": "Comment la dénutrition majore-t-elle le risque d'effets indésirables des médicaments fortement liés aux protéines plasmatiques ?",
+    "answer": "La dénutrition s'accompagne d'une hypoalbuminémie. Les molécules fortement liées à l'albumine (ex : anticoagulants oraux, phénytoïne) se retrouvent en proportion libre accrue dans le sang, ce qui augmente leur activité thérapeutique et leur toxicité.",
+    "tags": [
+      "Albumine",
+      "Pharmacocinétique",
+      "Dénutrition"
+    ]
+  },
+  {
+    "id": 3871,
+    "chapter": "ch18",
+    "rang": "B",
+    "question": "Qu'est-ce que la déprescription active et quels en sont les trois grands principes ?",
+    "answer": "Processus d'arrêt ou de réduction de dose des médicaments inappropriés.\n- Principes :\n1. Identifier tous les médicaments prescrits et leurs indications.\n2. Évaluer le rapport bénéfice/risque individuel de chaque molécule.\n3. Planifier l'arrêt progressif sous étroite surveillance.",
+    "tags": [
+      "Déprescription",
+      "Polymédication",
+      "Iatrogénie"
+    ]
+  },
+  {
+    "id": 3872,
+    "chapter": "ch18",
+    "rang": "A",
+    "question": "Quelles sont les complications majeures de la polymédication en EHPAD ?",
+    "answer": "1. Augmentation des effets indésirables (chutes, confusion, insuffisance rénale).\n2. Erreurs d'administration et défaut d'observance.\n3. Risque d'interactions médicamenteuses cumulatives.\n4. Surcoût financier et altération de la qualité de vie.",
+    "tags": [
+      "Polymédication",
+      "EHPAD",
+      "Complications"
+    ]
+  },
+  {
+    "id": 3873,
+    "chapter": "ch18",
+    "rang": "B",
+    "question": "Quels sont les signes d'alerte cliniques de la iatrogénie médicamenteuse à domicile ?",
+    "answer": "Baisse inexpliquée de la vigilance, ralentissement psychomoteur, survenue récente d'une anorexie, troubles de la marche ou chutes répétées, constipation opiniâtre ou hypotension orthostatique documentée.",
+    "tags": [
+      "Iatrogénie",
+      "Signes d'alerte",
+      "Sécurité"
+    ]
+  },
+  {
+    "id": 3874,
+    "chapter": "ch18",
+    "rang": "B",
+    "question": "Qu'est-ce que la conciliation médicamenteuse et quand doit-elle être réalisée ?",
+    "answer": "Démarche de sécurisation consistant à croiser la liste des médicaments habituels du patient avec les nouvelles ordonnances lors des transitions de soins (admission, sortie de l'hôpital) pour détecter et corriger les divergences et les erreurs.",
+    "tags": [
+      "Conciliation médicamenteuse",
+      "Sécurisation",
+      "Transition de soins"
+    ]
+  },
+  {
+    "id": 3875,
+    "chapter": "ch18",
+    "rang": "B",
+    "question": "Comment repérer et prendre en charge une automédication par AINS chez un patient âgé arthrosique ?",
+    "answer": "Interroger activement le patient sur la prise d'antalgiques en vente libre. Expliquer le risque d'ulcère, d'insuffisance rénale et d'HTA. Proposer des alternatives sûres (paracétamol, AINS locaux, rééducation physique, canne).",
+    "tags": [
+      "AINS",
+      "Automédication",
+      "Sécurité"
+    ]
+  },
+  {
+    "id": 3876,
+    "chapter": "ch18",
+    "rang": "A",
+    "question": "Pourquoi les antidépresseurs tricycliques (Imipramine, Amitriptyline) sont-ils contre-indiqués chez le sujet âgé ?",
+    "answer": "Ils possèdent une charge anticholinergique extrêmement forte (ACB=3) et bloquent les récepteurs alpha-adrénergiques, exposant le sujet âgé à une hypotension orthostatique sévère, à une confusion mentale et à des troubles du rythme cardiaque.",
+    "tags": [
+      "Antidépresseurs",
+      "Tricycliques",
+      "Iatrogénie"
+    ]
+  },
+  {
+    "id": 3877,
+    "chapter": "ch18",
+    "rang": "A",
+    "question": "Quel est le risque de prescrire des neuroleptiques pour une agitation modérée en cas de maladie d'Alzheimer ?",
+    "answer": "Ils augmentent le risque d'accident vasculaire cérébral (AVC) et de mortalité globale chez les patients atteints de démence. Leur utilisation doit être limitée aux troubles comportementaux sévères mettant le patient en danger.",
+    "tags": [
+      "Neuroleptiques",
+      "Alzheimer",
+      "Sécurité"
+    ]
+  },
+  {
+    "id": 3878,
+    "chapter": "ch18",
+    "rang": "B",
+    "question": "Qu'est-ce que la grille AGGIR et quelles sont ses variables discriminantes ?",
+    "answer": "Grille d'évaluation de l'autonomie comportant 10 variables physiques et mentales clés (cohérence, orientation, toilette, habillage, alimentation, continence, transferts, déplacement intérieur, déplacement extérieur, communication à distance).",
+    "tags": [
+      "AGGIR",
+      "Variables",
+      "Autonomie"
+    ]
+  },
+  {
+    "id": 3879,
+    "chapter": "ch18",
+    "rang": "B",
+    "question": "Quelle est la définition clinique d'un aidant familial ou proche aidant ?",
+    "answer": "Personne non professionnelle qui vient en aide de manière régulière et fréquente à un proche dépendant de son entourage pour réaliser tout ou partie des actes de la vie quotidienne.",
+    "tags": [
+      "Proche aidant",
+      "Définition",
+      "Social"
+    ]
+  },
+  {
+    "id": 3880,
+    "chapter": "ch18",
+    "rang": "B",
+    "question": "Qu'est-ce que le « fardeau de l'aidant » et comment l'évaluer en consultation ?",
+    "answer": "Souffrance psychologique, physique et épuisement de l'aidant principal lié à l'accompagnement constant du patient dépendant. Évalué par l'échelle de Zarit (score sur 88, fardeau sévère si > 55) pour prévenir l'effondrement de l'aidant.",
+    "tags": [
+      "Échelle de Zarit",
+      "Fardeau de l'aidant",
+      "Épuisement"
+    ]
+  },
+  {
+    "id": 3881,
+    "chapter": "ch18",
+    "rang": "B",
+    "question": "Qu'est-ce que l'accueil de jour pour les patients atteints de maladie d'Alzheimer ?",
+    "answer": "Structure accueillant les patients une à plusieurs journées par semaine pour proposer des activités thérapeutiques de stimulation cognitive et sociale, tout en offrant une période de répit indispensable pour l'aidant familial.",
+    "tags": [
+      "Accueil de jour",
+      "Alzheimer",
+      "Répit"
+    ]
+  },
+  {
+    "id": 3882,
+    "chapter": "ch18",
+    "rang": "B",
+    "question": "Quelles sont les aides financières disponibles en France pour l'hébergement permanent en EHPAD ?",
+    "answer": "1. L'APA en établissement (aide pour le tarif dépendance).\n2. L'Aide Sociale à l'Hébergement (ASH) départementale (sous conditions de ressources et récupération).\n3. L'aide au logement (APL/ALS) de la CAF.",
+    "tags": [
+      "EHPAD",
+      "Aides financières",
+      "Social"
+    ]
+  },
+  {
+    "id": 3883,
+    "chapter": "ch18",
+    "rang": "A",
+    "question": "Pourquoi les IPP (Oméprazole) doivent-ils être évités au long cours sans indication claire chez le sujet âgé ?",
+    "answer": "Leur usage chronique expose à une malabsorption du calcium (risque fracturaire accru), du magnésium (hypomagnésémie), de la vitamine B12, et augmente le risque de pneumopathies communautaires et de colite à Clostridioides difficile.",
+    "tags": [
+      "IPP",
+      "Iatrogénie",
+      "STOPP"
+    ]
+  },
+  {
+    "id": 3884,
+    "chapter": "ch18",
+    "rang": "B",
+    "question": "Comment évaluer l'observance thérapeutique d'un sujet âgé vivant seul à domicile ?",
+    "answer": "Interroger le patient et l'aidant, compter les boîtes restantes lors des visites, analyser les dates de délivrance de la pharmacie, et proposer l'installation d'un pilulier semainier préparé par l'infirmière.",
+    "tags": [
+      "Observance",
+      "Pilulier",
+      "Maintien à domicile"
+    ]
+  },
+  {
+    "id": 3885,
+    "chapter": "ch18",
+    "rang": "B",
+    "question": "Qu'est-ce que la « cascade médicamenteuse » et comment l'illustrer ?",
+    "answer": "Prescription d'un nouveau médicament pour traiter un effet secondaire non reconnu d'un traitement préexistant (ex : introduire un anti-secrétoire urinaire pour traiter une incontinence induite par un diurétique).",
+    "tags": [
+      "Cascade médicamenteuse",
+      "Iatrogénie",
+      "Clinique"
+    ]
+  },
+  {
+    "id": 3886,
+    "chapter": "ch18",
+    "rang": "A",
+    "question": "Pourquoi la clarithromycine est-elle fortement déconseillée en association avec la colchicine chez le sujet âgé ?",
+    "answer": "La clarithromycine bloque le CYP3A4 et la glycoprotéine P, inhibant le métabolisme de la colchicine. Cette interaction majeure provoque une accumulation toxique de colchicine à l'origine d'aplasie médullaire et de rhabdomyolyse mortelle (STOPP G4).",
+    "tags": [
+      "Colchicine",
+      "Clarithromycine",
+      "Interactions"
+    ]
+  },
+  {
+    "id": 3887,
+    "chapter": "ch18",
+    "rang": "B",
+    "question": "Qu'est-ce que le plan personnalisé de santé (PPS) dans le cadre du parcours de soins ?",
+    "answer": "Document rédigé par le médecin traitant en concertation avec les professionnels du DAC, détaillant les actions médicales, paramédicales et sociales à mettre en œuvre pour stabiliser la situation d'un patient fragile.",
+    "tags": [
+      "PPS",
+      "Parcours de soins",
+      "Coordination"
+    ]
+  },
+  {
+    "id": 3888,
+    "chapter": "ch18",
+    "rang": "B",
+    "question": "Quelle est la définition d'un hébergement temporaire en EHPAD ?",
+    "answer": "Accueil d'une personne âgée pour une durée limitée (maximum 3 mois) visant à faire face à une indisponibilité de l'aidant familial, à une transition difficile après hospitalisation, ou à évaluer l'adaptation avant entrée définitive.",
+    "tags": [
+      "Hébergement temporaire",
+      "EHPAD",
+      "Répit"
+    ]
+  },
+  {
+    "id": 3889,
+    "chapter": "ch18",
+    "rang": "B",
+    "question": "Comment la baisse de la fonction rénale liée à l'âge modifie-t-elle la prescription d'allopurinol ?",
+    "answer": "L'allopurinol et son métabolite actif sont éliminés par le rein. En cas de baisse du DFG, il faut réduire les doses initiales (débuter à 50-100 mg/j) et titrer progressivement sous contrôle biologique de l'uricémie pour éviter le syndrome de Lyell/DRESS.",
+    "tags": [
+      "Allopurinol",
+      "Insuffisance rénale",
+      "Posologie"
+    ]
+  },
+  {
+    "id": 3890,
+    "chapter": "ch18",
+    "rang": "B",
+    "question": "Quelles sont les aides techniques d'ergothérapie indispensables pour prévenir les chutes à domicile ?",
+    "answer": "Rehausseur de toilettes, tapis antidérapants dans la douche, chaise de douche, barres d'appui murales et éclairage à détection de mouvement pour les trajets nocturnes.",
+    "tags": [
+      "Ergothérapie",
+      "Prévention des chutes",
+      "Maintien à domicile"
+    ]
+  },
+  {
+    "id": 3891,
+    "chapter": "ch18",
+    "rang": "B",
+    "question": "Qu'est-ce que la garde itinérante de nuit à domicile ?",
+    "answer": "Service d'auxiliaires de vie réalisant des passages courts programmés (15 à 30 min) ou à la demande durant la nuit pour aider au coucher, au lever, ou pour assurer la sécurité lors des mictions nocturnes.",
+    "tags": [
+      "Garde de nuit",
+      "Maintien à domicile",
+      "Autonomie"
+    ]
+  },
+  {
+    "id": 3892,
+    "chapter": "ch18",
+    "rang": "B",
+    "question": "Comment le médecin doit-il réévaluer l'indication d'un neuroleptique prescrit pour troubles du comportement ?",
+    "answer": "Réaliser une tentative d'arrêt ou de décroissance progressive toutes les 4 à 12 semaines. L'efficacité sur les SPCD doit être pesée face aux effets parkinsoniens, cognitifs et au surrisque cardiovasculaire.",
+    "tags": [
+      "Neuroleptiques",
+      "Réévaluation",
+      "Sécurité"
+    ]
+  },
+  {
+    "id": 3893,
+    "chapter": "ch18",
+    "rang": "A",
+    "question": "Pourquoi les antidiabétiques sulfamides exposent-ils à un risque élevé d'hypoglycémies prolongées ?",
+    "answer": "Ils stimulent directement la sécrétion d'insuline de façon indépendante de la glycémie. Chez le sujet âgé, leur élimination rénale ralentie prolonge la durée de l'hypoglycémie, qui peut mimer un AVC ou une démence. Préférer les inhibiteurs de SGLT2 ou DPP4.",
+    "tags": [
+      "Sulfamides",
+      "Hypoglycémie",
+      "STOPP"
+    ]
+  },
+  {
+    "id": 3894,
+    "chapter": "ch18",
+    "rang": "B",
+    "question": "Quel est l'objectif du plan d'accompagnement et de soins personnalisé (PASP) en EHPAD ?",
+    "answer": "Document rédigé par l'équipe d'EHPAD à l'admission du résident, intégrant ses habitudes de vie, ses souhaits de confort, ses capacités physiques et cognitives, et détaillant les soins quotidiens adaptés.",
+    "tags": [
+      "PASP",
+      "EHPAD",
+      "Personnalisation"
+    ]
+  },
+  {
+    "id": 3895,
+    "chapter": "ch18",
+    "rang": "B",
+    "question": "Comment adapter la posologie des anticoagulants oraux directs (AOD) chez le sujet âgé ?",
+    "answer": "Réduire les doses d'Apixaban (à 2.5 mg x2/j) ou de Dabigatran si présence de ≥ 2 critères : âge ≥ 80 ans, poids ≤ 60 kg, créatininémie ≥ 133 µmol/L (ou DFG 30-50 ml/min pour le Dabigatran).",
+    "tags": [
+      "AOD",
+      "Posologie",
+      "Insuffisance rénale"
+    ]
+  },
+  {
+    "id": 3896,
+    "chapter": "ch18",
+    "rang": "A",
+    "question": "Pourquoi la co-prescription de spironolactone et d'IEC nécessite-t-elle une surveillance biologique stricte ?",
+    "answer": "Cette association bloque la sécrétion d'aldostérone et la filtration rénale, exposant à un risque majeur d'hyperkaliémie sévère et d'insuffisance rénale aiguë. Une surveillance du potassium et de la créatinine à J3, J7 et J30 est requise.",
+    "tags": [
+      "Spironolactone",
+      "IEC",
+      "Hyperkaliémie"
+    ]
+  },
+  {
+    "id": 3897,
+    "chapter": "ch18",
+    "rang": "B",
+    "question": "Qu'est-ce que la téléassistance gériatrique et comment l'installer ?",
+    "answer": "Dispositif électronique portatif (médaillon ou bracelet) relié à un émetteur téléphonique. En cas de chute ou de détresse, une simple pression alerte une plateforme d'assistance disponible 24h/24.",
+    "tags": [
+      "Téléassistance",
+      "Chutes",
+      "Maintien à domicile"
+    ]
+  },
+  {
+    "id": 3898,
+    "chapter": "ch18",
+    "rang": "B",
+    "question": "Quel est le rôle du conseil de la vie sociale (CVS) en EHPAD ?",
+    "answer": "Instance consultative obligatoire permettant aux résidents et à leurs familles de s'exprimer et de faire des propositions sur le fonctionnement de l'établissement (repas, animations, tarifs, travaux).",
+    "tags": [
+      "CVS",
+      "EHPAD",
+      "Droits des usagers"
+    ]
+  },
+  {
+    "id": 3899,
+    "chapter": "ch18",
+    "rang": "A",
+    "question": "Pourquoi la buprénorphine ou le fentanyl transdermiques sont-ils préférables à la morphine orale en cas d'insuffisance rénale sévère ?",
+    "answer": "La morphine produit des métabolites actifs neurotoxiques (M6G, M3G) qui s'accumulent en cas d'insuffisance rénale. Le fentanyl et la buprénorphine ont un métabolisme principalement hépatique sans métabolites actifs cumulatifs.",
+    "tags": [
+      "Morphine",
+      "Fentanyl",
+      "Insuffisance rénale"
+    ]
+  },
+  {
+    "id": 3900,
+    "chapter": "ch18",
+    "rang": "B",
+    "question": "Comment organiser le retour à domicile après une hospitalisation complexe pour syndrome confusionnel résolu ?",
+    "answer": "Assurer la présence d'un proche à la sortie, coordonner le passage infirmier pour la préparation du pilulier, programmer une réévaluation cognitive à distance (3 mois), et maintenir l'environnement familier du patient.",
+    "tags": [
+      "Retour à domicile",
+      "Transition de soins",
+      "Confusion"
+    ]
+  },
+  {
+    "id": 3901,
+    "chapter": "ch19",
+    "rang": "A",
+    "question": "Quels sont les quatre grands principes éthiques en médecine (éthique biomédicale) ?",
+    "answer": "1. Principe d'autonomie (respect de la volonté du patient).\n2. Principe de bienfaisance (agir dans l'intérêt du patient).\n3. Principe de non-malfaisance (« primum non nocere », ne pas nuire).\n4. Principe de justice (équité d'accès aux soins).",
+    "tags": [
+      "Éthique",
+      "Principes",
+      "Autonomie"
+    ]
+  },
+  {
+    "id": 3902,
+    "chapter": "ch19",
+    "rang": "A",
+    "question": "Comment concilier le principe d'autonomie et de bienfaisance en cas de refus de soins chez un patient dément ?",
+    "answer": "L'autonomie du patient dément n'est pas abolie mais altérée. Le refus de soins doit être analysé (compréhension du traitement, anxiété, dépression, douleur). Si le patient persiste et que la contrainte physique génère une souffrance majeure, le principe de non-malfaisance prévaut sur la bienfaisance forcée.",
+    "tags": [
+      "Troubles cognitifs",
+      "Refus de soins",
+      "Éthique"
+    ]
+  },
+  {
+    "id": 3903,
+    "chapter": "ch19",
+    "rang": "A",
+    "question": "Quelles sont les conditions légales pour instaurer des mesures de contention physique chez un patient âgé ?",
+    "answer": "1. Prescription médicale écrite, motivée, de durée limitée (24h max, renouvelable).\n2. Uniquement en cas de danger immédiat pour le patient (chutes graves répétées) ou autrui, après échec des alternatives.\n3. Surveillance horaire stricte consignée.\n4. Consentement recherché et information de la famille.",
+    "tags": [
+      "Contention",
+      "Prescription",
+      "Législation"
+    ]
+  },
+  {
+    "id": 3904,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Quelles sont les complications physiques et psychologiques de la contention physique prolongée ?",
+    "answer": "- Physiques : syndrome d'immobilisation, escarres, amyotrophie, risque d'étranglement fatal, incontinence induite.\n- Psychologiques : anxiété majeure, agitation réactionnelle, humiliation, perte d'estime de soi.",
+    "tags": [
+      "Contention",
+      "Complications",
+      "Syndrome d'immobilisation"
+    ]
+  },
+  {
+    "id": 3905,
+    "chapter": "ch19",
+    "rang": "A",
+    "question": "Qu'est-ce que l'espace de réflexion éthique régional (ERER) ?",
+    "answer": "Structure publique régionale chargée de susciter et coordonner la réflexion éthique sur les pratiques médicales, d'organiser des formations et des débats publics sur les thèmes de santé, sans rendre d'avis juridictionnels individuels.",
+    "tags": [
+      "ERER",
+      "Réflexion éthique",
+      "Organisation"
+    ]
+  },
+  {
+    "id": 3906,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Comment aborder éthiquement la question de la vérité du diagnostic de maladie d'Alzheimer face au patient ?",
+    "answer": "La loi Kouchner garantit le droit d'être informé sur sa santé. L'annonce doit être progressive, adaptée aux capacités de compréhension et de tolérance émotionnelle du patient, réalisée lors d'un entretien dédié en s'assurant du maintien de l'espoir (solutions d'accompagnement).",
+    "tags": [
+      "Annonce du diagnostic",
+      "Alzheimer",
+      "Communication"
+    ]
+  },
+  {
+    "id": 3907,
+    "chapter": "ch19",
+    "rang": "A",
+    "question": "Quelle est la définition clinique et éthique de l'acharnement diagnostique chez le grand âge ?",
+    "answer": "La réalisation d'examens complémentaires répétés, douloureux ou invasifs (ex : biopsies, coloscopies, coronarographies) chez un patient très fragile sans impact thérapeutique réel attendu sur son espérance de vie ou son confort.",
+    "tags": [
+      "Acharnement diagnostique",
+      "LATA",
+      "Éthique"
+    ]
+  },
+  {
+    "id": 3908,
+    "chapter": "ch19",
+    "rang": "A",
+    "question": "Dans quel cadre légal s'effectue la désignation d'un mandataire de protection future ?",
+    "answer": "Contrat par lequel une personne anticipe sa propre dépendance en désignant à l'avance un mandataire chargé de gérer ses biens et/ou sa protection personnelle lorsque le mandant ne pourra plus le faire. Évite le recours ultérieur à une tutelle.",
+    "tags": [
+      "Mandat de protection future",
+      "Protection juridique",
+      "Droit"
+    ]
+  },
+  {
+    "id": 3909,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Quelles sont les trois mesures de protection juridique d'urgence et de long terme en France ?",
+    "answer": "1. La sauvegarde de justice (mesure temporaire d'urgence, rapide, préservant la capacité juridique).\n2. La curatelle (mesure d'assistance, le curateur signe avec le patient).\n3. La tutelle (mesure de représentation complète, le tuteur agit au nom du patient).",
+    "tags": [
+      "Protection juridique",
+      "Sauvegarde",
+      "Droit"
+    ]
+  },
+  {
+    "id": 3910,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Qu'est-ce que l'habilitation familiale et comment se distingue-t-elle de la tutelle ?",
+    "answer": "Mesure simplifiée permettant à un membre de la famille proche (conjoint, enfant, parent) de représenter la personne vulnérable pour réaliser des actes de gestion de ses biens ou de sa personne sans le contrôle régulier du juge des tutelles.",
+    "tags": [
+      "Habilitation familiale",
+      "Protection juridique",
+      "Droit"
+    ]
+  },
+  {
+    "id": 3911,
+    "chapter": "ch19",
+    "rang": "A",
+    "question": "Comment évaluer éthiquement la pertinence de l'administration forcée de traitements cachés dans l'alimentation ?",
+    "answer": "Cette pratique contredit le principe de transparence et d'autonomie. Elle n'est tolérable que de façon exceptionnelle si le patient refuse un traitement vital (ex : traitement de l'insuffisance cardiaque sévère, antalgiques), si le refus met sa vie en danger immédiat, et après décision d'équipe.",
+    "tags": [
+      "Traitements cachés",
+      "Refus de soins",
+      "Éthique"
+    ]
+  },
+  {
+    "id": 3912,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Quel dilemme éthique pose la déambulation excessive d'un patient atteint de démence frontale en EHPAD ?",
+    "answer": "Le conflit entre la liberté d'aller et venir du patient (principe d'autonomie) et la sécurité physique du patient (risque de chutes) ou le confort des autres résidents. Préférer la sécurisation architecturale (chemins de déambulation) aux sédatifs.",
+    "tags": [
+      "Déambulation",
+      "Alzheimer",
+      "Liberté d'aller et venir"
+    ]
+  },
+  {
+    "id": 3913,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Qu'est-ce que la maltraitance ordinaire (ou maltraitance institutionnelle) en gériatrie ?",
+    "answer": "Comportements inappropriés, souvent involontaires, liés à l'organisation ou au manque de temps : infantilisation, refus de répondre aux appels, toilette forcée ou trop rapide, non-respect de l'intimité, repas servis à des heures inadaptées.",
+    "tags": [
+      "Maltraitance institutionnelle",
+      "Bientraitance",
+      "Éthique"
+    ]
+  },
+  {
+    "id": 3914,
+    "chapter": "ch19",
+    "rang": "A",
+    "question": "Quel numéro national d'appel est dédié au signalement des maltraitances envers les personnes âgées ?",
+    "answer": "Le 3977. C'est la plateforme d'écoute et de traitement des signalements de maltraitance à domicile ou en établissement.",
+    "tags": [
+      "3977",
+      "Maltraitance",
+      "Signalement"
+    ]
+  },
+  {
+    "id": 3915,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Quelle est la définition de la bientraitance en gériatrie ?",
+    "answer": "Démarche globale de respect de la singularité, de la dignité, de l'histoire de vie et de l'expression de la volonté de la personne vulnérable, mise en œuvre par l'écoute, le consentement aux soins et l'adaptation du rythme.",
+    "tags": [
+      "Bientraitance",
+      "Éthique",
+      "Relation de soins"
+    ]
+  },
+  {
+    "id": 3916,
+    "chapter": "ch19",
+    "rang": "A",
+    "question": "Pourquoi la pose d'une sonde de gastrostomie (GPE) est-elle éthiquement contestable en cas de maladie d'Alzheimer au stade terminal ?",
+    "answer": "L'alimentation artificielle n'améliore ni la survie, ni le confort, ni l'état nutritionnel des patients atteints de démence terminale. Elle majore au contraire le risque de pneumopathie d'inhalation, d'escarres (liées à l'immobilisation induite) et d'agitation.",
+    "tags": [
+      "Gastrostomie",
+      "Démence terminale",
+      "LATA"
+    ]
+  },
+  {
+    "id": 3917,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Comment aborder la sexualité des résidents en EHPAD sur le plan éthique ?",
+    "answer": "Respecter le droit fondamental à l'intimité et à la vie affective des résidents, y compris en collectivité, tant que les relations sont mutuellement consenties et exemptes de contraintes physiques ou cognitives unilatérales.",
+    "tags": [
+      "Sexualité",
+      "EHPAD",
+      "Dignité"
+    ]
+  },
+  {
+    "id": 3918,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Quelles sont les responsabilités légales d'un médecin signalant une situation de suspicion de maltraitance ou de vulnérabilité ?",
+    "answer": "Le signalement au procureur de la République ou à la cellule départementale de traitement des informations préoccupantes (CRIP) est autorisé par dérogation au secret professionnel en cas de sévices physiques ou psychiques constatés sur une personne vulnérable.",
+    "tags": [
+      "Maltraitance",
+      "Secret professionnel",
+      "Signalement"
+    ]
+  },
+  {
+    "id": 3919,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Comment gérer la demande d'arrêt thérapeutique d'un patient conscient mais en fin de vie sous ventilation assistée ?",
+    "answer": "La demande d'arrêt doit être entendue et analysée. Après s'être assuré de la clarté et de la constance du choix du patient, le médecin a le devoir d'arrêter le respirateur et de mettre en œuvre en même temps une sédation profonde et continue (SPCMD) pour éviter l'agonie étouffante.",
+    "tags": [
+      "Arrêt de traitement",
+      "SPCMD",
+      "LATA"
+    ]
+  },
+  {
+    "id": 3920,
+    "chapter": "ch19",
+    "rang": "A",
+    "question": "Qu'est-ce que le principe de proportionnalité thérapeutique en soins gériatriques ?",
+    "answer": "Évaluation constante du rapport bénéfice/risque et du confort des interventions médicales au regard de l'espérance de vie, des comorbidités et des valeurs morales du patient.",
+    "tags": [
+      "Proportionnalité",
+      "Éthique",
+      "Raisonnement"
+    ]
+  },
+  {
+    "id": 3921,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Comment justifier éthiquement une limitation de traitement (LATA) chez un patient muet suite à un AVC massif ?",
+    "answer": "La décision doit résulter d'une procédure collégiale croisant l'état clinique (pronostic neurologique sévère et irréversible), les directives anticipées, et le témoignage de la personne de confiance/famille pour éviter toute obstination déraisonnable.",
+    "tags": [
+      "LATA",
+      "AVC",
+      "Procédure collégiale"
+    ]
+  },
+  {
+    "id": 3922,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Quel est le rôle du comité d'éthique clinique au sein d'un centre hospitalier ?",
+    "answer": "Instance pluridisciplinaire apportant une aide à la réflexion collective face à des dilemmes éthiques complexes rencontrés dans les services de soins, en rédigeant des recommandations méthodologiques non décisionnelles.",
+    "tags": [
+      "Comité d'éthique",
+      "Hôpital",
+      "Organisation"
+    ]
+  },
+  {
+    "id": 3923,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Comment gérer le refus d'un patient atteint d'Alzheimer débutant de s'inscrire en accueil de jour alors que l'aidant est épuisé ?",
+    "answer": "Organiser une médiation pluridisciplinaire (médecin, psychologue) impliquant le patient et l'aidant. Proposer une visite préalable informelle pour apprivoiser la structure et réduire l'angoisse de l'inconnu, plutôt que d'imposer l'entrée.",
+    "tags": [
+      "Refus de soins",
+      "Alzheimer",
+      "Médiation"
+    ]
+  },
+  {
+    "id": 3924,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Qu'est-ce que la « dignité ontologique » en soins palliatifs ?",
+    "answer": "Valeur inaliénable inhérente à tout être humain, indépendante de son état de dégradation physique, cognitive, de sa perte d'autonomie ou de sa dépendance aux autres. Elle impose le respect inconditionnel de sa personne.",
+    "tags": [
+      "Dignité",
+      "Éthique",
+      "Fin de vie"
+    ]
+  },
+  {
+    "id": 3925,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Comment gérer le secret médical face aux proches d'un patient qui ne souhaite pas leur divulguer son diagnostic de cancer ?",
+    "answer": "Le secret médical s'impose au médecin, même vis-à-vis de la famille et des enfants. Si le patient s'oppose à la transmission d'informations, le médecin a le devoir éthique et légal de respecter cette volonté.",
+    "tags": [
+      "Secret médical",
+      "Famille",
+      "Droit"
+    ]
+  },
+  {
+    "id": 3926,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Quelle est la définition de la vulnérabilité clinique ?",
+    "answer": "État d'une personne caractérisé par une susceptibilité accrue aux agressions externes et internes (médicales, sociales, physiques) lié à la réduction de ses réserves physiologiques ou à la perte de son autonomie cognitive ou financière.",
+    "tags": [
+      "Vulnérabilité",
+      "Définition",
+      "Clinique"
+    ]
+  },
+  {
+    "id": 3927,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Comment évaluer le consentement éclairé d'un patient aphasique ?",
+    "answer": "Utiliser des supports visuels, des gestes, des questionnaires simplifiés, et accorder le temps nécessaire pour s'assurer de sa compréhension. Rechercher l'aide de l'orthophoniste et l'avis de la personne de confiance.",
+    "tags": [
+      "Consentement",
+      "Aphasie",
+      "Communication"
+    ]
+  },
+  {
+    "id": 3928,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Quelles sont les obligations déontologiques d'un médecin face à un conflit familial concernant l'arrêt des traitements de fin de vie ?",
+    "answer": "Le médecin doit apaiser le débat, rappeler le cadre légal (les directives anticipées et la personne de confiance prévalent), et réunir la famille pour expliquer que la décision finale est médicale, collégiale et guidée par l'absence de souffrance.",
+    "tags": [
+      "Conflit familial",
+      "LATA",
+      "Procédure collégiale"
+    ]
+  },
+  {
+    "id": 3929,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Qu'est-ce que l'acharnement affectif en soins de fin de vie ?",
+    "answer": "Demande insistante de la famille de poursuivre des traitements actifs et invasifs inutiles chez un patient mourant, par refus de faire le travail de deuil. Elle nécessite un soutien relationnel fort de l'équipe et de la psychologue.",
+    "tags": [
+      "Acharnement affectif",
+      "Deuil",
+      "Communication"
+    ]
+  },
+  {
+    "id": 3930,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Comment évaluer le bénéfice/risque d'une transfusion sanguine palliative chez un patient atteint d'Alzheimer terminal ?",
+    "answer": "La transfusion est invasive. Si le patient n'est pas dyspnéique au repos, le bénéfice fonctionnel est nul face au risque de confusion, de survenue d'une surcharge circulatoire (TACO) ou de choc infectieux. Elle doit être évitée.",
+    "tags": [
+      "Transfusion sanguine",
+      "LATA",
+      "Démence terminale"
+    ]
+  },
+  {
+    "id": 3931,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Qu'est-ce que la « clause de conscience » du médecin en soins de fin de vie ?",
+    "answer": "Droit pour un médecin de refuser de réaliser un acte médical qu'il estime contraire à ses convictions professionnelles ou personnelles (comme la sédation SPCMD), à la condition d'orienter immédiatement le patient vers un autre confrère.",
+    "tags": [
+      "Clause de conscience",
+      "LATA",
+      "Déontologie"
+    ]
+  },
+  {
+    "id": 3932,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Comment s'assurer du respect des droits du patient majeur protégé (sous tutelle) en consultation ?",
+    "answer": "Associer systématiquement le tuteur ou représentant légal pour toute décision médicale majeure. S'assurer de la présence du tuteur ou d'une ordonnance du juge pour signer le consentement opératoire, sauf urgence vitale.",
+    "tags": [
+      "Tutelle",
+      "Consentement",
+      "Protection juridique"
+    ]
+  },
+  {
+    "id": 3933,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Qu'est-ce que la sauvegarde de justice et dans quelle situation d'urgence l'utiliser ?",
+    "answer": "Mesure de protection juridique temporaire (durée max 1 an, renouvelable) prononcée par le juge des tutelles ou par déclaration médicale, visant à protéger rapidement les biens d'un patient vulnérable tout en lui laissant sa capacité civile.",
+    "tags": [
+      "Sauvegarde de justice",
+      "Protection juridique",
+      "Urgence"
+    ]
+  },
+  {
+    "id": 3934,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Quels actes nécessitent l'autorisation du juge des tutelles lors d'une mesure de tutelle active ?",
+    "answer": "La vente de la résidence principale du patient majeur protégé, les actes de disposition de son patrimoine financier, ou son entrée définitive en établissement d'hébergement s'il s'y oppose fermement.",
+    "tags": [
+      "Tutelle",
+      "Juge des tutelles",
+      "Droit"
+    ]
+  },
+  {
+    "id": 3935,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Comment concilier le secret médical et le signalement de vulnérabilité financière (abus de faiblesse) chez un patient à domicile ?",
+    "answer": "Le médecin peut déroger au secret professionnel pour signaler au procureur de la République les faits dont il a connaissance concernant des sévices ou des abus financiers infligés à un adulte vulnérable inapte à se protéger.",
+    "tags": [
+      "Abus de faiblesse",
+      "Signalement",
+      "Secret professionnel"
+    ]
+  },
+  {
+    "id": 3936,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Comment gérer la liberté d'aller et venir face au risque d'accident de voiture chez un patient atteint d'Alzheimer modéré ?",
+    "answer": "Le médecin ne peut pas retirer le permis de conduire directement. Il doit conseiller le patient et la famille, proposer de réaliser une évaluation psychologique d'aptitude, et si nécessaire signaler la situation à la préfecture pour convocation médicale.",
+    "tags": [
+      "Conduite automobile",
+      "Alzheimer",
+      "Législation"
+    ]
+  },
+  {
+    "id": 3937,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Qu'est-ce que l'évaluation collégiale interdisciplinaire de la dépendance ?",
+    "answer": "Évaluation de l'autonomie et de la dépendance croisant les regards du médecin coordonnateur, des infirmiers et des aides-soignants, afin d'établir un diagnostic partagé de GIR.",
+    "tags": [
+      "Pluridisciplinaire",
+      "GIR",
+      "Évaluation"
+    ]
+  },
+  {
+    "id": 3938,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Quels sont les repères cliniques et légaux face à une demande d'aide active à mourir ?",
+    "answer": "Rappeler le cadre de la loi française qui interdit l'aide active à mourir directe (euthanasie, suicide assisté) mais garantit le droit à la sédation profonde SPCMD si les critères cliniques de détresse de phase terminale sont réunis.",
+    "tags": [
+      "Aide active à mourir",
+      "Cadre légal",
+      "Éthique"
+    ]
+  },
+  {
+    "id": 3939,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Comment réagir face à un refus de toilette répété chez un patient dément agité ?",
+    "answer": "Ne pas forcer la toilette (risque de blessure et de réaction agressive). Analyser l'origine du refus (peur de l'eau, froid, douleur aux mouvements). Proposer une toilette partielle ultérieure ou utiliser la méthode de l'humanitude.",
+    "tags": [
+      "Refus de soins",
+      "Alzheimer",
+      "Toilette"
+    ]
+  },
+  {
+    "id": 3940,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Qu'est-ce que la « déprise sociale » chez les plus de 85 ans ?",
+    "answer": "Processus d'abandon progressif et involontaire des activités sociales, relationnelles et culturelles par la personne très âgée en réponse à l'affaiblissement de ses capacités sensorielles ou motrices.",
+    "tags": [
+      "Déprise sociale",
+      "Psychogériatrie",
+      "Isolement"
+    ]
+  },
+  {
+    "id": 3941,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Comment organiser le consentement pour une intervention chirurgicale programmée chez un patient sous curatelle simple ?",
+    "answer": "Le patient signe son consentement de manière autonome. Le curateur doit être informé et assister le patient s'il a des difficultés de compréhension, mais sa signature n'est pas obligatoirement exigée par la loi.",
+    "tags": [
+      "Curatelle",
+      "Consentement",
+      "Chirurgie"
+    ]
+  },
+  {
+    "id": 3942,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Pourquoi la « liberté de prendre des risques » est-elle un concept clé de l'éthique en EHPAD ?",
+    "answer": "Parce que l'obsession de la sécurité absolue conduit souvent à des dérives liberticides (contentions, interdiction de marcher seul). Il faut accepter une part de risque calculée pour préserver la liberté et l'autonomie du résident.",
+    "tags": [
+      "Prise de risques",
+      "Éthique",
+      "Liberté"
+    ]
+  },
+  {
+    "id": 3943,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Comment repérer une maltraitance psychologique à domicile chez une personne âgée isolée ?",
+    "answer": "Rechercher des signes indirects : repli sur soi, anxiété en présence de l'aidant, mutisme soudain, refus de recevoir des visites ou discours d'autodépréciation induit par les reproches de l'entourage.",
+    "tags": [
+      "Maltraitance psychologique",
+      "Signes d'alerte",
+      "Social"
+    ]
+  },
+  {
+    "id": 3944,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Qu'est-ce que l'échelle de bientraitance de la Haute Autorité de Santé (HAS) ?",
+    "answer": "Référentiel d'évaluation des établissements de santé et des EHPAD mesurant la qualité de l'accueil, le respect du rythme du résident, l'absence de contention indue et la personnalisation des projets de soins.",
+    "tags": [
+      "HAS",
+      "Bientraitance",
+      "Évaluation"
+    ]
+  },
+  {
+    "id": 3945,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Comment le médecin doit-il s'assurer de l'adéquation d'une décision de réanimation cardiopulmonaire (RCP) chez le très grand âge ?",
+    "answer": "Prendre en compte les comorbidités (Charlson), l'autonomie préalable (GIR, ADL), le souhait formulé par le patient (directives) et la réversibilité de l'arrêt, pour ne pas engager une RCP vouée à l'échec et source de lésions graves.",
+    "tags": [
+      "RCP",
+      "Réanimation",
+      "LATA"
+    ]
+  },
+  {
+    "id": 3946,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Qu'est-ce que l'évaluation éthique collégiale du refus alimentaire ?",
+    "answer": "Démarche d'équipe associant soignants, médecin et psychologue pour analyser la cause d'un refus de manger (dépression, douleur de bouche, refus d'exister en fin de vie), afin de proposer des soins de confort adaptés.",
+    "tags": [
+      "Refus alimentaire",
+      "Éthique",
+      "Pluridisciplinaire"
+    ]
+  },
+  {
+    "id": 3947,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Comment gérer le secret médical en EHPAD lors des relèves d'équipe ?",
+    "answer": "Le secret professionnel est partagé entre les membres de l'équipe de soins (IDE, AS, médecin) directement impliqués dans la prise en charge du résident, et doit se limiter aux seules informations strictement nécessaires à la continuité des soins.",
+    "tags": [
+      "Secret médical",
+      "EHPAD",
+      "Relève"
+    ]
+  },
+  {
+    "id": 3948,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Comment s'assurer du respect du secret médical face au médecin-conseil de l'assurance maladie ?",
+    "answer": "Le médecin a l'obligation de transmettre les justificatifs cliniques (bilans, courriers) demandés par le médecin-conseil pour l'octroi d'une ALD ou d'arrêts de travail, le secret professionnel n'étant pas opposable à ce dernier.",
+    "tags": [
+      "Médecin-conseil",
+      "Secret professionnel",
+      "Droit"
+    ]
+  },
+  {
+    "id": 3949,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Comment réagir face à des accusations réciproques de maltraitance au sein d'un couple de personnes âgées à domicile ?",
+    "answer": "Organiser une évaluation à domicile par le service social ou le DAC. Proposer des relais (aide à domicile, accueil temporaire) pour soulager la pression du quotidien, et signaler si la sécurité de l'un des conjoints est menacée.",
+    "tags": [
+      "Maltraitance",
+      "Couple",
+      "Médiation"
+    ]
+  },
+  {
+    "id": 3950,
+    "chapter": "ch19",
+    "rang": "B",
+    "question": "Pourquoi la co-décision patient-médecin-famille est-elle la règle d'or des situations éthiques complexes ?",
+    "answer": "Parce qu'elle garantit l'alignement des décisions de soins sur les valeurs personnelles du patient, évite les décisions unilatérales source d'acharnement ou d'abandon, et assure le soutien de l'entourage face aux limitations de traitements.",
+    "tags": [
+      "Co-décision",
+      "Éthique",
+      "Raisonnement"
+    ]
+  },
+  {
+    "id": 3951,
+    "chapter": "ch20",
+    "rang": "A",
+    "question": "Quelles sont les trois priorités cliniques absolues lors du triage aux urgences d'un patient de plus de 80 ans agité ?",
+    "answer": "1. Rechercher en urgence un syndrome confusionnel (CAM) et son facteur précipitant (globe urinaire, fécalome, douleur, infection).\n2. Évaluer et soulager la douleur (Algoplus).\n3. Éliminer une urgence vitale (AVC, sepsis grave, IDM atypique).",
+    "tags": [
+      "Triage",
+      "Urgences",
+      "Agitation"
+    ]
+  },
+  {
+    "id": 3952,
+    "chapter": "ch20",
+    "rang": "A",
+    "question": "Comment se manifeste un infarctus du myocarde (IDM) chez la personne âgée de plus de 85 ans ?",
+    "answer": "La douleur thoracique typique manque dans 50 % des cas. L'IDM se manifeste par des symptômes atypiques : dyspnée aiguë inexpliquée, syndrome confusionnel aigu, chute brutale, asthénie intense ou malaise sans point d'appel.",
+    "tags": [
+      "Infarctus",
+      "Clinique",
+      "Atypique"
+    ]
+  },
+  {
+    "id": 3953,
+    "chapter": "ch20",
+    "rang": "A",
+    "question": "Qu'est-ce que l'Évaluation Gériatrique Standardisée (EGS) et quels en sont les 5 piliers cardinaux ?",
+    "answer": "Démarche d'évaluation multidimensionnelle globale du sujet âgé.\n- Piliers :\n1. Autonomie (ADL/IADL).\n2. Cognition et Humeur (MMS/GDS).\n3. Équilibre et Marche (TUG/Tinetti).\n4. Nutrition et Hydratation (MNA/Poids).\n5. Comorbidités et Médicaments (Charlson/Polymédication).",
+    "tags": [
+      "EGS",
+      "Piliers",
+      "Fragilité"
+    ]
+  },
+  {
+    "id": 3954,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Comment différencier cliniquement une occlusion intestinale par fécalome d'une occlusion mécanique néoplasique ?",
+    "answer": "Le fécalome se manifeste par des fausses diarrhées (sécrétions réactionnelles autour du bouchon) et est palpé au toucher rectal (TR) systématique. L'occlusion tumorale ne présente pas d'ampoule rectale comblée de selles dures et nécessite un scanner.",
+    "tags": [
+      "Occlusion",
+      "Fécalome",
+      "TR"
+    ]
+  },
+  {
+    "id": 3955,
+    "chapter": "ch20",
+    "rang": "A",
+    "question": "Quelles sont les causes de syndrome confusionnel iatrogène les plus fréquentes aux urgences ?",
+    "answer": "L'introduction récente de psychotropes (benzodiazépines, neuroleptiques), d'anticholinergiques (anti-secrétoires urinaires, tricycliques), d'antalgiques de palier 2 ou 3 (tramadol, morphine) ou l'arrêt brutal d'un sédatif.",
+    "tags": [
+      "Syndrome confusionnel",
+      "Iatrogénie",
+      "Urgences"
+    ]
+  },
+  {
+    "id": 3956,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Comment poser le diagnostic de syndrome de glissement chez une patiente de 92 ans hospitalisée pour pneumonie guérie ?",
+    "answer": "Refus alimentaire complet persistant après la guérison de l'infection aiguë, accompagné d'un mutisme oppositionnel, d'un refus de se lever et d'un repli sur soi, sans syndrome inflammatoire biologique.",
+    "tags": [
+      "Syndrome de glissement",
+      "Dépression",
+      "Clinique"
+    ]
+  },
+  {
+    "id": 3957,
+    "chapter": "ch20",
+    "rang": "A",
+    "question": "Quelle est la prise en charge initiale d'un globe vésical (rétention urinaire aiguë) chez un homme de 80 ans comorbide ?",
+    "answer": "1. Sondage urinaire évacuateur ou pose d'un cathéter sus-pubien.\n2. Évacuation lente (maximum 500 ml toutes les 15 minutes) pour éviter l'hémorragie a vacuo.\n3. Rechercher la cause (HBP, médicament anticholinergique, constipation).",
+    "tags": [
+      "Globe vésical",
+      "Sondage urinaire",
+      "Urgences"
+    ]
+  },
+  {
+    "id": 3958,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Quels paramètres biologiques majorent le risque d'intolérance aux psychotropes chez le patient dénutri ?",
+    "answer": "L'hypoalbuminémie sévère. Elle diminue le transport des molécules fortement liées aux protéines (ex : antidépresseurs, anxiolytiques), augmentant leur fraction libre circulante et le risque de surdosage toxique.",
+    "tags": [
+      "Albumine",
+      "Dénutrition",
+      "Pharmacocinétique"
+    ]
+  },
+  {
+    "id": 3959,
+    "chapter": "ch20",
+    "rang": "A",
+    "question": "Comment évaluer et prendre en charge une hypotension orthostatique (HO) chez une patiente hypertendue chuteuse ?",
+    "answer": "Mesurer la PA couchée puis debout à 1, 2 et 3 min. Diagnostic si baisse PAS ≥ 20 mmHg ou PAD ≥ 10 mmHg. Prise en charge : révision des antihypertenseurs (diurétiques), lever progressif, bas de contention, hydratation suffisante.",
+    "tags": [
+      "Hypotension orthostatique",
+      "Chutes",
+      "Hypertension"
+    ]
+  },
+  {
+    "id": 3960,
+    "chapter": "ch20",
+    "rang": "A",
+    "question": "Quelle est la démarche diagnostique devant une suspicion d'ostéoporose secondaire ?",
+    "answer": "Demander un bilan biologique minimal : NFS, CRP, calcémie, phosphorémie, créatininémie (DFG), électrophorèse des protides sériques (recherche de myélome) et dosage de la 25-OH-vitamine D.",
+    "tags": [
+      "Ostéoporose",
+      "Biologie",
+      "Diagnostic"
+    ]
+  },
+  {
+    "id": 3961,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Comment différencier une pneumonie à pneumocoque d'une pneumopathie d'inhalation chez un patient aphasique ?",
+    "answer": "L'inhalation présente un antécédent de fausses routes (troubles de la déglutition, alimentation), touche préférentiellement les segments déclives (lobe inférieur droit), et nécessite une kinésithérapie de déglutition en plus des antibiotiques.",
+    "tags": [
+      "Pneumopathie d'inhalation",
+      "Fausses routes",
+      "Diagnostic"
+    ]
+  },
+  {
+    "id": 3962,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Quels sont les signes d'alerte de l'occlusion sur fécalome en EHPAD ?",
+    "answer": "Anorexie récente, nausées, douleurs abdominales diffuses, absence de selles depuis plusieurs jours entrecoupée de fausses diarrhées liquides et présence d'un blindage fécal palpable à l'examen de l'abdomen.",
+    "tags": [
+      "Fécalome",
+      "Constipation",
+      "EHPAD"
+    ]
+  },
+  {
+    "id": 3963,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Comment adapter la prescription de furosémide chez un patient insuffisant cardiaque en période de forte chaleur ?",
+    "answer": "Peser quotidiennement le patient. En cas de perte de poids rapide (déshydratation), réduire ou suspendre temporairement le furosémide pour éviter l'insuffisance rénale fonctionnelle et l'hypotension, tout en surveillant la dyspnée.",
+    "tags": [
+      "Furosémide",
+      "Canicule",
+      "Hydratation"
+    ]
+  },
+  {
+    "id": 3964,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Quel est le risque de la prescription systématique d'anti-H1 (hydroxyzine) pour anxiété chez le sujet de plus de 80 ans ?",
+    "answer": "L'hydroxyzine possède une charge anticholinergique forte (ACB=3). Elle expose à un risque majeur de confusion mentale, de chutes (somnolence), de constipation sévère et de rétention d'urine.",
+    "tags": [
+      "Hydroxyzine",
+      "Anticholinergiques",
+      "STOPP"
+    ]
+  },
+  {
+    "id": 3965,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Comment gérer une agitation nocturne violente chez un patient atteint d'une maladie à corps de Lewy ?",
+    "answer": "Éviter formellement les neuroleptiques classiques (risque de syndrome malin ou de rigidité extrême mortelle). Privilégier un environnement calme, une présence humaine, et si indispensable, introduire de petites doses de quétiapine ou de clozapine.",
+    "tags": [
+      "Maladie à corps de Lewy",
+      "Neuroleptiques",
+      "Contre-indication"
+    ]
+  },
+  {
+    "id": 3966,
+    "chapter": "ch20",
+    "rang": "A",
+    "question": "Quelle est la définition clinique de la déshydratation intracellulaire et ses signes cliniques ?",
+    "answer": "Perte d'eau supérieure aux pertes de sel, entraînant une hyperosmolarité plasmatique. Signes cliniques : sécheresse des muqueuses (face interne des joues), soif vive, somnolence, confusion et perte de poids.",
+    "tags": [
+      "Déshydratation",
+      "Clinique",
+      "Symptômes"
+    ]
+  },
+  {
+    "id": 3967,
+    "chapter": "ch20",
+    "rang": "A",
+    "question": "Quelles sont les causes de déshydratation extracellulaire les plus fréquentes en gériatrie ?",
+    "answer": "Pertes digestives (diarrhées, vomissements), pertes rénales (abus de diurétiques) ou fièvres prolongées avec apports hydriques insuffisants par perte du réflexe de la soif.",
+    "tags": [
+      "Déshydratation",
+      "Physiopathologie",
+      "Clinique"
+    ]
+  },
+  {
+    "id": 3968,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Comment interpréter une hypoalbuminémie associée à une CRP élevée chez un patient âgé alité ?",
+    "answer": "Traduit un syndrome inflammatoire aigu ou chronique (l'inflammation bloque la synthèse d'albumine par le foie). Ce n'est pas un reflet direct des réserves nutritionnelles à court terme, mais un facteur de risque majeur de dénutrition.",
+    "tags": [
+      "Albumine",
+      "CRP",
+      "Dénutrition"
+    ]
+  },
+  {
+    "id": 3969,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Qu'est-ce que l'indice de Lequesne et quel est son seuil chirurgical pour une arthrose de hanche ?",
+    "answer": "Indice algofonctionnel mesurant la sévérité de l'arthrose de hanche ou de genou (score sur 24). L'indication d'une prothèse totale de hanche (PTH) doit être discutée à partir d'un score de 10 à 12 points.",
+    "tags": [
+      "Indice de Lequesne",
+      "Arthrose",
+      "Chirurgie"
+    ]
+  },
+  {
+    "id": 3970,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Comment prendre en charge une poussée congestive aiguë de gonarthrose avec épanchement ?",
+    "answer": "Mettre l'articulation au repos, réaliser une ponction évacuatrice si l'épanchement est tendu (pour analyse du liquide mécanique), et proposer une infiltration intra-articulaire de corticoïdes.",
+    "tags": [
+      "Gonarthrose",
+      "Épanchement",
+      "Infiltration"
+    ]
+  },
+  {
+    "id": 3971,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Pourquoi les AINS topiques (gels) sont-ils préférables aux AINS oraux chez le sujet de plus de 75 ans ?",
+    "answer": "Les AINS locaux ont un passage systémique très faible (< 5-10 %), ce qui permet d'obtenir un effet anti-inflammatoire local sur le genou sans exposer le patient âgé aux risques majeurs d'insuffisance rénale et d'ulcère gastrique.",
+    "tags": [
+      "AINS topiques",
+      "Arthrose",
+      "Sécurité"
+    ]
+  },
+  {
+    "id": 3972,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Qu'est-ce que le syndrome post-chute et comment le diagnostiquer en urgence ?",
+    "answer": "Complication psychomotrice de la chute se caractérisant par une anxiété majeure à la verticalisation, une rétropulsion à la marche (le patient part en arrière), une flexion des genoux et une perte des réflexes de protection. C'est une urgence kinésithérapique.",
+    "tags": [
+      "Syndrome post-chute",
+      "Rétropulsion",
+      "Marche"
+    ]
+  },
+  {
+    "id": 3973,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Comment organiser le chaussage pour un patient chuteur instable ?",
+    "answer": "Proposer des chaussures fermées, tenant bien le talon, avec des semelles antidérapantes et fines, sans talons hauts. Éviter les pantoufles ouvertes (mules) qui favorisent le trébuchement.",
+    "tags": [
+      "Chaussage",
+      "Prévention des chutes",
+      "Autonomie"
+    ]
+  },
+  {
+    "id": 3974,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Qu'est-ce que le test de Tinetti et quels scores indiquent un risque de chute ?",
+    "answer": "Échelle d'évaluation clinique de l'équilibre (sur 16) et de la marche (sur 12), score total sur 28. Un score total < 19 indique un risque de chute très élevé ; un score entre 19 et 24 indique un risque modéré.",
+    "tags": [
+      "Tinetti",
+      "Équilibre",
+      "Chutes"
+    ]
+  },
+  {
+    "id": 3975,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Comment adapter la posologie de l'allopurinol en cas de DFG à 25 ml/min ?",
+    "answer": "Réduire la dose d'allopurinol à 50 mg ou 100 mg un jour sur deux, et ajuster par paliers de 50 mg sous surveillance étroite de l'uricémie et de la tolérance cutanée.",
+    "tags": [
+      "Allopurinol",
+      "Insuffisance rénale",
+      "Posologie"
+    ]
+  },
+  {
+    "id": 3976,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Quelle est la définition d'une fracture sévère de fragilité osseuse ?",
+    "answer": "Fracture associée à une augmentation de la morbimortalité à 1 an (FESF, vertèbres, humérus, pelvis, fémur distal) survenant suite à un traumatisme de faible énergie.",
+    "tags": [
+      "Fracture sévère",
+      "Ostéoporose",
+      "Définition"
+    ]
+  },
+  {
+    "id": 3977,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Pourquoi la parathormone (tériparatide) est-elle limitée à 18 mois de traitement ?",
+    "answer": "C'est la durée maximale d'efficacité démontrée pour stimuler l'ostéoformation sans induire de perte osseuse secondaire par activation ostéoclastique. Le traitement doit être relayé par un anti-résorbeur.",
+    "tags": [
+      "Tériparatide",
+      "Durée",
+      "Ostéoporose"
+    ]
+  },
+  {
+    "id": 3978,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Quel est le risque lié à la déprescription brutale du dénosumab sans relais ?",
+    "answer": "Un risque majeur d'accélération du remodelage osseux (effet rebond) avec perte rapide de la DMO acquise et survenue de fractures vertébrales multiples. Un relais par bisphosphonate pendant 1 an est obligatoire.",
+    "tags": [
+      "Dénosumab",
+      "Déprescription",
+      "Rebond fracturaire"
+    ]
+  },
+  {
+    "id": 3979,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Comment diagnostiquer une escarre de stade 1 (érythème) ?",
+    "answer": "Rougeur cutanée persistante (érythème) au niveau d'un point d'appui osseux (sacrum, talon) qui ne blanchit pas à la pression du doigt, traduisant une ischémie tissulaire réversible si la pression est levée immédiatement.",
+    "tags": [
+      "Escarre",
+      "Stade 1",
+      "Prévention"
+    ]
+  },
+  {
+    "id": 3980,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Quelles sont les trois règles de prévention des escarres chez le patient alité ?",
+    "answer": "1. Changement de position régulier (toutes les 2 à 3 heures).\n2. Utilisation de matelas et de supports de décharge de pression (matelas à air dynamique).\n3. Maintien d'un état nutritionnel et d'une hydratation optimaux.",
+    "tags": [
+      "Escarres",
+      "Prévention",
+      "Positionnement"
+    ]
+  },
+  {
+    "id": 3981,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Quelle est la définition clinique de la sarcopénie selon l'EWGSOP2 ?",
+    "answer": "Association d'une force musculaire diminuée (grip strength ou lever de chaise lent) et d'une quantité ou qualité de muscle basse. La sarcopénie est qualifiée de sévère si une performance physique altérée (vitesse de marche < 0.8 m/s) est associée.",
+    "tags": [
+      "Sarcopénie",
+      "EWGSOP2",
+      "Définition"
+    ]
+  },
+  {
+    "id": 3982,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Comment mesurer cliniquement la force de préhension musculaire (grip strength) ?",
+    "answer": "Utiliser un dynamomètre à main (de type Jamar). Le patient serre l'appareil à trois reprises de chaque côté, la valeur maximale mesurée étant comparée aux normes selon le sexe et l'IMC.",
+    "tags": [
+      "Dynamomètre",
+      "Sarcopénie",
+      "Évaluation"
+    ]
+  },
+  {
+    "id": 3983,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Quel apport en protéines quotidien est recommandé pour corriger la sarcopénie chez le sujet âgé ?",
+    "answer": "Un apport de 1,2 à 1,5 g/kg/jour de protéines de haute valeur biologique, à associer impérativement à des exercices physiques de résistance musculaire réguliers pour stimuler l'anabolisme.",
+    "tags": [
+      "Protéines",
+      "Sarcopénie",
+      "Nutrition"
+    ]
+  },
+  {
+    "id": 3984,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Qu'est-ce que le test de lever de chaise répété 5 fois et quel seuil signe un déficit de force ?",
+    "answer": "Test demandant au patient de se lever et s'asseoir 5 fois d'une chaise le plus vite possible sans s'aider des bras. Un temps total ≥ 15 secondes traduit une faiblesse musculaire des membres inférieurs.",
+    "tags": [
+      "Lever de chaise",
+      "Sarcopénie",
+      "Équilibre"
+    ]
+  },
+  {
+    "id": 3985,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Quelle est la prévalence de la dénutrition chez les personnes âgées hospitalisées en France ?",
+    "answer": "La dénutrition touche 30 à 50 % des personnes âgées hospitalisées en court séjour ou en soins de suite, constituant un facteur indépendant majeur de morbimortalité et de perte d'autonomie.",
+    "tags": [
+      "Dénutrition",
+      "Épidémiologie",
+      "Hôpital"
+    ]
+  },
+  {
+    "id": 3986,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Qu'est-ce que le score MNA et quel seuil signe un état de dénutrition avérée ?",
+    "answer": "Mini Nutritional Assessment, questionnaire d'évaluation nutritionnelle (score max 30). Un score MNA < 17/30 signe une dénutrition avérée ; un score entre 17 et 23.5 signe un risque de dénutrition.",
+    "tags": [
+      "MNA",
+      "Dénutrition",
+      "Évaluation"
+    ]
+  },
+  {
+    "id": 3987,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Comment calculer la perte de poids cliniquement significative chez une personne âgée ?",
+    "answer": "Perte de poids involontaire ≥ 5 % en 1 mois, ou ≥ 10 % en 6 mois, par rapport au poids habituel de référence du patient.",
+    "tags": [
+      "Perte de poids",
+      "Dénutrition",
+      "Diagnostic"
+    ]
+  },
+  {
+    "id": 3988,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Qu'est-ce que le score NRS-2002 et quelle est sa particularité gériatrique ?",
+    "answer": "Nutritional Risk Screening, outil de dépistage rapide du risque nutritionnel à l'admission. Particularité : il ajoute d'emblée +1 point au score final si le patient est âgé de 70 ans et plus.",
+    "tags": [
+      "NRS-2002",
+      "Dénutrition",
+      "Dépistage"
+    ]
+  },
+  {
+    "id": 3989,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Quelle est la définition de la presbyacousie et son traitement de référence ?",
+    "answer": "Baisse progressive, bilatérale et symétrique de l'audition liée au vieillissement des cellules cochléaires. Le traitement de référence est l'appareillage auditif prothétique bilatéral précoce.",
+    "tags": [
+      "Presbyacousie",
+      "Audition",
+      "Appareillage"
+    ]
+  },
+  {
+    "id": 3990,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Quelles sont les trois causes majeures de baisse chronique réversible de la vision chez le sujet âgé ?",
+    "answer": "1. La cataracte (opacification du cristallin, traitée par chirurgie).\n2. La correction optique inadaptée (presbytie, amétropie).\n3. La sécheresse oculaire sévère.",
+    "tags": [
+      "Vision",
+      "Cataracte",
+      "Réversible"
+    ]
+  },
+  {
+    "id": 3991,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Comment le médecin doit-il dépister une confusion aiguë (delirium) chez un patient agité ?",
+    "answer": "Utiliser l'algorithme CAM (Confusion Assessment Method) en recherchant : 1. Début aigu et fluctuation des symptômes. 2. Inattention. 3. Pensée désorganisée. 4. Altération du niveau de conscience.",
+    "tags": [
+      "CAM",
+      "Confusion",
+      "Diagnostic"
+    ]
+  },
+  {
+    "id": 3992,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Qu'est-ce que l'incontinence urinaire d'effort et ses options thérapeutiques ?",
+    "answer": "Fuite involontaire d'urine survenant lors d'un effort physique (toux, rire, port de charge) sans sensation de besoin. Options : rééducation périnéale (kinésithérapie), chirurgie de bandelette sous-urétrale.",
+    "tags": [
+      "Incontinence d'effort",
+      "Rééducation",
+      "Urologie"
+    ]
+  },
+  {
+    "id": 3993,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Comment prendre en charge une incontinence urinaire par impériosité (hyperactivité vésicale) ?",
+    "answer": "Proposer des mictions programmées, une rééducation comportementale, et si échec, prescrire du mirabégron (bêta-3 agoniste sans effet cognitif) plutôt qu'un anticholinergique vésical à haut risque.",
+    "tags": [
+      "Incontinence par impériosité",
+      "Mirabégron",
+      "Urologie"
+    ]
+  },
+  {
+    "id": 3994,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Quelle est la définition clinique d'un syndrome de glissement gériatrique ?",
+    "answer": "Décompensation somatopsychique rapide caractérisée par une anorexie, un refus d'hydratation, un mutisme et un abandon de l'élan vital, survenant après une affection aiguë guérie.",
+    "tags": [
+      "Syndrome de glissement",
+      "Psychogériatrie",
+      "Clinique"
+    ]
+  },
+  {
+    "id": 3995,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Comment le médecin coordonnateur organise-t-il la prévention de la iatrogénie en EHPAD ?",
+    "answer": "En animant régulièrement des commissions de coordination gérontologique pour réviser les ordonnances des résidents, en promouvant l'arrêt des psychotropes et des traitements inutiles au long cours.",
+    "tags": [
+      "Médecin coordonnateur",
+      "Iatrogénie",
+      "EHPAD"
+    ]
+  },
+  {
+    "id": 3996,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Qu'est-ce que le plan personnalisé de compensation (PPC) pour la dépendance ?",
+    "answer": "Document rédigé par l'équipe d'évaluation de l'APA détaillant les aides humaines (auxiliaires de vie) et techniques nécessaires pour compenser la perte d'autonomie du patient à son domicile.",
+    "tags": [
+      "PPC",
+      "APA",
+      "Compensation"
+    ]
+  },
+  {
+    "id": 3997,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Pourquoi la co-prescription de colchicine et de macrolides est-elle formellement contre-indiquée ?",
+    "answer": "Les macrolides (clarithromycine, érythromycine) bloquent le CYP3A4, ce qui arrête le métabolisme de la colchicine. La toxicité cumulative de la colchicine provoque une aplasie médullaire mortelle.",
+    "tags": [
+      "Colchicine",
+      "Macrolides",
+      "Contre-indication"
+    ]
+  },
+  {
+    "id": 3998,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Comment évaluer l'observance thérapeutique chez un patient vivant seul atteint d'Alzheimer modéré ?",
+    "answer": "Interroger les soignants à domicile, inspecter le pilulier, vérifier la régularité des renouvellements d'ordonnances en pharmacie et mettre en place un passage infirmier quotidien.",
+    "tags": [
+      "Observance",
+      "Alzheimer",
+      "Maintien à domicile"
+    ]
+  },
+  {
+    "id": 3999,
+    "chapter": "ch20",
+    "rang": "B",
+    "question": "Qu'est-ce que le syndrome d'immobilisation et ses complications cardiovasculaires majeures ?",
+    "answer": "Dégradation physiologique liée à l'alitement prolongé. Complications cardiovasculaires : hypotension orthostatique sévère au lever, phlébite et embolie pulmonaire (maladie thromboembolique veineuse).",
+    "tags": [
+      "Syndrome d'immobilisation",
+      "Complications",
+      "Cardiovasculaire"
+    ]
+  },
+  {
+    "id": 4000,
+    "chapter": "ch20",
+    "rang": "A",
+    "question": "Quel est l'apport nutritionnel minimum recommandé par jour chez le sujet de plus de 70 ans hospitalisé ?",
+    "answer": "Un apport énergétique minimum de 30 kcal/kg/jour, à associer à un apport protéique de 1.2 à 1.5 g/kg/jour pour prévenir la dénutrition hospitalière et limiter la fonte musculaire.",
+    "tags": [
+      "Apports nutritionnels",
+      "Protéines",
+      "Dénutrition"
+    ]
+  }
+]

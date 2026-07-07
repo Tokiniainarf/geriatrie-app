@@ -1,0 +1,2 @@
+## 2026-06-30T11:34:16Z
+Analyze how 'Situations de départ' are currently parsed and rendered in app.js. Investigate how and where raw numbers like '295' appear in paragraph bodies in Chapters 1 & 2. Propose a concrete parsing mechanism in app.js to extract all 'Situations de départ' (lines matching 2/3 digits followed by a title) completely from normal paragraphs, format them correctly in the dedicated list, and display them as badges. Save your analysis to C:\Users\tokin\.gemini\antigravity\scratch\geriatrie-app\.agents\explorer_m1_2_gen4\handoff.md.

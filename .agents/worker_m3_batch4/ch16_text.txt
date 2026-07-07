@@ -1,0 +1,1302 @@
+--- Page 282 ---
+Connaissances
+27 Chute de la personne âgée.
+43 Découverte d'une hypotension artérielle.
+50 Malaise/perte de connaissance.
+54 Œdème localisé ou diffus.
+103 Incontinence urinaire.
+119 Confusion/désorientation.
+135 Troubles du sommeil.
+159 Bradycardie.
+194 Analyse du bilan thyroïdien.
+198 Cholestase.
+199 Créatinine augmentée.
+201 Dyskaliémie.
+202 Dysnatrémie.
+206 Élévation des transaminases.
+209 Hypoglycémie.
+217 Baisse de l'hémoglobine.
+218 Diminution du TP.
+248 Prescription et suivi d'un traitement par anticoagulant et/ou antiagrégant.
+250 Prescrire des antalgiques.
+253 Prescrire des diurétiques.
+255 Prescrire un anti-infectieux.
+256 Prescrire un hypnotique/anxiolytique.
+Items, objectifs pédagogiques, hiérarchisation des connaissances
+ITEM 322 – La décision thérapeutique personnalisée : bon usage dans des situations à risque
+256 Rang Rubrique Intitulé Descriptif
+A Prise en charge Principes de prescription chez les Connaître les principes d'adaptation
+sujets à risque majoré* thérapeutique chez le sujet obèse
+A Prise en charge Enfant* Connaître les principes d'adaptation
+thérapeutique chez l'enfant
+A Prise en charge Femme enceinte* Connaître les principes d'adaptation
+thérapeutique pendant la grossesse et
+l'allaitement
+A Prise en charge Sujet âgé Connaître les principes d'adaptation
+thérapeutique chez la personne âgée
+A Prise en charge Insuffisant rénal Connaître les principes d'adaptation
+thérapeutique chez l'insuffisant rénal
+A Prise en charge Insuffisant hépatique* Connaître les principes d'adaptation
+thérapeutique chez le patient atteint
+de maladie du foie
+A Prise en charge Principes d'une décision médicale partagée avec un malade et son entourage
+A Prise en charge Principes de la prescription médica- Savoir prendre en compte les caracté-
+menteuse, les modalités de surveil- ristiques du médicament, du patient,
+lance et d'arrêt les risques et les objectifs
+A Prise en charge Principes de la consultation préanesthésique*
+A Prise en charge Principes du jeûne préanesthésie Conséquences sur l'administration
+médicamenteuse
+A Prise en charge Principes de gestion pluridisciplinaire Connaître les principaux médicaments
+des traitements avant une interven- concernés (par exemple, antiagrégants
+tion ou une anesthésie* plaquettaires en se limitant à l'aspirine
+en monothérapie)
+▼
+
+--- Page 283 ---
+Apprendre à prescrire chez le patient âgé
+Rang Rubrique Intitulé Descriptif
+B Prise en charge Dépendance médicamenteuse Connaître les indications et principes
+du sevrage médicamenteux
+A Prise en charge Interactions médicamenteuses Identifier les principaux mécanismes
+d'interactions médicamenteuses
+A Prise en charge Interactions médicamenteuses Connaître les principales classes
+médicamenteuses concernées
+ITEM 325 – Identification et gestion des risques liés aux médicaments et aux biomatériaux, risque
+iatrogène, erreur médicamenteuse
+Rang Rubrique Intitulé Descriptif
+A Définition Définition d'un effet indésirable médicamenteux (EIM)
+A Définition Comprendre les enjeux concernant les risques liés aux médicaments et aux
+biomatériaux
+A Définition Définition d'une prescription médicamenteuse inappropriée (PMI)
+B Définition Prévention des dysfonctionnements Connaître la règle des 5B
+du circuit du médicament*
+B Physio-patholologie Définir et expliquer les mécanismes généraux des principales pathologies
+induites par les médicaments
+B Épidémiologie Épidémiologie des risques iatrogènes Connaître les principaux résultats
+de l'Étude nationale des événements
+indésirables liés aux soins
+A Définition Connaître les caractéristiques des EIM chez les personnes âgées
+A Définition Connaître les objectifs et principes de la pharmacovigilance
+B Définition Connaître le principe d'imputabilité* Identifier les limites dans la quantifica-
+tion de la iatrogénie médicamenteuse
+A Définition Déclaration d'un effet indésirable Connaître le mécanisme de déclara-
+suspecté d'être dû à un médicament tion d'un effet indésirable suspecté
+d'être dû à un médicament (Quoi
+déclarer, à qui, par qui, comment ?)
+A Définition Expliquer les objectifs et principes de l'addictovigilance*
+A Définition Connaître le mécanisme de décla- Être capable de déclarer un abus, une
+ration d'un abus, une dépendance dépendance et des usages détournés
+et des usages détournés liés à liés à la consommation de toutes les
+la consommation de toutes les substances ou plantes ayant un effet
+substances ou plantes ayant un effet psychoactif, ainsi que de tous les
+psychoactif, ainsi que de tous les médicaments ou autres produits en
+médicaments ou autres produits en contenant (Quoi déclarer, à qui, par
+contenant* qui, comment ?)
+B Définition Connaître les objectifs et principes de la matériovigilance*
+A Définition Déclaration d'un effet indési- Connaître le mécanisme de déclara-
+rable suspecté d'être dû à des tion d'un effet indésirable suspecté
+biomatériaux* d'être dû à des biomatériaux (Quoi
+déclarer, à qui, par qui, comment ?)
+▼
+▼
+
+--- Page 284 ---
+Connaissances
+Rang Rubrique Intitulé Descriptif
+A Prise en charge Identifier une erreur médicamenteuse, ses mécanismes et connaître les
+conséquences
+A Définition Erreur médicamenteuse, signalement Être capable de signaler une erreur
+médicamenteuse
+A Prise en charge Identifier et prévenir une erreur sur le circuit du médicament
+B Définition Définition de la contrefaçon d'un Connaître la définition de la contrefa-
+médicament çon des médicaments
+B Définition Apprécier les risques liés à la contrefaçon des médicaments
+B Définition Définir la notion de responsabilité sans faute et le rôle de l'ONIAM
+B Définition Modalités de saisine de l'Office Connaître les modalités de saisine de
+national d'indemnisation des acci- l'ONIAM
+dents médicaux (ONIAM)
+I. Introduction à la prescription chez le patient
+âgé : notion de risque iatrogène et d'événement
+indésirable médicamenteux
+A Prescrire chez un patient âgé est un acte fréquent, mais dont la gravité doit rester à l'esprit
+du prescripteur. En effet, plus que tout autre, le patient âgé peut être victime de iatrogénie et
+d'événement indésirable médicamenteux (EIM), et seuls les praticiens qui ne prescrivent jamais
+ne font pas de iatrogénie chez des patients âgés.
+Avant toute prescription, il est donc indispensable de bien connaître les facteurs liés au patient,
+aux comorbidités, à leurs conséquences, aux médicaments et autres traitements, et aux cir-
+constances de prescription, en particulier en contexte aigu.
+A. Rappels de pharmacologie
+La pharmacologie d'un médicament intègre à la fois la pharmacocinétique et la
+pharmacodynamie.
+Pharmacocinétique
+• « Ce que l'organisme fait au médicament. »
+• Résumée par le « système ADME » pour Absorption, Diffusion, Métabolisme, Excrétion.
+• Variabilité inter- et intra-individuelle de la pharmacocinétique.
+Pharmacodynamie
+• « Ce que le médicament fait à l'organisme. »
+• Action thérapeutique et effets toxiques.
+Index thérapeutique
+L'index thérapeutique est la différence entre la dose de médicament efficace et la dose de
+médicament toxique. Un index thérapeutique étroit concerne de nombreux médicaments
+et entraîne :
+• une relation entre pharmacocinétique et pharmacodynamie (relation PK-PD) ;
+▼
+
+--- Page 285 ---
+Apprendre à prescrire chez le patient âgé
+• toute modification de la pharmacocinétique aura un effet sur son effet thérapeutique et
+toxique ;
+• un risque toxique proche de l'effet thérapeutique.
+Chez le patient âgé
+L'âge, les comorbidités, les comédications ont un impact sur la pharmacocinétique et la
+pharmacodynamique (tableau 16.1). Le patient âgé est donc à risque pharmacologique.
+B. Effets indésirables médicamenteux et iatrogénie
+médicamenteuse
+1. Définitions d'un effet indésirable médicamenteux (EIM)
+Pour l'OMS : « Une réaction nocive et non souhaitée à un médicament, survenant à des
+doses utilisées à des fins de prophylaxie, de diagnostic ou de traitement. » Cette définition
+sous-entend que l'utilisation du médicament intervient dans le cadre d'une bonne pratique
+de prescription.
+Pour l'Europe : « Conséquence d'un mésusage d'un médicament, soit au décours d'un acte
+volontaire de prescription d'un médicament hors AMM ou d'une non-prise intentionnelle par
+le malade. » Cette nouvelle définition est aussi décrite sous le terme de prescription médi-
+camenteuse inappropriée (PMI). Elle intègre la notion d'erreur médicamenteuse pouvant
+relever de la responsabilité du prescripteur ou de celle du malade, par exemple en lien avec
+une observance aléatoire.
+Les effets indésirables médicamenteux (EIM) sont synonymes de iatrogénie médicamen-
+teuse. Ce terme regroupe l'ensemble des effets indésirables médicamenteux, y compris ceux
+liés à la diminution de l'efficacité en rapport avec un défaut d'observance (par exemple,
+décompensation d'une insuffisance cardiaque en lien avec l'arrêt volontaire ou non d'un trai-
+tement diurétique, état confusionnel aigu secondaire à un sevrage brutal en benzodiazépine).
+Tableau 16.1. B Principaux facteurs de risque d'EIM et de iatrogénie médicamenteuse chez les
+patients âgés (liste non exhaustive).
+Paramètres Conséquences
+Modifications Augmentation relative de la masse grasse Relargage aléatoire par les adipocytes
+pharmacodynamiques avec modifications de diffusion des et variabilité de l'effet des médicaments
+et pharmacocinétiques molécules liposolubles liposolubles (par exemple, psychotropes)
+Hypoalbuminémie associée à la dénutrition Augmentation de la fraction libre de
+médicaments à forte fixation protéique (par
+exemple, antivitamine K)
+Diminution de la filtration glomérulaire Accumulation (surdosage) des médicaments
+éliminés par les reins (par exemple,
+antibiotiques)
+Polymédication Interactions médicamenteuses
+Polypathologie Polymédication
+Défaillances d'organes multiples
+Observance thérapeutique Oublis des prises médicamenteuses
+Monitorage aléatoire (par exemple, INR)
+Éducation thérapeutique limitée
+Pluriprofessionnalité, coordination des soins Multiplications des prescripteurs
+Absence de hiérarchisation thérapeutique et de réévaluation Poursuite traitements non indiqués
+
+--- Page 286 ---
+Connaissances
+En raison de leur gravité et de leur fréquence chez les patients âgés, il faut acquérir un réflexe iatrogé-
+nique, qui consiste à évoquer/détecter systématiquement des EIM devant toute modification brutale de
+l'état de santé et qui reste inexpliquée par des causes somatiques évidentes.
+B Les personnes âgées sont particulièrement exposées au risque d'EIM, dont les principaux
+facteurs de risque sont repris dans le tableau 16.1 :
+• en particulier la polymédication, directement responsable d'une fréquence élevée des EIM ;
+• un risque d'EIM multiplié par 2 par rapport aux sujets jeunes ;
+• 10 % des admissions aux urgences après 65 ans et au moins 20 % après 80 ans sont en
+lien direct ou indirect avec un EIM.
+2. Conséquences des EIM chez les patients âgés
+• Plus marquées que chez les patients jeunes.
+• Décompensation dites « en cascade » à partir d'un EIM (cf. chapitre 1 et chapitre 2).
+• Diagnostic souvent tardif en raison de la présentation sémiologique atypique dans cette
+population (cf. chapitre 2).
+• Liées parfois à des événements extrinsèques et à la poursuite d'un traitement devenu ina-
+dapté (par exemple, canicule et diurétiques).
+• Évitables pour une bonne partie d'entre eux si une bonne pratique de prescription est
+respectée.
+Les cinq écueils à éviter concernant les événements indésirables
+médicamenteux chez le patient âgé
+• Ne pas acquérir le réflexe iatrogénique devant toute situation médicale nouvelle [103, 119, 199, 202,
+331].
+• Ne pas réévaluer régulièrement les traitements habituels [295].
+• Ne pas évaluer le rapport risque/bénéfice de chaque nouveau traitement [248, 250, 256].
+• Ne pas envisager la prescription au sein d'une évaluation gériatrique globale [266].
+• Ne pas prendre en compte des critères clés comme la fonction rénale [264], la polymédication [266],
+les fonctions cognitives [298], les prescripteurs multiples.
+A En résumé, les EIM chez le patient âgé sont :
+• fréquents et peuvent survenir chez tous les patients âgés, en particulier comorbides et
+polymédiqués ;
+• sous-estimés et non diagnostiqués en raison d'une sémiologie atypique, d'une anam-
+nèse parfois difficile en raison de la présence de troubles cognitifs, d'une absence de coor-
+dination des différents partenaires de santé impliqués dans les soins au patient âgé ;
+• associés aux modifications pharmacologiques liées au vieillissement et à la
+polymédication ;
+
+--- Page 287 ---
+Apprendre à prescrire chez le patient âgé
+• sévères, à l'origine de décompensation en cascade, d'une morbi-mortalité et d'un
+surcoût en termes d'utilisation du système de soins ;
+• potentiellement liés à une introduction récente ou un sevrage, à une interaction, à
+une nouvelle situation pathologique.
+→ Les EIM sont fréquents et graves chez le patient âgé. Leur prévention repose sur l'acquisition
+du réflexe iatrogénique et la mise en place d'une démarche structurée rigoureuse.
+Évaluation du risque et prévention d'EIM chez un patient âgé
+L'évaluation du risque et la prévention d'EIM chez un patient âgé font partie de l'EGS (cf. chapitre 1) et
+nécessitent un temps dédié suffisant, souvent difficile à prendre sur la durée déjà longue de la consultation
+gériatrique.
+Quand ?
+• À l'occasion d'une consultation spécifique de réévaluation du traitement médicamenteux, a fortiori si
+introduction récente d'un ou plusieurs traitements [295].
+• Lors de l'introduction d'un ou plusieurs traitements en hospitalisation et lors de la rédaction de l'ordon-
+nance de sortie [355].
+• Systématiquement lors de consultations de suivi [266, 267, 279, 295].
+• En présence d'une cassure dans l'évolution sur le plan cognitif [119], comportemental ou fonctionnel
+[31] ou de complications [27, 50, 103] dans l'évolution du patient [348].
+Comment ?
+• En intégrant la prescription au sein d'une approche gériatrique globale.
+• En récupérant des informations objectives [131].
+• En impliquant/avertissant l'ensemble des prescripteurs et en particulier le médecin référent.
+• En évaluant l'observance thérapeutique [354] et en sécurisant les prises médicamenteuses.
+• En éduquant le patient, selon son état cognitif [298], et son aidant principal au bénéfice thérapeutique
+attendu, ainsi qu'aux risques encourus et aux signes à surveiller [348].
+• En veillant à la rigueur de la rédaction des ordonnances [342].
+• En faisant de la conciliation médicamenteuse.
+Pourquoi ?
+• Afin de prévenir et limiter les EIM chez le patient âgé [348].
+• Afin de limiter les conséquences en particulier graves des EIM [27, 50, 119].
+• Afin d'améliorer l'adhésion des patients au projet thérapeutique [343, 352].
+• Afin de réussir les sorties d'hospitalisation et d'éviter les réadmissions en particulier précoces aux
+urgences et/ou à l'hôpital.
+C. Prescription médicamenteuse inappropriée
+Les prescriptions médicamenteuses inappropriées (PMI) associent :
+• les sur-prescriptions des médicaments, autrement dit les prescriptions qui ne sont pas jus-
+tifiées par une pathologie → « overuse » ;
+• les prescriptions dont les risques encourus sont nettement supérieurs aux bénéfices atten-
+dus → mésusage ou « misuse » ;
+• la non-prescription d'un médicament potentiellement approprié → omission de prescrip-
+tion ou « underuse ».
+
+--- Page 288 ---
+Connaissances
+Mises en situation
+Ni trop ni trop peu, entre l'appréhension de l'overuse et le
+risque concret d'underuse : remplissage dans un sepsis
+De garde aux urgences, vous prenez en charge un patient de 91 ans admis pour fièvre. Vous ne dispo-
+sez d'aucune autre information qu'un antécédent d'œdème pulmonaire aigu un an auparavant lors
+d'une grippe. À l'arrivée, le patient est somnolent [28], marbré et fébrile à 38,5 °C. La pression arté-
+rielle systolique est à 80 mmHg [43], la fréquence cardiaque à 110/min. La fréquence respiratoire est à
+24/min. Vous notez une sensibilité abdominale au niveau du flanc gauche sans autre foyer infectieux.
+Il s'agit donc d'un probable sepsis grave (qSOFA 3/3) sur possible sigmoïdite diverticulaire. Vous faites
+perfuser le patient, avec prélèvement d'un bilan comprenant deux paires d'hémocultures avant de
+débuter une antibiothérapie probabiliste dans l'heure. Concernant le remplissage :
+1. Vous hésitez en raison de l'antécédent d'œdème pulmonaire aigu, d'un possible trouble de la relaxa-
+tion myocardique, et vous envisagez de perfuser le patient avec du glucosé à 5 % ou du glucosé à 5 %
+avec 4 g de NaCl par litre : cette option est un misuse et de l'underuse. Car le G5 n'est pas un soluté de
+remplissage. Le prolongement d'une défaillance hémodynamique engage le pronostic vital.
+2. Vous n'hésitez pas du tout et vous prescrivez un soluté de remplissage par du NaCl 9 ‰ 500 cc dont
+le volume total sera calculé (30 ml/kg) et le débit sera guidé par l'hémodynamique et les marbrures,
+pour obtenir une pression artérielle moyenne ≥ 65 mmHg : cette option est la bonne. Entre ne pas
+remplir suffisamment une situation très grave et remplir de manière adaptée en courant le risque
+de favoriser l'apparition de signes d'insuffisance cardiaque, le rapport risque/bénéfice est claire-
+ment en faveur de cette deuxième option.
+Attention à l'underuse facile : anticoagulation et fibrillation
+atriale
+Vous voyez en consultation une patiente de 85 ans adressée par son médecin traitant, qui souhaiterait
+avoir votre avis concernant l'indication d'un anticoagulant ou d'un antiagrégant plaquettaire pour une
+fibrillation atriale de découverte fortuite. Vous notez dans les antécédents une hypertension artérielle
+très ancienne (sous diurétique thiazidique et inhibiteur calcique), une cardiopathie ischémique stable
+depuis 5 ans (sous aspirine, statine, bêtabloqueur), une artériopathie oblitérante des membres inférieurs
+et un accident vasculaire cérébral sans séquelle il y a 2 ans dont le bilan avait été négatif. Un cardiologue
+a recommandé de ne laisser que l'aspirine ou de mettre un anticoagulant oral direct (AOD) à demi-dose,
+car ce patient est chuteur et que le risque sous anticoagulant a été jugé comme trop important.
+1. L'anticoagulation est indiquée [248] sans aucun doute. Il faut donc revoir les raisons pour lesquelles
+ce traitement ne pourrait pas être donné.
+2. Concernant le traitement habituel, trois points doivent être réévalués :
+❯ la tolérance d'une triple association antihypertenseurs (bêtabloqueur formellement indiqué et deux
+autres antihypertenseurs) : recherche en particulier d'hypotension orthostatique, rôle dans les chutes ?
+❯ l'absence d'IEC dans le traitement (cardiopathie, atteinte vasculaire) ;
+❯ la prescription d'un bêtabloqueur en présence d'une AOMI dont la gravité doit être précisée.
+3. Concernant le traitement anticoagulant de la fibrillation atriale : soit il existe une contre-indication
+et, en ce cas, le traitement par antiplaquettaire sera poursuivi pour sa cardiopathie ischémique
+▲
+
+--- Page 289 ---
+Apprendre à prescrire chez le patient âgé
+(aucune indication dans la fibrillation atriale) ; soit il n'existe pas de contre-indication et le patient
+pourra être traité à doses adaptées par anticoagulant : les chutes ne représentent pas une indica-
+tion à mettre des « demi-doses »…
+4. Tout repose sur la compréhension des chutes : dans ce cas, la mise en évidence de troubles atten-
+tionnels, de troubles visuels (faire opérer la cataracte) et d'une hypotension orthostatique (pou-
+vant être prévenue par les conseils hygièno-diététiques, corrigée par allègement thérapeutique
+et port éventuel d'une compression veineuse des membres inférieurs si l'AOMI le permet), permet
+de prescrire une anticoagulation à dose adaptée. Ne pas introduire d'anticoagulation indiquée
+sur une fausse contre-indication correspondrait à de l'underuse, tout comme choisir une posologie
+insuffisante. Choisir un antiplaquettaire pour la fibrillation atriale est un misuse.
+5. Par contre, la coprescription aspirine et AOD représente un surrisque hémorragique et n'est pas
+indiquée. Il s'agit d'overuse et de misuse. L'aspirine sera suspendue à l'introduction de l'AOD, la
+cardiopathie ischémique étant ancienne.
+6. Reste à expliquer les modifications et convaincre le patient et son entourage, évaluer l'observance,
+informer son médecin référent.
+Exemple d'underuse fréquent chez les patients âgés
+Un patient âgé, diabétique [281], insuffisant cardiaque [287] et rénal [290], est admis en urgence pour
+une détresse respiratoire aiguë [160] sur pneumopathie en période hivernale. Depuis quelques années,
+il développait des TNCM avec éléments de persécution et refusait de se faire vacciner contre la grippe.
+Il n'était pas à jour de sa vaccination antipneumococcique. Tout ceci avant la COVID-19…
+Ce cas nous permet de faire un rappel des points clés sur les vaccins chez le patient âgé [322, 343]
+(tableau 16.2) :
+❯ Le risque d'infection grave croît avec l'âge et le risque d'infection est d'autant plus important qu'il
+existe une altération des statuts nutritionnel et fonctionnel ainsi que des comorbidités et/ou une
+polymédication.
+❯ L'incidence de la majorité des infections à prévention vaccinale (COVID-19, grippe, infection à
+pneumocoque, zona, coqueluche) est augmentée dans la population âgée, tout particulièrement
+dans la population âgée dépendante.
+❯ Les conséquences de ces infections sont multiples, principalement une surmortalité élevée, une
+malnutrition protéino-énergétique, un déclin fonctionnel à court mais aussi à moyen et long terme.
+❯ Les mesures d'hygiène adaptées sont efficaces pour limiter le risque infectieux mais la vaccination
+est le meilleur moyen actuel.
+❯ La réponse vaccinale s'altère le plus souvent avec l'âge en raison d'un vieillissement immunitaire encore
+mal compris. C'est la raison pour laquelle, la fréquence des rappels est augmentée et que la vaccination
+antigrippale est recommandée chez les professionnels interagissant avec les personnes âgées.
+▲
+
+--- Page 290 ---
+Connaissances
+Tableau 16.2. B Rappel sur les vaccins chez les personnes âgées.
+Indications Schéma vaccinal
+Diphtérie, tétanos, Rapprochement des rappels pour tout patient âgé de 1 injection à 65, 75, 85, 95 ans…
+poliomyélite 65 ans et plus
+Zona Adultes âgés de 65 à 74 ans révolus 1 dose unique (vaccin vivant atténué
+contre-indiqué chez les personnes
+immunodéprimées)
+Grippe Adultes âgés de 65 ans et plus (entre autres) 1 injection tous les ans
+COVID-19 La vaccination est recommandée Soumis à modifications (+++)
+Pneumocoque Patients immunodéprimés VPC13 puis VPP23 8 semaines plus
+Insuffisance cardiaque tard (rappel VPP23 à 5 ans du dernier
+Insuffisance respiratoire chronique, BPCO, emphysème, VPP23)
+asthme sévère sous traitement continu Si VPP23 > 1 an, VPC13 puis VPP23
+Insuffisance rénale avec un délai de 5 ans entre les 2
+Diabète non équilibré par le simple régime VPP23
+Brèche ostéoméningée, implant cochléaire ou candidats
+à une implantation cochléaire
+Hépatopathie chronique
+Hépatite A Patients infectés chroniques par le virus de l'hépatite 2 doses à 6 mois d'intervalle (si
+B ou porteurs d'une maladie chronique du foie sérologie négative)
+(notamment dues au virus de l'hépatite C ou à une
+consommation excessive d'alcool)
+Hommes ayant des relations sexuelles avec des hommes
+Coqueluche Situation de cocooning (susceptible d'être en contact 1 injection de 1 dose de dTcaPolio3 (si
+étroit et durable avec le futur nourrisson au cours de dernière dose > 10 ans)
+ses 6 premiers mois)
+II. Thérapeutique médicamenteuse chez le patient âgé
+A. Identifier les patients à risque d'EIM avant de prescrire
+1. Facteurs pharmacologiques liés à l'âge
+A Différentes étapes pharmacocinétiques (système ADME) sont modifiées par le vieillisse-
+ment, les principales étant mentionnées dans le tableau 16.3.
+2. Facteurs liés aux comorbidités et aux syndromes gériatriques
+Les comorbidités peuvent interagir avec le risque d'EIM par différents mécanismes :
+• d'abord par leurs conséquences sur les différentes étapes de pharmacocinétique
+(tableau 16.3) ;
+• ensuite par l'impact sur la compréhension et l'adhésion au projet thérapeutique [343,
+352], sur les prises et l'observance [354] dans le cadre de troubles neurocognitifs ou de
+dépression [298].
+
+--- Page 291 ---
+Apprendre à prescrire chez le patient âgé
+Tableau 16.3. A Principaux impacts du vieillissement et des comorbidités sur la pharmacocinétique
+des médicaments.
+Étapes Influence de l'âge Influence des En pratique clinique
+pharmacocinétiques comorbidités
+Absorption ↓ due à l'atrophie Syndromes de dysabsorption Peu de retentissement
+muqueuse digestive et à la Hypochlorhydrie sur prescription
+↓ des flux sanguins médicamenteuse
+↑ par diminution de la Recherche de carences
+motricité intestinale vitaminiques et autres
+↓ sécrétion des enzymes nutriments
+digestives modifiant le pH
+gastrique
+Diffusion ↑ relative de masse grasse Dénutrition [30] Modifications de distribution
+(15 % à 30 % du poids) Syndrome œdémateux [54] des médicaments lipophiles
+↓ eau totale corporelle Sarcopénie (psychotropes)
+↓ poids Évaluation albuminémie (cf.
+↓ albuminémie chapitre 14)
+Métabolisme ↓ flux sanguin hépatique Insuffisance hépatocellulaire Bilan hépatique complet
+↓ fonction hépatocytaire sur hépatopathies
+chronique et/ou aiguë [198,
+218]
+Excrétion ↓ flux sanguin rénal Néphropathies chroniques Modifications d'excrétion
+Perte néphronique et/ou aiguës [199] des médicaments à
+Perte de capacités de élimination rénale
+réabsorption Clairance de créatinine
+Évaluer la fonction rénale via le DFG ou la clairance de la créatinine : quelle
+formule chez le patient âgé ?
+La créatininémie est le biomarqueur de fonction rénale le plus utilisé, mais la relation entre créatininémie
+et débit de filtration glomérulaire (DFG) n'étant pas linéaire, des équations d'estimation du DFG ont été
+développées.
+• La formule de Cockcroft et Gault estime la clairance de la créatinine et a des performances médiocres
+pour l'estimation du DFG chez les personnes âgées.
+• La formule CKD-EPI est actuellement recommandée pour l'estimation du DFG pour le diagnostic de
+maladie rénale chronique, y compris chez les personnes âgées.
+• La formule MDRD a des performances similaires à la formule CKD-EPI pour les DFG < 60 ml/min/1,73 m2.
+Pour l'adaptation posologique des médicaments à élimination rénale, la Haute Autorité de Santé (2012)
+recommande toujours l'utilisation de la formule de Cockcroft et Gault. Ces recommandations devraient
+prochainement évoluer et s'harmoniser avec les recommandations internationales, qui préconisent l'uti-
+lisation de CKD-EPI.
+Il est enfin nécessaire de connaître les limites de ces formules :
+• en cas de sarcopénie notamment, la créatininémie est un mauvais reflet de la fonction rénale ;
+• en cas d'insuffisance rénale aiguë, ces formules sont inutilisables ;
+• dans certaines situations, notamment en cas de chimiothérapie à index thérapeutique étroit, une esti-
+mation du DFG peut être insuffisante et une mesure du DFG par une méthode de référence peut être
+nécessaire (inuline, iohexol…).
+
+--- Page 292 ---
+Connaissances
+3. Facteurs liés à la polymédication, risques d'interactions
+médicamenteuses
+B Les interactions médicamenteuses peuvent être liées aux propriétés pharmacocinétiques de
+certains médicaments (tableau 16.4).
+Tableau 16.4. B Interactions pharmacocinétiques de médicaments utilisés en gériatrie (liste non
+exhaustive).
+Étapes pharmacocinétiques Influence des co-médications
+Absorption Médicaments modifiant le pH gastrique : IPP (inhibiteurs de pompe à protons),
+antiacides
+Résines : cholestyramine
+Chélateurs : déférasirox, déféroxamine, défériprone
+Métabolisme Inducteurs et inhibiteurs des cytochromes
+Hépatotoxiques : paracétamol à forte dose, AINS, antituberculeux, antirétroviraux,
+anticancéreux, azathioprine
+Excrétion Néphrotoxiques : antibiotiques (aminosides), anticancéreux (sels de platine), produits
+iodés, antiviraux…
+D'autres éléments peuvent être pris en compte dans le risque d'interactions médicamenteuses :
+• au-delà de cinq médicaments administrés de manière concomitante, il est impossible de
+prédire l'efficacité et la toxicité d'un traitement ;
+• le nombre de médicaments a de plus un impact sur l'anorexie, la dénutrition et l'obser-
+vance : il faut donc essayer de le réduire ;
+• certains aliments ou produits de phytothérapie ont un impact pharmacocinétique sur l'ab-
+sorption (graisses, produits laitiers) et sur le métabolisme (jus de pamplemousse, milleper-
+tuis…) de certains médicaments.
+Au-delà des effets propres à chaque type ou classe de traitement, il faut également anticiper
+les associations synergiques délétères :
+• action synergique hypotensive : par exemple, antihypertenseurs (toutes classes)
+et alphabloquant ;
+• action synergique néphrotoxique : par exemple, AINS et aminosides ;
+• action synergique hématotoxique : par exemple, chimiothérapies multiples ;
+• action synergique hémorragique : par exemple, associations d'antithrombotiques, AINS et
+anticoagulants ;
+• action synergique hépatotoxique : par exemple, isoniazide et rifampicine ;
+• action synergique confusiogène : par exemple, associations de psychotropes, psychotropes
+et antalgiques de palier 2 ou 3.
+4. Facteurs liés au contexte aigu
+A Le contexte aigu représente une période à risque. En effet, la pathologie aiguë :
+• ne va durer qu'un temps et il faudra anticiper la réévaluation de tous les traitements intro-
+duits selon l'évolution clinique ;
+• peut avoir un retentissement systémique nécessitant la suspension des traitements : baisse
+de la pression artérielle [43], déshydratation, dégradation de la fonction rénale [199], désa-
+turation en oxygène [160]… Selon l'évolution de ces paramètres, il faudra penser à une
+éventuelle reprise des médicaments suspendus ;
+
+--- Page 293 ---
+Apprendre à prescrire chez le patient âgé
+• peut favoriser la survenue d'un syndrome confusionnel [119] ou d'un trouble de la vigi-
+lance [28], compliquant la prise des traitements introduits et des traitements habituels, ce
+qu'il faut anticiper pour discuter du relais à mettre en place et de la voie nécessaire (par
+exemple, voie intraveineuse en raison de troubles de la vigilance ne permettant plus une
+prise orale) ;
+• peut survenir dans un contexte d'urgence, rendant encore plus difficile la récupération
+d'informations fiables et adaptées.
+Mise en situation
+Vous recevez aux urgences une patiente de 92 ans, pour suspicion d'AVC, avec apparition brutale d'un
+déficit de l'hémicorps droit [121] dans un contexte de chute [27]. Cette patiente prend un traitement
+par warfarine (antivitamine K) pour une fibrillation atriale. La TDM cérébrale montre un hématome
+intraparenchymateux gauche [226]. L'INR à l'arrivée est à 10 [218, 248].
+1. Le rapport risque/bénéfice entre la poursuite (en prévention des complications thromboemboliques
+de la fibrillation atriale) et l'arrêt des anticoagulants (en raison d'une complication hémorragique
+majeure) est clairement en faveur de l'arrêt immédiat, en présence d'une complication qui engage
+le pronostic vital immédiat.
+2. La prise en charge du traitement anticoagulant est rappelée dans l'encadré 16.1 et initiée
+immédiatement.
+3. La recherche des causes du surdosage en warfarine doit être initiée dans le même temps. Elle doit
+comprendre la possibilité d'une erreur de prise médicamenteuse, involontaire ou volontaire, d'une
+modification de posologie ou d'une interaction médicamenteuse, que confirme une ordonnance
+trouvée dans ses affaires avec prescription d'un antifongique imidazolé, pour une candidose orale
+dont il reste des traces à l'examen clinique [331, 348].
+▼
+Encadré 16.1
+Gestion d'un surdosage en AVK chez le patient âgé
+Comment traiter un surdosage en AVK chez un patient asymptomatique ?
+A (Recommandations HAS. Prise en charge des surdosages en AVK, des situations à risque hémorragique et des accidents hémorragiques chez les patients traités par AVK en ville et en milieu hospitalier. Avril 2008.)
+
+Pour un INR cible entre 2 et 3 (grande majorité des cas chez les patients âgés) : hospitalisation si possible chez le patient âgé, a fortiori pour INR > 6.
+
+Comprendre les raisons du surdosage (+++)
+Surveillance INR passée à 1 fois par jour dans tous les cas jusqu'au retour à un INR cible.
+
+• INR < 4,0 : pas de saut de prise mais réduire doses ultérieures.
+• INR entre 4,0 et 6,0 : sauter prise(s) et réduire doses ultérieures.
+• INR entre 6,0 et 10,0 :
+  – interrompre l'AVK ;
+  – + vitamine K 1 à 2 mg per os ;
+  – INR toutes les 12 heures ± renouvellement vitamine K ;
+  – réduire doses ultérieures.
+• INR > 10 :
+  – interrompre l'AVK ;
+  – + vitamine K 5 mg per os ;
+  – INR toutes les 12 heures ± renouvellement vitamine K ;
+  – réduire doses ultérieures.
+
+--- Page 294 ---
+Connaissances
+A B
+Fig. 16.1. A Complications du traitement par AVK.
+A. Hématome du psoas gauche. B. Hématome intracérébral.
+▼ Encadré 16.1 Suite
+Comment traiter un surdosage en AVK chez un rétropéritoine, hémopéricarde, hématome mus-
+patient symptomatique ? culaire profond (fig. 16.1A) et/ou syndrome de
+Connaître les critères de saignement majeur loge, hémorragie digestive aiguë, hémarthrose.
+et par élimination les critères de saignement
+Comment traiter une hémorragie mineure
+mineur (++)
+survenant sous AVK ?
+Une hémorragie grave ou potentiellement grave
+Prise en charge identique au patient asymptoma-
+dans le cadre d'un traitement par AVK est définie
+tique en cas de surdosage.
+par la présence d'au moins un des critères suivants :
+• hémorragie extériorisée non contrôlable par les Comment traiter une hémorragie majeure
+moyens usuels ; survenant sous AVK ?
+• instabilité hémodynamique : PAS < 90 mmHg Gestion identique avec ou sans surdosage.
+ou diminution de 40 mmHg par rapport à la PAS
+habituelle, ou PAM < 65 mmHg, ou tout signe de Quel que soit l'INR
+choc ; • Hospitalisation.
+• nécessité d'un geste hémostatique urgent : chirur- • Concentré de complexes prothrombiniques CCP
+gie, radiologie interventionnelle, endoscopie ; (anciennement PPSB).
+• nécessité de transfusion de culots globulaires ; • Vitamine K 10 mg per os ou IV.
+• localisation menaçant le pronostic vital ou fonc- • INR à 30 minutes (pour mesurer l'efficacité du
+tionnel, par exemple : hémorragie intracrânienne CCP) ± renouvellement CCP.
+et intraspinale (fig. 16.1B), hémorragie intr a- • INR à 6 heures (pour mesurer l'efficacité de la vita-
+oculaire et rétro-orbitaire, hémothorax, hémo- et mine K).
+
+--- Page 295 ---
+Apprendre à prescrire chez le patient âgé
+Mises en situation
+Un train peut en cacher un autre : confusion et hyponatrémie
+Vous recevez aux urgences le 8 août d'un été caniculaire à midi alors qu'il fait 35 °C dehors, une
+patiente de 89 ans, adressée pour confusion [119] par une équipe médicale d'urgence à domicile, et
+accompagnée du résultat de sa dernière prise de sang datée d'hier avec une natrémie à 118 mmol/l
+(contre 137 deux mois auparavant) [202]. Le médecin traitant est parti en vacances. La patiente est sui-
+vie pour une hypertension artérielle sous inhibiteur calcique et diurétique thiazidique, un diabète de
+type 2 sous sulfamide hypoglycémiant, une dépression sous inhibiteur de recapture de la sérotonine,
+une arthrose.
+1. L'urgence est d'abord de regarder le retentissement de la canicule, d'éliminer un coup de chaleur
+et une déshydratation. La pression artérielle est à 100/45 mmHg, la fréquence cardiaque à 105/min,
+la température à 37,8 °C, la fréquence respiratoire à 20/min, la saturation à 95 %. La langue est
+rôtie, le sillon gingivo-lingual est sec. La patiente est en sueurs. Vous confirmez la déshydratation
+et faites perfuser la patiente.
+2. L'urgence est ensuite à comprendre l'étiologie de la confusion, confirmée par votre examen cli-
+nique. La déshydratation et l'hyponatrémie sont des facteurs jouant très probablement un rôle.
+Mais la réalisation d'une glycémie capillaire est urgente pour trois raisons :
+❯ systématique en cas de confusion, en raison de la gravité de l'hypoglycémie ;
+❯ à la recherche d'une décompensation de son diabète à l'occasion d'une pathologie intercurrente
+non encore diagnostiquée ? (Ne pas oublier le 37,8 °C qui peut s'expliquer par la déshydratation
+mais pourrait être lié à une infection, dont une pneumopathie dont les crépitants seraient masqués
+par la déshydratation) ;
+❯ à faire en urgence car la déshydratation a entraîné une insuffisance rénale aiguë (créatinine
+150 μmol/l, contre 65 deux mois auparavant [199] ; attention à la kaliémie +++ [201]) et a pu accu-
+muler le sulfamide hypoglycémiant.
+La glycémie capillaire confirme l'hypoglycémie à 1,7 mmol/l [209], que vous corrigez immédiatement.
+Attention : ne pas oublier de penser à l'insuffisance surrénalienne aiguë sur l'association hypona-
+trémie, hyperkaliémie et hypoglycémie.
+3. Le diagnostic étiologique de l'hyponatrémie [202] va reposer sur le calcul de l'osmolarité plasma-
+tique (254 mOsm/l) et l'analyse du secteur extracellulaire cliniquement, qui est en déplétion. La
+déshydratation (la patiente a perdu plus de NaCl que d'eau) aggravée par le diurétique thiazidique
+poursuivi malgré la canicule (défaut d'éducation thérapeutique ou de réévaluation des traitements
+à anticiper avec la chaleur) sont probablement les deux facteurs essentiels, même si on ne peut
+écarter que l'inhibiteur de recapture de la sérotonine ait pu jouer un rôle. La patiente va donc être
+perfusée dans un premier temps par du NaCl 9 ‰ en surveillant une correction progressive de la
+natrémie.
+Asthénie, amaigrissement, insuffisance rénale
+Vous revoyez en consultation une patiente que vous suivez habituellement pour une maladie d'Alzhei-
+mer à un stade modéré, une dépression, une gonarthrose sous paracétamol, une hypertension arté-
+rielle sous inhibiteur de l'enzyme de conversion de l'angiotensine, et un diabète de type 2 sous régime
+et biguanide, et une constipation chronique sous laxatifs. La patiente a perdu 2 kg [17], se dit très
+fatiguée [21] et explique que rien ne va, qu'elle a de la diarrhée et des douleurs partout… Elle est
+convaincue qu'elle a un cancer, que la situation est très grave. Elle amène sa dernière prise de sang qui
+montre une insuffisance rénale aiguë [199] avec une créatinine passée de 86 à 160 μmol/l, avec une
+▲
+
+--- Page 296 ---
+Connaissances
+kaliémie à 4,9 mmol/l. Vous notez également une hémoglobine à 10 g/dl, alors qu'elle avait 12 g/dl il
+y a 5 mois.
+1. La bonne nouvelle est qu'elle ne semble pas confuse et que vous pouvez reprendre au calme l'inter-
+rogatoire pour reconstituer avec précision l'anamnèse. Tout a commencé 2 semaines auparavant,
+par une nouvelle « poussée de son arthrose » traitée par une nouvelle « cure » de kétoprofène
+(AINS), et elle a eu tellement mal qu'elle a décidé de continuer le traitement par peur que cela ne
+recommence. Mais si les douleurs se sont finalement améliorées, elle est maintenant très fatiguée,
+a perdu l'appétit. La seule bonne nouvelle est l'amélioration de sa constipation, mais avec des selles
+noires et malodorantes.
+2. La priorité est à la confirmation de l'hémorragie digestive, probablement haute, avec forte suspi-
+cion d'ulcère gastroduodénal sous AINS. Le toucher rectal confirme le méléna, la pression artérielle
+est à 125/70 mmHg, la fréquence cardiaque à 85/min. La patiente est immédiatement hospitalisée.
+3. L'asthénie, l'anorexie et l'amaigrissement sont apparus après la prescription de l'AINS, et sont liés
+à l'ulcère gastroduodénal, à l'anémie, mais également à l'insuffisance rénale aiguë, dont l'origine
+est directement liée aux AINS (inhibition de l'action vasodilatatrice des prostaglandines rénales)
+et à un effet délétère synergique par la coprescription d'IEC (qui agit en supprimant l'effet vaso-
+constricteur de l'angiotensine II sur l'artériole efférente du glomérule). Sans oublier une dernière
+complication à rechercher qui est l'acidose lactique liée à l'accumulation de biguanide sur insuffi-
+sance rénale aiguë. Dès son arrivée, les AINS, IEC et biguanides seront suspendus, la patiente sera
+perfusée et hydratée, et la prise en charge de sa probable hémorragie digestive sera initiée.
+Au terme de cette première étape, à la recherche des quatre types de facteurs détaillés ci-des-
+sus, le risque d'EIM est évalué :
+• d'un risque faible (mais toujours existant) chez un patient âgé mais monopathologique et
+autonome vu en consultation pour la découverte d'une nouvelle pathologie chronique ;
+• à un risque particulièrement élevé chez un patient dénutri [30], insuffisant rénal avec clai-
+rance de créatinine < 30 ml/min [290], avec trouble neurocognitif majeur [298], confus
+[119], prenant habituellement six médicaments, hypotendu [43] avec troubles de la vigi-
+lance [28] et de la déglutition [62] en contexte aigu.
+B. Décider de prescrire chez un patient âgé (hors contexte
+urgent)
+1. Partager la décision thérapeutique avec le patient et son
+entourage
+L'exercice de la médecine nécessite communication, confiance et partage entre le soignant et
+le soigné. En dehors de l'aspect purement éthique, la loi de 2002 oblige à considérer le patient
+comme un acteur de soin. La population âgée peut être au sens médico-légal classée dans trois
+catégories de patients :
+• les majeurs ;
+• les majeurs protégés : sous tutelle (représentés dans les actes de soins), sous curatelle
+(conseillés mais n'intervenant pas dans l'acte de soins), sous sauvegarde de justice (pas de
+représentant) (cf. chapitre 4) ;
+• les majeurs non protégés et non communicants : personne dont l'état de santé est affecté
+brutalement ou durablement (troubles cognitifs).
+Le préalable à une décision partagée est l'information car elle est consubstantielle au principe
+de consentement.
+▲
+
+--- Page 297 ---
+Apprendre à prescrire chez le patient âgé
+Toute information donnée doit tenir compte du patient et de la situation dans laquelle il
+s'inscrit (catégories citées ci-dessus). Toutefois les règles socles doivent être connues et n'ont
+aucune raison d'être oubliées pour les patients âgés :
+Le médecin :
+• doit formuler ses prescriptions avec toute la clarté indispensable ;
+• doit veiller à leur compréhension par le patient et son entourage ;
+• doit s'efforcer d'en obtenir la bonne exécution (art. 33 ; année 1955).
+L'information médicale incombe à tout professionnel de santé dans le cadre de ses compé-
+tences et dans le respect des règles professionnelles qui lui sont applicables (même s'il n'est
+pas prescripteur) (art. L. 1111-2 al. 2 du Code de la santé publique) ;
+Toute personne a le droit d'être informée sur son état de santé. Cette information porte sur les
+différentes investigations, traitements ou actions de prévention qui sont proposés, leur utilité,
+leur urgence éventuelle, leurs conséquences, les risques fréquents ou graves normalement
+prévisibles qu'ils comportent ainsi que les autres solutions possibles et sur les conséquences
+prévisibles en cas de refus (art. L. 1111-2 al. 1). Toutefois, les choses ne sont pas si simples car
+la loi dit également que « le médecin est tenu au respect du refus du patient d'être informé
+du diagnostic ou du pronostic. Néanmoins, il doit informer le patient de l'intervention ou des
+soins envisagés, de leurs risques, des autres solutions possibles, des conséquences en cas de
+refus » (art. L. 1111-2 al. 4).
+À titre exceptionnel, le médecin peut donner l'information médicale à un tiers (autre que le
+patient) lorsque :
+• la personne est sous tutelle (art. L. 1111-2). Le droit à l'information médicale des personnes
+majeures sous tutelle est exercé par le tuteur. Le médecin donne l'intégralité de l'informa-
+tion médicale au tuteur. Toutefois, il est tenu de délivrer cette information à la personne
+protégée elle-même qui, si elle est d'avis contraire au tuteur et fait preuve de discernement,
+reste la personne décisionnaire ;
+• le diagnostic ou le pronostic sont graves : le médecin a la possibilité (et non l'obligation)
+d'informer la famille, les proches ou la personne de confiance désignée par le patient (art.
+L. 1110-4 al. 6) ;
+• les personnes ne peuvent pas exprimer leurs volontés et ne sont pas protégées. Aucune
+intervention ou investigation ne peut être réalisée, sauf urgence ou impossibilité, sans que
+la personne de confiance (art. L. 1111-6) ou la famille ou, à défaut, un de ses proches ait
+été consulté (art. L. 1111-4).
+Au-delà de l'information, la décision médicale partagée va nécessiter un consentement du
+patient après discussion. Le consentement du patient doit être éclairé :
+• le patient doit comprendre ce à quoi il consent en ayant obtenu au préalable toutes les
+informations nécessaires pour qu'il puisse délibérer (art. L. 1111-4 al. 3) ;
+• ce consentement peut être retiré à tout moment ;
+• si, par sa volonté de refus ou d'interruption de tout traitement, la personne met sa vie en
+danger, elle doit réitérer sa décision dans un délai raisonnable (art. L. 1111-4).
+La personne de confiance :
+• ne décide pas ;
+• favorise le consentement lorsque les personnes ont des troubles cognitifs ;
+• témoigne de ce que désire le patient.
+En effet, le patient peut s'exprimer ou réagir à ce qu'on lui dit au cours de la maladie jusque
+dans les phases sévères. Toutefois, à mesure que l'état cognitif se dégrade, les soignants
+devront simplifier les choix et être sensibles aux messages non verbaux, afin que la personne
+atteinte puisse le plus longtemps possible être intégrée dans la décision.
+
+--- Page 298 ---
+Connaissances
+2. Diminuer le risque associé à la prescription médicamenteuse
+Faire une prescription médicamenteuse chez un patient âgé implique de :
+• confirmer l'indication avec prise en compte des comorbidités (à prioriser parfois), du
+degré d'autonomie, de l'espérance de vie, de ce que le patient dit et souhaite ;
+• évaluer le rapport bénéfice/risque : critères pharmacologiques, galénique, acceptation
+par le patient, tolérance démontrée chez le patient âgé ;
+• intégrer la prescription au sein de l'intégralité des traitements prescrits pour anticiper
+et éviter les interactions médicamenteuses ;
+• prévoir la durée et programmer la réévaluation du traitement ;
+• prévoir une délivrance sécurisée (+++) : infirmières, aidant, pilulier si besoin, a for-
+tiori pour les médicaments à marge thérapeutique étroite (par exemple, anticoagulants,
+antidiabétiques) ;
+• expliquer le traitement voire fournir une éducation thérapeutique : objectifs théra-
+peutiques adaptés au patient âgé, avertissement et suivi des effets indésirables ;
+• évaluer l'observance thérapeutique (cf. infra).
+3. Anticiper le risque de mauvaise observance
+« Drugs don't work in patients who don't take them. »
+C. Everett Koop.
+B L'observance :
+• n'est pas un acte d'obéissance aveugle du patient mais la conséquence de l'adhésion du
+patient au projet thérapeutique ;
+• est une démarche active (adhésion) et non passive (compliance) du malade, prolongée dans
+le temps (persistance) ;
+• est rarement prise en compte dans les pratiques ;
+• est souvent surévaluée dans les essais thérapeutiques.
+Le risque de non-observance dépend de :
+• facteurs de risque liés au traitement lui-même :
+– indication, objectif du traitement (balance bénéfice/risque) ;
+– complexité des modalités d'administration ;
+– intensité des effets secondaires ;
+– charge financière ;
+• facteurs de risque liés au patient et à son entourage :
+– polymédication (nombre de comprimés), comorbidités ;
+– âge, isolement social, troubles cognitifs, sensoriels, praxiques… ;
+– dimension psychologique (+++).
+La personne âgée constitue une personne à risque à de multiples titres et justifie à ce titre
+d'une individualisation de la décision médicale et thérapeutique : il faut mettre en place une
+stratégie d'aide à l'adhésion.
+
+--- Page 299 ---
+Apprendre à prescrire chez le patient âgé
+Stratégie d'aide à l'adhésion
+Améliorer l'accès au système de soins
+– Fixer les rendez-vous de suivi en respectant l'organisation du patient.
+– Faciliter l'accès à un soutien psychologique et aux assistants sociaux.
+Améliorer le plan de traitement
+– Simplifier au maximum le schéma d'administration.
+– Utiliser des semainiers ou autres piluliers.
+– Mettre en place des systèmes de rappel de prises type alarmes, SMS et implication des proches.
+– Considérer les comédications.
+Éducation du patient
+– Caractéristiques et compréhension de la maladie et du traitement.
+– Participation active du patient dans la prise de décision.
+– Évaluation des risques et bénéfices du traitement avec le patient.
+Initiatives du médecin prescripteur et des différents soignants
+– Écouter le patient, évaluer ses besoins, ses ressources, ses perspectives.
+– Tenir compte des comorbidités (notamment, la dépression et les déficits cognitifs).
+– Connaître les coûts et s'assurer de la couverture sociale.
+Valoriser la continuité des soins entre les différents intervenants (généraliste, spécialiste, pharmacien,
+infirmière…)
+– Informer systématiquement les professionnels de santé intervenant dans la prise en charge du patient.
+C. S'inscrire dans une démarche et utiliser des outils
+de prévention des EIM
+1. Alertes du réflexe iatrogénique
+A Devant tout tableau clinique ou symptôme nouveau et/ou peu spécifique d'une affection
+somatique, la recherche d'une origine iatrogène (réflexe iatrogénique) doit être systéma-
+tique. Cette approche est fondée sur la notion d'alertes :
+• B par type de médicaments (vigilance accrue vis-à-vis de certaines classes notamment les
+traitements cardiovasculaires ou les psychotropes) ;
+• par type d'événement clinique (par exemple, chute, état confusionnel aigu, déshydratation) ;
+• par type de pathologie (initier un traitement dont l'indication est fondée sur un haut niveau
+de preuve : prévention des AVC ischémiques en cas de fibrillation atriale, prévention d'une
+ostéoporose en cas de fracture ostéoporotique) ;
+• selon le type d'ordonnance (par exemple, renouvellement systématique et standardisée des
+prescriptions).
+2. Prévention et utilisation d'outils pour réduire le risque d'EIM
+La prévention des EIM permet de réduire, par exemple dans les EHPAD, de 25 à 50 % la fré-
+quence des EIM. Cette prévention se fait en pratique quotidienne à l'échelon :
+• du malade, via l'information voire l'éducation thérapeutique ;
+• du médecin, via des programmes de FMC et/ou de pratique de développement profession-
+nel continu : revue de morbi-mortalité (RMM) ou de comité de retour d'expérience (CREX)
+(cf. infra) ;
+• des structures recueillant les alertes et les signalements d'EIM, telles que les centres régio-
+naux de pharmacovigilance.
+La prévention des EIM repose sur :
+• le respect des bonnes pratiques quant à la rédaction des ordonnances ;
+• l'éducation thérapeutique ;
+
+--- Page 300 ---
+Connaissances
+• l'utilisation d'outils d'aides à la prescription médicamenteuse appropriée, qui comprend :
+– la conciliation médicamenteuse : recueil exhaustif des médicaments pris, bilan médi-
+camenteux par un binôme pharmacien-médecin vérifiant le caractère approprié des
+prescriptions et pouvant mener à des modifications, partage d'informations avec les
+acteurs de soins impliqués dans la santé du malade âgé ;
+– des listes aidant à la détection des PMI et à l'évaluation de la pertinence des prescrip-
+tions médicamenteuses (par exemple, logiciel STOPP-START) ;
+• une culture d'évaluation et d'amélioration des pratiques via :
+– la revue de morbimortalité (RMM) ;
+– le comité de retour d'expérience (CREX) ;
+– l'analyse des événements indésirables graves (EIG).
+3. Éducation thérapeutique
+Cette démarche :
+• est centrée sur les patients ;
+• se fait en partenariat avec leur proche aidant, les professionnels de santé ou les équipes
+impliquées dans la gestion du soin ;
+• a pour objectif d'optimiser l'initiation d'un traitement, son suivi et sa réévaluation ;
+• est essentielle dans la prise en charge des pathologies chroniques telles que le diabète,
+l'insuffisance cardiaque ou dans la gestion des anticoagulants.
+Le succès de l'éducation thérapeutique repose sur un certain nombre de piliers que sont
+la personnalisation des soins, le développement et le renforcement des compétences et de
+l'autonomie des soignants mais aussi du patient lui-même (« empowerment » des auteurs
+anglo-saxons).
+Il est recommandé dans la pratique médicale quotidienne, en particulier pour les personnes
+âgées, de dédier un temps spécifique à l'éducation thérapeutique qui sera distinct du temps
+clinique proprement dit.
+4. Conciliation médicamenteuse
+La conciliation médicamenteuse est une méthode dont les détails sont présentés dans une
+publication de la HAS de 2016. Elle consiste à :
+• recueillir l'information précise et exhaustive de l'ensemble des médicaments pris par
+une personne (y compris liée à l'automédication) en croisant via une enquête au moins
+trois sources (par exemple, données du médecin traitant, du pharmacien, des aidants
+naturels…) ;
+• regrouper les informations recueillies au sein d'un bilan médicamenteux à l'issue de cette
+phase de recueil, par exemple proposée à l'admission d'un malade à l'hôpital ;
+• valider secondairement ce bilan médicamenteux, c'est-à-dire définir parmi les traitements
+les prescriptions médicamenteuses inappropriées (PMI) et/ou les prescriptions médicamen-
+teuses omises (PMO) ;
+• partager et exploiter ce bilan médicamenteux avec l'ensemble des acteurs de soins impli-
+qués dans la santé du malade âgé concerné (par exemple, moment privilégié de la sortie
+de l'hôpital avant un retour à domicile ou en EHPAD). Cette méthode permet de lister et de
+corriger les différences recueillies et éventuellement méconnues des différents partenaires
+de soins (appelées divergences intentionnelles ou non intentionnelles).
+
+--- Page 301 ---
+Apprendre à prescrire chez le patient âgé
+5. Outil STOPP-START
+Cet outil validé en langue française et plus récemment disponible en version digitale est utile
+pour réaliser une évaluation objective et précise de la pertinence des médicaments pres-
+crits chez une personne âgée. Cet outil :
+• permet de déterminer une adéquation entre la pathologie ciblée et son traitement en fonc-
+tion des comorbidités, des syndromes gériatriques du patient et enfin des médicaments
+prescrits ;
+• permet de détecter et de corriger des PMI (critères « STOPP » pour Screening Tool of Older
+Persons' Prescriptions) ;
+• permet de détecter et de corriger des PMO (par exemple, absence de prévention secondaire
+en cas d'ostéoporose fracturaire, absence d'anticoagulation en cas de fibrillation atriale)
+(critères « START » pour Screening Tool to Alert to Right Treatment) ;
+• permet de réduire la polypharmacie et de limiter/prévenir les EIM dans une population
+gériatrique ;
+• ne permet cependant pas d'étudier l'adhésion au traitement, qui relève de la responsabilité
+du malade et/ou de son aidant.
+6. Revue de morbi-mortalité (RMM, référence HAS)
+La revue de morbi-mortalité :
+• consiste à l'analyse des causes et du caractère évitable ou non d'un EIM, et débouche sur
+un plan d'action de mesure de prévention de récidive en analysant tous les facteurs impli-
+qués dans l'EIM ;
+• est privilégiée dans les établissements de santé privés ou publics lors du séjour d'un patient ;
+• a pour objectifs l'amélioration des soins dans le cadre d'une démarche qualité dans ces
+établissements ;
+• est inscrite comme une démarche obligatoire dans le Code de santé publique ;
+• se fonde sur une méthodologie d'évaluation des pratiques de prescription qui souligne
+l'intérêt d'une démarche pluriprofessionnelle et plurispécialités.
+En résumé, la démarche de la RMM est de recenser à un moment donné tous les événements
+iatrogènes dans une situation précise (pathologie déterminée) ou d'un établissement de santé
+ou dans un service ou dans un département.
+En pratique, la RMM :
+• part souvent d'un incident survenu durant le parcours hospitalier d'un patient, et devra
+associer les différentes spécialités et professionnels concernés (interactivité) ;
+• commence par la présentation de l'observation, hiérarchisée quant à ses questions, anony-
+misée et confrontée aux données des publications résumant les niveaux de preuve établis
+(imputabilité extrinsèque) sur la thématique ciblée ;
+• permet de dégager les actions futures à engager, source de l'implémentation de bonnes
+pratiques, pour limiter le risque de récidive de l'EIM ;
+• a une portée limitée par le nombre de participants, à l'application/applicabilité et au res-
+pect/observance des recommandations formulées.
+
+--- Page 302 ---
+Connaissances
+7. Comité de retour d'expérience (CREX)
+Il s'agit également d'un outil d'amélioration de la qualité de la gestion du risque iatrogène.
+Le CREX a été développé dans les années 1990. Dans certains pays (Canada), un recueil annuel
+est obligatoire au sein d'un département de médecine. Cette démarche s'inscrit dans une
+démarche qualité et à l'échelon individuel comme une possibilité de validation du développe-
+ment professionnel continu des professionnels de santé pour leur certification.
+Dans la démarche CREX, les accidents iatrogènes antérieurs sont repérés et leur sévérité détail-
+lée (allant de l'événement mineur à l'EIG). Il s'agit donc de collecter encore une fois le plus
+d'événements possibles. Dans un second temps, une démarche assez voisine de la RMM est
+proposée pour identifier et rechercher collectivement les causes de la défaillance.
+Événement indésirable grave (EIG)
+B La notion de gravité a pour objectif de garder en mémoire les EIM ayant eu des conséquences impor-
+tantes. Le repérage et l'analyse détaillée de l'EIG font l'objet d'une analyse approfondie qui peut se faire via
+des procédures de type CREX et RMM. Les EIG font l'objet d'une déclaration obligatoire au sein de l'éta-
+blissement au responsable médical de la structure, du département ou du pôle de l'établissement. Des
+réunions transversales au sein de l'établissement sont alors réalisées pour améliorer la qualité et la sécurité
+des soins.
+clés
+Les effets indésirables médicamenteux (EIM) sont synonymes de iatrogénie médicamenteuse.
+En raison de leur gravité et de leur fréquence chez les patients âgés, il faut acquérir un réflexe iatrogé-
+nique qui consiste à évoquer/détecter systématiquement des EIM devant toute modification brutale de
+l'état de santé restant inexpliquée par des causes somatiques évidentes.
+Les prescriptions médicamenteuses inappropriées associent :
+• les surprescriptions des médicaments, autrement dit prescriptions qui ne sont pas justifiées par une
+pathologie → « overuse » ;
+• les prescriptions dont les risques encourus sont nettement supérieurs aux bénéfices attendus → mésu-
+sage, « misuse » ;
+• la non-prescription d'un médicament potentiellement approprié → omission de prescription,
+« underuse ».
+L'identification des patients à risque d'EIM est une étape indispensable avant toute prescription et
+nécessite de cibler :
+• les facteurs liés à l'âge ;
+• les facteurs liés aux comorbidités et aux syndromes gériatriques ;
+• les facteurs liés à la polymédication, au risque d'interaction ;
+• les facteurs liés au contexte aigu.
+Faire une prescription médicamenteuse chez un patient âgé implique de :
+• confirmer l'indication avec prise en compte des comorbidités (à prioriser parfois), du degré d'autono-
+mie, de l'espérance de vie, de ce que le patient dit et souhaite ;
+• évaluer le rapport bénéfice/risque ;
+• intégrer la prescription au sein de l'intégralité des traitements prescrits ;
+• prévoir la durée et programmer la réévaluation du traitement ;
+• prévoir une délivrance sécurisée ;
+• expliquer le traitement voire fournir une éducation thérapeutique ;
+• évaluer l'observance thérapeutique.
+stnioP
+
+--- Page 303 ---
+Apprendre à prescrire chez le patient âgé
+Bon usage des psychotropes
+Situations de départ
+En lien avec la définition et avec le diagnostic :
+31 Perte d'autonomie progressive.
+123 Humeur triste/douleur morale.
+131 Troubles de mémoire/déclin cognitif.
+256 Prescrire un hypnotique/anxiolytique.
+288 Consultation de suivi et traitement de fond d'un patient dépressif.
+298 Consultation et suivi d'un patient ayant des troubles cognitifs.
+352 Expliquer un traitement au patient.
+En lien avec l'urgence :
+114 Agitation.
+116 Anxiété.
+119 Confusion/désorientation.
+122 Hallucinations.
+240 Expliquer une hospitalisation en soins psychiatriques à la demande d'un tiers.
+En lien avec la démarche étiologique :
+17 Amaigrissement.
+21 Asthénie.
+27 Chute de la personne âgée.
+30 Dénutrition/malnutrition.
+31 Perte d'autonomie progressive.
+66 Apparition d'une difficulté à la marche.
+114 Agitation.
+116 Anxiété.
+117 Apathie.
+124 Idées délirantes.
+129 Troubles de l'attention.
+131 Troubles de mémoire/déclin cognitif.
+135 Trouble du sommeil, insomnie ou hypersomnie.
+267 Consultation de suivi d'un patient polymorbide.
+279 Consultation de suivi d'une pathologie chronique.
+295 Consultation de suivi gériatrique.
+327 Annonce d'un diagnostic de maladie grave au patient et/ou à sa famille.
+328 Annonce d'une maladie chronique.
+345 Situation de handicap.
+348 Suspicion d'un effet indésirable des médicaments ou d'un soin.
+Items, objectifs pédagogiques, hiérarchisation des connaissances
+ITEM 74 – Prescription et surveillance des psychotropes
+Rang Rubrique Intitulé Descriptif
+A Définition Connaître la définition et les princi- Antipsychotique ; antidépresseurs ;
+pales classes de psychotropes* anxiolytiques ; hypnotiques ; thymo-
+régulateurs ; psychostimulants
+B Prévalence, Connaître les principaux chiffres d'utilisation des psychotropes
+épidémiologie en France, notamment chez les patients âgés (usage et mésusage,
+pharmaco-épidémiologie)*
+A Définition Antipsychotiques : principales classes et molécules*
+▼
+
+--- Page 304 ---
+Connaissances
+Rang Rubrique Intitulé Descriptif
+B Prise en charge Antipsychotiques : indications, non-indications, contre-indications à tous
+les âges de la vie, notamment chez les patients âgés
+B Prise en charge Antipsychotiques : règles de bon usage à tous les âges de la vie, notam-
+ment chez les patients âgés et/ou atteints de démence
+B Prise en charge Antipsychotiques : effets indésirables fréquents ou graves, principales
+interactions médicamenteuses à tous les âges de la vie, notamment chez
+les patients âgés
+A Identifier une Antipsychotiques : modalités de Molécules à privilégier, bilan
+urgence prescription en situation d'urgence pré-thérapeutique, voie
+d'administration
+A Définition Antidépresseurs : principales classes et molécules
+A Prise en charge Antidépresseurs : indications, non-indications, contre-indications
+B Prise en charge Antidépresseurs : règles de bon usage à tous les âges de la vie, notamment
+chez les enfants/adolescents et les patients âgés
+A Prise en charge Antidépresseurs : effets indésirables fréquents ou graves, principales inte-
+ractions médicamenteuses
+A Définition Anxiolytiques : principales classes et molécules
+A Prise en charge Anxiolytiques : indications, non-indications, contre-indications à tous les
+âges de la vie, notamment chez les patients âgés
+A Prise en charge Anxiolytiques : règles de bon usage à tous les âges de la vie, notamment
+278 chez les patients âgés
+A Prise en charge Anxiolytiques : effets indésirables fréquents ou graves, principales interactions
+médicamenteuses à tous les âges de la vie, notamment chez les patients âgés
+A Prise en charge Anxiolytiques : modalités de pres- Molécules à privilégier, bilan
+cription en situation d'urgence pré-thérapeutique, voie
+d'administration
+A Définition Hypnotiques : principales classes et molécules
+A Prise en charge Hypnotiques : indications, non-indications, contre-indications à tous les
+âges de la vie, notamment chez les patients âgés
+A Prise en charge Hypnotiques : règles de bon usage à tous les âges de la vie, notamment
+chez les patients âgés
+A Prise en charge Hypnotiques : effets indésirables fréquents ou graves, principales interactions
+médicamenteuses à tous les âges de la vie, notamment chez les patients âgés
+A Définition Thymorégulateurs : principales classes et molécules*
+▼
+▼
+
+--- Page 305 ---
+Apprendre à prescrire chez le patient âgé
+Rang Rubrique Intitulé Descriptif
+B Prise en charge Thymorégulateurs : indications, Notamment acide valproïque et
+non-indications, contre-indications autres produits tératogènes et
+à tous les âges de la vie, notamment femme en âge de procréer
+chez les patients âgés*
+B Prise en charge Thymorégulateurs : effets indésirables fréquents ou graves, principales
+interactions médicamenteuses à tous les âges de la vie, notamment chez
+les patients âgés*
+A Définition Psychostimulants : principales classes et molécules*
+B Prise en charge Psychostimulants : indications, non-indications, contre-indications*
+B Prise en charge Psychostimulants : effets indésirables fréquents ou graves, principales
+interactions médicamenteuses*
+ITEM 330 – Prescription et surveillance des classes de médicaments les plus courantes chez l'adulte
+et chez l'enfant, hors anti-infectieux
+Rang Rubrique Intitulé Descriptif
+A Prise en charge Benzodiazépines : connaître les Connaître les mécanismes
+mécanismes d'action, indications, effets d'action
+secondaires, interactions médicamen-
+teuses, modalités de surveillance et
+principales causes d'échec
+A Prise en charge Inhibiteurs spécifiques de recapture Connaître les mécanismes
+de la sérotonine : connaître les méca- d'action
+nismes d'action, indications, effets
+secondaires, interactions médicamen-
+teuses, modalités de surveillance et
+principales causes d'échec
+A Prise en charge Antipsychotiques : connaître les Connaître les mécanismes
+mécanismes d'action, indications, effets d'action
+secondaires, interactions médicamen-
+teuses, modalités de surveillance et
+principales causes d'échec
+I. Généralités
+B La consommation de psychotropes est élevée en France, avec une consommation deux fois
+plus importante chez les femmes. Les benzodiazépines sont en première position, les antidé-
+presseurs en deuxième position. Mais malgré une consommation importante de psycho-
+tropes, le taux de patients dépressifs correctement traités reste largement insuffisant (15 %).
+Ainsi, l'HAS a recommandé en 2007 d'améliorer la prescription des psychotropes chez le
+patient âgé.
+▼
+
+--- Page 306 ---
+Connaissances
+Les écueils à éviter concernant la prescription de psychotropes
+du patient âgé
+• Ne pas prendre en compte la vulnérabilité cognitive du patient âgé [131, 298].
+• Négliger les risques de l'introduction ou du sevrage d'un psychotrope [348].
+• Ne pas avoir le réflexe iatrogène psychotrope en présence d'un syndrome confusionnel [119].
+• Ne pas anticiper les difficultés du sevrage d'un psychotrope.
+• Céder trop facilement aux benzodiazépines ou hypnotiques en présence de troubles du sommeil [135].
+→ La prescription de psychotropes est un acte fréquent, en particulier chez les patients ayant des TNC.
+L'introduction autant que les modifications de posologie et le sevrage sont des situations à risque de
+mauvaise tolérance, en particulier de syndrome confusionnel. L'évaluation du rapport risque/bénéfice est
+d'autant plus importante que les patients ont des TNCM ou sont polymédiqués.
+Quand prescrire ou réévaluer un traitement par psychotropes ?
+L'évaluation du risque lié aux psychotropes doit tenir compte du terrain et nécessite une EGS pour en
+limiter les risques.
+Quand ?
+• En cas de dépression [123, 288], d'anxiété [116], de trouble psychotique [122, 124].
+• En cas de trouble du comportement [114, 122] chez un patient avec TNC [298].
+• En présence d'une cassure sur le plan cognitif [119], comportemental [114] ou fonctionnel [31] dans
+280 l'évolution du patient.
+• Systématiquement en cas de syndrome confusionnel [119, 348].
+Comment ?
+• En privilégiant les mesures non médicamenteuses qui permettraient d'éviter un psychotrope.
+• En analysant précisément la sémiologie psychiatrique [31, 114, 116, 117, 124, 129, 135].
+• En impliquant si besoin l'aidant principal [330], le médecin référent.
+Pourquoi ?
+• Afin de ne prescrire de psychotropes que dans le cadre d'indications reconnues.
+• Afin de reconnaître les signes de mauvaise tolérance.
+• Afin de les gérer de manière adaptée en cas de syndrome confusionnel [119].
+• Afin d'en limiter l'indication et le risque iatrogène en corrigeant un facteur étiologique d'un syndrome
+confusionnel.
+II. Antidépresseurs
+A Le traitement de la dépression est aussi efficace chez le patient âgé que chez le patient
+jeune, il améliore 60 à 70 % des patients avec dépression caractérisée.
+Le choix de l'antidépresseur tient compte de l'efficacité d'un traitement antérieur, du risque
+d'effets indésirables propres à la molécule, des comorbidités et des interactions médicamen-
+teuses potentielles. La primo-prescription repose sur les inhibiteurs sélectifs de recapture de la
+sérotonine (ISRS) et sur un ISRS et de la noradrénaline (ISRS-NA) en cas d'échec.
+La résistance au traitement est définie par un échec thérapeutique après deux traitements bien
+conduits avec des molécules différentes (doses efficaces et durée suffisante).
+Rechercher alors une autre cause iatrogène, organique (notamment métabolique ou neurolo-
+gique) ou psychiatrique.
+
+--- Page 307 ---
+Apprendre à prescrire chez le patient âgé
+En cas de TNC :
+• utilisés dans le cadre de troubles du comportement (agressivité en particulier après avoir
+éliminé un facteur déclenchant) ;
+• efficacité encore controversée en l'absence de dépression, même si traitements fréquem-
+ment prescrits ;
+• principales difficultés :
+– absence de critères diagnostiques fiables de dépression en cas de TNC ;
+– apathie (diagnostic différentiel).
+Principaux effets secondaires des ISRS (paroxétine, citalopram et
+escitalopram, fluoxétine, fluvoxamine, sertraline)
+• Hyponatrémie par sécrétion inappropriée d'ADH : liées à un effet de classe, 25 % des cas.
+• Syndrome sérotoninergique : en cas de surdosage ou d'association à des molécules avec
+effets sérotoninergiques (par exemple, tramadol).
+• Syndrome extrapyramidal : décrit en raison du déclin des voies nigrostriées.
+• Effets cardiovasculaires : en particulier allongement du QT (précautions d'emploi avec réa-
+lisation d'un ECG au préalable et après l'introduction).
+• Nombreuses interactions médicamenteuses : cytochrome P450.
+Principaux effets secondaires des ISRS-NA (venlafaxine, minalcipran,
+duloxétine)
+• B Hypotension artérielle.
+• Nausée, vomissements.
+• Effets anticholinergiques minimes.
+• Pour la venlafaxine : poussée d'HTA.
+• Allongement du QT (précautions d'emploi avec réalisation d'un ECG au préalable).
+III. Benzodiazépines et molécules apparentées
+A Ces molécules ont en commun une action :
+• sédative et hypnotique : elles accélèrent la survenue du sommeil, diminuent les réveils noc-
+turnes et prolongent la durée du sommeil, mais modifient aussi l'architecture du sommeil
+normal ;
+• anxiolytique : rapide et visible dès la première prise sur la symptomatologie anxieuse ;
+• anticonvulsivante : utilisation réservée au traitement de l'urgence ;
+• myorelaxante.
+Principes de prescription chez le patient âgé
+• S'assurer de l'indication.
+• Informer et expliquer au patient les effets attendus.
+• Informer et expliquer au patient les effets indésirables possibles.
+• S'assurer de l'adhésion du patient et de sa compliance.
+• Proposer une dose minimale efficace.
+• Choisir un produit à demi-vie courte et sans métabolite actif.
+• En cas de primoprescription, prescrire une durée maximale de 4 semaines (hypnotiques) ou
+12 semaines (anxiolytiques).
+
+--- Page 308 ---
+Connaissances
+• Informer le patient des modalités d'arrêt dès la première prescription.
+• Réévaluer l'efficacité à chaque renouvellement de la prescription.
+• Réévaluer la pertinence de la poursuite du traitement à chaque renouvellement de la
+prescription.
+Trois principales indications
+• Prévention et traitement des manifestations de sevrage alcoolique (situation rarement
+gériatrique).
+• Troubles du sommeil.
+• Anxiété.
+Dans ces deux dernières indications, l'utilisation de mesures soit non médicamenteuses soit
+médicamenteuses à moindre risque (par exemple, mélatonine pour les troubles du sommeil)
+doit être privilégiée en première intention.
+ARRÊT DES BENZODIAZÉPINES ET APPARENTÉS CHEZ LE PATIENT DE PLUS DE 65 ANS
+DÉMARCHE du MÉDECIN TRAITANT en AMBULATOIRE
+Prise quotidienne de BZD > 30 jours Maintien du traitement par
+BZD ou apparentés si
+indication encore valide y
+compris en termes de durée
+Attentes du patient ? Degré d'attachement aux BZD ?
+Décision partagée d'arrêt des BZD
+Évaluation de la difficulté de l'arrêt des BZD
+Précautions particulières Prise en charge spécialisée conjointe
+• dépression
+• doses très élevées de BZD
+• insomnie chronique
+• insomnie rebelle
+• trouble anxieux caractérisé
+• dépendance à l'alcool
+(tr panique, tr obsessionnel compulsif)
+• autre dépendance
+• troubles cognitifs, démence
+• associations à d'autres psychotropes
+• échecs antérieurs d'arrêt
+• troubles psychiatriques sévères
+• surconsommation régulière d'alcool
+Arrêt progressif adapté
+sur 4 à 10 semaines le plus souvent
+Suivi
+Consultations rapprochées jusqu'à 1 semaine après l'arrêt
+Suivi jusqu'à 6 mois après l'arrêt
+Fig. 16.2. A Modalités d'arrêt des benzodiazépines chez le patient âgé de plus de 65 ans. Démarche
+du médecin traitant en ambulatoire. (Source : Recommandations de bonnes pratiques de l'HAS, 2007, réactuali-
+sée en 2014).
+
+--- Page 309 ---
+Apprendre à prescrire chez le patient âgé
+Principaux effets secondaires
+Le plus souvent directement liés à l'action clinique (effet sédatif, somnolence…) :
+• amnésie antérograde dose-dépendante liée aux propriétés amnésiantes (effet de classe) ;
+• risque de chutes et de fracture [27] ;
+• troubles cognitifs, syndrome confusionnel [119] ;
+• rares réactions paradoxales ;
+• tolérance et dépendance en cas de consommation prolongée ;
+• syndrome de sevrage en cas d'arrêt brutal. Recommandations de sevrage publiées par la
+Haute Autorité de Santé (fig. 16.2).
+IV. Antipsychotiques
+Indications et principales utilisations chez le patient âgé
+• Troubles psychotiques : schizophréniques, états maniaques avec délires, dépressions
+sévères avec éléments psychotiques.
+• Symptômes comportementaux et psychologiques lors de la démence (SCPD), comme
+une agressivité ou une agitation importantes ne bénéficiant pas d'un autre traitement et/
+ou en lien avec un trouble délirant.
+• À éviter dans la maladie de Parkinson et la maladie à corps de Lewy en raison d'ef-
+fets indésirables gravissimes — à l'exception de la clozapine, sous certaines conditions avec
+surveillance étroite.
+Choix des antipsychotiques
+Antipsychotiques typiques (ou de première génération)
+• B Tiapride : a l'AMM pour les états d'agitation chez le patient âgé, souvent utilisé pour ses
+propriétés sédatives. N'est pas un traitement chronique.
+• Halopéridol : nombreuses études chez le patient âgé mais du fait de sa mauvaise tolérance,
+n'est pas à utiliser en gériatrie.
+Antipsychotiques atypiques (ou de deuxième génération)
+Ils sont à privilégier du fait de leur meilleure tolérance. Ils ont fait l'objet de très peu d'études
+contrôlées chez le patient âgé (sauf rispéridone). En pratique, on utilise la rispéridone, la quié-
+tiapine ou l'olanzapine.
+Principaux effets secondaires
+• A Effets cardiovasculaires : hypotension orthostatique, allongements du QT (surveillance
+ECG chez les sujets à risque).
+• Syndrome parkinsonien responsable de chutes aux conséquences parfois graves.
+• Effets anticholinergiques.
+• Risques cérébrovasculaires (en particulier en cas d'antécédents cardiovasculaires).
+• Syndrome malin des neuroleptiques, rare mais grave.
+
+--- Page 310 ---
+Connaissances
+Savoir quand et comment transfuser un patient
+âgé en concentrés de globules rouges
+Situations de départ
+En lien avec la définition et avec le diagnostic :
+217 Baisse de l'hémoglobine.
+223 Interprétation de l'hémogramme.
+272 Prescrire et réaliser une transfusion sanguine.
+348 Suspicion d'un effet indésirable des médicaments ou d'un soin.
+352 Expliquer un traitement au patient.
+En lien avec la prise en charge en urgence :
+10 Méléna/rectorragie.
+14 Émission de sang par la bouche.
+16 Adénopathies unique ou multiples.
+17 Amaigrissement.
+21 Asthénie.
+27 Chute de la personne âgée.
+31 Perte d'autonomie progressive.
+43 Découverte d'une hypotension artérielle.
+50 Malaise/perte de connaissance.
+60 Hémorragie aiguë.
+64 Vertige et sensation vertigineuse.
+74 Faiblesse musculaire.
+284 89 Purpura/ecchymose/hématome.
+95 Découverte d'une anomalie au toucher rectal.
+112 Saignement génital anormal.
+119 Confusion mentale/désorientation.
+131 Troubles de mémoire/déclin cognitif.
+162 Dyspnée.
+166 Tachycardie.
+173 Traumatisme des membres.
+176 Traumatisme sévère.
+185 Réalisation et interprétation d'un électrocardiogramme (ECG).
+229 Découverte d'une anomalie pelvienne à l'examen d'imagerie médicale.
+231 Demande d'examen d'imagerie.
+En lien avec la démarche étiologique :
+178 Demande/prescription raisonnée et choix d'un examen diagnostique.
+231 Demande d'un examen d'imagerie.
+327 Annonce d'un diagnostic de maladie grave au patient et/ou à sa famille.
+334 Demande de traitement et investigation inappropriés.
+Item, objectifs pédagogiques, hiérarchisation des connaissances
+ITEM 329 – Transfusion sanguine et produits dérivés du sang : indications, complications, hémovigilance
+Rang Rubrique Intitulé Descriptif
+A Éléments Connaître les groupes sanguins Système ABO et système Rhésus,
+physiopathologiques érythrocytaires phénotype
+A Définition Connaître les règles immunolo- Groupage ABO, Rh KELL, règles de
+giques de transfusion des produits compatibilité ABO, recherche RAI
+sanguins labiles* préalable
+▼

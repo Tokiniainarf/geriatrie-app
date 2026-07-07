@@ -1,0 +1,2 @@
+## 2026-06-30T11:34:16Z
+Analyze tests/run-e2e.js and verify-all-chapters.js to understand test expectations. Formulate a design for a new automated audit script 'audit_ocr.js' that checks all 20 chapters for: (1) words containing cuts or repeats (e.g. 'altéinterrogatoire', 'complémentaires plémentaires'), and (2) situation numbers (e.g. 295, 298, 325) appearing in the text of normal paragraphs. Save your analysis and proposed design to C:\Users\tokin\.gemini\antigravity\scratch\geriatrie-app\.agents\explorer_m1_3_gen4\handoff.md.

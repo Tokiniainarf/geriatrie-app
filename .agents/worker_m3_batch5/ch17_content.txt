@@ -1,0 +1,423 @@
+--- Page 319 ---
+Prendre une décision de soins palliatifs et accompagner le patient
+ITEM 141 – Soins palliatifs pluridisciplinaires chez un malade en phase palliative ou terminale
+d'une maladie grave, chronique ou létale (3). La sédation pour détresse en phase terminale et dans
+des situations spécifiques et complexes en fin de vie. Réponse à la demande d'euthanasie ou de
+suicide assisté
+Rang Rubrique Intitulé
+A Définition Comprendre la distinction entre sédation à la demande du patient, sédation
+pour détresse en phase terminale et euthanasie
+B Diagnostic positif Connaître les indications des pratiques sédatives
+B Diagnostic positif Connaître les repères cliniques, relationnels et légaux lorsqu'un patient
+formule une demande d'euthanasie
+B Diagnostic positif Connaître les repères cliniques, relationnels et légaux lorsqu'un patient
+formule une demande de suicide assisté
+B Diagnostic positif Connaître les repères cliniques, relationnels et légaux lorsqu'un patient
+formule une demande de sédation pour détresse
+A Prise en charge Savoir faire appel à des équipes ressources ou à des services de recours
+B Prise en charge Savoir délibérer individuellement et collectivement pour aboutir à une
+décision de sédation
+I. Introduction aux situations et soins palliatifs
+A. Définitions
+A Il existe différents stades de situations palliatives, dont toutes ne relèvent pas de soins
+palliatifs, et la prise en charge varie selon les stades :
+• une phase de stade palliatif actif pouvant durer plusieurs années (par exemple, traitement
+pour cancer colique métastatique par chimiothérapie) ;
+• une phase de stade palliatif symptomatique qui peut durer plusieurs mois (par exemple,
+pose d'une prothèse biliaire pour un cancer du pancréas avancé ictérique) ;
+• une phase de stade terminale qui peut durer plusieurs semaines (par exemple, pertinence
+de l'instauration d'une alimentation artificielle) ;
+• une phase agonique qui peut durer quelques heures à quelques jours (priorité à la prise en
+charge des symptômes inconfortables).
+Les soins palliatifs sont des soins actifs et continus pratiqués par une équipe interdisciplinaire visant
+à soulager la douleur, à apaiser la souffrance psychique, à sauvegarder la dignité de la personne
+malade et à soutenir son entourage (Société française d'accompagnement des soins palliatifs).
+B. Connaître le cadre légal
+La situation de fin de vie s'inscrit dans un cadre légal. La Loi Claeys-Leonetti du 2 février 2016
+créant de nouveaux droits en faveur des malades et des personnes en fin de vie s'inscrit dans
+la lignée des lois :
+• du 4 février 1995 comportant des dispositions sur la lutte contre la douleur ;
+• du 9 juin 1999 visant à garantir le droit à l'accès aux soins palliatifs ;
+• du 4 mars 2002, dite Loi Kouchner, relative aux droits des malades et à la qualité du sys-
+tème de santé ;
+• du 22 avril 2005, dite Loi Leonetti, relative aux droits des malades et à la fin de vie.
+▼
+
+--- Page 320 ---
+Connaissances
+Points clefs réglementaires
+Selon la Loi Claeys-Leonetti du 2 février 2016 : « Toute personne a le droit de refuser ou de ne pas recevoir
+un traitement. Le suivi du malade reste cependant assuré par le médecin, notamment son accompagne-
+ment palliatif. » La loi nécessite que le patient réitère sa décision lors d'une réévaluation. Ce refus de trai-
+tement, qui n'est pas un refus de soins, sera inscrit dans le dossier médical et sera suivi de la construction
+d'un projet de soins pluridisciplinaire.
+Lorsqu'un patient exprime un souhait de mourir, le cadre légal rappelle « qu'en France l'euthanasie et le
+suicide assisté sont interdits ».
+La loi permet au patient atteint d'une affection grave et incurable de demander une sédation profonde et
+continue. La sédation est la recherche, par des moyens médicamenteux, d'une diminution de la vigilance afin
+de diminuer voire de faire disparaître la perception d'une situation vécue comme insupportable par le patient :
+• elle fait suite à une procédure collégiale pluridisciplinaire, intégrant le consentement du patient chaque
+fois qu'il est possible de le recueillir ;
+• elle peut être mise en œuvre en cas de situations aiguës à risque vital immédiat ;
+• elle doit être maintenue jusqu'au décès ;
+• elle intervient si :
+– son pronostic vital est engagé à court terme ;
+– et qu'il présente une souffrance (y compris psychique) qu'aucun traitement ne peut réduire ;
+– et que tous les moyens disponibles et adaptés à cette situation ont pu lui être proposés et/ou mis en
+œuvre.
+294 C. Mécanismes psychoadaptatifs du patient atteint de
+maladie grave
+Plusieurs théories sont proposées non spécifiques au patient âgé.
+Kübler-Ross E. (1926-2004) décrit un itinéraire de plusieurs phases qui se succéderont :
+• le choc : réaction à l'annonce « brutale », variable dans sa forme ;
+• la colère : elle vient d'un sentiment d'injustice : « pourquoi moi ? ». Cette colère est la prise
+de conscience de la solitude fondamentale de la personne devant son destin ;
+• le marchandage : c'est la recherche d'une échappatoire qui viendrait atténuer la brutalité
+de la réalité ;
+• le relâchement : plus de colère, plus d'espoir ;
+• la sérénité : il s'agit d'une sorte de lâcher-prise. Le patient peut sembler indifférent voire
+exprime une sorte de joie et calme. Mais il faut être vigilant, car cette étape n'est pas for-
+cément le signe d'une sorte de sagesse.
+Chez la personne âgée, ces phases peuvent paraître tronquées ou moins apparentes, car les
+expériences de la vie et la conscience de sa fragilité du fait de l'avancée en âge préparent la
+personne à l'éventualité de la survenue d'une maladie grave. Mais ceci est très subjectif et cer-
+taines personnes qui vieillissent de manière « réussie » peuvent avoir le même type de réactions
+que des patients plus jeunes.
+Ionescu S. (1997) décrit des réactions qui n'ont pas de relation temporelle entre elles ni de
+caractère obligatoire, la réaction étant très subjective s'inscrivant dans l'histoire et la psycho-
+logie du patient comme :
+• le déni : mécanisme radical par lequel le patient efface de sa conscience une information
+trop agressive sur le plan psychique ;
+• la dénégation : refus partiel de la réalité ;
+• l'isolation : consiste à isoler une pensée de son affect, ce qui amène le patient à parler de
+sa maladie de manière froide et insensible ;
+
+--- Page 321 ---
+Prendre une décision de soins palliatifs et accompagner le patient
+• le déplacement : le patient centre ses préoccupations sur un sujet indépendant de sa
+maladie ;
+• la maîtrise : le patient cherche à conserver le contrôle de ce qui lui arrive et va s'investir dans
+les moindres détails des caractéristiques de sa maladie ou des traitements qu'il reçoit d'une
+manière compulsive et obsessionnelle ;
+• la régression : fréquente chez des patients ayant des troubles cognitifs sévères ; il se laisse
+prendre en charge s'abandonnant dans le nursing d'une manière passive ;
+• la projection agressive : le patient devient agressif envers l'entourage et envers lui-même ;
+• la combativité ou la sublimation : ce sont des modes d'investissement psychique dans
+lequel le patient combat pour dépasser l'épreuve.
+D. Modèles de relation médecin-malade pour accompagner
+une personne malade et son entourage
+1. Différents modèles
+Modèle paternaliste
+B Le patient est faible et ignorant. Le médecin se substitue au malade dans un souci de bien-
+veillance et de bienfaisance. Cette position vient en opposition avec la dignité, la citoyenneté
+et le libre arbitre qui fondent l'application des lois, codes et règlements qui régissent l'acte
+médical. Par habitude culturelle, la fragilité présumée ou réelle de la personne âgée peut
+conduire le médecin à agir selon ce modèle. Mais, par contraste avec les personnes très âgées,
+l'abandon de ce modèle est toujours bien reçu par les nouvelles générations de personnes
+âgées, montrant ainsi que sa généralisation à une certaine époque ne voulait pas forcément
+dire son acceptation par le plus grand nombre.
+Modèle autonomiste
+La personne est perçue comme un adulte responsable, qui exprime sa liberté de décision.
+Son application chez les personnes ayant une altération cognitive rend son application
+difficile et fait intervenir les proches dont la reconnaissance juridique est la personne de
+confiance.
+Ces deux modèles sont remis en cause dans la pratique clinique
+En effet, si le modèle paternaliste est le plus aisé à mettre en œuvre, il n'est jamais souhaitable.
+À l'inverse, le modèle autonomiste est celui vers lequel nous devons tendre, car il représente
+le principe même d'une reconnaissance de la dignité de la personne, mais il est le plus difficile
+à appliquer auprès des personnes âgées. C'est pourquoi, quittant les modèles théoriques,
+l'application d'un mode pragmatique est actuellement valorisé, comme le modèle centré
+sur le patient.
+2. Relation centrée sur le patient
+La médecine cherche à construire une relation de confiance au service du patient. L'acte est
+moralement fondé sur sa capacité à reconnaître et à répondre aux attentes du patient et de
+ses proches. La relation mobilisée par l'empathie professionnelle est fondée sur la tolérance
+et la compréhension des mécanismes psychoaffectifs déployés par le patient pour répondre à
+la situation.
+
+--- Page 322 ---
+Connaissances
+Les sept écueils à éviter concernant la prise en charge palliative
+du patient âgé
+• Considérer trop rapidement une approche palliative chez un patient du fait de son âge [352].
+• Ne pas prendre en compte l'ensemble des critères indispensables (comorbidités, dépendance, qualité
+de vie, souhait du patient et perspective d'amélioration) pour définir un projet palliatif [337].
+• Confondre la décompensation aiguë d'une pathologie chronique avec l'aggravation de cette pathologie
+et l'utiliser comme critère dans un projet palliatif ; un syndrome confusionnel confondu avec la progres-
+sion d'un TNCM peut être un exemple typique [119, 131, 298].
+• Prendre en charge les symptômes d'une phase palliative de façon suboptimale par crainte de la iatrogé-
+nie médicamenteuse.
+• Considérer que les soins palliatifs ne concernent que la phase agonique [259, 260].
+• Ne pas associer le patient à un projet de soins palliatifs [327, 328].
+• Ne pas anticiper les discussions concernant la fin de vie.
+→ La décision de soins palliatifs répond à un projet thérapeutique actif et doit faire l'objet d'une discus-
+sion pluriprofessionnelle. La limitation d'examens complémentaires et de soins s'inscrit dans le cadre plus
+global de situations palliatives.
+→ Un projet de soins palliatifs doit envisager la prévention et le traitement de l'ensemble des symptômes
+inconfortables pour le patient.
+Envisager les soins palliatifs
+Les soins palliatifs peuvent être envisagés chez tous les patients en situation grave, quel que soit l'âge, en
+particulier comorbides, en complication de l'évolution d'une pathologie chronique.
+Quand ?
+• Lors d'une pathologie grave d'emblée ou en présence d'une aggravation ou d'une complication surajou-
+tée (par exemple : [28, 43, 60, 62, 160, 176]).
+• Lors d'un suivi d'une pathologie chronique d'aggravation progressive, quand elle s'associe à des symp-
+tômes invalidants et/ou une perte d'autonomie, devant faire rediscuter la balance bénéfice/risque des
+thérapeutiques chroniques.
+• Lors de la découverte de toute nouvelle pathologie grave nécessitant des explorations et/ou thérapeu-
+tiques lourdes [328].
+Comment ?
+• En récupérant l'ensemble des informations nécessaires à une prise de décision adaptée au patient et à
+la situation pathologique.
+• En impliquant le patient, la personne de confiance, l'aidant principal et/ou la famille [328].
+• En organisant l'équivalent d'une réunion de concertation pluridisciplinaire [337].
+Pourquoi ?
+• Afin de choisir objectivement le projet le plus adapté à la volonté du patient et à ses perspectives en
+termes de qualité de vie.
+• Afin de prévenir ou soulager le patient de symptômes inconfortables [258, 259, 260].
+
+--- Page 323 ---
+Prendre une décision de soins palliatifs et accompagner le patient
+II. Démarche clinique palliative devant un patient âgé
+en situation grave
+Démarche
+A. Aborder une situation de limitation de soins ou de discussion de soins palliatifs.
+B. Communiquer avec un patient en situation de soins palliatifs.
+C. Faire le diagnostic de situation et de soins palliatifs.
+D. Organiser le plan de soins thérapeutique palliatif.
+A. Aborder une situation de limitation de soins
+ou de discussion de soins palliatifs
+A La limitation de soins peut aboutir à une prise en charge palliative.
+La limitation de soins est une situation fréquente, rencontrée dès les urgences et/ou dans
+le cadre de l'urgence et/ou dans le cadre d'une hospitalisation mais aussi parfois en ville.
+La difficulté réside dans la fiabilité et la qualité des informations médicales, fonctionnelles
+et de qualité de vie du patient, devant être récupérées pour prendre une décision grave. En
+l'absence d'informations suffisamment fiables, le doute doit bénéficier au patient et le projet
+thérapeutique doit être envisagé pour laisser un maximum de chances de survie au patient.
+Comme chez des patients plus jeunes et moins comorbides, une limitation de soins peut être
+envisagée :
+• devant une situation particulièrement grave, au-delà de toute ressource thérapeutique,
+comme un arrêt cardiorespiratoire [38], un coma [28], une détresse respiratoire aiguë
+[160], un traumatisme sévère [176]… Cependant, la décision d'une limitation de soins
+est l'aboutissement d'une réflexion thérapeutique urgente, initiée à partir d'une démarche
+« pro-active » qui doit rester la règle au moment de la prise en charge du patient. Dans
+ce contexte, la récupération des informations est parfois impossible et l'examen clinique
+cherche en urgence des signes à considérer comme des témoins possibles de comorbidités
+sévères comme des rétractions tendineuses, une amyotrophie musculaire sévère, le port de
+protections [103] ou des escarres [86] ;
+• devant une situation grave chez un patient comorbide dont les capacités de réserve ne
+permettent pas d'envisager une évolution favorable, selon le projet de vie arrêté selon le
+souhait du patient (qualité de vie, dépendance), comme une hémorragie digestive haute
+[13, 60] avec instabilité hémodynamique [43], une détresse respiratoire aiguë [160]…
+Dans ce contexte, la récupération des informations est indispensable et le plus souvent
+possible, mais un engagement thérapeutique peut parfois être décidé afin de disposer de
+temps pour récupérer des informations indispensables à la prise de décision adaptée au
+patient et à la situation ;
+• devant l'évolution d'une ou plusieurs comorbidités, selon le projet de vie arrêté selon le
+souhait du patient (qualité de vie, dépendance). Dans ce cadre, la limitation de soins s'in-
+tègre à la situation palliative mène à la décision de plan de soins palliatifs.
+B. Communiquer avec un patient en situation de soins
+palliatifs
+Le comportement du médecin se fonde sur sa compétence médicale, l'évaluation des besoins
+du patient et l'adaptation de la communication à la subjectivité du patient. Chez les personnes
+
+--- Page 324 ---
+Connaissances
+âgées avec TNC, il faut y ajouter l'adaptation aux capacités cognitives du patient et la modalité
+d'aide apportée par l'entourage, en particulier familial.
+1. Communication verbale et non verbale
+La communication non verbale débute par une tenue vestimentaire correcte, une attitude
+corporelle positive et une ouverture des mains. Il faut chercher à être à la hauteur du patient.
+Il faut éviter de porter un document qui s'interpose entre le médecin et le patient. Le regard
+doit être posé en recherchant un contact visuel, mais sans insistance.
+La communication verbale débute par la présentation du praticien dans une situation de calme.
+La fréquence de la presbyacousie impose que l'on se place devant le patient afin de permettre
+une lecture labiale à environ 1 mètre du visage. Il ne faut pas parler en articulant de manière
+exagérée. Il faut s'assurer en cas de présence d'audioprothèse que celle-ci fonctionne. Il faut que
+le praticien veille à adapter son vocabulaire au niveau socioculturel et au niveau de compréhen-
+sion du patient. La première question doit être ouverte afin de permettre l'expression du patient.
+La personne âgée d'une manière générale a besoin de temps, et les troubles de la mémoire
+fréquents imposent que les informations puissent être données à plusieurs reprises. Enfin, un
+temps de rencontre associant la personne âgée, sa famille ou/et la personne de confiance, est
+essentiel pour que la personne puisse être accompagnée de manière adaptée par son entourage.
+2. Écoute active
+L'écoute est l'élément majeur de la qualité du dialogue. Il faut proscrire toute prise de parole
+coupant la parole de l'autre, même si le patient s'exprime d'une manière lente ou si les mots
+sont difficiles à trouver. Il faut éviter les ruptures de dialogue, en particulier chez une personne
+âgée ayant des troubles cognitifs.
+3. Approche palliative auprès du patient et de son entourage
+L'attitude palliative est souvent perçue comme une projection de l'idée de mort et d'incura-
+bilité source de souffrance. Elle représente une mauvaise nouvelle qui modifie négativement
+l'idée que le patient se fait de son avenir et cela même chez le patient âgé. L'écho de cette
+information dépend beaucoup de la relation que la personne a entretenue avec la mort qu'il a
+côtoyée plus fréquemment avec l'augmentation en âge. Il est donc nécessaire de commencer
+cette information par une écoute en interrogeant le patient sur des éléments biographiques
+pouvant entrer en résonance avec ce qu'il vit. Il est important de montrer le caractère actif,
+mobilisateur des soins palliatifs en continuant à poser les diagnostics nécessaires lorsqu'une
+maladie peut potentiellement altérer la qualité de vie.
+L'annonce d'une démarche thérapeutique à visée palliative impose donc et cela quel que soit
+l'âge, plusieurs étapes :
+• s'informer de la compréhension du patient ;
+• rappeler le contexte reprenant l'histoire récente ;
+• lui demander ce qu'il veut savoir et ce qu'il sait déjà ;
+• apporter progressivement les informations de l'annonce ;
+• interroger le patient sur ce qu'il ressent ;
+• aborder l'avenir et permettre son expression.
+C. Faire le diagnostic de situation et de soins palliatifs
+La capacité de décision relative à l'arrêt des traitements et aux traitements de fin de vie néces-
+site quatre capacités :
+• la compréhension des informations médicales ;
+
+--- Page 325 ---
+Prendre une décision de soins palliatifs et accompagner le patient
+• l'appréciation de la situation incluant les conséquences des choix ;
+• le raisonnement pour expliquer la raison de ses choix ;
+• la communication de ses choix.
+Le médecin en charge du patient, la personne de confiance du patient (ou à défaut la famille
+ou l'un des proches) peuvent engager cette procédure collégiale. Il s'agit alors d'une concer-
+tation entre :
+• le(s) médecin(s) qui suit(vent) le patient ;
+• les membres présents de l'équipe de soins et au moins un autre médecin, appelé en qualité
+de consultant sans lien hiérarchique avec le médecin en charge du patient.
+Pour limiter l'obstination et aider à la décision, il existe un outil créé par le Dr Sebag-Lanoë.
+– Quelle est la maladie principale de ce patient ?
+– Quel est son degré d'évolution ?
+– Quelle est la nature de l'épisode actuel surajouté ?
+– Est-il facilement curable ou non ? Y a-t-il eu répétition récente d'épisodes aigus rapprochés ou une multiplicité
+d'atteintes diverses ?
+– Que dit le malade s'il peut le faire ?
+– Qu'exprime-t-il à travers son comportement corporel et sa coopération aux soins ?
+– Quelle est la qualité de son confort actuel ?
+– Qu'en pense la famille (tenir compte de…) ?
+– Qu'en pensent les soignants qui le côtoient le plus souvent ?
+(D'après Sebag-Lanoë R. Soigner le grand âge. Paris : Desclée de Brouwer ; 1992.)
+Cet outil peut être utilisé en cas de renoncement thérapeutique envisagé comme une chimio-
+thérapie, une transfusion, une intervention chirurgicale, la pose d'une gastrotomie, une ampu-
+tation, une dialyse, réhydratation artificielle, une antibiothérapie, une oxygénothérapie…
+L'argumentation doit comprendre :
+• une évaluation de la balance bénéfice/risque ;
+• une évaluation de l'indication de la thérapeutique selon le stade de la maladie, les
+comorbidités ;
+• une évaluation de la qualité de vie et de l'espérance de vie du patient.
+À l'issue de cette concertation, le médecin :
+• informe la personne de confiance, si elle a été désignée, ou, à défaut, la famille ou l'un
+des proches du patient, de la nature et des motifs de la décision de limitation ou d'arrêt de
+traitement ;
+• inscrit ces informations dans le dossier médical du patient ;
+• met en œuvre la limitation ou l'arrêt des traitements ;
+• continue de garantir la dignité et la qualité de la fin de vie de la personne.
+Cas particulier
+Chez les patients ayant un trouble neurocognitif majeur [298], il peut exister une altération des capacités
+de discernement en vue d'un consentement éclairé, et ce dès le stade léger. Pour ces patients, il est souhai-
+table de préférer les choix accompagnés en incluant l'entourage sans exclure le patient. À mesure que l'état
+cognitif se dégrade, les soignants devront simplifier les choix et être sensibles aux messages non verbaux,
+afin que la personne atteinte puisse le plus longtemps possible être intégrée dans la décision.
+
+--- Page 326 ---
+Connaissances
+Mises en situation
+1. Le patient, en possession de ses capacités cognitives, décide de refuser un traitement [337]. Il en a le
+droit. Il ne s'agit pas d'une interruption de la relation médecin-malade. Le rôle du médecin est alors :
+❯ de rassurer et d'assurer le patient de la poursuite et de la continuité du suivi médical ;
+❯ de faire réitérer sa décision au patient lors d'une réévaluation ;
+❯ d'inscrire cette décision dans le dossier médical ;
+❯ de construire le projet de soins pluridisciplinaire.
+2. Le patient exprime son souhait de mourir [337]. Le rôle du médecin est alors :
+❯ de rappeler le cadre légal, dans lequel l'euthanasie et le suicide assisté sont interdits en France ;
+❯ de rechercher :
+• un souhait d'arrêt ou de limitation de traitement ;
+• un souhait de soulagement (qualité de vie très altérée) ;
+• une demande anticipée par peur d'avoir des symptômes au moment du décès ;
+• un souhait de parler de la fin de vie ;
+❯ de proposer des solutions selon la demande :
+• afin d'améliorer son confort ;
+• en mettant en place si nécessaire un traitement de symptômes dépressifs ;
+• en hiérarchisant avec le patient les différents traitements ;
+• en l'informant sur les options en fin de vie.
+300 3. Le patient exprime son souhait d'une sédation profonde et continue [337]. Le rôle du médecin est
+alors :
+❯ de mettre en place une procédure collégiale pluridisciplinaire, intégrant le consentement du
+patient chaque fois qu'il est possible de le recueillir ;
+❯ de vérifier que la situation répond aux critères nécessaires.
+4. L'équipe soignante vous interpelle en se demandant si les traitements envisagés ne relèvent pas d'une
+« obstination déraisonnable » [337]. La poursuite d'investigations ou de traitements chez des patients
+comorbides doit toujours interroger l'ensemble de l'équipe et nécessite souvent des réunions régulières.
+En effet, des examens ou traitements relevant d'une obstination déraisonnable peuvent être suspendus
+ou ne pas être entrepris :
+❯ à la demande du patient s'il est capable d'exprimer sa volonté ;
+❯ conformément aux directives anticipées du patient — la loi laisse à l'appréciation du médecin la
+capacité des patients à les faire en fonction de ces capacités cognitives ;
+❯ selon une procédure collégiale si la personne est hors d'état de manifester sa volonté.
+Le rôle du médecin est alors de réunir l'équipe et de réexpliquer le projet thérapeutique.
+D. Organiser le plan de soins thérapeutique palliatif
+Les thérapeutiques vont avoir deux objectifs prioritaires :
+• soulager des symptômes sources d'inconfort ;
+• prévenir les symptômes sources d'inconfort ;
+Deux situations font l'objet d'interrogation du patient et de son entourage, et nécessitent des
+concertations.
+
+--- Page 327 ---
+Prendre une décision de soins palliatifs et accompagner le patient
+Hydratation artificielle
+Chez le patient âgé, la sensation de soif diminue. Cependant, lorsque la sensation de soif
+existe en fin de vie, elle est soulagée par la prise orale de petites quantités de boissons, de
+glaçons et par les soins de bouche. La sensation de soif étant directement liée à la bouche
+sèche, les soins de bouche sont essentiels. Une hydratation artificielle ne sera proposée qu'en
+cas de sensation de soif désagréable ressentie par le patient et non contrôlée par des soins de
+bouches réguliers. En l'absence de symptômes, la décision peut dépendre du patient, de ses
+souhaits (ou de famille, s'il ne peut les exprimer) et doit être acceptée par tous.
+Nutrition artificielle
+Ne se justifie pas si l'espérance de vie du patient est inférieure à 3 mois et l'atteinte fonction-
+nelle permanente.
+Des fiches de synthèse individuelle pour les soignants dans leur réflexion éthique autour de
+la justification ou non d'une alimentation et/ou d'une hydratation artificielle ont été réalisées
+après une revue de la littérature conjointe de la SFAP et de la SFGG. Elles sont disponibles sur
+les sites www.sfap.org et de la SFGG www.sfgg.fr :
+• « Les troubles de déglutition du sujet âgé en situation palliative ».
+• « Il va mourir de faim, il va mourir de soif » Que répondre ?
+• « Réévaluation de l'indication d'une gastrostomie percutanée endoscopique (GPE) chez le
+patient âgé en fin de vie ».
+• « Refus alimentaire ».
+Particularités de la prise en charge thérapeutique chez le patient âgé dans le
+cadre de soins palliatifs
+B Différents facteurs doivent être pris en compte.
+1. Particularités liées à l'âge et aggravées par les comorbidités :
+– diminution de la masse maigre et de l'eau totale avec augmentation de la concentration plasmatique
+des médicaments hydrosolubles (morphine) ;
+– augmentation de la masse grasse : accumulation des médicaments lipophiles (benzodiazépines) ;
+– altération de la fonction rénale (risque d'accumulation +++, adaptation des doses).
+2. Réévaluation des traitements habituels et ceux introduits initialement pour la pathologie aiguë, avant la
+décision de soins palliatifs.
+3. Modalités d'administration différentes pour éviter les surdosages ou les sous-traitements :
+– prise en compte des troubles de la déglutition ;
+– opposition comportementale à la prise médicamenteuse en cas de troubles cognitifs ;
+– manque de capital veineux ;
+– intérêt de la voie sous-cutanée (+++) (liste des médicaments administrables par voie sous-cutanée sur
+le site de la SFAP).
+4. Symptômes inconfortables :
+– douleur, dyspnée : privilégier la morphine ;
+– anxiété : privilégier les benzodiazépines ;
+– encombrement bronchique : scopolamine.
+
+--- Page 328 ---
+Connaissances
+clés
+• Les soins palliatifs sont des soins actifs et continus pratiqués par une équipe interdisciplinaire visant
+à soulager la douleur, à apaiser la souffrance psychique, à sauvegarder la dignité de la personne malade
+et à soutenir son entourage.
+• La gestion d'une situation palliative impose une démarche structurée quel que soit l'âge du patient et
+donc aussi dans le grand âge.
+• L'annonce d'une démarche thérapeutique à visée palliative impose de s'assurer de la compréhension du
+patient, de rappeler le contexte, de demander ce que le patient veut savoir, d'apporter progressivement
+les informations de l'annonce, d'interroger le patient sur ce qu'il ressent et d'aborder l'avenir.
+• Selon la Loi Claeys-Leonetti du 2 février 2016 : « Toute personne a le droit de refuser ou de ne pas
+recevoir un traitement. Le suivi du malade reste cependant assuré par le médecin, notamment son
+accompagnement palliatif. »
+• Lorsqu'un patient exprime un souhait de mourir, le cadre légal rappelle « qu'en France l'euthanasie et le
+suicide assisté sont interdits ».
+• La loi permet au patient atteint d'une affection grave et incurable de demander une sédation profonde
+et continue.
+stnioP
+
+--- Page 330 ---
+This page intentionally left blank

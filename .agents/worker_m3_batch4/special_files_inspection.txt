@@ -1,0 +1,31 @@
+
+=== File: C:\Users\tokin\.gemini\antigravity\scratch\geriatrie-app\brainfeed.js ===
+Length: 82764
+First 1000 characters:
+/* ═══════════════════════════════════════════════════════════════
+   BrainFeed 2.0 — Feed addictif type Reels pour révision gériatrie
+   6 formats uniques · swipe · combo · confetti
+   ═══════════════════════════════════════════════════════════════ */
+
+const BrainFeed = (() => {
+  let deck = [];
+  let idx = 0;
+  let streak = 0;
+  let points = 0;
+  let dailyDone = 0;
+  let combo = 0;
+  let quizCombo = 0;
+  const DAILY_GOAL = 50;
+  const COMBO_BONUS_AT = 5;
+  const COMBO_CONFETTI_AT = 10;
+  const ACHIEVEMENTS = [
+    { id: 'first_card', icon: '🎯', title: 'Première carte', desc: '1 carte validée', check: (s) => (s.totalCards || 0) >= 1 },
+    { id: 'streak_3', icon: '🔥', title: 'En feu', desc: '3 jours de suite', check: (s) => (s.streak || 0) >= 3 },
+    { id: 'streak_10', icon: '💥', title: 'Inferno', desc: '10 jours de suite', check: (s) => (s.streak || 0) >= 10 },
+    { id: 'cards_50', icon: '📚', title: 'Demi-cent', desc: '50 cartes au total', check: (s) => (s.totalCards || 0) >= 50 },
+
+=== File: C:\Users\tokin\.gemini\antigravity\scratch\geriatrie-app\revision-aids.js ===
+Length: 92771
+First 1000 characters:
+// Auto-generated (68) - 3pts+flashcard+piege+mnemo
+const REVISION_AIDS = [{"id": "ch1_s001", "chapter": "ch1", "chapterTitle": "Comprendre le vieillissement", "section": "VI. Stratégies pour ralentir le vieillissement : nutrition, vitamine D et activi", "keyPoints": ["1 Vieillissement physiologique 2 Maladie chronique 3 Stress aigu = facteur décompensant d'organe 1 Réserve fonctionnelle 100 % Effet de l'in", "• à partir de 75 ans pour le risque de perte d'autonomie et de fragilité ;", "Bouchon permet de lister, en pré- sence d'une situation aiguë donnée, les différents facteurs aboutissant à une décompensation (apparition d"], "tags": ["CHIFFRE", "DEF", "OUTIL", "RISQUE"], "flashcard": {"q": "Points cles : VI. Stratégies pour ralentir le vieillissement : nutrit", "a": "1 Vieillissement physiologique 2 Maladie chronique 3 Stress aigu = facteur décompensant d'organe 1 Réserve fon • • à partir de 75 ans pour le risque de perte d'autonomie et de fragilité ; • Bouchon permet de lister, en 

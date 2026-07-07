@@ -1,0 +1,494 @@
+{
+  "results": {
+    "flashcards.js": {
+      "arrays": {
+        "FLASHCARDS": {
+          "total": 57,
+          "chapters": {
+            "ch1": 5,
+            "ch2": 4,
+            "ch3": 4,
+            "ch4": 3,
+            "ch5": 3,
+            "ch6": 3,
+            "ch7": 3,
+            "ch8": 3,
+            "ch9": 3,
+            "ch10": 3,
+            "ch11": 4,
+            "ch12": 4,
+            "ch13": 3,
+            "ch14": 3,
+            "ch15": 3,
+            "ch16": 3,
+            "ch17": 3
+          }
+        }
+      }
+    },
+    "flashcards-batch-A.js": {
+      "arrays": {
+        "FLASHCARDS_A": {
+          "total": 39,
+          "chapters": {
+            "ch1": 9,
+            "ch2": 6,
+            "ch3": 5,
+            "ch4": 5,
+            "ch5": 4,
+            "ch6": 5,
+            "ch7": 5
+          }
+        }
+      }
+    },
+    "flashcards-batch-B.js": {
+      "arrays": {
+        "FLASHCARDS_B": {
+          "total": 32,
+          "chapters": {
+            "ch8": 5,
+            "ch9": 6,
+            "ch10": 4,
+            "ch11": 4,
+            "ch12": 4,
+            "ch13": 4,
+            "ch14": 5
+          }
+        }
+      }
+    },
+    "flashcards-batch-C.js": {
+      "arrays": {
+        "FLASHCARDS_C": {
+          "total": 28,
+          "chapters": {
+            "ch15": 5,
+            "ch16": 5,
+            "ch17": 5,
+            "ch18": 4,
+            "ch19": 4,
+            "ch20": 5
+          }
+        }
+      }
+    },
+    "flashcards-memos.js": {
+      "arrays": {
+        "FLASHCARDS_MEMOS": {
+          "total": 30,
+          "chapters": {
+            "ch3": 2,
+            "ch9": 1,
+            "ch10": 2,
+            "ch11": 3,
+            "ch12": 3,
+            "ch13": 3,
+            "ch14": 2,
+            "ch8": 2,
+            "ch6": 2,
+            "ch2": 3,
+            "ch4": 3,
+            "ch17": 2,
+            "ch20": 2
+          }
+        }
+      }
+    },
+    "flashcards-expanded.js": {
+      "arrays": {
+        "FLASHCARDS_EXPANDED": {
+          "total": 60,
+          "chapters": {
+            "ch1": 3,
+            "ch2": 3,
+            "ch3": 3,
+            "ch4": 3,
+            "ch5": 3,
+            "ch6": 3,
+            "ch7": 3,
+            "ch8": 3,
+            "ch9": 3,
+            "ch10": 3,
+            "ch11": 3,
+            "ch12": 3,
+            "ch13": 3,
+            "ch14": 3,
+            "ch15": 3,
+            "ch16": 3,
+            "ch17": 3,
+            "ch18": 3,
+            "ch19": 3,
+            "ch20": 3
+          }
+        }
+      }
+    },
+    "mega-flashcards.js": {
+      "arrays": {
+        "MEGA_FLASHCARDS": {
+          "total": 100,
+          "chapters": {
+            "ch1": 5,
+            "ch2": 5,
+            "ch3": 5,
+            "ch4": 5,
+            "ch5": 5,
+            "ch6": 5,
+            "ch7": 5,
+            "ch8": 5,
+            "ch9": 5,
+            "ch10": 5,
+            "ch11": 5,
+            "ch12": 5,
+            "ch13": 5,
+            "ch14": 5,
+            "ch15": 5,
+            "ch16": 5,
+            "ch17": 5,
+            "ch18": 5,
+            "ch19": 5,
+            "ch20": 5
+          }
+        }
+      }
+    },
+    "mega-flashcards-2.js": {
+      "arrays": {
+        "MEGA_FLASHCARDS_2": {
+          "total": 100,
+          "chapters": {
+            "ch1": 5,
+            "ch2": 5,
+            "ch3": 5,
+            "ch4": 5,
+            "ch5": 5,
+            "ch6": 5,
+            "ch7": 5,
+            "ch8": 5,
+            "ch9": 5,
+            "ch10": 5,
+            "ch11": 5,
+            "ch12": 5,
+            "ch13": 5,
+            "ch14": 5,
+            "ch15": 5,
+            "ch16": 5,
+            "ch17": 5,
+            "ch18": 5,
+            "ch19": 5,
+            "ch20": 5
+          }
+        }
+      }
+    },
+    "mega-flashcards-3.js": {
+      "arrays": {
+        "MEGA_FLASHCARDS_3": {
+          "total": 100,
+          "chapters": {
+            "ch1": 5,
+            "ch2": 5,
+            "ch3": 5,
+            "ch4": 5,
+            "ch5": 5,
+            "ch6": 5,
+            "ch7": 5,
+            "ch8": 5,
+            "ch9": 5,
+            "ch10": 5,
+            "ch11": 5,
+            "ch12": 5,
+            "ch13": 5,
+            "ch14": 5,
+            "ch15": 5,
+            "ch16": 5,
+            "ch17": 5,
+            "ch18": 5,
+            "ch19": 5,
+            "ch20": 5
+          }
+        }
+      }
+    },
+    "mega-flashcards-4.js": {
+      "arrays": {
+        "MEGA_FLASHCARDS_4": {
+          "total": 100,
+          "chapters": {
+            "ch1": 5,
+            "ch2": 5,
+            "ch3": 5,
+            "ch4": 5,
+            "ch5": 5,
+            "ch6": 5,
+            "ch7": 5,
+            "ch8": 5,
+            "ch9": 5,
+            "ch10": 5,
+            "ch11": 5,
+            "ch12": 5,
+            "ch13": 5,
+            "ch14": 5,
+            "ch15": 5,
+            "ch16": 5,
+            "ch17": 5,
+            "ch18": 5,
+            "ch19": 5,
+            "ch20": 5
+          }
+        }
+      }
+    },
+    "mega-flashcards-5.js": {
+      "arrays": {
+        "MEGA_FLASHCARDS_5": {
+          "total": 100,
+          "chapters": {
+            "ch1": 5,
+            "ch2": 5,
+            "ch3": 5,
+            "ch4": 5,
+            "ch5": 5,
+            "ch6": 5,
+            "ch7": 5,
+            "ch8": 5,
+            "ch9": 5,
+            "ch10": 5,
+            "ch11": 5,
+            "ch12": 5,
+            "ch13": 5,
+            "ch14": 5,
+            "ch15": 5,
+            "ch16": 5,
+            "ch17": 5,
+            "ch18": 5,
+            "ch19": 5,
+            "ch20": 5
+          }
+        }
+      }
+    },
+    "mega-flashcards-6.js": {
+      "arrays": {
+        "MEGA_FLASHCARDS_6": {
+          "total": 100,
+          "chapters": {
+            "ch1": 5,
+            "ch2": 5,
+            "ch3": 5,
+            "ch4": 5,
+            "ch5": 5,
+            "ch6": 5,
+            "ch7": 5,
+            "ch8": 5,
+            "ch9": 5,
+            "ch10": 5,
+            "ch11": 5,
+            "ch12": 5,
+            "ch13": 5,
+            "ch14": 5,
+            "ch15": 5,
+            "ch16": 5,
+            "ch17": 5,
+            "ch18": 5,
+            "ch19": 5,
+            "ch20": 5
+          }
+        }
+      }
+    },
+    "mega-flashcards-7.js": {
+      "arrays": {
+        "MEGA_FLASHCARDS_7": {
+          "total": 100,
+          "chapters": {
+            "ch1": 5,
+            "ch2": 5,
+            "ch3": 5,
+            "ch4": 5,
+            "ch5": 5,
+            "ch6": 5,
+            "ch7": 5,
+            "ch8": 5,
+            "ch9": 5,
+            "ch10": 5,
+            "ch11": 5,
+            "ch12": 5,
+            "ch13": 5,
+            "ch14": 5,
+            "ch15": 5,
+            "ch16": 5,
+            "ch17": 5,
+            "ch18": 5,
+            "ch19": 5,
+            "ch20": 5
+          }
+        }
+      }
+    },
+    "mega-flashcards-8.js": {
+      "arrays": {
+        "MEGA_FLASHCARDS_8": {
+          "total": 100,
+          "chapters": {
+            "ch1": 5,
+            "ch2": 5,
+            "ch3": 5,
+            "ch4": 5,
+            "ch5": 5,
+            "ch6": 5,
+            "ch7": 5,
+            "ch8": 5,
+            "ch9": 5,
+            "ch10": 5,
+            "ch11": 5,
+            "ch12": 5,
+            "ch13": 5,
+            "ch14": 5,
+            "ch15": 5,
+            "ch16": 5,
+            "ch17": 5,
+            "ch18": 5,
+            "ch19": 5,
+            "ch20": 5
+          }
+        }
+      }
+    },
+    "mega-flashcards-9.js": {
+      "arrays": {
+        "MEGA_FLASHCARDS_9": {
+          "total": 100,
+          "chapters": {
+            "ch1": 5,
+            "ch2": 5,
+            "ch3": 5,
+            "ch4": 5,
+            "ch5": 5,
+            "ch6": 5,
+            "ch7": 5,
+            "ch8": 5,
+            "ch9": 5,
+            "ch10": 5,
+            "ch11": 5,
+            "ch12": 5,
+            "ch13": 5,
+            "ch14": 5,
+            "ch15": 5,
+            "ch16": 5,
+            "ch17": 5,
+            "ch18": 5,
+            "ch19": 5,
+            "ch20": 5
+          }
+        }
+      }
+    },
+    "mega-flashcards-10.js": {
+      "arrays": {
+        "MEGA_FLASHCARDS_10": {
+          "total": 100,
+          "chapters": {
+            "ch1": 5,
+            "ch2": 5,
+            "ch3": 5,
+            "ch4": 5,
+            "ch5": 5,
+            "ch6": 5,
+            "ch7": 5,
+            "ch8": 5,
+            "ch9": 5,
+            "ch10": 5,
+            "ch11": 5,
+            "ch12": 5,
+            "ch13": 5,
+            "ch14": 5,
+            "ch15": 5,
+            "ch16": 5,
+            "ch17": 5,
+            "ch18": 5,
+            "ch19": 5,
+            "ch20": 5
+          }
+        }
+      }
+    },
+    "revision-aids.js": {
+      "arrays": {
+        "REVISION_AIDS": {
+          "total": 68,
+          "chapters": {
+            "ch1": 5,
+            "ch2": 3,
+            "ch3": 2,
+            "ch4": 4,
+            "ch5": 3,
+            "ch6": 7,
+            "ch7": 13,
+            "ch8": 3,
+            "ch9": 3,
+            "ch10": 3,
+            "ch11": 2,
+            "ch12": 3,
+            "ch13": 4,
+            "ch14": 3,
+            "ch15": 2,
+            "ch16": 3,
+            "ch17": 2,
+            "ch18": 1,
+            "ch19": 1,
+            "ch20": 1
+          }
+        },
+        "REVISION_FLASHCARDS": {
+          "total": 68,
+          "chapters": {
+            "ch1": 5,
+            "ch2": 3,
+            "ch3": 2,
+            "ch4": 4,
+            "ch5": 3,
+            "ch6": 7,
+            "ch7": 13,
+            "ch8": 3,
+            "ch9": 3,
+            "ch10": 3,
+            "ch11": 2,
+            "ch12": 3,
+            "ch13": 4,
+            "ch14": 3,
+            "ch15": 2,
+            "ch16": 3,
+            "ch17": 2,
+            "ch18": 1,
+            "ch19": 1,
+            "ch20": 1
+          }
+        }
+      }
+    }
+  },
+  "globalChapters": {
+    "ch1": 77,
+    "ch2": 72,
+    "ch3": 68,
+    "ch4": 72,
+    "ch5": 66,
+    "ch6": 77,
+    "ch7": 87,
+    "ch8": 69,
+    "ch9": 69,
+    "ch10": 68,
+    "ch11": 68,
+    "ch12": 70,
+    "ch13": 71,
+    "ch14": 69,
+    "ch15": 65,
+    "ch16": 67,
+    "ch17": 67,
+    "ch18": 59,
+    "ch19": 59,
+    "ch20": 62
+  }
+}

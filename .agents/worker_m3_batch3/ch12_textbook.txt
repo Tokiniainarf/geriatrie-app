@@ -1,0 +1,773 @@
+=== CHAPTER CH12 ===
+
+--- PAGE 209 ---
+Raisonner devant une chute, comprendre la démarche diagnostique et thérapeutique
+Rang Rubrique Intitulé Descriptif
+A Examens Objectif des examens d'imagerie Faire le bilan lésionnel, étiologique et de
+complémentaires devant un trouble de la marche ou gravité
+de l'équilibre de la personne âgée
+A Examens Bilan de gravité Connaître les examens à demander aux
+complémentaires urgences pour évaluer la gravité
+A Diagnostic positif Définir et décrire le syndrome post-chute
+B Suivi/Pronostic Décrire les conséquences médicales et psychosociales des chutes chez la
+personne âgée
+A Identifier une Connaître les conséquences médi- Fractures, rhabdomyolyse, syndrome
+urgence cales urgentes d'une chute post-chute
+A Définition Définition d'une HTO Connaître la définition d'une HTO
+B Éléments Facteurs favorisant HTO avec âge
+physiopathologiques
+A Étiologie Causes d'HTO Connaître les principales étiologies de
+l'HTO
+A Prise en charge Prise en charge de l'HTO Connaître les principes de base de la
+prise en charge de l'HTO
+A Examens Indication des examens d'imagerie devant un trouble de la marche ou de
+complémentaires l'équilibre de la personne âgée
+B Examens Savoir énoncer les autres examens Connaître les examens à réaliser dans
+complémentaires complémentaires chez un patient le bilan étiologique d'une chute (hors
+âgé venant de faire une chute imagerie)
+A Prise en charge Savoir proposer une attitude Traitements des conséquences et causes
+thérapeutique au décours d'une de la chute
+chute (HAS) et les mesures de
+prévention de récidive
+B Prise en charge Modalités de kinésithérapie type pour une personne âgée chuteuse
+I. Généralités
+A. Définition
+A Selon l'Organisation mondiale de la santé, la chute est le « fait de se retrouver involontaire-
+ment sur le sol ou dans une position de niveau inférieur par rapport à la position de départ ».
+B. Épidémiologie
+La chute chez la personne âgée est un événement :
+• fréquent : un tiers des personnes âgées de plus de 65 ans et la moitié de celles âgées de
+plus de 85 ans font une ou plusieurs chutes par an ;
+▼
+Il n'existe pas de chute banale !
+
+--- PAGE 210 ---
+Connaissances
+• grave, car les chutes entraînent :
+– des complications physiques (tissus mous, fractures osseuses) ;
+– des complications psychologiques ;
+– une augmentation de la dépendance ;
+– une augmentation des institutionnalisations ;
+– une augmentation des hospitalisations ;
+– responsables de décès à court terme : 12 000 décès par an en France.
+Il existe de très nombreux facteurs de risque de chute.
+Aussi la chute non précédée d'un malaise, dite « mécanique », est-elle rarement fortuite et ne
+devrait jamais être négligée mais justifie au contraire :
+• une démarche diagnostique multidisciplinaire d'analyse de la gravité et d'analyse
+étiologique ;
+• suivie d'une intervention correctrice multifactorielle de prévention de la récidive de chute.
+Les cinq écueils à éviter concernant les chutes de la personne âgée
+• Considérer que les troubles de la marche sont normaux [66] et que les chutes sont inéluctables [27]
+chez le patient âgé.
+• Ne pas relever les facteurs de risque de chute ou oublier d'aborder les chutes [27] lors d'une consulta-
+tion gériatrique [295], en particulier chez le patient polypathologique [267], polymédiqué [266], en
+particulier en présence de troubles neurocognitifs majeurs [298].
+• Négliger le risque de chute en milieu hospitalier ou en situation aiguë comme la confusion [119].
+• Ne pas connaître ou ne pas évoquer les conséquences graves des chutes devant une perte d'autonomie
+184 [31].
+• Ne pas aborder l'exploration des chutes de la personne âgée avec une démarche diagnostique et théra-
+peutique structurée [334].
+→ Il faut prévenir ou éviter la récidive de chutes lors d'une consultation ou d'une hospitalisation gériatrique.
+Évaluation du risque de chute
+L'évaluation du risque de chute est un élément indispensable de la prise en charge des patients âgés, consé-
+quence des comorbidités, des traitements, et impactant fortement la qualité de vie.
+Quand ?
+• Lors d'une première consultation ou hospitalisation.
+• Lors de consultations de suivi [266, 267, 279, 295].
+• Lors d'une entrée et une sortie d'hospitalisation pour permettre le retour à domicile dans de bonnes
+conditions [131, 355].
+• Après une complication traumatologique ou une période de décubitus prolongé [172, 173, 276].
+Comment ?
+• En récupérant des informations objectives [131].
+• En impliquant si besoin l'aidant principal [330], le médecin référent et tous les soignants impliqués dans
+l'accompagnement du patient.
+• En reconstituant très précisément l'anamnèse des chutes [50, 64, 121, 129, 130, 165] en particulier
+médicamenteuse [358].
+• En examinant le patient sur le plan cognitif, neurologique, neuro-sensoriel, ostéoarticulaire.
+▼
+
+--- PAGE 211 ---
+Raisonner devant une chute, comprendre la démarche diagnostique et thérapeutique
+Pourquoi ?
+• Afin de proposer les examens complémentaires appropriés [334].
+• Afin de limiter de risque de récidive en cherchant à comprendre les causes et à lister l'ensemble des
+facteurs améliorables, prédisposants et précipitants.
+• Afin d'élaborer et d'expliquer au patient le projet thérapeutique [352].
+• Afin de limiter la perte d'autonomie et d'éviter les conséquences graves.
+II. Physiologie de la marche : impact du vieillissement
+B La marche est une activité alternée des membres inférieurs nécessitant un apprentissage
+dès l'enfance, qui permet le déplacement du corps tout en assurant le maintien de son équi-
+libre en orthostatisme. Plusieurs systèmes sont impliqués dans la marche :
+• le système antigravitaire sert au maintien de l'attitude érigée en s'opposant à l'effet
+de la pesanteur. Il est sous la dépendance du tonus des muscles antigravitaires (muscles
+extenseurs des membres inférieurs et muscles paravertébraux). Les afférences de ce sys-
+tème proviennent de la plante des pieds, du labyrinthe de l'oreille interne et des récepteurs
+musculo-tendineux ;
+• le système d'équilibre et d'adaptation posturale vise au maintien de la posture,
+notamment en position debout. Ce système est complexe et intègre les informations de
+trois modes de perception :
+– la vue ;
+– le système vestibulaire, qui participe au tonus postural et à l'information sur la direction
+et la vitesse du mouvement ;
+– les voies sensitives afférentes proprioceptives, qui informent de la position des articu-
+lations et des membres dans l'espace. Les afférences prenant leurs origines de la face
+plantaire sont particulièrement importantes pour la marche. Cette voie chemine par les
+cordons postérieurs de la moelle spinale.
+La réaction d'équilibration se définit comme l'ensemble des mouvements compensatoires
+automatiques qui permet l'adaptation posturale pour des débattements posturaux (mouve-
+ment oscillatoire du centre de gravité). Ce système est statique (tonus postural) et dynamique
+(marche). Il nécessite l'intégrité du système antigravitaire, des voies cérébello-vestibulaires,
+du contrôle moteur cérébral dit « de haut niveau » impliqué dans la navigation spatiale et la
+mémoire des mouvements complexes, des voies motrices (systèmes pyramidal et extrapyrami-
+dal), et des effecteurs (muscles et articulations).
+La production du pas est une activité rythmique au cours de laquelle le poids du corps alterne
+d'un membre inférieur à l'autre, par l'intermédiaire d'un appui unipodal. La marche peut donc
+être décrite comme une suite de ruptures d'équilibre conduisant à une instabilité suivie d'une
+réaction visant à restaurer la stabilité d'un des membres inférieurs en alternance.
+Effets du vieillissement sur la marche et l'équilibre
+Les réactions posturales se maintiennent efficacement au cours du vieillissement, mais la
+vitesse des réactions et les capacités d'adaptation aux situations extrêmes sont moindres.
+Cela s'explique d'une part par un vieillissement physiologique des systèmes antigravitaire
+et d'adaptation posturale et d'autre part par des facteurs pathologiques, fréquents chez les
+personnes âgées, qui affectent ces systèmes, notamment les vertiges paroxystiques bénins et
+les pathologies ophtalmologiques (tableau 12.1).
+▼
+
+--- PAGE 212 ---
+Connaissances
+Tableau 12.1. B Vieillissement physiologique et pathologique des systèmes d'équilibration.
+Proprioception Vision Vestibule
+Rôle Perception sol et position Champ visuel : voir objets Maintenir la tête en position
+segments corporels dans environnement verticale
+Sensibilité au contraste :
+Stimulation Contact Accélérations horizontales
+détecter objet arrière-plan
+Position et verticales
+sous différentes conditions
+Mouvement
+de lumière
+Acuité visuelle : discriminer
+détails objet
+Déclin physiologique Diminution nombre Rétrécissement champ Mise au repos par défaut de
+récepteurs, de vitesse de visuel ; stimulation
+conduction, de l'influx Diminution de sensibilité au Rôle majeur si autre
+nerveux contraste et d'acuité visuelle système déficitaire
+Membres inférieurs
+>> supérieurs
+Pathologies Diabète Cataracte VPPB
+Carences vitaminiques (B12, DMLA
+D…) Glaucome chronique
+Presbytie
+VPPB : vertige paroxystique bénin ; DMLA : dégénérescence chronique liée à l'âge.
+La marche des personnes âgées, modifiée par rapport aux sujets plus jeunes, est caractérisée
+par une :
+• augmentation des oscillations à la station debout ;
+• diminution de la vitesse de la marche ;
+• réduction de la longueur et de la hauteur du pas ;
+• augmentation du temps de double appui ;
+• plus grande variabilité du pas ;
+• diminution des mouvements de balanciers des bras.
+Ainsi, vieillir ne fait pas tomber, mais en présence d'un facteur précipitant le risque de chute
+sera plus important que chez un sujet jeune (cf. infra tableau 12.4).
+III. Analyser la marche d'une personne âgée
+A Indépendamment des chutes, l'examen clinique de la marche doit être systématique chez
+la personne âgée, en particulier et au minimum lors d'une première consultation :
+• inspection : faire marcher nu-pieds la personne sur une courte distance en ligne droite et
+lui faire faire demi-tour, repérer et caractériser à l'œil nu un trouble de la marche, et en
+apprécier l'origine (tableau 12.2) ;
+• examen neurologique en particulier à la recherche de :
+– déficit moteur et/ou sensitif focal ;
+– syndrome pyramidal unilatéral (AVC) ou bilatéral (lacunaire, compression médullaire…)
+[121] ;
+– syndrome parkinsonien ;
+– syndrome vestibulaire périphérique ou central [64, 130] ;
+– syndrome cérébelleux [64, 130] ;
+– syndrome radiculaire, polyneuropathie (motricité, sensibilité) ;
+• plus rarement syndrome myogène ou myasthénique ou motoneurone ;
+
+--- PAGE 213 ---
+Raisonner devant une chute, comprendre la démarche diagnostique et thérapeutique
+• examen ostéoarticulaire en particulier à la recherche d'une gonarthrose, d'une coxarthrose
+[67, 70] (cf. chapitre 7) ;
+• recherche d'un déficit visuel (cf. chapitre 5).
+→ Si l'examen clinique objective des anomalies, le patient est à risque de chute.
+Tableau 12.2. A Différents tableaux cliniques des troubles de la marche chez les personnes âgées.
+Troubles de la marche Localisation de l'atteinte
+Ataxique Latéralisée/en étoile Vestibulaire
+Pseudo-ébrieuse Cérébelleuse
+Talonnante Proprioceptive
+Spastique Fauchage Atteinte pyramidale unilatérale
+Spasmodique Atteinte pyramidale bilatérale
+Parétique Steppage Loge antéro-externe de jambe (L4-L5 ou
+SPE)
+Dandinante Ceinture pelvienne
+Parkinsonienne Lente à petits pas, perte du ballant des bras, demi- Syndrome parkinsonien
+tour décomposé, freezing, festination, enrayage
+cinétique
+Astasie-abasie Impossibilité de la station debout (rétropulsion Atteinte frontale
+spontanée) et de la marche Hydrocéphalie à pression normale
+État lacunaire
+Apraxique Petits pas traînants collés au sol (impossibilité Hydrocéphalie à pression normale
+à disposer convenablement de ses jambes pour Atteinte frontale
+marcher) Hématome sous-dural
+Claudicante Marche douloureuse, à l'origine d'un périmètre de Artériopathie oblitérante des membres
+marche et disparaissant au repos inférieurs
+Médullaire
+Boiterie Évitement Pathologie ostéo-articulaire douloureuse
+Déficitaire Pathologie neurologique
+Tests de vulnérabilité à la marche
+B En l'absence ou en complément en présence d'anomalie à l'examen clinique, des tests
+peuvent dépister une vulnérablilité à la marche. Il s'agit :
+• de la station unipodale (recommandé par l'HAS, 2012) ;
+• du Timed up and go test (recommandé par l'HAS, 2012) ;
+• du Stop walking while talking test (recommandé par l'HAS, 2012) ;
+• du Five times sit-to-stand test.
+Station unipodale
+Comment : demander à la personne de se tenir debout sur un pied (de son choix).
+Analyse : impossibilité de tenir plus de 5 secondes et/ou besoin d'écarter les bras.
+Conséquence(s) : associée à un risque de chute traumatisante. Un temps inférieur à 5
+secondes est prédictif d'un très haut risque de chute ; un temps supérieur à 30 secondes
+est prédictif d'un risque très faible de chute.
+Timed up and go test
+Comment : demander à la personne de se lever d'une chaise à accoudoirs, de marcher
+3 mètres en ligne droite, de faire demi-tour, et retourner s'asseoir. La personne porte ses
+chaussures habituelles et le cas échéant l'aide technique qu'elle utilise habituellement.
+
+--- PAGE 214 ---
+Connaissances
+Analyse : impossibilité de le réaliser en moins de 20 secondes.
+Conséquence(s) : > 20 secondes, prédictif du risque de nouvelle chute.
+Stop walking while talking test
+Comment : demander une tâche attentionnelle à la personne pendant qu'elle marche en
+ligne droite à sa vitesse habituelle, en s'aidant d'une aide technique le cas échéant (lui
+poser une question, décompter de 1 en 1, de 3 en 3, ou énumérer des noms d'animaux).
+Analyse : impossibilité de faire une tâche attentionnelle sans s'arrêter de marcher.
+Conséquence(s) : prédictif d'un risque accru de chutes.
+Five times sit-to-stand test
+Comment : demander à la personne de se lever et de se rassoir cinq fois aussi vite que
+possible sur une chaise sans s'aider des bras.
+Analyse : impossibilité de le réaliser en moins de 15 secondes.
+Conséquence(s) : > 15 secondes prédictif du risque de chutes, de faiblesse musculaire des
+membres inférieurs et à l'existence d'un trouble cognitif.
+Au terme de cette première étape, le patient présente ou non un trouble de la marche source ou non de
+risque de chute.
+188 IV. Démarche diagnostique devant un patient chuteur
+A La chute est un motif de consultation ou d'hospitalisation souvent évident, mais il faut aussi
+évoquer l'existence de chutes chez les patients non communiquants en présence de :
+• hématomes cutanés ;
+• douleurs osseuses ou articulaires [67, 173] ;
+• plaie ;
+• trouble du comportement [114] ;
+• confusion [119].
+A. Chercher et reconnaître une chute grave
+Dans un premier temps, il faut rechercher systématiquement chez la personne âgée ayant
+chuté les signes de gravité, qui peuvent nécessiter une prise en charge immédiate. Ces signes
+de gravité sont liés :
+• aux conséquences de la chute ;
+• au caractère répété de la chute ;
+• aux étiologies de la chute ;
+• aux situations médicales et sociales à risque de complications.
+1. Gravité liée aux conséquences de la chute
+Traumatiques [170, 177] (fig. 12.1 et 12.2)
+Contusions, hématomes, plaies, luxations, fractures osseuses, de diagnostic le plus souvent
+facile mais dont certaines sont néanmoins plus difficiles à reconnaître, en particulier les frac-
+tures engrenées de l'extrémité supérieure du fémur ou les hémorragies intracrâniennes.
+
+--- PAGE 215 ---
+Raisonner devant une chute, comprendre la démarche diagnostique et thérapeutique
+Fig. 12.1. A Complications traumatiques de la chute.
+A. Hématome sous-dural hémisphérique droit aigu. B. Hématome sous-dural chronique bilatéral avec des signes
+de saignement récent (hyperdensité).
+Fig. 12.2. A Fractures multiples du bassin.
+Syndrome post-chute
+• Rétropulsion, rendant souvent la station debout impossible sans aide humaine.
+• Composante anxieuse majeure déclenchée en position debout (« phobie de la marche », voire « phobie
+de la verticalisation »).
+• Troubles de la marche avec aide humaine : petits pas glissés, en appui talonnier sans déroulement du
+pas au sol avec possible élargissement du polygone de sustentation, et retard de l'initiation de la marche
+ou freezing.
+• Troubles neurologiques avec hypertonie oppositionnelle, altération des réactions d'adaptation postu-
+rale et des réactions parachutes.
+• Non expliqué par des lésions traumatiques ou neurologiques de la chute.
+• Non corrélé au caractère traumatisant ou fréquent de la chute.
+• Mauvais pronostic fonctionnel.
+→ Urgence gériatrique imposant une hospitalisation avec la mise en œuvre rapide d'une prise en charge
+pluridisciplinaire (rééducation fonctionnelle, soutien psychologique).
+
+--- PAGE 216 ---
+Connaissances
+Liées à la station prolongée au sol
+Rhabdomyolyse, insuffisance rénale [199] et hyperkaliémie [201], pneumopathie d'inhalation,
+hypothermie [45], déshydratation, escarres [86], MTEV, conséquences psychologiques [341].
+Psychologiques
+Syndrome post-chute ou syndrome de désadaptation psychomotrice (cf. encadré), peur de tom-
+ber, refus de toute verticalisation, dépression, tous participant à une perte d'autonomie [31].
+2. Gravité liée au caractère répété de la chute
+Chutes à répétition : définies par au moins deux chutes sur une période de 12 mois.
+Gravité en particulier en cas de :
+• augmentation récente de la fréquence des chutes ;
+• plus de trois facteurs prédisposant aux chutes (cf. infra) ;
+• trouble de la marche (cf. supra) ;
+• station au sol prolongée (> 1 heure) après une chute.
+3. Gravité liée aux étiologies de la chute
+• Trouble du rythme ou de la conduction cardiaque [50, 159, 165, 166] (fig. 12.3 et 12.4).
+• Infarctus du myocarde.
+• Accident vasculaire cérébral [121].
+• Pathologie infectieuse.
+190 • Hypoglycémie.
+• etc.
+Fig. 12.3. A Bloc bi-fasciculaire (association hémibloc antérieur gauche et bloc de branche droit complet)
+et non tri-fasciculaire (le bloc auriculoventriculaire du 1er degré associé n'est pas un bloc fasciculaire).
+Ce type de bloc bi-fasciculaire peut rester longtemps asymptomatique. En cas de suspicion d'évolution vers un
+BAV complet paroxystique responsable de chute, des explorations complémentaires seront nécessaires.
+
+--- PAGE 217 ---
+Raisonner devant une chute, comprendre la démarche diagnostique et thérapeutique
+Fig. 12.4. A Bloc auriculoventriculaire complet avec échappement à QRS fins dont la responsabilité
+doit être systématiquement évoquée dans la chute d'un patient.
+4. Gravité liée aux situations médicales et sociales à risque de
+complications
+Liés aux situations médicales à risque de complications :
+• traitement par anticoagulants ou antiagrégants ;
+• isolement socio-familial ;
+• ostéoporose avérée (cf. chapitre 6).
+Dans le contexte de chute grave, les examens à faire en urgence vont dépendre du contexte
+et peuvent comprendre :
+• ECG si malaise, perte de connaissance, facteurs de risque cardiovasculaire ou cardiopathie
+sous-jacente, suspicion ou évaluation de sévérité d'une hyperkaliémie, chute dans des cir-
+constances inconnues ;
+• radiographies osseuses si suspicion de fracture ;
+• dosage des CPK et de la créatinine sérique si séjour au sol > 1 heure ;
+• glycémie si la personne est diabétique : la glycémie capillaire est à faire systématiquement
+mais son rationnel repose surtout chez le patient à risque d'hypoglycémie (en particulier
+diabétiques sous insuline ou antidiabétique oral hypoglycémiant) ;
+• l'imagerie cérébrale (TDM cérébrale) en urgence n'est indiquée qu'en cas de symptôme
+neurologique (IRM cérébrale en première intention si suspicion d'AVC et délai thrombolyse
+ou thrombectomie) ou en cas de traumatisme crânien sous antithrombotique (anticoagu-
+lant ou antiplaquettaire).
+B. Reprendre l'enquête étiologique de la chute
+Les patients âgés cumulent souvent plusieurs facteurs prédisposants habituellement chroniques
+(ou facteur de risque) de chute. L'anamnèse doit s'acharner à reconstituer les circonstances de
+chute et à préciser LE facteur précipitant aigu qui a fait chuter le patient, même si finalement
+plusieurs de ces facteurs peuvent être retrouvés (tableau 12.3). L'analyse chronologique des
+éléments survenus avant la chute est ainsi essentielle.
+
+--- PAGE 218 ---
+Connaissances
+1. Facteurs prédisposants
+Ces facteurs représentent une vulnérabilité chronique face au risque de chute. Les recenser
+permet d'évaluer le risque de chute du patient. Certains d'entre eux sont améliorables et leur
+prise en charge permet de diminuer le risque de chute.
+• Âge ≥ + 80 ans.
+• Sexe féminin.
+• Antécédents de chutes et de fractures traumatiques.
+• Symptômes de dépression.
+• Troubles neurocognitifs (cf. chapitre 9).
+• Dénutrition protéino-énergétique (cf. chapitre 14).
+• Polymédication (≥ 5 traitements).
+• Iatrogénie (en particulier les médicaments psychotropes ou anticholinergiques ou à visée
+cardiovasculaire) (cf. tableau 12.4).
+• Pathologies donnant des troubles de la marche et de l'équilibre :
+– atteintes neurologiques (neurovasculaire, neurodégénérative, hydrocéphalie, atteinte
+médullaire, syndrome parkinsonien) ;
+– arthrose des membres inférieurs et/ou du rachis, anomalie des pieds ;
+– troubles de la sensibilité superficielle et/ou proprioceptive des membres inférieurs ;
+– faiblesse musculaire des membres inférieurs.
+• Troubles du sommeil avec possible prise de psychotropes.
+• Baisse de l'acuité visuelle et/ou altérations périphériques du champ visuel.
+Exemples de facteurs prédisposants améliorables
+• Déficit visuel par intervention pour cataracte +++.
+• Troubles de l'attention d'un patient avec TNC par de la stimulation cognitive.
+• Somnolence et troubles de la vigilance en appareillant un SAS sévère [135].
+• Ralentissement idéatoire d'une dépression par son traitement [123].
+• Allègement de l'ordonnance pour amélioration fréquence cardiaque, pression artérielle et vigilance [348].
+• Rigidité parkinsonienne par adaptation du traitement et kinésithérapie.
+• Douleur d'une gonarthrose par antalgiques adaptés voire infiltration.
+• Désadaptation à l'effort liée à l'âge par kinésithérapie.
+2. Facteurs précipitants
+Ces facteurs représentent l'événement aigu responsable de la chute (tableau 12.3). Ils peuvent
+êtres intrinsèques (liés à un facteur médical aigu) ou extrinsèques (liés à l'environnement)
+Parmi les facteurs intrinsèques, les éléments comportementaux doivent être recherchés car
+améliorables par de l'éducation. Certains facteurs sont iatrogènes (tableau 12.4).
+Souvent, plusieurs facteurs peuvent être présents, et il est difficile de savoir quel facteur est le
+premier responsable : il faut alors tous les corriger. Comme par exemple chez un patient ayant
+chuté avec un syndrome confusionnel et une pneumopathie d'inhalation : la confusion peut
+être responsable de la chute, qui a ensuite favorisé l'inhalation. Mais l'infection a pu favoriser
+la chute, et secondairement entraîner une confusion.
+Parmi les facteurs précipitants, l'hypotension orthostatique est une des étiologies les plus fré-
+quentes (encadré 12.1).
+
+--- PAGE 219 ---
+Raisonner devant une chute, comprendre la démarche diagnostique et thérapeutique
+Tableau 12.3. A Facteurs précipitants de la chute.
+1A. facteurs intrinsèques
+Cardiovasculaires Troubles du rythme supraventriculaires ou ventriculaires [165, 166]
+Troubles de conduction de haut degré [159]
+Syndrome coronarien aigu
+Embolie pulmonaire
+Complications d'un rétrécissement aortique serré [50]
+Hypotension orthostatique (cf. infra encadré 12.1) [64, 130]
+Syncopes neurocardiogéniques (syndrome du sinus carotidien, malaise vagal, syncopes
+situationnelles) [50]
+Neurologiques Déficit sensitivomoteur transitoire ou constitué [121]
+Syndrome confusionnel [119]
+Crise convulsive
+Vestibulaires Vertige, instabilité, nystagmus [64, 130]
+Maladies infectieuses Fièvre [44]
+Hypovolémie, déshydratation [43]
+Signe en rapport avec le siège de l'infection
+Métaboliques Hypoglycémie (iatrogène ++) [209]
+Hyponatrémie [202]
+Déshydratation [43]
+Hypercalcémie
+Toxiques Intoxication alcoolique, sevrage
+Iatrogénie Toute introduction ou modification de posologie (dont sevrage) dont la chronologie
+est cohérente avec la chute est suspecte (cf. tableau 12.4) [348]
+1B. Facteurs comportementaux
+Prise de risque Précipitation lors du lever ou de la marche, montée sur un escabeau ou un tabouret instable
+2. Facteurs extrinsèques
+Environnement inadapté Mobilier et W.-C. inadaptés ; habits trop longs ; mauvais état du sol mouillé glissant ou
+irrégulier ; chaussage inadapté maintenant mal le pied, à semelle usée ou glissante ;
+obstacles ; éclairage insuffisant
+Tableau 12.4. A Facteurs iatrogènes.
+Les traitements peuvent représenter des facteurs prédisposants chroniques et des facteurs précipitants aigus.
+Classe médicamenteuse Facteur prédisposant par : Facteur précipitant par :
+Psychotropes Trouble de la vigilance Somnolence
+Trouble de l'attention
+Anticholinergique Trouble de la vigilance Confusion
+Antihypertenseurs Pression artérielle basse Hypotension orthostatique
+Bêtabloqueur, inhibiteur calcique, digoxine Fréquence cardiaque basse Syncope
+Diurétiques Pression artérielle basse Déshydratation
+Neuroleptiques Syndrome parkinsonien Confusion
+C. Examens paracliniques dans le cadre du bilan de chute
+Les examens envisagés dans le cadre de l'urgence sont mentionnés dans le paragraphe consa-
+cré aux critères de gravité d'une chute.
+Les autres examens paracliniques dépendent de l'enquête étiologique :
+• dosage sérique de la vitamine D (25(OH)-D) pour le risque fracturaire ;
+• ECG standard 12 dérivations qui fait partie de l'examen clinique ;
+
+--- PAGE 220 ---
+Connaissances
+• en raison de la fréquence des troubles hydroélectrolytiques, de l'anémie, de la déshydra-
+tation, les examens biologiques « de routine » seront facilement réalisés, en particulier en
+l'absence de référence récente.
+Il n'est pas utile de réaliser, à titre systématique, les examens suivants : HbA1c chez les per-
+sonnes diabétiques, EEG, imagerie cérébrale, examen écho-doppler des artères supra-aor-
+tiques, holter-ECG, échographie cardiaque. Ces examens ne seront réalisés qu'en fonction des
+données de l'anamnèse, de l'examen clinique dont l'ECG.
+Encadré 12.1
+L'hypotension orthostatique
+A Pathologie très fréquente et pathologie grave : l'hypotension orthostatique ne doit pas être négligée car elle représente un risque vital immédiat.
+
+Définition
+Après plusieurs minutes de repos en conditions calmes :
+• diminution à l'orthostatisme :
+– ≥ 20 mmHg de la pression artérielle systolique ;
+– et/ou ≥ 10 mmHg de la pression artérielle diastolique ;
+– et/ou pression artérielle systolique < 90 mmHg à l'orthostatisme quelle que soit la valeur de départ ;
+… dans les 5 minutes après la verticalisation.
+Cette recherche est peu sensible, et doit être répétée en particulier le matin.
+NB : La présence de symptômes évocateurs (lipothymies fréquentes à l'orthostatisme) malgré une recherche négative peut suffire pour retenir le diagnostic.
+À noter que la définition ne comprend :
+• ni la présence de symptômes à l'orthostatisme (lipothymie, asthénie, chute…) ;
+• ni la variation de la fréquence cardiaque qui lorsqu'elle augmente de moins de 10 pulsations par minute à l'orthostatisme doit faire rechercher la prise d'un traitement bradycardisant (bêta-bloqueur, inhibiteur calcique, digoxine) et/ou une dysautonomie sous-jacente.
+
+L'âge favorise la survenue de l'hypotension orthostatique par :
+• atteinte du barorécepteur ;
+• vieillissement de la paroi artérielle ;
+• réduction du taux d'aldostérone et de rénine.
+
+L'hypotension orthostatique est souvent multifactorielle et ses étiologies sont nombreuses, mais son diagnostic étiologique doit comprendre au minimum :
+• iatrogénie (+++) à rechercher en priorité en traquant toute introduction ou modification de posologie récente : dérivés nitrés, association d'antihypertenseurs, alphabloqueurs, antidépresseurs tricycliques et IMAO, L-dopa, anticholinergiques, phénothiazine, morphine… ;
+• hypovolémie, déshydratation : rechercher toute pathologie aiguë qui peut en favoriser la survenue ;
+• anémie : l'hypotension orthostatique est un symptôme de mauvaise tolérance de l'anémie qui peut justifier une transfusion ;
+• insuffisance cardiaque par l'inadaptation de la réponse hémodynamique à l'orthostatisme ;
+• rarement endocrinopathie (phéochromocytome, dysthyroïdie, insuffisance surrénalienne, insuffisance anté-hypophysaire) ;
+• dysautonomie par :
+– pathologies neurodégénératives en particulier démence à corps de Lewy, maladie de Parkinson, « Parkinson + » ;
+– alitement prolongé ;
+– atteinte neurologique périphérique (diabète, amylose, alcool, connectivites, insuffisance rénale, carences vitaminiques).
+
+Prise en charge
+• Commencer par l'éradication du facteur déclenchant étiologique aigu et/ou de l'amélioration du traitement de la pathologie chronique, lorsque cela est possible.
+• Éduquer le patient à décomposer son passage en orthostatisme.
+• Mise en place d'une contention veineuse de classe 2.
+• Hydratation correcte.
+• Revoir l'ordonnance avec tous les traitements.
+Dans un second temps, discuter l'introduction de midodrine (par un mécanisme de vasoconstriction) ou la fludrocortisone (par inflation hémodynamique, mais hors AMM) en respectant les contre-indications et en expliquant les principaux effets secondaires.
+
+--- PAGE 221 ---
+Raisonner devant une chute, comprendre la démarche diagnostique et thérapeutique
+Au terme de cette démarche devant une ou plusieurs chutes, le clinicien doit disposer :
+• d'une évaluation de l'urgence et des conséquences immédiates ;
+• d'une anamnèse la plus précise permettant d'évoquer un facteur précipitant principal, ou plusieurs
+facteurs précipitants probables ;
+• de différents facteurs prédisposants dont certains potentiellement améliorables ;
+• d'une évaluation du risque de récidive et de sa gravité potentielle.
+Il est souvent utile de rédiger cette synthèse pour établir le plan de soins.
+Mise en situation
+Évaluation précise d'une chute en contexte grave
+Patient de 87 ans, hypertendu, diabétique, tabagique et arthrosique, est admis aux urgences pour
+douleur de la hanche droite [71]. Le patient est douloureux [259], confus [119], ne peut mobiliser son
+membre inférieur droit, qui est raccourci en rotation externe. La radiographie confirme une fracture
+de l'extrémité supérieure du fémur Garden IV droit [173], l'hémoglobine est à 11 g/dl, le ionogramme
+est normal. L'intervention pourrait se dérouler dans les deux heures qui suivent.
+La reconstitution de l'anamnèse de la chute est essentielle, et d'autant plus importante que le patient
+va subir une anesthésie et une intervention chirurgicale, avec possible hypotension peropératoire et
+aggravation de l'anémie. En raison du terrain, la recherche d'une cause cardiovasculaire à sa chute est
+la priorité. L'interrogatoire du patient et de l'accompagnant est nécessaire, à la recherche d'une syn-
+cope, d'un malaise [50], de signes fonctionnels associés (douleur, pâleur, dyspnée, palpitations [165],
+déficit moteur [121]). L'examen clinique réévalue les constantes, cherche des signes d'insuffisance car-
+diaque, de localisation neurologique, malgré la fracture, ainsi que des complications éventuelles d'un
+décubitus (déshydratation, globe, fécalome, inhalation, phlébite/embolie pulmonaire). L'ECG cherche
+un trouble du rythme en particulier une fibrillation atriale (dont il sera difficile de dire si elle est
+responsable de la chute, ou survenue sur une complication du décubitus, et devra également faire évo-
+quer une embolie pulmonaire dans le contexte), un infarctus du myocarde, un trouble de la conduction
+du haut degré, une embolie pulmonaire. Finalement, l'épouse décrit une chute par dérobement brutal
+du membre inférieur gauche, que confirme l'examen clinique avec un déficit moteur et un syndrome
+pyramidal gauche, l'ECG montre une possible séquelle d'infarctus inférieur. Le probable AVC doit être
+confirmé et pris en charge en priorité, et le risque d'hypotension sur sténose vasculaire intracrânienne
+doit faire différer la chirurgie. La confusion doit aussi être prioritairement prise en charge par antalgie
+par paracétamol et titration morphinique [250].
+V. Prise en charge des personnes âgées après une chute
+Les investigations et thérapeutiques nécessaires pour gérer les conséquences traumatiques et/
+ou les facteurs précipitants devant être traités immédiatement requièrent souvent une consul-
+tation au service d'accueil des urgences et parfois une hospitalisation.
+Plan de soins
+L'objectif est d'éviter ou diminuer le risque de récidive de chutes :
+• prendre en charge l'urgence ;
+• corriger le(s) facteur(s) précipitant(s), intrinsèques ou extrinsèques ;
+• prendre en charge la composante améliorable liée aux facteurs prédisposants ;
+• mettre en place des mesures systématiques :
+
+--- PAGE 222 ---
+Connaissances
+– révision de l'ensemble des médicaments ;
+– port de chaussures fermées à talons larges et bas (2 à 3 cm), à semelles fines et fermes
+avec une tige remontant haut (visant à stimuler la proprioception) ;
+– pratique régulière de la marche et/ou de toute autre activité physique (au moins
+30 minutes par jour) ;
+– correction d'une éventuelle carence en vitamine D, recherche et prise en charge d'une
+ostéoporose (cf. chapitre 6) ;
+– prévention ou recherche et prise en charge d'une éventuelle dénutrition ;
+– évaluation du domicile par la famille pour les mesures simples ou par une ergothérapeute ;
+– kinésithérapie motrice si nécessaire (voire ordonnance, cf. encadré), à poursuivre en
+autorééducation entre les séances encadrées par un professionnel ;
+– prescription si nécessaire d'une aide technique à la marche.
+Ordonnance type de kinésithérapie pour une personne âgée post-chute
+Kinésithérapie motrice PLURIHEBDOMADAIRE [souvent à domicile initialement].
+Rééducation de la MARCHE (éventuellement avec aide technique, déambulateur, canne).
+Travail de MUSCULATION proximale des membres inférieurs et du rachis.
+Travail de l'ÉQUILIBRE.
+Travail des TRANSFERTS (lit-fauteuil-toilettes).
+Travail de RELEVER DU SOL EN CAS DE CHUTE.
+SOINS URGENTS [pour ne pas attendre entente préalable CPAM].
+Mise en situation
+Chutes à répétition et perte d'autonomie
+Vous voyez en consultation une patiente de 84 ans, accompagnée de sa fille. Adressée pour chutes
+depuis 2 mois, vous notez dans les antécédents, détaillés dans la lettre du médecin traitant, une mala-
+die à corps de Lewy depuis 3 ans [131, 298] sous L-dopa et inhibiteur d'acétylcholine estérase avec des
+épisodes d'hallucinations, une dépression sous inhibiteur de recapture de la sérotonine, une coxar-
+throse droite débutante, un diabète de type 2. Vous notez la prescription d'un diurétique thiazidique
+et d'un patch de dérivés nitrés. La patiente vit à domicile avec sa fille [31], et ne sort plus depuis un
+mois sur les conseils de sa fille, ce qui est facile à appliquer puisque la patiente refuse de plus en plus
+de sortir de son fauteuil. La première chute est survenue il y a un mois, et depuis la patiente a fait
+trois chutes. Les chutes sont survenues le matin au lever, mais la patiente a ressenti plusieurs fois des
+sensations vertigineuses en se levant après la sieste. L'ECG est normal. La pression artérielle est à 100/58
+mmHg, la fréquence cardiaque est à 65/min. La recherche d'hypotension orthostatique est négative,
+sans accélération de la fréquence cardiaque à l'orthostatisme.
+1. Il s'agit de chutes à répétition [27]. La gravité de ces chutes réside dans le probable retentissement,
+sous la forme d'un syndrome post-chute. Il est urgent de mettre en place des mesures symptoma-
+tiques, en privilégiant le domicile, à commencer par une kinésithérapie de rééducation à la marche.
+Il faut également expliquer à la fille de reprendre les sorties du domicile, dès la cause de la chute
+traitée, pour limiter la désafférentation.
+2. La description est suffisamment évocatrice d'hypotension orthostatique pour faire le diagnostic,
+malgré la recherche négative. La valeur basse de pression artérielle [43] suggère un effet trop
+important des antihypertenseur/antiangineux. La maladie à corps de Lewy et le diabète (selon son
+ancienneté) expliquent la dysautonomie confirmée par l'absence d'accélération de la fréquence
+cardiaque à l'orthostatisme.
+▲
+
+--- PAGE 223 ---
+Raisonner devant une chute, comprendre la démarche diagnostique et thérapeutique
+3. Reste à comprendre pourquoi les chutes ont commencé. La reprise de l'interrogatoire confirme le
+lien chronologique entre l'introduction de nouveaux médicaments par un médecin venu à domicile
+pendant la nuit il y a plus d'un mois alors que la patiente avait été perturbée par une nouvelle hal-
+lucination [122]. L'ayant trouvé hypertendue, il avait introduit le diurétique thiazidique et préféré
+mettre un patch de dérivés nitrés. L'origine iatrogène est donc probable [348], et la suspension
+de ces deux traitements est immédiate avec surveillance de la pression artérielle par le médecin
+traitant, et surveillance de l'absence de récidive de chute.
+4. Dans les mesures complémentaires, éduquer la patiente et sa fille aux précautions à l'orthosta-
+tisme, veiller à une bonne hydratation, et mise en place d'une contention veineuse de classe 2.
+5. Les douleurs de coxarthrose peuvent participer aux chutes, et un traitement antalgique par para-
+cétamol est introduit pour la journée [260].
+6. Enfin, la recherche d'une carence en vitamine D, d'une dénutrition et d'une ostéoporose sera faite.
+▲
+clés
+L'évaluation du patient âgé après une chute comprend :
+1. la recherche des signes de gravité :
+– conséquences de la chute (traumatismes, décubitus prolongé, retentissement psychologique) ;
+– caractère répété de la chute ;
+– certaines étiologies de la chute (causes cardiologiques, cérébrovasculaire, etc.) ;
+– situations médicales et sociales à risque.
+2. une enquête étiologique comprenant :
+– l'analyse de la marche lors de l'examen clinique ;
+– la recherche des facteurs prédisposants, en particulier améliorables ;
+– la mise en evidence des facteurs précipitants : intrinsèques, extrinsèques ;
+– parmi ces différents facteurs prédisposants et précipitants, la recherche de facteurs iatrogènes est
+systématique ;
+– les examens complémentaires sont guidés par la clinique.
+En raison de sa fréquence et de sa gravité, le diagnostic et la prise en charge de l'hypotension orthosta-
+tique doivent être connus.
+La prise en charge d'un patient avec chute nécessite un plan de soins comprenant la :
+• prise en charge de l'urgence ;
+• correction de(s) facteur(s) précipitant(s), intrinsèques ou extrinsèques ;
+• prise en charge de la composante améliorable liée aux facteurs prédisposants ;
+• mise en place de mesures systématiques visant principalement à prévenir la récidive.
+stnioP
+
+--- PAGE 224 ---
+This page intentionally left blank
+
+--- PAGE 225 ---
+Prévenir et prendre en
+charge un syndrome
+d'immobilisation
+I. Généralités
+II. Enquête étiologique
+III. Évaluation : connaître les conséquences du syndrome d'immobilisation pour les prévenir
+IV. Prévention du syndrome d'immobilisation
+Situations de départ
+En lien avec la définition et avec le diagnostic :
+27 Chute de la personne âgée.
+86 Escarre.
+276 Prise en charge d'un patient en décubitus prolongé.
+En lien avec la prise en charge en urgence :
+43 Découverte d'une hypotension artérielle.
+50 Malaise/perte de connaissance.
+64 Vertige et sensation vertigineuse.
+66 Apparition d'une difficulté à la marche.
+74 Faiblesse musculaire.
+103 Incontinence urinaire.
+116 Anxiété.
+121 Déficit neurologique sensitif/moteur.
+130 Trouble de l'équilibre.
+170 Plaie.
+171 Douleur d'un membre (supérieur ou inférieur).
+172 Traumatisme crânien.
+173 Traumatisme des membres.
+174 Traumatisme facial.
+175 Traumatisme rachidien.
+176 Traumatisme sévère.
+248 Prescription et suivi d'un traitement par anticoagulant et/ou antiagrégant.
+250 Prescrire des antalgiques.
+259 Évaluation et prise en charge de la douleur aiguë.
+341 Réaction à un événement potentiellement traumatique.
+348 Suspicion d'un effet indésirable des médicaments ou d'un soin.
+En lien avec la démarche étiologique :
+27 Chute de la personne âgée.
+31 Perte d'autonomie progressive.
+35 Douleur chronique.
+72 Douleur du rachis (cervical, dorsal ou lombaire).
+119 Confusion mentale/désorientation.
+178 Demande/prescription raisonnée et choix d'un examen diagnostique.
+Gériatrie
+© 2021, Elsevier Masson SAS. Tous droits réservés
+
+--- PAGE 226 ---
+Connaissances
+185 Réalisation et interprétation d'un électrocardiogramme.
+226 Découverte d'une anomalie du cerveau à l'examen d'imagerie médicale.
+228 Découverte d'une anomalie osseuse et articulaire à l'examen d'imagerie
+médicale.
+245 Prescription d'un appareillage simple.
+247 Prescription d'une rééducation.
+267 Consultation de suivi d'un patient polymorbide.
+279 Consultation de suivi d'une pathologie chronique.
+295 Consultation de suivi gériatrique.
+298 Consultation et suivi d'un patient ayant des troubles cognitifs.
+334 Demande de traitement et investigation inappropriés.
+345 Situation de handicap.
+352 Expliquer un traitement au patient.
+Item, objectifs pédagogiques, hiérarchisation des connaissances
+ITEM 120 – Complications de l'immobilité et du décubitus. Prévention et prise en charge
+Rang Rubrique Intitulé Descriptif
+A Définition Définition de l'immobilisation
+A Identifier une urgence Savoir dépister les principaux éléments du syndrome de désadaptation
+psychomotrice
+A Définition Connaître les principales complica- Connaître la maladie veineuse
+tions précoces du décubitus thromboembolique, les escarres, la
+dénutrition et les risques infectieux
+notamment bronchopulmonaires
+B Définition Connaître les autres complications Connaître la neuromyopathie, la
+précoces et les complications tardives désadaptation cardiovasculaire
+du décubitus et respiratoire, la dépression, les
+complications locomotrices
+B Éléments Connaître la physiopathologie des Connaître les mécanismes allant
+physiopathologiques complications du décubitus concourir à l'escarre et à la
+dénutrition
+A Prise en charge Savoir prévenir les complications Savoir prescrire une anticoagula-
+précoces du décubitus tion préventive, une prévention
+d'escarres, une alimentation enté-
+rale et une réhabilitation précoce
+A Diagnostic positif Connaître les critères principaux des différents stades d'escarre
+A Diagnostic positif Connaître les principaux facteurs de risque d'escarre
+I. Généralités
+A. Définition
+A L'immobilisation ne traduit pas seulement le décubitus prolongé survenant après une chute,
+mais se définit surtout par un alitement de plus de 3 jours ou une incapacité à réaliser les
+transferts lit-fauteuil ou à se mouvoir.
+L'immobilisation d'une personne âgée est toujours grave car elle l'expose à un déclin
+fonctionnel rapide et à une surmortalité. C'est en ce sens qu'elle doit être considérée
+comme un syndrome.
+
+--- PAGE 227 ---
+Prévenir et prendre en charge un syndrome d'immobilisation
+Le syndrome d'immobilisation :
+• traduit les conséquences de l'alitement d'une personne âgée incapable de façon transitoire
+ou définitive de quitter seule son lit ou son fauteuil ;
+• représente l'un des syndromes gériatriques (c'est-à-dire une situation clinique fréquente,
+multifactorielle et plus ou moins accessible à des interventions pluridisciplinaires) ;
+• traduit une dégradation physiopathologique conduisant à une réduction d'activité, un
+déconditionnement et exposant à un risque élevé de complications somatiques parfois
+sévères et irréversibles (fig. 13.1).
+La connaissance du syndrome d'immobilisation permet d'apprécier la balance bénéfice-risque
+d'un alitement lors de la réflexion sur le projet de soins d'une personne âgée et de prévenir
+ses complications.
+Organe/système Conséquences de l'immobilisation
+Musculo- Baisse de la puissance, force et masse musculaire,
+Prévenir les complications squelettique contracture, souffrance cartilagineuse, ankylose,
+Limiter l'immobilisation ostéoporose, baisse de la masse osseuse
+du sujet âgé Cardiovasculaire et Augmentation de la fréquence cardiaque de
+vasculaire repos, baisse de la perfusion myocardique,
+augmentation de l'hypotension orthostatique,
+baisse de la VO2max, déconditionnement
+cardiaque, réduction des performances
+fonctionnelles pulmonaire, atélectasie
+pulmonaire, congestion veineuse, augmentation
+de l'agrégation plaquettaire, hypercoagulabilité
+Cutané Risque d'escarre et de macération
+Immobilisation
+Métabolique et Balance azoté négative, hypercalciurie, natriurèse,
+endocrine déplétion sodique, insulino résistance,
+hyperlipidérnie, réduction absorption et
+métabolisme vitarninique et minéraux
+Neurologique et Dépression, confusion, atrophie du cortex moteur
+psychiatrique et sensitif, trouble de l'équilibre, trouble cognitif,
+compression nerveuse, baisse de l'efficience
+Évaluer et neuromusculaire
+intervenir sur Gastro-intestinal et Incontinence urinaire et fécale, infection urinaire,
+les complications urinaire rétention d'urine, fécalome, constipation, reflux
+gastro-œsophagien, pneumopathie d'inhalation,
+saignement gastroduodénal.
+Fig. 13.1. A Conséquences du syndrome d'immobilisation.
+Les cinq écueils à éviter chez la personne âgée quant au syndrome
+d'immobilisation et le décubitus prolongé
+• Considérer l'alitement comme une situation normale chez la personne âgée.
+• Négliger les conséquences psychologiques [116], cognitives [119] et fonctionnelles de l'immobilisation
+[31] et leur rapidité d'apparition.
+• Négliger l'incapacité à se relever après une chute dans le plan de soins d'un patient âgé.
+• Négliger l'enquête étiologique de la chute après un décubitus prolongé [27].
+• Ne pas mobiliser le patient tous les jours en milieu hospitalier hors rares contre-indications [247] pour
+préserver l'autonomie.
+

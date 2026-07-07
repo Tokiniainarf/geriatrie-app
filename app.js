@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   document.documentElement.setAttribute('data-theme',S.th);
   document.getElementById('fsVal').textContent=S.fs+'px';
   document.getElementById('lhVal').textContent=S.lh;
-  renderHome();renderSynthesis();renderItems();renderFav();shuffleFlash();updStats();
+  renderHome();renderSynthesis();renderItems();renderFav();populateChapFilter();loadFlashDeck();updStats();
   updateThemeIcon();
   if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
   window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();window.deferredPrompt=e;const ib=document.getElementById('installB');if(ib)ib.style.display='flex'});
@@ -1730,9 +1730,74 @@ window.onSynthFilterInput=onSynthFilterInput;
 window.synthPrint=synthPrint;
 
 /* ── FLASHCARDS ── */
-function shuffleFlash(){flashDeck=filterDeck();for(let i=flashDeck.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[flashDeck[i],flashDeck[j]]=[flashDeck[j],flashDeck[i]]}flashIdx=0;renderFlashcard()}
-function filterDeck(){if(typeof FLASHCARDS==='undefined')return[];return flashFilter==='all'?[...FLASHCARDS]:FLASHCARDS.filter(c=>c.rang===flashFilter)}
-function filterFlash(rang,btn){flashFilter=rang;document.querySelectorAll('.flash-filt').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');shuffleFlash()}
+let flashChapFilter = 'all';
+
+function populateChapFilter() {
+  const sel = document.getElementById('flashChapFilter');
+  if (!sel || sel.options.length > 1) return;
+  if (typeof APP_DATA !== 'undefined' && APP_DATA.chapters) {
+    APP_DATA.chapters.forEach(c => {
+      const opt = document.createElement('option');
+      opt.value = c.id;
+      opt.textContent = c.t;
+      sel.appendChild(opt);
+    });
+  }
+}
+
+function filterFlashChap(val) {
+  flashChapFilter = val;
+  loadFlashDeck();
+}
+
+function loadFlashDeck() {
+  flashDeck = filterDeck();
+  flashIdx = 0;
+  renderFlashcard();
+}
+
+function shuffleFlash() {
+  for(let i=flashDeck.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [flashDeck[i],flashDeck[j]]=[flashDeck[j],flashDeck[i]];
+  }
+  flashIdx = 0;
+  renderFlashcard();
+}
+
+function filterDeck(){
+  const all = [];
+  if (typeof FLASHCARDS !== 'undefined') all.push(...FLASHCARDS);
+  if (typeof FLASHCARDS_A !== 'undefined') all.push(...FLASHCARDS_A);
+  if (typeof FLASHCARDS_B !== 'undefined') all.push(...FLASHCARDS_B);
+  if (typeof FLASHCARDS_C !== 'undefined') all.push(...FLASHCARDS_C);
+  if (typeof FLASHCARDS_EXPANDED !== 'undefined') all.push(...FLASHCARDS_EXPANDED);
+  if (typeof MEGA_FLASHCARDS !== 'undefined') all.push(...MEGA_FLASHCARDS);
+  if (typeof REVISION_FLASHCARDS !== 'undefined') all.push(...REVISION_FLASHCARDS);
+  if (typeof EVC_FLASHCARDS !== 'undefined') all.push(...EVC_FLASHCARDS);
+  if (typeof MEGA_FLASHCARDS_2 !== 'undefined') all.push(...MEGA_FLASHCARDS_2);
+  if (typeof MEGA_FLASHCARDS_3 !== 'undefined') all.push(...MEGA_FLASHCARDS_3);
+  if (typeof MEGA_FLASHCARDS_4 !== 'undefined') all.push(...MEGA_FLASHCARDS_4);
+  if (typeof MEGA_FLASHCARDS_5 !== 'undefined') all.push(...MEGA_FLASHCARDS_5);
+  if (typeof MEGA_FLASHCARDS_6 !== 'undefined') all.push(...MEGA_FLASHCARDS_6);
+  if (typeof MEGA_FLASHCARDS_7 !== 'undefined') all.push(...MEGA_FLASHCARDS_7);
+  if (typeof MEGA_FLASHCARDS_8 !== 'undefined') all.push(...MEGA_FLASHCARDS_8);
+  if (typeof MEGA_FLASHCARDS_9 !== 'undefined') all.push(...MEGA_FLASHCARDS_9);
+  if (typeof MEGA_FLASHCARDS_10 !== 'undefined') all.push(...MEGA_FLASHCARDS_10);
+  
+  all.sort((a, b) => {
+    const numA = parseInt((a.chapter || '').replace('ch', '')) || 999;
+    const numB = parseInt((b.chapter || '').replace('ch', '')) || 999;
+    return numA - numB;
+  });
+
+  return all.filter(c => {
+    const matchRang = (flashFilter === 'all' || c.rang === flashFilter);
+    const matchChap = (flashChapFilter === 'all' || c.chapter === flashChapFilter);
+    return matchRang && matchChap;
+  });
+}
+function filterFlash(rang,btn){flashFilter=rang;document.querySelectorAll('.flash-filt').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');loadFlashDeck()}
 function flashFilterLabel(){return flashFilter==='all'?'Toutes les cartes':'Rang '+flashFilter+' uniquement'}
 function ensureFlashEvalBar(){
   let bar=document.getElementById('flashEval');

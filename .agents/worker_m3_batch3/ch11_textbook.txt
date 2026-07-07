@@ -1,0 +1,639 @@
+=== CHAPTER CH11 ===
+
+--- PAGE 194 ---
+Connaissances
+I. Généralités
+A Le syndrome confusionnel (SC) (delirium pour les Anglo-Saxons) est un dysfonctionne-
+ment cérébral aigu grave responsable d'une augmentation de la morbimortalité dans l'an-
+née qui suit. Il nécessite une prise en charge urgente et est un motif fréquent de passages au
+service d'accueil des urgences (SAU) pour les personnes âgées. Une démarche diagnostique et
+thérapeutique structurée est indispensable à une prise en charge efficace et de qualité.
+A. Physiopathologie
+L'acétylcholine (Ach), qui joue un rôle clé dans les processus attentionnels et la cognition,
+serait un acteur déterminant de la survenue du SC.
+B La physiopathologie du SC est complexe et reste en grande partie méconnue. Aucune
+lésion anatomopathologique spécifique n'a été mise en évidence chez les patients autopsiés
+touchés par un syndrome confusionnel. Les recherches actuelles suggèrent l'intrication de
+plusieurs mécanismes aboutissant à sa survenue. Des modifications de la neurotransmission et
+de l'inflammation sont les principaux facteurs incriminés.
+Plusieurs systèmes de neurotransmission apparaissent concernés, mais les différentes voies phy-
+siopathologiques convergent vers un déficit en acétylcholine (Ach). La fréquence du déclenche-
+ment des SC par l'utilisation de traitements anticholinergiques appuie cette hypothèse. Une
+hypersécrétion de dopamine et un déséquilibre sérotoninergique ont également été évoqués.
+Les processus inflammatoires secondaires aux traumatismes, aux infections ou à la chirurgie et
+médiés par les cytokines pro-inflammatoires, sont responsables d'une réponse exagérée de la
+microglie aboutissant à une inflammation cérébrale. Des marqueurs d'inflammation (interleu-
+kines IL-8 et IL-10, IL-1β et IL-1, IGF-1) interfèrent avec la production et le relargage des neuro-
+transmetteurs et ont un effet neurotoxique direct.
+La diminution du métabolisme cérébral oxydatif dans lequel le système cholinergique est lar-
+gement impliqué est évoquée.
+Un stress aigu, notamment via l'élévation du niveau de cortisol, pourrait précipiter ou entre-
+tenir le SC.
+B. Épidémiologie
+Le SC est fréquent ; chiffres dépendent très fortement de la méthodologie de l'étude pour
+définir le SC, de l'âge et de la population, du mode de recrutement… On peut retenir en limite
+haute d'incidence :
+• 15 % dans les services de médecine ;
+• 30 % en gériatrie, avec un risque multiplié par 6 de mortalité dans les 6 mois ;
+• 50 % en chirurgie ;
+• > 50 % chez des patients hospitalisés avec un trouble neurocognitif majeur (TNCM) ;
+• 80 % en soins intensifs.
+Pour autant, le SC est très sous-diagnostiqué, en particulier dans le cadre de l'urgence où
+reconstituer l'anamnèse et identifier la sémiologie parfois discrète (formes hypoactives en par-
+ticulier) sont particulièrement difficiles.
+A Le SC est associé à un mauvais pronostic. Ainsi, après un passage au SAU avec SC :
+• augmentation du risque de décès à 6 mois ;
+• augmentation de la durée de séjour ;
+• augmentation du risque de passage en soins intensifs ;
+• augmentation du risque de réadmission précoce ;
+• augmentation du risque d'institutionnalisation.
+
+--- PAGE 195 ---
+Diagnostiquer et raisonner devant un syndrome confusionnel
+Cette surmortalité est liée aux causes de SC, mais aussi aux conséquences directes ou indi-
+rectes du SC (déshydratation, chutes, complications de décubitus, dénutrition…).
+Les quatre écueils à éviter concernant le syndrome confusionnel
+de la personne âgée
+• Ne pas considérer tout nouveau trouble du comportement comme un syndrome confusionnel jusqu'à
+preuve du contraire [114, 117].
+• Ne pas suivre une démarche rigoureuse pour faire le diagnostic étiologique du syndrome confusionnel [119].
+• Ne pas identifier l'urgence cachée derrière un syndrome confusionnel.
+• Céder trop facilement au traitement symptomatique d'un syndrome confusionnel sans faire de bilan
+étiologique [244, 348].
+→ Le syndrome confusionnel, favorisé par de nombreuses comorbidités et traitements associés, doit
+être pris en charge en urgence, pour en comprendre l'étiologie, éliminer les étiologies graves, évaluer la
+nécessité d'un traitement spécifique et d'une hospitalisation, et éviter le risque iatrogène des traitements
+surajoutés à tort.
+→ Tout syndrome confusionnel chez un patient âgé dont l'étiologie n'est pas rapidement comprise devrait
+bénéficier d'une expertise gériatrique.
+Deux approches complémentaires doivent être abordées concernant le syndrome confusionnel
+du patient âgé (fig. 11.1) :
+• évaluation du risque de SC en prévention chez un patient sans SC ;
+• prise en charge d'un patient confus ou suspect de l'être.
+Patient asymptomatique Patient symptomatique
+= Suspicion de syndrome confusionnel
+Évaluation du risque
+Dépistage (échelle) Confirmer ou infirmer le diagnostic
+Évaluer le risque (étiologique et iatrogène)
+Facteurs prédisposants
+Évaluation gériatrique globale
+Enquête étiologique pour trouver
+Comorbidités et traitements
+le(s) facteur(s) précipitant(s) (++++)
+→Facteurs prédisposants
+Traquer les facteurs graves
+Correction des facteurs :
+Correction des facteurs
+1. prédisposants modifiables
+prédisposants modifiables
+2. précipitants
+En cas d'exposition
+à un facteur précipitant
+1. Prendre en charge l'urgence
+(par ex., anesthésie, chirurgie…)
+2. Discuter une hospitalisation
+3. Discuter la nécessité
+Anticipation du parcours de soins (+++)
+d'un traitement symptomatique
+Orientation du patient vers :
+4. Prendre en charge les conséquences
+• structure gériatrique
+5. Réévaluer et suivre l'évolution
+• expertise gériatrique
+Surveillance et suivi
+Fig. 11.1. A Approches du syndrome confusionnel.
+
+--- PAGE 196 ---
+Connaissances
+Anticiper et reconnaître un syndrome confusionnel
+Le syndrome confusionnel peut survenir chez tous les patients âgés, en particulier comorbides, en com-
+plication de l'évolution d'une pathologie chronique, en particulier un TNCM, et être pris en charge dans
+le cadre d'une consultation ou d'une hospitalisation. L'évaluation du risque de syndrome confusionnel
+d'un patient fait partie de l'EGS (cf. chapitre 1), en particulier en vue d'un facteur déstabilisant comme une
+chirurgie programmée.
+Quand ?
+• Lors d'une première consultation et à chaque hospitalisation.
+• Lors de consultations de suivi [266, 267, 279, 295].
+• En présence d'une cassure sur le plan cognitif, comportemental ou fonctionnel dans l'évolution du
+patient [31].
+• En prévention chez un patient âgé avant une intervention pour évaluer le risque de syndrome
+confusionnel.
+Comment ?
+• En récupérant des informations objectives [131].
+• En impliquant si besoin l'aidant principal [330], le médecin référent.
+• En examinant le patient pour faire le diagnostic et pour en rechercher l'étiologie et les facteurs
+prédisposants.
+Pourquoi ?
+• Afin d'éliminer une étiologie grave qui justifierait une prise en charge spécifique urgente.
+• Afin d'évaluer le rapport risques/bénéfices des examens complémentaires [334].
+• Afin de déterminer l'utilité voire la nécessité d'une hospitalisation, qui est presque systématique.
+• Afin de limiter l'indication et le risque iatrogène d'un traitement spécifique en corrigeant le facteur
+étiologique.
+II. Diagnostic positif d'un syndrome confusionnel
+du patient âgé
+A. Faire le diagnostic de syndrome confusionnel et de sa
+forme clinique
+Le diagnostic est exclusivement clinique et repose sur la mise en évidence des critères dia-
+gnostiques du DSM-5 (encadré 11.1). Le diagnostic est à évoquer devant toute modification
+rapide comportementale [114, 117] ou cognitive ou inversion du cycle nycthéméral [135] du
+patient âgé (+++), en particulier en présence de TNCM.
+Les différents sous-types de SC selon l'état psychomoteur comprennent :
+• confusion hyperactive avec agitation psychomotrice au premier plan (possible opposition
+du patient aux soins) [114] : risque iatrogène de surtraiter en vue d'une sédation (+++),
+qui doit être la plus transitoire possible si elle est indispensable ;
+• confusion hypoactive : apathie, repli sur lui-même et ralentissement psychomoteur
+[117] ; source de sous-diagnostic, confondue avec une dépression ou un TNCM ;
+• confusion mixte : associe les deux premiers types.
+B Le diagnostic, dans le cadre d'une approche structurée (par exemple pour les études scien-
+tifiques) ou d'un dépistage, repose sur l'utilisation d'échelles, dont la plus utilisée est la
+Confusion Assesment Method (CAM) :
+
+--- PAGE 197 ---
+Diagnostiquer et raisonner devant un syndrome confusionnel
+• nécessite une formation ;
+• réalisation ne dépassant pas 5 à 10 minutes ;
+• sensibilité 86 % et spécificité 93 %.
+• Critères : 1 + 2 + (3 ou 4) :
+1. Début aigu, fluctuation de l'évolution.
+2. Troubles de l'attention.
+3. Désorganisation du cours de la pensée et du langage.
+4. Atteinte de la vigilance.
+Encadré 11.1
+Définition du syndrome confusionnel selon les critères du DSM-5
+• A Critère A : perturbation de l'attention (diminution de la capacité de diriger, focaliser, soutenir et
+déplacer son attention) et de l'orientation : test d'orientation spatio-temporelle et épreuve attentionnelle
+(jours de la semaine à l'envers) pour une évaluation rapide.
+• Critère B : installation sur un temps court (quelques heures à quelques jours) et changement par rapport
+à l'attention et à la conscience préalable ; fluctuation en sévérité au long de la journée : établir la rup-
+ture avec l'état antérieur : interrogatoire d'un proche (+++) ; identifier les formes hypo- et hyperactives.
+• Critère C : existence d'une autre perturbation cognitive (déficit de la mémoire, de l'orientation, du
+langage [au sens d'incohérence], des habiletés visuo-spatiales ou des perceptions).
+• Critère D : critères A et C pas mieux expliqués par un trouble neurocognitif préexistant, et hors contexte
+d'un niveau de vigilance très réduit, comme dans un coma.
+• Critère E : mise en évidence avec antécédents, examen physique ou examens complémentaires que la
+perturbation est conséquence directe d'une autre affection médicale, d'une intoxication ou d'un
+sevrage d'une substance (drogue ou médicament) ou d'une exposition à un produit toxique, ou est due à
+de multiples causes.
+B. Éliminer un diagnostic différentiel
+Aphasie de Wernicke
+• A Propos incohérents et patient ne comprenant pas l'examinateur, d'où agitation.
+• Existence de paraphasies (surtout sémantique) et encore plus d'éléments de jargon
+(néologismes) inexistants dans le SC.
+• Absence de trouble attentionnel et de fluctuation.
+• Imagerie cérébrale urgente en cas de survenue brutale ou de manifestation méconnue car
+constituant un signe neurologique focal (recherche d'AVC, d'une pathologie tumorale…).
+Décompensation d'une pathologie psychiatrique
+Décompensation psychotique, plus rare en gériatrie, à évoquer chez un patient habituelle-
+ment connu pour présenter une pathologie psychotique. Possibilité aussi de doute dans les
+états maniaques des patients bipolaires.
+Ictus amnésique
+• Trouble aigu de l'enregistrement mnésique.
+• Dure habituellement quelques heures.
+• Pas de trouble attentionnel.
+• Élément caractéristique de reprise itérative des mêmes questions chez un patient perplexe
+voire anxieux.
+
+--- PAGE 198 ---
+Connaissances
+III. Diagnostic étiologique d'un syndrome
+confusionnel du patient âgé
+A. Faire le diagnostic des facteurs prédisposants
+et précipitants
+Le raisonnement doit être guidé par la règle du 1 + 2 + 3 ou du 1 + 3 de J.-P. Bouchon (cf. fig. 1.1
+au chapitre 1). Le facteur 1 représente le vieillissement, altérant les capacités d'adaptation au
+stress (baisse de la réserve cognitive) sans aboutir à la défaillance. Les facteurs 2 représentent
+les pathologies chroniques ayant un retentissement cognitif, dont l'évolution peut aboutir à la
+défaillance de l'organe. L'ensemble des facteurs 1 et 2 représentent les facteurs prédis-
+posants à la survenue d'un syndrome confusionnel. Le ou les facteurs 3 représentent
+les facteurs précipitants, qui déclenchent le syndrome confusionnel.
+Notion de capacité de réserve cognitive : plus les facteurs prédisposants sont nombreux et/
+ou sévères (personne âgée comorbide), plus la réserve cognitive est dégradée pour affronter
+un stress, et moins le facteur précipitant responsable de la confusion a besoin d'être important
+(fig. 11.2).
+En présence d'une réserve cognitive
+importante, il faut un facteur précipitant
+important (par exemple : AVC)
+En présence d'une réserve cognitive
+Sévérité limitée, un facteur précipitant minime peut
+suffire (par exemple : changement de
+du facteur posologie d'un traitement)
+172 précipitant
+Syndrome
+confusionnel
+Réserve
+cognitive
+Fig. 11.2. A Lien entre réserve cognitive et sévérité du facteur précipitant.
+1. Commencer par identifier les facteurs prédisposants (HAS, 2009)
+pour estimer la vulnérabilité du patient âgé
+• Âge ≥ 80 ans.
+• TNCM avéré ou troubles cognitifs chroniques sous-jacents.
+• Immobilisation, aggravée par la contention physique.
+• Déficit sensoriel (visuel ou auditif).
+• Comorbidités multiples.
+• Dénutrition.
+• Polymédication.
+• Antécédents de confusion, notamment postopératoire.
+• Troubles de l'humeur, en particulier état dépressif.
+
+--- PAGE 199 ---
+Diagnostiquer et raisonner devant un syndrome confusionnel
+2. Identifier les facteurs précipitants ou facteurs déclenchants
+Trouver le ou les facteurs précipitants représente le temps essentiel de la prise en charge d'un syndrome
+confusionnel, car sa ou leur correction représente le plus souvent le seul traitement nécessaire à la guérison
+du syndrome confusionnel.
+Les facteurs précipitants sont fréquemment multiples chez le patient gériatrique.
+Ce diagnostic étiologique repose sur la reconstitution précise de l'anamnèse, de tous les évé-
+nements récents avant l'apparition du syndrome confusionnel, et sur l'examen clinique (ECG
+systématique) comprenant au minimum la recherche de :
+• foyer infectieux ;
+• douleur (céphalées, thoracique, ostéoarticulaire, abdominale, pelvienne…) ;
+• déshydratation ;
+• signes de localisation neurologique ;
+• signes d'insuffisance cardiaque droite ou gauche ;
+• infarctus du myocarde, hypercalcémie sur ECG.
+Facteurs précipitants du syndrome confusionnel
+Toute situation aiguë quelle qu'elle soit, iatrogène ou pathologie.
+– Iatrogène médicamenteuse : recueil des traitements, en particulier modifications récentes (ajout, arrêt [sevrage
+en benzodiazépines ou hypnotiques +++] ou changement de posologie), recherche de traitements anticholi-
+nergiques (antispasmodique de l'instabilité vésicale, antihistaminique, neuroleptique caché dans les antiémé-
+tiques, antitussifs…).
+– Infectieuses (+++) de toute origine. Tout syndrome confusionnel fébrile sans foyer infectieux retrouvé (pulmo-
+naire, urinaire, abdominal…) doit faire envisager une ponction lombaire en urgence pour suspicion de ménin-
+gite ou méningoencéphalite.
+– Toxiques : alcool, monoxyde de carbone…
+– Douleur, quelle qu'en soit la cause (fracture, globe vésical…).
+– Cardiovasculaire : syndrome coronarien, embolie pulmonaire…
+– Neurologique : AVC, hématome sous-dural, épilepsie…
+– Métabolique et endocrinienne : hypoglycémie (+++), déshydratation, hyponatrémie, hypernatrémie, hypercal-
+cémie, hypoxie…
+– Psychiatrique (dépression, stress, deuil…).
+– Autres situations : chirurgie, anesthésie générale, réanimation, subocclusion, fièvre, contention, privation sen-
+sorielle, changement de repères.
+B. Identifier les facteurs de gravité
+La survenue d'un syndrome confusionnel est en soi un événement grave. Lors de la prise
+en charge, des critères de gravité supplémentaires doivent être recherchés, car impactant le
+pronostic et relevant d'une prise en charge spécifique urgente, d'une hospitalisation ou d'un
+traitement spécifique. Gravité liée :
+• aux facteurs précipitants (par exemple, choc septique, méningoencéphalite ou méningite,
+infarctus du myocarde, embolie pulmonaire…) ;
+• aux complications du syndrome confusionnel :
+– mise en danger du patient ou plus rarement d'autrui, refus de soins ;
+– chutes et potentielles conséquences traumatologiques ;
+– déshydratation ;
+– escarres ;
+
+--- PAGE 200 ---
+Connaissances
+– fausses routes ;
+– décompensation de pathologies sous-jacentes ;
+– globe et fécalome, que l'on peut retrouver en cause mais aussi en conséquence du SC ;
+• au terrain, avec nécessité d'une surveillance ;
+• aux conséquences iatrogènes d'un traitement symptomatique (contention, sédation), en
+particulier dans un service non habitué à prendre en charge les SC :
+– somnolence, inhalation, pneumopathie, détresse respiratoire, décès ;
+– auto-entretien de la confusion par la contention.
+C. Examens complémentaires
+Selon les données de l'interrogatoire et de l'examen clinique, les examens complémentaires
+sont réalisés soit pour confirmer le(s) facteur(s) précipitant(s), soit pour rechercher un facteur
+précipitant fréquent, sans négliger de faire le point sur les facteurs prédisposants sous-jacents.
+Le bilan de première intention est représenté dans la figure 11.3 et est fonction de l'orientation
+clinique.
+• Le scanner cérébral :
+– n'est pas un examen de première intention, sauf en cas de :
+– signe de localisation neurologique ;
+– suspicion d'hémorragie méningée ;
+– traumatisme crânien y compris mineur, notamment chez les patients sous anticoa-
+gulants ou antiagrégants plaquettaire ;
+– chute dans des circonstances peu claires ;
+INTERROGATOIRE TDMc : scanner cérébral
+NFS : numération-formule sanguine
+Toxiques CRP : protéine réactive C
+! Médicaments Ca : calcémie
+Traumatisme TSH : thyréostimuline
+BU : bandelette urinaire
+ECG : électrocardiogramme
+BH : bilan hépatique
+EXAMEN CLINIQUE ECBU : examen cytobactériologique des urines
+TC : traumatisme crânien
+EEG : électroencéphalogramme
+PL : ponction lombaire
+Neurologique : Digestif :
+Signes neurologiques focaux Abdomen chirurgical Cœur Métabolique Infectieux Examen locomoteur
+Syndrome méningé Troubles du transit
+BILAN DE PREMIÈRE INTENTION :
+bilan biologique : NFS, ionogramme sanguin, créatininémie et calculde la
+clairance, CRP, glycémie, Ca, Bu
++ ECG
+BILAN DE SECONDE INTENTION :
+en fonction du contexte
+Gaz du sang, troponine, toxiques, BH, hémocultures, TSH, ECBU, radio de thorax
+TDM c : TC ou signes neurologiques focaux
+EEG : suspicion clinique de crise convulsive ou bilan de confusion négatif y compris scanner cérébral
+PL : syndrome infectieux sans point d'appel clinique ou syndrome méningé
+Fig. 11.3. A Choix des examens complémentaires dans le cadre d'un syndrome confusionnel.
+(Source : Dourthe L, Verny M. Syndrome confusionnel de la personne âgée. EMC - Médecine d'urgence 2018:1–9.
+Elsevier Masson SAS. Tous droits réservés.)
+
+--- PAGE 201 ---
+Diagnostiquer et raisonner devant un syndrome confusionnel
+– bilan étiologique de première intention négatif, en particulier en cas de persistance du
+syndrome confusionnel, et peut être complété d'une IRM cérébrale à la recherche d'un
+petit accident ischémique limité par exemple.
+• La ponction lombaire doit être envisagée chez tout patient avec confusion fébrile :
+– mais elle n'est pas un examen de première intention, sauf en cas de :
+– syndrome méningé ;
+– suspicion d'hémorragie méningée (après réalisation d'un scanner cérébral) ;
+– fièvre sans autre point d'appel infectieux ;
+– elle doit être réalisée en seconde intention en cas de bilan négatif, en particulier en cas
+de persistance du syndrome confusionnel.
+• Électroencéphalogramme (EEG) :
+– en cas de suspicion de confusion post-critique d'une épilepsie ;
+– également utile en cas de bilan étiologique négatif pour dépister les épilepsies infra-
+cliniques, notamment des états de mal dont la seule manifestation sera le SC.
+Mise en situation
+Reconstituer l'anamnèse encore et toujours…
+Vous revoyez en consultation, comme tous les 6 mois, une patiente de 78 ans, que vous suivez depuis
+2 ans, date du diagnostic de trouble neurocognitif majeur modéré lié à une probable maladie d'Alzhei-
+mer [298], et qui présente également une hypertension artérielle sous inhibiteur calcique et une
+dépression sous inhibiteur de recapture de la sérotonine. Cette patiente continue à vivre seule, avec
+une aide ménagère, et continue à conduire dans un petit périmètre car elle vit dans une maison assez
+isolée à la campagne. La situation était parfaitement stable depuis 2 ans. Mais la consultation a été
+avancée à la demande de son fils, qui pense que sa mère ne peut désormais plus rester à domicile
+seule, car la situation se dégrade maintenant rapidement. En reprenant l'interrogatoire, les troubles
+ont commencé il y a 1 mois et demi, ce que date assez précisément son fils. La patiente a commencé
+à être plus inquiète [116], à moins bien retenir les informations que lui donnait son fils par téléphone
+[129], et à moins bien dormir la nuit [135]. Récemment, la patiente a eu beaucoup de mal à revenir en
+voiture à la maison pour un trajet habituel [129]. Et son discours a changé, elle dit maintenant qu'elle
+doit aller en institution, contrairement à son souhait habituel. Vous notez une anxiété inhabituelle de
+la patiente et une grande inquiétude chez son fils.
+1. La cassure dans l'évolution évoque avant tout la survenue d'un facteur aigu précipitant. La pré-
+sence d'anxiété, mais aussi de troubles attentionnels, de la concentration et mnésiques, fait évo-
+quer la survenue d'un syndrome confusionnel, que l'interrogatoire confirme.
+2. La première question posée à la patiente et à son fils est celle de savoir s'il s'est passé quelque chose
+avant que la situation ne se dégrade. Et en particulier, s'il y a eu :
+• la moindre modification thérapeutique (introduction, sevrage, modification de posologie). De
+mieux préciser les choses en demandant s'il était apparu de nouveaux symptômes pour lesquels
+il avait fallu prendre un autre traitement, en particulier des antalgiques pour une douleur, des
+anxiolytiques pour l'anxiété ;
+• un épisode infectieux ou autre événement aigu ;
+▲
+
+--- PAGE 202 ---
+Connaissances
+• une ou plusieurs chutes.
+Considérant le terrain, la possibilité d'un AVC, celle d'une réactivation de la dépression, d'une hypona-
+trémie sous IRS (prise ancienne) doivent être évoqués.
+L'examen clinique cherchera de la fièvre, des signes de localisation neurologique, des signes d'insuf-
+fisance cardiaque et des séquelles d'infarctus du myocarde sur l'ECG, et des signes de retentissement,
+finalement limités, avec une pression artérielle, une fréquence cardiaque et une saturation normales,
+un état d'hydratation normal, et une perte de poids de 1 kg. C'est à la fin de la consultation que la
+patiente vous parle de la mort, une semaine avant le début des troubles, de son chat qu'elle avait
+depuis 15 ans et qui était son vieux compagnon.
+3. Au terme de la consultation, vous retenez le diagnostic de syndrome confusionnel sur anxiété/
+deuil liés au décès de l'animal de compagnie. L'absence de critères de gravité, l'examen clinique
+rassurant et l'anamnèse assez précise sur un terrain dépressif semblent cohérents et permettent
+de ne pas prendre de mesures thérapeutiques autres que de reprendre un animal de compagnie.
+Vous expliquez à la patiente et à son fils que ce deuil a déstabilisé la patiente et qu'il ne s'agit pas
+de l'évolution normale de la maladie. Mais il faut surveiller la patiente et s'assurer de l'évolution
+favorable.
+IV. Prise en charge et traitement de la confusion
+du patient âgé
+A. Évaluation du besoin d'hospitalisation en urgence
+En cas de :
+• mise en jeu du pronostic vital ou fonctionnel ;
+• facteurs précipitants nécessitant une prise en charge immédiate ;
+• dangerosité du patient pour lui-même ou pour autrui ;
+• impossibilité de réaliser les examens complémentaires en ambulatoire ;
+• impossibilité d'assurer une surveillance adaptée ;
+• absence d'un entourage fiable ;
+• absence d'étiologie déterminée et donc de traitement curatif instauré.
+B. Correction du ou des facteurs précipitants → Objectif
+numéro 1
+La mise en œuvre rapide de cette prise en charge est le meilleur gage d'une évolution la plus
+courte possible. Bien prendre en compte tous les facteurs déclenchants existants.
+Il s'agit le plus souvent de la seule mesure à mettre en place. Elle s'associera secondairement à
+la correction des facteurs prédisposants modifiables.
+C. Correction des conséquences du syndrome confusionnel
+Prise en charge de la déshydratation, d'une escarre, etc.
+▲
+
+--- PAGE 203 ---
+Diagnostiquer et raisonner devant un syndrome confusionnel
+D. Mise en place de mesures non médicamenteuses
+Ces mesures représentent un prérequis indispensable, dont l'efficacité a été montrée, notam-
+ment dans la gestion des troubles du comportement ; ces mesures sont également à mettre
+en place en prévention d'un syndrome confusionnel, en particulier chez les patients ayant un
+risque important de développer un SC :
+• installation dans un lieu approprié suffisamment éclairé et calme ;
+• éviter le risque de fugue sans contentionner (éviter la chambre devant les ascenseurs, sécu-
+riser l'environnement…) ;
+• maintenir une mobilité physique ;
+• favoriser la présence des proches ;
+• personnel soignant attentif à la communication verbale et non verbale (mimiques, gestes…)
+avec attitude apaisante ;
+• lutte contre l'isolement sensoriel (prothèses auditives et lunettes) ;
+• favoriser la reprise de repères spatiaux et temporels (calendrier, horloge, rappels réguliers
+par l'équipe soignante) ;
+• maintien d'une bonne hydratation ;
+• évaluation du bénéfice/risque de tous les actes invasifs (perfusion, sondage…) ;
+• favoriser l'élimination : accès aux toilettes/pistolet, laxatifs ;
+• formation des équipes au dépistage.
+E. Mesures médicamenteuses
+Attention à l'escalade thérapeutique (fig. 11.4) !
+L'indication d'un traitement médicamenteux doit faire l'objet d'une évaluation du rapport
+risque/bénéfice de chaque traitement. Il doit être envisagé uniquement en présence d'une
+anxiété majeure ou de troubles du comportement envahissants. La prise per os doit être
+favorisée.
+En cas d'anxiété majeure
+• Vérifier qu'un sevrage en hypnotique ou benzodiazépine n'a pas été réalisé et, en ce cas,
+reprise impérative du traitement suspendu.
+• Privilégier une benzodiazépine à pic d'action rapide et à demi-vie courte type alprazo-
+lam (demi-vie = 12 heures) ou oxazépam (demi-vie = 6 à 8 heures) à faible dose (recom-
+mandations HAS).
+En cas de délire et/ou hallucinations à l'origine d'agitation compromettant
+sa sécurité (examens clinique ou complémentaires ou traitement impossibles)
+ou celle de l'entourage (agressivité physique)
+• Privilégier un neuroleptique atypique type rispéridone ou olanzapine (dose faible et
+administration orale, orodispersible).
+• Éviter autant que possible le recours aux formes injectables. Sinon, discuter le tiapride
+(Tiapridal®), neuroleptique classique le moins anticholinergique à faible dose.
+
+--- PAGE 204 ---
+Connaissances
+B Toute anxiété ou tout délire/hallucination ne justifie pas obligatoirement un traitement
+médicamenteux.
+Pas d'utilisation d'hydoxyzine (Atarax®), de cyamémazine (Tercian®) ou d'halopéridol (Haldol®) du
+fait de la composante anticholinergique de ces molécules.
+Dans le cas particulier de la maladie à corps de Lewy ou des TNCM dans la maladie de Parkinson,
+utilisation des neuroleptiques habituels contre-indiquée (risque majeur de syndrome malin des neuro-
+leptiques). Discuter dans ces cas l'utilisation de quétiapine (hors AMM) ou de clozapine.
++
+Traitement étiologique Mesures non médicamenteuses
+Échec
+Auto-/hétéroagressivité
+Examen clinique/examens complémentaires/traitement
+étiologique compromis
+Anxiété majeure Agitation, agressivité, hallucinations
+Benzodiazépines Neuroleptique*
+Voie orale Voie orale
+–
++ + –
+Alprazolam 0,25 mg Rispéridone 0,5 mg Tiapridal 50 mg
+178 ou solution buvable IM
+Oxazépam 10 mg
+À
+À RÉÉVALUATION renouveler
+renouveler si besoin
+si besoin
+1/À surveiller tout au long de l'évolution :
+! douleur, fécalome, rétention aiguë d'urine
+2/Éviter sauf nécessité :
+cathéter, sonde urinaire, perfusion...
+Fig. 11.4. A Prise en charge de l'agitation du patient âgé confus.
+* Si démence à corps de Lewy : quétiapine ou clozapine. (Source : Dourthe L, Verny M. Syndrome confusionnel de la
+personne âgée. EMC - Médecine d'urgence 2018:1–9. Elsevier Masson SAS. Tous droits réservés.)
+F. Très rarement, recours à la contention physique en ultime
+recours
+• A À envisager en dernier lieu, après échec de toutes les mesures précédentes.
+• Sur prescription médicale, engageant la responsabilité du prescripteur.
+• Sur une durée limitée.
+• À réévaluer pluriquotidiennement.
+• Surveillance spécifique.
+• Source d'aggravation du SC.
+• Attention, les barrières, les attaches mousses, les sangles de maintien sont des modes de
+contention.
+
+--- PAGE 205 ---
+Diagnostiquer et raisonner devant un syndrome confusionnel
+Mise en situation
+Objectif thérapeutique dépassé : iatrogénie
+De garde, vous êtes appelé(e) en chirurgie pour fièvre [44] et désaturation [162] chez une patiente
+de 90 ans. En vous attendant, la patiente a été mise sous oxygène et la saturation est maintenant à
+94 %. La patiente est très somnolente, non informative. En reprenant le dossier, vous notez un antécé-
+dent de maladie d'Alzheimer sous inhibiteur de l'acétylcholine estérase, de dépression sous inhibiteur
+de recapture de la sérotonine, d'hypertension artérielle sous diurétiques thiazidiques, de troubles du
+sommeil sous mélatonine et hypnotique, de surdité appareillée (prothèses auditives non portées). Elle
+vivait en EHPAD et déambulait sans autre trouble du comportement. Patiente opérée deux jours avant
+d'une fracture de l'extrémité supérieure du fémur. L'infirmière vous rapporte que depuis l'opération, la
+patiente était anxieuse, agitée, et qu'elle criait en grimaçant, qu'il était impossible de l'approcher pour
+lui faire un bilan [114, 119]. Elle a donc d'abord été attachée des quatre membres (selon les procédures
+du service) et, comme cela ne s'améliorait pas, elle a reçu une injection d'halopéridol 5 mg en intra-
+musculaire. La situation s'est alors nettement améliorée, puisque la patiente a été beaucoup plus calme
+[28]. Mais c'est en faisant le tour à 3 h cette nuit que l'infirmière a constaté la fièvre et la désaturation.
+À l'examen clinique : température 38,5 °C, 125/65 mmHg, pouls 90/min, saturation 93 % sous 3 litres/
+min, fréquence respiratoire 24/min. Vous trouvez un foyer de crépitants étendu à toute la base droite,
+une langue rôtie, une hypovigilance avec un Glasgow à 12 (V4, M5, Y3), des gémissements à la mobili-
+sation de la hanche opérée et à la palpation du pelvis.
+1. La description correspond à un probable syndrome confusionnel [119] hyperactif [114] postopé-
+ratoire, aggravé par une contention, et finalement sédatée (trop) par neuroleptiques [348]. Les
+troubles de la vigilance ont probablement favorisé l'inhalation et la pneumopathie. Le pronostic
+vital est engagé.
+2. L'urgence est à gérer le risque vital : poursuivre l'oxygénothérapie, suspendre la contention et
+les neuroleptiques, et vérifier les pupilles pour éliminer un myosis en faveur d'un surdosage en
+morphinique, peu probable avec une tachypnée. Il faut perfuser la patiente et faire un bilan bio-
+logique, corriger la déshydratation, contrôler l'hémoglobine pour l'anémie postopératoire, débu-
+ter une antibiothérapie (fièvre, pneumopathie, pression artérielle basse pour une hypertendue,
+qSFOFA 2/3), et vérifier la prévention de maladie veineuse thromboembolique.
+3. Il faut ensuite faire le point sur le syndrome confusionnel et sur les possibles facteurs précipitants, et éviter
+la récidive lorsque l'état de vigilance de la patiente s'améliorera : traiter correctement la douleur [77] (la
+morphine est confusiogène mais indispensable), prendre en charge la rétention aiguë d'urines [97] (et
+contrôler le toucher rectal), corriger une anémie [217] qui pourrait être mal tolérée sur le plan cognitif,
+corriger un possible sevrage en hypnotiques, éliminer un infarctus du myocarde (ECG) [185], chercher des
+signes de localisation neurologique (en faveur d'une AVC ou d'un hématome sous-dural négligé dans le
+contexte de chute) [121], expliquer le rôle délétère probable de la contention.
+4. Enfin, il faudra mettre en place les mesures non médicamenteuses et, au mieux, transférer la
+patiente en gériatrie ou la faire suivre par une équipe mobile gériatrique.
+5. Idéalement, l'ensemble des mesures de prévention du SC aurait pu être mis en place en préopéra-
+toire chez cette patiente à haut risque de SC.
+
+--- PAGE 206 ---
+Connaissances
+Points particuliers
+B Prévention du syndrome confusionnel
+Le SC pourrait être prévenu dans 30 % à 40 % des cas en utilisant les mesures non médicamenteuses citées
+ci-dessus, tandis qu'aucune prise en charge médicamenteuse n'a montré son efficacité. Un programme
+d'intervention structuré permettrait de diminuer :
+• l'incidence du SC ;
+• le nombre de chutes ;
+• la durée de séjour ;
+• le nombre d'institutionnalisations.
+Liens entre trouble neurocognitif majeur et syndrome confusionnel
+Il existe des liens étroits entre le TNCM et le SC, et la coexistence est fréquente. Le SC est un marqueur de
+vulnérabilité cognitive souvent sous-tendu par des troubles cognitifs (pas toujours connus…), et pourrait
+aussi favoriser la bascule vers un authentique TNCM !
+La survenue d'un SC chez des patients atteints d'une maladie d'Alzheimer est suivie d'une dégradation
+cognitive 3 fois plus rapide.
+Pour ces raisons, tout patient présentant un SC doit être réévalué sur le plan cognitif dans les 3 à 6 mois qui
+suivent.
+Cas particulier de la maladie à corps de Lewy
+Une des présentations cliniques est la survenue d'épisodes confusionnels itératifs d'évolution spontané-
+ment favorable dont le bilan étiologique reste négatif. Il faut y penser d'autant plus qu'il existe un syn-
+drome parkinsonien, des épisodes d'hallucinations visuelles ou encore des arguments pour un trouble du
+comportement en sommeil paradoxal.
+clés
+Le syndrome confusionnel :
+• est associé à un mauvais pronostic ;
+• est sous-diagnostiqué mais surtraité (recours trop fréquents aux psychotropes et à la contention avec
+un risque de iatrogènie) ;
+• doit être évoqué dans toute cassure brutale dans l'évolution de patients en particulier avec trouble
+neurocognitif.
+Son diagnostic est clinique et repose sur la reconstitution d'une anamnèse et un examen clinique précis
+pour reconnaître les critères du DSM-5.
+Une fois le diagnostic fait, la démarche clinique comprend :
+• la reconnaissance des facteurs prédisposants ;
+• l'identification des facteurs précipitants, véritable enjeu de la prise en charge dont le traitement suffit
+souvent à entraîner une amélioration clinique voire une régression du syndrome confusionnel ;
+• la reconnaissance des facteurs de gravité ;
+• des examens complémentaires guidés par l'anamnèse et la clinique.
+La prise en charge d'un syndrome confusionnel comprend :
+• l'évaluation de l'urgence et le besoin d'hospitalisation ;
+• la correction des facteurs précipitants ;
+• la correction des conséquences du syndrome confusionnel ;
+• la mise en place de mesures non médicamenteuses ;
+• rarement le recours à un traitement médicamenteux (sauf circonstances très particulières).
+stnioP
+
+--- PAGE 207 ---
+Raisonner devant
+une chute, comprendre
+la démarche diagnostique
+et thérapeutique
+I. Généralités
+II. Physiologie de la marche : impact du vieillissement
+III. Analyser la marche d'une personne âgée
+IV. Démarche diagnostique devant un patient chuteur
+V. Prise en charge des personnes âgées après une chute
+Situations de départ
+En lien avec la définition et avec le diagnostic :
+27 Chute de la personne âgée.
+64 Vertige et sensation vertigineuse.
+66 Apparition d'une difficulté à la marche.
+130 Trouble de l'équilibre.
+En lien avec la prise en charge en urgence :
+43 Découverte d'une hypotension artérielle.
+50 Malaise/perte de connaissance.
+71 Douleur d'un membre (supérieur ou inférieur).
+121 Déficit neurologique sensitif/moteur.
+159 Bradycardie.
+165 Palpitations.
+166 Tachycardie.
+172 Traumatisme crânien.
+173 Traumatisme des membres.
+174 Traumatisme facial.
+175 Traumatisme rachidien.
+176 Traumatisme sévère.
+250 Prescrire des antalgiques.
+259 Évaluation et prise en charge de la douleur aiguë.
+276 Prise en charge d'un patient en décubitus prolongé.
+341 Réaction à un évènement potentiellement traumatique.
+348 Suspicion d'un effet indésirable des médicaments ou d'un soin.
+En lien avec la démarche étiologique :
+27 Chute de la personne âgée.
+31 Perte d'autonomie progressive.
+35 Douleur chronique.
+51 Obésité/surpoids.
+67 Douleurs articulaires.
+68 Boiterie.
+Gériatrie
+© 2021, Elsevier Masson SAS. Tous droits réservés
+

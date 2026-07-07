@@ -1,0 +1,62 @@
+
+=== File: flashcards-batch-A.js ===
+Length: 15584
+First 1000 characters:
+const FLASHCARDS_A = [
+  // ── Ch1 : Vieillissement ──
+  { id: 101, chapter: 'ch1', rang: 'A', question: 'Définition du vieillissement ?', answer: 'Ensemble des processus physiologiques modifiant la structure et les fonctions des organes à partir de l\'âge mûr. Facteurs : génétiques + environnementaux + stochastiques. Processus lent, jamais responsable seul d\'une symptomatologie aiguë.', tags: ['vieillissement', 'définition'] },
+  { id: 102, chapter: 'ch1', rang: 'A', question: 'Les 5 critères de Fried pour la fragilité ?', answer: '1. Perte de poids involontaire (≥4,5 kg/an ou ≥5%). 2. Fatigue (échelle de fatigue). 3. Réduction des activités physiques. 4. Vitesse de marche lente (<0,8 m/s). 5. Faible force de préhension (grip strength). ≥ 3 critères = fragile.', tags: ['Fried', 'fragilité'] },
+  { id: 103, chapter: 'ch1', rang: 'A', question: 'Seuil de vitesse de marche pour le diagnostic de fragilité ?', answer: '< 0,8 m/s (soit < 4,8 s sur 4 m). Mesuré par le test de marche de 4 mè
+
+=== File: flashcards-batch-B.js ===
+Length: 13305
+First 1000 characters:
+const FLASHCARDS_B = [
+  // ── Ch8 : Douleur ──
+  { id: 201, chapter: 'ch8', rang: 'A', question: 'Échelle EVA pour la douleur ?', answer: 'Échelle Visuelle Analogique : ligne de 10 cm, 0 = pas de douleur, 10 = douleur maximale. Utilisable chez la personne âgée communicante. Si non communicante : utiliser ECPA ou DOLOPLUS-2.', tags: ['EVA', 'évaluation', 'douleur'] },
+  { id: 202, chapter: 'ch8', rang: 'A', question: 'Comment évaluer la douleur chez une PA non communicante ?', answer: 'Échelle ECPA (Échelle Comportementale pour Personnes Âgées) ou DOLOPLUS-2. Observer : mimiques faciales (grimaces), vocalisations (gémissements), langage corporel (protection, retrait), modifications comportementales (agitation, repli), changement activité.', tags: ['ECPA', 'DOLOPLUS', 'non communicante'] },
+  { id: 203, chapter: 'ch8', rang: 'A', question: 'Échelle OMS des paliers antalgiques ?', answer: 'Palier 1 : paracétamol (3g/j max). Palier 2 : tramadol, codéine (opioïdes faibles). Palier 3 : morp
+
+=== File: flashcards-batch-C.js ===
+Length: 12174
+First 1000 characters:
+const FLASHCARDS_C = [
+  // ── Ch15 : Incontinence ──
+  { id: 301, chapter: 'ch15', rang: 'A', question: 'Types d\'incontinence urinaire ?', answer: '1. IUE (effort) : fuites à l\'effort, toux, éternuement. 2. IUU (urgente) : fuites avec impériosité. 3. Mixte : IUE + IUU. 4. Fonctionnelle : liée à la mobilité/cognition. 5. Par regorgement : globe vésical. 6. Neurogène : lésion neurologique.', tags: ['types', 'IUE', 'IUU'] },
+  { id: 302, chapter: 'ch15', rang: 'A', question: 'Facteurs réversibles d\'incontinence chez la PA ?', answer: 'Méthode DIAPPERS : D = Delirium, I = Infection urinaire, A = Atrophie urétrale/vaginale, P = Pharmacologique (diurétiques, anticholinergiques), P = Psychologique, E = Excessive production urinaire (diabète, insuffisance cardiaque), R = Réduction mobilité, S = Selle (constipation).', tags: ['DIAPPERS', 'réversible', 'facteurs'] },
+  { id: 303, chapter: 'ch15', rang: 'A', question: 'Traitement de l\'IUE (incontinence d\'effort) ?', answer: '1. Rééducation 
+
+=== File: flashcards-expanded.js ===
+Length: 27006
+First 1000 characters:
+const FLASHCARDS_EXPANDED = [
+  // ── Chapitre 1 : Vieillissement ──────────────────────────────────
+  { id: 'fc-exp-1', chapter: 'ch1', rang: 'A', question: 'Qu\'est-ce que la réserve fonctionnelle chez la personne âgée ?', answer: 'Capacité de l\'organisme à maintenir l\'homéostasie face au stress (maladie, chirurgie, médicament). Diminue avec l\'âge : marge de compensation réduite, décompensation plus fréquente et plus rapide. Le gériatre évalue cette réserve pour anticiper les risques (confusion, chute, dénutrition).', tags: ['réserve fonctionnelle', 'vieillissement', 'homéostasie'] },
+  { id: 'fc-exp-2', chapter: 'ch1', rang: 'A', question: 'Critères EWGSOP2 pour le diagnostic de sarcopénie ?', answer: '1. Faible masse musculaire (DEXA, impédance, périmètre cuisse). 2. + faible force (grip strength ou chair stand). 3. Sarcopénie sévère si performance physique réduite (vitesse de marche, SPPB). Prévalence élevée après 80 ans ; facteur de chute et de perte d\'autonomie.', tags: ['sa
+
+=== File: flashcards-memos.js ===
+Length: 12306
+First 1000 characters:
+const FLASHCARDS_MEMOS = [
+  // ── Mnémotechniques & scores — autonomie (ch3) ──
+  { id: 'memo-1', chapter: 'ch3', rang: 'A',
+    question: 'Mnémotechnique ADL (Katz) : les 6 activités de la vie quotidienne ?',
+    answer: 'BATHING · DRESSING · TOILETING · TRANSFERRING · CONTINENCE · FEEDING. En français : toilette, habillage, continence, transferts, déplacement (marche), alimentation. Score Katz : A (autonome) à G (dépendant pour ≥ 2 AVD).',
+    tags: ['ADL', 'Katz', 'mnémotechnique', 'autonomie'] },
+  { id: 'memo-2', chapter: 'ch3', rang: 'A',
+    question: 'Mnémotechnique IADL (Lawton) : exemples d\'AVD instrumentales à retenir ?',
+    answer: 'SHOPPING · COOKING · HOUSEKEEPING · LAUNDRY · TELEPHONE · TRANSPORT · MEDICATIONS · FINANCES. Perdues AVANT les AVD de base → signe précoce de déclin fonctionnel.',
+    tags: ['IADL', 'Lawton', 'mnémotechnique', 'autonomie'] },
+
+  // ── Cognition (ch9) ──
+  { id: 'memo-3', chapter: 'ch9', rang: 'A',
+    question: 'MMSE (MMS) : que évalue-t-on
+
+=== File: flashcards.js ===
+Length: 44720
+First 1000 characters:
+const FLASHCARDS = [
+  // ── Chapitre 1 : Vieillissement ──────────────────────────────────
+  { id: 1, chapter: 'ch1', rang: 'A', question: 'Définition du vieillissement ?', answer: 'Ensemble des processus physiologiques modifiant la structure et les fonctions des organes à partir de l\'âge mûr. Facteurs : génétiques + environnementaux + stochastiques. Processus lent, jamais responsable seul d\'une symptomatologie aiguë.', tags: ['vieillissement', 'définition'] },
+  { id: 2, chapter: 'ch1', rang: 'A', question: 'Définition de la gériatrie ?', answer: 'Médecine des personnes âgées. DES de gériatrie depuis 2017. Approche globale (médicale, sociale, psychologique). Prise en charge multidimensionnelle.', tags: ['gériatrie', 'définition'] },
+  { id: 3, chapter: 'ch1', rang: 'A', question: 'Quels sont les 5 critères de Fried pour le diagnostic de fragilité ?', answer: '1. Perte de poids involontaire (≥4,5 kg/an ou ≥5 %). 2. Fatigue (échelle de fatigue). 3. Réduction des activités physiques. 

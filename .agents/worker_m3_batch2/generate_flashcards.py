@@ -1,0 +1,1652 @@
+import json
+import os
+
+cards = []
+
+# --- CHAPTER 5: Troubles sensoriels (3201 - 3250) ---
+ch5_cards = [
+    {
+        "id": 3201,
+        "chapter": "ch5",
+        "rang": "A",
+        "question": "Quelle est la définition physiopathologique de la presbyacousie et quelles structures sont principalement affectées ?",
+        "answer": "La presbyacousie est le vieillissement physiologique de l'appareil auditif. Elle est liée à l'âge (habituellement à partir de 50 ans) et se caractérise par :\n1. Une atteinte sensorielle : dégénérescence des cellules ciliées de l'organe de Corti dans la cochlée.\n2. Une atteinte nerveuse et centrale : dégénérescence des fibres du nerf auditif (VIII) et des voies auditives centrales du système nerveux central.\nElle se manifeste par une perte auditive progressive, bilatérale, symétrique, prédominant sur les fréquences aiguës, de type surdité de perception.",
+        "tags": ["Troubles sensoriels", "Presbyacousie", "Physiopathologie"]
+    },
+    {
+        "id": 3202,
+        "chapter": "ch5",
+        "rang": "B",
+        "question": "Quelle est la prévalence de la perte auditive chez les personnes âgées en France selon les tranches d'âge ?",
+        "answer": "La prévalence des troubles de l'audition est extrêmement élevée dans la population âgée :\n- 1/3 (environ 33 %) des personnes âgées de 65 ans et plus ;\n- 40 % des personnes âgées de plus de 75 ans ;\n- 60 % des personnes âgées de plus de 85 ans.\nEn France, on estime qu'il y a 4 à 6 millions de personnes malentendantes, dont les 2/3 ont plus de 65 ans.",
+        "tags": ["Troubles sensoriels", "Presbyacousie", "Épidémiologie"]
+    },
+    {
+        "id": 3203,
+        "chapter": "ch5",
+        "rang": "A",
+        "question": "Quelles sont les caractéristiques sémiologiques typiques de la perte d'audition dans la presbyacousie ?",
+        "answer": "La perte d'audition dans la presbyacousie présente les caractéristiques sémiologiques suivantes :\n1. Installation insidieuse et évolution lente.\n2. Atteinte bilatérale et symétrique (affecte les deux oreilles de façon similaire).\n3. Prédominance sur les fréquences aiguës (gêne initiale pour les sons aigus).\n4. Surdité de perception (sensorineurale).",
+        "tags": ["Troubles sensoriels", "Presbyacousie", "Sémiologie"]
+    },
+    {
+        "id": 3204,
+        "chapter": "ch5",
+        "rang": "A",
+        "question": "Quel est le signe du « cocktail » (cocktail party effect) dans la presbyacousie ?",
+        "answer": "Le signe du « cocktail » traduit la perte d'intelligibilité de la parole en milieu bruyant. Le patient presbyacousique a des difficultés à comprendre ses interlocuteurs dans les situations bruyantes (conversations de groupe, réunions de famille, restaurants). \nLe patient « entend mais ne comprend pas », ce qui le conduit à faire répéter, à se fatiguer lors de l'attention double, et finalement à s'isoler socialement.",
+        "tags": ["Troubles sensoriels", "Presbyacousie", "Sémiologie"]
+    },
+    {
+        "id": 3205,
+        "chapter": "ch5",
+        "rang": "B",
+        "question": "Quels sont les trois stades cliniques décrits pour la presbyacousie ?",
+        "answer": "Les trois stades cliniques de la presbyacousie sont :\n1. Stade infraclinique : Perte d'intelligibilité uniquement dans le bruit. L'audiogramme tonal montre une perte < 30 dB sur la fréquence 2 000 Hz. Gêne minimale.\n2. Stade de retentissement social : Gêne nette au quotidien. Le patient fait répéter, augmente le volume de la télévision. La perte atteint ou dépasse 30 dB sur la fréquence 2 000 Hz. Prise en charge impérative.\n3. Stade d'isolement : Le patient non traité communique de moins en moins, s'isole, avec risque élevé de syndrome dépressif réactionnel et de déclin cognitif.",
+        "tags": ["Troubles sensoriels", "Presbyacousie", "Clinique"]
+    },
+    {
+        "id": 3206,
+        "chapter": "ch5",
+        "rang": "B",
+        "question": "Qu'est-ce que le phénomène de recrutement dans la presbyacousie ?",
+        "answer": "Le recrutement est une intolérance aux sons forts. Le patient présente un rétrécissement de sa dynamique auditive : bien qu'il ne comprenne plus les conversations à intensité normale, des sons de forte intensité (mots prononcés à haute voix près de l'oreille, bruits ambiants) sont perçus de façon désagréable ou douloureuse. Cela s'explique par une dysfonction des cellules ciliées externes.",
+        "tags": ["Troubles sensoriels", "Presbyacousie", "Sémiologie"]
+    },
+    {
+        "id": 3207,
+        "chapter": "ch5",
+        "rang": "A",
+        "question": "Quels sont les trois principaux diagnostics différentiels de la presbyacousie à éliminer en consultation ?",
+        "answer": "Les trois diagnostics différentiels à éliminer devant une baisse d'audition progressive sont :\n1. Le bouchon de cérumen (le plus fréquent, réversible, éliminé par l'otoscopie systématique).\n2. Une atteinte cognitive ou un déclin attentionnel au sein de l'EGS (qui altère la vocalisation et la compréhension des tests).\n3. Un schwannome de l'acoustique (neurinome du VIII) : à évoquer devant une surdité unilatérale ou asymétrique.",
+        "tags": ["Troubles sensoriels", "Presbyacousie", "Diagnostic différentiel"]
+    },
+    {
+        "id": 3208,
+        "chapter": "ch5",
+        "rang": "A",
+        "question": "Quels signes cliniques doivent faire suspecter un schwannome de l'acoustique (neurinome du VIII) chez une personne âgée ?",
+        "answer": "Un schwannome de l'acoustique doit être évoqué systématiquement devant :\n1. Une surdité de perception unilatérale ou nettement asymétrique.\n2. Des acouphènes unilatéraux.\n3. Des sensations vertigineuses ou des troubles de l'équilibre.\n4. Plus rarement, à un stade avancé, une hypoesthésie cornéenne ou une parésie faciale homolatérale.",
+        "tags": ["Troubles sensoriels", "Neurinome du VIII", "Sémiologie"]
+    },
+    {
+        "id": 3209,
+        "chapter": "ch5",
+        "rang": "A",
+        "question": "Quelles sont les grandes familles de médicaments ototoxiques administrés par voie générale ?",
+        "answer": "Les médicaments ototoxiques systémiques comprennent :\n- Antibiotiques : Aminosides (gentamicine, amikacine), glycopeptides (vancomycine), macrolides (érythromycine par voie IV).\n- Diurétiques : Diurétiques de l'anse de Henle (furosémide, bumétanide à fortes doses).\n- Anticancéreux : Sels de platine (cisplatine, carboplatine).\n- Antalgiques : Acide acétylsalicylique (aspirine à doses élevées > 3 g/jour).",
+        "tags": ["Troubles sensoriels", "Ototoxicité", "Iatrogénie"]
+    },
+    {
+        "id": 3210,
+        "chapter": "ch5",
+        "rang": "A",
+        "question": "Pourquoi l'insuffisance rénale majore-t-elle le risque d'ototoxicité médicamenteuse chez le patient âgé ?",
+        "answer": "La plupart des médicaments ototoxiques (comme les aminosides ou la vancomycine) sont éliminés par voie rénale. La réduction néphronique liée à l'âge ou une insuffisance rénale aiguë/chronique entraîne une accumulation de ces molécules dans l'organisme, ce qui augmente leur concentration plasmatique et majore drastiquement le risque de toxicité cochléaire ou vestibulaire irréversible. \nIl faut adapter systématiquement les doses à la clairance et utiliser des dosages plasmatiques.",
+        "tags": ["Troubles sensoriels", "Ototoxicité", "Insuffisance rénale"]
+    },
+    {
+        "id": 3211,
+        "chapter": "ch5",
+        "rang": "A",
+        "question": "Quelle est la règle d'or gériatrique absolue à respecter avant de prescrire des gouttes auriculaires ?",
+        "answer": "Avant toute prescription de gouttes auriculaires contenant des substances potentiellement ototoxiques (comme les aminosides, les glycopeptides ou certains antiseptiques), il est obligatoire de s'enquérir de l'état de la membrane tympanique par une otoscopie.\nEn cas de tympan perforé, la solution pénètre dans la caisse du tympan et passe dans l'oreille interne via la fenêtre ronde, provoquant une surdité de perception irréversible ou des troubles vestibulaires majeurs.",
+        "tags": ["Troubles sensoriels", "Ototoxicité", "Iatrogénie"]
+    },
+    {
+        "id": 3212,
+        "chapter": "ch5",
+        "rang": "B",
+        "question": "Quelles sont les différences majeures entre l'audiométrie tonale et l'audiométrie vocale ?",
+        "answer": "1. L'audiométrie tonale (quantitative) : Mesure les seuils d'audition du patient (en décibels, dB) pour différentes fréquences pures. Elle objective le type de surdité (perception vs transmission) et la pente descendante sur les aigus typique de la presbyacousie.\n2. L'audiométrie vocale (qualitative) : Évalue la compréhension de la parole en faisant répéter des listes de mots. Elle mesure la perte d'intelligibilité, la gêne sociale, et détermine les capacités d'adaptation et le bénéfice attendu d'un appareillage prothétique.",
+        "tags": ["Troubles sensoriels", "Audiométrie", "Diagnostic"]
+    },
+    {
+        "id": 3213,
+        "chapter": "ch5",
+        "rang": "B",
+        "question": "Quels sont les seuils d'indication d'un appareillage prothétique auditif chez le patient presbyacousique ?",
+        "answer": "L'appareillage auditif est indiqué par l'ORL dès que la perte auditive dépasse :\n- 30 dB sur les fréquences conversationnelles (1 000 et 2 000 Hz) sur la meilleure oreille ;\n- OU 30 % de perte en audiométrie vocale sur la meilleure oreille.",
+        "tags": ["Troubles sensoriels", "Presbyacousie", "Appareillage"]
+    },
+    {
+        "id": 3214,
+        "chapter": "ch5",
+        "rang": "B",
+        "question": "Quelles sont les trois règles d'or pour assurer le succès d'un appareillage auditif chez la personne âgée ?",
+        "answer": "Les trois règles d'or sont :\n1. Un appareillage précoce : L'adaptation neurologique (plasticité cérébrale) est bien meilleure chez le patient moins âgé et avec une surdité moins marquée.\n2. Un appareillage bilatéral : Il favorise la stéréophonie, ce qui permet une meilleure localisation spatiale des sons et une meilleure discrimination de la parole en milieu bruyant.\n3. Un port continu : L'appareil doit être porté toute la journée (du lever au coucher) pour réhabituer le cerveau aux stimulations sonores en continu.",
+        "tags": ["Troubles sensoriels", "Appareillage", "Prise en charge"]
+    },
+    {
+        "id": 3215,
+        "chapter": "ch5",
+        "rang": "B",
+        "question": "Quels obstacles physiques et cognitifs peuvent limiter l'utilisation d'une prothèse auditive chez le sujet âgé ?",
+        "answer": "Les obstacles à l'utilisation des prothèses auditives comprennent :\n- Les troubles moteurs fins (arthrose des mains, tremblements, séquelles d'AVC) qui gênent l'insertion des embouts, le nettoyage et le changement des piles ou l'utilisation du chargeur.\n- Les troubles cognitifs majeurs (maladie d'Alzheimer) qui empêchent l'apprentissage de l'utilisation de l'appareil, favorisent sa perte ou son rejet, et nécessitent la formation active de l'aidant principal pour manipuler l'appareillage.",
+        "tags": ["Troubles sensoriels", "Appareillage", "Obstacles"]
+    },
+    {
+        "id": 3216,
+        "chapter": "ch5",
+        "rang": "A",
+        "question": "Comment définit-on légalement la cécité et la malvoyance en ophtalmologie ?",
+        "answer": "La définition légale repose sur l'acuité visuelle du meilleur œil après correction :\n- Malvoyance : Acuité visuelle comprise entre 4/10 (exclus) et 1/20 (inclus).\n- Cécité : Acuité visuelle de 1/20 ou moins, ou champ visuel réduit à moins de 10 degrés autour de la fixation.",
+        "tags": ["Troubles sensoriels", "Déficit visuel", "Définition"]
+    },
+    {
+        "id": 3217,
+        "chapter": "ch5",
+        "rang": "B",
+        "question": "Quelle est la répartition démographique des déficiences visuelles en France ?",
+        "answer": "En France, les déficiences visuelles touchent majoritairement la population âgée :\n- 60 % des personnes déficientes visuelles ont plus de 60 ans ;\n- 40 % ont plus de 75 ans.\nLe vieillissement de la population entraîne une augmentation constante du nombre de patients malvoyants ou aveugles.",
+        "tags": ["Troubles sensoriels", "Déficit visuel", "Épidémiologie"]
+    },
+    {
+        "id": 3218,
+        "chapter": "ch5",
+        "rang": "A",
+        "question": "Quelles sont les quatre principales pathologies responsables d'une altération chronique de la vision chez le sujet âgé ?",
+        "answer": "Les quatre principales pathologies (la « triade ophtalmologique gériatrique » + la rétinopathie) sont :\n1. La cataracte (opacification du cristallin, réversible).\n2. La dégénérescence maculaire liée à l'âge (DMLA, atteinte de la vision centrale).\n3. Le glaucome chronique (hyperpression oculaire et destruction du nerf optique).\n4. La rétinopathie diabétique (atteinte microvasculaire de la rétine).",
+        "tags": ["Troubles sensoriels", "Déficit visuel", "Pathologie"]
+    },
+    {
+        "id": 3219,
+        "chapter": "ch5",
+        "rang": "A",
+        "question": "Définissez la cataracte liée à l'âge, son diagnostic clinique et ses principales causes.",
+        "answer": "La cataracte est l'opacification progressive du cristallin. \n- Causes : Le vieillissement physiologique (principale cause), le diabète, la corticothérapie prolongée, l'exposition prolongée aux UV.\n- Diagnostic clinique : Repose sur une baisse progressive et indolore de l'acuité visuelle, une sensation de brouillard visuel, des éblouissements à la lumière (phares la nuit), et une modification de la perception des couleurs (jaunissement). L'examen montre une opacification visible du cristallin lors de l'examen à la lampe à fente.",
+        "tags": ["Troubles sensoriels", "Cataracte", "Clinique"]
+    },
+    {
+        "id": 3220,
+        "chapter": "ch5",
+        "rang": "A",
+        "question": "Pourquoi la chirurgie de la cataracte est-elle une intervention gériatrique majeure ?",
+        "answer": "La chirurgie de la cataracte (remplacement du cristallin opacifié par un implant) est cruciale car elle est simple, sûre, et a un impact systémique majeur :\n1. Elle restaure l'acuité visuelle et améliore la sensibilité aux contrastes.\n2. Elle améliore la vitesse de marche et l'équilibre, réduisant significativement le risque de chute.\n3. Elle limite la désafférentation sensorielle, réduisant le risque de syndrome confusionnel et d'isolement social.",
+        "tags": ["Troubles sensoriels", "Cataracte", "Chirurgie"]
+    },
+    {
+        "id": 3221,
+        "chapter": "ch5",
+        "rang": "A",
+        "question": "Quelle est la triade sémiologique classique du glaucome chronique à angle ouvert ?",
+        "answer": "Le glaucome chronique à angle ouvert se caractérise par :\n1. Une augmentation de la pression intraoculaire (supérieure à 21 mmHg) liée à un défaut d'évacuation de l'humeur aqueuse.\n2. Une excavation de la papille optique (visible au fond d'œil et quantifiée par OCT).\n3. Des altérations du champ visuel périphérique, débutant par des scotomes insidieux respectant la vision centrale jusqu'à un stade tardif.",
+        "tags": ["Troubles sensoriels", "Glaucome", "Sémiologie"]
+    },
+    {
+        "id": 3222,
+        "chapter": "ch5",
+        "rang": "B",
+        "question": "Quel est le principal piège diagnostique du glaucome chronique chez la personne âgée ?",
+        "answer": "Le glaucome chronique est une maladie silencieuse, indolore, touchant un œil blanc (non rouge). L'acuité visuelle centrale est conservée extrêmement longtemps. \nLe patient ne se plaint de rien jusqu'à ce que la destruction du nerf optique soit majeure et irréversible, entraînant un champ visuel tubulaire. De plus, il existe des glaucomes à pression normale, ce qui rend indispensable l'évaluation de la papille par OCT en plus de la tonométrie.",
+        "tags": ["Troubles sensoriels", "Glaucome", "Piège diagnostique"]
+    },
+    {
+        "id": 3223,
+        "chapter": "ch5",
+        "rang": "A",
+        "question": "Quelle est la définition de la dégénérescence maculaire liée à l'âge (DMLA) et sa prévalence chez le grand âgé ?",
+        "answer": "La DMLA est une pathologie dégénérative de la zone centrale de la rétine (la macula), survenant après 50 ans, qui détruit la vision centrale nécessaire à la lecture, à l'écriture et à la reconnaissance des visages.\n- Épidémiologie : C'est la première cause de handicap visuel et de cécité chez les personnes de plus de 50 ans en France. Elle touche environ 25 % des personnes de plus de 75 ans.",
+        "tags": ["Troubles sensoriels", "DMLA", "Épidémiologie"]
+    },
+    {
+        "id": 3224,
+        "chapter": "ch5",
+        "rang": "B",
+        "question": "Quels sont les principaux facteurs de risque cardiovasculaires et environnementaux de la DMLA ?",
+        "answer": "Les facteurs de risque de la DMLA comprennent :\n1. L'âge (principal facteur).\n2. Le tabagisme actif ou passif (multiplie le risque par 3 à 5).\n3. L'hypertension artérielle et les pathologies cardiovasculaires.\n4. L'obésité et une mauvaise nutrition.\n5. L'exposition prolongée à la lumière solaire (rayons UV).\n6. Une prédisposition génétique (antécédents familiaux).",
+        "tags": ["Troubles sensoriels", "DMLA", "Facteurs de risque"]
+    },
+    {
+        "id": 3225,
+        "chapter": "ch5",
+        "rang": "A",
+        "question": "Quels sont les symptômes cardinaux de la DMLA et comment les dépister simplement ?",
+        "answer": "Les symptômes cardinaux de la DMLA sont :\n- Une baisse progressive de l'acuité visuelle centrale (difficulté à lire, à voir les détails).\n- Des métamorphopsies : déformation des lignes droites (qui apparaissent ondulées ou brisées).\n- Un scotome central : tache sombre ou floue au centre du champ visuel empêchant la fixation.\nLe dépistage simple se fait à l'aide de la grille d'Amsler, où le patient fixe un point central et signale toute ondulation des lignes.",
+        "tags": ["Troubles sensoriels", "DMLA", "Sémiologie"]
+    },
+    {
+        "id": 3226,
+        "chapter": "ch5",
+        "rang": "B",
+        "question": "Décrivez la forme atrophique (« sèche ») de la DMLA (physiopathologie, clinique et évolution).",
+        "answer": "La DMLA sèche ou atrophique :\n- Physiopathologie : Disparition progressive des cellules de l'épithélium pigmentaire rétinien et des photorécepteurs de la macula.\n- Clinique : Début par une gêne à la lecture ou à l'écriture, baisse progressive et lente de la vision centrale.\n- Évolution : Lente sur plusieurs années. La vision périphérique est conservée. Il n'existe pas de traitement curatif validé, la prise en charge repose sur des aides visuelles de fort grossissement et la rééducation basse vision.",
+        "tags": ["Troubles sensoriels", "DMLA", "Clinique"]
+    },
+    {
+        "id": 3227,
+        "chapter": "ch5",
+        "rang": "A",
+        "question": "Décrivez la forme exsudative ou néovasculaire (« humide ») de la DMLA (physiopathologie, urgence, traitement).",
+        "answer": "La DMLA humide ou exsudative :\n- Physiopathologie : Prolifération de néovaisseaux choroïdiens sous-rétiniens anormaux et fragiles. Ils laissent diffuser du sérum (décollement séreux) ou du sang (hémorragie rétinienne).\n- Urgence : Baisse brutale de la vision ou apparition rapide de métamorphopsies. Nécessite une consultation ophtalmologique sous 48 heures.\n- Traitement : Injections intravitréennes d'anti-VEGF (ranibizumab, aflibercept) répétées pour stabiliser ou améliorer la vision en asséchant les néovaisseaux.",
+        "tags": ["Troubles sensoriels", "DMLA", "Clinique"]
+    },
+    {
+        "id": 3228,
+        "chapter": "ch5",
+        "rang": "A",
+        "question": "Qu'est-ce que la maculopathie liée à l'âge (MLA) ou stade initial de la DMLA ?",
+        "answer": "La MLA est le stade précurseur de la DMLA. Elle est généralement asymptomatique et dépistée au fond d'œil par la présence de « drusen » (dépôts blanchâtres sous la rétine constitués de débris cellulaires) et d'anomalies de l'épithélium pigmentaire rétinien. \nElle n'évolue pas systématiquement vers une forme sévère (atrophique ou exsudative), mais nécessite une surveillance régulière.",
+        "tags": ["Troubles sensoriels", "DMLA", "Diagnostic"]
+    },
+    {
+        "id": 3229,
+        "chapter": "ch5",
+        "rang": "A",
+        "question": "Qu'est-ce que la rétinopathie diabétique et comment la dépister chez la personne âgée ?",
+        "answer": "La rétinopathie diabétique est une microangiopathie rétinienne liée à un diabète chronique mal contrôlé. Elle entraîne des microanévrismes, des hémorragies intrarétiniennes et une ischémie. \n- Dépistage : Fond d'œil annuel systématique (ou photographies de la rétine par rétinographe non mydriatique) chez tout patient diabétique, même en l'absence de symptômes visuels. \n- Traitement : Équilibre strict de la glycémie et de la pression artérielle, complété si besoin par du laser ou des anti-VEGF aux stades avancés.",
+        "tags": ["Troubles sensoriels", "Rétinopathie diabétique", "Dépistage"]
+    },
+    {
+        "id": 3230,
+        "chapter": "ch5",
+        "rang": "B",
+        "question": "Définissez la cécité corticale, ses causes et son piège diagnostique chez le sujet âgé.",
+        "answer": "La cécité corticale est la perte de la vision bilatérale par atteinte des aires visuelles du cortex occipital (généralement après un AVC ischémique bilatéral du territoire cérébral postérieur ou une complication hémorragique sous anticoagulant).\n- Piège diagnostique : Le patient est anosognosique (il nie sa cécité, affirmant qu'il voit mais que la pièce est sombre ou qu'il a perdu ses lunettes).\n- Examen : Les réflexes pupillaires (photomoteur direct et consensuel) sont conservés et le fond d'œil est parfaitement normal. Le diagnostic repose sur la perte brutale de repères spatiaux et la clinique neurologique.",
+        "tags": ["Troubles sensoriels", "Cécité corticale", "Neurologie"]
+    },
+    {
+        "id": 3231,
+        "chapter": "ch5",
+        "rang": "A",
+        "question": "Quelle urgence ophtalmologique d'origine systémique peut causer une névrite optique ischémique antérieure aiguë (NOIAA) chez la personne âgée ?",
+        "answer": "La maladie de Horton (artérite temporale ou artérite giganto-cellulaire) est une urgence absolue. C'est une panartérite inflammatoire segmentaire.\n- Risque visuel : Une occlusion des artères ciliaires courtes postérieures provoque une NOIAA, se manifestant par une baisse d'acuité visuelle brutale et indolore d'un œil, précédée parfois d'amauroses fugaces.\n- Urgence : Le risque de bilatéralisation rapide impose une corticothérapie à forte dose en urgence immédiate dès la suspicion clinique, confirmée ultérieurement par la biopsie de l'artère temporale.",
+        "tags": ["Troubles sensoriels", "Maladie de Horton", "Urgence"]
+    },
+    {
+        "id": 3232,
+        "chapter": "ch5",
+        "rang": "B",
+        "question": "Quelles sont les présentations cliniques respectives de l'OACR et de l'OVCR chez la personne âgée ?",
+        "answer": "1. Occlusion de l'artère centrale de la rétine (OACR) : Baisse d'acuité visuelle brutale, totale, indolore. Le fond d'œil montre un rétrécissement artériel, une rétine pâle/ischémique et une macula rouge cerise.\n2. Occlusion de la veine centrale de la rétine (OVCR) : Baisse d'acuité visuelle d'installation rapide (quelques heures), indolore. Le fond d'œil montre des veines tortueuses dilatées, des hémorragies rétiniennes en « flammèches » diffuses et un œdème papillaire.\nCes occlusions nécessitent un bilan cardiovasculaire complet (recherche d'athérome carotidien, cardiopathie emboligène ou thrombophilie).",
+        "tags": ["Troubles sensoriels", "Occlusions vasculaires", "Diagnostic"]
+    },
+    {
+        "id": 3233,
+        "chapter": "ch5",
+        "rang": "B",
+        "question": "Qu'est-ce que le syndrome de Charles Bonnet en gériatrie et comment le prendre en charge ?",
+        "answer": "Le syndrome de Charles Bonnet correspond à la survenue d'hallucinations visuelles (élémentaires ou complexes : personnages, animaux) chez des personnes âgées présentant un déficit visuel important (DMLA, cataracte, glaucome), sans aucun trouble psychiatrique ni démence sous-jacente.\n- Caractéristique : Le patient a conscience du caractère irréel des hallucinations (insight conservé) et n'éprouve pas d'anxiété.\n- Prise en charge : Rassurer le patient sur sa santé mentale, optimiser la luminosité ambiante et corriger la vision. Les antipsychotiques sont inefficaces et contre-indiqués.",
+        "tags": ["Troubles sensoriels", "Syndrome de Charles Bonnet", "Hallucinations"]
+    },
+    {
+        "id": 3234,
+        "chapter": "ch5",
+        "rang": "A",
+        "question": "Quels sont les 6 principaux écueils à éviter concernant le handicap sensoriel du sujet âgé ?",
+        "answer": "Les 6 écueils cliniques majeurs sont :\n1. Considérer que l'isolement sensoriel est une fatalité normale liée à l'âge.\n2. Négliger l'impact thymique (dépression) et cognitif de l'isolement sensoriel.\n3. Omettre d'éliminer un simple bouchon de cérumen devant une baisse d'audition.\n4. Omettre de dépister un déficit sensoriel dans le bilan diagnostique d'une chute.\n5. Omettre de dépister un déficit sensoriel devant un déclin cognitif ou une plainte mnésique.\n6. Omettre de maintenir ou réinsérer les appareillages visuels et auditifs en cas d'hospitalisation pour syndrome confusionnel aigu.",
+        "tags": ["Troubles sensoriels", "Écueils", "Prise en charge"]
+    },
+    {
+        "id": 3235,
+        "chapter": "ch5",
+        "rang": "A",
+        "question": "Quelles sont les questions clés à poser systématiquement lors de l'EGS pour dépister un déficit sensoriel ?",
+        "answer": "Lors de l'évaluation gériatrique standardisée, le clinicien doit poser systématiquement deux questions :\n1. « Avez-vous consulté ou êtes-vous bien suivi par un ORL et/ou un ophtalmologue ? » (Vérifier le suivi spécialisé).\n2. « Avec votre prise en charge ou votre appareillage actuel, comment entendez-vous et voyez-vous ? » (Évaluer l'efficacité réelle au quotidien).\nCette démarche est essentielle car les patients s'habituent à leur handicap et tendent à le minimiser ou à le taire.",
+        "tags": ["Troubles sensoriels", "EGS", "Dépistage"]
+    },
+    {
+        "id": 3236,
+        "chapter": "ch5",
+        "rang": "B",
+        "question": "Comment la baisse de vision contribue-t-elle à la majoration des troubles attentionnels et cognitifs chez la personne âgée ?",
+        "answer": "La perte d'acuité visuelle réduit les afférences sensorielles (désafférentation). Pour compenser la perte de signal, le cerveau doit mobiliser des ressources cognitives et attentionnelles importantes (surcharge cognitive). \nDans les situations de double tâche (par exemple, marcher et parler en même temps), le patient épuise ses réserves attentionnelles, ce qui majore le risque de chute, de confusion mentale et d'apathie.",
+        "tags": ["Troubles sensoriels", "Cognition", "Physiopathologie"]
+    },
+    {
+        "id": 3237,
+        "chapter": "ch5",
+        "rang": "A",
+        "question": "Quelles mesures environnementales et galéniques le gériatre doit-il prendre face à un patient malvoyant ?",
+        "answer": "1. Environnement : Sécuriser le domicile pour éviter les chutes (éclairage nocturne suffisant, suppression des tapis, marquage des contrastes dans les escaliers).\n2. Galénique : S'assurer que le patient peut identifier visuellement ses boîtes et doser ses traitements (insuline, anticoagulants oraux). En cas de malvoyance sévère, adapter la galénique ou organiser le passage d'une infirmière pour sécuriser les prises et éviter les iatrogénies.",
+        "tags": ["Troubles sensoriels", "Déficit visuel", "Iatrogénie"]
+    },
+    {
+        "id": 3238,
+        "chapter": "ch5",
+        "rang": "B",
+        "question": "Dans le cas clinique de Marcel (82 ans, chutes, retrait social, suspicion de démence), qu'a révélé le bilan gériatrique complet et quelle a été l'évolution ?",
+        "answer": "Le bilan a montré que Marcel ne présentait pas de démence primitive mais une presbyacousie marquée et une cataracte bilatérale évoluée. \n- Évolution : L'appareillage auditif bilatéral et la chirurgie séquentielle de la cataracte ont permis une reprise complète des activités sociales, l'amélioration des capacités d'attention, la disparition de la pseudo-démence et l'arrêt total des chutes.",
+        "tags": ["Troubles sensoriels", "Cas clinique", "Prise en charge"]
+    },
+    {
+        "id": 3239,
+        "chapter": "ch5",
+        "rang": "B",
+        "question": "Quelle est l'utilité de la tympanométrie dans le diagnostic des surdités de transmission ?",
+        "answer": "La tympanométrie (impédancemétrie) évalue la compliance du système tympano-ossiculaire en faisant varier la pression dans le conduit auditif externe. \nElle objective la présence d'un épanchement dans l'oreille moyenne (courbe plate en cas d'otite séro-muqueuse) ou une rigidification de la chaîne des osselets (otospongiose), orientant vers la cause d'une surdité de transmission.",
+        "tags": ["Troubles sensoriels", "Tympanométrie", "Diagnostic"]
+    },
+    {
+        "id": 3240,
+        "chapter": "ch5",
+        "rang": "A",
+        "question": "Quelle est la cause d'une otite séro-muqueuse (OSM) et comment peut-elle altérer l'audition chez le sujet âgé ?",
+        "answer": "L'OSM est une inflammation chronique de la muqueuse de l'oreille moyenne avec épanchement liquidien rétro-tympanique fluide ou visqueux, sans symptomatologie aiguë (pas de fièvre ni de douleur).\n- Conséquence : Elle bloque la transmission des ondes sonores par le tympan et les osselets, provoquant une surdité de transmission (parfois bilatérale) qui peut s'ajouter à une presbyacousie sous-jacente.",
+        "tags": ["Troubles sensoriels", "Otite séro-muqueuse", "Pathologie"]
+    },
+    {
+        "id": 3241,
+        "chapter": "ch5",
+        "rang": "B",
+        "question": "Quels sont les facteurs anatomiques et environnementaux qui favorisent la survenue d'un bouchon de cérumen chez la personne âgée ?",
+        "answer": "Le bouchon de cérumen est favorisé par :\n1. Une modification de la consistance du cérumen avec l'âge (qui devient plus sec et dur, moins hydraté).\n2. La présence de poils plus rigides à l'entrée du conduit auditif externe (trichose du conduit chez l'homme âgé).\n3. L'utilisation inappropriée de cotons-tiges (qui tassent le cérumen).\n4. Le port prolongé de prothèses auditives intra-canalaires qui empêchent l'élimination naturelle du cérumen.",
+        "tags": ["Troubles sensoriels", "Bouchon de cérumen", "Étiologie"]
+    },
+    {
+        "id": 3242,
+        "chapter": "ch5",
+        "rang": "B",
+        "question": "Qu'est-ce que l'Optical Coherence Tomography (OCT) maculaire et quelles sont ses indications principales en gériatrie ?",
+        "answer": "L'OCT est un examen d'imagerie non invasif à haute résolution qui fournit des coupes transversales micrométriques de la rétine. \n- Indications gériatriques : \n1. Dépister et suivre la DMLA humide (visualisation de fluide intra- ou sous-rétinien, néovaisseaux).\n2. Mesurer l'épaisseur des fibres nerveuses rétiniennes pour diagnostiquer précocement un glaucome chronique (excavation de la papille).\n3. Diagnostiquer un œdème maculaire diabétique ou une membrane épirétinienne.",
+        "tags": ["Troubles sensoriels", "OCT", "Imagerie"]
+    },
+    {
+        "id": 3243,
+        "chapter": "ch5",
+        "rang": "A",
+        "question": "Pourquoi le tabagisme est-il le facteur de risque modifiable le plus puissant pour la DMLA ?",
+        "answer": "Le tabac induit un stress oxydatif systémique et local intense, altère la microcirculation choroïdienne et diminue la concentration plasmatique d'antioxydants protecteurs de la rétine. \nLe tabagisme actif ou passif multiplie le risque de développer une DMLA par 3 à 5, accélère son évolution et réduit la réponse thérapeutique aux injections d'anti-VEGF. Le sevrage tabagique est la première mesure de prévention.",
+        "tags": ["Troubles sensoriels", "DMLA", "Tabagisme"]
+    },
+    {
+        "id": 3244,
+        "chapter": "ch5",
+        "rang": "B",
+        "question": "Quel est le but de la rééducation basse vision chez un patient atteint de DMLA atrophique ?",
+        "answer": "En l'absence de traitement curatif pour la forme atrophique, la rééducation basse vision par un orthoptiste vise à apprendre au patient à utiliser ses zones de rétine périphérique saine encore fonctionnelles (fixation excentrée ou locus rétinien préféré) à l'aide d'aides optiques grossissantes (loupes, télé-loupes, éclairages directionnels adaptés) pour préserver la lecture et l'autonomie.",
+        "tags": ["Troubles sensoriels", "DMLA", "Rééducation"]
+    },
+    {
+        "id": 3245,
+        "chapter": "ch5",
+        "rang": "A",
+        "question": "Citez trois molécules non antibiotiques connues pour leur ototoxicité par voie générale.",
+        "answer": "Trois molécules non antibiotiques ototoxiques sont :\n1. Le cisplatine (sel de platine anticancéreux, toxicité cochléaire bilatérale irréversible).\n2. Le furosémide (diurétique de l'anse, ototoxicité réversible à fortes doses, favorisée par l'insuffisance rénale).\n3. L'acide acétylsalicylique (aspirine à doses élevées > 3 g/jour, provoque des acouphènes réversibles à l'arrêt).",
+        "tags": ["Troubles sensoriels", "Ototoxicité", "Pharmacologie"]
+    },
+    {
+        "id": 3246,
+        "chapter": "ch5",
+        "rang": "B",
+        "question": "Quelle est la définition d'un test auditif objectif par Potentiels Évoqués Auditifs (PEA) ?",
+        "answer": "Les PEA correspondent à l'enregistrement de l'activité électrique des voies nerveuses auditives (du nerf auditif au tronc cérébral) en réponse à une stimulation sonore. \nC'est un examen objectif qui ne nécessite pas la participation active du patient, particulièrement utile chez les patients atteints de troubles cognitifs sévères ou non communicants pour évaluer l'intégrité des voies auditives et estimer le seuil d'audition.",
+        "tags": ["Troubles sensoriels", "PEA", "Diagnostic"]
+    },
+    {
+        "id": 3247,
+        "chapter": "ch5",
+        "rang": "A",
+        "question": "Quels sont les arguments cliniques pour éliminer un syndrome dépressif primaire chez un patient âgé s'isolant et présentant des troubles de l'attention ?",
+        "answer": "Devant un isolement et des troubles attentionnels, il faut suspecter une presbyacousie et une cataracte. Le gériatre doit réaliser une otoscopie (éliminer un bouchon) et tester l'audition (élever la voix, tester dans le silence vs le bruit) et la vision (lecture). \nSi la correction sensorielle (appareillage auditif/chirurgie cataracte) corrige rapidement l'isolement, le repli et les troubles cognitifs, cela confirme l'origine sensorielle (pseudo-démence ou pseudo-dépression) et élimine une dépression primaire.",
+        "tags": ["Troubles sensoriels", "Presbyacousie", "Diagnostic différentiel"]
+    },
+    {
+        "id": 3248,
+        "chapter": "ch5",
+        "rang": "A",
+        "question": "Pourquoi la presbyacousie est-elle considérée comme un facteur de risque majeur et modifiable de démence chez le sujet âgé ?",
+        "answer": "La presbyacousie non corrigée entraîne une déprivation sensorielle chronique, réduisant la stimulation cérébrale et accélérant l'atrophie corticale (notamment temporale). De plus, l'effort cognitif constant requis pour décoder la parole épuise les réserves cognitives du cerveau. \nLes études épidémiologiques montrent que la correction précoce de l'audition par des prothèses auditives réduit significativement le risque de survenue d'un déclin cognitif accéléré.",
+        "tags": ["Troubles sensoriels", "Presbyacousie", "Cognition"]
+    },
+    {
+        "id": 3249,
+        "chapter": "ch5",
+        "rang": "A",
+        "question": "Pourquoi l'utilisation des aminosides par voie systémique doit-elle être évitée chez le sujet âgé sauf indication formelle ?",
+        "answer": "Les aminosides (gentamicine, amikacine) possèdent une ototoxicité vestibulocochléaire sévère, cumulative et irréversible, ainsi qu'une néphrotoxicité. \nLeur utilisation doit être restreinte aux infections bactériennes graves (choc septique, endocardite) pour une durée maximale de 3 à 5 jours, avec une adaptation rigoureuse des doses à la fonction rénale et une surveillance des taux résiduels plasmatiques pour éviter le surdosage.",
+        "tags": ["Troubles sensoriels", "Aminosides", "Ototoxicité"]
+    },
+    {
+        "id": 3250,
+        "chapter": "ch5",
+        "rang": "B",
+        "question": "Quelles sont les causes courantes de cécité vasculaire autre que la maladie de Horton chez la personne âgée ?",
+        "answer": "Les autres causes de cécité vasculaire comprennent :\n1. L'infarctus cérébral occipital bilatéral (cécité corticale, souvent compliquée d'embolies sur fibrillation auriculaire ou sténoses athéromateuses).\n2. La thrombose de l'artère centrale de la rétine (OACR) liée à des emboles d'origine carotidienne ou cardiaque.\n3. L'occlusion de la veine centrale de la rétine (OVCR) favorisée par l'hypertension artérielle, le glaucome chronique et l'athérosclérose.",
+        "tags": ["Troubles sensoriels", "Cécité vasculaire", "Étiologie"]
+    }
+]
+
+# --- CHAPTER 6: Ostéoporose et fractures (3251 - 3300) ---
+ch6_cards = [
+    {
+        "id": 3251,
+        "chapter": "ch6",
+        "rang": "A",
+        "question": "Quelle est la définition de l'ostéoporose selon l'Organisation Mondiale de la Santé (OMS) ?",
+        "answer": "L'ostéoporose est une maladie diffuse du squelette caractérisée par une réduction de la densité minérale osseuse (DMO) et une altération de la micro-architecture et de la qualité du tissu osseux. \nCela diminue la résistance mécanique de l'os et entraîne un risque accru de fracture. \n- Critère densitométrique : Un T-score inférieur ou égal à -2,5 écart-type au niveau du fémur proximal (col fémoral ou fémur total) mesuré par DXA.",
+        "tags": ["Ostéoporose", "OMS", "Définition"]
+    },
+    {
+        "id": 3252,
+        "chapter": "ch6",
+        "rang": "B",
+        "question": "Quelle est la différence physiologique majeure entre la perte osseuse post-ménopausique et la perte osseuse sénile chez le sujet âgé de plus de 75 ans ?",
+        "answer": "1. Perte osseuse post-ménopausique (femme, 50-60 ans) : Liée à la carence œstrogénique. Elle est caractérisée par un remodelage osseux élevé avec une hyperactivité des ostéoclastes, entraînant une résorption osseuse rapide, une perforation des travées et une perte prédominante d'os spongieux.\n2. Perte osseuse sénile (homme et femme, > 75 ans) : Caractérisée par une baisse de l'activité des ostéoblastes (formation osseuse ralentie) intriquée à une hyperparathyroïdie secondaire (carence en Vit D/calcium), entraînant un amincissement des corticales et une diminution de l'épaisseur des travées.",
+        "tags": ["Ostéoporose", "Physiopathologie", "Vieillissement"]
+    },
+    {
+        "id": 3253,
+        "chapter": "ch6",
+        "rang": "B",
+        "question": "Quel est l'impact épidémiologique des fractures ostéoporotiques en France (incidence annuelle et coût économique) ?",
+        "answer": "L'incidence annuelle des fractures de fragilité en France est estimée à :\n- 50 000 fractures de l'extrémité supérieure du fémur (FESF) ;\n- 35 000 fractures du poignet (Pouteau-Colles) ;\n- 50 000 à 75 000 fractures vertébrales (diagnostiquées seulement 1 fois sur 3).\nLe coût économique global de l'ostéoporose dépasse 4,5 milliards d'euros par an en France, dont la moitié est liée aux FESF.",
+        "tags": ["Ostéoporose", "Épidémiologie", "Coût"]
+    },
+    {
+        "id": 3254,
+        "chapter": "ch6",
+        "rang": "B",
+        "question": "Définissez le pic de masse osseuse, sa période d'acquisition et ses principaux déterminants.",
+        "answer": "Le pic de masse osseuse correspond à la valeur maximale de capital osseux acquise à la fin de la croissance et de la maturation squelettique (entre 30 et 40 ans).\n- Déterminants : \n1. Facteurs génétiques (déterminent 70 à 80 % de la variance de la masse osseuse).\n2. Facteurs nutritionnels (apports suffisants en calcium et protéines).\n3. Facteurs mécaniques (activité physique régulière avec contraintes en charge).",
+        "tags": ["Ostéoporose", "Physiologie", "Capital osseux"]
+    },
+    {
+        "id": 3255,
+        "chapter": "ch6",
+        "rang": "B",
+        "question": "Expliquez le concept de « seuil fracturaire » dans la physiopathologie de l'ostéoporose.",
+        "answer": "Le seuil fracturaire correspond au niveau critique de résistance biomécanique en deçà duquel la perte de masse osseuse et les altérations de la qualité de l'os (micro-architecture) exposent le squelette à un risque majeur de rupture en cas de traumatisme à basse énergie (chute de sa hauteur). \nCe seuil dépend de la densité minérale osseuse et de facteurs qualitatifs de l'os.",
+        "tags": ["Ostéoporose", "Physiopathologie", "Résistance osseuse"]
+    },
+    {
+        "id": 3256,
+        "chapter": "ch6",
+        "rang": "A",
+        "question": "Quels sont les facteurs de risque non modifiables d'ostéoporose et de fracture ?",
+        "answer": "Les facteurs de risque non modifiables majeurs sont :\n1. L'âge (le risque augmente fortement avec l'âge).\n2. Le sexe féminin (le sex-ratio des fractures est de 3 femmes pour 1 homme).\n3. Des antécédents familiaux de fracture de l'extrémité supérieure du fémur (FESF) chez un parent du premier degré.\n4. L'origine ethnique (caucasienne ou asiatique).\n5. Une ménopause précoce (< 40 ans) naturelle ou chirurgicale.",
+        "tags": ["Ostéoporose", "Facteurs de risque", "Génétique"]
+    },
+    {
+        "id": 3257,
+        "chapter": "ch6",
+        "rang": "A",
+        "question": "Quels sont les principaux facteurs de risque modifiables d'ostéoporose et de fracture de fragilité ?",
+        "answer": "Les facteurs de risque modifiables sur lesquels le clinicien doit agir sont :\n1. Le faible poids (indice de masse corporelle IMC < 19 kg/m²) ou la dénutrition.\n2. La sédentarité, l'immobilisation ou l'alitement prolongé (perte de la contrainte mécanique osseuse).\n3. Le tabagisme actif.\n4. L'alcoolisme chronique.\n5. Les carences d'apport en calcium et en vitamine D.",
+        "tags": ["Ostéoporose", "Facteurs de risque", "Prévention"]
+    },
+    {
+        "id": 3258,
+        "chapter": "ch6",
+        "rang": "A",
+        "question": "Quelles sont les 5 localisations squelettiques classées comme « fractures sévères » et pourquoi ?",
+        "answer": "Les 5 localisations de fractures sévères sont :\n1. L'extrémité supérieure du fémur (FESF).\n2. L'extrémité inférieure du fémur (FEIF).\n3. L'extrémité supérieure de l'humérus (FESH).\n4. Les vertèbres (dorso-lombaires).\n5. Le pelvis (bassin/branches ischio-pubiennes).\nElles sont qualifiées de « sévères » car elles sont associées à une augmentation significative de la morbimortalité à court et moyen terme chez le sujet âgé.",
+        "tags": ["Ostéoporose", "Fractures sévères", "Sémiologie"]
+    },
+    {
+        "id": 3259,
+        "chapter": "ch6",
+        "rang": "A",
+        "question": "Citez des exemples de fractures non sévères de fragilité et expliquez leur valeur clinique.",
+        "answer": "Des exemples de fractures non sévères de fragilité comprennent :\n- La fracture du poignet (Pouteau-Colles).\n- La fracture du col de la fibula.\n- Les fractures des métatarsiens.\nBien que non sévères en termes de mortalité directe, elles témoignent d'une fragilité osseuse sous-jacente et multiplient le risque de survenue ultérieure d'une fracture sévère (notamment de hanche), justifiant une prise en charge diagnostique active.",
+        "tags": ["Ostéoporose", "Fractures non sévères", "Clinique"]
+    },
+    {
+        "id": 3260,
+        "chapter": "ch6",
+        "rang": "A",
+        "question": "Quelles localisations de fractures sont formellement exclues de la classification des fractures de fragilité de l'ostéoporose ?",
+        "answer": "Sont exclues des fractures de fragilité (car elles surviennent généralement sur des os résistants à l'ostéoporose ou ne témoignent pas d'une fragilité métabolique) les fractures du :\n- Crâne et de la face.\n- Rachis cervical.\n- Des trois premières vertèbres thoraciques (T1, T2, T3).\n- Des doigts et des orteils.",
+        "tags": ["Ostéoporose", "Fractures", "Exceptions"]
+    },
+    {
+        "id": 3261,
+        "chapter": "ch6",
+        "rang": "B",
+        "question": "Quelle est la présentation clinique classique d'une fracture vertébrale ostéoporotique ?",
+        "answer": "La fracture vertébrale (tassement vertébral) se présente souvent de manière insidieuse :\n- Asymptomatique dans plus de 50 à 60 % des cas (découverte fortuite sur une radiographie pulmonaire ou abdominale).\n- Douleur vertébrale aiguë, localisée, mécanique, cédant au repos, parfois invalidante.\n- Signes physiques d'alerte : Diminution progressive de la taille inexpliquée (perte de >= 4 cm par rapport à la taille historique ou >= 2 cm sous suivi) et déformation rachidienne (cyphose dorsale progressive).",
+        "tags": ["Ostéoporose", "Fractures vertébrales", "Clinique"]
+    },
+    {
+        "id": 3262,
+        "chapter": "ch6",
+        "rang": "B",
+        "question": "Quelles sont les indications cliniques pour prescrire des radiographies du rachis dorso-lombaire à la recherche d'une fracture vertébrale ?",
+        "answer": "Des radiographies du rachis (face/profil) doivent être demandées chez la femme ménopausée ou l'homme de plus de 60 ans devant :\n1. Une douleur rachidienne aiguë localisée d'horaire mécanique.\n2. Une diminution documentée de la taille >= 4 cm (comparée à la taille jeune) ou >= 2 cm (sous suivi médical).\n3. Une modification visible de la statique rachidienne (hypercyphose).\n4. Un patient sous corticothérapie prolongée ou sous inhibiteur de l'aromatase.",
+        "tags": ["Ostéoporose", "Radiographie", "Dépistage"]
+    },
+    {
+        "id": 3263,
+        "chapter": "ch6",
+        "rang": "B",
+        "question": "Quel est le pronostic à 1 an d'une fracture de l'extrémité supérieure du fémur (FESF) chez le sujet âgé ?",
+        "answer": "Le pronostic d'une FESF (fracture du col du fémur) est extrêmement grave chez le sujet âgé, témoignant de sa fragilité systémique :\n- 15 à 20 % de mortalité globale à 1 an (plus élevée chez l'homme, atteignant 30 %).\n- 20 à 25 % d'institutionnalisation définitive (EHPAD).\n- 40 à 60 % de perte d'autonomie motrice importante (difficultés de marche résiduelles).",
+        "tags": ["Ostéoporose", "FESF", "Pronostic"]
+    },
+    {
+        "id": 3264,
+        "chapter": "ch6",
+        "rang": "A",
+        "question": "Qu'est-ce que l'ostéodensitométrie (DXA) et comment interpréter le T-score et le Z-score ?",
+        "answer": "La DXA mesure la densité minérale osseuse (DMO, en g/cm²) par absorption biphotonique de rayons X. \n1. T-score : Nombre de déviations standards par rapport à la moyenne d'une population de référence d'adultes jeunes de même sexe (utilisé pour définir l'ostéoporose chez le sujet âgé ; normal > -1, ostéopénie entre -1 et -2,5, ostéoporose <= -2,5).\n2. Z-score : Nombre de déviations standards par rapport à la moyenne des sujets de même âge et de même sexe (s'il est effondré < -2, suspecter une ostéoporose secondaire).",
+        "tags": ["Ostéoporose", "DXA", "T-score"]
+    },
+    {
+        "id": 3265,
+        "chapter": "ch6",
+        "rang": "B",
+        "question": "Pourquoi la mesure de la DMO au niveau du rachis lombaire est-elle déconseillée chez la personne âgée de plus de 75 ans ?",
+        "answer": "Chez le grand âgé, la mesure de la DMO au niveau du rachis lombaire est fréquemment faussée (artificiellement surestimée) par la présence d'arthrose vertébrale hyperostosante, de calcifications de l'aorte abdominale ou de tassements vertébraux multiples. \nLa mesure de référence gériatrique doit être réalisée au niveau de l'extrémité supérieure du fémur (col fémoral et fémur total).",
+        "tags": ["Ostéoporose", "DXA", "Piège diagnostique"]
+    },
+    {
+        "id": 3266,
+        "chapter": "ch6",
+        "rang": "B",
+        "question": "Quelles sont les indications de prise en charge et de remboursement de l'ostéodensitométrie (DXA) selon la HAS chez la femme ménopausée ?",
+        "answer": "La DXA est remboursée en cas de facteurs de risque :\n- Antécédent personnel de fracture de fragilité (sans traumatisme majeur, hors crâne/doigts/orteils).\n- Antécédent documenté de corticothérapie systémique de plus de 3 mois consécutifs (> 7,5 mg/j équivalent prednisone).\n- IMC < 19 kg/m².\n- Ménopause précoce (< 40 ans).\n- Antécédent familial de FESF chez un parent du premier degré sans traumatisme.",
+        "tags": ["Ostéoporose", "DXA", "HAS"]
+    },
+    {
+        "id": 3267,
+        "chapter": "ch6",
+        "rang": "B",
+        "question": "Pourquoi est-il cliniquement erroné de confondre le diagnostic densitométrique d'ostéoporose et le seuil d'indication thérapeutique ?",
+        "answer": "1. Le diagnostic densitométrique repose strictement sur le T-score <= -2,5.\n2. Le seuil thérapeutique (décision de traiter) dépend du risque fracturaire global (DMO + antécédents de fractures + risque de chutes + comorbidités).\nUn traitement anti-ostéoporotique peut être indiqué dès un T-score de -1 en cas d'antécédent de fracture sévère (comme une fracture de hanche), alors que le patient n'est pas techniquement en zone d'ostéoporose densitométrique pure.",
+        "tags": ["Ostéoporose", "DXA", "Prise en charge"]
+    },
+    {
+        "id": 3268,
+        "chapter": "ch6",
+        "rang": "A",
+        "question": "Quel est le bilan biologique minimum de première intention à réaliser devant la découverte d'une ostéoporose ?",
+        "answer": "Le bilan biologique vise à éliminer une cause secondaire d'ostéoporose ou une autre ostéopathie fragilisante :\n1. NFS (recherche d'anémie).\n2. CRP (recherche de syndrome inflammatoire).\n3. Électrophorèse des protides sériques (EPP, recherche de myélome).\n4. Calcémie et phosphorémie.\n5. Créatininémie avec estimation de la clairance de la créatinine (fonction rénale).\n6. Dosage de la 25-OH-vitamine D totale.\n7. TSH (dépistage d'une hyperthyroïdie).",
+        "tags": ["Ostéoporose", "Biologie", "Diagnostic"]
+    },
+    {
+        "id": 3269,
+        "chapter": "ch6",
+        "rang": "A",
+        "question": "Quelles sont les causes endocriniennes et métaboliques majeures d'ostéoporose secondaire chez le sujet âgé ?",
+        "answer": "Les causes secondaires à rechercher en priorité sont :\n1. L'hyperparathyroïdie primitive (adénome parathyroïdien, hypercalcémie).\n2. L'hyperthyroïdie évolutive (TSH effondrée, accélération du remodelage).\n3. L'hypercorticisme (syndrome de Cushing ou corticothérapie systémique prolongée).\n4. L'hypogonadisme prolongé (ex: traitement par anti-androgènes pour cancer de la prostate ou orchidectomie).",
+        "tags": ["Ostéoporose", "Ostéoporose secondaire", "Endocrinologie"]
+    },
+    {
+        "id": 3270,
+        "chapter": "ch6",
+        "rang": "A",
+        "question": "Pourquoi la réalisation d'une Électrophorèse des Protides Sériques (EPP) est-elle systématique dans le bilan de l'ostéoporose ?",
+        "answer": "L'EPP permet de dépister un myélome multiple (présence d'un pic monoclonal d'immunoglobuline). Le myélome est une cause classique d'ostéopathies fragilisantes secondaires et peut se révéler par des fractures vertébrales ou des douleurs osseuses mimant une ostéoporose primitive. \nSon identification modifie radicalement la prise en charge médicale.",
+        "tags": ["Ostéoporose", "Biologie", "Myélome"]
+    },
+    {
+        "id": 3271,
+        "chapter": "ch6",
+        "rang": "A",
+        "question": "Définissez l'ostéomalacie et son profil biologique typique.",
+        "answer": "L'ostéomalacie est une ostéopathie généralisée caractérisée par un défaut de minéralisation de la matrice osseuse nouvellement formée (tissu ostéoïde), principalement liée à une carence profonde et prolongée en vitamine D (rachitisme de l'adulte).\n- Profil biologique typique : Hypocalcémie modérée, hypophosphatémie, 25-OH-vitamine D effondrée (< 10 ng/ml), élévation de la parathormone (PTH, hyperparathyroïdie secondaire) et élévation des phosphatases alcalines (PAL).",
+        "tags": ["Ostéoporose", "Ostéomalacie", "Biologie"]
+    },
+    {
+        "id": 3272,
+        "chapter": "ch6",
+        "rang": "A",
+        "question": "Comment différencier biologiquement une hyperparathyroïdie primitive d'une hyperparathyroïdie secondaire ?",
+        "answer": "1. Hyperparathyroïdie primitive : Calcémie élevée (hypercalcémie) associée à un taux de parathormone (PTH) anormalement élevé ou anormalement « normal » dans un contexte d'hypercalcémie.\n2. Hyperparathyroïdie secondaire : Calcémie normale ou basse (hypocalcémie) associée à une élévation réactionnelle de la PTH, généralement secondaire à une carence en vitamine D ou à une insuffisance rénale chronique (déficit de 1-alpha-hydroxylase).",
+        "tags": ["Ostéoporose", "Hyperparathyroïdie", "Biologie"]
+    },
+    {
+        "id": 3273,
+        "chapter": "ch6",
+        "rang": "A",
+        "question": "Quel est le seuil de corticothérapie systémique nécessitant une prévention anti-ostéoporotique active ?",
+        "answer": "La prévention anti-ostéoporotique doit être systématiquement évaluée dès le début d'une corticothérapie par voie générale prescrite pour une durée d'au moins 3 mois consécutifs, à une posologie supérieure ou égale à 7,5 mg/jour d'équivalent prednisone chez une femme ménopausée ou un homme de plus de 60 ans.",
+        "tags": ["Ostéoporose", "Corticothérapie", "Prévention"]
+    },
+    {
+        "id": 3274,
+        "chapter": "ch6",
+        "rang": "B",
+        "question": "Quels sont les mécanismes physiopathologiques de la toxicité osseuse des glucocorticoïdes ?",
+        "answer": "Les glucocorticoïdes induisent une ostéoporose rapide par plusieurs voies :\n1. Une action directe de répression sur les ostéoblastes (formation osseuse ralentie) et d'induction de l'apoptose des ostéocytes.\n2. Une augmentation de la durée de vie des ostéoclastes (résorption accrue).\n3. Une diminution de l'absorption intestinale du calcium et une augmentation de la fuite urinaire de calcium.\n4. La freination de la sécrétion des hormones sexuelles par blocage de l'axe hypothalamo-hypophysaire.",
+        "tags": ["Ostéoporose", "Corticothérapie", "Physiopathologie"]
+    },
+    {
+        "id": 3275,
+        "chapter": "ch6",
+        "rang": "B",
+        "question": "Quelles sont les doses quotidiennes de calcium et de vitamine D recommandées chez la personne âgée dans la prise en charge de l'ostéoporose ?",
+        "answer": "Les apports quotidiens recommandés sont d'au moins :\n- 1 000 mg de Calcium par jour.\n- 800 UI de Vitamine D par jour (sous forme de cholécalciférol ou vitamine D3).\nCette supplémentation doit être systématique avant l'instauration de tout traitement spécifique car l'efficacité des anti-ostéoporotiques n'a été validée que chez des patients normo-vitaminés.",
+        "tags": ["Ostéoporose", "Calcium", "Vitamine D"]
+    },
+    {
+        "id": 3276,
+        "chapter": "ch6",
+        "rang": "B",
+        "question": "Quel protocole de recharge en vitamine D3 (protocole de Souberbielle) est indiqué chez le patient carencé ?",
+        "answer": "La recharge en vitamine D3 (ampoules de 80 000 ou 100 000 UI) dépend du taux initial de 25-OH-D :\n- Taux < 10 ng/ml : 4 ampoules espacées chacune de 15 jours.\n- Taux entre 10 et 20 ng/ml : 3 ampoules espacées chacune de 15 jours.\n- Taux entre 20 et 30 ng/ml : 2 ampoules espacées de 15 jours.\nL'objectif est d'atteindre rapidement un taux cible de 25-OH-vitamine D >= 30 ng/ml, avant d'instaurer un relais à vie (quotidien ou trimestriel).",
+        "tags": ["Ostéoporose", "Vitamine D", "Protocole"]
+    },
+    {
+        "id": 3277,
+        "chapter": "ch6",
+        "rang": "B",
+        "question": "Pourquoi est-il recommandé de privilégier les apports alimentaires en calcium plutôt que les suppléments médicamenteux ?",
+        "answer": "Les suppléments calciques médicamenteux (comprimés) sont mal tolérés au niveau digestif chez le sujet âgé, provoquant dyspepsie, nausées et constipation sévère, ce qui conduit à une mauvaise observance. \nIl est préférable de privilégier les apports alimentaires naturels (consommation d'au moins un produit laitier à chaque repas) et la boisson d'eaux minérales riches en calcium (Hépar, Contrexéville).",
+        "tags": ["Ostéoporose", "Calcium", "Nutrition"]
+    },
+    {
+        "id": 3278,
+        "chapter": "ch6",
+        "rang": "A",
+        "question": "Quel est le mécanisme d'action des bisphosphonates ?",
+        "answer": "Les bisphosphonates sont des inhibiteurs puissants de la résorption osseuse (antiresorptifs). Ils se fixent sélectivement sur les surfaces osseuses en cours de remodelage et sont endocytés par les ostéoclastes. \nIls bloquent la voie du mévalonate (inhibition de l'enzyme farnésyl pyrophosphate synthase), désorganisant le cytosquelette de l'ostéoclaste et induisant son apoptose. Cela augmente la DMO et réduit le risque de fracture.",
+        "tags": ["Ostéoporose", "Bisphosphonates", "Pharmacologie"]
+    },
+    {
+        "id": 3279,
+        "chapter": "ch6",
+        "rang": "A",
+        "question": "Quelles sont les modalités d'administration des bisphosphonates oraux (alendronate et risédronate) pour éviter la toxicité œsophagienne ?",
+        "answer": "L'alendronate (70 mg/semaine) et le risédronate (35 mg/semaine) doivent être pris :\n1. Le matin à jeun, dès le réveil, avec un grand verre d'eau du robinet pure (les eaux minérales ou le thé empêchent leur absorption).\n2. Sans croquer ni sucer le comprimé.\n3. En restant en position assise ou debout (sans s'allonger) pendant au moins 30 minutes après la prise afin d'éviter tout reflux gastro-œsophagien irritant et d'éventuelles ulcérations œsophagiennes graves.",
+        "tags": ["Ostéoporose", "Bisphosphonates", "Iatrogénie"]
+    },
+    {
+        "id": 3280,
+        "chapter": "ch6",
+        "rang": "A",
+        "question": "Quel bisphosphonate intraveineux annuel est indiqué après une FESF et quelle précaution d'injection faut-il prendre ?",
+        "answer": "L'acide zolédronique (zolédronate, 5 mg en perfusion annuelle de plus de 20 minutes) est le traitement de première intention recommandé après une fracture de l'extrémité supérieure du fémur.\n- Précaution : Un syndrome pseudo-grippal (fièvre transitoire, arthralgies, myalgies dans les 48 heures suivant l'injection) est très fréquent lors de la première perfusion. Il est prévenu par la prescription systématique de paracétamol toutes les 6 heures pendant 24 à 48 heures post-perfusion.",
+        "tags": ["Ostéoporose", "Zolédronate", "Prise en charge"]
+    },
+    {
+        "id": 3281,
+        "chapter": "ch6",
+        "rang": "A",
+        "question": "Quelles sont les contre-indications absolues à l'utilisation des bisphosphonates chez le sujet âgé ?",
+        "answer": "Les contre-indications majeures des bisphosphonates sont :\n1. Une insuffisance rénale sévère avec une clairance de la créatinine inférieure à 30-35 ml/min (pour le zolédronate, contre-indication stricte en deçà de 35 ml/min en raison du risque de nécrose tubulaire).\n2. Une hypocalcémie non corrigée.\n3. Pour les formes orales : Des anomalies de l'œsophage retardant le transit (sténose, achalasie) ou l'incapacité de rester assis/debout pendant 30 minutes.",
+        "tags": ["Ostéoporose", "Bisphosphonates", "Contre-indications"]
+    },
+    {
+        "id": 3282,
+        "chapter": "ch6",
+        "rang": "A",
+        "question": "Définissez l'ostéonécrose de la mâchoire (ONM) sous traitement osseux et sa prévention en gériatrie.",
+        "answer": "L'ONM est une exposition d'os nécrotique dans la cavité buccale évoluant depuis plus de 8 semaines, sous bisphosphonates ou dénosumab, survenant le plus souvent après un geste invasif dentaire (extraction dentaire) ou en cas de mauvaise hygiène bucco-dentaire.\n- Prévention : Avant d'instaurer le traitement osseux, réaliser un examen dentaire complet avec panoramique dentaire et effectuer tous les soins requis (extractions, assainissement parodontal). Le patient doit maintenir une hygiène dentaire rigoureuse.",
+        "tags": ["Ostéoporose", "Ostéonécrose de la mâchoire", "Prévention"]
+    },
+    {
+        "id": 3283,
+        "chapter": "ch6",
+        "rang": "B",
+        "question": "Qu'est-ce qu'une fracture fémorale atypique (FFA) sous traitement antiresorptif prolongé ?",
+        "answer": "La FFA est une fracture sous-trochantérienne ou diaphysaire du fémur survenant après un traumatisme minime sous bisphosphonates ou dénosumab au long cours (> 3-5 ans). \n- Sémiologie : Elle est précédée de douleurs sourdes bilatérales de la cuisse ou de l'aine. À la radiographie, le trait de fracture est transversal ou oblique court, non comminutif, avec un épaississement cortical localisé en « bec de flûte ».\n- Conduite à tenir : Arrêt définitif de l'antiresorptif et ostéosynthèse.",
+        "tags": ["Ostéoporose", "Bisphosphonates", "Iatrogénie"]
+    },
+    {
+        "id": 3284,
+        "chapter": "ch6",
+        "rang": "A",
+        "question": "Définissez le dénosumab (Prolia) : mécanisme d'action, posologie et place en thérapeutique chez le sujet âgé.",
+        "answer": "Le dénosumab est un anticorps monoclonal IgG2 humain anti-RANK ligand.\n- Mécanisme : Il se lie avec une forte affinité au RANKL, empêchant son interaction avec le récepteur RANK à la surface des ostéoclastes, bloquant leur formation, leur fonction et leur survie.\n- Posologie : Injection sous-cutanée de 60 mg une fois tous les 6 mois pendant 3 ans.\n- Place : Traitement de seconde intention de l'ostéoporose post-ménopausique chez les patientes à haut risque de fracture, particulièrement en relais des bisphosphonates ou en cas de contre-indication (clairance rénale entre 15 et 30 ml/min).",
+        "tags": ["Ostéoporose", "Dénosumab", "Pharmacologie"]
+    },
+    {
+        "id": 3285,
+        "chapter": "ch6",
+        "rang": "B",
+        "question": "Quel est l'avantage majeur du dénosumab chez la personne âgée insuffisante rénale ?",
+        "answer": "Contrairement aux bisphosphonates qui sont éliminés par filtration glomérulaire rénale et accumulés en cas d'insuffisance rénale, le dénosumab est éliminé par le système réticulo-endothélial (catabolisme des immunoglobulines). \nIl peut être prescrit en toute sécurité chez des patientes insuffisantes rénales modérées à sévères (clairance de la créatinine comprise entre 15 et 30 ml/min) sans aucune adaptation de posologie.",
+        "tags": ["Ostéoporose", "Dénosumab", "Insuffisance rénale"]
+    },
+    {
+        "id": 3286,
+        "chapter": "ch6",
+        "rang": "A",
+        "question": "Expliquez le phénomène d'« effet rebond » à l'arrêt du dénosumab et comment le prévenir.",
+        "answer": "À l'arrêt du dénosumab (après 6 mois de l'injection), son effet s'estompe rapidement, entraînant une accélération massive de la résorption osseuse (effet rebond) avec une perte rapide de la DMO acquise. Cela expose la patiente à un risque majeur de fractures vertébrales multiples spontanées.\n- Prévention : Ne jamais arrêter le dénosumab sans instaurer immédiatement un relais par un bisphosphonate (oral pendant 1 an ou perfusion annuelle de zolédronate 6 mois après la dernière dose).",
+        "tags": ["Ostéoporose", "Dénosumab", "Iatrogénie"]
+    },
+    {
+        "id": 3287,
+        "chapter": "ch6",
+        "rang": "A",
+        "question": "Définissez le tériparatide (Forsteo) : mécanisme d'action, posologie et indications de remboursement en France.",
+        "answer": "Le tériparatide est le fragment recombinant 1-34 de la parathormone humaine (PTH).\n- Mécanisme : Administré de façon intermittente, il stimule préférentiellement l'activité des ostéoblastes par rapport à celle des ostéoclastes, agissant comme un ostéoformateur puissant (reconstruction osseuse).\n- Posologie : Injection sous-cutanée quotidienne de 20 µg pour une durée maximale de 18 mois à vie.\n- Remboursement : Limité en France aux formes d'ostéoporose sévère caractérisées par la présence d'au moins deux fractures vertébrales prévalentes.",
+        "tags": ["Ostéoporose", "Tériparatide", "Pharmacologie"]
+    },
+    {
+        "id": 3288,
+        "chapter": "ch6",
+        "rang": "B",
+        "question": "Quelles sont les contre-indications absolues à l'utilisation du tériparatide chez le sujet âgé ?",
+        "answer": "Les contre-indications majeures du tériparatide sont :\n1. Une hypercalcémie préexistante ou une hyperparathyroïdie primitive.\n2. Une maladie osseuse métabolique autre que l'ostéoporose (ex: maladie de Paget osseuse, ostéomalacie).\n3. Des antécédents de radiothérapie externe ou squelettique (risque théorique d'ostéosarcome).\n4. Des tumeurs osseuses malignes ou métastases osseuses.\n5. Une insuffisance rénale sévère (clairance < 30 ml/min).",
+        "tags": ["Ostéoporose", "Tériparatide", "Contre-indications"]
+    },
+    {
+        "id": 3289,
+        "chapter": "ch6",
+        "rang": "B",
+        "question": "Quel relais thérapeutique est impératif après un cycle de 18 mois de tériparatide ?",
+        "answer": "Après l'arrêt du tériparatide, le gain de DMO et la micro-architecture reconstruite s'altèrent rapidement si aucun traitement n'est instauré. \nIl est impératif d'enchaîner immédiatement par une prescription de relais avec un antiresorptif puissant (un bisphosphonate ou en seconde intention du dénosumab) pour consolider et maintenir le gain de masse osseuse.",
+        "tags": ["Ostéoporose", "Tériparatide", "Prise en charge"]
+    },
+    {
+        "id": 3290,
+        "chapter": "ch6",
+        "rang": "B",
+        "question": "Quels sont les seuils de T-score du GRIO (2018) guidant l'indication d'un traitement anti-ostéoporotique chez la femme de plus de 50 ans ?",
+        "answer": "La décision dépend du contexte fracturaire :\n1. En cas de fracture sévère (FESF, vertèbre, humérus, pelvis) : Traitement indiqué si le T-score est <= -1.\n2. En cas de fracture non sévère (poignet) : Traitement indiqué si le T-score est <= -2.\n3. En l'absence de fracture (mais avec facteurs de risque majeurs ou risque de chute) : Traitement indiqué si le T-score est <= -3.",
+        "tags": ["Ostéoporose", "GRIO", "Recommandations"]
+    },
+    {
+        "id": 3291,
+        "chapter": "ch6",
+        "rang": "B",
+        "question": "Qu'est-ce que le score FRAX et quelle est son utilité clinique ?",
+        "answer": "Le FRAX (Fracture Risk Assessment Tool) est un algorithme développé par l'OMS qui estime la probabilité à 10 ans de survenue d'une fracture majeure d'origine ostéoporotique (FESF, vertèbre, poignet, humérus).\n- Paramètres : Il intègre des facteurs cliniques (âge, sexe, IMC, fracture prévalente, tabac, alcool, corticothérapie, polyarthrite rhumatoïde) avec ou sans la mesure de la DMO du col fémoral, aidant à guider la décision thérapeutique dans les zones d'incertitude.",
+        "tags": ["Ostéoporose", "FRAX", "Dépistage"]
+    },
+    {
+        "id": 3292,
+        "chapter": "ch6",
+        "rang": "A",
+        "question": "Quels sont les 4 principaux écueils cliniques à éviter concernant l'ostéoporose en gériatrie ?",
+        "answer": "Les 4 écueils majeurs sont :\n1. Banaliser la pathologie en considérant que l'ostéoporose et les tassements sont normaux avec l'âge.\n2. Se limiter à une supplémentation de Calcium + Vitamine D chez un patient à haut risque de fracture sans introduire de traitement spécifique.\n3. Ne pas rechercher systématiquement une ostéopathie fragilisante secondaire (myélome, cancer).\n4. Omettre d'envisager le diagnostic d'ostéoporose chez un patient chuteur ou à risque de chute, même s'il est asymptomatique.",
+        "tags": ["Ostéoporose", "Écueils", "Prise en charge"]
+    },
+    {
+        "id": 3293,
+        "chapter": "ch6",
+        "rang": "B",
+        "question": "Quelle est la durée recommandée pour un premier cycle thérapeutique anti-ostéoporotique et comment le réévaluer ?",
+        "answer": "Un cycle standard dure de 3 à 5 ans. \n- Réévaluation : Elle doit être programmée à 2 ou 3 ans sans interrompre le traitement. Elle repose sur la recherche de nouvelles fractures de fragilité, de nouveaux facteurs de risque, et le contrôle de la DMO par DXA. \n- Décision : On discute l'arrêt ou la poursuite (nouveau cycle) selon que la DMO cible est atteinte, l'absence de perte osseuse significative et l'absence de récidive fracturaire sous traitement.",
+        "tags": ["Ostéoporose", "Suivi", "Réévaluation"]
+    },
+    {
+        "id": 3294,
+        "chapter": "ch6",
+        "rang": "B",
+        "question": "Quand doit-on prescrire une deuxième séquence thérapeutique (un nouveau cycle de 3 à 5 ans) de traitement anti-ostéoporotique ?",
+        "answer": "Un nouveau cycle thérapeutique est indiqué dans trois situations :\n1. La survenue d'une nouvelle fracture de fragilité sous traitement.\n2. La survenue de nouveaux facteurs de risque de fracture (début d'une corticothérapie, aggravation de l'instabilité posturale).\n3. Une diminution significative de la DMO au contrôle densitométrique (perte >= 0,03 g/cm² au col ou au fémur) ou la persistance d'un T-score très bas (<= -2,5) sur le site le plus bas.",
+        "tags": ["Ostéoporose", "Suivi", "Prise en charge"]
+    },
+    {
+        "id": 3295,
+        "chapter": "ch6",
+        "rang": "B",
+        "question": "Comment le gériatre doit-il gérer l'ostéoporose chez une patiente de 85 ans insuffisante rénale sévère (clairance à 25 ml/min) présentant une FESF ?",
+        "answer": "Chez cette patiente :\n1. Le zolédronate et les bisphosphonates sont contre-indiqués (clairance < 30-35 ml/min).\n2. La prise en charge repose sur l'injection sous-cutanée de dénosumab (60 mg tous les 6 mois pendant 3 ans) en veillant à la normalisation stricte du statut vitaminocalcique au préalable pour éviter une hypocalcémie aiguë.\n3. Un avis d'expert (rhumatologue ou néphrologue) est fortement conseillé.",
+        "tags": ["Ostéoporose", "Insuffisance rénale", "Cas clinique"]
+    },
+    {
+        "id": 3296,
+        "chapter": "ch6",
+        "rang": "A",
+        "question": "Pourquoi la prévention des chutes est-elle indissociable du traitement de l'ostéoporose chez la personne âgée ?",
+        "answer": "La survenue d'une fracture est le produit d'un os fragile (ostéoporose) et d'un traumatisme mécanique (la chute). Plus de 90 % des FESF surviennent suite à une chute de sa hauteur. \nLe traitement médicamenteux de l'os perd l'essentiel de son bénéfice si le patient continue à tomber. Le traitement de l'ostéoporose doit donc obligatoirement intégrer une EGS de la marche, la réhabilitation motrice et la sécurisation du domicile.",
+        "tags": ["Ostéoporose", "Chutes", "Prévention"]
+    },
+    {
+        "id": 3297,
+        "chapter": "ch6",
+        "rang": "B",
+        "question": "Quelle est l'incidence relative des fractures ostéoporotiques selon le sexe chez les personnes âgées ?",
+        "answer": "L'incidence des fractures ostéoporotiques est environ trois fois plus importante chez la femme en raison de la perte osseuse post-ménopausique rapide et d'une espérance de vie plus longue. \nCependant, les fractures de hanche (FESF) chez l'homme âgé, bien que moins fréquentes, sont associées à un taux de mortalité à 1 an nettement supérieur (jusqu'à 30 % de mortalité à 1 an chez l'homme vs 15-20 % chez la femme).",
+        "tags": ["Ostéoporose", "Sexe", "Épidémiologie"]
+    },
+    {
+        "id": 3298,
+        "chapter": "ch6",
+        "rang": "A",
+        "question": "Quels sont les signes cliniques orientant vers une fracture de l'extrémité supérieure du fémur (FESF) chez un patient âgé après une chute ?",
+        "answer": "Les signes cliniques typiques d'une FESF sont :\n- Une impotence fonctionnelle totale du membre inférieur atteint (impossibilité de prendre appui ou de décoller le talon du plan du lit).\n- Une attitude vicieuse caractéristique du membre inférieur : Raccourci, en adduction et en rotation externe (le bord externe du pied touche le lit).\n- Une vive douleur inguinale provoquée à la mobilisation douce de la hanche.",
+        "tags": ["Ostéoporose", "FESF", "Clinique"]
+    },
+    {
+        "id": 3299,
+        "chapter": "ch6",
+        "rang": "B",
+        "question": "Pourquoi le délai opératoire en cas de fracture du col du fémur chez le sujet âgé doit-il idéalement être inférieur à 48 heures ?",
+        "answer": "Un délai opératoire court (< 48 heures) réduit considérablement la morbimortalité. Un retard opératoire majore :\n1. Le syndrome d'immobilisation (confusion mentale, déshydratation, escarres sacrales, thrombose veineuse profonde/embolie pulmonaire, surinfections bronchiques).\n2. La douleur aiguë postopératoire et la dénutrition.\nUne mobilisation précoce dès le lendemain de la chirurgie est l'objectif prioritaire.",
+        "tags": ["Ostéoporose", "FESF", "Chirurgie"]
+    },
+    {
+        "id": 3300,
+        "chapter": "ch6",
+        "rang": "B",
+        "question": "Quelle est la cause d'une hypocalcémie aiguë sévère après une injection de dénosumab et comment la prévenir ?",
+        "answer": "Le dénosumab bloque brutalement l'activité de résorption ostéoclastique. En cas de carence sévère en vitamine D non corrigée au préalable, l'organisme ne peut pas mobiliser le calcium osseux pour maintenir la calcémie plasmatique.\n- Prévention : Toujours doser et normaliser la 25-OH-vitamine D et s'assurer d'une calcémie normale avant l'injection. Assurer un apport suffisant en calcium oral au début du traitement.",
+        "tags": ["Ostéoporose", "Dénosumab", "Iatrogénie"]
+    }
+]
+
+# --- CHAPTER 7: Arthrose (3301 - 3350) ---
+ch7_cards = [
+    {
+        "id": 3301,
+        "chapter": "ch7",
+        "rang": "A",
+        "question": "Quelle est la définition clinique et physiopathologique de l'arthrose ?",
+        "answer": "L'arthrose est une affection articulaire caractérisée par une dégradation prématurée et une destruction du cartilage, associée à des remaniements de l'os sous-chondral (ostéosclérose condensante et géodes d'hyperpression), à une production d'ostéophytes marginaux et à des poussées congestives d'inflammation de la membrane synoviale. \nCe n'est pas une simple usure mécanique du cartilage, mais une maladie active de l'ensemble de l'articulation.",
+        "tags": ["Arthrose", "Physiopathologie", "Définition"]
+    },
+    {
+        "id": 3302,
+        "chapter": "ch7",
+        "rang": "B",
+        "question": "Comment l'arthrose se distingue-t-elle du vieillissement articulaire normal (physiologique) ?",
+        "answer": "1. Le vieillissement articulaire physiologique : Se caractérise par une simple attrition (amincissement) du cartilage avec une diminution modérée du nombre de chondrocytes et de la teneur en eau, sans pincement complet de l'interligne, sans ostéophytose ni inflammation. La fonction articulaire reste normale au repos.\n2. La maladie arthrosique : Processus pathologique actif avec déséquilibre catabolique/anabolique, œdème cartilagineux initial, fissures superficielles puis profondes, mise à nu de l'os sous-chondral, ostéophytose réactionnelle et synovite inflammatoire secondaire.",
+        "tags": ["Arthrose", "Physiopathologie", "Vieillissement"]
+    },
+    {
+        "id": 3303,
+        "chapter": "ch7",
+        "rang": "B",
+        "question": "Quelle est la prévalence de l'arthrose en France et quel est son coût médico-économique ?",
+        "answer": "L'arthrose est la plus fréquente des maladies rhumatismales en France :\n- Elle touche entre 9 et 10 millions de personnes.\n- Sa prévalence est très élevée chez le sujet âgé : Elle concerne 1 adulte sur 2 après 60 ans.\n- Son coût médico-économique global annuel pour le système de santé est estimé à environ 1 milliard d'euros en France.",
+        "tags": ["Arthrose", "Épidémiologie", "Coût"]
+    },
+    {
+        "id": 3304,
+        "chapter": "ch7",
+        "rang": "B",
+        "question": "Quelles sont les trois localisations arthrosiques symptomatiques les plus fréquentes et leur incidence annuelle relative ?",
+        "answer": "Les trois localisations les plus fréquentes sont :\n1. La gonarthrose (arthrose du genou) : La plus fréquente, avec une incidence de 240 cas pour 100 000 patients par an.\n2. L'arthrose digitale (mains) : Incidence de 100 cas pour 100 000 patients par an.\n3. La coxarthrose (arthrose de la hanche) : Incidence de 80 cas pour 100 000 patients par an.",
+        "tags": ["Arthrose", "Épidémiologie", "Localisation"]
+    },
+    {
+        "id": 3305,
+        "chapter": "ch7",
+        "rang": "B",
+        "question": "Décrivez la structure normale du cartilage articulaire et ses propriétés biomécaniques.",
+        "answer": "Le cartilage est un tissu avasculaire et non innervé comprenant un seul type de cellules, les chondrocytes, qui synthétisent la matrice extracellulaire. \nCette matrice est constituée d'un réseau dense de fibres de collagène (type II principalement) qui emprisonnent des molécules géantes de protéoglycanes hydrophiles. Ces protéoglycanes attirent l'eau, conférant au cartilage sa déformabilité élastique et ses propriétés d'amortissement.",
+        "tags": ["Arthrose", "Physiologie", "Cartilage"]
+    },
+    {
+        "id": 3306,
+        "chapter": "ch7",
+        "rang": "B",
+        "question": "Quels sont les trois stades physiopathologiques de la dégradation cartilagineuse dans l'arthrose ?",
+        "answer": "Les trois stades sont :\n1. Stade initial : Œdème cartilagineux par hyperactivité catabolique des chondrocytes et surproduction néfaste de protéoglycanes (hyperhydratation), avec synthèse d'un néocollagène anormal.\n2. Stade intermédiaire : Apparition de fissures superficielles du cartilage, avec relargage d'enzymes protéolytiques (métalloprotéases) et de cytokines pro-inflammatoires dans le liquide synovial.\n3. Stade final : Destruction des couches profondes du cartilage, laissant l'os sous-chondral à nu (chondrolyse complète).",
+        "tags": ["Arthrose", "Physiopathologie", "Cartilage"]
+    },
+    {
+        "id": 3307,
+        "chapter": "ch7",
+        "rang": "A",
+        "question": "Quels sont les trois principaux facteurs de risque d'arthrose décrits comme majeurs ?",
+        "answer": "Les trois principaux facteurs de risque majeurs (dont un est modifiable) sont :\n1. L'âge (vieillissement tissulaire, diminution des capacités de régénération chondrocytaire).\n2. L'hérédité (facteurs génétiques prédominants surtout dans l'arthrose digitale).\n3. Le surpoids / l'obésité (facteur de surcharge mécanique modifiable pour la coxarthrose et la gonarthrose, mais aussi facteur inflammatoire systémique lié aux adipokines).",
+        "tags": ["Arthrose", "Facteurs de risque", "Obésité"]
+    },
+    {
+        "id": 3308,
+        "chapter": "ch7",
+        "rang": "A",
+        "question": "Pourquoi la perte de poids doit-elle être encouragée chez le patient arthrosique en gériatrie et quel est son écueil ?",
+        "answer": "La réduction pondérale diminue les contraintes mécaniques sur les articulations portantes (hanche, genou), réduisant la douleur et ralentissant la dégradation cartilagineuse.\n- Écueil gériatrique : La perte de poids chez le patient âgé ne doit jamais se faire au détriment de la masse musculaire. Un régime restrictif mal encadré favorise la sarcopénie (perte musculaire), ce qui aggrave l'instabilité articulaire, le risque de chute et la perte d'autonomie. La perte de poids doit être associée à un apport protéique suffisant et à une activité physique.",
+        "tags": ["Arthrose", "Obésité", "Sarcopénie"]
+    },
+    {
+        "id": 3309,
+        "chapter": "ch7",
+        "rang": "A",
+        "question": "Quels sont les 6 principaux écueils cliniques à éviter concernant l'arthrose du sujet âgé ?",
+        "answer": "Les 6 écueils cliniques majeurs sont :\n1. Considérer que l'arthrose est normale chez le patient âgé.\n2. Omettre d'évaluer l'arthrose comme facteur prédisposant ou précipitant de chutes (par la douleur).\n3. Négliger le handicap fonctionnel associé et son impact sur la qualité de vie.\n4. Négliger le risque d'automédication iatrogène par des AINS.\n5. Se limiter à des antalgiques de palier 1 (paracétamol) en omettant la rééducation et l'activité physique.\n6. Retarder excessivement la discussion d'une indication chirurgicale de prothèse.",
+        "tags": ["Arthrose", "Écueils", "Prise en charge"]
+    },
+    {
+        "id": 3310,
+        "chapter": "ch7",
+        "rang": "A",
+        "question": "Quelle est la présentation sémiologique typique de la douleur dans la coxarthrose ?",
+        "answer": "La coxarthrose se manifeste par :\n1. Une douleur de type mécanique : Aggravée par l'effort (marche, station debout), soulagée par le repos, sans réveil nocturne (sauf lors des poussées congestives), avec un dérouillage matinal court de moins de 15 minutes.\n2. Une topographie inguinale ou crurale typique (pli de l'aine), pouvant irradier à la face antérieure de la cuisse vers le genou (douleur projetée du genou qui peut égarer le diagnostic).\n3. Une boiterie d'esquive à la marche.",
+        "tags": ["Arthrose", "Coxarthrose", "Sémiologie"]
+    },
+    {
+        "id": 3311,
+        "chapter": "ch7",
+        "rang": "A",
+        "question": "Décrivez l'examen physique de la hanche d'un patient atteint de coxarthrose (debout, marche, couché).",
+        "answer": "- En position debout : Recherche d'une attitude vicieuse (flessum de hanche, rotation externe, adduction) ou d'une inégalité de longueur des membres.\n- À la marche : Analyse de la boiterie d'esquive (diminution du temps d'appui unilatéral sur le membre douloureux).\n- En position couchée (sur table) : \n1. Mobilisation passive : Limitation douloureuse précoce de la rotation interne et de l'extension.\n2. Mobilité active : Syndrome clinostatique (difficulté à décoller le talon du plan du lit) et recherche d'une amyotrophie du quadriceps.",
+        "tags": ["Arthrose", "Coxarthrose", "Examen clinique"]
+    },
+    {
+        "id": 3312,
+        "chapter": "ch7",
+        "rang": "B",
+        "question": "Qu'est-ce que l'indice algofonctionnel de Lequesne pour la hanche et la hanche/genou ?",
+        "answer": "L'indice de Lequesne est un questionnaire validé qui mesure le retentissement fonctionnel de la coxopathie ou de la gonopathie. Il évalue trois piliers :\n1. La douleur ou la gêne (nocturne, dérouillage, station debout, à la marche, assise).\n2. La distance maximale de marche (périmètre de marche de plus de 1 km à moins de 100 m, utilisation de cannes).\n3. Les activités de la vie quotidienne (monter des escaliers, couper les ongles, s'accroupir, enfiler ses chaussettes, sortir de voiture).\nLe score total varie de 0 à 24 points.",
+        "tags": ["Arthrose", "Lequesne", "Évaluation"]
+    },
+    {
+        "id": 3313,
+        "chapter": "ch7",
+        "rang": "B",
+        "question": "À partir de quel score à l'indice fonctionnel de Lequesne l'indication chirurgicale d'une prothèse de hanche ou de genou est-elle à discuter ?",
+        "answer": "Une indication chirurgicale de prothèse totale de hanche (PTH) ou de genou (PTG) est généralement discutée lorsque le score à l'indice de Lequesne atteint ou dépasse 10 à 12 points, ce qui correspond à un handicap très sévère ou extrêmement sévère altérant l'autonomie et la qualité de vie du patient.",
+        "tags": ["Arthrose", "Lequesne", "Chirurgie"]
+    },
+    {
+        "id": 3314,
+        "chapter": "ch7",
+        "rang": "A",
+        "question": "Quels sont les principaux diagnostics différentiels de la coxarthrose à éliminer ?",
+        "answer": "Les principaux diagnostics différentiels sont :\n1. Une cruralgie L3-L4 : Douleur à irradiation antérieure avec trajet radiculaire, impulsivité à la toux, signe de Léri positif, diminution/abolition du réflexe rotulien, sans limitation de la hanche passive.\n2. Une tendinopathie du moyen fessier : Douleur externe à la palpation du grand trochanter, réveillée par l'abduction contrariée.\n3. Une ostéonécrose aseptique de la tête fémorale ou une fracture de contrainte du bassin : Début brutal, hyperalgique (IRM nécessaire).\n4. Une coxite inflammatoire ou infectieuse.",
+        "tags": ["Arthrose", "Coxarthrose", "Diagnostic différentiel"]
+    },
+    {
+        "id": 3315,
+        "chapter": "ch7",
+        "rang": "A",
+        "question": "Comment différencier cliniquement une tendinopathie du moyen fessier d'une coxarthrose ?",
+        "answer": "- Tendinopathie du moyen fessier : La douleur est localisée à la face externe de la hanche, centrée sur le grand trochanter. Elle est réveillée par la palpation locale, l'abduction passive forcée en adduction, et surtout par la manœuvre d'abduction active contrariée. La rotation interne passive de la hanche est libre et indolore.\n- Coxarthrose : La douleur est majoritairement inguinale. La rotation interne passive de la hanche est limitée et douloureuse.",
+        "tags": ["Arthrose", "Diagnostic différentiel", "Moyen fessier"]
+    },
+    {
+        "id": 3316,
+        "chapter": "ch7",
+        "rang": "A",
+        "question": "Quel est le bilan biologique d'une arthrose pure et les caractéristiques de son liquide synovial ?",
+        "answer": "- Biologie : Le bilan biologique est strictement normal. Il n'y a pas de syndrome inflammatoire (CRP normale, VS normale).\n- Liquide synovial (si ponction réalisé en cas d'épanchement) : Liquide de type mécanique (visqueux, clair, jaune citrin, pauvre en cellules avec moins de 2 000 leucocytes/mm³ et une prédominance de cellules mononucléées, stérile, absence de cristaux sauf en cas de chondrocalcinose associée).",
+        "tags": ["Arthrose", "Biologie", "Liquide synovial"]
+    },
+    {
+        "id": 3317,
+        "chapter": "ch7",
+        "rang": "A",
+        "question": "Quels sont les 4 signes radiologiques cardinaux de l'arthrose sur une radiographie standard ?",
+        "answer": "Les 4 signes cardinaux sont :\n1. Le pincement localisé de l'interligne articulaire (traduit la perte de substance du cartilage).\n2. L'ostéosclérose (ostéocondensation) sous-chondrale (condensation de l'os dans les zones d'hyperpression).\n3. Les géodes sous-chondrales d'hyperpression (lacunes osseuses arrondies à proximité du pincement).\n4. L'ostéophytose marginale (tentative de réparation osseuse périphérique en réponse aux contraintes).",
+        "tags": ["Arthrose", "Radiographie", "Diagnostic"]
+    },
+    {
+        "id": 3318,
+        "chapter": "ch7",
+        "rang": "B",
+        "question": "Quelle incidence radiographique spécifique est indispensable pour évaluer correctement une coxarthrose et pourquoi ?",
+        "answer": "L'incidence de faux profil de hanche de Lequesne (en charge) est indispensable en complément du bassin de face en charge. \nElle permet de mesurer précisément l'interligne articulaire de la hanche dans sa partie antérieure et postérieure (le pôle supéro-antérieur et supéro-postérieur), ce qui évite de méconnaître un pincement débutant invisible sur le cliché de face.",
+        "tags": ["Arthrose", "Coxarthrose", "Radiographie"]
+    },
+    {
+        "id": 3319,
+        "chapter": "ch7",
+        "rang": "B",
+        "question": "Qu'est-ce que la classification de Kellgren et Lawrence en radiographie d'arthrose ?",
+        "answer": "C'est une classification radiologique consensuelle de sévérité de l'arthrose (gradée de 0 à 4) :\n- Grade 0 : Absence de signe.\n- Grade 1 : Douteux (ostéophyte minime, interligne normal).\n- Grade 2 : Minimal (ostéophyte net, interligne respecté ou peu diminué).\n- Grade 3 : Modéré (pincement modéré de l'interligne articulaire, ostéophytes multiples).\n- Grade 4 : Sévère (pincement majeur ou complet, ostéosclérose sous-chondrale marquée, déformation des extrémités osseuses).",
+        "tags": ["Arthrose", "Radiographie", "Classification"]
+    },
+    {
+        "id": 3320,
+        "chapter": "ch7",
+        "rang": "A",
+        "question": "Définissez la coxarthrose destructrice rapide (CDR) : terrain, présentation clinique, critères diagnostiques.",
+        "answer": "La CDR est une variété évolutive rare caractérisée par une destruction accélérée du cartilage coxo-fémoral :\n- Terrain : Femme de plus de 65 ans, souvent en surpoids.\n- Clinique : Douleur de hanche d'apparition brutale, très intense, hyperalgique, avec recrudescence nocturne (mimant une arthrite).\n- Critère radiologique : Pincement global de l'interligne articulaire supérieur à 50 % ou supérieur à 2 mm en 1 an, caractérisé par l'absence d'ostéophytes (la destruction est trop rapide pour permettre la néoformation osseuse).",
+        "tags": ["Arthrose", "CDR", "Sémiologie"]
+    },
+    {
+        "id": 3321,
+        "chapter": "ch7",
+        "rang": "A",
+        "question": "Pourquoi la surveillance radiographique est-elle impérative devant une suspicion de coxarthrose destructrice rapide (CDR) ?",
+        "answer": "La CDR mime initialement une poussée congestive d'arthrose ou une arthrite. Le pincement n'est pas toujours complet au début.\n- Surveillance : Il est impératif de répéter les clichés radiographiques (face et faux profil) à 3 mois d'intervalle. L'objectivation d'un pincement de plus de 1 mm sur cette courte période confirme la destruction accélérée et impose une prise en charge chirurgicale rapide avant la survenue d'une ostéolyse majeure de la tête fémorale.",
+        "tags": ["Arthrose", "CDR", "Radiographie"]
+    },
+    {
+        "id": 3322,
+        "chapter": "ch7",
+        "rang": "A",
+        "question": "Définissez la gonarthrose fémoro-patellaire : épidémiologie, facteurs déclenchants et examen clinique.",
+        "answer": "La gonarthrose fémoro-patellaire (articulation entre la rotule et le fémur) représente environ 35 % des gonarthroses, souvent bilatérale.\n- Facteurs déclenchants : Douleurs antérieures provoquées par la descente des escaliers (plus douloureuse que la montée), la station assise prolongée (signe du cinéma), l'agenouillement.\n- Examen clinique : Douleur à la pression de la rotule sur le fémur, signe du rabot (crépitation à la friction de la rotule), et douleur à l'extension contrariée de la jambe.",
+        "tags": ["Arthrose", "Gonarthrose", "Clinique"]
+    },
+    {
+        "id": 3323,
+        "chapter": "ch7",
+        "rang": "A",
+        "question": "Définissez la gonarthrose fémoro-tibiale interne : prévalence, facteurs mécaniques et déformations associées.",
+        "answer": "La gonarthrose fémoro-tibiale interne est la forme la plus fréquente de gonarthrose (45 à 50 % des cas).\n- Physiopathologie : Elle est favorisée par des contraintes mécaniques excessives sur le compartiment interne du genou.\n- Déformation : Elle est fréquemment associée (comme cause ou conséquence) à un genu varum (déviation des membres inférieurs en jambes de cow-boy), qui déplace l'axe de charge vers l'intérieur.",
+        "tags": ["Arthrose", "Gonarthrose", "Genu varum"]
+    },
+    {
+        "id": 3324,
+        "chapter": "ch7",
+        "rang": "A",
+        "question": "Définissez la gonarthrose fémoro-tibiale externe : prévalence et déformations associées.",
+        "answer": "La gonarthrose fémoro-tibiale externe est moins fréquente (environ 5 à 10 % des cas).\n- Déformation : Elle affecte le compartiment externe du genou et est associée à une déviation des membres inférieurs en genu valgum (jambes en X, les genoux se touchent), ce qui déplace l'axe mécanique et les forces de pression vers l'extérieur.",
+        "tags": ["Arthrose", "Gonarthrose", "Genu valgum"]
+    },
+    {
+        "id": 3325,
+        "chapter": "ch7",
+        "rang": "A",
+        "question": "Quels diagnostics différentiels majeurs devez-vous évoquer devant une douleur aiguë du genou chez un patient âgé ?",
+        "answer": "Devant une douleur aiguë du genou, il faut éliminer :\n1. Une phlébite (thrombose veineuse profonde de la veine poplitée ou fémorale) : Douleur du mollet, œdème du membre inférieur.\n2. Une tendinite de la patte d'oie : Douleur exquise localisée en dedans du tibia proximal, sans épanchement intra-articulaire.\n3. Une radiculalgie L3-L4 projetée : Douleur à irradiation antérieure du genou d'origine rachidienne.\n4. Une arthrite septique ou microcristalline : Genou rouge, chaud, gonflé avec syndrome inflammatoire.",
+        "tags": ["Arthrose", "Gonarthrose", "Diagnostic différentiel"]
+    },
+    {
+        "id": 3326,
+        "chapter": "ch7",
+        "rang": "A",
+        "question": "Qu'est-ce que la tendinite de la patte d'oie (bursite anserine) et comment la diagnostiquer cliniquement chez la personne âgée ?",
+        "answer": "La tendinite de la patte d'oie est l'inflammation des tendons des muscles sartorius, gracile et semi-tendineux à leur insertion sur la face interne du tibia proximal.\n- Diagnostic clinique : Douleur exquise provoquée à la palpation directe de la face interne du tibia, 2 cm sous l'interligne articulaire fémoro-tibial interne, souvent majorée par la flexion passive ou la flexion contrariée de la jambe, sans épanchement du genou. Elle est fréquente en cas de gonarthrose sur genu varum.",
+        "tags": ["Arthrose", "Gonarthrose", "Patte d'oie"]
+    },
+    {
+        "id": 3327,
+        "chapter": "ch7",
+        "rang": "A",
+        "question": "Quelles déformations nodulaires caractérisent l'arthrose digitale aux mains et quelles articulations touchent-elles ?",
+        "answer": "L'arthrose digitale se caractérise par des déformations nodulaires dures liées à des ostéophytes marginaux :\n1. Les nodules d'Heberden : Situés sur les articulations interphalangiennes distales (IPD, les plus fréquentes, composante génétique forte).\n2. Les nodosités de Bouchard : Situées sur les articulations interphalangiennes proximales (IPP).\n3. La rhizarthrose : Atteinte de l'articulation trapézo-métacarpienne (base du pouce).",
+        "tags": ["Arthrose", "Arthrose digitale", "Sémiologie"]
+    },
+    {
+        "id": 3328,
+        "chapter": "ch7",
+        "rang": "A",
+        "question": "Qu'est-ce que la rhizarthrose : définition, signes physiques et déformations ?",
+        "answer": "La rhizarthrose est l'arthrose de l'articulation trapézo-métacarpienne à la base du pouce. \n- Clinique : Douleur mécanique lors des mouvements de pince (fermer un pot, tourner une clé), limitation douloureuse de l'opposition du pouce.\n- Déformations : Amyotrophie de l'éminence thénar et déformation caractéristique en « Z » ou pouce en tiroir par subluxation de la base du premier métacarpien.",
+        "tags": ["Arthrose", "Rhizarthrose", "Sémiologie"]
+    },
+    {
+        "id": 3329,
+        "chapter": "ch7",
+        "rang": "B",
+        "question": "Quels sont les critères diagnostiques de l'ACR (American College of Rheumatology) pour l'arthrose de la main ?",
+        "answer": "Le diagnostic repose sur la présence d'une douleur ou raideur des mains associée à au moins 3 des 4 critères suivants :\n1. Élargissement tissulaire dur (ostéophytes) sur au moins 2 des 10 articulations cibles (IPD 2e et 3e, IPP 2e et 3e, trapézo-métacarpienne bilatérales).\n2. Élargissement dur sur au moins 2 articulations IPD.\n3. Moins de 3 articulations métacarpo-phalangiennes (MCP) gonflées (différencie de la PR).\n4. Déformation d'au moins 1 des 10 articulations cibles.",
+        "tags": ["Arthrose", "Arthrose digitale", "ACR"]
+    },
+    {
+        "id": 3330,
+        "chapter": "ch7",
+        "rang": "A",
+        "question": "Définissez l'arthrose digitale érosive : présentation, diagnostic radiologique et différentiel.",
+        "answer": "L'arthrose digitale érosive est une forme destructrice sévère caractérisée par des poussées congestives inflammatoires intenses avec douleurs nocturnes.\n- Radiographie : Érosions osseuses sous-chondrales centrales typiques avec amincissement du cartilage, dessinant une image caractéristique en « aile de mouette » ou en « T ».\n- Diagnostic différentiel : Le rhumatisme psoriasique qui cible également les IPD, mais se distingue par la biologie inflammatoire, des lésions cutanées ou unguéales de psoriasis.",
+        "tags": ["Arthrose", "Arthrose digitale érosive", "Clinique"]
+    },
+    {
+        "id": 3331,
+        "chapter": "ch7",
+        "rang": "B",
+        "question": "Pourquoi la confusion est-elle fréquente entre l'arthrose digitale érosive et le rhumatisme psoriasique, et comment trancher ?",
+        "answer": "Les deux pathologies touchent préférentiellement les articulations interphalangiennes distales (IPD), contrairement à la polyarthrite rhumatoïde qui épargne les IPD et cible les MCP et les poignets.\n- Pour trancher : Rechercher des signes cliniques de psoriasis (plaques cutanées aux coudes/genoux/cuir chevelu, atteinte unguéale en dés à coudre). Confirmer l'absence de syndrome inflammatoire biologique marqué et l'absence de facteur rhumatoïde/anti-CCP.",
+        "tags": ["Arthrose", "Rhumatisme psoriasique", "Diagnostic différentiel"]
+    },
+    {
+        "id": 3332,
+        "chapter": "ch7",
+        "rang": "A",
+        "question": "Comment se manifeste un accès aigu de chondrocalcinose (arthropathie microcristalline) au genou chez un patient âgé ?",
+        "answer": "L'accès aigu (pseudogoutte) se caractérise par :\n1. Un début extrêmement brutal (installation en quelques heures).\n2. Une intensité douloureuse majeure empêchant tout appui.\n3. Des signes inflammatoires locaux francs : Genou rouge, chaud, tendu par un épanchement abondant.\n4. Des signes généraux fréquents (fièvre, frissons) mimant une arthrite septique.\n5. Un syndrome inflammatoire biologique marqué (CRP élevée).",
+        "tags": ["Arthrose", "Chondrocalcinose", "Sémiologie"]
+    },
+    {
+        "id": 3333,
+        "chapter": "ch7",
+        "rang": "A",
+        "question": "Quelle est la conduite à tenir immédiate devant un genou aigu chaud, rouge, gonflé chez une personne âgée et pourquoi ?",
+        "answer": "La conduite à tenir immédiate est la ponction articulaire sous conditions d'asepsie rigoureuse avant tout traitement.\n- Buts : \n1. Éliminer une arthrite septique (urgence thérapeutique absolue), par analyse bactériologique (examen direct, culture).\n2. Confirmer une arthropathie microcristalline (recherche de cristaux de pyrophosphate de calcium ou d'urate de sodium).\n3. Soulager immédiatement le patient par l'évacuation de l'épanchement sous tension.",
+        "tags": ["Arthrose", "Ponction articulaire", "Arthrite septique"]
+    },
+    {
+        "id": 3334,
+        "chapter": "ch7",
+        "rang": "A",
+        "question": "Définissez la chondrocalcinose articulaire (CCA) : physiopathologie, terrain et signature radiologique.",
+        "answer": "La CCA est liée au dépôt de cristaux de pyrophosphate de calcium dihydraté dans les tissus articulaires (cartilage, fibrocartilage).\n- Terrain : Personne âgée (la prévalence augmente avec l'âge, favorisée par l'arthrose).\n- Signature radiologique : Présence d'un liseré calcique linéaire opaque dans l'épaisseur du cartilage articulaire (parallèle à l'os sous-chondral) ou calcification des fibrocartilages (ménisques au genou, ligament triangulaire au poignet).",
+        "tags": ["Arthrose", "Chondrocalcinose", "Radiographie"]
+    },
+    {
+        "id": 3335,
+        "chapter": "ch7",
+        "rang": "A",
+        "question": "Définissez la goutte chez le sujet âgé : physiopathologie, terrain, articulations cibles et signature radiologique.",
+        "answer": "La goutte est liée au dépôt de cristaux d'urate de sodium, secondaire à une hyperuricémie chronique.\n- Terrain : Souvent chez l'homme mûr pléthorique ou la femme âgée sous diurétiques.\n- Articulation cible : Métatarso-phalangienne du gros orteil (MTP1, crise de podagre), mais aussi genoux ou chevilles chez le sujet âgé.\n- Signature radiologique (stades tardifs) : Érosions osseuses péri-articulaires à l'emporte-pièce avec collerette d'ostéosclérose (encoches de court-circuit) et présence de tophi goutteux radiotransparents.",
+        "tags": ["Arthrose", "Goutte", "Clinique"]
+    },
+    {
+        "id": 3336,
+        "chapter": "ch7",
+        "rang": "B",
+        "question": "Définissez la maladie à apatite : cristaux impliqués, cible clinique principale et signature radiologique.",
+        "answer": "La maladie à dépôts d'apatite est liée à la précipitation de cristaux de phosphate de calcium (hydroxyapatite).\n- Cible principale : L'épaule (tendinopathie calcifiante de la coiffe des rotateurs chez l'adulte d'âge moyen).\n- Signature radiologique : Présence d'opacités calciques homogènes, arrondies ou ovalaires, localisées dans les parties douces péri-articulaires (au niveau des tendons ou des bourses séreuses), sans atteinte articulaire sous-jacente au début.",
+        "tags": ["Arthrose", "Maladie à apatite", "Radiographie"]
+    },
+    {
+        "id": 3337,
+        "chapter": "ch7",
+        "rang": "A",
+        "question": "Pourquoi les Anti-Inflammatoires Non Stéroïdiens (AINS) par voie orale sont-ils formellement contre-indiqués chez le patient âgé de plus de 75 ans ?",
+        "answer": "Les AINS per os exposent le sujet âgé à une iatrogénie majeure (la « triple menace de la fragilité ») :\n1. Toxicité rénale : Précipitation d'une insuffisance rénale aiguë par blocage des prostaglandines vasodilatatrices rénales, sur une fonction rénale déjà déclinante (réduction néphronique liée à l'âge).\n2. Toxicité digestive : Hémorragies digestives hautes massives, souvent asymptomatiques chez le sujet âgé jusqu'au choc.\n3. Toxicité cardiovasculaire : Rétention hydrosodée provoquant des poussées d'HTA et la décompensation d'une insuffisance cardiaque.",
+        "tags": ["Arthrose", "AINS", "Iatrogénie"]
+    },
+    {
+        "id": 3338,
+        "chapter": "ch7",
+        "rang": "A",
+        "question": "Quelle est la seule exception tolérée pour l'utilisation des AINS chez la personne âgée de plus de 75 ans ?",
+        "answer": "La seule exception tolérée est l'application topique locale d'AINS (gels ou emplâtres) sur des articulations superficielles (comme le genou ou les petites articulations des mains). \nLe passage systémique est extrêmement faible (inférieur à 5-10 % de la voie orale), ce qui limite considérablement le risque de toxicité rénale, digestive ou cardiovasculaire, tout en apportant une efficacité antalgique locale démontrée.",
+        "tags": ["Arthrose", "AINS", "Prise en charge"]
+    },
+    {
+        "id": 3339,
+        "chapter": "ch7",
+        "rang": "A",
+        "question": "Quelles sont les règles de prescription du paracétamol comme traitement antalgique de première intention de l'arthrose chez le sujet âgé ?",
+        "answer": "Le paracétamol reste l'antalgique systémique de première intention :\n- Posologie maximale stricte : 3 g par jour chez le sujet âgé (au lieu de 4 g chez l'adulte jeune).\n- Adaptations : Réduire la posologie à 2 g par jour (voire moins) en cas d'insuffisance hépatocellulaire, d'alcoolisme chronique, de dénutrition sévère ou de faible poids corporel (< 50 kg) pour prévenir tout risque d'hépatotoxicité aiguë.",
+        "tags": ["Arthrose", "Paracétamol", "Prescription"]
+    },
+    {
+        "id": 3340,
+        "chapter": "ch7",
+        "rang": "B",
+        "question": "Qu'est-ce que les Anti-arthrosiques Symptomatiques d'Action Lente (AASAL) et quelle est leur place dans la stratégie thérapeutique ?",
+        "answer": "Les AASAL (chondroïtine sulfate, glucosamine, diacéréine, insaponifiables d'avocat et de soja) sont des traitements per os à visée symptomatique.\n- Caractéristiques : Leur efficacité sur la douleur est modeste et différée (nécessite 4 à 6 semaines de prise). Ils n'ont pas d'effet structural démontré (ne reconstruisent pas le cartilage). Leur intérêt principal est leur excellente tolérance clinique, permettant parfois de réduire la consommation d'antalgiques plus iatrogènes.",
+        "tags": ["Arthrose", "AASAL", "Pharmacologie"]
+    },
+    {
+        "id": 3341,
+        "chapter": "ch7",
+        "rang": "B",
+        "question": "Quelles sont les indications et les limites des infiltrations intra-articulaires de corticoïdes dans l'arthrose ?",
+        "answer": "- Indications : Indiquées lors des poussées congestives d'arthrose (notamment du genou) résistantes aux antalgiques simples, caractérisées par un épanchement intra-articulaire et des douleurs d'horaire inflammatoire.\n- Limites : L'effet antalgique est rapide mais transitoire (quelques semaines à mois). Il ne faut pas dépasser 3 infiltrations par an et par articulation pour éviter une accélération de la chondrolyse ou un risque infectieux.",
+        "tags": ["Arthrose", "Infiltrations", "Corticoïdes"]
+    },
+    {
+        "id": 3342,
+        "chapter": "ch7",
+        "rang": "B",
+        "question": "Qu'est-ce que la viscosupplémentation dans l'arthrose : principe, indications, limites ?",
+        "answer": "- Principe : Injection intra-articulaire d'acide hyaluronique pour restaurer les propriétés viscoélastiques et lubrifiantes du liquide synovial altéré par l'arthrose.\n- Indications : Gonarthrose douloureuse modérée en dehors des poussées congestives, pour améliorer le retentissement fonctionnel.\n- Limites : L'effet thérapeutique est différé (maximum à 1-2 mois) mais prolongé (6 à 12 mois). L'efficacité est limitée dans les stades avancés (destruction cartilagineuse complète grade 4).",
+        "tags": ["Arthrose", "Viscosupplémentation", "Acide hyaluronique"]
+    },
+    {
+        "id": 3343,
+        "chapter": "ch7",
+        "rang": "A",
+        "question": "Quels sont les piliers non pharmacologiques du traitement de l'arthrose des membres inférieurs chez la personne âgée ?",
+        "answer": "Les traitements non pharmacologiques sont le socle de la prise en charge :\n1. Activité physique adaptée (maintien de la marche, vélo d'appartement) pour préserver la mobilité et la trophicité musculaire.\n2. Kinésithérapie active (renforcement du quadriceps pour la gonarthrose, étirements, verrouillage articulaire).\n3. Perte de poids encadrée en cas de surcharge.\n4. Utilisation d'aides techniques : Cannes, semelles orthopédiques amortissantes.",
+        "tags": ["Arthrose", "Prise en charge", "Kinésithérapie"]
+    },
+    {
+        "id": 3344,
+        "chapter": "ch7",
+        "rang": "A",
+        "question": "Quelle est la règle biomécanique pour l'utilisation d'une canne de marche simple en cas d'atteinte unilatérale de hanche ou de genou ?",
+        "answer": "Le patient doit tenir sa canne dans la main du côté opposé à l'articulation douloureuse (canne tenue du côté contralateral). \nCela permet de réduire les contraintes d'appui et la charge biomécanique s'exerçant sur la hanche ou le genou arthrosique lors de la marche, en élargissant la base de sustentation et en respectant le schéma naturel d'oscillation des bras.",
+        "tags": ["Arthrose", "Aides techniques", "Biomécanique"]
+    },
+    {
+        "id": 3345,
+        "chapter": "ch7",
+        "rang": "B",
+        "question": "Comment le gériatre doit-il évaluer l'indication d'une prothèse totale de hanche ou de genou chez un patient polypathologique ?",
+        "answer": "La décision doit être collégiale (gériatre, chirurgien, anesthésiste) :\n1. Évaluer le retentissement (Lequesne >= 10, échec des traitements médicaux bien conduits).\n2. Peser le rapport bénéfice/risque en tenant compte des comorbidités cardiovasculaires, de l'état musculaire (sarcopénie) et cognitif.\n3. Ne pas attendre la grabatisation complète (qui compromet la rééducation postopératoire). Opérer tant que le patient est capable de participer activement à sa rééducation.",
+        "tags": ["Arthrose", "Chirurgie", "Prothèse"]
+    },
+    {
+        "id": 3346,
+        "chapter": "ch7",
+        "rang": "B",
+        "question": "Quel est le rôle de l'Unité de Péri-Opératoire Gériatrique (UPOG) lors d'une chirurgie prothétique de hanche ou de genou chez un sujet âgé ?",
+        "answer": "L'UPOG assure une co-gestion médicale par un gériatre et un chirurgien :\n1. Préparer le patient en optimisant les comorbidités (anémie, équilibre tensionnel, hydratation).\n2. Prévenir activement le syndrome confusionnel postopératoire (gestion de la douleur sans surdosage morphinique, arrêt des molécules anticholinergiques, lever précoce, maintien des repères sensoriels).\n3. Organiser précocement le retour au domicile ou le transfert en SSR.",
+        "tags": ["Arthrose", "UPOG", "Chirurgie"]
+    },
+    {
+        "id": 3347,
+        "chapter": "ch7",
+        "rang": "A",
+        "question": "Comment différencier cliniquement une douleur d'horaire mécanique d'une douleur d'horaire inflammatoire ?",
+        "answer": "1. Douleur mécanique (Arthrose) : Maximale en fin de journée ou après effort, soulagée par le repos, pas de réveil nocturne (sauf changement de position), dérouillage matinal court (< 15 minutes).\n2. Douleur inflammatoire (Arthrite/Poussée congestive) : Maximale le matin ou en deuxième partie de nuit (réveils nocturnes spontanés), non soulagée par le repos, dérouillage matinal prolongé (> 30 minutes) s'améliorant progressivement à l'activité.",
+        "tags": ["Arthrose", "Sémiologie", "Diagnostic différentiel"]
+    },
+    {
+        "id": 3348,
+        "chapter": "ch7",
+        "rang": "B",
+        "question": "Quelle est la définition radiologique d'une gonarthrose grade 4 selon Kellgren-Lawrence ?",
+        "answer": "La gonarthrose de grade 4 se caractérise par :\n- Un pincement complet ou quasi-complet de l'interligne articulaire fémoro-tibial (les surfaces osseuses sont en contact direct, traduisant la disparition du cartilage).\n- Une ostéosclérose sous-chondrale majeure (os très blanc sous l'interligne).\n- Des ostéophytes géants marginaux.\n- Des déformations articulaires marquées avec déviation d'axe visible.",
+        "tags": ["Arthrose", "Gonarthrose", "Radiographie"]
+    },
+    {
+        "id": 3349,
+        "chapter": "ch7",
+        "rang": "B",
+        "question": "Comment les débris de cartilage dégradé entretiennent-ils l'arthrose à un stade avancé ?",
+        "answer": "Les débris de cartilage dégradé (protéoglycanes et collagène altérés) sont libérés dans la cavité articulaire. Ils sont phagocytés par les cellules de la membrane synoviale, ce qui déclenche une réaction inflammatoire locale (synovite secondaire) avec libération de cytokines pro-inflammatoires (IL-1, TNF-alpha) et d'enzymes protéolytiques qui vont à leur tour détruire le cartilage restant, créant un cercle vicieux.",
+        "tags": ["Arthrose", "Physiopathologie", "Cartilage"]
+    },
+    {
+        "id": 3350,
+        "chapter": "ch7",
+        "rang": "B",
+        "question": "Pourquoi le renforcement du muscle quadriceps est-il une priorité dans la rééducation de la gonarthrose ?",
+        "answer": "Le muscle quadriceps est le principal stabilisateur dynamique du genou. En cas de gonarthrose, l'amyotrophie du quadriceps est fréquente en raison de l'inactivité douloureuse.\n- Intérêt du renforcement : Il stabilise activement la rotule et l'articulation fémoro-tibiale, amortit les forces de charge lors de la marche, réduit les contraintes de pression fémoro-patellaire, diminue la douleur et améliore la marche.",
+        "tags": ["Arthrose", "Gonarthrose", "Kinésithérapie"]
+    }
+]
+
+# --- CHAPTER 8: Douleur (3351 - 3400) ---
+ch8_cards = [
+    {
+        "id": 3351,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Quelle est la définition officielle de la douleur selon l'IASP (1979) et quelles sont ses 4 composantes majeures ?",
+        "answer": "La douleur est une « expérience sensorielle et émotionnelle désagréable associée à une lésion tissulaire réelle ou potentielle ou décrite en des termes évoquant une telle lésion ».\n- Ses 4 composantes sont :\n1. Sensori-discriminative (intensité, durée, localisation).\n2. Affectivo-émotionnelle (tonalité désagréable, anxiété, dépression).\n3. Comportementale (vocalisations, grimaces, repli, agressivité).\n4. Cognitive (interprétation, mémorisation, signification donnée à la douleur).",
+        "tags": ["Douleur", "IASP", "Définition"]
+    },
+    {
+        "id": 3352,
+        "chapter": "ch8",
+        "rang": "B",
+        "question": "Quelle est la prévalence de la douleur chronique chez les personnes âgées de plus de 75 ans en France ?",
+        "answer": "La douleur chronique est extrêmement fréquente chez le sujet âgé :\n- 52 % des patients de plus de 75 ans souffrent d'une douleur chronique.\n- Elle est particulièrement sous-évaluée et insuffisamment traitée, notamment chez les patients vivant en institution (EHPAD) ou atteints de troubles cognitifs majeurs.",
+        "tags": ["Douleur", "Épidémiologie", "Personne âgée"]
+    },
+    {
+        "id": 3353,
+        "chapter": "ch8",
+        "rang": "B",
+        "question": "Expliquez les modifications physiologiques de la nociception avec l'âge ( paradoxe de la douleur).",
+        "answer": "Le vieillissement modifie la sensibilité douloureuse de deux façons opposées :\n1. Augmentation du seuil de détection : Liée à la démyélinisation des fibres périphériques et à la baisse des neurotransmetteurs nociceptifs. La douleur met plus de temps à être perçue.\n2. Diminution du seuil de tolérance : Liée à la diminution des récepteurs morphiniques cérébraux et à la baisse de sérotonine/noradrénaline dans les voies inhibitrices descendantes. Une fois perçue, la douleur est moins bien tolérée (sensibilisation).",
+        "tags": ["Douleur", "Physiologie", "Vieillissement"]
+    },
+    {
+        "id": 3354,
+        "chapter": "ch8",
+        "rang": "B",
+        "question": "Quelles sont les particularités de la douleur chez le patient atteint de troubles neurocognitifs majeurs (démence) ?",
+        "answer": "- Le processus de traitement de la douleur (seuils biologiques) est identique à celui du sujet sain.\n- Cependant, la tolérance apparente au seuil douloureux est corrélée au score MMSE (le patient communique moins verbalement et oublie la cause de la douleur).\n- La douleur s'exprime alors majoritairement par des réactions comportementales atypiques (agitation, agressivité, refus de soins), souvent exacerbées par la perte du processus d'anticipation.",
+        "tags": ["Douleur", "Troubles neurocognitifs", "Sémiologie"]
+    },
+    {
+        "id": 3355,
+        "chapter": "ch8",
+        "rang": "B",
+        "question": "Qu'est-ce que le concept de « dépression masquée » et comment peut-elle se présenter sur le plan douloureux chez le sujet âgé ?",
+        "answer": "La dépression masquée est une forme clinique fréquente chez le sujet âgé où la souffrance psychique s'exprime exclusivement à travers des plaintes somatiques douloureuses.\n- Présentation : Douleurs diffuses, de type variable (brûlures, tiraillements), de localisation fluctuante et d'horaire aléatoire. Les antalgiques usuels sont inefficaces. La douleur s'améliore significativement sous traitement antidépresseur adapté (ISRS/IRSNA) associé à une prise en charge psychothérapeutique.",
+        "tags": ["Douleur", "Dépression masquée", "Psychogène"]
+    },
+    {
+        "id": 3356,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Quels sont les 6 comportements douloureux spécifiques à rechercher chez une personne âgée non communicante ?",
+        "answer": "Les 6 comportements spécifiques (évalués dans les échelles comportementales) sont :\n1. Expressions faciales (grimaces, froncements de sourcils, crispation du visage).\n2. Vocalisations (gémissements, soupirs, cris, plaintes verbales).\n3. Mouvements corporels (protection d'une zone, rigidité, refus de mobilisation, déambulation incessante).\n4. Changements des relations sociales (agressivité, refus de soins, retrait social).\n5. Changements des activités quotidiennes (refus alimentaire, insomnie).\n6. Modifications de l'état psychique (irritabilité, confusion aiguë, pleurs).",
+        "tags": ["Douleur", "Hétéro-évaluation", "Sémiologie"]
+    },
+    {
+        "id": 3357,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Décrivez l'algorithme décisionnel de l'EGS pour l'évaluation de la douleur chez le sujet âgé.",
+        "answer": "L'évaluation doit être systématique :\n1. Tenter en première intention une auto-évaluation (EVS de préférence), quel que soit le niveau cognitif.\n2. En cas d'échec ou de mauvaise fiabilité (troubles cognitifs sévères, aphasie), utiliser une échelle d'hétéro-évaluation comportementale brève (Algoplus).\n3. En cas de doute persistant ou d'impossibilité d'évaluer, réaliser un test thérapeutique antalgique (test antalgique empirique).\n4. Réévaluer régulièrement l'efficacité et la tolérance.",
+        "tags": ["Douleur", "EGS", "Algorithme"]
+    },
+    {
+        "id": 3358,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Pourquoi l'Échelle Verbale Simple (EVS) est-elle préférée à l'Échelle Visuelle Analogique (EVA) en gériatrie pour l'auto-évaluation ?",
+        "answer": "L'EVS (gradée en : Pas de douleur, Faible, Modérée, Intense, Extrêmement intense) est l'échelle de référence chez la personne âgée car elle est simple, concrète et ne nécessite pas de capacité d'abstraction spatio-visuelle (contrairement à la réglette de l'EVA qui présente un fort taux d'échec ou de mauvaise compréhension chez les patients âgés fatigués ou présentant un TNC léger).",
+        "tags": ["Douleur", "EVS", "Auto-évaluation"]
+    },
+    {
+        "id": 3359,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Quel score à l'EVS ou à l'Échelle Numérique (EN) justifie l'introduction d'un traitement antalgique ?",
+        "answer": "L'introduction immédiate d'un traitement antalgique est cliniquement justifiée dès lors que le niveau de douleur auto-évalué atteint :\n- Un score supérieur ou égal à 2 sur l'Échelle Verbale Simple (EVS, douleur modérée, intense ou extrêmement intense).\n- OU un score supérieur ou égal à 3 sur l'Échelle Numérique (EN, cotée de 0 à 10).",
+        "tags": ["Douleur", "Auto-évaluation", "Seuil thérapeutique"]
+    },
+    {
+        "id": 3360,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Définissez l'échelle Algoplus : indication, durée de passation et conditions de validation.",
+        "answer": "Algoplus est une échelle comportementale d'hétéro-évaluation de la douleur aiguë chez la personne âgée présentant des troubles de la communication verbale (démence, confusion, aphasie).\n- Caractéristiques : Elle évalue 5 items comportementaux cotés 0 (non) ou 1 (oui). Sa passation est extrêmement rapide (moins de 1 minute) et elle a été validée en gériatrie y compris chez les patients atteints de troubles neurocognitifs majeurs ou de dépression.",
+        "tags": ["Douleur", "Algoplus", "Hétéro-évaluation"]
+    },
+    {
+        "id": 3361,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Quels sont les 5 items comportementaux évalués par l'échelle Algoplus ?",
+        "answer": "Les 5 items d'Algoplus (recherchant un changement par rapport à l'état habituel) sont :\n1. Le visage (froncement des sourcils, grimaces, crispation, visage figé).\n2. Le regard (regard fixe, lointain, inattentif, yeux fermés, pleurs).\n3. Les plaintes (cris, gémissements, soupirs, plaintes verbales comme « aïe », « ouille »).\n4. Le corps (retrait ou protection d'une zone, refus de mobilisation, attitude figée).\n5. Les comportements (agitation ou agressivité, agrippement des soignants).",
+        "tags": ["Douleur", "Algoplus", "Sémiologie"]
+    },
+    {
+        "id": 3362,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Quel est le score seuil thérapeutique validé sur l'échelle Algoplus pour instaurer un traitement antalgique ?",
+        "answer": "Un score d'Algoplus supérieur ou égal à 2 / 5 (présence d'au moins deux items comportementaux) justifie cliniquement et de manière immédiate l'instauration d'un traitement antalgique adapté chez le patient âgé non communicant.",
+        "tags": ["Douleur", "Algoplus", "Seuil thérapeutique"]
+    },
+    {
+        "id": 3363,
+        "chapter": "ch8",
+        "rang": "B",
+        "question": "Définissez l'échelle Doloplus : indication et différences par rapport à l'échelle Algoplus.",
+        "answer": "L'échelle Doloplus est une échelle d'hétéro-évaluation comportementale de la douleur en gériatrie.\n- Différences avec Algoplus : Doloplus est spécifiquement validée pour l'évaluation de la douleur chronique persistante. Elle comprend 10 items (évaluant la réaction somatique, psychique et le comportement au quotidien). Sa passation est plus longue (5 à 10 minutes) et nécessite une bonne connaissance du patient par l'équipe soignante.",
+        "tags": ["Douleur", "Doloplus", "Hétéro-évaluation"]
+    },
+    {
+        "id": 3364,
+        "chapter": "ch8",
+        "rang": "B",
+        "question": "Définissez l'Échelle d'Évaluation de la Douleur chez la Personne Âgée (ECPA) et sa place en pratique clinique.",
+        "answer": "L'ECPA est une échelle comportementale d'hétéro-évaluation de la douleur chez le sujet âgé dément.\n- Structure : Elle comporte 8 items divisés en deux dimensions : l'observation du patient en dehors des soins (attitude spontanée) et l'observation pendant les soins (toilette, mobilisation). Elle est particulièrement adaptée au suivi de la douleur lors des soins en EHPAD.",
+        "tags": ["Douleur", "ECPA", "Hétéro-évaluation"]
+    },
+    {
+        "id": 3365,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Définissez la douleur neuropathique et ses principales manifestations cliniques.",
+        "answer": "La douleur neuropathique est consécutive à une lésion ou une maladie affectant le système somatosensoriel (périphérique ou central).\n- Manifestations cliniques : Sensations de brûlure, de froid douloureux, de décharges électriques (lancement), associées à des paresthésies locales (fourmillements, picotements, engourdissements, démangeaisons). À l'examen, on objective une hypoesthésie au tact ou à la piqûre, et une allodynie (douleur provoquée par le frottement léger).",
+        "tags": ["Douleur", "Douleur neuropathique", "Clinique"]
+    },
+    {
+        "id": 3366,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Qu'est-ce que le questionnaire DN4 : structure et score seuil de diagnostic positif ?",
+        "answer": "Le DN4 (Douleur Neuropathique 4) est un outil de dépistage clinique rapide de la douleur neuropathique.\n- Structure : Il comporte 4 questions divisées en 10 items (7 items à l'interrogatoire sur les symptômes, 3 items à l'examen physique pour l'hypo-esthésie et l'allodynie). Chaque réponse « oui » vaut 1 point.\n- Score seuil : Un score supérieur ou égal à 4 / 10 confirme une forte probabilité de douleur neuropathique.",
+        "tags": ["Douleur", "DN4", "Diagnostic"]
+    },
+    {
+        "id": 3367,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Définissez la douleur par excès de nociception et citez ses principales étiologies gériatriques.",
+        "answer": "La douleur nociceptive résulte de l'activation des nocicepteurs périphériques en réponse à une lésion tissulaire ou à une inflammation, avec des voies nerveuses intactes.\n- Étiologies gériatriques : \n1. Arthrose (coxarthrose, gonarthrose, arthrose vertébrale).\n2. Fractures de fragilité (col du fémur, vertèbres).\n3. Ulcères de jambe et escarres cutanées.\n4. Douleurs viscérales (globe vésical, fécalome).",
+        "tags": ["Douleur", "Nociception", "Étiologie"]
+    },
+    {
+        "id": 3368,
+        "chapter": "ch8",
+        "rang": "B",
+        "question": "Définissez la douleur nociplastique et citez deux exemples cliniques.",
+        "answer": "La douleur nociplastique est une douleur qui provient d'une altération de la nociception (sensibilisation centrale ou défaut d'inhibition), en l'absence de preuve claire de lésion tissulaire ou de maladie du système somatosensoriel.\n- Exemples cliniques : La fibromyalgie et le syndrome de l'intestin irritable (SII). Ces douleurs nécessitent des explications claires au patient et répondent mal aux antalgiques classiques.",
+        "tags": ["Douleur", "Douleur nociplastique", "Physiopathologie"]
+    },
+    {
+        "id": 3369,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Quelles urgences vitales peuvent se présenter sous forme de douleurs atypiques ou aspécifiques chez le sujet âgé ?",
+        "answer": "Des pathologies aiguës sévères peuvent se manifester sans douleur typique :\n1. L'infarctus du myocarde (silencieux ou se manifestant uniquement par une dyspnée aiguë ou une confusion, pas de douleur thoracique dans 30 % des cas).\n2. L'ischémie mésentérique (douleur abdominale diffuse intense contrastant avec un examen physique pauvre).\n3. L'embolie pulmonaire (dyspnée ou tachycardie isolée).\n4. Le globe vésical ou fécalome (se manifestant par une agitation extrême ou confusion).",
+        "tags": ["Douleur", "Urgence", "Atypie clinique"]
+    },
+    {
+        "id": 3370,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Comment une douleur aiguë non traitée peut-elle déclencher une cascade de décompensation gériatrique ?",
+        "answer": "La douleur aiguë non traitée agit comme un facteur précipitant (facteur 3 du modèle de Bouchon) :\n- Elle génère de l'agitation ou un syndrome confusionnel aigu.\n- Elle force l'immobilisation au lit, provoquant un syndrome d'immobilisation rapide (escarres, constipation, déshydratation, thrombose veineuse, amyotrophie).\n- Elle altère la prise alimentaire (dénutrition).\nTraiter la douleur en urgence est indispensable pour enrayer ce cercle vicieux.",
+        "tags": ["Douleur", "Modèle de Bouchon", "Iatrogénie"]
+    },
+    {
+        "id": 3371,
+        "chapter": "ch8",
+        "rang": "B",
+        "question": "Comment adapter les trois paliers antalgiques de l'OMS chez le patient âgé de plus de 75 ans ?",
+        "answer": "La stratégie doit être prudente :\n- Palier 1 : Paracétamol à privilégier (respecter la dose max).\n- Palier 2 : Opioïdes faibles (tramadol, codéine) à éviter si possible car leur profil de tolérance est médiocre chez le sujet âgé (fort risque de confusion, constipation, nausées).\n- Palier 3 : Opioïdes forts (morphine) à privilégier pour les douleurs sévères d'emblée, en réalisant une titration prudente et en prévenant systématiquement les effets secondaires.",
+        "tags": ["Douleur", "Paliers OMS", "Prescription"]
+    },
+    {
+        "id": 3372,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Quelles sont les limites de posologie du paracétamol chez le sujet âgé dénutri ou de faible poids ?",
+        "answer": "La dose standard est de 3 g par jour. \n- Limites strictes : La posologie maximale doit être réduite à 2 g par jour (500 mg toutes les 6 heures) en cas de poids corporel inférieur à 50 kg, de dénutrition sévère (albumine < 30 g/l), de déshydratation ou d'insuffisance hépatocellulaire, afin de prévenir une toxicité hépatique par déplétion des stocks de glutathion.",
+        "tags": ["Douleur", "Paracétamol", "Iatrogénie"]
+    },
+    {
+        "id": 3373,
+        "chapter": "ch8",
+        "rang": "B",
+        "question": "Quelles molécules constituent le palier 2 antalgique de l'OMS et quels sont leurs principaux risques chez la personne âgée ?",
+        "answer": "Les opioïdes faibles comprennent : Le tramadol, la codéine, la dihydrocodéine et la poudre d'opium. \n- Risques gériatriques : Risque élevé de syndrome confusionnel aigu (surtout chez le patient atteint de TNC), de constipation sévère, d'hypotension orthostatique (chute), de rétention urinaire et de nausées. Ils nécessitent une titration extrêmement lente si prescrits.",
+        "tags": ["Douleur", "Palier 2", "Iatrogénie"]
+    },
+    {
+        "id": 3374,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Quel est le double mécanisme d'action du tramadol ?",
+        "answer": "Le tramadol est un antalgique atypique possédant un double mécanisme :\n1. Un effet opioïde : Faible agoniste des récepteurs morphiniques mu (µ).\n2. Un effet monoaminergique : Inhibiteur de la recapture de la sérotonine (5-HT) et de la noradrénaline au niveau des voies descendantes inhibitrices de la douleur.\nCela lui confère une efficacité sur les douleurs nociceptives et neuropathiques, mais complique sa tolérance.",
+        "tags": ["Douleur", "Tramadol", "Pharmacologie"]
+    },
+    {
+        "id": 3375,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Quelle interaction médicamenteuse contre-indique formellement le tramadol chez la personne âgée et quel est le risque ?",
+        "answer": "Le tramadol est formellement contre-indiqué en association avec les antidépresseurs inhibiteurs sélectifs de la recapture de la sérotonine (ISRS, comme le citalopram ou la sertraline) ou mixtes (IRSNA, comme la duloxetine).\n- Risque : Accumulation de sérotonine provoquant un syndrome sérotoninergique potentiellement mortel (manifesté par une confusion, des myoclonies, une hyperthermie, une dysautonomie et des tremblements).",
+        "tags": ["Douleur", "Tramadol", "Syndrome sérotoninergique"]
+    },
+    {
+        "id": 3376,
+        "chapter": "ch8",
+        "rang": "B",
+        "question": "Quelle est la règle de titration recommandée en cas de prescription de tramadol chez le patient âgé ?",
+        "answer": "Pour éviter les effets secondaires neurologiques et digestifs du tramadol, il est recommandé d'utiliser sa forme pédiatrique buvable (gouttes) pour réaliser une titration fine :\n- Débuter à de très faibles doses : 10 à 15 mg (soit 4 à 6 gouttes) matin et soir.\n- Augmenter très progressivement par paliers sur plusieurs jours selon l'efficacité et la tolérance jusqu'à la dose efficace, en évitant les comprimés de 50 mg d'emblée.",
+        "tags": ["Douleur", "Tramadol", "Titration"]
+    },
+    {
+        "id": 3377,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Citez les principaux opioïdes forts (palier 3) et expliquez la règle d'initiation gériatrique.",
+        "answer": "Les principaux opioïdes forts sont : La morphine, l'oxycodone et le fentanyl.\n- Règle d'initiation : « Start slow, go slow » (commencer par de faibles doses et augmenter lentement). Chez le sujet âgé naïf d'opioïdes, débuter par des formes à libération immédiate (ex: morphine orale à 2,5 ou 5 mg toutes les 4 ou 6 heures, ou titration intraveineuse en aigu) avant d'envisager une forme à libération prolongée.",
+        "tags": ["Douleur", "Palier 3", "Opioïdes"]
+    },
+    {
+        "id": 3378,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Décrivez le protocole de titration de la morphine par voie intraveineuse (IV) dans une douleur aiguë sévère (ex : fracture du col du fémur).",
+        "answer": "La titration IV permet d'obtenir rapidement l'antalgie avant la mobilisation ou l'examen :\n1. Poser une voie veineuse périphérique.\n2. Administrer un bolus de 1 mg de morphine par voie IV.\n3. Répéter l'injection de 1 mg toutes les 3 à 5 minutes (intervalle d'évaluation).\n4. Arrêter dès l'obtention d'une analgésie satisfaisante (EVS < 2) ou en cas d'apparition de somnolence (sommeil léger) ou de bradypnée.\n5. Assurer une surveillance continue de la saturation, de la fréquence respiratoire et de la conscience.",
+        "tags": ["Douleur", "Morphine", "Titration IV"]
+    },
+    {
+        "id": 3379,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Pourquoi la co-prescription de laxatifs est-elle obligatoire et systématique avec les morphiniques ?",
+        "answer": "La constipation est un effet secondaire constant, immédiat et persistant (il n'y a pas d'accoutumance ou de tolérance à cet effet au cours du temps). Elle expose le patient au risque de fécalome, d'occlusion ou de confusion.\n- Prise en charge : Co-prescrire systématiquement dès le premier jour d'opioïde un traitement laxatif associant de préférence deux mécanismes (un laxatif osmotique comme le macrogol et un laxatif stimulant comme le séné ou le picosulfate).",
+        "tags": ["Douleur", "Morphine", "Constipation"]
+    },
+    {
+        "id": 3380,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Quel est le risque urinaire des morphiniques chez le patient âgé et comment le surveiller ?",
+        "answer": "Les morphiniques diminuent le tonus du muscle détrusor de la vessie et augmentent le tonus du sphincter urétral, favorisant la rétention aiguë d'urines (globe vésical).\n- Surveillance : Palper régulièrement l'hypogastre à la recherche d'une matité ou d'une voussure douloureuse (globe), surveiller la diurèse et se méfier des mictions par engorgement (fausse incontinence). Le risque est accru en cas d'adénome prostatique préexistant.",
+        "tags": ["Douleur", "Morphine", "Rétention urinaire"]
+    },
+    {
+        "id": 3381,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Comment prévenir et gérer les nausées/vomissements en début de traitement par morphine ?",
+        "answer": "Les nausées et vomissements sont fréquents au début du traitement par morphine (liés à la stimulation de la trigger zone chimioréceptrice bulbaire) et s'estompent généralement en 3 à 5 jours par accoutumance.\n- Gestion : Prescrire de manière préventive ou dès l'apparition des symptômes un traitement antiémétique de courte durée (2 à 3 jours) par métoclopramide ou dompéridone. Éviter les neuroleptiques anticholinergiques.",
+        "tags": ["Douleur", "Morphine", "Nausées"]
+    },
+    {
+        "id": 3382,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Quelle conduite tenir en cas d'apparition de hallucinations ou d'un syndrome confusionnel aigu sous traitement par morphine ?",
+        "answer": "L'apparition de confusion, de délire ou d'hallucinations sous morphine traduit une mauvaise tolérance cérébrale ou un surdosage par accumulation de métabolites actifs.\n- Conduite à tenir : \n1. Vérifier l'absence de cause organique surajoutée (globe, fécalome, infection).\n2. Diminuer la posologie de la morphine de 25 à 50 % si l'antalgie le permet.\n3. Réaliser une rotation d'opioïde (passer à l'oxycodone ou au fentanyl) en cas d'échec.",
+        "tags": ["Douleur", "Morphine", "Confusion"]
+    },
+    {
+        "id": 3383,
+        "chapter": "ch8",
+        "rang": "B",
+        "question": "Pourquoi le prurit est-il fréquent sous morphiniques et comment le gérer chez le sujet âgé ?",
+        "answer": "Le prurit sous morphiniques est causé par une libération d'histamine par les mastocytes (effet histamino-libérateur direct de la morphine) et par des mécanismes centraux récepteurs-dépendants.\n- Gestion : Il ne s'agit pas d'une allergie vraie. Si le prurit est gênant, la conduite à tenir repose sur une rotation d'opioïdes (remplacer la morphine par le fentanyl ou l'oxycodone, qui sont moins histamino-libérateurs) ou l'utilisation prudente d'antihistaminiques non sédatifs.",
+        "tags": ["Douleur", "Morphine", "Prurit"]
+    },
+    {
+        "id": 3384,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Quels sont les signes cliniques majeurs d'un surdosage en morphine chez la personne âgée ?",
+        "answer": "Le surdosage en morphine (ou intoxication morphinique) associe typiquement :\n1. Des troubles de la vigilance majeurs : Somnolence excessive, coma calme.\n2. Une dépression respiratoire : Fréquence respiratoire inférieure à 10 cycles par minute ou apnées.\n3. Un miosis serré bilatéral (pupilles en têtes d'épingles), symétrique et réactif.\nDans les cas graves, s'associent cyanose, hypotension et hypothermie.",
+        "tags": ["Douleur", "Morphine", "Surdosage"]
+    },
+    {
+        "id": 3385,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Quel est l'antidote de la morphine et comment l'administrer chez le sujet âgé surdosé ?",
+        "answer": "L'antidote est la naloxone (antagoniste pur des récepteurs morphiniques).\n- Administration : En cas de dépression respiratoire sévère, diluer 1 ampoule de 0,4 mg de naloxone dans 10 ml de sérum physiologique. Injecter par voie IV lente par bolus de 1 à 2 ml (soit 0,04 à 0,08 mg) toutes les 2 minutes jusqu'à la reprise d'une fréquence respiratoire > 12/min et le réveil du patient, sans réverser complètement l'effet antalgique (risque de crise hyperalgique).",
+        "tags": ["Douleur", "Morphine", "Naloxone"]
+    },
+    {
+        "id": 3386,
+        "chapter": "ch8",
+        "rang": "B",
+        "question": "Qu'est-ce que la rotation d'opioïdes : définition et utilité clinique ?",
+        "answer": "La rotation d'opioïdes consiste à remplacer l'opioïde fort en cours d'utilisation par un autre opioïde fort (ex: remplacer la morphine orale par de l'oxycodone ou du fentanyl transdermique) en utilisant des tables d'équianalgésie et en appliquant un coefficient de réduction de dose de sécurité (25 à 30 %).\n- Utilité : Elle permet d'améliorer le contrôle de la douleur ou de réduire des effets secondaires intolérables (myoclonies, hallucinations, prurit) liés à l'accumulation de métabolites.",
+        "tags": ["Douleur", "Opioïdes", "Rotation d'opioïdes"]
+    },
+    {
+        "id": 3387,
+        "chapter": "ch8",
+        "rang": "B",
+        "question": "Quelles thérapies non pharmacologiques de la douleur peuvent être intégrées en gériatrie ?",
+        "answer": "En complément des médicaments, les approches non pharmacologiques comprennent :\n- La stimulation électrique transcutanée (TENS) : Efficace sur les douleurs neuropathiques localisées ou lombaires.\n- Des techniques psychocorporelles : Sophrologie, hypnose clinique (très utile lors des soins douloureux comme les pansements d'escarres), musicothérapie et relaxation.\n- Des approches physiques : Balnéothérapie, massages doux de confort.",
+        "tags": ["Douleur", "Non pharmacologique", "Prise en charge"]
+    },
+    {
+        "id": 3388,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Quels sont les traitements médicamenteux de première intention recommandés pour les douleurs neuropathiques du sujet âgé ?",
+        "answer": "La prise en charge repose sur :\n1. Les gabapentinoids : Gabapentine (débuter à 100 mg/j) ou prégabaline (débuter à 25 ou 50 mg/j), augmentés très progressivement selon la fonction rénale.\n2. Les antidépresseurs inhibiteurs de la recapture de la sérotonine et de la noradrénaline (IRSNA) : Duloxétine (30 à 60 mg/j).\n3. Les traitements locaux topiques : Emplâtres de lidocaïne à 5 % (douleurs neuropathiques localisées post-zona).",
+        "tags": ["Douleur", "Douleur neuropathique", "Pharmacologie"]
+    },
+    {
+        "id": 3389,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Pourquoi les antidépresseurs tricycliques (imipraminiques comme l'amitriptyline) doivent-ils être évités chez le sujet âgé pour le traitement des douleurs neuropathiques ?",
+        "answer": "Les antidépresseurs tricycliques possèdent des propriétés anticholinergiques puissantes.\n- Risques : Ils exposent le sujet âgé à une iatrogénie sévère : Syndrome confusionnel aigu, sécheresse buccale intense, constipation opiniâtre, rétention aiguë d'urines (surtout si HBP), troubles de la conduction cardiaque et hypotension orthostatique (facteur de chute).\nIls sont à proscrire au profit des gabapentinoides ou de la duloxétine.",
+        "tags": ["Douleur", "Tricycliques", "Anticholinergique"]
+    },
+    {
+        "id": 3390,
+        "chapter": "ch8",
+        "rang": "B",
+        "question": "Quel est le délai de réévaluation de l'efficacité et de la tolérance d'un traitement antalgique en gériatrie selon sa voie d'administration ?",
+        "answer": "La réévaluation doit être systématique :\n- Voie intraveineuse (IV) : Toutes les 3 à 5 minutes lors d'une titration morphinique, puis à 15-30 minutes.\n- Voie sous-cutanée (SC) : À 30 minutes après l'injection.\n- Voie orale (libération immédiate) : À 1 heure à 1 heure 30 après la prise.\n- Voie transdermique (patch fentanyl) : À 24 heures de la pose (délai d'obtention du plateau plasmatique).",
+        "tags": ["Douleur", "Suivi", "Réévaluation"]
+    },
+    {
+        "id": 3391,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Quels sont les signes cliniques évocateurs d'un globe vésical (rétention aiguë d'urines) chez un patient âgé atteint de démence sévère ?",
+        "answer": "Chez le patient non communicant, le globe vésical se manifeste souvent par :\n1. Une agitation psychomotrice soudaine ou une agressivité inhabituelle.\n2. Un syndrome confusionnel aigu d'apparition rapide.\n3. Des signes physiques : Voussure hypogastrique mate à la percussion et douloureuse à la palpation douce, tachycardie, sueurs.\nLe diagnostic est confirmé par échographie vésicale (bladderscan) et nécessite un sondage urinaire en urgence.",
+        "tags": ["Douleur", "Globe vésical", "Atypie clinique"]
+    },
+    {
+        "id": 3392,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Quels sont les signes cliniques évocateurs d'un fécalome chez une personne âgée grabataire ou confuse ?",
+        "answer": "Le fécalome (accumulation de selles dures dans le rectum) se manifeste par :\n1. Une agitation, une irritabilité ou un délire (syndrome confusionnel).\n2. Des douleurs abdominales diffuses d'allure colique.\n3. Une fausse diarrhée (diarrhée de constipation par irritation colique autour du bouchon de selles).\nLe diagnostic est posé par le toucher rectal systématique et le traitement repose sur des lavements locaux et l'extraction manuelle sous couverture antalgique.",
+        "tags": ["Douleur", "Fécalome", "Toucher rectal"]
+    },
+    {
+        "id": 3393,
+        "chapter": "ch8",
+        "rang": "B",
+        "question": "Expliquez la théorie du portillon (Gate Control) dans la physiologie de la douleur.",
+        "answer": "Le Gate Control postule que la transmission des messages nociceptifs (véhiculés par les fibres fines A-delta et C) au niveau de la corne postérieure de la moelle épinière peut être bloquée par l'activation simultanée des fibres nerveuses tactiles de gros calibre (fibres A-beta).\n- Application : Stimuler le tact (par frottement, massage ou stimulation électrique TENS) ferme le « portillon », empêchant le message douloureux de monter vers le cerveau.",
+        "tags": ["Douleur", "Gate Control", "Physiologie"]
+    },
+    {
+        "id": 3394,
+        "chapter": "ch8",
+        "rang": "B",
+        "question": "Quels neurotransmetteurs majeurs interviennent dans les voies descendantes inhibitrices de la douleur et quelle est leur évolution avec l'âge ?",
+        "answer": "Les voies descendantes inhibitrices (qui partent du tronc cérébral et bloquent le message nociceptif dans la moelle) font intervenir la sérotonine et la noradrénaline, ainsi que les endorphines.\n- Vieillissement : On observe avec l'âge une baisse significative de la concentration en sérotonine et en noradrénaline dans ces voies, ce qui réduit leur efficacité inhibitrice et entraîne une sensibilisation centrale face aux stimuli douloureux persistants.",
+        "tags": ["Douleur", "Physiologie", "Vieillissement"]
+    },
+    {
+        "id": 3395,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Définissez l'allodynie et citez un exemple clinique typique.",
+        "answer": "L'allodynie est une douleur provoquée par un stimulus qui est normalement non douloureux (ex: un frottement léger, le contact du drap sur la peau, une caresse).\n- Exemple clinique : L'allodynie mécanique dynamique lors d'une névralgie post-herpétique (zona) ou d'une neuropathie diabétique périphérique. C'est une signature clinique majeure de douleur neuropathique, témoignant d'une sensibilisation centrale.",
+        "tags": ["Douleur", "Allodynie", "Douleur neuropathique"]
+    },
+    {
+        "id": 3396,
+        "chapter": "ch8",
+        "rang": "B",
+        "question": "Définissez l'hyperalgesie et distinguez-la de l'allodynie.",
+        "answer": "1. L'hyperalgesie correspond à une réponse douloureuse exagérée (intensité disproportionnée) face à un stimulus qui est normalement douloureux (ex: une piqûre d'aiguille perçue comme une douleur atroce).\n2. L'allodynie correspond à une douleur déclenchée par un stimulus normalement indolore (comme le simple toucher de la peau). Les deux traduisent un dysfonctionnement du système de traitement de la douleur.",
+        "tags": ["Douleur", "Hyperalgesie", "Sémiologie"]
+    },
+    {
+        "id": 3397,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Dans quelles conditions un « test antalgique » est-il indiqué en gériatrie ?",
+        "answer": "Un test antalgique (essai thérapeutique d'antalgiques, par exemple du paracétamol systématique ou une faible dose de morphine) est indiqué chez un patient non communicant (dément sévère ou confus) présentant une modification comportementale inexpliquée (agitation, refus de soins, repli) lorsque le bilan étiologique est négatif mais que la douleur reste suspectée cliniquement. Le succès du test confirme a posteriori l'existence de la douleur.",
+        "tags": ["Douleur", "Test antalgique", "Hétéro-évaluation"]
+    },
+    {
+        "id": 3398,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Dans la mise en situation clinique aux urgences d'une patiente de 91 ans atteinte d'Alzheimer, agitée après une chute avec un score Algoplus de 4/5, quelle est la prise en charge immédiate ?",
+        "answer": "La patiente présente une douleur sévère (Algoplus >= 2/5) intriquée à un syndrome confusionnel.\n- Prise en charge immédiate : \n1. Débuter en urgence une titration morphinique IV (bolus de 1 mg toutes les 3 à 5 minutes sous surveillance étroite).\n2. Une fois l'antalgie obtenue (Algoplus < 2), réaliser l'examen clinique complet à la recherche d'une fracture de hanche.\n3. Prescrire des radiographies de bassin/hanche et prévenir la constipation.",
+        "tags": ["Douleur", "Cas clinique", "Morphine"]
+    },
+    {
+        "id": 3399,
+        "chapter": "ch8",
+        "rang": "A",
+        "question": "Quels sont les 6 principaux écueils cliniques à éviter concernant la douleur de la personne âgée ?",
+        "answer": "Les 6 écueils cliniques majeurs sont :\n1. Considérer que la douleur est normale chez le patient âgé et ne pas lui proposer de traitement.\n2. Omettre de suspecter une douleur chez le patient non communicant présentant une modification du comportement.\n3. Ne pas reconnaître les équivalents sémiologiques (anxiété, insomnie, agitation, confusion).\n4. Négliger le risque d'automédication iatrogène par le patient.\n5. Se limiter à des antalgiques de palier 1 en cas de douleur modérée à sévère.\n6. Prescrire des morphiniques sans anticiper et co-prescrire la prévention des effets secondaires (laxatifs).",
+        "tags": ["Douleur", "Écueils", "Prise en charge"]
+    },
+    {
+        "id": 3300 + 100, # 3400
+        "chapter": "ch8",
+        "rang": "B",
+        "question": "Quel est l'impact de la douleur chronique sur l'état nutritionnel du sujet âgé ?",
+        "answer": "La douleur chronique persistante altère l'appétit (anorexie induite par la douleur), perturbe le sommeil et favorise un état dépressif ou apathique. \nCela se traduit fréquemment par un refus alimentaire et une baisse des prises de repas, ce qui précipite le patient âgé dans la dénutrition protéino-énergétique et la sarcopénie secondaire, aggravant la fragilité globale.",
+        "tags": ["Douleur", "Nutrition", "Fragilité"]
+    }
+]
+
+# Combine all cards
+cards.extend(ch5_cards)
+cards.extend(ch6_cards)
+cards.extend(ch7_cards)
+cards.extend(ch8_cards)
+
+# Validation of requirements
+print(f"Total cards generated: {len(cards)}")
+ch_counts = {}
+for card in cards:
+    ch = card["chapter"]
+    ch_counts[ch] = ch_counts.get(ch, 0) + 1
+
+print("Chapter breakdown:")
+for ch, count in ch_counts.items():
+    print(f"  {ch}: {count} cards")
+
+# Check IDs
+ids = [card["id"] for card in cards]
+print(f"ID range: {min(ids)} to {max(ids)}")
+assert len(ids) == 200, "Error: Must be exactly 200 cards!"
+assert min(ids) == 3201, "Error: Must start at 3201!"
+assert max(ids) == 3400, "Error: Must end at 3400!"
+assert len(set(ids)) == 200, "Error: IDs must be unique!"
+
+# Save to file
+out_path = r"C:\Users\tokin\.gemini\antigravity\scratch\geriatrie-app\.agents\worker_m3_batch2\flashcards.json"
+with open(out_path, "w", encoding="utf-8") as f:
+    json.dump(cards, f, ensure_ascii=False, indent=2)
+
+print(f"Successfully saved 200 cards to {out_path}")

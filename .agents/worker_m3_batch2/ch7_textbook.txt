@@ -1,0 +1,750 @@
+--- PAGE 120 ---
+Connaissances
+Généralités
+I. Définition, épidémiologie
+A. Définition(s) de l'arthrose
+A L'arthrose est une maladie qui se caractérise par une destruction du cartilage qui s'étend
+à toutes les structures de l'articulation, notamment à l'os et au tissu synovial.
+Les six écueils à éviter dans l'arthrose de la personne âgée
+• Considérer que l'arthrose est normale chez le patient âgé [67].
+• Ne pas y penser comme un facteur améliorable prédisposant voire précipitant (par la douleur) chez les
+patients chuteurs ou à risque de chute [27].
+• Négliger le handicap associé et l'impact péjoratif sur la qualité de vie.
+• Négliger le risque d'automédication iatrogène de la douleur associée.
+• Se limiter à un antalgique de palier 1 sans évaluer les autres possibilités thérapeutiques, principalement
+non médicamenteuses (règles de vie et rééducation).
+• Ne pas associer les compétences pour discuter d'une indication chirurgicale en cas d'atteinte évoluée.
+94 Arthrose
+La recherche d'une arthrose est un élément important de la prise en charge des patients âgés, dans le
+cadre de l'évaluation des comorbidités, des traitements et de la qualité de vie, à laquelle l'arthrose est très
+associée par la douleur et le retentissement fonctionnel.
+L'une des complexités de sa prise en charge tient au projet thérapeutique qui doit associer des mesures
+générales difficiles à mettre en place chez la personne âgée, en particulier si elle est comorbide, à des
+mesures plus spécifiques en lien avec un rhumatologue, mais aussi avec un orthopédiste en cas de sanction
+chirurgicale envisagée.
+Quand ?
+• Lors d'une première évaluation gériatrique globale à l'occasion d'une consultation [295] ou à la fin
+d'une hospitalisation [306].
+• Lors d'une consultation ou hospitalisation pour chute [27, 228], perte d'autonomie [31], situation de
+handicap [345], trouble de la marche [266].
+• En présence d'une douleur d'un membre [71].
+• Lors de consultations de suivi [266, 267, 279, 295].
+Comment ?
+• En récupérant des informations objectives [131].
+• En impliquant si besoin l'aidant principal [330], le médecin référent et tous les soignants impliqués
+dans l'accompagnement du patient.
+• En cherchant et quantifiant le retentissement fonctionnel.
+Pourquoi ?
+• Afin d'améliorer l'autonomie, en prescrivant une rééducation adaptée [247].
+• Afin de prévenir le risque de chute [27], la fracture ou la récidive de fracture [306].
+• Afin de cibler les interventions utiles et faisables, dont le choix des antalgiques [250].
+• Afin d'envisager et d'organiser une sanction chirurgicale si nécessaire.
+--- PAGE 121 ---
+Du vieillissement articulaire à l'arthrose
+B. Épidémiologie
+B L'arthrose :
+• est la plus fréquente des maladies rhumatismales (entre 9 et 10 millions de patients en
+France) ;
+• est à l'origine d'un coût médico-économique estimé à 1 milliard d'euros en France ;
+• a une prévalence importante : un adulte sur deux après 60 ans.
+Son incidence annuelle varie selon la localisation :
+• coxarthrose symptomatique : 80 pour 100 000 patients ;
+• arthrose digitale symptomatique : 100 pour 100 000 patients ;
+• gonarthrose symptomatique : 240 pour 100 000 patients.
+II. Physiopathologie
+A Le cartilage est un tissu avasculaire, non innervé, comprenant un seul type de cellules : les
+chondrocytes.
+L'architecture du cartilage est complexe, avec l'agencement d'un réseau de fibres collagènes
+qui emprisonnent des protéoglycanes fortement hydrophiles, à l'origine des propriétés biomé-
+caniques du cartilage articulaire. L'atteinte du cartilage au cours d'un processus dégénératif
+comme l'arthrose est due à un déséquilibre entre une synthèse défaillante et une destruc-
+tion enzymatique accrue. L'arthrose est ainsi caractérisée par une dégradation prématurée
+du cartilage (tableau 7.1) associée à des remaniements de l'os sous-chondral, une production
+d'ostéophytes et des épisodes d'inflammation synoviale.
+C'est donc une maladie de l'articulation et pas seulement une maladie du cartilage.
+Elle peut toucher l'ensemble des articulations de l'organisme, avec une prédominance pour
+celles qui subissent de fortes contraintes comme le rachis, la hanche ou le genou.
+Tableau 7.1. B Dégradation cartilagineuse dans l'arthrose.
+Stade initial Stade intermédiaire Stade final
+Œdème Fissures superficielles par hyperactivité Destruction des couches profondes
+catabolique des chondrocytes Os sous-chondral à nu
+Surproduction de protéoglycanes Relargage d'enzymes protéolytiques et Progression de la chondrolyse sous
+→ Hyperhydratation néfaste de cytokines pro-inflammatoires dans l'effet des débris de cartilages et des
+Synthèse d'un néocollagène (type I) le liquide synovial microcristaux
+Prolifération, puis hypertrophie, puis
+apoptose des chondrocytes
+III. Facteurs de risque de l'arthrose
+A En présence d'une douleur [67] ou d'une déformation [70] articulaire entraînant un impact
+sur l'autonomie et la qualité de vie du patient, la démarche diagnostique et thérapeutique de
+l'arthrose commence par chercher les facteurs de risque, en particulier ceux qui pourraient être
+améliorés. Les trois principaux facteurs de risque d'arthrose sont en gras dans le tableau 7.2.
+Deux d'entre eux sont non modifiables. Le troisième, le surpoids, souligne d'emblée l'impor-
+tance mais la difficulté de la nutrition et de l'activité physique adaptées dans le traitement de
+l'arthrose de la personne âgée. En effet, sur le plan nutritionnel, la perte de poids ne doit
+s'envisager qu'à la condition de la préservation de la masse musculaire.
+--- PAGE 122 ---
+Connaissances
+Tableau 7.2. A Facteurs de risque de l'arthrose.
+Âge
+Surpoids
+Hérédité
+Statut hormonal (femmes, post-ménopause ++)
+Facteurs biomécaniques (charges lourdes, traumatismes répétés, lésion ou chirurgie ménisco-ligamentaire)
+Anomalies métaboliques (diabète, microcristaux, hémochromatose)
+Anomalies de l'architecture des membres congénitales ou acquises (par exemple, genu varum ou genu valgum)
+IV. Particularités gériatriques de l'arthrose
+L'arthrose est une comorbidité parmi d'autres chez le patient âgé.
+Elle peut représenter le motif de consultation (douleur articulaire [67]), mais se présente plus
+souvent comme l'un des facteurs de risque de chute [27] ou de perte d'autonomie [31], qu'il
+faut rechercher systématiquement par l'interrogatoire et l'examen clinique, et ceci d'autant
+plus que le patient, habitué à sa douleur [260] ou à son handicap [345] ou présentant des
+troubles neurocognitifs majeurs [298], ne le mentionnera pas ou en minimisera l'importance.
+Dans ce cas, la démarche gériatrique est celle de l'EGS (cf. chapitre 1) et comprend :
+• préciser le motif de consultation ;
+• évaluer les comorbidités [267] et en particulier l'état nutritionnel et musculaire ;
+• évaluer l'autonomie [31] — une atteinte fonctionnelle peut révéler une arthrose, alors que
+le patient vient pour une plainte cognitive — et l'adéquation du niveau d'aides [355] ;
+• évaluer les traitements habituels [266], leurs indications et posologies à la lumière de la
+fonction rénale et des interactions. Poser les questions adaptées permettant de mettre en évi-
+dence l'automédication, en particulier avec des anti-inflammatoires non stéroïdiens. Recons-
+tituer les différents essais préalables d'antalgiques, leur efficacité et leur tolérance [348] ;
+• lorsqu'une sanction chirurgicale est envisagée, particulièrement lorsqu'une période de
+rééducation prolongée est nécessaire dans le projet thérapeutique, évaluer les capacités
+cognitive, cardiovasculaire, musculaire et thymique.
+Les objectifs de la consultation gériatrique comprennent, lorsque le patient est atteint d'arthrose :
+• prioriser les pathologies à prendre en charge selon le motif de consultation et les comorbidités ;
+• et spécifiquement pour l'arthrose :
+– évaluer le retentissement ;
+– évaluer la nécessité d'un traitement, en particulier antalgique ;
+– choisir les traitements selon les comorbidités, en anticipant les interactions médicamenteuses ;
+– demander un avis rhumatologique sur des questions spécifiques ;
+– anticiper avec le rhumatologue, l'orthopédiste et l'anesthésiste la meilleure chrono-
+logie pour envisager une sanction chirurgicale lorsqu'elle est indiquée, dans le cadre
+d'une discussion collégiale : précoce tant que le patient est en capacité d'être opéré et
+d'affronter une rééducation, ou le plus tard possible au vu des comorbidités.
+Coxarthrose
+• B Pathologie de hanche la plus fréquente.
+• Prédominance féminine.
+• Augmentation de l'incidence avec l'âge pour atteindre 445 pour 100 000 chez les femmes
+de plus de 70 ans.
+--- PAGE 123 ---
+Du vieillissement articulaire à l'arthrose
+Démarche
+I. Préciser le motif de consultation.
+II. Évaluation globale du patient et du retentissement de la coxarthrose.
+III. Examiner le patient.
+IV. Éliminer un diagnostic différentiel.
+V. Demander et interpréter les examens complémentaires.
+VI. Envisager et organiser le traitement.
+I. Motif de consultation : quand évoquer
+le diagnostic ?
+A Classiquement, la présentation clinique de la coxarthrose associe [31, 67, 68] :
+• douleurs mécaniques augmentées à l'effort avec possible dérouillage court
+(< 15 minutes) ;
+• douleurs inguino-crurales (plus rarement en face latérale ou postérieure de hanche) mais
+pouvant :
+– mimer une cruralgie (mais absence de lombalgie concomitante ou d'impulsivité) ;
+– être en regard du grand trochanter ;
+– être projetées en regard du genou ;
+• trouble de la marche avec boiterie d'esquive ;
+• raideur ;
+• limitation des capacités fonctionnelles et perte d'autonomie ;
+• diminution de la qualité de vie.
+Lors des poussées congestives, les douleurs peuvent être de type inflammatoire.
+II. Évaluation
+• Évaluation globale du patient (cf. supra).
+• Évaluer l'intensité de la douleur (EVA ou ALGOPLUS chez les patients non communiquants ;
+cf. chapitre 8) :
+– au repos et à l'effort [259, 260] ;
+– avec durée, efficacité et tolérance des antalgiques essayés [348].
+• Chercher les facteurs de risque améliorables :
+– contraintes mécaniques comme la surcharge pondérale ;
+– diabète ;
+• Évaluer le retentissement et l'autonomie [31] :
+– réduction de la marche (périmètre, vitesse) ;
+– difficultés à mettre des chaussettes, couper les ongles des orteils, enfiler un collant,
+s'accroupir, sortir de voiture ou retentissement sur la vie sexuelle ;
+– utilisation de questionnaire algofonctionnel initial et pour le suivi (Lequesne)
+(tableau 7.3).
+--- PAGE 124 ---
+Connaissances
+Tableau 7.3. B Indice fonctionnel des coxopathies de Lequesne.
+Évaluation Cotation
+Douleur ou gêne
+Douleur nocturne Aucune 0
+Seulement aux mouvements et dans certaines 1
+postures
+Même immobile, sans bouger 2
+Dérouillage matinal Aucun ou inférieur à 1 minute 0
+Pendant quelques minutes 1
+Plus d'un quart d'heure 2
+Douleurs lors du stationnement Aucune 0
+debout ou du piétinement pendant
+Douleurs 1
+une demi-heure
+À la marche Aucune 0
+Après quelque distance 1
+Dès les premiers pas et allant croissant 2
+Gêne lors de la station assise Aucune 0
+prolongée
+Douleur 1
+Marche maximale
+Aucune limitation 0
+Plus de 1 km mais limitée 1
+98 Environ 1 km (environ 15 minutes) 2
+500 à 900 mètres (environ 8 à 15 minutes) 3
+300 à 500 mètres 4
+100 à 300 mètres 5
+Moins de 100 mètres 6
+Avec une canne ou canne-béquille* + 1
+Avec deux cannes ou cannes-béquilles* + 2
+Difficultés pour
+Enfiler une chaussette ou un collant par devant 0 à 2⁎⁎
+Ramasser un objet à terre 0 à 2
+Monter et descendre un étage 0 à 2
+Sortir d'une voiture 0 à 2
+Retentissement sur l'activité sexuelle 0 à 2
+L'indication chirurgicale est à discuter vers 10 à 12 points
+* L'utilisation d'une ou deux cannes-béquilles majore le score obtenu.
+** Cotation : 0 : sans difficulté ; 0,5 : assez facilement ; 1 : avec difficulté ; 1,5 : avec beaucoup de difficulté ; 2 : impossible.
+III. Examen clinique de la hanche
+A L'examen clinique doit pouvoir affirmer la responsabilité de la hanche dans la plainte du
+patient.
+--- PAGE 125 ---
+Du vieillissement articulaire à l'arthrose
+En position debout
+Rechercher une attitude vicieuse (flessum de hanche, rotation externe).
+À la marche
+• Rechercher une boiterie [68].
+• Majoritairement d'esquive, liée à la douleur.
+En position couchée
+• Mobilisation passive : douleur et/ou limitation douloureuse [71] ; au début de l'évolution,
+limitation sur la rotation interne et l'extension.
+• Mobilité active : syndrome clinostatique (difficulté à décoller le talon du plan du lit), déficit,
+amyotrophie des muscles de loge antérieure de cuisse (psoas, quadriceps).
+IV. Éliminer les diagnostics différentiels
+• Ostéonécrose, fissure osseuse : anamnèse avec début anormalement brutal (indications à IRM).
+• Algodystrophie post-traumatique (indication à IRM).
+• Arthropathies inflammatoires et microcristallines lors des poussées congestives ou en pré-
+sence d'un syndrome inflammatoire [186].
+• Cruralgie (+++) : mais présence de lombalgies et d'impulsivité, tonalité volontiers neuro-
+gène de la douleur, diminution ou abolition d'un réflexe rotulien, hypoesthésie de la face
+antérieure de cuisse.
+• B Autres : névralgie du nerf fémoro-cutané, pathologie osseuse (indication de l'arthros-
+canner), fracture de contrainte (sacrum ou branche), synovite villo-nodulaire (rarissime),
+tendinopathies :
+– du moyen fessier (douleur externe, en regard du grand trochanter et manœuvre du
+moyen fessier positive) ;
+– du droit antérieur (douleurs provoquées à la flexion de la cuisse jambe tendue).
+V. Démarche diagnostique et examens complémentaires
+A. Biologie
+• A Absence de syndrome inflammatoire (CRP habituellement normale).
+• L'examen du liquide synovial est inutile dans une coxarthrose ; il serait de type mécanique.
+B. Imagerie
+L'importance de l'atteinte radiologique n'est pas corrélée avec la douleur et/ou avec le reten-
+tissement fonctionnel.
+B Quatre types d'examen peuvent être envisagés [178], mais les radiographies convention-
+nelles suffisent dans la grande majorité des cas :
+• radiographies [228] ;
+• échographie de hanche ;
+• arthroscanner ;
+• IRM de hanche.
+--- PAGE 126 ---
+Connaissances
+1. Radiographies
+• Bassin en charge de face avec les membres inférieurs en rotation interne à 20° (fig. 7.1).
+• Comparatif des deux hanches en incidence de faux profil de Lequesne (indispensable) pour
+évaluer l'interligne articulaire en avant et en arrière (qui croît normalement d'arrière en
+avant et de bas en haut).
+Signes évocateurs de coxarthrose [228] (fig. 7.2) :
+• évocateurs de la dégradation du cartilage :
+– pincement articulaire ;
+– géodes d'hyperpression ;
+• évocateurs de tentative de réparation du cartilage :
+– ostéocondensation sous-chondrale ;
+– ostéophytose.
+Fig. 7.1. A Coxarthrose.
+A Pincement articulaire
+supéro-externe
+B Ostéocondensation B
+sous-chondrale
+C Géodes sous- 1 A
+chondrales
+D ostéophytose D
+1 cotyloïdienne
+2 péricapitale
+C
+3 cervicale
+inférieure 5
+4 sous-capitale
+5 de l'arrière fond
+du cotyle
+6 périfovéale
+3 4
+Fig. 7.2. A Coxarthrose polaire supérieure.
+--- PAGE 127 ---
+Du vieillissement articulaire à l'arthrose
+Quelques particularités :
+• l'interligne sur le cliché de face peut être normal dans les formes débutantes ;
+• les géodes : lacunes cerclées en regard du pincement de l'interligne articulaire ;
+• l'ostéosclérose condensante de l'os sous-chondral : dans les zones d'hyperpression (pôle
+supérieur de la tête et/ou toit du cotyle) ;
+• l'ostéophytose marginale : avant-toit, péricéphalique, périfovéale, céphalique postéro-infé-
+rieure, en « hamac » sous le col fémoral ;
+• perte de sphéricité dans les formes plus évoluées ;
+• cotation de l'atteinte radiologique par la classification de Kellgren et Lawrence (qui tient
+compte du pincement et des ostéophytes) ou la mesure du pincement de l'interligne.
+2. Échographie de hanche
+Elle peut :
+• aider au diagnostic de bursite associée à une coxopathie ;
+• montrer un épanchement (à suspecter en cas de flessum de hanche qui est limitée dans
+toutes les directions) ;
+• guider la ponction de liquide synovial et l'infiltration.
+3. Arthroscanner
+Rares indications :
+• épisodes cliniques de blocages articulaires (corps étrangers non calcifiés annonçant une
+chondromatose) ;
+• suspicion de lésion du labrum (kyste simple, fissure ou désinsertion partielle), quand la
+douleur apparaît en rotation interne-adduction.
+4. IRM de hanche
+Rares indications :
+• douleurs d'aggravation récente, dont la brutalité fait suspecter une fissure de contrainte ou
+une ostéonécrose ;
+• suspicion de lésion du labrum.
+VI. Traitement médical et chirurgical
+A. Évolution et pronostic
+• A La coxarthrose est une pathologie chronique dans la grande majorité des cas ; elle est
+néanmoins évolutive. Une forme clinique avec évolution rapide doit être connue (la CDR :
+cf. encadré).
+• Grande variabilité interindividuelle (moins de 10 % des patients n'évoluent pas).
+• Aggravation possible via des épisodes de chondrolyse semi-rapide, voire de chondrolyse
+rapide.
+• Pincement moyen à la hanche de 0,2 à 0,3 mm par an.
+--- PAGE 128 ---
+Connaissances
+Coxarthrose destructrice rapide (CDR)
+• Définie par un pincement de plus de 50 % de l'interligne ou de plus de 2 mm en l'espace d'un an.
+• Caractérisée par une douleur de début brutal, très intense, à recrudescence nocturne.
+• Touche préférentiellement la femme de 65 ans, obèse.
+• Peut être déclenchée par un traumatisme articulaire ou un surmenage physique.
+• Destruction rapide avec pincement global de l'interligne sans ostéophytose.
+• Répéter les clichés à trois mois d'intervalle minimum pour mettre en évidence la chondrolyse.
+B. Traitement médical
+Le traitement médical est pharmacologique et non pharmacologique.
+Il est toujours indiqué pour limiter le retentissement fonctionnel.
+Son bénéfice doit être évalué sur des critères validés (périmètre de marche, douleur à la marche
+mesurée sur une EVA, indices algofonctionnels, indices de qualité de vie).
+1. Traitement non pharmacologique
+• Ménagement de l'articulation douloureuse :
+– corriger un excès de poids mais en évitant dénutrition et sarcopénie (cf. chapitre 14)
+[30, 51] ;
+– respecter un repos quotidien en position allongée, hanches en extension ;
+– favoriser la marche au quotidien en dehors des poussées très douloureuses et la pra-
+tique du vélo et de la piscine [247] ;
+– prendre une canne du côté opposé à la hanche malade [245] ;
+– éviter les stations debout prolongées et le port de charges lourdes, et les marches dans
+les périodes les plus douloureuses.
+• Rééducation douce de la hanche (balnéothérapie).
+2. Traitement pharmacologique
+• B Antalgiques simples (paracétamol) ; AINS contre-indiqués après 75 ans (recommanda-
+tions ACR 2012).
+• Anti-arthrosiques à action lente (AASAL) : peuvent diminuer la douleur, effet antalgique
+différé (1 à 2 mois).
+• Injections d'acide hyaluronique (viscosupplémentation) : peuvent limiter le retentissement
+fonctionnel mais pas d'effet sur la dégradation du cartilage.
+C. Traitement chirurgical : prothèse totale de hanche
+A L'imagerie seule (degré d'atteinte radiologique) ne permet pas de porter l'indication de la
+mise en place d'une prothèse totale de hanche. Seul le retentissement clinique (douleur et
+handicap) justifie d'envisager une sanction chirurgicale. L'espérance de vie d'une prothèse
+totale de hanche (fig. 7.3) est de 15 ans.
+--- PAGE 129 ---
+Du vieillissement articulaire à l'arthrose
+Fig. 7.3. A Prothèse totale de hanche à droite et coxarthrose à gauche.
+Organisation
+B L'indication chirurgicale chez les plus de 75 ans doit :
+• prendre en compte le souhait du patient et/ou de son entourage ;
+• évaluer au mieux le rapport risque/bénéfice :
+– temporiser l'intervention chirurgicale :
+– possibilités d'amélioration par le traitement médical ;
+– risque anesthésique et chirurgical ;
+– risques péri-opératoires gériatriques ;
+– complexité de la rééducation au décours ;
+– envisager l'intervention chirurgicale :
+– impact sur la qualité de vie et possibilité de l'améliorer ;
+– rapidité de l'évolution de la coxarthrose ;
+– risques à différer la chirurgie ;
+• prendre en compte l'espérance de vie du patient.
+Le parcours hospitalier doit être anticipé et organisé :
+• consultation de gériatrie et consultation d'anesthésie dans les suites de la consultation
+d'orthopédie ;
+• privilégier une organisation intégrant des soins gériatriques péri-opératoires (exemple des
+unités péri-opératoires gériatriques) pour les plus âgés et comorbides.
+Mise en situation
+Approche de l'arthrose au sein d'une polypathologie chez la
+personne âgée
+Vous prenez en charge en consultation une patiente de 85 ans pour « démence rapidement évolutive »
+[131] depuis un mois ; elle est accompagnée par sa fille. Vous notez dans les antécédents précisés dans
+le courrier du médecin traitant, un indice de masse corporelle à 32, une hypertension artérielle sous
+▲
+--- PAGE 130 ---
+Connaissances
+diurétiques thiazidiques, un diabète de type 2 sous metformine, de l'arthrose pour laquelle elle prend
+de temps en temps du paracétamol. Elle prend un antidépresseur (citalopram, inhibiteur de recapture
+de la sérotonine) pour dépression depuis un an. Concernant l'autonomie, la patiente se débrouillait
+seule à domicile, avec l'aide d'une infirmière pour les médicaments car elle avait fait quelques erreurs,
+tandis que sa fille s'occupe de la gestion de ses comptes qu'elle n'arrive plus à tenir. La patiente a déjà
+fait une chute il y a un an, marche avec une canne depuis un à deux ans.
+Depuis un mois, la patiente ne peut plus rester seule à la maison. Elle dort le jour et vit beaucoup la nuit,
+est assez angoissée [116], a des problèmes de mémoire beaucoup plus importants qu'avant, ne comprend
+pas ce que lui dit sa fille [129] mais est parfois presque « normale » pendant des heures. Son médecin
+traitant a fait un bilan biologique montrant une hémoglobine à 12 g/dl, une CRP < 5 mg/l, une albumine
+à 32 g/l, un ionogramme normal, une créatininémie à 65 μmol/l.
+❯ Sur le plan cognitif, qui est le motif de consultation, la perte de points sur les items de l'IADL
+montre que l'autonomie n'était pas normale [31], et que des troubles de la mémoire [131] avaient
+déjà été notés, suggérant en premier lieu soit l'existence de troubles neurocognitifs majeurs prée­
+xistants, soit d'une dépression insuffisamment traitée. Ensuite, la cassure dans l'évolution et la
+présentation clinique évoquent en priorité un syndrome confusionnel [119]. Ce diagnostic est très
+probable et doit faire rechercher un facteur précipitant : en premier lieu un accident vasculaire
+cérébral en raison du terrain, ou de principe un problème iatrogène, avant d'envisager l'ensemble
+des étiologies, tout en privilégiant les facteurs cohérents en termes de chronologie et selon les don­
+nées de l'examen clinique.
+❯ En précisant l'anamnèse, vous notez l'introduction de tramadol un mois auparavant pour les
+douleurs, anciennes, de sa hanche droite. Les douleurs chroniques [260], qui expliquent l'utilisation
+de la canne, augmentaient progressivement et son médecin traitant a dû modifier le traitement.
+La problématique initiale est donc la douleur articulaire de sa hanche droite [67].
+En synthèse, il s'agit donc d'une patiente présentant un syndrome confusionnel dont l'anamnèse
+oriente vers une origine iatrogène :
+❯ l'urgence est à l'arrêt du tramadol [348], en commençant par évaluer la douleur : prendre du para­
+cétamol à dose maximale avant de réévaluer l'indication de morphiniques per os à petites doses
+[250]. Il faut noter que le bilan biologique de son syndrome confusionnel est incomplet (par exem­
+ple, calcémie corrigée, bilan hépatique…) ;
+❯ l'étiologie de son syndrome confusionnel [119] semble bien comprise et le maintien à domicile sous
+surveillance de la fille et de l'évolution favorable rapide peut s'envisager. Dans l'attente, il faut
+évaluer le besoin d'aide à domicile ;
+❯ ensuite, il faut explorer ses troubles cognitifs, mais il faudra l'organiser à distance. De même, cette
+patiente est à risque de chute et il faut explorer une éventuelle ostéoporose [306] (cf. chapitre 6) ;
+❯ concernant la douleur de hanche, il faudra prescrire des radiographies (cf. supra), qui confirmeront
+le diagnostic de coxarthrose. Sur le plan du traitement, le surpoids ne doit pas faire oublier la dénu­
+trition confirmée par la biologie et, si un régime doit être prescrit, il doit être hyperprotidique. La
+recommandation de la poursuite de la marche régulière, permise par l'antalgie, est indispensable ;
+❯ enfin, si à terme le retentissement est important malgré l'ensemble des mesures pharmacologiques
+et non pharmacologiques, une sanction chirurgicale pourra être envisagée, avec un risque péri­
+opératoire important de confusion et de complications cardiovasculaires.
+▲
+--- PAGE 131 ---
+Du vieillissement articulaire à l'arthrose
+Gonarthrose
+I. Épidémiologie, clinique, imagerie, pronostic
+• B Arthrose la plus fréquente des membres inférieurs.
+• Prédominance féminine après la ménopause.
+• Touche 2 à 10 % des hommes et 3 à 15 % des femmes en France.
+• Affecte différents compartiments (tableau 7.4) : fémoro-tibiale (45 à 50 %), fémoro-patel-
+laire (35 %) et mixte (15 à 20 %).
+Tableau 7.4. A Caractéristiques comparées des arthroses fémoro-tibiale et fémoro-patellaire.
+Arthrose fémoro-tibiale Arthrose fémoro-patellaire
+Épidémiologie Femme > 65 ans Femme > 40 ans
+Surpoids ou obésité Bilatérale et symétrique
+Profession avec port de charges lourdes Compartiment externe
+Activités sportives intenses
+Atteinte du compartiment interne (médial) plus
+fréquente qu'en externe (latéral)
+Sémiologie Douleur mécanique diffuse et globale du genou Douleur mécanique en face antérieure du
+Latéralisée selon l'atteinte compartimentale genou
+Favorisée par la marche, montée et descente des escaliers Favorisée par l'extension (descente
+Soulagée par le repos des escaliers, station assise prolongée,
+Retentissement : indice algofonctionnel (Lequesne) agenouillement)
+Examen clinique En position debout : déviations axiales des membres Syndrome rotulien : douleur réveillée par :
+(genu varum, valgum ou recurvatum) – l'extension contrariée de la jambe
+À la marche surtout, recherche d'une majoration d'un – la pression de la rotule sur le genou
+trouble statique fléchi
+En décubitus dorsal, flexion du genou (distance – le toucher rotulien
+talon-fesse) longtemps conservée, craquements – la manœuvre du rabot (douleur
+(atteinte du cartilage), choc rotulien (épanchement déclenchée au frottement de la rotule
+intra-articulaire), tuméfaction poplitée (témoin d'un contre la trochlée)
+kyste poplité : épanchement important) – la manœuvre de Zohlen : douleur lorsque
+l'examinateur s'oppose à l'ascension
+de la rotule lors de la contraction du
+quadriceps
+Radiographies 1. Examen de face en appui bipodal, rotation nulle, 1. Fémoro-patellaire (spécifique) avec
+(fig. 7.4 à 7.7) genoux en extension incidences axiales à 30° ou 60°
+2. Profil comparatif des genoux 2. Incidences de face et de profil des
+3. Défilé fémoro-patellaire à 30° de flexion genoux en charge
+4. Examen en « schuss » (de face, en charge, à 30° – Amincissement /disparition de l'interligne
+de flexion, cliché en postéro-antérieur pour le externe
+compartiment postérieur) – Ostéophytose rotulienne trochléenne
+– Pincement de l'interligne localisé externe
+– Géodes d'hyperpression – Rotule translatée vers l'extérieur (usure
+– Ostéophytose et ostéosclérose sous-chondrale du cartilage)
+– Pas de corrélation avec le degré de
+symptomatologie douloureuse
+Pronostic Variabilité interindividuelle, périodes de poussées et Évolution capricieuse (douleurs
+d'accalmie intermittentes puis gênantes pour la marche)
+Association à amyotrophie quadriceps et
+kyste poplité
+--- PAGE 132 ---
+Connaissances
+Fig. 7.4. A Arthrose fémoro-patellaire avec amincissement de l'interligne externe
+Fig. 7.5. A Dysplasie trochléo-patellaire
+Fig. 7.6. A Gonarthrose fémoro-tibiale interne : évolution radiographique avec apparition d'une
+déformation en varus.
+--- PAGE 133 ---
+Du vieillissement articulaire à l'arthrose
+Fig. 7.7. A Gonarthrose fémoro-tibiale interne
+II. Diagnostics différentiels et pièges diagnostiques
+• B Atteinte méniscale isolée.
+• Arthropathie microcristalline (cf. encadré en fin de chapitre) évoluant à bas bruit — qui
+peut favoriser la progression de l'arthrose et peut être écartée par ponction d'un
+épanchement.
+• Ostéonécrose ou fissure d'un condyle fémoral (indication d'IRM).
+• En cas de poussée de gonarthrose : arthrite infectieuse ou microcristalline (goutte, chon-
+drocalcinose) ou inflammatoire (polyarthrite rhumatoïde débutante de la personne âgée
+pouvant débuter par une grosse articulation), synovite villonodulaire.
+• Douleurs projetées : coxo-fémorales (+++), radiculalgies (L3-L4) ou cruralgie tronculaire.
+• Pathologie non articulaire : phlébite poplitée ou surale.
+• Lésions abarticulaires tendineuses : tendinite rotulienne de la pointe de la rotule (dou-
+leur sous-rotulienne exacerbée lors de la montée ou la descente des escaliers et la flexion
+en charge du genou), tendinite quadricipitale (rare), tendinite de la patte d'oie (douleur
+réveillée par la palpation de la face interne du tibia en dessous de l'interligne fémoro-tibial
+interne).
+• Lésions osseuses tibiales ou fémorales : tumeur osseuse, fracture de contrainte, algodystro-
+phie, maladie de Paget, ostéonécrose d'un condyle (début brutal, sur terrain de surcharge
+pondérale, avec problème axial au genou).
+III. Traitement
+A Il existe des traitements pharmacologiques, non pharmacologiques et chirurgicaux (recom-
+mandations de la SFR 2020).
+--- PAGE 134 ---
+Connaissances
+A. Mesures non pharmacologiques indispensables
+• Activité physique : favoriser la marche ou les activités d'intensité modérée, chaussage
+adapté [247].
+• Kinésithérapie :
+– rééducation isométrique du muscle vaste interne pour ré-axer la rotule pour l'arthrose
+fémoro-patelaire ;
+– renforcement du quadriceps et lutte contre le flessum pour l'arthrose fémoro-tibiale.
+• Éducation.
+• Corriger un excès de poids mais en évitant dénutrition et sarcopénie (cf. chapitre 14)
+[30, 51].
+• Appareillage.
+• Orthèses plantaires ou semelles amortissantes [245].
+B. Traitement pharmacologique à visée symptomatique avec
+réévaluations régulières
+• Antalgiques selon douleur et tolérance.
+• Anti-inflammatoires non stéroïdiens en cure courte : contre-indiqués chez la personne âgée.
+• Anti-arthrosiques à action lente (AASAL) : peuvent diminuer la douleur, effet antalgique
+différé (1 à 2 mois) (faible niveau de preuve).
+• Traitements locaux percutanés par anti-inflammatoires non stéroïdiens.
+• Traitements locaux intra-articulaires par :
+– corticoïdes, en particulier en cas de poussée inflammatoire avec épanchement ;
+– acide hyaluronique (viscosupplémentation) : peuvent limiter le retentissement fonction-
+nel mais pas d'effet sur la dégradation du cartilage.
+C. Traitements chirurgicaux
+• Lavage articulaire.
+• Ostéotomie.
+• Prothèse totale de genou : la décision d'une intervention chirurgicale repose sur les mêmes
+éléments que pour la prothèse totale de hanche (cf. supra). La rééducation dans les suites
+d'une pose de prothèse totale de genou est plus complexe et plus difficile que dans le
+cadre de la prothèse totale de hanche. L'évaluation préopératoire doit tenir compte de ce
+paramètre.
+Arthrose digitale
+• Localisation la plus fréquente de l'arthrose.
+• Après 55 ans, 2 femmes sur 3 et 1 homme sur 2 dont 20 % présentent des douleurs.
+• Essentiellement interphalangienne distale (IPD) (+++), base du pouce, moins souvent inter-
+phalangienne proximale (IPP) (fig. 7.8).
+--- PAGE 135 ---
+Du vieillissement articulaire à l'arthrose
+Fig. 7.8. A Arthrose digitale. Atteintes caractéristiques des interphalangiennes distales et proximales.
+(Source : collection C. Marcelli, Caen.)
+I. Quand évoquer le diagnostic ?
+• Développement à bas bruit.
+• Tuméfactions nodulaires des IPD (nodules d'Heberden) ou des IPP (nodosités de Bouchard),
+parfois douloureuses et déformatrices.
+• Rhizarthrose : des douleurs mécaniques de la racine du pouce et la partie externe du
+poignet, difficultés à la préhension des objets (pince), voire recrudescence nocturne des
+douleurs si poussée congestive intense.
+Critères d'arthrose digitale de l'American College of Rheumatology
+1. Douleur et/ou raideur digitales.
+Et :
+2. Trois ou quatre des caractéristiques suivantes :
+– élargissement d'au moins 2 des 10 articulations sélectionnées (nodules d'Heberden et de Bouchard
+pour les IP) ;
+– élargissement d'au moins 2 IPD ;
+– déformation d'au moins 1 des 10 articulations sélectionnées ;
+– moins de 3 articulations MCP gonflées.
+Les 10 articulations sélectionnées sont : IPD 2 et 3, IPP 2 et 3 et la première articulation carpométacar-
+pienne, droites et gauches.
+--- PAGE 136 ---
+Connaissances
+II. Examen clinique de la main
+• Mobilisation trapézométacarpienne douloureuse (mise en pression de la colonne du pouce).
+• Hypertrophie de l'articulation, parfois siège d'un épanchement.
+• Formes évoluées : un pouce adductus associé à une amyotrophie de la loge thénar (pouce
+en « Z ») (fig. 7.9).
+Fig. 7.9. A Rhizarthrose. Déformation du pouce avec pouce adductus.
+(Source : collection C. Marcelli, Caen.)
+III. Examens complémentaires
+• Radiographies :
+– inutiles devant un tableau typique (lésions arthrosiques habituelles) ;
+– mais cherchent des arguments pour la chondrocalcinose (calcifications du ligament
+triangulaire du carpe et/ou radio-carpien) devant une arthrite fluxionnaire de la
+trapézométacarpienne.
+• Échographie : en cas de doute diagnostique (ténosynovite).
+• Scanner : en cas de doute sur une fracture du scaphoïde.
+• Biologie :
+– pas de biologie systématique ;
+– recherche de syndrome inflammatoire et anticorps spécifiques si suspicion d'un rhuma-
+tisme inflammatoire (polyarthrite rhumatoïde pour MCP ou IPP, rhumatisme psoriasique
+si atteinte des IPD) ;
+– hyperuricémie si suspicion de goutte (tophus à ne pas confondre avec des nodosités
+d'Heberden et Bouchard).
+--- PAGE 137 ---
+Du vieillissement articulaire à l'arthrose
+Forme clinique particulière : l'atteinte érosive des doigts
+• B Poussées congestives des articulations des doigts.
+• Douleurs intenses, inflammatoires avec réveils nocturnes.
+• Évolution sur plusieurs semaines.
+• Importantes érosions avec géodes et pincement total de l'interligne articulaire.
+• Peut ressembler à un rhumatisme psoriasique (localisation interphalangienne distale).
+IV. Pronostic
+• B Parfois invalidante par les douleurs et/ou la gêne fonctionnelle (évaluation par indices
+algofonctionnels : Dreiser ou Cochin).
+• Évolution marquée par une régression des douleurs au prix de l'installation de nodules,
+parfois déformants, rarement très handicapants sur le plan fonctionnel.
+• À terme, gêne fonctionnelle parfois considérable possible en raison d'une déformation
+vicieuse.
+V. Traitement
+A. Traitement médical
+• Antalgiques (paracétamol).
+• Anti-arthrosiques d'action lente pour limiter le retentissement fonctionnel.
+• Anti-inflammatoires en topiques locaux.
+• Orthèses de fonction et de repos la nuit au moment des poussées (éviter les déformations
+notamment des interphalangiennes distales et de la rhizarthrose).
+• Infiltrations corticoïdes au cours des poussées très douloureuses et résistant aux traite-
+ments habituels.
+B. Traitement chirurgical
+• Réservé à des cas exceptionnels compte tenu du caractère extensif et diffus de la maladie.
+• Dans la rhizarthrose, l'indication peut se poser en fonction du retentissement de l'arthrose
+et de l'âge (trapézectomie avec ou sans interposition ligamentaire).
+--- PAGE 138 ---
+Connaissances
+Arthropathies microcristallines
+Diagnostic différentiel d'une poussée de gonarthrose
+Caractérisées par des dépôts intra-articulaires ou péri-articulaires de microcristaux, pouvant être à l'ori-
+gine d'accès inflammatoires aigus ou, parfois, d'arthropathies chroniques.
+Trois types de microcristaux sont en cause, cristaux de :
+• urate de sodium (goutte, plus volontiers chez l'homme mûr pléthorique) ;
+• pyrophosphate de calcium (chondrocalcinose, chez la personne âgée +++) ;
+• phosphate de calcium en péri-articulaire (apatite, chez la femme jeune).
+Les caractéristiques sémiologiques des arthropathies microcristallines articulaires ou péri-articulaires
+typiques sont :
+• début brutal, forte intensité de la douleur et de l'inflammation locale ;
+• résolution spontanée en quelques jours à quelques semaines ;
+• contexte favorisant : traumatisme, contexte postopératoire, prise médicamenteuse, absorption de cer-
+taines boissons ou aliments pour les accès goutteux ;
+• signes généraux (fièvre, frissons) [44] ;
+• syndrome inflammatoire biologique (élévation de la CRP [203], hyperleucocytose) : la découverte d'un
+syndrome inflammatoire doit faire systématiquement rechercher une atteinte articulaire, voire recher-
+cher des localisations plus atypiques comme celle du ligament rétro-odontoïdien de l'atlas (syndrome
+de la dent couronnée) ;
+• l'arthrite septique est le principal diagnostic différentiel.
+Le site de l'inflammation peut parfois orienter le diagnostic :
+• la goutte donne classiquement des accès aigus de la métatarsophalangienne du gros orteil ou d'une
+autre articulation du pied ;
+• la chondrocalcinose (parfois appelée pseudo-goutte) se manifeste souvent par une arthrite du genou ;
+• les accès péri-articulaires liés aux dépôts apatitiques touchent souvent l'épaule par tendinite calcifiante
+des muscles de la coiffe.
+Les clés du diagnostic sont :
+• l'analyse du liquide synovial : liquide articulaire inflammatoire (> 2 000 cellules nucléées/mm3) à prédo-
+minance de polynucléaires neutrophiles, de microcristaux et négativité des examens bactériologiques ;
+• la radiographie standard, à la recherche de dépôts calciques péri-articulaires pour les accès apatitiques
+ou intra-articulaires pour la chondrocalcinose (fig. 7.10 et 7.11) ou des dépôts sous forme de tophus
+goutteux intra- ou péri-articulaire ;
+• parfois la visualisation de calcifications tendineuses et/ou articulaires sur une TDM, comme les calci-
+fications arciformes du ligament transverse de l'atlas sur des coupes cervicales de TDM cérébrale ou
+cervicale (fig. 7.12).
+--- PAGE 139 ---
+Du vieillissement articulaire à l'arthrose
+Fig. 7.10. A Liseré calcique dans le cadre d'une chondrocalcinose du genou.
+Fig. 7.11. A Calcifications du carpe dans le cadre d'une chondrocalcinose.
+Fig. 7.12. A Calcification arciforme du ligament transverse de l'atlas.
+--- PAGE 140 ---
+Connaissances
+clés
+L'arthrose est une maladie qui se caractérise par une destruction du cartilage qui s'étend à toutes les
+structures de l'articulation, notamment à l'os et au tissu synovial.
+Les facteurs de risque comprennent :
+• âge ;
+• surpoids ;
+• hérédité ;
+• statut hormonal ;
+• facteurs biomécaniques ;
+• anomalies métaboliques ;
+• anomalies congénitales ou acquises de l'architecture des membres.
+La démarche gériatrique en présence d'arthrose comprend :
+• préciser le motif de consultation ;
+• évaluer les comorbidités, en particulier l'état nutritionnel et musculaire ;
+• évaluer l'autonomie et l'adéquation du niveau d'aides ;
+• évaluer les traitements habituels, reconstituer les différents essais préalables d'antalgiques, leur efficacité
+et leur tolérance ;
+• évaluer les capacités cognitive, cardiovasculaire, musculaire et thymique en cas de sanction chirurgicale
+envisagée.
+Connaître les principaux diagnostics différentiels :
+1. de la coxarthrose :
+– ostéonécrose, fissure osseuse ;
+– algodystrophie post-traumatique ;
+– arthropathies inflammatoires et microcristallines ;
+– cruralgie (+++) ;
+2. de la gonarthrose :
+– atteinte méniscale isolée ;
+– arthropathie microcristalline ;
+– ostéonécrose ou fissure d'un condyle fémoral ;
+– arthrite microcristalline, infectieuse ou inflammatoire en cas de poussée ;
+– douleurs projetées.
+Le traitement médical de la coxarthrose et de la gonarthrose, avant d'envisager la chirurgie, est
+pharmacologique (antalgiques, anti-arthrosiques, infiltrations) et non pharmacologique (ménagement de
+l'articulation douloureuse, maintien d'une activité physique adaptée et rééducation douce).
+stnioP
+--- PAGE 141 ---
+Évaluer la douleur
+et en comprendre
+le retentissement
+I. Définition de la douleur
+II. Particularités de la douleur chez la personne âgée
+III. Démarche diagnostique devant une douleur du patient âgé
+IV. Traitements de la douleur
+Situations de départ
+En lien avec la définition et avec le diagnostic :
+250 Prescrire des antalgiques.
+258 Prévention de la douleur liée aux soins.
+259 Évaluation et prise en charge de la douleur aiguë.
+260 Évaluation et prise en charge de la douleur chronique.
+266 Consultation de suivi d'un patient polymédiqué.
+267 Consultation de suivi d'un patient polymorbide.
+En lien avec la prise en charge en urgence :
+4 Douleur abdominale.
+5 Douleur anale.
+27 Chute de la personne âgée.
+34 Douleur aiguë postopératoire.
+36 Douleur de la région lombaire.
+66 Apparition d'une difficulté à la marche.
+67 Douleurs articulaires.
+71 Douleur d'un membre.
+72 Douleur du rachis.
+97 Rétention aiguë d'urines.
+114 Agitation.
+116 Anxiété.
+117 Apathie.
+119 Confusion mentale/désorientation.
+130 Trouble de l'équilibre.
+135 Trouble du sommeil, insomnie ou hypersomnie.
+161 Douleur thoracique.
+355 Organisation de la sortie d'hospitalisation.
+En lien avec la démarche étiologique :
+31 Perte d'autonomie progressive.
+35 Douleur chronique.
+239 Explication préopératoire et recueil de consentement d'un geste invasif diagnos-
+tique et thérapeutique.
+295 Consultation de suivi gériatrique.
+298 Consultation de suivi d'un patient ayant des troubles cognitifs.
+345 Situation de handicap.
+Gériatrie
+© 2021, Elsevier Masson SAS. Tous droits réservés

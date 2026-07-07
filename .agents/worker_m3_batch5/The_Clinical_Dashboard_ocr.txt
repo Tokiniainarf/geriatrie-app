@@ -1,0 +1,352 @@
+=== Page 1 ===
+L'EQUI
+ILIBRECLINIQUE
+Le Tableau de Bord du Clinicien : Biologie, Hydratation et Antibiotherapie
+5NotebookLM
+
+=== Page 2 ===
+L'Anatomie d'une Decision Medicale
+Décrypter le Terrain
+RestaurerlesVolumes
+Cibler I'Agression
+Corriger les deficits intra
+L'interpretation
+Frapper juste, réévaluer
+paraclinique qui oriente le
+et extracellulaires. L'art du
+vite (48-72h),et limiter les
+soluté et I'élegance de la
+tir (Rein, NFS
+dégats collatéeraux. Le
+lonogramme). Ne pas se
+voie sous-cutanee.
+paradigme du traitement
+fier aux apparences.
+court.
+SNotebookLM
+
+=== Page 3 ===
+Fonction Renale:L'lllusion de la Creatinine lIsolee
+EvaluerlaClairance.
+Normal
+Age
+Poids
+Creatinine
+La Creatininemie seule est aveugle.
+Elledependdelamassemusculaire,de
+I'age et de la dénutrition.
+Sexe
+Unevaleurnormalepeutmasquerune
+baissede40%duDebitdeFiltration
+L'évaluation reelle repose surla mesure
+Glomerulaire entre 40 et 80 ans.
+delaclairance estimee
+Mais quelleformulechoisirau quotidien?
+SNotebookLM
+
+=== Page 4 ===
+Matrice deDecision:Cockcroft-Gault vsCKD-EPl
+Cockcroft-Gault
+CKD-EPIIMDRD
+Objectif Principal
+Objectif Principal
+Adaptation Posologique des
+Dépistage et Stades de I'IRC
+Medicaments
+Unite de Mesure
+Unité de Mesure
+mL/min (Fonction rénale brute)
+mL/min/1.73 m? (Fonction normalisee)
+Prise en compte du Poids
+Prise en compte du Poids
+Utilise le poids réel du patient
+Independant du poids
+Usage Pratique
+Usage Pratique
+Ajustement des antibiotiques, dépistage de
+Classification de la maladie rénale chronique
+toxicite (AINS).
+Ne pas utiliserpourajuster uneposologie
+sans desindexer.
+SNotebookLM
+
+=== Page 5 ===
+La Boussole Hematologique : Decrypter I'Anemie
+Hemoglobine<12g/dL(F)/<13g/dL(H)
+Reticulocytes>120G/L
+Reticulocytes<120G/L
+(Regenerative)
+(Aregenerative)
+Evaluer leVGM
+Hemolyse ou Hemorragie
+Microcytaire
+Macrocytaire
+Normocytaire
+CarenceB12/B9
+Carencemartiale
+Multifactoriel
+(Ferritine)
+(Rein,Inflammation)
+Alcoolisme
+Syndrome
+Hypothyroidie
+inflammatoire
+SNotebookLM
+
+=== Page 6 ===
+LePiege Diagnostique:L'Anemie Mixte
+La ferritine s'éleve lors de toute inflammation, masquant une veritable carence en fer.
+Anemie Ferriprive
+AnemieInflammatoire
+AnemieMixte
+ (<30 μg/L)
+个ouNormale
+Ferritine
+Jou Normale
+Coef.Saturation -CST
+ (< 15%)
+RsT-Recepteurs
+个（Confirmela
+Normale
+Solubles
+carence associee
+Le Juge de Paix: Les RsT augmentent en cas de carence martiale vraie,meme en plein
+orageinflammatoire.
+SNotebookLM
+
+=== Page 7 ===
+Hyponatremie (Etape 1) : Eliminer I'Artefact
+Pseudohyponatremie
+Proteines ou lipides excessifs occupant le volume plasmatique. Le sodium
+réel est normal. Solution : Dosage par électrodes ioniques.
+L'effetOsmolaire
+Laglycemietirel'eauhorsdescellules,
+Osmolarité=2x(Na+K)+Glycémie+Uree
+diluantlesodium.
+Si I'osmolarite est basse(<275mOsm/L),il s'agit d'une vraie hyponatremie
+Onpasseal'etape2.
+SNotebookLM
+
+=== Page 8 ===
+Hyponatremie (Etape 2) : L'Arbre du Volume
+Extracellulaire (VEC)
+VEC Normal
+VEC Diminue
+VEC Augmente
+(PerteEau+Sel)
+(RetentionEau seule)
+(Retention Eau+Sel)
+Natriurese>20mmol/L
+(Rénale) :
+Natriurese>20 mmol/L:
+Diuretiques,Insuffisance
+Insuffisance renale aigue
+surrenalienne
+Diagnostic principal :
+SIADH,Potomanie
+Hypothyroidie
+Natriurese<20mmol/L
+Natriurese<20 mmol/L:
+(Extra-rénale) :
+Insuffisancecardiaque,
+Vomissements,Diarrhee
+Cirrhose, Nephrotique
+Brulures
+SNotebookLM
+
+=== Page 9 ===
+Module 2 : Restaurerla Balance (Les Besoins de Base)
+La routine pourun adulte de 7o kg a jeun, sans anomalie des volumes.
+Eau
+Sodium (Na+)
+Potassium(K+)
+Glucose
+20a30ml/kg/jour
+1a2mmol/kg/jour
+1mmol/kg/jour
+50a100g/jour
+(~5g/jour)
+(~2Litres)
+(~4a8g/jour)
+(Evite la cétose)
+Regle d'or:Pour I'obese, utiliser le poids ideal theorique pour eviter la surcharge
+NotebookLM
+
+=== Page 10 ===
+Cartographie Therapeutique: Cibler le Bon Compartiment
+Extracellulaire (VEC)
+Intracellulaire (VIC)
+Signes :
+Signes :
+Hypotension,
+Soif, Hypernatremie
+Plicutane
+Deshydratation
+Arme :
+Arme :
+Glucosé5%
+H20
+NaCI0.9%
+(Apport d'eau pure)
+Signes:
+Signes :
+CEdemes,
+Hyponatremie
+Prise de poids
+hypo-osmolaire
+Hyperhydratation
+Arme :
+Arme :
+Restrictionsodee
+Restriction
++ Diuretiques
+hydrique stricte
+SNotebookLM
+
+=== Page 11 ===
+Le Pivot Strategique : L'Hypodermoclyse (Voie SC)
+Voie Intraveineuse (IV)
+Voie Sous-Cutanee (SC)
+OAvantages:Reponse
+Mecanisme:Diffusion
+immediate, gros volumes.
+lente via I'hypoderme vers
+lescapillaires.
+X Inconvenients : Capital
+veineux alterable,risque
+Indications:Deshydratation
+infectieux/thrombotique,
+moderee,maintien a
+entrave la mobilite
+domicile,capital veineux
+épuisé.
+Atouts:Préservationdu
+confort, autonomie,faible
+risque systemique.
+SNotebookLM
+
+=== Page 12 ===
+Voie Sous-Cutanee : Ce qui Passe et ce qui Casse
+Solutes Isotoniques : NaCl 0.9%
+ Urgences Vitales : Choc,
+(idéal).
+deshydratation severe.
+Médicaments cibles : Morphine,
+Toxiquestissulaires:Potassium
+Midazolam, Ceftriaxone.
+pur (KCl), Glucose 5% pur.
+ Vitesse : Adaptée a I'absorption
+ Terrains inadaptés : Peau infectée,
+tissulaire
+anasarque, troubles de la
+coagulation
+SNotebookLM
+
+=== Page 13 ===
+Module 3 : La Frappe Chirurgicale (Les 4 Piliers)
+Justifer
+Cibler
+Desescalader
+Raccourcir
+Toute fievre
+Passerau
+Prefererle
+Reduire la
+n'est pas
+spectreleplus
+traitement
+pression de
+bacterienne.
+étroit.
+documente des
+selection,la
+S'appuyer sur
+leretourde
+L'associationn'a
+toxicite et les
+I'antibiogramme.
+lesTRODetla
+BMR.
+aucunepreuve
+Procalcitonine
+d'interet courant.
+SNotebookLM
+
+=== Page 14 ===
+La Fenetre Critique: Le Cap des 48-72 Heures
+Apyrexie?
+-> Poursuite
+JO:
+J2-J3:
+Echec clinique?
+La Frappe
+L'Heure de
+-> Relais ou changement.
+Probabiliste
+Verite
+Retour Antibiogramme
+Prelevementsavant
+traitement.
+-> Désescalade et Relais
+Prescriptionbasee
+Per Os.
+sur le terrain.
+SNotebookLM
+
+=== Page 15 ===
+Le Nouveau Paradigme : Plus Court, Aussi Efficace
+10
+12
+11
+13
+14
+Pneumonie Aigue
+5Jours（Amoxicilline)
+Communautaire
+Cystite Aigue
+5a7Jours(Amox=7J,TMP=5J)
+Dermohypodermite
+7 Jours
+/Erysipele
+Pyelonephrite
+7a14Jours
+10
+12
+11
+1314
+SNotebookLM
+
+=== Page 16 ===
+L'Axe Rein-Antibiotique : Sécuriser la Posologie
+Clairance
+Demi-vie
+(Dose)
+（Rythme)
+Antibiotique
+Antibiotique
+Temps-Dependant:
+Concentration-Dependant :
+Baisserla doseunitaire
+Espacerlesadministrations
+L'Alerte latrogene:L'association AiNS +Antibiotique bloque la perfusion
+glomerulaire, risque la necrose tubulaire et masque l'échec clinique.
+SNotebookLM
+
+=== Page 17 ===
+La Boucle de I'Homeostasie:L'Ordonnance Parfaite
+La Boussole
+La Boussole
+EvaluerleDFG,demelerles
+EvaluerleDFG,demeler
+signaux mixtes.
+lessignaux mixtes.
+Sécurité,
+Précision,
+Equilibre.
+LaFrappe
+La Balance
+Traitements courts,
+CiblerleVECVIC,mobiliser
+desescaladeimplacablea48h.
+la voie sous-cutanee.
+SNotebookLM

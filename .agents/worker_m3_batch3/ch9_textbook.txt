@@ -1,0 +1,900 @@
+=== CHAPTER CH9 ===
+
+--- PAGE 155 ---
+Raisonner devant une plainte mnésique et un trouble neurocognitif
+Rang Rubrique Intitulé Descriptif
+B Examens Connaître les grandes lignes des Application des critères HAS 2011
+complémentaires résultats attendus de l'IRM devant
+un trouble neurocognitif
+B Contenu multimédia Exemple HSD chronique TDM
+ITEM 108 – Confusion, démence
+Cf. chapitre 11.
+I. Généralités
+A En dehors d'une situation aiguë de type syndrome confusionnel faisant évoquer ou décou-
+vrir un trouble neurocognitif (TNC) sous-jacent, un diagnostic de TNC est souvent fait dans un
+contexte de plainte cognitive essentiellement mnésique générant une inquiétude chez le
+patient ou ses proches. Lors d'une consultation pour plainte mnésique, il est nécessaire de
+mettre en place une démarche diagnostique rigoureuse et de faire les examens complémen-
+taires nécessaires afin d'établir le diagnostic de la pathologie sous-jacente.
+Vieillissement cognitif
+Le vieillissement est hétérogène d'une personne à l'autre mais s'accompagne de modifications
+physiologiques du fonctionnement cognitif :
+• réduction des ressources attentionnelles avec un certain degré de ralentissement et diffi-
+culté à faire des tâches multiples simultanément ;
+• modification du fonctionnement exécutif marqué par :
+– élaboration plus difficile de stratégies ;
+– réduction des capacités d'inhibition ;
+– réduction de l'adaptabilité ;
+– rappel libre mnésique diminué avec normalisation par l'indiçage.
+Ces difficultés, ou vulnérabilité cognitive liée à l'âge, peuvent être à l'origine d'une plainte mné-
+sique, mais jamais à l'origine d'un retentissement su les activités de vie quotidienne (ADL et IADL).
+▼
+Les sept écueils à éviter concernant les troubles cognitifs
+de la personne âgée
+• Considérer que le vieillissement cérébral s'accompagne de troubles cognitifs retentissant sur les IADL [131].
+• Ne pas évaluer l'autonomie devant des troubles cognitifs [131].
+• Ne pas rechercher et diagnostiquer les troubles comportementaux, et négliger leurs conséquences
+[114, 116, 117].
+• Négliger une cassure dans l'évolution et ne pas penser à un syndrome confusionnel [119].
+• Négliger la sensibilité aux médicaments et ne pas anticiper le risque iatrogène [348].
+• Ne pas élaborer un plan de soins structuré médicamenteux et non médicamenteux, comprenant la
+mise en place d'aides pour pallier la dépendance des patients [352].
+• Ne pas prendre en compte la souffrance des aidants et en négliger l'aide [330].
+→ Les troubles neurocognitifs (TNC), au sein de l'ensemble des comorbidités et en considérant les traitements
+associés, doivent être pris en charge pour en ralentir l'évolution et limiter leur impact sur la qualité de vie du
+patient et de son entourage. Leur conséquence sur l'autonomie doit être spécifiquement prise en charge.
+Il est important de différentier les TNC légers des TNC majeurs retentissant au minimum sur les IADL et
+potentiellement sur les ADL.
+
+--- PAGE 156 ---
+Connaissances
+L'évaluation des fonctions cognitives, dans un contexte de dépistage, est une dimension de l'évaluation
+gériatrique globale (EGS, cf. chapitre 1).
+Quand ?
+• Lors d'une première consultation ou hospitalisation.
+• Lors de consultations de suivi [266, 267, 279, 295].
+• En présence d'une perte d'autonomie [31].
+• En seconde intention dans un bilan d'altération de l'état général.
+• À distance d'un événement intercurrent en particulier un syndrome confusionnel [119].
+• Devant tout trouble du comportement [114, 116, 117].
+• Après tout syndrome confusionnel [119].
+Comment ?
+• En récupérant des informations objectives [131].
+• En impliquant si besoin l'aidant principal [330], le médecin référent.
+• En examinant le patient sur le plan neurologique, thymique et neuro-sensoriel.
+• En discutant l'intérêt des examens complémentaires appropriés [334].
+Pourquoi ?
+• Afin d'éliminer ou de faire un diagnostic de trouble neurocognitif et d'apporter des explications aux
+troubles ressentis par le patient et/ou son entourage.
+• Afin de prévenir les facteurs déstabilisant le patient sur le plan cognitif.
+• Afin de limiter la progression des troubles cognitifs.
+• Afin de suppléer au déclin fonctionnel et d'organiser la mise en place des aides.
+• Afin d'élaborer et d'expliquer au patient le projet thérapeutique [352].
+II. Démarche diagnostique devant une plainte
+mnésique du patient âgé
+Démarche
+A. Faire le diagnostic de plainte mnésique ou d'équivalent sémiologique.
+B. Analyser les troubles cognitifs et leur retentissement.
+C. Décider des examens complémentaires.
+D. Organiser le plan de soin.
+L'objectif devant une plainte mnésique est de rechercher des arguments pour un TNC sous-
+jacent et, le cas échéant, de rassurer le patient, souvent inquiet en raison de sa plainte. Un
+TNC léger ou majeur, respectivement sans ou avec perte d'autonomie, répond à une définition
+précise du DSM-5 (encadré 9.1).
+Un TNC peut répondre à de nombreuses étiologies (encadré 9.2) et doit engager une démarche
+diagnostique permettant de porter un diagnostic le plus souvent possible ou probable, repo-
+sant sur un faisceau d'arguments cliniques, neuropsychologiques, biologiques et neuroradiolo-
+giques. En effet, le diagnostic certain n'est apporté que par la neuropathologie. Aucun résultat
+d'examen clinique ou paraclinique n'est pathognomonique d'un processus pathologique.
+
+--- PAGE 157 ---
+Raisonner devant une plainte mnésique et un trouble neurocognitif
+Encadré 9.1
+Critères diagnostiques des troubles neurocognitifs d'après le DSM-5
+Trouble neurocognitif léger
+A. A Présence d'un déclin cognitif modéré à partir d'un niveau antérieur de performance dans un ou plu-
+sieurs domaines de la cognition (attention complexe, fonctions exécutives, apprentissage et mémoire,
+langage, cognition perceptivo-motrice ou sociale) fondé sur :
+1. la perception par le patient, un informant fiable ou le clinicien, d'un léger déclin cognitif ;
+2. l'existence d'une diminution modérée des performances cognitives, préférablement documentée
+par des examens neuropsychologiques standardisés ou, à défaut, par une autre évaluation clinique
+quantitative.
+B. Les déficits cognitifs n'interfèrent pas avec l'autonomie dans la vie quotidienne (c'est-à-dire les IADL
+comme payer ses factures ou gérer ses médicaments sont préservés, mais nécessitent un plus grand effort,
+des stratégies compensatrices ou un ajustement).
+C. Les déficits cognitifs ne surviennent pas uniquement dans le contexte d'un delirium [syndrome confusion-
+nel dans la terminologie française].
+D. Les déficits cognitifs ne sont pas mieux expliqués par une autre affection mentale (par exemple, épisode
+dépressif majeur, schizophrénie).
+Trouble neurocognitif majeur
+A. Présence d'un déclin cognitif significatif à partir d'un niveau antérieur de performance dans un ou plu-
+sieurs domaines de la cognition (attention complexe, fonctions exécutives, apprentissage et mémoire,
+langage, cognition perceptivo-motrice ou sociale) fondé sur :
+1. la perception par le patient, un informant fiable ou le clinicien, d'un déclin cognitif significatif ;
+2. l'existence d'une diminution importante des performances cognitives, préférablement documentée
+par des examens neuropsychologiques standardisés ou, à défaut, par une autre évaluation clinique
+quantitative.
+B. Le déclin cognitif retentit sur l'autonomie dans les activités quotidiennes (c'est-à-dire nécessite au mini-
+mum une assistance dans les activités instrumentales complexes comme payer ses factures ou gérer ses
+médicaments).
+C. Les déficits cognitifs ne surviennent pas uniquement dans le contexte d'un delirium [syndrome confusion-
+nel dans la terminologie française].
+D. Les déficits cognitifs ne sont pas mieux expliqués par une autre affection mentale (par exemple épisode
+dépressif majeur, schizophrénie).
+Encadré 9.2
+Étiologie des troubles neurocognitifs majeurs (TNCM) ou légers (TNCL)
+d'après le DSM-5
+• A TNCM (probable ou possible) ou TNCL :
+– dû à la maladie d'Alzheimer ;
+– fronto-temporal ;
+– à corps de Lewy ;
+– vasculaire ;
+– dû à un traumatisme cérébral ;
+– induit par une substance ;
+– dû à l'infection VIH ;
+– dû à la maladie de Parkinson ;
+– dû à une maladie à prions ;
+– dû à la maladie de Huntington ;
+– dû à une autre affection médicale ;
+– dû à de multiples étiologies.
+• TNC non spécifié.
+
+--- PAGE 158 ---
+Connaissances
+A. Faire le diagnostic de plainte mnésique ou d'équivalent
+sémiologique
+Différentes situations sont rencontrées :
+• le patient communique normalement et consulte pour une plainte nouvelle. Il peut s'agir
+d'une plainte mnésique [131], d'une anxiété [116], d'éléments dépressifs [123], d'un
+trouble du langage [134], plus rarement d'un trouble du sommeil [135] ou d'une autre
+atteinte cognitive ;
+• le patient communique mais il s'agit d'une demande de l'entourage, souvent dans le cadre
+d'un changement de comportement, comme une apathie [117], ou d'idées délirantes
+[124], interférant avec la vie quotidienne ;
+• le patient n'a pas exprimé de plainte et est adressé par sa famille ou par un collègue,
+pour asthénie (facilement confondue avec de l'apathie), pour altération de l'état général
+(souvent après bilan de première, deuxième voire troisième intention, l'inadéquation de
+l'alimentation étant à l'origine de l'amaigrissement) ou pour perte d'autonomie ;
+• le patient est hospitalisé pour un autre motif médical aigu et le dépistage de troubles
+cognitifs montre des anomalies ;
+• situation fréquente, les troubles cognitifs ont été minorés, négligés ou rattachés à l'âge (le
+fameux concept de démence sénile), et vous découvrez des troubles cognitifs évolués au
+décours d'un syndrome confusionnel, sur des difficultés dans la gestion financière ou sur
+l'épuisement de l'entourage, en particulier de l'aidant principal.
+2. Exemples de pièges sémiologiques
+132 Confondre :
+• une apathie avec une asthénie [117] ;
+• une agressivité (par exemple, frontale) avec le reflet de traits de personnalité anciens
+(« méchanceté », « mauvais caractère ») ;
+• une idée délirante (persécution, alimentation empoisonnée [124]) avec des traits « para-
+noïaques » anciens ;
+• une alimentation inadaptée (liée à la perte d'autonomie pour accéder aux courses ou à un
+trouble du comportement) avec une anorexie et une altération de l'état général ;
+• une chute sur trouble attentionnel avec une autre cause de chute [27] ;
+• une désinhibition frontale avec des difficultés de respect des convenances sociales
+anciennes.
+B. Analyser les troubles cognitifs et leurs conséquences
+La plainte confirmée ou le TNC avéré, il faut le caractériser. Il faut d'une part faire une enquête étiologique
+centrée sur le TNC et, d'autre part, aborder le patient dans sa globalité et mettre en place des interventions
+adaptées.
+Reprendre les antécédents :
+• éventuellement familiaux, même si la majorité des TNC de la personne âgée sont en lien
+avec des affections sporadiques ;
+• vasculaires : facteurs de risque, accident vasculaire cérébral, autre atteinte artérielle, en
+faveur d'un TNC d'origine vasculaire ou au moins mixte ;
+• syndrome parkinsonien connu ou maladie de Parkinson en faveur d'un TNC parkinsonien
+ou d'une maladie à corps de Lewy ;
+
+--- PAGE 159 ---
+Raisonner devant une plainte mnésique et un trouble neurocognitif
+• dépression ;
+• autre pathologie psychiatrique qui pourrait interférer avec la présentation sémiologique.
+Il faut également recueillir :
+• les atteintes sensorielles ;
+• les autres pathologies en vérifiant l'adéquation des traitements ;
+• l'ensemble des traitements ;
+• le mode de vie dont la responsabilité dans la prise des traitements, l'existence de situations
+à risque comme une cuisinière à gaz à domicile, la conduite automobile, le risque d'escro-
+querie ou de spoliation…
+En présente d'une plainte cognitive, il faut également systématiquement interroger les patients
+et leur entourage sur l'existence de troubles comportementaux associés, en s'aidant des items
+de l'échelle Neuro-Psychiatric Inventory (NPI, encadré 9.3) et ne pas attendre que le patient
+décrive tous ses symptômes. L'interrogatoire de l'entourage est important, mais la chronicité
+de certains symptômes peut favoriser leur banalisation.
+Encadré 9.3
+Troubles comportementaux de la maladie d'Alzheimer d'après le Neuro-
+Psychiatric Inventory
+• A Dépression/dysphorie.
+• Anxiété.
+• Irritabilité/labilité.
+• Apathie.
+• Exaltation/euphorie.
+• Désinhibition.
+• Idées délirantes.
+• Hallucinations.
+• Agitation/agressivité.
+• Comportements moteurs aberrants.
+• Troubles du sommeil.
+• Troubles de l'appétit.
+(Source : Cummings JL, Mega M, Gray K, Rosenberg-Thompson S, Carusi DA, Gornbein J. The Neuropsychiatric Inventory: comprehensive
+assessment of psychopathology in dementia. Neurology 1994 ;44:2308–14.)
+À ce stade, utilisation d'outils de repérage d'un TNC, qui ne permettent en aucun cas de
+faire un diagnostic mais permettent aussi d'apprécier la sévérité d'une atteinte ou le type
+d'atteinte :
+• Mini Mental State Evaluation : évaluation cognitive globale ;
+• test des cinq mots : évaluation de la mémoire et de l'encodage ;
+• BREF : évaluation des fonctions éxécutives ;
+• test de l'horloge : évaluation des fonctions exécutives et visuospatiales.
+Principaux mots clefs permettant d'évoquer une étiologie
+– Maladie d'Alzheimer : fréquence, évolution progressive, trouble mnésique [131] et du langage [134] au
+premier plan.
+– Vasculaire : fréquence, terrain vasculaire, signe de localisation neurologique [121], dégradation par à-coups,
+troubles dysexécutifs.
+– Maladie à corps de Lewy : évolution progressive, syndrome parkinsonien [128], malaise/dysautonomie [50],
+hallucinations [122], fluctuations.
+– Fronto-temporale : syndrome frontal, trouble du comportement au premier plan (apathie ou désinhibition,
+modifications des comportements alimentaires et/ou d'hygiène…).
+
+--- PAGE 160 ---
+Connaissances
+C. Évaluation du retentissement et de l'autonomie
+Le retentissement des TNC sur l'autonomie permettant de faire le diagnostic de TNC majeur,
+l'évaluation de l'autonomie est un temps essentiel :
+• elle doit prendre en compte le niveau socio-culturel (notion de réserve cognitive) ;
+• elle repose sur la recherche en particulier de conséquences sur les interactions sociales (par
+exemple, réduction, évitement) et l'utilisation d'échelles d'évaluation de l'autonomie (ADL
+de Katz et IADL de Lawton, cf. chapitre 2). Dans le DSM-5, le retentissement sur l'auto-
+monie est évalué par les items de l'échelle IADL ; parmi les items IADL, les quatre le plus
+associés à l'existence d'un TNC sous-jacent sont :
+– utilisation du téléphone ;
+– utilisation des moyens de transport ;
+– gestion des médicaments ;
+– gestion des comptes, de l'argent ;
+• elle permet d'anticiper le besoin d'aides et d'adapter le plan de soins (cf. infra).
+D. Décider des examens complémentaires
+1. Bilan neuropsychologique
+• Permet une caractérisation des troubles cognitifs.
+• Doit s'envisager essentiellement en cas d'altération légère des fonctions cognitives, mais
+pourrait s'envisager pour un MMS > 18.
+134 2. Examens biologiques
+Les examens biologiques cherchent surtout à éliminer un facteur aggravant. Ils sont également
+guidés par les comorbidités associées.
+Première intention
+• Numération-formule sanguine.
+• CRP.
+• TSH.
+• Ionogramme sanguin avec calcémie, glycémie à jeun.
+• Albuminémie.
+Selon le contexte
+• SGOT/SGPT, γGT.
+• Sérologies TPHA-VDRL, VIH.
+• Vitamines B12, B9.
+3. Électroencéphalogramme
+Indication à décider au cas par cas. Recherche de grapho-éléments pseudo-périodiques en cas
+d'évolution rapide faisant suspecter une maladie de Creutzfeldt-Jakob.
+4. Examens d'imagerie [226, 230]
+• B La réalisation d'une imagerie est systématique, IRM en première intention.
+• IRM encéphalique : T1 3D plan hippocampique, T2, FLAIR, T2* (écho de gradient), de
+diffusion si évolution rapide (quelques semaines). Ce n'est qu'en cas de contre-indication à
+l'IRM que l'on réalisera une tomodensitométrie cérébrale.
+
+--- PAGE 161 ---
+Raisonner devant une plainte mnésique et un trouble neurocognitif
+• DAT-Scan® : recherche d'un hypométabolisme dopaminergique dans le cadre d'une suspi-
+cion de démence à corps de Lewy.
+• TEP ou TEMP : à réserver aux cas difficiles (cf. infra fig. 9.7).
+III. Diagnostic étiologique
+A Au terme de la démarche ci-dessus, les troubles cognitifs peuvent être rattachés à un dia-
+gnostic probable ou possible.
+A. Maladie d'Alzheimer
+Première étiologie de TNC, entre 50 et 70 % des cas selon les séries.
+1. Neuropathologie
+B L'association d'une perte neuronale, de plaques amyloïdes et de dégénérescences neurofi-
+brillaires est caractéristique de la maladie (1997) :
+• les plaques amyloïdes sont des lésions sphériques extracellulaires composées principale-
+ment de protéine amyloïde Aβ issue du peptide précurseur de l'amyloïde ou APP (Amyloid
+Precursor Peptide) suite à diverses actions enzymatiques ;
+• les dégénérescences neurofibrillaires (DNF) sont riches en protéine tau (tubulin-associated
+unit), notamment dans sa forme phosphorylée, qui permet l'assemblage des sous-unités de
+tubuline en microtubules en fonction de son état de phosphorylation.
+Chez les personnes âgées de plus de 75 ans, les co-lésions sont fréquentes, associant des
+lésions caractéristiques de la malade d'Alzheimer, mais aussi des lésions vasculaires isché-
+miques diffuses ou lacunaires, des micro-hémorragies en lien avec une angiopathie amyloïde
+(cf. infra), des corps de Lewy tels que ceux de la maladie de Parkinson ou la maladie à corps de
+Lewy, et une gliose (ou neurodégénérescence) aspécifique.
+2. Symptômes et signes cliniques
+A La maladie d'Alzheimer est souvent évoquée sur une perte d'autonomie chez le patient âgé
+[31], dont elle représente la première étiologie. Cependant, cette maladie et les maladies
+apparentées ainsi que les diagnostics différentiels peuvent être diagnostiqués avant la perte
+d'autonomie, ce qui améliore la prise en charge et la prévention des complications.
+• Trouble de la mémoire épisodique :
+– symptôme révélant habituellement la maladie ;
+– oubli des informations de plus en plus saillantes. Marque une rupture dans ses capacités
+de mémorisation habituellement sur plusieurs années [131], mise en évidence à l'inter-
+rogatoire du patient ou de l'entourage ;
+– atteinte caractéristique mais non nécessaire au diagnostic de maladie d'Alzheimer, la
+maladie pouvant aussi débuter dans de plus rares cas par un trouble du langage verbal
+[134], des fonctions visio-spatiales ou exécutives ;
+– à l'examen : évaluation du discours du patient, commentaire des faits d'actualité, orien-
+tation temporelle et spatiale, rappel des trois mots du MMSE par exemple.
+• Classique syndrome aphaso-apraxo-agnosique :
+– aphasie d'expression (manque du mot en spontanée) ou/et de compréhension, une
+dysorthographie précoce, des difficultés de lecture tardive vont pouvoir survenir ;
+– les difficultés praxiques, souvent plus tardives, peuvent être retrouvées à l'interrogatoire
+explorant les capacités d'habillage, de réalisation des gestes de la vie courante.
+
+--- PAGE 162 ---
+Connaissances
+• Altération des fonctions exécutives (frontales), comme les capacités de programmation,
+d'inhibition, de conceptualisation, les stratégies complexes et les capacités de jugement.
+L'évolution se fait vers l'aggravation progressive des déficits cognitifs, ce qui retentit sur les
+activités de vie quotidienne et l'autonomie du patient évaluée par les activités instrumentales
+de vie quotidienne (IADL) [31].
+Le syndrome démentiel ou TNC majeur marqué par un déclin cognitif global et une perte
+d'autonomie est aggravé par la survenue de symptômes psychologiques et comportementaux
+des démences listés dans le Neuro-Psychiatric Inventory (NPI) (cf. encadré 9.2). Ces troubles
+sont à l'origine de prescriptions médicamenteuses associées à un risque iatrogène important
+du fait du terrain particulier qu'est la personne âgée et de la maladie sous-jacente.
+3. La neuro-imagerie, marqueur de topographie lésionnelle [226]
+L'IRM encéphalique ou, à défaut, le scanner crânien sans injection de produit de contraste, per-
+met d'objectiver l'atrophie cérébrale qui prédomine dans la région temporale interne au début
+de la maladie, pour s'étendre ensuite vers le cortex temporo-pariétal et frontal. Chez la personne
+âgée, des lésions vasculaires sont souvent associées (fig. 9.1). Cet examen permet aussi d'écarter
+d'autres types de lésions, notamment vasculaires, pouvant participer au déficit cognitif.
+Dans certains cas atypiques comme les TNC rapides (quelques semaines d'évolution), les pré-
+sentations cliniques particulières comme l'aphasie progressive ou les troubles visuels centraux
+progressifs, ou chez les patients jeunes (< 65 ans), des analyses complémentaires mesurant
+notamment des biomarqueurs spécifiques de la maladie d'Alzheimer peuvent faire appel à une
+ponction lombaire ou une tomographie par émission de positons.
+Fig. 9.1. A Atrophie hippocampique, néocorticale diffuse et leucoencéphalopathie vasculaire modé-
+rée en séquence IRM FLAIR, coupe coronale. Compatible avec le diagnostic de maladie d'Alzheimer à
+composante cérébrovasculaire.
+B. Encéphalopathies vasculaires
+Considérés comme la deuxième cause de démence après la maladie d'Alzheimer chez la per-
+sonne âgée.
+La présentation et la sévérité dépendent de la localisation et de l'étendue de l'atteinte céré-
+brovasculaire. Ces troubles peuvent être d'origine ischémique ou hémorragique et peuvent
+induire un trouble cognitif léger (TNC léger) ou un syndrome démentiel (TNC majeur).
+Plusieurs types de lésions sont répertoriés [226] :
+• par infarctus multiples ;
+• par infarctus multilacunaires ;
+• par leucoencéphalopathie diffuse (fig. 9.2) ;
+
+--- PAGE 163 ---
+Raisonner devant une plainte mnésique et un trouble neurocognitif
+• par infarctus stratégique comme dans le thalamus ou le gyrus angulaire ;
+• par hypoperfusion, du fait d'hémorragies étendues ou de microhémorragies diffuses.
+Une présentation brutale du trouble cognitif ou classiquement en « marches d'escaliers » est
+évocatrice mais non nécessaire. Une marche progressive est observée dans les encéphalopa-
+thies diffuses notamment lacunaires.
+Fig. 9.2. A Encéphalopathie vasculaire diffuse en séquence IRM FLAIR, coupe axiale.
+Angiopathie amyloïde cérébrale
+Maladie des petites artères superficielles (dites piales) liée à des dépôts amyloïdes Aβ au niveau des parois
+artérielles.
+Fréquente chez la personne âgée dans sa forme sporadique et associée à une démence dans 10 à 30 % des cas.
+Les lésions qui en résultent sont essentiellement hémorragiques :
+• hémorragies corticales lobaires [226] ;
+• microsaignements corticaux multiples.
+Diagnostic évoqué grâce aux progrès de l'IRM (séquences en écho de gradient T2*) qui permet de visuali-
+ser les microsaignements corticaux (fig. 9.3) — lorsque les microsaignements sont sous-corticaux (noyaux
+gris centraux), ils sont davantage rapportés à une hypertension artérielle.
+Fig. 9.3. A Microbleeds, ou microsaignements, apparaissant comme des anomalies de signal de petite
+taille (2 à 10 mm) en IRM séquences T2*.
+
+--- PAGE 164 ---
+Connaissances
+C. Maladie à corps de Lewy et troubles cognitifs de la
+maladie de Parkinson
+La maladie à corps de Lewy figure parmi les trois principales causes de démence de la personne
+âgée.
+Les corps de Lewy sont des agrégats intra-neuronaux d'alpha-synucléine décrits dans la mala-
+die de Parkinson et la maladie à corps de Lewy.
+Par convention, les troubles cognitifs associés aux troubles moteurs :
+• sont présents dès la première année d'évolution clinique dans la maladie à corps de Lewy ;
+• surviennent secondairement, après plusieurs années de symptômes moteurs nettement
+prédominants dans la maladie de Parkinson.
+Les manifestations cliniques de la maladie à corps de Lewy associent de façon variable et aléa-
+toire (tableau 9.1) :
+• des troubles cognitifs progressifs, principalement une altération des fonctions exécutives,
+des capacités attentionnelles, des fonctions visio-spatiales ;
+• un syndrome parkinsonien surtout akinéto-rigide ;
+• des troubles du comportement en sommeil paradoxal avec sensation de « rêve éveillé »
+voire des cauchemars violents [135] ;
+• des hallucinations visuelles précoces [122] ;
+• une dysautonomie avec hypotension orthostatique [50].
+B L'imagerie anatomique montre une atrophie cortico-sous-corticale diffuse, modérée et peu
+spécifique. La TEMP/SPECT avec traceur fixant le transporteur de la dopamine (ioflupane ou
+DAT-Scan®) objective précocement un défaut de fixation striatale impliquant initialement la
+partie postérieure du putamen. Cet examen à bonne sensibilité doit être réservé aux patients
+ne présentant pas de syndrome parkinsonien clinique caractéristique.
+Tableau 9.1. B Critères diagnostiques révisés de maladie à corps de Lewy.
+Trouble cognitif Attention, fonctions exécutives et visuo-spatiales, ± amnésie
+Signes cliniques cardinaux Troubles du comportement en sommeil paradoxal (REM)
+Hallucinations visuelles
+Fluctuations
+Syndrome parkinsonien
+Signes cliniques suggestifs Hypersensibilité aux neuroleptiques
+Syndrome dysautonomique : hypotension orthostatique, syncopes, constipation…
+Hypersomnie
+Apathie
+Autres hallucinations, délire
+Hyposmie
+Anxiété, dépression
+Biomarqueurs
+Biomarqueurs caractéristiques Hypofixation striatale au DAT-Scan® (TEMP) ou en TEP à la fluoro-dopa
+Anomalies à l'enregistrement polysomnographique caractéristiques des troubles du
+comportement en sommeil paradoxal
+Anomalie de fixation du 123iodine-MIBG en scintigraphie myocardique
+Biomarqueurs suggestifs Préservation relative du lobe temporal médian à l'IRM
+Hypoperfusion/métabolisme cérébral postérieur (occipital) en PET/SPECT
+Ondes lentes postérieures en EEG
+
+--- PAGE 165 ---
+Raisonner devant une plainte mnésique et un trouble neurocognitif
+D. Syndrome de paralysie supranucléaire progressive
+Le syndrome de paralysie supranucléaire progressive (PSP) doit être évoqué devant :
+• des chutes précoces dans l'histoire de la maladie ;
+• un syndrome parkinsonien avec rigidité axiale, en grande partie dopa-résistant ;
+• des anomalies oculomotrices, notamment un ralentissement ou une limitation des sac-
+cades verticales volontaires ;
+• souvent un syndrome dysexécutif comportemental et cognitif précoce ;
+• une atrophie mésencéphalique (signe du colibri) en IRM encéphalique.
+E. Syndrome de dégénérescence cortico-basale
+Le syndrome de dégénérescence cortico-basale (DCB) doit être évoqué devant :
+• une apraxie gestuelle souvent asymétrique, intéressant une main (« main inutile ») ;
+• un syndrome parkinsonien également asymétrique et une association possible à une hyper-
+tonie sévère avec dystonie du membre supérieur ;
+• un syndrome dysexécutif et une aphasie survenant rapidement, dépendant d'une exten-
+sion de la neurodégénérescence dans les régions frontales ;
+• une atrophie pariétale souvent très asymétrique controlatérale à la gêne motrice en image-
+rie cérébrale.
+F. Dégénérescences fronto-temporales
+Elles font partie du large groupe des dégénérescences lobaires fronto-temporales, comprenant
+également la majorité des cas de démence sémantique et d'aphasie primaire progressive non
+fluente :
+• affectent souvent des personnes de moins de 60 ans ;
+• antécédents familiaux souvent observés ;
+• affection hétérogène au plan génétique et lésionnel, liées au métabolisme de la protéine
+tau ou s'illustrent notamment par des inclusions à ubiquitine.
+La présentation clinique initiale est souvent marquée par :
+• des troubles du comportement par atteinte exécutive comportementale (anciennement
+dénommée « atteinte frontale ») avec un comportement social inapproprié, une désinhibition
+ou une apathie, des actes impulsifs, une perte précoce d'empathie, des comportements per-
+sévératifs, stéréotypés ou compulsifs/ritualisés, une hyperoralité et des modifications du com-
+portement alimentaire avec attirance pour le sucré, et une franche dégradation de l'hygiène ;
+• un syndrome dysexécutif (frontal) avec des troubles de la programmation, de flexibilité,
+d'inhibition, une diminution des capacités d'évocation lexicale ;
+• un examen neurologique longtemps normal, mais peuvent apparaître une libération des
+réflexes archaïques, un syndrome pyramidal ou parkinsonien, une astasie-abasie ou apraxie
+de la marche, des signes d'atteinte de la corne antérieure de la moelle spinale ;
+• une atrophie frontale et temporale antérieure bilatérale à l'IRM encéphalique (fig. 9.4).
+
+--- PAGE 166 ---
+Connaissances
+Fig. 9.4. A Atrophie frontotemporale en IRM séquence FLAIR, coupe horizontale.
+G. Troubles neurocognitifs en rapport avec une autre
+affection neurologique
+Hydrocéphalie chronique dite « à pression normale »
+• A Affection potentiellement curable.
+• Doit être évoquée devant la triade clinique de Hakim et Adams :
+– difficultés de la marche [66], essentiellement apraxie ou astasie-abasie avec marche
+précautionneuse à petits pas, élargissement du polygone et tendance à la rétropulsion ;
+– altération cognitive avec syndrome sous-cortico-frontal, avec ralentissement idéatoire,
+déficit attentionnel et syndrome dysexécutif ;
+– troubles vésico-sphinctériens [103].
+• Dilatation tétraventriculaire alors que les sillons corticaux sont moins dilatés voire effacés,
+ainsi qu'une suffusion trans-épendymaire de LCS illustrée par une hypodensité scannogra-
+phique ou un hypersignal T2 périventriculaire (fig. 9.5) [226].
+• Amélioration inconstante après ponction lombaire évacuatrice de 30 à 40 cm3 de LCS.
+Hématome sous-dural (HSD)
+Classiquement associé au syndrome confusionnel, il peut toutefois passer inaperçu lors de sa
+constitution. L'HSD peut être responsable d'un TNC plus chronique. L'imagerie met facilement
+en évidence la lésion, mais son caractère bilatéral et parfois isodense (ou isointense) peut
+constituer un piège, seul un œdème cérébral étant alors détectable.
+Tumeurs encéphaliques
+Les lésions tumorales à développement lent comme les méningiomes, les gliomes de bas grade,
+parfois les lymphomes cérébraux, peuvent induire un trouble cognitif dont la nature dépendra
+de la localisation de la tumeur. Parfois les lésions peuvent provoquer une hydrocéphalie non
+communicante.
+
+--- PAGE 167 ---
+Raisonner devant une plainte mnésique et un trouble neurocognitif
+Fig. 9.5. A Dilatation ventriculaire et effacement des sillons corticaux en IRM séquence FLAIR évo-
+quant une hydrocéphalie chronique.
+H. Maladie de Creutzfeldt-Jakob
+• B La maladie de Creutzfeldt-Jakob (MCJ) est la plus fréquente des maladies à prion
+(incidence en France de 1,5 à 2 cas par an par million).
+• Formes généralement sporadiques chez la personne âgée.
+• Présentation clinique classique associant :
+– un syndrome cérébelleux rapidement progressif ;
+– une démence rapide se développant en quelques semaines ;
+– des myoclonies survenant en cours d'évolution.
+• Décès en quelques mois.
+• Apparaît rapidement un aspect de grapho-éléments triphasiques caractéristiques à l'EEG.
+• Présence de protéine 14-3-3 dans le LCS.
+• Hypersignaux pratiquement pathognomoniques des noyaux gris centraux et du cortex
+cérébral en séquence de diffusion à l'IRM (fig. 9.6).
+Fig. 9.6. A Hypersignal cortical et du noyau caudé droit en IRM séquence de diffusion, coupes axiales,
+évoquant une maladie de Creutzfeldt-Jakob.
+
+--- PAGE 168 ---
+Connaissances
+I. Troubles neurocognitifs liés à une affection générale
+1. Carences vitaminiques et intoxication éthylique chronique
+Les encéphalopathies alcoolo-carentielles :
+• syndrome démentiel aspécifique, avec d'autres complications neurologiques telles qu'une
+polyneuropathie sensitivo-motrice ou une atrophie cérébelleuse et frontale responsable de
+troubles de la marche ;
+• syndrome de Korsakoff alcoolo-carentiel :
+– s'illustre par une amnésie antérograde majeure et des fabulations ;
+– peut être favorisé par l'hydratation glucosée sans supplémentation vitaminique chez un
+patient carencé en vitamine B1 ;
+– sa symptomatologie peut rarement être améliorée par la supplémentation en vitamine
+B1 parentérale immédiate, massive (500 mg à 1 g par jour) et prolongée.
+Les carences en vitamine B12 et acide folique sont parfois responsables d'un déclin cognitif
+aspécifique. Un contexte hématologique évocateur doit inciter à les doser car la réversibilité
+du déficit peut être remarquable.
+2. Autres intoxications
+L'intoxication au monoxyde de carbone peut induire une altération cognitive sévère en rapport
+avec des lésions des noyaux gris centraux.
+De nombreux médicaments peuvent révéler ou aggraver un trouble cognitif :
+• médicaments à effet anticholinergique (+++) : antidépresseurs tricycliques, antihistami-
+niques, neuroleptiques et leurs correcteurs, antispasmodiques urinaires, antiparkinsoniens,
+collyres atropiniques ;
+• autres psychotropes, en particulier les benzodiazépines (aggravation des difficultés atten-
+tionnelles et ainsi du syndrome démentiel) ;
+• tout médicament pouvant induire une hyponatrémie.
+À ne pas manquer :
+• encéphalopathie au valproate (Dépakine®), qui peut induire un syndrome démentiel sévère
+et parfois une grabatisation, même si les taux sériques sont dans la zone thérapeutique ;
+• encéphalopathie au lithium, qui doit être redoutée en cas de prescription chronique.
+3. Maladies métaboliques et endocrinopathies
+Une altération cognitive marquée par un ralentissement idéomoteur, une apathie, des
+troubles de mémoire avec difficultés attentionnelles peut être observée dans l'hypothyroïdie.
+L'association à un syndrome dépressif peut être trompeuse. L'insuffisance antéhypophysaire
+et l'insuffisance surrénalienne chronique doivent être recherchées en fonction du contexte.
+L'hyponatrémie, l'hypercalcémie et les variations de la glycémie doivent être évoquées
+systématiquement.
+4. Maladies systémiques et vascularites
+Le neurolupus et les vascularites peuvent induire des TNC, souvent du fait de lésions
+ischémo-hémorragiques.
+5. Syndromes paranéoplasiques
+Les troubles cognitifs sont généralement d'installation rapide. Les symptômes initiaux illustrent
+un syndrome amnésique massif et l'IRM encéphalique peut montrer un hypersignal des struc-
+tures impliquées en séquences pondérées en T2.
+
+--- PAGE 169 ---
+Raisonner devant une plainte mnésique et un trouble neurocognitif
+6. Neurosyphilis
+Le tableau classique de la neurosyphilis à la phase tertiaire en rapport avec une vascularite et/
+ou une méningoencéphalite comporte une détérioration cognitive globale, parfois un syn-
+drome confusionnel avec troubles de l'humeur ou délires. Le classique signe d'Argyll-Robert-
+son doit être recherché, de même qu'un syndrome pyramidal, parkinsonien, des mouvements
+anormaux en particulier un tremblement.
+Les autres maladies infectieuses sont exceptionnellement révélées par un trouble cognitif chez
+le patient âgé.
+Imagerie de la maladie d'Alzheimer
+Patient A
+Patient B
+Fig. 9.7. A Le patient A présente une atrophie hippocampique ainsi qu'une atrophie diffuse sur
+l'IRM. Et la scintigraphie montre une hypoperfusion du cortex associatif avec respect des aires
+primaires. (On pourrait également visualiser sur d'autres coupes de la scintigraphie une hypoper-
+fusion temporale interne). S'il existe des critères cliniques de syndrome démentiel et une anam-
+nèse, un bilan neuropsychologique en faveur, ces éléments d'imagerie sont des arguments pour
+une maladie d'Alzheimer.
+Le patient B est un patient « normal » mais âgé. On peut noter la présence d'une atrophie diffuse,
+associée à l'âge et sans valeur pathologique lorsqu'elle est isolée.
+
+--- PAGE 170 ---
+Connaissances
+IV. Prise en charge et traitement des troubles
+neurocognitifs majeurs du patient âgé
+A. Annonce du diagnostic
+A Les recommandations de bonne pratique de la Haute Autorité de Santé (HAS) rappellent
+que le diagnostic de maladie d'Alzheimer doit être communiqué au patient [328].
+• L'information du patient concernant son diagnostic est justifiée par les éléments suivants :
+– droit du patient ;
+– nécessité éthique (principe de vérité) ;
+– base nécessaire pour organiser la prise en charge ;
+– possibilité donnée au patient d'agir sur son futur (mandat de protection future, direc-
+tives anticipées en particulier) ;
+– droit d'accès à la recherche.
+• Le patient est informé en premier de son diagnostic. À sa demande, ce diagnostic est
+partagé avec une personne de son choix. En cas d'incapacité à exprimer cette demande, le
+diagnostic est annoncé à la personne de confiance ou à défaut un membre de l'entourage
+en présence du patient.
+• L'information doit être réalisée par le médecin (médecin spécialiste) qui pose le diagnostic.
+Le processus d'annonce doit s'adapter au patient afin de tenir compte de son rythme
+d'appropriation et de son état thymique. Il est recommandé que le médecin traitant soit
+informé de l'annonce diagnostique avant de revoir le patient.
+• Le médecin généraliste doit être impliqué dans un processus d'annonce continu. Le médecin
+généraliste évalue la bonne compréhension du patient de l'annonce qui lui a été faite. Il présente
+au patient le plan de soins et d'aide et en assure la mise en place en collaboration avec le méde-
+cin ayant établi le diagnostic et les structures de coordination : réseaux, CLIC, MAIA, CMP…
+B. Plan de soins et d'aide des troubles neurocognitifs majeurs
+Objectifs du plan de soins
+• Préserver la qualité de vie du patient et, indirectement, des aidants de son entourage.
+• Maintenir ses capacités fonctionnelles en agissant sur la cognition, l'humeur, le comporte-
+ment et l'état somatique.
+• Compenser la perte d'indépendance fonctionnelle.
+• Établir un plan de prévention secondaire, notamment des troubles psycho-comportementaux.
+Il doit être suivi et réévalué régulièrement.
+Plan de soins et d'aides
+– 1. Mise en place de l'ALD 15.
+– 2. Interventions non médicamenteuses.
+– 3. Remédiation cognitive par orthophoniste ou en accueil de jour ou en hôpital de jour, équipe de soin
+Alzheimer (ESA).
+– 4. Éventuels traitements médicamenteux selon l'AMM.
+– 5. Prise en charge des autres comorbidités et des facteurs de risque.
+– 6. Surveillance nutritionnelle.
+– 7. Évaluation et prévention du risque de chutes.
+– 8. Mise en place des aides :
+– orientation vers les services sociaux (allocation personnalisée d'autonomie, financements) ;
+– aides à domicile si nécessaire (auxiliaire de vie, infirmier(e)) ;
+– information sur les associations de malades et de familles de malades, sur les structures de répit.
+– 9. Suivi médical du patient voire de l'aidant âgé.
+
+--- PAGE 171 ---
+Raisonner devant une plainte mnésique et un trouble neurocognitif
+C. Traitements médicamenteux spécifiques
+1. Maladie d'Alzheimer
+B Des traitements médicamenteux symptomatiques spécifiques (inhibiteurs de la cholinesté-
+rase : donépézil, galantamine, rivastigmine, et un antiglutamate : mémantine) font l'objet
+d'une AMM européenne dans la maladie d'Alzheimer, la démence de la maladie de Parkinson
+et la maladie à corps de Lewy, au stade de la démence ou du TNC majeur. Les méta-analyses
+soulignent une efficacité modeste mais significative sur la cognition. Cependant, la Haute
+Autorité de Santé a évalué le service médical rendu insuffisant. Ils ne sont donc pas pris en
+charge par l'assurance maladie.
+2. TNC majeur vasculaire
+Le contrôle des facteurs de risque cardiovasculaire, en particulier hypertension artérielle, dia-
+bète et dyslipidémie, est recommandé.
+3. Maladie à corps de Lewy et TNC majeur associé à la maladie de
+Parkinson
+Les inhibiteurs de la cholinestérase peuvent être envisagés pour les patients avec une démence
+parkinsonienne ou une maladie à corps de Lewy, en prenant en compte les bénéfices thé-
+rapeutiques attendus et les éventuels effets indésirables. La L-dopa peut être prescrite en
+association avec les inhibiteurs de la cholinestérase.
+4. Dégénérescences lobaires fronto-temporales
+Il n'est pas recommandé de prescrire un médicament indiqué dans le traitement de la maladie
+d'Alzheimer dans les dégénérescences lobaires fronto-temporales.
+D. Utilisation des autres médicaments
+Les patients présentant des TNCM sont particulièrement vulnérables aux médicaments, en
+particulier aux psychotropes. Il faut apprendre au patient et à son entourage à éviter les traite-
+ments psychotropes inutiles en raison du risque iatrogène [348].
+Parmi les traitements déconseillés, les sédatifs, les médicaments ayant des effets anticholiner-
+giques, en particulier des neuroleptiques ou les antidépresseurs tricycliques, qui ont des effets
+négatifs sur :
+• les capacités attentionnelles et la mémoire ;
+• le risque de chute [27] ;
+• les troubles de la déglutition et les infections respiratoires [62] ;
+• le syndrome parkinsonien (induction ou aggravation) : neuroleptiques ;
+• la mortalité cardiovasculaire.
+En cas de dépression caractérisée, il est possible d'utiliser des antidépresseurs, en préférant les
+inhibiteurs de la recapture de la sérotonine.
+En cas de troubles du comportement perturbateurs (agitation [114], agressivité, comporte-
+ment moteur aberrant), il faut privilégier des approches non médicamenteuses et utiliser des
+médicaments seulement en cas de danger pour le patient ou l'entourage : dans ce dernier cas,
+les benzodiazépines à demi-vie courte ou les antipsychotiques atypiques peuvent être utilisés
+transitoirement dans le cadre de cures courtes (2 à 3 semaines). Le choix entre ces deux classes
+de médicaments doit être fondé sur la symptomatologie prédominante (anxiété versus idées
+
+--- PAGE 172 ---
+Connaissances
+délirantes/hallucinations). Les effets indésirables de ces médicaments sont nombreux et les
+patients qui les reçoivent doivent être surveillés.
+E. Actions non médicamenteuses envers le patient
+1. Conseils et mode de vie
+Le maintien, voire la restitution temporaire de certaines capacités, passe par un certain nombre
+de conseils donnés au patient et à son aidant :
+• maintenir un bon état physique : encourager la marche par des promenades quotidiennes ;
+• stimuler et encourager la pratique d'activités quotidiennes d'occupation ou de loisirs : cui-
+sine, vaisselle, ménage, bricolage, jardinage. Selon l'atteinte cognitive du patient, il s'agit
+de le laisser faire, de le surveiller ou de le guider. La notion de plaisir est à rechercher ;
+• maintenir une vie sociale : garder le lien avec des amis en les avertissant des difficultés du
+patient, fréquenter les magasins, les restaurants, les lieux de culte…
+2. Prise en charge sanitaire (financée par la Sécurité sociale sur
+prescription médicale)
+Selon les cas, il est utile de prescrire :
+• le passage d'une infirmière au domicile pour la dispensation des médicaments et le suivi du
+malade (prise de la pression artérielle), parfois SSIAD pour l'aide à la toilette ;
+• une prise en charge orthophonique dans les maladies avec atteinte du langage au premier
+plan (démence sémantique, aphasie primaire progressive) mais également pour maintenir
+les fonctions de communication du patient pour tous les TNC. est recommandée égale-
+ment pour les troubles de la déglutition ;
+• un programme de réhabilitation par un ergothérapeute ou un psychomotricien dans le
+cadre d'une équipe spécialisée Alzheimer (ESA) à domicile ou d'un hôpital de jour aux
+stades légers et modérés de la maladie ;
+• un accompagnement psychologique des patients par le médecin généraliste traitant et
+le spécialiste ayant fait le diagnostic, complété si besoin par un accompagnement par un
+psychologue et/ou un psychiatre.
+La surveillance du patient par le gériatre [267, 295, 295] ou le médecin généraliste [279]
+comporte :
+• score cognitif (score au MMSE) ;
+• degré d'indépendance fonctionnelle (scores ADL et IADL, par exemple) [31] ;
+• humeur [123], sommeil [135] et comportement (score au NPI, par exemple) ;
+• poids et état nutritionnel [30] ;
+• détection ou suivi de comorbidités.
+3. Prise en charge médico-sociale
+Le patient peut bénéficier de l'attribution de l'allocation personnalisée d'autonomie (APA), qui
+est une prestation sociale dont le montant dépend des revenus du patient et de son niveau de
+dépendance et qui permet au patient de financer partiellement les services.
+Il faut proposer selon les cas une prise en charge par :
+• des aides professionnelles au domicile (auxiliaire de vie, portage de repas), lorsque le patient
+a besoin d'aide pour les gestes de la vie quotidienne ;
+
+--- PAGE 173 ---
+Raisonner devant une plainte mnésique et un trouble neurocognitif
+• un centre d'accueil de jour comportant (selon les établissements) des thérapies non médi-
+camenteuses : groupes de stimulation de la mémoire, ateliers d'art-thérapie (peinture,
+modelage, musicothérapie, aromathérapie), stimulation multisensorielle, activités occu-
+pationnelles, des activités de stimulation et de rééducation physique. Ces activités sont
+adaptées au stade des troubles neurocognitifs et faites le plus souvent en groupe ;
+• un gestionnaire de cas lorsque la prise en charge au domicile est difficile en raison de
+troubles du comportement, de refus de soins, d'une dépendance sévère et/ou du fait d'un
+isolement. Ce professionnel évalue la situation médicale et sociale du patient, puis donne
+des conseils et/ou oriente le patient en fonction de ses besoins.
+F. Actions envers l'entourage
+Différentes aides peuvent être apportées aux aidants :
+• éducation thérapeutique : certains centres spécialisés proposent des programmes destinés
+aux aidants de patients atteints de troubles neurocognitifs qui permettent de mieux com-
+prendre la maladie et de mieux utiliser l'aide professionnelle ;
+• informations délivrées par les centres locaux d'information et de coordination (CLIC) de
+leur bassin de vie sur les aides disponibles localement ainsi que par les dispositifs d'appui à
+la coordination DAC du territoire ;
+• soutien par des associations de famille : les aidants peuvent y trouver de la solidarité, des
+informations, et souvent des groupes de parole ;
+• prise en charge de répit : elle consiste à procurer à l'aidant des périodes de temps libre
+sans avoir la charge du patient ; en pratique, cela consiste à s'occuper du patient de façon
+temporaire : une à deux journées par semaine en centre d'accueil de jour (stades modéré/
+sévère) ou hôpital de jour (stades légers/modéré) ; séjour de 2 à 3 semaines en EHPAD. Dans
+le cadre du plan Alzheimer ont été créées des plateformes d'accompagnement et de répit
+pour faciliter l'accès à ces structures ou services.
+Certaines aides sont financées par la Sécurité sociale (hôpital de jour, soins infirmiers à domi-
+cile), d'autres sont à la charge du malade et finançable en partie par l'APA (protections pour
+incontinence, accueil de jour, hébergement temporaire, auxiliaires de vie, portage de repas).
+G. Sécurité et protection du malade et de son entourage
+Le suivi doit être l'occasion d'examiner :
+• les risques liés à l'environnement (pour limiter les accidents domestiques) ;
+• les capacités du patient à la bonne gestion des médicaments ;
+• le rapport bénéfice/risque des divers traitements (révision de l'ordonnance) ;
+• la conduite automobile, qui est déconseillée pour les patients atteints de trouble neuro-
+cognitif majeur ;
+• la capacité du patient à assurer la gestion administrative et financière ;
+• les relations du patient avec son entourage (pour éviter par exemple un épuisement des
+aidants qui peut être aussi source de maltraitance) ;
+• l'état de santé physique et psychologique de l'aidant.
+Il faut aussi savoir présenter les mesures de protection juridique (cf chapitre 4) :
+
+--- PAGE 174 ---
+Connaissances
+Mise en situation
+Vous voyez en consultation un patient de 86 ans, accompagné de son épouse, adressé par son méde-
+cin traitant pour difficultés à la marche [266], chutes [27] et modifications du comportement qui
+inquiètent son épouse. Dans les antécédents : un diabète de type 2 depuis 2 ans sous biguanide, une
+arthrose traitée par prise de paracétamol à la demande, une dépression 10 ans auparavant sous inhi-
+biteur de recapture de la sérotonine, et un tremblement sous anxiolytique. Il a été opéré d'un cancer
+du côlon un an auparavant, sans traitement complémentaire, avec un suivi régulier par son oncologue.
+Le patient avait été très perturbé par la chirurgie, n'a jamais complètement récupéré depuis. Et depuis
+un an, le patient a fait trois chutes, généralement en se levant, et ressenti à différentes reprises des
+sensations vertigineuses dans les mêmes circonstances. Par ailleurs, son comportement a changé, il est
+plus taciturne et, parfois, il parle tout seul en regardant les murs. Sa mémoire n'est plus ce qu'elle était
+[131]. Le fils du patient a depuis 2 ans pris en charge la gestion des comptes et des impôts, tandis que
+son épouse lui donne ses traitements pour éviter qu'il ne les oublie.
+La présentation du patient soulève différentes problématiques : d'abord une perte d'autonomie, avec
+atteinte des fonctions instrumentales. Ensuite des troubles neurocognitifs et psycho-comportemen-
+taux, des chutes à répétition. Enfin, une possible souffrance de l'épouse, aidant principal. Sans oublier
+que la situation semble se détériorer depuis le diagnostic et la prise en charge d'un cancer du côlon.
+1. Les chutes représentent la menace immédiate la plus importante. La description est évocatrice d'hypo-
+tension orthostatique, que la recherche confirme, avec une perte de 30 mmHg de pression artérielle
+systolique, reproduisant les symptômes, sans accélération de la fréquence cardiaque, en faveur d'une
+atteinte du système nerveux autonome. La priorité est de faire le bilan de cette hypotension orthos-
+tatique (éliminer une anémie, une déshydratation) et de mettre en place une éducation de l'orthosta-
+tisme et une contention veineuse de classe 2, avant d'envisager un traitement spécifique (midodrine).
+2. Deux éléments orientent vers un trouble neurocognitif : la perte d'autonomie, après avoir vérifié
+qu'elle n'est pas liée à une récidive de sa dépression, et les symptômes associant troubles mnésiques
+et probables hallucinations visuelles confirmées par le patient. Le probable syndrome confusionnel
+postopératoire est en faveur du diagnostic. Ajouté à cela, la présence d'une dysautonomie, non
+expliquée par un diabète n'évoluant que depuis 2 ans, d'un tremblement de repos et d'un trouble
+de la marche fait évoquer une maladie à corps de Lewy. L'examen neurologique confirme le syn-
+drome parkinsonien. Le MMS à 22/30 avec un rappel à 2/3 permettra d'envisager un bilan neuro-
+psychologique. Une imagerie cérébrale (IRM) sera réalisée dans le même temps. Une stimulation
+cognitive par une orthophoniste sera secondairement mise en place. Un traitement par inhibiteur
+de l'acétylcholine estérase pourra être discuté devant les troubles du comportement. Un traitement
+par L-Dopa permettra d'améliorer la marche. La discussion avec le patient et son épouse sur les
+troubles cognitifs aborde les points suivants :
+❯ les troubles ne sont probablement pas liés à l'âge ;
+❯ il existe des arguments en faveur d'une affection neurologique et il est nécessaire de faire des
+examens pour en comprendre la nature ;
+❯ l'intérêt de faire ces examens permettra de voir quel traitement envisager pour améliorer l'état de
+santé du patient.
+3. Concernant le retentissement fonctionnel, la discussion avec le patient et l'épouse permettra de
+discuter la mise en place d'aides, avec passage d'une IDE pour les prises médicamenteuses, d'un
+kinésithérapeute et d'une auxiliaire de vie, pour permettre à l'épouse de trouver un peu de temps
+pour elle. La proposition d'un soutien psychologique de l'épouse pourra ensuite être abordée.
+4. Enfin, dans la mesure où la situation évolue dans les suites de l'antécédent de cancer du côlon,
+un contact avec l'oncologue permettra de s'assurer que la maladie est en rémission et non pas en
+échappement thérapeutique. Le sevrage progressif de l'anxiolytique devra être réalisé.
+
+--- PAGE 175 ---
+Raisonner devant une plainte mnésique et un trouble neurocognitif
+clés
+• L'objectif devant une plainte mnésique est de rechercher des arguments pour un trouble neurocognitif
+sous-jacent et, le cas échéant, de rassurer le patient, souvent inquiet en raison de sa plainte. Un TNC léger ou
+majeur, respectivement sans ou avec perte d'autonomie, répond à une définition précise du DSM-5.
+• La plainte mnésique, ou le symptôme équivalent, doit être caractérisée en première étape, et l'ensemble
+des symptômes et signes cliniques associés doit être relevé.
+• L'évaluation du retentissement et de l'autonomie est une seconde étape essentielle, qui repose sur
+la recherche de conséquences sur les interactions sociales et l'utilisation de l'échelle d'évaluation des
+activités instrumentales (IADL de Lawton).
+• Parmi les items IADL, les quatre le plus associés à l'existence d'un TNC sous-jacent sont :
+– utilisation du téléphone ;
+– utilisation des moyens de transport ;
+– gestion des médicaments ;
+– gestion des comptes, de l'argent.
+• Cette évaluation permet d'anticiper le besoin d'aides et d'adapter le plan de soins.
+• Les examens complémentaires sont discutés au cas par cas et comprennent pour l'essentiel :
+– bilan neuropsychologique ;
+– examens biologiques ;
+– imagerie cérébrale.
+• Finalement, la démarche diagnostique peut aboutir à une étiologie probable parmi lesquelles les plus
+fréquentes sont :
+– maladie d'Alzheimer ;
+– encéphalopathies vasculaires ;
+– atteintes mixtes neurodégénératives et vasculaires ;
+– maladie à corps de Lewy.
+• Les diagnostics différentiels doivent être écartés, parmi lesquels :
+– dépression ;
+– trouble anxieux ;
+– hydrocéphalie à pression normale ;
+– hématome sous-dural chronique.
+• La prise en charge relève d'un plan de soins qui peut paraître complexe mais doit être structuré.
+stnioP
+
+--- PAGE 176 ---
+This page intentionally left blank
+
+--- PAGE 177 ---
+Raisonner devant une
+plainte thymique et une
+dépression
+I. Généralités
+II. Démarche diagnostique devant une plainte thymique ou un équivalent sémiologique du patient
+âgé
+III. Préciser le pronostic et le risque suicidaire en présence d'une dépression
+IV. Prise en charge et traitement d'un épisode dépressif du patient âgé
+Situations de départ
+En lien avec la définition et avec le diagnostic :
+31 Perte d'autonomie progressive.
+123 Humeur triste/douleur morale.
+131 Troubles de mémoire/déclin cognitif.
+256 Prescrire un hypnotique/anxiolytique.
+269 Consultation de suivi et traitement de fond d'un patient souffrant d'un trouble
+psychiatrique chronique (hors dépression).
+288 Consultation de suivi et traitement de fond d'un patient dépressif.
+298 Consultation et suivi d'un patient ayant des troubles cognitifs.
+330 Accompagnement global d'un aidant.
+352 Expliquer un traitement au patient.
+En lien avec l'urgence :
+114 Agitation.
+116 Anxiété.
+119 Confusion/désorientation.
+122 Hallucinations.
+240 Expliquer une hospitalisation en soins psychiatriques à la demande d'un tiers.
+En lien avec la démarche étiologique :
+17 Amaigrissement.
+21 Asthénie.
+27 Chute de la personne âgée.
+30 Dénutrition/malnutrition.
+31 Perte d'autonomie progressive.
+66 Apparition d'une difficulté à la marche.
+114 Agitation.
+116 Anxiété.
+117 Apathie.
+124 Idées délirantes.
+129 Troubles de l'attention.
+131 Troubles de mémoire/déclin cognitif.
+134 Trouble du langage.
+135 Trouble du sommeil, insomnie ou hypersomnie.
+Gériatrie
+© 2021, Elsevier Masson SAS. Tous droits réservés
+

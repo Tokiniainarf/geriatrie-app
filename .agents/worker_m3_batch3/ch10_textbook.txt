@@ -1,0 +1,618 @@
+=== CHAPTER CH10 ===
+
+--- PAGE 179 ---
+Raisonner devant une plainte thymique et une dépression
+ITEM 74 – Prescription et surveillance des psychotropes
+Cf. chapitre 16.
+I. Généralités
+A. Définition
+A Un état dépressif caractérisé répond à des critères diagnostiques précis (encadré 10.1).
+Encadré 10.1
+Critères diagnostiques de l'état dépressif caractérisé selon de DSM-5
+A Les symptômes pour diagnostiquer un épisode caractérisé à partir du DSM nécessitent la présence d'au
+moins cinq des symptômes suivants pendant au moins 2 semaines.
+• Au moins l'un des symptômes clefs qui est :
+– soit une humeur dépressive [123] ;
+– soit une perte d'intérêt ou de plaisir.
+• Et parmi les autres symptômes suivants :
+– fatigue ou perte d'énergie [21] ;
+– sentiment de dévalorisation ou culpabilité excessive ;
+– pensées de mort, idées suicidaires ;
+– difficultés de l'aptitude à penser, de concentration ou d'indécision [129] ;
+– agitation ou ralentissement psychomoteur [114, 117] ;
+– insomnie ou hypersomnie [135] ;
+– diminution ou augmentation de l'appétit ou du poids [17].
+B. Épidémiologie, prévalence
+Maladie fréquente
+Maladie psychiatrique la plus fréquente du patient âgé qui atteint :
+• préférentiellement les femmes ;
+• 11 à 13 % des personnes âgées de 65 ans et plus ;
+• 25 % des patients âgés hospitalisés ;
+• 40 % des résidents des établissements hébergeant des personnes âgées dépendantes
+(EHPAD).
+Maladie grave
+La dépression de la personne âgée a un mauvais pronostic :
+• avec 30 % de chronicisation et 30 % de rechute ;
+• responsable de surcoûts de santé : surconsommation de soins (consultations, biologies,
+hospitalisations non liées à la dépression) ou institutionnalisation ;
+• associée à un moins bon pronostic vital dans plusieurs maladies : infarctus du myocarde,
+accident vasculaire cérébral, bronchopneumopathie obstructive, etc. ;
+• associée à une surmortalité générale de l'ordre de 30 % dans les 3 ans suivant l'épisode
+dépressif.
+
+--- PAGE 180 ---
+Connaissances
+Risque suicidaire
+• La France est l'un des pays européens où le taux de suicide chez la personne âgée est le plus
+élevé :
+– 28 % des 10 400 suicides survenus en 2010 concernaient des patients de 65 ans et
+plus ;
+– taux de suicide d'environ 1 pour 1 000 dans la population des personnes âgées de
+85 ans ;
+– prédominance masculine (54 %).
+• Moyens employés souvent radicaux (armes à feu, pendaison pour les hommes ; asphyxie
+noyade, défenestration pour les femmes). Les intoxications volontaires sont plus rares mais
+plus graves que chez le sujet jeune :
+– ingestion massive de médicaments ;
+– ingestions de molécule à haut risque (par exemple, digoxine, anticoagulants…) ou de
+produits corrosifs (par exemple, eau de javel).
+• Méthodes violentes témoins d'une détermination dans le geste suicidaire : réussite des
+suicides chez la personne âgée est 50 fois supérieure à celle d'un adulte plus jeune, alors
+même que les idées suicidaires sont peu verbalisées par la personne âgée.
+• Conséquences parfois dramatiques en raison du terrain fragile sur lequel ils surviennent
+(polypathologies, insuffisance d'organe), qui vont favoriser les décompensations et entraî-
+ner des complications secondaires.
+• Principal facteur de risque de suicide : dépression (présente dans 90 % des cas), mais
+également l'âge avancé, le sexe masculin, l'isolement social et le sentiment de solitude,
+le veuvage (notamment la première année), la personnalité psychorigide, les difficultés
+d'adaptation aux changements, les maladies invalidantes ou douloureuses.
+• Facteurs protecteurs : avoir des enfants voire vivre avec eux, avoir des activités de loisirs ou
+associatives, avoir une pratique religieuse, avoir une vie sociale riche, se sentir utile.
+Les huit écueils à éviter concernant la dépression de la personne âgée
+• Considérer la tristesse comme un synonyme de vieillissement [123].
+• Confondre anhédonie et sagesse de la personne âgée [123].
+• Considérer la perte d'intérêt comme normale chez la personne âgée [31].
+• Négliger les plaintes somatiques en lien avec la dépression [267].
+• Ne pas envisager une dépression en présence d'un trouble cognitif ou d'une perte d'autonomie d'un
+patient âgé [31, 298].
+• Négliger de réévaluer les fonctions cognitives chez un patient âgé avec dépression [123, 298].
+• Ne pas rechercher une pathologie somatique ou une iatrogénie médicamenteuse associée voire un
+facteur améliorable de la dépression.
+• Négliger le retentissement et la dépression chez un aidant principal [330].
+→ La dépression, au sein de l'ensemble des comorbidités et en considérant les traitements associés, doit
+être largement dépistée et prise en charge pour limiter son impact sur l'autonomie et la qualité de vie du
+patient et de son entourage.
+→ L'évaluation du risque suicidaire dans le cadre d'un épisode dépressif caractérisé doit être systématique.
+
+--- PAGE 181 ---
+Raisonner devant une plainte thymique et une dépression
+Évaluation de l'état thymique
+Dans un contexte de dépistage, c'est une dimension de l'évaluation gériatrique globale (EGS, cf. chapitre 1).
+Quand ?
+• Lors d'une première consultation ou hospitalisation.
+• Lors de consultations de suivi [267, 279, 295].
+• En présence d'une perte d'autonomie [31].
+• En présence de troubles cognitifs [298].
+• En seconde intention dans un bilan d'altération de l'état général [17, 30, 117].
+• Devant tout trouble du comportement [114, 116, 117].
+• Lors d'un syndrome confusionnel [119].
+• Chez l'aidant principal d'un patient avec pathologies chroniques lourdes dont TNC et ou dépendance
+[330].
+Comment ?
+• En récupérant des informations objectives [131].
+• En impliquant si besoin l'aidant principal [330], le médecin référent.
+• En interrogeant le patient et en s'aidant d'échelle adaptée.
+• En discutant l'intérêt des examens complémentaires appropriés [334].
+Pourquoi ?
+• Afin d'apporter des explications aux troubles ressentis par le patient et/ou son entourage.
+• Afin d'améliorer l'autonomie, la qualité de vie du patient [31].
+• Afin de suppléer au déclin fonctionnel et d'organiser la mise en place des aides.
+• Afin d'élaborer et d'expliquer au patient le projet thérapeutique [352].
+II. Démarche diagnostique devant une plainte thymique
+ou un équivalent sémiologique du patient âgé
+Le diagnostic de la dépression est clinique, fondé sur un entretien avec le patient. Aussi la dépres-
+sion est-elle souvent sous-diagnostiquée (de l'ordre de 50 %) en raison d'idées reçues sur la « nor-
+malité » d'une tristesse ou d'une anhédonie avec le vieillissement et de l'existence de nombreux
+tableaux atypiques. Des échelles d'évaluation permettent de faire un repérage systématique ou
+apporter une aide au diagnostic, MAIS elles ne font pas un diagnostic de dépression.
+La démarche clinique repose sur l'identification de la plainte thymique ou d'un équivalent
+sémiologique, en particulier chez un patient non communiquant, puis de la récupération
+d'informations à partir de l'interrogatoire des antécédents et du terrain (facteurs de risque de
+dépression), de l'anamnèse (plainte) et de l'examen clinique pour aboutir au diagnostic d'état
+dépressif caractérisé (cf. encadré 10.1).
+A. Rechercher les facteurs de risque de dépression
+• Antécédent de dépression : permet de faire la part entre maladie dépressive ancienne
+avec récurrence (troubles bipolaires ou unipolaires) et la survenue tardive d'une maladie
+dépressive.
+• Facteurs sociaux (retraite, isolement).
+• Facteurs affectifs (veuvage, deuils, conflits).
+
+--- PAGE 182 ---
+Connaissances
+• Mauvais état de santé (maladies invalidantes, perte d'autonomie). La dépression survient
+plus fréquemment au cours ou au décours de certaines maladies et lors de la prise de cer-
+tains médicaments (tableau 10.1).
+Tableau 10.1. A Maladies somatiques et médicaments fréquemment associés à la dépression.
+Maladies neurologiques Accident vasculaire cérébral
+Maladie d'Alzheimer et autres TNCM
+Maladie de Parkinson
+Hydrocéphalie à pression normale ou dite chronique
+Maladies cardiovasculaires Infarctus du myocarde
+Insuffisance cardiaque
+Maladies endocriniennes Diabète
+Hypothyroïdie – Hyperthyroïdie
+Hyperparathyroïdie
+Hypercorticisme
+Déficit androgénique chez l'homme
+Maladies diverses Cancers
+Douleur chronique
+Médicaments Corticoïdes
+Clonidine
+Bêtabloquants
+L-dopa
+Amantadine
+Neuroleptiques
+TNCM : troubles neurocognitifs majeurs.
+B. Caractériser la plainte thymique
+Le diagnostic de dépression repose sur un ensemble de symptômes retrouvés lors d'un entre-
+tien individuel avec le patient.
+L'état dépressif caractérisé tel que défini dans le DSM-5 (cf. encadré 10.1) représente environ
+12 % des dépressions de la personne âgée. Il n'existe pas de critères diagnostiques spécifiques
+à la personne âgée, non plus que de critères spécifiques de dépression au cours d'autre mala-
+die (par exemple, dépression et maladie neurodégénérative).
+B Certains symptômes de dépression sont cependant considérés comme plus spécifiques à la
+personne âgée (tableau 10.2).
+Tableau 10.2. B Symptômes de la dépression chez la personne âgée.
+Symptômes quel que soit l'âge Symptômes plus spécifiques à la personne âgée
+Tristesse, douleur morale [123] Irritabilité, agressivité, agitation, colère [114]
+Pessimisme, désespoir Opposition ou comportement de refus (alimentation, soins,
+Sentiment d'inutilité, mésestime de soi traitement) [17, 30]
+Anhédonie ou incapacité à ressentir du plaisir Démotivation
+Perte d'intérêt pour les activités de la vie quotidienne Sentiment d'inutilité, d'être une charge
+Ralentissement idéo-moteur Sentiment d'impuissance
+Anorexie, perte de poids [17, 30] Repli sur soi, prostration, isolement
+Troubles du sommeil (endormissement tardif ou réveil Sensation douloureuse de vide intérieur
+précoce) [135] Angoisse matinale [116]
+Troubles de la concentration [129]
+Plaintes mnésiques [131]
+Dépendance fonctionnelle [31]
+Somatisations (douleurs, dyspnée…), hypochondrie
+
+--- PAGE 183 ---
+Raisonner devant une plainte thymique et une dépression
+Cas particulier : dépression chez un patient avec TNCM
+• Dépression fréquente au cours d'une maladie neurodégénérative (45 % en cas de maladie
+d'Alzheimer) [298].
+• Les deux pathologies partagent plusieurs symptômes (apathie, anhédonie, ralentissement
+idéo-moteur, irritabilité, agitation, agressivité, déambulation, perte de poids, insomnie)
+avec risque de retard diagnostique ou de diagnostic par excès.
+• La dépression doit être évoquée devant toute cassure dans l'évolution cognitive ou fonc-
+tionnelle d'un patient âgé avec TNCM.
+C. Connaître les tableaux atypiques
+Dépression masquée
+A Perte d'autonomie [31] et plaintes somatiques au premier plan (dyspnée, douleurs abdomi-
+nales, oppression thoracique, douleurs musculo-squelettiques [35]), alors que la souffrance
+psychique, en particulier la tristesse, n'est pas exprimée par le patient. La recherche d'une
+étiologie organique sera la règle, décidée selon les comorbidités, l'anamnèse et l'examen cli-
+nique du patient.
+Dépression hostile
+Anxiété, récriminations, agitation hostile [114], refus de soins et agressivité souvent dirigée
+contre l'entourage direct du patient. Notion importante de modification récente du compor-
+tement en faveur de la dépression. Prise en charge souvent difficile.
+Dépression avec plainte mnésique
+La plainte mnésique [131] est un symptôme de dépression chez la personne âgée, qui repré-
+sente un diagnostic différentiel avec le TNC (cf. chapitre 9).
+D. S'aider d'une échelle gériatrique pour repérer une plainte
+mnésique
+Échelle de dépression gériatrique (ou Geriatric Depression Scale, GDS) :
+• en version originale (30 items) ou abrégées (15 ou 4 items) (fortement corrélée à la version
+30 items) (tableau 10.3) ;
+• en autoquestionnaire ;
+• la plus souvent utilisée chez le patient âgé ;
+• objectif : repérage d'un état dépressif (pas le diagnostic) ;
+• non validée chez les sujets ayant des troubles cognitifs avec MMS < 15.
+Tableau 10.3. A Geriatric Depression Scale (GDS) : version 4 items.
+Un score total ≥ 1 indique une très forte probabilité de dépression.
+Poser les questions au patient en lui précisant qu'il doit se resituer dans le temps qui précède, au
+mieux une semaine, et non pas dans la vie passée ni dans l'instant présent.
+Oui Non
+1. Vous sentez-vous souvent abattu(e) et triste ? 1 0
+2. Avez-vous le sentiment que votre vie est vide ? 1 0
+3. Êtes-vous heureux(se)/bien la plupart du temps ? 0 1
+4. Pensez-vous que votre situation est sans espoir ? 1 0
+
+--- PAGE 184 ---
+Connaissances
+III. Préciser le pronostic et le risque suicidaire
+en présence d'une dépression
+A On peut en fonction de son intensité qualifier l'épisode dépressif caractérisé de léger,
+modéré ou sévère. L'intensité est évaluée selon le DSM-5 en fonction du nombre de symp-
+tômes et du retentissement sur le mode de fonctionnement du patient.
+A. Formes cliniques
+Le DSM-5 précise des spécifications de l'épisode dépressif caractérisé qui vont correspondre à
+des formes cliniques distinctes :
+• avec caractéristiques mélancoliques ;
+• avec caractéristiques psychotiques congruentes à l'humeur ;
+• avec caractéristiques psychotiques non congruentes à l'humeur ;
+• avec caractéristiques mixtes ;
+• avec caractéristiques atypiques ;
+• avec caractéristiques catatoniques ;
+• avec caractéristiques anxieuses ;
+• avec début dans le péri-partum ;
+• avec caractéristiques saisonnières.
+Épisode dépressif caractérisé avec caractéristiques mélancoliques
+158 Il correspond à un épisode dépressif d'intensité particulièrement sévère associée à un risque
+suicidaire élevé. La souffrance morale est profonde, le ralentissement moteur est majeur et
+peut être associé à un mutisme. Elle se caractérise par une anhédonie et/ou un manque de
+réactivité aux stimuli habituellement agréables (anesthésie affective), associés à plusieurs des
+symptômes suivants :
+• une humeur dépressive marquée par un découragement profond, un sentiment de déses-
+poir, voire d'incurabilité ;
+• des symptômes cliniques plus marqués le matin ;
+• des troubles du sommeil avec réveils matinaux précoces ;
+• une agitation ou un ralentissement psychomoteur marqué ;
+• une perte d'appétit (refus alimentaire) ou une perte de poids significative ;
+• une culpabilité excessive ou inappropriée.
+Il s'agit d'une urgence psychiatrique et gériatrique car d'évolution rapide vers une perte
+d'autonomie et/ou de décompensations somatiques sur un terrain polypathologique. Le risque
+suicidaire est élevé.
+Un épisode dépressif caractérisé sévère justifie une prise en charge spécialisée en hospitalisa-
+tion en raison du risque d'évolution rapidement défavorable [240].
+Épisode dépressif caractérisé avec caractéristiques psychotiques
+(anciennement mélancolie délirante) [124]
+L'épisode dépressif est associé à la présence d'idées délirantes et/ou d'hallucinations
+congruentes à l'humeur ou non. Les thématiques délirantes sont le plus souvent des idées
+de ruine, d'incapacité, de maladie, de mort, d'indignité, de culpabilité, ou encore de néga-
+
+--- PAGE 185 ---
+Raisonner devant une plainte thymique et une dépression
+tion d'organe (syndrome de Cotard). Fait discuter les diagnostics de TNC avec manifestations
+délirantes ou d'état psychotique à début tardif, et justifie d'une prise en charge rapprochée et
+d'un suivi prolongé.
+B. Risque suicidaire
+Les gériatres prennent rarement en charge des patients âgés dans les suites d'une tentative de
+suicide, mais ils doivent évaluer le risque suicidaire chez leurs patients ayant une dépression
+d'autant plus que les personnes âgées expriment rarement des idées suicidaires avant le pas-
+sage à l'acte ou ont plus rarement que d'autres l'occasion de les exprimer.
+L'évaluation du risque suicidaire (RUD, pour Risque-Urgence-Danger) comprend
+l'évaluation :
+• du risque : rapport facteurs de risque ou protecteurs ;
+• de l'urgence : précision du scénario suicidaire ;
+• du danger : accessibilité aux moyens létaux.
+Lorsque le RUD est très élevé, l'hospitalisation en urgence est requise.
+C. Retentissement fonctionnel
+La dépression est à la fois cause et conséquence de plusieurs complications sévères chez le
+patient âgé. Ces conséquences doivent être prises en charge de manière conjointe avec le
+traitement de la dépression, et leur traitement doit être réévalué selon l'évolution du patient.
+• Perte d'autonomie sur les activités de la vie courante [31].
+• Isolement social et familial.
+• Dénutrition [17, 30] très fréquemment associée en raison des troubles du comportement
+alimentaire (anorexie, dégoût des aliments) et de la perte de poids secondaire (cf. cha-
+pitre 14) (risque × 4,3).
+• Hospitalisations plus fréquentes.
+D. Pronostic
+1. Chronicité
+L'évolution naturelle de la maladie dépressive montre qu'environ 30 % des patients vont pré-
+senter une évolution chronique de la maladie avec une faible réponse aux traitements antidé-
+presseurs. Les facteurs de chronicité sont :
+• les limitations fonctionnelles ;
+• l'existence de troubles cognitifs ;
+• la pauvreté des relations sociales ;
+• la sévérité des symptômes dépressifs ;
+• le ralentissement psychomoteur.
+Avant de parler de chronicité, il faut s'assurer que le diagnostic de dépression a été posé et un
+traitement bien conduit proposé au patient.
+
+--- PAGE 186 ---
+Connaissances
+2. Rechute
+Environ 30 % des patients vont présenter une rechute de la maladie dépressive. Un des fac-
+teurs importants de la rechute est la durée trop courte du traitement antidépresseur ou une
+mauvaise observance médicamenteuse. Les facteurs de faible adhésion au traitement sont :
+• absence d'information sur la maladie ;
+• erreurs de perception de la maladie et de son traitement ;
+• stigmatisation de la dépression ;
+• absence de soutien familial ;
+• troubles cognitifs ;
+• effets secondaires des traitements ;
+• coût des traitements ;
+• relation médecin-patient faible ou pauvre.
+IV. Prise en charge et traitement d'un épisode
+dépressif du patient âgé
+A. Décider d'une hospitalisation
+En raison de la gravité
+• Risque suicidaire élevé (évaluation RUD).
+• Dépression avec caractéristiques psychotiques.
+• Dépression avec caractéristiques mélancoliques en raison du risque de décompensation
+d'organe et de décès.
+En raison du risque d'évolution défavorable
+• Isolement familial ou social ou situation de précarité en raison de la difficulté de la prise en
+charge.
+• Agitation ou prostration sévère.
+• Dépendance ou pathologie chronique à un stade évolué.
+Principes généraux de prescription d'un antidépresseur pour une meilleure efficacité
+(NICE 2009)
+1. Informer le patient du diagnostic et mettre en place un « contrat » thérapeutique.
+2. Discuter du choix de l'antidépresseur avec le patient.
+3. Informer le patient sur :
+– l'effet progressif mais retardé de l'action du traitement ;
+– l'importance de prendre le traitement même après la rémission des symptômes ;
+– des possibles effets secondaires et des interactions médicamenteuses.
+4. Réévaluer très régulièrement la réponse au traitement et les effets indésirables.
+5. Ne pas prescrire des doses infrathérapeutiques.
+6. Réévaluer l'observance.
+
+--- PAGE 187 ---
+Raisonner devant une plainte thymique et une dépression
+B. Mettre en place un traitement et un plan de soins chez
+un patient âgé avec état dépressif caractérisé
+Principes du traitement médicamenteux (cf. chapitre 16) :
+• inhibiteur sélectif de la recapture de la sérotonine (ISRS) en première intention ;
+• 12 mois minimum.
+1. Informer du diagnostic de la dépression.
+B Annoncer :
+• le diagnostic pour optimiser l'adhésion au traitement [288, 328] ;
+• de manière anticipée le délai d'apparition d'efficacité du traitement retardé chez le patient
+âgé (entre 10 jours et 6 semaines).
+2. Choix de l'antidépresseur : prendre en compte les particularités du
+patient
+• Rechercher :
+– les antécédents dépressifs ;
+– les traitements antidépresseurs antérieurs et leur efficacité.
+• Évaluer :
+– le terrain et notamment les comorbidités ;
+– les traitements associés ;
+– les éventuels contre-indications et risques d'interaction.
+• Évaluer l'effet recherché par l'antidépresseur :
+– plutôt anxiolytique sédatif ;
+– ou à l'inverse plus stimulant.
+• Les tricycliques sont à éviter chez le patient âgé en raison de leurs effets anticholinergiques
+importants et de leur cardiotoxicité.
+3. Introduire le traitement : s'assurer de la bonne conduite et durée
+du traitement
+• Pas une urgence.
+• Début par une posologie plus faible que chez l'adulte jeune (tolérance).
+• Posologie progressivement augmentée (par palier de 15 jours) jusqu'à la dose efficace
+recommandée (correspond à celle proposée chez l'adulte plus jeune).
+• Réévaluation de l'efficacité à 6 à 12 semaines : soit amélioration, soit rémission des
+symptômes.
+• Pas d'association systématique d'un traitement psychotrope à l'antidépresseur.
+• Durée de traitement antidépresseur :
+– 12 mois minimum pour un épisode dépressif isolé après rémission des symp-
+tômes. Si on envisage un arrêt des antidépresseurs, proposer une diminution progres-
+sive des posologies sur 3 mois pour limiter le risque de symptômes de sevrage rencontrés
+avec certaines molécules et en particulier les ISRS ;
+– 2 ans en cas d'antécédents de dépression.
+
+--- PAGE 188 ---
+Connaissances
+4. Mesures non médicamenteuses
+L'association du traitement antidépresseur à des mesures non médicamenteuses a fait la
+preuve de son efficacité chez le patient âgé.
+Électroconvulsivothérapie (ou sismothérapie)
+• Indiquée dans les dépressions sévères, résistantes ou mélancoliques.
+• Efficacité comparable voire supérieure à celle des antidépresseurs.
+• Intérêt d'une association à un antidépresseur (prévention des rechutes).
+• Contre-indications rares et liées à l'anesthésie générale.
+• Bonne tolérance.
+• Principaux effets secondaires : céphalées, troubles mnésiques, confusion.
+• Trois séances par semaine jusqu'à efficacité maximale puis, si besoin, séances d'entretien
+sur une période de 6 mois.
+• Difficultés d'accès, réticences à tort des médecins.
+Thérapie cognitivo-comportementale
+Amélioration plus rapide de l'état dépressif à 6 mois en association à un antidépresseur et
+risque moindre de rechute.
+Stimulation magnétique transcrânienne (rTMS)
+Il s'agit d'une stimulation de façon non invasive des neurones du cortex cérébral par induction
+magnétique en utilisant des champs magnétiques brefs à haute intensité. L'efficacité de cette
+méthode dans le traitement des épisodes dépressifs caractérisés est en cours d'évaluation.
+Mise en situation
+Vous recevez en consultation une patiente de 86 ans pour suspicion de troubles neurocognitifs car
+elle a des oublis depuis quelques mois. Elle est accompagnée de sa fille qui signale notamment que sa
+mère oublie de prendre ses médicaments (elle a retrouvé des boîtes de médicaments pleines). La fille
+s'inquiète aussi car elle trouve que sa mère mange mal, elle ne cuisine plus depuis l'hospitalisation de
+son voisin et ami proche avec qui elle passait beaucoup de temps (il est hospitalisé depuis 6 mois après
+un accident vasculaire cérébral ; c'est la patiente qui l'a retrouvé au sol et qui a prévenu les pompiers).
+Elle a noté une perte de poids non chiffrable et le réfrigérateur rempli par ses soins tous les mois ne se
+vide presque pas. La patiente dort beaucoup et ne sort plus beaucoup de chez elle. Sa fille constate par
+ailleurs un certain laisser-aller avec une apathie et une tristesse.
+❯ Les troubles « mnésiques » sont la plainte première mais des éléments de l'interrogatoire évoquent
+une dépression sous-jacente qu'il faut éliminer. Deux hypothèses : un épisode dépressif caractérisé
+réactionnel à l'isolement du fait de l'hospitalisation de l'ami et entraînant la perte d'autonomie,
+et/ou des troubles neurocognitifs jusque-là « masqués » par la présence de l'ami qui se substituait à
+la patiente pour certains actes de la vie quotidienne.
+❯ L'interrogatoire va rechercher un antécédent dépressif, une prise de traitements psychotropes,
+l'introduction de nouveaux traitements, des troubles du comportement, des hallucinations, un
+délire, des chutes.
+▲
+
+--- PAGE 189 ---
+Raisonner devant une plainte thymique et une dépression
+clés
+• La dépression :
+– est la maladie psychiatrique la plus fréquente de la personne âgée ;
+– a un mauvais pronostic chez la personne âgée en termes de morbimortalité ;
+– reste sous-diagnostiquée en raison de nombreux tableaux atypiques ;
+– doit être recherchée en présence de troubles neurocognitifs et trouble délirant ;
+– doit être recherchée particulièrement en présence de facteurs de risque : antécédent de dépression,
+sociaux, affectifs, mauvais état de santé.
+• L'évaluation du risque suicidaire repose sur l'évaluation du RUD (Risque-Urgence-Danger).
+• Le retentissement fonctionnel doit être évalué et pris en charge, et comprend :
+– perte d'autonomie ;
+– isolement ;
+– dénutrition ;
+– hospitalisations.
+• La prise en charge de la dépression comprend :
+– évaluation du degré d'urgence et du besoin d'hospitalisation ;
+– élaboration d'un plan de soins ;
+– mise en route d'un traitement (ISRS en première intention).
+stnioP
+❯ L'évaluation de la sévérité et d'un potentiel risque suicidaire doit être réalisée.
+❯ L'examen clinique comprendra en particulier un examen neurologique à la recherche d'un signe de
+localisation, d'un syndrome extrapyramidal. Les tests de dépistage des TNC seront réalisés mais en
+les interprétant prudemment compte tenu des éléments dépressifs associés.
+❯ L'examen clinique sera aussi orienté vers une pathologie chronique expliquant une anorexie et
+une perte de poids ; la patiente devra être pesée et mesurée pour comparer au poids de forme et
+calculer un IMC devant des apports alimentaires mesurés insuffisants.
+❯ Les examens complémentaires vont principalement être orientés vers la recherche d'une pathologie
+somatique expliquant l'anorexie et la perte de poids ou bien associée classiquement à une dépres-
+sion de la personne âgée : dans un premier temps biologie avec en particulier natrémie, créatini-
+némie, glycémie, calcémie, TSH, albuminémie, NFS, CRP. Une imagerie cérébrale sera programmée si
+l'examen neurologique n'est pas normal ou si un TNC reste suspecté, ce qui est le plus probable.
+Chez cette patiente, l'hypothèse d'un syndrome dépressif est retenue et un traitement par ISRS est débuté,
+à posologie adaptée à l'âge et avec projection d'augmentation progressive en revoyant la patiente en
+consultation au minimum à 4 puis 8 semaines. Sont prescrits un passage infirmier au domicile pour la prise
+des traitements et un portage des repas ou une auxiliaire de vie pour superviser la prise des repas. Sont
+programmées une surveillance de la natrémie et une surveillance clinico-biologique de la dénutrition.
+À distance, après la prise en charge de l'épisode dépressif caractérisé, un bilan neuropsychologique
+sera programmé à la recherche d'un TNC sous-jacent.
+▲
+
+--- PAGE 190 ---
+This page intentionally left blank
+
+--- PAGE 191 ---
+Diagnostiquer et raisonner
+devant un syndrome
+confusionnel
+I. Généralités
+II. Diagnostic positif d'un syndrome confusionnel du patient âgé
+III. Diagnostic étiologique d'un syndrome confusionnel du patient âgé
+IV. Prise en charge et traitement de la confusion du patient âgé
+Situations de départ
+En lien avec la définition et avec le diagnostic :
+119 Confusion/désorientation.
+131 Troubles de mémoire/déclin cognitif.
+298 Consultation et suivi d'un patient ayant des troubles cognitifs.
+En lien avec la prise en charge en urgence :
+27 Chute de la personne âgée.
+62 Troubles de la déglutition ou fausse route.
+114 Agitation.
+116 Anxiété.
+117 Apathie.
+122 Hallucinations.
+244 Mise en place et suivi d'une contention mécanique.
+En lien avec la démarche étiologique :
+17 Amaigrissement.
+27 Chute de la personne âgée.
+50 Malaise/perte de connaissance.
+66 Apparition d'une difficulté à la marche.
+114 Agitation.
+116 Anxiété.
+121 Déficit neurologique sensitif/moteur.
+123 Humeur triste/douleur morale.
+124 Idées délirantes.
+129 Troubles de l'attention.
+130 Troubles de l'équilibre.
+134 Trouble du langage.
+135 Trouble du sommeil, insomnie ou hypersomnie.
+178 Demande/prescription raisonnée et choix d'un examen diagnostique.
+226 Découverte d'une anomalie du cerveau à l'examen d'imagerie médicale.
+231 Demande d'un examen d'imagerie.
+266 Consultation de suivi d'un patient polymédiqué.
+267 Consultation de suivi d'un patient polymorbide.
+295 Consultation de suivi gériatrique.
+327 Annonce d'un diagnostic de maladie grave au patient et/ou à sa famille.
+Gériatrie
+© 2021, Elsevier Masson SAS. Tous droits réservés
+
+--- PAGE 192 ---
+Connaissances
+328 Annonce d'une maladie chronique.
+330 Accompagnement global d'un aidant.
+334 Demande de traitement et investigation inappropriés.
+348 Suspicion d'un effet indésirable des médicaments ou d'un soin.
+Items, objectifs pédagogiques, hiérarchisation des connaissances
+ITEM 108 – Confusion, démences
+Rang Rubrique Intitulé Descriptif
+B Éléments Comprendre le mécanisme physiopathologique de la confusion mentale
+physiopathologiques
+A Définition Connaître la définition d'une confu- Description des principaux
+sion et d'une démence symptômes
+A Étiologie Connaître les principales causes neu- Méningites, tumeurs, trauma-
+rologiques de confusion mentale tismes, AVEC, épilepsie
+A Étiologie Connaître les principales causes non Toxiques, métaboliques,
+neurologiques de confusion mentale infectieuses
+A Diagnostic positif Savoir rechercher les causes de la Démarche clinique : conduire
+confusion mentale l'examen clinique, décider de
+l'indication éventuelle d'une PL
+ou d'un scanner cérébral
+A Prise en charge Connaître les principes de la prise en Faire les prescriptions d'urgence
+charge thérapeutique d'un patient et de traitement de la cause
+confus
+166 B Éléments Connaître les principales lésions de la Perte des neurones, accumula-
+physiopathologiques maladie d'Alzheimer (MA) tion protéine amyloïde, accumu-
+lation protéine tau
+A Diagnostic positif Connaître les manifestations cliniques Phases prodromale, démentielle
+de la MA aux différentes phases et de démence sévère
+A Diagnostic positif Connaître le profil des troubles de la Trouble de la consolidation en
+mémoire de la MA mémoire épisodique
+A Diagnostic positif Connaître les principaux diagnostics Confusion, causes fonctionnelles,
+différentiels de la MA causes organiques curables
+A Prise en charge Connaître les principes de prise en Aides humaines et financières,
+charge non médicamenteuse de la hygiène de vie, iatrogénie
+MA, y compris l'aide des réseaux
+ville-hôpital
+B Éléments Préciser les principes du raisonnement Attention, fonctions d'intégra-
+physiopathologiques topographique devant un syndrome tion perceptive, mémoire et
+démentiel fonctions exécutives
+B Examens Connaître les indications et les objec- Démence : IRM cérébrale, à
+complémentaires tifs d'imagerie devant une démence défaut TDM
+ou une confusion
+B Examens Connaître la sémiologie en imagerie Collection extraparenchy-
+complémentaires de l'hématome sous-dural chronique mateuse à contenu liquidien,
+parfois associée à un saignement
+récent, habituellement en forme
+de « croissant », limitée par les
+sinus duraux, et assez souvent
+bilatérale
+▼
+
+--- PAGE 193 ---
+Diagnostiquer et raisonner devant un syndrome confusionnel
+Rang Rubrique Intitulé Descriptif
+A Contenu multimédia Exemple HSD chronique TDM
+B Examens Connaître la sémiologie en imagerie de l'hydrocéphalie chronique de
+complémentaires l'adulte
+B Examens Connaître les indications des exa- Scintigraphie de perfusion
+complémentaires mens de médecine nucléaire dans les cérébrale, scintigraphie des
+démences transporteurs de la dopamine,
+TEP au 18FDG
+ITEM 343 – État confusionnel et trouble de conscience chez l'adulte
+Rang Rubrique Intitulé Descriptif
+A Définition Définition du syndrome Description des principaux
+confusionnel symptômes
+B Prévalence, épidémiologie Prévalences du syndrome confusionnel dans la population générale,
+aux urgences et dans différents milieux hospitaliers
+A Diagnostic positif Diagnostic clinique du syndrome confusionnel chez l'adulte et parti-
+cularités chez l'enfant
+A Diagnostic positif Connaître les trois formes cliniques Forme confuso-onirique, forme
+du syndrome confusionnel stuporeuse, forme mixte
+B Diagnostic positif Connaître le principal outil de Confusion Assessment Method
+dépistage clinique (CAM)
+A Identifier une urgence Connaître les situations nécessitant Engagement, paludisme grave…
+une prise en charge en urgence
+A Étiologie Connaître les principales étiologies Causes toxiques, métaboliques,
+et les principaux facteurs de risque neurologiques, infections bacté-
+du syndrome confusionnel chez riennes, virales ou parasitaires,
+l'adulte et chez l'enfant rétention d'urines, fécalome
+(savoir rechercher une cause
+médicamenteuse, princi-
+pale étiologie du syndrome
+confusionnel)
+A Examens complémentaires Connaître le bilan biologique de Ionogramme sanguin, calcémie
+première intention devant un
+syndrome confusionnel
+B Examens complémentaires Connaître les indications des Scanner ou IRM
+examens d'imagerie devant un état
+confusionnel et/ou un trouble de
+la conscience chez l'enfant et chez
+l'adulte
+Prise en charge Connaître les grands principes de Y compris prise en charge
+la prise en charge d'un syndrome pré-hospitalière
+confusionnel chez l'adulte et chez
+l'enfant selon l'étiologie
+ITEM 132 – Troubles cognitifs de la personne âgée
+Cf. chapitre 9.
+▼
+

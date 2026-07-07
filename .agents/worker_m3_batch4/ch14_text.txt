@@ -1,0 +1,852 @@
+--- Page 248 ---
+Connaissances
+Rang Rubrique Intitulé
+A Diagnostic positif Critères diagnostiques dénutrition et dénutrition sévère de la personne
+âgée
+A Pronostic Citer les complications de dénutrition de la personne âgée
+B Définition Définition obésité de la personne âgée
+B Diagnostic positif Conséquences spécifiques négatives et protectrices de l'obésité de la
+personne âgée
+B Examens Critères biologiques d'une dénutrition de la personne âgée
+complémentaires
+B Prise en charge Grands principes de la prise en charge dénutrition de la personne âgée
+I. Généralités
+A L'équilibre nutritionnel est menacé au cours du vieillissement avec de nombreuses
+conséquences :
+• modification de la composition corporelle : diminution de la masse musculaire et augmen-
+tation de la masse grasse ;
+• altération de la régulation de l'appétit ;
+• exposition au risque d'obésité et de dénutrition.
+Les conséquences fonctionnelles d'un déséquilibre nutritionnel sont aggravées par la coexis-
+tence d'autres marqueurs de vieillissement, comme la sarcopénie et la désadaptation à l'effort
+222 (cf. chapitre 13).
+La dénutrition :
+• est la conséquence d'une diminution des apports et/ou d'une augmentation des dépenses
+énergétiques (plus souvent hypercatabolisme lié à une inflammation en situation patholo-
+gique qu'augmentation d'activité physique) ;
+• doit être recherchée dans tout bilan gériatrique global et doit être identifiée précocement,
+ainsi que ses mécanismes, pour les corriger, car elle :
+– est une comorbidité et un facteur de risque indépendant de mauvais pronostic (autono-
+mie, chutes, infections et décès) ;
+– fait partie des causes majeures de vulnérabilité et de fragilité des individus âgés ;
+– est une des causes de dépendance iatrogène (recommandations HAS).
+Les cinq écueils à éviter dans la dénutrition de la personne âgée
+• Ne pas peser un patient âgé !
+• Considérer que l'anorexie et l'amaigrissement sont normaux chez le patient âgé [17].
+• Ne pas comprendre que la dénutrition est une pathologie silencieuse que le patient âgé n'abordera
+jamais spontanément [30] lors d'une consultation gériatrique [295].
+• Ne pas aborder le sujet notamment chez les patients les plus à risque, polypathologique [267], polymé-
+diqué [266], et en particulier en présence de troubles neurocognitifs majeurs [298].
+• Ne pas surveiller l'efficacité de la renutrition sur des critères adaptés.
+▼
+
+--- Page 249 ---
+Évaluer l'état nutritionnel et en comprendre l'importance
+Recherche d'une dénutrition
+La recherche d'une dénutrition est un élément indispensable de la prise en charge des patients âgés, à
+considérer comme une comorbidité parmi d'autres, en prenant en compte les traitements et l'autonomie
+qui garantit l'accès à une nutrition correcte.
+Quand ?
+• Lors d'une première consultation ou hospitalisation.
+• Lors de consultations de suivi [266, 267, 279, 295].
+• Lors d'une sortie d'hospitalisation pour permettre le retour à domicile dans de bonnes conditions [131,
+355] avec un projet thérapeutique nutritionnel [324].
+• Après une période de décubitus prolongé [276].
+Comment ?
+• En récupérant des informations objectives [131].
+• En impliquant si besoin l'aidant principal [330], le médecin référent et tous les soignants impliqués
+dans l'accompagnement du patient.
+• En surveillant régulièrement le poids du patient et les critères validés.
+Pourquoi ?
+• Comprendre et traiter les causes.
+• Mettre en place des interventions utiles, faisables et de suivre leur efficacité.
+• Prévenir les complications [86].
+II. Nutrition normale dans le grand âge
+A. Dépenses énergétiques chez la personne âgée
+B Rappel :
+Dépense énergétique totale (DET) = Dépense énergétique de repos (DER) + Dépense éner-
+gétique liée à l'effet thermique des aliments (thermogenèse) + Dépense énergétique liée à
+l'activité physique.
+• La dépense énergétique de repos (DER) :
+– correspond à une dépense énergétique « incompressible » nécessaire au maintien de la
+vie (métabolisme de base) ;
+– représente environ 60 % de la DET ;
+– est modérément diminuée chez la personne âgée à cause de la diminution de masse
+musculaire ;
+– ne varie pas en fonction de l'âge lorsqu'elle est rapportée à la masse maigre ;
+– représente environ 1 kcal/kg/h soit 24 kcal/kg par jour.
+• La dépense énergétique liée à l'effet thermique des aliments :
+– correspond à la transformation des aliments ingérés en nutriments utilisables ;
+– représente environ 10 % de la DET ;
+– est inchangée chez la personne âgée.
+• La dépense énergétique liée à l'activité physique :
+– représente la part variable de la DET : plus l'activité est intense, plus la dépense énergé-
+tique est élevée ;
+– l'activité physique diminue avec l'âge ;
+– pour assurer le même exercice physique, la dépense énergétique est par ailleurs souvent
+plus importante chez la personne âgée que chez le l'adulte jeune.
+
+--- Page 250 ---
+Connaissances
+Pour la plupart des personnes âgées ayant une activité physique modérée (une heure de
+marche, de jardinage ou d'activité ménagère par jour), la DET est environ 1,3 à 1,4 fois la DER.
+B. Besoins nutritionnels chez la personne âgée
+A La référence nutritionnelle pour la population (RNP) est l'apport quotidien qui couvre les
+besoins de la quasi-totalité (97,5 %) de la population en bonne santé. La RNP correspond
+généralement à 1,3 fois les besoins nutritionnels moyens. Les principaux chiffres sont repris
+dans le tableau 14.1.
+Tableau 14.1. A Chiffres clefs de la nutrition de la personne âgée.
+Énergie Protides Glucides Lipides
+30 kcal/kg/j 1 à 1,2 g/kg/j 50 % de l'AET 40 % des AET
+Acides gras essentiels Eau Fibres Calcium Vitamine D
+9 à 10 g/j 40 ml/kg/j 30 g/j 1 000 mg/j 15 μg/j
+AET : apport énergétique total.
+1. Macronutriments
+Énergie
+Les besoins énergétiques d'une personne âgée en bonne santé sont variables d'un individu
+à l'autre mais sont proches de 30 kcal/kg par jour. Un poids stable (en dehors de troubles de
+l'hydratation) est le témoin que les apports énergétiques comblent les besoins.
+Protéines
+La ration recommandée en protéines est de 1 à 1,2 g/kg par jour chez la personne âgée en
+bonne santé. Les besoins en protéines sont ainsi légèrement supérieurs chez les personnes
+âgées que chez les adultes jeunes (0,8 g/kg par jour). Il semble important de préserver des
+apports en protéines d'origine animale car leur composition en acides aminés est plus riche en
+acides aminés essentiels.
+Glucides
+La ration globale en glucides représente environ 50 % de l'apport énergétique total (AET).
+Le vieillissement s'accompagne d'une tendance à la résistance à l'insuline, en particulier au
+niveau du tissu musculaire.
+Lipides
+Les lipides représentent environ 40 % des AET. Les besoins en acides gras essentiels sont de
+9 à 10 g par jour chez la personne âgée, ce qui représente environ 1 cuillerée à soupe d'huile
+végétale chaque jour.
+2. Eau
+L'évaluation des besoins hydriques doit prendre en compte le poids, les situations climatiques
+(fortes chaleurs) et les situations pathologiques (hyperthermie, diarrhée, vomissements) ainsi
+que les traitements (diurétiques). Le besoin hydrique quotidien total (tout volume liquidien
+compris) de la personne âgée vivant en milieu tempéré et ayant une activité physique moyenne
+est estimé entre 35 et 45 ml d'eau/kg par jour, soit environ 2,5 litres d'eau par jour pour
+une personne de 60 kg. La moitié du besoin quotidien en eau est apportée par les boissons
+
+--- Page 251 ---
+Évaluer l'état nutritionnel et en comprendre l'importance
+et l'autre moitié est apportée par les aliments. Les apports viennent compenser les pertes
+hydriques qui sont de l'ordre de 1,5 litre par jour dans les urines, 900 ml par jour de pertes
+insensibles par perspiration et 100 ml par jour dans les selles.
+Du fait d'une diminution de la capacité de concentration des urines avec le vieillissement, le
+risque de déshydratation est important dans les situations entraînant une augmentation des
+pertes hydriques.
+Par ailleurs, avec le vieillissement, certaines personnes réduisent leur consommation hydrique
+en raison d'une diminution de la sensation de soif ou volontairement afin d'éviter de se lever
+la nuit ou le risque d'incontinence.
+3. Fibres
+Il est conseillé un apport en fibres de 30 g par jour mais, comme chez l'adulte, les apports chez
+la personne âgée sont le plus souvent aux alentours de 20 g par jour. Des apports bas en fibres
+peuvent favoriser la constipation et l'intolérance au glucose.
+4. Micronutriments
+Les besoins en la plupart des micronutriments chez la personne âgée en bonne santé sont
+globalement semblables à ceux de l'adulte jeune. Une alimentation suffisamment abondante
+et variée permet aux personnes âgées en bonne santé de couvrir ces besoins.
+Cependant, les personnes consommant moins de 1 500 kcal par jour ne peuvent couvrir leurs besoins en
+vitamines, minéraux et oligoéléments même si leur alimentation est variée.
+Vitamines
+Les besoins en vitamine D sont augmentés chez la personne âgée et sont très rarement cou-
+verts par l'exposition au soleil et l'alimentation : la carence en vitamine D est donc très fré-
+quente. Il est recommandé de supplémenter systématiquement les personnes âgées de plus
+de 65 ans par 800 à 1 000 UI de vitamine D par jour (ou l'équivalent en doses de 50 000 à
+100 000 UI) pour limiter le risque de chute et de fracture.
+Les déficits concernant les autres vitamines sont plus rares à domicile. Les patients hospita-
+lisés ou en institution, avec une alimentation insuffisante, sont particulièrement exposés aux
+carences en vitamines B9 (folates), B12 et C.
+Calcium
+Les produits laitiers et les eaux minérales à forte teneur en calcium sont recommandés pour
+atteindre les RNP. Un supplément calcique médicamenteux peut être nécessaire si les apports
+calciques spontanés sont inférieurs à 500 mg par jour.
+Fer
+Les besoins sont généralement couverts par l'alimentation. Les carences martiales surviennent
+en cas de saignement occulte, digestif ou gynécologique.
+Phosphore
+B Le phosphore est contenu dans de très nombreux aliments : poissons, œufs, viandes, pro-
+duits laitiers, fruits, céréales. Ainsi, les besoins sont le plus souvent couverts par l'alimentation.
+
+--- Page 252 ---
+Connaissances
+Magnésium
+Le magnésium est apporté par des aliments comme le chocolat, les fruits secs, les fruits de mer
+ou les céréales entières et, de façon non négligeable, par l'eau de boisson. La moitié du capital
+en magnésium (24 g) est contenue dans l'os. Les muscles squelettiques, le système nerveux et
+les organes à haute activité métabolique en comportent aussi beaucoup. Il est possible que les
+pertes excessives de magnésium apparaissent chez les patients âgés malades, alcooliques ou
+diabétiques, et chez les patients traités par les diurétiques thiazidiques.
+III. Troubles nutritionnels et dénutrition
+A. Obésité de la personne âgée
+A L'obésité [51] se définit par un IMC ≥ 30 kg/m2 chez la personne âgée, comme chez
+l'adulte plus jeune.
+B La prévalence de l'obésité augmente avec l'âge avec un pic à 18–20 % à 55–65 ans, puis
+diminue. Après 80 ans, la prévalence est de l'ordre de 10 %.
+Conséquences
+Chez la personne âgée, l'obésité peut représenter un facteur de risque ou un facteur protec-
+teur, en fonction des situations et des pathologies.
+Comme chez l'adulte plus jeune, l'obésité est associée à diabète, hypertension artérielle, dyslipi-
+démie, pathologies cardiovasculaires, insuffisance respiratoire, insuffisance veineuse, arthrose…
+226 Après 80 ans, le diabète atteint une personne sur cinq et l'HTA une personne sur quatre. Dans
+la population générale âgée vivant à domicile, l'association entre obésité et mortalité (toutes
+causes ou cardiovasculaire) persiste mais elle apparaît comme beaucoup moins forte que chez
+les adultes jeunes. La morbi-mortalité semble surtout liée à l'obésité morbide (IMC ≥ 40).
+A Plus spécifiquement chez la personne âgée, l'obésité a des conséquences négatives sur
+l'autonomie, particulièrement chez les obèses sarcopéniques et/ou dénutris :
+• complications articulaires [67] ;
+• déséquilibre entre l'excès de poids et une masse musculaire devenue insuffisante ;
+• handicap pour les actes de la vie quotidienne (se lever d'une chaise, monter des marches)
+[31] ;
+• risque de rentrer dans la dépendance.
+Certains obèses perdent du poids en vieillissant, en lien avec diverses pathologies (dont certaines liées aux
+complications de l'obésité). On observe ainsi des personnes âgées obèses et dénutries (+++).
+B En revanche, l'obésité chez le patient âgé peut également avoir un effet protecteur :
+• diminution du risque de fracture (rôle protecteur mécanique du tissu adipeux en cas de
+traumatisme, pression stimulante du poids sur la structure osseuse, et effet hormonal lié à
+la transformation des androgènes surrénaliens en œstrogènes par le tissu adipeux) ;
+• augmentation de la survie dans des pathologies chroniques cachectisantes comme l'insuf-
+fisance rénale, respiratoire et cardiaque ou les rhumatismes inflammatoires lorsqu'elle est
+associée à des réserves énergétiques importantes.
+En cas d'hospitalisation, la mortalité des patients les plus âgés en fonction de leur IMC décrit
+une courbe en « U » dont le nadir correspond à un IMC à 30–32. Ainsi, dans les pathologies
+chroniques ou aiguës entraînant un risque de réduction des apports alimentaires, l'obésité
+semble constituer un facteur protecteur chez les personnes âgées.
+
+--- Page 253 ---
+Évaluer l'état nutritionnel et en comprendre l'importance
+Points clés du diabète chez le patient âgé
+• Les objectifs thérapeutiques, en termes d'hémoglobine glyquée cible, ne sont pas dépendants de l'âge
+chronologique du patient mais sont adaptés aux comorbidités et à la fragilité du patient :
+– patient considéré comme vigoureux : objectif d'HbA1c ≤ 7 % ;
+– patient considéré comme fragile : objectif d'HbA1c ≤ 8 % ;
+– patient considéré comme malade, avec espérance de vie limitée : objectif d'HbA1c < 9 %.
+• Les mesures hygiéno-diététiques doivent être adaptées : éviter les régimes restrictifs qui exposent au
+risque de dénutrition, poursuite d'une activité physique adaptée au patient.
+• Le choix du traitement antidiabétique doit notamment prendre en compte la présence de troubles
+cognitifs, le risque de dénutrition, la polymédication et le risque d'interférence médicamenteuse, le
+risque de chute et une éventuelle altération de la fonction rénale.
+• La metformine reste le traitement de première intention dans le diabète de type 2 du patient âgé.
+• Les hypoglycémies sont plus fréquentes chez le diabétique âgé et passent plus souvent inaperçues.
+• Les traitements hypoglycémiants, dont les sulfamides et les glinides, doivent faire l'objet d'une grande
+prudence chez le diabétique âgé.
+• Le recours à l'insulinothérapie est souvent nécessaire du fait de la survenue d'événements aigus, d'altéra-
+tion de la fonction rénale ou de contre-indications aux antidiabétiques oraux. L'insulinothérapie ne doit
+pas être crainte et permet l'instauration d'une surveillance infirmière régulière.
+• L'éducation thérapeutique du patient doit être adaptée à chaque patient et élargie aux aidants.
+Mise en situation
+Obésité et dénutrition
+Vous voyez en consultation un patient de 80 ans, pour gonalgies bilatérales invalidantes [67], imposant
+une marche avec déambulateur sur de courtes distances. Ce patient est obèse avec un IMC à 36 kg/
+m2 (110 kg) [51]. Il présente une cardiopathie ischémique stentée à trois reprises, sans insuffisance
+cardiaque, une HTA, une dyslipidémie, un diabète de type 2 ancien, un AVC ancien sans séquelle, une
+insuffisance respiratoire restrictive, un syndrome d'apnées du sommeil appareillé depuis 5 ans, une
+dépression intriquée avec de possibles troubles neurocognitifs mineurs débutants. Il suit rigoureuse-
+ment son régime sans sel et antidiabétique, et prend sept médicaments. La gonarthrose sévère bilaté-
+rale est documentée. L'examen clinique note également un mauvais état bucco-dentaire. Le patient
+vient pour envisager une chirurgie sur les conseils d'un ami.
+Le risque chirurgical chez ce patient très vasculaire est important et la rééducation après intervention
+sera très difficile (surpoids, dépression, TNC débutants). Malgré sa demande initiale, les mesures non
+chirurgicales sont donc essentielles et prioritaires.
+1. Traitement antalgique adapté et traitement symptomatique de son arthrose permettant d'aug-
+menter progressivement la marche (cf. chapitre 7), dans un contexte évident de déconditionne-
+ment à l'effort [353].
+2. Mesures nutritionnelles qui ne peuvent être envisagées qu'après avoir recherché une dénutrition
+[30] malgré l'obésité, chez ce patient présentant des facteurs de risque importants de dénutrition
+(dépression, TNC, polymédication, état bucco-dentaire, régime diabétique sans sel). La découverte
+▲
+
+--- Page 254 ---
+Connaissances
+d'une albuminémie à 32 g/l sans inflammation ni autre étiologie confirme bien la dénutrition.
+L'objectif est alors d'adapter le régime en supprimant le régime sans sel, en adaptant le régime
+antidiabétique selon l'équilibre glycémique, d'améliorer l'état thymique (par le traitement des
+douleurs en premier lieu) et l'état bucco-dentaire, et d'apporter une alimentation hyperprotidique
+avec pour objectif une perte modérée ou une stabilité du poids [324].
+3. La surveillance nutritionnelle sera essentielle sur le poids et l'albuminémie chaque mois, tout
+comme la surveillance fonctionnelle sur les gonalgies et la marche.
+B. Dénutrition de la personne âgée
+1. Prévalence
+A Même si elle varie fortement en fonction du contexte de soin et des critères utilisés pour
+définir la dénutrition, la prévalence de la dénutrition protéino-énergétique (DPE) est élevée
+dans la population âgée (tableau 14.2).
+Tableau 14.2. A Prévalence de la dénutrition dans la population âgée selon le lieu de vie.
+Domicile Institution Hospitalisation
+Dénutrition 4 à 10 % 15 à 40 % 30 à 70 %
+2. Démarche diagnostique
+Dépister les patients ou les situations à risque
+Il s'agit d'identifier les situations à risque d'entraîner une dénutrition, en particulier les patients
+présentant des facteurs de risque et/ou des situations d'hypercatabolisme, et de rechercher
+une diminution des apports alimentaires.
+Facteurs de risque de dénutrition
+Les facteurs de risque de dénutrition sont nombreux et souvent multiples chez un patient âgé
+(tableau 14.3). Il faut en particulier noter le rôle de :
+• troubles neurocognitifs ;
+• dépendance ;
+• dépression ;
+• cancer ;
+• toute pathologie à un stade sévère (cardiaque, respiratoire, rénale et hépatique) ;
+• pathologies inflammatoires ou infectieuses chroniques (pathologie rhumatismale,
+tuberculose…).
+État d'hypercatabolisme
+B De nombreuses pathologies aiguës sont source d'hypercatabolisme, particulièrement délé-
+tère chez le patient âgé déjà préalablement dénutri. Cet hypercatabolisme associe :
+• catabolisme musculaire (diminution de la masse musculaire), qui représente la première
+source énergétique mobilisable ;
+• fonte des réserves lipidiques (diminution du tissu adipeux) ;
+• modification du métabolisme glucidique.
+▲
+
+--- Page 255 ---
+Évaluer l'état nutritionnel et en comprendre l'importance
+Tableau 14.3. A Facteurs de risque de dénutrition chez la personne âgée.
+Psycho-socio-environnementaux Toute affection aiguë ou Iatrogénie médicamenteuse
+décompensation d'une pathologie
+chronique
+– Isolement social – Douleur – Polymédication
+– Deuil – Pathologie infectieuse – Médicaments entraînant une
+– Difficultés financières – Impotence fonctionnelle sécheresse de la bouche, une
+– Maltraitance – Intervention chirurgicale dysgueusie, des troubles digestifs,
+– Hospitalisation – Constipation sévère une anorexie, une somnolence, etc.
+– Changement des habitudes de vie : – Corticoïdes au long cours
+entrée en institution
+Troubles bucco-dentaires Régimes restrictifs Troubles neurocognitifs
+– Trouble de la mastication – Sans sel – Maladie d'Alzheimer et apparentées
+– Mauvais état dentaire – Amaigrissant – Syndrome confusionnel
+– Appareillage mal adapté – Diabétique – Troubles de la vigilance
+– Sécheresse de la bouche – Hypocholestérolémiant – Syndrome parkinsonien
+– Candidose oropharyngée – Sans résidus au long cours
+– Dysgueusie
+Troubles de la déglutition Dépendance pour les actes de la Troubles psychiatriques
+vie quotidienne
+– Pathologie ORL – Dépendance pour l'alimentation – Syndromes dépressifs
+– Pathologie neurologique – Dépendance pour la mobilité – Troubles du comportement
+dégénérative ou vasculaire
+Comprendre l'hypercatabolisme
+B Les hypercatabolismes sont sous la dépendance de médiateurs ubiquitaires de l'inflammation qui
+entraînent une augmentation de la production des hormones cataboliques. Quel que soit le mécanisme
+d'activation du catabolisme, il y a hyperstimulation des monocytes et macrophages se traduisant par une
+augmentation du taux des cytokines pro-inflammatoires (IL-1, IL-6, TNF). Les cytokines ont un rôle central
+en orientant le métabolisme de l'organisme pour fournir aux cellules concernées (lymphocytes, phago-
+cytes ou fibroblastes) les nutriments dont elles ont besoin. La synthèse des protéines de phase aiguë (CRP,
+orosomucoïde, macroglobuline…) augmente. Les cytokines ont aussi un effet anorexigène propre. Les
+personnes âgées sont particulièrement menacées au cours des états d'hypercatabolisme car leurs réserves
+(surtout musculaires) sont diminuées. Ces états s'accompagnent d'une résistance à l'anabolisme et à la
+renutrition.
+Cette situation est fréquente dans les situations aiguës mais aussi au cours de la plupart des pathologies
+chroniques, entraînant une cachexie. L'hypercatabolisme est déclenché lors de toute maladie provoquant
+une inflammation systémique ou peut être médié par d'autres facteurs :
+• pathologies infectieuses ;
+• phénomènes de destruction et de réparation tissulaire (tumeurs, rhumatismes, fractures ou plaies) ;
+• insuffisance cardiaque ;
+• insuffisance respiratoire ;
+• insuffisance rénale ;
+• hyperthyroïdie.
+
+--- Page 256 ---
+Connaissances
+Faire le diagnostic
+A Les critères diagnostiques de la dénutrition chez la personne âgée de 70 ans et plus ont été
+précisés dans les recommandations HAS sur la stratégie de prise en charge en cas de dénutri-
+tion protéino-énergétique chez la personne âgée en 2007 (tableau 14.4).
+Tableau 14.4. A Critères diagnostiques de dénutrition de la personne âgée (HAS 2007).
+Dénutrition Dénutrition sévère
+Perte de poids ≥ 5 % en 1 mois ≥ 10 % en 1 mois
+ou ou
+≥ 10 % en 6 mois ≥ 15 % en 6 mois
+IMC < 21 < 18
+Score MNA global < 17
+Albuminémie* < 35 g/l < 30 g/l
+IMC : indice de masse corporelle (kg/m2) ; MNA : Mini Nutritional Assessment.
+* Sous réserve d'une CRP normale.
+Poids
+Le poids, idéalement sur même balance et avec même habillage, est un critère clinique essen-
+tiel du suivi des patients âgés :
+• lors de toute consultation médicale ;
+• à l'entrée en hospitalisation puis une fois par semaine en court séjour et une fois tous les
+15 jours en SSR ;
+• à l'entrée puis une fois par mois en SLD ou en EHPAD.
+Indice de masse corporelle
+L'indice de masse corporelle (IMC) se calcule selon la formule : Poids (kg)/Taille2 (m2). Chez
+une personne âgée, le seuil est plus élevé que chez l'adulte jeune. Un IMC < 21 kg/m2 est un
+critère de dénutrition. Il existe une diminution de taille avec le vieillissement, variable selon
+les individus, et il faut prendre en compte la taille « de référence » ou celle notée sur la carte
+nationale d'identité.
+Biologie
+Albuminémie
+• Critère diagnostique et marqueur robuste de mauvais pronostic et de mortalité.
+• Demi-vie relativement longue de 21 jours en situation métabolique stable.
+• Influencée par l'inflammation et le statut hydrique.
+Transthyrétine (ou préalbumine)
+• B Utile pour le suivi nutritionnel à plus court terme lors d'une prise en charge nutrition-
+nelle (mais non utilisée en pratique).
+• Demi-vie très courte de 2 jours.
+• Dénutrition suspectée à partir d'un taux plasmatique < 0,2 g/l.
+Mini Nutritional Assessment (MNA)
+Ce questionnaire est composé de dix-huit items concernant les situations cliniques qui
+entraînent un risque de dénutrition, l'appétit et la consommation alimentaire et des mesures
+anthropométriques (IMC, circonférence du bras et du mollet). Le score varie de 0 (moins bon
+état nutritionnel) à 30 points (meilleur état nutritionnel).
+
+--- Page 257 ---
+Évaluer l'état nutritionnel et en comprendre l'importance
+Un score < 17/30 atteste d'une dénutrition protéino-énergétique (DPE). Un score entre 18 et
+23,5 indique une situation à risque de DPE. Un score ≥ 24 indique un bon état nutritionnel.
+Quantifier les ingestas (apports alimentaires), par un diététicien
+A C'est le calcul des apports énergétiques et protéiques par :
+• relevé des quantités de chaque plat effectivement consommé sur la journée, en prenant en
+compte l'ensemble des prises alimentaires repas et collations ;
+• pendant 3 jours.
+Plus simplement, approche possible en consultation en utilisant des échelles de prise alimen-
+taire cotée de 0 à 10 ou en hospitalisation (fiches remplies au moment de débarrasser le
+plateau par l'équipe soignante).
+Rechercher et prévenir les complications de la dénutrition
+Les principales complications de la dénutrition protéino-énergétique de la personne âgée sont :
+• morbimortalité ;
+• 
+• immunodépression ;
+• escarres ;
+• déshydratation ;
+• déficit en micronutriment.
+Morbi-mortalité
+B La dénutrition augmente significativement la morbidité et la mortalité. En augmentant les
+complications à l'hôpital, elle augmente la durée de séjour. La dénutrition augmente aussi le
+risque d'institutionnalisation chez les personnes âgées vivant à domicile.
+Sarcopénie
+Correspond à la diminution de la masse, de la force et de la fonction musculaires au cours
+du vieillissement (tableau 14.5 et fig. 14.1). La sarcopénie est associée à la diminution de la
+mobilité, au risque de chute et à la dépendance.
+Elle est majorée par la réduction des apports alimentaires, la sédentarité, les maladies (surtout
+en cas de syndrome inflammatoire) et l'alitement.
+Tableau 14.5. B Critères diagnostiques cliniques de la sarcopénie.
+Critères de sarcopénie Outil de mesure
+↓ Masse musculaire Anthropométrie, impédancemétrie ou absorptiométrie biphotonique
+↓ Force musculaire Force de préhension par dynamomètre :
+< 20 kg chez les femmes
+< 30 kg chez les hommes
+↓ Fonction musculaire Vitesse de marche < 0,8 m/s ou autres tests fonctionnels
+Immunodépression
+La dénutrition peut s'associer à une lymphopénie, une altération de l'immunité à médiation
+cellulaire, de l'immunité humorale et l'immunité non spécifique. Elle augmente ainsi le nombre
+et la sévérité des infections, ainsi que le risque d'infection nosocomiale.
+Escarres [86]
+La dénutrition augmente le risque d'apparition d'escarres (cf. chapitre 13) et, en cas d'escarres
+constituées, elle est associée à un retard de cicatrisation.
+
+--- Page 258 ---
+Connaissances
+Personne âgée
+(> 65 ans)
+Mesure
+vitesse de marche
+> 0,8 m/s < 0,8 m/s
+Mesure Mesure
+Force préhension Masse musculaire
+Normale Basse Basse Normale
+Pas de Pas de
+Sarcopénie
+sarcopénie sarcopénie
+Fig. 14.1. B Algorithme de dépistage de la sarcopénie proposé par l'European Working Group on
+Sarcopenia in Older People.
+Déshydratation
+La moitié des besoins quotidiens en eau est assurée par l'alimentation. Les personnes qui
+s'alimentent peu sont aussi susceptibles de boire insuffisamment. Il est donc nécessaire de
+rechercher et, le cas échéant, de corriger une déshydratation.
+232 Déficits en micronutriments (vitamines et oligoéléments)
+• Déficits en vitamines B (B9 et B12) : asthénie, troubles psychiques, encéphalopathies caren-
+tielles, neuropathies, anémie et déficit immunitaire.
+• Carence en zinc : altération du goût — donc elle entretient l'anorexie —, déficit immuni-
+taire, retard de cicatrisation des plaies, risque infectieux.
+IV. Prise en charge nutritionnelle chez la personne âgée
+L'alimentation ne se limite pas à l'ingestion d'énergie et de nutriments. C'est un acte essentiel
+de la vie. À un âge avancé de la vie, l'alimentation doit rester ou redevenir un plaisir, et peut
+être aussi l'occasion de développer un lien social.
+La prise en charge, pour être efficace, doit impliquer tous les intervenants autour de la per-
+sonne âgée ainsi que son entourage :
+• diététicien, qui permettra une évaluation précise des apports et une adaptation des conseils
+alimentaires ;
+• personnel de soin et personnel de rééducation, pour encourager les prises alimentaires et
+l'activité physique ;
+• famille.
+La prise en charge doit également intégrer l'avis du malade et/ou de son entourage ainsi que
+des considérations éthiques.
+
+--- Page 259 ---
+Évaluer l'état nutritionnel et en comprendre l'importance
+A. Prise en charge de l'obésité de la personne âgée
+A Le plus souvent, l'objectif le plus raisonnable est celui d'une stabilité pondérale associée à
+une activité physique. Une activité physique, même modérée et débutée après l'âge de 75 ans,
+continue d'avoir un effet favorable sur la survie et le maintien de l'autonomie.
+Projet thérapeutique
+Il faudra tenir compte :
+• de l'ancienneté de l'excès pondéral et du poids actuel par rapport au poids maximum
+atteint au cours de la vie ;
+• du retentissement de cette obésité ;
+• des comorbidités, de l'autonomie, de la qualité de vie et de l'espérance de vie ;
+• des capacités de la personne âgée à modifier ses habitudes alimentaires [324] ;
+• d'une possible dénutrition sous-jacente.
+Ainsi, en cas d'obésité récemment constituée, avec un important retentissement métabolique
+et/ou sur la mobilité, chez une personne de moins de 80 ans sans comorbidité sévère, à l'espé-
+rance de vie peu limitée, il est possible qu'une perte de poids modeste (de l'ordre de 3 à 5 %)
+puisse améliorer le contrôle du diabète, par exemple, ou la symptomatologie douloureuse
+d'une gonarthrose — l'effet à long terme sur la mortalité globale reste indéterminé.
+Cependant, chez les personnes âgées, la perte pondérale s'accompagne, encore plus que chez
+l'adulte jeune, d'une perte de masse musculaire. S'il est prescrit, le programme diététique doit
+impérativement s'accompagner d'un programme d'activité physique pour limiter cette perte
+de masse musculaire. La forme d'exercice physique la plus efficace pour augmenter la force
+musculaire est l'exercice contre résistance [247].
+Ainsi, dans la situation particulière d'une chirurgie programmée chez une personne âgée, la
+réduction pondérale préopératoire n'est pas recommandée ; les risques opératoires ne sont pas
+augmentés en cas d'obésité modérée et la rééducation postopératoire risque d'être compro-
+mise par une perte musculaire préalable.
+B. Prévention de la dénutrition
+1. Enquête alimentaire
+B L'analyse de l'alimentation habituelle d'une personne âgée doit répondre aux questions
+suivantes :
+• Les revenus permettent-ils l'achat d'aliments variés ?
+• Qui fait les courses et qui choisit les aliments et prépare les repas ?
+• Les aliments apportant des protéines, du calcium et des vitamines font-ils partie du menu ?
+• Connaissance de la personne ou ses aidants des besoins en nutriments ?
+• Combien la personne fait-elle de repas par jour ?
+• Les repas sont-ils pris seul ou en compagnie ?
+• La notion de « plaisir de manger » existe-t-elle ?
+• Existe-t-il des repas pris en famille et des repas de fêtes ?
+• Quelle est la quantité de liquides absorbée quotidiennement ?
+En fonction des réponses à ces questions simples mais essentielles, le médecin peut appré-
+cier les habitudes nutritionnelles et apporter des conseils alimentaires. La prévention de la
+dénutrition des personnes âgées figure dans les objectifs des actions de santé publique des
+programmes nationaux nutrition et santé successifs (Programme national Nutrition et Santé,
+PNNS) ainsi que dans le plan national « Bien Vieillir ».
+
+--- Page 260 ---
+Connaissances
+2. Activité physique
+Le meilleur moyen de lutter contre la sarcopénie et de prévenir la dénutrition est de garder
+une activité physique régulière, adaptée aux possibilités de la personne âgée. Il n'y a pas d'âge
+limite au-delà duquel l'activité physique serait contre-indiquée. L'activité physique permet le
+maintien des capacités physique et de l'autonomie. Les activités en endurance peuvent être
+complétées par des exercices contre résistance. Lorsque la marche devient difficile voire impos-
+sible, la personne peut continuer à réaliser de petits exercices permettant de mobiliser les
+segments corporels.
+3. Hygiène bucco-dentaire
+Une hygiène bucco-dentaire et des soins réguliers permettent de préserver les capacités de
+mastication et favorisent une alimentation diversifiée et suffisante. Les dents manquantes, les
+douleurs et les infections sont associées au risque de dénutrition.
+C. Prise en charge de la dénutrition
+1. Évaluation clinique globale
+A La stratégie de prise en charge reprend l'approche clinique gériatrique :
+• comorbidités ;
+• traitements en cours ;
+• dépendance ;
+• contexte socio-environnemental ;
+… et intègre pour définir le projet de soins l'espérance de vie et de la qualité de vie.
+Tous les facteurs pouvant contribuer à aggraver le statut nutritionnel doivent être pris en
+compte :
+• pathologies chroniques ;
+• troubles bucco-dentaires ;
+• recherche de troubles de la déglutition [62] ;
+• régimes inappropriés ;
+• effets secondaires des médicaments ;
+• difficultés à s'approvisionner, à cuisiner ou à s'alimenter.
+2. Objectifs protéino-énergétiques
+• Correspondent chez la personne âgée dénutrie à :
+– apport énergétique : 30 à 40 kcal/kg par jour ;
+– apport protidique : 1,2 à 1,5 g de protéine/kg par jour.
+• Reposent sur une consultation diététique, sans laquelle ces objectifs restent souvent
+théoriques.
+3. Choix des modalités de prise en charge nutritionnelle
+La stratégie de prise en charge nutritionnelle repose sur le statut nutritionnel du malade et le
+niveau des apports alimentaires énergétiques et protéiques spontanés (tableau 14.6).
+En présence d'une dénutrition, débuter prioritairement par :
+• des conseils nutritionnels ;
+• une alimentation enrichie.
+
+--- Page 261 ---
+Évaluer l'état nutritionnel et en comprendre l'importance
+Tableau 14.6. B Stratégie de prise en charge nutritionnelle d'une personne âgée dénutrie (HAS 2007).
+Statut nutritionnel Dénutrition Dénutrition sévère
+normal
+Apports alimentaires Surveillance Conseils diététiques Conseils diététiques
+normaux Alimentation enrichie Alimentation enrichie
+Réévaluation à 1 mois + CNO
+Réévaluation à 15 jours
+Apports alimentaires ↓↓ Conseils diététiques Conseils diététiques Conseils diététiques
+> 1/2 apports habituels Alimentation enrichie Alimentation enrichie Alimentation enrichie
+Réévaluation à 1 mois Réévaluation à 15 jours + CNO
+Si échec : CNO Réévaluation à 1 sem.
+Si échec : NE
+Apports alimentaires ↓↓↓ Conseils diététiques Alimentation enrichie Conseils diététiques
+< 1/2 apports habituels Alimentation enrichie + CNO Alimentation enrichie
++ CNO Réévaluation à 1 sem. NE d'emblée
+Réévaluation à 1 sem. Si échec : NE Réévaluation à 1 sem.
+Si échec : CNO
+CNO : compléments nutritionnels oraux ; NE : nutrition entérale.
+En cas d'échec, recourir à une complémentation nutritionnelle orale (CNO).
+En présence d'une dénutrition sévère, débuter par :
+• une complémentation nutritionnelle orale (CNO) ;
+• une nutrition entérale en première intention si les apports alimentaires sont effondrés, ou
+en deuxième intention en cas d'échec de la prise en charge nutritionnelle orale.
+Dans les situations ou l'alimentation orale s'avère impossible ou insuffisante, il faut envisager
+l'alimentation entérale, lorsque le tube digestif est fonctionnel, ou la nutrition parentérale, en
+cas d'occlusion, de malabsorption ou l'échec d'une nutrition entérale bien conduite.
+4. Prise en charge nutritionnelle orale
+Conseils nutritionnels
+• B Objectif : augmenter et diversifier les apports alimentaires.
+• Respecter les repères du Programme national Nutrition Santé (PNNS) pour les personnes
+âgées (tableau 14.7).
+• Augmenter la fréquence des prises alimentaires dans la journée, en s'assurant que la per-
+sonne âgée consomme trois repas quotidiens et en proposant des collations entre les repas.
+• Éviter une période de jeûne nocturne trop longue (> 12 heures) en retardant l'horaire du
+dîner, en avançant l'horaire du petit déjeuner et/ou en proposant une collation.
+• Privilégier des produits riches en énergie et/ou en protéines.
+• Adapter les menus aux goûts de la personne et adapter la texture des aliments à ses capa-
+cités de mastication et de déglutition.
+• Organiser une aide technique et/ou humaine au repas en fonction du handicap de la
+personne.
+• Proposer les repas dans un environnement agréable (cadre et convives).
+Enrichir l'alimentation
+Objectif : augmenter l'apport énergétique et protéique d'une ration d'alimentation tradition-
+nelle sans en augmenter le volume, en utilisant poudre de lait, lait concentré entier, fromage
+râpé, œufs, crème fraîche, beurre fondu, huile ou poudres de protéines industrielles.
+
+--- Page 262 ---
+Connaissances
+Tableau 14.7. B Repères alimentaires du PNNS pour la personne âgée fragile.
+Fruits et légumes Au moins 5 par jour
+Pains et autres aliments céréaliers, À chaque repas selon l'appétit
+pommes de terre et légumes secs
+Laits et produit laitiers 3 ou 4 par jour
+Viandes, poissons et produit de la 2 fois par jour
+pêche, œufs
+Matières grasses ajoutées Sans en abuser
+Produits sucrés Sans en abuser
+Boissons 1 à 1,5 litre par jour
+Sel Pas de conseil spécifique
+Activité physique Bouger chaque jour, le plus possible
+
+--- Page 263 ---
+Évaluer l'état nutritionnel et en comprendre l'importance
+Compléments nutritionnels oraux
+• Gamme relativement vaste de goûts variés et de textures.
+• Favoriser les produits hyper-énergétiques (≥ 1,5 kcal/ml ou kcal/g) et/ou hyper-protidiques
+(protéines ≥ 7,0 g/100 ml ou g/100 g, ou protéines ≥ 20 % de l'apport énergétique du
+produit).
+• Il est recommandé de prescrire des CNO permettant d'atteindre un apport alimentaire
+supplémentaire de 400 kcal par jour et/ou de 30 g par jour de protéines, en plus des repas
+pris spontanément.
+• La prescription des CNO est efficace pour améliorer le statut nutritionnel des personnes
+âgées, en particulier à l'hôpital, pour réduire les complications, la mortalité et les réadmis-
+sions à l'hôpital.
+Enrichir l'alimentation ou CNO ?
+Les mesures nutritionnelles et le délai de la réévaluation de leur efficacité varient selon la sévérité de la
+dénutrition et selon les apports alimentaires spontanés (AAS) (recommandations HAS 2007) :
+1. Les conseils diététiques et l'alimentation enrichie sont à mettre en place en première intention en cas
+de dénutrition, avec :
+– réévaluation à 1 mois en cas d'AAS normaux ;
+– réévaluation à 15 jours en cas d'AAS diminués mais > 50 % de l'apport habituel ;
+– CNO d'emblée et réévaluation à 7 jours en cas d'AAS diminués et < 50 % de l'apport habituel.
+2. Les conseils diététiques et l'alimentation enrichie et les compléments nutritionnels oraux sont à
+mettre en place en première intention en cas de dénutrition sévère, avec :
+– réévaluation à 15 jours en cas de d'AAS normaux ;
+– réévaluation à 7 jours en cas d'AAS diminués mais > 50 % de l'apport habituel ;
+– nutrition entérale d'emblée et réévaluation à 7 jours en cas d'AAS diminués et < 50 % de l'apport
+habituel.
+Micronutriments
+Les personnes âgées, en particulier celles qui sont institutionnalisées et/ou dénutries, repré-
+sentent une population particulièrement à risque de carences en micronutriments. Pour
+autant, aucune étude de supplémentation n'a pour l'instant montré de bénéfice clinique, et il
+n'est pas recommandé de complémenter systématiquement les personnes âgées en micronu-
+triments. Il reste néanmoins raisonnable, sans entraîner de risque particulier, de proposer une
+complémentation en micronutriments aux doses de la RNP pendant une période transitoire,
+en début de renutrition.
+Comme pour toutes les personnes âgées, la vitamine D doit être prescrite à la dose de 800 à
+1 000 UI par jour (ou équivalent en doses de 80 000 ou 100 000 UI) pour limiter de risque de
+chute et de fracture.
+5. Nutritions entérale et parentérale
+Chez le malade âgé très anorexique ou en situation d'agression métabolique, la prise en
+charge nutritionnelle orale peut être insuffisante. Il faut alors envisager la nutrition entérale,
+ou, en cas d'impossibilité d'utiliser le tube digestif, la nutrition parentérale. La décision doit
+prendre en compte une réflexion éthique comprenant le pronostic, la motivation du patient
+âgé et sa qualité de vie. Les pathologies en phase terminale (démence, cancer, etc.) sont des
+indications très discutables. La nutrition artificielle nécessite aussi l'adhésion du patient au pro-
+jet thérapeutique. Ces types de nutrition « artificielle » augmentent les apports nutritionnels
+mais présents des risques. La mise en place d'une nutrition artificielle doit être faite à l'hôpital,
+mais peut ensuite se poursuivre à domicile.
+
+--- Page 264 ---
+Connaissances
+Nutrition entérale
+La nutrition entérale utilise une sonde introduite dans l'estomac (sonde nasogastrique ou
+gastrostomie) ou dans le jéjunum si les risques de régurgitation et d'inhalation justifient de
+dépasser le pylore (sonde nasojéjunale ou gastrojéjunale) :
+• jusqu'à 4 semaines (courte durée), choisir la sonde nasogastrique ou nasojéjunale ;
+• au-delà de 4 à 6 semaines, choisir une gastrostomie par voie endoscopique ou radiologique ;
+• administration contrôlée par pompe : débit de 80 à 120 ml/heure ;
+• installation du patient : position assise ou demi-assise pour éviter la pneumopathie d'inha-
+lation, principale complication ;
+• augmentation progressive des apports énergétiques pour atteindre l'objectif en quelques
+jours, voire plus lentement si la dénutrition est ancienne (cf. encadré, Syndrome de renutri-
+tion inappropriée) ;
+• surveillance de la tolérance, particulièrement en début de renutrition :
+– clinique : état respiratoire et cardiaque, apparition d'œdèmes, diarrhée… ;
+– biologique : natrémie, kaliémie, glycémie, phosphore et magnésium, bilan hépatique.
+Nutrition parentérale
+Administration de nutriments directement dans le compartiment sanguin par le biais d'une voie
+veineuse centrale (ou éventuellement d'une voie veineuse périphérique mais seulement pour de
+petites quantités et sur quelques heures en raison de la toxicité veineuse des produits injectés).
+Expose le malade aux risques d'hypervolémie, d'infection et de thrombose du cathéter et de
+perturbations métaboliques (hyponatrémie, hyperglycémie, perturbations du bilan hépatique).
+Comme pour la nutrition entérale, les apports caloriques doivent être augmentés progressivement.
+Les poches de nutrition parentérale prêtes à l'utilisation ne contiennent ni électrolytes, ni
+minéraux, ni oligoéléments, ni vitamines. Il est indispensable d'administrer ces nutriments
+parallèlement.
+Risque de la renutrition : syndrome de renutrition inappropriée
+Il témoigne d'une mauvaise tolérance métabolique d'une renutrition entérale ou parentérale trop rapide.
+Survient en cas d'IMC très bas avec perte de poids importante et/ou arrêt prolongé de l'alimentation.
+Lié à l'apport glucidique après une réduction prolongée, qui entraîne une augmentation brutale de l'insu-
+linémie qui provoque un transfert intracellulaire d'électrolytes et donc une hypokaliémie, une hypophos-
+phorémie, une hypomagnésémie, un déficit en vitamine B1. Les complications cliniques sont liées à ces
+désordres hydroélectrolytiques brutaux : encéphalopathie, confusion, rétention hydrosodée, insuffisance
+cardiaque, arythmie, hypoventilation et insuffisance respiratoire, atteinte musculaire et hépatique…
+jusqu'à un syndrome de défaillance multiviscérale.
+La prévention du syndrome de renutrition inappropriée consiste à reconnaître les patients à risque, à
+augmenter les apports énergétiques de façon progressive, d'autant plus lentement que la dénutrition est
+ancienne et sévère et à associer une recharge en électrolytes (notamment phosphore), en vitamines et
+oligoéléments.
+6. Surveillance de la prise en charge nutritionnelle
+A La prise en charge nutritionnelle doit être adaptée en fonction de son acceptabilité, de sa
+tolérance et de la réponse nutritionnelle. La fréquence de la surveillance est variable en fonc-
+tion de la situation clinique, de la sévérité de la dénutrition et de l'évolution pondérale, mais
+elle est recommandée au minimum lors de chaque réévaluation mentionnée dans le
+tableau 14.4.
+
+--- Page 265 ---
+Évaluer l'état nutritionnel et en comprendre l'importance
+Il est recommandé de fonder cette surveillance médicale sur les paramètres suivants :
+• poids lors de toute consultation médicale, à l'entrée de toute hospitalisation puis 1 fois par
+semaine en court séjour et 1 fois tous les 15 jours en SSR, à l'entrée en institution (SLD ou
+EHPAD) puis 1 fois par mois ;
+• apports alimentaires (ingestas) ;
+• albumine : dosage recommandé sauf si l'albuminémie initiale est normale, au maximum
+une fois par mois (pas de contrôle avant un mois), en dehors de situations particulières.
+Mise en situation
+Dénutrition dans une situation d'hypercatabolisme
+Vous prenez en charge en gériatrie une patiente de 90 ans, pour pneumopathie de base droite. Vous suivez
+cette patiente depuis 3 ans pour troubles neurocognitifs majeurs avec dépression, cardiopathie rythmique
+(fibrillation atriale) et arthrose. Cette patiente vit à domicile avec son fils handicapé, avec une auxiliaire de
+vie et un passage infirmier pour sécuriser les prises médicamenteuses (coumadine, citalopram, bisoprolol,
+paracétamol). La dernière consultation remonte à 1 mois. Son médecin l'a adressée aux urgences la veille
+pour fièvre, toux et dyspnée depuis 7 jours, avec une PCR Covid négative. À l'examen, la patiente pèse
+40 kg, a perdu 7 % de son poids par rapport à la dernière consultation [30], elle est agitée, anxieuse, elle
+tousse. Vous notez une pression artérielle à 145/84 mmHg, un pouls à 85/min, une saturation normale sous
+1 litre/min d'oxygène, un foyer de crépitants en base droite, sans signe de déshydratation. Biologiquement :
+hyperleucocytose 13 g/l, hémoglobine 11,5 g/dl, CRP 150 mg/l, albumine 29 g/l.
+Le diagnostic de pneumopathie est cohérent, avec probable syndrome confusionnel — vous savez qu'elle
+est différente de son état habituel et elle présente des fluctuations. La patiente est en situation d'hyperca-
+tabolisme. Au-delà de la prise en charge de sa pneumopathie (O, antibiotiques, prévention de maladie vei-
+neuse thromboembolique, hydratation), de sa confusion (tolérance tant que pas de mise en danger), une
+course contre la montre est engagée concernant l'état nutritionnel et l'autonomie. Sur le plan nutritionnel :
+1. Il faut commencer par déterminer le statut nutritionnel. Cette patiente est dénutrie :
+❯ car perte de poids de 5 % en un mois (si elle n'est pas liée à une composante de déshydratation) ;
+❯ car taille, rarement disponible en aigu mais notée lors de la consultation précédente, permettant
+de calculer l'indice de masse corporelle à 20,6 ;
+❯ albuminémie non interprétable en raison du syndrome inflammatoire ;
+❯ MNA difficilement utilisable en contexte aigu.
+2. Il faut ensuite déterminer les objectifs caloriques et protidiques : doit avoir 35 kcal/kg par jour soit
+1 400 kcal par jour, et 1,2 à 1,5 g/kg par jour de protides soit 60 g. Rappelons qu'un morceau de
+viande de 100 g apporte 20 g de protéines. Contact avec la diététicienne.
+3. Il faut déterminer les moyens pour arriver à atteindre ces objectifs :
+❯ toujours privilégier la voie per os mais, chez cette patiente, l'asthénie, la probable anorexie en
+contexte septique vont limiter les possibilités d'atteindre les objectifs ;
+❯ il faut envisager l'enrichissement des plats et l'utilisation de compléments nutritionnels oraux ;
+❯ il faut détecter les très probables troubles de la déglutition (pneumopathie de base droite et troubles
+de la vigilance du syndrome confusionnel) et adapter les textures ;
+❯ le recours à une sonde nasogastrique ou à une nutrition parentérale ne peut s'envisager qu'après
+échec des premières mesures et pas dans ce contexte confusionnel (arrachage, déplacement).
+4. Il faut surveiller la mise en place des mesures nutritionnelles : ingestas, appétit.
+5. Dans le même temps, il faut mobiliser la patiente et préserver une activité physique minimale : mise
+au fauteuil, marche, etc.
+
+--- Page 266 ---
+Connaissances
+clés
+Le vieillissement s'accompagne d'une diminution de la masse, de la force et de la fonction musculaires
+(risque de sarcopénie) et d'une augmentation de la masse grasse (risque d'obésité).
+Le vieillissement s'accompagne aussi d'une augmentation de la prévalence des pathologies avec hyper-
+catabolisme et perte d'appétit (risque de dénutrition).
+L'obésité est définie par un IMC ≥ 30 kg/m2. Sa prévalence baisse avec l'âge mais reste autour de 10 % pour
+les plus de 80 ans. Les conséquences d'une obésité importante sont surtout les troubles de la mobilité et la
+dépendance. Un patient peut cumuler obésité et dénutrition.
+La dénutrition doit être systématiquement recherchée chez le patient âgé, en particulier en présence de
+facteurs de risque de dénutrition :
+• troubles neurocognitifs ;
+• dépendance ;
+• dépression ;
+• cancer ;
+• toute pathologie à un stade sévère ;
+• pathologies inflammatoires ou infectieuses aiguës ou chroniques.
+Les critères de dénutrition de l'HAS doivent être connus et recherchés pour permettre une prise en charge
+nutritionnelle.
+Les conséquences de la dénutrition sont les chutes, les fractures, les infections, les escarres, l'augmen-
+tation des complications et de la durée de séjour à l'hôpital, la dépendance, l'institutionnalisation et la
+mortalité.
+Prise en charge des troubles nutritionnels du patient âgé :
+• chez une personne âgée en « bonne santé », l'objectif est de maintenir un poids stable, de consommer 1
+à 1,2 g de protéines/kg par jour, de pratiquer une activité physique modérée régulière ;
+• il est rarement recommandé de proposer une perte de poids à une personne âgée obèse par crainte
+d'une perte de masse musculaire ; il est important de s'assurer d'une consommation suffisante de pro-
+téines et d'une activité physique adaptée ;
+• chez une personne âgée obèse et dénutrie, l'objectif est de maintenir un poids stable et de préserver des
+apports protéiques à 1–1,2 g/kg par jour ;
+• chez une personne âgée dénutrie, l'objectif est d'augmenter les apports énergétiques (30–40 kcal/kg par
+jour) pour reprendre du poids et d'augmenter les apports protéiques à 1,2–1,5 g de protéines/kg par jour ;
+• dans tous les cas, il est important de proposer une supplémentation en vitamine D à la dose de 800 à
+1 000 UI par jour et de l'activité physique adaptée ;
+• la surveillance du poids et de la fonction musculaire est un élément principal de la surveillance nutritionnelle.
+stnioP
+
+--- Page 267 ---
+Raisonner sur les troubles
+vésico-sphinctériens
+FOCUS sur l'incontinence urinaire
+I. Pour comprendre l'incontinence urinaire
+II. Démarche diagnostique
+III. Prise en charge multidisciplinaire
+Situations de départ
+En lien avec la définition et avec le diagnostic :
+103 Incontinence urinaire.
+En lien avec la prise en charge en urgence :
+34 Douleur aiguë postopératoire.
+86 Escarre.
+96 Brûlure mictionnelle.
+97 Rétention aiguë d'urines.
+99 Douleur pelvienne.
+106 Masse pelvienne.
+114 Agitation.
+199 Créatinine augmentée.
+244 Mise en place et suivi d'une contention mécanique.
+258 Prévention de la douleur liée aux soins.
+259 Évaluation et prise en charge de la douleur aiguë.
+276 Prise en charge d'un patient en décubitus prolongé.
+327 Annonce d'un diagnostic de maladie grave au patient et/ou à sa famille.
+330 Accompagnement de l'aidant.
+348 Suspicion d'un effet indésirable des médicaments ou d'un soin.
+En lien avec la démarche étiologique :
+1 Constipation.
+7 Incontinence fécale.
+22 Diminution de la diurèse.
+23 Anomalie de la miction.
+119 Confusion mentale/désorientation.
+131 Trouble de mémoire/déclin cognitif.
+178 Demande/prescription raisonnée et choix d'un examen diagnostique.
+239 Explication préopératoire et recueil de consentement d'un geste invasif diagnos-
+tique ou thérapeutique.
+246 Prescription d'un soin ambulatoire.
+247 Prescription d'une rééducation.
+266 Consultation de suivi d'un patient polymédiqué.
+267 Consultation de suivi d'un patient polymorbide.
+279 Consultation de suivi d'une pathologie chronique.
+295 Consultation de suivi gériatrique.
+Gériatrie
+© 2021, Elsevier Masson SAS. Tous droits réservés

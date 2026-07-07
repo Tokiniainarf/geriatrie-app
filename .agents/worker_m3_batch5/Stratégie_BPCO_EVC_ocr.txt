@@ -1,0 +1,314 @@
+=== Page 1 ===
+Pland'Action Clinique
+Le Parcours
+BPCO
+Synthese strategique et réflexes décisionnels pour les
+Epreuves de Vérification des Connaissances (EvC)
+Diagnostic ,gradationtherapeutique
+, urgences--, et regles médico-légales de prescription
+SNotebookLM
+
+=== Page 2 ===
+L'Algorithme Cognitif du Candidat EvC
+La démarche systematisee face a un patient BPcO
+3.Traiter
+1.Confirmer
+4.Pallier
+2.Stader
+5.Gerer
+(Fond&
+(Diagnostic)
+(Sévérité)
+（Defaillance)
+(Exacerbation)
+Rehabilitation)
+EvaluerleVEMS,
+DepisterleTvOet
+Identifierles
+Appliquerla
+TrierI'urgenceet
+exclure l'asthme
+la dyspnee et le
+criteres precis de
+therapie en
+cibler
+de maniere
+escalier(Step-up)
+l'Oxygenotherapie
+pronostic global
+I'antibiotherapie/
+formelle.
+(ScoreBODE)
+(OLD).
+etintegrerI'ETP.
+corticotherapie.
+SNotebookLM
+
+=== Page 3 ===
+Etape 1 : La Signature Spirometrique du TVO
+Le diagnostic de BPco repose sur une preuve fonctionnelle irrefutable,mesuree post-bronchodilatateur.
+L'Empreinte Visuelle de l'oObstruction
+Le Seuil Diagnostique EvC
+LacourbeDebit-Volumemontreunaspectconcave
+Indice de Tiffeneau:
+caracteristique (BCO et Emphyseme).
+VEMS/CVF<70%
+Debit
+Courbe debit
+volume normale
+CourbedeBPCO
+Condition absolue :
+Mesure effectuee apres administration
+d'un bronchodilatateur (reversibilite
+BCO
+incomplete)
+BCO
+Volume
+Examen systematiqueassocie:
+Radiographie de thorax (eliminer
+uncancerouuneanomaliepleuro-pulmonaire)
+Emphyseme
+SNotebookLM
+
+=== Page 4 ===
+Diagnostic Différentiel : BPCO vs Asthme
+Le piege classique de I'examen. Savoir discriminer sur I'interrogatoire et la fonction respiratoire.
+Critere Clinique
+BPCO
+Asthme
+Souvent < 35 ans (mais
+Age de début
+Souvent > 35 ans
+possible a tout age)
+Tabagisme
+Terrain atopique,allergies
+Facteur de risque majeur
+(presquetoujours)
+(possiblefumeur)
+Touxproductivechronique
+Tres freguente
+Rare
+Caractere de la dyspnee
+Persistante et progressive
+Variable (crises)
+Frequente
+Variabilite des symptomes
+Rare (stable sur la journée)
+(diurne/nocturne/selon les
+jours)
+Incomplete
+Souvent complete outres
+ReversibilitesousBDCA
+(VEMS/CVF reste < 70%)
+significative(+40OmLVEMS)
+SNotebookLM
+
+=== Page 5 ===
+Etape 2 : Stader la Sévérité de I'Obstruction
+La classification spirometrique dicte directement I'escalade therapeutique.
+Stadel:Leger
+LEGER
+VEMS≥8o%delavaleurtheorigue
+Stade ll:Modere
+MODERE
+50%≤VEMS<80%.(Seuild"introductiondutraitement
+de fond continu BLA et de la Rehabilitation)
+Stade ll:Severe
+SEVERE
+3o%≤VEMS<5o%.(Seuild"indicationdescorticoides
+inhalessiexacerbations)
+TRESSEVERE
+StadeIV:TresSevere
+VEMS<30%OUVEMS<50%avecInsuffisanceRespira
+toireChronique (IRC)grave.
+SNotebookLM
+
+=== Page 6 ===
+e BODE : L'Evaluation Pronostique Globale
+Le Score
+L'évaluationdela BPCO depasse le simple VEMS.Le scoreBODEprédit lamortalite a 4 ans.
+O(Obstruction)
+D (Dyspnea)
+VEMS
+ScoremMRC(Oa4)
+Ledegred'obstruction
+Mesure I'incapacite
+des voies aeriennes (%
+fonctionnelleauquotidien.
+delavaleurtheorique)
+B (Body Mass Index)
+E(Exercise)
+Mortalite
+IMC.UnIMCs21kg/m
+Test de Marche de 6minutes
+aggravelepronostic
+(TM6).Ladistanceparcourue
+(denutrition).
+en metres evalue la
+tolerance a I'effort.
+UnscoreBODEde7a1Ocorrespondaun
+tauxdemortalitede80%a4ans.
+SNotebookLM
+
+=== Page 7 ===
+Etape 3 : La Thérapie Pharmacologique en Escalier
+L'intensification du traitement est conditionnee par les symptomes et le VEMS
+Lesevragetabagique estlabase incontournablea chaque stade.
+*Larretdutabacestleseul
+VEMS<50%+Exacerbations
+traitement prouve pour ralentir
+repetees(StadeIl/IV)
+ledeclinduVEMS
+Association fixe:BDLA +
+CorticoidesInhales (CSl)
+Symptomespersistants
+(DesStadeI)
+Traitement de fond continu :
+Bronchodilatateurs de Longue
+Durée d'Action (BDLA)
+(β2-agonistesLAou
+Dyspnee a I'effort
+100
+anticholinergiques LA)
+(Stadel)
+Traitement a la demande :
+Bronchodilatateursde
+Courte Dureed'Action
+(BDCA)-β2-agonistesou
+anticholinergigues.
+SNotebookLM
+
+=== Page 8 ===
+Les'Red Flags'de la Prescription : Erreurs
+Eliminatoires aux
+EVC
+Ce qu'il ne faut formellement PAS prescrire dans la BPCO stable.
+Corticoides Inhales
+(CsI)enMonotherapie
+Antitussifs
+Interdit.Les CSl ne doivent etre
+Nonrecommandes.Latouxest
+unmecanismededefense
+prescrits qu'en associationfixe
+avec un BDLA,uniquement pour
+essentielpourlevacuationdes
+secretions bronchiques.
+lesstadesseveresavec
+exacerbations.
+Corticotherapie Orale
+aulong cours
+Mucolytiques
+Interdit.Rapport benefice/risque
+Nonrecommandes.Absencede
+defavorable (osteoporose,
+benefice clinigueprouvedans les
+diabete,myopathie cortisonique).
+recommandationsde la HAs.
+Reserveeaux curescourtes lors
+d'exacerbations.
+SNotebookLM
+
+=== Page 9 ===
+La Réhabilitation Respiratoire : L'Approche Multidisciplinaire
+Indiquée des le stade ll en cas d'incapacité (dyspnée) ou de handicap social
+Ce n'estpas quede la kinesitherapie.
+Réentrainementa I'Exercice(Le Moteur)
+Endurance,renforcementdesmusclesperipheriques,
+etkinesitherapierespiratoire(desencombrement)
+EducationTherapeutique(ETP)
+Comprehension dela maladie, maitrisedes
+dispositifs d'inhalation,gestion d'une crise.
+Soutien Psychosocial
+Prise en charge de I'anxiete, de la depression et
+del'isolementsocial.
+PriseenchargeNutritionnelle
+Luttecontreladenutritionsevere(évaluationde
+I'IMCetpertedepoids).
+SNotebookLM
+
+=== Page 10 ===
+Etape 4:Criteres d'Oxygenotherapie de Longue Duree (OLD)
+Prescription de compétence spécialisée. La rigueur gazometrique est absolue (mesures a
+I'etat stable, a 3 semaines d'intervalle).
+Gaz du sang arteriel
+(Diurne, air ambiant, au repos)
+Critere Conditionnel (Pa02 entre 56 et 59 mmHg)
+Associe a au moins un signe de souffrance tissulaire
+ou cardiaque:
+Critere Direct
+1.CceurPulmonaireChronique(CPC)clinique
+Pa02≤55mmHg(7,3kPa)
+2. Hypertension Arterielle Pulmonaire (HTAP)
+3. Polyglobulie (Hematocrite > 55 %).
+4.Desaturation nocturne non lieea un SAs
+(Sp02<90% >30% du temps).
+Regles de Prescription EVC:
+·L'oxygene est un medicament.
+·Administration>15heurespar jour (demontre surla survie).
+·Risque majeur:verifier I'absence d'hypercapnie induite (tolerance).
+SNotebookLM
+
+=== Page 11 ===
+Etape 5 : L'Exacerbation - Reconnaissance et Triage
+Aggravation brutale des symptomes (> 48h) justifiant une modification therapeutique.
+La Detection
+Criteresd'Hospitalisation (Red Flags Cliniques)
+Majorationdeladyspnee
+delatouxoudu
+La présence d'unseulde ceséléments necessiteuneadmission:
+volume/purulencede
+I'expectoration.
+. Terrain : Age > 7o ans, comorbidités lourdes, BPco Stade Ill ou IV.
+: Signes Respiratoires : Dyspnee de repos, cyanose, SpO2 < 90%,
+respiration paradoxale, FR > 25/min.
+. Signes Cardiovasculaires : Tachycardie > 11o/min, hypotension
+marbrures, oedemes des membres inférieurs (CPC).
+. Signes Neurologiques : Agitation, confusion, obnubilation,
+asterixis (hypercapnie).
+. Contexte : Necessite d'Oxygenotherapie, isolement social.
+Si NotebookLM
+
+=== Page 12 ===
+L'Arbre Decisionnel : Traitement de I'Exacerbation en Ambulatoire
+Optimisation Bronchodilatatrice (Systematique)
+·Augmentation des doses ou de la fréquence des BDCA (β2-mimétiques).
+• Ajout d'un anticholinergique courte action si non utilisé.
+·But:Soulagerlebronchospasme immediat.
+Corticothérapie Orale (Ciblée)
+•Indication : Augmentation nette de la dyspnée ou BPCO sévere (VEMS< 50%)
+• Prescription Evc : Prednisolone per os 30 mg/jour pendant 7 a 10 jours.
+(Cure courte, jamais au long cours).
+Antibiotherapie (Restrictive)
+·Nejamaisprescrire systematiquement.
+• Indications strictes : Franche purulence verdatre des crachats ET/OU dyspnee de
+repos/au moindre effort
+· Duree :7 a 14 jours (Amoxicilline, Macrolides, ou C3G orale selon les facteurs de risque).
+SNotebookLM
+
+=== Page 13 ===
+Le "Take-Home" EVC: Fiche de Synthese Mentale
+1.Seuil Diagnostique
+2. Gradation Therapeutique
+TVO:VEMS/CVF<7o% post-bronchodilatateur.
+Base:Arrettabac+BDCAalademande
+Differentiel Asthme:Dyspnee variable,
+Stade Il:BDLA continu (tiotropium ou
+reversibilite significative,age precoce.
+formotérol).
+ScorePronostique:BODE(IMC,VEMS
+Stade Ill/IV :BDLA + CSI (uniquement si
+Dyspnee, TM6)
+exacerbationsfrequentes).
+3.Urgences&OLD
+4.LesInterdits(ZerosaI'EVC)
+OLD:PaO2≤55mmHg(ou56-59si
+PAS de Corticoides inhales en monotherapie.
+CPC/polyglobulie), >15h/jour.
+ PAS de Corticotherapie orale au long cours.
+Exacerbation:BDCA+Corticoidescourts
+PAS d'Antitussifs (dangerd'encombrement).
+(30mg 7-10j).
+PAS de Mucolytiques.
+ATB exacerbation:Uniguement si crachats
+purulents ou dyspnee majeure.
+SNotebookLM
