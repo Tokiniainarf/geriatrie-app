@@ -521,6 +521,22 @@ const NUM_LIST_RE=/^(\d{1,2})[\.)]\s+(.+)/;
 function preprocessAppData(appData){
   const data = appData || (typeof APP_DATA !== 'undefined' ? APP_DATA : null);
   if (!data || !data.chapters || !data.content) return;
+
+  // Filter out book index pages
+  for (const chId in data.content) {
+    data.content[chId] = data.content[chId].filter(page => {
+      const text = page[1];
+      const clean = text.trim();
+      if (clean.toLowerCase().startsWith('index')) {
+        const matches = clean.match(/[a-zA-ZÀ-ÖØ-öø-ÿ'\-()]+\s*,\s*\d+/g);
+        if (matches && matches.length >= 3) {
+          return false;
+        }
+      }
+      return true;
+    });
+  }
+
   const normalize = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');
   const chapters = data.chapters;
   
@@ -782,6 +798,49 @@ function renderChapter(raw,chId){
   });
   let html='';let paraBuf=[];let bulletBuf=[];let inSection=false;let inSit=false;let sitItems=[];let inCallout=false;let calloutTitle='';let calloutBuf=[];let inNumList=false;let numBuf=[];let pastPreamble=false;let lettrinePlaced=false; let seenFigs=new Set(); let seenTabs=new Set(); let seenFigSrcs=new Set(); let seenTabSrcs=new Set();
 
+  let inQCM = false;
+  let qcmStem = [];
+  let qcmOpts = [];
+  let qcmMax = null;
+
+  function flushQCM() {
+    if (!inQCM) return;
+    inQCM = false;
+    const stemText = qcmStem.join('<br>').trim();
+    if (!stemText && !qcmOpts.length) return;
+    let cardHtml = `<div class="qcm-card">`;
+    if (qcmMax) {
+      cardHtml += `<span class="qcm-badge">Maximum ${qcmMax}</span>`;
+    }
+    if (stemText) {
+      cardHtml += `<div class="qcm-stem">${replaceCitations(esc(stemText))}</div>`;
+    }
+    if (qcmOpts.length) {
+      cardHtml += `<ol class="qcm-options">`;
+      qcmOpts.forEach(opt => {
+        cardHtml += `<li>${replaceCitations(esc(opt))}</li>`;
+      });
+      cardHtml += `</ol>`;
+    }
+    cardHtml += `</div>`;
+    html += cardHtml;
+    qcmStem = [];
+    qcmOpts = [];
+    qcmMax = null;
+  }
+
+  function splitOptions(line) {
+    const parts = line.split(/(?=\b\d{1,2}\.\s+)/);
+    const result = [];
+    for (let part of parts) {
+      part = part.trim();
+      if (!part) continue;
+      const clean = part.replace(/^\d{1,2}\.\s+/, '');
+      if (clean) result.push(clean);
+    }
+    return result;
+  }
+
   function markBodyStart(){pastPreamble=true}
   function isPreambleLine(l){
     if(/^\d{3}\s+\S/.test(l))return true;
@@ -865,8 +924,46 @@ function renderChapter(raw,chId){
 
   for(let i=0;i<lines.length;i++){
     let l=lines[i];
-    if(l === '▼'){flushPara();flushBullets();flushNumList();flushCallout();flushSituations();continue}
+    if(l === '▼'){flushPara();flushBullets();flushNumList();flushCallout();flushSituations();flushQCM();continue}
     if(!l){flushBullets();flushNumList();if(inCallout)flushCallout();continue}
+
+    // QCM Handling
+    const isQcmMarker = /^(Question\s+[A-Z0-9]|Réponse\s*:|QRM\s*\d|QRU\s*\d)/i.test(l);
+    if (isQcmMarker) {
+      flushPara(); flushBullets(); flushNumList(); flushQCM();
+      inQCM = true;
+      let targetL = l;
+      const maxM = targetL.match(/\[maximum\s+(\d+)\]/i);
+      if (maxM) {
+        qcmMax = maxM[1];
+        targetL = targetL.replace(/\[maximum\s+\d+\]/i, '').trim();
+      }
+      qcmStem.push(targetL);
+      markBodyStart();
+      continue;
+    }
+
+    if (inQCM) {
+      const isListItem = /^\d{1,2}\.\s+/.test(l);
+      const isMergedListItem = /\b\d{1,2}\.\s+/.test(l);
+      const isStructural = SECTION_RE.test(l) || LETTER_RE.test(l) || /^Situations?\s+de\s+départ/i.test(l) || /^Encadré\s+/i.test(l) || /^Tableau\s+/i.test(l) || /^Fig\.\s*\d/i.test(l) || RANG_RE.test(l);
+
+      if (isListItem || isMergedListItem) {
+        qcmOpts.push(...splitOptions(l));
+        markBodyStart();
+        continue;
+      } else if (isStructural) {
+        flushQCM();
+      } else {
+        if (qcmOpts.length > 0) {
+          flushQCM();
+        } else {
+          qcmStem.push(l);
+          markBodyStart();
+          continue;
+        }
+      }
+    }
 
     if(/^Situations?\s+de\s+départ/i.test(l)){
       flushBullets();flushNumList();closeSection();
@@ -1107,7 +1204,7 @@ function renderChapter(raw,chId){
 
     paraBuf.push(l);
   }
-  flushPara();flushBullets();flushNumList();if(inCallout)flushCallout();flushSituations();closeSection();
+  flushPara();flushBullets();flushNumList();flushQCM();if(inCallout)flushCallout();flushSituations();closeSection();
   // R3 — Supprimer les sections sans contenu (en-tete de plan sans texte correspondant dans la BDD)
   html = html.replace(/<section class="manual-section">([\s\S]*?)<\/section>/g, (match, inner) => {
     const bodyIndex = inner.indexOf('<div class="section-body">');

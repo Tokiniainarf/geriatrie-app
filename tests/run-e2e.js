@@ -717,6 +717,21 @@ addTest('TC-51', 'RW-5', 'Concept navigation correctly locates a target node, sc
   }
 });
 
+addTest('TC-52', 'RW-6', 'ch20 contains no book index entries, and ch19 rendered content contains multiple paragraphs (is not a single paragraph blob).', () => {
+  runPreprocess();
+  const ch20Pages = vm.runInContext('APP_DATA.content.ch20', context);
+  const raw20 = ch20Pages.map(p => p[1]).join('\n▼\n');
+  const html20 = vm.runInContext(`renderChapter(${JSON.stringify(raw20)}, "ch20")`, context);
+  assert.ok(!html20.includes("Apraxie, 143"), "ch20 should not contain index pages like Apraxie, 143");
+  assert.ok(!html20.includes("Chondrocalcinose, 116"), "ch20 should not contain index pages like Chondrocalcinose, 116");
+
+  const ch19Pages = vm.runInContext('APP_DATA.content.ch19', context);
+  const raw19 = ch19Pages.map(p => p[1]).join('\n▼\n');
+  const html19 = vm.runInContext(`renderChapter(${JSON.stringify(raw19)}, "ch19")`, context);
+  const cardCount = (html19.match(/class="para-card"|class="qcm-card"/g) || []).length;
+  assert.ok(cardCount > 1, `ch19 should render multiple paragraph/qcm cards, found: ${cardCount}`);
+});
+
 // 3. Execute all tests and format output as markdown table
 console.log("## E2E Test Suite Run Results\n");
 console.log("| Test ID | Req | Description | Status | Error / Details |");
