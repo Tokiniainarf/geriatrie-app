@@ -706,6 +706,34 @@ const BrainFeed = (() => {
     return shuffle(merged);
   }
 
+  function isLowQualityCard(card) {
+    if (!card) return true;
+    const q = String(card.question || card.trap || card.line || card.text || '').replace(/\s+/g, ' ').trim();
+    const a = String(card.answer || card.explain || card.diagnosis || card.detail || card.explanation || '').replace(/\s+/g, ' ').trim();
+    if (q.length < 12 && a.length < 12) return true;
+    // Placeholder / auto-generated junk
+    if (/points?\s*cl[eé]s?/i.test(q) && a.length < 30) return true;
+    if (/^(n\/a|todo|tbd|xxx|\.{3,}|—{2,})$/i.test(q) || /^(n\/a|todo|tbd)$/i.test(a)) return true;
+    if (/undefined|null|\[object object\]/i.test(q + ' ' + a)) return true;
+    // OCR-ish mashed noise without vowels (French needs vowels)
+    const sample = (q + ' ' + a).slice(0, 120);
+    if (sample.length > 40 && (sample.match(/[aeiouyàâäéèêëïîôùûüœ]/gi) || []).length < 6) return true;
+    return false;
+  }
+
+  function dedupeDeck(cards) {
+    const seen = new Set();
+    const out = [];
+    for (const c of cards) {
+      if (isLowQualityCard(c)) continue;
+      const key = String(c.id || '') + '|' + String(c.question || c.trap || c.line || c.text || '').toLowerCase().replace(/\s+/g, ' ').trim().slice(0, 120);
+      if (seen.has(key)) continue;
+      seen.add(key);
+      out.push(c);
+    }
+    return out;
+  }
+
   function buildDeck() {
     const today = new Date().toDateString();
     const stats = loadStats();
@@ -722,7 +750,7 @@ const BrainFeed = (() => {
     dailyDone = stats.dailyDone || 0;
 
     const pools = buildSpecialPools();
-    return interleaveDeck(pools, 96);
+    return dedupeDeck(interleaveDeck(pools, 96));
   }
 
   function getChapterName(chId) {
@@ -899,40 +927,43 @@ const BrainFeed = (() => {
       ? `<span class="bf-rang bf-rang-${String(card.rang).toLowerCase()}">Rang ${card.rang}</span>` : '';
     const chTag = chName ? `<span class="bf-card-chapter">${esc(chName)}</span>` : '';
     const tagsHtml = (card.tags || []).slice(0, 3).map(t => `<span class="bf-tag">${esc(t)}</span>`).join('');
+    const progressDots = `<div class="bf-page-dots" aria-hidden="true"><span class="on"></span><span></span></div>`;
 
     return `
       <div class="bf-horiz-scroll" id="bfScroll-${slideIdx}">
         <!-- PAGE 1 : QUESTION -->
         <div class="bf-horiz-page page-1 bf-theme-classic">
-          <div class="bf-bg-emoji">🎴</div>
-          <article class="bf-card-content">
+          <div class="bf-bg-emoji" aria-hidden="true">🎴</div>
+          <article class="bf-card-content bf-card-shell">
             <header class="bf-card-hdr">
               <span class="bf-type-badge">${typeIcons[card.type] || '🎴'} ${typeLabels[card.type] || 'Carte'}</span>
               ${rangBadge}
             </header>
+            ${progressDots}
             <main class="bf-card-main">
               <p class="bf-question-text">${esc(card.question)}</p>
             </main>
             <footer class="bf-card-ftr">
               ${chTag}
-              <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:document.getElementById('bfScroll-${slideIdx}').clientWidth,behavior:'smooth'})">Révéler la réponse ➔</button>
+              <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:document.getElementById('bfScroll-${slideIdx}').clientWidth,behavior:'smooth'})">Révéler la réponse</button>
             </footer>
           </article>
         </div>
         <!-- PAGE 2 : RÉPONSE -->
         <div class="bf-horiz-page page-2 bf-theme-classic-back">
-          <div class="bf-bg-emoji">💡</div>
-          <article class="bf-card-content">
+          <div class="bf-bg-emoji" aria-hidden="true">💡</div>
+          <article class="bf-card-content bf-card-shell">
             <header class="bf-card-hdr">
               <span class="bf-type-badge">💡 Réponse</span>
               ${rangBadge}
             </header>
+            <div class="bf-page-dots" aria-hidden="true"><span></span><span class="on"></span></div>
             <main class="bf-card-main scrollable">
               ${formatRichAnswer(card)}
             </main>
             <footer class="bf-card-ftr">
               <div class="bf-card-tags">${tagsHtml}</div>
-              <span class="bf-swipe-left-hint">⬅ Revoir la question</span>
+              <span class="bf-swipe-left-hint">← Revoir la question</span>
             </footer>
           </article>
         </div>
@@ -945,30 +976,32 @@ const BrainFeed = (() => {
         <!-- PAGE 1 : ENONCE -->
         <div class="bf-horiz-page page-1 bf-theme-memo">
           <div class="bf-bg-emoji">🧠</div>
-          <article class="bf-card-content">
+          <article class="bf-card-content bf-card-shell">
             <header class="bf-card-hdr">
               <span class="bf-type-badge">🧠 ${esc(card.title)}</span>
             </header>
+            <div class="bf-page-dots" aria-hidden="true"><span class="on"></span><span></span></div>
             <main class="bf-card-main">
               <p class="bf-question-text">${esc(card.question)}</p>
             </main>
             <footer class="bf-card-ftr">
-              <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:document.getElementById('bfScroll-${slideIdx}').clientWidth,behavior:'smooth'})">Révéler la réponse ➔</button>
+              <button type="button" class="bf-action-reveal" onclick="document.getElementById('bfScroll-${slideIdx}').scrollBy({left:document.getElementById('bfScroll-${slideIdx}').clientWidth,behavior:'smooth'})">Révéler la réponse</button>
             </footer>
           </article>
         </div>
         <!-- PAGE 2 : MNEMO -->
         <div class="bf-horiz-page page-2 bf-theme-memo-back">
-          <div class="bf-bg-emoji">✨</div>
-          <article class="bf-card-content">
+          <div class="bf-bg-emoji" aria-hidden="true">✨</div>
+          <article class="bf-card-content bf-card-shell">
             <header class="bf-card-hdr">
               <span class="bf-type-badge">✨ Rétention</span>
             </header>
+            <div class="bf-page-dots" aria-hidden="true"><span></span><span class="on"></span></div>
             <main class="bf-card-main scrollable">
               ${formatRichAnswer(card)}
             </main>
             <footer class="bf-card-ftr">
-              <span class="bf-swipe-left-hint">⬅ Revoir l'énoncé</span>
+              <span class="bf-swipe-left-hint">← Revoir l'énoncé</span>
             </footer>
           </article>
         </div>
@@ -981,7 +1014,7 @@ const BrainFeed = (() => {
         <!-- PAGE 1 : CAS CLINIQUE -->
         <div class="bf-horiz-page page-1 bf-theme-choc">
           <div class="bf-bg-emoji">🚑</div>
-          <article class="bf-card-content">
+          <article class="bf-card-content bf-card-shell">
             <header class="bf-card-hdr">
               <span class="bf-type-badge">🚑 CAS CHOC</span>
               <div class="bf-choc-timer" data-seconds="${card.timer}">
@@ -1001,7 +1034,7 @@ const BrainFeed = (() => {
         <!-- PAGE 2 : DIAGNOSTIC -->
         <div class="bf-horiz-page page-2 bf-theme-choc-back">
           <div class="bf-bg-emoji">🩺</div>
-          <article class="bf-card-content">
+          <article class="bf-card-content bf-card-shell">
             <header class="bf-card-hdr">
               <span class="bf-type-badge">🩺 Diagnostic gériatrique</span>
             </header>
@@ -1030,7 +1063,7 @@ const BrainFeed = (() => {
         <!-- PAGE 1 : QUESTIONS/CHOIX -->
         <div class="bf-horiz-page page-1 bf-theme-quiz">
           <div class="bf-bg-emoji">❓</div>
-          <article class="bf-card-content">
+          <article class="bf-card-content bf-card-shell">
             <header class="bf-card-hdr">
               <span class="bf-type-badge">⚡ QUIZ FLASH</span>
             </header>
@@ -1046,7 +1079,7 @@ const BrainFeed = (() => {
         <!-- PAGE 2 : EXPLICATION -->
         <div class="bf-horiz-page page-2 bf-theme-quiz-back">
           <div class="bf-bg-emoji">📖</div>
-          <article class="bf-card-content">
+          <article class="bf-card-content bf-card-shell">
             <header class="bf-card-hdr">
               <span class="bf-type-badge">📖 Explication d'expert</span>
             </header>
@@ -1068,7 +1101,7 @@ const BrainFeed = (() => {
         <!-- PAGE 1 : QUESTION -->
         <div class="bf-horiz-page page-1 bf-theme-stat">
           <div class="bf-bg-emoji">📊</div>
-          <article class="bf-card-content">
+          <article class="bf-card-content bf-card-shell">
             <header class="bf-card-hdr">
               <span class="bf-type-badge">📊 CHIFFRE CLÉ</span>
             </header>
@@ -1085,7 +1118,7 @@ const BrainFeed = (() => {
         <!-- PAGE 2 : RÉPONSE -->
         <div class="bf-horiz-page page-2 bf-theme-stat">
           <div class="bf-bg-emoji">📈</div>
-          <article class="bf-card-content">
+          <article class="bf-card-content bf-card-shell">
             <header class="bf-card-hdr">
               <span class="bf-type-badge">📊 Valeur</span>
             </header>
@@ -1112,7 +1145,7 @@ const BrainFeed = (() => {
         <!-- PAGE 1 : CITATION -->
         <div class="bf-horiz-page page-1 bf-theme-quote">
           <div class="bf-bg-emoji">💬</div>
-          <article class="bf-card-content">
+          <article class="bf-card-content bf-card-shell">
             <header class="bf-card-hdr">
               <span class="bf-type-badge">CITATION</span>
             </header>
@@ -1128,7 +1161,7 @@ const BrainFeed = (() => {
         <!-- PAGE 2 : RÉPONSE -->
         <div class="bf-horiz-page page-2 bf-theme-quote">
           <div class="bf-bg-emoji">✍️</div>
-          <article class="bf-card-content">
+          <article class="bf-card-content bf-card-shell">
             <header class="bf-card-hdr">
               <span class="bf-type-badge">Auteur</span>
             </header>
@@ -1150,7 +1183,7 @@ const BrainFeed = (() => {
         <!-- PAGE 1 : LE PIEGE -->
         <div class="bf-horiz-page page-1 bf-theme-trap">
           <div class="bf-bg-emoji">🪤</div>
-          <article class="bf-card-content">
+          <article class="bf-card-content bf-card-shell">
             <header class="bf-card-hdr">
               <span class="bf-type-badge">🪤 PIÈGE D'EXAM</span>
             </header>
@@ -1171,7 +1204,7 @@ const BrainFeed = (() => {
         <!-- PAGE 2 : RECTIFICATION -->
         <div class="bf-horiz-page page-2 bf-theme-trap-back">
           <div class="bf-bg-emoji">✅</div>
-          <article class="bf-card-content">
+          <article class="bf-card-content bf-card-shell">
             <header class="bf-card-hdr">
               <span class="bf-type-badge">✅ Règle académique</span>
             </header>

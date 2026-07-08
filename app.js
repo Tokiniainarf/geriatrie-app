@@ -339,10 +339,15 @@ function showCh(id){
   const bmOn=S.bm.includes(id);
   const toolbar=document.getElementById('chToolbar');
   if(toolbar){
-    toolbar.innerHTML=`<button onclick="goHome()">Retour</button><button onclick="quickBm('${id}')">${bmOn?BM_SVG.on+' Retirer':BM_SVG.off+' Favori'}</button><button onclick="openNotes('${id}')">📝 Notes</button>`;
+    toolbar.innerHTML=`<button type="button" onclick="goHome()" aria-label="Retour à l'accueil">← Retour</button><button type="button" onclick="quickBm('${id}')" aria-label="Favori">${bmOn?BM_SVG.on+' Retirer':BM_SVG.off+' Favori'}</button><button type="button" onclick="openNotes('${id}')" aria-label="Notes">Notes</button>`;
   }
   renderChapterContent();
   sw('ch');
+  // Soft scroll reset into reader content after paint
+  requestAnimationFrame(() => {
+    const cc = document.getElementById('chContent');
+    if (cc) cc.setAttribute('tabindex', '-1');
+  });
 }
 function renderChapterContent(){
   const cc=document.getElementById('chContent');if(!cc)return;
@@ -551,19 +556,27 @@ function preprocessAppData(appData){
   const data = appData || (typeof APP_DATA !== 'undefined' ? APP_DATA : null);
   if (!data || !data.chapters || !data.content) return;
 
-  // Filter out book index pages
+  const pageNorm = (t) => String(t || '').toLowerCase().replace(/\s+/g, ' ').trim().slice(0, 280);
+
+  // Filter out book index pages + consecutive duplicate page bodies (keep intentional blanks for boundary logic)
   for (const chId in data.content) {
-    data.content[chId] = data.content[chId].filter(page => {
+    const filtered = [];
+    let prevNorm = '';
+    for (const page of data.content[chId]) {
       const text = page[1];
-      const clean = text.trim();
+      const clean = (text || '').trim();
+      if (!clean) continue;
       if (clean.toLowerCase().startsWith('index')) {
         const matches = clean.match(/[a-zA-ZÀ-ÖØ-öø-ÿ'\-()]+\s*,\s*\d+/g);
-        if (matches && matches.length >= 3) {
-          return false;
-        }
+        if (matches && matches.length >= 3) continue;
       }
-      return true;
-    });
+      // Drop consecutive pages with nearly identical text (OCR double-extract)
+      const n = pageNorm(clean);
+      if (n.length > 80 && n === prevNorm) continue;
+      prevNorm = n;
+      filtered.push(page);
+    }
+    data.content[chId] = filtered;
   }
 
   const normalize = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');
@@ -825,7 +838,74 @@ function renderChapter(raw,chId){
     }
     return !(nxtFound || prvFound);
   });
+
+  // ── Content hygiene: OCR fragments, consecutive/near-duplicate lines ──
+  const normKey = (s) => String(s || '')
+    .toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+
+  // Fix leftover OCR word fragments: "complémentaires plémentaires" → "complémentaires"
+  lines = lines.map((l) => {
+    if (!l) return l;
+    return l
+      .replace(/\b([A-Za-zÀ-ÿœŒæÆ]{5,})\s+\1\b/gi, '$1')
+      .replace(/\b([A-Za-zÀ-ÿœŒæÆ]{6,})\s+([A-Za-zÀ-ÿœŒæÆ]{4,})\b/g, (m, a, b) => {
+        const al = a.toLowerCase(), bl = b.toLowerCase();
+        if (bl.length >= 4 && al.endsWith(bl) && al.length - bl.length >= 2) return a;
+        if (al.length >= 4 && bl.endsWith(al) && bl.length - al.length >= 2) return b;
+        return m;
+      })
+      .replace(/\s{2,}/g, ' ')
+      .trim();
+  });
+
+  // Drop consecutive identical lines (page reflow / OCR doubles)
+  {
+    const deduped = [];
+    let prevKey = '';
+    for (const l of lines) {
+      if (l === '') { deduped.push(l); prevKey = ''; continue; }
+      // Never collapse structural headings
+      if (SECTION_RE.test(l) || LETTER_RE.test(l) || RANG_RE.test(l) || BULLET_RE.test(l) || /^\d{2,3}\s/.test(l)) {
+        deduped.push(l); prevKey = normKey(l); continue;
+      }
+      const k = normKey(l);
+      if (k && k === prevKey && k.length > 24) continue;
+      deduped.push(l);
+      prevKey = k;
+    }
+    lines = deduped;
+  }
+
+  // Drop near-duplicate long prose that reappears within the same section only
+  // (avoids killing legitimate repeated teaching lines under different headings)
+  {
+    const sectionKeys = new Set();
+    const out = [];
+    for (const l of lines) {
+      if (l === '') { out.push(l); continue; }
+      if (SECTION_RE.test(l) || LETTER_RE.test(l)) {
+        sectionKeys.clear();
+        out.push(l);
+        continue;
+      }
+      if (RANG_RE.test(l) || BULLET_RE.test(l) || /^\d{2,3}\s/.test(l) || l.length < 70) {
+        out.push(l);
+        continue;
+      }
+      const k = normKey(l);
+      // Only collapse true page-header leaks: long lines reappearing in same section
+      if (k.length > 50 && sectionKeys.has(k)) continue;
+      out.push(l);
+      if (k.length > 50) sectionKeys.add(k);
+    }
+    lines = out;
+  }
+
   let html='';let paraBuf=[];let bulletBuf=[];let inSection=false;let inSit=false;let sitItems=[];let inCallout=false;let calloutTitle='';let calloutBuf=[];let inNumList=false;let numBuf=[];let pastPreamble=false;let lettrinePlaced=false; let seenFigs=new Set(); let seenTabs=new Set(); let seenFigSrcs=new Set(); let seenTabSrcs=new Set();
+  const seenParaKeys = new Set();
 
   let inQCM = false;
   let qcmStem = [];
@@ -899,6 +979,10 @@ function renderChapter(raw,chId){
     const merged=paraBuf.join(" ").replace(/\s+/g," ").trim();
     paraBuf=[];
     if(merged.length<12)return;
+    // Skip exact paragraph repeats only for long prose (page joins / OCR doubles)
+    const pKey = normKey(merged);
+    if (pKey.length > 90 && seenParaKeys.has(pKey)) return;
+    if (pKey.length > 90) seenParaKeys.add(pKey);
     const chip=rang?`<span class="rang-inline rang-${rang==="A"?"a":"b"}">Rang ${rang}</span>`:"";
     let pClass = "";
     if (inSection && !lettrinePlaced) {
