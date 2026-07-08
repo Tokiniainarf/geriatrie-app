@@ -3668,3 +3668,206 @@ button, input, a {
 }
 
 
+
+/* === PREMIUM MEDICALCUL (GLASSMORPHISM & UI) === */
+
+/* Glass Box */
+.calc-glass-box {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  margin-bottom: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.calc-glass-box:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+.calc-group-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* iOS Style Toggle Checkbox */
+.ios-toggle-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  user-select: none;
+  border: 1px solid transparent;
+}
+.ios-toggle-label:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+.ios-toggle-label.active-toggle {
+  background: rgba(var(--accent-rgb, 14, 165, 233), 0.1);
+  border-color: rgba(var(--accent-rgb, 14, 165, 233), 0.3);
+}
+.ios-toggle-text {
+  font-size: 0.95rem;
+  color: var(--text);
+  font-weight: 500;
+  line-height: 1.4;
+  padding-right: 12px;
+}
+.ios-toggle {
+  position: relative;
+  width: 50px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+  transition: background 0.3s ease;
+  flex-shrink: 0;
+}
+.ios-toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 24px;
+  height: 24px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.calc-input[type="checkbox"]:checked + .ios-toggle {
+  background: var(--accent);
+}
+.calc-input[type="checkbox"]:checked + .ios-toggle::after {
+  transform: translateX(22px);
+}
+.calc-input[type="checkbox"] {
+  display: none;
+}
+
+/* Modern Radio Cards */
+.radio-card-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.calc-input[type="radio"] {
+  display: none;
+}
+.radio-card-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--text3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+.radio-card-circle::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  transform: scale(0);
+  transition: transform 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+.calc-input[type="radio"]:checked ~ .radio-card-circle {
+  border-color: var(--accent);
+}
+.calc-input[type="radio"]:checked ~ .radio-card-circle::after {
+  transform: scale(1);
+}
+.calc-input[type="radio"]:checked ~ .radio-card-text {
+  color: var(--accent);
+  font-weight: 600;
+}
+.calc-input[type="radio"]:checked ~ .radio-card-label,
+.calc-input[type="radio"]:checked + .radio-card-content {
+  background: rgba(var(--accent-rgb, 14, 165, 233), 0.1);
+  border-color: rgba(var(--accent-rgb, 14, 165, 233), 0.3);
+}
+
+/* Range Sliders */
+.modern-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  outline: none;
+  margin: 15px 0;
+}
+.modern-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(var(--accent-rgb, 14, 165, 233), 0.5);
+  transition: transform 0.1s;
+}
+.modern-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+/* Result Box Glow */
+.calc-res-box {
+  border-radius: 16px;
+  padding: 24px;
+  color: white;
+  animation: glowIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  position: relative;
+  overflow: hidden;
+}
+.calc-res-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+  pointer-events: none;
+}
+@keyframes glowIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.calc-res-box.danger { background: linear-gradient(135deg, #ef4444, #b91c1c); box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4); }
+.calc-res-box.warning { background: linear-gradient(135deg, #f59e0b, #b45309); box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4); }
+.calc-res-box.normal { background: linear-gradient(135deg, #10b981, #047857); box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4); }
+
+/* Progress bar inside card */
+.calc-progress-bg {
+  width: 100%;
+  height: 8px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 4px;
+  margin-top: 12px;
+  overflow: hidden;
+}
+.calc-progress-fill {
+  height: 100%;
+  background: white;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}

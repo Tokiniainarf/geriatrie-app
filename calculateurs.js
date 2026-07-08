@@ -20,7 +20,7 @@ const CALCULATEURS = [
 
           <!-- Étape 1 : Autonomie -->
           <div id="egs-step-1" class="egs-step-panel">
-            <div class="calc-group-box">
+            <div class="calc-glass-box">
               <div class="calc-group-title">Autonomie Physique (ADL / Katz)</div>
               <p class="fs-sm" style="margin-bottom:8px; color:var(--text2);">Cocher les fonctions conservées de manière autonome :</p>
               <label class="check-container"><input type="checkbox" id="egs_adl_1" checked><span class="checkmark"></span>Toilette (se lave seul)</label>
@@ -30,7 +30,7 @@ const CALCULATEURS = [
               <label class="check-container"><input type="checkbox" id="egs_adl_5" checked><span class="checkmark"></span>Continence (miction et défécation contrôlées)</label>
               <label class="check-container"><input type="checkbox" id="egs_adl_6" checked><span class="checkmark"></span>Alimentation (mange seul)</label>
             </div>
-            <div class="calc-group-box" style="margin-top:12px;">
+            <div class="calc-glass-box" style="margin-top:12px;">
               <div class="calc-group-title">Autonomie Instrumentale (Lawton IADL - 4 variables clés)</div>
               <p class="fs-sm" style="margin-bottom:8px; color:var(--text2);">Cocher les activités gérées de manière autonome :</p>
               <label class="check-container"><input type="checkbox" id="egs_iadl_1" checked><span class="checkmark"></span>Téléphone (utilise seul)</label>
@@ -38,7 +38,7 @@ const CALCULATEURS = [
               <label class="check-container"><input type="checkbox" id="egs_iadl_3" checked><span class="checkmark"></span>Médicaments (prend seul)</label>
               <label class="check-container"><input type="checkbox" id="egs_iadl_4" checked><span class="checkmark"></span>Budget (gère ses finances seul)</label>
             </div>
-            <div class="calc-group-box" style="margin-top:12px;">
+            <div class="calc-glass-box" style="margin-top:12px;">
               <div class="calc-group-title">Grille AGGIR (GIR Estimé)</div>
               <label>Estimation clinique directe du GIR :
                 <select id="egs_gir" style="width:100%; margin-top:6px; background:var(--bg-elevated); color:var(--text1); border:1px solid var(--glass-border); border-radius:4px; padding:6px;">
@@ -55,14 +55,14 @@ const CALCULATEURS = [
 
           <!-- Étape 2 : Cognition & Humeur -->
           <div id="egs-step-2" class="egs-step-panel" style="display:none">
-            <div class="calc-group-box">
+            <div class="calc-glass-box">
               <div class="calc-group-title">Cognition (Score MMS)</div>
               <label>Saisir ou estimer le score MMS (sur 30) :
                 <input type="number" id="egs_mms" min="0" max="30" value="28" style="width:70px; margin-left:12px; background:var(--bg-elevated); color:var(--text1); border:1px solid var(--glass-border); border-radius:4px; padding:4px 8px;">
               </label>
               <p class="fs-sm" style="margin-top:6px; color:var(--text3);">Normale ≥ 24 · Démence légère 18-23 · Modérée 10-17 · Sévère < 10.</p>
             </div>
-            <div class="calc-group-box" style="margin-top:12px;">
+            <div class="calc-glass-box" style="margin-top:12px;">
               <div class="calc-group-title">Dépistage de la dépression (GDS-15 abrégé)</div>
               <p class="fs-sm" style="margin-bottom:8px; color:var(--text2);">Cocher si le patient présente ces signes d\'alerte :</p>
               <label class="check-container"><input type="checkbox" id="egs_gds_1"><span class="checkmark"></span>Sentiment de vide / Désintérêt pour ses activités</label>
@@ -74,14 +74,14 @@ const CALCULATEURS = [
 
           <!-- Étape 3 : Mobilité & Fragilité -->
           <div id="egs-step-3" class="egs-step-panel" style="display:none">
-            <div class="calc-group-box">
+            <div class="calc-glass-box">
               <div class="calc-group-title">Équilibre (Score Tinetti POMA)</div>
               <label>Saisir le score d\'équilibre de Tinetti (sur 16) :
                 <input type="number" id="egs_tinetti" min="0" max="16" value="15" style="width:70px; margin-left:12px; background:var(--bg-elevated); color:var(--text1); border:1px solid var(--glass-border); border-radius:4px; padding:4px 8px;">
               </label>
               <p class="fs-sm" style="margin-top:6px; color:var(--text3);">Normal ≥ 15 · Risque modéré 11-14 · Risque élevé < 11.</p>
             </div>
-            <div class="calc-group-box" style="margin-top:12px;">
+            <div class="calc-glass-box" style="margin-top:12px;">
               <div class="calc-group-title">Critères de fragilité de Fried</div>
               <p class="fs-sm" style="margin-bottom:8px; color:var(--text2);">Cocher les critères présents :</p>
               <label class="check-container"><input type="checkbox" id="egs_fried_1"><span class="checkmark"></span>Perte de poids involontaire (≥ 4.5 kg en 1 an)</label>
@@ -90,7 +90,7 @@ const CALCULATEURS = [
               <label class="check-container"><input type="checkbox" id="egs_fried_4"><span class="checkmark"></span>Lenteur de la marche (vitesse de marche diminuée)</label>
               <label class="check-container"><input type="checkbox" id="egs_fried_5"><span class="checkmark"></span>Faible niveau d\'activité physique</label>
             </div>
-            <div class="calc-group-box" style="margin-top:12px;">
+            <div class="calc-glass-box" style="margin-top:12px;">
               <div class="calc-group-title">Clinical Frailty Scale (CFS)</div>
               <label>Classe CFS de 1 à 9 :
                 <select id="egs_cfs" style="width:100%; margin-top:6px; background:var(--bg-elevated); color:var(--text1); border:1px solid var(--glass-border); border-radius:4px; padding:6px;">
@@ -110,14 +110,14 @@ const CALCULATEURS = [
 
           <!-- Étape 4 : Nutrition & Sensoriel -->
           <div id="egs-step-4" class="egs-step-panel" style="display:none">
-            <div class="calc-group-box">
+            <div class="calc-glass-box">
               <div class="calc-group-title">Statut Nutritionnel (MNA-SF)</div>
               <label>Saisir le score MNA-SF (sur 14) :
                 <input type="number" id="egs_mna" min="0" max="14" value="12" style="width:70px; margin-left:12px; background:var(--bg-elevated); color:var(--text1); border:1px solid var(--glass-border); border-radius:4px; padding:4px 8px;">
               </label>
               <p class="fs-sm" style="margin-top:6px; color:var(--text3);">Normal ≥ 12 · Risque dénutrition 8-11 · Dénutrition sévère ≤ 7.</p>
             </div>
-            <div class="calc-group-box" style="margin-top:12px;">
+            <div class="calc-glass-box" style="margin-top:12px;">
               <div class="calc-group-title">Déficits Sensoriels & Dentition</div>
               <p class="fs-sm" style="margin-bottom:8px; color:var(--text2);">Cocher les déficits cliniques constatés :</p>
               <label class="check-container"><input type="checkbox" id="egs_sens_1"><span class="checkmark"></span>Déficit visuel sévère (non corrigé ou DMLA/glaucome)</label>
@@ -128,7 +128,7 @@ const CALCULATEURS = [
 
           <!-- Étape 5 : Synthèse -->
           <div id="egs-step-5" class="egs-step-panel" style="display:none">
-            <div class="calc-group-box" style="text-align:center; padding:24px 16px;">
+            <div class="calc-glass-box" style="text-align:center; padding:24px 16px;">
               <h3>Synthèse de l\'Évaluation Gériatrique</h3>
               <p style="color:var(--text2); margin-top:8px; margin-bottom:16px;">Générer le rapport clinique finalisé de l\'EGS pour le dossier patient.</p>
               <button type="button" class="set-btn" id="egs-btn-generate" style="background:var(--accent); color:white; border:none; border-radius:8px; padding:12px 24px; font-weight:bold; cursor:pointer; width:100%;">Générer le Rapport EGS ➔</button>
@@ -1437,7 +1437,7 @@ Date de l\'évaluation : ${new Date().toLocaleDateString('fr-FR')}
     render: (div) => {
       div.innerHTML = `
         <div class="calc-form">
-          <div class="calc-group-box">
+          <div class="calc-glass-box">
             <div class="calc-group-title">Saisir les paramètres cliniques</div>
             <div style="display:flex; flex-direction:column; gap:10px; margin-top:8px;">
               <label>Âge : <input type="number" id="grace_age" value="70" class="calc-input" style="width:70px; background:var(--bg-elevated); color:var(--text1); border:1px solid var(--glass-border); border-radius:4px; padding:2px 6px;"></label>
@@ -1446,13 +1446,13 @@ Date de l\'évaluation : ${new Date().toLocaleDateString('fr-FR')}
               <label>Créatininémie (µmol/L) : <input type="number" id="grace_creat" value="100" class="calc-input" style="width:70px; background:var(--bg-elevated); color:var(--text1); border:1px solid var(--glass-border); border-radius:4px; padding:2px 6px;"></label>
             </div>
           </div>
-          <div class="calc-group-box">
+          <div class="calc-glass-box">
             <div class="calc-group-title">Autres facteurs</div>
             <label class="check-container"><input type="checkbox" id="grace_st" class="calc-input"><span class="checkmark"></span>Déviation du segment ST</label>
             <label class="check-container"><input type="checkbox" id="grace_trop" class="calc-input"><span class="checkmark"></span>Troponine / Biomarqueurs élevés</label>
             <label class="check-container"><input type="checkbox" id="grace_arr" class="calc-input"><span class="checkmark"></span>Arrêt cardiaque à l\'admission</label>
           </div>
-          <div class="calc-group-box">
+          <div class="calc-glass-box">
             <div class="calc-group-title">Classification de Killip</div>
             <label class="radio-container"><input type="radio" name="grace_k" value="1" checked class="calc-input"><span class="radiomark"></span>Classe I (Pas de râles)</label>
             <label class="radio-container"><input type="radio" name="grace_k" value="2" class="calc-input"><span class="radiomark"></span>Classe II (Râles < 50% ou B3)</label>
@@ -1628,14 +1628,14 @@ Date de l\'évaluation : ${new Date().toLocaleDateString('fr-FR')}
     render: (div) => {
       div.innerHTML = `
         <div class="calc-form">
-          <div class="calc-group-box">
+          <div class="calc-glass-box">
             <div class="calc-group-title">Données Démographiques</div>
             <label class="radio-container"><input type="radio" name="psi_sexe" value="H" checked class="calc-input"><span class="radiomark"></span>Homme</label>
             <label class="radio-container"><input type="radio" name="psi_sexe" value="F" class="calc-input"><span class="radiomark"></span>Femme</label>
             <label>Âge : <input type="number" id="psi_age" value="75" class="calc-input" style="width:70px; background:var(--bg-elevated); color:var(--text1); border:1px solid var(--glass-border); border-radius:4px; padding:2px 6px;"></label>
             <label class="check-container"><input type="checkbox" id="psi_inst" class="calc-input"><span class="checkmark"></span>Vit en institution (EHPAD)</label>
           </div>
-          <div class="calc-group-box">
+          <div class="calc-glass-box">
             <div class="calc-group-title">Comorbidités (+ points)</div>
             <label class="check-container"><input type="checkbox" id="psi_neo" class="calc-input"><span class="checkmark"></span>Néoplasie active (+30)</label>
             <label class="check-container"><input type="checkbox" id="psi_foie" class="calc-input"><span class="checkmark"></span>Hépatopathie chronique (+20)</label>
@@ -1643,7 +1643,7 @@ Date de l\'évaluation : ${new Date().toLocaleDateString('fr-FR')}
             <label class="check-container"><input type="checkbox" id="psi_avc" class="calc-input"><span class="checkmark"></span>Maladie cérébrovasculaire / AVC (+10)</label>
             <label class="check-container"><input type="checkbox" id="psi_rein" class="calc-input"><span class="checkmark"></span>Insuffisance rénale chronique (+10)</label>
           </div>
-          <div class="calc-group-box">
+          <div class="calc-glass-box">
             <div class="calc-group-title">Examen Clinique (+ points)</div>
             <label class="check-container"><input type="checkbox" id="psi_conf" class="calc-input"><span class="checkmark"></span>Confusion / Altération conscience (+20)</label>
             <label class="check-container"><input type="checkbox" id="psi_fr" class="calc-input"><span class="checkmark"></span>Fréquence respiratoire ≥ 30/min (+20)</label>
@@ -2165,7 +2165,7 @@ Date de l\'évaluation : ${new Date().toLocaleDateString('fr-FR')}
     render: (div) => {
       div.innerHTML = `
         <div class="calc-form">
-          <div class="calc-group-box">
+          <div class="calc-glass-box">
             <div class="calc-group-title">Saisir les variables biologiques</div>
             <div style="display:flex; flex-direction:column; gap:10px; margin-top:8px;">
               <label>Créatininémie (mg/dL) : <input type="number" step="0.1" id="meld_creat" value="1.0" class="calc-input" style="width:70px; background:var(--bg-elevated); color:var(--text1); border:1px solid var(--glass-border); border-radius:4px; padding:2px 6px;"></label>
@@ -2174,7 +2174,7 @@ Date de l\'évaluation : ${new Date().toLocaleDateString('fr-FR')}
               <label>Sodium sérique (mmol/L) : <input type="number" id="meld_na" value="137" class="calc-input" style="width:70px; background:var(--bg-elevated); color:var(--text1); border:1px solid var(--glass-border); border-radius:4px; padding:2px 6px;"></label>
             </div>
           </div>
-          <div class="calc-group-box">
+          <div class="calc-glass-box">
             <div class="calc-group-title">Dialyse</div>
             <label class="check-container"><input type="checkbox" id="meld_dial" class="calc-input"><span class="checkmark"></span>Dialysé ≥ 2 fois dans la semaine précédente</label>
           </div>
@@ -2643,7 +2643,7 @@ Date de l\'évaluation : ${new Date().toLocaleDateString('fr-FR')}
         'Score 2 (Modéré)': ['Amantadine','Cétirizine','Méclizine','Lansoprazole','Mirtazapine','Quétiapine','Loratadine'],
         'Score 1 (Faible)': ['Furosémide','Cimétidine','Ranitidine','Prednisolone','Métoprolol','Codéine','Tramadol','Warfarine','Digoxine','Nifédipine']
       };
-      let html = '<div class="calc-group-box"><div class="calc-group-title">Sélectionner les médicaments du patient</div>';
+      let html = '<div class="calc-glass-box"><div class="calc-group-title">Sélectionner les médicaments du patient</div>';
       html += '<p class="fs-sm" style="color:var(--text2); margin-bottom:12px;">Cocher tous les médicaments pris. Le score ACB total est calculé automatiquement.</p>';
       let idx = 0;
       Object.entries(drugs).forEach(([group, meds]) => {
@@ -3131,7 +3131,7 @@ const Medicalcul = {
     if (calc.type === 'checklist') {
       html += `
         <div class="calc-form">
-          <div class="calc-group-box">
+          <div class="calc-glass-box">
             <div class="calc-group-title">Éléments de l'évaluation</div>
             <div style="display:flex; flex-direction:column; gap:10px; margin-top:8px;">
               ${calc.items.map((item, idx) => `
@@ -3149,13 +3149,14 @@ const Medicalcul = {
       html += `
         <div class="calc-form">
           ${calc.groups.map((group, gIdx) => `
-            <div class="calc-group-box" style="margin-bottom:12px;">
+            <div class="calc-glass-box" style="margin-bottom:16px;">
               <div class="calc-group-title">${helperEsc(group.question)}</div>
-              <div class="calc-radio-group" style="display:flex; flex-direction:column; gap:8px; margin-top:8px;">
+              <div class="calc-radio-group" style="display:flex; flex-direction:column; gap:12px; margin-top:12px;">
                 ${group.options.map((opt, oIdx) => `
-                  <label class="radio-container" style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                  <label class="radio-card-label" style="position:relative;">
                     <input type="radio" name="rad_${id}_${gIdx}" class="calc-input" value="${opt.value}" ${oIdx === 0 ? 'checked' : ''}>
-                    <span>${helperEsc(opt.text)}</span>
+                    <div class="radio-card-circle"></div>
+                    <span class="radio-card-text" style="flex:1;">${helperEsc(opt.text)}</span>
                   </label>
                 `).join('')}
               </div>
@@ -3166,7 +3167,7 @@ const Medicalcul = {
     } else if (calc.type === 'select') {
       html += `
         <div class="calc-form">
-          <div class="calc-group-box">
+          <div class="calc-glass-box">
             <div class="calc-group-title">Saisie des données</div>
             <div style="display:flex; flex-direction:column; gap:12px; margin-top:8px;">
               ${calc.fields.map((field) => `
@@ -3188,17 +3189,17 @@ const Medicalcul = {
     } else if (calc.type === 'number_result') {
       html += `
         <div class="calc-form">
-          <div class="calc-group-box">
+          <div class="calc-glass-box">
             <div class="calc-group-title">Saisie des valeurs</div>
-            <div style="display:flex; flex-direction:column; gap:12px; margin-top:8px;">
+            <div style="display:flex; flex-direction:column; gap:20px; margin-top:8px;">
               ${calc.fields.map((field) => `
-                <label style="display:flex; flex-direction:column; gap:4px;">
-                  <span style="font-weight:500; font-size:0.9rem;">${helperEsc(field.label)}</span>
-                  <div style="display:flex; align-items:center; gap:8px;">
-                    <input type="${field.type || 'number'}" id="num_${id}_${field.id}" min="${field.min || 0}" max="${field.max || 100}" placeholder="${field.placeholder || ''}" class="calc-input" style="width:100px; background:var(--bg-elevated); color:var(--text); border:1px solid var(--glass-border); border-radius:4px; padding:6px;">
-                    ${field.unit ? `<span class="fs-sm" style="color:var(--text2);">${helperEsc(field.unit)}</span>` : ''}
+                <div style="display:flex; flex-direction:column; gap:8px;">
+                  <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+                    <span style="font-weight:600; font-size:0.95rem;">${helperEsc(field.label)}</span>
+                    <div style="font-weight:700; color:var(--accent); font-size:1.1rem;" id="val_disp_${id}_${field.id}">-- ${field.unit ? helperEsc(field.unit) : ''}</div>
                   </div>
-                </label>
+                  <input type="range" id="num_${id}_${field.id}" min="${field.min || 0}" max="${field.max || 100}" step="${field.step || 1}" value="${field.min || 0}" class="calc-input modern-slider">
+                </div>
               `).join('')}
             </div>
           </div>
@@ -3259,14 +3260,17 @@ const Medicalcul = {
       if (resDiv && result) {
         resDiv.innerHTML = `
           <div class="calc-res-box ${result.cls || result.cat || 'normal'}" style="position:relative; margin-top:20px;">
-            <div class="calc-res-title" style="font-size:1.2rem; font-weight:800; display:flex; justify-content:space-between; align-items:center; color:var(--text);">
-              <span>Score : ${result.score || result.total}</span>
-              <button class="calc-copy-btn" onclick="Medicalcul.copyResultToClipboard('${id}')" style="font-size:0.75rem; background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.25); color:var(--text); padding:4px 10px; border-radius:6px; display:flex; align-items:center; gap:4px; font-weight:700; transition:all 0.2s ease;">
+            <div class="calc-res-title" style="font-size:1.4rem; font-weight:800; display:flex; justify-content:space-between; align-items:center; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">
+              <span>SCORE : ${result.score || result.total}</span>
+              <button class="calc-copy-btn" onclick="Medicalcul.copyResultToClipboard('${id}')" style="font-size:0.75rem; background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.4); color:white; padding:6px 12px; border-radius:8px; display:flex; align-items:center; gap:6px; font-weight:700; transition:all 0.2s ease; box-shadow:0 2px 8px rgba(0,0,0,0.2);">
                 📋 Copier
               </button>
             </div>
-            <div class="calc-res-desc" style="font-size:0.9rem; margin-top:6px; line-height:1.4; color:var(--text);">${result.interp || result.desc || ''}</div>
-            ${calc.seuils ? `<div class="fs-xs" style="margin-top:8px; opacity:0.85; border-top:1px solid rgba(255,255,255,0.15); padding-top:6px; font-size:0.75rem; color:var(--text);"><strong>Repères cliniques :</strong> ${helperEsc(calc.seuils)}</div>` : ''}
+            <div class="calc-progress-bg">
+               <div class="calc-progress-fill" style="width:${Math.min(100, Math.max(0, ((result.score || result.total) / (calc.max || 100)) * 100))}%;"></div>
+            </div>
+            <div class="calc-res-desc" style="font-size:1.05rem; font-weight:600; margin-top:12px; line-height:1.4; text-shadow: 0 1px 3px rgba(0,0,0,0.2);">${result.interp || result.desc || ''}</div>
+            ${calc.seuils ? `<div class="fs-xs" style="margin-top:12px; opacity:0.9; border-top:1px solid rgba(255,255,255,0.25); padding-top:10px; font-size:0.8rem;"><strong>Repères cliniques :</strong> ${helperEsc(calc.seuils)}</div>` : ''}
           </div>
         `;
         
@@ -3278,9 +3282,47 @@ const Medicalcul = {
     };
 
     inputs.forEach(input => {
+      // Logic for sliders to update text live
+      if (input.type === 'range') {
+         input.addEventListener('input', (e) => {
+            const disp = document.getElementById('val_disp_' + id + '_' + input.id.split('_').pop());
+            if (disp) {
+               // find unit
+               let unit = '';
+               calc.fields.forEach(f => { if(f.id === input.id.split('_').pop() && f.unit) unit = f.unit; });
+               disp.innerText = e.target.value + (unit ? ' ' + unit : '');
+            }
+            updateResult();
+         });
+      }
+      
+      // Logic for iOS toggles active class
+      if (input.type === 'checkbox') {
+         input.addEventListener('change', (e) => {
+             const lbl = e.target.closest('.ios-toggle-label');
+             if (lbl) {
+                 if (e.target.checked) lbl.classList.add('active-toggle');
+                 else lbl.classList.remove('active-toggle');
+             }
+             updateResult();
+         });
+      }
+      
       input.addEventListener('change', updateResult);
       if (input.type === 'number' || input.type === 'text') {
         input.addEventListener('input', updateResult);
+      }
+    });
+    
+    // Init display for ranges
+    inputs.forEach(input => {
+      if (input.type === 'range') {
+        const disp = document.getElementById('val_disp_' + id + '_' + input.id.split('_').pop());
+        if (disp) {
+            let unit = '';
+            calc.fields.forEach(f => { if(f.id === input.id.split('_').pop() && f.unit) unit = f.unit; });
+            disp.innerText = input.value + (unit ? ' ' + unit : '');
+        }
       }
     });
 

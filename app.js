@@ -1888,6 +1888,7 @@ function filterDeck(){
   });
 
   return all.filter(c => {
+    if (c._deleted) return false;
     const matchRang = (flashFilter === 'all' || c.rang === flashFilter);
     const matchChap = (flashChapFilter === 'all' || c.chapter === flashChapFilter);
     return matchRang && matchChap;
