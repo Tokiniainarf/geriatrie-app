@@ -179,23 +179,38 @@ function sw(view, opts){
   }
 }
 
-/** Synthèses + ITEMs sur le même écran */
+/** Synthèses + Notebook interactif + ITEMs */
 function switchStudyMode(mode){
   const btnS=document.getElementById('btnSubSynth');
+  const btnN=document.getElementById('btnSubNotebook');
   const btnI=document.getElementById('btnSubItems');
   const tabS=document.getElementById('subTabSynth');
+  const tabN=document.getElementById('subTabNotebook');
   const tabI=document.getElementById('subTabItems');
-  if(mode==='items'){
+  const hideAll=()=>{
     if(tabS) tabS.style.display='none';
-    if(tabI) tabI.style.display='block';
+    if(tabN) tabN.style.display='none';
+    if(tabI) tabI.style.display='none';
     btnS?.classList.remove('active');
+    btnN?.classList.remove('active');
+    btnI?.classList.remove('active');
+  };
+  hideAll();
+  if(mode==='items'){
+    if(tabI) tabI.style.display='block';
     btnI?.classList.add('active');
     renderItems();
+  }else if(mode==='notebook'){
+    if(tabN) tabN.style.display='block';
+    btnN?.classList.add('active');
+    if(typeof NotebookUI!=='undefined') NotebookUI.renderHub();
+    else {
+      const hub=document.getElementById('notebookHub');
+      if(hub) hub.innerHTML='<div class="empty"><div class="empty-text">Module Notebook non chargé</div><div class="empty-hint">Ctrl+F5</div></div>';
+    }
   }else{
     if(tabS) tabS.style.display='block';
-    if(tabI) tabI.style.display='none';
     btnS?.classList.add('active');
-    btnI?.classList.remove('active');
     renderSynthesis();
   }
 }

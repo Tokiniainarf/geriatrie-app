@@ -19,7 +19,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<link rel="stylesheet" href="style.css?v=195">
+<link rel="stylesheet" href="style.css?v=196">
 <style>
 /* Critical preloader (inline so it shows before CSS/JS) */
 #appPreloader{position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:radial-gradient(ellipse 80% 50% at 50% 0%,#164E63 0%,#0f1117 55%,#050508 100%);color:#EDEDEF;font-family:Figtree,system-ui,sans-serif;transition:opacity .45s ease,visibility .45s}
@@ -151,15 +151,20 @@
   <!-- SYNTHESIS + ITEMs (même écran, 2 onglets — plus de doublon Accueil) -->
   <div class="view" id="vSynth">
     <div class="page-hd">
-      <h1>Synthèses &amp; ITEMs</h1>
-      <p>Fiches de synthèse par chapitre · objectifs EDN/R2C liés aux chapitres (pas des annales)</p>
+      <h1>Synthèses &amp; Notebooks</h1>
+      <p>Fiches CNEG · notebooks interactifs (style NotebookLM) · objectifs EDN/R2C</p>
     </div>
     <div class="sub-tab-switch">
       <button type="button" id="btnSubSynth" class="active" onclick="switchStudyMode('synth')">Fiches synthèse</button>
+      <button type="button" id="btnSubNotebook" onclick="switchStudyMode('notebook')">Notebook interactif</button>
       <button type="button" id="btnSubItems" onclick="switchStudyMode('items')">ITEMs EDN</button>
     </div>
     <div id="subTabSynth" class="sub-tab-content">
       <div id="synthGrid" class="synth-grid"></div>
+    </div>
+    <div id="subTabNotebook" class="sub-tab-content" style="display:none">
+      <div id="notebookHub"></div>
+      <div id="notebookPlayer" style="display:none"></div>
     </div>
     <div id="subTabItems" class="sub-tab-content" style="display:none">
       <div id="itemsList"></div>
@@ -549,15 +554,16 @@
 <script>
 (function(){
   var steps = [
-    { src: 'data-bundle.js?v=195', label: 'Contenu des chapitres…', pct: 45 },
-    { src: 'calculateurs.js?v=195', label: 'Scores & calculateurs…', pct: 58 },
-    { src: 'quiz.js?v=195', label: 'Mode examen…', pct: 66 },
-    { src: 'dashboard.js?v=195', label: 'Tableau de bord…', pct: 72 },
-    { src: 'appsearch.js?v=195', label: 'Recherche…', pct: 78 },
-    { src: 'erreurs-journal.js?v=195', label: 'Fichier erreurs…', pct: 84 },
-    { src: 'graph.js?v=195', label: 'Carte des liens…', pct: 90 },
-    { src: 'brainfeed.js?v=195', label: 'BrainFeed…', pct: 95 },
-    { src: 'app.js?v=195', label: 'Interface…', pct: 100 }
+    { src: 'data-bundle.js?v=196', label: 'Contenu des chapitres…', pct: 42 },
+    { src: 'notebook-interactive.js?v=196', label: 'Notebooks interactifs…', pct: 52 },
+    { src: 'calculateurs.js?v=196', label: 'Scores & calculateurs…', pct: 60 },
+    { src: 'quiz.js?v=196', label: 'Mode examen…', pct: 68 },
+    { src: 'dashboard.js?v=196', label: 'Tableau de bord…', pct: 74 },
+    { src: 'appsearch.js?v=196', label: 'Recherche…', pct: 80 },
+    { src: 'erreurs-journal.js?v=196', label: 'Fichier erreurs…', pct: 85 },
+    { src: 'graph.js?v=196', label: 'Carte des liens…', pct: 90 },
+    { src: 'brainfeed.js?v=196', label: 'BrainFeed…', pct: 95 },
+    { src: 'app.js?v=196', label: 'Interface…', pct: 100 }
   ];
   var i = 0;
   var fill = document.getElementById('plFill');
