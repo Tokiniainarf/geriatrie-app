@@ -3106,9 +3106,20 @@ function renderProto(){
     })));
   }
 
-  // Normalisation des catégories et dédoublonnage intelligent par titre normalisé
+  // Normalisation des catégories et dédoublonnage (titre + id exact)
   const all = [];
-  const seen = new Map();
+  const seenTitle = new Map();
+  const seenId = new Map();
+
+  const protoRichness = (p) => {
+    const steps = p.protocole || p.steps || p.checklist || p.etapes || [];
+    return (Array.isArray(steps) ? steps.length * 2 : 0)
+      + (p.surveillance ? 5 : 0)
+      + (p.alerte || p.alert ? 3 : 0)
+      + (p.indication ? 2 : 0)
+      + (p.objectif ? 2 : 0)
+      + (typeof p.protocole === 'string' ? Math.min(20, p.protocole.length / 40) : 0);
+  };
 
   rawAll.forEach(p => {
     // Détermination de la catégorie
@@ -3120,7 +3131,7 @@ function renderProto(){
       c = '🚑 Fiches de Garde (Urgences)';
     } else if (lower.includes('urgence') || lower === 'rcp' || lower === 'réanimation' || lower === 'reanimation') {
       c = '🔴 Urgences & Réanimation';
-    } else if (lower.includes('completes') || lower === 'autre') {
+    } else if (lower.includes('completes') || lower === 'autre' || lower.includes('protocoles complets')) {
       c = '📋 Protocoles généraux';
     } else if (lower.includes('kine') || lower.includes('réadaptation') || lower.includes('readaptation') || lower.includes('kinésithérapie')) {
       c = '🏃 Rééducation & Kiné';
@@ -3138,38 +3149,47 @@ function renderProto(){
       c = '👴 Spécificités Gériatriques';
     }
 
-    const normalizedTitle = (p.titre || p.title || '').toLowerCase().trim()
+    const titre = (p.titre || p.title || p.nom || p.situation || '').toString().trim();
+    const normalizedTitle = titre.toLowerCase()
       .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
       .replace(/[^a-z0-9]/g, '');
+    const pid = p.id != null ? String(p.id) : '';
 
-    if (!normalizedTitle) return;
+    if (!normalizedTitle && !pid) return;
 
     const currentProtoObj = {
       ...p,
+      id: pid || p.id,
       categorie: c,
-      titre: p.titre || p.title || ''
+      titre: titre || pid
     };
 
-    if (seen.has(normalizedTitle)) {
-      // Dédupliquer : Choisir le protocole qui contient le plus de détails (ex: étapes du protocole)
-      const existing = seen.get(normalizedTitle);
-      const steps = p.protocole || p.steps || p.checklist || [];
-      const extSteps = existing.protocole || existing.steps || existing.checklist || [];
-      
-      const newScore = (Array.isArray(steps) ? steps.length * 2 : 0) + (p.surveillance ? 5 : 0) + (p.alerte || p.alert ? 3 : 0);
-      const extScore = (Array.isArray(extSteps) ? extSteps.length * 2 : 0) + (existing.surveillance ? 5 : 0) + (existing.alerte || existing.alert ? 3 : 0);
-      
-      if (newScore > extScore) {
+    // Exact ID collision → keep richer
+    if (pid && seenId.has(pid)) {
+      const existing = seenId.get(pid);
+      if (protoRichness(currentProtoObj) > protoRichness(existing)) {
         const idx = all.indexOf(existing);
-        if (idx !== -1) {
-          all[idx] = currentProtoObj;
-          seen.set(normalizedTitle, currentProtoObj);
-        }
+        if (idx !== -1) all[idx] = currentProtoObj;
+        seenId.set(pid, currentProtoObj);
+        if (normalizedTitle) seenTitle.set(normalizedTitle, currentProtoObj);
       }
-    } else {
-      all.push(currentProtoObj);
-      seen.set(normalizedTitle, currentProtoObj);
+      return;
     }
+
+    if (normalizedTitle && seenTitle.has(normalizedTitle)) {
+      const existing = seenTitle.get(normalizedTitle);
+      if (protoRichness(currentProtoObj) > protoRichness(existing)) {
+        const idx = all.indexOf(existing);
+        if (idx !== -1) all[idx] = currentProtoObj;
+        seenTitle.set(normalizedTitle, currentProtoObj);
+        if (pid) seenId.set(pid, currentProtoObj);
+      }
+      return;
+    }
+
+    all.push(currentProtoObj);
+    if (normalizedTitle) seenTitle.set(normalizedTitle, currentProtoObj);
+    if (pid) seenId.set(pid, currentProtoObj);
   });
 
   if(!all.length){el.innerHTML='<div class="empty"><div class="empty-text">Aucun protocole disponible</div></div>';return}

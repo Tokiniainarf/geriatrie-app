@@ -3168,10 +3168,12 @@ const Medicalcul = {
     const hasItems = Array.isArray(calc.items) && calc.items.length > 0;
     const hasFields = Array.isArray(calc.fields) && calc.fields.length > 0;
     const hasGroups = Array.isArray(calc.groups) && calc.groups.length > 0;
+    const hasQuestions = Array.isArray(calc.questions) && calc.questions.length > 0;
     let effectiveType = calc.type;
     if (effectiveType === 'checklist' && !hasItems && hasFields) effectiveType = 'select';
     if (effectiveType === 'select_result') effectiveType = 'select';
-    if (effectiveType === 'questions' && hasItems) effectiveType = 'checklist';
+    if (effectiveType === 'questions' && hasQuestions) effectiveType = 'questions';
+    else if (effectiveType === 'questions' && hasItems) effectiveType = 'checklist';
 
     let html = `
       <div class="calc-detail-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:20px; border-bottom:1px solid var(--glass-border); padding-bottom:12px;">
@@ -3213,7 +3215,32 @@ const Medicalcul = {
       return;
     }
 
-    if (effectiveType === 'checklist' && hasItems) {
+    if (effectiveType === 'questions' && hasQuestions) {
+      html += `
+        <div class="calc-form">
+          <div class="calc-glass-box">
+            <div class="calc-group-title">Questions (Oui / Non)</div>
+            <div style="display:flex; flex-direction:column; gap:12px; margin-top:8px;">
+              ${calc.questions.map((q, idx) => `
+                <div class="calc-q-item" style="padding:10px;border:1px solid var(--glass-border);border-radius:10px;">
+                  <div style="font-weight:600;font-size:0.9rem;margin-bottom:8px;">${idx + 1}. ${helperEsc(q.text || '')}</div>
+                  <div style="display:flex;gap:16px;">
+                    <label style="display:flex;align-items:center;gap:6px;cursor:pointer;">
+                      <input type="radio" name="q_${id}_${idx}" class="calc-input" value="yes" data-qidx="${idx}" ${q.pointsOnYes === 0 ? 'checked' : ''}>
+                      Oui
+                    </label>
+                    <label style="display:flex;align-items:center;gap:6px;cursor:pointer;">
+                      <input type="radio" name="q_${id}_${idx}" class="calc-input" value="no" data-qidx="${idx}" ${q.pointsOnYes !== 0 ? 'checked' : ''}>
+                      Non
+                    </label>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+    } else if (effectiveType === 'checklist' && hasItems) {
       html += `
         <div class="calc-form">
           <div class="calc-glass-box">
@@ -3296,7 +3323,23 @@ const Medicalcul = {
     const updateResult = () => {
       let result = null;
       try {
-        if (effectiveType === 'checklist' && hasItems) {
+        if (effectiveType === 'questions' && hasQuestions) {
+          let total = 0;
+          calc.questions.forEach((q, idx) => {
+            let checked = null;
+            if (detailContent.querySelector) {
+              checked = detailContent.querySelector(`input[name="q_${id}_${idx}"]:checked`);
+            }
+            if (!checked && document.querySelector) {
+              checked = document.querySelector(`input[name="q_${id}_${idx}"]:checked`);
+            }
+            const ans = checked ? checked.value : 'no';
+            if (ans === 'yes') total += (q.pointsOnYes != null ? q.pointsOnYes : 1);
+            else total += (q.pointsOnNo != null ? q.pointsOnNo : 0);
+          });
+          if (typeof calc.calculer === 'function') result = calc.calculer(total);
+          else if (typeof calc.calculate === 'function') result = calc.calculate(total);
+        } else if (effectiveType === 'checklist' && hasItems) {
           let total = 0;
           calc.items.forEach((item, idx) => {
             const chk = document.getElementById(`chk_${id}_${idx}`);
@@ -3332,9 +3375,13 @@ const Medicalcul = {
           calc.fields.forEach((field) => {
             const sel = document.getElementById(`sel_${id}_${field.id}`);
             const num = document.getElementById(`num_${id}_${field.id}`);
-            if (sel) values[field.id] = parseFloat(sel.value);
-            else if (num) values[field.id] = parseFloat(num.value);
-            if (values[field.id] !== values[field.id]) values[field.id] = 0; // NaN → 0
+            if (sel) {
+              // Keep string so calculate() can .split / map keys; parseInt still works on "0","4"
+              values[field.id] = sel.value;
+            } else if (num) {
+              const n = parseFloat(num.value);
+              values[field.id] = Number.isFinite(n) ? n : 0;
+            }
           });
           if (typeof calc.calculate === 'function') result = calc.calculate(values);
           else if (typeof calc.calculer === 'function') result = calc.calculer(values);
