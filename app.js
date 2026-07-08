@@ -32,11 +32,11 @@ function bootApp(){
   bootStep(updStats, 'updStats');
   bootStep(updateThemeIcon, 'updateThemeIcon');
   if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
+  applyInstallBarVisibility();
   window.addEventListener('beforeinstallprompt', e=>{
     e.preventDefault();
     window.deferredPrompt=e;
-    const ib=document.getElementById('installB');
-    if(ib) ib.style.display='flex';
+    applyInstallBarVisibility(true);
   });
   window.addEventListener('scroll', ()=>{
     const f=document.getElementById('fab');
@@ -61,17 +61,46 @@ function bootApp(){
 // (avoids TDZ on flashChapFilter / functions declared later in the same script)
 window.bootApp = bootApp;
 
-/* ── NAV ── */
-function sw(view){
+/* ── NAV + historique Retour ── */
+const viewHistory = [];
+function updateBackBtn(){
+  const btn=document.getElementById('btnBack');
+  const logo=document.getElementById('topLogoIcon');
+  const canBack = viewHistory.length > 0 || (S.view && S.view !== 'home');
+  if(btn){
+    if(canBack && S.view !== 'home'){ btn.hidden=false; btn.removeAttribute('hidden'); }
+    else { btn.hidden=true; btn.setAttribute('hidden',''); }
+  }
+  if(logo) logo.style.display = (btn && !btn.hidden) ? 'none' : '';
+}
+function goBack(){
+  if(viewHistory.length){
+    const prev=viewHistory.pop();
+    sw(prev, { back:true });
+    return;
+  }
+  if(S.view && S.view !== 'home') sw('home', { back:true });
+}
+window.goBack=goBack;
+
+function sw(view, opts){
+  opts = opts || {};
   try {
     const prev=S.view;
     if(prev==='graph'&&view!=='graph'&&typeof destroyGraph==='function'){
       try{ destroyGraph(); }catch(e){ console.warn('[sw] destroyGraph', e); }
     }
     
-    // Sujets est fusionné dans Annales
+    // Aliases & fusions (éviter vues fantômes / doublons)
     let targetView = view;
     if(view === 'sujets') targetView = 'annales';
+    if(view === 'items') targetView = 'synth'; // ITEMs = onglet de Synthèses
+    
+    // Pousser l'historique sauf navigation "Retour"
+    if(!opts.back && prev && prev !== targetView){
+      viewHistory.push(prev);
+      if(viewHistory.length > 40) viewHistory.shift();
+    }
     
     document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
     document.querySelectorAll('#bnav button').forEach(b=>b.classList.remove('active'));
@@ -85,18 +114,25 @@ function sw(view){
     } else {
       console.error('[sw] view not found', viewId);
     }
-    document.querySelector(`[data-v="${targetView}"]`)?.classList.add('active');
+    // Highlight bottom nav (scores/proto/annales/feed/dict/set/home)
+    const navKey = targetView === 'ch' ? 'home' : targetView;
+    document.querySelector(`[data-v="${navKey}"]`)?.classList.add('active');
     
     S.view=targetView;
     try{ window.scrollTo(0,0); }catch(_){}
     document.getElementById('searchBar')?.classList.remove('open');
+    updateBackBtn();
     
     const safe = (fn, label) => { try{ fn(); }catch(e){ console.error('[sw]', label, e); } };
 
-    if(targetView==='synth') safe(renderSynthesis, 'synth');
+    if(targetView==='synth'){
+      safe(()=>{
+        if(view === 'items') switchStudyMode('items');
+        else switchStudyMode('synth');
+      }, 'synth');
+    }
     // Always rebuild deck on open (boot may have failed earlier)
     if(targetView==='flash') safe(loadFlashDeck, 'flash');
-    if(targetView==='items') safe(renderItems, 'items');
     if(targetView==='fav') safe(renderFav, 'fav');
     if(targetView==='graph'&&typeof initGraph==='function') safe(initGraph, 'graph');
     if(targetView==='feed'&&typeof BrainFeed!=='undefined') safe(()=>BrainFeed.init(), 'feed');
@@ -135,12 +171,35 @@ function sw(view){
     if(targetView==='set'){
       const pd=document.getElementById('pd');
       if(pd) pd.textContent=`${S.read.length} chapitre${S.read.length>1?'s':''} consulté${S.read.length>1?'s':''}`;
+      safe(updateInstallPrefUI, 'install-pref');
     }
   } catch (e) {
     console.error('[sw] fatal', view, e);
     if(typeof toast==='function') toast('Erreur navigation');
   }
 }
+
+/** Synthèses + ITEMs sur le même écran */
+function switchStudyMode(mode){
+  const btnS=document.getElementById('btnSubSynth');
+  const btnI=document.getElementById('btnSubItems');
+  const tabS=document.getElementById('subTabSynth');
+  const tabI=document.getElementById('subTabItems');
+  if(mode==='items'){
+    if(tabS) tabS.style.display='none';
+    if(tabI) tabI.style.display='block';
+    btnS?.classList.remove('active');
+    btnI?.classList.add('active');
+    renderItems();
+  }else{
+    if(tabS) tabS.style.display='block';
+    if(tabI) tabI.style.display='none';
+    btnS?.classList.add('active');
+    btnI?.classList.remove('active');
+    renderSynthesis();
+  }
+}
+window.switchStudyMode=switchStudyMode;
 
 function switchAnnalesMode(mode) {
   const btnAnn = document.getElementById('btnSubAnnales');
@@ -2626,11 +2685,12 @@ function renderSynthesis(){
   if(!hasExpanded&&!hasClassic)return;
 
   let toolbar=document.getElementById('synthToolbar');
-  if(!toolbar&&view){
+  if(!toolbar&&grid){
     toolbar=document.createElement('div');
     toolbar.id='synthToolbar';
     toolbar.className='synth-toolbar';
-    view.insertBefore(toolbar,grid);
+    const parent=grid.parentNode||view;
+    if(parent) parent.insertBefore(toolbar,grid);
   }
   const mastered=getSynthMastered().filter(id=>/^ch\d+$/.test(id));
   const totalCh=20;
@@ -3175,23 +3235,8 @@ function renderProto(){
   addProto(typeof PROTOCOLES_LEGISLATION!=='undefined'?PROTOCOLES_LEGISLATION:null,'Législation');
   addProto(typeof PROTOCOLES_FORMATION!=='undefined'?PROTOCOLES_FORMATION:null,'Formation');
   
-  // Charger FICHES_GARDE comme protocoles
-  if (typeof FICHES_GARDE !== 'undefined' && Array.isArray(FICHES_GARDE)) {
-    FICHES_GARDE.forEach(f => {
-      rawAll.push({
-        id: f.id,
-        titre: f.title,
-        icon: f.icon || '🚑',
-        categorie: 'Fiches de Garde (Urgences)',
-        protocole: f.checklist || [],
-        alerte: f.alert || '',
-        urgency: f.urgency || '',
-        fallbackCategory: 'Fiches de Garde (Urgences)'
-      });
-    });
-  }
-  // CLINICAL_REFERENCE stays in search/reference only — do NOT inject into protocoles
-  // (cr-26…cr-30 were thin duplicates of PROTOCOLES_URGENCE / COMPLETS).
+  // FICHES_GARDE restent UNIQUEMENT dans l'onglet Garde (checklists) — pas de doublon ici.
+  // CLINICAL_REFERENCE stays in search/reference only — do NOT inject into protocoles.
 
   // Normalisation des catégories et dédoublonnage (titre + id exact + near-dup catégorie)
   const all = [];
@@ -3229,31 +3274,36 @@ function renderProto(){
   };
 
   rawAll.forEach(p => {
-    // Détermination de la catégorie
+    // Catégories simplifiées (domaines cliniques, sans empiler garde/protocoles)
     let c = p.categorie || p.category || p.fallbackCategory || 'Autre';
     c = String(c).trim();
     const lower = c.toLowerCase();
+    const id = String(p.id || '').toLowerCase();
+    const titreL = String(p.titre || p.title || '').toLowerCase();
     
-    if (lower.includes('garde')) {
-      c = '🚑 Fiches de Garde (Urgences)';
-    } else if (lower.includes('urgence') || lower === 'rcp' || lower === 'réanimation' || lower === 'reanimation') {
-      c = '🔴 Urgences & Réanimation';
-    } else if (lower.includes('completes') || lower === 'autre' || lower.includes('protocoles complets')) {
-      c = '📋 Protocoles généraux';
-    } else if (lower.includes('kine') || lower.includes('réadaptation') || lower.includes('readaptation') || lower.includes('kinésithérapie')) {
-      c = '🏃 Rééducation & Kiné';
-    } else if (lower.includes('cognitif') || lower.includes('neuro')) {
-      c = '🧠 Neuro-Gériatrie & Cognition';
-    } else if (lower.includes('qualité') || lower.includes('qualite') || lower.includes('législation') || lower.includes('legislation')) {
-      c = '⚖️ Législation & Qualité';
-    } else if (lower.includes('formation')) {
-      c = '🎓 Formation & Pratique';
-    } else if (lower.includes('antalgie') || lower.includes('douleur') || lower.includes('palliatif')) {
-      c = '💊 Antalgie & Soins Palliatifs';
-    } else if (lower.includes('antibio')) {
-      c = '🦠 Antibiothérapie';
-    } else if (lower.includes('gériatrie') || lower.includes('geriatrie')) {
-      c = '👴 Spécificités Gériatriques';
+    if (lower.includes('urgence') || lower === 'rcp' || lower.includes('réanim') || lower.includes('reanim')
+        || id.startsWith('uv-') || id.startsWith('proto-') || id.startsWith('pr-') || id.startsWith('prcp-')) {
+      c = 'Urgences & réa';
+    } else if (lower.includes('antibio') || id.startsWith('abx-') || titreL.includes('infect')) {
+      c = 'Infectieux';
+    } else if (lower.includes('antalgie') || lower.includes('douleur') || lower.includes('palliatif')
+        || id.startsWith('ant-') || id.startsWith('ppa-')) {
+      c = 'Douleur & palliatif';
+    } else if (lower.includes('cardio') || id.startsWith('card-') || id.startsWith('resp-') || id.startsWith('ren-')) {
+      c = 'Cardio / respiratoire / rénal';
+    } else if (lower.includes('cognitif') || lower.includes('neuro') || id.startsWith('neuro-') || id.startsWith('pc-')) {
+      c = 'Neuro & cognition';
+    } else if (lower.includes('kine') || lower.includes('réadaptation') || lower.includes('readaptation')
+        || lower.includes('kinésithérapie') || id.startsWith('pk-') || id.startsWith('prad-')) {
+      c = 'Rééducation';
+    } else if (lower.includes('qualité') || lower.includes('qualite') || lower.includes('législation')
+        || lower.includes('legislation') || lower.includes('formation')
+        || id.startsWith('pqua-') || id.startsWith('pleg-') || id.startsWith('pform-')) {
+      c = 'Qualité & organisation';
+    } else if (lower.includes('met') || id.startsWith('met-') || lower.includes('gériatrie') || lower.includes('geriatrie')) {
+      c = 'Métabolisme & gériatrie';
+    } else {
+      c = 'Autres protocoles';
     }
 
     const titre = (p.titre || p.title || p.nom || p.situation || '').toString().trim();
@@ -3323,18 +3373,16 @@ function renderProto(){
 
   if(!all.length){el.innerHTML='<div class="empty"><div class="empty-text">Aucun protocole disponible</div></div>';return}
   
-  // Trier les catégories pour avoir Urgences et Gardes en premier
   const customOrder = {
-    '🚑 Fiches de Garde (Urgences)': 1,
-    '🔴 Urgences & Réanimation': 2,
-    '🦠 Antibiothérapie': 3,
-    '💊 Antalgie & Soins Palliatifs': 4,
-    '🧠 Neuro-Gériatrie & Cognition': 5,
-    '🏃 Rééducation & Kiné': 6,
-    '👴 Spécificités Gériatriques': 7,
-    '📋 Protocoles généraux': 8,
-    '⚖️ Législation & Qualité': 9,
-    '🎓 Formation & Pratique': 10
+    'Urgences & réa': 1,
+    'Infectieux': 2,
+    'Douleur & palliatif': 3,
+    'Cardio / respiratoire / rénal': 4,
+    'Neuro & cognition': 5,
+    'Métabolisme & gériatrie': 6,
+    'Rééducation': 7,
+    'Qualité & organisation': 8,
+    'Autres protocoles': 9
   };
 
   const cats=[...new Set(all.map(p=>p.categorie))].sort((a, b) => {
@@ -3478,7 +3526,60 @@ function updStats(){
   const stats=document.querySelector('.stats-bar');
   if(stats&&S.view==='home')renderHome();
 }
-function installPWA(){if(window.deferredPrompt){window.deferredPrompt.prompt();window.deferredPrompt=null}}
+function isInstallHidden(){ return localStorage.getItem('g_hide_install') === '1'; }
+function applyInstallBarVisibility(forceShow){
+  const ib=document.getElementById('installB');
+  if(!ib) return;
+  if(isInstallHidden()){
+    ib.hidden=true;
+    ib.style.display='none';
+    return;
+  }
+  // show only if browser offered install (deferredPrompt) or forced after event
+  if(forceShow || window.deferredPrompt){
+    ib.hidden=false;
+    ib.style.display='flex';
+  } else {
+    ib.hidden=true;
+    ib.style.display='none';
+  }
+}
+function dismissInstallBar(){
+  localStorage.setItem('g_hide_install','1');
+  applyInstallBarVisibility();
+  if(typeof toast==='function') toast('Bannière masquée — réactivable dans Réglages');
+  updateInstallPrefUI();
+}
+function toggleInstallPref(){
+  if(isInstallHidden()){
+    localStorage.removeItem('g_hide_install');
+    if(typeof toast==='function') toast('Bannière réactivée (si le navigateur la propose)');
+  } else {
+    localStorage.setItem('g_hide_install','1');
+    if(typeof toast==='function') toast('Bannière d’installation masquée');
+  }
+  applyInstallBarVisibility();
+  updateInstallPrefUI();
+}
+function updateInstallPrefUI(){
+  const lab=document.getElementById('installPrefLabel');
+  const btn=document.getElementById('btnToggleInstall');
+  const hidden=isInstallHidden();
+  if(lab) lab.textContent = hidden ? 'Masquée' : 'Visible si proposée';
+  if(btn) btn.textContent = hidden ? 'Réafficher' : 'Masquer';
+}
+function installPWA(){
+  if(window.deferredPrompt){
+    window.deferredPrompt.prompt();
+    window.deferredPrompt=null;
+    applyInstallBarVisibility();
+  } else if(typeof toast==='function') {
+    toast('Installation non disponible sur cet appareil / navigateur');
+  }
+}
+window.dismissInstallBar=dismissInstallBar;
+window.toggleInstallPref=toggleInstallPref;
+window.applyInstallBarVisibility=applyInstallBarVisibility;
 
 /* ── TRAITEMENTS (THERAPEUTIQUE) ── */
 function switchProtoMode(mode) {

@@ -19,7 +19,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<link rel="stylesheet" href="style.css?v=194">
+<link rel="stylesheet" href="style.css?v=195">
 <style>
 /* Critical preloader (inline so it shows before CSS/JS) */
 #appPreloader{position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:radial-gradient(ellipse 80% 50% at 50% 0%,#164E63 0%,#0f1117 55%,#050508 100%);color:#EDEDEF;font-family:Figtree,system-ui,sans-serif;transition:opacity .45s ease,visibility .45s}
@@ -47,7 +47,10 @@
 
 <header class="top-bar">
   <div class="top-left">
-    <div class="top-icon">
+    <button type="button" class="top-btn top-back-btn" id="btnBack" onclick="goBack()" aria-label="Retour" title="Retour" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="top-icon" id="topLogoIcon">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"/></svg>
     </div>
     <div>
@@ -93,39 +96,39 @@
       <div class="stat stat-click" role="button" tabindex="0" onclick="sw('fav')" onkeydown="if(event.key==='Enter')sw('fav')"><span class="stat-num" id="statFav">0</span><span class="stat-label">fav.</span></div>
     </div>
     
-    <!-- ACCÈS RAPIDES MAISON -->
+    <!-- ACCÈS RAPIDES (dédupliqués — pas de double Synth/Items ni Garde=Protocoles) -->
     <div class="quick-access-grid">
       <button class="qa-card" onclick="sw('synth')">
         <span class="qa-icon">📋</span>
         <span class="qa-label">Synthèses</span>
       </button>
-      <button class="qa-card" onclick="sw('items')">
-        <span class="qa-icon">📚</span>
-        <span class="qa-label">ITEMs</span>
-      </button>
       <button class="qa-card" onclick="sw('flash')">
         <span class="qa-icon">🎴</span>
-        <span class="qa-label">Révision</span>
+        <span class="qa-label">Flashcards</span>
       </button>
       <button class="qa-card" onclick="sw('quiz')">
         <span class="qa-icon">🧠</span>
         <span class="qa-label">Quiz</span>
       </button>
-      <button class="qa-card" onclick="sw('garde')">
-        <span class="qa-icon">🚑</span>
-        <span class="qa-label">Garde</span>
-      </button>
-      <button class="qa-card" onclick="sw('dash')">
-        <span class="qa-icon">📈</span>
-        <span class="qa-label">Stats</span>
-      </button>
       <button class="qa-card" onclick="sw('scores')">
         <span class="qa-icon">🧮</span>
         <span class="qa-label">Scores</span>
       </button>
-      <button class="qa-card" onclick="sw('erreurs')">
-        <span class="qa-icon">❌</span>
-        <span class="qa-label">Erreurs</span>
+      <button class="qa-card" onclick="sw('proto')">
+        <span class="qa-icon">📋</span>
+        <span class="qa-label">Protocoles</span>
+      </button>
+      <button class="qa-card" onclick="sw('garde')">
+        <span class="qa-icon">🚑</span>
+        <span class="qa-label">Garde</span>
+      </button>
+      <button class="qa-card" onclick="sw('annales')">
+        <span class="qa-icon">📝</span>
+        <span class="qa-label">Annales</span>
+      </button>
+      <button class="qa-card" onclick="sw('dash')">
+        <span class="qa-icon">📈</span>
+        <span class="qa-label">Progression</span>
       </button>
     </div>
     
@@ -145,10 +148,22 @@
     <canvas id="graphCanvas"></canvas>
   </div>
 
-  <!-- SYNTHESIS -->
+  <!-- SYNTHESIS + ITEMs (même écran, 2 onglets — plus de doublon Accueil) -->
   <div class="view" id="vSynth">
-    <div class="page-hd"><h1>Fiches Synthèse</h1><p>Les concepts clés en un coup d'œil</p></div>
-    <div id="synthGrid" class="synth-grid"></div>
+    <div class="page-hd">
+      <h1>Synthèses &amp; ITEMs</h1>
+      <p>Fiches de synthèse par chapitre · objectifs EDN/R2C liés aux chapitres (pas des annales)</p>
+    </div>
+    <div class="sub-tab-switch">
+      <button type="button" id="btnSubSynth" class="active" onclick="switchStudyMode('synth')">Fiches synthèse</button>
+      <button type="button" id="btnSubItems" onclick="switchStudyMode('items')">ITEMs EDN</button>
+    </div>
+    <div id="subTabSynth" class="sub-tab-content">
+      <div id="synthGrid" class="synth-grid"></div>
+    </div>
+    <div id="subTabItems" class="sub-tab-content" style="display:none">
+      <div id="itemsList"></div>
+    </div>
   </div>
 
   <!-- FLASHCARDS -->
@@ -197,11 +212,7 @@
     <div class="ch-content" id="chContent"></div>
   </div>
 
-  <!-- ITEMS -->
-  <div class="view" id="vItems">
-    <div class="page-hd"><h1>Objectifs ITEMs</h1><p>Connaissances hiérarchisées par rang</p></div>
-    <div id="itemsList"></div>
-  </div>
+  <!-- vItems retiré : ITEMs fusionnés dans vSynth (switchStudyMode) -->
 
   <!-- FAVORIS -->
   <div class="view" id="vFav">
@@ -331,18 +342,23 @@
     <div class="dict-list" id="dictList"></div>
   </div>
 
-  <!-- FICHES DE GARDE -->
+  <!-- FICHES DE GARDE (checklists rapides — PAS les protocoles complets) -->
   <div class="view" id="vGarde">
-    <div class="page-hd"><h1>Fiches de Garde</h1><p>Quick reference pour les urgences gériatriques</p></div>
+    <div class="page-hd">
+      <h1>Fiches de garde</h1>
+      <p>Checklists express pour la nuit / SAU · distinctes des protocoles détaillés</p>
+    </div>
+    <div class="src-note">10 situations urgentes (chute, delirium, douleur…). Pour le détail thérapeutique → onglet Protocoles.</div>
     <div id="gardeContent"></div>
   </div>
 
-  <!-- ANNALES EVC PAR ANNÉE -->
+  <!-- ANNALES / ENTRAÎNEMENT -->
   <div class="view" id="vAnnales">
     <div class="page-hd">
-      <h1>Annales & Sujets EVC</h1>
-      <p>Outils d'entraînement officiels pour les épreuves classantes</p>
+      <h1>Annales &amp; cas cliniques</h1>
+      <p>Entraînement style EVC — cas pédagogiques + sujets datés quand disponibles</p>
     </div>
+    <div class="src-note">Pas une base officielle CNG/CNCI exhaustive. Mélange de cas rédigés pour l’app (manuel CNEG) et de cas type EVC par année lorsque le module est chargé. Toujours croiser avec les sujets officiels.</div>
     
     <div class="sub-tab-switch">
       <button id="btnSubAnnales" class="active" onclick="switchAnnalesMode('annales')">Cas Cliniques</button>
@@ -364,11 +380,15 @@
 
   <!-- PROTOCOLES -->
   <div class="view" id="vProto">
-    <div class="page-hd"><h1>Protocoles & Traitements</h1><p>Protocoles cliniques de référence et guides thérapeutiques</p></div>
+    <div class="page-hd">
+      <h1>Protocoles &amp; traitements</h1>
+      <p>Conduites cliniques de synthèse + médiathèque — pas un clone intégral des reco HAS</p>
+    </div>
+    <div class="src-note">Synthèses pratiques (urgence, ATB, cardio, neuro…) inspirées des standards gériatriques. Les reco HAS ponctuelles existent en données annexes ; toujours vérifier la source HAS/ANSM officielle pour une décision critique.</div>
     
     <div class="sub-tab-switch">
-      <button id="btnSubProtoCliniques" class="active" onclick="switchProtoMode('cliniques')">Protocoles Cliniques</button>
-      <button id="btnSubTraitements" onclick="switchProtoMode('traitements')">Traitements (Thérapeutique)</button>
+      <button id="btnSubProtoCliniques" class="active" onclick="switchProtoMode('cliniques')">Protocoles</button>
+      <button id="btnSubTraitements" onclick="switchProtoMode('traitements')">Médicaments</button>
     </div>
 
     <!-- Section Protocoles Cliniques -->
@@ -451,17 +471,28 @@
         <div class="set-label"><div class="lb">Favoris</div><div class="ds">Chapitres marqués</div></div>
         <span class="set-chevron" aria-hidden="true">›</span>
       </div>
+      <div class="set-row set-link" role="button" tabindex="0" onclick="sw('erreurs')" onkeydown="if(event.key==='Enter')sw('erreurs')">
+        <div class="set-label"><div class="lb">Fichier erreurs</div><div class="ds">Méthode PrEP / révision J+7</div></div>
+        <span class="set-chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="set-row">
+        <div class="set-label"><div class="lb">Bannière « Installer l’app »</div><div class="ds" id="installPrefLabel">Visible si proposée</div></div>
+        <button type="button" class="set-btn set-btn-inline" id="btnToggleInstall" onclick="toggleInstallPref()">Masquer</button>
+      </div>
       <div class="set-btn" onclick="resetProg()">Réinitialiser la progression</div>
       <div class="set-btn" onclick="clearAll()">Effacer toutes les données</div>
       <div class="set-btn" onclick="location.href='clear-cache.html'">Vider le cache PWA</div>
     </div>
     <div class="set-group" style="margin-top:18px">
       <div class="set-label" style="padding:4px 2px 10px">
-        <div class="lb">Sources de l'app</div>
-        <div class="ds" style="line-height:1.45;margin-top:6px">
-          Manuel : <strong>Gériatrie 5e éd.</strong> (CNEG · Boddaert · Elsevier Masson 2021).<br>
-          Compléments NotebookLM / blueprints cliniques : chutes, autonomie, delirium, nutrition, prescription, soins palliatifs, BPSD, BPCO, etc.<br>
-          Scores : MMS, MNA, GDS, Tinetti, TUG, Braden, EGS/CGA, CAM… alignés sur la pratique gériatrique.
+        <div class="lb">Sources &amp; limites (honnêteté des contenus)</div>
+        <div class="ds" style="line-height:1.5;margin-top:6px">
+          <strong>Manuel</strong> : Gériatrie 5e éd. (CNEG · Boddaert · Elsevier Masson 2021).<br>
+          <strong>Flashcards / synthèses</strong> : dérivées du manuel + enrichissements pédagogiques.<br>
+          <strong>Annales</strong> : cas d’entraînement style EVC + modules par année si chargés — pas l’intégralité des sujets officiels CNG.<br>
+          <strong>Protocoles</strong> : synthèses cliniques pratiques (pas un export HAS). Vérifier HAS/ANSM pour les décisions critiques.<br>
+          <strong>Garde</strong> : checklists express (≠ protocoles complets).<br>
+          <strong>Scores</strong> : échelles usuelles (MMS, MNA, GDS, TUG, Braden, CAM…).
         </div>
       </div>
     </div>
@@ -509,23 +540,24 @@
 <button class="fab" id="fab" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Haut de page"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg></button>
 <div class="toast" id="toast"></div>
 
-<div class="install-bar" id="installB">
-  <span>Installer l'app sur votre téléphone</span>
+<div class="install-bar" id="installB" hidden>
+  <span class="install-bar-text">Installer l'app sur votre téléphone</span>
   <button type="button" class="install-btn" onclick="event.stopPropagation();installPWA()">Installer</button>
+  <button type="button" class="install-dismiss" onclick="event.stopPropagation();dismissInstallBar()" aria-label="Ne plus afficher" title="Ne plus afficher">×</button>
 </div>
 
 <script>
 (function(){
   var steps = [
-    { src: 'data-bundle.js?v=194', label: 'Contenu des chapitres…', pct: 45 },
-    { src: 'calculateurs.js?v=194', label: 'Scores & calculateurs…', pct: 58 },
-    { src: 'quiz.js?v=194', label: 'Mode examen…', pct: 66 },
-    { src: 'dashboard.js?v=194', label: 'Tableau de bord…', pct: 72 },
-    { src: 'appsearch.js?v=194', label: 'Recherche…', pct: 78 },
-    { src: 'erreurs-journal.js?v=194', label: 'Fichier erreurs…', pct: 84 },
-    { src: 'graph.js?v=194', label: 'Carte des liens…', pct: 90 },
-    { src: 'brainfeed.js?v=194', label: 'BrainFeed…', pct: 95 },
-    { src: 'app.js?v=194', label: 'Interface…', pct: 100 }
+    { src: 'data-bundle.js?v=195', label: 'Contenu des chapitres…', pct: 45 },
+    { src: 'calculateurs.js?v=195', label: 'Scores & calculateurs…', pct: 58 },
+    { src: 'quiz.js?v=195', label: 'Mode examen…', pct: 66 },
+    { src: 'dashboard.js?v=195', label: 'Tableau de bord…', pct: 72 },
+    { src: 'appsearch.js?v=195', label: 'Recherche…', pct: 78 },
+    { src: 'erreurs-journal.js?v=195', label: 'Fichier erreurs…', pct: 84 },
+    { src: 'graph.js?v=195', label: 'Carte des liens…', pct: 90 },
+    { src: 'brainfeed.js?v=195', label: 'BrainFeed…', pct: 95 },
+    { src: 'app.js?v=195', label: 'Interface…', pct: 100 }
   ];
   var i = 0;
   var fill = document.getElementById('plFill');

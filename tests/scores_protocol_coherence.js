@@ -304,18 +304,7 @@ function loadScript(code, sandbox, filename) {
   addProto(getArr('PROTOCOLES_QUALITE'), 'Qualité');
   addProto(getArr('PROTOCOLES_LEGISLATION'), 'Législation');
   addProto(getArr('PROTOCOLES_FORMATION'), 'Formation');
-  const FG = getArr('FICHES_GARDE');
-  if (FG) {
-    FG.forEach((f) => {
-      rawAll.push({
-        id: f.id,
-        titre: f.title,
-        categorie: 'Fiches de Garde (Urgences)',
-        protocole: f.checklist || [],
-        fallbackCategory: 'Fiches de Garde (Urgences)',
-      });
-    });
-  }
+  // FICHES_GARDE are NOT merged into protocoles (dedicated Garde tab only)
 
   // Per-source exact ID and title dupes
   const perSource = {};
