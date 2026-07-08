@@ -755,187 +755,263 @@ function escHtml(s){
     .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
     .replace(/"/g,'&quot;');
 }
+
 function cleanPracticeText(t){
   return String(t||'')
     .replace(/\r\n/g,'\n')
-    // reunify OCR hyphenations
     .replace(/([a-zà-öø-ÿœæ]{2,})-\s*\n\s*([a-zà-öø-ÿœæ]{2,})/gi,'$1$2')
     .replace(/([a-zà-öø-ÿœæ]{2,})-\s+([a-zà-öø-ÿœæ]{2,})/gi,'$1$2')
-    // strip running headers
-    .replace(/^(Mini-dossiers progressifs|Key-features problems|Questions isolées|Gériatrie|Connaissances|Entraînement|Énoncés et questions)\s*/gim,'')
     .replace(/©\s*\d{4}[^\n]*Elsevier[^\n]*/gi,'')
     .replace(/Tous droits réservés[^\n]*/gi,'')
     .replace(/This page intentionally left blank/gi,'')
     .replace(/\u25bc/g,'')
     .replace(/[ \t]{2,}/g,' ')
-    .replace(/\n{3,}/g,'\n\n')
     .trim();
 }
 
-/**
- * Unweave two-column OCR typical of Elsevier training pages:
- * left column vignette/stem interleaved with right column options A–E.
- * Rebuilds a linear stream: markers → narrative → options → réponses.
- */
-function unweaveTwoColumnOCR(raw){
-  let t = cleanPracticeText(raw);
-  // Force structural tokens onto their own lines
-  t = t
-    .replace(/\b(Question\s+\d+)\b/gi, '\n$1\n')
-    .replace(/\b(KFP\s*\d+)\b/gi, '\n$1\n')
-    .replace(/\b([AB])\s*(QRM|QRU)\s*(\d+)\b/gi, '\n$1 $2 $3\n')
-    .replace(/\b(QRM|QRU)\s*(\d+)\b/gi, '\n$1 $2\n')
-    .replace(/\b(R[eé]ponses?\s*:)/gi, '\n$1\n')
-    .replace(/(?:^|\s)([A-H])\.\s+/g, '\n$1. ')
-    .replace(/(?:^|\s)(\d{1,2})\.\s+(?=[A-Za-zÀ-ÿ(])/g, '\n$1. ');
+function isStemFragment(l){
+  return /évaluée?\(s\)|parmi\s+(ces|les)|quelle?\(s\)|échelle|activités|concernant|indiquez|proposition|quotidienne|Lawton|Katz|IADL|ADL|GIR|à retenir|en faveur|en priorité/i.test(l);
+}
 
-  const lines = t.split(/\n/).map(l => l.trim()).filter(l => {
-    if (!l) return false;
-    if (/^(Mini-dossiers|Key-features|Questions isolées|Gériatrie|Connaissances|Énoncés)/i.test(l)) return false;
-    if (/^Les (key-features|questions isolées) concernent/i.test(l)) return false;
+function isOptLine(l){
+  return /^[A-H]\.\s+\S/.test(l) || /^\d{1,2}\.\s+\S/.test(l);
+}
+
+function isMarkerLine(l){
+  return /^(Question\s+\d+|KFP\s*\d+|[AB]\s*QRM\s*\d+|[AB]\s*QRU\s*\d+|QRM\s*\d+|QRU\s*\d+)\b/i.test(l);
+}
+
+/** Normalize raw page into token lines (markers / options / narrative) */
+function tokenizePractice(raw){
+  let t = cleanPracticeText(raw);
+  // Headers out
+  t = t.replace(/^(Mini-dossiers progressifs|Key-features problems|Questions isolées|Gériatrie|Connaissances|Entraînement|Énoncés et questions)\s*/gim, '');
+  // Markers ONCE (avoid double-hit A QRM 17 → A QRM + QRM)
+  t = t
+    .replace(/\b(Question\s+\d+)\b/gi, '\n§M§$1\n')
+    .replace(/\b(KFP\s*\d+)\b/gi, '\n§M§$1\n')
+    .replace(/\b([AB])\s+(QRM|QRU)\s*(\d+)\b/gi, '\n§M§$1 $2 $3\n')
+    // Only bare QRM/QRU if not already prefixed by A/B on same token
+    .replace(/(^|[^AB\s])\b(QRM|QRU)\s*(\d+)\b/gi, '$1\n§M§$2 $3\n')
+    .replace(/\b(R[eé]ponses?\s*:)/gi, '\n§R§$1\n')
+    .replace(/(?:^|[\s])([A-H])\.\s+/g, '\n§O§$1. ')
+    .replace(/(?:^|[\s])(\d{1,2})\.\s+(?=[A-Za-zÀ-ÿ(«"])/g, '\n§O§$1. ');
+
+  return t.split(/\n/).map(l => l.trim()).filter(l => {
+    if (!l || l.length < 2) return false;
+    if (/^(matiques|blématiques|pro-|gine)$/i.test(l)) return false;
+    // Drop duplicate bare QRM if we already have A QRM nearby — handled in unweave
     return true;
   });
+}
 
-  const out = [];
-  let narr = [];
-  let opts = [];
-  let mode = 'narr';
+/**
+ * Rebuild blocks from two-column OCR.
+ * Options are placed with zigzag-aware assignment (A1,B1,C1,A2,D1,B2…).
+ */
+function unweaveTwoColumnOCR(raw){
+  const lines = tokenizePractice(raw);
+  const blocks = [];
+  let cur = { marker: '', stemParts: [], optionSets: [], answers: [] };
+  // Parallel option sets as maps for zigzag fill
+  let optMaps = []; // [{A:text, B:text, ...}, ...]
+  let mode = 'stem';
 
-  const flushNarr = () => {
-    if (!narr.length) return;
-    let s = narr.join(' ').replace(/\s+/g, ' ').trim();
-    // Drop pure intro boilerplate
-    if (s && !/^(Les key-features|Les questions isolées|Mini-dossiers|Le rang est|Ils s'appuient)/i.test(s)) {
-      out.push(s);
+  const mapsToSets = () => {
+    const sets = [];
+    for (const map of optMaps) {
+      const letters = Object.keys(map).filter(k => k !== '_n').sort((a, b) => {
+        const na = /^\d+$/.test(a), nb = /^\d+$/.test(b);
+        if (na && nb) return parseInt(a, 10) - parseInt(b, 10);
+        return a.localeCompare(b);
+      });
+      if (letters.length) {
+        sets.push(letters.map(L => ({ letter: L, text: map[L] })));
+      }
     }
-    narr = [];
-  };
-  const flushOpts = () => {
-    if (!opts.length) return;
-    // Keep first complete A→E (or 1→5) chain; if second A appears, already flushed earlier
-    out.push(...opts);
-    opts = [];
+    return sets;
   };
 
-  const isMarker = (l) => /^(Question\s+\d+|KFP\s*\d+|[AB]\s*QRM\s*\d+|[AB]\s*QRU\s*\d+|QRM\s*\d+|QRU\s*\d+)/i.test(l);
-  const isAnswer = (l) => /^R[eé]ponses?\s*:/i.test(l);
-  const isOpt = (l) => /^([A-H])\.\s+\S/.test(l) || /^(\d{1,2})\.\s+\S/.test(l);
+  const placeOption = (letter, text) => {
+    letter = String(letter).toUpperCase();
+    const isNum = /^\d+$/.test(letter);
+    const code = isNum ? parseInt(letter, 10) : letter.charCodeAt(0);
+
+    // 1) Sequential extend (max+1) — oldest incomplete set first (zigzag columns)
+    for (let i = 0; i < optMaps.length; i++) {
+      if (optMaps[i][letter]) continue;
+      const keys = Object.keys(optMaps[i]).filter(k => k !== '_n').sort((a, b) => {
+        if (/^\d+$/.test(a) && /^\d+$/.test(b)) return parseInt(a, 10) - parseInt(b, 10);
+        return a.localeCompare(b);
+      });
+      if (!keys.length) continue;
+      const max = keys[keys.length - 1];
+      const maxCode = /^\d+$/.test(max) ? parseInt(max, 10) : max.charCodeAt(0);
+      if (code === maxCode + 1) {
+        optMaps[i][letter] = text;
+        return;
+      }
+    }
+    // 2) Hole-fill (letter < max, missing) — oldest first
+    for (let i = 0; i < optMaps.length; i++) {
+      if (optMaps[i][letter]) continue;
+      const keys = Object.keys(optMaps[i]).filter(k => k !== '_n').sort();
+      if (!keys.length) continue;
+      const max = keys[keys.length - 1];
+      const maxCode = /^\d+$/.test(max) ? parseInt(max, 10) : max.charCodeAt(0);
+      if (code < maxCode) {
+        optMaps[i][letter] = text;
+        return;
+      }
+    }
+    // 3) New set on A / 1
+    if (letter === 'A' || letter === '1' || !optMaps.length) {
+      optMaps.push({ [letter]: text });
+      return;
+    }
+    // 4) Append to last set if free, else new set
+    const last = optMaps[optMaps.length - 1];
+    if (last && !last[letter]) last[letter] = text;
+    else optMaps.push({ [letter]: text });
+  };
+
+  const flushOptsIntoCur = () => {
+    cur.optionSets = mapsToSets();
+    optMaps = [];
+  };
+
+  const pushBlock = () => {
+    flushOptsIntoCur();
+    if (cur.marker || cur.stemParts.length || cur.optionSets.length) {
+      blocks.push(cur);
+    }
+    cur = { marker: '', stemParts: [], optionSets: [], answers: [] };
+    mode = 'stem';
+  };
 
   for (let l of lines) {
-    // Detox overlong option lines (column bleed): keep head, push rest as narrative
-    if (isOpt(l) && l.length > 170) {
-      const head = l.slice(0, 150);
-      const cut = Math.max(head.lastIndexOf('. '), head.lastIndexOf(', '), head.lastIndexOf(' ; '));
-      if (cut > 30) {
-        const rest = l.slice(cut + 1).trim();
-        l = l.slice(0, cut + (l[cut] === '.' ? 1 : 0)).trim();
-        if (rest.length > 20) narr.push(rest);
-      }
-    }
-
-    if (isMarker(l)) {
-      flushNarr(); flushOpts();
-      out.push(l.replace(/\s+/g, ' ').trim());
-      mode = 'narr';
+    if (l.startsWith('§M§')) {
+      const lab = l.slice(3).replace(/\s+/g, ' ').trim();
+      pushBlock();
+      cur.marker = lab;
+      mode = 'stem';
       continue;
     }
-    if (isAnswer(l)) {
-      flushNarr(); flushOpts();
-      out.push(l);
+    if (l.startsWith('§R§')) {
       mode = 'ans';
+      cur.answers.push(l.slice(3).replace(/\s+/g, ' ').trim());
       continue;
     }
-    if (isOpt(l)) {
-      // New option set starting at A/1 while we already have E/5 → close previous
-      if (opts.length && (/^A\.\s/i.test(l) || /^1\.\s/.test(l)) && opts.some(o => /^[E5]\.\s/i.test(o))) {
-        flushNarr(); flushOpts();
+    if (l.startsWith('§O§') || isOptLine(l)) {
+      const ol = l.startsWith('§O§') ? l.slice(3).trim() : l;
+      const m = ol.match(/^([A-H]|\d{1,2})\.\s+(.+)$/);
+      if (!m) continue;
+      let text = m[2].replace(/\s+/g, ' ').trim();
+      if (text.length > 180) {
+        const c = text.slice(0, 160).search(/[.!?]\s/);
+        text = text.slice(0, c > 20 ? c + 1 : 160).trim();
       }
-      // Merge continuation: if previous opt exists and this looks like wrong letter repeat from 2nd set mid-way
-      opts.push(l.replace(/\s+/g, ' ').trim());
+      placeOption(m[1], text);
       mode = 'opt';
       continue;
     }
-    // Narrative / stem / vignette
-    if (mode === 'opt' && opts.length >= 3 && l.length > 50 && /[a-zà-ÿ]{5,}/i.test(l) && /\?/.test(l)) {
-      // Likely next question stem leaking after options
-      flushOpts();
-      mode = 'narr';
-    }
     if (mode === 'ans') {
-      out.push(l);
+      cur.answers.push(l.replace(/\s+/g, ' ').trim());
       continue;
     }
-    // Skip tiny OCR crumbs
-    if (l.length < 3) continue;
-    if (/^(matiques|blématiques|pro-|gine)$/i.test(l)) continue;
-    narr.push(l);
-    mode = 'narr';
+    if (mode === 'opt' && isStemFragment(l)) {
+      // stem of interleaved next question — keep on current stemParts (will pair via multi-sets)
+      cur.stemParts.push(l.replace(/\s+/g, ' ').trim());
+      continue;
+    }
+    if (mode === 'opt' && l.length < 70 && !isStemFragment(l) && optMaps.length) {
+      // option text continuation
+      const lastMap = optMaps[optMaps.length - 1];
+      const keys = Object.keys(lastMap).filter(k => k !== '_n').sort();
+      const lastL = keys[keys.length - 1];
+      if (lastL && lastMap[lastL] && lastMap[lastL].length < 100 && !/[.!?]$/.test(lastMap[lastL])) {
+        lastMap[lastL] = (lastMap[lastL] + ' ' + l).replace(/\s+/g, ' ').trim();
+        continue;
+      }
+    }
+    cur.stemParts.push(l.replace(/\s+/g, ' ').trim());
+    mode = 'stem';
   }
-  flushNarr(); flushOpts();
-  return out.join('\n');
+  pushBlock();
+
+  unweaveTwoColumnOCR._lastBlocks = blocks;
+  return blocks.map(b => {
+    const parts = [];
+    if (b.marker) parts.push(b.marker);
+    if (b.stemParts.length) parts.push(b.stemParts.join(' '));
+    b.optionSets.forEach(set => set.forEach(o => parts.push(o.letter + '. ' + o.text)));
+    if (b.answers.length) parts.push('Réponse : ' + b.answers.join(' '));
+    return parts.join('\n');
+  }).join('\n');
 }
 
-/** Line-based letter options A–H (handles multi-line continuations) */
 function parseLetterOptions(block){
-  const lines = String(block||'').replace(/\r/g,'').split(/\n/).map(l=>l.trim()).filter(Boolean);
-  // If single blob, also split inline A. B.
-  let expanded = [];
-  for (const l of lines) {
-    if ((l.match(/\b[A-H]\.\s+/g)||[]).length >= 2) {
-      expanded.push(...l.split(/(?=\b[A-H]\.\s+)/).map(x=>x.trim()).filter(Boolean));
-    } else expanded.push(l);
-  }
+  // Prefer structured sets if available from last unweave of same content — fallback line parse
+  const lines = String(block||'').split(/\n/).map(l=>l.trim()).filter(Boolean);
   const opts = [];
   let cur = null;
-  for (const l of expanded) {
+  let lastCode = 0;
+  for (const l of lines) {
     const m = l.match(/^([A-H])\.\s+(.+)$/);
     if (m) {
-      if (cur) opts.push(cur);
-      let text = m[2].replace(/\s*(Réponse|Correction|Question\s+\d+|KFP\s*\d+|[AB]\s*QRM).*$/i,'').trim();
-      // Cap option length (bleed)
-      if (text.length > 220) {
-        const c = text.slice(0, 200).lastIndexOf('. ');
-        text = text.slice(0, c > 40 ? c + 1 : 200).trim();
+      const code = m[1].charCodeAt(0);
+      if (cur && code <= lastCode) {
+        // restart — don't merge into previous set via dedup longest
+        opts.push(cur);
+        // mark boundary with null
+        opts.push({ letter: '__SPLIT__', text: '' });
+        cur = null;
       }
-      cur = { letter: m[1], text };
-    } else if (cur && !/^(Question|KFP|QRM|QRU|Réponse)/i.test(l) && !/^\d{1,2}\.\s/.test(l) && l.length < 90) {
-      cur.text = (cur.text + ' ' + l).replace(/\s+/g,' ').trim();
+      if (cur) opts.push(cur);
+      cur = { letter: m[1], text: m[2].slice(0, 200).trim() };
+      lastCode = code;
+    } else if (cur && l.length < 70 && !isStemFragment(l) && !isMarkerLine(l)) {
+      cur.text = (cur.text + ' ' + l).replace(/\s+/g,' ').trim().slice(0, 200);
     }
   }
   if (cur) opts.push(cur);
-  // Dedup by letter keeping longest text
-  const byL = new Map();
+  // Take first contiguous set only (until SPLIT)
+  const first = [];
   for (const o of opts) {
-    const prev = byL.get(o.letter);
-    if (!prev || o.text.length > prev.text.length) byL.set(o.letter, o);
+    if (o.letter === '__SPLIT__') break;
+    first.push(o);
   }
-  return [...byL.values()].sort((a,b) => a.letter.localeCompare(b.letter));
+  return first.length ? first : opts.filter(o => o.letter !== '__SPLIT__');
 }
 
-/** Numbered options 1. 2. 3. (KFP style) */
 function parseNumberedOptions(block){
-  const lines = String(block||'').replace(/\r/g,'').split(/\n/).map(l=>l.trim()).filter(Boolean);
-  let expanded = [];
-  for (const l of lines) {
-    if ((l.match(/\b\d{1,2}\.\s+/g)||[]).length >= 2) {
-      expanded.push(...l.split(/(?=\b\d{1,2}\.\s+)/).map(x=>x.trim()).filter(Boolean));
-    } else expanded.push(l);
-  }
+  const lines = String(block||'').split(/\n/).map(l=>l.trim()).filter(Boolean);
   const opts = [];
   let cur = null;
-  for (const l of expanded) {
+  let lastN = 0;
+  for (const l of lines) {
     const m = l.match(/^(\d{1,2})\.\s+(.+)$/);
     if (m) {
+      const n = parseInt(m[1], 10);
+      if (cur && n <= lastN) {
+        opts.push(cur);
+        opts.push({ letter: '__SPLIT__', text: '' });
+        cur = null;
+      }
       if (cur) opts.push(cur);
-      let text = m[2].replace(/\s*\[maximum\s+\d+\]\s*/i,'').replace(/\s*(Réponse|KFP\s*\d+|Question\s+\d+).*$/i,'').trim();
-      if (text.length > 220) text = text.slice(0, 200).trim();
-      cur = { letter: m[1], text };
-    } else if (cur && !/^(Question|KFP|QRM|Réponse)/i.test(l) && !/^[A-H]\.\s/.test(l) && l.length < 90) {
-      cur.text = (cur.text + ' ' + l).replace(/\s+/g,' ').trim();
+      cur = { letter: m[1], text: m[2].slice(0, 200).trim() };
+      lastN = n;
+    } else if (cur && l.length < 70 && !isStemFragment(l)) {
+      cur.text = (cur.text + ' ' + l).replace(/\s+/g,' ').trim().slice(0, 200);
     }
   }
   if (cur) opts.push(cur);
-  return opts;
+  const first = [];
+  for (const o of opts) {
+    if (o.letter === '__SPLIT__') break;
+    first.push(o);
+  }
+  return first.length ? first : opts.filter(o => o.letter !== '__SPLIT__');
 }
 
 function extractAnswerBlock(block){
@@ -991,154 +1067,169 @@ window.togglePracticeAnswer=function(id){
 };
 
 function parsePracticeItems(raw, chId){
-  // Two-column deinterleave first, then split on question markers
-  let text = unweaveTwoColumnOCR(raw);
-  text = text
-    .replace(/^(Question\s+\d+)\b/gim, '\n@@@$1')
-    .replace(/^(KFP\s*\d+)\b/gim, '\n@@@$1')
-    .replace(/^([AB])\s*(QRM|QRU)\s*(\d+)\b/gim, '\n@@@$1 $2 $3')
-    .replace(/^(QRM|QRU)\s*(\d+)\b/gim, '\n@@@$1 $2');
+  unweaveTwoColumnOCR(raw);
+  const blocks = unweaveTwoColumnOCR._lastBlocks || [];
+  const items = [];
+  let pendingStem = '';
+  let waitMarker = null;
+  let waitStem = '';
 
-  const chunks=text.split(/\n@@@/).map(s=>s.trim()).filter(Boolean);
-  const items=[];
-  let intro='';
+  const defaultStem = (type) => type === 'KFP'
+    ? 'Sélectionnez la (les) proposition(s) pertinente(s)'
+    : 'Quelle(s) est (sont) la (les) proposition(s) exacte(s) ?';
 
-  // First chunk may be intro / first vignette without marker
-  if(chunks.length && !/^(Question\s+\d+|KFP\s*\d+|[AB]\s*QRM|[AB]\s*QRU|QRM\s*\d|QRU\s*\d)/i.test(chunks[0])){
-    intro=chunks.shift();
-  }
+  const splitQuestions = (text) => {
+    const t = String(text || '').replace(/\s+/g, ' ').trim();
+    if (!t) return [];
+    return t.split(/(?=(?:Quel(?:le)?\(s\)|Parmi\s+(?:ces|les)|Concernant\s+[A-Za-zÀ-ÿ]|Indiquez\s+|Que\s+(?:pouvez|faut|réalisez)|Quelle\s+description))/i)
+      .map(s => s.trim())
+      .filter(s => s.length > 12);
+  };
 
-  let sharedVignette=intro;
-  // strip pure intros for MDP/KFP
-  if(sharedVignette && /^(Les key-features|Les questions isolées|Mini-dossiers)/i.test(sharedVignette) && sharedVignette.length<400){
-    sharedVignette='';
-  }
+  const makeItem = (label, stem, vignette, options, answer, qIndex) => {
+    let rang = '';
+    const rangM = String(label).match(/^([AB])\s*(QRM|QRU)/i);
+    if (rangM) rang = rangM[1].toUpperCase();
+    let type = 'QCM';
+    if (/KFP/i.test(label) || chId === 'ch19') type = 'KFP';
+    else if (/Question\s+\d+/i.test(label) || chId === 'ch18') type = 'MDP';
+    else if (/QRM|QRU/i.test(label) || chId === 'ch20') type = 'QI';
 
-  for(const chunk of chunks){
-    const headM=chunk.match(/^(Question\s+\d+|KFP\s*\d+|[AB]\s*QRM\s*\d+|[AB]\s*QRU\s*\d+|QRM\s*\d+|QRU\s*\d+)\s*/i);
-    if(!headM) continue;
-    const label=headM[1].replace(/\s+/g,' ').trim();
-    let body=chunk.slice(headM[0].length).trim();
-    const { body: main, answer }=extractAnswerBlock(body);
-    body=main;
+    let st = String(stem || '').replace(/\s+/g, ' ').trim();
+    let vg = String(vignette || '').replace(/\s+/g, ' ').trim();
 
-    const maxM=body.match(/\[maximum\s+(\d+)\]/i);
-    const max=maxM?maxM[1]:'';
-    body=body.replace(/\[maximum\s+\d+\]/ig,' ').trim();
-
-    let rang='';
-    const rangM=label.match(/^([AB])\s*(QRM|QRU)/i);
-    if(rangM) rang=rangM[1].toUpperCase();
-    else {
-      const rb=body.match(/^(Rang\s*)?([AB])\b/);
-      if(rb && body.length<80){ /* ignore */ }
+    // Unpack multi-question blobs (2-column interleave often glues two stems)
+    const allQ = splitQuestions((vg + ' ' + st).trim());
+    if (allQ.length >= 2 && typeof qIndex === 'number') {
+      st = allQ[Math.min(qIndex, allQ.length - 1)];
+      vg = qIndex === 0 && allQ.length > 2 ? allQ.slice(0, -1).join(' ') : '';
+      // Prefer matching index; if only 2 questions, map 0 and 1
+      if (allQ.length === 2) {
+        st = allQ[Math.min(qIndex, 1)];
+        vg = '';
+      }
+    } else if (allQ.length === 1 && /proposition\(s\) exacte/i.test(st)) {
+      st = allQ[0];
+      vg = '';
     }
-    // ch20 often has "A QRM n" already; also "A" line before QRM in raw
-    if(!rang && /^[AB]\s/i.test(label)) rang=label[0].toUpperCase();
 
-    let type='QCM';
-    if(/KFP/i.test(label) || chId==='ch19') type='KFP';
-    else if(/Question\s+\d+/i.test(label) || chId==='ch18') type='MDP';
-    else if(/QRM|QRU/i.test(label) || chId==='ch20') type='QI';
+    if (st.length > 140 && allQ.length < 2) {
+      const qm = st.lastIndexOf('?');
+      if (qm > 40) {
+        const head = st.slice(0, qm + 1).trim();
+        const tail = st.slice(qm + 1).trim();
+        if (tail.length > 12 && /quel|parmi|indiquez|concernant/i.test(tail)) {
+          vg = (vg ? vg + ' ' : '') + head;
+          st = tail;
+        } else if (head.length > 80 && tail.length < 8) {
+          // Keep the question ending with ? as stem, rest as vignette before it
+          const firstQ = head.search(/Quel|Parmi|Concernant|Indiquez|Que /i);
+          if (firstQ > 10) {
+            vg = head.slice(0, firstQ).trim();
+            st = head.slice(firstQ).trim();
+          } else {
+            st = head;
+          }
+        }
+      }
+    }
+    if (/^(matiques|blématiques|pro-|gine|appartenant|Les key-features|Les questions isolées)\b/i.test(st) || st.length < 10) {
+      st = (options && options.length >= 2) ? defaultStem(type) : st;
+    }
+    // Prefer real question over generic placeholder when available in vg
+    if (/proposition\(s\) exacte|proposition\(s\) pertinente/i.test(st) && vg) {
+      const qs = splitQuestions(vg);
+      if (qs.length) {
+        st = qs[typeof qIndex === 'number' ? Math.min(qIndex, qs.length - 1) : 0];
+        vg = '';
+      }
+    }
 
-    // Options (line-based after unweave)
-    let options=parseLetterOptions(body);
-    if(options.length<2) options=parseNumberedOptions(body);
-
-    // Stem = lines that are NOT options
-    let stemLines = body.split(/\n/).map(l=>l.trim()).filter(Boolean).filter(l => {
-      if (/^[A-H]\.\s+\S/.test(l)) return false;
-      const nm = l.match(/^(\d{1,2})\.\s+\S/);
-      if (nm && options.some(o => o.letter === nm[1])) return false;
-      if (/^R[eé]ponse/i.test(l)) return false;
+    options = (options || []).filter(o => {
+      const t = String(o.text || '').trim();
+      if (t.length < 3) return false;
+      if (/Elsevier|droits réservés|Mini-dossiers|Questions isolées/i.test(t)) return false;
+      if (t.length < 6 && !/^[A-Za-zÀ-ÿ]{3,}$/.test(t)) return false;
       return true;
-    });
-    let stem = stemLines.join(' ').replace(/\s+/g,' ').trim();
-    // Fallback: cut before first option in blob
-    if(!stem && options.length){
-      const cut=body.search(/(?:^|\n)\s*[A-H1-9]\.\s+/);
-      if(cut>0) stem=body.slice(0,cut).replace(/\s+/g,' ').trim();
+    }).slice(0, 10);
+
+    // Require solid MCQ shape
+    if (options.length < 3 && !answer) return null;
+    if (options.length >= 2 && options.every(o => /[A-H]/.test(o.letter)) && !options.some(o => o.letter === 'A') && options.length < 4) return null;
+
+    const maxM = (st + ' ' + vg).match(/\[maximum\s+(\d+)\]/i);
+    const max = maxM ? maxM[1] : '';
+    st = st.replace(/\[maximum\s+\d+\]/ig, '').trim();
+
+    return {
+      label: label || 'QCM', type, rang, max,
+      stem: (st || defaultStem(type)).slice(0, 500),
+      vignette: vg.slice(0, 900),
+      options,
+      answer: String(answer || '').slice(0, 600)
+    };
+  };
+
+  for (const b of blocks) {
+    const stemText = (b.stemParts || []).join(' ').replace(/\s+/g, ' ').trim();
+    const answer = (b.answers || []).join(' ').replace(/^R[eé]ponses?\s*:\s*/i, '').trim();
+    const sets = b.optionSets || [];
+
+    if (!b.marker && !sets.length) {
+      if (stemText.length > 30 && !/^(Les key-features|Les questions isolées)/i.test(stemText)) {
+        pendingStem = (pendingStem ? pendingStem + ' ' : '') + stemText;
+      }
+      continue;
     }
-    // Strip residual option letters inside stem
-    stem = stem.replace(/\s+[A-H]\.\s+[A-Za-zÀ-ÿ][^.]{0,80}/g, m => {
-      // keep if looks like sentence mid, drop if classic option
-      return m.length < 100 ? '' : m;
-    }).replace(/\s+/g,' ').trim();
-    // If stem empty for MDP Q2+, keep previous vignette context only in vignette field
-    let vignette='';
-    if(type==='MDP' && sharedVignette && items.length===0 && stem.length<40){
-      vignette=sharedVignette.replace(/\s+/g,' ').trim().slice(0,800);
+
+    if (b.marker && !sets.length) {
+      const fullStem = [waitStem, pendingStem, stemText].filter(Boolean).join(' ');
+      waitMarker = b.marker;
+      waitStem = fullStem;
+      pendingStem = '';
+      if (answer) {
+        const it = makeItem(b.marker, fullStem, '', [], answer);
+        if (it) items.push(it);
+        waitMarker = null; waitStem = '';
+      }
+      continue;
     }
-    // KFP: long clinical text before options is vignette
-    if(type==='KFP' && stem.length>120 && options.length){
-      // keep stem as question line if ends with ? else whole as vignette+stem
-      const qm=stem.lastIndexOf('?');
-      if(qm>40 && qm<stem.length-1){
-        vignette=stem.slice(0, qm+1).trim();
-        stem=stem.slice(qm+1).trim()||'Quelle(s) proposition(s) retenir ?';
-      } else {
-        vignette=stem;
-        stem='Sélectionnez la (les) proposition(s) pertinente(s)';
+
+    if (sets.length) {
+      let label = b.marker || waitMarker || 'QCM';
+      let stem = [waitStem, pendingStem, stemText].filter(Boolean).join(' ');
+      waitMarker = null; waitStem = ''; pendingStem = '';
+
+      for (let si = 0; si < sets.length; si++) {
+        let st = stem;
+        let vg = '';
+        if (si > 0) {
+          const parts = stem.split(/(?=quel(?:le)?\(s\)|parmi\s+(ces|les)|concernant\s+)/i);
+          if (parts.length >= 2) {
+            st = parts[parts.length - 1].trim();
+            vg = parts.slice(0, -1).join(' ').trim();
+          } else {
+            st = defaultStem(chId === 'ch19' ? 'KFP' : 'QI');
+          }
+          label = 'QCM';
+        }
+        const it = makeItem(si === 0 ? label : 'QCM', st, vg, sets[si], si === 0 ? answer : '', si);
+        if (it) items.push(it);
       }
     }
-    if(type==='MDP' && stem.length>180 && options.length){
-      const qm=stem.lastIndexOf('?');
-      if(qm>50){
-        vignette=(vignette?vignette+' ':'')+stem.slice(0, qm+1).trim();
-        stem=stem.slice(qm+1).trim()||'Quelle(s) est (sont) la (les) proposition(s) exacte(s) ?';
-      }
-    }
-
-    // Quality filter on options (drop OCR column-bleed garbage)
-    options = options.filter(o => {
-      const t = o.text.replace(/\s+/g,' ').trim();
-      if (t.length < 4) return false;
-      // mid-sentence bleed often starts lowercase without medical sense and is very long without verb markers — keep short clinical opts
-      if (/^(et |ou |de |du |des |la |le |les |un |une |au |aux )/i.test(t) && t.length < 12) return false;
-      if (/Mini-dossiers|Key-features|Questions isolées|Elsevier|droits réservés/i.test(t)) return false;
-      return true;
-    });
-
-    if(!stem && !options.length && !answer) continue;
-    if(!stem) stem = (type==='KFP')
-      ? 'Sélectionnez la (les) proposition(s) pertinente(s)'
-      : 'Quelle(s) est (sont) la (les) proposition(s) exacte(s) ?';
-
-    // Detox stem: pull real question phrase out of column-bleed preamble
-    const qIdx = stem.search(/quel(?:le)?\(s\)|parmi\s+(ces|les)|indiquez|concernant\s+[a-zà-ÿ]|que\s+pouvez|que\s+faut/i);
-    if (qIdx > 15) {
-      const head = stem.slice(0, qIdx).trim();
-      if (head.length > 20 && !vignette) vignette = head.slice(0, 400);
-      stem = stem.slice(qIdx).trim();
-    }
-    // Drop pure OCR crumbs
-    if (/^(matiques|blématiques|pro-|gine)\b/i.test(stem)) {
-      stem = options.length
-        ? (type === 'KFP' ? 'Sélectionnez la (les) proposition(s) pertinente(s)' : 'Quelle(s) est (sont) la (les) proposition(s) exacte(s) ?')
-        : '';
-    }
-    const stemOk = stem.length >= 12;
-    if (!stemOk && options.length < 2) continue;
-    if (options.length < 2 && !answer && stem.length < 40) continue;
-
-    // Prefer sequential option letters A,B,C… (drop orphaned mid-alphabet sets without A)
-    if (options.length >= 2 && options.every(o => /[A-H]/.test(o.letter))) {
-      if (!options.some(o => o.letter === 'A') && options.some(o => o.letter === 'C' || o.letter === 'D')) {
-        // keep but try renumber? better drop incomplete bleed sets with < 3
-        if (options.length < 3) continue;
-      }
-    }
-
-    items.push({
-      label, type, rang, max, stem: (stem || label).slice(0,500),
-      vignette: vignette.slice(0,900),
-      options: options.slice(0, 12),
-      answer: answer.slice(0,600)
-    });
   }
 
-  // Fallback: if almost nothing parsed, chunk by Question/QRM still failed — return empty
-  return { intro: intro.slice(0,500), items };
+  // Drop near-duplicate cards (same first 3 options)
+  const seen = new Set();
+  const deduped = [];
+  for (const it of items) {
+    const key = (it.options || []).slice(0, 3).map(o => o.letter + o.text.slice(0, 40)).join('|');
+    if (key.length > 10 && seen.has(key)) continue;
+    if (key.length > 10) seen.add(key);
+    deduped.push(it);
+  }
+
+  return { intro: '', items: deduped };
 }
 
 function renderPracticeChapter(raw, chId){
@@ -1743,6 +1834,20 @@ function renderChapter(raw,chId){
 
     const letM=l.match(LETTER_RE);
     if(letM&&letM[2].length>2&&!/^[IVX]\./.test(l)){
+      const letTitle = letM[2].trim();
+      // Skip empty / garbage / MCQ options (A. passage infirmier…) — not book sub-heads
+      const isMcqOpt = letTitle.length < 90 && /^(passage|personne|il faut|faire |utiliser |s'alimenter|les |le |la |une |un |des |du |de |auxiliaire|kinésithérapeute|orthophoniste|aide |séances |calcul |normalisation )/i.test(letTitle);
+      const looksLikeTitle = letTitle.length >= 4 && letTitle.length <= 90 && !/[.!?]$/.test(letTitle) && /^[A-ZÀ-ÖØ-Þ]/.test(letTitle) && !isMcqOpt;
+      if (!looksLikeTitle) {
+        // Keep as prose/bullet instead of empty sub-head
+        if (isMcqOpt || /^[A-H]\.\s+\S/.test(l)) {
+          flushPara(); flushNumList();
+          bulletBuf.push(letM[1] + '. ' + letTitle);
+          continue;
+        }
+        paraBuf.push(l);
+        continue;
+      }
       if(!pastPreamble){
         let hasSibling = false;
         for (let j = i + 1, cnt = 0; j < lines.length && cnt < 5; j++) {
@@ -1762,7 +1867,7 @@ function renderChapter(raw,chId){
         markBodyStart();
       }
       flushPara();flushBullets();flushNumList();
-      html+=`<h3 class="sub-head"><span class="sub-letter">${esc(letM[1])}</span>${esc(letM[2])}</h3>`;
+      html+=`<h3 class="sub-head"><span class="sub-letter">${esc(letM[1])}</span> ${esc(letTitle)}</h3>`;
       continue;
     }
 
@@ -1853,7 +1958,17 @@ function renderChapter(raw,chId){
     paraBuf.push(l);
   }
   flushPara();flushBullets();flushNumList();flushQCM();if(inCallout)flushCallout();flushSituations();closeSection();
-  // R3 — Supprimer les sections sans contenu (en-tete de plan sans texte correspondant dans la BDD)
+  // Strip empty sub-heads and empty paragraphs (OCR debris)
+  html = html.replace(/<h3 class="sub-head"><span class="sub-letter">[^<]*<\/span>\s*<\/h3>/g, '');
+  html = html.replace(/<div class="para-card(?: study-block)?"><p>\s*<\/p><\/div>/g, '');
+  html = html.replace(/<div class="para-card(?: study-block)?"><p>(.{1,12})<\/p><\/div>/g, (m, t) => {
+    // Drop tiny OCR crumb paragraphs
+    if (/^[\d\s.,;:–—\-]+$/.test(t) || t.trim().length < 8) return '';
+    return m;
+  });
+  html = html.replace(/<div class="def-block"><span class="rang-badge[^"]*">[^<]*<\/span><span class="def-text">\s*<\/span><\/div>/g, '');
+  // Drop empty list cards
+  html = html.replace(/<div class="reader-list-card"><ul class="reader-list"><\/ul><\/div>/g, '');
   // R3 — remove empty sections (class may include id= attributes)
   html = html.replace(/<section class="manual-section"[^>]*>([\s\S]*?)<\/section>/g, (match, inner) => {
     const bodyIndex = inner.indexOf('<div class="section-body">');
