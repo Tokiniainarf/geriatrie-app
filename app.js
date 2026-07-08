@@ -1155,7 +1155,10 @@ function parsePracticeItems(raw, chId){
 
     // Require solid MCQ shape
     if (options.length < 3 && !answer) return null;
-    if (options.length >= 2 && options.every(o => /[A-H]/.test(o.letter)) && !options.some(o => o.letter === 'A') && options.length < 4) return null;
+    // Must have A for letter options (incomplete zigzag leftovers)
+    if (options.length >= 2 && options.every(o => /[A-H]/.test(o.letter)) && !options.some(o => o.letter === 'A')) return null;
+    // Drop generic stem without enough distinctive options
+    if (/proposition\(s\) exacte|proposition\(s\) pertinente/i.test(st) && options.length < 4 && !answer) return null;
 
     const maxM = (st + ' ' + vg).match(/\[maximum\s+(\d+)\]/i);
     const max = maxM ? maxM[1] : '';
@@ -2012,8 +2015,20 @@ function renderChapter(raw,chId){
     }
   }
 
-  if (keptSections.length >= 3) {
-    const outlineItems = keptSections.slice(0, 12).map((s, i) => {
+  // Prefer first35 TOC sections; if filter too strict, fall back to all kept sections with titles
+  let outlineSrc = keptSections.filter(s => s.num && s.title && String(s.title).trim().length > 1);
+  if (outlineSrc.length < 3) {
+    // Rebuild from all rendered sections with non-empty titles
+    outlineSrc = [];
+    const allSecRe = /<section class="manual-section"[^>]*\bid="([^"]*)"[^>]*>\s*<header class="section-head"><span class="section-num">([^<]*)<\/span><span class="section-title">([^<]*)<\/span>/g;
+    let am;
+    while ((am = allSecRe.exec(html)) !== null) {
+      if (am[2].trim() && am[3].trim()) outlineSrc.push({ id: am[1], num: am[2], title: am[3] });
+    }
+  }
+  // Keep threshold at 3 (matches TOC richness of real chapters; ch2/ch17 stay clean)
+  if (outlineSrc.length >= 3) {
+    const outlineItems = outlineSrc.slice(0, 14).map((s, i) => {
       const href = s.id || ('sec-auto-' + i);
       return `<li><a href="#${href}" class="outline-link"><span class="outline-num">${esc(s.num)}</span> ${esc(s.title)}</a></li>`;
     }).join('');
@@ -3555,5 +3570,13 @@ function filterMeds(classe, btn) {
 }
 
 /* ── UTILS ── */
-function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+// Pure string escape — never depend on DOM (createElement mock/edge cases emptied titles & lists)
+function esc(s){
+  return String(s ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
 function toast(msg){const t=document.getElementById('toast');if(!t)return;t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000)}
