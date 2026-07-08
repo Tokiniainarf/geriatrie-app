@@ -728,7 +728,7 @@ addTest('TC-52', 'RW-6', 'ch20 contains no book index entries, and ch19 rendered
   const ch19Pages = vm.runInContext('APP_DATA.content.ch19', context);
   const raw19 = ch19Pages.map(p => p[1]).join('\n▼\n');
   const html19 = vm.runInContext(`renderChapter(${JSON.stringify(raw19)}, "ch19")`, context);
-  const cardCount = (html19.match(/class="para-card"|class="qcm-card"/g) || []).length;
+  const cardCount = (html19.match(/class="para-card"|class="qcm-card"|class="pqcm-card"/g) || []).length;
   assert.ok(cardCount > 1, `ch19 should render multiple paragraph/qcm cards, found: ${cardCount}`);
 });
 

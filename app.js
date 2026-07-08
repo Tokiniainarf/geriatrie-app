@@ -401,9 +401,16 @@ function renderChapterContent(){
     cc.innerHTML = '<div class="empty"><div class="empty-text">Erreur de rendu</div><div class="empty-hint">'+String(e.message||e)+'</div></div>';
     return;
   }
-  applyConceptLinks();
-  // Max 4 visuals, contextual only — no spam of broken placeholders
-  injectEducationalVisuals(S.ch, cc);
+  // Mode lecture étude (anti-livre) + mode entraînement
+  cc.classList.add('study-reader');
+  if (S.ch === 'ch18' || S.ch === 'ch19' || S.ch === 'ch20') {
+    cc.classList.add('practice-reader');
+    cc.classList.remove('study-reader');
+  } else {
+    cc.classList.remove('practice-reader');
+    applyConceptLinks();
+    injectEducationalVisuals(S.ch, cc);
+  }
 }
 
 function injectEducationalVisuals(chId, cc) {
@@ -688,7 +695,310 @@ if (typeof APP_DATA !== 'undefined' && (typeof document === 'undefined' || !docu
   preprocessAppData();
 }
 
+/* ── Entraînement ch18–20 : parser QCM/KFP/MDP dédié (pas le rendu « livre ») ── */
+function escHtml(s){
+  return String(s||'')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;');
+}
+function cleanPracticeText(t){
+  return String(t||'')
+    .replace(/\r\n/g,'\n')
+    // reunify OCR hyphenations
+    .replace(/([a-zà-öø-ÿœæ]{2,})-\s*\n\s*([a-zà-öø-ÿœæ]{2,})/gi,'$1$2')
+    .replace(/([a-zà-öø-ÿœæ]{2,})-\s+([a-zà-öø-ÿœæ]{2,})/gi,'$1$2')
+    // strip running headers
+    .replace(/^(Mini-dossiers progressifs|Key-features problems|Questions isolées|Gériatrie|Connaissances|Entraînement)\s*/gim,'')
+    .replace(/©\s*\d{4}[^\n]*Elsevier[^\n]*/gi,'')
+    .replace(/Tous droits réservés[^\n]*/gi,'')
+    .replace(/This page intentionally left blank/gi,'')
+    .replace(/\u25bc/g,'')
+    .replace(/[ \t]{2,}/g,' ')
+    .replace(/\n{3,}/g,'\n\n')
+    .trim();
+}
+
+/** Split a block into letter options A–E (and optional F–H) */
+function parseLetterOptions(block){
+  const opts=[];
+  // Split keeping delimiters A. B. C. ...
+  const re=/(?:^|\s)([A-H])\.\s+/g;
+  const parts=[];
+  let m, last=0, labels=[];
+  const src=' '+block.replace(/\n/g,' ');
+  while((m=re.exec(src))!==null){
+    if(labels.length){
+      parts.push(src.slice(last, m.index).trim());
+    }
+    labels.push(m[1]);
+    last=m.index+m[0].length;
+  }
+  if(labels.length){
+    parts.push(src.slice(last).trim());
+    for(let i=0;i<labels.length;i++){
+      let text=parts[i]||'';
+      // cut trailing answer keys / next question noise
+      text=text.replace(/\s*(Réponse|Correction|Question\s+\d+|KFP\s*\d+|[AB]\s*QRM\s*\d+).*$/i,'').trim();
+      if(text.length>1) opts.push({ letter: labels[i], text });
+    }
+  }
+  return opts;
+}
+
+/** Numbered options 1. 2. 3. (KFP style) */
+function parseNumberedOptions(block){
+  const opts=[];
+  const re=/(?:^|\s)(\d{1,2})\.\s+/g;
+  const src=' '+block.replace(/\n/g,' ');
+  let m, last=0, nums=[];
+  const parts=[];
+  while((m=re.exec(src))!==null){
+    if(nums.length) parts.push(src.slice(last, m.index).trim());
+    nums.push(m[1]);
+    last=m.index+m[0].length;
+  }
+  if(nums.length){
+    parts.push(src.slice(last).trim());
+    for(let i=0;i<nums.length;i++){
+      let text=(parts[i]||'').replace(/\s*\[maximum\s+\d+\]\s*/i,'').trim();
+      text=text.replace(/\s*(Réponse|Correction|KFP\s*\d+|Question\s+\d+).*$/i,'').trim();
+      if(text.length>1) opts.push({ letter: nums[i], text });
+    }
+  }
+  return opts;
+}
+
+function extractAnswerBlock(block){
+  const m=block.match(/R[eé]ponses?\s*[:：]\s*([\s\S]*)$/i);
+  if(!m) return { body: block, answer: '' };
+  return {
+    body: block.slice(0, m.index).trim(),
+    answer: m[1].replace(/\s*(Question\s+\d+|KFP\s*\d+|[AB]\s*QRM\s*\d+)[\s\S]*$/i,'').trim()
+  };
+}
+
+function renderQcmInteractiveCard(card, idx){
+  const id='pqcm-'+idx;
+  const opts=card.options||[];
+  const optHtml=opts.map((o,i)=>{
+    const lid=id+'-o'+i;
+    return `<label class="pqcm-opt" for="${lid}">
+      <input type="checkbox" id="${lid}" class="pqcm-check" data-card="${id}">
+      <span class="pqcm-letter">${escHtml(o.letter)}</span>
+      <span class="pqcm-opt-text">${escHtml(o.text)}</span>
+    </label>`;
+  }).join('');
+  const maxBadge=card.max?`<span class="pqcm-badge">Max ${escHtml(String(card.max))}</span>`:'';
+  const rangBadge=card.rang?`<span class="pqcm-rang rang-${String(card.rang).toLowerCase()}">Rang ${escHtml(card.rang)}</span>`:'';
+  const typeBadge=`<span class="pqcm-type">${escHtml(card.type||'QCM')}</span>`;
+  const answerBlock=card.answer
+    ? `<div class="pqcm-answer" id="${id}-ans" hidden>
+        <div class="pqcm-answer-label">Correction</div>
+        <div class="pqcm-answer-body">${escHtml(card.answer)}</div>
+      </div>
+      <button type="button" class="pqcm-reveal" onclick="togglePracticeAnswer('${id}')">Voir la correction</button>`
+    : '';
+  const vignette=card.vignette
+    ? `<div class="pqcm-vignette">${escHtml(card.vignette)}</div>` : '';
+  return `<article class="pqcm-card" id="${id}" data-qtype="${escHtml(card.type||'')}">
+    <header class="pqcm-hdr">${typeBadge}${rangBadge}${maxBadge}
+      <span class="pqcm-num">${escHtml(card.label||('Q'+(idx+1)))}</span>
+    </header>
+    ${vignette}
+    <div class="pqcm-stem">${escHtml(card.stem)}</div>
+    ${optHtml?`<div class="pqcm-options" role="group">${optHtml}</div>`:''}
+    ${answerBlock}
+  </article>`;
+}
+
+window.togglePracticeAnswer=function(id){
+  const ans=document.getElementById(id+'-ans');
+  const btn=document.querySelector('#'+id+' .pqcm-reveal');
+  if(!ans) return;
+  const open=ans.hasAttribute('hidden');
+  if(open){ ans.removeAttribute('hidden'); if(btn) btn.textContent='Masquer la correction'; }
+  else { ans.setAttribute('hidden',''); if(btn) btn.textContent='Voir la correction'; }
+};
+
+function parsePracticeItems(raw, chId){
+  let text=cleanPracticeText(raw);
+  // Normalize common markers onto own lines for splitting
+  text=text
+    .replace(/\b(Question\s+\d+)\b/gi,'\n@@@$1\n')
+    .replace(/\b(KFP\s*\d+)\b/gi,'\n@@@$1\n')
+    .replace(/\b([AB])\s*(QRM|QRU)\s*(\d+)\b/gi,'\n@@@$1 $2 $3\n')
+    .replace(/\b(QRM|QRU)\s*(\d+)\b/gi,'\n@@@$1 $2\n');
+
+  const chunks=text.split(/\n@@@/).map(s=>s.trim()).filter(Boolean);
+  const items=[];
+  let intro='';
+
+  // First chunk may be intro / first vignette without marker
+  if(chunks.length && !/^(Question\s+\d+|KFP\s*\d+|[AB]\s*QRM|[AB]\s*QRU|QRM\s*\d|QRU\s*\d)/i.test(chunks[0])){
+    intro=chunks.shift();
+  }
+
+  let sharedVignette=intro;
+  // strip pure intros for MDP/KFP
+  if(sharedVignette && /^(Les key-features|Les questions isolées|Mini-dossiers)/i.test(sharedVignette) && sharedVignette.length<400){
+    sharedVignette='';
+  }
+
+  for(const chunk of chunks){
+    const headM=chunk.match(/^(Question\s+\d+|KFP\s*\d+|[AB]\s*QRM\s*\d+|[AB]\s*QRU\s*\d+|QRM\s*\d+|QRU\s*\d+)\s*/i);
+    if(!headM) continue;
+    const label=headM[1].replace(/\s+/g,' ').trim();
+    let body=chunk.slice(headM[0].length).trim();
+    const { body: main, answer }=extractAnswerBlock(body);
+    body=main;
+
+    const maxM=body.match(/\[maximum\s+(\d+)\]/i);
+    const max=maxM?maxM[1]:'';
+    body=body.replace(/\[maximum\s+\d+\]/ig,' ').trim();
+
+    let rang='';
+    const rangM=label.match(/^([AB])\s*(QRM|QRU)/i);
+    if(rangM) rang=rangM[1].toUpperCase();
+    else {
+      const rb=body.match(/^(Rang\s*)?([AB])\b/);
+      if(rb && body.length<80){ /* ignore */ }
+    }
+    // ch20 often has "A QRM n" already; also "A" line before QRM in raw
+    if(!rang && /^[AB]\s/i.test(label)) rang=label[0].toUpperCase();
+
+    let type='QCM';
+    if(/KFP/i.test(label) || chId==='ch19') type='KFP';
+    else if(/Question\s+\d+/i.test(label) || chId==='ch18') type='MDP';
+    else if(/QRM|QRU/i.test(label) || chId==='ch20') type='QI';
+
+    // Options
+    let options=parseLetterOptions(body);
+    if(options.length<2) options=parseNumberedOptions(body);
+
+    // Stem = text before first option
+    let stem=body;
+    if(options.length){
+      const firstLabel=options[0].letter;
+      const isNum=/^\d+$/.test(firstLabel);
+      const cutRe=isNum
+        ? new RegExp('(?:^|\\s)'+firstLabel+'\\.\\s+')
+        : new RegExp('(?:^|\\s)'+firstLabel+'\\.\\s+');
+      const cut=stem.search(cutRe);
+      if(cut>0) stem=stem.slice(0, cut).trim();
+      else if(cut===0) stem='';
+    }
+    stem=stem.replace(/\s+/g,' ').trim();
+    // If stem empty for MDP Q2+, keep previous vignette context only in vignette field
+    let vignette='';
+    if(type==='MDP' && sharedVignette && items.length===0 && stem.length<40){
+      vignette=sharedVignette.replace(/\s+/g,' ').trim().slice(0,800);
+    }
+    // KFP: long clinical text before options is vignette
+    if(type==='KFP' && stem.length>120 && options.length){
+      // keep stem as question line if ends with ? else whole as vignette+stem
+      const qm=stem.lastIndexOf('?');
+      if(qm>40 && qm<stem.length-1){
+        vignette=stem.slice(0, qm+1).trim();
+        stem=stem.slice(qm+1).trim()||'Quelle(s) proposition(s) retenir ?';
+      } else {
+        vignette=stem;
+        stem='Sélectionnez la (les) proposition(s) pertinente(s)';
+      }
+    }
+    if(type==='MDP' && stem.length>180 && options.length){
+      const qm=stem.lastIndexOf('?');
+      if(qm>50){
+        vignette=(vignette?vignette+' ':'')+stem.slice(0, qm+1).trim();
+        stem=stem.slice(qm+1).trim()||'Quelle(s) est (sont) la (les) proposition(s) exacte(s) ?';
+      }
+    }
+
+    // Quality filter on options (drop OCR column-bleed garbage)
+    options = options.filter(o => {
+      const t = o.text.replace(/\s+/g,' ').trim();
+      if (t.length < 4) return false;
+      // mid-sentence bleed often starts lowercase without medical sense and is very long without verb markers — keep short clinical opts
+      if (/^(et |ou |de |du |des |la |le |les |un |une |au |aux )/i.test(t) && t.length < 12) return false;
+      if (/Mini-dossiers|Key-features|Questions isolées|Elsevier|droits réservés/i.test(t)) return false;
+      return true;
+    });
+
+    if(!stem && !options.length && !answer) continue;
+    if(!stem) stem = (type==='KFP')
+      ? 'Sélectionnez la (les) proposition(s) pertinente(s)'
+      : 'Quelle(s) est (sont) la (les) proposition(s) exacte(s) ?';
+
+    // Drop items that are clearly OCR wreckage
+    const stemOk = stem.length >= 12 && !/^(matiques|blématiques|pro-)$/i.test(stem);
+    if (!stemOk && options.length < 2) continue;
+
+    items.push({
+      label, type, rang, max, stem: stem.slice(0,500),
+      vignette: vignette.slice(0,900),
+      options: options.slice(0, 12),
+      answer: answer.slice(0,600)
+    });
+  }
+
+  // Fallback: if almost nothing parsed, chunk by Question/QRM still failed — return empty
+  return { intro: intro.slice(0,500), items };
+}
+
+function renderPracticeChapter(raw, chId){
+  const titles={
+    ch18:{ h:'Mini-dossiers progressifs', s:'Dossiers progressifs · questions enchaînées · mode entraînement' },
+    ch19:{ h:'Key-features problems', s:'Situations cliniques rang A · choix multiples (KFP)' },
+    ch20:{ h:'Questions isolées', s:'QRM / QRU isolées · rang A ou B indiqué' }
+  };
+  const meta=titles[chId]||{ h:'Entraînement', s:'' };
+  const { intro, items }=parsePracticeItems(raw, chId);
+
+  if(!items.length){
+    // Dernier recours : affichage structuré brut nettoyé (toujours mieux que le livre cassé)
+    const clean=cleanPracticeText(raw).split(/\n+/).filter(l=>l.trim().length>2);
+    return `<div class="practice-wrap">
+      <div class="practice-hero"><h2>${escHtml(meta.h)}</h2><p>${escHtml(meta.s)}</p>
+      <p class="practice-warn">Structure QCM incomplète dans la source OCR — affichage nettoyé.</p></div>
+      <div class="practice-fallback">${clean.slice(0,80).map(l=>`<p class="practice-line">${escHtml(l)}</p>`).join('')}</div>
+    </div>`;
+  }
+
+  const filters=`<div class="practice-toolbar">
+    <span class="practice-count">${items.length} item${items.length>1?'s':''}</span>
+    <button type="button" class="practice-tool-btn" onclick="revealAllPractice(true)">Tout corriger</button>
+    <button type="button" class="practice-tool-btn ghost" onclick="revealAllPractice(false)">Tout masquer</button>
+  </div>`;
+
+  const cards=items.map((it,i)=>renderQcmInteractiveCard(it,i)).join('');
+  const introHtml=intro && intro.length>40
+    ? `<div class="practice-intro">${escHtml(intro.slice(0,600))}</div>` : '';
+
+  return `<div class="practice-wrap" data-ch="${escHtml(chId)}">
+    <div class="practice-hero">
+      <div class="practice-kicker">Partie II · Entraînement</div>
+      <h2>${escHtml(meta.h)}</h2>
+      <p>${escHtml(meta.s)}</p>
+    </div>
+    ${introHtml}
+    ${filters}
+    <div class="practice-list">${cards}</div>
+  </div>`;
+}
+
+window.revealAllPractice=function(open){
+  document.querySelectorAll('.pqcm-answer').forEach(el=>{
+    if(open) el.removeAttribute('hidden'); else el.setAttribute('hidden','');
+  });
+  document.querySelectorAll('.pqcm-reveal').forEach(btn=>{
+    btn.textContent=open?'Masquer la correction':'Voir la correction';
+  });
+};
+
 function renderChapter(raw,chId){
+  // Practice chapters: dedicated interactive engine (fixes empty A./B. "book" garbage)
+  if(chId==='ch18'||chId==='ch19'||chId==='ch20'){
+    return renderPracticeChapter(raw, chId);
+  }
   const ch=APP_DATA.chapters.find(c=>c.id===chId);
   const titleRe=ch?new RegExp('^'+ch.t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\s*$','i'):null;
   
@@ -946,30 +1256,27 @@ function renderChapter(raw,chId){
   function flushQCM() {
     if (!inQCM) return;
     inQCM = false;
-    const stemText = qcmStem.join('<br>').trim();
-    if (!stemText && !qcmOpts.length) return;
-    let cardHtml = `<div class="qcm-card">`;
-    if (qcmMax) {
-      cardHtml += `<span class="qcm-badge">Maximum ${qcmMax}</span>`;
-    }
-    if (stemText) {
-      cardHtml += `<div class="qcm-stem">${replaceCitations(esc(stemText))}</div>`;
-    }
-    if (qcmOpts.length) {
-      cardHtml += `<ol class="qcm-options">`;
-      qcmOpts.forEach(opt => {
-        cardHtml += `<li>${replaceCitations(esc(opt))}</li>`;
-      });
-      cardHtml += `</ol>`;
-    }
-    cardHtml += `</div>`;
-    html += cardHtml;
+    const stemText = qcmStem.join(' ').replace(/\s+/g,' ').trim();
+    const cleanOpts = qcmOpts.map(o => String(o||'').replace(/\s+/g,' ').trim()).filter(o => o.length > 1);
+    if (!stemText && !cleanOpts.length) { qcmStem=[]; qcmOpts=[]; qcmMax=null; return; }
+    // Interactive-style card even in knowledge chapters
+    const tmp = {
+      label: 'QCM', type: 'QCM', max: qcmMax||'', stem: stemText,
+      options: cleanOpts.map((t,i)=>({ letter: String.fromCharCode(65+i), text: t })),
+      answer: ''
+    };
+    // Prefer letter labels if stem already had A. style absorbed into opts
+    html += renderQcmInteractiveCard(tmp, Math.floor(Math.random()*1e6));
     qcmStem = [];
     qcmOpts = [];
     qcmMax = null;
   }
 
   function splitOptions(line) {
+    // Support "1. foo 2. bar" AND "A. foo B. bar"
+    if (/(?:^|\s)[A-H]\.\s+/.test(line)) {
+      return parseLetterOptions(line).map(o => o.letter + '. ' + o.text);
+    }
     const parts = line.split(/(?=\b\d{1,2}\.\s+)/);
     const result = [];
     for (let part of parts) {
@@ -1015,13 +1322,9 @@ function renderChapter(raw,chId){
     if (pKey.length > 90 && seenParaKeys.has(pKey)) return;
     if (pKey.length > 90) seenParaKeys.add(pKey);
     const chip=rang?`<span class="rang-inline rang-${rang==="A"?"a":"b"}">Rang ${rang}</span>`:"";
-    let pClass = "";
-    if (inSection && !lettrinePlaced) {
-      pClass = ' class="has-lettrine"';
-      lettrinePlaced = true;
-    }
+    // Pas de lettrine « livre » — lecture type fiche d'étude
     let escaped = replaceCitations(esc(merged));
-    html+=`<div class="para-card">${chip}<p${pClass}>${escaped}</p></div>`;
+    html+=`<div class="para-card study-block">${chip}<p>${escaped}</p></div>`;
   }
 
   function flushBullets(){
@@ -1071,8 +1374,8 @@ function renderChapter(raw,chId){
     if(l === '▼'){flushPara();flushBullets();flushNumList();flushCallout();flushSituations();flushQCM();continue}
     if(!l){flushBullets();flushNumList();if(inCallout)flushCallout();continue}
 
-    // QCM Handling
-    const isQcmMarker = /^(Question\s+[A-Z0-9]|Réponse\s*:|QRM\s*\d|QRU\s*\d)/i.test(l);
+    // QCM Handling (knowledge chapters only — practice uses renderPracticeChapter)
+    const isQcmMarker = /^(Question\s+\d+|Réponse\s*:|[AB]\s*QRM\s*\d|QRM\s*\d|QRU\s*\d|KFP\s*\d)/i.test(l);
     if (isQcmMarker) {
       flushPara(); flushBullets(); flushNumList(); flushQCM();
       inQCM = true;
@@ -1082,15 +1385,16 @@ function renderChapter(raw,chId){
         qcmMax = maxM[1];
         targetL = targetL.replace(/\[maximum\s+\d+\]/i, '').trim();
       }
-      qcmStem.push(targetL);
+      if (!/^Réponse/i.test(targetL)) qcmStem.push(targetL);
       markBodyStart();
       continue;
     }
 
     if (inQCM) {
-      const isListItem = /^\d{1,2}\.\s+/.test(l);
-      const isMergedListItem = /\b\d{1,2}\.\s+/.test(l);
-      const isStructural = SECTION_RE.test(l) || LETTER_RE.test(l) || /^Situations?\s+de\s+départ/i.test(l) || /^Encadré\s+/i.test(l) || /^Tableau\s+/i.test(l) || /^Fig\.\s*\d/i.test(l) || RANG_RE.test(l);
+      const isListItem = /^\d{1,2}\.\s+/.test(l) || /^[A-H]\.\s+/.test(l);
+      const isMergedListItem = /\b\d{1,2}\.\s+\S/.test(l) || /\b[A-H]\.\s+\S/.test(l);
+      // LETTER_RE alone is NOT structural here — A./B. are options
+      const isStructural = SECTION_RE.test(l) || /^Situations?\s+de\s+départ/i.test(l) || /^Encadré\s+/i.test(l) || /^Tableau\s+/i.test(l) || /^Fig\.\s*\d/i.test(l) || RANG_RE.test(l) || /^(Question\s+\d+|KFP\s*\d|[AB]\s*QRM)/i.test(l);
 
       if (isListItem || isMergedListItem) {
         qcmOpts.push(...splitOptions(l));
@@ -1098,9 +1402,11 @@ function renderChapter(raw,chId){
         continue;
       } else if (isStructural) {
         flushQCM();
+        // fall through to reprocess line as normal structure
       } else {
         if (qcmOpts.length > 0) {
           flushQCM();
+          // fall through
         } else {
           qcmStem.push(l);
           markBodyStart();
