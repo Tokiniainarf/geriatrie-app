@@ -1,24 +1,20 @@
-const CACHE_NAME = 'geriatrie-v181';
+// Bump CACHE_NAME whenever core assets change so clients drop stale offline caches.
+const CACHE_NAME = 'geriatrie-v183';
+// Must match scripts actually loaded by index.html (post data-bundle architecture).
 const CORE = [
   './',
   './index.html',
   './style.css',
-  './app.js',
-  './data-bundle.js',
-  './appsearch.js',
-  './revision-aids.js',
-  './figures.js',
-  './dashboard.js',
-  './brainfeed.js',
-  './flashcards.js',
-  './graph.js',
-  './has-reco.js',
-  './quiz.js',
-  './annales-v2.js',
-  './interactive-figures.js',
-  './annales.js',
-  './calculateurs.js',
   './manifest.json',
+  './data-bundle.js',
+  './calculateurs.js',
+  './quiz.js',
+  './dashboard.js',
+  './appsearch.js',
+  './erreurs-journal.js',
+  './graph.js',
+  './brainfeed.js',
+  './app.js',
   './icons/icon-192.png',
   './icons/icon-512.png'
 ];
@@ -44,15 +40,24 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
-  // Always fetch from network first for HTML/JS/CSS
+  // Network-first for navigations & app shell; offline falls back to cache.
   e.respondWith(
     fetch(e.request).then(resp => {
-      if (resp.status === 200) {
+      if (resp && resp.status === 200 && (resp.type === 'basic' || resp.type === 'cors')) {
         const clone = resp.clone();
-        caches.open(CACHE_NAME).then(c => c.put(e.request, clone));
+        caches.open(CACHE_NAME).then(c => c.put(e.request, clone)).catch(() => {});
       }
       return resp;
-    }).catch(() => caches.match(e.request))
+    }).catch(async () => {
+      const cached = await caches.match(e.request);
+      if (cached) return cached;
+      // Offline navigation fallback to shell
+      if (e.request.mode === 'navigate') {
+        const shell = await caches.match('./index.html') || await caches.match('./');
+        if (shell) return shell;
+      }
+      return new Response('Offline', { status: 503, statusText: 'Offline' });
+    })
   );
 });
 

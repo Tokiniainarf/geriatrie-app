@@ -2838,15 +2838,23 @@ const Medicalcul = {
 
   init() {
     const searchInput = document.getElementById('calcSearch');
-    if (searchInput) {
-      searchInput.value = this.currentSearch;
-      // Remove any existing listener by cloning and replacing
-      const newSearch = searchInput.cloneNode(true);
-      searchInput.parentNode.replaceChild(newSearch, searchInput);
-      newSearch.addEventListener('input', (e) => {
-        this.currentSearch = e.target.value.toLowerCase().trim();
-        this.renderList();
-      });
+    if (searchInput && searchInput.parentNode) {
+      searchInput.value = this.currentSearch || '';
+      // Remove any existing listener by cloning and replacing (when cloneNode is available)
+      if (typeof searchInput.cloneNode === 'function') {
+        const newSearch = searchInput.cloneNode(true);
+        searchInput.parentNode.replaceChild(newSearch, searchInput);
+        newSearch.addEventListener('input', (e) => {
+          this.currentSearch = e.target.value.toLowerCase().trim();
+          this.renderList();
+        });
+      } else if (!searchInput._mcBound) {
+        searchInput._mcBound = true;
+        searchInput.addEventListener('input', (e) => {
+          this.currentSearch = e.target.value.toLowerCase().trim();
+          this.renderList();
+        });
+      }
     }
     this.renderList();
     this.showListContainer();

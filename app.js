@@ -7,24 +7,39 @@ const S={view:'home',ch:null,bm:safeJSON('gbm',[]),read:safeJSON('grd',[]),fs:pa
 let flashIdx=0,flashDeck=[],flashFilter='all';
 
 document.addEventListener('DOMContentLoaded',()=>{
-  preprocessAppData();
-  setFS(S.fs);setLH(S.lh,true);
-  const fsR=document.getElementById('fsRange');if(fsR)fsR.value=S.fs;
-  const lhR=document.getElementById('lhRange');if(lhR)lhR.value=S.lh;
-  document.documentElement.setAttribute('data-theme',S.th);
-  document.getElementById('fsVal').textContent=S.fs+'px';
-  document.getElementById('lhVal').textContent=S.lh;
-  renderHome();renderSynthesis();renderItems();renderFav();populateChapFilter();loadFlashDeck();updStats();
-  updateThemeIcon();
-  if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
-  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();window.deferredPrompt=e;const ib=document.getElementById('installB');if(ib)ib.style.display='flex'});
-  window.addEventListener('scroll',()=>{const f=document.getElementById('fab');if(f){if(window.scrollY>300){if(!f.classList.contains('show')){f.classList.add('show')}}else{f.classList.remove('show')}}
-    // Barre de progression de lecture
+  try{ preprocessAppData(); }catch(e){ console.error('[boot] preprocessAppData', e); }
+  setFS(S.fs); setLH(S.lh, true);
+  const fsR=document.getElementById('fsRange'); if(fsR) fsR.value=S.fs;
+  const lhR=document.getElementById('lhRange'); if(lhR) lhR.value=S.lh;
+  document.documentElement.setAttribute('data-theme', S.th);
+  try{
+    renderHome(); renderSynthesis(); renderItems(); renderFav();
+    populateChapFilter(); loadFlashDeck(); updStats(); updateThemeIcon();
+  }catch(e){ console.error('[boot] initial render', e); }
+  if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
+  window.addEventListener('beforeinstallprompt', e=>{
+    e.preventDefault();
+    window.deferredPrompt=e;
+    const ib=document.getElementById('installB');
+    if(ib) ib.style.display='flex';
+  });
+  window.addEventListener('scroll', ()=>{
+    const f=document.getElementById('fab');
+    if(f){
+      if(window.scrollY>300){ if(!f.classList.contains('show')) f.classList.add('show'); }
+      else f.classList.remove('show');
+    }
     const rp=document.getElementById('readingProgress');
-    if(rp){const h=document.documentElement.scrollHeight-window.innerHeight;const pct=h>0?Math.min(100,(window.scrollY/h)*100):0;rp.style.width=pct+'%';}
-    // Bouton retour en haut
+    if(rp){
+      const h=document.documentElement.scrollHeight-window.innerHeight;
+      const pct=h>0?Math.min(100,(window.scrollY/h)*100):0;
+      rp.style.width=pct+'%';
+    }
     const stb=document.getElementById('scrollTopBtn');
-    if(stb){if(window.scrollY>300)stb.classList.add('visible');else stb.classList.remove('visible');}
+    if(stb){
+      if(window.scrollY>300) stb.classList.add('visible');
+      else stb.classList.remove('visible');
+    }
   });
 });
 
@@ -65,7 +80,10 @@ function sw(view){
   }
   if(targetView==='proto')renderProto();
   if(targetView!=='quiz'&&typeof QuizMode!=='undefined')QuizMode.destroy();
-  if(targetView==='set'){document.getElementById('pd').textContent=`${S.read.length} chapitre${S.read.length>1?'s':''} consulté${S.read.length>1?'s':''}`}
+  if(targetView==='set'){
+    const pd=document.getElementById('pd');
+    if(pd) pd.textContent=`${S.read.length} chapitre${S.read.length>1?'s':''} consulté${S.read.length>1?'s':''}`;
+  }
 }
 
 function switchAnnalesMode(mode) {
@@ -292,28 +310,39 @@ function renderFav(){
 
 /* ── CHAPTER READING ── */
 function showCh(id){
-  const ch=APP_DATA.chapters.find(c=>c.id===id);if(!ch)return;
+  if(typeof APP_DATA==='undefined'||!APP_DATA.chapters) return;
+  const ch=APP_DATA.chapters.find(c=>c.id===id); if(!ch) return;
   S.ch=id;
-  if(!S.read.includes(id)){S.read.push(id);localStorage.setItem('grd',JSON.stringify(S.read));updStats()}
-  document.getElementById('chHero').style.background=`linear-gradient(145deg,${CH_COLORS[id]},#164E63)`;
-  document.getElementById('chNum').textContent=id.replace('ch','');
-  document.getElementById('chT').textContent=ch.t;
+  if(!S.read.includes(id)){ S.read.push(id); localStorage.setItem('grd',JSON.stringify(S.read)); updStats(); }
+  const heroEl=document.getElementById('chHero');
+  if(heroEl) heroEl.style.background=`linear-gradient(145deg,${CH_COLORS[id]||'#164E63'},#164E63)`;
+  const chNum=document.getElementById('chNum'); if(chNum) chNum.textContent=id.replace('ch','');
+  const chT=document.getElementById('chT'); if(chT) chT.textContent=ch.t;
   // Chapter hero image (AI-generated or fallback to PDF illustration)
-  const heroImg = (typeof CHAPTER_HERO!=='undefined'?CHAPTER_HERO[id]:null) || CHAPTER_ILL[id] || '';
-  const heroEl = document.getElementById('chHero');
-  const oldImg = heroEl.querySelector('.ch-hero-img');
-  if(oldImg) oldImg.remove();
-  if(heroImg){
-    const img = document.createElement('img');
-    img.className='ch-hero-img'; img.src=heroImg; img.alt=ch.t; img.loading='lazy';
-    img.onerror=function(){this.style.display='none'};
-    heroEl.insertBefore(img, heroEl.firstChild);
+  const heroImg =
+    (typeof CHAPTER_HERO!=='undefined' ? CHAPTER_HERO[id] : null) ||
+    (typeof CHAPTER_ILL!=='undefined' ? CHAPTER_ILL[id] : null) ||
+    '';
+  if(heroEl){
+    const oldImg=heroEl.querySelector('.ch-hero-img');
+    if(oldImg) oldImg.remove();
+    if(heroImg){
+      const img=document.createElement('img');
+      img.className='ch-hero-img'; img.src=heroImg; img.alt=ch.t; img.loading='lazy';
+      img.onerror=function(){ this.style.display='none'; };
+      heroEl.insertBefore(img, heroEl.firstChild);
+    }
   }
-  const tags=ch.items.map(i=>`<span class="tag">${i}</span>`).join('');
-  document.getElementById('chTags').innerHTML=tags+(S.read.includes(id)?'<span class="tag tag-read">Consulté</span>':'');
+  const tags=(ch.items||[]).map(i=>`<span class="tag">${i}</span>`).join('');
+  const chTags=document.getElementById('chTags');
+  if(chTags) chTags.innerHTML=tags+(S.read.includes(id)?'<span class="tag tag-read">Consulté</span>':'');
   const bmOn=S.bm.includes(id);
-  document.getElementById('chToolbar').innerHTML=`<button onclick="goHome()">Retour</button><button onclick="quickBm('${id}')">${bmOn?BM_SVG.on+' Retirer':BM_SVG.off+' Favori'}</button><button onclick="openNotes('${id}')">📝 Notes</button>`;
-  renderChapterContent();sw('ch');
+  const toolbar=document.getElementById('chToolbar');
+  if(toolbar){
+    toolbar.innerHTML=`<button onclick="goHome()">Retour</button><button onclick="quickBm('${id}')">${bmOn?BM_SVG.on+' Retirer':BM_SVG.off+' Favori'}</button><button onclick="openNotes('${id}')">📝 Notes</button>`;
+  }
+  renderChapterContent();
+  sw('ch');
 }
 function renderChapterContent(){
   const cc=document.getElementById('chContent');if(!cc)return;
@@ -1356,7 +1385,7 @@ function navigateToConcept(chId,search){
   });
 }
 window.navigateToConcept=navigateToConcept;
-function closeConceptModal(){document.getElementById('conceptModal').classList.remove('open')}
+function closeConceptModal(){ document.getElementById('conceptModal')?.classList.remove('open'); }
 
 /* ── DICTIONNAIRE MÉDICAL ── */
 const DICT_FAV_KEY='gdict_fav';
@@ -1974,8 +2003,8 @@ function renderFlashcard(){
   if(sess)sess.textContent=flashFilterLabel();
   if(!flashDeck.length){
     card.classList.add('flash-empty-state');
-    document.getElementById('flashCh').textContent='';
-    document.getElementById('flashRang').textContent='';
+    const flashCh=document.getElementById('flashCh'); if(flashCh) flashCh.textContent='';
+    const flashRang=document.getElementById('flashRang'); if(flashRang) flashRang.textContent='';
     const fq=document.getElementById('flashQ');
     if(fq){
       fq.innerHTML='';
@@ -1984,25 +2013,31 @@ function renderFlashcard(){
       empty.innerHTML='<div class="empty-icon">🎴</div><div class="empty-text">Aucune carte pour ce filtre</div><div class="empty-hint">Essayez « Tous » ou un autre rang</div>';
       fq.appendChild(empty);
     }
-    document.getElementById('flashA').textContent='';
-    document.getElementById('flashTags').innerHTML='';
-    document.getElementById('flashProg').textContent='0 / 0';
+    const flashA=document.getElementById('flashA'); if(flashA) flashA.textContent='';
+    const flashTags=document.getElementById('flashTags'); if(flashTags) flashTags.innerHTML='';
+    const flashProg=document.getElementById('flashProg'); if(flashProg) flashProg.textContent='0 / 0';
     return;
   }
   card.classList.remove('flash-empty-state');
   const c=flashDeck[flashIdx];
-  const chName=APP_DATA.chapters.find(ch=>ch.id===c.chapter)?.t||'';
-  document.getElementById('flashCh').textContent=chName;
+  if(!c) return;
+  const chapters=(typeof APP_DATA!=='undefined'&&APP_DATA.chapters)||[];
+  const chName=chapters.find(ch=>ch.id===c.chapter)?.t||'';
+  const flashCh=document.getElementById('flashCh'); if(flashCh) flashCh.textContent=chName;
   const r=document.getElementById('flashRang');
-  r.textContent='Rang '+c.rang;
-  r.className='flash-rang '+(c.rang==='A'?'rang-a':'rang-b');
+  if(r){
+    r.textContent='Rang '+(c.rang||'?');
+    r.className='flash-rang '+(c.rang==='A'?'rang-a':'rang-b');
+  }
   const fq=document.getElementById('flashQ');
-  if(fq)fq.textContent=c.question;
-  document.getElementById('flashA').textContent=c.answer;
-  document.getElementById('flashTags').innerHTML=(c.tags||[]).map(t=>'<span class="tag">'+t+'</span>').join('');
-  document.getElementById('flashProg').textContent=(flashIdx+1)+' / '+flashDeck.length;
-  card.classList.toggle('rev-rang-a',c.rang==='A');
-  card.classList.toggle('rev-rang-b',c.rang==='B');
+  if(fq) fq.textContent=c.question||'';
+  const flashA=document.getElementById('flashA'); if(flashA) flashA.textContent=c.answer||'';
+  const flashTags=document.getElementById('flashTags');
+  if(flashTags) flashTags.innerHTML=(c.tags||[]).map(t=>'<span class="tag">'+t+'</span>').join('');
+  const flashProg=document.getElementById('flashProg');
+  if(flashProg) flashProg.textContent=(flashIdx+1)+' / '+flashDeck.length;
+  card.classList.toggle('rev-rang-a', c.rang==='A');
+  card.classList.toggle('rev-rang-b', c.rang==='B');
 }
 function nextFlash(){if(!flashDeck.length)return;flashIdx=(flashIdx+1)%flashDeck.length;renderFlashcard()}
 function prevFlash(){if(!flashDeck.length)return;flashIdx=(flashIdx-1+flashDeck.length)%flashDeck.length;renderFlashcard()}
@@ -2452,8 +2487,21 @@ function renderItems(){
 }
 
 /* ── SETTINGS ── */
-function setFS(v){S.fs=+v;document.body.style.fontSize=v+'px';localStorage.setItem('gfs',v);document.getElementById('fsVal').textContent=v+'px'}
-function setLH(v,init){S.lh=parseFloat(v);document.documentElement.style.setProperty('--lh',S.lh);document.body.style.lineHeight=String(S.lh);if(!init)localStorage.setItem('glh',v);document.getElementById('lhVal').textContent=v}
+function setFS(v){
+  S.fs=+v||18;
+  if(document.body) document.body.style.fontSize=S.fs+'px';
+  try{ localStorage.setItem('gfs', String(S.fs)); }catch{}
+  const el=document.getElementById('fsVal');
+  if(el) el.textContent=S.fs+'px';
+}
+function setLH(v,init){
+  S.lh=parseFloat(v)||1.7;
+  try{ document.documentElement.style.setProperty('--lh', String(S.lh)); }catch{}
+  if(document.body) document.body.style.lineHeight=String(S.lh);
+  if(!init){ try{ localStorage.setItem('glh', String(S.lh)); }catch{} }
+  const el=document.getElementById('lhVal');
+  if(el) el.textContent=String(S.lh);
+}
 function resetProg(){if(confirm('Réinitialiser les chapitres consultés ?')){S.read=[];localStorage.setItem('grd','[]');renderHome();updStats();toast('Progression réinitialisée')}}
 function clearAll(){if(confirm('Effacer toutes les données ?')){S.bm=[];S.read=[];localStorage.clear();renderHome();renderFav();updStats();toast('Données effacées')}}
 function updStats(){
