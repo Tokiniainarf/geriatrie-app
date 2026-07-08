@@ -3467,28 +3467,40 @@ function itemRangClass(itemStr){
 }
 function renderItems(){
   const list=document.getElementById('itemsList');if(!list)return;
+  // ITEMs EDN = index des codes ITEM du manuel (pas un doublon de l'accueil).
+  // Accueil = lecture chapitres ; ici = codes ITEM → objectifs → ouvrir le cours.
   const rows=[];
-  APP_DATA.chapters.filter(ch=>ch.items.length>0).forEach(ch=>{
-    ch.items.forEach(item=>{
+  ((typeof APP_DATA!=='undefined'&&APP_DATA.chapters)||[]).forEach(ch=>{
+    (ch.items||[]).forEach(item=>{
       rows.push({item,ch});
     });
   });
+  // Enrich with ITEMS_EVC entries not already listed
+  if (typeof ITEMS_EVC !== 'undefined' && Array.isArray(ITEMS_EVC)) {
+    const seen = new Set(rows.map(r=>String(r.item).toLowerCase()));
+    ITEMS_EVC.forEach(it=>{
+      const label = it.id || it.titre || '';
+      const key = String(label).toLowerCase();
+      if (!key || seen.has(key) || seen.has('item '+key)) return;
+      rows.push({item: it.titre ? (it.id||'')+' — '+it.titre : label, ch: null, evc: it});
+    });
+  }
   if(!rows.length){
-    list.innerHTML='<div class="empty"><div class="empty-icon">📌</div><div class="empty-text">Aucun objectif ITEM référencé</div><div class="empty-hint">Les ITEMs apparaissent au fil des chapitres</div></div>';
+    list.innerHTML='<div class="empty"><div class="empty-icon">📌</div><div class="empty-text">Aucun code ITEM dans le manuel</div><div class="empty-hint">Les ITEMs sont les objectifs EDN/R2C rattachés aux chapitres — ouvrez un chapitre depuis l\'accueil pour le cours complet</div></div>';
     return;
   }
-  list.innerHTML='';
-  rows.forEach(({item,ch},i)=>{
+  list.innerHTML='<div class="src-note" style="margin-bottom:12px">Index des <strong>codes ITEM EDN</strong> cités dans le manuel (ex. ITEM 123). Ce n\'est pas la liste des chapitres : l\'accueil sert à lire le cours ; ici vous retrouvez l\'objectif pédagogique et le chapitre lié.</div>';
+  rows.forEach(({item,ch,evc},i)=>{
     const el=document.createElement('div');
     el.className='item-card item-card-enter';
-    el.style.animationDelay=(i*0.03)+'s';
-    el.onclick=()=>showCh(ch.id);
+    el.style.animationDelay=(i*0.02)+'s';
+    if(ch) el.onclick=()=>showCh(ch.id);
     const rc=itemRangClass(item);
     
-    let matched = null;
-    if (typeof ITEMS_EVC !== 'undefined') {
-      const seekId = item.toLowerCase().replace(/\s+/g, '-');
-      matched = ITEMS_EVC.find(x => x.id === seekId || x.id.startsWith(seekId + '-'));
+    let matched = evc || null;
+    if (!matched && typeof ITEMS_EVC !== 'undefined') {
+      const seekId = String(item).toLowerCase().replace(/\s+/g, '-');
+      matched = ITEMS_EVC.find(x => x.id === seekId || (x.id&&seekId.includes(x.id)) || x.id.startsWith(seekId + '-'));
     }
 
     let objectivesHtml = '';
@@ -3501,15 +3513,15 @@ function renderItems(){
         </div>`;
     }
 
-    const itemTitle = matched ? matched.titre : ch.t;
+    const itemTitle = matched && matched.titre ? matched.titre : (ch ? ch.t : '');
     el.innerHTML=`
       <div class="item-title">
         <span class="rang-badge ${rc || 'rang-a'}">${esc(item)}</span>
-        <span class="item-ch-title">${esc(itemTitle)}</span>
+        ${itemTitle?`<span class="item-ch-title">${esc(itemTitle)}</span>`:''}
       </div>
       ${objectivesHtml}
       <div class="item-desc" style="margin-top: 6px; font-size: 0.78rem; text-align: right; color: var(--text2);">
-        Chapitre ${ch.id.replace('ch','')} : ${esc(ch.t)} — Lire le cours ➔
+        ${ch?`Chapitre ${ch.id.replace('ch','')} : ${esc(ch.t)} — Ouvrir le cours ➔`:'Objectif EDN'}
       </div>`;
     list.appendChild(el);
   });
