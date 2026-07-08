@@ -4511,3 +4511,123 @@ button:disabled { opacity: .45; cursor: not-allowed; }
   font-size: .9rem; line-height: 1.5; margin: 0 0 8px; color: var(--text2);
 }
 #vCh .ch-content.practice-reader { padding-top: 4px; }
+
+/* ── v187 dense study + practice OCR polish ── */
+.toolbar-dense {
+  min-height: 40px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  background: var(--bg-card);
+  font-weight: 700;
+  font-size: .8rem;
+  color: var(--text2);
+}
+.toolbar-dense.active {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.toolbar-dense.ghost { opacity: .9; }
+
+.ch-outline-sticky {
+  position: sticky;
+  top: calc(var(--topbar) + 52px);
+  z-index: 25;
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  padding: 10px 12px;
+  margin: 0 0 16px;
+  box-shadow: var(--shadow-card);
+  max-height: 42vh;
+  overflow: auto;
+}
+.ch-outline-sticky.collapsed .outline-list { display: none; }
+.outline-hd {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: .72rem; font-weight: 800; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--text3); margin-bottom: 8px;
+}
+.outline-toggle {
+  font-size: .72rem; font-weight: 700; color: var(--accent); padding: 4px 8px;
+}
+.outline-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.outline-link {
+  display: flex; gap: 8px; align-items: baseline;
+  padding: 8px 10px; border-radius: 10px; min-height: 40px;
+  color: var(--text2); text-decoration: none; font-size: .88rem; line-height: 1.3;
+  border: 1px solid transparent;
+}
+.outline-link:hover {
+  background: var(--accent-soft); color: var(--accent); border-color: var(--glass-border);
+}
+.manual-section.sec-flash {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 12px;
+  transition: outline-color .8s;
+}
+
+.key-panel {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent-cta) 12%, var(--bg-card)), var(--bg-card));
+  border: 1px solid var(--glass-border);
+  border-left: 4px solid var(--accent-cta);
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin: 0 0 16px;
+  box-shadow: var(--shadow-card);
+}
+.key-panel-hd {
+  font-size: .75rem; font-weight: 800; letter-spacing: .05em;
+  text-transform: uppercase; color: var(--accent-cta); margin-bottom: 8px;
+}
+.key-panel-list {
+  margin: 0; padding-left: 1.1rem;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.key-panel-list li {
+  font-size: .88rem; line-height: 1.4; color: var(--text);
+}
+
+/* Dense mode: compact study cards, less “book” air */
+.study-reader.dense-mode {
+  font-size: 0.92rem !important;
+  line-height: 1.5 !important;
+  max-width: 38rem;
+}
+.study-reader.dense-mode .para-card.study-block {
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  border-radius: 10px;
+}
+.study-reader.dense-mode .manual-section { margin: 0.85rem 0; }
+.study-reader.dense-mode .section-head {
+  padding: 8px 10px;
+  margin-bottom: 8px;
+}
+.study-reader.dense-mode .section-title { font-size: 1rem; }
+.study-reader.dense-mode .sub-head {
+  margin: 12px 0 8px;
+  font-size: .95rem;
+  padding-bottom: 2px;
+}
+.study-reader.dense-mode .edu-visual-wrapper { display: none !important; }
+.study-reader.dense-mode .bullet-card,
+.study-reader.dense-mode .reader-list-card {
+  padding: 10px 12px;
+  margin: 8px 0;
+}
+.study-reader.dense-mode .ch-outline-sticky {
+  max-height: 28vh;
+  padding: 8px 10px;
+}
+.study-reader .section-head {
+  scroll-margin-top: calc(var(--topbar) + 100px);
+}
+
+/* Practice cards slightly denser after OCR cleanup */
+.practice-reader .pqcm-card { padding: 12px; }
+.practice-reader .pqcm-stem { font-size: .95rem; }
+.practice-reader .pqcm-opt { padding: 8px 10px; gap: 8px; }
+.practice-reader .pqcm-vignette { font-size: .85rem; padding: 8px 10px; }

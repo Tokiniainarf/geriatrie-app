@@ -363,18 +363,44 @@ function showCh(id){
   const chTags=document.getElementById('chTags');
   if(chTags) chTags.innerHTML=tags+(S.read.includes(id)?'<span class="tag tag-read">Consulté</span>':'');
   const bmOn=S.bm.includes(id);
+  const isPractice = id==='ch18'||id==='ch19'||id==='ch20';
+  const denseOn = localStorage.getItem('gdense') !== '0';
   const toolbar=document.getElementById('chToolbar');
   if(toolbar){
-    toolbar.innerHTML=`<button type="button" onclick="goHome()" aria-label="Retour à l'accueil">← Retour</button><button type="button" onclick="quickBm('${id}')" aria-label="Favori">${bmOn?BM_SVG.on+' Retirer':BM_SVG.off+' Favori'}</button><button type="button" onclick="openNotes('${id}')" aria-label="Notes">Notes</button>`;
+    toolbar.innerHTML =
+      `<button type="button" onclick="goHome()" aria-label="Retour à l'accueil">← Retour</button>`+
+      `<button type="button" onclick="quickBm('${id}')" aria-label="Favori">${bmOn?BM_SVG.on+' Retirer':BM_SVG.off+' Favori'}</button>`+
+      `<button type="button" onclick="openNotes('${id}')" aria-label="Notes">Notes</button>`+
+      (isPractice ? '' :
+        `<button type="button" id="btnDense" class="toolbar-dense${denseOn?' active':''}" onclick="toggleDenseMode()" aria-pressed="${denseOn?'true':'false'}">${denseOn?'Dense ✓':'Mode dense'}</button>`+
+        `<button type="button" class="toolbar-dense ghost" onclick="scrollToKeyPanel()">Points clés</button>`);
   }
   renderChapterContent();
   sw('ch');
-  // Soft scroll reset into reader content after paint
   requestAnimationFrame(() => {
     const cc = document.getElementById('chContent');
     if (cc) cc.setAttribute('tabindex', '-1');
   });
 }
+
+window.toggleDenseMode = function(){
+  const next = localStorage.getItem('gdense') === '0' ? '1' : '0';
+  localStorage.setItem('gdense', next);
+  const cc = document.getElementById('chContent');
+  const btn = document.getElementById('btnDense');
+  const on = next !== '0';
+  if (cc) cc.classList.toggle('dense-mode', on);
+  if (btn) {
+    btn.classList.toggle('active', on);
+    btn.textContent = on ? 'Dense ✓' : 'Mode dense';
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+  }
+};
+window.scrollToKeyPanel = function(){
+  const el = document.querySelector('.key-panel, .ch-outline-sticky');
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
+
 function renderChapterContent(){
   const cc=document.getElementById('chContent');if(!cc)return;
   if(typeof APP_DATA==='undefined'||!APP_DATA.content){
@@ -386,12 +412,15 @@ function renderChapterContent(){
     cc.innerHTML='<div class="empty"><div class="empty-icon">📖</div><div class="empty-text">Contenu indisponible</div><div class="empty-hint">Ce chapitre sera bientôt disponible</div></div>';
     return;
   }
-  // Join pages with soft breaks — avoid noisy page markers that fragment reading
-  const raw = chunks.map((c, idx) => {
+  // Practice chapters: unweave each page before join to limit column bleed across pages
+  const isPractice = S.ch==='ch18'||S.ch==='ch19'||S.ch==='ch20';
+  const raw = chunks.map((c) => {
     let t = String(c[1] || '').trim();
     if (!t) return '';
-    // Drop pure blank-page placeholders from reader body
     if (/^this page intentionally left blank$/i.test(t)) return '';
+    if (isPractice && typeof unweaveTwoColumnOCR === 'function') {
+      try { t = unweaveTwoColumnOCR(t); } catch (_) {}
+    }
     return t;
   }).filter(Boolean).join('\n\n');
   try {
@@ -401,15 +430,34 @@ function renderChapterContent(){
     cc.innerHTML = '<div class="empty"><div class="empty-text">Erreur de rendu</div><div class="empty-hint">'+String(e.message||e)+'</div></div>';
     return;
   }
-  // Mode lecture étude (anti-livre) + mode entraînement
   cc.classList.add('study-reader');
-  if (S.ch === 'ch18' || S.ch === 'ch19' || S.ch === 'ch20') {
+  if (isPractice) {
     cc.classList.add('practice-reader');
-    cc.classList.remove('study-reader');
+    cc.classList.remove('study-reader', 'dense-mode');
   } else {
     cc.classList.remove('practice-reader');
+    const denseOn = localStorage.getItem('gdense') !== '0';
+    cc.classList.toggle('dense-mode', denseOn);
     applyConceptLinks();
     injectEducationalVisuals(S.ch, cc);
+    // Smooth outline anchors
+    cc.querySelectorAll('.outline-link').forEach(a => {
+      if (!a || typeof a.addEventListener !== 'function') return;
+      a.addEventListener('click', (ev) => {
+        const id = (a.getAttribute && a.getAttribute('href') || '').slice(1);
+        const target = id && document.getElementById(id);
+        if (target) {
+          if (ev && ev.preventDefault) ev.preventDefault();
+          if (typeof target.scrollIntoView === 'function') {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+          if (target.classList && target.classList.add) {
+            target.classList.add('sec-flash');
+            setTimeout(() => target.classList.remove && target.classList.remove('sec-flash'), 1200);
+          }
+        }
+      });
+    });
   }
 }
 
@@ -695,6 +743,12 @@ if (typeof APP_DATA !== 'undefined' && (typeof document === 'undefined' || !docu
   preprocessAppData();
 }
 
+function hashStr(s){
+  let h=0; const t=String(s||'');
+  for(let i=0;i<t.length;i++){ h=((h<<5)-h)+t.charCodeAt(i); h|=0; }
+  return h;
+}
+
 /* ── Entraînement ch18–20 : parser QCM/KFP/MDP dédié (pas le rendu « livre ») ── */
 function escHtml(s){
   return String(s||'')
@@ -708,7 +762,7 @@ function cleanPracticeText(t){
     .replace(/([a-zà-öø-ÿœæ]{2,})-\s*\n\s*([a-zà-öø-ÿœæ]{2,})/gi,'$1$2')
     .replace(/([a-zà-öø-ÿœæ]{2,})-\s+([a-zà-öø-ÿœæ]{2,})/gi,'$1$2')
     // strip running headers
-    .replace(/^(Mini-dossiers progressifs|Key-features problems|Questions isolées|Gériatrie|Connaissances|Entraînement)\s*/gim,'')
+    .replace(/^(Mini-dossiers progressifs|Key-features problems|Questions isolées|Gériatrie|Connaissances|Entraînement|Énoncés et questions)\s*/gim,'')
     .replace(/©\s*\d{4}[^\n]*Elsevier[^\n]*/gi,'')
     .replace(/Tous droits réservés[^\n]*/gi,'')
     .replace(/This page intentionally left blank/gi,'')
@@ -718,53 +772,169 @@ function cleanPracticeText(t){
     .trim();
 }
 
-/** Split a block into letter options A–E (and optional F–H) */
+/**
+ * Unweave two-column OCR typical of Elsevier training pages:
+ * left column vignette/stem interleaved with right column options A–E.
+ * Rebuilds a linear stream: markers → narrative → options → réponses.
+ */
+function unweaveTwoColumnOCR(raw){
+  let t = cleanPracticeText(raw);
+  // Force structural tokens onto their own lines
+  t = t
+    .replace(/\b(Question\s+\d+)\b/gi, '\n$1\n')
+    .replace(/\b(KFP\s*\d+)\b/gi, '\n$1\n')
+    .replace(/\b([AB])\s*(QRM|QRU)\s*(\d+)\b/gi, '\n$1 $2 $3\n')
+    .replace(/\b(QRM|QRU)\s*(\d+)\b/gi, '\n$1 $2\n')
+    .replace(/\b(R[eé]ponses?\s*:)/gi, '\n$1\n')
+    .replace(/(?:^|\s)([A-H])\.\s+/g, '\n$1. ')
+    .replace(/(?:^|\s)(\d{1,2})\.\s+(?=[A-Za-zÀ-ÿ(])/g, '\n$1. ');
+
+  const lines = t.split(/\n/).map(l => l.trim()).filter(l => {
+    if (!l) return false;
+    if (/^(Mini-dossiers|Key-features|Questions isolées|Gériatrie|Connaissances|Énoncés)/i.test(l)) return false;
+    if (/^Les (key-features|questions isolées) concernent/i.test(l)) return false;
+    return true;
+  });
+
+  const out = [];
+  let narr = [];
+  let opts = [];
+  let mode = 'narr';
+
+  const flushNarr = () => {
+    if (!narr.length) return;
+    let s = narr.join(' ').replace(/\s+/g, ' ').trim();
+    // Drop pure intro boilerplate
+    if (s && !/^(Les key-features|Les questions isolées|Mini-dossiers|Le rang est|Ils s'appuient)/i.test(s)) {
+      out.push(s);
+    }
+    narr = [];
+  };
+  const flushOpts = () => {
+    if (!opts.length) return;
+    // Keep first complete A→E (or 1→5) chain; if second A appears, already flushed earlier
+    out.push(...opts);
+    opts = [];
+  };
+
+  const isMarker = (l) => /^(Question\s+\d+|KFP\s*\d+|[AB]\s*QRM\s*\d+|[AB]\s*QRU\s*\d+|QRM\s*\d+|QRU\s*\d+)/i.test(l);
+  const isAnswer = (l) => /^R[eé]ponses?\s*:/i.test(l);
+  const isOpt = (l) => /^([A-H])\.\s+\S/.test(l) || /^(\d{1,2})\.\s+\S/.test(l);
+
+  for (let l of lines) {
+    // Detox overlong option lines (column bleed): keep head, push rest as narrative
+    if (isOpt(l) && l.length > 170) {
+      const head = l.slice(0, 150);
+      const cut = Math.max(head.lastIndexOf('. '), head.lastIndexOf(', '), head.lastIndexOf(' ; '));
+      if (cut > 30) {
+        const rest = l.slice(cut + 1).trim();
+        l = l.slice(0, cut + (l[cut] === '.' ? 1 : 0)).trim();
+        if (rest.length > 20) narr.push(rest);
+      }
+    }
+
+    if (isMarker(l)) {
+      flushNarr(); flushOpts();
+      out.push(l.replace(/\s+/g, ' ').trim());
+      mode = 'narr';
+      continue;
+    }
+    if (isAnswer(l)) {
+      flushNarr(); flushOpts();
+      out.push(l);
+      mode = 'ans';
+      continue;
+    }
+    if (isOpt(l)) {
+      // New option set starting at A/1 while we already have E/5 → close previous
+      if (opts.length && (/^A\.\s/i.test(l) || /^1\.\s/.test(l)) && opts.some(o => /^[E5]\.\s/i.test(o))) {
+        flushNarr(); flushOpts();
+      }
+      // Merge continuation: if previous opt exists and this looks like wrong letter repeat from 2nd set mid-way
+      opts.push(l.replace(/\s+/g, ' ').trim());
+      mode = 'opt';
+      continue;
+    }
+    // Narrative / stem / vignette
+    if (mode === 'opt' && opts.length >= 3 && l.length > 50 && /[a-zà-ÿ]{5,}/i.test(l) && /\?/.test(l)) {
+      // Likely next question stem leaking after options
+      flushOpts();
+      mode = 'narr';
+    }
+    if (mode === 'ans') {
+      out.push(l);
+      continue;
+    }
+    // Skip tiny OCR crumbs
+    if (l.length < 3) continue;
+    if (/^(matiques|blématiques|pro-|gine)$/i.test(l)) continue;
+    narr.push(l);
+    mode = 'narr';
+  }
+  flushNarr(); flushOpts();
+  return out.join('\n');
+}
+
+/** Line-based letter options A–H (handles multi-line continuations) */
 function parseLetterOptions(block){
-  const opts=[];
-  // Split keeping delimiters A. B. C. ...
-  const re=/(?:^|\s)([A-H])\.\s+/g;
-  const parts=[];
-  let m, last=0, labels=[];
-  const src=' '+block.replace(/\n/g,' ');
-  while((m=re.exec(src))!==null){
-    if(labels.length){
-      parts.push(src.slice(last, m.index).trim());
-    }
-    labels.push(m[1]);
-    last=m.index+m[0].length;
+  const lines = String(block||'').replace(/\r/g,'').split(/\n/).map(l=>l.trim()).filter(Boolean);
+  // If single blob, also split inline A. B.
+  let expanded = [];
+  for (const l of lines) {
+    if ((l.match(/\b[A-H]\.\s+/g)||[]).length >= 2) {
+      expanded.push(...l.split(/(?=\b[A-H]\.\s+)/).map(x=>x.trim()).filter(Boolean));
+    } else expanded.push(l);
   }
-  if(labels.length){
-    parts.push(src.slice(last).trim());
-    for(let i=0;i<labels.length;i++){
-      let text=parts[i]||'';
-      // cut trailing answer keys / next question noise
-      text=text.replace(/\s*(Réponse|Correction|Question\s+\d+|KFP\s*\d+|[AB]\s*QRM\s*\d+).*$/i,'').trim();
-      if(text.length>1) opts.push({ letter: labels[i], text });
+  const opts = [];
+  let cur = null;
+  for (const l of expanded) {
+    const m = l.match(/^([A-H])\.\s+(.+)$/);
+    if (m) {
+      if (cur) opts.push(cur);
+      let text = m[2].replace(/\s*(Réponse|Correction|Question\s+\d+|KFP\s*\d+|[AB]\s*QRM).*$/i,'').trim();
+      // Cap option length (bleed)
+      if (text.length > 220) {
+        const c = text.slice(0, 200).lastIndexOf('. ');
+        text = text.slice(0, c > 40 ? c + 1 : 200).trim();
+      }
+      cur = { letter: m[1], text };
+    } else if (cur && !/^(Question|KFP|QRM|QRU|Réponse)/i.test(l) && !/^\d{1,2}\.\s/.test(l) && l.length < 90) {
+      cur.text = (cur.text + ' ' + l).replace(/\s+/g,' ').trim();
     }
   }
-  return opts;
+  if (cur) opts.push(cur);
+  // Dedup by letter keeping longest text
+  const byL = new Map();
+  for (const o of opts) {
+    const prev = byL.get(o.letter);
+    if (!prev || o.text.length > prev.text.length) byL.set(o.letter, o);
+  }
+  return [...byL.values()].sort((a,b) => a.letter.localeCompare(b.letter));
 }
 
 /** Numbered options 1. 2. 3. (KFP style) */
 function parseNumberedOptions(block){
-  const opts=[];
-  const re=/(?:^|\s)(\d{1,2})\.\s+/g;
-  const src=' '+block.replace(/\n/g,' ');
-  let m, last=0, nums=[];
-  const parts=[];
-  while((m=re.exec(src))!==null){
-    if(nums.length) parts.push(src.slice(last, m.index).trim());
-    nums.push(m[1]);
-    last=m.index+m[0].length;
+  const lines = String(block||'').replace(/\r/g,'').split(/\n/).map(l=>l.trim()).filter(Boolean);
+  let expanded = [];
+  for (const l of lines) {
+    if ((l.match(/\b\d{1,2}\.\s+/g)||[]).length >= 2) {
+      expanded.push(...l.split(/(?=\b\d{1,2}\.\s+)/).map(x=>x.trim()).filter(Boolean));
+    } else expanded.push(l);
   }
-  if(nums.length){
-    parts.push(src.slice(last).trim());
-    for(let i=0;i<nums.length;i++){
-      let text=(parts[i]||'').replace(/\s*\[maximum\s+\d+\]\s*/i,'').trim();
-      text=text.replace(/\s*(Réponse|Correction|KFP\s*\d+|Question\s+\d+).*$/i,'').trim();
-      if(text.length>1) opts.push({ letter: nums[i], text });
+  const opts = [];
+  let cur = null;
+  for (const l of expanded) {
+    const m = l.match(/^(\d{1,2})\.\s+(.+)$/);
+    if (m) {
+      if (cur) opts.push(cur);
+      let text = m[2].replace(/\s*\[maximum\s+\d+\]\s*/i,'').replace(/\s*(Réponse|KFP\s*\d+|Question\s+\d+).*$/i,'').trim();
+      if (text.length > 220) text = text.slice(0, 200).trim();
+      cur = { letter: m[1], text };
+    } else if (cur && !/^(Question|KFP|QRM|Réponse)/i.test(l) && !/^[A-H]\.\s/.test(l) && l.length < 90) {
+      cur.text = (cur.text + ' ' + l).replace(/\s+/g,' ').trim();
     }
   }
+  if (cur) opts.push(cur);
   return opts;
 }
 
@@ -821,13 +991,13 @@ window.togglePracticeAnswer=function(id){
 };
 
 function parsePracticeItems(raw, chId){
-  let text=cleanPracticeText(raw);
-  // Normalize common markers onto own lines for splitting
-  text=text
-    .replace(/\b(Question\s+\d+)\b/gi,'\n@@@$1\n')
-    .replace(/\b(KFP\s*\d+)\b/gi,'\n@@@$1\n')
-    .replace(/\b([AB])\s*(QRM|QRU)\s*(\d+)\b/gi,'\n@@@$1 $2 $3\n')
-    .replace(/\b(QRM|QRU)\s*(\d+)\b/gi,'\n@@@$1 $2\n');
+  // Two-column deinterleave first, then split on question markers
+  let text = unweaveTwoColumnOCR(raw);
+  text = text
+    .replace(/^(Question\s+\d+)\b/gim, '\n@@@$1')
+    .replace(/^(KFP\s*\d+)\b/gim, '\n@@@$1')
+    .replace(/^([AB])\s*(QRM|QRU)\s*(\d+)\b/gim, '\n@@@$1 $2 $3')
+    .replace(/^(QRM|QRU)\s*(\d+)\b/gim, '\n@@@$1 $2');
 
   const chunks=text.split(/\n@@@/).map(s=>s.trim()).filter(Boolean);
   const items=[];
@@ -871,23 +1041,29 @@ function parsePracticeItems(raw, chId){
     else if(/Question\s+\d+/i.test(label) || chId==='ch18') type='MDP';
     else if(/QRM|QRU/i.test(label) || chId==='ch20') type='QI';
 
-    // Options
+    // Options (line-based after unweave)
     let options=parseLetterOptions(body);
     if(options.length<2) options=parseNumberedOptions(body);
 
-    // Stem = text before first option
-    let stem=body;
-    if(options.length){
-      const firstLabel=options[0].letter;
-      const isNum=/^\d+$/.test(firstLabel);
-      const cutRe=isNum
-        ? new RegExp('(?:^|\\s)'+firstLabel+'\\.\\s+')
-        : new RegExp('(?:^|\\s)'+firstLabel+'\\.\\s+');
-      const cut=stem.search(cutRe);
-      if(cut>0) stem=stem.slice(0, cut).trim();
-      else if(cut===0) stem='';
+    // Stem = lines that are NOT options
+    let stemLines = body.split(/\n/).map(l=>l.trim()).filter(Boolean).filter(l => {
+      if (/^[A-H]\.\s+\S/.test(l)) return false;
+      const nm = l.match(/^(\d{1,2})\.\s+\S/);
+      if (nm && options.some(o => o.letter === nm[1])) return false;
+      if (/^R[eé]ponse/i.test(l)) return false;
+      return true;
+    });
+    let stem = stemLines.join(' ').replace(/\s+/g,' ').trim();
+    // Fallback: cut before first option in blob
+    if(!stem && options.length){
+      const cut=body.search(/(?:^|\n)\s*[A-H1-9]\.\s+/);
+      if(cut>0) stem=body.slice(0,cut).replace(/\s+/g,' ').trim();
     }
-    stem=stem.replace(/\s+/g,' ').trim();
+    // Strip residual option letters inside stem
+    stem = stem.replace(/\s+[A-H]\.\s+[A-Za-zÀ-ÿ][^.]{0,80}/g, m => {
+      // keep if looks like sentence mid, drop if classic option
+      return m.length < 100 ? '' : m;
+    }).replace(/\s+/g,' ').trim();
     // If stem empty for MDP Q2+, keep previous vignette context only in vignette field
     let vignette='';
     if(type==='MDP' && sharedVignette && items.length===0 && stem.length<40){
@@ -928,12 +1104,33 @@ function parsePracticeItems(raw, chId){
       ? 'Sélectionnez la (les) proposition(s) pertinente(s)'
       : 'Quelle(s) est (sont) la (les) proposition(s) exacte(s) ?';
 
-    // Drop items that are clearly OCR wreckage
-    const stemOk = stem.length >= 12 && !/^(matiques|blématiques|pro-)$/i.test(stem);
+    // Detox stem: pull real question phrase out of column-bleed preamble
+    const qIdx = stem.search(/quel(?:le)?\(s\)|parmi\s+(ces|les)|indiquez|concernant\s+[a-zà-ÿ]|que\s+pouvez|que\s+faut/i);
+    if (qIdx > 15) {
+      const head = stem.slice(0, qIdx).trim();
+      if (head.length > 20 && !vignette) vignette = head.slice(0, 400);
+      stem = stem.slice(qIdx).trim();
+    }
+    // Drop pure OCR crumbs
+    if (/^(matiques|blématiques|pro-|gine)\b/i.test(stem)) {
+      stem = options.length
+        ? (type === 'KFP' ? 'Sélectionnez la (les) proposition(s) pertinente(s)' : 'Quelle(s) est (sont) la (les) proposition(s) exacte(s) ?')
+        : '';
+    }
+    const stemOk = stem.length >= 12;
     if (!stemOk && options.length < 2) continue;
+    if (options.length < 2 && !answer && stem.length < 40) continue;
+
+    // Prefer sequential option letters A,B,C… (drop orphaned mid-alphabet sets without A)
+    if (options.length >= 2 && options.every(o => /[A-H]/.test(o.letter))) {
+      if (!options.some(o => o.letter === 'A') && options.some(o => o.letter === 'C' || o.letter === 'D')) {
+        // keep but try renumber? better drop incomplete bleed sets with < 3
+        if (options.length < 3) continue;
+      }
+    }
 
     items.push({
-      label, type, rang, max, stem: stem.slice(0,500),
+      label, type, rang, max, stem: (stem || label).slice(0,500),
       vignette: vignette.slice(0,900),
       options: options.slice(0, 12),
       answer: answer.slice(0,600)
@@ -1539,7 +1736,8 @@ function renderChapter(raw,chId){
         markBodyStart();
       }
       flushPara();flushBullets();flushNumList();closeSection();
-      html+=`<section class="manual-section"><header class="section-head"><span class="section-num">${esc(secM[1])}</span><span class="section-title">${esc(secM[2])}</span></header><div class="section-body">`;
+      const secAnchor = 'sec-' + String(secM[1]).replace(/[^A-Za-z0-9]/g,'') + '-' + Math.abs(hashStr(secM[2])).toString(36).slice(0,5);
+      html+=`<section class="manual-section" id="${secAnchor}"><header class="section-head"><span class="section-num">${esc(secM[1])}</span><span class="section-title">${esc(secM[2])}</span></header><div class="section-body">`;
       inSection=true;lettrinePlaced=false;continue;
     }
 
@@ -1656,7 +1854,8 @@ function renderChapter(raw,chId){
   }
   flushPara();flushBullets();flushNumList();flushQCM();if(inCallout)flushCallout();flushSituations();closeSection();
   // R3 — Supprimer les sections sans contenu (en-tete de plan sans texte correspondant dans la BDD)
-  html = html.replace(/<section class="manual-section">([\s\S]*?)<\/section>/g, (match, inner) => {
+  // R3 — remove empty sections (class may include id= attributes)
+  html = html.replace(/<section class="manual-section"[^>]*>([\s\S]*?)<\/section>/g, (match, inner) => {
     const bodyIndex = inner.indexOf('<div class="section-body">');
     if (bodyIndex === -1) return '';
     const bodyHtml = inner.substring(bodyIndex + '<div class="section-body">'.length);
@@ -1674,33 +1873,66 @@ function renderChapter(raw,chId){
     return match;
   });
 
-  // Now build the outline from the kept sections (run after R3 empty cleaning)
-  // Build a Set of Roman numeral prefixes from first35Headings for prefix-matching
+  // Outline from kept sections (regex allows id= on section)
   const first35Nums = new Set();
   for (const key of first35Headings) {
     const bar = key.indexOf('|');
     if (bar > 0) first35Nums.add(key.substring(0, bar));
   }
   const keptSections = [];
-  const secRegex = /<section class="manual-section"><header class="section-head"><span class="section-num">(.*?)<\/span><span class="section-title">(.*?)<\/span>/g;
+  const secRegex = /<section class="manual-section"[^>]*>\s*<header class="section-head"><span class="section-num">(.*?)<\/span><span class="section-title">(.*?)<\/span>/g;
   let match;
   while ((match = secRegex.exec(html)) !== null) {
     const num = match[1];
     const title = match[2];
     const key = num + '|' + title;
-    // Match by exact key OR by Roman numeral prefix (handles truncated titles)
     if (first35Headings.has(key) || first35Nums.has(num)) {
-      keptSections.push({ num, title });
+      // capture id from full match window
+      const openTag = html.slice(match.index, match.index + 120);
+      const idM = openTag.match(/\bid="([^"]+)"/);
+      keptSections.push({ num, title, id: idM ? idM[1] : '' });
     }
   }
 
   if (keptSections.length >= 3) {
-    const outlineHtml = `<details class="ch-outline" aria-label="Plan du chapitre"><summary>Plan du chapitre</summary><ul>${keptSections.slice(0, 8).map(s => `<li><span class="outline-num">${esc(s.num)}</span> ${esc(s.title)}</li>`).join('')}</ul></details>`;
+    const outlineItems = keptSections.slice(0, 12).map((s, i) => {
+      const href = s.id || ('sec-auto-' + i);
+      return `<li><a href="#${href}" class="outline-link"><span class="outline-num">${esc(s.num)}</span> ${esc(s.title)}</a></li>`;
+    }).join('');
+    const outlineHtml = `<nav class="ch-outline ch-outline-sticky" aria-label="Plan du chapitre">
+      <div class="outline-hd"><span>Plan</span><button type="button" class="outline-toggle" onclick="this.closest('.ch-outline').classList.toggle('collapsed')">masquer</button></div>
+      <ul class="outline-list">${outlineItems}</ul>
+    </nav>`;
     html = outlineHtml + html;
   }
 
-  // Highlight key summary points like "Les deux éléments clefs du bien vieillir" or specific "points clés" summaries as special callout (avoid turning section titles into boxes)
-  html = html.replace(/<div class="para-card"><p>([^<]*(?:Les deux éléments clefs du bien vieillir|points clés (?:du bien vieillir|sur les|du diabète|sur les vaccins))[^<]*)<\/p><\/div>/gi, '<div class="para-card key-point"><p>$1</p></div>');
+  // Highlight key summary points
+  html = html.replace(/<div class="para-card study-block"><p>([^<]*(?:Les deux éléments clefs du bien vieillir|points clés|à retenir|en pratique|mémo)[^<]*)<\/p><\/div>/gi,
+    '<div class="para-card key-point"><p>$1</p></div>');
+  html = html.replace(/<div class="para-card"><p>([^<]*(?:Les deux éléments clefs du bien vieillir|points clés (?:du bien vieillir|sur les|du diabète|sur les vaccins))[^<]*)<\/p><\/div>/gi,
+    '<div class="para-card key-point"><p>$1</p></div>');
+
+  // Build "Points clés" panel from key-points + def-blocks + rang badges
+  const keySnips = [];
+  const kpRe = /class="(?:para-card key-point|key-point|def-block)"[^>]*>([\s\S]*?)<\/div>/gi;
+  let km;
+  while ((km = kpRe.exec(html)) !== null && keySnips.length < 6) {
+    const plain = km[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+    if (plain.length > 30 && plain.length < 320) keySnips.push(plain);
+  }
+  // Also pull first rang-A one-liners
+  const raRe = /rang-inline rang-a[\s\S]*?<\/span>([^<]{20,160})/gi;
+  while ((km = raRe.exec(html)) !== null && keySnips.length < 8) {
+    const plain = km[1].replace(/\s+/g, ' ').trim();
+    if (plain.length > 24) keySnips.push(plain);
+  }
+  if (keySnips.length >= 2) {
+    const kpHtml = `<aside class="key-panel" aria-label="Points clés">
+      <div class="key-panel-hd">⚡ Points clés</div>
+      <ul class="key-panel-list">${keySnips.slice(0, 6).map(k => `<li>${esc(k)}</li>`).join('')}</ul>
+    </aside>`;
+    html = kpHtml + html;
+  }
 
   // Final pass to remove any remaining embedded headers inside paragraphs
   html = html.replace(/>([^<]*?)\s{2,}(Connaissances|Points clés|Gériatrie ©)[^<]{0,30}</gi, '>$1<');
