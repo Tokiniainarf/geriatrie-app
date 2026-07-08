@@ -461,7 +461,7 @@ function showCh(id){
   const toolbar=document.getElementById('chToolbar');
   if(toolbar){
     toolbar.innerHTML =
-      `<button type="button" onclick="goHome()" aria-label="Retour à l'accueil">← Retour</button>`+
+      `<button type="button" onclick="goBack()" aria-label="Retour">← Retour</button>`+
       `<button type="button" onclick="quickBm('${id}')" aria-label="Favori">${bmOn?BM_SVG.on+' Retirer':BM_SVG.off+' Favori'}</button>`+
       `<button type="button" onclick="openNotes('${id}')" aria-label="Notes">Notes</button>`+
       (isPractice ? '' :
