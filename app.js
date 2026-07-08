@@ -3157,17 +3157,10 @@ function renderProto(){
       });
     });
   }
+  // CLINICAL_REFERENCE stays in search/reference only — do NOT inject into protocoles
+  // (cr-26…cr-30 were thin duplicates of PROTOCOLES_URGENCE / COMPLETS).
 
-  if(typeof CLINICAL_REFERENCE!=='undefined') {
-    rawAll.push(...CLINICAL_REFERENCE.filter(p=>p.category==='Urgence').map(p=>({
-      ...p,
-      _src:'ref',
-      protocole: p.content?p.content.split('. ').filter(Boolean):[],
-      fallbackCategory: 'Urgence'
-    })));
-  }
-
-  // Normalisation des catégories et dédoublonnage (titre + id exact)
+  // Normalisation des catégories et dédoublonnage (titre + id exact + near-dup catégorie)
   const all = [];
   const seenTitle = new Map();
   const seenId = new Map();
@@ -3182,7 +3175,24 @@ function renderProto(){
       + (p.conduite ? 4 : 0)
       + (p.programme ? 4 : 0)
       + (p.etapes ? 4 : 0)
+      + (p.contreIndications ? 2 : 0)
+      + (p.effetsSecondaires ? 1 : 0)
       + (p.considerations || p.ethique ? 2 : 0);
+  };
+
+  const titleTokenSet = (s) => new Set(String(s || '')
+    .toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim()
+    .split(/\s+/)
+    .filter(t => t.length > 2));
+  const titleJaccard = (a, b) => {
+    const A = titleTokenSet(a), B = titleTokenSet(b);
+    if (!A.size || !B.size) return 0;
+    let i = 0;
+    for (const x of A) if (B.has(x)) i++;
+    return i / (A.size + B.size - i);
   };
 
   rawAll.forEach(p => {
@@ -3255,6 +3265,28 @@ function renderProto(){
     if (normalizedTitle) seenTitle.set(normalizedTitle, currentProtoObj);
     if (pid) seenId.set(pid, currentProtoObj);
   });
+
+  // Pass 2: near-duplicate titles in the SAME category → keep the richer card only
+  // (e.g. "Code AVC" checklist vs "AVC aigu code stroke" protocole complet)
+  const dropNear = new Set();
+  for (let i = 0; i < all.length; i++) {
+    if (dropNear.has(all[i])) continue;
+    for (let j = i + 1; j < all.length; j++) {
+      if (dropNear.has(all[j])) continue;
+      if (all[i].categorie !== all[j].categorie) continue;
+      const jv = titleJaccard(all[i].titre, all[j].titre);
+      // 0.7+ = true near-clones (e.g. Code AVC vs AVC code stroke).
+      // 0.6 alone would wrongly merge "Gestion X en fin de vie" variants.
+      if (jv < 0.7) continue;
+      if (protoRichness(all[i]) >= protoRichness(all[j])) dropNear.add(all[j]);
+      else dropNear.add(all[i]);
+    }
+  }
+  if (dropNear.size) {
+    for (let i = all.length - 1; i >= 0; i--) {
+      if (dropNear.has(all[i])) all.splice(i, 1);
+    }
+  }
 
   if(!all.length){el.innerHTML='<div class="empty"><div class="empty-text">Aucun protocole disponible</div></div>';return}
   

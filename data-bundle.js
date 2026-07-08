@@ -3841,7 +3841,7 @@ const PROTOCOLES_URGENCE = [
     alert: 'Le sujet âgé masque le sepsis : pas de fièvre, pas de leucocytose. CRP/PCT = meilleurs marqueurs.'
   },
   {
-    id: 'proto-avc', title: 'Code AVC (stroke code)',
+    id: 'proto-avc', title: 'Code AVC — checklist SAU (FAST)',
     icon: '🧠', category: 'urgence',
     steps: [
       '1. FAST : Face (asymétrie), Arm (chute bras), Speech (dysarthrie), Time (heure début)',
@@ -3856,7 +3856,7 @@ const PROTOCOLES_URGENCE = [
     alert: 'Fenêtre thrombolyse : 4.5h. Fenêtre thrombectomie : 24h. CHAQUE MINUTE COMPTE.'
   },
   {
-    id: 'proto-oap', title: 'OAP (Œdème Aigu du Poumon)',
+    id: 'proto-oap', title: 'OAP — checklist SAU (position / diurétique / VNI)',
     icon: '🫁', category: 'urgence',
     steps: [
       '1. Position assise, jambes pendantes',
@@ -3871,7 +3871,7 @@ const PROTOCOLES_URGENCE = [
     alert: 'Si OAP cardiogénique : PAS < 90 → pas de dérivés nitrés. Si OAP lésionnel : pas de furosémide.'
   },
   {
-    id: 'proto-hypona', title: 'Hyponatrémie',
+    id: 'proto-hypona', title: 'Hyponatrémie aiguë — checklist SAU',
     icon: '⚡', category: 'urgence',
     steps: [
       '1. Seuil : Na < 135 mmol/L. Critique : Na < 120',
@@ -3886,7 +3886,7 @@ const PROTOCOLES_URGENCE = [
     alert: 'CORRECTION LENTE ! Max 10 mmol/L/24h. Correction trop rapide → myélinolyse osmotique centrale (irréversible).'
   },
   {
-    id: 'proto-hyperk', title: 'Hyperkaliémie',
+    id: 'proto-hyperk', title: 'Hyperkaliémie — checklist SAU (ECG + protection)',
     icon: '⚡', category: 'urgence',
     steps: [
       '1. Seuil : K > 5.5 mmol/L. Critique : K > 6.5 ou ECG anormal',

@@ -334,22 +334,63 @@ function loadScript(code, sandbox, filename) {
     else pass('proto_src_title_' + name, 'no exact title dups');
   }
 
-  // Merged list using same title+id richness logic as app.js (simplified export)
+  // Merged list using same title+id+near-dup logic as app.js renderProto
   const all = [];
   const seenTitle = new Map();
   const seenId = new Map();
+  // Load SHIPPED helpers early for richness + body checks
+  const appSrcEarly = fs.readFileSync(path.join(ROOT, 'app.js'), 'utf8');
+  const hStartEarly = appSrcEarly.indexOf('function getProtoBodySteps');
+  const hEndEarly = appSrcEarly.indexOf('window.getProtoBodySteps');
+  let getStepsEarly = null;
+  if (hStartEarly >= 0 && hEndEarly >= 0) {
+    loadScript(
+      appSrcEarly.slice(hStartEarly, hEndEarly)
+        + '\n;this.getProtoBodySteps=getProtoBodySteps;this.getProtoMetaBlocks=getProtoMetaBlocks;',
+      ctx,
+      'proto_helpers_early.js'
+    );
+    getStepsEarly = vm.runInContext('getProtoBodySteps', ctx);
+  }
   const richness = (p) => {
-    const steps = p.protocole || p.steps || p.checklist || p.etapes || [];
-    return (Array.isArray(steps) ? steps.length * 2 : 0)
+    const steps = getStepsEarly ? getStepsEarly(p) : (p.protocole || p.steps || p.checklist || p.etapes || []);
+    const n = Array.isArray(steps) ? steps.length : 0;
+    return (n * 2)
       + (p.surveillance ? 5 : 0) + (p.alerte || p.alert ? 3 : 0)
-      + (p.indication ? 2 : 0) + (p.objectif ? 2 : 0);
+      + (p.indication ? 2 : 0) + (p.objectif ? 2 : 0)
+      + (p.conduite ? 4 : 0) + (p.programme ? 4 : 0) + (p.etapes ? 4 : 0)
+      + (p.contreIndications ? 2 : 0) + (p.effetsSecondaires ? 1 : 0)
+      + (p.considerations || p.ethique ? 2 : 0);
+  };
+  const catBucket = (p) => {
+    let c = String(p.categorie || p.category || p.fallbackCategory || 'Autre').trim();
+    const lower = c.toLowerCase();
+    if (lower.includes('garde')) return '🚑 Fiches de Garde (Urgences)';
+    if (lower.includes('urgence') || lower === 'rcp' || lower === 'réanimation' || lower === 'reanimation') return '🔴 Urgences & Réanimation';
+    if (lower.includes('completes') || lower === 'autre' || lower.includes('protocoles complets')) return '📋 Protocoles généraux';
+    if (lower.includes('kine') || lower.includes('réadaptation') || lower.includes('readaptation') || lower.includes('kinésithérapie')) return '🏃 Rééducation & Kiné';
+    if (lower.includes('cognitif') || lower.includes('neuro')) return '🧠 Neuro-Gériatrie & Cognition';
+    if (lower.includes('qualité') || lower.includes('qualite') || lower.includes('législation') || lower.includes('legislation')) return '⚖️ Législation & Qualité';
+    if (lower.includes('formation')) return '🎓 Formation & Pratique';
+    if (lower.includes('antalgie') || lower.includes('douleur') || lower.includes('palliatif')) return '💊 Antalgie & Soins Palliatifs';
+    if (lower.includes('antibio')) return '🦠 Antibiothérapie';
+    if (lower.includes('gériatrie') || lower.includes('geriatrie')) return '👴 Spécificités Gériatriques';
+    return c;
+  };
+  const titleTokens = (s) => new Set(String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim().split(/\s+/).filter((t) => t.length > 2));
+  const titleJaccard = (a, b) => {
+    const A = titleTokens(a), B = titleTokens(b);
+    if (!A.size || !B.size) return 0;
+    let i = 0;
+    for (const x of A) if (B.has(x)) i++;
+    return i / (A.size + B.size - i);
   };
   rawAll.forEach((p) => {
     const titre = String(p.titre || p.title || p.nom || p.situation || '').trim();
     const norm = titre.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]/g, '');
     const pid = p.id != null ? String(p.id) : '';
     if (!norm && !pid) return;
-    const obj = { ...p, id: pid || p.id, titre: titre || pid };
+    const obj = { ...p, id: pid || p.id, titre: titre || pid, categorie: catBucket(p) };
     if (pid && seenId.has(pid)) {
       const ex = seenId.get(pid);
       if (richness(obj) > richness(ex)) {
@@ -375,14 +416,54 @@ function loadScript(code, sandbox, filename) {
     if (pid) seenId.set(pid, obj);
   });
 
+  // Pass 2: near-dup titles same category (mirror app.js)
+  const dropNear = new Set();
+  for (let i = 0; i < all.length; i++) {
+    if (dropNear.has(all[i])) continue;
+    for (let j = i + 1; j < all.length; j++) {
+      if (dropNear.has(all[j])) continue;
+      if (all[i].categorie !== all[j].categorie) continue;
+      if (titleJaccard(all[i].titre, all[j].titre) < 0.7) continue;
+      if (richness(all[i]) >= richness(all[j])) dropNear.add(all[j]);
+      else dropNear.add(all[i]);
+    }
+  }
+  const nearDropped = [];
+  if (dropNear.size) {
+    for (let i = all.length - 1; i >= 0; i--) {
+      if (dropNear.has(all[i])) {
+        nearDropped.push(all[i].id);
+        all.splice(i, 1);
+      }
+    }
+  }
+
+  // Gate: CLINICAL_REFERENCE must not pollute protocoles merge
+  const crLeak = all.filter((p) => String(p.id || '').startsWith('cr-'));
+  if (crLeak.length) fail('proto_no_clinical_ref_inject', crLeak.map((p) => p.id).join(','));
+  else pass('proto_no_clinical_ref_inject', 'no cr-* in protocoles merge');
+
   const mergedIds = all.map((p) => String(p.id || ''));
   const mergedIdDupes = mergedIds.filter((id, i) => id && mergedIds.indexOf(id) !== i);
   const mergedTitles = all.map((p) => String(p.titre || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]/g, ''));
   const mergedTitleDupes = mergedTitles.filter((t, i) => t && mergedTitles.indexOf(t) !== i);
 
+  // Near-dup residual gate (same category, jaccard >= 0.7 must be zero after pass 2)
+  const residualNear = [];
+  for (let i = 0; i < all.length; i++) {
+    for (let j = i + 1; j < all.length; j++) {
+      if (all[i].categorie !== all[j].categorie) continue;
+      const jv = titleJaccard(all[i].titre, all[j].titre);
+      if (jv >= 0.7) residualNear.push(all[i].id + '~' + all[j].id + '@' + jv.toFixed(2));
+    }
+  }
+  if (residualNear.length) fail('proto_no_near_title_dups_same_cat', residualNear.join(' ; '));
+  else pass('proto_no_near_title_dups_same_cat', 'no jaccard>=0.7 pairs in same category (dropped ' + nearDropped.length + ')');
+
   report.protocols = {
     rawCount: rawAll.length,
     mergedCount: all.length,
+    nearDropped,
     perSource,
     mergedIdDupes: [...new Set(mergedIdDupes)],
     mergedTitleDupes: [...new Set(mergedTitleDupes)].slice(0, 20),
@@ -398,16 +479,13 @@ function loadScript(code, sandbox, filename) {
   else pass('proto_merged_min_count', all.length + ' protocols');
 
   // Load SHIPPED getProtoBodySteps / getProtoMetaBlocks from app.js (same as renderProtoList)
-  const appSrc = fs.readFileSync(path.join(ROOT, 'app.js'), 'utf8');
-  const hStart = appSrc.indexOf('function getProtoBodySteps');
-  const hEnd = appSrc.indexOf('window.getProtoBodySteps');
+  const appSrc = appSrcEarly;
+  const hStart = hStartEarly;
+  const hEnd = hEndEarly;
   if (hStart < 0 || hEnd < 0) {
     fail('proto_helpers_shipped', 'getProtoBodySteps not found in app.js');
   } else {
-    const helperCode = appSrc.slice(hStart, hEnd)
-      + '\n;this.getProtoBodySteps=getProtoBodySteps;this.getProtoMetaBlocks=getProtoMetaBlocks;';
-    loadScript(helperCode, ctx, 'proto_helpers_from_app.js');
-    const getSteps = vm.runInContext('getProtoBodySteps', ctx);
+    const getSteps = getStepsEarly || vm.runInContext('getProtoBodySteps', ctx);
     const getMeta = vm.runInContext('getProtoMetaBlocks', ctx);
 
     // Spot-check known field shapes against SHIPPED extractor
