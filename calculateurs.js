@@ -3119,19 +3119,59 @@ const Medicalcul = {
   },
 
   showDetail(id) {
-    const calc = CALCULATEURS.find(c => c.id === id);
-    if (!calc) return;
+    try {
+      this._showDetailInner(id);
+    } catch (err) {
+      console.error('[Medicalcul.showDetail]', id, err);
+      const detailCont = document.getElementById('calc-detail-container');
+      const detailContent = document.getElementById('calc-detail-content');
+      const listCont = document.getElementById('calc-list-container');
+      if (listCont) listCont.style.display = 'none';
+      if (detailCont) detailCont.style.display = 'block';
+      if (detailContent) {
+        detailContent.innerHTML = `
+          <button type="button" class="calc-back-btn" onclick="Medicalcul.showListContainer()" style="margin-bottom:12px;color:var(--accent);font-weight:600;">← Retour à la liste</button>
+          <div class="empty" style="padding:24px;text-align:center;">
+            <div class="empty-text" style="font-weight:700;">Impossible d'ouvrir ce score</div>
+            <div class="empty-hint" style="margin-top:8px;">${String(err && err.message ? err.message : err)}</div>
+            <div class="empty-hint" style="margin-top:6px;font-size:0.8rem;">ID: ${id}</div>
+          </div>`;
+      }
+    }
+  },
+
+  _showDetailInner(id) {
+    const source = (typeof CALCULATEURS !== 'undefined' && CALCULATEURS.length)
+      ? CALCULATEURS
+      : (window.CALCULATEURS || []);
+    const calc = source.find(c => c.id === id);
+    if (!calc) throw new Error('Calculateur introuvable: ' + id);
 
     const listCont = document.getElementById('calc-list-container');
     const detailCont = document.getElementById('calc-detail-container');
     const detailContent = document.getElementById('calc-detail-content');
+    if (!detailContent) throw new Error('Zone détail absente (#calc-detail-content)');
 
     if (listCont) listCont.style.display = 'none';
     if (detailCont) detailCont.style.display = 'block';
-    window.scrollTo(0, 0);
+    try { window.scrollTo(0, 0); } catch (_) {}
 
-    const helperEsc = (s) => typeof esc === 'function' ? esc(s) : s;
+    const helperEsc = (s) => {
+      if (typeof esc === 'function') return esc(s);
+      return String(s ?? '')
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    };
     const isFav = this.isFavorite(id);
+
+    // Normalize type: checklist+fields → select form; select_result → select
+    const hasItems = Array.isArray(calc.items) && calc.items.length > 0;
+    const hasFields = Array.isArray(calc.fields) && calc.fields.length > 0;
+    const hasGroups = Array.isArray(calc.groups) && calc.groups.length > 0;
+    let effectiveType = calc.type;
+    if (effectiveType === 'checklist' && !hasItems && hasFields) effectiveType = 'select';
+    if (effectiveType === 'select_result') effectiveType = 'select';
+    if (effectiveType === 'questions' && hasItems) effectiveType = 'checklist';
 
     let html = `
       <div class="calc-detail-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:20px; border-bottom:1px solid var(--glass-border); padding-bottom:12px;">
@@ -3158,21 +3198,22 @@ const Medicalcul = {
       </div>
     `;
 
-    // Render based on type
-    if (calc.type === 'custom') {
+    // Render based on effective type
+    if (calc.type === 'custom' || effectiveType === 'custom') {
       html += `<div id="calc-custom-area"></div>`;
-      html += `
-        <div class="calc-result-area" id="calc-result" style="margin-top:16px;"></div>
-      `;
+      html += `<div class="calc-result-area" id="calc-result" style="margin-top:16px;"></div>`;
       detailContent.innerHTML = html;
       const customArea = document.getElementById('calc-custom-area');
       if (customArea && typeof calc.render === 'function') {
-        calc.render(customArea);
+        try { calc.render(customArea); }
+        catch (re) {
+          customArea.innerHTML = `<div class="empty"><div class="empty-text">Erreur du calculateur personnalisé</div><div class="empty-hint">${helperEsc(re.message || re)}</div></div>`;
+        }
       }
       return;
     }
 
-    if (calc.type === 'checklist') {
+    if (effectiveType === 'checklist' && hasItems) {
       html += `
         <div class="calc-form">
           <div class="calc-glass-box">
@@ -3182,25 +3223,25 @@ const Medicalcul = {
                 <label class="check-container">
                   <input type="checkbox" class="calc-input" data-pts="${item.points || 0}" id="chk_${id}_${idx}">
                   <span class="checkmark"></span>
-                  ${helperEsc(item.text)}
+                  ${helperEsc(item.text || item.label || '')}
                 </label>
               `).join('')}
             </div>
           </div>
         </div>
       `;
-    } else if (calc.type === 'radio_group') {
+    } else if (effectiveType === 'radio_group' && hasGroups) {
       html += `
         <div class="calc-form">
           ${calc.groups.map((group, gIdx) => `
             <div class="calc-glass-box" style="margin-bottom:16px;">
-              <div class="calc-group-title">${helperEsc(group.question)}</div>
+              <div class="calc-group-title">${helperEsc(group.question || group.label || ('Item ' + (gIdx + 1)))}</div>
               <div class="calc-radio-group" style="display:flex; flex-direction:column; gap:12px; margin-top:12px;">
-                ${group.options.map((opt, oIdx) => `
+                ${(group.options || []).map((opt, oIdx) => `
                   <label class="radio-card-label" style="position:relative;">
-                    <input type="radio" name="rad_${id}_${gIdx}" class="calc-input" value="${opt.value}" ${oIdx === 0 ? 'checked' : ''}>
+                    <input type="radio" name="rad_${id}_${gIdx}" class="calc-input" value="${opt.value != null ? opt.value : oIdx}" ${oIdx === 0 ? 'checked' : ''}>
                     <div class="radio-card-circle"></div>
-                    <span class="radio-card-text" style="flex:1;">${helperEsc(opt.text)}</span>
+                    <span class="radio-card-text" style="flex:1;">${helperEsc(opt.text || String(opt))}</span>
                   </label>
                 `).join('')}
               </div>
@@ -3208,164 +3249,166 @@ const Medicalcul = {
           `).join('')}
         </div>
       `;
-    } else if (calc.type === 'select') {
+    } else if ((effectiveType === 'select' || effectiveType === 'number_result') && hasFields) {
+      const isRange = effectiveType === 'number_result';
       html += `
         <div class="calc-form">
           <div class="calc-glass-box">
             <div class="calc-group-title">Saisie des données</div>
             <div style="display:flex; flex-direction:column; gap:12px; margin-top:8px;">
-              ${calc.fields.map((field) => `
-                <label style="display:flex; flex-direction:column; gap:4px;">
-                  <span style="font-weight:500; font-size:0.9rem;">${helperEsc(field.label)}</span>
-                  <select id="sel_${id}_${field.id}" class="calc-input" style="width:100%; background:var(--bg-elevated); color:var(--text); border:1px solid var(--glass-border); border-radius:4px; padding:6px;">
-                    ${field.options.map((opt) => {
-                      const valMatch = opt.match(/^([0-9.]+)\s*—\s*(.*)$/) || opt.match(/^([0-9.]+)\s*:\s*(.*)$/) || [opt, opt, opt];
-                      const val = valMatch[1].trim();
-                      return `<option value="${val}">${helperEsc(opt)}</option>`;
-                    }).join('')}
-                  </select>
-                </label>
-              `).join('')}
-            </div>
-          </div>
-        </div>
-      `;
-    } else if (calc.type === 'number_result') {
-      html += `
-        <div class="calc-form">
-          <div class="calc-glass-box">
-            <div class="calc-group-title">Saisie des valeurs</div>
-            <div style="display:flex; flex-direction:column; gap:20px; margin-top:8px;">
-              ${calc.fields.map((field) => `
+              ${calc.fields.map((field) => {
+                if (isRange || field.type === 'number' || field.type === 'range') {
+                  return `
                 <div style="display:flex; flex-direction:column; gap:8px;">
                   <div style="display:flex; justify-content:space-between; align-items:flex-end;">
                     <span style="font-weight:600; font-size:0.95rem;">${helperEsc(field.label)}</span>
                     <div style="font-weight:700; color:var(--accent); font-size:1.1rem;" id="val_disp_${id}_${field.id}">-- ${field.unit ? helperEsc(field.unit) : ''}</div>
                   </div>
                   <input type="range" id="num_${id}_${field.id}" min="${field.min || 0}" max="${field.max || 100}" step="${field.step || 1}" value="${field.min || 0}" class="calc-input modern-slider">
-                </div>
-              `).join('')}
+                </div>`;
+                }
+                const opts = field.options || [];
+                return `
+                <label style="display:flex; flex-direction:column; gap:4px;">
+                  <span style="font-weight:500; font-size:0.9rem;">${helperEsc(field.label)}</span>
+                  <select id="sel_${id}_${field.id}" class="calc-input" style="width:100%; background:var(--bg-elevated); color:var(--text); border:1px solid var(--glass-border); border-radius:4px; padding:6px;">
+                    ${opts.map((opt) => {
+                      const s = String(opt);
+                      const valMatch = s.match(/^([0-9.]+)\s*[—–\-:]\s*(.*)$/) || [s, s, s];
+                      const val = (valMatch[1] || s).trim();
+                      return `<option value="${helperEsc(val)}">${helperEsc(s)}</option>`;
+                    }).join('')}
+                  </select>
+                </label>`;
+              }).join('')}
             </div>
           </div>
         </div>
       `;
+    } else {
+      html += `<div class="empty" style="padding:20px;"><div class="empty-text">Format de score non supporté (${helperEsc(calc.type)})</div></div>`;
     }
 
-    // Add result area
-    html += `
-      <div class="calc-result-area" id="calc-result" style="margin-top:16px;"></div>
-    `;
-
+    html += `<div class="calc-result-area" id="calc-result" style="margin-top:16px;"></div>`;
     detailContent.innerHTML = html;
 
-    // Attach dynamic calculation events
-    const inputs = detailContent.querySelectorAll('.calc-input');
+    const inputs = detailContent.querySelectorAll ? detailContent.querySelectorAll('.calc-input') : [];
     const updateResult = () => {
       let result = null;
-      if (calc.type === 'checklist') {
-        let total = 0;
-        calc.items.forEach((item, idx) => {
-          const chk = document.getElementById(`chk_${id}_${idx}`);
-          if (chk && chk.checked) {
-            total += item.points || 0;
+      try {
+        if (effectiveType === 'checklist' && hasItems) {
+          let total = 0;
+          calc.items.forEach((item, idx) => {
+            const chk = document.getElementById(`chk_${id}_${idx}`);
+            if (chk && chk.checked) total += item.points || 0;
+          });
+          if (typeof calc.calculer === 'function') result = calc.calculer(total);
+          else if (typeof calc.calculate === 'function') result = calc.calculate(total);
+        } else if (effectiveType === 'radio_group' && hasGroups) {
+          let total = 0;
+          const values = [];
+          calc.groups.forEach((group, gIdx) => {
+            let checkedRadio = null;
+            if (detailContent.querySelector) {
+              checkedRadio = detailContent.querySelector(`input[name="rad_${id}_${gIdx}"]:checked`);
+            }
+            if (!checkedRadio) {
+              // fallback: first radio of group
+              checkedRadio = document.querySelector && document.querySelector(`input[name="rad_${id}_${gIdx}"]:checked`);
+            }
+            const v = checkedRadio ? (parseFloat(checkedRadio.value) || 0) : 0;
+            values.push(v);
+            total += v;
+          });
+          if (typeof calc.calculer === 'function') {
+            // AGGIR expects (total, values[]); others may only take total
+            try { result = calc.calculer(total, values); }
+            catch (_) { result = calc.calculer(total); }
+          } else if (typeof calc.calculate === 'function') {
+            result = calc.calculate(total, values);
           }
-        });
-        result = calc.calculer(total);
-      } else if (calc.type === 'radio_group') {
-        let total = 0;
-        calc.groups.forEach((group, gIdx) => {
-          const checkedRadio = detailContent.querySelector(`input[name="rad_${id}_${gIdx}"]:checked`);
-          if (checkedRadio) {
-            total += parseFloat(checkedRadio.value) || 0;
-          }
-        });
-        result = calc.calculer(total);
-      } else if (calc.type === 'select') {
-        const values = {};
-        calc.fields.forEach((field) => {
-          const sel = document.getElementById(`sel_${id}_${field.id}`);
-          if (sel) {
-            values[field.id] = parseFloat(sel.value) || 0;
-          }
-        });
-        result = calc.calculate(values);
-      } else if (calc.type === 'number_result') {
-        const values = {};
-        calc.fields.forEach((field) => {
-          const num = document.getElementById(`num_${id}_${field.id}`);
-          if (num) {
-            values[field.id] = parseFloat(num.value);
-          }
-        });
-        result = calc.calculate(values);
+        } else if ((effectiveType === 'select' || effectiveType === 'number_result') && hasFields) {
+          const values = {};
+          calc.fields.forEach((field) => {
+            const sel = document.getElementById(`sel_${id}_${field.id}`);
+            const num = document.getElementById(`num_${id}_${field.id}`);
+            if (sel) values[field.id] = parseFloat(sel.value);
+            else if (num) values[field.id] = parseFloat(num.value);
+            if (values[field.id] !== values[field.id]) values[field.id] = 0; // NaN → 0
+          });
+          if (typeof calc.calculate === 'function') result = calc.calculate(values);
+          else if (typeof calc.calculer === 'function') result = calc.calculer(values);
+        }
+      } catch (calcErr) {
+        console.error('[Medicalcul.updateResult]', id, calcErr);
+        const resDivErr = document.getElementById('calc-result');
+        if (resDivErr) resDivErr.innerHTML = `<div class="empty"><div class="empty-hint">Erreur de calcul : ${helperEsc(calcErr.message || calcErr)}</div></div>`;
+        return;
       }
 
       const resDiv = document.getElementById('calc-result');
       if (resDiv && result) {
+        const scoreVal = result.score != null ? result.score : result.total;
+        const numericForBar = typeof scoreVal === 'number' ? scoreVal : parseFloat(String(scoreVal).replace(/[^\d.]/g, ''));
+        const maxBar = calc.max || 100;
+        const pct = Number.isFinite(numericForBar) ? Math.min(100, Math.max(0, (numericForBar / maxBar) * 100)) : 0;
         resDiv.innerHTML = `
           <div class="calc-res-box ${result.cls || result.cat || 'normal'}" style="position:relative; margin-top:20px;">
             <div class="calc-res-title" style="font-size:1.4rem; font-weight:800; display:flex; justify-content:space-between; align-items:center; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">
-              <span>SCORE : ${result.score || result.total}</span>
-              <button class="calc-copy-btn" onclick="Medicalcul.copyResultToClipboard('${id}')" style="font-size:0.75rem; background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.4); color:white; padding:6px 12px; border-radius:8px; display:flex; align-items:center; gap:6px; font-weight:700; transition:all 0.2s ease; box-shadow:0 2px 8px rgba(0,0,0,0.2);">
+              <span>SCORE : ${scoreVal}</span>
+              <button type="button" class="calc-copy-btn" onclick="Medicalcul.copyResultToClipboard('${id}')" style="font-size:0.75rem; background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.4); color:white; padding:6px 12px; border-radius:8px; display:flex; align-items:center; gap:6px; font-weight:700;">
                 📋 Copier
               </button>
             </div>
             <div class="calc-progress-bg">
-               <div class="calc-progress-fill" style="width:${Math.min(100, Math.max(0, ((result.score || result.total) / (calc.max || 100)) * 100))}%;"></div>
+               <div class="calc-progress-fill" style="width:${pct}%;"></div>
             </div>
-            <div class="calc-res-desc" style="font-size:1.05rem; font-weight:600; margin-top:12px; line-height:1.4; text-shadow: 0 1px 3px rgba(0,0,0,0.2);">${result.interp || result.desc || ''}</div>
+            <div class="calc-res-desc" style="font-size:1.05rem; font-weight:600; margin-top:12px; line-height:1.4;">${result.interp || result.desc || ''}</div>
             ${calc.seuils ? `<div class="fs-xs" style="margin-top:12px; opacity:0.9; border-top:1px solid rgba(255,255,255,0.25); padding-top:10px; font-size:0.8rem;"><strong>Repères cliniques :</strong> ${helperEsc(calc.seuils)}</div>` : ''}
           </div>
         `;
-        
-        // Save to global property for copying
-        Medicalcul.currentResultText = `[Gériatrie - ${calc.nom}]\nScore : ${result.score || result.total}\nInterprétation : ${result.interp || result.desc || ''}`;
+        Medicalcul.currentResultText = `[Gériatrie - ${calc.nom}]\nScore : ${scoreVal}\nInterprétation : ${result.interp || result.desc || ''}`;
       } else if (resDiv) {
         resDiv.innerHTML = '';
       }
     };
 
     inputs.forEach(input => {
-      // Logic for sliders to update text live
+      if (!input || typeof input.addEventListener !== 'function') return;
       if (input.type === 'range') {
-         input.addEventListener('input', (e) => {
-            const disp = document.getElementById('val_disp_' + id + '_' + input.id.split('_').pop());
-            if (disp) {
-               // find unit
-               let unit = '';
-               calc.fields.forEach(f => { if(f.id === input.id.split('_').pop() && f.unit) unit = f.unit; });
-               disp.innerText = e.target.value + (unit ? ' ' + unit : '');
-            }
-            updateResult();
-         });
+        input.addEventListener('input', (e) => {
+          const disp = document.getElementById('val_disp_' + id + '_' + input.id.split('_').pop());
+          if (disp) {
+            let unit = '';
+            (calc.fields || []).forEach(f => { if (f.id === input.id.split('_').pop() && f.unit) unit = f.unit; });
+            disp.innerText = e.target.value + (unit ? ' ' + unit : '');
+          }
+          updateResult();
+        });
       }
-      
-      // Logic for iOS toggles active class
       if (input.type === 'checkbox') {
-         input.addEventListener('change', (e) => {
-             const lbl = e.target.closest('.ios-toggle-label');
-             if (lbl) {
-                 if (e.target.checked) lbl.classList.add('active-toggle');
-                 else lbl.classList.remove('active-toggle');
-             }
-             updateResult();
-         });
+        input.addEventListener('change', (e) => {
+          const lbl = e.target.closest && e.target.closest('.ios-toggle-label');
+          if (lbl) {
+            if (e.target.checked) lbl.classList.add('active-toggle');
+            else lbl.classList.remove('active-toggle');
+          }
+          updateResult();
+        });
       }
-      
       input.addEventListener('change', updateResult);
       if (input.type === 'number' || input.type === 'text') {
         input.addEventListener('input', updateResult);
       }
     });
-    
-    // Init display for ranges
+
     inputs.forEach(input => {
-      if (input.type === 'range') {
+      if (input && input.type === 'range') {
         const disp = document.getElementById('val_disp_' + id + '_' + input.id.split('_').pop());
         if (disp) {
-            let unit = '';
-            calc.fields.forEach(f => { if(f.id === input.id.split('_').pop() && f.unit) unit = f.unit; });
-            disp.innerText = input.value + (unit ? ' ' + unit : '');
+          let unit = '';
+          (calc.fields || []).forEach(f => { if (f.id === input.id.split('_').pop() && f.unit) unit = f.unit; });
+          disp.innerText = input.value + (unit ? ' ' + unit : '');
         }
       }
     });
@@ -3373,6 +3416,12 @@ const Medicalcul = {
     updateResult();
   }
 };
+
+// Ensure globals for inline handlers (const is not always on window)
+try {
+  window.Medicalcul = Medicalcul;
+  window.CALCULATEURS = CALCULATEURS;
+} catch (_) {}
 
 // Expose globals for classic scripts / onclick handlers
 window.Medicalcul = Medicalcul;

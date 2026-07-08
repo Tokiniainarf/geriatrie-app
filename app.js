@@ -61,54 +61,81 @@ window.bootApp = bootApp;
 
 /* ── NAV ── */
 function sw(view){
-  const prev=S.view;
-  if(prev==='graph'&&view!=='graph'&&typeof destroyGraph==='function')destroyGraph();
-  
-  // Sujets est fusionné dans Annales
-  let targetView = view;
-  if(view === 'sujets') targetView = 'annales';
-  
-  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  document.querySelectorAll('#bnav button').forEach(b=>b.classList.remove('active'));
-  
-  const el=document.getElementById('v'+targetView.charAt(0).toUpperCase()+targetView.slice(1));
-  if(el)el.classList.add('active');
-  document.querySelector(`[data-v="${targetView}"]`)?.classList.add('active');
-  
-  S.view=targetView;window.scrollTo(0,0);
-  document.getElementById('searchBar')?.classList.remove('open');
-  
-  if(targetView==='synth')renderSynthesis();
-  if(targetView==='flash')renderFlashcard();
-  if(targetView==='items')renderItems();
-  if(targetView==='fav')renderFav();
-  if(targetView==='graph'&&typeof initGraph==='function')initGraph();
-  if(targetView==='feed'&&typeof BrainFeed!=='undefined')BrainFeed.init();
-  if(targetView!=='feed'&&typeof BrainFeed!=='undefined')BrainFeed.destroy();
-  if(targetView==='dash'&&typeof Dashboard!=='undefined')Dashboard.render();
-  if(targetView==='erreurs'&&typeof ErrorJournal!=='undefined')ErrorJournal.render();
-  if(targetView==='garde')renderGarde();
-  if(targetView==='dict')renderDict();
-  if(targetView==='scores'){
-    const Mc = (typeof Medicalcul!=='undefined') ? Medicalcul
-      : (typeof window!=='undefined' ? window.Medicalcul : null);
-    if(Mc && typeof Mc.init==='function'){
-      try{ Mc.init(); }
-      catch(e){ console.error('[scores]', e); if(typeof toast==='function') toast('Erreur scores'); }
-    } else {
-      const list=document.getElementById('calc-list');
-      if(list) list.innerHTML='<div class="empty"><div class="empty-text">Module scores non chargé</div><div class="empty-hint">Ctrl+F5 ou clear-cache.html</div></div>';
+  try {
+    const prev=S.view;
+    if(prev==='graph'&&view!=='graph'&&typeof destroyGraph==='function'){
+      try{ destroyGraph(); }catch(e){ console.warn('[sw] destroyGraph', e); }
     }
-  }
-  if(targetView==='annales') {
-    if (view === 'sujets') switchAnnalesMode('sujets');
-    else switchAnnalesMode('annales');
-  }
-  if(targetView==='proto')renderProto();
-  if(targetView!=='quiz'&&typeof QuizMode!=='undefined')QuizMode.destroy();
-  if(targetView==='set'){
-    const pd=document.getElementById('pd');
-    if(pd) pd.textContent=`${S.read.length} chapitre${S.read.length>1?'s':''} consulté${S.read.length>1?'s':''}`;
+    
+    // Sujets est fusionné dans Annales
+    let targetView = view;
+    if(view === 'sujets') targetView = 'annales';
+    
+    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+    document.querySelectorAll('#bnav button').forEach(b=>b.classList.remove('active'));
+    
+    // Map view ids (scores → vScores)
+    const viewId = 'v' + targetView.charAt(0).toUpperCase() + targetView.slice(1);
+    const el = document.getElementById(viewId);
+    if(el){
+      el.classList.add('active');
+      el.style.display = ''; // clear any leftover inline hide
+    } else {
+      console.error('[sw] view not found', viewId);
+    }
+    document.querySelector(`[data-v="${targetView}"]`)?.classList.add('active');
+    
+    S.view=targetView;
+    try{ window.scrollTo(0,0); }catch(_){}
+    document.getElementById('searchBar')?.classList.remove('open');
+    
+    const safe = (fn, label) => { try{ fn(); }catch(e){ console.error('[sw]', label, e); } };
+
+    if(targetView==='synth') safe(renderSynthesis, 'synth');
+    if(targetView==='flash') safe(renderFlashcard, 'flash');
+    if(targetView==='items') safe(renderItems, 'items');
+    if(targetView==='fav') safe(renderFav, 'fav');
+    if(targetView==='graph'&&typeof initGraph==='function') safe(initGraph, 'graph');
+    if(targetView==='feed'&&typeof BrainFeed!=='undefined') safe(()=>BrainFeed.init(), 'feed');
+    if(targetView!=='feed'&&typeof BrainFeed!=='undefined'&&BrainFeed.destroy) safe(()=>BrainFeed.destroy(), 'feed-destroy');
+    if(targetView==='dash'&&typeof Dashboard!=='undefined') safe(()=>Dashboard.render(), 'dash');
+    if(targetView==='erreurs'&&typeof ErrorJournal!=='undefined') safe(()=>ErrorJournal.render(), 'erreurs');
+    if(targetView==='garde') safe(renderGarde, 'garde');
+    if(targetView==='dict') safe(renderDict, 'dict');
+    if(targetView==='scores'){
+      const Mc = (typeof Medicalcul!=='undefined') ? Medicalcul
+        : (typeof window!=='undefined' ? window.Medicalcul : null);
+      const list=document.getElementById('calc-list');
+      const listCont=document.getElementById('calc-list-container');
+      const detailCont=document.getElementById('calc-detail-container');
+      // Always show list shell when entering scores
+      if(listCont) listCont.style.display = 'block';
+      if(detailCont) detailCont.style.display = 'none';
+      if(Mc && typeof Mc.init==='function'){
+        safe(()=>Mc.init(), 'scores-init');
+        // Force reflow if list still empty
+        if(list && (!list.innerHTML || list.innerHTML.trim().length < 40)){
+          safe(()=>{ Mc.currentDomain='all'; Mc.currentSearch=''; Mc.renderList(); Mc.showListContainer(); }, 'scores-retry');
+        }
+      } else if(list) {
+        list.innerHTML='<div class="empty"><div class="empty-text">Module scores non chargé</div><div class="empty-hint">Ctrl+F5 ou Réglages → Vider le cache PWA</div></div>';
+      }
+    }
+    if(targetView==='annales') {
+      safe(()=>{
+        if (view === 'sujets') switchAnnalesMode('sujets');
+        else switchAnnalesMode('annales');
+      }, 'annales');
+    }
+    if(targetView==='proto') safe(renderProto, 'proto');
+    if(targetView!=='quiz'&&typeof QuizMode!=='undefined'&&QuizMode.destroy) safe(()=>QuizMode.destroy(), 'quiz-destroy');
+    if(targetView==='set'){
+      const pd=document.getElementById('pd');
+      if(pd) pd.textContent=`${S.read.length} chapitre${S.read.length>1?'s':''} consulté${S.read.length>1?'s':''}`;
+    }
+  } catch (e) {
+    console.error('[sw] fatal', view, e);
+    if(typeof toast==='function') toast('Erreur navigation');
   }
 }
 
