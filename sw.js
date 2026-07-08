@@ -7,6 +7,7 @@ const CORE = [
   './style.css',
   './manifest.json',
   './data-bundle.js',
+  './notebook-interactive.js',
   './calculateurs.js',
   './quiz.js',
   './dashboard.js',
