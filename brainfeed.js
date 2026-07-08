@@ -160,24 +160,29 @@ const BrainFeed = (() => {
   }
 
   function getAllFlash() {
+    if (typeof collectAllFlashcards === 'function') {
+      return collectAllFlashcards().filter(c => c && (c.question || c.q));
+    }
     const all = [];
-    if (typeof FLASHCARDS !== 'undefined') all.push(...FLASHCARDS);
-    if (typeof FLASHCARDS_A !== 'undefined') all.push(...FLASHCARDS_A);
-    if (typeof FLASHCARDS_B !== 'undefined') all.push(...FLASHCARDS_B);
-    if (typeof FLASHCARDS_C !== 'undefined') all.push(...FLASHCARDS_C);
-    if (typeof FLASHCARDS_MEMOS !== 'undefined') all.push(...FLASHCARDS_MEMOS);
-    if (typeof FLASHCARDS_EXPANDED !== 'undefined') all.push(...FLASHCARDS_EXPANDED);
-    if (typeof MEGA_FLASHCARDS !== 'undefined') all.push(...MEGA_FLASHCARDS);
-    if (typeof EVC_FLASHCARDS !== 'undefined') all.push(...EVC_FLASHCARDS);
-    if (typeof MEGA_FLASHCARDS_2 !== 'undefined') all.push(...MEGA_FLASHCARDS_2);
-    if (typeof MEGA_FLASHCARDS_3 !== 'undefined') all.push(...MEGA_FLASHCARDS_3);
-    if (typeof MEGA_FLASHCARDS_4 !== 'undefined') all.push(...MEGA_FLASHCARDS_4);
-    if (typeof MEGA_FLASHCARDS_5 !== 'undefined') all.push(...MEGA_FLASHCARDS_5);
-    if (typeof MEGA_FLASHCARDS_6 !== 'undefined') all.push(...MEGA_FLASHCARDS_6);
-    if (typeof MEGA_FLASHCARDS_7 !== 'undefined') all.push(...MEGA_FLASHCARDS_7);
-    if (typeof MEGA_FLASHCARDS_8 !== 'undefined') all.push(...MEGA_FLASHCARDS_8);
-    if (typeof MEGA_FLASHCARDS_9 !== 'undefined') all.push(...MEGA_FLASHCARDS_9);
-    if (typeof MEGA_FLASHCARDS_10 !== 'undefined') all.push(...MEGA_FLASHCARDS_10);
+    const push = (arr) => { if (Array.isArray(arr) && arr.length) all.push(...arr); };
+    push(typeof FLASHCARDS !== 'undefined' ? FLASHCARDS : null);
+    push(typeof FLASHCARDS_A !== 'undefined' ? FLASHCARDS_A : null);
+    push(typeof FLASHCARDS_B !== 'undefined' ? FLASHCARDS_B : null);
+    push(typeof FLASHCARDS_C !== 'undefined' ? FLASHCARDS_C : null);
+    push(typeof FLASHCARDS_MEMOS !== 'undefined' ? FLASHCARDS_MEMOS : null);
+    push(typeof FLASHCARDS_EXPANDED !== 'undefined' ? FLASHCARDS_EXPANDED : null);
+    push(typeof REVISION_FLASHCARDS !== 'undefined' ? REVISION_FLASHCARDS : null);
+    push(typeof MEGA_FLASHCARDS !== 'undefined' ? MEGA_FLASHCARDS : null);
+    push(typeof EVC_FLASHCARDS !== 'undefined' ? EVC_FLASHCARDS : null);
+    push(typeof MEGA_FLASHCARDS_2 !== 'undefined' ? MEGA_FLASHCARDS_2 : null);
+    push(typeof MEGA_FLASHCARDS_3 !== 'undefined' ? MEGA_FLASHCARDS_3 : null);
+    push(typeof MEGA_FLASHCARDS_4 !== 'undefined' ? MEGA_FLASHCARDS_4 : null);
+    push(typeof MEGA_FLASHCARDS_5 !== 'undefined' ? MEGA_FLASHCARDS_5 : null);
+    push(typeof MEGA_FLASHCARDS_6 !== 'undefined' ? MEGA_FLASHCARDS_6 : null);
+    push(typeof MEGA_FLASHCARDS_7 !== 'undefined' ? MEGA_FLASHCARDS_7 : null);
+    push(typeof MEGA_FLASHCARDS_8 !== 'undefined' ? MEGA_FLASHCARDS_8 : null);
+    push(typeof MEGA_FLASHCARDS_9 !== 'undefined' ? MEGA_FLASHCARDS_9 : null);
+    push(typeof MEGA_FLASHCARDS_10 !== 'undefined' ? MEGA_FLASHCARDS_10 : null);
     return all;
   }
 

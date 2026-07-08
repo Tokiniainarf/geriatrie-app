@@ -4,7 +4,7 @@ const BM_SVG={on:'<svg viewBox="0 0 24 24" width="22" height="22" fill="currentC
 
 function safeJSON(k,f){try{return JSON.parse(localStorage.getItem(k))||f}catch{return f}}
 const S={view:'home',ch:null,bm:safeJSON('gbm',[]),read:safeJSON('grd',[]),fs:parseInt(localStorage.getItem('gfs')||'18'),lh:parseFloat(localStorage.getItem('glh')||'1.7'),th:localStorage.getItem('gth')||'dark'};
-let flashIdx=0,flashDeck=[],flashFilter='all';
+let flashIdx=0,flashDeck=[],flashFilter='all',flashChapFilter='all';
 
 function bootApp(){
   if (window.__geriBooted) return;
@@ -21,10 +21,16 @@ function bootApp(){
   const fsR=document.getElementById('fsRange'); if(fsR) fsR.value=S.fs;
   const lhR=document.getElementById('lhRange'); if(lhR) lhR.value=S.lh;
   document.documentElement.setAttribute('data-theme', S.th);
-  try{
-    renderHome(); renderSynthesis(); renderItems(); renderFav();
-    populateChapFilter(); loadFlashDeck(); updStats(); updateThemeIcon();
-  }catch(e){ console.error('[boot] initial render', e); }
+  // Each step isolated — a home/synth crash must NEVER skip flash deck load
+  const bootStep=(fn,label)=>{ try{ fn(); }catch(e){ console.error('[boot]', label, e); } };
+  bootStep(renderHome, 'renderHome');
+  bootStep(renderSynthesis, 'renderSynthesis');
+  bootStep(renderItems, 'renderItems');
+  bootStep(renderFav, 'renderFav');
+  bootStep(populateChapFilter, 'populateChapFilter');
+  bootStep(loadFlashDeck, 'loadFlashDeck');
+  bootStep(updStats, 'updStats');
+  bootStep(updateThemeIcon, 'updateThemeIcon');
   if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
   window.addEventListener('beforeinstallprompt', e=>{
     e.preventDefault();
@@ -51,12 +57,8 @@ function bootApp(){
     }
   });
 }
-// Scripts may load after DOMContentLoaded (sequential preloader) — always boot
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', bootApp);
-} else {
-  bootApp();
-}
+// Expose early for preloader; actual boot is scheduled at END of this file
+// (avoids TDZ on flashChapFilter / functions declared later in the same script)
 window.bootApp = bootApp;
 
 /* ── NAV ── */
@@ -92,7 +94,8 @@ function sw(view){
     const safe = (fn, label) => { try{ fn(); }catch(e){ console.error('[sw]', label, e); } };
 
     if(targetView==='synth') safe(renderSynthesis, 'synth');
-    if(targetView==='flash') safe(renderFlashcard, 'flash');
+    // Always rebuild deck on open (boot may have failed earlier)
+    if(targetView==='flash') safe(loadFlashDeck, 'flash');
     if(targetView==='items') safe(renderItems, 'items');
     if(targetView==='fav') safe(renderFav, 'fav');
     if(targetView==='graph'&&typeof initGraph==='function') safe(initGraph, 'graph');
@@ -289,20 +292,24 @@ function updateThemeIcon(){
 function renderHome(){
   const p1=document.getElementById('p1'),p2=document.getElementById('p2');
   if(!p1||!p2)return;p1.innerHTML=p2.innerHTML='';
-  // Update stats
+  // Update stats (null-safe — never crash boot)
+  const chapters=(typeof APP_DATA!=='undefined'&&APP_DATA.chapters)||[];
   const totalFigs=typeof FIGURES!=='undefined'?Object.keys(FIGURES).length:0;
-  const totalItems=APP_DATA.chapters.reduce((s,ch)=>s+ch.items.length,0);
-  document.querySelector('.stats-bar').innerHTML=`
-    <div class="stat"><span class="stat-num">${APP_DATA.chapters.length}</span><span class="stat-label">chap.</span></div>
+  const totalItems=chapters.reduce((s,ch)=>s+(ch.items?ch.items.length:0),0);
+  const statsBar=document.getElementById('statsBar')||document.querySelector('.stats-bar');
+  if(statsBar){
+    statsBar.innerHTML=`
+    <div class="stat"><span class="stat-num">${chapters.length}</span><span class="stat-label">chap.</span></div>
     <div class="stat"><span class="stat-num">${totalFigs}</span><span class="stat-label">fig.</span></div>
     <div class="stat"><span class="stat-num">${totalItems}</span><span class="stat-label">ITEMs</span></div>
     <div class="stat"><span class="stat-num">${S.read.length}</span><span class="stat-label">lus</span></div>
     <div class="stat stat-click" role="button" tabindex="0" onclick="sw('fav')" onkeydown="if(event.key==='Enter')sw('fav')"><span class="stat-num" id="statFav">${S.bm.length}</span><span class="stat-label">fav.</span></div>`;
+  }
   // Daily revision card
-  renderDailyRev();
+  try{ renderDailyRev(); }catch(e){ console.warn('[renderHome] dailyRev', e); }
   // Render chapters
   let chIdx=0;
-  APP_DATA.chapters.forEach(ch=>{
+  chapters.forEach(ch=>{
     const rd=S.read.includes(ch.id),bm=S.bm.includes(ch.id);
     const pct=rd?100:0;
     const el=document.createElement('div');el.className='ch-row ch-row-enter';
@@ -2669,7 +2676,7 @@ window.onSynthFilterInput=onSynthFilterInput;
 window.synthPrint=synthPrint;
 
 /* ── FLASHCARDS ── */
-let flashChapFilter = 'all';
+// flashChapFilter declared at top with flashIdx/flashDeck (must not redeclare — TDZ broke boot)
 
 function populateChapFilter() {
   const sel = document.getElementById('flashChapFilter');
@@ -2704,25 +2711,37 @@ function shuffleFlash() {
   renderFlashcard();
 }
 
-function filterDeck(){
+/** Collect every flashcard source (shared by flash tab + BrainFeed). */
+function collectAllFlashcards(){
   const all = [];
-  if (typeof FLASHCARDS !== 'undefined') all.push(...FLASHCARDS);
-  if (typeof FLASHCARDS_A !== 'undefined') all.push(...FLASHCARDS_A);
-  if (typeof FLASHCARDS_B !== 'undefined') all.push(...FLASHCARDS_B);
-  if (typeof FLASHCARDS_C !== 'undefined') all.push(...FLASHCARDS_C);
-  if (typeof FLASHCARDS_EXPANDED !== 'undefined') all.push(...FLASHCARDS_EXPANDED);
-  if (typeof MEGA_FLASHCARDS !== 'undefined') all.push(...MEGA_FLASHCARDS);
-  if (typeof EVC_FLASHCARDS !== 'undefined') all.push(...EVC_FLASHCARDS);
-  if (typeof MEGA_FLASHCARDS_2 !== 'undefined') all.push(...MEGA_FLASHCARDS_2);
-  if (typeof MEGA_FLASHCARDS_3 !== 'undefined') all.push(...MEGA_FLASHCARDS_3);
-  if (typeof MEGA_FLASHCARDS_4 !== 'undefined') all.push(...MEGA_FLASHCARDS_4);
-  if (typeof MEGA_FLASHCARDS_5 !== 'undefined') all.push(...MEGA_FLASHCARDS_5);
-  if (typeof MEGA_FLASHCARDS_6 !== 'undefined') all.push(...MEGA_FLASHCARDS_6);
-  if (typeof MEGA_FLASHCARDS_7 !== 'undefined') all.push(...MEGA_FLASHCARDS_7);
-  if (typeof MEGA_FLASHCARDS_8 !== 'undefined') all.push(...MEGA_FLASHCARDS_8);
-  if (typeof MEGA_FLASHCARDS_9 !== 'undefined') all.push(...MEGA_FLASHCARDS_9);
-  if (typeof MEGA_FLASHCARDS_10 !== 'undefined') all.push(...MEGA_FLASHCARDS_10);
-  
+  const push = (arr) => {
+    if (Array.isArray(arr) && arr.length) all.push(...arr);
+  };
+  push(typeof FLASHCARDS !== 'undefined' ? FLASHCARDS : null);
+  push(typeof FLASHCARDS_A !== 'undefined' ? FLASHCARDS_A : null);
+  push(typeof FLASHCARDS_B !== 'undefined' ? FLASHCARDS_B : null);
+  push(typeof FLASHCARDS_C !== 'undefined' ? FLASHCARDS_C : null);
+  push(typeof FLASHCARDS_MEMOS !== 'undefined' ? FLASHCARDS_MEMOS : null);
+  push(typeof FLASHCARDS_EXPANDED !== 'undefined' ? FLASHCARDS_EXPANDED : null);
+  push(typeof REVISION_FLASHCARDS !== 'undefined' ? REVISION_FLASHCARDS : null);
+  push(typeof MEGA_FLASHCARDS !== 'undefined' ? MEGA_FLASHCARDS : null);
+  push(typeof EVC_FLASHCARDS !== 'undefined' ? EVC_FLASHCARDS : null);
+  push(typeof MEGA_FLASHCARDS_2 !== 'undefined' ? MEGA_FLASHCARDS_2 : null);
+  push(typeof MEGA_FLASHCARDS_3 !== 'undefined' ? MEGA_FLASHCARDS_3 : null);
+  push(typeof MEGA_FLASHCARDS_4 !== 'undefined' ? MEGA_FLASHCARDS_4 : null);
+  push(typeof MEGA_FLASHCARDS_5 !== 'undefined' ? MEGA_FLASHCARDS_5 : null);
+  push(typeof MEGA_FLASHCARDS_6 !== 'undefined' ? MEGA_FLASHCARDS_6 : null);
+  push(typeof MEGA_FLASHCARDS_7 !== 'undefined' ? MEGA_FLASHCARDS_7 : null);
+  push(typeof MEGA_FLASHCARDS_8 !== 'undefined' ? MEGA_FLASHCARDS_8 : null);
+  push(typeof MEGA_FLASHCARDS_9 !== 'undefined' ? MEGA_FLASHCARDS_9 : null);
+  push(typeof MEGA_FLASHCARDS_10 !== 'undefined' ? MEGA_FLASHCARDS_10 : null);
+  return all;
+}
+window.collectAllFlashcards = collectAllFlashcards;
+
+function filterDeck(){
+  const all = collectAllFlashcards();
+
   all.sort((a, b) => {
     const numA = parseInt((a.chapter || '').replace('ch', '')) || 999;
     const numB = parseInt((b.chapter || '').replace('ch', '')) || 999;
@@ -2730,8 +2749,12 @@ function filterDeck(){
   });
 
   return all.filter(c => {
-    if (c._deleted) return false;
-    const matchRang = (flashFilter === 'all' || c.rang === flashFilter);
+    if (!c || c._deleted) return false;
+    if (!c.question && !c.q) return false;
+    // Normalize alt field names (revision aids use q/a)
+    if (!c.question && c.q) c.question = c.q;
+    if (!c.answer && c.a) c.answer = c.a;
+    const matchRang = (flashFilter === 'all' || c.rang === flashFilter || (!c.rang && flashFilter === 'all'));
     const matchChap = (flashChapFilter === 'all' || c.chapter === flashChapFilter);
     return matchRang && matchChap;
   });
@@ -2815,6 +2838,14 @@ function renderFlashcard(){
   }
   if(sess)sess.textContent=flashFilterLabel();
   if(!flashDeck.length){
+    // One retry: data may have loaded after first empty boot attempt
+    const rawN = typeof collectAllFlashcards==='function' ? collectAllFlashcards().length : 0;
+    if(rawN>0 && !renderFlashcard._retried){
+      renderFlashcard._retried=true;
+      loadFlashDeck();
+      renderFlashcard._retried=false;
+      return;
+    }
     card.classList.add('flash-empty-state');
     const flashCh=document.getElementById('flashCh'); if(flashCh) flashCh.textContent='';
     const flashRang=document.getElementById('flashRang'); if(flashRang) flashRang.textContent='';
@@ -2823,7 +2854,9 @@ function renderFlashcard(){
       fq.innerHTML='';
       const empty=document.createElement('div');
       empty.className='flash-empty-inner';
-      empty.innerHTML='<div class="empty-icon">🎴</div><div class="empty-text">Aucune carte pour ce filtre</div><div class="empty-hint">Essayez « Tous » ou un autre rang</div>';
+      empty.innerHTML=rawN===0
+        ? '<div class="empty-icon">🎴</div><div class="empty-text">Cartes non chargées</div><div class="empty-hint">Ctrl+F5 pour recharger le bundle (data-bundle.js)</div>'
+        : '<div class="empty-icon">🎴</div><div class="empty-text">Aucune carte pour ce filtre</div><div class="empty-hint">Essayez « Tous » ou un autre rang ('+rawN+' cartes dispo)</div>';
       fq.appendChild(empty);
     }
     const flashA=document.getElementById('flashA'); if(flashA) flashA.textContent='';
@@ -3727,3 +3760,9 @@ function esc(s){
     .replace(/'/g, '&#39;');
 }
 function toast(msg){const t=document.getElementById('toast');if(!t)return;t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000)}
+// Boot only after full app.js evaluation (all lets/functions initialized)
+(function scheduleBoot(){
+  function go(){ try{ if(typeof window.bootApp==='function') window.bootApp(); }catch(e){ console.error('[boot schedule]', e); } }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', go);
+  else go();
+})();
