@@ -1967,8 +1967,11 @@ function renderChapter(raw,chId){
     return m;
   });
   html = html.replace(/<div class="def-block"><span class="rang-badge[^"]*">[^<]*<\/span><span class="def-text">\s*<\/span><\/div>/g, '');
-  // Drop empty list cards
+  // Drop empty list cards and empty p tags
   html = html.replace(/<div class="reader-list-card"><ul class="reader-list"><\/ul><\/div>/g, '');
+  html = html.replace(/<p>\s*<\/p>/g, '');
+  // Never render leaked CSS/JS fragments as prose
+  html = html.replace(/<div class="para-card[^"]*"[^>]*>[\s\S]*?(?:\.bouchon-svg|@keyframes|stroke-dashoffset)[\s\S]*?<\/div>/gi, '');
   // R3 — remove empty sections (class may include id= attributes)
   html = html.replace(/<section class="manual-section"[^>]*>([\s\S]*?)<\/section>/g, (match, inner) => {
     const bodyIndex = inner.indexOf('<div class="section-body">');
