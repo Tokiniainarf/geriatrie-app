@@ -3058,6 +3058,67 @@ function renderAnnalesList(){
 }
 
 /* ── PROTOCOLES ── */
+/** Normalize all known body fields into a list of step strings for display */
+function getProtoBodySteps(p){
+  if(!p||typeof p!=='object') return [];
+  const out=[];
+  const seen=new Set();
+  const pushOne=(s)=>{
+    const t=String(s||'').replace(/\s+/g,' ').trim();
+    if(!t||t.length<2) return;
+    const k=t.toLowerCase();
+    if(seen.has(k)) return;
+    seen.add(k);
+    out.push(t);
+  };
+  const pushRaw=(raw)=>{
+    if(raw==null) return;
+    if(Array.isArray(raw)){
+      raw.forEach(item=>{
+        if(item==null) return;
+        if(typeof item==='string') pushOne(item);
+        else if(typeof item==='object') pushOne(item.text||item.step||item.titre||item.label||JSON.stringify(item));
+      });
+      return;
+    }
+    if(typeof raw==='string'){
+      const s=raw.trim();
+      if(!s) return;
+      // Numbered list in one string → split
+      const parts=s.split(/(?=\d+\.\s)/).map(x=>x.replace(/^\d+\.\s*/,'').trim()).filter(Boolean);
+      if(parts.length>1) parts.forEach(pushOne);
+      else pushOne(s);
+    }
+  };
+  // Canonical + source-specific body fields used across protocol arrays
+  pushRaw(p.protocole);
+  pushRaw(p.steps);
+  pushRaw(p.checklist);
+  pushRaw(p.etapes);       // PROTOCOLES_RCP
+  pushRaw(p.conduite);     // PROTOCOLES_REANIMATION
+  pushRaw(p.programme);    // PROTOCOLES_KINE
+  return out;
+}
+/** Extra meta lines rendered under the card (not step list) */
+function getProtoMetaBlocks(p){
+  if(!p) return [];
+  const blocks=[];
+  const add=(label,val)=>{
+    const t=String(val||'').trim();
+    if(t) blocks.push({label, text:t});
+  };
+  add('Objectif', p.objectif);
+  add('Âge / cible', p.age);
+  add('Considérations', p.considerations);
+  add('Éthique', p.ethique);
+  add('Critères d\'arrêt', p.criteres_arret);
+  add('Références', p.references);
+  add('Durée', p.duree);
+  return blocks;
+}
+window.getProtoBodySteps=getProtoBodySteps;
+window.getProtoMetaBlocks=getProtoMetaBlocks;
+
 function renderProto(){
   const el=document.getElementById('protoContent');
   const filtEl=document.getElementById('protoFilters');
@@ -3112,13 +3173,16 @@ function renderProto(){
   const seenId = new Map();
 
   const protoRichness = (p) => {
-    const steps = p.protocole || p.steps || p.checklist || p.etapes || [];
-    return (Array.isArray(steps) ? steps.length * 2 : 0)
+    const steps = getProtoBodySteps(p);
+    return (steps.length * 2)
       + (p.surveillance ? 5 : 0)
       + (p.alerte || p.alert ? 3 : 0)
       + (p.indication ? 2 : 0)
       + (p.objectif ? 2 : 0)
-      + (typeof p.protocole === 'string' ? Math.min(20, p.protocole.length / 40) : 0);
+      + (p.conduite ? 4 : 0)
+      + (p.programme ? 4 : 0)
+      + (p.etapes ? 4 : 0)
+      + (p.considerations || p.ethique ? 2 : 0);
   };
 
   rawAll.forEach(p => {
@@ -3249,15 +3313,19 @@ function renderProtoList(list){
         <span class="ann-chevron">▾</span>
       </div>
       <div class="proto-cat-body">${items.map(p=>{
-        const raw=p.protocole||p.steps||p.checklist||[];
-        const steps=Array.isArray(raw)?raw:(typeof raw==='string'?raw.split(/(?=\d+\.\s)/).map(s=>s.replace(/^\d+\.\s*/,'').trim()).filter(Boolean):[]);
+        const steps=getProtoBodySteps(p);
+        const meta=getProtoMetaBlocks(p);
         const icon=p.icon||'📋';
-        return`<div class="proto-card${p.urgency==='high'?' proto-urgent':''}">
+        const hasBody=steps.length>0||meta.length>0||p.indication||p.surveillance||p.alerte||p.alert||p.contreIndications||p.effetsSecondaires;
+        return`<div class="proto-card${p.urgency==='high'?' proto-urgent':''}${hasBody?'':' proto-empty'}">
           <div class="proto-card-head"><span class="proto-icon">${icon}</span><div class="proto-card-title">${esc(p.titre||p.title||'')}</div></div>
           ${p.indication?`<div class="proto-indication">${esc(p.indication)}</div>`:''}
+          ${meta.map(m=>`<div class="proto-meta"><strong>${esc(m.label)} :</strong> ${esc(m.text)}</div>`).join('')}
           ${steps.length?`<ol class="proto-steps">${steps.map(s=>`<li>${esc(s)}</li>`).join('')}</ol>`:''}
+          ${!hasBody?`<div class="proto-alert">⚠️ Contenu manquant pour ce protocole</div>`:''}
           ${p.alerte||p.alert?`<div class="proto-alert">⚠️ ${esc(p.alerte||p.alert)}</div>`:''}
           ${p.surveillance?`<div class="proto-surveillance">📊 ${esc(p.surveillance)}</div>`:''}
+          ${p.effetsSecondaires?`<div class="proto-surveillance">⚡ EI: ${esc(p.effetsSecondaires)}</div>`:''}
           ${p.contreIndications?`<div class="proto-ci">🚫 CI: ${esc(p.contreIndications)}</div>`:''}
         </div>`;
       }).join('')}</div>

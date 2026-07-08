@@ -396,6 +396,61 @@ function loadScript(code, sandbox, filename) {
 
   if (all.length < 20) fail('proto_merged_min_count', 'only ' + all.length);
   else pass('proto_merged_min_count', all.length + ' protocols');
+
+  // Load SHIPPED getProtoBodySteps / getProtoMetaBlocks from app.js (same as renderProtoList)
+  const appSrc = fs.readFileSync(path.join(ROOT, 'app.js'), 'utf8');
+  const hStart = appSrc.indexOf('function getProtoBodySteps');
+  const hEnd = appSrc.indexOf('window.getProtoBodySteps');
+  if (hStart < 0 || hEnd < 0) {
+    fail('proto_helpers_shipped', 'getProtoBodySteps not found in app.js');
+  } else {
+    const helperCode = appSrc.slice(hStart, hEnd)
+      + '\n;this.getProtoBodySteps=getProtoBodySteps;this.getProtoMetaBlocks=getProtoMetaBlocks;';
+    loadScript(helperCode, ctx, 'proto_helpers_from_app.js');
+    const getSteps = vm.runInContext('getProtoBodySteps', ctx);
+    const getMeta = vm.runInContext('getProtoMetaBlocks', ctx);
+
+    // Spot-check known field shapes against SHIPPED extractor
+    const rcp = getArr('PROTOCOLES_RCP') || [];
+    const rea = getArr('PROTOCOLES_REANIMATION') || [];
+    const kine = getArr('PROTOCOLES_KINE') || [];
+    const rcpEmpty = rcp.filter((p) => getSteps(p).length === 0);
+    const reaEmpty = rea.filter((p) => getSteps(p).length === 0 && getMeta(p).length === 0);
+    const kineEmpty = kine.filter((p) => getSteps(p).length === 0);
+    if (rcpEmpty.length) fail('proto_rcp_etapes_mapped', rcpEmpty.map((p) => p.id).join(','));
+    else pass('proto_rcp_etapes_mapped', rcp.length + ' RCP cards have steps from etapes');
+    if (reaEmpty.length) fail('proto_reanim_conduite_mapped', reaEmpty.map((p) => p.id).join(','));
+    else pass('proto_reanim_conduite_mapped', rea.length + ' reanim cards have conduite/meta body');
+    if (kineEmpty.length) fail('proto_kine_programme_mapped', kineEmpty.map((p) => p.id).join(','));
+    else pass('proto_kine_programme_mapped', kine.length + ' kine cards have programme steps');
+
+    // Every merged protocol must have visible body under same field set as renderProtoList
+    const emptyCards = [];
+    all.forEach((p) => {
+      const steps = getSteps(p);
+      const meta = getMeta(p);
+      const hasBody = steps.length > 0
+        || meta.length > 0
+        || !!(p.indication && String(p.indication).trim())
+        || !!(p.surveillance && String(p.surveillance).trim())
+        || !!(p.alerte || p.alert)
+        || !!(p.contreIndications && String(p.contreIndications).trim())
+        || !!(p.effetsSecondaires && String(p.effetsSecondaires).trim());
+      if (!hasBody) emptyCards.push({ id: p.id, titre: p.titre });
+    });
+    report.protocols.emptyVisibleBodies = emptyCards;
+    if (emptyCards.length) fail('proto_no_empty_visible_body', JSON.stringify(emptyCards.slice(0, 15)));
+    else pass('proto_no_empty_visible_body', all.length + ' cards have visible body content');
+
+    // Spot IDs called out by skeptic
+    for (const id of ['prcp-1', 'pr-1', 'pk-1']) {
+      const hit = all.find((p) => String(p.id) === id) || rcp.concat(rea, kine).find((p) => String(p.id) === id);
+      if (!hit) { pass('proto_spot_' + id, 'not in merge (ok if renamed)'); continue; }
+      const n = getSteps(hit).length + getMeta(hit).length;
+      if (n === 0) fail('proto_spot_' + id, 'still empty body');
+      else pass('proto_spot_' + id, n + ' body fragments');
+    }
+  }
 })();
 
 // Print + exit
