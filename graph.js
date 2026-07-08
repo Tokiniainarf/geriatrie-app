@@ -17,21 +17,34 @@
   };
   const TYPE_PRIORITY = { concept: 3, sameItem: 2, samePart: 1 };
 
+  // Lazy graph model — never block first paint by scanning all textbook text at load
   const nodeById = new Map();
-  const NODES = APP_DATA.chapters.map((ch, i) => {
-    const n = {
-      id: ch.id,
-      label: ch.t.replace(/^.*?:\s*/, ''),
-      full: ch.t,
-      color: CH_COLORS[ch.id],
-      part: ch.part,
-      items: ch.items || [],
-      x: 0, y: 0, vx: 0, vy: 0, fx: null, fy: null,
-      mass: 1 + (ch.items?.length || 0) * 0.15
-    };
-    nodeById.set(n.id, n);
-    return n;
-  });
+  let NODES = [];
+  let EDGES = [];
+  let adjacency = new Map();
+  let particles = [];
+  let graphDataReady = false;
+
+  function buildNodes(){
+    nodeById.clear();
+    const chapters = (typeof APP_DATA !== 'undefined' && APP_DATA.chapters) ? APP_DATA.chapters : [];
+    return chapters.map((ch) => {
+      const n = {
+        id: ch.id,
+        label: String(ch.t || ch.id).replace(/^.*?:\s*/, ''),
+        full: ch.t || ch.id,
+        color: CH_COLORS[ch.id] || '#0891B2',
+        part: ch.part,
+        items: ch.items || [],
+        x: (Math.random() - 0.5) * 200,
+        y: (Math.random() - 0.5) * 200,
+        vx: 0, vy: 0, fx: null, fy: null,
+        mass: 1 + (ch.items?.length || 0) * 0.15
+      };
+      nodeById.set(n.id, n);
+      return n;
+    });
+  }
 
   function buildEdges(){
     const pairMap = new Map();
@@ -45,12 +58,24 @@
       }
     }
 
+    if(typeof APP_DATA === 'undefined' || !APP_DATA.chapters) return [];
+
+    // Precompute chapter text once (was O(concepts × chapters × pages) before — froze UI)
+    const chapterTexts = {};
+    APP_DATA.chapters.forEach(ch => {
+      const pages = APP_DATA.content[ch.id] || [];
+      chapterTexts[ch.id] = pages.map(p => p[1]).join(' ').toLowerCase();
+    });
+
+    // Cap concept edges for speed & readability (shared ITEMs + part still full)
     if(typeof CONCEPT_MAP !== 'undefined'){
-      Object.entries(CONCEPT_MAP).forEach(([term, info]) => {
+      const entries = Object.entries(CONCEPT_MAP).slice(0, 120);
+      entries.forEach(([term, info]) => {
+        if(!info || !info.ch) return;
+        const t = String(term).toLowerCase();
+        if(t.length < 4) return;
         APP_DATA.chapters.forEach(ch => {
-          const pages = APP_DATA.content[ch.id] || [];
-          const text = pages.map(p => p[1]).join(' ').toLowerCase();
-          if(text.includes(term.toLowerCase()) && ch.id !== info.ch){
+          if(ch.id !== info.ch && chapterTexts[ch.id] && chapterTexts[ch.id].includes(t)){
             addEdge(ch.id, info.ch, 'concept', term);
           }
         });
@@ -70,21 +95,24 @@
     return Array.from(pairMap.values()).map((e, i) => (e.idx = i, e));
   }
 
-  const EDGES = buildEdges();
-  const adjacency = new Map();
-  NODES.forEach(n => adjacency.set(n.id, []));
-  EDGES.forEach(e => {
-    adjacency.get(e.from)?.push(e);
-    adjacency.get(e.to)?.push(e);
-  });
-
-  /** Particles flowing along edges */
-  const particles = EDGES.map((e, i) => ({
-    edgeIndex: i,
-    t: Math.random(),
-    speed: 0.00035 + Math.random() * 0.00025,
-    size: 1.2 + Math.random() * 1.2
-  }));
+  function ensureGraphData(){
+    if(graphDataReady && NODES.length) return;
+    NODES = buildNodes();
+    EDGES = buildEdges();
+    adjacency = new Map();
+    NODES.forEach(n => adjacency.set(n.id, []));
+    EDGES.forEach(e => {
+      adjacency.get(e.from)?.push(e);
+      adjacency.get(e.to)?.push(e);
+    });
+    particles = EDGES.map((e, i) => ({
+      edgeIndex: i,
+      t: Math.random(),
+      speed: 0.00035 + Math.random() * 0.00025,
+      size: 1.2 + Math.random() * 1.2
+    }));
+    graphDataReady = true;
+  }
 
   let canvas, ctx, minimap, mctx, graphWrap;
   let W = 800, H = 600, animId;
@@ -256,6 +284,14 @@
   }
 
   function initGraph(){
+    try { ensureGraphData(); } catch (err) {
+      console.error('[graph] ensureGraphData', err);
+      return;
+    }
+    if (!NODES.length) {
+      console.warn('[graph] no chapters to display');
+      return;
+    }
     canvas = document.getElementById('graphCanvas');
     if(!canvas) return;
     ctx = canvas.getContext('2d');

@@ -19,9 +19,30 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<link rel="stylesheet" href="style.css?v=184">
+<link rel="stylesheet" href="style.css?v=185">
+<style>
+/* Critical preloader (inline so it shows before CSS/JS) */
+#appPreloader{position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:radial-gradient(ellipse 80% 50% at 50% 0%,#164E63 0%,#0f1117 55%,#050508 100%);color:#EDEDEF;font-family:Figtree,system-ui,sans-serif;transition:opacity .45s ease,visibility .45s}
+#appPreloader.hide{opacity:0;visibility:hidden;pointer-events:none}
+#appPreloader .pl-logo{width:72px;height:72px;border-radius:20px;background:linear-gradient(135deg,#0891B2,#059669);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 40px rgba(8,145,178,.35)}
+#appPreloader .pl-logo svg{width:36px;height:36px;stroke:#fff}
+#appPreloader .pl-title{font-size:1.35rem;font-weight:800;letter-spacing:-.02em}
+#appPreloader .pl-sub{font-size:.85rem;color:rgba(255,255,255,.55);text-align:center;max-width:280px;line-height:1.4}
+#appPreloader .pl-track{width:min(240px,70vw);height:6px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden}
+#appPreloader .pl-fill{height:100%;width:8%;border-radius:99px;background:linear-gradient(90deg,#22D3EE,#34D399);transition:width .35s ease;box-shadow:0 0 12px rgba(52,211,153,.5)}
+#appPreloader .pl-status{font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+</style>
 </head>
 <body>
+<div id="appPreloader" role="status" aria-live="polite" aria-busy="true">
+  <div class="pl-logo" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"/></svg>
+  </div>
+  <div class="pl-title">Gériatrie</div>
+  <div class="pl-sub">Chargement du manuel CNEG 5e éd. · scores · feed</div>
+  <div class="pl-track"><div class="pl-fill" id="plFill"></div></div>
+  <div class="pl-status" id="plStatus">Initialisation…</div>
+</div>
 <div class="reading-progress" id="readingProgress"></div>
 
 <header class="top-bar">
@@ -432,6 +453,17 @@
       </div>
       <div class="set-btn" onclick="resetProg()">Réinitialiser la progression</div>
       <div class="set-btn" onclick="clearAll()">Effacer toutes les données</div>
+      <div class="set-btn" onclick="location.href='clear-cache.html'">Vider le cache PWA</div>
+    </div>
+    <div class="set-group" style="margin-top:18px">
+      <div class="set-label" style="padding:4px 2px 10px">
+        <div class="lb">Sources de l'app</div>
+        <div class="ds" style="line-height:1.45;margin-top:6px">
+          Manuel : <strong>Gériatrie 5e éd.</strong> (CNEG · Boddaert · Elsevier Masson 2021).<br>
+          Compléments NotebookLM / blueprints cliniques : chutes, autonomie, delirium, nutrition, prescription, soins palliatifs, BPSD, BPCO, etc.<br>
+          Scores : MMS, MNA, GDS, Tinetti, TUG, Braden, EGS/CGA, CAM… alignés sur la pratique gériatrique.
+        </div>
+      </div>
     </div>
   </div>
 </main>
@@ -482,15 +514,68 @@
   <button type="button" class="install-btn" onclick="event.stopPropagation();installPWA()">Installer</button>
 </div>
 
-<script src="data-bundle.js?v=184"></script>
-<script src="calculateurs.js?v=184"></script>
-<script src="quiz.js?v=184"></script>
-<script src="dashboard.js?v=184"></script>
-<script src="appsearch.js?v=184"></script>
-<script src="erreurs-journal.js?v=184"></script>
-<script src="graph.js?v=184"></script>
-<script src="brainfeed.js?v=184"></script>
-<script src="app.js?v=184"></script>
+<script>
+(function(){
+  var steps = [
+    { src: 'data-bundle.js?v=185', label: 'Contenu des chapitres…', pct: 45 },
+    { src: 'calculateurs.js?v=185', label: 'Scores & calculateurs…', pct: 58 },
+    { src: 'quiz.js?v=185', label: 'Mode examen…', pct: 66 },
+    { src: 'dashboard.js?v=185', label: 'Tableau de bord…', pct: 72 },
+    { src: 'appsearch.js?v=185', label: 'Recherche…', pct: 78 },
+    { src: 'erreurs-journal.js?v=185', label: 'Fichier erreurs…', pct: 84 },
+    { src: 'graph.js?v=185', label: 'Carte des liens…', pct: 90 },
+    { src: 'brainfeed.js?v=185', label: 'BrainFeed…', pct: 95 },
+    { src: 'app.js?v=185', label: 'Interface…', pct: 100 }
+  ];
+  var i = 0;
+  var fill = document.getElementById('plFill');
+  var status = document.getElementById('plStatus');
+  function setProg(p, label){
+    if(fill) fill.style.width = Math.min(100, p) + '%';
+    if(status) status.textContent = label || '';
+  }
+  function fail(msg){
+    if(status) status.textContent = msg;
+    if(fill){ fill.style.width = '100%'; fill.style.background = '#ef4444'; }
+  }
+  function next(){
+    if(i >= steps.length){
+      setProg(100, 'Prêt');
+      setTimeout(function(){
+        var pl = document.getElementById('appPreloader');
+        if(pl){ pl.classList.add('hide'); pl.setAttribute('aria-busy','false'); }
+      }, 280);
+      return;
+    }
+    var step = steps[i++];
+    setProg(step.pct - 8, step.label);
+    var s = document.createElement('script');
+    s.src = step.src;
+    s.async = false;
+    s.onload = function(){
+      setProg(step.pct, step.label);
+      if (step.src.indexOf('app.js') === 0 && typeof window.bootApp === 'function') {
+        try { window.bootApp(); } catch (e) { console.error(e); }
+      }
+      next();
+    };
+    s.onerror = function(){
+      fail('Erreur: ' + step.src.split('?')[0] + ' — vérifiez la connexion / cache');
+      // Continue so partial app may still work
+      next();
+    };
+    document.body.appendChild(s);
+  }
+  // Start after DOM is interactive
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', next);
+  else next();
+  // Safety hide after 20s
+  setTimeout(function(){
+    var pl = document.getElementById('appPreloader');
+    if(pl && !pl.classList.contains('hide')) pl.classList.add('hide');
+  }, 20000);
+})();
+</script>
 
 <button class="scroll-top-btn" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Retour en haut" title="Retour en haut">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>

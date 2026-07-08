@@ -6,7 +6,16 @@ function safeJSON(k,f){try{return JSON.parse(localStorage.getItem(k))||f}catch{r
 const S={view:'home',ch:null,bm:safeJSON('gbm',[]),read:safeJSON('grd',[]),fs:parseInt(localStorage.getItem('gfs')||'18'),lh:parseFloat(localStorage.getItem('glh')||'1.7'),th:localStorage.getItem('gth')||'dark'};
 let flashIdx=0,flashDeck=[],flashFilter='all';
 
-document.addEventListener('DOMContentLoaded',()=>{
+function bootApp(){
+  if (window.__geriBooted) return;
+  window.__geriBooted = true;
+  // Safety: dismiss preloader if sequential loader already finished or stuck
+  try{
+    const pl=document.getElementById('appPreloader');
+    if(pl && !pl.classList.contains('hide')){
+      setTimeout(()=>{ pl.classList.add('hide'); pl.setAttribute('aria-busy','false'); }, 120);
+    }
+  }catch{}
   try{ preprocessAppData(); }catch(e){ console.error('[boot] preprocessAppData', e); }
   setFS(S.fs); setLH(S.lh, true);
   const fsR=document.getElementById('fsRange'); if(fsR) fsR.value=S.fs;
@@ -41,7 +50,14 @@ document.addEventListener('DOMContentLoaded',()=>{
       else stb.classList.remove('visible');
     }
   });
-});
+}
+// Scripts may load after DOMContentLoaded (sequential preloader) — always boot
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', bootApp);
+} else {
+  bootApp();
+}
+window.bootApp = bootApp;
 
 /* ── NAV ── */
 function sw(view){
@@ -73,7 +89,17 @@ function sw(view){
   if(targetView==='erreurs'&&typeof ErrorJournal!=='undefined')ErrorJournal.render();
   if(targetView==='garde')renderGarde();
   if(targetView==='dict')renderDict();
-  if(targetView==='scores'&&typeof Medicalcul!=='undefined')Medicalcul.init();
+  if(targetView==='scores'){
+    const Mc = (typeof Medicalcul!=='undefined') ? Medicalcul
+      : (typeof window!=='undefined' ? window.Medicalcul : null);
+    if(Mc && typeof Mc.init==='function'){
+      try{ Mc.init(); }
+      catch(e){ console.error('[scores]', e); if(typeof toast==='function') toast('Erreur scores'); }
+    } else {
+      const list=document.getElementById('calc-list');
+      if(list) list.innerHTML='<div class="empty"><div class="empty-text">Module scores non chargé</div><div class="empty-hint">Ctrl+F5 ou clear-cache.html</div></div>';
+    }
+  }
   if(targetView==='annales') {
     if (view === 'sujets') switchAnnalesMode('sujets');
     else switchAnnalesMode('annales');
@@ -351,48 +377,69 @@ function showCh(id){
 }
 function renderChapterContent(){
   const cc=document.getElementById('chContent');if(!cc)return;
+  if(typeof APP_DATA==='undefined'||!APP_DATA.content){
+    cc.innerHTML='<div class="empty"><div class="empty-text">Données non chargées</div><div class="empty-hint">Rechargez l\'app (Ctrl+F5)</div></div>';
+    return;
+  }
   const chunks=APP_DATA.content[S.ch]||[];
-  if(!chunks.length){cc.innerHTML='<div class="empty"><div class="empty-icon">📖</div><div class="empty-text">Contenu indisponible</div><div class="empty-hint">Ce chapitre sera bientôt disponible</div></div>';return}
-  cc.innerHTML=renderChapter(chunks.map(c=>c[1]).join('\n▼\n'),S.ch);
+  if(!chunks.length){
+    cc.innerHTML='<div class="empty"><div class="empty-icon">📖</div><div class="empty-text">Contenu indisponible</div><div class="empty-hint">Ce chapitre sera bientôt disponible</div></div>';
+    return;
+  }
+  // Join pages with soft breaks — avoid noisy page markers that fragment reading
+  const raw = chunks.map((c, idx) => {
+    let t = String(c[1] || '').trim();
+    if (!t) return '';
+    // Drop pure blank-page placeholders from reader body
+    if (/^this page intentionally left blank$/i.test(t)) return '';
+    return t;
+  }).filter(Boolean).join('\n\n');
+  try {
+    cc.innerHTML = renderChapter(raw, S.ch);
+  } catch (e) {
+    console.error('[renderChapter]', e);
+    cc.innerHTML = '<div class="empty"><div class="empty-text">Erreur de rendu</div><div class="empty-hint">'+String(e.message||e)+'</div></div>';
+    return;
+  }
   applyConceptLinks();
-
-  // === ROBUST EDUCATIONAL VISUALS INJECTION ===
-  // Always guarantee >=6 images/videos per chapter. No duplicates. Reliable placement.
-  // Targets complete blocks (sub-head/para-card) to keep good text flow. Uses only confirmed existing chX-N.jpg + specials.
-  // Final append guarantee + src dedup across all passes.
+  // Max 4 visuals, contextual only — no spam of broken placeholders
   injectEducationalVisuals(S.ch, cc);
 }
 
 function injectEducationalVisuals(chId, cc) {
   if (!cc || typeof createEduVisualWrapper !== 'function') return;
 
-  const addedSrcs = new Set(); // global dedup for this chapter render to avoid any repeats
+  const addedSrcs = new Set();
+  const MAX_VISUALS = 4;
+  const isQAChapter = ['ch18','ch19','ch20'].includes(chId);
 
-  // Base reliable images (always exist)
-  const basics = [];
-  for (let i=1; i<=6; i++) {
-    basics.push(`images/chapters/educational/${chId}-${i}.jpg`);
-  }
-
-  // Merge targeted from EDU_VISUALS (cleaned paths)
-  let candidates = [...basics];
+  // Prefer curated EDU_VISUALS; only 1–2 generic educational fallbacks (not 6 broken slots)
+  let candidates = [];
   if (typeof EDU_VISUALS !== 'undefined' && EDU_VISUALS[chId]) {
     EDU_VISUALS[chId].forEach(v => {
-      if (v && v.img && !candidates.includes(v.img)) candidates.push(v.img);
+      if (v && v.img) candidates.push(v.img);
     });
   }
-  candidates = [...new Set(candidates)];
+  if (!isQAChapter) {
+    candidates.push(`images/chapters/educational/${chId}-1.jpg`);
+    candidates.push(`images/chapters/educational/${chId}-2.jpg`);
+  }
+  candidates = [...new Set(candidates)].slice(0, MAX_VISUALS + 2);
 
-  // Targeted match inserts first (good context match)
+  // Targeted match inserts first (context-aware)
   if (typeof EDU_VISUALS !== 'undefined' && EDU_VISUALS[chId]) {
     EDU_VISUALS[chId].forEach(v => {
-      if (!v || !v.img || addedSrcs.has(v.img)) return;
-      const re = new RegExp(v.match || '.*', 'i');
+      if (!v || !v.img || addedSrcs.has(v.img) || addedSrcs.size >= MAX_VISUALS) return;
+      let re;
+      try { re = new RegExp(v.match || '.*', 'i'); } catch { re = /./; }
       const targets = cc.querySelectorAll('h3, .sub-head, .section-title, .para-card, header');
       for (let el of targets) {
         if (re.test((el.textContent || el.innerText || ''))) {
           const w = createEduVisualWrapper(v.img, v.note || `Illustration ${chId}`);
-          if (w) {
+          if (w && el.parentNode) {
+            // Hide broken images so reading isn't littered with empty boxes
+            const img = w.querySelector('img, video');
+            if (img) img.onerror = function(){ const wrap=this.closest('.edu-visual-wrapper'); if(wrap) wrap.remove(); };
             el.parentNode.insertBefore(w, el.nextSibling);
             addedSrcs.add(v.img);
             break;
@@ -405,38 +452,32 @@ function injectEducationalVisuals(chId, cc) {
   // Collect solid insertion points for spaced placement
   let blocks = Array.from(cc.querySelectorAll('.para-card, h3.sub-head, .sub-head, .section-head'));
   if (blocks.length < 2) {
-    blocks = Array.from(cc.querySelectorAll('h3, .para-card, section, div'));
+    blocks = Array.from(cc.querySelectorAll('h3, .para-card, section'));
   }
-  // For QA/practice chapters (ch18-20) with very few blocks, don't spam visuals at end
-  const isQAChapter = ['ch18','ch19','ch20'].includes(chId);
-  if (isQAChapter && blocks.length < 4) {
-    // only use targeted matches, skip forced fill
+  if (isQAChapter || addedSrcs.size >= MAX_VISUALS) {
     blocks = [];
   }
 
-  // Spaced insert of remaining candidates
+  // Spaced insert of remaining candidates (cap MAX_VISUALS)
   let placed = cc.querySelectorAll('figure.edu-visual-wrapper').length;
   let cIdx = 0;
   for (let b of blocks) {
-    if (placed >= 6) break;
+    if (placed >= MAX_VISUALS) break;
     if (cIdx >= candidates.length) break;
     let src = candidates[cIdx];
-    // advance past already added
     let guard=0;
     while (addedSrcs.has(src) && guard < candidates.length) { cIdx++; src = candidates[cIdx % candidates.length]; guard++; }
     if (addedSrcs.has(src)) break;
 
-    // skip immediate repeat
     const nxt = b.nextSibling;
     if (nxt && nxt.classList && nxt.classList.contains('edu-visual-wrapper')) {
-      const media = nxt.querySelector('img, video');
-      if (media && (media.src || media.getAttribute('src') || '').includes(src.substring(src.lastIndexOf('/')+1))) {
-        cIdx++; continue;
-      }
+      cIdx++; continue;
     }
 
     const w = createEduVisualWrapper(src, `Illustration : ${chId}`);
-    if (w) {
+    if (w && b.parentNode) {
+      const media = w.querySelector('img, video');
+      if (media) media.onerror = function(){ const wrap=this.closest('.edu-visual-wrapper'); if(wrap) wrap.remove(); };
       b.parentNode.insertBefore(w, b.nextSibling);
       addedSrcs.add(src);
       placed++;
@@ -444,29 +485,19 @@ function injectEducationalVisuals(chId, cc) {
     cIdx++;
   }
 
-  // Final strong guarantee: append any missing to reach 6 (distinct only)
-  // Improved: properly scan for next unused candidate
+  // Optional light fill only if chapter has almost no visuals (never force 6)
   let currentCount = cc.querySelectorAll('figure.edu-visual-wrapper').length;
-  let safety = 0;
-  function pickNextUnused(startIdx) {
-    for (let i = 0; i < candidates.length; i++) {
-      const s = candidates[(startIdx + i) % candidates.length];
-      if (!addedSrcs.has(s)) return s;
-    }
-    return null;
-  }
-  const skipForcedFill = isQAChapter && blocks.length === 0;
-  while (currentCount < 6 && safety < 20 && !skipForcedFill) {
-    safety++;
-    let src = pickNextUnused(currentCount);
-    if (!src) break;
-    const w = createEduVisualWrapper(src, `Visuel éducatif – ${chId}`);
-    if (w) {
-      cc.appendChild(w);
-      addedSrcs.add(src);
-      currentCount++;
-    } else {
-      currentCount++;
+  if (!isQAChapter && currentCount < 2) {
+    for (const src of candidates) {
+      if (currentCount >= 2 || addedSrcs.has(src)) continue;
+      const w = createEduVisualWrapper(src, `Illustration ${chId}`);
+      if (w) {
+        const media = w.querySelector('img, video');
+        if (media) media.onerror = function(){ const wrap=this.closest('.edu-visual-wrapper'); if(wrap) wrap.remove(); };
+        cc.appendChild(w);
+        addedSrcs.add(src);
+        currentCount++;
+      }
     }
   }
 

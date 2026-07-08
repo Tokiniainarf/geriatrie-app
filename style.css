@@ -4303,3 +4303,38 @@ button:disabled { opacity: .45; cursor: not-allowed; }
 :root:not([data-theme="dark"]) .ch-content .bullet {
   color: #1e293b;
 }
+
+/* v185 fixes: scores display, preloader-safe, tokens */
+:root {
+  --radius-md: 14px;
+}
+#vScores {
+  max-width: 56rem !important;
+}
+#vScores .calc-list {
+  min-height: 120px;
+  display: block !important;
+  visibility: visible !important;
+}
+#vScores .calc-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+#vScores .calc-card {
+  display: block !important;
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  padding: 14px 16px;
+  cursor: pointer;
+}
+#vGraph {
+  max-width: none !important;
+  padding: 0 !important;
+}
+.ch-content .para-card p {
+  max-width: 65ch;
+}
+/* Hide broken visual shells */
+.edu-visual-wrapper:empty { display: none !important; }

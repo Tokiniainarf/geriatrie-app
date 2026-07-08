@@ -2837,27 +2837,48 @@ const Medicalcul = {
   currentResultText: '',
 
   init() {
-    const searchInput = document.getElementById('calcSearch');
-    if (searchInput && searchInput.parentNode) {
-      searchInput.value = this.currentSearch || '';
-      // Remove any existing listener by cloning and replacing (when cloneNode is available)
-      if (typeof searchInput.cloneNode === 'function') {
-        const newSearch = searchInput.cloneNode(true);
-        searchInput.parentNode.replaceChild(newSearch, searchInput);
-        newSearch.addEventListener('input', (e) => {
-          this.currentSearch = e.target.value.toLowerCase().trim();
-          this.renderList();
-        });
-      } else if (!searchInput._mcBound) {
-        searchInput._mcBound = true;
-        searchInput.addEventListener('input', (e) => {
-          this.currentSearch = e.target.value.toLowerCase().trim();
-          this.renderList();
-        });
+    try {
+      const list = typeof CALCULATEURS !== 'undefined' ? CALCULATEURS
+        : (typeof window !== 'undefined' ? window.CALCULATEURS : null);
+      if (!list || !list.length) {
+        const container = document.getElementById('calc-list');
+        if (container) {
+          container.innerHTML = `
+            <div class="empty" style="text-align:center;padding:40px 20px;">
+              <div class="empty-text" style="font-weight:700;">Calculateurs indisponibles</div>
+              <div class="empty-hint">Rechargez l'application (Ctrl+F5) ou videz le cache PWA.</div>
+            </div>`;
+        }
+        return;
+      }
+      const searchInput = document.getElementById('calcSearch');
+      if (searchInput && searchInput.parentNode) {
+        searchInput.value = this.currentSearch || '';
+        if (typeof searchInput.cloneNode === 'function') {
+          const newSearch = searchInput.cloneNode(true);
+          searchInput.parentNode.replaceChild(newSearch, searchInput);
+          newSearch.addEventListener('input', (e) => {
+            this.currentSearch = e.target.value.toLowerCase().trim();
+            this.renderList();
+          });
+        } else if (!searchInput._mcBound) {
+          searchInput._mcBound = true;
+          searchInput.addEventListener('input', (e) => {
+            this.currentSearch = e.target.value.toLowerCase().trim();
+            this.renderList();
+          });
+        }
+      }
+      this.currentDomain = this.currentDomain || 'all';
+      this.renderList();
+      this.showListContainer();
+    } catch (err) {
+      console.error('[Medicalcul.init]', err);
+      const container = document.getElementById('calc-list');
+      if (container) {
+        container.innerHTML = `<div class="empty"><div class="empty-text">Erreur d'affichage des scores</div><div class="empty-hint">${String(err.message || err)}</div></div>`;
       }
     }
-    this.renderList();
-    this.showListContainer();
   },
 
   showListContainer() {
@@ -3010,19 +3031,34 @@ const Medicalcul = {
     const container = document.getElementById('calc-list');
     if (!container) return;
 
-    let filtered = CALCULATEURS;
+    const source = (typeof CALCULATEURS !== 'undefined' && CALCULATEURS.length)
+      ? CALCULATEURS
+      : (window.CALCULATEURS || []);
+    let filtered = Array.isArray(source) ? source.slice() : [];
 
-    // Filter by domain
-    if (this.currentDomain !== 'all') {
-      filtered = filtered.filter(c => c.domaine === this.currentDomain);
+    // Filter by domain (exact, then fuzzy accent-insensitive)
+    if (this.currentDomain && this.currentDomain !== 'all') {
+      const exact = filtered.filter(c => c.domaine === this.currentDomain);
+      if (exact.length) {
+        filtered = exact;
+      } else {
+        const norm = (s) => String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        const d = norm(this.currentDomain);
+        filtered = filtered.filter(c => {
+          const cd = norm(c.domaine);
+          return cd === d || cd.includes(d) || d.includes(cd.split(' ')[0] || '');
+        });
+      }
     }
 
     // Filter by search query
     if (this.currentSearch) {
+      const q = this.currentSearch;
       filtered = filtered.filter(c =>
-        c.nom.toLowerCase().includes(this.currentSearch) ||
-        c.domaine.toLowerCase().includes(this.currentSearch) ||
-        c.description.toLowerCase().includes(this.currentSearch)
+        (c.nom || '').toLowerCase().includes(q) ||
+        (c.domaine || '').toLowerCase().includes(q) ||
+        (c.description || '').toLowerCase().includes(q) ||
+        (c.id || '').toLowerCase().includes(q)
       );
     }
 
@@ -3338,9 +3374,11 @@ const Medicalcul = {
   }
 };
 
+// Expose globals for classic scripts / onclick handlers
 window.Medicalcul = Medicalcul;
+window.CALCULATEURS = CALCULATEURS;
 
 
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { CALCULATEURS };
+  module.exports = { CALCULATEURS, Medicalcul };
 }
