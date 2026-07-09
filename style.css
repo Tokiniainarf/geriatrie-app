@@ -4552,29 +4552,36 @@ button:disabled { opacity: .45; cursor: not-allowed; }
 }
 .toolbar-dense.ghost { opacity: .9; }
 
-.ch-outline-sticky {
-  position: sticky;
-  top: calc(var(--topbar) + 52px);
-  z-index: 25;
+/* Plan: static in document flow — NEVER sticky (was covering body text on scroll) */
+.ch-outline-sticky,
+.ch-outline-nav {
+  position: relative;
+  top: auto;
+  z-index: 1;
   background: var(--bg-card);
   border: 1px solid var(--glass-border);
   border-radius: 14px;
   padding: 10px 12px;
   margin: 0 0 16px;
   box-shadow: var(--shadow-card);
-  max-height: 42vh;
-  overflow: auto;
+  max-height: none;
+  overflow: visible;
 }
+.ch-outline-nav.collapsed .outline-list,
 .ch-outline-sticky.collapsed .outline-list { display: none; }
+.ch-outline-nav.collapsed { padding-bottom: 8px; }
 .outline-hd {
   display: flex; justify-content: space-between; align-items: center;
   font-size: .72rem; font-weight: 800; letter-spacing: .06em;
-  text-transform: uppercase; color: var(--text3); margin-bottom: 8px;
+  text-transform: uppercase; color: var(--text3); margin-bottom: 0;
 }
+.ch-outline-nav:not(.collapsed) .outline-hd { margin-bottom: 8px; }
 .outline-toggle {
-  font-size: .72rem; font-weight: 700; color: var(--accent); padding: 4px 8px;
+  font-size: .72rem; font-weight: 700; color: var(--accent);
+  padding: 6px 10px; min-height: 36px; border-radius: 8px;
+  background: var(--accent-soft); border: 1px solid var(--glass-border);
 }
-.outline-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.outline-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; max-height: 50vh; overflow: auto; }
 .outline-link {
   display: flex; gap: 8px; align-items: baseline;
   padding: 8px 10px; border-radius: 10px; min-height: 40px;
@@ -4640,12 +4647,156 @@ button:disabled { opacity: .45; cursor: not-allowed; }
   padding: 10px 12px;
   margin: 8px 0;
 }
+.study-reader.dense-mode .ch-outline-nav,
 .study-reader.dense-mode .ch-outline-sticky {
-  max-height: 28vh;
   padding: 8px 10px;
 }
 .study-reader .section-head {
-  scroll-margin-top: calc(var(--topbar) + 100px);
+  scroll-margin-top: calc(var(--topbar) + 72px);
+}
+
+/* ═══ FIGURES & TABLEAUX RECONSTITUÉS (pas de scan PDF) ═══ */
+.fig-block.fig-reconstituted,
+.faithful-table,
+.faithful-fig {
+  margin: 18px 0;
+  border-radius: 14px;
+  border: 1px solid var(--glass-border);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  max-width: 100%;
+}
+.fig-block.fig-reconstituted { padding: 0 0 10px; text-align: left; }
+.fig-block.fig-reconstituted figcaption {
+  padding: 8px 14px 0;
+  font-family: var(--sans);
+  font-size: .78rem;
+  color: var(--text3);
+  font-style: normal;
+}
+.faithful-table-hd,
+.faithful-fig-hd {
+  display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: baseline;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--glass-border);
+  background: color-mix(in srgb, var(--accent) 8%, var(--bg-card));
+}
+.faithful-badge {
+  font-size: .68rem; font-weight: 800; letter-spacing: .04em;
+  text-transform: uppercase; color: #fff;
+  background: var(--accent); padding: 4px 10px; border-radius: 999px;
+  flex-shrink: 0;
+}
+.faithful-title {
+  font-size: .92rem; font-weight: 700; color: var(--text); line-height: 1.35;
+}
+.faithful-table-scroll {
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+  padding: 0;
+  max-width: 100%;
+}
+.faithful-grid {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .82rem;
+  line-height: 1.4;
+  min-width: 260px;
+}
+.faithful-grid th,
+.faithful-grid td {
+  border: 1px solid var(--glass-border);
+  padding: 8px 10px;
+  vertical-align: top;
+  text-align: left;
+  color: var(--text2);
+}
+.faithful-grid thead th {
+  background: color-mix(in srgb, var(--accent) 12%, var(--bg-elevated));
+  color: var(--text);
+  font-weight: 700;
+  font-size: .75rem;
+  white-space: nowrap;
+}
+.faithful-grid tbody th {
+  font-weight: 600;
+  color: var(--text);
+  background: color-mix(in srgb, var(--bg-elevated) 80%, transparent);
+  white-space: normal;
+}
+.faithful-grid tr:nth-child(even) td {
+  background: color-mix(in srgb, var(--accent) 4%, transparent);
+}
+.faithful-note {
+  margin: 0;
+  padding: 10px 14px;
+  font-size: .8rem;
+  color: var(--text2);
+  line-height: 1.45;
+  border-top: 1px dashed var(--glass-border);
+}
+.faithful-source {
+  display: none; /* no “capture collège” footer */
+}
+.faithful-fig-body { padding: 12px 14px 14px; }
+.faithful-flow {
+  margin: 0;
+  padding: 0 0 0 1.15rem;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.faithful-flow li {
+  font-size: .88rem; color: var(--text); line-height: 1.4;
+}
+.faithful-flow li span {
+  display: block; font-size: .8rem; color: var(--text2); font-weight: 400; margin-top: 2px;
+}
+.faithful-chips {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.faithful-chip {
+  display: inline-flex; flex-direction: column; gap: 2px;
+  padding: 8px 12px; border-radius: 10px;
+  background: var(--accent-soft);
+  border: 1px solid var(--glass-border);
+  font-size: .8rem; color: var(--text2);
+  max-width: 100%;
+}
+.faithful-chip b { color: var(--text); font-size: .84rem; }
+.faithful-bouchon {
+  display: grid; gap: 8px;
+}
+.fb-zone {
+  padding: 12px 14px; border-radius: 12px;
+  font-size: .88rem; line-height: 1.4; color: var(--text);
+}
+.fb-z1 { background: color-mix(in srgb, #0891B2 16%, var(--bg-card)); border: 1px solid color-mix(in srgb, #0891B2 35%, transparent); }
+.fb-z2 { background: color-mix(in srgb, #059669 16%, var(--bg-card)); border: 1px solid color-mix(in srgb, #059669 35%, transparent); }
+.fb-z3 { background: color-mix(in srgb, #DC2626 14%, var(--bg-card)); border: 1px solid color-mix(in srgb, #DC2626 30%, transparent); }
+.fb-threshold {
+  margin-top: 4px; text-align: center;
+  font-size: .75rem; font-weight: 700; color: #DC2626;
+  border-top: 2px dashed #DC2626; padding-top: 8px;
+}
+.fig-placeholder {
+  padding: 16px;
+  display: flex; flex-direction: column; gap: 6px;
+  background: var(--bg-elevated);
+}
+.fig-placeholder strong { color: var(--accent); }
+.fig-placeholder span { color: var(--text); font-size: .9rem; }
+.fig-placeholder em { color: var(--text3); font-size: .78rem; }
+.fig-interactive-wrap {
+  padding: 8px;
+  max-width: 100%;
+  overflow-x: auto;
+}
+.fig-interactive-wrap svg { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+.table-lead { margin-bottom: 8px; }
+@media (max-width: 480px) {
+  .faithful-grid { font-size: .76rem; }
+  .faithful-grid th, .faithful-grid td { padding: 7px 8px; }
+  .faithful-badge { font-size: .62rem; }
+  .ch-outline-nav { margin: 0 0 12px; }
 }
 
 /* Practice cards slightly denser after OCR cleanup */

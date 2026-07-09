@@ -11,6 +11,66 @@ function resolveManualAsset(entry){
   if(typeof entry==='object' && entry.src) return {src:String(entry.src), desc:entry.desc?String(entry.desc):''};
   return null;
 }
+
+/**
+ * Build a figure block — reconstituted HTML/SVG only (no PDF page capture).
+ * Priority: faithful-visuals → interactive SVG exact → interactive fuzzy → crop (clinical photo only).
+ */
+function buildFigureBlock(figId, titleHint){
+  const capTitle = (titleHint||'').replace(/^[AB]\s+/i,'').trim();
+  let inner = '';
+  // 1) Faithful pedagogical reconstitution
+  if(typeof renderFaithfulFigure==='function'){
+    try { inner = renderFaithfulFigure(figId) || ''; } catch(e){ console.warn('faithful fig', figId, e); }
+  }
+  // 2) Exact interactive SVG
+  if(!inner && typeof INTERACTIVE_FIGURES!=='undefined' && INTERACTIVE_FIGURES[figId]?.svg){
+    inner = `<div class="fig-interactive-wrap" data-fig="${figId}">${INTERACTIVE_FIGURES[figId].svg}</div>`;
+  }
+  // 3) Fuzzy interactive (chapter schema) — never use PDF full-page
+  if(!inner && typeof INTERACTIVE_FIGURES!=='undefined'){
+    const gk = String(figId).split('.')[0] + '.x';
+    if(INTERACTIVE_FIGURES[gk]?.svg){
+      inner = `<div class="fig-interactive-wrap" data-fig="${figId}">${INTERACTIVE_FIGURES[gk].svg}</div>`;
+    }
+  }
+  // 4) Clinical crop only (not figures/page_* book scans)
+  if(!inner && typeof FIGURES!=='undefined' && FIGURES[figId]){
+    const asset = resolveManualAsset(FIGURES[figId]);
+    if(asset?.src && !/figures\/page_/i.test(asset.src) && !/\/page_\d/i.test(asset.src)){
+      inner = `<img src="${asset.src}" alt="Figure ${figId}${asset.desc?': '+esc(asset.desc):''}" class="fig-original" loading="lazy" decoding="async" onerror="this.closest('figure')&&(this.closest('figure').style.display='none')">`;
+      if(asset.desc && !capTitle) titleHint = asset.desc;
+    }
+  }
+  if(!inner){
+    // Visible placeholder so the reference is never silently dropped
+    inner = `<div class="fig-placeholder"><strong>Figure ${esc(figId)}</strong>${capTitle?`<span>${esc(capTitle)}</span>`:''}<em>Schéma en cours de reconstitution</em></div>`;
+  }
+  const cap = capTitle ? `Figure ${figId} — ${esc(capTitle)}` : `Figure ${figId}`;
+  return `<figure class="fig-block fig-reconstituted">${inner}<figcaption>${cap}</figcaption></figure>`;
+}
+
+/**
+ * Build a table block — reconstituted HTML only (never PDF page image).
+ */
+function buildTableBlock(tabId, titleHint){
+  const title = (titleHint||'').replace(/^[AB]\s+/i,'').trim();
+  // Faithful HTML table
+  if(typeof renderFaithfulTable==='function'){
+    try {
+      const html = renderFaithfulTable(tabId);
+      if(html) return html;
+    } catch(e){ console.warn('faithful table', tabId, e); }
+  }
+  // Title + empty structured shell (no scan)
+  return `<div class="faithful-table faithful-table-missing" data-table="${esc(tabId)}">
+    <div class="faithful-table-hd">
+      <span class="faithful-badge">Tableau ${esc(tabId)}</span>
+      <span class="faithful-title">${esc(title||'')}</span>
+    </div>
+    <p class="faithful-note">Tableau reconstitué non encore disponible pour cet identifiant.</p>
+  </div>`;
+}
 const S={view:'home',ch:null,bm:safeJSON('gbm',[]),read:safeJSON('grd',[]),fs:parseInt(localStorage.getItem('gfs')||'18'),lh:parseFloat(localStorage.getItem('glh')||'1.7'),th:localStorage.getItem('gth')||'dark'};
 let flashIdx=0,flashDeck=[],flashFilter='all',flashChapFilter='all';
 
@@ -513,7 +573,7 @@ window.toggleDenseMode = function(){
   }
 };
 window.scrollToKeyPanel = function(){
-  const el = document.querySelector('.key-panel, .ch-outline-sticky');
+  const el = document.querySelector('.key-panel, .ch-outline-nav, .ch-outline');
   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 };
 
@@ -1887,60 +1947,36 @@ function renderChapter(raw,chId){
       else flushCallout();
     }
 
-    const figM=l.match(/Fig\.?\s*(\d+\.\d+)/i);
+    // Figures: only caption lines starting with Fig. (never mid-paragraph citations)
+    // Capture id as d+.d+ only (not "1.1." with trailing dot — that broke lookups)
+    const figM=l.match(/^Fig\.?\s*(\d+\.\d+)\.?\s*([AB])?\s*(.*)$/i);
     if(figM){
       flushPara();flushBullets();flushNumList();
       const figId=figM[1];
+      const figTitle=(figM[3]||'').trim();
       if(!seenFigs) seenFigs = new Set();
       if(seenFigs.has(figId)) continue;
-      // Support FIGURES as {src,desc} | [src] | string (legacy [0] broke all originals)
-      const figAsset = (typeof resolveManualAsset==='function')
-        ? resolveManualAsset(typeof FIGURES!=='undefined' ? FIGURES[figId] : null)
-        : null;
-      const figSrc = figAsset?.src || (typeof resolveFigureSrc==='function' ? resolveFigureSrc(figId) : '') || '';
-      const figDesc = figAsset?.desc || '';
-      if(!seenFigSrcs) seenFigSrcs = new Set();
-      if(figSrc && seenFigSrcs.has(figSrc)) continue;
       seenFigs.add(figId);
-      if(figSrc) seenFigSrcs.add(figSrc);
-      let figInner = '';
-      // Prefer original book crop/image; interactive only if no static original
-      if(figSrc){
-        figInner = `<img src="${figSrc}" alt="Figure ${figId}${figDesc?': '+esc(figDesc):''}" class="fig-original" loading="lazy" decoding="async">`;
-        // Exact interactive (not fuzzy) as optional schéma under original
-        if(typeof INTERACTIVE_FIGURES!=='undefined' && INTERACTIVE_FIGURES[figId]?.svg){
-          figInner += `<div class="fig-interactive-wrap" data-fig="${figId}">${INTERACTIVE_FIGURES[figId].svg}</div>`;
-        }
-      } else if(typeof renderInteractiveFigure==='function'){
-        figInner = renderInteractiveFigure(figId, {preferStatic:true});
-      }
-      if(figInner && !/non disponible/i.test(figInner)){
-        const cap = figDesc ? `Figure ${figId} — ${esc(figDesc)}` : `Figure ${figId}`;
-        html+=`<figure class="fig-block">${figInner}<figcaption>${cap}</figcaption></figure>`;
-      }
+      const block = (typeof buildFigureBlock==='function')
+        ? buildFigureBlock(figId, figTitle)
+        : '';
+      if(block) html+=block;
       continue;
     }
 
-    const tab=l.match(/^Tableau\s+([\d.]+)\.\s*(.*)/i);
+    // Tables: caption lines only — reconstituted HTML, never PDF page scans
+    const tab=l.match(/^Tableau\s+(\d+\.\d+)\.?\s*([AB])?\s*(.*)$/i);
     if(tab){
       flushPara();flushBullets();flushNumList();
       const tabId=tab[1];
+      const tabTitle=((tab[2]?tab[2]+' ':'')+(tab[3]||'')).trim();
       if(!seenTabs) seenTabs = new Set();
       if(seenTabs.has(tabId)) continue;
-      // TABLES map (page crops) first — never reuse FIGURES ids (Fig 7.1 ≠ Tab 7.1)
-      const tabAsset = (typeof resolveManualAsset==='function')
-        ? resolveManualAsset(typeof TABLES!=='undefined' ? TABLES[tabId] : null)
-        : null;
-      const tabSrc = tabAsset?.src || '';
-      if(!seenTabSrcs) seenTabSrcs = new Set();
-      if(tabSrc && seenTabSrcs.has(tabSrc)) { /* still show lead */ }
       seenTabs.add(tabId);
-      if(tabSrc) seenTabSrcs.add(tabSrc);
-      const tabTitle = (tab[2]||'').trim() || tabAsset?.desc || '';
-      html+=`<div class="table-lead"><span class="table-badge">Tableau ${tab[1]}</span><span>${esc(tabTitle)}</span></div>`;
-      if(tabSrc){
-        html+=`<figure class="fig-block table-fig"><div class="table-fig-scroll"><img src="${tabSrc}" alt="Tableau ${tabId}${tabTitle?': '+esc(tabTitle):''}" class="fig-original" loading="lazy" decoding="async"></div></figure>`;
-      }
+      const block = (typeof buildTableBlock==='function')
+        ? buildTableBlock(tabId, tabTitle)
+        : `<div class="table-lead"><span class="table-badge">Tableau ${esc(tabId)}</span><span>${esc(tabTitle)}</span></div>`;
+      if(block) html+=block;
       continue;
     }
 
@@ -2167,8 +2203,12 @@ function renderChapter(raw,chId){
       const href = s.id || ('sec-auto-' + i);
       return `<li><a href="#${href}" class="outline-link"><span class="outline-num">${esc(s.num)}</span> ${esc(s.title)}</a></li>`;
     }).join('');
-    const outlineHtml = `<nav class="ch-outline ch-outline-sticky" aria-label="Plan du chapitre">
-      <div class="outline-hd"><span>Plan</span><button type="button" class="outline-toggle" onclick="this.closest('.ch-outline').classList.toggle('collapsed')">masquer</button></div>
+    // Plan: NOT sticky (sticky covered body text on scroll). Collapsed by default on narrow screens via CSS.
+    const outlineHtml = `<nav class="ch-outline ch-outline-nav collapsed" aria-label="Plan du chapitre">
+      <div class="outline-hd">
+        <span>Plan du chapitre</span>
+        <button type="button" class="outline-toggle" aria-expanded="false" onclick="(function(b){var n=b.closest('.ch-outline');var on=n.classList.toggle('collapsed');b.setAttribute('aria-expanded', on?'false':'true');b.textContent=on?'afficher':'masquer';})(this)">afficher</button>
+      </div>
       <ul class="outline-list">${outlineItems}</ul>
     </nav>`;
     html = outlineHtml + html;
