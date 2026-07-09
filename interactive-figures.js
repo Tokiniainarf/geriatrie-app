@@ -1803,30 +1803,50 @@ const INTERACTIVE_FIGURES = {
 
 };
 
+// ─── Helper: resolve static FIGURES asset (object {src}, array, or string) ───
+function resolveFigureSrc(figId) {
+  if (typeof FIGURES === 'undefined' || !FIGURES[figId]) return null;
+  var v = FIGURES[figId];
+  if (typeof v === 'string') return v;
+  if (Array.isArray(v)) return v[0] || null;
+  if (v && typeof v === 'object' && v.src) return v.src;
+  return null;
+}
+
 // ─── Helper function: render interactive figure or fall back to static ───
-function renderInteractiveFigure(figId) {
-  // Direct match
-  if (INTERACTIVE_FIGURES[figId]) {
-    return INTERACTIVE_FIGURES[figId].svg;
+// Prefer original book crops/images. Exact interactive match only as enhancement
+// when preferStatic is false. Fuzzy "X.x" never replaces an existing static original.
+function renderInteractiveFigure(figId, opts) {
+  opts = opts || {};
+  var preferStatic = opts.preferStatic !== false; // default true
+  var staticSrc = resolveFigureSrc(figId);
+  var exactInteractive = INTERACTIVE_FIGURES[figId];
+
+  if (preferStatic && staticSrc) {
+    return '<img src="' + staticSrc + '" alt="Figure ' + figId + '" class="fig-original" loading="lazy" decoding="async">';
   }
-  // Fuzzy match: "7.1" → "7.x", "9.1" → "9.x", "13.6" → "13.x"
-  var prefix = figId.split('.')[0];
-  var genericKey = prefix + '.x';
-  if (INTERACTIVE_FIGURES[genericKey]) {
-    return INTERACTIVE_FIGURES[genericKey].svg;
+  if (exactInteractive) {
+    return exactInteractive.svg;
   }
-  // Fallback: try to use static FIGURES if available
-  if (typeof FIGURES !== 'undefined' && FIGURES[figId]) {
-    var src = FIGURES[figId][0] || FIGURES[figId];
-    return '<img src="' + src + '" alt="Figure ' + figId + '" style="max-width:100%;height:auto;border-radius:8px;" loading="lazy">';
+  // Fuzzy match only when no static original
+  if (!staticSrc) {
+    var prefix = String(figId).split('.')[0];
+    var genericKey = prefix + '.x';
+    if (INTERACTIVE_FIGURES[genericKey]) {
+      return INTERACTIVE_FIGURES[genericKey].svg;
+    }
   }
-  return '<p style="color:currentColor;opacity:0.5;font-style:italic;">Figure ' + figId + ' non disponible</p>';
+  if (staticSrc) {
+    return '<img src="' + staticSrc + '" alt="Figure ' + figId + '" class="fig-original" loading="lazy" decoding="async">';
+  }
+  return '<p class="fig-missing" style="color:currentColor;opacity:0.5;font-style:italic;">Figure ' + figId + ' non disponible</p>';
 }
 
 // Make available globally
 if (typeof window !== 'undefined') {
   window.INTERACTIVE_FIGURES = INTERACTIVE_FIGURES;
   window.renderInteractiveFigure = renderInteractiveFigure;
+  window.resolveFigureSrc = resolveFigureSrc;
   // Escarre stage toggle (referenced by onclick in SVG)
   window.toggleEscarreStage = function(stage) {
     var el = document.getElementById('esc-r' + stage);

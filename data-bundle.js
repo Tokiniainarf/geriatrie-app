@@ -5,6 +5,7 @@ const APP_DATA = {"chapters":[{"id":"ch1","t":"Comprendre le vieillissement","it
 
 /* --- figures.js --- */
 const FIGURES = {"1.1": {"src": "images/crops/crop_p031_0.jpg", "desc": "Bouchon 1+2+3"}, "2.3": {"src": "images/crops/crop_p049_0.jpg", "desc": "EGS multidim"}, "6.6": {"src": "images/crops/crop_p110_0.jpg", "desc": "Osteoporose T<=-2,5"}, "7.1": {"src": "images/crops/crop_p126_0.jpg", "desc": "Arthrose cartilage"}, "7.2": {"src": "images/crops/crop_p126_0.jpg", "desc": "Heberden/Bouchard"}, "7.3": {"src": "images/crops/crop_p128_0.jpg", "desc": "Coxarthrose"}, "7.5": {"src": "images/crops/crop_p132_0.jpg", "desc": "Gonarthrose"}, "7.6": {"src": "images/crops/crop_p132_0.jpg", "desc": "IRM menisque"}, "7.7": {"src": "images/crops/crop_p133_0.jpg", "desc": "Echo epanchement"}, "7.9": {"src": "images/crops/crop_p136_0.jpg", "desc": "Erosive mante"}, "7.10": {"src": "images/crops/crop_p138_0.jpg", "desc": "Chondrocalcinose"}, "7.11": {"src": "images/crops/crop_p139_0.jpg", "desc": "PPR VS>40"}, "7.12": {"src": "images/crops/crop_p138_0.jpg", "desc": "Horton corticoide"}, "8.3": {"src": "images/p148_0.jpg", "desc": "EVA/ECPA"}, "9.1": {"src": "images/crops/crop_p162_0.jpg", "desc": "IRM Alzheimer hippo"}, "9.2": {"src": "images/crops/crop_p162_0.jpg", "desc": "TDM lacunes"}, "9.3": {"src": "images/crops/crop_p163_0.jpg", "desc": "Lewy fluctuations"}, "9.5": {"src": "images/crops/crop_p166_0.jpg", "desc": "HSD croissant"}, "9.6": {"src": "images/crops/crop_p167_0.jpg", "desc": "Horloge 11h10"}, "12.2": {"src": "images/crops/crop_p215_0.jpg", "desc": "TUG>20s"}, "12.3": {"src": "images/crops/crop_p216_0.jpg", "desc": "Tinetti<19"}, "12.4": {"src": "images/crops/crop_p217_0.jpg", "desc": "Unipodal>5s"}, "13.6": {"src": "images/crops/crop_p234_0.jpg", "desc": "Escarres Norton"}, "13.7": {"src": "images/crops/crop_p237_0.jpg", "desc": "Kine verticalisation"}, "13.10": {"src": "images/crops/crop_p240_0.jpg", "desc": "SNG/gastrostomie"}, "13.11": {"src": "images/crops/crop_p241_0.jpg", "desc": "HBPM"}, "13.12": {"src": "images/crops/crop_p241_0.jpg", "desc": "Contention"}, "15.1": {"src": "images/crops/crop_p271_0.jpg", "desc": "Bubo debitmetrie"}, "15.3": {"src": "images/crops/crop_p276_0.jpg", "desc": "Reeducation perinee"}, "16.1": {"src": "images/crops/crop_p294_0.jpg", "desc": "STOPP/START"}, "18.1": {"src": "images/crops/crop_p334_1.jpg", "desc": "EVC ouvertes"}, "20.1": {"src": "images/crops/crop_p368_8.jpg", "desc": "ECG BAV"}, "20.2": {"src": "images/crops/crop_p371_7.jpg", "desc": "Radio col femoral"}};
+const TABLES = {"1.1":{"src":"images/figures/page_035.jpg","page":35,"desc":"Mécanismes cellulaires et moléculaires du vieillissement"},"2.3":{"src":"images/figures/page_055.jpg","page":55,"desc":"Critères de fragilité de Fried"},"3.2":{"src":"images/figures/page_064.jpg","page":64,"desc":"Échelle des activités de la vie quotidienne (AVQ, ou ADL de Katz)"},"3.4":{"src":"images/figures/page_066.jpg","page":66,"desc":"Grille AGGIR (autonomie gérontologie groupes iso-ressources)"},"4.1":{"src":"images/figures/page_079.jpg","page":79,"desc":"Différences entre curatelle et tutelle"},"5.1":{"src":"images/figures/page_091.jpg","page":91,"desc":"Facteurs aggravant une presbyacousie"},"5.2":{"src":"images/figures/page_094.jpg","page":94,"desc":"Facteurs de risque de DMLA"},"6.1":{"src":"images/figures/page_102.jpg","page":102,"desc":"Évolution du capital osseux selon les différentes étapes de la vie"},"6.2":{"src":"images/figures/page_112.jpg","page":112,"desc":"Effets indésirables des bisphosphonates"},"7.1":{"src":"images/figures/page_121.jpg","page":121,"desc":"Dégradation cartilagineuse dans l"},"7.2":{"src":"images/figures/page_122.jpg","page":122,"desc":"Facteurs de risque de l"},"7.3":{"src":"images/figures/page_124.jpg","page":124,"desc":"Indice fonctionnel des coxopathies de Lequesne"},"7.4":{"src":"images/figures/page_131.jpg","page":131,"desc":"Caractéristiques comparées des arthroses fémoro-tibiale et fémoro-patellaire"},"8.1":{"src":"images/figures/page_145.jpg","page":145,"desc":"Les six comportements douloureux et leurs expressions symptomatiques chez la personne âgée"},"8.2":{"src":"images/figures/page_146.jpg","page":146,"desc":"Caractéristiques de la douleur aiguë et de la douleur chronique"},"10.1":{"src":"images/figures/page_182.jpg","page":182,"desc":"Maladies somatiques et médicaments fréquemment associés à la dépression"},"10.3":{"src":"images/figures/page_183.jpg","page":183,"desc":"Geriatric Depression Scale (GDS) : version 4 items"},"12.1":{"src":"images/figures/page_212.jpg","page":212,"desc":"Vieillissement physiologique et pathologique des systèmes d"},"12.3":{"src":"images/figures/page_219.jpg","page":219,"desc":"Facteurs précipitants de la chute"},"12.4":{"src":"images/figures/page_219.jpg","page":219,"desc":"Facteurs iatrogènes"},"13.1":{"src":"images/figures/page_229.jpg","page":229,"desc":"Causes du syndrome d"},"13.3":{"src":"images/figures/page_239.jpg","page":239,"desc":"Échelle de Braden"},"14.1":{"src":"images/figures/page_250.jpg","page":250,"desc":"Chiffres clefs de la nutrition de la personne âgée"},"14.2":{"src":"images/crops/crop_p254_0.jpg","page":254,"desc":"Prévalence de la dénutrition dans la population âgée selon le lieu de vie"},"14.6":{"src":"images/figures/page_261.jpg","page":261,"desc":"Stratégie de prise en charge nutritionnelle d"},"15.1":{"src":"images/figures/page_273.jpg","page":273,"desc":"Facteurs précipitants réversibles d"},"16.2":{"src":"images/figures/page_290.jpg","page":290,"desc":"Rappel sur les vaccins chez les personnes âgées"},"16.4":{"src":"images/figures/page_292.jpg","page":292,"desc":"Interactions pharmacocinétiques de médicaments utilisés en gériatrie (liste non"}};
 const PAGE_IMAGES = {"31": ["images/p031_0.jpg", "images/crops/crop_p031_0.jpg"], "39": ["images/p039_0.jpg", "images/crops/crop_p039_0.jpg"], "49": ["images/p049_0.jpg", "images/p049_1.jpg", "images/p049_2.jpg", "images/p049_3.jpg"], "51": ["images/p051_0.jpg", "images/crops/crop_p051_0.jpg"], "62": ["images/p062_0.jpg"], "70": ["images/p070_0.jpg", "images/crops/crop_p070_0.jpg"], "96": ["images/p096_0.jpg"], "104": ["images/p104_0.jpg", "images/p104_1.jpg", "images/p104_2.jpg", "images/crops/crop_p104_0.jpg"], "105": ["images/p105_0.png", "images/crops/crop_p105_0.jpg", "images/crops/crop_p105_1.jpg"], "109": ["images/p109_0.jpg"], "110": ["images/crops/crop_p110_0.jpg"], "111": ["images/p111_0.jpg", "images/crops/crop_p111_0.jpg"], "126": ["images/p126_0.jpg", "images/crops/crop_p126_0.jpg"], "128": ["images/crops/crop_p128_0.jpg"], "129": ["images/p129_0.png", "images/p129_1.jpg", "images/crops/crop_p129_0.jpg", "images/crops/crop_p129_1.jpg"], "132": ["images/p132_0.jpg", "images/p132_1.jpg", "images/p132_2.png", "images/crops/crop_p132_0.jpg"], "133": ["images/p133_0.jpg", "images/crops/crop_p133_0.jpg"], "135": ["images/p135_0.jpg", "images/crops/crop_p135_0.jpg"], "136": ["images/p136_0.jpg", "images/crops/crop_p136_0.jpg"], "138": ["images/crops/crop_p138_0.jpg"], "139": ["images/p139_0.jpg", "images/p139_1.jpg", "images/p139_2.jpg", "images/crops/crop_p139_0.jpg"], "148": ["images/p148_0.jpg"], "152": ["images/p152_0.jpg"], "162": ["images/p162_0.jpg", "images/crops/crop_p162_0.jpg"], "163": ["images/p163_0.png", "images/p163_1.jpg", "images/crops/crop_p163_0.jpg", "images/crops/crop_p163_1.jpg"], "166": ["images/p166_0.jpg", "images/crops/crop_p166_0.jpg"], "167": ["images/p167_0.jpg", "images/p167_1.jpg", "images/crops/crop_p167_0.jpg", "images/crops/crop_p167_1.jpg"], "169": ["images/p169_0.jpg", "images/p169_1.jpg", "images/crops/crop_p169_0.jpg", "images/crops/crop_p169_1.jpg"], "174": ["images/p174_0.jpg"], "188": ["images/p188_0.jpg"], "201": ["images/p201_0.jpg"], "205": ["images/p205_0.jpg"], "215": ["images/p215_0.jpg", "images/p215_1.jpg", "images/crops/crop_p215_0.jpg", "images/crops/crop_p215_1.jpg"], "216": ["images/p216_0.jpg", "images/crops/crop_p216_0.jpg"], "217": ["images/p217_0.jpg", "images/crops/crop_p217_0.jpg"], "221": ["images/p221_0.jpg"], "222": ["images/p222_0.jpg"], "230": ["images/p230_0.jpg"], "234": ["images/p234_0.jpg", "images/crops/crop_p234_0.jpg"], "235": ["images/p235_0.jpg", "images/crops/crop_p235_0.jpg"], "237": ["images/p237_0.jpg", "images/p237_1.jpg", "images/crops/crop_p237_0.jpg", "images/crops/crop_p237_1.jpg"], "240": ["images/p240_0.jpg", "images/p240_1.jpg", "images/p240_2.jpg", "images/p240_3.jpg"], "241": ["images/p241_0.jpg", "images/p241_1.jpg", "images/p241_2.jpg", "images/p241_3.jpg"], "244": ["images/p244_0.jpg"], "253": ["images/p253_0.jpg"], "254": ["images/crops/crop_p254_0.jpg"], "255": ["images/crops/crop_p255_0.jpg"], "262": ["images/p262_0.jpg", "images/p262_1.jpg", "images/p262_2.jpg", "images/p262_3.jpg"], "264": ["images/crops/crop_p264_0.jpg"], "265": ["images/p265_0.jpg"], "271": ["images/p271_0.jpg", "images/crops/crop_p271_0.jpg", "images/crops/crop_p271_1.jpg"], "276": ["images/p276_0.jpg", "images/crops/crop_p276_0.jpg"], "277": ["images/p277_0.jpg", "images/crops/crop_p277_0.jpg"], "278": ["images/p278_0.jpg", "images/crops/crop_p278_0.jpg"], "288": ["images/p288_0.jpg"], "289": ["images/crops/crop_p289_0.jpg"], "291": ["images/crops/crop_p291_0.jpg"], "293": ["images/p293_0.jpg", "images/crops/crop_p293_0.jpg"], "294": ["images/p294_0.jpg", "images/p294_1.jpg", "images/crops/crop_p294_0.jpg", "images/crops/crop_p294_1.jpg"], "295": ["images/p295_0.jpg"], "326": ["images/p326_0.jpg"], "334": ["images/p334_0.jpg", "images/crops/crop_p334_1.jpg"], "343": ["images/p343_0.jpg", "images/crops/crop_p343_1.jpg"], "368": ["images/p368_0.jpg", "images/crops/crop_p368_8.jpg"], "371": ["images/p371_0.jpg", "images/crops/crop_p371_7.jpg"]};
 const CHAPTER_ILL = {"ch1": "images/p031_0.jpg", "ch2": "images/p049_0.jpg", "ch3": "images/p062_0.jpg", "ch5": "images/p096_0.jpg", "ch6": "images/p104_0.jpg", "ch7": "images/p126_0.jpg", "ch8": "images/p148_0.jpg", "ch9": "images/p162_0.jpg", "ch10": "images/p188_0.jpg", "ch11": "images/p201_0.jpg", "ch12": "images/p215_0.jpg", "ch13": "images/p230_0.jpg", "ch14": "images/p253_0.jpg", "ch15": "images/p271_0.jpg", "ch16": "images/p288_0.jpg", "ch17": "images/p326_0.jpg", "ch18": "images/p334_0.jpg", "ch20": "images/p368_0.jpg"};;
 
@@ -2027,30 +2028,50 @@ const INTERACTIVE_FIGURES = {
 
 };
 
+// ─── Helper: resolve static FIGURES asset (object {src}, array, or string) ───
+function resolveFigureSrc(figId) {
+  if (typeof FIGURES === 'undefined' || !FIGURES[figId]) return null;
+  var v = FIGURES[figId];
+  if (typeof v === 'string') return v;
+  if (Array.isArray(v)) return v[0] || null;
+  if (v && typeof v === 'object' && v.src) return v.src;
+  return null;
+}
+
 // ─── Helper function: render interactive figure or fall back to static ───
-function renderInteractiveFigure(figId) {
-  // Direct match
-  if (INTERACTIVE_FIGURES[figId]) {
-    return INTERACTIVE_FIGURES[figId].svg;
+// Prefer original book crops/images. Exact interactive match only as enhancement
+// when preferStatic is false. Fuzzy "X.x" never replaces an existing static original.
+function renderInteractiveFigure(figId, opts) {
+  opts = opts || {};
+  var preferStatic = opts.preferStatic !== false; // default true
+  var staticSrc = resolveFigureSrc(figId);
+  var exactInteractive = INTERACTIVE_FIGURES[figId];
+
+  if (preferStatic && staticSrc) {
+    return '<img src="' + staticSrc + '" alt="Figure ' + figId + '" class="fig-original" loading="lazy" decoding="async">';
   }
-  // Fuzzy match: "7.1" → "7.x", "9.1" → "9.x", "13.6" → "13.x"
-  var prefix = figId.split('.')[0];
-  var genericKey = prefix + '.x';
-  if (INTERACTIVE_FIGURES[genericKey]) {
-    return INTERACTIVE_FIGURES[genericKey].svg;
+  if (exactInteractive) {
+    return exactInteractive.svg;
   }
-  // Fallback: try to use static FIGURES if available
-  if (typeof FIGURES !== 'undefined' && FIGURES[figId]) {
-    var src = FIGURES[figId][0] || FIGURES[figId];
-    return '<img src="' + src + '" alt="Figure ' + figId + '" style="max-width:100%;height:auto;border-radius:8px;" loading="lazy">';
+  // Fuzzy match only when no static original
+  if (!staticSrc) {
+    var prefix = String(figId).split('.')[0];
+    var genericKey = prefix + '.x';
+    if (INTERACTIVE_FIGURES[genericKey]) {
+      return INTERACTIVE_FIGURES[genericKey].svg;
+    }
   }
-  return '<p style="color:currentColor;opacity:0.5;font-style:italic;">Figure ' + figId + ' non disponible</p>';
+  if (staticSrc) {
+    return '<img src="' + staticSrc + '" alt="Figure ' + figId + '" class="fig-original" loading="lazy" decoding="async">';
+  }
+  return '<p class="fig-missing" style="color:currentColor;opacity:0.5;font-style:italic;">Figure ' + figId + ' non disponible</p>';
 }
 
 // Make available globally
 if (typeof window !== 'undefined') {
   window.INTERACTIVE_FIGURES = INTERACTIVE_FIGURES;
   window.renderInteractiveFigure = renderInteractiveFigure;
+  window.resolveFigureSrc = resolveFigureSrc;
   // Escarre stage toggle (referenced by onclick in SVG)
   window.toggleEscarreStage = function(stage) {
     var el = document.getElementById('esc-r' + stage);

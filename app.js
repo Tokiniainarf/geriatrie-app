@@ -3,6 +3,14 @@ const CH_COLORS={ch1:'#0891B2',ch2:'#059669',ch3:'#0D9488',ch4:'#DC2626',ch5:'#0
 const BM_SVG={on:'<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.77 5.82 22 7 14.14l-5-4.87 6.91-1.01z"/></svg>',off:'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.77 5.82 22 7 14.14l-5-4.87 6.91-1.01z"/></svg>'};
 
 function safeJSON(k,f){try{return JSON.parse(localStorage.getItem(k))||f}catch{return f}}
+/** Resolve FIGURES/TABLES entry: {src,desc} | [src,desc?] | string */
+function resolveManualAsset(entry){
+  if(!entry) return null;
+  if(typeof entry==='string') return {src:entry, desc:''};
+  if(Array.isArray(entry)) return {src:entry[0]||'', desc:entry[1]||''};
+  if(typeof entry==='object' && entry.src) return {src:String(entry.src), desc:entry.desc?String(entry.desc):''};
+  return null;
+}
 const S={view:'home',ch:null,bm:safeJSON('gbm',[]),read:safeJSON('grd',[]),fs:parseInt(localStorage.getItem('gfs')||'18'),lh:parseFloat(localStorage.getItem('glh')||'1.7'),th:localStorage.getItem('gth')||'dark'};
 let flashIdx=0,flashDeck=[],flashFilter='all',flashChapFilter='all';
 
@@ -1880,23 +1888,35 @@ function renderChapter(raw,chId){
     }
 
     const figM=l.match(/Fig\.?\s*(\d+\.\d+)/i);
-    if(figM&&typeof FIGURES!=='undefined'){
+    if(figM){
       flushPara();flushBullets();flushNumList();
       const figId=figM[1];
       if(!seenFigs) seenFigs = new Set();
       if(seenFigs.has(figId)) continue;
-      const figSrc = (typeof FIGURES!=='undefined' ? FIGURES[figId]?.[0] : null) || '';
+      // Support FIGURES as {src,desc} | [src] | string (legacy [0] broke all originals)
+      const figAsset = (typeof resolveManualAsset==='function')
+        ? resolveManualAsset(typeof FIGURES!=='undefined' ? FIGURES[figId] : null)
+        : null;
+      const figSrc = figAsset?.src || (typeof resolveFigureSrc==='function' ? resolveFigureSrc(figId) : '') || '';
+      const figDesc = figAsset?.desc || '';
       if(!seenFigSrcs) seenFigSrcs = new Set();
       if(figSrc && seenFigSrcs.has(figSrc)) continue;
       seenFigs.add(figId);
       if(figSrc) seenFigSrcs.add(figSrc);
-      if(typeof renderInteractiveFigure==='function'){
-        html+=`<figure class="fig-block">${renderInteractiveFigure(figId)}<figcaption>Figure ${figId}</figcaption></figure>`;
-      }else{
-        const src=FIGURES[figId]?.[0];
-        if(src&&!src.includes('figures/page_')){
-          html+=`<figure class="fig-block"><img src="${src}" alt="Figure ${figId}" loading="lazy"><figcaption>Figure ${figId}</figcaption></figure>`;
+      let figInner = '';
+      // Prefer original book crop/image; interactive only if no static original
+      if(figSrc){
+        figInner = `<img src="${figSrc}" alt="Figure ${figId}${figDesc?': '+esc(figDesc):''}" class="fig-original" loading="lazy" decoding="async">`;
+        // Exact interactive (not fuzzy) as optional schéma under original
+        if(typeof INTERACTIVE_FIGURES!=='undefined' && INTERACTIVE_FIGURES[figId]?.svg){
+          figInner += `<div class="fig-interactive-wrap" data-fig="${figId}">${INTERACTIVE_FIGURES[figId].svg}</div>`;
         }
+      } else if(typeof renderInteractiveFigure==='function'){
+        figInner = renderInteractiveFigure(figId, {preferStatic:true});
+      }
+      if(figInner && !/non disponible/i.test(figInner)){
+        const cap = figDesc ? `Figure ${figId} — ${esc(figDesc)}` : `Figure ${figId}`;
+        html+=`<figure class="fig-block">${figInner}<figcaption>${cap}</figcaption></figure>`;
       }
       continue;
     }
@@ -1907,17 +1927,19 @@ function renderChapter(raw,chId){
       const tabId=tab[1];
       if(!seenTabs) seenTabs = new Set();
       if(seenTabs.has(tabId)) continue;
-      const tabSrc = (typeof FIGURES!=='undefined' ? FIGURES[tabId]?.[0] : null) || '';
+      // TABLES map (page crops) first — never reuse FIGURES ids (Fig 7.1 ≠ Tab 7.1)
+      const tabAsset = (typeof resolveManualAsset==='function')
+        ? resolveManualAsset(typeof TABLES!=='undefined' ? TABLES[tabId] : null)
+        : null;
+      const tabSrc = tabAsset?.src || '';
       if(!seenTabSrcs) seenTabSrcs = new Set();
-      if(tabSrc && seenTabSrcs.has(tabSrc)) continue;
+      if(tabSrc && seenTabSrcs.has(tabSrc)) { /* still show lead */ }
       seenTabs.add(tabId);
       if(tabSrc) seenTabSrcs.add(tabSrc);
-      html+=`<div class="table-lead"><span class="table-badge">Tableau ${tab[1]}</span><span>${esc(tab[2]||'')}</span></div>`;
-      if(typeof FIGURES!=='undefined'){
-        const src=FIGURES[tabId]?.[0];
-        if(src){
-          html+=`<figure class="fig-block table-fig"><img src="${src}" alt="Tableau ${tabId}" loading="lazy"></figure>`;
-        }
+      const tabTitle = (tab[2]||'').trim() || tabAsset?.desc || '';
+      html+=`<div class="table-lead"><span class="table-badge">Tableau ${tab[1]}</span><span>${esc(tabTitle)}</span></div>`;
+      if(tabSrc){
+        html+=`<figure class="fig-block table-fig"><div class="table-fig-scroll"><img src="${tabSrc}" alt="Tableau ${tabId}${tabTitle?': '+esc(tabTitle):''}" class="fig-original" loading="lazy" decoding="async"></div></figure>`;
       }
       continue;
     }
