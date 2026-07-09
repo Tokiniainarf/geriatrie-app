@@ -5087,3 +5087,154 @@ body.nb-presenting .scroll-top-btn { display: none !important; visibility: hidde
   .nb-fs-film, .nb-fs-hint { display: none; }
   .nb-fs-slide { max-height: calc(100dvh - 108px) !important; }
 }
+
+
+/* ═══ MOBILE POLISH v199 ═══ */
+@media (max-width: 480px) {
+  :root { --bottom: 64px; --topbar: 56px; }
+  .bottom-nav button {
+    width: 52px; min-width: 48px; font-size: .55rem; gap: 2px; padding: 6px 0;
+  }
+  .nav-svg { width: 20px; height: 20px; }
+  .bottom-nav button::after { display: none; }
+  .quick-access-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  .qa-card { padding: 10px 6px; min-height: 72px; }
+  .qa-icon { font-size: 1.25rem; }
+  .qa-label { font-size: .68rem; line-height: 1.15; }
+  .hero-card { min-height: 140px; }
+  .hero-title { font-size: 1.5rem; }
+  .hero-sub { font-size: .72rem; }
+  .page-hd h1 { font-size: 1.15rem; }
+  .page-hd p { font-size: .8rem; }
+  .main-content { padding-left: 12px; padding-right: 12px; }
+  .ch-content {
+    padding: 0 2px 24px;
+    font-size: 1.02rem;
+    line-height: 1.65;
+  }
+  .ch-content .para-card {
+    padding: 12px 12px;
+    margin: 8px 0;
+    border-radius: 12px;
+  }
+  .ch-toolbar {
+    position: sticky; top: var(--topbar);
+    z-index: 40;
+    display: flex; flex-wrap: wrap; gap: 6px;
+    padding: 8px 0;
+    background: var(--bg-base);
+    border-bottom: 1px solid var(--border);
+  }
+  .ch-toolbar button {
+    min-height: 40px; padding: 8px 12px; font-size: .78rem;
+  }
+  .edu-visual-wrapper {
+    margin: 12px 0;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .edu-visual-wrapper img,
+  .edu-visual-wrapper video {
+    max-height: 220px;
+    width: 100%;
+    object-fit: contain;
+    background: #0a0a0f;
+  }
+  .study-reader.dense-mode .para-card { padding: 10px; margin: 6px 0; }
+  .study-reader.dense-mode { font-size: .95rem; line-height: 1.55; }
+  .sub-tab-switch {
+    display: flex; flex-wrap: nowrap; overflow-x: auto;
+    gap: 4px; -webkit-overflow-scrolling: touch;
+  }
+  .sub-tab-switch button {
+    flex: 0 0 auto; font-size: .75rem; padding: 8px 12px; white-space: nowrap;
+  }
+  .flash-card { min-height: 280px; }
+  .proto-card, .ann-card, .item-card { padding: 12px; }
+  .calc-filters { overflow-x: auto; flex-wrap: nowrap; }
+  .calc-filt-btn { flex-shrink: 0; font-size: .72rem; }
+}
+
+/* Feed media visibility */
+.bf-visual-page {
+  padding: 0 !important;
+  align-items: stretch !important;
+  justify-content: center !important;
+  background: #050508 !important;
+  min-height: 100%;
+}
+.bf-visual-stack {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  min-height: min(100dvh, 720px);
+}
+.bf-reel-media {
+  flex: 1 1 auto;
+  min-height: 55dvh;
+  max-height: 78dvh;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  background: #000;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+.bf-visual-media {
+  width: 100%; height: 100%;
+  max-height: 78dvh;
+  object-fit: contain !important;
+}
+.bf-media-fallback {
+  display: none; color: rgba(255,255,255,.5); font-size: .85rem;
+}
+.bf-media-container.bf-media-missing .bf-visual-media { display: none; }
+.bf-media-container.bf-media-missing .bf-media-fallback { display: block; padding: 24px; }
+.bf-visual-caption {
+  flex-shrink: 0;
+  padding: 10px 14px 16px;
+  background: linear-gradient(transparent, rgba(0,0,0,.95));
+  color: #fff; text-align: center;
+}
+.bf-visual-title { font-size: .88rem; font-weight: 700; margin: 0 0 4px; line-height: 1.25; }
+.bf-visual-sub { font-size: .72rem; opacity: .85; margin: 0; line-height: 1.3; }
+.bf-media-container {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0a0a0f;
+  margin: 8px 0;
+}
+.bf-media-container img,
+.bf-media-container video {
+  display: block; width: 100%; max-height: 42vh; object-fit: contain;
+}
+.bf-quiz-opt {
+  min-height: 48px;
+  text-align: left;
+  font-size: .88rem;
+  line-height: 1.35;
+}
+.bf-quiz-q {
+  font-size: 1.05rem !important;
+  line-height: 1.35 !important;
+  margin-bottom: 12px !important;
+}
+@media (max-width: 480px) {
+  .bf-card-shell { padding: 14px 12px !important; }
+  .bf-quiz-opt-text { font-size: .84rem; }
+  #vFeed .bf-header { padding-top: env(safe-area-inset-top, 0); }
+}
+
+/* Chapter reading — prevent overflow from long OCR lines */
+.ch-content, .study-reader {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.ch-hero { padding: 16px 14px; }
+.ch-title { font-size: 1.25rem; line-height: 1.25; }
+@media (max-width: 480px) {
+  .ch-title { font-size: 1.1rem; }
+  .ch-num { font-size: 2rem; }
+}

@@ -31,17 +31,17 @@ const BrainFeed = (() => {
   let activeTimers = new Map();
 
   const TYPE_RATIO = {
-    memo_jour: 0.18,
-    cas_choc: 0.18,
-    quiz_flash: 0.20,
-    chiffre_cle: 0.14,
-    citation: 0.05,
-    piege_exam: 0.15,
-    visual: 0.10,
-    flash: 0.05,
-    synthesis: 0.03,
+    memo_jour: 0.10,
+    cas_choc: 0.12,
+    quiz_flash: 0.18,
+    chiffre_cle: 0.12,
+    citation: 0.04,
+    piege_exam: 0.12,
+    visual: 0.22, // images + vidéos plus présentes
+    flash: 0.06,
+    synthesis: 0.02,
     case: 0.02,
-    reco: 0.05
+    reco: 0.00
   };
 
   const CITATIONS = [
@@ -186,20 +186,49 @@ const BrainFeed = (() => {
     return all;
   }
 
+  function isQuizReadyFlash(fc) {
+    if (!fc) return false;
+    const q = String(fc.question || fc.q || '').replace(/\s+/g, ' ').trim();
+    const a = String(fc.answer || fc.a || '').replace(/\s+/g, ' ').trim();
+    if (q.length < 18 || q.length > 160) return false;
+    if (a.length < 20 || a.length > 280) return false;
+    // Junk from revision-aids / OCR
+    if (/points?\s*cl[eé]s?\s*:/i.test(q)) return false;
+    if (/^points?\s*cl[eé]s?/i.test(q)) return false;
+    if (/undefined|null|\[object/i.test(q + a)) return false;
+    if (/rev-ch\d+_s\d+/i.test(String(fc.id || ''))) return false;
+    // Prefer factual closed questions
+    if (!/[?？]$/.test(q) && !/^(qu['’]|quel|quelle|quels|quelles|citer|donner|définir|seuil|critère|score|quand|comment|pourquoi)/i.test(q)) {
+      // allow short definition stems
+      if (q.length > 100) return false;
+    }
+    return true;
+  }
+
   function buildQuizOptions(correctAnswer, allFlash, fc) {
     const cleanAnswer = (ans) => {
       let a = (ans || '').trim();
       a = a.replace(/^[•\-–*]\s*/, '');
       a = a.replace(/^\d{1,2}(?:\.\s+|\s*[)-]\s*)/, '');
-      a = a.split(/\.(?:\s+|$)/)[0].trim();
-      if (a.length > 90) {
-        const idx = a.lastIndexOf(' ', 87);
-        a = (idx > 10 ? a.substring(0, idx) : a.substring(0, 87)) + '...';
+      // Take first 1–2 sentences max, cut at sensible boundary
+      const parts = a.split(/(?<=[.!?])\s+/).filter(Boolean);
+      a = parts.slice(0, 2).join(' ').trim() || a;
+      if (a.length > 110) {
+        const idx = a.lastIndexOf(' ', 105);
+        a = (idx > 20 ? a.substring(0, idx) : a.substring(0, 105)).replace(/[,:;]\s*$/, '') + '…';
       }
       return a;
     };
 
     const correctClean = cleanAnswer(correctAnswer);
+    if (!correctClean || correctClean.length < 8) {
+      return shuffle([
+        { text: correctClean || 'Réponse correcte', correct: true },
+        { text: 'Aucune de ces propositions', correct: false },
+        { text: 'Réponse non applicable', correct: false },
+        { text: 'À revoir dans le cours', correct: false }
+      ]);
+    }
 
     // 1. Percentage
     const pctMatch = correctClean.match(/^(\d+(?:,\d+)?)\s*%/);
@@ -425,16 +454,29 @@ const BrainFeed = (() => {
       });
     });
 
-    const quizFlash = allFlash.filter(f => (f.answer || '').length > 15).map(fc => ({
-      type: 'quiz_flash', id: 'qf-' + fc.id,
-      chapter: fc.chapter, rang: fc.rang,
-      question: fc.question,
-      options: buildQuizOptions(fc.answer, allFlash, fc),
-      explanation: fc.answer,
-      srsKey: fc.id,
-      srs: srs[fc.id] || { ease: 2.5, interval: 0, nextReview: 0 },
-      tags: fc.tags || []
-    }));
+    // Quality-gated quiz: skip OCR junk / overlong answers that produce bad MCQ
+    const quizFlash = allFlash
+      .filter(isQuizReadyFlash)
+      .map(fc => {
+        const q = fc.question || fc.q;
+        const a = fc.answer || fc.a;
+        const opts = buildQuizOptions(a, allFlash, fc);
+        // Drop if options collapsed / all empty
+        const texts = (opts || []).map(o => (o.text || '').trim()).filter(Boolean);
+        if (texts.length < 3) return null;
+        if (new Set(texts.map(t => t.toLowerCase())).size < 3) return null;
+        return {
+          type: 'quiz_flash', id: 'qf-' + fc.id,
+          chapter: fc.chapter, rang: fc.rang,
+          question: q,
+          options: opts,
+          explanation: a,
+          srsKey: fc.id,
+          srs: srs[fc.id] || { ease: 2.5, interval: 0, nextReview: 0 },
+          tags: fc.tags || []
+        };
+      })
+      .filter(Boolean);
     // Add quiz urgence cards
     if (typeof QUIZ_URGENCE !== 'undefined') {
       QUIZ_URGENCE.forEach(qu => {
@@ -606,14 +648,34 @@ const BrainFeed = (() => {
       {media: 'images/feed/illustrative/feed-vis-21.jpg', isVideo: false, title: 'Sarcopénie - Mécanismes'},
       {media: 'images/feed/videos/feed-vis-21.mp4', isVideo: true, title: 'Sarcopénie et interventions'}
     ];
-    const visualExplanations = visualMedias.map((v, i) => ({
-      type: 'visual',
-      id: 'vis-' + (i+1),
-      question: v.title,
-      answer: 'Illustration clé — Visualisez et retenez',
-      media: v.media,
-      isVideo: v.isVideo
-    }));
+    // Only keep media files that resolve (broken paths = "images disparues")
+    const mediaOk = (path) => {
+      if (!path) return false;
+      // Prefer known existing roots; runtime 404 still handled by onerror
+      return /images\/(feed|chapters)\//.test(path);
+    };
+    const visualExplanations = visualMedias
+      .filter(v => mediaOk(v.media))
+      .map((v, i) => ({
+        type: 'visual',
+        id: 'vis-' + (i + 1),
+        question: v.title,
+        answer: 'Illustration / animation — retenez le schéma',
+        media: v.media,
+        isVideo: !!v.isVideo
+      }));
+
+    // Pair image+video by theme title for richer cards
+    const byTitle = {};
+    visualExplanations.forEach(v => {
+      const key = (v.question || '').replace(/\s*-\s*(vidéo|animation).*$/i, '').trim().toLowerCase();
+      if (!byTitle[key]) byTitle[key] = v;
+      else if (v.isVideo && !byTitle[key].isVideo) {
+        byTitle[key].video = v.media;
+      } else if (!v.isVideo && byTitle[key].isVideo) {
+        byTitle[key].image = v.media;
+      }
+    });
 
     return { memoJour, casChoc, quizFlash, chiffreCle, citation, piegeExam, visualExplanations, allFlash, srs };
   }
@@ -713,14 +775,20 @@ const BrainFeed = (() => {
 
   function isLowQualityCard(card) {
     if (!card) return true;
+    // Always keep pure visual media cards
+    if (card.type === 'visual' && card.media) return false;
+    if (card.type === 'chiffre_cle' && card.line) return false;
+    if (card.type === 'piege_exam' && card.trap) return false;
+    if (card.type === 'citation' && card.text) return false;
     const q = String(card.question || card.trap || card.line || card.text || '').replace(/\s+/g, ' ').trim();
     const a = String(card.answer || card.explain || card.diagnosis || card.detail || card.explanation || '').replace(/\s+/g, ' ').trim();
     if (q.length < 12 && a.length < 12) return true;
     // Placeholder / auto-generated junk
-    if (/points?\s*cl[eé]s?/i.test(q) && a.length < 30) return true;
+    if (/points?\s*cl[eé]s?/i.test(q)) return true;
     if (/^(n\/a|todo|tbd|xxx|\.{3,}|—{2,})$/i.test(q) || /^(n\/a|todo|tbd)$/i.test(a)) return true;
     if (/undefined|null|\[object object\]/i.test(q + ' ' + a)) return true;
-    // OCR-ish mashed noise without vowels (French needs vowels)
+    // OCR mashed / book-index junk
+    if (/\bstniop\b|rang\s*rubrique|elsevier masson/i.test(q + ' ' + a)) return true;
     const sample = (q + ' ' + a).slice(0, 120);
     if (sample.length > 40 && (sample.match(/[aeiouyàâäéèêëïîôùûüœ]/gi) || []).length < 6) return true;
     return false;
@@ -771,19 +839,24 @@ const BrainFeed = (() => {
   }
 
   function renderVisual(card, slideIdx) {
-    const mediaHtml = card.isVideo 
-      ? `<video src="${card.media}" controls muted loop playsinline style="width:100%;height:100%;object-fit:contain;"></video>`
-      : `<img src="${card.media}" style="width:100%;height:100%;object-fit:contain;">`;
+    const src = card.media || card.video || card.image || '';
+    const isVid = card.isVideo || /\.mp4($|\?)/i.test(src);
+    const mediaHtml = isVid
+      ? `<video class="bf-visual-media" src="${src}" muted loop playsinline autoplay controls
+           onerror="this.closest('.bf-media-container')?.classList.add('bf-media-missing')"></video>`
+      : `<img class="bf-visual-media" src="${src}" alt="${esc(card.question || '')}" loading="lazy"
+           onerror="this.closest('.bf-media-container')?.classList.add('bf-media-missing')">`;
     return `
       <div class="bf-horiz-scroll" id="bfScroll-${slideIdx}">
-        <div class="bf-horiz-page page-1" style="padding:0;align-items:stretch;justify-content:center;background:#0a0a0f;height:100dvh;">
-          <div style="width:100%;height:100%;display:flex;flex-direction:column;">
-            <div class="bf-media-container bf-reel-media" style="flex: 1 1 auto; margin:0; border-radius:0; height: 0; min-height: 0; aspect-ratio: 9 / 16; max-height: 82%;">
+        <div class="bf-horiz-page page-1 bf-visual-page">
+          <div class="bf-visual-stack">
+            <div class="bf-media-container bf-reel-media">
               ${mediaHtml}
+              <div class="bf-media-fallback">Média indisponible</div>
             </div>
-            <div class="bf-visual-text" style="padding:5px 12px 7px;background:linear-gradient(transparent, rgba(0,0,0,0.93));color:#fff;text-align:center;flex-shrink:0;">
-              <p style="font-size:0.76rem;margin:0 0 1px;font-weight:600;letter-spacing:0.01em;line-height:1.15;">${esc(card.question)}</p>
-              <p style="font-size:0.62rem;opacity:0.9;margin:0;line-height:1.15;">${esc(card.answer)}</p>
+            <div class="bf-visual-caption">
+              <p class="bf-visual-title">${esc(card.question)}</p>
+              <p class="bf-visual-sub">${esc(card.answer || 'Illustration clinique')}</p>
             </div>
           </div>
         </div>
@@ -1402,7 +1475,12 @@ const BrainFeed = (() => {
 
     observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting && entry.intersectionRatio > 0.55) {
+        // Pause videos when off-screen
+        if (!entry.isIntersecting) {
+          entry.target.querySelectorAll('video').forEach(v => { try { v.pause(); } catch (_) {} });
+          return;
+        }
+        if (entry.intersectionRatio > 0.55) {
           const slideIdx = parseInt(entry.target.dataset.idx, 10);
           if (!isNaN(slideIdx) && slideIdx !== idx) {
             stopCasChocTimer(idx);
@@ -1417,6 +1495,10 @@ const BrainFeed = (() => {
             if (card) startCasChocTimer(slideIdx, card.timer || 30);
           }
           if (type === 'chiffre_cle') animateStatNumber(entry.target);
+          // Autoplay visual / embedded videos on active slide
+          entry.target.querySelectorAll('video').forEach(v => {
+            try { v.muted = true; v.play().catch(() => {}); } catch (_) {}
+          });
         }
       });
     }, { root: feed, threshold: [0.55, 0.75] });

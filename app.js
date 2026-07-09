@@ -544,7 +544,12 @@ function renderChapterContent(){
     cc.classList.remove('study-reader', 'dense-mode');
   } else {
     cc.classList.remove('practice-reader');
-    const denseOn = localStorage.getItem('gdense') !== '0';
+    // Mobile: default dense reading unless user turned it off
+    let densePref = localStorage.getItem('gdense');
+    if (densePref == null && typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(max-width: 480px)').matches) {
+      densePref = '1';
+    }
+    const denseOn = densePref !== '0';
     cc.classList.toggle('dense-mode', denseOn);
     applyConceptLinks();
     injectEducationalVisuals(S.ch, cc);
