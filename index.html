@@ -19,7 +19,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<link rel="stylesheet" href="style.css?v=212">
+<link rel="stylesheet" href="style.css?v=213">
 <style>
 /* Critical preloader (inline so it shows before CSS/JS) */
 #appPreloader{position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:radial-gradient(ellipse 80% 50% at 50% 0%,#164E63 0%,#0f1117 55%,#050508 100%);color:#EDEDEF;font-family:Figtree,system-ui,sans-serif;transition:opacity .45s ease,visibility .45s}
@@ -277,6 +277,11 @@
       <h1>Medicalcul</h1>
       <p>Calculateurs interactifs et échelles cliniques gériatriques</p>
     </div>
+    <div class="calc-overview" aria-label="Repères des scores">
+      <div><strong>56</strong><span>outils</span></div>
+      <div><strong>EGS</strong><span>parcours prioritaire</span></div>
+      <div><strong>⌕</strong><span>recherche instantanée</span></div>
+    </div>
     
     <div id="calc-list-container">
       <div class="calc-toolbar">
@@ -308,6 +313,10 @@
       <button type="button" class="bf-close-btn" onclick="sw('home')" aria-label="Quitter le Feed" title="Quitter le Feed">
         <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
+      <div class="bf-header-title">
+        <strong>Feed clinique</strong>
+        <span>Questions validées · décisions gériatriques · EVC</span>
+      </div>
       <div class="bf-stats-bar">
         <span id="bfStreak">Jour 1</span>
         <span id="bfPoints">0 pts</span>
@@ -554,17 +563,17 @@
 <script>
 (function(){
   var steps = [
-    { src: 'data-bundle.js?v=212', label: 'Contenu des chapitres…', pct: 42 },
-    { src: 'notebook-decks-data.js?v=212', label: 'Decks NotebookLM…', pct: 48 },
-    { src: 'notebook-interactive.js?v=212', label: 'Lecteur présentation…', pct: 54 },
-    { src: 'calculateurs.js?v=212', label: 'Scores & calculateurs…', pct: 60 },
-    { src: 'quiz.js?v=212', label: 'Mode examen…', pct: 68 },
-    { src: 'dashboard.js?v=212', label: 'Tableau de bord…', pct: 74 },
-    { src: 'appsearch.js?v=212', label: 'Recherche…', pct: 80 },
-    { src: 'erreurs-journal.js?v=212', label: 'Fichier erreurs…', pct: 85 },
-    { src: 'graph.js?v=212', label: 'Carte des liens…', pct: 90 },
-    { src: 'brainfeed.js?v=212', label: 'BrainFeed…', pct: 95 },
-    { src: 'app.js?v=212', label: 'Interface…', pct: 100 }
+    { src: 'data-bundle.js?v=213', label: 'Contenu des chapitres…', pct: 42 },
+    { src: 'notebook-decks-data.js?v=213', label: 'Decks NotebookLM…', pct: 48 },
+    { src: 'notebook-interactive.js?v=213', label: 'Lecteur présentation…', pct: 54 },
+    { src: 'calculateurs.js?v=213', label: 'Scores & calculateurs…', pct: 60 },
+    { src: 'quiz.js?v=213', label: 'Mode examen…', pct: 68 },
+    { src: 'dashboard.js?v=213', label: 'Tableau de bord…', pct: 74 },
+    { src: 'appsearch.js?v=213', label: 'Recherche…', pct: 80 },
+    { src: 'erreurs-journal.js?v=213', label: 'Fichier erreurs…', pct: 85 },
+    { src: 'graph.js?v=213', label: 'Carte des liens…', pct: 90 },
+    { src: 'brainfeed.js?v=213', label: 'BrainFeed…', pct: 95 },
+    { src: 'app.js?v=213', label: 'Interface…', pct: 100 }
   ];
   var i = 0;
   var fill = document.getElementById('plFill');
