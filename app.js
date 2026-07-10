@@ -13,63 +13,82 @@ function resolveManualAsset(entry){
 }
 
 /**
- * Build a figure block — reconstituted HTML/SVG only (no PDF page capture).
- * Priority: faithful-visuals → interactive SVG exact → interactive fuzzy → crop (clinical photo only).
+ * Build a figure block from EXISTING assets only:
+ * 1) Interactive SVG schemas (interactive-figures.js)
+ * 2) Crop / illustration images (FIGURES map)
+ * Never use faithful text-cards (unreadable on mobile).
  */
 function buildFigureBlock(figId, titleHint){
   const capTitle = (titleHint||'').replace(/^[AB]\s+/i,'').trim();
+  let desc = capTitle;
   let inner = '';
-  // 1) Faithful pedagogical reconstitution
-  if(typeof renderFaithfulFigure==='function'){
-    try { inner = renderFaithfulFigure(figId) || ''; } catch(e){ console.warn('faithful fig', figId, e); }
-  }
-  // 2) Exact interactive SVG
-  if(!inner && typeof INTERACTIVE_FIGURES!=='undefined' && INTERACTIVE_FIGURES[figId]?.svg){
-    inner = `<div class="fig-interactive-wrap" data-fig="${figId}">${INTERACTIVE_FIGURES[figId].svg}</div>`;
-  }
-  // 3) Fuzzy interactive (chapter schema) — never use PDF full-page
-  if(!inner && typeof INTERACTIVE_FIGURES!=='undefined'){
-    const gk = String(figId).split('.')[0] + '.x';
-    if(INTERACTIVE_FIGURES[gk]?.svg){
-      inner = `<div class="fig-interactive-wrap" data-fig="${figId}">${INTERACTIVE_FIGURES[gk].svg}</div>`;
+
+  // Prefer already-generated interactive SVG schemas
+  if(typeof INTERACTIVE_FIGURES!=='undefined'){
+    if(INTERACTIVE_FIGURES[figId]?.svg){
+      inner = `<div class="fig-media fig-svg-wrap">${INTERACTIVE_FIGURES[figId].svg}</div>`;
+      if(INTERACTIVE_FIGURES[figId].title && !desc) desc = INTERACTIVE_FIGURES[figId].title;
+    } else {
+      const gk = String(figId).split('.')[0] + '.x';
+      if(INTERACTIVE_FIGURES[gk]?.svg){
+        inner = `<div class="fig-media fig-svg-wrap">${INTERACTIVE_FIGURES[gk].svg}</div>`;
+        if(INTERACTIVE_FIGURES[gk].title && !desc) desc = INTERACTIVE_FIGURES[gk].title;
+      }
     }
   }
-  // 4) Clinical crop only (not figures/page_* book scans)
-  if(!inner && typeof FIGURES!=='undefined' && FIGURES[figId]){
-    const asset = resolveManualAsset(FIGURES[figId]);
-    if(asset?.src && !/figures\/page_/i.test(asset.src) && !/\/page_\d/i.test(asset.src)){
-      inner = `<img src="${asset.src}" alt="Figure ${figId}${asset.desc?': '+esc(asset.desc):''}" class="fig-original" loading="lazy" decoding="async" onerror="this.closest('figure')&&(this.closest('figure').style.display='none')">`;
-      if(asset.desc && !capTitle) titleHint = asset.desc;
+
+  // Fallback: static crop / illustration (correct .src access)
+  const asset = (typeof FIGURES!=='undefined') ? resolveManualAsset(FIGURES[figId]) : null;
+  if(asset?.src){
+    if(!desc && asset.desc) desc = asset.desc;
+    const img = `<img class="fig-media fig-img" src="${asset.src}" alt="Figure ${figId}${desc?': '+esc(desc):''}" loading="lazy" decoding="async" onerror="this.style.display='none'">`;
+    // If we already have SVG, show crop below as reference image when available
+    if(inner){
+      // Keep SVG only — crops of same id can be clinical photos; show both when crop is real photo path
+      if(/crops\/|images\/p\d/i.test(asset.src)){
+        inner += img;
+      }
+    } else {
+      inner = img;
     }
   }
-  if(!inner){
-    // Visible placeholder so the reference is never silently dropped
-    inner = `<div class="fig-placeholder"><strong>Figure ${esc(figId)}</strong>${capTitle?`<span>${esc(capTitle)}</span>`:''}<em>Schéma en cours de reconstitution</em></div>`;
+
+  // Last resort: renderInteractiveFigure helper (SVG or img)
+  if(!inner && typeof renderInteractiveFigure==='function'){
+    try {
+      const r = renderInteractiveFigure(figId, { preferStatic: false });
+      if(r && !/non disponible/i.test(r)) inner = `<div class="fig-media fig-svg-wrap">${r}</div>`;
+    } catch(e){}
   }
-  const cap = capTitle ? `Figure ${figId} — ${esc(capTitle)}` : `Figure ${figId}`;
-  return `<figure class="fig-block fig-reconstituted">${inner}<figcaption>${cap}</figcaption></figure>`;
+
+  if(!inner) return ''; // don't inject text placeholders
+
+  const cap = desc ? `Figure ${figId} — ${esc(desc)}` : `Figure ${figId}`;
+  return `<figure class="fig-block">${inner}<figcaption>${cap}</figcaption></figure>`;
 }
 
 /**
- * Build a table block — reconstituted HTML only (never PDF page image).
+ * Build a table block from EXISTING image assets (TABLES / PAGE crops).
+ * No HTML-as-text tables on mobile.
  */
 function buildTableBlock(tabId, titleHint){
   const title = (titleHint||'').replace(/^[AB]\s+/i,'').trim();
-  // Faithful HTML table
-  if(typeof renderFaithfulTable==='function'){
-    try {
-      const html = renderFaithfulTable(tabId);
-      if(html) return html;
-    } catch(e){ console.warn('faithful table', tabId, e); }
+  let src = '';
+  let desc = title;
+
+  // TABLES map (page/crop images)
+  if(typeof TABLES!=='undefined' && TABLES[tabId]){
+    const a = resolveManualAsset(TABLES[tabId]);
+    if(a?.src){ src = a.src; if(a.desc && !desc) desc = a.desc; }
   }
-  // Title + empty structured shell (no scan)
-  return `<div class="faithful-table faithful-table-missing" data-table="${esc(tabId)}">
-    <div class="faithful-table-hd">
-      <span class="faithful-badge">Tableau ${esc(tabId)}</span>
-      <span class="faithful-title">${esc(title||'')}</span>
-    </div>
-    <p class="faithful-note">Tableau reconstitué non encore disponible pour cet identifiant.</p>
-  </div>`;
+  // Some tables share cropped assets under FIGURES only when not a clinical fig collision
+  // Prefer TABLES; if missing, try page image convention from TABLES-like page keys only
+
+  let html = `<div class="table-lead"><span class="table-badge">Tableau ${esc(tabId)}</span><span>${esc(desc||'')}</span></div>`;
+  if(src){
+    html += `<figure class="fig-block table-fig"><div class="table-fig-scroll"><img class="fig-media fig-img" src="${src}" alt="Tableau ${tabId}${desc?': '+esc(desc):''}" loading="lazy" decoding="async" onerror="this.closest('.table-fig')&&(this.closest('.table-fig').style.display='none')"></div></figure>`;
+  }
+  return html;
 }
 const S={view:'home',ch:null,bm:safeJSON('gbm',[]),read:safeJSON('grd',[]),fs:parseInt(localStorage.getItem('gfs')||'18'),lh:parseFloat(localStorage.getItem('glh')||'1.7'),th:localStorage.getItem('gth')||'dark'};
 let flashIdx=0,flashDeck=[],flashFilter='all',flashChapFilter='all';

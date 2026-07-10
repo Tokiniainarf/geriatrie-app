@@ -2038,33 +2038,32 @@ function resolveFigureSrc(figId) {
   return null;
 }
 
-// ─── Helper function: render interactive figure or fall back to static ───
-// Prefer original book crops/images. Exact interactive match only as enhancement
-// when preferStatic is false. Fuzzy "X.x" never replaces an existing static original.
+// ─── Helper: interactive SVG first (generated schemas), then static crop ───
 function renderInteractiveFigure(figId, opts) {
   opts = opts || {};
-  var preferStatic = opts.preferStatic !== false; // default true
+  // Default: prefer generated SVG schemas over static photos
+  var preferStatic = opts.preferStatic === true;
   var staticSrc = resolveFigureSrc(figId);
   var exactInteractive = INTERACTIVE_FIGURES[figId];
 
+  if (!preferStatic && exactInteractive) {
+    return exactInteractive.svg;
+  }
   if (preferStatic && staticSrc) {
-    return '<img src="' + staticSrc + '" alt="Figure ' + figId + '" class="fig-original" loading="lazy" decoding="async">';
+    return '<img src="' + staticSrc + '" alt="Figure ' + figId + '" class="fig-img" loading="lazy" decoding="async" style="max-width:100%;height:auto;border-radius:8px;">';
   }
   if (exactInteractive) {
     return exactInteractive.svg;
   }
-  // Fuzzy match only when no static original
-  if (!staticSrc) {
-    var prefix = String(figId).split('.')[0];
-    var genericKey = prefix + '.x';
-    if (INTERACTIVE_FIGURES[genericKey]) {
-      return INTERACTIVE_FIGURES[genericKey].svg;
-    }
+  var prefix = String(figId).split('.')[0];
+  var genericKey = prefix + '.x';
+  if (INTERACTIVE_FIGURES[genericKey]) {
+    return INTERACTIVE_FIGURES[genericKey].svg;
   }
   if (staticSrc) {
-    return '<img src="' + staticSrc + '" alt="Figure ' + figId + '" class="fig-original" loading="lazy" decoding="async">';
+    return '<img src="' + staticSrc + '" alt="Figure ' + figId + '" class="fig-img" loading="lazy" decoding="async" style="max-width:100%;height:auto;border-radius:8px;">';
   }
-  return '<p class="fig-missing" style="color:currentColor;opacity:0.5;font-style:italic;">Figure ' + figId + ' non disponible</p>';
+  return '';
 }
 
 // Make available globally
@@ -2084,7 +2083,6 @@ if (typeof window !== 'undefined') {
     }
   };
 }
-
 
 
 /* --- faithful-visuals.js --- */
