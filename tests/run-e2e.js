@@ -681,12 +681,15 @@ addTest('TC-47', 'RW-1', 'Chapter 13 ("Alitement") correctly displays "I. Géné
   assert.ok(html.includes("Généralités") && html.includes("Définition"), "ch13 should render Généralités and Définition");
 });
 
-addTest('TC-48', 'RW-2', 'Chapter 16 ("Prescrire...") completely hides the Transfusion sections (I. Généralités, II. Indications...) from both rendered text and outline panel since there is no body text.', () => {
+addTest('TC-48', 'RW-2', 'Chapter 16 ("Prescrire...") renders the restored transfusion body and its two faithful tables.', () => {
   runPreprocess();
   const ch16Pages = vm.runInContext('APP_DATA.content.ch16', context);
   const raw = ch16Pages.map(p => p[1]).join('\n▼\n');
   const html = vm.runInContext(`renderChapter(${JSON.stringify(raw)}, "ch16")`, context);
-  assert.ok(!html.includes("Transfusion"), "ch16 should hide Transfusion sections completely");
+  const faithfulSource = fs.readFileSync(path.join(__dirname, '../faithful-visuals.js'), 'utf8');
+  assert.ok(/Indications de la transfusion/i.test(html), "ch16 should render the transfusion indications");
+  assert.ok(/Tableau\s+16\.5/i.test(raw) && faithfulSource.includes("'16.5': function"), "ch16 should map table 16.5");
+  assert.ok(/Tableau\s+16\.6/i.test(raw) && faithfulSource.includes("'16.6': function"), "ch16 should map table 16.6");
 });
 
 addTest('TC-49', 'RW-3', 'Outline panels (ch-outline) are visible for ch1, ch3, and ch16, but hidden for ch2, ch17, and ch18.', () => {

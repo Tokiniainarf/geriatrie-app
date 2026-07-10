@@ -698,12 +698,9 @@ function injectEducationalVisuals(chId, cc) {
       if (v && v.img && !isPdfCapturePath(v.img)) candidates.push(v.img);
     });
   }
-  if (!isQAChapter) {
-    for (let i = 1; i <= 6; i++) {
-      candidates.push(`images/chapters/educational/${chId}-${i}.jpg`);
-    }
-    candidates.push(`images/chapters/educational/${chId}-extra-1.jpg`);
-  }
+  // EDU_VISUALS is the authoritative asset manifest. Avoid synthesizing
+  // filenames here: later chapters intentionally have fewer than six images,
+  // and guessed paths generated avoidable 404 responses while reading.
   candidates = [...new Set(candidates)].filter(s => !isPdfCapturePath(s)).slice(0, MAX_VISUALS + 4);
 
   // Targeted match inserts first (context-aware)
