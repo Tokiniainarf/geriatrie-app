@@ -91,6 +91,35 @@ const BrainFeed = (() => {
     { trap: 'AOMI = aspirine systématique', explain: 'Le bénéfice de l\'aspirine secondaire chez le très grand âge doit être pondéré par le risque hémorragique. La balance bénéfice/risque est individuelle.' }
   ];
 
+  // Banque éditorialisée : le feed ne transforme plus des extraits de cours en QCM.
+  // Chaque réponse erronée correspond au même problème clinique que la bonne réponse.
+  const CURATED_QUIZZES = [
+    { id:'bouchon-3', chapter:'ch2', question:'Dans le modèle 1 + 2 + 3 de Bouchon, que représente le facteur 3 ?', correct:'Un facteur précipitant aigu, souvent réversible et à rechercher en priorité.', wrong:['Le vieillissement physiologique de l’organe.', 'La maladie chronique déjà connue.', 'Le niveau d’autonomie antérieur.'], explanation:'Le raisonnement gériatrique distingue le vieillissement (1), les comorbidités (2) et le stress aigu décompensant (3). Identifier et corriger ce dernier est souvent le levier immédiat.' },
+    { id:'cam', chapter:'ch11', question:'Quel outil valide le dépistage d’un delirium au lit du patient ?', correct:'La CAM : début aigu et fluctuant, trouble attentionnel, avec pensée désorganisée ou vigilance altérée.', wrong:['Le MMS seul, interprété sans données antérieures.', 'La GDS-15, centrée sur les symptômes dépressifs.', 'Le Tinetti, qui évalue l’équilibre et la marche.'], explanation:'La CAM est un outil de dépistage du syndrome confusionnel aigu. Un MMS ne permet pas, à lui seul, de distinguer un delirium d’un trouble cognitif chronique.' },
+    { id:'delirium-bzd', chapter:'ch11', question:'Quelle attitude adopter devant un delirium avec agitation sans sevrage alcoolique ?', correct:'Chercher et traiter la cause ; éviter les benzodiazépines qui aggravent confusion et risque de chute.', wrong:['Prescrire une benzodiazépine systématiquement pour obtenir le sommeil.', 'Augmenter les anticholinergiques pour diminuer l’agitation.', 'Conclure à une démence irréversible sans bilan étiologique.'], explanation:'Le delirium est une urgence diagnostique. Les benzodiazépines sont surtout indiquées dans le sevrage alcoolique ou des indications très ciblées.' },
+    { id:'hypoactive', chapter:'ch11', question:'Pourquoi un delirium hypoactif doit-il être activement recherché ?', correct:'Il est peu bruyant mais associé à un risque de retard diagnostique et à un mauvais pronostic.', wrong:['Il correspond toujours à une dépression chronique.', 'Il ne nécessite aucune recherche de cause aiguë.', 'Il confirme une maladie d’Alzheimer à début brutal.'], explanation:'Somnolence, retrait ou apathie peuvent révéler un delirium hypoactif. Il faut rechercher infection, douleur, fécalome, globe, iatrogénie ou trouble métabolique.' },
+    { id:'orthostatic', chapter:'ch12', question:'Quel examen simple fait partie du bilan initial après une chute ?', correct:'La mesure de la pression artérielle couchée puis debout, à la recherche d’une hypotension orthostatique.', wrong:['Une épreuve d’effort maximale chez tout patient.', 'Une contention systématique avant toute évaluation.', 'Un scanner cérébral systématique en l’absence de signe d’alerte.'], explanation:'Une chute est un symptôme. L’orthostatisme, les médicaments, la vision, la marche et l’environnement doivent être évalués.' },
+    { id:'tug', chapter:'ch12', question:'Quel résultat du Timed Up and Go (TUG) alerte sur un risque élevé de chute ?', correct:'Un temps supérieur à 20 secondes.', wrong:['Un temps inférieur à 10 secondes.', 'Un temps de 5 secondes exactement.', 'Le TUG ne renseigne jamais sur la mobilité.'], explanation:'Le TUG explore le lever, la marche, le demi-tour et le retour assis. Un temps prolongé justifie une évaluation multifactorielle de la chute.' },
+    { id:'tinetti', chapter:'ch12', question:'Quel score Tinetti évoque un risque élevé de chute ?', correct:'Un score inférieur à 19 sur 28.', wrong:['Un score supérieur à 26 sur 28.', 'Un score de 28 sur 28.', 'Le Tinetti ne comporte aucun seuil de risque.'], explanation:'Le Tinetti évalue équilibre et marche. Un score bas doit conduire à rechercher des facteurs corrigibles et à proposer une prise en charge adaptée.' },
+    { id:'fried', chapter:'ch1', question:'À partir de combien de critères de Fried parle-t-on de fragilité ?', correct:'Au moins 3 critères sur 5.', wrong:['1 critère sur 5.', '2 critères sur 5.', '5 critères sont nécessaires pour toute pré-fragilité.'], explanation:'Les critères sont perte de poids involontaire, fatigue, faible activité, lenteur de marche et faiblesse musculaire. Un ou deux critères définissent la pré-fragilité.' },
+    { id:'mna', chapter:'ch14', question:'Comment interpréter un MNA-SF à 7/14 ?', correct:'Il évoque une dénutrition et impose une évaluation et une prise en charge nutritionnelle.', wrong:['Il correspond à un statut nutritionnel normal.', 'Il élimine une sarcopénie.', 'Il indique seulement un surpoids.'], explanation:'Pour le MNA-SF : 12–14 = statut normal, 8–11 = risque de dénutrition et ≤ 7 = dénutrition.' },
+    { id:'adl-iadl', chapter:'ch3', question:'Quel couple d’échelles permet de distinguer autonomie de base et autonomie instrumentale ?', correct:'ADL de Katz pour les activités de base et IADL de Lawton pour les activités instrumentales.', wrong:['MMS pour l’autonomie de base et CAM pour l’autonomie instrumentale.', 'GDS-15 pour l’autonomie de base et MNA pour l’autonomie instrumentale.', 'Tinetti pour l’autonomie de base et TUG pour l’autonomie instrumentale.'], explanation:'Le MMS explore la cognition, pas l’autonomie. Les ADL et IADL objectivent le retentissement fonctionnel au quotidien.' },
+    { id:'ecpa', chapter:'ch8', question:'Quelle échelle privilégier pour évaluer la douleur chez un patient non communicant ?', correct:'L’ECPA, fondée sur l’observation comportementale.', wrong:['L’EVA verbale uniquement.', 'Le MMS, qui mesure la mémoire.', 'La GDS-15, qui dépiste la dépression.'], explanation:'La douleur est souvent sous-déclarée chez la personne âgée. Une échelle comportementale est adaptée en cas de troubles cognitifs ou de communication.' },
+    { id:'braden', chapter:'ch13', question:'Comment évolue le risque d’escarre sur l’échelle de Braden ?', correct:'Il augmente lorsque le score diminue.', wrong:['Il augmente lorsque le score augmente.', 'Il est indépendant de la mobilité et de la nutrition.', 'Il ne concerne que les patients en réanimation.'], explanation:'Braden prend notamment en compte mobilité, activité, humidité, nutrition, friction et cisaillement. Un score bas impose des mesures préventives.' },
+    { id:'osteoporosis', chapter:'ch6', question:'Quel T-score définit l’ostéoporose densitométrique ?', correct:'Un T-score inférieur ou égal à −2,5.', wrong:['Un T-score supérieur à +2,5.', 'Un T-score compris entre 0 et +1.', 'Un T-score supérieur ou égal à −1.'], explanation:'L’ostéopénie correspond à un T-score entre −1 et −2,5. Le contexte fracturaire et les facteurs de risque orientent la prise en charge.' },
+    { id:'diappers', chapter:'ch15', question:'Devant une incontinence urinaire récente, quelle première démarche est justifiée ?', correct:'Rechercher une cause transitoire et réversible, notamment selon le mémo DIAPPERS.', wrong:['Poser d’emblée une sonde à demeure au long cours.', 'Considérer l’incontinence comme normale avec l’âge.', 'Prescrire un anticholinergique sans évaluation clinique.'], explanation:'Une incontinence aiguë peut être liée à une infection, un médicament, une constipation, une rétention, une confusion ou un handicap. La cause doit être recherchée avant l’étiquetage chronique.' },
+    { id:'renal-prescription', chapter:'ch16', question:'Quel réflexe de prescription est indispensable chez une personne âgée ?', correct:'Adapter la dose des médicaments à la fonction rénale et réévaluer régulièrement le rapport bénéfice-risque.', wrong:['Conserver les doses adultes sans tenir compte de la fonction rénale.', 'Multiplier les traitements pour chaque symptôme isolé.', 'Arrêter brutalement tous les psychotropes.'], explanation:'La réserve rénale et la polymédication exposent à l’iatrogénie. Toute prescription doit être revue, hiérarchisée et surveillée.' },
+    { id:'gds', chapter:'ch10', question:'Quel score GDS-15 doit faire évoquer une dépression ?', correct:'Un score d’au moins 5 sur 15.', wrong:['Un score de 0 sur 15.', 'Un score de 1 sur 15 sans symptôme associé.', 'La GDS-15 ne sert pas au dépistage.'], explanation:'La GDS-15 dépiste les symptômes dépressifs. L’interprétation clinique doit tenir compte du contexte, du deuil, des comorbidités et du risque suicidaire.' },
+    { id:'palliative', chapter:'ch17', question:'Quel est l’objectif de la sédation en situation palliative ?', correct:'Soulager une souffrance réfractaire, sans intention de provoquer la mort.', wrong:['Provoquer le décès lorsque la demande familiale est forte.', 'Remplacer toute évaluation de la douleur et de l’anxiété.', 'Éviter systématiquement la discussion collégiale.'], explanation:'La décision suit le cadre légal et clinique : symptôme réfractaire, proportionnalité, information, traçabilité et décision collégiale selon la situation.' },
+    { id:'lewy', chapter:'ch9', question:'Pourquoi faut-il être prudent avec les neuroleptiques dans une démence à corps de Lewy ?', correct:'Une hypersensibilité peut entraîner une aggravation neurologique et des effets indésirables sévères.', wrong:['Ils améliorent toujours la cognition à long terme.', 'Ils sont obligatoires dès le diagnostic.', 'Ils n’ont aucun effet sur la marche ou la vigilance.'], explanation:'Les hallucinations visuelles et les fluctuations cognitives évoquent une démence à corps de Lewy. Toute prescription psychotrope doit être très prudente.' },
+    { id:'bedrest', chapter:'ch13', question:'Quelle mesure prévient le mieux le syndrome d’immobilisation ?', correct:'La mobilisation et la réadaptation précoces, dès que l’état clinique le permet.', wrong:['Le repos strict prolongé pour éviter toute chute.', 'La contention au lit comme mesure de première intention.', 'La suppression de toute aide technique.'], explanation:'L’alitement favorise perte musculaire, escarres, thrombose, confusion et perte d’autonomie. La prévention repose sur mobilisation, soins de peau, nutrition et évaluation quotidienne.' },
+    { id:'presbyacousie', chapter:'ch5', question:'Quelle proposition décrit le mieux la presbyacousie ?', correct:'Une baisse progressive, bilatérale et symétrique de l’audition, avec indication d’appareillage auditif si retentissement.', wrong:['Une surdité unilatérale brutale à traiter comme une urgence vasculaire.', 'Une douleur aiguë d’oreille avec fièvre.', 'Une perte auditive forcément due à un bouchon de cérumen.'], explanation:'La presbyacousie est fréquente et favorise isolement, troubles de communication et déclin fonctionnel. Un dépistage et un appareillage précoce sont utiles.' },
+    { id:'pseudodementia', chapter:'ch10', question:'Pourquoi une dépression peut-elle imiter un trouble neurocognitif ?', correct:'Elle peut donner une plainte cognitive et un ralentissement réversibles après prise en charge adaptée.', wrong:['Elle entraîne toujours un delirium aigu.', 'Elle exclut toute évaluation cognitive.', 'Elle rend la GDS-15 inutile.'], explanation:'Face à une plainte cognitive, rechercher une dépression et d’autres causes réversibles avant de conclure à une maladie neurodégénérative.' },
+    { id:'polypharmacy', chapter:'ch16', question:'À partir de quel nombre de médicaments parle-t-on habituellement de polymédication ?', correct:'Cinq médicaments ou plus pris quotidiennement.', wrong:['Deux médicaments ou plus.', 'Uniquement dix médicaments ou plus.', 'La polymédication ne dépend jamais du nombre de traitements.'], explanation:'Au-delà de cinq médicaments, le risque d’interactions et d’effets indésirables augmente. La pertinence de chaque traitement doit être réévaluée.' },
+    { id:'delirium-cause', chapter:'ch11', question:'Quel facteur doit être recherché sans délai devant un delirium récent ?', correct:'Une cause aiguë réversible : infection, douleur, globe, fécalome, iatrogénie ou trouble métabolique.', wrong:['Seulement l’âge chronologique du patient.', 'Uniquement les antécédents de démence.', 'Une décision d’institutionnalisation immédiate.'], explanation:'Un delirium récent a toujours une cause à rechercher. Les présentations sont souvent atypiques chez la personne âgée.' },
+    { id:'gir', chapter:'ch3', question:'Que mesure principalement le GIR ?', correct:'Le niveau de dépendance pour les actes de la vie quotidienne afin d’orienter notamment l’APA.', wrong:['La sévérité d’une dépression.', 'Le risque de dénutrition.', 'Le risque hémorragique sous anticoagulant.'], explanation:'La grille AGGIR classe la perte d’autonomie de GIR 1 à GIR 6. Elle ne remplace pas l’évaluation clinique globale.' }
+  ];
+
   function loadSRS() {
     try { return JSON.parse(localStorage.getItem('bf_srs')) || {}; } catch { return {}; }
   }
@@ -207,6 +236,16 @@ const BrainFeed = (() => {
     return true;
   }
 
+  function isCaseChocReady(vignette, diagnosis) {
+    const stem = String(vignette || '').replace(/\s+/g, ' ').trim();
+    const correction = String(diagnosis || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+    // A feed card is a short clinical decision, never a copied EVC template.
+    if (stem.length < 70 || stem.length > 780 || correction.length < 35 || correction.length > 1500) return false;
+    if (!/\b\d{2,3}\s*ans\b/i.test(stem)) return false;
+    if (/interrogatoire complété|examen clinique complet|constantes répétées|réunion de staff|dossier mentionne|station EVC|candidat dispose de|référentiels français|questions du jury/i.test(stem + ' ' + correction)) return false;
+    return true;
+  }
+
   function buildQuizOptions(correctAnswer, allFlash, fc) {
     const cleanAnswer = (ans) => {
       let a = (ans || '').trim();
@@ -311,14 +350,17 @@ const BrainFeed = (() => {
     const isSymptom = /signe|symptôme|clinique|manifestation|douleur|marche/.test(ctx);
     const isExam = /bilan|exam|biologie|imagerie|radiographie|scanner|irm/.test(ctx);
 
-    // Get up to 3 distractors from actual cards
-    let candidates = allFlash.filter(f => f.id !== fc.id && f.answer);
-    
-    // Sort candidates to prioritize same chapter or same tags
-    let chapCandidates = [];
-    if (fc.chapter) {
-      chapCandidates = candidates.filter(f => f.chapter === fc.chapter);
-    }
+    // Get distractors only from the same clinical topic. A random answer from
+    // another chapter makes a question trivial rather than formative.
+    let candidates = allFlash.filter(f => f.id !== fc.id && f.answer && isQuizReadyFlash(f));
+    const ignoredTerms = new Set(['quel', 'quelle', 'quels', 'quelles', 'comment', 'pourquoi', 'chez', 'avec', 'dans', 'pour', 'plus', 'moins', 'patient', 'patients', 'personne', 'gériatrique', 'geriatrie', 'traitement', 'reference', 'référence', 'connaître', 'connaitre', 'définition', 'definition', 'trouble', 'troubles', 'syndrome', 'syndromes', 'grandes', 'familles', 'cause', 'causes', 'sujet', 'âgé', 'agée', 'aigu', 'aigue', 'aigus', 'aigues', 'outil', 'utilise', 'utiliser', 'validé', 'validée', 'service', 'soins', 'positif', 'positive', 'début', 'brutal', 'brutale', 'fluctuation', 'attention', 'altération', 'mesure', 'prioritaire', 'médicamenteuse', 'médicamenteux', 'présence', 'environnement']);
+    const focusTerms = [...new Set((qLower + ' ' + aLower).toLowerCase().match(/[a-zà-öø-ÿ]{5,}/g) || [])]
+      .filter(term => !ignoredTerms.has(term));
+    const topicCandidates = candidates.filter(f => {
+      const candidateText = String(f.question || '') + ' ' + String(f.answer || '');
+      const normalized = candidateText.toLowerCase();
+      return focusTerms.some(term => normalized.includes(term));
+    });
 
     const getCleanDistractors = (list) => {
       return shuffle(list)
@@ -334,55 +376,9 @@ const BrainFeed = (() => {
         .filter(Boolean);
     };
 
-    let uniq = [...new Set(getCleanDistractors(chapCandidates))];
-
-    // If we need more, check general pool
-    if (uniq.length < 3) {
-      const generalWrong = getCleanDistractors(candidates);
-      uniq = [...new Set([...uniq, ...generalWrong])];
-    }
-
-    // Slice to 3 wrong answers
-    uniq = uniq.slice(0, 3);
-
-    // Fallback static distractors ONLY if we still have less than 3 distractors
-    if (uniq.length < 3) {
-      const themeDistractors = {
-        treatment: ['Antibiotique en 1ère intention', 'Aucun traitement nécessaire', 'Hospitalisation systématique', 'Kinesithérapie seule suffit'],
-        definition: ['Une complication aiguë', 'Un symptôme non spécifique', 'Un médicament', 'Une procédure chirurgicale'],
-        score: ['Score de 0/30', 'Score toujours interprété brut', 'Score normal ≥ 25/30', 'Score non validé chez la PA'],
-        symptom: ['Douleur neuropathique', 'Signe de décompensation cardiaque', 'Manifestation iatrogène', 'Symptôme psychogène'],
-        exam: ['Bilan biologique systématique', 'Scanner cérébral systématique', 'Aucun examen complémentaire', 'Hospitalisation pour bilan'],
-        nutrition: ['Complémentation systématique par nutrition parentérale', 'IMC > 25 = obésité', 'Albumine > 40 g/L = normal'],
-        chute: ['Le TUG < 10 s = risque élevé', 'Arrêter toute activité physique', 'Contention systématique'],
-        cognition: ['Le MMS augmente avec l’âge', 'Prescrire un anticholinergique', 'La confusion est chronique et irréversible'],
-        douleur: ['L’EVA est impossible chez la PA', 'Le paracétamol est contre-indiqué', 'Douleur = toujours psychogène'],
-        pharma: ['Les BZD sont recommandées chez la PA', 'La polymédication est sans risque', 'Arrêter brutalement tous les traitements'],
-        ethique: ['L’acharnement est obligatoire', 'Les directives anticipées sont non contraignantes', 'La sédation est toujours interdite'],
-        incontinence: ['L’incontinence est normale avec l’âge', 'Pose systématique de sonde à demeure', 'Pas de rééducation périnéale'],
-        osteo: ['La vitamine D est inutile chez la PA', 'Le scanner est l’examen de 1re intention', 'Pas de prévention des chutes'],
-        default: ['Aucune de ces réponses', 'Contre-indication absolue', 'Surveillance simple']
-      };
-      let key = 'default';
-      if (isTreatment) key = 'treatment';
-      else if (isDefinition) key = 'definition';
-      else if (isScore) key = 'score';
-      else if (isSymptom) key = 'symptom';
-      else if (isExam) key = 'exam';
-      else if (/nutrition|mna|albumine|imc|dénutri|poids/.test(ctx)) key = 'nutrition';
-      else if (/chute|tinetti|tug|marche|équilibre/.test(ctx)) key = 'chute';
-      else if (/démence|cognitif|mms|alzheimer|confusion|delirium/.test(ctx)) key = 'cognition';
-      else if (/douleur|eva|ecpa/.test(ctx)) key = 'douleur';
-      else if (/pharmaco|médicament|iatrogène|stopp|beers|psychotrope/.test(ctx)) key = 'pharma';
-      else if (/éthique|palliatif|fin de vie|directives|leonetti/.test(ctx)) key = 'ethique';
-      else if (/incontinen|vésico|sphinctér/.test(ctx)) key = 'incontinence';
-      else if (/ostéopor|fracture|osseux|vitamine d/.test(ctx)) key = 'osteo';
-
-      while (uniq.length < 3) {
-        const candidate = themeDistractors[key][uniq.length % themeDistractors[key].length];
-        if (!uniq.includes(candidate)) uniq.push(candidate); else uniq.push('Aucune de ces réponses');
-      }
-    }
+    let uniq = [...new Set(getCleanDistractors(topicCandidates))].slice(0, 3);
+    // Better to omit a card than to manufacture three unrelated wrong answers.
+    if (uniq.length < 3) return [];
 
     const options = shuffle([
       { text: correctClean, correct: true },
@@ -434,6 +430,7 @@ const BrainFeed = (() => {
       if (!diagnosis) return;
 
       const text = a.situation || a.cas || a.case || a.title || '';
+      if (!isCaseChocReady(text, diagnosis)) return;
       const nameMatch = text.match(/M(?:me|\.?Monsieur|\.)\s+([A-ZÀ-ÖØ-Þ][a-zà-öø-ÿ'-]+)/);
       const nameKey = nameMatch ? nameMatch[1] : '';
       const ageMatch = text.match(/(\d{2,3})\s*ans/);
@@ -456,43 +453,21 @@ const BrainFeed = (() => {
       });
     });
 
-    // Quality-gated quiz: skip OCR junk / overlong answers that produce bad MCQ
-    const quizFlash = allFlash
-      .filter(isQuizReadyFlash)
-      .map(fc => {
-        const q = fc.question || fc.q;
-        const a = fc.answer || fc.a;
-        const opts = buildQuizOptions(a, allFlash, fc);
-        // Drop if options collapsed / all empty
-        const texts = (opts || []).map(o => (o.text || '').trim()).filter(Boolean);
-        if (texts.length < 3) return null;
-        if (new Set(texts.map(t => t.toLowerCase())).size < 3) return null;
-        return {
-          type: 'quiz_flash', id: 'qf-' + fc.id,
-          chapter: fc.chapter, rang: fc.rang,
-          question: q,
-          options: opts,
-          explanation: a,
-          srsKey: fc.id,
-          srs: srs[fc.id] || { ease: 2.5, interval: 0, nextReview: 0 },
-          tags: fc.tags || []
-        };
-      })
-      .filter(Boolean);
-    // Add quiz urgence cards
-    if (typeof QUIZ_URGENCE !== 'undefined') {
-      QUIZ_URGENCE.forEach(qu => {
-        quizFlash.push({
-          type: 'quiz_flash', id: 'qu-' + qu.id,
-          chapter: '', rang: 'A',
-          question: qu.question,
-          options: buildQuizOptions(qu.reponse, allFlash, qu),
-          explanation: qu.reponse,
-          srsKey: null, srs: null,
-          tags: [qu.categorie || 'Urgence']
-        });
-      });
-    }
+    // The feed uses an editorial question bank instead of transforming OCR
+    // flashcards into artificial MCQ. It guarantees clinically comparable
+    // alternatives and a concise explanation for every card.
+    const quizFlash = CURATED_QUIZZES.map(q => ({
+      type: 'quiz_flash', id: 'qf-curated-' + q.id,
+      chapter: q.chapter, rang: 'A', question: q.question,
+      options: shuffle([
+        { text: q.correct, correct: true },
+        ...q.wrong.map(text => ({ text, correct: false }))
+      ]),
+      explanation: q.explanation,
+      srsKey: 'curated-' + q.id,
+      srs: srs['curated-' + q.id] || { ease: 2.5, interval: 0, nextReview: 0 },
+      tags: ['Révision clinique', 'EVC']
+    }));
 
     const chiffreCle = CHIFFRES_CLES.map((c, i) => ({
       type: 'chiffre_cle', id: 'ck-' + i,
