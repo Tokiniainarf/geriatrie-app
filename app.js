@@ -674,6 +674,18 @@ function renderChapterContent(){
     applyConceptLinks();
     // Images IA educational/ EN PLUS des figures refaites (SVG/HTML)
     injectEducationalVisuals(S.ch, cc);
+    // La figure 1.1 est le schéma fondateur du chapitre : la rendre visible
+    // immédiatement après le plan, sans supprimer les autres illustrations.
+    if (S.ch === 'ch1') {
+      const mainFig = cc.querySelector('.fig-media[data-fig="1.1"]');
+      const figure = mainFig && mainFig.closest('figure');
+      if (figure) {
+        figure.classList.add('fig-spotlight');
+        const outline = cc.querySelector('.ch-outline-nav, .ch-outline');
+        if (outline && outline.parentNode) outline.parentNode.insertBefore(figure, outline.nextSibling);
+        else if (cc.firstChild) cc.insertBefore(figure, cc.firstChild);
+      }
+    }
     // Smooth outline anchors
     cc.querySelectorAll('.outline-link').forEach(a => {
       if (!a || typeof a.addEventListener !== 'function') return;
@@ -2173,7 +2185,10 @@ function renderChapter(raw,chId){
     }
 
     const bulM=l.match(BULLET_RE);
-    const isAutoBullet = bulM || (!bulletBuf.length && (l.endsWith(';') || l.endsWith('.')));
+    // Une ligne OCR qui finit par « . » n'est pas une puce. Seules les
+    // puces explicitement présentes dans le manuel le deviennent ; cela
+    // évite les fragments « ces hormones. », « cognitif. », etc.
+    const isAutoBullet = !!bulM;
     if(isAutoBullet && !SECTION_RE.test(l) && !LETTER_RE.test(l) && !RANG_RE.test(l)){
       flushNumList();
       // Le « B » est une indication de rang du PDF ; il n’est pas le début
