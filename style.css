@@ -4641,7 +4641,20 @@ button:disabled { opacity: .45; cursor: not-allowed; }
   font-size: .95rem;
   padding-bottom: 2px;
 }
-.study-reader.dense-mode .edu-visual-wrapper { display: none !important; }
+/* Dense mode: keep remade educational figures visible (was display:none — broke mobile) */
+.study-reader.dense-mode .edu-visual-wrapper {
+  display: block !important;
+  margin: 10px 0;
+}
+.study-reader.dense-mode .edu-visual-wrapper img,
+.study-reader.dense-mode .edu-visual-wrapper video {
+  max-height: 220px;
+  width: 100%;
+  object-fit: contain;
+}
+.study-reader.dense-mode .fig-block {
+  display: block !important;
+}
 .study-reader.dense-mode .bullet-card,
 .study-reader.dense-mode .reader-list-card {
   padding: 10px 12px;

@@ -13,81 +13,100 @@ function resolveManualAsset(entry){
 }
 
 /**
- * Build a figure block from EXISTING assets only:
- * 1) Interactive SVG schemas (interactive-figures.js)
- * 2) Crop / illustration images (FIGURES map)
- * Never use faithful text-cards (unreadable on mobile).
+ * True if path is a PDF capture (page scan / crop) — NEVER use for chapter figures.
+ * User requirement: only remade schemas (SVG interactive + educational AI images).
+ */
+function isPdfCapturePath(src){
+  if(!src) return true;
+  const s = String(src).replace(/\\/g,'/');
+  return /figures\/page_/i.test(s) || /\/crops\//i.test(s) || /\/p\d{3}_\d+\.(jpg|png|jpeg)$/i.test(s);
+}
+
+/** Educational remade asset for a figure id (chapter educational images). */
+function resolveEducationalFigSrc(figId){
+  // Prefer explicit map if present
+  if(typeof FIGURE_EDU_MAP!=='undefined' && FIGURE_EDU_MAP[figId]) return FIGURE_EDU_MAP[figId];
+  // Heuristic: ch{N}-extra-1 or ch{N}-1 for figure N.x
+  const n = String(figId).split('.')[0];
+  if(!n) return null;
+  const candidates = [
+    `images/chapters/educational/ch${n}-extra-1.jpg`,
+    `images/chapters/educational/ch${n}-1.jpg`,
+    `images/chapters/educational/ch${n}-2.jpg`
+  ];
+  // We can't fs.exists in browser; onerror will hide broken. Prefer first stable extra/1.
+  return candidates[0];
+}
+
+/**
+ * Build figure from REMADE assets only:
+ * 1) Interactive SVG (interactive-figures.js) — schemas already rebuilt
+ * 2) Educational images (Grok Imagine / chapters/educational)
+ * NEVER PDF page scans or crops.
  */
 function buildFigureBlock(figId, titleHint){
   const capTitle = (titleHint||'').replace(/^[AB]\s+/i,'').trim();
   let desc = capTitle;
   let inner = '';
 
-  // Prefer already-generated interactive SVG schemas
+  // 1) Interactive SVG schemas (already remade)
   if(typeof INTERACTIVE_FIGURES!=='undefined'){
-    if(INTERACTIVE_FIGURES[figId]?.svg){
-      inner = `<div class="fig-media fig-svg-wrap">${INTERACTIVE_FIGURES[figId].svg}</div>`;
-      if(INTERACTIVE_FIGURES[figId].title && !desc) desc = INTERACTIVE_FIGURES[figId].title;
-    } else {
-      const gk = String(figId).split('.')[0] + '.x';
-      if(INTERACTIVE_FIGURES[gk]?.svg){
-        inner = `<div class="fig-media fig-svg-wrap">${INTERACTIVE_FIGURES[gk].svg}</div>`;
-        if(INTERACTIVE_FIGURES[gk].title && !desc) desc = INTERACTIVE_FIGURES[gk].title;
-      }
+    const exact = INTERACTIVE_FIGURES[figId];
+    const fuzzy = INTERACTIVE_FIGURES[String(figId).split('.')[0] + '.x'];
+    const hit = exact || fuzzy;
+    if(hit?.svg){
+      inner = `<div class="fig-media fig-svg-wrap" data-fig="${esc(figId)}">${hit.svg}</div>`;
+      if(hit.title && !desc) desc = hit.title;
     }
   }
-
-  // Fallback: static crop / illustration (correct .src access)
-  const asset = (typeof FIGURES!=='undefined') ? resolveManualAsset(FIGURES[figId]) : null;
-  if(asset?.src){
-    if(!desc && asset.desc) desc = asset.desc;
-    const img = `<img class="fig-media fig-img" src="${asset.src}" alt="Figure ${figId}${desc?': '+esc(desc):''}" loading="lazy" decoding="async" onerror="this.style.display='none'">`;
-    // If we already have SVG, show crop below as reference image when available
-    if(inner){
-      // Keep SVG only — crops of same id can be clinical photos; show both when crop is real photo path
-      if(/crops\/|images\/p\d/i.test(asset.src)){
-        inner += img;
-      }
-    } else {
-      inner = img;
-    }
-  }
-
-  // Last resort: renderInteractiveFigure helper (SVG or img)
   if(!inner && typeof renderInteractiveFigure==='function'){
     try {
       const r = renderInteractiveFigure(figId, { preferStatic: false });
-      if(r && !/non disponible/i.test(r)) inner = `<div class="fig-media fig-svg-wrap">${r}</div>`;
+      if(r && /<svg/i.test(r)) inner = `<div class="fig-media fig-svg-wrap">${r}</div>`;
     } catch(e){}
   }
 
-  if(!inner) return ''; // don't inject text placeholders
+  // 2) Remade educational illustration (not PDF)
+  if(!inner){
+    const edu = resolveEducationalFigSrc(figId);
+    if(edu && !isPdfCapturePath(edu)){
+      inner = `<img class="fig-media fig-img edu-fig" src="${edu}" alt="Figure ${figId}${desc?': '+esc(desc):''}" loading="lazy" decoding="async" onerror="this.closest('figure')&&this.closest('figure').remove()">`;
+    }
+  }
+
+  // 3) FIGURES map only if NOT a PDF capture
+  if(!inner && typeof FIGURES!=='undefined' && FIGURES[figId]){
+    const asset = resolveManualAsset(FIGURES[figId]);
+    if(asset?.src && !isPdfCapturePath(asset.src)){
+      if(asset.desc && !desc) desc = asset.desc;
+      inner = `<img class="fig-media fig-img" src="${asset.src}" alt="Figure ${figId}" loading="lazy" decoding="async" onerror="this.closest('figure')&&this.closest('figure').remove()">`;
+    }
+  }
+
+  if(!inner) return ''; // no PDF fallback, no text wall
 
   const cap = desc ? `Figure ${figId} — ${esc(desc)}` : `Figure ${figId}`;
-  return `<figure class="fig-block">${inner}<figcaption>${cap}</figcaption></figure>`;
+  return `<figure class="fig-block fig-remade">${inner}<figcaption>${cap}</figcaption></figure>`;
 }
 
 /**
- * Build a table block from EXISTING image assets (TABLES / PAGE crops).
- * No HTML-as-text tables on mobile.
+ * Tables: title badge only + remade educational visual if chapter has one.
+ * NEVER inject PDF page scans (images/figures/page_*).
  */
 function buildTableBlock(tabId, titleHint){
   const title = (titleHint||'').replace(/^[AB]\s+/i,'').trim();
-  let src = '';
-  let desc = title;
+  let html = `<div class="table-lead"><span class="table-badge">Tableau ${esc(tabId)}</span><span>${esc(title||'')}</span></div>`;
 
-  // TABLES map (page/crop images)
-  if(typeof TABLES!=='undefined' && TABLES[tabId]){
-    const a = resolveManualAsset(TABLES[tabId]);
-    if(a?.src){ src = a.src; if(a.desc && !desc) desc = a.desc; }
-  }
-  // Some tables share cropped assets under FIGURES only when not a clinical fig collision
-  // Prefer TABLES; if missing, try page image convention from TABLES-like page keys only
+  // Optional: remade educational image for same chapter as table number
+  const n = String(tabId).split('.')[0];
+  const eduCandidates = [
+    `images/chapters/educational/ch${n}-extra-1.jpg`,
+    `images/chapters/educational/ch${n}-1.jpg`
+  ];
+  // Only attach for well-known table types that had edu diagrams (not every table)
+  // Skip auto-attach to avoid wrong images; title lead is enough for tables.
+  // Interactive SVG never covers generic "Tableau X.Y" content.
 
-  let html = `<div class="table-lead"><span class="table-badge">Tableau ${esc(tabId)}</span><span>${esc(desc||'')}</span></div>`;
-  if(src){
-    html += `<figure class="fig-block table-fig"><div class="table-fig-scroll"><img class="fig-media fig-img" src="${src}" alt="Tableau ${tabId}${desc?': '+esc(desc):''}" loading="lazy" decoding="async" onerror="this.closest('.table-fig')&&(this.closest('.table-fig').style.display='none')"></div></figure>`;
-  }
   return html;
 }
 const S={view:'home',ch:null,bm:safeJSON('gbm',[]),read:safeJSON('grd',[]),fs:parseInt(localStorage.getItem('gfs')||'18'),lh:parseFloat(localStorage.getItem('glh')||'1.7'),th:localStorage.getItem('gth')||'dark'};
@@ -559,7 +578,8 @@ function showCh(id){
   if(chTags) chTags.innerHTML=tags+(S.read.includes(id)?'<span class="tag tag-read">Consulté</span>':'');
   const bmOn=S.bm.includes(id);
   const isPractice = id==='ch18'||id==='ch19'||id==='ch20';
-  const denseOn = localStorage.getItem('gdense') !== '0';
+  // Dense is opt-in only (gdense==='1') so remade figures stay visible by default
+  const denseOn = localStorage.getItem('gdense') === '1';
   const toolbar=document.getElementById('chToolbar');
   if(toolbar){
     toolbar.innerHTML =
@@ -579,11 +599,11 @@ function showCh(id){
 }
 
 window.toggleDenseMode = function(){
-  const next = localStorage.getItem('gdense') === '0' ? '1' : '0';
+  const next = localStorage.getItem('gdense') === '1' ? '0' : '1';
   localStorage.setItem('gdense', next);
   const cc = document.getElementById('chContent');
   const btn = document.getElementById('btnDense');
-  const on = next !== '0';
+  const on = next === '1';
   if (cc) cc.classList.toggle('dense-mode', on);
   if (btn) {
     btn.classList.toggle('active', on);
@@ -631,12 +651,8 @@ function renderChapterContent(){
     cc.classList.remove('study-reader', 'dense-mode');
   } else {
     cc.classList.remove('practice-reader');
-    // Mobile: default dense reading unless user turned it off
-    let densePref = localStorage.getItem('gdense');
-    if (densePref == null && typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(max-width: 480px)').matches) {
-      densePref = '1';
-    }
-    const denseOn = densePref !== '0';
+    // Dense mode is opt-in only — never auto-hide educational figures on mobile
+    const denseOn = localStorage.getItem('gdense') === '1';
     cc.classList.toggle('dense-mode', denseOn);
     applyConceptLinks();
     injectEducationalVisuals(S.ch, cc);
@@ -665,21 +681,24 @@ function injectEducationalVisuals(chId, cc) {
   if (!cc || typeof createEduVisualWrapper !== 'function') return;
 
   const addedSrcs = new Set();
-  const MAX_VISUALS = 4;
+  // Remade educational figures (Grok Imagine) — show several per chapter
+  const MAX_VISUALS = 8;
   const isQAChapter = ['ch18','ch19','ch20'].includes(chId);
 
-  // Prefer curated EDU_VISUALS; only 1–2 generic educational fallbacks (not 6 broken slots)
+  // Prefer curated EDU_VISUALS (already remade, not PDF captures)
   let candidates = [];
   if (typeof EDU_VISUALS !== 'undefined' && EDU_VISUALS[chId]) {
     EDU_VISUALS[chId].forEach(v => {
-      if (v && v.img) candidates.push(v.img);
+      if (v && v.img && !isPdfCapturePath(v.img)) candidates.push(v.img);
     });
   }
   if (!isQAChapter) {
-    candidates.push(`images/chapters/educational/${chId}-1.jpg`);
-    candidates.push(`images/chapters/educational/${chId}-2.jpg`);
+    for (let i = 1; i <= 6; i++) {
+      candidates.push(`images/chapters/educational/${chId}-${i}.jpg`);
+    }
+    candidates.push(`images/chapters/educational/${chId}-extra-1.jpg`);
   }
-  candidates = [...new Set(candidates)].slice(0, MAX_VISUALS + 2);
+  candidates = [...new Set(candidates)].filter(s => !isPdfCapturePath(s)).slice(0, MAX_VISUALS + 4);
 
   // Targeted match inserts first (context-aware)
   if (typeof EDU_VISUALS !== 'undefined' && EDU_VISUALS[chId]) {
