@@ -235,108 +235,84 @@ const INTERACTIVE_FIGURES = {
     svg: `<style>
   .bouchon-svg { font-family: 'Figtree', 'Noto Sans', sans-serif; }
   .bouchon-svg .curve-main {
-    fill: none; stroke: #0891B2; stroke-width: 3; stroke-linecap: round;
-    stroke-dasharray: 600; stroke-dashoffset: 600;
-    animation: bouchon-draw 2.5s ease-out forwards;
+    fill: none; stroke: #22D3EE; stroke-width: 3.5; stroke-linecap: round;
+    /* Courbe toujours visible (pas seulement après animation) */
+    stroke-dasharray: none; stroke-dashoffset: 0; opacity: 1;
+  }
+  .bouchon-svg .curve-shadow {
+    fill: none; stroke: #0891B2; stroke-width: 8; stroke-linecap: round; opacity: 0.25;
   }
   .bouchon-svg .threshold-line {
-    stroke: #ef4444; stroke-width: 1.5; stroke-dasharray: 8 4;
-    opacity: 0; animation: bouchon-fade 0.8s 2.6s forwards;
+    stroke: #ef4444; stroke-width: 2; stroke-dasharray: 8 4; opacity: 1;
   }
-  .bouchon-svg .zone1-area { fill: rgba(8,145,178,0.10); opacity: 0; animation: bouchon-fade 0.6s 1.0s forwards; }
-  .bouchon-svg .zone2-area { fill: rgba(5,150,105,0.12); opacity: 0; animation: bouchon-fade 0.6s 1.6s forwards; }
-  .bouchon-svg .zone3-area { fill: rgba(239,68,68,0.10); opacity: 0; animation: bouchon-fade 0.6s 2.2s forwards; }
-  .bouchon-svg .label { fill: currentColor; font-size: 11px; opacity: 0; }
-  .bouchon-svg .label1 { animation: bouchon-fade 0.5s 1.2s forwards; }
-  .bouchon-svg .label2 { animation: bouchon-fade 0.5s 1.8s forwards; }
-  .bouchon-svg .label3 { animation: bouchon-fade 0.5s 2.4s forwards; }
-  .bouchon-svg .threshold-label { fill: #ef4444; font-size: 10px; opacity: 0; animation: bouchon-fade 0.6s 3.0s forwards; }
+  .bouchon-svg .zone1-area { fill: rgba(8,145,178,0.14); opacity: 1; }
+  .bouchon-svg .zone2-area { fill: rgba(5,150,105,0.14); opacity: 1; }
+  .bouchon-svg .zone3-area { fill: rgba(239,68,68,0.12); opacity: 1; }
+  .bouchon-svg .label { fill: currentColor; font-size: 11px; opacity: 1; }
+  .bouchon-svg .threshold-label { fill: #ef4444; font-size: 10px; font-weight: 700; opacity: 1; }
   .bouchon-svg .axis-label { fill: currentColor; font-size: 11px; font-weight: 600; }
-  .bouchon-svg .zone-hover { fill: transparent; cursor: pointer; transition: fill 0.3s; }
-  .bouchon-svg .zone-hover:hover { fill: rgba(8,145,178,0.08); }
-  .bouchon-svg .tooltip-box { opacity: 0; pointer-events: none; transition: opacity 0.25s; }
-  .bouchon-svg .zone-trigger:hover + .tooltip-box,
-  .bouchon-svg .zone-trigger:hover ~ .tooltip-box { opacity: 1; }
-  .bouchon-svg .glow-line { stroke: #0891B2; stroke-width: 6; opacity: 0; filter: blur(4px);
-    stroke-dasharray: 600; stroke-dashoffset: 600; }
-  .bouchon-svg .zone-trigger:hover ~ .glow-line { opacity: 0.4; animation: bouchon-draw 1.5s ease-out forwards; }
+  .bouchon-svg .drop-arrow { fill: none; stroke: #ef4444; stroke-width: 2; marker-end: url(#bouchon-arr); }
+  @media (prefers-reduced-motion: no-preference) {
+    .bouchon-svg .curve-main {
+      stroke-dasharray: 600; stroke-dashoffset: 600;
+      animation: bouchon-draw 2.2s ease-out forwards;
+    }
+  }
   @keyframes bouchon-draw { to { stroke-dashoffset: 0; } }
-  @keyframes bouchon-fade { to { opacity: 1; } }
 </style>
-<svg class="bouchon-svg" viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;">
+<svg class="bouchon-svg" viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;display:block;">
+  <defs>
+    <marker id="bouchon-arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#ef4444"/>
+    </marker>
+  </defs>
   <!-- Axes -->
-  <line x1="60" y1="30" x2="60" y2="280" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
-  <line x1="60" y1="280" x2="500" y2="280" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
-  <text class="axis-label" x="15" y="160" transform="rotate(-90,15,160)" text-anchor="middle">Réserve fonctionnelle</text>
+  <line x1="60" y1="30" x2="60" y2="280" stroke="currentColor" stroke-width="1.5" opacity="0.35"/>
+  <line x1="60" y1="280" x2="500" y2="280" stroke="currentColor" stroke-width="1.5" opacity="0.35"/>
+  <text class="axis-label" x="18" y="160" transform="rotate(-90,18,160)" text-anchor="middle">Réserve fonctionnelle</text>
   <text class="axis-label" x="280" y="315" text-anchor="middle">Âge →</text>
+  <text x="68" y="40" fill="currentColor" font-size="10" opacity="0.5">100 %</text>
+  <text x="68" y="275" fill="currentColor" font-size="10" opacity="0.5">0</text>
 
-  <!-- Grid lines (subtle) -->
-  <line x1="60" y1="80" x2="500" y2="80" stroke="currentColor" stroke-width="0.5" opacity="0.08"/>
-  <line x1="60" y1="180" x2="500" y2="180" stroke="currentColor" stroke-width="0.5" opacity="0.08"/>
+  <!-- Zone fills under the curve -->
+  <path class="zone1-area" d="M60,280 L60,105 C100,100 140,115 210,145 L210,280 Z"/>
+  <path class="zone2-area" d="M210,280 L210,145 C250,160 300,175 350,195 L350,280 Z"/>
+  <path class="zone3-area" d="M350,280 L350,195 C390,215 430,245 470,275 L470,280 Z"/>
 
-  <!-- Zone backgrounds (transparent, for interaction) -->
-  <rect x="60" y="30" width="150" height="250" class="zone-hover" rx="4" id="bz1"/>
-  <rect x="210" y="30" width="140" height="250" class="zone-hover" rx="4" id="bz2"/>
-  <rect x="350" y="30" width="150" height="250" class="zone-hover" rx="4" id="bz3"/>
-
-  <!-- Zone colored areas -->
-  <path class="zone1-area" d="M60,280 L60,120 C100,110 140,125 210,140 L210,280 Z"/>
-  <path class="zone2-area" d="M210,280 L210,140 C250,155 300,170 350,190 L350,280 Z"/>
-  <path class="zone3-area" d="M350,280 L350,190 C380,210 420,240 450,270 L470,280 Z"/>
-
-  <!-- Main decline curve -->
+  <!-- Shadow curve + main decline curve (vraie courbe) -->
+  <path class="curve-shadow" d="M60,100 C100,95 140,110 200,130 C260,150 310,165 350,185 C390,205 430,240 470,272"/>
   <path class="curve-main" d="M60,100 C100,95 140,110 200,130 C260,150 310,165 350,185 C390,205 430,240 470,272"/>
 
-  <!-- Threshold line (seuil d'insuffisance) -->
-  <line class="threshold-line" x1="55" y1="240" x2="500" y2="240"/>
-  <text class="threshold-label" x="505" y="244">Seuil</text>
-  <text class="threshold-label" x="505" y="256">d'insuffisance</text>
+  <!-- Seuil d'insuffisance -->
+  <line class="threshold-line" x1="55" y1="240" x2="490" y2="240"/>
+  <text class="threshold-label" x="492" y="236">Seuil</text>
+  <text class="threshold-label" x="492" y="250">d'insuffisance</text>
 
-  <!-- Zone labels -->
-  <text class="label label1" x="135" y="55" text-anchor="middle" font-weight="700" fill="#0891B2">(1)</text>
-  <text class="label label1" x="135" y="70" text-anchor="middle" font-size="9.5" fill="#0891B2">Vieillissement</text>
-  <text class="label label1" x="135" y="82" text-anchor="middle" font-size="9.5" fill="#0891B2">physiologique</text>
+  <!-- Separators (1)(2)(3) -->
+  <line x1="210" y1="30" x2="210" y2="280" stroke="currentColor" stroke-dasharray="4 3" stroke-width="1" opacity="0.2"/>
+  <line x1="350" y1="30" x2="350" y2="280" stroke="currentColor" stroke-dasharray="4 3" stroke-width="1" opacity="0.2"/>
 
-  <text class="label label2" x="280" y="55" text-anchor="middle" font-weight="700" fill="#059669">(2)</text>
-  <text class="label label2" x="280" y="70" text-anchor="middle" font-size="9.5" fill="#059669">Maladie</text>
-  <text class="label label2" x="280" y="82" text-anchor="middle" font-size="9.5" fill="#059669">chronique</text>
+  <!-- Labels zones -->
+  <text class="label" x="135" y="52" text-anchor="middle" font-weight="800" fill="#22D3EE" font-size="14">(1)</text>
+  <text class="label" x="135" y="68" text-anchor="middle" font-size="10" fill="#22D3EE">Vieillissement</text>
+  <text class="label" x="135" y="82" text-anchor="middle" font-size="10" fill="#22D3EE">physiologique</text>
 
-  <text class="label label3" x="420" y="55" text-anchor="middle" font-weight="700" fill="#ef4444">(3)</text>
-  <text class="label label3" x="420" y="70" text-anchor="middle" font-size="9.5" fill="#ef4444">Stress aigu</text>
-  <text class="label label3" x="420" y="82" text-anchor="middle" font-size="9" fill="#ef4444">= facteur</text>
-  <text class="label label3" x="420" y="94" text-anchor="middle" font-size="9" fill="#ef4444">décompensant</text>
+  <text class="label" x="280" y="52" text-anchor="middle" font-weight="800" fill="#34D399" font-size="14">(2)</text>
+  <text class="label" x="280" y="68" text-anchor="middle" font-size="10" fill="#34D399">Maladie(s)</text>
+  <text class="label" x="280" y="82" text-anchor="middle" font-size="10" fill="#34D399">chronique(s)</text>
 
-  <!-- Vertical zone separators (dashed) -->
-  <line x1="210" y1="30" x2="210" y2="280" stroke="currentColor" stroke-dasharray="4 3" stroke-width="1" opacity="0.15"/>
-  <line x1="350" y1="30" x2="350" y2="280" stroke="currentColor" stroke-dasharray="4 3" stroke-width="1" opacity="0.15"/>
+  <text class="label" x="420" y="52" text-anchor="middle" font-weight="800" fill="#F87171" font-size="14">(3)</text>
+  <text class="label" x="420" y="68" text-anchor="middle" font-size="10" fill="#F87171">Stress aigu</text>
+  <text class="label" x="420" y="82" text-anchor="middle" font-size="9.5" fill="#F87171">décompensant</text>
 
-  <!-- Hover tooltips (hidden by default, shown via CSS on zone hover) -->
-  <g class="tooltip-box" style="transform:translate(0,0);">
-    <rect x="65" y="160" width="140" height="50" rx="6" fill="rgba(22,78,99,0.92)" stroke="#0891B2" stroke-width="1"/>
-    <text x="135" y="180" text-anchor="middle" fill="#fff" font-size="9.5">Déclin progressif et</text>
-    <text x="135" y="194" text-anchor="middle" fill="#fff" font-size="9.5">prévisible avec l'âge</text>
-  </g>
-  <g class="tooltip-box" style="transform:translate(0,0);">
-    <rect x="215" y="160" width="130" height="50" rx="6" fill="rgba(22,78,99,0.92)" stroke="#059669" stroke-width="1"/>
-    <text x="280" y="180" text-anchor="middle" fill="#fff" font-size="9.5">Perte de réserve</text>
-    <text x="280" y="194" text-anchor="middle" fill="#fff" font-size="9.5">par pathologie</text>
-  </g>
-  <g class="tooltip-box" style="transform:translate(0,0);">
-    <rect x="355" y="195" width="140" height="50" rx="6" fill="rgba(22,78,99,0.92)" stroke="#ef4444" stroke-width="1"/>
-    <text x="425" y="215" text-anchor="middle" fill="#fff" font-size="9.5">Chute brutale sous</text>
-    <text x="425" y="229" text-anchor="middle" fill="#fff" font-size="9.5">l'effet d'un stress</text>
-  </g>
+  <!-- Flèches de décompensation sous le seuil -->
+  <path class="drop-arrow" d="M300,195 L300,255"/>
+  <path class="drop-arrow" d="M400,220 L400,255"/>
+  <text x="310" y="250" fill="#ef4444" font-size="9" font-weight="600">décompensation</text>
 
-  <!-- Hover interaction zones (re-drawn on top for CSS hover to work) -->
-  <rect x="60" y="30" width="150" height="250" fill="transparent" class="zone-trigger"
-        onmouseover="this.parentNode.querySelectorAll('.tooltip-box')[0].style.opacity=1"
-        onmouseout="this.parentNode.querySelectorAll('.tooltip-box')[0].style.opacity=0" rx="4" style="cursor:pointer;"/>
-  <rect x="210" y="30" width="140" height="250" fill="transparent" class="zone-trigger"
-        onmouseover="this.parentNode.querySelectorAll('.tooltip-box')[1].style.opacity=1"
-        onmouseout="this.parentNode.querySelectorAll('.tooltip-box')[1].style.opacity=0" rx="4" style="cursor:pointer;"/>
-  <rect x="350" y="30" width="150" height="250" fill="transparent" class="zone-trigger"
-        onmouseover="this.parentNode.querySelectorAll('.tooltip-box')[2].style.opacity=1"
-        onmouseout="this.parentNode.querySelectorAll('.tooltip-box')[2].style.opacity=0" rx="4" style="cursor:pointer;"/>
+  <!-- Intervention (remontée de réserve) -->
+  <path d="M250,170 C270,155 290,145 310,140" fill="none" stroke="#34D399" stroke-width="2" stroke-dasharray="5 3"/>
+  <text x="318" y="138" fill="#34D399" font-size="9" font-weight="600">Effet de l'intervention</text>
 </svg>`
   },
 
@@ -1131,7 +1107,193 @@ const INTERACTIVE_FIGURES = {
 </svg>`
   },
 
-  // ─── Figure 6.x : Cascade de l'ostéoporose ───
+  // ─── Fig. 6.1–6.7 : schémas DISTINCTS (pas le fuzzy 6.x répété) ───
+  "6.1": {
+    title: "Fracture pertrochantérienne (FESF)",
+    svg: `<svg viewBox="0 0 420 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;display:block;">
+  <text x="210" y="22" text-anchor="middle" fill="currentColor" font-size="13" font-weight="700">Fracture pertrochantérienne gauche</text>
+  <text x="210" y="40" text-anchor="middle" fill="currentColor" font-size="10" opacity="0.7">Extrémité supérieure du fémur (FESF) · schéma pédagogique</text>
+  <!-- Pelvis simplified -->
+  <ellipse cx="210" cy="100" rx="90" ry="35" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35"/>
+  <!-- Femur head + neck + trochanters -->
+  <circle cx="175" cy="115" r="28" fill="rgba(8,145,178,0.15)" stroke="#0891B2" stroke-width="2"/>
+  <path d="M195,130 L230,155 L245,220" fill="none" stroke="#0891B2" stroke-width="14" stroke-linecap="round"/>
+  <!-- Greater trochanter -->
+  <ellipse cx="235" cy="145" rx="16" ry="12" fill="rgba(8,145,178,0.2)" stroke="#0891B2" stroke-width="1.5"/>
+  <!-- Fracture line through trochanters -->
+  <path d="M210,135 L255,160" stroke="#ef4444" stroke-width="3" stroke-linecap="round"/>
+  <path d="M218,132 L250,155" stroke="#ef4444" stroke-width="2" stroke-dasharray="4 2"/>
+  <circle cx="232" cy="148" r="6" fill="#ef4444" opacity="0.9"/>
+  <text x="270" y="145" fill="#ef4444" font-size="11" font-weight="700">Trait de fracture</text>
+  <text x="270" y="160" fill="#ef4444" font-size="10">pertrochantérien</text>
+  <!-- Labels -->
+  <text x="175" y="100" text-anchor="middle" fill="currentColor" font-size="9">Tête</text>
+  <text x="205" y="125" fill="currentColor" font-size="9">Col</text>
+  <text x="255" y="130" fill="currentColor" font-size="9">Gd trochanter</text>
+  <text x="250" y="230" fill="currentColor" font-size="9">Diaphyse</text>
+  <rect x="40" y="250" width="340" height="50" rx="8" fill="rgba(239,68,68,0.08)" stroke="#ef4444" stroke-width="1"/>
+  <text x="210" y="270" text-anchor="middle" fill="currentColor" font-size="10" font-weight="600">Site le plus fréquent de FESF · ostéoporose</text>
+  <text x="210" y="288" text-anchor="middle" fill="currentColor" font-size="9" opacity="0.8">Urgence orthogériatrique · lever précoce · prévention 2e fracture</text>
+</svg>`
+  },
+  "6.2": {
+    title: "Fracture de l'extrémité inférieure du fémur (FEIF)",
+    svg: `<svg viewBox="0 0 420 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;display:block;">
+  <text x="210" y="22" text-anchor="middle" fill="currentColor" font-size="13" font-weight="700">Fracture extrémité inférieure du fémur</text>
+  <text x="210" y="40" text-anchor="middle" fill="currentColor" font-size="10" opacity="0.7">FEIF · schéma pédagogique (pas une radio)</text>
+  <!-- Shaft -->
+  <path d="M200,55 L200,180" fill="none" stroke="#0891B2" stroke-width="16" stroke-linecap="round"/>
+  <!-- Condyles -->
+  <ellipse cx="175" cy="210" rx="28" ry="35" fill="rgba(8,145,178,0.15)" stroke="#0891B2" stroke-width="2"/>
+  <ellipse cx="225" cy="210" rx="28" ry="35" fill="rgba(8,145,178,0.15)" stroke="#0891B2" stroke-width="2"/>
+  <path d="M175,185 L225,185" stroke="#0891B2" stroke-width="10"/>
+  <!-- Fracture supracondylar -->
+  <path d="M165,175 L235,195" stroke="#ef4444" stroke-width="3.5" stroke-linecap="round"/>
+  <circle cx="200" cy="185" r="7" fill="#ef4444"/>
+  <text x="255" y="180" fill="#ef4444" font-size="11" font-weight="700">Fracture</text>
+  <text x="255" y="195" fill="#ef4444" font-size="10">supracondylienne /</text>
+  <text x="255" y="208" fill="#ef4444" font-size="10">extrémité inférieure</text>
+  <text x="200" y="100" text-anchor="middle" fill="currentColor" font-size="9">Diaphyse fémorale</text>
+  <text x="200" y="255" text-anchor="middle" fill="currentColor" font-size="9">Condyles · genou</text>
+  <rect x="40" y="270" width="340" height="35" rx="8" fill="rgba(8,145,178,0.08)"/>
+  <text x="210" y="292" text-anchor="middle" fill="currentColor" font-size="10">Souvent traumatisme à haute énergie ou chute chez sujet ostéoporotique</text>
+</svg>`
+  },
+  "6.3": {
+    title: "Fracture de l'extrémité supérieure de l'humérus (FESH)",
+    svg: `<svg viewBox="0 0 420 340" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;display:block;">
+  <text x="210" y="22" text-anchor="middle" fill="currentColor" font-size="13" font-weight="700">Fracture extrémité supérieure de l'humérus</text>
+  <text x="210" y="40" text-anchor="middle" fill="currentColor" font-size="10" opacity="0.7">FESH · schéma pédagogique distinct (≠ fémur)</text>
+  <!-- Scapula / glenoid hint -->
+  <path d="M120,90 Q100,120 110,160" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
+  <!-- Humeral head -->
+  <circle cx="160" cy="110" r="32" fill="rgba(5,150,105,0.18)" stroke="#059669" stroke-width="2.5"/>
+  <!-- Surgical neck + shaft -->
+  <path d="M175,138 L210,170 L230,260" fill="none" stroke="#059669" stroke-width="14" stroke-linecap="round"/>
+  <!-- Greater tuberosity -->
+  <ellipse cx="185" cy="95" rx="12" ry="10" fill="rgba(5,150,105,0.25)" stroke="#059669" stroke-width="1.2"/>
+  <!-- Fracture at surgical neck -->
+  <path d="M155,140 L200,155" stroke="#ef4444" stroke-width="3.5" stroke-linecap="round"/>
+  <circle cx="175" cy="147" r="7" fill="#ef4444"/>
+  <text x="250" y="130" fill="#ef4444" font-size="11" font-weight="700">Col chirurgical</text>
+  <text x="250" y="146" fill="#ef4444" font-size="10">siège fréquent FESH</text>
+  <text x="160" y="105" text-anchor="middle" fill="currentColor" font-size="9">Tête</text>
+  <text x="235" y="220" fill="currentColor" font-size="9">Diaphyse</text>
+  <text x="195" y="88" fill="currentColor" font-size="8">Tubérosité</text>
+  <rect x="35" y="275" width="350" height="48" rx="8" fill="rgba(5,150,105,0.1)" stroke="#059669" stroke-width="1"/>
+  <text x="210" y="295" text-anchor="middle" fill="currentColor" font-size="10" font-weight="600">3e site fracturaire ostéoporotique fréquent</text>
+  <text x="210" y="312" text-anchor="middle" fill="currentColor" font-size="9" opacity="0.85">Chute sur le moignon de l'épaule · classification Neer</text>
+</svg>`
+  },
+  "6.4": {
+    title: "Fractures vertébrales et cimentoplastie",
+    svg: `<svg viewBox="0 0 440 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;display:block;">
+  <text x="220" y="22" text-anchor="middle" fill="currentColor" font-size="13" font-weight="700">Fractures vertébrales L2–L3</text>
+  <text x="220" y="40" text-anchor="middle" fill="currentColor" font-size="10" opacity="0.7">Tassement · cimentoplastie (principe)</text>
+  <!-- Normal vertebra -->
+  <rect x="50" y="70" width="70" height="50" rx="6" fill="rgba(8,145,178,0.15)" stroke="#0891B2" stroke-width="2"/>
+  <text x="85" y="100" text-anchor="middle" fill="currentColor" font-size="10">L1 normal</text>
+  <!-- Collapsed L2 -->
+  <path d="M150,85 L220,85 L215,125 L155,130 Z" fill="rgba(239,68,68,0.2)" stroke="#ef4444" stroke-width="2"/>
+  <text x="185" y="100" text-anchor="middle" fill="#ef4444" font-size="10" font-weight="700">L2 tassée</text>
+  <text x="185" y="145" text-anchor="middle" fill="#ef4444" font-size="9">avant</text>
+  <!-- Arrow -->
+  <path d="M235,105 L270,105" stroke="currentColor" stroke-width="2" marker-end="url(#arr64)"/>
+  <defs><marker id="arr64" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="currentColor"/></marker></defs>
+  <!-- After cementoplasty -->
+  <path d="M285,80 L355,80 L350,130 L290,130 Z" fill="rgba(5,150,105,0.2)" stroke="#059669" stroke-width="2"/>
+  <rect x="300" y="95" width="30" height="20" rx="2" fill="#34D399" opacity="0.7"/>
+  <text x="320" y="100" text-anchor="middle" fill="#059669" font-size="10" font-weight="700">L2</text>
+  <text x="320" y="148" text-anchor="middle" fill="#059669" font-size="9">après ciment</text>
+  <!-- L3 mild -->
+  <rect x="150" y="165" width="70" height="40" rx="4" fill="rgba(245,158,11,0.15)" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="185" y="190" text-anchor="middle" fill="#f59e0b" font-size="10">L3 ± tassement</text>
+  <rect x="40" y="230" width="360" height="70" rx="8" fill="rgba(8,145,178,0.06)"/>
+  <text x="220" y="255" text-anchor="middle" fill="currentColor" font-size="10" font-weight="600">Cimentoplastie / vertébroplastie</text>
+  <text x="220" y="275" text-anchor="middle" fill="currentColor" font-size="9" opacity="0.85">Stabilisation · antalgie · pas un traitement de l'ostéoporose de fond</text>
+  <text x="220" y="292" text-anchor="middle" fill="#0891B2" font-size="9">+ Ca²⁺ · vit. D · anti-ostéoporotique · prévention chute</text>
+</svg>`
+  },
+  "6.5": {
+    title: "Démarche devant suspicion d'ostéoporose",
+    svg: `<svg viewBox="0 0 460 380" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;display:block;">
+  <text x="230" y="22" text-anchor="middle" fill="currentColor" font-size="13" font-weight="700">Suspicion d'ostéoporose — démarche</text>
+  <rect x="130" y="40" width="200" height="40" rx="8" fill="rgba(8,145,178,0.15)" stroke="#0891B2" stroke-width="1.5"/>
+  <text x="230" y="65" text-anchor="middle" fill="currentColor" font-size="11" font-weight="600">Facteurs de risque / fracture fragilité</text>
+  <path d="M230,80 L230,100" stroke="#0891B2" stroke-width="2"/>
+  <rect x="130" y="100" width="200" height="40" rx="8" fill="rgba(8,145,178,0.1)" stroke="#0891B2" stroke-width="1.5"/>
+  <text x="230" y="125" text-anchor="middle" fill="currentColor" font-size="11">DXA (T-score) ± radio</text>
+  <path d="M230,140 L230,160" stroke="#0891B2" stroke-width="2"/>
+  <rect x="100" y="160" width="260" height="40" rx="8" fill="rgba(5,150,105,0.12)" stroke="#059669" stroke-width="1.5"/>
+  <text x="230" y="185" text-anchor="middle" fill="currentColor" font-size="11">Bilan étiologique (bio, 2e causes)</text>
+  <path d="M230,200 L230,220" stroke="#0891B2" stroke-width="2"/>
+  <rect x="80" y="220" width="300" height="50" rx="8" fill="rgba(245,158,11,0.12)" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="230" y="242" text-anchor="middle" fill="currentColor" font-size="11" font-weight="600">Traitement de fond + chute + Ca/vit D</text>
+  <text x="230" y="258" text-anchor="middle" fill="currentColor" font-size="10" opacity="0.8">GRIO · durée limitée · réévaluation</text>
+  <rect x="60" y="290" width="340" height="60" rx="8" fill="rgba(8,145,178,0.06)"/>
+  <text x="230" y="315" text-anchor="middle" fill="currentColor" font-size="10">Ne pas confondre avec figures de fractures (6.1–6.4)</text>
+  <text x="230" y="335" text-anchor="middle" fill="#0891B2" font-size="10">Algorithme clinique · pas une image TDM</text>
+</svg>`
+  },
+  "6.6": {
+    title: "Indications traitements anti-ostéoporotiques (GRIO)",
+    svg: `<svg viewBox="0 0 460 340" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;display:block;">
+  <text x="230" y="22" text-anchor="middle" fill="currentColor" font-size="13" font-weight="700">Indications anti-ostéoporotiques</text>
+  <text x="230" y="40" text-anchor="middle" fill="currentColor" font-size="10" opacity="0.7">Synthèse pédagogique (vérifier GRIO actualisé)</text>
+  <rect x="30" y="55" width="120" height="70" rx="8" fill="rgba(239,68,68,0.12)" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="90" y="80" text-anchor="middle" fill="#ef4444" font-size="11" font-weight="700">Fracture</text>
+  <text x="90" y="98" text-anchor="middle" fill="currentColor" font-size="9">sévère / FESF</text>
+  <text x="90" y="112" text-anchor="middle" fill="currentColor" font-size="9">→ traiter</text>
+  <rect x="170" y="55" width="120" height="70" rx="8" fill="rgba(245,158,11,0.12)" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="230" y="80" text-anchor="middle" fill="#f59e0b" font-size="11" font-weight="700">T ≤ −2,5</text>
+  <text x="230" y="98" text-anchor="middle" fill="currentColor" font-size="9">+ facteurs de risque</text>
+  <text x="230" y="112" text-anchor="middle" fill="currentColor" font-size="9">→ discuter</text>
+  <rect x="310" y="55" width="120" height="70" rx="8" fill="rgba(8,145,178,0.12)" stroke="#0891B2" stroke-width="1.5"/>
+  <text x="370" y="80" text-anchor="middle" fill="#0891B2" font-size="11" font-weight="700">FRAX élevé</text>
+  <text x="370" y="98" text-anchor="middle" fill="currentColor" font-size="9">risque 10 ans</text>
+  <text x="370" y="112" text-anchor="middle" fill="currentColor" font-size="9">→ individualiser</text>
+  <path d="M230,125 L230,150" stroke="currentColor" stroke-width="2"/>
+  <rect x="100" y="150" width="260" height="55" rx="8" fill="rgba(5,150,105,0.12)" stroke="#059669" stroke-width="1.5"/>
+  <text x="230" y="175" text-anchor="middle" fill="currentColor" font-size="11" font-weight="600">Biphosphonate / dénosumab / autre</text>
+  <text x="230" y="193" text-anchor="middle" fill="currentColor" font-size="9" opacity="0.8">+ calcium · vitamine D · prévention chute</text>
+  <rect x="60" y="225" width="340" height="90" rx="8" fill="rgba(8,145,178,0.06)"/>
+  <text x="230" y="250" text-anchor="middle" fill="currentColor" font-size="10" font-weight="600">Points clés gériatriques</text>
+  <text x="230" y="270" text-anchor="middle" fill="currentColor" font-size="9">Clairance rénale · dentaire avant biphosphonate</text>
+  <text x="230" y="288" text-anchor="middle" fill="currentColor" font-size="9">Durée 3–5 ans · réévaluation (fig. 6.7)</text>
+  <text x="230" y="305" text-anchor="middle" fill="#0891B2" font-size="9">Observance · effets indésirables (tableau 6.2)</text>
+</svg>`
+  },
+  "6.7": {
+    title: "Cycle thérapeutique de l'ostéoporose primitive",
+    svg: `<svg viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;display:block;">
+  <text x="230" y="22" text-anchor="middle" fill="currentColor" font-size="13" font-weight="700">Cycle thérapeutique (3–5 ans)</text>
+  <text x="230" y="40" text-anchor="middle" fill="currentColor" font-size="10" opacity="0.7">Ostéoporose primitive · personne âgée</text>
+  <!-- Timeline -->
+  <line x1="50" y1="120" x2="410" y2="120" stroke="#0891B2" stroke-width="3"/>
+  <circle cx="80" cy="120" r="12" fill="#0891B2"/>
+  <circle cx="180" cy="120" r="12" fill="#0891B2"/>
+  <circle cx="280" cy="120" r="12" fill="#f59e0b"/>
+  <circle cx="380" cy="120" r="12" fill="#059669"/>
+  <text x="80" y="90" text-anchor="middle" fill="currentColor" font-size="10" font-weight="700">J0</text>
+  <text x="80" y="155" text-anchor="middle" fill="currentColor" font-size="9">Initiation</text>
+  <text x="80" y="168" text-anchor="middle" fill="currentColor" font-size="8" opacity="0.7">DXA · dentaire</text>
+  <text x="180" y="90" text-anchor="middle" fill="currentColor" font-size="10" font-weight="700">1 an</text>
+  <text x="180" y="155" text-anchor="middle" fill="currentColor" font-size="9">Observance</text>
+  <text x="180" y="168" text-anchor="middle" fill="currentColor" font-size="8" opacity="0.7">EI · chute</text>
+  <text x="280" y="90" text-anchor="middle" fill="currentColor" font-size="10" font-weight="700">3–5 ans</text>
+  <text x="280" y="155" text-anchor="middle" fill="currentColor" font-size="9">Réévaluation</text>
+  <text x="280" y="168" text-anchor="middle" fill="currentColor" font-size="8" opacity="0.7">DXA · pause ?</text>
+  <text x="380" y="90" text-anchor="middle" fill="currentColor" font-size="10" font-weight="700">Suite</text>
+  <text x="380" y="155" text-anchor="middle" fill="currentColor" font-size="9">Holiday /</text>
+  <text x="380" y="168" text-anchor="middle" fill="currentColor" font-size="8" opacity="0.7">relais / arrêt</text>
+  <rect x="50" y="200" width="360" height="75" rx="8" fill="rgba(8,145,178,0.07)"/>
+  <text x="230" y="225" text-anchor="middle" fill="currentColor" font-size="10" font-weight="600">Pendant tout le cycle</text>
+  <text x="230" y="245" text-anchor="middle" fill="currentColor" font-size="9">Calcium + vitamine D · activité physique · prévention des chutes</text>
+  <text x="230" y="262" text-anchor="middle" fill="#0891B2" font-size="9">Réévaluer bénéfice / risque (rein, mâchoire, fractures atypiques)</text>
+</svg>`
+  },
+
+  // ─── Figure 6.x : Cascade (fallback générique uniquement si pas d'exact) ───
   "6.x": {
     title: "Cascade de l'ostéoporose — T-score et trabécules",
     svg: `<style>
@@ -2038,19 +2200,21 @@ function resolveFigureSrc(figId) {
   return null;
 }
 
-// ─── Helper: REFAIT SVG only (never crops / page scans) ───
+// ─── Helper: REFAIT SVG exact only (never crops; fuzzy only if allowFuzzy) ───
 function renderInteractiveFigure(figId, opts) {
   opts = opts || {};
   var exactInteractive = INTERACTIVE_FIGURES[figId];
   if (exactInteractive && exactInteractive.svg) {
     return exactInteractive.svg;
   }
-  var prefix = String(figId).split('.')[0];
-  var genericKey = prefix + '.x';
-  if (INTERACTIVE_FIGURES[genericKey] && INTERACTIVE_FIGURES[genericKey].svg) {
-    return INTERACTIVE_FIGURES[genericKey].svg;
+  // Fuzzy désactivé par défaut : évitait que 6.1–6.7 affichent le même schéma
+  if (opts.allowFuzzy) {
+    var prefix = String(figId).split('.')[0];
+    var genericKey = prefix + '.x';
+    if (INTERACTIVE_FIGURES[genericKey] && INTERACTIVE_FIGURES[genericKey].svg) {
+      return INTERACTIVE_FIGURES[genericKey].svg;
+    }
   }
-  // Do NOT fall back to FIGURES crops — user wants remade figures only
   return '';
 }
 

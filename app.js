@@ -13,34 +13,22 @@ function resolveManualAsset(entry){
 }
 
 /**
- * Figures REFAITES uniquement (pas de capture manuel).
- * 1) SVG interactive-figures (schémas déjà générés)
- * 2) HTML faithful-visuals (schémas pédagogiques)
- * Images IA educational/ = injectEducationalVisuals() en plus, séparément.
+ * Figures REFAITES (SVG exact ou schéma HTML) — jamais crop/page manuel.
+ * Images IA = injectEducationalVisuals() en plus (ne pas désactiver).
+ * IMPORTANT : pas de fuzzy "6.x" (répétait le même schéma pour 6.1–6.7).
  */
 function buildFigureBlock(figId, titleHint){
   const capTitle = (titleHint||'').replace(/^[AB]\s+/i,'').trim();
   let desc = capTitle;
   let inner = '';
 
-  // SVG refait
-  if(typeof INTERACTIVE_FIGURES!=='undefined'){
-    const exact = INTERACTIVE_FIGURES[figId];
-    const fuzzy = INTERACTIVE_FIGURES[String(figId).split('.')[0] + '.x'];
-    const hit = exact || fuzzy;
-    if(hit?.svg){
-      inner = `<div class="fig-media fig-svg-wrap" data-fig="${esc(figId)}">${hit.svg}</div>`;
-      if(hit.title && !desc) desc = hit.title;
-    }
-  }
-  if(!inner && typeof renderInteractiveFigure==='function'){
-    try{
-      const r = renderInteractiveFigure(figId, { preferStatic: false });
-      if(r && /<svg[\s>]/i.test(r)) inner = `<div class="fig-media fig-svg-wrap">${r}</div>`;
-    }catch(e){}
+  // 1) SVG EXACT uniquement (pas de fuzzy ch.x → anti-répétition)
+  if(typeof INTERACTIVE_FIGURES!=='undefined' && INTERACTIVE_FIGURES[figId]?.svg){
+    inner = `<div class="fig-media fig-svg-wrap" data-fig="${esc(figId)}">${INTERACTIVE_FIGURES[figId].svg}</div>`;
+    if(INTERACTIVE_FIGURES[figId].title && !desc) desc = INTERACTIVE_FIGURES[figId].title;
   }
 
-  // Schéma HTML refait
+  // 2) Schéma HTML refait distinct par id
   if(!inner && typeof renderFaithfulFigure==='function'){
     try{
       const h = renderFaithfulFigure(figId);
@@ -48,8 +36,7 @@ function buildFigureBlock(figId, titleHint){
     }catch(e){}
   }
 
-  // JAMAIS FIGURES crops / page scans
-  if(!inner) return '';
+  if(!inner) return ''; // pas de capture livre en fallback
 
   const cap = desc ? `Figure ${figId} — ${esc(desc)}` : `Figure ${figId}`;
   return `<figure class="fig-block fig-remade">${inner}<figcaption>${cap}</figcaption></figure>`;
