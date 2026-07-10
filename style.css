@@ -4769,19 +4769,79 @@ button:disabled { opacity: .45; cursor: not-allowed; }
   padding: 3px 8px;
   border-radius: 6px;
 }
-/* ═══ TABLEAUX + FIGURES REFAITS (HTML/SVG) — jamais crops ═══ */
+/* Citations discrètes — plus de pastilles 239/334 type “item” */
+.cite-quiet {
+  color: var(--text3);
+  font-size: .85em;
+  font-weight: 500;
+}
+.sit-badge-inline { display: none !important; } /* legacy cache */
+
+/* Situations de départ : repliables, sobres */
+.situations-details {
+  margin: 12px 0 18px;
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  background: var(--bg-card);
+  padding: 0;
+}
+.situations-details > summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 12px 14px;
+  font-size: .85rem;
+  font-weight: 700;
+  color: var(--text2);
+  font-family: var(--sans);
+}
+.situations-details > summary::-webkit-details-marker { display: none; }
+.situations-details[open] > summary {
+  border-bottom: 1px solid var(--glass-border);
+  color: var(--accent);
+}
+.situations-list.quiet {
+  list-style: none;
+  margin: 0;
+  padding: 8px 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.situations-list.quiet li {
+  font-size: .82rem;
+  color: var(--text2);
+  line-height: 1.35;
+}
+.sit-num {
+  display: inline-block;
+  min-width: 2em;
+  font-weight: 700;
+  font-size: .75rem;
+  color: var(--text3);
+  font-variant-numeric: tabular-nums;
+}
+.sit-badge-turquoise {
+  /* réduit si cache ancien */
+  font-size: .7rem !important;
+  padding: 1px 6px !important;
+  background: transparent !important;
+  color: var(--text3) !important;
+  border: 1px solid var(--glass-border) !important;
+}
+.note-soft { border: 1px solid var(--glass-border); }
+.note-soft-title { color: var(--accent); font-size: .85rem; display: block; margin-bottom: 4px; }
+
+/* Figures livre (vraies images FIGURES) */
+.fig-book { text-align: center; }
+.fig-book img {
+  background: #fff;
+  border-radius: 8px;
+}
+
+/* ═══ (legacy faithful — masqué, non utilisé en v206) ═══ */
 .faithful-table,
 .faithful-fig {
-  display: block !important;
-  width: 100%;
-  max-width: 100%;
-  margin: 18px 0;
-  border-radius: 14px;
-  border: 1px solid var(--glass-border);
-  background: var(--bg-card);
-  box-shadow: var(--shadow-card);
-  overflow: hidden;
-  box-sizing: border-box;
+  display: none !important;
 }
 .faithful-table-hd,
 .faithful-fig-hd {

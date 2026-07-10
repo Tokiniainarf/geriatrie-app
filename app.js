@@ -13,75 +13,50 @@ function resolveManualAsset(entry){
 }
 
 /**
- * FIGURES / TABLEAUX REFAITS uniquement — JAMAIS crops PDF ni page scans.
- *
- * Figures  : 1) SVG interactive-figures  2) schéma HTML faithful-visuals
- * Tableaux : HTML reconstitués (faithful-visuals) — vraies grilles CSS
- * + injectEducationalVisuals : images educational/ déjà générées
+ * Vraies figures du manuel (extrait figure = crop de la figure, pas page entière, pas IA).
+ * Ex. Fig. 1.1 → images/crops/crop_p031_0.jpg (schéma Bouchon du livre).
  */
-function isCapturePath(src){
-  if(!src) return true;
-  const s = String(src).replace(/\\/g,'/');
-  return /\/crops\//i.test(s) || /figures\/page_/i.test(s) || /\/p\d{3}_\d+\.(jpe?g|png)$/i.test(s);
-}
-
 function buildFigureBlock(figId, titleHint){
   const capTitle = (titleHint||'').replace(/^[AB]\s+/i,'').trim();
-  let desc = capTitle;
-  let inner = '';
-
-  // 1) Schéma SVG refait (interactive-figures.js)
-  if(typeof INTERACTIVE_FIGURES!=='undefined'){
-    const exact = INTERACTIVE_FIGURES[figId];
-    const fuzzy = INTERACTIVE_FIGURES[String(figId).split('.')[0]+'.x'];
-    const hit = exact || fuzzy;
-    if(hit && hit.svg){
-      inner = `<div class="fig-media fig-svg-wrap" data-fig="${esc(figId)}">${hit.svg}</div>`;
-      if(hit.title && !desc) desc = hit.title;
-    }
-  }
-  if(!inner && typeof renderInteractiveFigure==='function'){
-    try{
-      const r = renderInteractiveFigure(figId, { preferStatic: false });
-      if(r && /<svg[\s>]/i.test(r)) inner = `<div class="fig-media fig-svg-wrap">${r}</div>`;
-    }catch(e){}
-  }
-
-  // 2) Schéma HTML refait (faithful-visuals) — pas de crop
-  if(!inner && typeof renderFaithfulFigure==='function'){
-    try{
-      const h = renderFaithfulFigure(figId);
-      if(h && h.indexOf('faithful-fig')!==-1) return h; // already a full card
-    }catch(e){}
-  }
-
-  if(!inner) return '';
-
-  const cap = desc ? `Figure ${figId} — ${esc(desc)}` : `Figure ${figId}`;
-  return `<figure class="fig-block fig-remade">${inner}<figcaption>${cap}</figcaption></figure>`;
+  const asset = (typeof FIGURES!=='undefined') ? resolveManualAsset(FIGURES[figId]) : null;
+  let src = asset?.src || '';
+  // Interdire pages entières du livre ; accepter crops + images figure isolées
+  if(src && /figures\/page_/i.test(src)) src = '';
+  if(!src) return '';
+  const desc = capTitle || asset?.desc || '';
+  const alt = desc ? `Figure ${figId} — ${desc}` : `Figure ${figId}`;
+  return `<figure class="fig-block fig-book">`+
+    `<img class="fig-media fig-img" src="${src}" alt="${esc(alt)}" loading="lazy" decoding="async" onerror="this.closest('figure')&&(this.closest('figure').style.display='none')">`+
+    `<figcaption>${esc(alt)}</figcaption></figure>`;
 }
 
+/**
+ * Tableaux : image de tableau du livre si mappée (TABLES), sinon titre seul.
+ * Pas de HTML “faithful” texte, pas d’IA.
+ */
 function buildTableBlock(tabId, titleHint){
   const title = (titleHint||'').replace(/^[AB]\s+/i,'').trim();
-
-  // Tableaux REFAITS en HTML (faithful-visuals) — jamais image PDF
-  if(typeof renderFaithfulTable==='function'){
-    try{
-      const h = renderFaithfulTable(tabId);
-      if(h && h.indexOf('faithful-table')!==-1){
-        // Si titre OCR plus riche, on le laisse dans le module (déjà dans le badge)
-        return h;
-      }
-    }catch(e){ console.warn('faithful table', tabId, e); }
+  let src = '';
+  let desc = title;
+  if(typeof TABLES!=='undefined' && TABLES[tabId]){
+    const a = resolveManualAsset(TABLES[tabId]);
+    if(a?.src){ src = a.src; if(a.desc && !desc) desc = a.desc; }
   }
-
-  // Fallback minimal : en-tête seulement (pas de scan)
-  return `<div class="table-lead"><span class="table-badge">Tableau ${esc(tabId)}</span><span>${esc(title||'')}</span></div>`;
+  let html = `<div class="table-lead"><span class="table-badge">Tableau ${esc(tabId)}</span><span>${esc(desc||'')}</span></div>`;
+  if(src){
+    html += `<figure class="fig-block table-fig">`+
+      `<div class="table-fig-scroll">`+
+      `<img class="fig-media fig-img" src="${src}" alt="Tableau ${tabId}${desc?': '+esc(desc):''}" loading="lazy" decoding="async" onerror="this.closest('.table-fig')&&(this.closest('.table-fig').style.display='none')">`+
+      `</div></figure>`;
+  }
+  return html;
 }
 
-/** Educational inject: only remade educational/* paths, never crops/page scans */
 function isPdfCapturePath(src){
-  return isCapturePath(src);
+  // Used only for educational inject filters
+  if(!src) return true;
+  const s = String(src).replace(/\\/g,'/');
+  return /figures\/page_/i.test(s) || /\/crops\//i.test(s) || /\/p\d{3}_\d+\./i.test(s);
 }
 const S={view:'home',ch:null,bm:safeJSON('gbm',[]),read:safeJSON('grd',[]),fs:parseInt(localStorage.getItem('gfs')||'18'),lh:parseFloat(localStorage.getItem('glh')||'1.7'),th:localStorage.getItem('gth')||'dark'};
 let flashIdx=0,flashDeck=[],flashFilter='all',flashChapFilter='all';
@@ -629,7 +604,8 @@ function renderChapterContent(){
     const denseOn = localStorage.getItem('gdense') === '1';
     cc.classList.toggle('dense-mode', denseOn);
     applyConceptLinks();
-    injectEducationalVisuals(S.ch, cc);
+    // Pas d'images IA educational injectées ici — figures = vraies figures du manuel (FIGURES)
+    // injectEducationalVisuals(S.ch, cc);
     // Smooth outline anchors
     cc.querySelectorAll('.outline-link').forEach(a => {
       if (!a || typeof a.addEventListener !== 'function') return;
@@ -1781,18 +1757,10 @@ function renderChapter(raw,chId){
     return false;
   }
 
+  // Citations [239, 334] : texte discret — PAS de pastilles “item” qui polluent la lecture
   function replaceCitations(escaped) {
-    return escaped.replace(/\[\s*(\d{2,3}(?:\s*,\s*\d{2,3})*)\s*\]/g, (match, numListStr) => {
-      const nums = numListStr.split(',').map(n => n.trim());
-      const mapped = nums.map(n => {
-        const val = parseInt(n);
-        if (SITUATION_NUMBERS.has(val)) {
-          return `<span class="sit-badge-inline">${n}</span>`;
-        }
-        return n;
-      });
-      if (mapped.join(', ') === nums.join(', ')) return match;
-      return '[' + mapped.join(', ') + ']';
+    return escaped.replace(/\[\s*(\d{2,3}(?:\s*,\s*\d{2,3})*)\s*\]/g, (match) => {
+      return `<span class="cite-quiet">${match}</span>`;
     });
   }
 
@@ -1822,23 +1790,32 @@ function renderChapter(raw,chId){
     numBuf=[];inNumList=false;
   }
   function flushCallout(){
-    if(!calloutBuf.length&&!calloutTitle)return;
-    html+=`<aside class="callout"><div class="callout-title">${esc(calloutTitle||'Encadré')}</div><div class="callout-body">${calloutBuf.map(p=>`<p>${replaceCitations(esc(p))}</p>`).join('')}</div></aside>`;
+    // Encadrés livre : fondus en prose simple (pas de gros cartons inutiles)
+    if(!calloutBuf.length&&!calloutTitle){inCallout=false;return}
+    const body = calloutBuf.map(p => replaceCitations(esc(p))).join(' ');
+    if(body.length > 20){
+      const t = calloutTitle && !/^Encadré\s*[\d.]*$/i.test(calloutTitle) ? calloutTitle : '';
+      html += `<div class="para-card study-block note-soft">${t?`<strong class="note-soft-title">${esc(t)}</strong> `:''}<p>${body}</p></div>`;
+    }
     calloutBuf=[];calloutTitle='';inCallout=false;
   }
   function closeSection(){if(inSection){html+=`</div></section>`;inSection=false}}
   function flushSituations() {
     if (!inSit) return;
+    // Une seule liste compacte repliable — pas de pastilles géantes type “ITEM”
     if (sitItems.length > 0) {
-      html += `<div class="situations-card"><div class="situations-title">Situations de départ</div><ul class="situations-list">`;
-      for (const item of sitItems) {
-        if (item.type === 'group') {
-          html += `<li class="sit-group-title">${esc(item.text)}</li>`;
-        } else {
-          html += `<li><span class="sit-badge-turquoise">${item.num}</span> ${esc(item.text.replace(/\.$/, ''))}</li>`;
+      const items = sitItems.filter(it => it.type !== 'group' || (it.text && it.text.length > 3));
+      if (items.length) {
+        html += `<details class="situations-details"><summary>Situations de départ (${items.filter(i=>i.type==='item').length})</summary><ul class="situations-list quiet">`;
+        for (const item of items) {
+          if (item.type === 'group') {
+            html += `<li class="sit-group-title">${esc(item.text)}</li>`;
+          } else {
+            html += `<li><span class="sit-num">${esc(item.num)}</span> ${esc(item.text.replace(/\.$/, ''))}</li>`;
+          }
         }
+        html += `</ul></details>`;
       }
-      html += `</ul></div>`;
     }
     inSit = false;
   }
@@ -2132,6 +2109,11 @@ function renderChapter(raw,chId){
     if(/^\w{4,20}$/.test(l)&&!/^(Fig|Tableau|Encadré)/i.test(l))continue;
     if(/^[→\u25bc]$/.test(l.trim()))continue;
     if(l.length<15&&!/[.!?]/.test(l)&&!/^[A-Z]\./.test(l)&&!BULLET_RE.test(l)&&!SECTION_RE.test(l)&&!LETTER_RE.test(l))continue;
+    // Bruit OCR : légendes de schéma déjà remplacées par l'image FIGURES
+    if(/^(Fonction|d'organe|Réserve fonctionnelle|Seuil d'insuffisance|Effet de l'intervention|100\s*%|0\s*Âge)\b/i.test(l)) continue;
+    if(/^\d\s+(Vieillissement|Maladie|Stress)\b/i.test(l)) continue;
+    // Lignes "239 Explication…" hors bloc situations = numéros de situation EDN, pas utiles en corps
+    if(/^\d{2,3}\s+[A-ZÀ-ÖØ-Þ]/.test(l) && SITUATION_NUMBERS.has(parseInt(l,10))) continue;
     // OCR garbage - catch specific patterns that leak through preamble
     if(/Bouchon\s*\)/.test(l))continue;
     if(/vieillissemnt|viellissement/.test(l))continue;
