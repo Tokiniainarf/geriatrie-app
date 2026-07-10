@@ -1,5 +1,6 @@
 const fs = require('fs');
 const vm = require('vm');
+const path = require('path');
 const files = [
   'data.js', 'figures.js', 'interactive-figures.js', 'synthesis.js', 'concepts.js',
   'flashcards.js', 'flashcards-batch-A.js', 'flashcards-batch-B.js', 'flashcards-batch-C.js',
@@ -35,9 +36,9 @@ const sb = {
 sb.globalThis = sb;
 vm.createContext(sb);
 for (const f of files) {
-  const path = 'C:/Users/tokin/geriatrie-app/' + f;
-  if (!fs.existsSync(path)) continue;
-  const src = fs.readFileSync(path, 'utf8');
+  const filePath = path.resolve(__dirname, '..', f);
+  if (!fs.existsSync(filePath)) continue;
+  const src = fs.readFileSync(filePath, 'utf8');
   try {
     vm.runInContext(src, sb, { filename: f });
   } catch (e) {

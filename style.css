@@ -1016,6 +1016,17 @@ body.synth-printing .synth-section-panel { max-height: none !important; grid-tem
 }
 .flash-filt.active { background: var(--accent); border-color: var(--accent); color: #fff; box-shadow: 0 0 20px var(--accent-glow); }
 
+@media (max-width: 480px) {
+  .flash-filters { flex-wrap: wrap; width: 100%; gap: 6px; }
+  .flash-filters .flash-select {
+    flex: 1 1 100%; width: 100%; max-width: 100%; min-width: 0;
+    margin-right: 0 !important;
+  }
+  .flash-filters .flash-filt {
+    flex: 1 1 0; min-width: 0; padding-left: 12px; padding-right: 12px;
+  }
+}
+
 .flash-container { perspective: 1400px; max-width: 400px; margin: 0 auto; }
 .rev-container { max-width: 100%; }
 

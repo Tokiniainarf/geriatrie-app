@@ -712,6 +712,31 @@
         ),
         'Au-delà de 5 médicaments concomitants, efficacité et toxicité deviennent imprévisibles · réduire le nombre · attention pamplemousse, millepertuis, graisses/produits laitiers.'
       );
+    },
+
+    '16.5': function () {
+      return tableWrap('16.5', 'Événements indésirables receveurs à rechercher', 'B',
+        listTable('Événement indésirable receveur', [
+          'Allo-immunisation isolée',
+          'Réaction fébrile non hémolytique',
+          'TACO (Transfusion-related Cardiac Overload)',
+          'Incompatibilité immunologique (accident ABO)',
+          'Réaction allergique',
+          'TRALI (Transfusion-Related Acute Lung Injury)',
+          'Infection bactérienne, parasitaire (paludisme), virale'
+        ])
+      );
+    },
+
+    '16.6': function () {
+      var left = '<ul><li>Fièvre</li><li>Dyspnée</li><li>Allergie</li><li>Modification hémodynamique</li></ul>';
+      var right = '<ul><li>Hypotension, tachycardie, marbrures, oligurie, trouble de conscience, choc</li><li>Détresse respiratoire</li><li>Hyperthermie/Frissons</li><li>Douleurs lombaires ou abdominales</li><li>Nausées, vomissements</li><li>Prurit, urticaire</li></ul>';
+      return tableWrap('16.6', 'Signes cardinaux et de mauvaise tolérance d’un EIR', 'B',
+        '<table class="faithful-grid">' +
+          thead(['Signes cardinaux', 'Signes de mauvaise tolérance : arrêt immédiat']) +
+          tbody([[left, right]]) +
+        '</table>'
+      );
     }
   };
 

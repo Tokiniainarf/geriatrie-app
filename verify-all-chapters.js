@@ -29,7 +29,7 @@ for (const ch of chapters) {
   sb.raw = raw;
   vm.runInNewContext('out = renderChapter(raw, "' + id + '");', sb);
   const html = sb.out;
-  const cards = (html.match(/<div class="para-card">/g) || []).length;
+  const cards = (html.match(/class="[^"]*\b(?:para-card|qa-card|practice-card|qcm-card|pqcm-card|def-block|key-point|faithful-table)\b[^"]*"/g) || []).length;
   const sections = (html.match(/manual-section/g) || []).length;
   const subheads = (html.match(/sub-head/g) || []).length;
   const empty = html.includes('Aucun contenu structuré') || html.length < 500;

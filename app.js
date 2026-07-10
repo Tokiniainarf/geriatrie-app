@@ -698,12 +698,9 @@ function injectEducationalVisuals(chId, cc) {
       if (v && v.img && !isPdfCapturePath(v.img)) candidates.push(v.img);
     });
   }
-  if (!isQAChapter) {
-    for (let i = 1; i <= 6; i++) {
-      candidates.push(`images/chapters/educational/${chId}-${i}.jpg`);
-    }
-    candidates.push(`images/chapters/educational/${chId}-extra-1.jpg`);
-  }
+  // EDU_VISUALS is the authoritative asset manifest. Avoid synthesizing
+  // filenames here: later chapters intentionally have fewer than six images,
+  // and guessed paths generated avoidable 404 responses while reading.
   candidates = [...new Set(candidates)].filter(s => !isPdfCapturePath(s)).slice(0, MAX_VISUALS + 4);
 
   // Targeted match inserts first (context-aware)
@@ -858,7 +855,7 @@ const SYLLABUS_RE=/^(Rang Rubrique|Intitulé Descriptif|Item, objectifs|Hiérarc
 const SYLLABUS_ROW_RE=/^[A-D]\s+(Définition|Épidémiologie|Éléments|Prévalence|Prise en charge|B\s)|^(physiopathologiques|complémentaires|pathologiques|physiopa(?:tho)?|épidémiologie|pharmacologique|squelettique|immunologiques|psychomotrice)\s+[a-z]/;
 const SECTION_RE=/^([IVX]+)\.\s+(.+)/;
 const LETTER_RE=/^([A-Z])\.\s+(.+)/;
-const RANG_RE=/^([A-D])\s+(.+)/;
+const RANG_RE=/^([AB])\s+(.+)/;
 const BULLET_RE=/^[•\-–]\s*(.+)/;
 const DIAGRAM_RE=/^(Fonction|d'organe|Réserve|Seuil|Effet|100\s*%|0\s+Âge|\d\s+(Vieillissement|Maladie|Stress)|Fig\.\s*\d)/i;
 const NUM_LIST_RE=/^(\d{1,2})[\.)]\s+(.+)/;
@@ -2130,6 +2127,10 @@ function renderChapter(raw,chId){
       }
       flushBullets();
     }
+
+    // OCR from multi-panel figures can yield isolated labels such as
+    // "A B", "D E" or "C D 0 2 ...". They are captions, not Rang cards.
+    if(/^[A-E](?:\s+[A-E])?(?:\s+\d+)*$/.test(l))continue;
 
     const rangM=l.match(RANG_RE);
     if(rangM&&!/Rubrique|Intitulé|Descriptif|Connaître|Modifications|Éléments physiopathologiques/.test(l)){
