@@ -31,16 +31,18 @@ const BrainFeed = (() => {
   let activeTimers = new Map();
 
   const TYPE_RATIO = {
-    memo_jour: 0.10,
-    cas_choc: 0.12,
-    quiz_flash: 0.18,
-    chiffre_cle: 0.12,
-    citation: 0.04,
-    piege_exam: 0.12,
-    visual: 0.22, // images + vidéos plus présentes
-    flash: 0.06,
-    synthesis: 0.02,
-    case: 0.02,
+    // Le feed est une séance de révision, pas un mélange de citations,
+    // chiffres isolés ou cartes OCR. Priorité aux décisions cliniques.
+    memo_jour: 0.12,
+    cas_choc: 0.26,
+    quiz_flash: 0.42,
+    chiffre_cle: 0,
+    citation: 0,
+    piege_exam: 0.20,
+    visual: 0,
+    flash: 0,
+    synthesis: 0,
+    case: 0,
     reco: 0.00
   };
 
@@ -190,18 +192,17 @@ const BrainFeed = (() => {
     if (!fc) return false;
     const q = String(fc.question || fc.q || '').replace(/\s+/g, ' ').trim();
     const a = String(fc.answer || fc.a || '').replace(/\s+/g, ' ').trim();
-    if (q.length < 18 || q.length > 160) return false;
-    if (a.length < 20 || a.length > 280) return false;
+    if (q.length < 18 || q.length > 130) return false;
+    if (a.length < 20 || a.length > 220) return false;
     // Junk from revision-aids / OCR
     if (/points?\s*cl[eé]s?\s*:/i.test(q)) return false;
     if (/^points?\s*cl[eé]s?/i.test(q)) return false;
     if (/undefined|null|\[object/i.test(q + a)) return false;
     if (/rev-ch\d+_s\d+/i.test(String(fc.id || ''))) return false;
-    // Prefer factual closed questions
-    if (!/[?？]$/.test(q) && !/^(qu['’]|quel|quelle|quels|quelles|citer|donner|définir|seuil|critère|score|quand|comment|pourquoi)/i.test(q)) {
-      // allow short definition stems
-      if (q.length > 100) return false;
-    }
+    // Une carte OCR ou une section de cours n’est jamais une bonne question.
+    if (/\b(situations? de départ|rang rubrique|encadré|tableau|fig\.)\b/i.test(q + ' ' + a)) return false;
+    if (/[•●]/.test(a) || /\.{3,}|\b(stnioP|vieillissemnt|viellissement)\b/i.test(q + ' ' + a)) return false;
+    if (!/[?？]$/.test(q) && !/^(qu['’]|quel|quelle|quels|quelles|citer|donner|définir|seuil|critère|score|quand|comment|pourquoi|dans quelle)/i.test(q)) return false;
     return true;
   }
 
@@ -761,7 +762,7 @@ const BrainFeed = (() => {
       chiffre_cle: pickN(pools.chiffreCle, counts.chiffre_cle),
       citation: pickN(pools.citation, counts.citation),
       piege_exam: pickN(pools.piegeExam, counts.piege_exam),
-      visual: pickN(pools.visualExplanations, counts.visual || 10),
+      visual: pickN(pools.visualExplanations, counts.visual),
       flash: [], synthesis: [], case: [], reco: []
     };
     const legacy = shuffle(buildLegacyPools(pools.allFlash, pools.srs));

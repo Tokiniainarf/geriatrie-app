@@ -93,7 +93,19 @@ function buildFigureBlock(figId, titleHint){
   if(!inner) return '';
 
   const cap = desc ? `Figure ${figId} — ${esc(desc)}` : `Figure ${figId}`;
-  return `<figure class="fig-block fig-remade">${inner}<figcaption>${cap}</figcaption></figure>`;
+  // A figure is a learning object, not a screenshot of a book page.  The
+  // Bouchon model gets a short, optional explanation which can be opened
+  // without leaving the reading flow.
+  const companion = figId === '1.1' ? `
+    <details class="figure-explainer">
+      <summary>Lire le modèle 1 + 2 + 3</summary>
+      <ol>
+        <li><strong>1 — Vieillissement physiologique :</strong> les réserves diminuent progressivement.</li>
+        <li><strong>2 — Maladie chronique :</strong> elle réduit encore la réserve de l’organe.</li>
+        <li><strong>3 — Stress aigu :</strong> c’est le facteur précipitant à rechercher et à corriger en priorité.</li>
+      </ol>
+    </details>` : '';
+  return `<figure class="fig-block fig-remade">${inner}<figcaption>${cap}</figcaption>${companion}</figure>`;
 }
 
 /**
@@ -985,6 +997,7 @@ function cleanPracticeText(t){
     .replace(/([a-zà-öø-ÿœæ]{2,})-\s+([a-zà-öø-ÿœæ]{2,})/gi,'$1$2')
     .replace(/©\s*\d{4}[^\n]*Elsevier[^\n]*/gi,'')
     .replace(/Tous droits réservés[^\n]*/gi,'')
+    .replace(/Bouchon\)/gi,'Bouchon')
     .replace(/This page intentionally left blank/gi,'')
     .replace(/\u25bc/g,'')
     .replace(/[ \t]{2,}/g,' ')
@@ -1550,13 +1563,35 @@ function renderChapter(raw,chId){
   text = text.replace(/\n\s*Tous\s+droits\s+réservés[^\n]*\n/g, '\n');
   text = text.replace(/\n\s*Gériatrie\s*\n/g, '\n');
   text = text.replace(/\n\s*This page intentionally left blank\s*\n/g, '\n');
+  // Le tableau démographique est parfois extrait en une seule ligne.
+  text = text.replace(/\s+(?=(?:Longévité moyenne|Longévité maximale|Espérance de vie sans incapacité|Espérance de vie)\s)/gi, '\n');
 
   const rawLines = text.replace(/\r\n/g,'\n').split('\n').map(l=>l.trim());
+
+  // Les premières pages contiennent le sommaire pédagogique du manuel
+  // papier (situations de départ, numéros 239, 266…, tableau Rang/Rubrique).
+  // Ce ne sont pas des paragraphes de cours : on les retire du lecteur sans
+  // toucher aux données source ni aux renvois cliniques dans le texte.
+  const hasBookPreamble = rawLines.slice(0, 90).some(l =>
+    /^Situations?\s+de\s+départ/i.test(l) || /^Item, objectifs pédagogiques/i.test(l)
+  );
+  const readerLines = [];
+  let skippingBookPreamble = hasBookPreamble;
+  for (const line of rawLines) {
+    if (skippingBookPreamble) {
+      if (SECTION_RE.test(line)) {
+        skippingBookPreamble = false;
+        readerLines.push(line);
+      }
+      continue;
+    }
+    readerLines.push(line);
+  }
   
   // 3. Preprocess and merge split headings
   const preprocessedLines = [];
-  for (let i = 0; i < rawLines.length; i++) {
-    let l = rawLines[i];
+  for (let i = 0; i < readerLines.length; i++) {
+    let l = readerLines[i];
     if (l === '') {
       if (preprocessedLines.length > 0 && preprocessedLines[preprocessedLines.length - 1] !== '') {
         preprocessedLines.push('');
@@ -1566,15 +1601,15 @@ function renderChapter(raw,chId){
     
     // Merge Roman numeral on its own line followed by title
     if (/^[IVX]+$/.test(l)) {
-      if (i + 1 < rawLines.length && rawLines[i+1] && !/[.!?]$/.test(rawLines[i+1]) && rawLines[i+1].length < 100) {
-        l = l + '. ' + rawLines[i+1];
+      if (i + 1 < readerLines.length && readerLines[i+1] && !/[.!?]$/.test(readerLines[i+1]) && readerLines[i+1].length < 100) {
+        l = l + '. ' + readerLines[i+1];
         i++;
       }
     }
     // Merge capital letter on its own line followed by title
     else if (/^[A-Z]$/.test(l)) {
-      if (i + 1 < rawLines.length && rawLines[i+1] && !/[.!?]$/.test(rawLines[i+1]) && rawLines[i+1].length < 100) {
-        l = l + '. ' + rawLines[i+1];
+      if (i + 1 < readerLines.length && readerLines[i+1] && !/[.!?]$/.test(readerLines[i+1]) && readerLines[i+1].length < 100) {
+        l = l + '. ' + readerLines[i+1];
         i++;
       }
     }
@@ -1599,6 +1634,7 @@ function renderChapter(raw,chId){
   // 4. Filter OCR junk, keeping empty lines for paragraph breaks (protect group titles)
   let lines = preprocessedLines.filter((l,i,arr)=>{
     if(l === '') return true;
+    if (/^(Longévité moyenne|Longévité maximale|Espérance de vie(?: sans incapacité)?)\s+/i.test(l)) return true;
     if(RUN_HDR_RE.test(l))return false;
     if(SKIP_LINE_RE.test(l))return false;
     if(titleRe&&titleRe.test(l))return false;
@@ -1616,6 +1652,7 @@ function renderChapter(raw,chId){
   if(firstSec>0){
     lines=lines.filter((l,i)=>{
       if(l === '') return true;
+      if (/^(Longévité moyenne|Longévité maximale|Espérance de vie(?: sans incapacité)?)\s+/i.test(l)) return true;
       if(i>=firstSec)return true;
       if(RANG_RE.test(l))return true;
       if(/Situations?\s+de\s+départ/i.test(l))return true;
@@ -1630,6 +1667,7 @@ function renderChapter(raw,chId){
   // Kill remaining short non-sentence fragments (common OCR junk, protecting group titles and mashed table cells)
   lines = lines.filter(l => {
     if(l === '') return true;
+    if (/^(Longévité moyenne|Longévité maximale|Espérance de vie(?: sans incapacité)?)\s+/i.test(l)) return true;
     if (l.length >= 50) return true;
     if (RANG_RE.test(l)) return true;
     if (BULLET_RE.test(l) || SECTION_RE.test(l) || LETTER_RE.test(l)) return true;
@@ -1854,23 +1892,10 @@ function renderChapter(raw,chId){
   }
   function closeSection(){if(inSection){html+=`</div></section>`;inSection=false}}
   function flushSituations() {
-    if (!inSit) return;
-    // Une seule liste compacte repliable — pas de pastilles géantes type “ITEM”
-    if (sitItems.length > 0) {
-      const items = sitItems.filter(it => it.type !== 'group' || (it.text && it.text.length > 3));
-      if (items.length) {
-        html += `<details class="situations-details"><summary>Situations de départ (${items.filter(i=>i.type==='item').length})</summary><ul class="situations-list quiet">`;
-        for (const item of items) {
-          if (item.type === 'group') {
-            html += `<li class="sit-group-title">${esc(item.text)}</li>`;
-          } else {
-            html += `<li><span class="sit-num">${esc(item.num)}</span> ${esc(item.text.replace(/\.$/, ''))}</li>`;
-          }
-        }
-        html += `</ul></details>`;
-      }
-    }
+    // Les « situations de départ » sont des métadonnées du programme, pas
+    // du contenu à lire. Elles ne sont plus affichées dans les chapitres.
     inSit = false;
+    sitItems = [];
   }
 
   const first35Headings = new Set();
@@ -1978,6 +2003,42 @@ function renderChapter(raw,chId){
         i--;
       }
       continue;
+    }
+
+    // Les quatre définitions démographiques sont un mini-glossaire : les
+    // présenter comme tel évite le bloc OCR collé au premier paragraphe.
+    if (/^Longévité moyenne\s+/i.test(l)) {
+      const labels = ['Longévité moyenne', 'Longévité maximale', 'Espérance de vie', 'Espérance de vie sans incapacité'];
+      const entries = [];
+      let scan = i;
+      while (entries.length < labels.length && scan < Math.min(lines.length, i + 10)) {
+        const candidate = lines[scan] || '';
+        if (!candidate) { scan++; continue; }
+        const label = labels[entries.length];
+        if (!candidate.toLowerCase().startsWith(label.toLowerCase())) break;
+        entries.push([label, candidate.slice(label.length).trim()]);
+        scan++;
+      }
+      // Selon le moteur PDF, les quatre cellules peuvent être concaténées en
+      // une seule ligne. On reconstitue alors les bornes des intitulés.
+      if (entries.length < labels.length) {
+        const source = l;
+        const positions = labels.map(label => source.toLowerCase().indexOf(label.toLowerCase()));
+        if (positions.every(pos => pos >= 0) && positions[0] === 0) {
+          entries.length = 0;
+          for (let n = 0; n < labels.length; n++) {
+            const start = positions[n] + labels[n].length;
+            const end = n + 1 < labels.length ? positions[n + 1] : source.length;
+            entries.push([labels[n], source.slice(start, end).trim()]);
+          }
+        }
+      }
+      if (entries.length === labels.length) {
+        flushPara(); flushBullets(); flushNumList();
+        html += `<dl class="reader-glossary">${entries.map(([term, definition]) => `<div><dt>${esc(term)}</dt><dd>${replaceCitations(esc(definition))}</dd></div>`).join('')}</dl>`;
+        i = Math.max(i, scan - 1);
+        continue;
+      }
     }
 
     const enc=l.match(/^Encadré\s+([\d.]+)/i);
@@ -2112,17 +2173,23 @@ function renderChapter(raw,chId){
     }
 
     const bulM=l.match(BULLET_RE);
-    const isAutoBullet = bulM || l.endsWith(';') || (bulletBuf.length > 0 && l.endsWith('.'));
+    const isAutoBullet = bulM || (!bulletBuf.length && (l.endsWith(';') || l.endsWith('.')));
     if(isAutoBullet && !SECTION_RE.test(l) && !LETTER_RE.test(l) && !RANG_RE.test(l)){
       flushNumList();
-      const cleanL = l.replace(/^[•\-–]\s*/, '');
+      // Le « B » est une indication de rang du PDF ; il n’est pas le début
+      // de la phrase et ne doit jamais apparaître dans une puce de lecture.
+      const cleanL = l.replace(/^[•\-–]\s*/, '').replace(/^[AB]\s+(?=[A-ZÀ-ÖØ-Þ])/, '');
       bulletBuf.push(cleanL);
       continue;
     }
-    // Bullet continuation: if we have bullets and line is not structural, append to last bullet (must start with lowercase)
+    // Une page PDF coupe une phrase sans conserver la puce. On rattache la
+    // ligne suivante tant que la puce précédente n’est pas terminée ; cela
+    // couvre « est de / 122 ans et 6 mois » et évite les faux fragments.
     if(bulletBuf.length){
-      const isStruct=SECTION_RE.test(l)||LETTER_RE.test(l)||/^Situations?\s+de\s+départ/i.test(l)||/^Encadré\s+/i.test(l)||/^Tableau\s+/i.test(l)||/^Fig\.\s*\d/i.test(l)||RANG_RE.test(l)||/^\d{2,3}\s+/.test(l);
-      if(!isStruct&&/^[a-zà-öø-ÿœŒæÆÀ-ÖØ-ß]/.test(l)&&l.length<200){
+      const isStruct=SECTION_RE.test(l)||LETTER_RE.test(l)||/^Situations?\s+de\s+départ/i.test(l)||/^Encadré\s+/i.test(l)||/^Tableau\s+/i.test(l)||/^Fig\.\s*\d/i.test(l)||RANG_RE.test(l);
+      const previous = bulletBuf[bulletBuf.length-1].trim();
+      const previousComplete = /[.!?;:]$/.test(previous);
+      if(!isStruct && !BULLET_RE.test(l) && !previousComplete && l.length<240){
         bulletBuf[bulletBuf.length-1]+=' '+l;continue;
       }
       flushBullets();
