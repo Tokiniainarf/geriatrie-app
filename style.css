@@ -6032,6 +6032,25 @@ body {
   .reader-glossary { grid-template-columns: 1fr; }
 }
 
+/* Vue feed et scores : hiérarchie visible dès l’ouverture. */
+.bf-header { min-height: 64px; display: flex; align-items: center; gap: 12px; padding: 10px 14px !important; }
+.bf-header-title { display: flex; flex-direction: column; min-width: 0; margin-right: auto; }
+.bf-header-title strong { font-size: .98rem; letter-spacing: -.01em; color: #fff; }
+.bf-header-title span { margin-top: 2px; font-size: .66rem; line-height: 1.25; color: rgba(255,255,255,.58); }
+.bf-stats-bar { flex-shrink: 0; }
+.calc-overview { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 0 0 14px; }
+.calc-overview > div { display: flex; align-items: baseline; gap: 6px; padding: 10px 12px; border: 1px solid var(--glass-border); border-radius: 12px; background: linear-gradient(135deg, var(--bg-card), color-mix(in srgb, var(--accent-soft) 35%, transparent)); }
+.calc-overview strong { color: var(--accent); font-size: 1.05rem; }
+.calc-overview span { color: var(--text3); font-size: .68rem; line-height: 1.15; }
+.fig-spotlight { border-color: color-mix(in srgb, var(--accent) 65%, var(--glass-border)) !important; box-shadow: 0 0 0 3px var(--accent-soft), var(--shadow-card) !important; }
+.fig-spotlight::before { content: 'Figure principale du chapitre'; display: block; padding: 7px 10px 0; color: var(--accent); font-size: .68rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; text-align: left; }
+@media (max-width: 540px) {
+  .bf-header-title strong { font-size: .9rem; }
+  .bf-header-title span { font-size: .6rem; }
+  .calc-overview { grid-template-columns: 1fr; gap: 6px; }
+  .calc-overview > div { padding: 8px 10px; }
+}
+
 /* Final typography pass — one readable scale across the three dense views. */
 #vFeed .bf-card-main,
 #vFeed .bf-card-ftr,
