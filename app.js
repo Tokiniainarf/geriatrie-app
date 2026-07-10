@@ -604,8 +604,11 @@ function showCh(id){
       `<button type="button" onclick="quickBm('${id}')" aria-label="Favori">${bmOn?BM_SVG.on+' Retirer':BM_SVG.off+' Favori'}</button>`+
       `<button type="button" onclick="openNotes('${id}')" aria-label="Notes">Notes</button>`+
       (isPractice ? '' :
-        `<button type="button" id="btnDense" class="toolbar-dense${denseOn?' active':''}" onclick="toggleDenseMode()" aria-pressed="${denseOn?'true':'false'}">${denseOn?'Dense ✓':'Mode dense'}</button>`+
-        `<button type="button" class="toolbar-dense ghost" onclick="scrollToKeyPanel()">Points clés</button>`);
+        `<button type="button" class="toolbar-figure" onclick="scrollToFirstFigure()">Figures</button>`+
+        `<button type="button" class="toolbar-dense ghost" onclick="scrollToKeyPanel()">Plan</button>`+
+        `<button type="button" id="btnReaderSmaller" class="toolbar-font" onclick="adjustReaderText(-1)" aria-label="Réduire la taille du texte">A−</button>`+
+        `<button type="button" id="btnReaderLarger" class="toolbar-font" onclick="adjustReaderText(1)" aria-label="Augmenter la taille du texte">A+</button>`+
+        `<button type="button" id="btnDense" class="toolbar-dense${denseOn?' active':''}" onclick="toggleDenseMode()" aria-pressed="${denseOn?'true':'false'}">${denseOn?'Compact ✓':'Lecture compacte'}</button>`);
   }
   renderChapterContent();
   sw('ch');
@@ -624,7 +627,7 @@ window.toggleDenseMode = function(){
   if (cc) cc.classList.toggle('dense-mode', on);
   if (btn) {
     btn.classList.toggle('active', on);
-    btn.textContent = on ? 'Dense ✓' : 'Mode dense';
+    btn.textContent = on ? 'Compact ✓' : 'Lecture compacte';
     btn.setAttribute('aria-pressed', on ? 'true' : 'false');
   }
 };
@@ -632,6 +635,68 @@ window.scrollToKeyPanel = function(){
   const el = document.querySelector('.key-panel, .ch-outline-nav, .ch-outline');
   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 };
+window.scrollToFirstFigure = function(){
+  const cc = document.getElementById('chContent');
+  if (!cc) return;
+  const figure = cc.querySelector('.fig-block, .faithful-table, figure:not(.edu-visual-wrapper)');
+  if (!figure) return;
+  figure.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  figure.classList.add('reader-target-flash');
+  setTimeout(() => figure.classList.remove('reader-target-flash'), 1300);
+};
+window.adjustReaderText = function(delta){
+  const current = Number(localStorage.getItem('greaderText') || '0');
+  const next = Math.max(-1, Math.min(2, current + Number(delta || 0)));
+  localStorage.setItem('greaderText', String(next));
+  const cc = document.getElementById('chContent');
+  if (cc) {
+    cc.classList.remove('reader-size--1', 'reader-size-0', 'reader-size-1', 'reader-size-2');
+    cc.classList.add('reader-size-' + next);
+  }
+  const small = document.getElementById('btnReaderSmaller');
+  const large = document.getElementById('btnReaderLarger');
+  if (small) small.disabled = next <= -1;
+  if (large) large.disabled = next >= 2;
+};
+
+function updateReaderStatus(cc, isPractice){
+  const status = document.getElementById('readerStatus');
+  if (!status || !cc) return;
+  const figures = new Set([
+    ...cc.querySelectorAll('.fig-block, .faithful-table, figure:not(.edu-visual-wrapper)')
+  ]).size;
+  const sections = cc.querySelectorAll('.manual-section').length;
+  status.innerHTML = `
+    <div class="reader-status-copy">
+      <span class="reader-status-kicker">Lecture guidée</span>
+      <strong>${isPractice ? 'Entraînement progressif' : `${sections || '—'} sections · ${figures || '—'} figures et tableaux`}</strong>
+    </div>
+    <div class="reader-progress-wrap" aria-label="Progression de lecture">
+      <span id="readerProgressText">Début</span>
+      <i><b id="readerProgressBar"></b></i>
+    </div>`;
+  const textSize = Number(localStorage.getItem('greaderText') || '0');
+  cc.classList.remove('reader-size--1', 'reader-size-0', 'reader-size-1', 'reader-size-2');
+  cc.classList.add('reader-size-' + textSize);
+  const small = document.getElementById('btnReaderSmaller');
+  const large = document.getElementById('btnReaderLarger');
+  if (small) small.disabled = textSize <= -1;
+  if (large) large.disabled = textSize >= 2;
+  if (window._readerProgressHandler) window.removeEventListener('scroll', window._readerProgressHandler);
+  window._readerProgressHandler = () => {
+    const bar = document.getElementById('readerProgressBar');
+    const label = document.getElementById('readerProgressText');
+    if (!bar || !label) return;
+    const rect = typeof cc.getBoundingClientRect === 'function' ? cc.getBoundingClientRect() : { top: 0 };
+    const top = (rect.top || 0) + (window.scrollY || 0);
+    const available = Math.max(1, cc.offsetHeight - window.innerHeight * .55);
+    const pct = Math.max(0, Math.min(100, Math.round(((window.scrollY - top + window.innerHeight * .28) / available) * 100)));
+    bar.style.width = pct + '%';
+    label.textContent = pct >= 98 ? 'Terminé' : pct ? pct + ' % lu' : 'Début';
+  };
+  window.addEventListener('scroll', window._readerProgressHandler, { passive: true });
+  window._readerProgressHandler();
+}
 
 function renderChapterContent(){
   const cc=document.getElementById('chContent');if(!cc)return;
@@ -666,6 +731,7 @@ function renderChapterContent(){
   if (isPractice) {
     cc.classList.add('practice-reader');
     cc.classList.remove('study-reader', 'dense-mode');
+    updateReaderStatus(cc, true);
   } else {
     cc.classList.remove('practice-reader');
     // Dense mode is opt-in only — never auto-hide educational figures on mobile
@@ -704,6 +770,7 @@ function renderChapterContent(){
         }
       });
     });
+    updateReaderStatus(cc, false);
   }
 }
 
