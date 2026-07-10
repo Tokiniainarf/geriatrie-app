@@ -314,19 +314,18 @@ function addTest(id, target, description, fn) {
 loadCodebase();
 
 // Tier 1: Feature Coverage (21 Cases)
-addTest('TC-01', 'R1', 'Check ch1 to ch2 alignment. Page 42 (blank) and page 43 (chapter 2 cover) must shift to ch2.', () => {
+addTest('TC-01', 'R1', 'Check normalized ch1 to ch2 alignment: blank page 42 is omitted and page 43 starts ch2.', () => {
   runPreprocess();
   const ch1Pages = vm.runInContext('APP_DATA.content.ch1', context);
   const ch2Pages = vm.runInContext('APP_DATA.content.ch2', context);
   const p42InCh1 = ch1Pages.some(p => p[0] === 42);
   const p43InCh1 = ch1Pages.some(p => p[0] === 43);
-  const p42InCh2 = ch2Pages.some(p => p[0] === 42);
   const p43InCh2 = ch2Pages.some(p => p[0] === 43);
   assert.ok(!p42InCh1 && !p43InCh1, "Pages 42/43 should not be in ch1");
-  assert.ok(p42InCh2 && p43InCh2, "Pages 42/43 should be in ch2");
+  assert.ok(!ch2Pages.some(p => p[0] === 42) && p43InCh2, "Blank page 42 should be omitted and page 43 should start ch2");
 });
 
-addTest('TC-02', 'R1', 'Check ch2 to ch3 alignment. Page 57 must shift to ch3.', () => {
+addTest('TC-02', 'R1', 'Check normalized ch2 to ch3 alignment: page 57 starts ch3.', () => {
   runPreprocess();
   const ch2Pages = vm.runInContext('APP_DATA.content.ch2', context);
   const ch3Pages = vm.runInContext('APP_DATA.content.ch3', context);
@@ -334,32 +333,32 @@ addTest('TC-02', 'R1', 'Check ch2 to ch3 alignment. Page 57 must shift to ch3.',
   assert.ok(ch3Pages.some(p => p[0] === 57), "Page 57 should be in ch3");
 });
 
-addTest('TC-03', 'R1', 'Check ch4 to ch5 alignment. Pages 84 and 85 must shift to ch5.', () => {
+addTest('TC-03', 'R1', 'Check normalized ch4 to ch5 alignment: blank page 84 is omitted and page 85 starts ch5.', () => {
   runPreprocess();
   const ch4Pages = vm.runInContext('APP_DATA.content.ch4', context);
   const ch5Pages = vm.runInContext('APP_DATA.content.ch5', context);
   assert.ok(!ch4Pages.some(p => p[0] === 84 || p[0] === 85), "Pages 84/85 should not be in ch4");
-  assert.ok(ch5Pages.some(p => p[0] === 84) && ch5Pages.some(p => p[0] === 85), "Pages 84/85 should be in ch5");
+  assert.ok(!ch5Pages.some(p => p[0] === 84) && ch5Pages.some(p => p[0] === 85), "Blank page 84 should be omitted and page 85 should start ch5");
 });
 
-addTest('TC-04', 'R1', 'Check ch12 to ch13 alignment. Pages 224-227 must shift to ch13.', () => {
+addTest('TC-04', 'R1', 'Check normalized ch12 to ch13 alignment: blank page 224 is omitted and pages 225-227 start ch13.', () => {
   runPreprocess();
   const ch12Pages = vm.runInContext('APP_DATA.content.ch12', context);
   const ch13Pages = vm.runInContext('APP_DATA.content.ch13', context);
   const pNums = [224, 225, 226, 227];
   assert.ok(!ch12Pages.some(p => pNums.includes(p[0])), "Pages 224-227 should not be in ch12");
-  assert.ok(pNums.every(num => ch13Pages.some(p => p[0] === num)), "Pages 224-227 should be in ch13");
+  assert.ok(!ch13Pages.some(p => p[0] === 224) && [225, 226, 227].every(num => ch13Pages.some(p => p[0] === num)), "Blank page 224 should be omitted and pages 225-227 should be in ch13");
 });
 
-addTest('TC-05', 'R1', 'Check ch15 to ch16 alignment. Page 280 and 281 must shift to ch16.', () => {
+addTest('TC-05', 'R1', 'Check normalized ch15 to ch16 alignment: blank page 280 is omitted and page 281 starts ch16.', () => {
   runPreprocess();
   const ch15Pages = vm.runInContext('APP_DATA.content.ch15', context);
   const ch16Pages = vm.runInContext('APP_DATA.content.ch16', context);
   assert.ok(!ch15Pages.some(p => p[0] === 280 || p[0] === 281), "Pages 280/281 should not be in ch15");
-  assert.ok(ch16Pages.some(p => p[0] === 280) && ch16Pages.some(p => p[0] === 281), "Pages 280/281 should be in ch16");
+  assert.ok(!ch16Pages.some(p => p[0] === 280) && ch16Pages.some(p => p[0] === 281), "Blank page 280 should be omitted and page 281 should start ch16");
 });
 
-addTest('TC-06', 'R1', 'Fallback title matching for ch18 -> ch19. Page 353 (Key-features problems) must shift to ch19.', () => {
+addTest('TC-06', 'R1', 'Check normalized ch18 to ch19 alignment: page 353 starts ch19.', () => {
   runPreprocess();
   const ch18Pages = vm.runInContext('APP_DATA.content.ch18', context);
   const ch19Pages = vm.runInContext('APP_DATA.content.ch19', context);
@@ -367,7 +366,7 @@ addTest('TC-06', 'R1', 'Fallback title matching for ch18 -> ch19. Page 353 (Key-
   assert.ok(ch19Pages.some(p => p[0] === 353), "Page 353 should be in ch19");
 });
 
-addTest('TC-07', 'R1', 'Fallback title matching for ch19 -> ch20. Page 361 (Questions isolées) must shift to ch20.', () => {
+addTest('TC-07', 'R1', 'Check normalized ch19 to ch20 alignment: page 361 starts ch20.', () => {
   runPreprocess();
   const ch19Pages = vm.runInContext('APP_DATA.content.ch19', context);
   const ch20Pages = vm.runInContext('APP_DATA.content.ch20', context);
@@ -375,7 +374,7 @@ addTest('TC-07', 'R1', 'Fallback title matching for ch19 -> ch20. Page 361 (Ques
   assert.ok(ch20Pages.some(p => p[0] === 361), "Page 361 should be in ch20");
 });
 
-addTest('TC-08', 'R1', 'No-shift assertion for ch3 (stnioP is on the last page).', () => {
+addTest('TC-08', 'R1', 'No-shift assertion for the normalized end of ch3.', () => {
   runPreprocess();
   const ch3Pages = vm.runInContext('APP_DATA.content.ch3', context);
   const p72 = ch3Pages.find(p => p[0] === 72);
@@ -391,7 +390,7 @@ addTest('TC-09', 'R1', 'No-shift assertion for ch16 (psychotropes and transfusio
   assert.ok(ch16Pages.some(p => p[1].includes("Transfusion")), "ch16 should keep Transfusion content");
 });
 
-addTest('TC-10', 'R1', 'No-shift assertion for ch17 (no text content page follows stnioP).', () => {
+addTest('TC-10', 'R1', 'No-shift assertion for the normalized end of ch17.', () => {
   runPreprocess();
   const ch17Pages = vm.runInContext('APP_DATA.content.ch17', context);
   assert.ok(ch17Pages.length > 0, "ch17 should retain its pages");

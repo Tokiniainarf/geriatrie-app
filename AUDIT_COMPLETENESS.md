@@ -7,7 +7,7 @@ Référence immuable : branche `main`, commit `9a624a4`
 
 L'application conserve son apparence, son organisation, ses modules et ses formulations validés. L'audit a restauré uniquement douze pages substantielles dont l'absence a été confirmée dans le PDF fourni, ajouté les deux tableaux correspondants qui n'avaient aucun équivalent, et réparé deux défauts techniques démontrés. La page physique 329, simple intercalaire « Entraînement II », reste volontairement absente.
 
-Après correction, les pages substantielles 29 à 382 du manuel sont toutes expliquées : 356 pages uniques sont embarquées et l'unique absence est la page 329 non éditoriale. Aucun numéro de page ni texte de page n'est dupliqué.
+Après correction, les pages substantielles 29 à 382 du manuel sont toutes expliquées. Les données de lecture contiennent 342 pages substantielles ; onze pages intentionnellement blanches et la page 329 non éditoriale sont exclues. Aucun numéro de page ni texte de page n'est dupliqué.
 
 ## Omissions corrigées
 
@@ -32,7 +32,7 @@ Tous les identifiants de figures et tableaux détectés dans le corps du PDF dis
 - Suppression de la génération automatique de noms de médias inexistants : la liste éditoriale `EDU_VISUALS` est désormais la seule source, ce qui supprime la requête 404 vers `ch16-extra-1.jpg` sans retirer d'illustration réelle.
 - Retour à la ligne des filtres de flashcards sous 480 px : le débordement horizontal observé à 390 px disparaît.
 - Synchronisation mécanique de `data.js` et de sa section dans `data-bundle.js`, ainsi que de `faithful-visuals.js` dans le bundle.
-- Passage du cache PWA et des ressources publiées à la version 210, uniquement parce que les fichiers publiés changent.
+- Passage du cache PWA et des ressources publiées à la version 211, uniquement parce que les fichiers publiés changent.
 - Réparation des chemins et heuristiques de scripts d'audit, sans incidence sur l'application publiée.
 
 ## Matrice des options testées
@@ -65,7 +65,7 @@ Les 16 vues principales ont été ouvertes sur desktop et mobile, en thèmes som
 
 L'application est une PWA statique sans serveur applicatif, API, base distante ni authentification. La couche tenant lieu de backend est constituée des scripts de données, de `data-bundle.js`, de `localStorage` et du Service Worker.
 
-- 20 chapitres et 356 pages uniques sont présents.
+- 20 chapitres et 342 pages substantielles sont présents ; les pages blanches et l'index hors chapitre sont exclus de la lecture.
 - 391 chemins d'assets statiques ont été vérifiés ; aucun fichier ne manque.
 - Les données source et leur section embarquée ont la même empreinte.
 - 56 calculateurs s'ouvrent et possèdent des identifiants uniques.
@@ -76,22 +76,24 @@ L'application est une PWA statique sans serveur applicatif, API, base distante n
 
 Limites conservées : les polices Google sont externes, mais leur indisponibilité ne bloque pas l'application grâce aux polices de repli. Il n'existe pas de synchronisation multiappareil ni de sauvegarde distante des données personnelles.
 
-## Répétitions et incohérences observées, laissées intactes
+## Répétitions et incohérences corrigées
 
-L'audit a parcouru 141 jeux de données structurés et 2 938 enregistrements. Aucun doublon d'identifiant n'a été détecté. Les points suivants sont consignés sans modification, conformément au principe de conservation :
+L'audit a parcouru 141 jeux de données structurés et 2 938 enregistrements. Aucun doublon d'identifiant n'a été détecté. Le second passage a corrigé les points précédemment consignés :
 
-- `REVISION_FLASHCARDS` réutilise des intitulés génériques comme « Points clés : Introduction » dans plusieurs chapitres. Le contexte de chapitre diffère : ce ne sont pas des doublons stricts.
-- Six flashcards de révision semblent courtes ou tronquées par l'extraction du PDF. Leur correction exigerait une décision éditoriale et n'a donc pas été appliquée.
-- Les séries « stades d'escarre 1 à 4 » et « GIR 1 à 6 » sont proches lexicalement mais pédagogiquement intentionnelles.
-- Le chapitre 13 contient quatre courts blocs de définition ; les chapitres 17 à 20 ont un faible ratio de paragraphes selon l'heuristique automatisée. Leur rendu est toutefois non vide et cohérent avec la structure particulière des objectifs et exercices.
-- Les pages 383 à 385 de l'index sont déjà présentes alors que les pages 386 à 388 ne le sont pas. Ce reliquat préexistant, hors corps des chapitres 29–382, est laissé intact faute d'omission pédagogique certaine dans les modules validés.
-- Onze mentions de page intentionnellement blanche, 17 marqueurs OCR inversés `stnioP`, 20 en-têtes de copyright et 857 coupures de mots potentielles préexistent dans les données. Ils ne sont pas normalisés afin d'éviter toute reformulation massive.
+- les 68 questions de `REVISION_FLASHCARDS` incluent désormais le chapitre et la section ; aucun intitulé exact n'est dupliqué ;
+- les six flashcards courtes ou tronquées ont été réécrites à partir des passages correspondants du manuel ; aucune réponse ne fait moins de 80 caractères ;
+- onze flashcards capturées à une frontière de chapitre ont été réaffectées au bon chapitre ;
+- les séries « stades d'escarre 1 à 4 » et « GIR 1 à 6 » ont été vérifiées et conservées, car leur proximité est pédagogique et intentionnelle ;
+- les lettres des légendes des figures 13.7 à 13.12 ne sont plus interprétées comme des blocs « Rang » ;
+- l'audit de rendu tient compte des cartes interactives des chapitres 18 à 20 au lieu de les évaluer comme des paragraphes narratifs ;
+- les trois pages partielles de l'index 383 à 385 ont été retirées des chapitres de l'app ;
+- onze pages blanches, 17 marqueurs `stnioP`, 20 en-têtes de copyright et 845 coupures de mots certaines ont été nettoyés. Trente-quatre traits d'union lexicaux ont été préservés.
 
 ## Valeur de l'application
 
 L'application vaut la peine comme support personnel de révision : la couverture du manuel est désormais explicable, la navigation est rapide, le mode hors ligne est fonctionnel et les flashcards, quiz, annales, scores et protocoles couvrent des usages complémentaires.
 
-- **EVC** : utile pour la répétition, les synthèses, les ITEM, les cas et le repérage rapide ; les six flashcards suspectes doivent rester secondaires jusqu'à une validation éditoriale.
+- **EVC** : utile pour la répétition, les synthèses, les ITEM, les cas et le repérage rapide ; les six flashcards auparavant suspectes sont maintenant complètes et sourcées dans le manuel.
 - **Stages** : utile comme aide-mémoire pour scores, garde, médicaments et protocoles ; les décisions critiques doivent toujours être recoupées avec les recommandations HAS/ANSM et les protocoles locaux à jour.
 - **Révision personnelle** : très utile grâce aux favoris, notes, progression, réglages de lecture et fonctionnement hors ligne.
 
@@ -106,6 +108,7 @@ Le manuel source datant de 2021, l'application ne doit pas être considérée co
 - audit assets : 391 références, zéro manquante ;
 - audit PDF : zéro page substantielle manquante, page non éditoriale 329 explicitée ;
 - navigateur : 20 chapitres, 16 vues et sous-modes sans erreur console ni requête locale en échec ;
+- lecture des chapitres : 80 parcours complets — desktop/mobile, clair/sombre — sans chapitre vide, débordement, média cassé, artefact visible ni bloc tronqué ;
 - responsive : largeur 390/390 px après correction des flashcards ;
 - PWA : rechargement hors ligne réussi après amorçage du cache.
 

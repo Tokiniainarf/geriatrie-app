@@ -127,7 +127,8 @@ for (const ch of chapters) {
   // 7. Check for proper paragraph count vs raw size
   const rawLines = raw.split('\n').filter(l => l.trim().length > 5).length;
   const paraRatio = allParas.length / rawLines;
-  if (paraRatio < 0.01 && rawLines > 20) {
+  const practiceCards = (html.match(/class="pqcm-card"/g) || []).length;
+  if (paraRatio < 0.01 && rawLines > 20 && practiceCards === 0) {
     issues.push(`Very low paragraph ratio: ${allParas.length} paragraphs from ${rawLines} raw lines (${(paraRatio*100).toFixed(1)}%)`);
   }
 
