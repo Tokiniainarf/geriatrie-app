@@ -2905,6 +2905,19 @@ const Medicalcul = {
     this.renderList();
   },
 
+  openScore(id) {
+    // Les accès rapides sont de vrais raccourcis vers le calculateur, pas des cartes décoratives.
+    this.showDetail(id);
+  },
+
+  rememberRecent(id) {
+    try {
+      const existing = JSON.parse(localStorage.getItem('medicalcul_recent')) || [];
+      const recent = [id, ...existing.filter(x => x !== id)].slice(0, 3);
+      localStorage.setItem('medicalcul_recent', JSON.stringify(recent));
+    } catch (_) {}
+  },
+
   isFavorite(id) {
     try {
       const favs = JSON.parse(localStorage.getItem('medicalcul_favorites')) || [];
@@ -3103,6 +3116,22 @@ const Medicalcul = {
       }
     }
 
+    // Les derniers scores ouverts permettent de reprendre une consultation sans refaire une recherche.
+    if (this.currentDomain === 'all' && !this.currentSearch) {
+      let recentIds = [];
+      try { recentIds = JSON.parse(localStorage.getItem('medicalcul_recent')) || []; } catch (_) {}
+      const recentCalcs = recentIds.map(id => filtered.find(c => c.id === id)).filter(Boolean);
+      if (recentCalcs.length) {
+        html += `
+          <div class="calc-recent-section">
+            <div class="calc-section-label"><span>Reprendre</span><small>Derniers outils ouverts</small></div>
+            <div class="calc-grid calc-recent-grid">
+              ${recentCalcs.map(c => this.renderCalcCardHtml(c, favs.includes(c.id))).join('')}
+            </div>
+          </div>`;
+      }
+    }
+
     const titleText = this.currentDomain === 'all' ? 'Tous les calculateurs' : this.currentDomain;
     html += `
       <div class="calc-all-section">
@@ -3146,6 +3175,7 @@ const Medicalcul = {
       : (window.CALCULATEURS || []);
     const calc = source.find(c => c.id === id);
     if (!calc) throw new Error('Calculateur introuvable: ' + id);
+    this.rememberRecent(id);
 
     const listCont = document.getElementById('calc-list-container');
     const detailCont = document.getElementById('calc-detail-container');
