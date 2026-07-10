@@ -11,6 +11,7 @@ const BrainFeed = (() => {
   let dailyDone = 0;
   let combo = 0;
   let quizCombo = 0;
+  let activeSession = 'mix';
   const DAILY_GOAL = 50;
   const COMBO_BONUS_AT = 5;
   const COMBO_CONFETTI_AT = 10;
@@ -824,7 +825,53 @@ const BrainFeed = (() => {
     dailyDone = stats.dailyDone || 0;
 
     const pools = buildSpecialPools();
-    return dedupeDeck(interleaveDeck(pools, 96));
+    const mixed = dedupeDeck(interleaveDeck(pools, 96));
+    const sessionTypes = {
+      mix: null,
+      cas: new Set(['cas_choc']),
+      quiz: new Set(['quiz_flash']),
+      pieges: new Set(['piege_exam', 'memo_jour'])
+    };
+    const allowed = sessionTypes[activeSession] || null;
+    const selected = allowed ? mixed.filter(card => allowed.has(card.type)) : mixed;
+    // Une séance doit rester utilisable même si une source locale est incomplète.
+    return selected.length ? selected : mixed;
+  }
+
+  function updateSessionChrome() {
+    const labels = {
+      mix: 'Questions validées · décisions gériatriques · EVC',
+      cas: 'Cas cliniques courts · raisonnement et décision',
+      quiz: 'Quiz de rappel actif · réponses expliquées',
+      pieges: 'Pièges EVC · erreurs à éviter le jour J'
+    };
+    document.querySelectorAll('#bfSessionTabs .bf-session-tab').forEach(tab => {
+      const on = tab.dataset.session === activeSession;
+      tab.classList.toggle('active', on);
+      tab.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    const subtitle = document.querySelector('#vFeed .bf-header-title span');
+    if (subtitle) subtitle.textContent = labels[activeSession] || labels.mix;
+    const counter = document.getElementById('bfCounter');
+    if (counter) counter.setAttribute('title', activeSession === 'mix' ? 'Séance mixte' : labels[activeSession]);
+  }
+
+  function selectSession(session) {
+    if (!['mix', 'cas', 'quiz', 'pieges'].includes(session)) session = 'mix';
+    activeSession = session;
+    try { localStorage.setItem('bf_session', activeSession); } catch (_) {}
+    if (observer) observer.disconnect();
+    activeTimers.forEach(t => clearTimeout(t));
+    activeTimers.clear();
+    deck = buildDeck();
+    idx = 0;
+    combo = 0;
+    quizCombo = 0;
+    const feed = document.getElementById('bfFeed');
+    if (feed) feed.scrollTop = 0;
+    updateSessionChrome();
+    renderSlides();
+    showToast({ mix: 'Séance mixte', cas: 'Séance cas clinique', quiz: 'Séance quiz', pieges: 'Séance pièges EVC' }[activeSession]);
   }
 
   function getChapterName(chId) {
@@ -1876,12 +1923,17 @@ const BrainFeed = (() => {
   }
 
   function init() {
+    try {
+      const stored = localStorage.getItem('bf_session');
+      if (['mix', 'cas', 'quiz', 'pieges'].includes(stored)) activeSession = stored;
+    } catch (_) {}
     deck = buildDeck();
     idx = 0;
     combo = 0;
     quizCombo = 0;
     sessionCombo10Unlocked = false;
     ensureFeedChrome();
+    updateSessionChrome();
     renderSlides();
     highlightActiveSlide();
     document.addEventListener('keydown', onKeyDown);
@@ -1913,5 +1965,5 @@ const BrainFeed = (() => {
     document.removeEventListener('keydown', onKeyDown);
   }
 
-  return { init, destroy, actionKnow, actionDontKnow, actionFav, shareCard, renderSlides, audit: () => ({ deck: interleaveDeck(buildSpecialPools(), 96), pools: buildSpecialPools() }) };
+  return { init, destroy, actionKnow, actionDontKnow, actionFav, shareCard, renderSlides, selectSession, audit: () => ({ deck: interleaveDeck(buildSpecialPools(), 96), pools: buildSpecialPools() }) };
 })();
