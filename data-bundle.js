@@ -235,30 +235,22 @@ const INTERACTIVE_FIGURES = {
     svg: `<style>
   .bouchon-svg { font-family: 'Figtree', 'Noto Sans', sans-serif; }
   .bouchon-svg .curve-main {
-    fill: none; stroke: #22D3EE; stroke-width: 3.5; stroke-linecap: round;
-    /* Courbe toujours visible (pas seulement après animation) */
-    stroke-dasharray: none; stroke-dashoffset: 0; opacity: 1;
+    fill: none; stroke: #0891B2; stroke-width: 4; stroke-linecap: round;
+    stroke-dasharray: none !important; stroke-dashoffset: 0 !important; opacity: 1 !important;
   }
   .bouchon-svg .curve-shadow {
-    fill: none; stroke: #0891B2; stroke-width: 8; stroke-linecap: round; opacity: 0.25;
+    fill: none; stroke: #22D3EE; stroke-width: 10; stroke-linecap: round; opacity: 0.35;
   }
   .bouchon-svg .threshold-line {
-    stroke: #ef4444; stroke-width: 2; stroke-dasharray: 8 4; opacity: 1;
+    stroke: #DC2626; stroke-width: 2.5; stroke-dasharray: 8 4; opacity: 1 !important;
   }
-  .bouchon-svg .zone1-area { fill: rgba(8,145,178,0.14); opacity: 1; }
-  .bouchon-svg .zone2-area { fill: rgba(5,150,105,0.14); opacity: 1; }
-  .bouchon-svg .zone3-area { fill: rgba(239,68,68,0.12); opacity: 1; }
-  .bouchon-svg .label { fill: currentColor; font-size: 11px; opacity: 1; }
-  .bouchon-svg .threshold-label { fill: #ef4444; font-size: 10px; font-weight: 700; opacity: 1; }
-  .bouchon-svg .axis-label { fill: currentColor; font-size: 11px; font-weight: 600; }
-  .bouchon-svg .drop-arrow { fill: none; stroke: #ef4444; stroke-width: 2; marker-end: url(#bouchon-arr); }
-  @media (prefers-reduced-motion: no-preference) {
-    .bouchon-svg .curve-main {
-      stroke-dasharray: 600; stroke-dashoffset: 600;
-      animation: bouchon-draw 2.2s ease-out forwards;
-    }
-  }
-  @keyframes bouchon-draw { to { stroke-dashoffset: 0; } }
+  .bouchon-svg .zone1-area { fill: rgba(8,145,178,0.18); opacity: 1 !important; }
+  .bouchon-svg .zone2-area { fill: rgba(5,150,105,0.16); opacity: 1 !important; }
+  .bouchon-svg .zone3-area { fill: rgba(220,38,38,0.14); opacity: 1 !important; }
+  .bouchon-svg .label { fill: currentColor; font-size: 11px; opacity: 1 !important; }
+  .bouchon-svg .threshold-label { fill: #DC2626; font-size: 10px; font-weight: 700; opacity: 1 !important; }
+  .bouchon-svg .axis-label { fill: currentColor; font-size: 11px; font-weight: 600; opacity: 1 !important; }
+  .bouchon-svg .drop-arrow { fill: none; stroke: #DC2626; stroke-width: 2.5; marker-end: url(#bouchon-arr); }
 </style>
 <svg class="bouchon-svg" viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;display:block;">
   <defs>
@@ -434,7 +426,7 @@ const INTERACTIVE_FIGURES = {
   .knee-svg .cartilage-lost { fill: #ef4444; opacity: 0.5; }
   .knee-svg .synovial { fill: rgba(8,145,178,0.25); stroke: #0891B2; stroke-width: 0.8; stroke-dasharray: 3 2; }
   .knee-svg .meniscus { fill: #0891B2; opacity: 0.5; }
-  .knee-svg .label-group text { fill: currentColor; font-size: 10px; opacity: 0; transition: opacity 0.3s; }
+  .knee-svg .label-group text { fill: currentColor; font-size: 10px; opacity: 1; transition: opacity 0.3s; }
   .knee-svg .struct:hover + .label-group text,
   .knee-svg .struct:hover ~ .label-group text { opacity: 1; }
   .knee-svg .hover-zone { fill: transparent; cursor: pointer; }
@@ -443,7 +435,7 @@ const INTERACTIVE_FIGURES = {
   .knee-svg .grad-bar:nth-child(1) { animation-delay: 0.5s; }
   .knee-svg .grad-bar:nth-child(2) { animation-delay: 0.7s; }
   .knee-svg .grad-bar:nth-child(3) { animation-delay: 0.9s; }
-  .knee-svg .knee-label { opacity: 0; animation: knee-fade 0.5s forwards; }
+  .knee-svg .knee-label { opacity: 1; animation: knee-fade 0.5s forwards; }
   @keyframes knee-fade { to { opacity: 1; } }
   @keyframes knee-pulse { 0%,100%{opacity:0.5} 50%{opacity:1} }
 </style>
@@ -659,14 +651,14 @@ const INTERACTIVE_FIGURES = {
   .escarre-svg .bone-layer { fill: #ecf0f1; stroke: #7f8c8d; stroke-width: 1.5; }
   .escarre-svg .stage-highlight {
     fill: rgba(239,68,68,0.25); stroke: #ef4444; stroke-width: 2; stroke-dasharray: 4 2;
-    opacity: 0; transition: opacity 0.4s;
+    opacity: 1; transition: opacity 0.4s;
   }
   .escarre-svg .stage-box { cursor: pointer; }
   .escarre-svg .stage-box:hover .stage-highlight,
   .escarre-svg .stage-box.active .stage-highlight { opacity: 1; }
   .escarre-svg .stage-box:hover .stage-info,
   .escarre-svg .stage-box.active .stage-info { opacity: 1; }
-  .escarre-svg .stage-info { opacity: 0; transition: opacity 0.3s; }
+  .escarre-svg .stage-info { opacity: 1; transition: opacity 0.3s; }
   .escarre-svg .stage-btn {
     rx: 8; ry: 8; cursor: pointer; transition: all 0.3s;
     stroke-width: 2;
@@ -1030,7 +1022,7 @@ const INTERACTIVE_FIGURES = {
   .ch5-svg .fill-loss { fill: rgba(239,68,68,0.15); stroke: #ef4444; stroke-width: 1.5; stroke-dasharray: 4 2; }
   .ch5-svg .fill-accent { fill: rgba(8,145,178,0.2); stroke: #0891B2; stroke-width: 1; }
   .ch5-svg .label { fill: currentColor; font-size: 9.5px; font-weight: 600; }
-  .ch5-svg .label-sm { fill: currentColor; font-size: 8px; opacity: 0.7; }
+  .ch5-svg .label-sm { fill: currentColor; font-size: 8px; opacity: 1; }
   .ch5-svg .title-text { fill: currentColor; font-size: 11px; font-weight: 700; }
   .ch5-svg .fade-in { opacity: 0; animation: ch5-fade 0.5s forwards; }
   .ch5-svg .fade-in:nth-of-type(1) { animation-delay: 0.3s; }
@@ -1308,13 +1300,10 @@ const INTERACTIVE_FIGURES = {
   .ch6-svg .arr1 { animation: ch6-draw 0.6s 0.8s ease-out forwards; }
   .ch6-svg .arr2 { animation: ch6-draw 0.6s 1.8s ease-out forwards; }
   .ch6-svg .arr3 { animation: ch6-draw 0.6s 2.8s ease-out forwards; }
-  .ch6-svg .stage { opacity: 0; animation: ch6-fade 0.5s forwards; }
-  .ch6-svg .s1 { animation-delay: 0s; }
-  .ch6-svg .s2 { animation-delay: 1.0s; }
-  .ch6-svg .s3 { animation-delay: 2.0s; }
-  .ch6-svg .s4 { animation-delay: 3.0s; }
+  .ch6-svg .stage { opacity: 1 !important; }
+  .ch6-svg .s1, .ch6-svg .s2, .ch6-svg .s3, .ch6-svg .s4 { opacity: 1 !important; }
   .ch6-svg .label { fill: currentColor; font-size: 10px; font-weight: 600; }
-  .ch6-svg .label-sm { fill: currentColor; font-size: 8px; opacity: 0.7; }
+  .ch6-svg .label-sm { fill: currentColor; font-size: 8px; opacity: 1; }
   .ch6-svg .tip { opacity: 0; pointer-events: none; transition: opacity 0.3s; }
   .ch6-svg .stage-box:hover .tip { opacity: 1; }
   @keyframes ch6-draw { to { stroke-dashoffset: 0; } }
@@ -1386,7 +1375,7 @@ const INTERACTIVE_FIGURES = {
   .ch8-svg .organ { fill: rgba(8,145,178,0.12); stroke: #0891B2; stroke-width: 1.5; rx: 8; }
   .ch8-svg .gate-box { fill: rgba(245,158,11,0.15); stroke: #f59e0b; stroke-width: 2; rx: 6; cursor: pointer; }
   .ch8-svg .label { fill: currentColor; font-size: 10px; font-weight: 600; }
-  .ch8-svg .label-sm { fill: currentColor; font-size: 8px; opacity: 0.7; }
+  .ch8-svg .label-sm { fill: currentColor; font-size: 8px; opacity: 1; }
   .ch8-svg .fib-A { stroke: #059669; stroke-width: 1.5; fill: none; stroke-dasharray: 6 3; }
   .ch8-svg .fib-C { stroke: #ef4444; stroke-width: 1.5; fill: none; stroke-dasharray: 2 2; }
   .ch8-svg .tip { opacity: 0; pointer-events: none; transition: opacity 0.3s; }
@@ -1543,7 +1532,7 @@ const INTERACTIVE_FIGURES = {
   .ch11-svg .neg { fill: rgba(5,150,105,0.12); stroke: #059669; }
   .ch11-svg .arrow { fill: none; stroke: #0891B2; stroke-width: 1.5; stroke-dasharray: 5 3; opacity: 0.5; }
   .ch11-svg .label { fill: currentColor; font-size: 10px; font-weight: 600; }
-  .ch11-svg .label-sm { fill: currentColor; font-size: 8px; opacity: 0.7; }
+  .ch11-svg .label-sm { fill: currentColor; font-size: 8px; opacity: 1; }
   .ch11-svg .fade-in { opacity: 0; animation: ch11-fade 0.5s forwards; }
   .ch11-svg .fade-in:nth-of-type(1) { animation-delay: 0.2s; }
   .ch11-svg .fade-in:nth-of-type(2) { animation-delay: 0.5s; }
@@ -1638,7 +1627,7 @@ const INTERACTIVE_FIGURES = {
   .ch12-svg .chain-el:nth-of-type(4) { animation-delay: 2.4s; }
   .ch12-svg .chain-el:nth-of-type(5) { animation-delay: 3.2s; }
   .ch12-svg .label { fill: currentColor; font-size: 10px; font-weight: 600; }
-  .ch12-svg .label-sm { fill: currentColor; font-size: 7.5px; opacity: 0.7; }
+  .ch12-svg .label-sm { fill: currentColor; font-size: 7.5px; opacity: 1; }
   @keyframes ch12-draw { to { stroke-dashoffset: 0; } }
   @keyframes ch12-fade { to { opacity: 1; } }
 </style>
@@ -1704,7 +1693,7 @@ const INTERACTIVE_FIGURES = {
   .ch14-svg .p4 { fill: rgba(239,68,68,0.12); stroke: #ef4444; }
   .ch14-svg .p5 { fill: rgba(139,92,246,0.15); stroke: #8B5CF6; }
   .ch14-svg .label { fill: currentColor; font-size: 10px; font-weight: 600; }
-  .ch14-svg .label-sm { fill: currentColor; font-size: 8px; opacity: 0.7; }
+  .ch14-svg .label-sm { fill: currentColor; font-size: 8px; opacity: 1; }
   .ch14-svg .tip { opacity: 0; pointer-events: none; transition: opacity 0.3s; }
   .ch14-svg .pyra-level:hover .tip { opacity: 1; }
   .ch14-svg .fade-in { opacity: 0; animation: ch14-fade 0.5s forwards; }
@@ -1772,7 +1761,7 @@ const INTERACTIVE_FIGURES = {
   .ch15-svg .sphincter { fill: rgba(245,158,11,0.2); stroke: #f59e0b; stroke-width: 2; }
   .ch15-svg .detrusor { fill: rgba(239,68,68,0.12); stroke: #ef4444; stroke-dasharray: 4 2; stroke-width: 1.5; }
   .ch15-svg .label { fill: currentColor; font-size: 9.5px; font-weight: 600; }
-  .ch15-svg .label-sm { fill: currentColor; font-size: 8px; opacity: 0.7; }
+  .ch15-svg .label-sm { fill: currentColor; font-size: 8px; opacity: 1; }
   .ch15-svg .state-box { rx: 8; stroke-width: 2; cursor: pointer; transition: filter 0.3s; }
   .ch15-svg .state-box:hover { filter: brightness(1.15); }
   .ch15-svg .s1 { fill: rgba(5,150,105,0.12); stroke: #059669; }
@@ -1850,7 +1839,7 @@ const INTERACTIVE_FIGURES = {
   .ch16-svg .fade-in:nth-of-type(3) { animation-delay: 1.8s; }
   .ch16-svg .fade-in:nth-of-type(4) { animation-delay: 2.8s; }
   .ch16-svg .label { fill: currentColor; font-size: 10px; font-weight: 600; }
-  .ch16-svg .label-sm { fill: currentColor; font-size: 8px; opacity: 0.7; }
+  .ch16-svg .label-sm { fill: currentColor; font-size: 8px; opacity: 1; }
   .ch16-svg .warn { fill: #ef4444; font-size: 18px; opacity: 0; animation: ch16-fade 0.3s 3.5s forwards; }
   @keyframes ch16-draw { to { stroke-dashoffset: 0; } }
   @keyframes ch16-fade { to { opacity: 1; } }
@@ -1903,13 +1892,13 @@ const INTERACTIVE_FIGURES = {
   .ch17-svg .curve-cancer { fill: none; stroke: #ef4444; stroke-width: 2.5; stroke-linecap: round;
     stroke-dasharray: 500; stroke-dashoffset: 500; animation: ch17-draw 2s ease-out forwards; }
   .ch17-svg .curve-degen { fill: none; stroke: #0891B2; stroke-width: 2.5; stroke-linecap: round;
-    stroke-dasharray: 600; stroke-dashoffset: 600; animation: ch17-draw 2.5s 0.5s ease-out forwards; }
+    stroke-dasharray: none; stroke-dashoffset: 0; animation: ch17-draw 2.5s 0.5s ease-out forwards; }
   .ch17-svg .intervention { fill: #059669; stroke: #fff; stroke-width: 2; r: 5; opacity: 0; animation: ch17-fade 0.4s forwards; }
   .ch17-svg .int1 { animation-delay: 1.5s; }
   .ch17-svg .int2 { animation-delay: 2.0s; }
   .ch17-svg .int3 { animation-delay: 2.5s; }
   .ch17-svg .label { fill: currentColor; font-size: 10px; font-weight: 600; }
-  .ch17-svg .label-sm { fill: currentColor; font-size: 8px; opacity: 0.7; }
+  .ch17-svg .label-sm { fill: currentColor; font-size: 8px; opacity: 1; }
   .ch17-svg .phase-box { rx: 6; stroke-width: 1.5; opacity: 0; animation: ch17-fade 0.5s forwards; }
   .ch17-svg .ph1 { animation-delay: 3s; fill: rgba(5,150,105,0.08); stroke: #059669; }
   .ch17-svg .ph2 { animation-delay: 3.3s; fill: rgba(245,158,11,0.08); stroke: #f59e0b; }
@@ -1978,7 +1967,7 @@ const INTERACTIVE_FIGURES = {
   .ch18-svg .fade-in:nth-of-type(5) { animation-delay: 2.4s; }
   .ch18-svg .fade-in:nth-of-type(6) { animation-delay: 3.0s; }
   .ch18-svg .label { fill: currentColor; font-size: 9.5px; font-weight: 600; }
-  .ch18-svg .label-sm { fill: currentColor; font-size: 7.5px; opacity: 0.7; }
+  .ch18-svg .label-sm { fill: currentColor; font-size: 7.5px; opacity: 1; }
   .ch18-svg .tip { opacity: 0; pointer-events: none; transition: opacity 0.3s; }
   .ch18-svg .step:hover + .tip { opacity: 1; }
   @keyframes ch18-draw { to { stroke-dashoffset: 0; } }

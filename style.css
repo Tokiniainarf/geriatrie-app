@@ -4715,26 +4715,68 @@ button:disabled { opacity: .45; cursor: not-allowed; }
   background: #0a0a0f;
   object-fit: contain;
 }
+/* Panneau SVG toujours contrasté clair + sombre */
 .fig-svg-wrap {
-  display: block;
+  display: block !important;
   width: 100%;
   max-width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  padding: 4px 0;
-  -webkit-overflow-scrolling: touch;
+  overflow: visible;
+  padding: 14px 12px;
+  border-radius: 12px;
+  box-sizing: border-box;
+  /* Mode sombre (défaut app) */
+  background: #0B1220;
+  color: #E2E8F0 !important;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+}
+/* Mode clair */
+html[data-theme="light"] .fig-svg-wrap,
+html:not([data-theme="dark"]) .fig-svg-wrap {
+  background: #FFFFFF;
+  color: #0F172A !important;
+  border: 1px solid #CBD5E1;
+  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.06);
 }
 .fig-svg-wrap svg,
+.fig-svg-wrap .fig-svg-root,
 .ch-content .fig-block svg,
 .fig-block svg {
   display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
   width: 100% !important;
   max-width: 100% !important;
   height: auto !important;
-  min-height: 160px;
+  min-height: 200px;
   margin: 0 auto;
-  color: var(--text);
+  color: inherit !important;
+  overflow: visible !important;
+  background: transparent !important;
 }
+/* Texte / axes SVG lisibles dans les deux thèmes */
+.fig-svg-wrap svg text {
+  fill: currentColor;
+}
+.fig-svg-wrap svg [stroke="currentColor"] {
+  stroke: currentColor;
+}
+/* Contenu SVG : annuler les opacity:0 d'animation non terminée */
+.fig-svg-wrap svg .stage,
+.fig-svg-wrap svg .label,
+.fig-svg-wrap svg .knee-label,
+.fig-svg-wrap svg .curve-main,
+.fig-svg-wrap svg .s1,
+.fig-svg-wrap svg .s2,
+.fig-svg-wrap svg .s3,
+.fig-svg-wrap svg .s4 {
+  opacity: 1 !important;
+}
+.fig-remade {
+  display: block !important;
+  visibility: visible !important;
+  background: var(--bg-card);
+}
+.fig-remade .fig-svg-wrap { margin: 0; }
 .table-fig-scroll {
   width: 100%;
   max-width: 100%;

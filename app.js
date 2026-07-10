@@ -12,31 +12,85 @@ function resolveManualAsset(entry){
   return null;
 }
 
+/** Resolve globals whether declared const or attached on window */
+function getInteractiveFiguresMap(){
+  try{
+    if(typeof INTERACTIVE_FIGURES!=='undefined' && INTERACTIVE_FIGURES) return INTERACTIVE_FIGURES;
+  }catch(e){}
+  return (typeof window!=='undefined' && window.INTERACTIVE_FIGURES) || {};
+}
+function callRenderFaithfulFigure(id){
+  const fn = (typeof renderFaithfulFigure==='function')
+    ? renderFaithfulFigure
+    : (typeof window!=='undefined' ? window.renderFaithfulFigure : null);
+  if(typeof fn!=='function') return '';
+  try{ return fn(id) || ''; }catch(e){ return ''; }
+}
+function callRenderFaithfulTable(id){
+  const fn = (typeof renderFaithfulTable==='function')
+    ? renderFaithfulTable
+    : (typeof window!=='undefined' ? window.renderFaithfulTable : null);
+  if(typeof fn!=='function') return '';
+  try{ return fn(id) || ''; }catch(e){ return ''; }
+}
+
+/**
+ * Force SVG content visible in light + dark (kills opacity:0 / dashoffset hide).
+ * Tooltips (.tip) stay hidden until hover.
+ */
+function sanitizeFigureSvg(svgHtml){
+  if(!svgHtml || typeof svgHtml!=='string') return '';
+  let s = svgHtml;
+  // Curves must never start "un-drawn"
+  s = s.replace(/stroke-dashoffset:\s*\d+/gi, 'stroke-dashoffset:0');
+  s = s.replace(/stroke-dasharray:\s*600/gi, 'stroke-dasharray:none');
+  // Content stages/labels: opacity 0 → 1 (keep tip/tooltip/detail hidden)
+  s = s.replace(/(\.[a-zA-Z0-9_-]+(?:\s*,\s*\.[a-zA-Z0-9_-]+)*\s*\{)([^}]*?)\}/g, (full, sel, body) => {
+    if(/\b(tip|tooltip|detail|tt-|crit-detail)\b/i.test(sel+body) && !/\bstage\b/i.test(sel)) {
+      return full; // leave tooltips
+    }
+    // Don't touch pure tip rules
+    if(/\.(tip|tooltip|knee-tooltip|crit-detail)\b/i.test(sel)) return full;
+    let b = body.replace(/(^|[^-])opacity:\s*0(\s*;|)/gi, '$1opacity:1$2');
+    return sel + b + '}';
+  });
+  // Inline style opacity:0 on non-tooltip elements
+  s = s.replace(/style="([^"]*)"/gi, (m, st) => {
+    if(/tooltip|tip/i.test(st) && /opacity:\s*0/i.test(st)) return m;
+    return 'style="' + st.replace(/opacity:\s*0(\s*;?)/gi, 'opacity:1$1') + '"';
+  });
+  // Ensure root svg has explicit contrast styles
+  if(/<svg[\s>]/i.test(s) && !/class="[^"]*fig-svg-root/.test(s)){
+    s = s.replace(/<svg\b/i, '<svg class="fig-svg-root"');
+  }
+  return s;
+}
+
 /**
  * Figures REFAITES (SVG exact ou schéma HTML) — jamais crop/page manuel.
- * Images IA = injectEducationalVisuals() en plus (ne pas désactiver).
- * IMPORTANT : pas de fuzzy "6.x" (répétait le même schéma pour 6.1–6.7).
+ * Images IA = injectEducationalVisuals() en plus.
+ * Pas de fuzzy ch.x (évitait 6.1–6.7 identiques).
  */
 function buildFigureBlock(figId, titleHint){
   const capTitle = (titleHint||'').replace(/^[AB]\s+/i,'').trim();
   let desc = capTitle;
   let inner = '';
+  const IF = getInteractiveFiguresMap();
 
-  // 1) SVG EXACT uniquement (pas de fuzzy ch.x → anti-répétition)
-  if(typeof INTERACTIVE_FIGURES!=='undefined' && INTERACTIVE_FIGURES[figId]?.svg){
-    inner = `<div class="fig-media fig-svg-wrap" data-fig="${esc(figId)}">${INTERACTIVE_FIGURES[figId].svg}</div>`;
-    if(INTERACTIVE_FIGURES[figId].title && !desc) desc = INTERACTIVE_FIGURES[figId].title;
+  // 1) SVG EXACT
+  if(IF[figId] && IF[figId].svg){
+    const svg = sanitizeFigureSvg(IF[figId].svg);
+    inner = `<div class="fig-media fig-svg-wrap" data-fig="${esc(figId)}">${svg}</div>`;
+    if(IF[figId].title && !desc) desc = IF[figId].title;
   }
 
-  // 2) Schéma HTML refait distinct par id
-  if(!inner && typeof renderFaithfulFigure==='function'){
-    try{
-      const h = renderFaithfulFigure(figId);
-      if(h && h.indexOf('faithful-fig')!==-1) return h;
-    }catch(e){}
+  // 2) Schéma HTML refait
+  if(!inner){
+    const h = callRenderFaithfulFigure(figId);
+    if(h && h.indexOf('faithful-fig')!==-1) return h;
   }
 
-  if(!inner) return ''; // pas de capture livre en fallback
+  if(!inner) return '';
 
   const cap = desc ? `Figure ${figId} — ${esc(desc)}` : `Figure ${figId}`;
   return `<figure class="fig-block fig-remade">${inner}<figcaption>${cap}</figcaption></figure>`;
@@ -47,12 +101,8 @@ function buildFigureBlock(figId, titleHint){
  */
 function buildTableBlock(tabId, titleHint){
   const title = (titleHint||'').replace(/^[AB]\s+/i,'').trim();
-  if(typeof renderFaithfulTable==='function'){
-    try{
-      const h = renderFaithfulTable(tabId);
-      if(h && h.indexOf('faithful-table')!==-1) return h;
-    }catch(e){ console.warn('faithful table', tabId, e); }
-  }
+  const h = callRenderFaithfulTable(tabId);
+  if(h && h.indexOf('faithful-table')!==-1) return h;
   return `<div class="table-lead"><span class="table-badge">Tableau ${esc(tabId)}</span><span>${esc(title||'')}</span></div>`;
 }
 
