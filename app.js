@@ -13,50 +13,69 @@ function resolveManualAsset(entry){
 }
 
 /**
- * Vraies figures du manuel (extrait figure = crop de la figure, pas page entière, pas IA).
- * Ex. Fig. 1.1 → images/crops/crop_p031_0.jpg (schéma Bouchon du livre).
+ * Figures REFAITES uniquement (pas de capture manuel).
+ * 1) SVG interactive-figures (schémas déjà générés)
+ * 2) HTML faithful-visuals (schémas pédagogiques)
+ * Images IA educational/ = injectEducationalVisuals() en plus, séparément.
  */
 function buildFigureBlock(figId, titleHint){
   const capTitle = (titleHint||'').replace(/^[AB]\s+/i,'').trim();
-  const asset = (typeof FIGURES!=='undefined') ? resolveManualAsset(FIGURES[figId]) : null;
-  let src = asset?.src || '';
-  // Interdire pages entières du livre ; accepter crops + images figure isolées
-  if(src && /figures\/page_/i.test(src)) src = '';
-  if(!src) return '';
-  const desc = capTitle || asset?.desc || '';
-  const alt = desc ? `Figure ${figId} — ${desc}` : `Figure ${figId}`;
-  return `<figure class="fig-block fig-book">`+
-    `<img class="fig-media fig-img" src="${src}" alt="${esc(alt)}" loading="lazy" decoding="async" onerror="this.closest('figure')&&(this.closest('figure').style.display='none')">`+
-    `<figcaption>${esc(alt)}</figcaption></figure>`;
+  let desc = capTitle;
+  let inner = '';
+
+  // SVG refait
+  if(typeof INTERACTIVE_FIGURES!=='undefined'){
+    const exact = INTERACTIVE_FIGURES[figId];
+    const fuzzy = INTERACTIVE_FIGURES[String(figId).split('.')[0] + '.x'];
+    const hit = exact || fuzzy;
+    if(hit?.svg){
+      inner = `<div class="fig-media fig-svg-wrap" data-fig="${esc(figId)}">${hit.svg}</div>`;
+      if(hit.title && !desc) desc = hit.title;
+    }
+  }
+  if(!inner && typeof renderInteractiveFigure==='function'){
+    try{
+      const r = renderInteractiveFigure(figId, { preferStatic: false });
+      if(r && /<svg[\s>]/i.test(r)) inner = `<div class="fig-media fig-svg-wrap">${r}</div>`;
+    }catch(e){}
+  }
+
+  // Schéma HTML refait
+  if(!inner && typeof renderFaithfulFigure==='function'){
+    try{
+      const h = renderFaithfulFigure(figId);
+      if(h && h.indexOf('faithful-fig')!==-1) return h;
+    }catch(e){}
+  }
+
+  // JAMAIS FIGURES crops / page scans
+  if(!inner) return '';
+
+  const cap = desc ? `Figure ${figId} — ${esc(desc)}` : `Figure ${figId}`;
+  return `<figure class="fig-block fig-remade">${inner}<figcaption>${cap}</figcaption></figure>`;
 }
 
 /**
- * Tableaux : image de tableau du livre si mappée (TABLES), sinon titre seul.
- * Pas de HTML “faithful” texte, pas d’IA.
+ * Tableaux REFAITS (HTML) — pas de capture page PDF.
  */
 function buildTableBlock(tabId, titleHint){
   const title = (titleHint||'').replace(/^[AB]\s+/i,'').trim();
-  let src = '';
-  let desc = title;
-  if(typeof TABLES!=='undefined' && TABLES[tabId]){
-    const a = resolveManualAsset(TABLES[tabId]);
-    if(a?.src){ src = a.src; if(a.desc && !desc) desc = a.desc; }
+  if(typeof renderFaithfulTable==='function'){
+    try{
+      const h = renderFaithfulTable(tabId);
+      if(h && h.indexOf('faithful-table')!==-1) return h;
+    }catch(e){ console.warn('faithful table', tabId, e); }
   }
-  let html = `<div class="table-lead"><span class="table-badge">Tableau ${esc(tabId)}</span><span>${esc(desc||'')}</span></div>`;
-  if(src){
-    html += `<figure class="fig-block table-fig">`+
-      `<div class="table-fig-scroll">`+
-      `<img class="fig-media fig-img" src="${src}" alt="Tableau ${tabId}${desc?': '+esc(desc):''}" loading="lazy" decoding="async" onerror="this.closest('.table-fig')&&(this.closest('.table-fig').style.display='none')">`+
-      `</div></figure>`;
-  }
-  return html;
+  return `<div class="table-lead"><span class="table-badge">Tableau ${esc(tabId)}</span><span>${esc(title||'')}</span></div>`;
 }
 
+/** Educational inject: keep AI images; skip book captures only */
 function isPdfCapturePath(src){
-  // Used only for educational inject filters
   if(!src) return true;
   const s = String(src).replace(/\\/g,'/');
-  return /figures\/page_/i.test(s) || /\/crops\//i.test(s) || /\/p\d{3}_\d+\./i.test(s);
+  // Block only book captures — allow educational/ and ai-heroes/
+  if(/chapters\/educational\//i.test(s) || /chapters\/ai-heroes\//i.test(s)) return false;
+  return /figures\/page_/i.test(s) || /\/crops\//i.test(s) || /\/p\d{3}_\d+\.(jpe?g|png)$/i.test(s);
 }
 const S={view:'home',ch:null,bm:safeJSON('gbm',[]),read:safeJSON('grd',[]),fs:parseInt(localStorage.getItem('gfs')||'18'),lh:parseFloat(localStorage.getItem('glh')||'1.7'),th:localStorage.getItem('gth')||'dark'};
 let flashIdx=0,flashDeck=[],flashFilter='all',flashChapFilter='all';
@@ -604,8 +623,8 @@ function renderChapterContent(){
     const denseOn = localStorage.getItem('gdense') === '1';
     cc.classList.toggle('dense-mode', denseOn);
     applyConceptLinks();
-    // Pas d'images IA educational injectées ici — figures = vraies figures du manuel (FIGURES)
-    // injectEducationalVisuals(S.ch, cc);
+    // Images IA educational/ EN PLUS des figures refaites (SVG/HTML)
+    injectEducationalVisuals(S.ch, cc);
     // Smooth outline anchors
     cc.querySelectorAll('.outline-link').forEach(a => {
       if (!a || typeof a.addEventListener !== 'function') return;
