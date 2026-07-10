@@ -1813,19 +1813,18 @@ function resolveFigureSrc(figId) {
   return null;
 }
 
-// ─── Helper: interactive SVG first (generated schemas), then static crop ───
+// ─── Helper: digitized manual crop first, then interactive SVG ───
 function renderInteractiveFigure(figId, opts) {
   opts = opts || {};
-  // Default: prefer generated SVG schemas over static photos
-  var preferStatic = opts.preferStatic === true;
+  // preferStatic true (default): show manuel numérisé (crop) first
+  var preferStatic = opts.preferStatic !== false;
   var staticSrc = resolveFigureSrc(figId);
+  // Skip full-page dumps as "figure"
+  if (staticSrc && /figures\/page_/i.test(staticSrc)) staticSrc = null;
   var exactInteractive = INTERACTIVE_FIGURES[figId];
 
-  if (!preferStatic && exactInteractive) {
-    return exactInteractive.svg;
-  }
   if (preferStatic && staticSrc) {
-    return '<img src="' + staticSrc + '" alt="Figure ' + figId + '" class="fig-img" loading="lazy" decoding="async" style="max-width:100%;height:auto;border-radius:8px;">';
+    return '<img src="' + staticSrc + '" alt="Figure ' + figId + '" class="fig-img fig-manual" loading="lazy" decoding="async" style="max-width:100%;height:auto;border-radius:8px;display:block;width:100%;">';
   }
   if (exactInteractive) {
     return exactInteractive.svg;
@@ -1836,7 +1835,7 @@ function renderInteractiveFigure(figId, opts) {
     return INTERACTIVE_FIGURES[genericKey].svg;
   }
   if (staticSrc) {
-    return '<img src="' + staticSrc + '" alt="Figure ' + figId + '" class="fig-img" loading="lazy" decoding="async" style="max-width:100%;height:auto;border-radius:8px;">';
+    return '<img src="' + staticSrc + '" alt="Figure ' + figId + '" class="fig-img fig-manual" loading="lazy" decoding="async" style="max-width:100%;height:auto;border-radius:8px;display:block;width:100%;">';
   }
   return '';
 }

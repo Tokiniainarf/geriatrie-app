@@ -13,101 +13,94 @@ function resolveManualAsset(entry){
 }
 
 /**
- * True if path is a PDF capture (page scan / crop) — NEVER use for chapter figures.
- * User requirement: only remade schemas (SVG interactive + educational AI images).
+ * Paths that are full-book page dumps (not a figure crop).
+ * Crops (images/crops/…) = figures du manuel numérisées — ON LES GARDE.
+ * page_XXX full pages = parfois le seul rendu d’un tableau numérisé — OK pour TABLES.
  */
-function isPdfCapturePath(src){
+function isFullPageDumpOnly(src){
   if(!src) return true;
-  const s = String(src).replace(/\\/g,'/');
-  return /figures\/page_/i.test(s) || /\/crops\//i.test(s) || /\/p\d{3}_\d+\.(jpg|png|jpeg)$/i.test(s);
-}
-
-/** Educational remade asset for a figure id (chapter educational images). */
-function resolveEducationalFigSrc(figId){
-  // Prefer explicit map if present
-  if(typeof FIGURE_EDU_MAP!=='undefined' && FIGURE_EDU_MAP[figId]) return FIGURE_EDU_MAP[figId];
-  // Heuristic: ch{N}-extra-1 or ch{N}-1 for figure N.x
-  const n = String(figId).split('.')[0];
-  if(!n) return null;
-  const candidates = [
-    `images/chapters/educational/ch${n}-extra-1.jpg`,
-    `images/chapters/educational/ch${n}-1.jpg`,
-    `images/chapters/educational/ch${n}-2.jpg`
-  ];
-  // We can't fs.exists in browser; onerror will hide broken. Prefer first stable extra/1.
-  return candidates[0];
+  return /figures\/page_/i.test(String(src).replace(/\\/g,'/'));
 }
 
 /**
- * Build figure from REMADE assets only:
- * 1) Interactive SVG (interactive-figures.js) — schemas already rebuilt
- * 2) Educational images (Grok Imagine / chapters/educational)
- * NEVER PDF page scans or crops.
+ * Figure du manuel numérisée (crop) + schéma SVG si dispo.
+ * Priorité :
+ *  1) Crop FIGURES (comme dans le livre, découpé/numérisé)
+ *  2) SVG interactif exact (schéma pédagogique déjà généré)
+ *  3) SVG fuzzy ch.x seulement si pas de crop
  */
 function buildFigureBlock(figId, titleHint){
   const capTitle = (titleHint||'').replace(/^[AB]\s+/i,'').trim();
   let desc = capTitle;
-  let inner = '';
+  let parts = [];
 
-  // 1) Interactive SVG schemas (already remade)
-  if(typeof INTERACTIVE_FIGURES!=='undefined'){
-    const exact = INTERACTIVE_FIGURES[figId];
-    const fuzzy = INTERACTIVE_FIGURES[String(figId).split('.')[0] + '.x'];
-    const hit = exact || fuzzy;
-    if(hit?.svg){
-      inner = `<div class="fig-media fig-svg-wrap" data-fig="${esc(figId)}">${hit.svg}</div>`;
-      if(hit.title && !desc) desc = hit.title;
+  // 1) Image du manuel numérisée (crop)
+  const asset = (typeof FIGURES!=='undefined') ? resolveManualAsset(FIGURES[figId]) : null;
+  if(asset?.src && !isFullPageDumpOnly(asset.src)){
+    if(asset.desc && !desc) desc = asset.desc;
+    parts.push(
+      `<img class="fig-media fig-img fig-manual" src="${asset.src}" alt="Figure ${figId}${desc?': '+esc(desc):''}" loading="lazy" decoding="async" onerror="this.remove()">`
+    );
+  }
+
+  // 2) Schéma SVG exact (déjà généré) — en plus du crop si les deux existent
+  if(typeof INTERACTIVE_FIGURES!=='undefined' && INTERACTIVE_FIGURES[figId]?.svg){
+    parts.push(`<div class="fig-media fig-svg-wrap" data-fig="${esc(figId)}">${INTERACTIVE_FIGURES[figId].svg}</div>`);
+    if(INTERACTIVE_FIGURES[figId].title && !desc) desc = INTERACTIVE_FIGURES[figId].title;
+  } else if(!parts.length && typeof INTERACTIVE_FIGURES!=='undefined'){
+    // Fuzzy only when no digitized crop
+    const gk = String(figId).split('.')[0] + '.x';
+    if(INTERACTIVE_FIGURES[gk]?.svg){
+      parts.push(`<div class="fig-media fig-svg-wrap" data-fig="${esc(figId)}">${INTERACTIVE_FIGURES[gk].svg}</div>`);
+      if(INTERACTIVE_FIGURES[gk].title && !desc) desc = INTERACTIVE_FIGURES[gk].title;
     }
   }
-  if(!inner && typeof renderInteractiveFigure==='function'){
+
+  if(!parts.length && typeof renderInteractiveFigure==='function'){
     try {
-      const r = renderInteractiveFigure(figId, { preferStatic: false });
-      if(r && /<svg/i.test(r)) inner = `<div class="fig-media fig-svg-wrap">${r}</div>`;
+      const r = renderInteractiveFigure(figId, { preferStatic: true });
+      if(r && ( /<svg/i.test(r) || /<img/i.test(r) )) parts.push(`<div class="fig-media">${r}</div>`);
     } catch(e){}
   }
 
-  // 2) Remade educational illustration (not PDF)
-  if(!inner){
-    const edu = resolveEducationalFigSrc(figId);
-    if(edu && !isPdfCapturePath(edu)){
-      inner = `<img class="fig-media fig-img edu-fig" src="${edu}" alt="Figure ${figId}${desc?': '+esc(desc):''}" loading="lazy" decoding="async" onerror="this.closest('figure')&&this.closest('figure').remove()">`;
-    }
-  }
-
-  // 3) FIGURES map only if NOT a PDF capture
-  if(!inner && typeof FIGURES!=='undefined' && FIGURES[figId]){
-    const asset = resolveManualAsset(FIGURES[figId]);
-    if(asset?.src && !isPdfCapturePath(asset.src)){
-      if(asset.desc && !desc) desc = asset.desc;
-      inner = `<img class="fig-media fig-img" src="${asset.src}" alt="Figure ${figId}" loading="lazy" decoding="async" onerror="this.closest('figure')&&this.closest('figure').remove()">`;
-    }
-  }
-
-  if(!inner) return ''; // no PDF fallback, no text wall
+  if(!parts.length) return '';
 
   const cap = desc ? `Figure ${figId} — ${esc(desc)}` : `Figure ${figId}`;
-  return `<figure class="fig-block fig-remade">${inner}<figcaption>${cap}</figcaption></figure>`;
+  return `<figure class="fig-block fig-manual-block">${parts.join('')}<figcaption>${cap}</figcaption></figure>`;
 }
 
 /**
- * Tables: title badge only + remade educational visual if chapter has one.
- * NEVER inject PDF page scans (images/figures/page_*).
+ * Tableau du manuel numérisé (image TABLES : crop ou page tableau).
  */
 function buildTableBlock(tabId, titleHint){
   const title = (titleHint||'').replace(/^[AB]\s+/i,'').trim();
-  let html = `<div class="table-lead"><span class="table-badge">Tableau ${esc(tabId)}</span><span>${esc(title||'')}</span></div>`;
+  let src = '';
+  let desc = title;
 
-  // Optional: remade educational image for same chapter as table number
-  const n = String(tabId).split('.')[0];
-  const eduCandidates = [
-    `images/chapters/educational/ch${n}-extra-1.jpg`,
-    `images/chapters/educational/ch${n}-1.jpg`
-  ];
-  // Only attach for well-known table types that had edu diagrams (not every table)
-  // Skip auto-attach to avoid wrong images; title lead is enough for tables.
-  // Interactive SVG never covers generic "Tableau X.Y" content.
+  if(typeof TABLES!=='undefined' && TABLES[tabId]){
+    const a = resolveManualAsset(TABLES[tabId]);
+    if(a?.src){
+      src = a.src;
+      if(a.desc && !desc) desc = a.desc;
+    }
+  }
 
+  let html = `<div class="table-lead"><span class="table-badge">Tableau ${esc(tabId)}</span><span>${esc(desc||'')}</span></div>`;
+  if(src){
+    html += `<figure class="fig-block table-fig table-manual">`+
+      `<div class="table-fig-scroll">`+
+      `<img class="fig-media fig-img" src="${src}" alt="Tableau ${tabId}${desc?': '+esc(desc):''}" loading="lazy" decoding="async" onerror="this.closest('.table-fig')&&(this.closest('.table-fig').style.display='none')">`+
+      `</div></figure>`;
+  }
   return html;
+}
+
+/** Used by injectEducationalVisuals — exclude raw full-page dumps only */
+function isPdfCapturePath(src){
+  if(!src) return true;
+  // Educational / interactive assets OK; only block nothing for edu inject
+  // Full page dumps not used as "educational" fillers
+  return /figures\/page_/i.test(String(src).replace(/\\/g,'/'));
 }
 const S={view:'home',ch:null,bm:safeJSON('gbm',[]),read:safeJSON('grd',[]),fs:parseInt(localStorage.getItem('gfs')||'18'),lh:parseFloat(localStorage.getItem('glh')||'1.7'),th:localStorage.getItem('gth')||'dark'};
 let flashIdx=0,flashDeck=[],flashFilter='all',flashChapFilter='all';

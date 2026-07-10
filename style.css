@@ -4668,9 +4668,11 @@ button:disabled { opacity: .45; cursor: not-allowed; }
   scroll-margin-top: calc(var(--topbar) + 72px);
 }
 
-/* ═══ FIGURES / TABLEAUX — assets générés (SVG + images), lisibles mobile ═══ */
+/* ═══ FIGURES / TABLEAUX — manuel numérisé (crops) + SVG, lisibles mobile ═══ */
 .ch-content .fig-block,
-.fig-block {
+.fig-block,
+.fig-manual-block,
+.table-manual {
   display: block;
   width: 100%;
   max-width: 100%;
@@ -4683,6 +4685,11 @@ button:disabled { opacity: .45; cursor: not-allowed; }
   border-radius: 14px;
   box-shadow: var(--shadow-card);
   overflow: visible;
+}
+.fig-manual-block .fig-manual + .fig-svg-wrap {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--glass-border);
 }
 .ch-content .fig-block figcaption,
 .fig-block figcaption {
