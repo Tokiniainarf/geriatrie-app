@@ -1813,30 +1813,19 @@ function resolveFigureSrc(figId) {
   return null;
 }
 
-// ─── Helper: digitized manual crop first, then interactive SVG ───
+// ─── Helper: REFAIT SVG only (never crops / page scans) ───
 function renderInteractiveFigure(figId, opts) {
   opts = opts || {};
-  // preferStatic true (default): show manuel numérisé (crop) first
-  var preferStatic = opts.preferStatic !== false;
-  var staticSrc = resolveFigureSrc(figId);
-  // Skip full-page dumps as "figure"
-  if (staticSrc && /figures\/page_/i.test(staticSrc)) staticSrc = null;
   var exactInteractive = INTERACTIVE_FIGURES[figId];
-
-  if (preferStatic && staticSrc) {
-    return '<img src="' + staticSrc + '" alt="Figure ' + figId + '" class="fig-img fig-manual" loading="lazy" decoding="async" style="max-width:100%;height:auto;border-radius:8px;display:block;width:100%;">';
-  }
-  if (exactInteractive) {
+  if (exactInteractive && exactInteractive.svg) {
     return exactInteractive.svg;
   }
   var prefix = String(figId).split('.')[0];
   var genericKey = prefix + '.x';
-  if (INTERACTIVE_FIGURES[genericKey]) {
+  if (INTERACTIVE_FIGURES[genericKey] && INTERACTIVE_FIGURES[genericKey].svg) {
     return INTERACTIVE_FIGURES[genericKey].svg;
   }
-  if (staticSrc) {
-    return '<img src="' + staticSrc + '" alt="Figure ' + figId + '" class="fig-img fig-manual" loading="lazy" decoding="async" style="max-width:100%;height:auto;border-radius:8px;display:block;width:100%;">';
-  }
+  // Do NOT fall back to FIGURES crops — user wants remade figures only
   return '';
 }
 

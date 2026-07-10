@@ -4769,13 +4769,157 @@ button:disabled { opacity: .45; cursor: not-allowed; }
   padding: 3px 8px;
   border-radius: 6px;
 }
-/* Hide unused faithful text modules if present in old cache */
+/* ═══ TABLEAUX + FIGURES REFAITS (HTML/SVG) — jamais crops ═══ */
 .faithful-table,
-.faithful-fig,
-.fig-placeholder,
-.fig-reconstituted .faithful-flow,
-.fig-reconstituted .faithful-chips {
-  /* still show structure if old HTML cached — but prefer media */
+.faithful-fig {
+  display: block !important;
+  width: 100%;
+  max-width: 100%;
+  margin: 18px 0;
+  border-radius: 14px;
+  border: 1px solid var(--glass-border);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.faithful-table-hd,
+.faithful-fig-hd {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  align-items: baseline;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--glass-border);
+  background: color-mix(in srgb, var(--accent) 10%, var(--bg-card));
+}
+.faithful-badge {
+  display: inline-block;
+  font-size: .65rem;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--accent);
+  padding: 4px 10px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+.faithful-title {
+  font-size: .9rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.35;
+}
+.faithful-table-scroll {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.faithful-grid {
+  width: 100%;
+  min-width: 280px;
+  border-collapse: collapse;
+  font-size: .82rem;
+  line-height: 1.4;
+}
+.faithful-grid th,
+.faithful-grid td {
+  border: 1px solid var(--glass-border);
+  padding: 9px 10px;
+  text-align: left;
+  vertical-align: top;
+  color: var(--text2);
+  word-break: break-word;
+}
+.faithful-grid thead th {
+  background: color-mix(in srgb, var(--accent) 14%, var(--bg-elevated));
+  color: var(--text);
+  font-weight: 700;
+  font-size: .75rem;
+  white-space: normal;
+}
+.faithful-grid tbody th[scope="row"] {
+  font-weight: 600;
+  color: var(--text);
+  background: color-mix(in srgb, var(--bg-elevated) 70%, transparent);
+}
+.faithful-grid tr:nth-child(even) td {
+  background: color-mix(in srgb, var(--accent) 5%, transparent);
+}
+.faithful-note {
+  margin: 0;
+  padding: 10px 14px;
+  font-size: .78rem;
+  color: var(--text2);
+  line-height: 1.45;
+  border-top: 1px dashed var(--glass-border);
+}
+.faithful-source { display: none; }
+.faithful-fig-body { padding: 12px 14px 14px; text-align: left; }
+.faithful-flow {
+  margin: 0;
+  padding: 0 0 0 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.faithful-flow li {
+  font-size: .88rem;
+  color: var(--text);
+  line-height: 1.4;
+}
+.faithful-flow li span {
+  display: block;
+  font-size: .8rem;
+  color: var(--text2);
+  font-weight: 400;
+  margin-top: 2px;
+}
+.faithful-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.faithful-chip {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  border: 1px solid var(--glass-border);
+  font-size: .8rem;
+  color: var(--text2);
+  max-width: 100%;
+}
+.faithful-chip b { color: var(--text); font-size: .84rem; }
+.faithful-bouchon { display: grid; gap: 8px; }
+.fb-zone {
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: .88rem;
+  line-height: 1.4;
+  color: var(--text);
+}
+.fb-z1 { background: color-mix(in srgb, #0891B2 16%, var(--bg-card)); border: 1px solid color-mix(in srgb, #0891B2 35%, transparent); }
+.fb-z2 { background: color-mix(in srgb, #059669 16%, var(--bg-card)); border: 1px solid color-mix(in srgb, #059669 35%, transparent); }
+.fb-z3 { background: color-mix(in srgb, #DC2626 14%, var(--bg-card)); border: 1px solid color-mix(in srgb, #DC2626 30%, transparent); }
+.fb-threshold {
+  margin-top: 4px;
+  text-align: center;
+  font-size: .75rem;
+  font-weight: 700;
+  color: #DC2626;
+  border-top: 2px dashed #DC2626;
+  padding-top: 8px;
+}
+.fig-remade { text-align: center; }
+.study-reader.dense-mode .faithful-table,
+.study-reader.dense-mode .faithful-fig,
+.study-reader.dense-mode .fig-remade {
+  display: block !important;
 }
 @media (max-width: 480px) {
   .ch-content .fig-block,
@@ -4788,6 +4932,9 @@ button:disabled { opacity: .45; cursor: not-allowed; }
   .ch-content .fig-block svg {
     min-height: 140px;
   }
+  .faithful-grid { font-size: .76rem; min-width: 260px; }
+  .faithful-grid th,
+  .faithful-grid td { padding: 7px 8px; }
   .ch-outline-nav { margin: 0 0 12px; }
 }
 

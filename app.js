@@ -13,94 +13,75 @@ function resolveManualAsset(entry){
 }
 
 /**
- * Paths that are full-book page dumps (not a figure crop).
- * Crops (images/crops/…) = figures du manuel numérisées — ON LES GARDE.
- * page_XXX full pages = parfois le seul rendu d’un tableau numérisé — OK pour TABLES.
+ * FIGURES / TABLEAUX REFAITS uniquement — JAMAIS crops PDF ni page scans.
+ *
+ * Figures  : 1) SVG interactive-figures  2) schéma HTML faithful-visuals
+ * Tableaux : HTML reconstitués (faithful-visuals) — vraies grilles CSS
+ * + injectEducationalVisuals : images educational/ déjà générées
  */
-function isFullPageDumpOnly(src){
+function isCapturePath(src){
   if(!src) return true;
-  return /figures\/page_/i.test(String(src).replace(/\\/g,'/'));
+  const s = String(src).replace(/\\/g,'/');
+  return /\/crops\//i.test(s) || /figures\/page_/i.test(s) || /\/p\d{3}_\d+\.(jpe?g|png)$/i.test(s);
 }
 
-/**
- * Figure du manuel numérisée (crop) + schéma SVG si dispo.
- * Priorité :
- *  1) Crop FIGURES (comme dans le livre, découpé/numérisé)
- *  2) SVG interactif exact (schéma pédagogique déjà généré)
- *  3) SVG fuzzy ch.x seulement si pas de crop
- */
 function buildFigureBlock(figId, titleHint){
   const capTitle = (titleHint||'').replace(/^[AB]\s+/i,'').trim();
   let desc = capTitle;
-  let parts = [];
+  let inner = '';
 
-  // 1) Image du manuel numérisée (crop)
-  const asset = (typeof FIGURES!=='undefined') ? resolveManualAsset(FIGURES[figId]) : null;
-  if(asset?.src && !isFullPageDumpOnly(asset.src)){
-    if(asset.desc && !desc) desc = asset.desc;
-    parts.push(
-      `<img class="fig-media fig-img fig-manual" src="${asset.src}" alt="Figure ${figId}${desc?': '+esc(desc):''}" loading="lazy" decoding="async" onerror="this.remove()">`
-    );
-  }
-
-  // 2) Schéma SVG exact (déjà généré) — en plus du crop si les deux existent
-  if(typeof INTERACTIVE_FIGURES!=='undefined' && INTERACTIVE_FIGURES[figId]?.svg){
-    parts.push(`<div class="fig-media fig-svg-wrap" data-fig="${esc(figId)}">${INTERACTIVE_FIGURES[figId].svg}</div>`);
-    if(INTERACTIVE_FIGURES[figId].title && !desc) desc = INTERACTIVE_FIGURES[figId].title;
-  } else if(!parts.length && typeof INTERACTIVE_FIGURES!=='undefined'){
-    // Fuzzy only when no digitized crop
-    const gk = String(figId).split('.')[0] + '.x';
-    if(INTERACTIVE_FIGURES[gk]?.svg){
-      parts.push(`<div class="fig-media fig-svg-wrap" data-fig="${esc(figId)}">${INTERACTIVE_FIGURES[gk].svg}</div>`);
-      if(INTERACTIVE_FIGURES[gk].title && !desc) desc = INTERACTIVE_FIGURES[gk].title;
+  // 1) Schéma SVG refait (interactive-figures.js)
+  if(typeof INTERACTIVE_FIGURES!=='undefined'){
+    const exact = INTERACTIVE_FIGURES[figId];
+    const fuzzy = INTERACTIVE_FIGURES[String(figId).split('.')[0]+'.x'];
+    const hit = exact || fuzzy;
+    if(hit && hit.svg){
+      inner = `<div class="fig-media fig-svg-wrap" data-fig="${esc(figId)}">${hit.svg}</div>`;
+      if(hit.title && !desc) desc = hit.title;
     }
   }
-
-  if(!parts.length && typeof renderInteractiveFigure==='function'){
-    try {
-      const r = renderInteractiveFigure(figId, { preferStatic: true });
-      if(r && ( /<svg/i.test(r) || /<img/i.test(r) )) parts.push(`<div class="fig-media">${r}</div>`);
-    } catch(e){}
+  if(!inner && typeof renderInteractiveFigure==='function'){
+    try{
+      const r = renderInteractiveFigure(figId, { preferStatic: false });
+      if(r && /<svg[\s>]/i.test(r)) inner = `<div class="fig-media fig-svg-wrap">${r}</div>`;
+    }catch(e){}
   }
 
-  if(!parts.length) return '';
+  // 2) Schéma HTML refait (faithful-visuals) — pas de crop
+  if(!inner && typeof renderFaithfulFigure==='function'){
+    try{
+      const h = renderFaithfulFigure(figId);
+      if(h && h.indexOf('faithful-fig')!==-1) return h; // already a full card
+    }catch(e){}
+  }
+
+  if(!inner) return '';
 
   const cap = desc ? `Figure ${figId} — ${esc(desc)}` : `Figure ${figId}`;
-  return `<figure class="fig-block fig-manual-block">${parts.join('')}<figcaption>${cap}</figcaption></figure>`;
+  return `<figure class="fig-block fig-remade">${inner}<figcaption>${cap}</figcaption></figure>`;
 }
 
-/**
- * Tableau du manuel numérisé (image TABLES : crop ou page tableau).
- */
 function buildTableBlock(tabId, titleHint){
   const title = (titleHint||'').replace(/^[AB]\s+/i,'').trim();
-  let src = '';
-  let desc = title;
 
-  if(typeof TABLES!=='undefined' && TABLES[tabId]){
-    const a = resolveManualAsset(TABLES[tabId]);
-    if(a?.src){
-      src = a.src;
-      if(a.desc && !desc) desc = a.desc;
-    }
+  // Tableaux REFAITS en HTML (faithful-visuals) — jamais image PDF
+  if(typeof renderFaithfulTable==='function'){
+    try{
+      const h = renderFaithfulTable(tabId);
+      if(h && h.indexOf('faithful-table')!==-1){
+        // Si titre OCR plus riche, on le laisse dans le module (déjà dans le badge)
+        return h;
+      }
+    }catch(e){ console.warn('faithful table', tabId, e); }
   }
 
-  let html = `<div class="table-lead"><span class="table-badge">Tableau ${esc(tabId)}</span><span>${esc(desc||'')}</span></div>`;
-  if(src){
-    html += `<figure class="fig-block table-fig table-manual">`+
-      `<div class="table-fig-scroll">`+
-      `<img class="fig-media fig-img" src="${src}" alt="Tableau ${tabId}${desc?': '+esc(desc):''}" loading="lazy" decoding="async" onerror="this.closest('.table-fig')&&(this.closest('.table-fig').style.display='none')">`+
-      `</div></figure>`;
-  }
-  return html;
+  // Fallback minimal : en-tête seulement (pas de scan)
+  return `<div class="table-lead"><span class="table-badge">Tableau ${esc(tabId)}</span><span>${esc(title||'')}</span></div>`;
 }
 
-/** Used by injectEducationalVisuals — exclude raw full-page dumps only */
+/** Educational inject: only remade educational/* paths, never crops/page scans */
 function isPdfCapturePath(src){
-  if(!src) return true;
-  // Educational / interactive assets OK; only block nothing for edu inject
-  // Full page dumps not used as "educational" fillers
-  return /figures\/page_/i.test(String(src).replace(/\\/g,'/'));
+  return isCapturePath(src);
 }
 const S={view:'home',ch:null,bm:safeJSON('gbm',[]),read:safeJSON('grd',[]),fs:parseInt(localStorage.getItem('gfs')||'18'),lh:parseFloat(localStorage.getItem('glh')||'1.7'),th:localStorage.getItem('gth')||'dark'};
 let flashIdx=0,flashDeck=[],flashFilter='all',flashChapFilter='all';
