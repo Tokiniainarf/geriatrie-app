@@ -17,14 +17,18 @@
 }
 
 /* ── Library view ── */
+/* Listen force un shell sombre immersif (même en thème clair de l’app) */
 #vAudio {
-  padding-bottom: 120px;
+  padding: 12px 12px 120px;
   min-height: 100%;
+  color: var(--ap-text);
   background:
-    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(34, 211, 238, 0.12), transparent 55%),
-    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(30, 215, 96, 0.08), transparent 50%),
-    var(--bg-base, #0b0b12);
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(34, 211, 238, 0.14), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(30, 215, 96, 0.1), transparent 50%),
+    #07070f;
 }
+#vAudio .empty-text { color: #f4f4f8; }
+#vAudio .empty-hint { color: #a1a1b5; }
 
 .al-hero {
   position: relative;

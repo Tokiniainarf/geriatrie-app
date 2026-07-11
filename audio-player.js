@@ -109,11 +109,19 @@
       if (!root) return;
       const albums = this.albums();
       if (!albums.length) {
-        root.innerHTML = '<div class="empty"><div class="empty-text">Bibliothèque audio indisponible</div></div>';
+        root.innerHTML = `
+          <div class="empty" style="padding:48px 20px;text-align:center">
+            <div class="empty-text" style="font-weight:800;font-size:1.15rem;color:#fff">Bibliothèque non chargée</div>
+            <div class="empty-hint" style="color:#a1a1b5;margin-top:10px;line-height:1.5">
+              Fichier <code>audio-library-data.js</code> manquant ou bloqué.<br>
+              Rechargez avec Ctrl+F5.
+            </div>
+          </div>`;
         return;
       }
 
       const cur = this.current();
+      const mediaBase = (this.lib().basePath || 'media/notebook-lm/');
       let html = `
         <header class="al-hero">
           <div class="al-hero-glow" aria-hidden="true"></div>
@@ -121,6 +129,7 @@
             <span class="al-kicker">Révision immersive</span>
             <h1 class="al-hero-title">Listen</h1>
             <p class="al-hero-sub">Leçons NotebookLM par chapitre — pochettes, file d’attente, présentation liée pendant l’écoute.</p>
+            <p class="al-hero-sub" id="alMediaStatus" style="margin-top:10px;font-size:0.8rem;opacity:0.85">Médias : <code>${esc(mediaBase)}</code> · stream local (pas dans le cache PWA)</p>
           </div>
           <div class="al-hero-stats">
             <div><strong>${albums.length}</strong><span>albums</span></div>
@@ -160,6 +169,8 @@
         <section class="al-section" id="alAlbumDetail" hidden></section>`;
 
       root.innerHTML = html;
+      // probe media availability once (status line under hero)
+      this._probeMedia(mediaBase);
       $$('.al-album-card', root).forEach((btn) => {
         btn.addEventListener('click', () => this.openAlbum(btn.getAttribute('data-album')));
       });
@@ -712,11 +723,36 @@
       this._onTime();
     },
 
+    _probeMedia(base) {
+      const sample = this.albums()[0] && this.albums()[0].tracks && this.albums()[0].tracks[0];
+      if (!sample) return;
+      const url = mediaUrl(sample.file);
+      fetch(url, { method: 'HEAD', cache: 'no-store' })
+        .then((r) => {
+          const el = document.getElementById('alMediaStatus');
+          if (!el) return;
+          if (r.ok) {
+            el.innerHTML = 'Médias connectés · <code>' + esc(base) + '</code> · lecture en streaming';
+            el.style.color = '#7dffa8';
+          } else {
+            el.innerHTML = '⚠ Médias introuvables (' + r.status + '). Le dossier <code>media/notebook-lm</code> doit pointer vers vos fichiers NotebookLM.';
+            el.style.color = '#fbbf24';
+          }
+        })
+        .catch(() => {
+          const el = document.getElementById('alMediaStatus');
+          if (!el) return;
+          el.innerHTML = '⚠ Impossible d’accéder aux médias. Vérifiez que le serveur tourne dans le dossier de l’app et que <code>media/notebook-lm</code> existe (lien vers vos fichiers).';
+          el.style.color = '#fbbf24';
+        });
+    },
+
     /* Public API for app.js */
     open() {
       this.init();
       if (typeof sw === 'function') sw('audio');
-      this.renderLibrary();
+      // render after view switch so #audioLibraryRoot is visible
+      requestAnimationFrame(() => this.renderLibrary());
     }
   };
 
