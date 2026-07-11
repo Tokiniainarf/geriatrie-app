@@ -2,7 +2,7 @@
 // Color scheme: #0891B2 (cyan), #059669 (teal), #164E63 (dark)
 // All SVGs are viewBox-based, responsive, theme-aware (currentColor for text, explicit colors for fills)
 
-const INTERACTIVE_FIGURES = {
+var INTERACTIVE_FIGURES = {
 
   // ─── Figure 1.1 : Modèle de décompensation gériatrique de Bouchon ───
   "1.1": {

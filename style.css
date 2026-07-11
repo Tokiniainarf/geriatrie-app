@@ -6249,3 +6249,118 @@ body {
   #vFeed .bf-card-content,
   #vFeed .bf-card-shell { height: calc(100dvh - 195px) !important; min-height: 318px; padding: 15px !important; }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   Editorial v216 — lecture, figures, Pulse et outils cliniques
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Lecture longue : Literata pour le texte, Figtree pour les repères. */
+.study-reader .para-card.study-block p,
+.study-reader .para-card p,
+.study-reader .reader-list-card li,
+.study-reader .def-block dd {
+  max-width: 66ch !important;
+  font-family: var(--reader) !important;
+  font-size: clamp(1.03rem, .28vw + .99rem, 1.12rem) !important;
+  line-height: 1.82 !important;
+  letter-spacing: -.009em;
+  text-wrap: pretty;
+}
+.study-reader .section-title,
+.study-reader .sub-head,
+.study-reader .callout-title,
+.study-reader figcaption { font-family: var(--sans) !important; }
+.study-reader .section-head { margin-top: 3rem !important; padding-bottom: .72rem !important; }
+.study-reader .section-title { font-size: clamp(1.28rem, 1.15vw + 1rem, 1.7rem) !important; letter-spacing: -.032em; line-height: 1.2; }
+.study-reader .sub-head { margin-top: 2.25rem !important; font-size: 1.12rem !important; letter-spacing: -.018em; }
+.study-reader .reader-list-card { padding: .85rem 1rem .85rem 1.15rem !important; }
+.study-reader .reader-list-card li + li { margin-top: .72rem; }
+.study-reader.reader-size--1 .para-card p { font-size: .96rem !important; }
+.study-reader.reader-size-1 .para-card p { font-size: 1.2rem !important; }
+.study-reader.reader-size-2 .para-card p { font-size: 1.3rem !important; }
+
+/* Figures cliniques : vraie source, mosaïque nette et zoom sans page de livre. */
+.manual-clinical-figure,
+.fig-remade {
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--glass-border)) !important;
+  border-radius: 22px !important;
+  background: color-mix(in srgb, var(--bg-card) 92%, transparent) !important;
+}
+.manual-figure-head { padding: 18px 20px 5px; text-align: left; }
+.manual-figure-head span { color: var(--accent); font: 800 .67rem/1 var(--sans); letter-spacing: .075em; text-transform: uppercase; }
+.manual-figure-head h4 { margin: 7px 0 0; color: var(--text); font: 750 1.08rem/1.35 var(--sans); letter-spacing: -.02em; }
+.manual-media-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px; padding: 14px; }
+.manual-media-count-1 { grid-template-columns: minmax(0,1fr); }
+.manual-media-item { position: relative; min-height: 180px; padding: 0; overflow: hidden; border: 0; border-radius: 14px; background: #081219; cursor: zoom-in; }
+.manual-media-item img { display: block; width: 100%; height: 100%; max-height: 470px; object-fit: contain; transition: transform .25s ease; }
+.manual-media-item:hover img { transform: scale(1.018); }
+.manual-media-item span { position: absolute; right: 8px; bottom: 8px; padding: 4px 7px; border-radius: 999px; background: rgba(2,8,12,.72); color: #fff; font: 700 .64rem/1 var(--sans); }
+.manual-clinical-figure figcaption { padding: 0 20px 17px; margin: 0 !important; text-align: left; font-style: normal !important; }
+.figure-viewer { position: fixed; inset: 0; z-index: 10050; display: none; place-items: center; padding: 5vw; background: rgba(2,8,12,.92); backdrop-filter: blur(12px); }
+.figure-viewer.open { display: grid; }
+.figure-viewer-stage { max-width: min(1200px, 94vw); max-height: 88vh; display: grid; gap: 10px; justify-items: center; }
+.figure-viewer-stage img { max-width: 100%; max-height: 80vh; object-fit: contain; border-radius: 12px; background: #fff; }
+.figure-viewer-stage p { margin: 0; color: rgba(255,255,255,.82); font: 650 .84rem/1.4 var(--sans); text-align: center; }
+.figure-viewer-close { position: absolute; top: max(14px, env(safe-area-inset-top)); right: 18px; width: 44px; height: 44px; border: 1px solid rgba(255,255,255,.18); border-radius: 999px; background: rgba(255,255,255,.08); color: #fff; font-size: 1.7rem; cursor: pointer; }
+
+/* Pulse : immersion, progression visible, actions compréhensibles. */
+#vFeed { --pulse: #8ce3df; --pulse2: #67c7f0; }
+#vFeed .bf-header-title strong { font-size: 1.08rem; font-weight: 800; letter-spacing: -.035em; }
+#vFeed .bf-header-title strong::after { content: ' clinical'; color: var(--pulse); font-size: .65rem; font-weight: 750; letter-spacing: .01em; }
+#vFeed .bf-stats-bar #bfPoints { display: inline-flex !important; }
+#vFeed .bf-session-tabs { padding-block: 10px 12px; }
+#vFeed .bf-session-tab { min-height: 35px; padding-inline: 14px; border-color: rgba(166,232,233,.16); }
+#vFeed .bf-session-tab.active { background: linear-gradient(135deg, var(--pulse), #c4f1e7); }
+#vFeed .bf-progress-fill { background: linear-gradient(90deg, var(--pulse), var(--pulse2)); }
+#vFeed .bf-slide { background: radial-gradient(ellipse 78% 62% at 50% 18%, rgba(77,189,197,.22), transparent 70%); }
+#vFeed .bf-card-content,
+#vFeed .bf-card-shell {
+  width: min(94vw, 570px) !important;
+  max-width: 570px !important;
+  border-radius: 26px !important;
+  background: linear-gradient(160deg, rgba(23,61,73,.98), rgba(7,25,37,.99)) !important;
+  box-shadow: 0 28px 70px rgba(0,0,0,.33), inset 0 1px rgba(255,255,255,.07) !important;
+}
+#vFeed .bf-question-text,
+#vFeed .bf-quiz-q { max-width: 31ch; font-size: clamp(1.18rem, 1.65vw + .9rem, 1.52rem) !important; line-height: 1.38 !important; text-wrap: balance; }
+#vFeed .bf-choc-vignette,
+#vFeed .bf-answer-body,
+#vFeed .bf-quiz-opt-text { max-width: 58ch; font-size: .97rem !important; line-height: 1.55 !important; }
+#vFeed .bf-action-btn { min-width: 96px; border-radius: 16px; font-weight: 750; }
+#vFeed .bf-action-know { background: linear-gradient(135deg, #7ee4bd, #a7edd5); color: #04251b; border-color: transparent; }
+#vFeed .bf-action-fail { background: rgba(255,255,255,.055); color: rgba(255,255,255,.82); }
+#vFeed .bf-action-btn svg { width: 21px; height: 21px; }
+
+/* Outils cliniques : cartes sans emoji, langage visuel de produit médical. */
+.calc-path-code { width: 38px; height: 30px; display: grid; place-items: center; border-radius: 8px; background: var(--accent-soft); color: var(--accent); font: 850 .68rem/1 var(--sans); letter-spacing: .045em; }
+#vScores .calc-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)) !important; gap: 13px !important; }
+#vScores .calc-card.calc-card-premium { min-height: 188px; display: flex; flex-direction: column; padding: 18px !important; border: 1px solid var(--glass-border); border-radius: 19px !important; background: var(--bg-card); cursor: pointer; transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+#vScores .calc-card.calc-card-premium:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--accent) 48%, var(--glass-border)); }
+.calc-card-topline { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.calc-domain-code { flex: 0 0 auto; padding: 6px 8px; border-radius: 7px; background: var(--accent-soft); color: var(--accent); font: 850 .63rem/1 var(--sans); letter-spacing: .055em; }
+.calc-domain-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--text3); font: 680 .67rem/1.2 var(--sans); }
+.calc-star-btn { margin-left: auto; width: 34px; min-height: 34px !important; display: grid; place-items: center; padding: 0; border: 0; background: transparent; color: var(--text3); cursor: pointer; }
+.calc-star-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.6; }
+.calc-star-btn.is-starred { color: #d99b20; }
+.calc-star-btn.is-starred svg { fill: currentColor; }
+.calc-card-body { padding: 22px 0 16px; }
+#vScores .calc-card-nom { margin: 0; font-size: 1.07rem !important; line-height: 1.3; letter-spacing: -.025em; }
+#vScores .calc-card-desc { margin: 8px 0 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; color: var(--text2); font-size: .79rem !important; line-height: 1.5 !important; }
+.calc-card-footer { margin-top: auto; padding-top: 13px; display: flex; justify-content: space-between; border-top: 1px solid var(--glass-border); color: var(--text3); font: 700 .7rem/1 var(--sans); }
+.calc-card-footer span:last-child { color: var(--accent); }
+
+@media (max-width: 740px) {
+  .study-reader .para-card.study-block p,
+  .study-reader .para-card p,
+  .study-reader .reader-list-card li { font-size: 1.03rem !important; line-height: 1.77 !important; }
+  .manual-media-grid { grid-template-columns: 1fr; padding: 10px; }
+  .manual-media-item { min-height: 150px; }
+  #vFeed .bf-stats-bar #bfStreak { display: inline-flex !important; }
+  #vFeed .bf-stats-bar #bfPoints { display: none !important; }
+  #vFeed .bf-card-content,
+  #vFeed .bf-card-shell { border-radius: 22px !important; }
+  #vFeed .bf-actions { gap: 8px; }
+  #vFeed .bf-action-btn { min-width: 0; flex: 1 1 0; }
+  #vScores .calc-grid { grid-template-columns: 1fr !important; }
+}

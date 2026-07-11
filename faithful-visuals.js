@@ -1306,6 +1306,76 @@
     }
   };
 
+  /* Correctifs éditoriaux v216 : ces entrées suivent le numéro et le sujet
+     exacts du manuel. Elles remplacent les anciens schémas génériques dont le
+     titre pouvait être exact mais dont le contenu décrivait une autre figure. */
+  Object.assign(FAITHFUL_FIGURES, {
+    '2.1': function () { return figCard('2.1', 'Application du raisonnement gériatrique à des situations fréquentes', flowSteps([
+      {t:'Identifier le symptôme aigu',d:'chute, confusion, perte d’autonomie ou dénutrition'},
+      {t:'Séparer 1 + 2 + 3',d:'vieillissement, maladies chroniques, facteur précipitant'},
+      {t:'Évaluer le retentissement',d:'somatique, fonctionnel, cognitif et social'},
+      {t:'Agir sur le réversible',d:'traiter la cause et prévenir la cascade'}
+    ]),'Raisonnement'); },
+    '2.4': function () { return figCard('2.4', 'Exemple de cascade gériatrique', flowSteps([
+      {t:'Événement aigu',d:'infection, chute ou médicament'},
+      {t:'Réduction de mobilité',d:'alitement et désadaptation'},
+      {t:'Complications',d:'confusion, dénutrition, escarre, thrombose'},
+      {t:'Perte d’autonomie',d:'retour à domicile compromis'}
+    ]),'Cascade'); },
+    '2.5': function () { return figCard('2.5', 'Cercle vicieux dénutrition - bronchopneumonie', flowSteps([
+      {t:'Dénutrition',d:'immunité et force musculaire diminuées'},
+      {t:'Troubles de déglutition et toux moins efficace'},
+      {t:'Bronchopneumonie',d:'inflammation et hypercatabolisme'},
+      {t:'Anorexie et fonte musculaire',d:'aggravation de la dénutrition'}
+    ]),'Cercle vicieux'); },
+    '2.6': function () { return figCard('2.6', 'Concept de fragilité', chipGrid([
+      {t:'Robuste',d:'réserve suffisante'}, {t:'Préfragile',d:'réserve réduite'},
+      {t:'Fragile',d:'faible stress → décompensation'}, {t:'Dépendant',d:'récupération incomplète'}
+    ]),'Continuum'); },
+    '5.1': function () { return figCard('5.1', 'Différentes causes de surdité', chipGrid([
+      {t:'Transmission',d:'cérumen, tympan, oreille moyenne'},
+      {t:'Perception',d:'presbyacousie, bruit, ototoxicité'},
+      {t:'Rétrocochléaire',d:'nerf auditif et voies centrales'},
+      {t:'Mixte',d:'association de mécanismes'}
+    ]),'Repères'); },
+    '8.1': function () { return figCard('8.1', 'Échelle visuelle analogique', '<div class="faithful-scale"><span>Pas de douleur</span><input type="range" min="0" max="10" value="0" aria-label="Échelle visuelle analogique de 0 à 10"><span>Douleur maximale imaginable</span></div>','Échelle interactive'); },
+    '8.2': function () { return figCard('8.2', 'Échelle verbale simple', chipGrid(['Absente','Faible','Modérée','Intense','Extrêmement intense']),'Échelle'); },
+    '8.4': function () { return figCard('8.4', 'Questionnaire DN4', chipGrid(['Brûlure','Froid douloureux','Décharges électriques','Fourmillements','Picotements','Engourdissement','Démangeaisons','Hypoesthésie au tact','Hypoesthésie à la piqûre','Allodynie au frottement']),'Questionnaire'); },
+    '8.5': function () { return figCard('8.5', 'Algorithme d’évaluation de la douleur chez la personne âgée', flowSteps([
+      {t:'Communication possible ?',d:'oui : auto-évaluation EVA, EVS ou EN'},
+      {t:'Communication impossible ?',d:'hétéro-évaluation Algoplus ou ECPA'},
+      {t:'Caractériser',d:'siège, intensité, mécanisme, retentissement'},
+      {t:'Traiter puis réévaluer',d:'efficacité et effets indésirables'}
+    ]),'Algorithme'); },
+    '11.1': function () { return figCard('11.1', 'Approches du syndrome confusionnel', chipGrid([
+      {t:'Prédisposition',d:'âge, cognition, fragilité'}, {t:'Précipitant',d:'infection, douleur, médicament'},
+      {t:'Présentation',d:'hyperactive, hypoactive ou mixte'}, {t:'Réponse',d:'cause + mesures non médicamenteuses'}
+    ]),'Modèle'); },
+    '11.2': function () { return figCard('11.2', 'Réserve cognitive et sévérité du facteur précipitant', '<div class="faithful-bouchon"><div class="fb-zone fb-z1"><b>Réserve élevée</b><br><small>facteur important nécessaire</small></div><div class="fb-zone fb-z2"><b>Réserve intermédiaire</b><br><small>stress modéré</small></div><div class="fb-zone fb-z3"><b>Réserve faible</b><br><small>stress minime suffisant</small></div><div class="fb-threshold">Seuil de confusion</div></div>','Relation'); },
+    '11.3': function () { return figCard('11.3', 'Choix des examens complémentaires devant un syndrome confusionnel', flowSteps([
+      {t:'Clinique et constantes',d:'douleur, globe, fécalome, hydratation, médicaments'},
+      {t:'Biologie orientée',d:'NFS, ionogramme, glycémie, fonction rénale ± autres'},
+      {t:'ECG, imagerie ou ponction',d:'uniquement selon signes d’appel'},
+      {t:'Réévaluation répétée',d:'évolution fluctuante et réponse au traitement'}
+    ]),'Algorithme'); },
+    '11.4': function () { return figCard('11.4', 'Prise en charge de l’agitation du patient âgé confus', flowSteps([
+      {t:'Sécuriser sans contention réflexe'}, {t:'Traiter douleur et facteur causal'},
+      {t:'Réorientation et présence rassurante'}, {t:'Médicament seulement si danger',d:'dose minimale, durée brève, surveillance'}
+    ]),'Algorithme'); },
+    '13.1': function () { return figCard('13.1', 'Conséquences du syndrome d’immobilisation', chipGrid(['Fonte musculaire','Hypotension orthostatique','Encombrement bronchique','Thrombose veineuse','Constipation et rétention','Confusion','Escarres','Perte d’autonomie']),'Systèmes'); },
+    '13.2': function () { return figCard('13.2', 'Masse, force et puissance musculaires', flowSteps([{t:'Masse musculaire ↓'},{t:'Force ↓ davantage'},{t:'Puissance ↓ plus rapidement'},{t:'Marche, transferts et équilibre altérés'}]),'Relations'); },
+    '13.3': function () { return figCard('13.3', 'Diminution des capacités en endurance au cours de la vie', '<div class="faithful-bouchon"><div class="fb-zone fb-z1"><b>Adulte</b><br><small>réserve élevée</small></div><div class="fb-zone fb-z2"><b>Vieillissement</b><br><small>déclin progressif</small></div><div class="fb-zone fb-z3"><b>Inactivité / maladie</b><br><small>accélération du déclin</small></div><div class="fb-threshold">Seuil de dépendance</div></div>','Courbe conceptuelle'); },
+    '13.4': function () { return figCard('13.4', 'Faible réserve et déclin fonctionnel après alitement', flowSteps([{t:'Réserve fonctionnelle basse'},{t:'Quelques jours d’alitement'},{t:'Passage sous le seuil fonctionnel'},{t:'Récupération lente ou incomplète'}]),'Trajectoire'); },
+    '13.5': function () { return figCard('13.5', 'Démarche diagnostique devant une suspicion de thrombose veineuse profonde', flowSteps([{t:'Estimer la probabilité clinique'},{t:'Probabilité faible',d:'D-dimères ; si négatifs, TVP écartée'},{t:'Probabilité forte ou D-dimères positifs',d:'écho-Doppler veineux'},{t:'Imagerie positive',d:'anticoagulation adaptée'}]),'Algorithme'); },
+    '13.7': function () { return figCard('13.7', 'Pression en fonction du positionnement du patient', chipGrid([{t:'Décubitus dorsal',d:'occiput, sacrum, talons'},{t:'Décubitus latéral',d:'oreille, trochanter, malléoles'},{t:'Assis',d:'ischions et sacrum'},{t:'Procubitus',d:'thorax, genoux, orteils'}]),'Carte des appuis'); },
+    '13.8': function () { return figCard('13.8', 'Physiopathogénie de l’escarre', flowSteps([{t:'Pression + cisaillement'},{t:'Compression microcirculatoire'},{t:'Ischémie et hypoxie tissulaire'},{t:'Nécrose cutanée et profonde'}]),'Mécanisme'); },
+    '14.1': function () { return figCard('14.1', 'Algorithme de dépistage de la sarcopénie', flowSteps([{t:'SARC-F ou suspicion clinique'},{t:'Force musculaire',d:'préhension ou lever de chaise'},{t:'Masse musculaire',d:'DXA ou impédancemétrie'},{t:'Performance physique',d:'vitesse de marche, SPPB ou TUG'}]),'EWGSOP'); },
+    '15.1': function () { return figCard('15.1', 'Distribution périphérique de l’innervation vésicale', chipGrid([{t:'Parasympathique S2-S4',d:'contraction du détrusor'},{t:'Sympathique T10-L2',d:'stockage et col vésical'},{t:'Somatique pudendal',d:'sphincter externe volontaire'}]),'Neuroanatomie'); },
+    '15.2': function () { return figCard('15.2', 'Comorbidités et médicaments contribuant à l’incontinence', chipGrid(['Diabète','Insuffisance cardiaque','Trouble cognitif','Mobilité réduite','Diurétiques','Sédatifs','Anticholinergiques','Alpha-bloquants']),'Facteurs'); },
+    '15.3': function () { return figCard('15.3', 'Évaluation et traitement de l’incontinence et de la rétention aiguë', flowSteps([{t:'Rechercher une cause transitoire',d:'DIAPPERS, fécalome, infection, médicament'},{t:'Mesurer le résidu post-mictionnel'},{t:'Rétention aiguë',d:'drainage puis cause'},{t:'Incontinence persistante',d:'type, calendrier et traitement ciblé'}]),'Algorithme'); },
+    '16.2': function () { return figCard('16.2', 'Modalités d’arrêt des benzodiazépines après 65 ans', flowSteps([{t:'Informer et décider avec le patient'},{t:'Réduire progressivement',d:'paliers individualisés'},{t:'Surveiller le sevrage et le sommeil'},{t:'Maintenir les mesures non médicamenteuses'}]),'Algorithme'); }
+  });
+
   // simpleTable helper used inside figure cards
   function simpleTable(headers, rows) {
     return '<table class="faithful-grid">' + thead(headers) + tbody(rows.map(function (r) {

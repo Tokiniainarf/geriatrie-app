@@ -3005,38 +3005,35 @@ const Medicalcul = {
 
   renderCalcCardHtml(c, isStarred) {
     const helperEsc = (s) => typeof esc === 'function' ? esc(s) : s;
-    const domainIcons = {
-      'Évaluation Gériatrique Standardisée (EGS)': '📋',
-      'Cognition & Humeur': '🧠',
-      'Autonomie': '🚶',
-      'Nutrition & Peau': '🍏',
-      'Équilibre & Marche': '⚖️',
-      'Cardiovasculaire': '🫀',
-      'Pneumologie': '🫁',
-      'Urgences & Soins Intensifs': '🚨',
-      'Évaluation de la Douleur': '🩹'
+    const domainCodes = {
+      'Évaluation Gériatrique Standardisée (EGS)': 'EGS',
+      'Cognition & Humeur': 'COG',
+      'Autonomie': 'ADL',
+      'Nutrition & Peau': 'NUT',
+      'Équilibre & Marche': 'MOB',
+      'Cardiovasculaire': 'CV',
+      'Pneumologie': 'PNE',
+      'Urgences & Soins Intensifs': 'URG',
+      'Évaluation de la Douleur': 'DOL'
     };
-    const icon = domainIcons[c.domaine] || '🧮';
+    const code = domainCodes[c.domaine] || 'CALC';
+    const shortDomain = String(c.domaine || 'Outil clinique').replace('Évaluation Gériatrique Standardisée (EGS)', 'Évaluation gériatrique');
     
     return `
-      <div class="calc-card" onclick="Medicalcul.showDetail('${c.id}')" role="button" tabindex="0" style="display:flex; flex-direction:column; justify-content:space-between; position:relative; background:var(--bg-card); border:1px solid var(--glass-border); border-radius:12px; padding:16px; transition:all 0.2s ease; cursor:pointer;">
-        <div>
-          <div class="calc-card-hdr" style="display:flex; justify-content:space-between; align-items:flex-start; gap:8px; margin-bottom:8px;">
-            <div style="display:flex; align-items:center; gap:8px;">
-              <span style="font-size:1.25rem; background:var(--accent-soft); width:32px; height:32px; display:flex; align-items:center; justify-content:center; border-radius:8px;">${icon}</span>
-              <div class="calc-card-nom" style="font-size:0.95rem; font-weight:700; color:var(--text); line-height:1.2;">${helperEsc(c.nom)}</div>
-            </div>
-            <button class="calc-star-btn" onclick="Medicalcul.toggleFavorite('${c.id}', event)" style="font-size:1.15rem; background:none; border:none; padding:4px; color:${isStarred ? '#eab308' : 'var(--text3)'}; cursor:pointer; line-height:1; transition:transform 0.15s ease;" title="${isStarred ? 'Retirer des favoris' : 'Épingler'}">
-              ${isStarred ? '★' : '☆'}
-            </button>
-          </div>
-          <div class="calc-card-desc" style="font-size:0.8rem; color:var(--text2); line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; text-overflow:ellipsis;">${helperEsc(c.description)}</div>
+      <article class="calc-card calc-card-premium" onclick="Medicalcul.showDetail('${c.id}')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();Medicalcul.showDetail('${c.id}')}" aria-label="Ouvrir ${helperEsc(c.nom)}">
+        <div class="calc-card-topline">
+          <span class="calc-domain-code">${code}</span>
+          <span class="calc-domain-name">${helperEsc(shortDomain)}</span>
+          <button class="calc-star-btn ${isStarred ? 'is-starred' : ''}" onclick="Medicalcul.toggleFavorite('${c.id}', event)" title="${isStarred ? 'Retirer des favoris' : 'Épingler'}" aria-label="${isStarred ? 'Retirer des favoris' : 'Épingler'}">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.75 5.57 6.15.9-4.45 4.33 1.05 6.12L12 17.03l-5.5 2.89 1.05-6.12L3.1 9.47l6.15-.9L12 3Z"/></svg>
+          </button>
         </div>
-        <div style="margin-top:10px; display:flex; justify-content:space-between; align-items:center;">
-          <span class="calc-badge" style="background:var(--accent-soft); color:var(--accent); font-size:0.68rem; font-weight:700; padding:1px 6px; border-radius:4px; border:1px solid var(--glass-border);">${helperEsc(c.domaine.split(' ')[0])}</span>
-          <span style="font-size:0.75rem; color:var(--accent); font-weight:600; display:flex; align-items:center; gap:2px;">Ouvrir ➔</span>
+        <div class="calc-card-body">
+          <h3 class="calc-card-nom">${helperEsc(c.nom)}</h3>
+          <p class="calc-card-desc">${helperEsc(c.description)}</p>
         </div>
-      </div>
+        <footer class="calc-card-footer"><span>Calcul guidé</span><span>Ouvrir <b aria-hidden="true">→</b></span></footer>
+      </article>
     `;
   },
 

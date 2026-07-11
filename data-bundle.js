@@ -220,14 +220,90 @@ const EDU_VISUALS = {
   ]
 };
 
-
+/* Exact inventory from Gériatrie 5e éd. Figures are either reconstructed
+   diagrams (HTML/SVG) or clinical media extracted from the figure itself.
+   Educational AI illustrations remain separate and are never presented as
+   manual figures. */
+var FIGURE_META = {
+  "1.1": {kind:"diagram", title:"Le raisonnement gériatrique : modèle de décompensation 1 + 2 + 3 de Bouchon"},
+  "1.2": {kind:"clinical", title:"Doppler mitral en échocardiographie transthoracique", sources:["images/p039_0.jpg"]},
+  "2.1": {kind:"diagram", title:"Application du raisonnement gériatrique à des situations fréquentes"},
+  "2.2": {kind:"clinical", title:"Personne âgée et polypathologie", sources:["images/p049_0.jpg","images/p049_1.jpg"]},
+  "2.3": {kind:"clinical", title:"Pathologies chroniques découvertes sur une radiographie pulmonaire", sources:["images/p049_2.jpg","images/p049_3.jpg"]},
+  "2.4": {kind:"diagram", title:"Exemple de cascade gériatrique"},
+  "2.5": {kind:"diagram", title:"Cercle vicieux dénutrition - bronchopneumonie"},
+  "2.6": {kind:"diagram", title:"Concept de fragilité"},
+  "5.1": {kind:"diagram", title:"Différentes causes de surdité"},
+  "6.1": {kind:"clinical", title:"Fracture pertrochantérienne gauche", sources:["images/p104_0.jpg"]},
+  "6.2": {kind:"clinical", title:"Fracture de l’extrémité inférieure du fémur", sources:["images/p104_1.jpg"]},
+  "6.3": {kind:"clinical", title:"Fracture de l’extrémité supérieure de l’humérus", sources:["images/p104_2.jpg"]},
+  "6.4": {kind:"clinical", title:"Fractures vertébrales L3 et L2 avant et après cimentoplastie", sources:["images/p105_0.png"]},
+  "6.5": {kind:"diagram", title:"Démarche diagnostique et thérapeutique devant une suspicion d’ostéoporose"},
+  "6.6": {kind:"diagram", title:"Indications des traitements anti-ostéoporotiques"},
+  "6.7": {kind:"diagram", title:"Cycle thérapeutique de l’ostéoporose primitive"},
+  "7.1": {kind:"clinical", title:"Coxarthrose", sources:["images/p126_0.jpg"]},
+  "7.2": {kind:"clinical", title:"Coxarthrose polaire supérieure", sources:["images/p126_0.jpg"]},
+  "7.3": {kind:"clinical", title:"Prothèse totale de hanche à droite et coxarthrose à gauche", sources:["images/p129_0.png","images/p129_1.jpg"]},
+  "7.4": {kind:"clinical", title:"Arthrose fémoro-patellaire avec amincissement de l’interligne externe", sources:["images/p132_0.jpg"]},
+  "7.5": {kind:"clinical", title:"Dysplasie trochléo-patellaire", sources:["images/p132_1.jpg"]},
+  "7.6": {kind:"clinical", title:"Gonarthrose fémoro-tibiale interne : évolution et varus", sources:["images/p132_2.png"]},
+  "7.7": {kind:"clinical", title:"Gonarthrose fémoro-tibiale interne", sources:["images/p133_0.jpg"]},
+  "7.8": {kind:"clinical", title:"Arthrose digitale : atteinte des interphalangiennes", sources:["images/p135_0.jpg"]},
+  "7.9": {kind:"clinical", title:"Rhizarthrose : pouce adductus", sources:["images/p136_0.jpg"]},
+  "7.10": {kind:"clinical", title:"Liseré calcique d’une chondrocalcinose du genou", sources:["images/p139_0.jpg"]},
+  "7.11": {kind:"clinical", title:"Calcifications du carpe dans une chondrocalcinose", sources:["images/p139_1.jpg"]},
+  "7.12": {kind:"clinical", title:"Calcification arciforme du ligament transverse de l’atlas", sources:["images/p139_2.jpg"]},
+  "8.1": {kind:"tool", title:"Échelle visuelle analogique"},
+  "8.2": {kind:"tool", title:"Échelle verbale simple"},
+  "8.3": {kind:"clinical", title:"Échelle Algoplus", sources:["images/p148_0.jpg"]},
+  "8.4": {kind:"tool", title:"Questionnaire DN4"},
+  "8.5": {kind:"diagram", title:"Algorithme d’évaluation de la douleur chez la personne âgée"},
+  "9.1": {kind:"clinical", title:"Atrophie hippocampique et leucoencéphalopathie vasculaire en IRM", sources:["images/p162_0.jpg"]},
+  "9.2": {kind:"clinical", title:"Encéphalopathie vasculaire diffuse en IRM FLAIR", sources:["images/p163_0.png"]},
+  "9.3": {kind:"clinical", title:"Microbleeds en IRM T2*", sources:["images/p163_1.jpg"]},
+  "9.4": {kind:"clinical", title:"Atrophie frontotemporale en IRM FLAIR", sources:["images/p166_0.jpg"]},
+  "9.5": {kind:"clinical", title:"Hydrocéphalie chronique : dilatation ventriculaire et effacement des sillons", sources:["images/p167_0.jpg"]},
+  "9.6": {kind:"clinical", title:"Maladie de Creutzfeldt-Jakob : hypersignal cortical et caudé", sources:["images/p167_1.jpg"]},
+  "9.7": {kind:"clinical", title:"IRM et scintigraphie dans une maladie d’Alzheimer", sources:["images/p169_0.jpg","images/p169_1.jpg"]},
+  "11.1": {kind:"diagram", title:"Approches du syndrome confusionnel"},
+  "11.2": {kind:"diagram", title:"Réserve cognitive et sévérité du facteur précipitant"},
+  "11.3": {kind:"diagram", title:"Choix des examens complémentaires devant un syndrome confusionnel"},
+  "11.4": {kind:"diagram", title:"Prise en charge de l’agitation du patient âgé confus"},
+  "12.1": {kind:"clinical", title:"Complications traumatiques : hématomes sous-duraux", sources:["images/p215_0.jpg","images/p215_1.jpg"]},
+  "12.2": {kind:"clinical", title:"Fractures multiples du bassin", sources:["images/crops/crop_p215_1.jpg"]},
+  "12.3": {kind:"clinical", title:"Bloc bifasciculaire", sources:["images/p216_0.jpg"]},
+  "12.4": {kind:"clinical", title:"Bloc auriculoventriculaire complet", sources:["images/p217_0.jpg"]},
+  "13.1": {kind:"diagram", title:"Conséquences du syndrome d’immobilisation"},
+  "13.2": {kind:"diagram", title:"Liens entre masse, force et puissance musculaires et alitement"},
+  "13.3": {kind:"diagram", title:"Diminution des capacités en endurance au cours de la vie"},
+  "13.4": {kind:"diagram", title:"Déconditionnement et seuil fonctionnel après alitement"},
+  "13.5": {kind:"diagram", title:"Démarche diagnostique devant une suspicion de thrombose veineuse profonde"},
+  "13.6": {kind:"clinical", title:"Syndrome d’Ogilvie", sources:["images/p235_0.jpg"]},
+  "13.7": {kind:"diagram", title:"Pression en fonction du positionnement du patient"},
+  "13.8": {kind:"diagram", title:"Physiopathogénie de l’escarre"},
+  "13.9": {kind:"clinical", title:"Escarre de stade 1", sources:["images/p240_0.jpg"]},
+  "13.10": {kind:"clinical", title:"Escarres de stade 2", sources:["images/p240_1.jpg","images/p240_2.jpg","images/p240_3.jpg","images/p240_4.jpg","images/p240_5.jpg","images/p240_6.jpg","images/p240_7.jpg"]},
+  "13.11": {kind:"clinical", title:"Escarres de stade 3", sources:["images/p241_0.jpg","images/p241_1.jpg","images/p241_2.jpg"]},
+  "13.12": {kind:"clinical", title:"Escarres de stade 4", sources:["images/p241_3.jpg","images/p241_4.jpg","images/p241_5.jpg"]},
+  "14.1": {kind:"diagram", title:"Algorithme de dépistage de la sarcopénie"},
+  "15.1": {kind:"diagram", title:"Distribution périphérique de l’innervation vésicale"},
+  "15.2": {kind:"diagram", title:"Comorbidités et médicaments contribuant à l’incontinence"},
+  "15.3": {kind:"diagram", title:"Évaluation et traitement de l’incontinence et de la rétention aiguë"},
+  "16.1": {kind:"clinical", title:"Complications du traitement par AVK", sources:["images/p294_0.jpg","images/p294_1.jpg"]},
+  "16.2": {kind:"diagram", title:"Modalités d’arrêt des benzodiazépines après 65 ans"},
+  "18.1": {kind:"clinical", title:"Examen clinique de la patiente - mini-dossier progressif", sources:["images/p334_0.jpg"]},
+  "18.2": {kind:"clinical", title:"Imagerie abdominale - mini-dossier progressif", sources:["images/p343_0.jpg"]},
+  "20.1": {kind:"clinical", title:"ECG - question isolée", sources:["images/crops/crop_p368_8.jpg"]},
+  "20.2": {kind:"clinical", title:"Radiographie du col fémoral - question isolée", sources:["images/crops/crop_p371_7.jpg"]}
+};
+if (typeof window !== 'undefined') window.FIGURE_META = FIGURE_META;
 
 /* --- interactive-figures.js --- */
 // interactive-figures.js — Animated interactive SVG figures for GeriatrieApp
 // Color scheme: #0891B2 (cyan), #059669 (teal), #164E63 (dark)
 // All SVGs are viewBox-based, responsive, theme-aware (currentColor for text, explicit colors for fills)
 
-const INTERACTIVE_FIGURES = {
+var INTERACTIVE_FIGURES = {
 
   // ─── Figure 1.1 : Modèle de décompensation gériatrique de Bouchon ───
   "1.1": {
@@ -2225,7 +2301,6 @@ if (typeof window !== 'undefined') {
   };
 }
 
-
 /* --- faithful-visuals.js --- */
 /**
  * faithful-visuals.js — Versions fidèles reconstituées (CNEG 5e / Boddaert)
@@ -3534,6 +3609,76 @@ if (typeof window !== 'undefined') {
         'Schéma radio');
     }
   };
+
+  /* Correctifs éditoriaux v216 : ces entrées suivent le numéro et le sujet
+     exacts du manuel. Elles remplacent les anciens schémas génériques dont le
+     titre pouvait être exact mais dont le contenu décrivait une autre figure. */
+  Object.assign(FAITHFUL_FIGURES, {
+    '2.1': function () { return figCard('2.1', 'Application du raisonnement gériatrique à des situations fréquentes', flowSteps([
+      {t:'Identifier le symptôme aigu',d:'chute, confusion, perte d’autonomie ou dénutrition'},
+      {t:'Séparer 1 + 2 + 3',d:'vieillissement, maladies chroniques, facteur précipitant'},
+      {t:'Évaluer le retentissement',d:'somatique, fonctionnel, cognitif et social'},
+      {t:'Agir sur le réversible',d:'traiter la cause et prévenir la cascade'}
+    ]),'Raisonnement'); },
+    '2.4': function () { return figCard('2.4', 'Exemple de cascade gériatrique', flowSteps([
+      {t:'Événement aigu',d:'infection, chute ou médicament'},
+      {t:'Réduction de mobilité',d:'alitement et désadaptation'},
+      {t:'Complications',d:'confusion, dénutrition, escarre, thrombose'},
+      {t:'Perte d’autonomie',d:'retour à domicile compromis'}
+    ]),'Cascade'); },
+    '2.5': function () { return figCard('2.5', 'Cercle vicieux dénutrition - bronchopneumonie', flowSteps([
+      {t:'Dénutrition',d:'immunité et force musculaire diminuées'},
+      {t:'Troubles de déglutition et toux moins efficace'},
+      {t:'Bronchopneumonie',d:'inflammation et hypercatabolisme'},
+      {t:'Anorexie et fonte musculaire',d:'aggravation de la dénutrition'}
+    ]),'Cercle vicieux'); },
+    '2.6': function () { return figCard('2.6', 'Concept de fragilité', chipGrid([
+      {t:'Robuste',d:'réserve suffisante'}, {t:'Préfragile',d:'réserve réduite'},
+      {t:'Fragile',d:'faible stress → décompensation'}, {t:'Dépendant',d:'récupération incomplète'}
+    ]),'Continuum'); },
+    '5.1': function () { return figCard('5.1', 'Différentes causes de surdité', chipGrid([
+      {t:'Transmission',d:'cérumen, tympan, oreille moyenne'},
+      {t:'Perception',d:'presbyacousie, bruit, ototoxicité'},
+      {t:'Rétrocochléaire',d:'nerf auditif et voies centrales'},
+      {t:'Mixte',d:'association de mécanismes'}
+    ]),'Repères'); },
+    '8.1': function () { return figCard('8.1', 'Échelle visuelle analogique', '<div class="faithful-scale"><span>Pas de douleur</span><input type="range" min="0" max="10" value="0" aria-label="Échelle visuelle analogique de 0 à 10"><span>Douleur maximale imaginable</span></div>','Échelle interactive'); },
+    '8.2': function () { return figCard('8.2', 'Échelle verbale simple', chipGrid(['Absente','Faible','Modérée','Intense','Extrêmement intense']),'Échelle'); },
+    '8.4': function () { return figCard('8.4', 'Questionnaire DN4', chipGrid(['Brûlure','Froid douloureux','Décharges électriques','Fourmillements','Picotements','Engourdissement','Démangeaisons','Hypoesthésie au tact','Hypoesthésie à la piqûre','Allodynie au frottement']),'Questionnaire'); },
+    '8.5': function () { return figCard('8.5', 'Algorithme d’évaluation de la douleur chez la personne âgée', flowSteps([
+      {t:'Communication possible ?',d:'oui : auto-évaluation EVA, EVS ou EN'},
+      {t:'Communication impossible ?',d:'hétéro-évaluation Algoplus ou ECPA'},
+      {t:'Caractériser',d:'siège, intensité, mécanisme, retentissement'},
+      {t:'Traiter puis réévaluer',d:'efficacité et effets indésirables'}
+    ]),'Algorithme'); },
+    '11.1': function () { return figCard('11.1', 'Approches du syndrome confusionnel', chipGrid([
+      {t:'Prédisposition',d:'âge, cognition, fragilité'}, {t:'Précipitant',d:'infection, douleur, médicament'},
+      {t:'Présentation',d:'hyperactive, hypoactive ou mixte'}, {t:'Réponse',d:'cause + mesures non médicamenteuses'}
+    ]),'Modèle'); },
+    '11.2': function () { return figCard('11.2', 'Réserve cognitive et sévérité du facteur précipitant', '<div class="faithful-bouchon"><div class="fb-zone fb-z1"><b>Réserve élevée</b><br><small>facteur important nécessaire</small></div><div class="fb-zone fb-z2"><b>Réserve intermédiaire</b><br><small>stress modéré</small></div><div class="fb-zone fb-z3"><b>Réserve faible</b><br><small>stress minime suffisant</small></div><div class="fb-threshold">Seuil de confusion</div></div>','Relation'); },
+    '11.3': function () { return figCard('11.3', 'Choix des examens complémentaires devant un syndrome confusionnel', flowSteps([
+      {t:'Clinique et constantes',d:'douleur, globe, fécalome, hydratation, médicaments'},
+      {t:'Biologie orientée',d:'NFS, ionogramme, glycémie, fonction rénale ± autres'},
+      {t:'ECG, imagerie ou ponction',d:'uniquement selon signes d’appel'},
+      {t:'Réévaluation répétée',d:'évolution fluctuante et réponse au traitement'}
+    ]),'Algorithme'); },
+    '11.4': function () { return figCard('11.4', 'Prise en charge de l’agitation du patient âgé confus', flowSteps([
+      {t:'Sécuriser sans contention réflexe'}, {t:'Traiter douleur et facteur causal'},
+      {t:'Réorientation et présence rassurante'}, {t:'Médicament seulement si danger',d:'dose minimale, durée brève, surveillance'}
+    ]),'Algorithme'); },
+    '13.1': function () { return figCard('13.1', 'Conséquences du syndrome d’immobilisation', chipGrid(['Fonte musculaire','Hypotension orthostatique','Encombrement bronchique','Thrombose veineuse','Constipation et rétention','Confusion','Escarres','Perte d’autonomie']),'Systèmes'); },
+    '13.2': function () { return figCard('13.2', 'Masse, force et puissance musculaires', flowSteps([{t:'Masse musculaire ↓'},{t:'Force ↓ davantage'},{t:'Puissance ↓ plus rapidement'},{t:'Marche, transferts et équilibre altérés'}]),'Relations'); },
+    '13.3': function () { return figCard('13.3', 'Diminution des capacités en endurance au cours de la vie', '<div class="faithful-bouchon"><div class="fb-zone fb-z1"><b>Adulte</b><br><small>réserve élevée</small></div><div class="fb-zone fb-z2"><b>Vieillissement</b><br><small>déclin progressif</small></div><div class="fb-zone fb-z3"><b>Inactivité / maladie</b><br><small>accélération du déclin</small></div><div class="fb-threshold">Seuil de dépendance</div></div>','Courbe conceptuelle'); },
+    '13.4': function () { return figCard('13.4', 'Faible réserve et déclin fonctionnel après alitement', flowSteps([{t:'Réserve fonctionnelle basse'},{t:'Quelques jours d’alitement'},{t:'Passage sous le seuil fonctionnel'},{t:'Récupération lente ou incomplète'}]),'Trajectoire'); },
+    '13.5': function () { return figCard('13.5', 'Démarche diagnostique devant une suspicion de thrombose veineuse profonde', flowSteps([{t:'Estimer la probabilité clinique'},{t:'Probabilité faible',d:'D-dimères ; si négatifs, TVP écartée'},{t:'Probabilité forte ou D-dimères positifs',d:'écho-Doppler veineux'},{t:'Imagerie positive',d:'anticoagulation adaptée'}]),'Algorithme'); },
+    '13.7': function () { return figCard('13.7', 'Pression en fonction du positionnement du patient', chipGrid([{t:'Décubitus dorsal',d:'occiput, sacrum, talons'},{t:'Décubitus latéral',d:'oreille, trochanter, malléoles'},{t:'Assis',d:'ischions et sacrum'},{t:'Procubitus',d:'thorax, genoux, orteils'}]),'Carte des appuis'); },
+    '13.8': function () { return figCard('13.8', 'Physiopathogénie de l’escarre', flowSteps([{t:'Pression + cisaillement'},{t:'Compression microcirculatoire'},{t:'Ischémie et hypoxie tissulaire'},{t:'Nécrose cutanée et profonde'}]),'Mécanisme'); },
+    '14.1': function () { return figCard('14.1', 'Algorithme de dépistage de la sarcopénie', flowSteps([{t:'SARC-F ou suspicion clinique'},{t:'Force musculaire',d:'préhension ou lever de chaise'},{t:'Masse musculaire',d:'DXA ou impédancemétrie'},{t:'Performance physique',d:'vitesse de marche, SPPB ou TUG'}]),'EWGSOP'); },
+    '15.1': function () { return figCard('15.1', 'Distribution périphérique de l’innervation vésicale', chipGrid([{t:'Parasympathique S2-S4',d:'contraction du détrusor'},{t:'Sympathique T10-L2',d:'stockage et col vésical'},{t:'Somatique pudendal',d:'sphincter externe volontaire'}]),'Neuroanatomie'); },
+    '15.2': function () { return figCard('15.2', 'Comorbidités et médicaments contribuant à l’incontinence', chipGrid(['Diabète','Insuffisance cardiaque','Trouble cognitif','Mobilité réduite','Diurétiques','Sédatifs','Anticholinergiques','Alpha-bloquants']),'Facteurs'); },
+    '15.3': function () { return figCard('15.3', 'Évaluation et traitement de l’incontinence et de la rétention aiguë', flowSteps([{t:'Rechercher une cause transitoire',d:'DIAPPERS, fécalome, infection, médicament'},{t:'Mesurer le résidu post-mictionnel'},{t:'Rétention aiguë',d:'drainage puis cause'},{t:'Incontinence persistante',d:'type, calendrier et traitement ciblé'}]),'Algorithme'); },
+    '16.2': function () { return figCard('16.2', 'Modalités d’arrêt des benzodiazépines après 65 ans', flowSteps([{t:'Informer et décider avec le patient'},{t:'Réduire progressivement',d:'paliers individualisés'},{t:'Surveiller le sevrage et le sommeil'},{t:'Maintenir les mesures non médicamenteuses'}]),'Algorithme'); }
+  });
 
   // simpleTable helper used inside figure cards
   function simpleTable(headers, rows) {
@@ -7689,35 +7834,16 @@ const GUIDE_ACCOMPAGNANT = [
 
 
 /* --- figures-index.js --- */
-// Images et tableaux du manuel — Index des figures principales
-const FIGURES_INDEX = [
-  { id: 'fig-ch1-1', chapitre: 'ch1', description: 'Modèle de décompensation gériatrique de Bouchon', type: 'schema', svg: true },
-  { id: 'fig-ch1-2', chapitre: 'ch1', description: 'Mécanismes cellulaires du vieillissement (télomères, ROS, AGE)', type: 'schema', svg: false },
-  { id: 'fig-ch3-1', chapitre: 'ch3', description: 'Échelle ADL de Katz — 6 activités', type: 'tableau', svg: false },
-  { id: 'fig-ch3-2', chapitre: 'ch3', description: 'Échelle IADL de Lawton — 8 activités', type: 'tableau', svg: false },
-  { id: 'fig-ch3-3', chapitre: 'ch3', description: 'Critères de Fried — pentagramme fragilité', type: 'schema', svg: true },
-  { id: 'fig-ch6-1', chapitre: 'ch6', description: 'Densité osseuse — T-score et Z-score', type: 'schema', svg: false },
-  { id: 'fig-ch6-2', chapitre: 'ch6', description: 'FRAX — facteurs de risque fracturaire', type: 'tableau', svg: false },
-  { id: 'fig-ch7-1', chapitre: 'ch7', description: 'Anatomie du genou — arthrose fémoro-tibiale', type: 'schema', svg: true },
-  { id: 'fig-ch7-2', chapitre: 'ch7', description: 'Stades radiologiques de Kellgren-Lawrence', type: 'tableau', svg: false },
-  { id: 'fig-ch8-1', chapitre: 'ch8', description: 'Voies de la douleur — gate control', type: 'schema', svg: true },
-  { id: 'fig-ch9-1', chapitre: 'ch9', description: 'Cascade de décompensation cognitive', type: 'schema', svg: true },
-  { id: 'fig-ch9-2', chapitre: 'ch9', description: 'Stades GDS de Reisberg (1-7)', type: 'tableau', svg: false },
-  { id: 'fig-ch10-1', chapitre: 'ch10', description: 'Spectre dépressif chez la personne âgée', type: 'schema', svg: true },
-  { id: 'fig-ch11-1', chapitre: 'ch11', description: 'Algorithme CAM — diagnostic confusion', type: 'algorithme', svg: true },
-  { id: 'fig-ch12-1', chapitre: 'ch12', description: 'Chaîne causale des chutes', type: 'schema', svg: true },
-  { id: 'fig-ch12-2', chapitre: 'ch12', description: 'Échelle de Tinetti — grille d\'évaluation', type: 'tableau', svg: false },
-  { id: 'fig-ch13-1', chapitre: 'ch13', description: 'Stades d\'escarre (NPUAP 1-4)', type: 'schema', svg: true },
-  { id: 'fig-ch13-2', chapitre: 'ch13', description: 'Échelle de Braden — 6 facteurs', type: 'tableau', svg: false },
-  { id: 'fig-ch13-3', chapitre: 'ch13', description: 'Conséquences de l\'alitement par appareil', type: 'tableau', svg: false },
-  { id: 'fig-ch14-1', chapitre: 'ch14', description: 'Pyramide nutritionnelle gériatrique', type: 'schema', svg: true },
-  { id: 'fig-ch14-2', chapitre: 'ch14', description: 'Mini Nutritional Assessment (MNA)', type: 'questionnaire', svg: false },
-  { id: 'fig-ch15-1', chapitre: 'ch15', description: 'Anatomie vésicale — types d\'incontinence', type: 'schema', svg: true },
-  { id: 'fig-ch16-1', chapitre: 'ch16', description: 'Cascade iatrogénique', type: 'schema', svg: true },
-  { id: 'fig-ch16-2', chapitre: 'ch16', description: 'Critères de Beers 2023 — extraits', type: 'tableau', svg: false },
-  { id: 'fig-ch17-1', chapitre: 'ch17', description: 'Trajectoires de fin de vie (cancer vs dégénératif)', type: 'schema', svg: true }
-];
-
+/* Index exact des figures du manuel. La source de vérité est FIGURE_META. */
+var FIGURES_INDEX = Object.entries(FIGURE_META).map(([number, meta]) => ({
+  id: `fig-ch${number.replace('.', '-')}`,
+  number,
+  chapitre: `ch${number.split('.')[0]}`,
+  description: meta.title,
+  type: meta.kind,
+  interactive: meta.kind === 'diagram' || meta.kind === 'tool',
+  clinical: meta.kind === 'clinical'
+}));
 
 /* --- annales-archive.js --- */
 // ═══════════════════════════════════════════════════════════════

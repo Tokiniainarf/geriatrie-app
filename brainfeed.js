@@ -12,7 +12,7 @@ const BrainFeed = (() => {
   let combo = 0;
   let quizCombo = 0;
   let activeSession = 'mix';
-  const DAILY_GOAL = 50;
+  const DAILY_GOAL = 20;
   const COMBO_BONUS_AT = 5;
   const COMBO_CONFETTI_AT = 10;
   const ACHIEVEMENTS = [
@@ -22,7 +22,7 @@ const BrainFeed = (() => {
     { id: 'cards_50', icon: '📚', title: 'Demi-cent', desc: '50 cartes au total', check: (s) => (s.totalCards || 0) >= 50 },
     { id: 'cards_100', icon: '🏅', title: 'Centurion', desc: '100 cartes au total', check: (s) => (s.totalCards || 0) >= 100 },
     { id: 'combo_10', icon: '⚡', title: 'Combo x10', desc: '10 bonnes réponses d\'affilée', check: (s) => s._sessionCombo10 },
-    { id: 'daily_goal', icon: '🏆', title: 'Objectif jour', desc: '50 cartes aujourd\'hui', check: (s) => (s.dailyDone || 0) >= DAILY_GOAL }
+    { id: 'daily_goal', icon: '🏆', title: 'Objectif jour', desc: '20 cartes utiles aujourd\'hui', check: (s) => (s.dailyDone || 0) >= DAILY_GOAL }
   ];
   let observer = null;
   let audioCtx = null;
@@ -34,13 +34,13 @@ const BrainFeed = (() => {
   const TYPE_RATIO = {
     // Le feed est une séance de révision, pas un mélange de citations,
     // chiffres isolés ou cartes OCR. Priorité aux décisions cliniques.
-    memo_jour: 0.12,
-    cas_choc: 0.26,
-    quiz_flash: 0.42,
+    memo_jour: 0.15,
+    cas_choc: 0.22,
+    quiz_flash: 0.32,
     chiffre_cle: 0,
     citation: 0,
-    piege_exam: 0.20,
-    visual: 0,
+    piege_exam: 0.16,
+    visual: 0.15,
     flash: 0,
     synthesis: 0,
     case: 0,
@@ -240,10 +240,19 @@ const BrainFeed = (() => {
     const stem = String(vignette || '').replace(/\s+/g, ' ').trim();
     const correction = String(diagnosis || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
     // A feed card is a short clinical decision, never a copied EVC template.
-    if (stem.length < 70 || stem.length > 780 || correction.length < 35 || correction.length > 1500) return false;
+    if (stem.length < 70 || stem.length > 360 || correction.length < 35 || correction.length > 600) return false;
     if (!/\b\d{2,3}\s*ans\b/i.test(stem)) return false;
     if (/interrogatoire complété|examen clinique complet|constantes répétées|réunion de staff|dossier mentionne|station EVC|candidat dispose de|référentiels français|questions du jury/i.test(stem + ' ' + correction)) return false;
     return true;
+  }
+
+  function conciseCaseText(value, max = 220) {
+    let text = String(value || '').replace(/<[^>]*>/g, ' ').replace(/[•●➔]/g, ' ').replace(/\s+/g, ' ').trim();
+    const sentences = text.split(/(?<=[.!?])\s+/).filter(Boolean);
+    text = sentences.slice(0, 2).join(' ') || text;
+    if (text.length <= max) return text;
+    const cut = text.lastIndexOf(' ', max - 1);
+    return text.slice(0, cut > 80 ? cut : max).replace(/[,:;\s]+$/, '') + '…';
   }
 
   function buildQuizOptions(correctAnswer, allFlash, fc) {
@@ -423,9 +432,13 @@ const BrainFeed = (() => {
     annales.forEach(a => {
       let diagnosis = '';
       if (a.questions && a.questions.length) {
-        diagnosis = a.questions.map((q, i) => `<strong>Q${i+1}: ${q.q || q.question || ''}</strong><br>➔ ${q.a || q.answer || ''} ${q.points ? `[${q.points} pts]` : ''}`).join('<br><br>');
+        diagnosis = a.questions.slice(0, 1).map((q, i) => {
+          const prompt = conciseCaseText(q.q || q.question || '', 120);
+          const answer = conciseCaseText(q.a || q.answer || '', 230);
+          return `<strong>${i + 1}. ${prompt}</strong><br>${answer}`;
+        }).join('<br><br>');
       } else {
-        diagnosis = a.correction || a.reponse || '';
+        diagnosis = conciseCaseText(a.correction || a.reponse || '', 520);
       }
       if (!diagnosis) return;
 
@@ -447,7 +460,7 @@ const BrainFeed = (() => {
         chapter: a.chapter, rang: a.difficulty || 'A',
         vignette: a.situation || a.cas || a.case || a.title || '',
         diagnosis: diagnosis,
-        juryTips: a.juryTips || '',
+        juryTips: conciseCaseText(a.juryTips || '', 150),
         timer: 30,
         tags: ['Urgence', 'Cas choc']
       });
@@ -631,13 +644,25 @@ const BrainFeed = (() => {
       // Prefer known existing roots; runtime 404 still handled by onerror
       return /images\/(feed|chapters)\//.test(path);
     };
+    const visualCue = (title) => {
+      const t = String(title || '').toLowerCase();
+      if (/chute/.test(t)) return 'Repérez les facteurs intrinsèques, les médicaments et l’environnement : une chute appelle toujours une évaluation multifactorielle.';
+      if (/delirium/.test(t)) return 'Retenez la séquence : reconnaître la fluctuation et l’inattention, rechercher une cause aiguë, corriger le facteur précipitant.';
+      if (/dénutrition|nutrition|sarcop/.test(t)) return 'Reliez perte d’apports, inflammation et fonte musculaire ; dépister tôt permet d’interrompre le cercle vicieux.';
+      if (/fried|fragilit/.test(t)) return 'Cinq critères, trois pour la fragilité : perte de poids, fatigue, faiblesse, lenteur et faible activité.';
+      if (/polyméd|beers|prescription/.test(t)) return 'Pour chaque médicament : indication, dose rénale, interactions, durée et possibilité de déprescription.';
+      if (/douleur|ecpa/.test(t)) return 'Auto-évaluation si possible ; sinon observer le comportement avec une échelle adaptée, puis réévaluer après traitement.';
+      if (/incontinence|diappers/.test(t)) return 'Avant d’étiqueter une incontinence chronique, recherchez une cause aiguë et réversible avec DIAPPERS.';
+      if (/escarre|braden/.test(t)) return 'Le risque augmente quand le score de Braden baisse : décharge, mobilisation, peau et nutrition sont indissociables.';
+      return 'Observez le mécanisme, formulez le message clinique en une phrase, puis faites défiler pour le rappeler sans support.';
+    };
     const visualExplanations = visualMedias
       .filter(v => mediaOk(v.media))
       .map((v, i) => ({
         type: 'visual',
         id: 'vis-' + (i + 1),
         question: v.title,
-        answer: 'Illustration / animation — retenez le schéma',
+        answer: visualCue(v.title),
         media: v.media,
         isVideo: !!v.isVideo
       }));
@@ -745,9 +770,20 @@ const BrainFeed = (() => {
     legacy.forEach(c => {
       if (buckets[c.type] && buckets[c.type].length < counts[c.type]) buckets[c.type].push(c);
     });
+    Object.keys(buckets).forEach(key => { buckets[key] = shuffle(buckets[key]); });
+    // Alternance éditoriale : jamais une longue série du même format.
+    const cadence = ['quiz_flash', 'cas_choc', 'memo_jour', 'visual', 'piege_exam', 'quiz_flash'];
     const merged = [];
-    Object.values(buckets).forEach(b => merged.push(...b));
-    return shuffle(merged);
+    let remaining = Object.values(buckets).reduce((sum, items) => sum + items.length, 0);
+    while (remaining > 0) {
+      let moved = false;
+      cadence.forEach(type => {
+        const card = buckets[type] && buckets[type].shift();
+        if (card) { merged.push(card); remaining--; moved = true; }
+      });
+      if (!moved) break;
+    }
+    return merged;
   }
 
   function isLowQualityCard(card) {
@@ -805,7 +841,8 @@ const BrainFeed = (() => {
       mix: null,
       cas: new Set(['cas_choc']),
       quiz: new Set(['quiz_flash']),
-      pieges: new Set(['piege_exam', 'memo_jour'])
+      pieges: new Set(['piege_exam', 'memo_jour']),
+      visual: new Set(['visual'])
     };
     const allowed = sessionTypes[activeSession] || null;
     const selected = allowed ? mixed.filter(card => allowed.has(card.type)) : mixed;
@@ -815,10 +852,11 @@ const BrainFeed = (() => {
 
   function updateSessionChrome() {
     const labels = {
-      mix: 'Questions validées · décisions gériatriques · EVC',
+      mix: 'Rappels courts · cas EVC · visuels · répétition espacée',
       cas: 'Cas cliniques courts · raisonnement et décision',
       quiz: 'Quiz de rappel actif · réponses expliquées',
-      pieges: 'Pièges EVC · erreurs à éviter le jour J'
+      pieges: 'Pièges EVC · erreurs à éviter le jour J',
+      visual: 'Figures et illustrations · apprendre en regardant'
     };
     document.querySelectorAll('#bfSessionTabs .bf-session-tab').forEach(tab => {
       const on = tab.dataset.session === activeSession;
@@ -832,7 +870,7 @@ const BrainFeed = (() => {
   }
 
   function selectSession(session) {
-    if (!['mix', 'cas', 'quiz', 'pieges'].includes(session)) session = 'mix';
+    if (!['mix', 'cas', 'quiz', 'pieges', 'visual'].includes(session)) session = 'mix';
     activeSession = session;
     try { localStorage.setItem('bf_session', activeSession); } catch (_) {}
     if (observer) observer.disconnect();
@@ -846,7 +884,7 @@ const BrainFeed = (() => {
     if (feed) feed.scrollTop = 0;
     updateSessionChrome();
     renderSlides();
-    showToast({ mix: 'Séance mixte', cas: 'Séance cas clinique', quiz: 'Séance quiz', pieges: 'Séance pièges EVC' }[activeSession]);
+    showToast({ mix: 'Séance Pour toi', cas: 'Séance cas EVC', quiz: 'Séance flash', pieges: 'Séance pièges EVC', visual: 'Séance visuelle' }[activeSession]);
   }
 
   function getChapterName(chId) {

@@ -19,6 +19,12 @@ function getInteractiveFiguresMap(){
   }catch(e){}
   return (typeof window!=='undefined' && window.INTERACTIVE_FIGURES) || {};
 }
+function getManualFigureMeta(){
+  try{
+    if(typeof FIGURE_META!=='undefined' && FIGURE_META) return FIGURE_META;
+  }catch(e){}
+  return (typeof window!=='undefined' && window.FIGURE_META) || {};
+}
 function callRenderFaithfulFigure(id){
   const fn = (typeof renderFaithfulFigure==='function')
     ? renderFaithfulFigure
@@ -61,10 +67,51 @@ function sanitizeFigureSvg(svgHtml){
   });
   // Ensure root svg has explicit contrast styles
   if(/<svg[\s>]/i.test(s) && !/class="[^"]*fig-svg-root/.test(s)){
-    s = s.replace(/<svg\b/i, '<svg class="fig-svg-root"');
+    if (/<svg\b[^>]*\bclass="/i.test(s)) {
+      s = s.replace(/(<svg\b[^>]*\bclass=")([^"]*)/i, '$1fig-svg-root $2');
+    } else {
+      s = s.replace(/<svg\b/i, '<svg class="fig-svg-root"');
+    }
   }
   return s;
 }
+
+function buildClinicalFigureBlock(figId, meta){
+  const sources = Array.isArray(meta && meta.sources) ? meta.sources.filter(Boolean) : [];
+  if(!sources.length) return '';
+  const title = (meta.title || `Figure ${figId}`).trim();
+  const media = sources.map((src, index) => `
+    <button type="button" class="manual-media-item" data-src="${escAttr(src)}" data-title="${escAttr(title)}" onclick="openFigureViewer(this.dataset.src,this.dataset.title)" aria-label="Agrandir ${escAttr(title)}${sources.length>1?' - vue '+(index+1):''}">
+      <img src="${escAttr(src)}" alt="${escAttr(title)}${sources.length>1?' - vue '+(index+1):''}" loading="lazy" onerror="this.closest('.manual-media-item')?.remove()">
+      ${sources.length>1?`<span>Vue ${index+1}</span>`:''}
+    </button>`).join('');
+  return `<figure class="fig-block manual-clinical-figure" data-fig="${escAttr(figId)}">
+    <header class="manual-figure-head"><span>Figure ${esc(figId)} · document clinique</span><h4>${esc(title)}</h4></header>
+    <div class="manual-media-grid manual-media-count-${Math.min(sources.length,4)}">${media}</div>
+    <figcaption>Document clinique du manuel. Touchez une vue pour l’agrandir.</figcaption>
+  </figure>`;
+}
+
+window.openFigureViewer = function(src, title){
+  if(!src) return;
+  let viewer=document.getElementById('figureViewer');
+  if(!viewer){
+    viewer=document.createElement('div');
+    viewer.id='figureViewer';
+    viewer.className='figure-viewer';
+    viewer.setAttribute('role','dialog');
+    viewer.setAttribute('aria-modal','true');
+    viewer.innerHTML='<button type="button" class="figure-viewer-close" aria-label="Fermer">×</button><div class="figure-viewer-stage"><img alt=""><p></p></div>';
+    viewer.addEventListener('click',e=>{if(e.target===viewer||e.target.closest('.figure-viewer-close'))viewer.classList.remove('open')});
+    document.body.appendChild(viewer);
+  }
+  const img=viewer.querySelector('img');
+  const label=viewer.querySelector('p');
+  if(img){img.src=src;img.alt=title||'Figure clinique';}
+  if(label)label.textContent=title||'';
+  viewer.classList.add('open');
+  viewer.querySelector('.figure-viewer-close')?.focus();
+};
 
 /**
  * Figures REFAITES (SVG exact ou schéma HTML) — jamais crop/page manuel.
@@ -72,10 +119,18 @@ function sanitizeFigureSvg(svgHtml){
  * Pas de fuzzy ch.x (évitait 6.1–6.7 identiques).
  */
 function buildFigureBlock(figId, titleHint){
+  const meta = getManualFigureMeta()[figId] || null;
   const capTitle = (titleHint||'').replace(/^[AB]\s+/i,'').trim();
-  let desc = capTitle;
+  let desc = (meta && meta.title) || capTitle;
   let inner = '';
   const IF = getInteractiveFiguresMap();
+
+  // Radiographs, ECG, scans and clinical photographs retain the real signal.
+  // They must never be replaced by a decorative or invented vector diagram.
+  if(meta && meta.kind==='clinical'){
+    const clinical=buildClinicalFigureBlock(figId,meta);
+    if(clinical)return clinical;
+  }
 
   // 1) SVG EXACT
   if(IF[figId] && IF[figId].svg){
@@ -697,7 +752,6 @@ function updateReaderStatus(cc, isPractice){
   window.addEventListener('scroll', window._readerProgressHandler, { passive: true });
   window._readerProgressHandler();
 }
-
 function renderChapterContent(){
   const cc=document.getElementById('chContent');if(!cc)return;
   if(typeof APP_DATA==='undefined'||!APP_DATA.content){
@@ -2123,7 +2177,7 @@ function renderChapter(raw,chId){
     const enc=l.match(/^Encadré\s+([\d.]+)/i);
     if(enc){flushBullets();flushNumList();flushCallout();calloutTitle='Encadré '+enc[1];inCallout=true;continue}
     if(inCallout){
-      if(SECTION_RE.test(l)||LETTER_RE.test(l)||/^Tableau\s+/i.test(l)){flushCallout()}
+      if(SECTION_RE.test(l)||LETTER_RE.test(l)||/^Tableau\s+/i.test(l)||/^Fig\.?\s*\d+\.\d+/i.test(l)){flushCallout()}
       else if(BULLET_RE.test(l)){calloutBuf.push(l.match(BULLET_RE)[1]);continue}
       else if(l.length<200){calloutBuf.push(l);continue}
       else flushCallout();
@@ -2344,8 +2398,9 @@ function renderChapter(raw,chId){
   // Drop empty list cards and empty p tags
   html = html.replace(/<div class="reader-list-card"><ul class="reader-list"><\/ul><\/div>/g, '');
   html = html.replace(/<p>\s*<\/p>/g, '');
-  // Never render leaked CSS/JS fragments as prose
-  html = html.replace(/<div class="para-card[^"]*"[^>]*>[\s\S]*?(?:\.bouchon-svg|@keyframes|stroke-dashoffset)[\s\S]*?<\/div>/gi, '');
+  // Les styles SVG font partie des figures interactives. Une ancienne
+  // expression régulière les prenait pour du texte OCR et supprimait le
+  // schéma complet (notamment la figure 1.1) tout en laissant sa légende.
   // R3 — remove empty sections (class may include id= attributes)
   html = html.replace(/<section class="manual-section"[^>]*>([\s\S]*?)<\/section>/g, (match, inner) => {
     const bodyIndex = inner.indexOf('<div class="section-body">');
