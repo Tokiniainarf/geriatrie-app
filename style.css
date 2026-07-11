@@ -3724,12 +3724,74 @@ button, input, a {
   color: var(--bg-deep);
 }
 
-/* Zone de résultat */
+/* Zone de résultat — en bas du formulaire, jamais sticky (ne masque pas le questionnaire) */
 .calc-result-area {
-  margin-top: 24px;
-  position: sticky;
-  bottom: 70px;
-  z-index: 10;
+  margin-top: 20px;
+  position: relative;
+  z-index: 1;
+}
+.calc-result-area.is-hidden {
+  display: none !important;
+}
+.calc-score-footer {
+  margin-top: 22px;
+  padding: 16px;
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  background: var(--bg-card);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
+}
+.calc-progress-status {
+  font-size: 0.88rem;
+  color: var(--text2);
+  line-height: 1.4;
+  font-weight: 500;
+}
+.calc-progress-status strong {
+  color: var(--text);
+}
+.calc-progress-status.is-ready {
+  color: var(--accent);
+}
+.calc-show-score-btn {
+  appearance: none;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--accent), #059669);
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(8, 145, 178, 0.28);
+  transition: transform .15s ease, opacity .15s ease, filter .15s ease;
+}
+.calc-show-score-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+.calc-show-score-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+  background: var(--bg-elevated, #334);
+  color: var(--text3);
+}
+.calc-hide-score-btn {
+  appearance: none;
+  margin-top: 10px;
+  border: 1px solid rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
 }
 .calc-res-box {
   padding: 16px 20px;
@@ -3914,8 +3976,14 @@ button, input, a {
 .calc-input[type="checkbox"]:checked + .ios-toggle::after {
   transform: translateX(22px);
 }
-.calc-input[type="checkbox"] {
-  display: none;
+/* Only hide native inputs when a custom visual control is present */
+.ios-toggle-label > .calc-input[type="checkbox"],
+.ios-toggle-label .calc-input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
 }
 
 /* Modern Radio Cards */
@@ -3929,9 +3997,14 @@ button, input, a {
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s ease;
+  position: relative;
 }
-.calc-input[type="radio"] {
-  display: none;
+.radio-card-label > .calc-input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
 }
 .radio-card-circle {
   width: 20px;
@@ -3953,6 +4026,20 @@ button, input, a {
   transform: scale(0);
   transition: transform 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
 }
+.radio-card-label:has(.calc-input[type="radio"]:checked) {
+  background: rgba(var(--accent-rgb, 14, 165, 233), 0.12);
+  border-color: rgba(var(--accent-rgb, 14, 165, 233), 0.35);
+}
+.radio-card-label:has(.calc-input[type="radio"]:checked) .radio-card-circle {
+  border-color: var(--accent);
+}
+.radio-card-label:has(.calc-input[type="radio"]:checked) .radio-card-circle::after {
+  transform: scale(1);
+}
+.radio-card-label:has(.calc-input[type="radio"]:checked) .radio-card-text {
+  color: var(--accent);
+  font-weight: 600;
+}
 .calc-input[type="radio"]:checked ~ .radio-card-circle {
   border-color: var(--accent);
 }
@@ -3967,6 +4054,173 @@ button, input, a {
 .calc-input[type="radio"]:checked + .radio-card-content {
   background: rgba(var(--accent-rgb, 14, 165, 233), 0.1);
   border-color: rgba(var(--accent-rgb, 14, 165, 233), 0.3);
+}
+
+/* Oui / Non (GDS et scores questions) — toujours cliquables + feedback */
+.calc-q-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+.calc-q-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  transition: border-color 0.15s ease, background 0.15s ease;
+  flex-wrap: wrap;
+}
+.calc-q-row.is-answered {
+  border-color: rgba(var(--accent-rgb, 14, 165, 233), 0.35);
+  background: rgba(var(--accent-rgb, 14, 165, 233), 0.06);
+}
+.calc-q-text {
+  font-size: 0.9rem;
+  color: var(--text);
+  font-weight: 500;
+  flex: 1 1 180px;
+  line-height: 1.35;
+}
+.calc-q-btns {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.radio-btn-label {
+  cursor: pointer;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+.radio-btn-label input.calc-q-input,
+.radio-btn-label input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  pointer-events: none;
+}
+.radio-btn-label span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 52px;
+  padding: 10px 16px;
+  border: 1px solid var(--glass-border-strong);
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text2);
+  transition: all 0.15s ease;
+  background: var(--bg-elevated, var(--bg-card));
+  user-select: none;
+}
+.radio-btn-label:hover span {
+  border-color: var(--accent);
+  color: var(--text);
+}
+.radio-btn-label input:checked + span,
+.radio-btn-label:has(input:checked) span {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  box-shadow: 0 2px 10px var(--accent-glow, rgba(8, 145, 178, 0.35));
+}
+[data-theme="dark"] .radio-btn-label input:checked + span,
+[data-theme="dark"] .radio-btn-label:has(input:checked) span {
+  color: #041016;
+}
+.calc-hint-text {
+  font-size: 0.8rem;
+  color: var(--text3);
+  margin: 4px 0 0;
+  line-height: 1.4;
+}
+.calc-purpose-card {
+  margin: 0 0 18px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(var(--accent-rgb, 14, 165, 233), 0.28);
+  background: linear-gradient(135deg, rgba(var(--accent-rgb, 14, 165, 233), 0.12), rgba(5, 150, 105, 0.08));
+}
+.calc-purpose-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.calc-purpose-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--text);
+}
+.calc-ref-detail {
+  margin: 10px 0 0 !important;
+  font-size: 0.86rem !important;
+  color: var(--text2) !important;
+  line-height: 1.45 !important;
+}
+.calc-ref-source {
+  margin: 6px 0 0 !important;
+  font-size: 0.75rem !important;
+  color: var(--text3) !important;
+  font-style: italic;
+}
+.calc-ch-links {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+}
+.calc-purpose-card .calc-ch-links {
+  border-top-color: var(--glass-border);
+}
+.calc-ch-links-label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.9;
+  margin-bottom: 6px;
+}
+.calc-purpose-card .calc-ch-links-label { color: var(--text3); }
+.calc-res-box .calc-ch-links-label { color: rgba(255,255,255,0.9); }
+.calc-ch-links-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.calc-ch-link {
+  appearance: none;
+  border: 1px solid rgba(255,255,255,0.45);
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .15s ease, transform .15s ease;
+}
+.calc-purpose-card .calc-ch-link {
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--glass-border));
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.calc-ch-link:hover {
+  transform: translateY(-1px);
+  background: rgba(255,255,255,0.28);
+}
+.calc-purpose-card .calc-ch-link:hover {
+  background: color-mix(in srgb, var(--accent) 18%, var(--bg-card));
 }
 
 /* Range Sliders */
@@ -3994,11 +4248,11 @@ button, input, a {
   transform: scale(1.15);
 }
 
-/* Result Box Glow */
+/* Result Box Glow — good/warn alias + texte toujours lisible */
 .calc-res-box {
   border-radius: 16px;
   padding: 24px;
-  color: white;
+  color: #ffffff !important;
   animation: glowIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   position: relative;
@@ -4011,13 +4265,24 @@ button, input, a {
   background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
   pointer-events: none;
 }
+.calc-res-box .calc-res-title,
+.calc-res-box .calc-res-desc,
+.calc-res-box .fs-xs,
+.calc-res-box strong {
+  color: #ffffff !important;
+  position: relative;
+  z-index: 1;
+}
 @keyframes glowIn {
   from { opacity: 0; transform: translateY(15px); }
   to { opacity: 1; transform: translateY(0); }
 }
 .calc-res-box.danger { background: linear-gradient(135deg, #ef4444, #b91c1c); box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4); }
-.calc-res-box.warning { background: linear-gradient(135deg, #f59e0b, #b45309); box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4); }
-.calc-res-box.normal { background: linear-gradient(135deg, #10b981, #047857); box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4); }
+.calc-res-box.warning,
+.calc-res-box.warn { background: linear-gradient(135deg, #f59e0b, #b45309); box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4); }
+.calc-res-box.normal,
+.calc-res-box.good { background: linear-gradient(135deg, #10b981, #047857); box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4); }
+.calc-res-box.info { background: linear-gradient(135deg, #0ea5e9, #0369a1); box-shadow: 0 8px 25px rgba(14, 165, 233, 0.35); }
 
 /* Progress bar inside card */
 .calc-progress-bg {

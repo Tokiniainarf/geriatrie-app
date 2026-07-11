@@ -23,20 +23,20 @@ const CALCULATEURS = [
             <div class="calc-glass-box">
               <div class="calc-group-title">Autonomie Physique (ADL / Katz)</div>
               <p class="fs-sm" style="margin-bottom:8px; color:var(--text2);">Cocher les fonctions conservées de manière autonome :</p>
-              <label class="check-container"><input type="checkbox" id="egs_adl_1" checked><span class="checkmark"></span>Toilette (se lave seul)</label>
-              <label class="check-container"><input type="checkbox" id="egs_adl_2" checked><span class="checkmark"></span>Habillage (s\'habille seul)</label>
-              <label class="check-container"><input type="checkbox" id="egs_adl_3" checked><span class="checkmark"></span>Aller aux toilettes (seul)</label>
-              <label class="check-container"><input type="checkbox" id="egs_adl_4" checked><span class="checkmark"></span>Transferts (se lève et se couche seul)</label>
-              <label class="check-container"><input type="checkbox" id="egs_adl_5" checked><span class="checkmark"></span>Continence (miction et défécation contrôlées)</label>
-              <label class="check-container"><input type="checkbox" id="egs_adl_6" checked><span class="checkmark"></span>Alimentation (mange seul)</label>
+              <label class="check-container"><input type="checkbox" id="egs_adl_1"><span class="checkmark"></span>Toilette (se lave seul)</label>
+              <label class="check-container"><input type="checkbox" id="egs_adl_2"><span class="checkmark"></span>Habillage (s\'habille seul)</label>
+              <label class="check-container"><input type="checkbox" id="egs_adl_3"><span class="checkmark"></span>Aller aux toilettes (seul)</label>
+              <label class="check-container"><input type="checkbox" id="egs_adl_4"><span class="checkmark"></span>Transferts (se lève et se couche seul)</label>
+              <label class="check-container"><input type="checkbox" id="egs_adl_5"><span class="checkmark"></span>Continence (miction et défécation contrôlées)</label>
+              <label class="check-container"><input type="checkbox" id="egs_adl_6"><span class="checkmark"></span>Alimentation (mange seul)</label>
             </div>
             <div class="calc-glass-box" style="margin-top:12px;">
               <div class="calc-group-title">Autonomie Instrumentale (Lawton IADL - 4 variables clés)</div>
               <p class="fs-sm" style="margin-bottom:8px; color:var(--text2);">Cocher les activités gérées de manière autonome :</p>
-              <label class="check-container"><input type="checkbox" id="egs_iadl_1" checked><span class="checkmark"></span>Téléphone (utilise seul)</label>
-              <label class="check-container"><input type="checkbox" id="egs_iadl_2" checked><span class="checkmark"></span>Transports (se déplace seul)</label>
-              <label class="check-container"><input type="checkbox" id="egs_iadl_3" checked><span class="checkmark"></span>Médicaments (prend seul)</label>
-              <label class="check-container"><input type="checkbox" id="egs_iadl_4" checked><span class="checkmark"></span>Budget (gère ses finances seul)</label>
+              <label class="check-container"><input type="checkbox" id="egs_iadl_1"><span class="checkmark"></span>Téléphone (utilise seul)</label>
+              <label class="check-container"><input type="checkbox" id="egs_iadl_2"><span class="checkmark"></span>Transports (se déplace seul)</label>
+              <label class="check-container"><input type="checkbox" id="egs_iadl_3"><span class="checkmark"></span>Médicaments (prend seul)</label>
+              <label class="check-container"><input type="checkbox" id="egs_iadl_4"><span class="checkmark"></span>Budget (gère ses finances seul)</label>
             </div>
             <div class="calc-glass-box" style="margin-top:12px;">
               <div class="calc-group-title">Grille AGGIR (GIR Estimé)</div>
@@ -1384,22 +1384,22 @@ Date de l\'évaluation : ${new Date().toLocaleDateString('fr-FR')}
       { text: 'Âge compris entre 65 et 74 ans (+1 pt)', points: 1 },
       { text: 'Sexe féminin (+1 pt)', points: 1 }
     ],
-    calculer: (total) => {
-      const inputs = document.querySelectorAll('#calc-interactive-form .calc-input');
-      const isFemale = inputs[7] && inputs[7].checked;
-      
+    calculer: (total, checkedFlags) => {
+      // checkedFlags[7] = sexe féminin (ordre des items ci-dessus)
+      const isFemale = Array.isArray(checkedFlags) ? !!checkedFlags[7] : false;
       let cat = 'normal';
-      let desc = 'Pas d\'anticoagulation nécessaire (sauf si FA valvulaire).';
-      
+      let desc = 'Pas d\'anticoagulation nécessaire en FA non valvulaire à bas risque (sauf indication particulière).';
       const threshold = isFemale ? 3 : 2;
       const borderline = isFemale ? 2 : 1;
-      
       if (total >= threshold) {
         cat = 'danger';
-        desc = `Anticoagulation recommandée (AOD ou AVK) car CHA₂DS₂-VASc ≥ ${threshold} chez ${isFemale ? 'une femme' : 'un homme'}.`;
+        desc = `Anticoagulation recommandée (AOD ou AVK) : CHA₂DS₂-VASc ≥ ${threshold} (${isFemale ? 'femme' : 'homme'}).`;
       } else if (total === borderline) {
         cat = 'warning';
-        desc = `Anticoagulation à considérer au cas par cas (discussion bénéfice/risque) car score de ${borderline} chez ${isFemale ? 'une femme' : 'un homme'}.`;
+        desc = `Anticoagulation à discuter au cas par cas : score ${borderline} (${isFemale ? 'femme' : 'homme'}).`;
+      } else if (isFemale && total === 1) {
+        cat = 'normal';
+        desc = 'Risque bas chez la femme (score 1 = sexe seul) — anticoagulation généralement non indiquée.';
       }
       return { total, cat, desc, max: 9 };
     }
@@ -1454,7 +1454,7 @@ Date de l\'évaluation : ${new Date().toLocaleDateString('fr-FR')}
           </div>
           <div class="calc-glass-box">
             <div class="calc-group-title">Classification de Killip</div>
-            <label class="radio-container"><input type="radio" name="grace_k" value="1" checked class="calc-input"><span class="radiomark"></span>Classe I (Pas de râles)</label>
+            <label class="radio-container"><input type="radio" name="grace_k" value="1" class="calc-input"><span class="radiomark"></span>Classe I (Pas de râles)</label>
             <label class="radio-container"><input type="radio" name="grace_k" value="2" class="calc-input"><span class="radiomark"></span>Classe II (Râles < 50% ou B3)</label>
             <label class="radio-container"><input type="radio" name="grace_k" value="3" class="calc-input"><span class="radiomark"></span>Classe III (Râles > 50% ou OAP)</label>
             <label class="radio-container"><input type="radio" name="grace_k" value="4" class="calc-input"><span class="radiomark"></span>Classe IV (Choc cardiogénique)</label>
@@ -1630,7 +1630,7 @@ Date de l\'évaluation : ${new Date().toLocaleDateString('fr-FR')}
         <div class="calc-form">
           <div class="calc-glass-box">
             <div class="calc-group-title">Données Démographiques</div>
-            <label class="radio-container"><input type="radio" name="psi_sexe" value="H" checked class="calc-input"><span class="radiomark"></span>Homme</label>
+            <label class="radio-container"><input type="radio" name="psi_sexe" value="H" class="calc-input"><span class="radiomark"></span>Homme</label>
             <label class="radio-container"><input type="radio" name="psi_sexe" value="F" class="calc-input"><span class="radiomark"></span>Femme</label>
             <label>Âge : <input type="number" id="psi_age" value="75" class="calc-input" style="width:70px; background:var(--bg-elevated); color:var(--text1); border:1px solid var(--glass-border); border-radius:4px; padding:2px 6px;"></label>
             <label class="check-container"><input type="checkbox" id="psi_inst" class="calc-input"><span class="checkmark"></span>Vit en institution (EHPAD)</label>
@@ -2828,6 +2828,159 @@ Date de l\'évaluation : ${new Date().toLocaleDateString('fr-FR')}
 
 
 // ─────────────────────────────────────────────────────────────────────────────
+//  À QUOI SERT CHAQUE SCORE (explication courte affichée dans le détail)
+// ─────────────────────────────────────────────────────────────────────────────
+const SCORE_UTILITE = {
+  egs: 'Bilan global du patient âgé fragile : autonomie, cognition, mobilité, nutrition et sensoriel — base de la prise en charge gériatrique.',
+  mms: 'Dépister et suivre un trouble cognitif global (orientation, mémoire, langage, praxies). Ne pose pas seul le diagnostic de démence.',
+  moca: 'Dépister un trouble cognitif léger (MCI) plus sensible que le MMS, surtout fonctions exécutives et attention.',
+  gds15: 'Dépister une dépression chez la personne âgée en 15 questions oui/non. Outil de screening, pas un diagnostic psychiatrique.',
+  gds30: 'Version longue du dépistage de dépression gériatrique (30 items) quand un bilan thymique plus fin est utile.',
+  cam: 'Aider au diagnostic clinique de syndrome confusionnel (delirium) au lit du patient.',
+  adl: 'Mesurer l’autonomie pour les gestes de base (toilette, habillage, continence, transferts…) — dépendance quotidienne.',
+  iadl: 'Mesurer l’autonomie instrumentale à domicile (téléphone, courses, budget, transport…) — capacité à vivre seul.',
+  aggir: 'Classer la dépendance en GIR pour l’APA et l’orientation médico-sociale (pas un score « médical » pur).',
+  mna_sf: 'Dépister rapidement une dénutrition ou un risque nutritionnel chez le sujet âgé.',
+  mna_complet: 'Affiner le statut nutritionnel après un MNA-SF pathologique (évaluation plus complète).',
+  braden: 'Estimer le risque d’escarres pour adapter prévention (supports, réfection, nutrition, mobilisations).',
+  norton: 'Alternative historique au Braden pour le risque d’escarres (même objectif de prévention).',
+  tinetti: 'Évaluer l’équilibre (et risque de chute) pour orienter kinésithérapie et aides techniques.',
+  bbs: 'Évaluer finement l’équilibre fonctionnel en 14 tâches — suivi rééducatif et risque de chute.',
+  algoplus: 'Repérer une douleur aiguë chez le patient âgé non communicant (observation comportementale).',
+  doloplus: 'Évaluer une douleur chronique chez le sujet âgé non communicant.',
+  ecpa: 'Évaluer la douleur comportementale chez le patient âgé dément (avant/après antalgie).',
+  eva_en: 'Auto-évaluation simple de l’intensité douloureuse (0–10) quand le patient peut répondre.',
+  cha2ds2vasc: 'Estimer le risque d’AVC/thromboembolie en fibrillation atriale pour décider d’une anticoagulation.',
+  hasbled: 'Estimer le risque hémorragique sous anticoagulant et corriger les facteurs modifiables (pas un frein absolu).',
+  grace: 'Stratifier le risque de mortalité après un syndrome coronarien aigu (orientation et intensité de soins).',
+  killip: 'Classer la gravité d’une insuffisance cardiaque aiguë post-infarctus au lit du patient.',
+  nyha: 'Classer la sévérité fonctionnelle d’une insuffisance cardiaque chronique (dyspnée d’effort).',
+  curb65: 'Stratifier la gravité d’une pneumonie communautaire (ambulatoire vs hospitalisation / réa).',
+  psi_port: 'Score pronostique plus complet de gravité des pneumonies (classe de risque et lieu de soins).',
+  wells_ep: 'Estimer la probabilité clinique d’embolie pulmonaire avant d’enchaîner D-dimères / angioscanner.',
+  wells_tvp: 'Estimer la probabilité clinique de thrombose veineuse profonde avant écho-Doppler.',
+  geneva_ep: 'Alternative au Wells pour la probabilité clinique d’embolie pulmonaire.',
+  qsofa: 'Alerte rapide de sepsis sévère au lit (tachypnée, hypotension, troubles de conscience).',
+  sofa: 'Quantifier la dysfonction d’organes (sepsis / soins intensifs) et suivre l’évolution.',
+  news2: 'Détecter précocement une détérioration clinique (paramètres vitaux) et déclencher une escalade.',
+  glasgow: 'Évaluer la conscience / profondeur de coma (neurologie, traumatisme, urgence).',
+  charlson: 'Estimer le fardeau de comorbidités et la survie approximative à 10 ans (pronostic global).',
+  child_pugh: 'Classer la sévérité d’une cirrhose (pronostic, chirurgie, gestes invasifs).',
+  meld: 'Estimer le risque de décès à court terme en maladie hépatique avancée (priorisation greffe).',
+  nihss: 'Mesurer la sévérité clinique d’un AVC ischémique (thrombolyse, thrombectomie, suivi).',
+  tug: 'Dépister un risque de chute / limite de mobilité en chronométrant lever + marche 3 m + assise.',
+  sppb: 'Mesurer la performance physique globale (équilibre, marche, lever de chaise) et la fragilité motrice.',
+  barthel: 'Suivre l’indépendance fonctionnelle en rééducation (plus granulaire que les ADL de Katz).',
+  fab: 'Dépister une dysfonction frontale / exécutive (DFT, Parkinson, syndrome dysexécutif).',
+  npi: 'Inventorier les troubles psycho-comportementaux de la démence et leur retentissement aidant.',
+  cdr: 'Stadier globalement une démence (très légère → sévère) à partir de l’entretien clinique.',
+  phq9: 'Dépister et suivre une dépression (auto-questionnaire DSM) en soins primaires ou gériatrie.',
+  four_at: 'Dépister rapidement un delirium en urgence / gériatrie aiguë (outil court validé).',
+  frax: 'Estimer le risque fracturaire à 10 ans pour décider d’une densitométrie / traitement ostéoporose.',
+  nrs2002: 'Dépister le risque nutritionnel dès l’admission hospitalière (alerte dénutrition).',
+  dn4: 'Repérer une composante neuropathique de la douleur pour adapter le traitement.',
+  psqi: 'Évaluer la qualité du sommeil sur le dernier mois (insomnie, fragmentation, retentissement).',
+  ramsay: 'Suivre la profondeur de sédation (soins palliatifs / sédation contrôlée).',
+  acb: 'Quantifier la charge anticholinergique des traitements (risque cognitif, chute, confusion).',
+  sarcopenie: 'Orienter le diagnostic de sarcopénie (force, masse, performance) selon EWGSOP2.',
+  audit: 'Dépister un usage problématique d’alcool (outil OMS détaillé, 10 questions).',
+  cage: 'Dépistage ultra-rapide d’un problème d’alcool en 4 questions (alerte, pas quantification).',
+  g8: 'Dépister la fragilité oncogériatrique avant un traitement cancer — indique si EGS complète utile.',
+  lequesne: 'Mesurer la sévérité algofonctionnelle d’une coxarthrose ou gonarthrose (indication prothèse, suivi).'
+};
+
+/** Références manuel CNEG + complément d’interprétation (liens cliquables vers chapitres) */
+const SCORE_REFS = {
+  egs: { chapters: ['ch2', 'ch3'], detail: 'L’EGS structure le raisonnement gériatrique multi-domaine. Un domaine pathologique oriente vers l’échelle dédiée (ADL, MMS, MNA, Tinetti…).', source: 'CNEG 5e · raisonnement gériatrique & autonomie' },
+  mms: { chapters: ['ch9'], detail: 'Seuils usuels : ≥24–26 normal selon scolarité ; 18–23 trouble modéré ; <18 sévère. Toujours croiser avec le retentissement (IADL) et éliminer un delirium (CAM/4AT).', source: 'CNEG 5e · troubles neurocognitifs' },
+  moca: { chapters: ['ch9'], detail: 'Souvent plus sensible que le MMS pour le MCI. Seuil classique ≈26/30 (ajuster scolarité). Un MoCA bas justifie bilan étiologique, pas un diagnostic de démence isolé.', source: 'CNEG 5e · troubles neurocognitifs' },
+  gds15: { chapters: ['ch10'], detail: '0–4 : pas de dépression probable ; 5–9 : dépression légère possible ; ≥10 : dépression modérée/sévère à confirmer. Dépistage uniquement — vérifier iatrogénie, douleur, deuil, hypothyroïdie, confusion.', source: 'Yesavage · CNEG 5e · dépression' },
+  gds30: { chapters: ['ch10'], detail: 'Version longue (0–9 normal ; 10–19 légère ; ≥20 sévère selon usages). Même logique que le GDS-15 : orientation clinique, pas diagnostic formalisé.', source: 'Yesavage · CNEG 5e · dépression' },
+  cam: { chapters: ['ch11'], detail: 'CAM positif si (début aigu + fluctuation) ET inattention ET (pensée désorganisée OU altération conscience). Urgence : chercher cause (infection, iatrogénie, rétention, douleur, sevrage).', source: 'CNEG 5e · syndrome confusionnel' },
+  adl: { chapters: ['ch3'], detail: '6 items Katz. Score bas = dépendance pour les gestes de base → besoins en aides humaines / institution. Compléter par IADL pour le domicile.', source: 'CNEG 5e · évaluation de l’autonomie' },
+  iadl: { chapters: ['ch3'], detail: 'Lawton : téléphone, transports, budget, médicaments… Décline souvent avant les ADL. Utile pour maintien à domicile et charge de l’aidant.', source: 'CNEG 5e · évaluation de l’autonomie' },
+  aggir: { chapters: ['ch3', 'ch4'], detail: 'Détermine le GIR (APA, orientation). Ce n’est pas un score « médical » d’acuité : il décrit la dépendance pour l’aide sociale.', source: 'CNEG 5e · autonomie / protection' },
+  mna_sf: { chapters: ['ch14'], detail: '≥12 : statut normal ; 8–11 : risque de dénutrition ; ≤7 : dénutrition. Enchaîner MNA complet ou bilan albuminémie/IMC/perte de poids selon le contexte.', source: 'HAS / CNEG 5e · nutrition' },
+  mna_complet: { chapters: ['ch14'], detail: 'Affinage du statut nutritionnel. Oriente enrichissement, CNO, enquête étiologique (dépression, dentition, dépendances, pathologies).', source: 'CNEG 5e · nutrition' },
+  braden: { chapters: ['ch13'], detail: 'Plus le score est bas, plus le risque d’escarre est élevé (souvent <18 = risque). Adapter supports, réfections, nutrition, mobilisation.', source: 'CNEG 5e · alitement / escarres' },
+  norton: { chapters: ['ch13'], detail: 'Alternative au Braden. Score bas = risque. Même finalité : prévention cutanée active.', source: 'CNEG 5e · alitement / escarres' },
+  tinetti: { chapters: ['ch12'], detail: 'Équilibre (+ marche selon version). Score bas = risque de chute élevé → bilan multifactoriel (médicaments, vision, orthostatisme, environnement).', source: 'CNEG 5e · chutes et marche' },
+  bbs: { chapters: ['ch12'], detail: 'Berg : 14 tâches. <45 souvent associé à un risque de chute accru. Suivi de rééducation utile.', source: 'CNEG 5e · chutes et marche' },
+  algoplus: { chapters: ['ch8'], detail: 'Douleur aiguë non communicant : ≥2 comportements évocateurs → traiter comme douleur et réévaluer. Ne remplace pas l’examen clinique.', source: 'CNEG 5e · douleur' },
+  doloplus: { chapters: ['ch8'], detail: 'Douleur chronique comportementale. Variation du score sous antalgie plus informative qu’une valeur isolée.', source: 'CNEG 5e · douleur' },
+  ecpa: { chapters: ['ch8'], detail: 'Observation avant/après soins. Utile chez le patient dément pour guider l’antalgie.', source: 'CNEG 5e · douleur' },
+  eva_en: { chapters: ['ch8'], detail: '0–10 si le patient comprend l’échelle. ≥4 souvent seuil d’intervention ; croiser avec retentissement et causes.', source: 'CNEG 5e · douleur' },
+  cha2ds2vasc: { chapters: ['ch16'], detail: 'FA non valvulaire : anticoagulation si score ≥2 (H) / ≥3 (F) en général. Toujours balancer avec HAS-BLED et risque de chute (décision partagée).', source: 'ESC / CNEG · iatrogénie & cardio du sujet âgé' },
+  hasbled: { chapters: ['ch16'], detail: '≥3 = risque hémorragique élevé : corriger HTA, alcool, AINS, INR labile. Ne contre-indique pas automatiquement l’anticoagulation.', source: 'ESC / CNEG · prescription du sujet âgé' },
+  grace: { chapters: ['ch16'], detail: 'Risque post-SCA pour intensité de prise en charge. Interpréter avec âge, fragilité et objectifs de soins.', source: 'Cardiologie gériatrique / CNEG' },
+  killip: { chapters: ['ch16'], detail: 'Classe clinique d’OAP/IC post-IDM au lit. Classe élevée = gravité et monitoring rapproché.', source: 'Cardiologie / CNEG' },
+  nyha: { chapters: ['ch16'], detail: 'Dyspnée d’effort en IC chronique. Oriente traitements, réadaptation et objectifs fonctionnels.', source: 'ESC HF / CNEG' },
+  curb65: { chapters: ['ch16'], detail: '0–1 souvent ambulatoire ; 2 hospitalisation ; ≥3 risque élevé / réa selon état. Adapter à la fragilité du sujet âgé.', source: 'Infectiologie / CNEG' },
+  psi_port: { chapters: ['ch16'], detail: 'Classes de risque de pneumonie (lieu de soins). Plus complet que CURB-65 mais plus lourd à calculer.', source: 'Infectiologie / CNEG' },
+  wells_ep: { chapters: ['ch16'], detail: 'Probabilité clinique d’EP avant imagerie. Oriente D-dimères vs angioscanner selon algorithme local.', source: 'Recommandations EP / CNEG' },
+  wells_tvp: { chapters: ['ch16'], detail: 'Probabilité de TVP avant écho-Doppler. Score bas + D-dimères négatifs : TVP peu probable.', source: 'Recommandations TVP / CNEG' },
+  geneva_ep: { chapters: ['ch16'], detail: 'Alternative au Wells pour l’EP. Même logique de pré-test avant imagerie.', source: 'Recommandations EP / CNEG' },
+  qsofa: { chapters: ['ch11', 'ch16'], detail: '≥2 critères : alerte sepsis / gravité. Sensibilité limitée : ne pas rassurer à tort chez le sujet âgé.', source: 'Sepsis-3 / urgence gériatrique' },
+  sofa: { chapters: ['ch16'], detail: 'Dysfonction d’organes (réa). Variation du SOFA plus utile que la valeur brute pour le suivi.', source: 'Sepsis-3' },
+  news2: { chapters: ['ch16'], detail: 'Alerte précoce sur constantes. Score élevé → escalade de surveillance (protocole local).', source: 'NEWS2 / urgence' },
+  glasgow: { chapters: ['ch11', 'ch9'], detail: 'Conscience : 15 normal ; ≤8 intubation souvent discutée. Chez le sujet âgé, croiser avec status basal et causes réversibles.', source: 'Neurologie / CNEG' },
+  charlson: { chapters: ['ch2', 'ch16'], detail: 'Charge de comorbidités et survie approximative. Utile en discussion pronostique, pas comme seul critère de non-traitement.', source: 'CNEG · raisonnement gériatrique' },
+  child_pugh: { chapters: ['ch16'], detail: 'A/B/C : sévérité de cirrhose (chirurgie, gestes, pronostic).', source: 'Hépatologie' },
+  meld: { chapters: ['ch16'], detail: 'Risque de décès à court terme / priorisation greffe. Interpréter avec dialyse et sodium (MELD-Na).', source: 'Hépatologie' },
+  nihss: { chapters: ['ch9'], detail: 'Sévérité d’AVC. Oriente thrombolyse/thrombectomie selon délais et imagerie — décider en filière AVC.', source: 'Neurologie vasculaire' },
+  tug: { chapters: ['ch12'], detail: '<12 s souvent rassurant ; >20 s risque élevé / sarcopénie possible. Intégrer au bilan de chute multifactoriel.', source: 'CNEG 5e · chutes et marche' },
+  sppb: { chapters: ['ch12', 'ch14'], detail: '≤8 évoque fragilité physique ; 0–3 performance très altérée. Utile sarcopénie (EWGSOP2) et suivi rééducation.', source: 'CNEG · chutes / nutrition-sarcopénie' },
+  barthel: { chapters: ['ch3'], detail: 'Indépendance en rééducation (0–100). Complète les ADL Katz pour le suivi fonctionnel.', source: 'CNEG 5e · autonomie' },
+  fab: { chapters: ['ch9'], detail: 'Fonctions exécutives/frontales. Score bas oriente vers DFT, Parkinson, syndrome dysexécutif — croiser avec clinique.', source: 'CNEG 5e · troubles neurocognitifs' },
+  npi: { chapters: ['ch9', 'ch10'], detail: 'SPC de la démence (agitation, idées délirantes, apathie…). Mesure aussi le fardeau aidant — cible de prise en charge non médicamenteuse d’abord.', source: 'CNEG 5e · TNC / humeur' },
+  cdr: { chapters: ['ch9'], detail: 'Stadification globale de démence (0 à 3). Guide objectifs de soins, aidants et traitements symptomatiques.', source: 'CNEG 5e · troubles neurocognitifs' },
+  phq9: { chapters: ['ch10'], detail: 'Auto-questionnaire dépression. ≥10 souvent seuil de dépression majeure possible — confirmer cliniquement (et suicidabilité).', source: 'CNEG 5e · dépression' },
+  four_at: { chapters: ['ch11'], detail: '≥4 : delirium probable ; 1–3 : possible déficit cognitif. Outil court validé en gériatrie aiguë.', source: 'CNEG 5e · syndrome confusionnel' },
+  frax: { chapters: ['ch6'], detail: 'Risque fracturaire à 10 ans. Oriente DXA / traitement anti-ostéoporotique selon seuils nationaux et chute.', source: 'CNEG 5e · ostéoporose et fractures' },
+  nrs2002: { chapters: ['ch14'], detail: 'Dépistage nutritionnel d’admission. Score élevé → plan nutritionnel précoce.', source: 'CNEG 5e · nutrition' },
+  dn4: { chapters: ['ch8'], detail: '≥4/10 : composante neuropathique probable → adapter (antidépresseurs IRSN/tricycliques bas dose, gabapentinoïdes selon terrain).', source: 'CNEG 5e · douleur' },
+  psqi: { chapters: ['ch10', 'ch16'], detail: 'Qualité de sommeil. Score élevé → hygiène de sommeil, iatrogénie (benzodiazépines), dépression, SAOS.', source: 'CNEG · dépression / prescription' },
+  ramsay: { chapters: ['ch17'], detail: 'Profondeur de sédation (palliatif). Viser le niveau de confort décidé collégialement, réévaluer souvent.', source: 'CNEG 5e · soins palliatifs' },
+  acb: { chapters: ['ch16', 'ch9', 'ch11'], detail: 'Charge anticholinergique cumulée : confusion, chute, constipation, rétention. Déprescrire si possible.', source: 'CNEG 5e · prescrire chez le PA' },
+  sarcopenie: { chapters: ['ch14', 'ch12'], detail: 'EWGSOP2 : force → confirmation masse → sévérité performance. Oriente protéines, résistance, bilan étiologique.', source: 'EWGSOP2 / CNEG nutrition & marche' },
+  audit: { chapters: ['ch16'], detail: 'Usage d’alcool problématique. Chez le PA, sevrage et interactions médicamenteuses sont à anticiper.', source: 'OMS AUDIT / CNEG prescription' },
+  cage: { chapters: ['ch16'], detail: '≥2 réponses positives : suspicion forte. Dépistage ultra-rapide, confirmer avec AUDIT/clinique.', source: 'CAGE / CNEG' },
+  g8: { chapters: ['ch2', 'ch3'], detail: '≤14 : fragilité oncogériatrique probable → EGS complète avant traitement cancer lourd.', source: 'Oncogériatrie / CNEG raisonnement' },
+  lequesne: { chapters: ['ch7'], detail: 'Indice algofonctionnel hanche/genou. Scores élevés oriente prise en charge (dont discussion prothèse).', source: 'CNEG 5e · arthrose' }
+};
+
+const CHAPTER_LABELS = {
+  ch1: 'Ch. 1 — Comprendre le vieillissement',
+  ch2: 'Ch. 2 — Raisonnement gériatrique',
+  ch3: 'Ch. 3 — Évaluation de l\'autonomie',
+  ch4: 'Ch. 4 — Éthique et protection',
+  ch5: 'Ch. 5 — Troubles sensoriels',
+  ch6: 'Ch. 6 — Ostéoporose et fractures',
+  ch7: 'Ch. 7 — Arthrose',
+  ch8: 'Ch. 8 — Douleur',
+  ch9: 'Ch. 9 — Troubles neurocognitifs',
+  ch10: 'Ch. 10 — Dépression',
+  ch11: 'Ch. 11 — Syndrome confusionnel',
+  ch12: 'Ch. 12 — Chutes et marche',
+  ch13: 'Ch. 13 — Alitement',
+  ch14: 'Ch. 14 — Nutrition',
+  ch15: 'Ch. 15 — Incontinence urinaire',
+  ch16: 'Ch. 16 — Prescrire chez le patient âgé',
+  ch17: 'Ch. 17 — Soins palliatifs',
+  ch18: 'Ch. 18 — Mini-dossiers',
+  ch19: 'Ch. 19 — Key-features',
+  ch20: 'Ch. 20 — Questions isolées'
+};
+
+// Enrichit chaque calculateur avec utilite si absente
+try {
+  (typeof CALCULATEURS !== 'undefined' ? CALCULATEURS : []).forEach((c) => {
+    if (c && !c.utilite && SCORE_UTILITE[c.id]) c.utilite = SCORE_UTILITE[c.id];
+    if (c && !c.utilite && c.description) c.utilite = c.description;
+  });
+} catch (_) {}
+
+// ─────────────────────────────────────────────────────────────────────────────
 //  MOTEUR DE RENDU INTERACTIF (MEDICALCUL)
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -2835,6 +2988,23 @@ const Medicalcul = {
   currentDomain: 'all',
   currentSearch: '',
   currentResultText: '',
+
+  /** Normalise score / interprétation / classe CSS pour tous les calculateurs */
+  normalizeResult(result, calc) {
+    if (result == null) return null;
+    if (typeof result !== 'object') {
+      return { score: result, interp: String(result), cls: 'info', max: calc && calc.max };
+    }
+    const clsRaw = String(result.cls || result.cat || 'normal').toLowerCase();
+    const clsMap = { good: 'normal', warn: 'warning', warning: 'warning', danger: 'danger', normal: 'normal', info: 'info' };
+    const cls = clsMap[clsRaw] || 'normal';
+    const score = result.score != null ? result.score : result.total;
+    let interp = result.interp || result.desc || result.interpretation || result.message || '';
+    interp = String(interp || '').trim();
+    if (!interp) interp = 'Interprétation non renseignée pour cette valeur — se référer aux repères cliniques ci-dessous ou au référentiel.';
+    const max = result.max != null ? result.max : (calc && calc.max != null ? calc.max : null);
+    return { score, interp, cls, max, raw: result };
+  },
 
   init() {
     try {
@@ -2906,8 +3076,33 @@ const Medicalcul = {
   },
 
   openScore(id) {
-    // Les accès rapides sont de vrais raccourcis vers le calculateur, pas des cartes décoratives.
     this.showDetail(id);
+  },
+
+  /** Ouvre le chapitre du manuel correspondant (depuis un score) */
+  openChapter(chId) {
+    try {
+      if (typeof showCh === 'function') showCh(chId);
+      else if (typeof window !== 'undefined' && typeof window.showCh === 'function') window.showCh(chId);
+      else if (typeof sw === 'function') sw('home');
+    } catch (e) {
+      console.error('[Medicalcul.openChapter]', chId, e);
+    }
+  },
+
+  getRefs(calcId) {
+    return (typeof SCORE_REFS !== 'undefined' && SCORE_REFS[calcId]) || null;
+  },
+
+  renderChapterLinksHtml(calcId, helperEsc) {
+    const refs = this.getRefs(calcId);
+    if (!refs || !refs.chapters || !refs.chapters.length) return '';
+    const labels = (typeof CHAPTER_LABELS !== 'undefined') ? CHAPTER_LABELS : {};
+    const links = refs.chapters.map((chId) => {
+      const label = labels[chId] || chId;
+      return `<button type="button" class="calc-ch-link" onclick="event.stopPropagation();Medicalcul.openChapter('${chId}')">${helperEsc(label)}</button>`;
+    }).join('');
+    return `<div class="calc-ch-links"><span class="calc-ch-links-label">Voir dans le manuel</span><div class="calc-ch-links-row">${links}</div></div>`;
   },
 
   rememberRecent(id) {
@@ -3019,6 +3214,7 @@ const Medicalcul = {
     const code = domainCodes[c.domaine] || 'CALC';
     const shortDomain = String(c.domaine || 'Outil clinique').replace('Évaluation Gériatrique Standardisée (EGS)', 'Évaluation gériatrique');
     
+    const purpose = helperEsc((c.utilite || (typeof SCORE_UTILITE !== 'undefined' && SCORE_UTILITE[c.id]) || c.description || '').slice(0, 110));
     return `
       <article class="calc-card calc-card-premium" onclick="Medicalcul.showDetail('${c.id}')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();Medicalcul.showDetail('${c.id}')}" aria-label="Ouvrir ${helperEsc(c.nom)}">
         <div class="calc-card-topline">
@@ -3030,7 +3226,7 @@ const Medicalcul = {
         </div>
         <div class="calc-card-body">
           <h3 class="calc-card-nom">${helperEsc(c.nom)}</h3>
-          <p class="calc-card-desc">${helperEsc(c.description)}</p>
+          <p class="calc-card-desc">${purpose}${purpose.length >= 110 ? '…' : ''}</p>
         </div>
         <footer class="calc-card-footer"><span>Calcul guidé</span><span>Ouvrir <b aria-hidden="true">→</b></span></footer>
       </article>
@@ -3218,12 +3414,23 @@ const Medicalcul = {
         </div>
       </div>
       
-      <div class="calc-title-sec" style="margin-bottom:20px;">
+      <div class="calc-title-sec" style="margin-bottom:16px;">
         <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
           <span class="calc-badge" style="background:var(--accent-soft); color:var(--accent); border:1px solid var(--glass-border); font-weight:600; font-size:0.75rem; border-radius:6px; padding:2px 8px;">${helperEsc(calc.domaine)}</span>
         </div>
         <h2 style="font-size:1.4rem; font-weight:800; color:var(--text); margin:0;">${helperEsc(calc.nom)}</h2>
-        <p class="calc-desc" style="color:var(--text2); font-size:0.9rem; margin-top:6px; line-height:1.45;">${helperEsc(calc.description)}</p>
+        <p class="calc-desc" style="color:var(--text2); font-size:0.9rem; margin-top:6px; line-height:1.45;">${helperEsc(calc.description || '')}</p>
+      </div>
+      <div class="calc-purpose-card">
+        <div class="calc-purpose-label">À quoi sert ce score ?</div>
+        <p>${helperEsc(calc.utilite || (typeof SCORE_UTILITE !== 'undefined' && SCORE_UTILITE[id]) || calc.description || 'Outil d\'aide à l\'évaluation clinique.')}</p>
+        ${(() => {
+          const refs = Medicalcul.getRefs(id);
+          if (!refs) return '';
+          const detail = refs.detail ? `<p class="calc-ref-detail">${helperEsc(refs.detail)}</p>` : '';
+          const src = refs.source ? `<p class="calc-ref-source">Réf. : ${helperEsc(refs.source)}</p>` : '';
+          return detail + src + Medicalcul.renderChapterLinksHtml(id, helperEsc);
+        })()}
       </div>
     `;
 
@@ -3247,18 +3454,19 @@ const Medicalcul = {
         <div class="calc-form">
           <div class="calc-glass-box">
             <div class="calc-group-title">Questions (Oui / Non)</div>
-            <div style="display:flex; flex-direction:column; gap:12px; margin-top:8px;">
+            <p class="calc-hint-text">Appuyez sur <strong>Oui</strong> ou <strong>Non</strong> pour chaque question. Le score et l’interprétation se mettent à jour automatiquement.</p>
+            <div class="calc-q-list">
               ${calc.questions.map((q, idx) => `
-                <div class="calc-q-item" style="padding:10px;border:1px solid var(--glass-border);border-radius:10px;">
-                  <div style="font-weight:600;font-size:0.9rem;margin-bottom:8px;">${idx + 1}. ${helperEsc(q.text || '')}</div>
-                  <div style="display:flex;gap:16px;">
-                    <label style="display:flex;align-items:center;gap:6px;cursor:pointer;">
-                      <input type="radio" name="q_${id}_${idx}" class="calc-input" value="yes" data-qidx="${idx}" ${q.pointsOnYes === 0 ? 'checked' : ''}>
-                      Oui
+                <div class="calc-q-row" data-qidx="${idx}" id="qrow_${id}_${idx}">
+                  <div class="calc-q-text">${idx + 1}. ${helperEsc(q.text || '')}</div>
+                  <div class="calc-q-btns" role="group" aria-label="Question ${idx + 1}">
+                    <label class="radio-btn-label">
+                      <input type="radio" name="q_${id}_${idx}" class="calc-q-input" value="yes" data-qidx="${idx}">
+                      <span>Oui</span>
                     </label>
-                    <label style="display:flex;align-items:center;gap:6px;cursor:pointer;">
-                      <input type="radio" name="q_${id}_${idx}" class="calc-input" value="no" data-qidx="${idx}" ${q.pointsOnYes !== 0 ? 'checked' : ''}>
-                      Non
+                    <label class="radio-btn-label">
+                      <input type="radio" name="q_${id}_${idx}" class="calc-q-input" value="no" data-qidx="${idx}">
+                      <span>Non</span>
                     </label>
                   </div>
                 </div>
@@ -3293,7 +3501,7 @@ const Medicalcul = {
               <div class="calc-radio-group" style="display:flex; flex-direction:column; gap:12px; margin-top:12px;">
                 ${(group.options || []).map((opt, oIdx) => `
                   <label class="radio-card-label" style="position:relative;">
-                    <input type="radio" name="rad_${id}_${gIdx}" class="calc-input" value="${opt.value != null ? opt.value : oIdx}" ${oIdx === 0 ? 'checked' : ''}>
+                    <input type="radio" name="rad_${id}_${gIdx}" class="calc-input" value="${opt.value != null ? opt.value : oIdx}">
                     <div class="radio-card-circle"></div>
                     <span class="radio-card-text" style="flex:1;">${helperEsc(opt.text || String(opt))}</span>
                   </label>
@@ -3326,6 +3534,7 @@ const Medicalcul = {
                 <label style="display:flex; flex-direction:column; gap:4px;">
                   <span style="font-weight:500; font-size:0.9rem;">${helperEsc(field.label)}</span>
                   <select id="sel_${id}_${field.id}" class="calc-input" style="width:100%; background:var(--bg-elevated); color:var(--text); border:1px solid var(--glass-border); border-radius:4px; padding:6px;">
+                    <option value="" selected disabled>— Choisir —</option>
                     ${opts.map((opt) => {
                       const s = String(opt);
                       const valMatch = s.match(/^([0-9.]+)\s*[—–\-:]\s*(.*)$/) || [s, s, s];
@@ -3343,151 +3552,318 @@ const Medicalcul = {
       html += `<div class="empty" style="padding:20px;"><div class="empty-text">Format de score non supporté (${helperEsc(calc.type)})</div></div>`;
     }
 
-    html += `<div class="calc-result-area" id="calc-result" style="margin-top:16px;"></div>`;
+    html += `
+      <div class="calc-score-footer" id="calc-score-footer">
+        <div class="calc-progress-status" id="calc-progress-status">Complétez le questionnaire pour débloquer le score.</div>
+        <button type="button" class="calc-show-score-btn" id="calc-show-score-btn" disabled>Voir le score et l’interprétation</button>
+      </div>
+      <div class="calc-result-area is-hidden" id="calc-result" aria-live="polite"></div>
+    `;
     detailContent.innerHTML = html;
 
-    const inputs = detailContent.querySelectorAll ? detailContent.querySelectorAll('.calc-input') : [];
-    const updateResult = () => {
-      let result = null;
-      try {
-        if (effectiveType === 'questions' && hasQuestions) {
-          let total = 0;
-          calc.questions.forEach((q, idx) => {
-            let checked = null;
-            if (detailContent.querySelector) {
-              checked = detailContent.querySelector(`input[name="q_${id}_${idx}"]:checked`);
-            }
-            if (!checked && document.querySelector) {
-              checked = document.querySelector(`input[name="q_${id}_${idx}"]:checked`);
-            }
-            const ans = checked ? checked.value : 'no';
-            if (ans === 'yes') total += (q.pointsOnYes != null ? q.pointsOnYes : 1);
-            else total += (q.pointsOnNo != null ? q.pointsOnNo : 0);
-          });
-          if (typeof calc.calculer === 'function') result = calc.calculer(total);
-          else if (typeof calc.calculate === 'function') result = calc.calculate(total);
-        } else if (effectiveType === 'checklist' && hasItems) {
-          let total = 0;
-          calc.items.forEach((item, idx) => {
-            const chk = document.getElementById(`chk_${id}_${idx}`);
-            if (chk && chk.checked) total += item.points || 0;
-          });
-          if (typeof calc.calculer === 'function') result = calc.calculer(total);
-          else if (typeof calc.calculate === 'function') result = calc.calculate(total);
-        } else if (effectiveType === 'radio_group' && hasGroups) {
-          let total = 0;
-          const values = [];
-          calc.groups.forEach((group, gIdx) => {
-            let checkedRadio = null;
-            if (detailContent.querySelector) {
-              checkedRadio = detailContent.querySelector(`input[name="rad_${id}_${gIdx}"]:checked`);
-            }
-            if (!checkedRadio) {
-              // fallback: first radio of group
-              checkedRadio = document.querySelector && document.querySelector(`input[name="rad_${id}_${gIdx}"]:checked`);
-            }
-            const v = checkedRadio ? (parseFloat(checkedRadio.value) || 0) : 0;
-            values.push(v);
-            total += v;
-          });
-          if (typeof calc.calculer === 'function') {
-            // AGGIR expects (total, values[]); others may only take total
-            try { result = calc.calculer(total, values); }
-            catch (_) { result = calc.calculer(total); }
-          } else if (typeof calc.calculate === 'function') {
-            result = calc.calculate(total, values);
-          }
-        } else if ((effectiveType === 'select' || effectiveType === 'number_result') && hasFields) {
-          const values = {};
-          calc.fields.forEach((field) => {
-            const sel = document.getElementById(`sel_${id}_${field.id}`);
-            const num = document.getElementById(`num_${id}_${field.id}`);
-            if (sel) {
-              // Keep string so calculate() can .split / map keys; parseInt still works on "0","4"
-              values[field.id] = sel.value;
-            } else if (num) {
-              const n = parseFloat(num.value);
-              values[field.id] = Number.isFinite(n) ? n : 0;
-            }
-          });
-          if (typeof calc.calculate === 'function') result = calc.calculate(values);
-          else if (typeof calc.calculer === 'function') result = calc.calculer(values);
-        }
-      } catch (calcErr) {
-        console.error('[Medicalcul.updateResult]', id, calcErr);
-        const resDivErr = document.getElementById('calc-result');
-        if (resDivErr) resDivErr.innerHTML = `<div class="empty"><div class="empty-hint">Erreur de calcul : ${helperEsc(calcErr.message || calcErr)}</div></div>`;
-        return;
-      }
+    const inputs = detailContent.querySelectorAll
+      ? detailContent.querySelectorAll('.calc-input, .calc-q-input, select, input[type="range"], input[type="number"], input[type="checkbox"], input[type="radio"]')
+      : [];
 
+    let scoreRevealed = false;
+    let lastReadyResult = null;
+
+    const paintQuestionRows = () => {
+      if (!(effectiveType === 'questions' && hasQuestions)) return;
+      calc.questions.forEach((_, idx) => {
+        const row = document.getElementById(`qrow_${id}_${idx}`);
+        const checked = detailContent.querySelector(`input[name="q_${id}_${idx}"]:checked`);
+        if (row) row.classList.toggle('is-answered', !!checked);
+      });
+    };
+
+    const setFooter = (ready, statusHtml, readyLabel) => {
+      const statusEl = document.getElementById('calc-progress-status');
+      const btn = document.getElementById('calc-show-score-btn');
+      if (statusEl) {
+        statusEl.innerHTML = statusHtml;
+        statusEl.classList.toggle('is-ready', !!ready);
+      }
+      if (btn) {
+        btn.disabled = !ready;
+        btn.textContent = ready
+          ? (readyLabel || 'Voir le score et l’interprétation')
+          : 'Voir le score et l’interprétation';
+      }
+    };
+
+    const hideScorePanel = () => {
+      scoreRevealed = false;
       const resDiv = document.getElementById('calc-result');
-      if (resDiv && result) {
-        const scoreVal = result.score != null ? result.score : result.total;
-        const numericForBar = typeof scoreVal === 'number' ? scoreVal : parseFloat(String(scoreVal).replace(/[^\d.]/g, ''));
-        const maxBar = calc.max || 100;
-        const pct = Number.isFinite(numericForBar) ? Math.min(100, Math.max(0, (numericForBar / maxBar) * 100)) : 0;
-        resDiv.innerHTML = `
-          <div class="calc-res-box ${result.cls || result.cat || 'normal'}" style="position:relative; margin-top:20px;">
-            <div class="calc-res-title" style="font-size:1.4rem; font-weight:800; display:flex; justify-content:space-between; align-items:center; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">
-              <span>SCORE : ${scoreVal}</span>
-              <button type="button" class="calc-copy-btn" onclick="Medicalcul.copyResultToClipboard('${id}')" style="font-size:0.75rem; background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.4); color:white; padding:6px 12px; border-radius:8px; display:flex; align-items:center; gap:6px; font-weight:700;">
-                📋 Copier
-              </button>
-            </div>
-            <div class="calc-progress-bg">
-               <div class="calc-progress-fill" style="width:${pct}%;"></div>
-            </div>
-            <div class="calc-res-desc" style="font-size:1.05rem; font-weight:600; margin-top:12px; line-height:1.4;">${result.interp || result.desc || ''}</div>
-            ${calc.seuils ? `<div class="fs-xs" style="margin-top:12px; opacity:0.9; border-top:1px solid rgba(255,255,255,0.25); padding-top:10px; font-size:0.8rem;"><strong>Repères cliniques :</strong> ${helperEsc(calc.seuils)}</div>` : ''}
-          </div>
-        `;
-        Medicalcul.currentResultText = `[Gériatrie - ${calc.nom}]\nScore : ${scoreVal}\nInterprétation : ${result.interp || result.desc || ''}`;
-      } else if (resDiv) {
+      if (resDiv) {
+        resDiv.classList.add('is-hidden');
         resDiv.innerHTML = '';
       }
     };
 
-    inputs.forEach(input => {
-      if (!input || typeof input.addEventListener !== 'function') return;
-      if (input.type === 'range') {
-        input.addEventListener('input', (e) => {
-          const disp = document.getElementById('val_disp_' + id + '_' + input.id.split('_').pop());
+    const renderScorePanel = (result) => {
+      const resDiv = document.getElementById('calc-result');
+      const norm = Medicalcul.normalizeResult(result, calc);
+      if (!resDiv || !norm) return;
+      const scoreVal = norm.score;
+      const numericForBar = typeof scoreVal === 'number' ? scoreVal : parseFloat(String(scoreVal).replace(/[^\d.]/g, ''));
+      const maxBar = (norm.max != null && Number.isFinite(Number(norm.max)) && Number(norm.max) > 0)
+        ? Number(norm.max)
+        : (calc.max || 100);
+      const pct = Number.isFinite(numericForBar) ? Math.min(100, Math.max(0, (numericForBar / maxBar) * 100)) : 0;
+      const showBar = Number.isFinite(numericForBar) && maxBar > 0 && String(scoreVal) !== '—';
+      const refs = Medicalcul.getRefs(id);
+      const enrich = (refs && refs.detail)
+        ? `<div class="calc-res-enrich" style="margin-top:10px;font-size:0.88rem;font-weight:500;line-height:1.45;opacity:0.95;">${helperEsc(refs.detail)}</div>`
+        : '';
+      const chLinks = Medicalcul.renderChapterLinksHtml(id, helperEsc);
+      const srcLine = (refs && refs.source)
+        ? `<div class="fs-xs" style="margin-top:8px;opacity:0.9;font-size:0.75rem;">Réf. : ${helperEsc(refs.source)}</div>`
+        : '';
+      resDiv.classList.remove('is-hidden');
+      resDiv.innerHTML = `
+        <div class="calc-res-box ${norm.cls}" style="position:relative;">
+          <div class="calc-res-title" style="font-size:1.35rem; font-weight:800; display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
+            <span>SCORE : ${helperEsc(scoreVal)}</span>
+            <button type="button" class="calc-copy-btn" onclick="Medicalcul.copyResultToClipboard('${id}')" style="font-size:0.75rem; background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.4); color:white; padding:6px 12px; border-radius:8px; display:flex; align-items:center; gap:6px; font-weight:700;">
+              📋 Copier
+            </button>
+          </div>
+          ${showBar ? `<div class="calc-progress-bg"><div class="calc-progress-fill" style="width:${pct}%;"></div></div>` : ''}
+          <div class="calc-res-desc" style="font-size:1.05rem; font-weight:600; margin-top:12px; line-height:1.45;">
+            <span style="display:block;font-size:0.72rem;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;opacity:0.9;margin-bottom:4px;">Interprétation</span>
+            ${helperEsc(norm.interp)}
+          </div>
+          ${enrich}
+          ${calc.seuils ? `<div class="fs-xs" style="margin-top:12px; opacity:0.95; border-top:1px solid rgba(255,255,255,0.25); padding-top:10px; font-size:0.8rem;"><strong>Repères cliniques :</strong> ${helperEsc(calc.seuils)}</div>` : ''}
+          ${srcLine}
+          ${chLinks}
+          <button type="button" class="calc-hide-score-btn" id="calc-hide-score-btn">Masquer le score</button>
+        </div>
+      `;
+      Medicalcul.currentResultText = `[Gériatrie - ${calc.nom}]\nScore : ${scoreVal}\nInterprétation : ${norm.interp}${refs && refs.detail ? '\nPrécisions : ' + refs.detail : ''}${calc.seuils ? '\nRepères : ' + calc.seuils : ''}${refs && refs.source ? '\nRéf. : ' + refs.source : ''}`;
+      const hideBtn = document.getElementById('calc-hide-score-btn');
+      if (hideBtn) hideBtn.addEventListener('click', () => {
+        hideScorePanel();
+        const btn = document.getElementById('calc-show-score-btn');
+        if (btn && !btn.disabled) btn.textContent = 'Voir le score et l’interprétation';
+      });
+      try { resDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } catch (_) {}
+    };
+
+    /** Calcule l’état du formulaire : progression + résultat final si prêt (sans l’afficher) */
+    const computeFormState = () => {
+      paintQuestionRows();
+      let ready = false;
+      let result = null;
+      let status = 'Complétez le questionnaire pour débloquer le score.';
+      let answered = 0;
+      let totalItems = 0;
+
+      try {
+        if (effectiveType === 'questions' && hasQuestions) {
+          totalItems = calc.questions.length;
+          let total = 0;
+          calc.questions.forEach((q, idx) => {
+            let checked = detailContent.querySelector
+              ? detailContent.querySelector(`input[name="q_${id}_${idx}"]:checked`)
+              : null;
+            if (!checked && document.querySelector) {
+              checked = document.querySelector(`input[name="q_${id}_${idx}"]:checked`);
+            }
+            if (!checked) return;
+            answered += 1;
+            const ans = checked.value;
+            if (ans === 'yes') total += (q.pointsOnYes != null ? q.pointsOnYes : 1);
+            else total += (q.pointsOnNo != null ? q.pointsOnNo : 0);
+          });
+          if (answered < totalItems) {
+            status = `<strong>${answered}/${totalItems}</strong> questions répondues — le score s’affiche seulement à la fin.`;
+          } else {
+            ready = true;
+            status = `<strong>${totalItems}/${totalItems}</strong> questions remplies — vous pouvez afficher le score.`;
+            if (typeof calc.calculer === 'function') result = calc.calculer(total);
+            else if (typeof calc.calculate === 'function') result = calc.calculate(total);
+          }
+        } else if (effectiveType === 'checklist' && hasItems) {
+          // Checklist : chaque case est une réponse (cochée ou non) — prêt dès l’ouverture, bouton pour valider
+          totalItems = calc.items.length;
+          answered = totalItems;
+          let total = 0;
+          const checkedFlags = [];
+          let checkedCount = 0;
+          calc.items.forEach((item, idx) => {
+            const chk = document.getElementById(`chk_${id}_${idx}`);
+            const on = !!(chk && chk.checked);
+            checkedFlags.push(on);
+            if (on) { total += item.points || 0; checkedCount += 1; }
+          });
+          ready = true;
+          status = `<strong>${checkedCount}</strong> critère${checkedCount > 1 ? 's' : ''} coché${checkedCount > 1 ? 's' : ''} sur ${totalItems} — appuyez pour calculer le score.`;
+          if (typeof calc.calculer === 'function') {
+            try { result = calc.calculer(total, checkedFlags); }
+            catch (_) { result = calc.calculer(total); }
+          } else if (typeof calc.calculate === 'function') {
+            result = calc.calculate(total, checkedFlags);
+          }
+        } else if (effectiveType === 'radio_group' && hasGroups) {
+          totalItems = calc.groups.length;
+          let total = 0;
+          const values = [];
+          calc.groups.forEach((group, gIdx) => {
+            let checkedRadio = detailContent.querySelector
+              ? detailContent.querySelector(`input[name="rad_${id}_${gIdx}"]:checked`)
+              : null;
+            if (!checkedRadio && document.querySelector) {
+              checkedRadio = document.querySelector(`input[name="rad_${id}_${gIdx}"]:checked`);
+            }
+            if (!checkedRadio) {
+              values.push(null);
+              return;
+            }
+            answered += 1;
+            const v = parseFloat(checkedRadio.value);
+            const num = Number.isFinite(v) ? v : 0;
+            values.push(num);
+            total += num;
+          });
+          if (answered < totalItems) {
+            status = `<strong>${answered}/${totalItems}</strong> items renseignés — terminez le questionnaire pour voir le score.`;
+          } else {
+            ready = true;
+            status = `<strong>${totalItems}/${totalItems}</strong> items remplis — vous pouvez afficher le score.`;
+            if (typeof calc.calculer === 'function') {
+              try { result = calc.calculer(total, values); }
+              catch (_) { result = calc.calculer(total); }
+            } else if (typeof calc.calculate === 'function') {
+              result = calc.calculate(total, values);
+            }
+          }
+        } else if ((effectiveType === 'select' || effectiveType === 'number_result') && hasFields) {
+          totalItems = calc.fields.length;
+          const values = {};
+          let missing = 0;
+          calc.fields.forEach((field) => {
+            const sel = document.getElementById(`sel_${id}_${field.id}`);
+            const num = document.getElementById(`num_${id}_${field.id}`);
+            if (sel) {
+              if (sel.value === '' || (sel.selectedIndex === 0 && sel.options[0] && sel.options[0].disabled)) {
+                missing += 1;
+                values[field.id] = '';
+              } else {
+                answered += 1;
+                values[field.id] = sel.value;
+              }
+            } else if (num) {
+              answered += 1;
+              const n = parseFloat(num.value);
+              values[field.id] = Number.isFinite(n) ? n : 0;
+            }
+          });
+          if (effectiveType === 'select' && missing > 0) {
+            status = `<strong>${answered}/${totalItems}</strong> champs renseignés — complétez toutes les listes pour voir le score.`;
+          } else {
+            ready = true;
+            status = effectiveType === 'number_result'
+              ? 'Valeur saisie — appuyez pour afficher le score et l’interprétation.'
+              : `<strong>${totalItems}/${totalItems}</strong> champs remplis — vous pouvez afficher le score.`;
+            if (typeof calc.calculate === 'function') result = calc.calculate(values);
+            else if (typeof calc.calculer === 'function') result = calc.calculer(values);
+          }
+        }
+      } catch (calcErr) {
+        console.error('[Medicalcul.computeFormState]', id, calcErr);
+        ready = false;
+        result = null;
+        status = `Erreur de calcul : ${helperEsc(calcErr.message || calcErr)}`;
+      }
+
+      return { ready, result, status };
+    };
+
+    const refreshFooter = () => {
+      const state = computeFormState();
+      lastReadyResult = state.ready ? state.result : null;
+      setFooter(state.ready, state.status);
+      // Si l’utilisateur a déjà révélé le score, le masquer dès qu’une réponse change (évite un score obsolète collé à l’écran)
+      if (scoreRevealed) {
+        if (state.ready && state.result) {
+          renderScorePanel(state.result);
+        } else {
+          hideScorePanel();
+        }
+      } else {
+        hideScorePanel();
+      }
+    };
+
+    const showScoreBtn = document.getElementById('calc-show-score-btn');
+    if (showScoreBtn) {
+      showScoreBtn.addEventListener('click', () => {
+        const state = computeFormState();
+        if (!state.ready || !state.result) return;
+        scoreRevealed = true;
+        lastReadyResult = state.result;
+        renderScorePanel(state.result);
+        showScoreBtn.textContent = 'Actualiser le score';
+      });
+    }
+
+    // Délégation d'événements (fiable pour radios Oui/Non, cards, selects)
+    detailContent.addEventListener('change', (e) => {
+      const t = e.target;
+      if (!t) return;
+      if (t.matches && (t.matches('.calc-input, .calc-q-input, select, input'))) {
+        if (t.type === 'checkbox') {
+          const lbl = t.closest && t.closest('.ios-toggle-label');
+          if (lbl) lbl.classList.toggle('active-toggle', !!t.checked);
+        }
+        // Toute modification masque le score jusqu’à nouvel appui (sauf si on actualise après reveal via refreshFooter)
+        scoreRevealed = false;
+        refreshFooter();
+      }
+    });
+    detailContent.addEventListener('input', (e) => {
+      const t = e.target;
+      if (!t || !t.matches) return;
+      if (t.matches('input[type="range"], input[type="number"], input[type="text"]')) {
+        if (t.type === 'range' && t.id) {
+          const fieldId = t.id.split('_').slice(2).join('_');
+          const disp = document.getElementById('val_disp_' + id + '_' + fieldId);
           if (disp) {
             let unit = '';
-            (calc.fields || []).forEach(f => { if (f.id === input.id.split('_').pop() && f.unit) unit = f.unit; });
-            disp.innerText = e.target.value + (unit ? ' ' + unit : '');
+            (calc.fields || []).forEach(f => { if (f.id === fieldId && f.unit) unit = f.unit; });
+            disp.innerText = t.value + (unit ? ' ' + unit : '');
           }
-          updateResult();
-        });
+        }
+        scoreRevealed = false;
+        refreshFooter();
       }
-      if (input.type === 'checkbox') {
-        input.addEventListener('change', (e) => {
-          const lbl = e.target.closest && e.target.closest('.ios-toggle-label');
-          if (lbl) {
-            if (e.target.checked) lbl.classList.add('active-toggle');
-            else lbl.classList.remove('active-toggle');
-          }
-          updateResult();
-        });
-      }
-      input.addEventListener('change', updateResult);
-      if (input.type === 'number' || input.type === 'text') {
-        input.addEventListener('input', updateResult);
+    });
+    // Clic sur le span Oui/Non (certains navigateurs / styles)
+    detailContent.addEventListener('click', (e) => {
+      const lab = e.target && e.target.closest && e.target.closest('.radio-btn-label');
+      if (!lab) return;
+      const input = lab.querySelector('input[type="radio"]');
+      if (input && !input.checked) {
+        input.checked = true;
+        input.dispatchEvent(new Event('change', { bubbles: true }));
       }
     });
 
     inputs.forEach(input => {
-      if (input && input.type === 'range') {
-        const disp = document.getElementById('val_disp_' + id + '_' + input.id.split('_').pop());
+      if (input && input.type === 'range' && input.id) {
+        const fieldId = input.id.split('_').slice(2).join('_');
+        const disp = document.getElementById('val_disp_' + id + '_' + fieldId);
         if (disp) {
           let unit = '';
-          (calc.fields || []).forEach(f => { if (f.id === input.id.split('_').pop() && f.unit) unit = f.unit; });
+          (calc.fields || []).forEach(f => { if (f.id === fieldId && f.unit) unit = f.unit; });
           disp.innerText = input.value + (unit ? ' ' + unit : '');
         }
       }
     });
 
-    updateResult();
+    refreshFooter();
   }
 };
 
@@ -3495,13 +3871,21 @@ const Medicalcul = {
 try {
   window.Medicalcul = Medicalcul;
   window.CALCULATEURS = CALCULATEURS;
+  window.SCORE_UTILITE = SCORE_UTILITE;
+  window.SCORE_REFS = SCORE_REFS;
+  window.CHAPTER_LABELS = CHAPTER_LABELS;
 } catch (_) {}
 
 // Expose globals for classic scripts / onclick handlers
-window.Medicalcul = Medicalcul;
-window.CALCULATEURS = CALCULATEURS;
+if (typeof window !== 'undefined') {
+  window.Medicalcul = Medicalcul;
+  window.CALCULATEURS = CALCULATEURS;
+  window.SCORE_UTILITE = SCORE_UTILITE;
+  window.SCORE_REFS = SCORE_REFS;
+  window.CHAPTER_LABELS = CHAPTER_LABELS;
+}
 
 
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { CALCULATEURS, Medicalcul };
+  module.exports = { CALCULATEURS, Medicalcul, SCORE_UTILITE, SCORE_REFS, CHAPTER_LABELS };
 }
