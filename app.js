@@ -338,6 +338,16 @@ function sw(view, opts){
         list.innerHTML='<div class="empty"><div class="empty-text">Module scores non chargé</div><div class="empty-hint">Ctrl+F5 ou Réglages → Vider le cache PWA</div></div>';
       }
     }
+    if(targetView==='audio'){
+      const AP = (typeof AudioPlayer!=='undefined') ? AudioPlayer
+        : (typeof window!=='undefined' ? window.AudioPlayer : null);
+      if(AP && typeof AP.init==='function'){
+        safe(()=>{ AP.init(); AP.renderLibrary(); }, 'audio-init');
+      } else {
+        const root=document.getElementById('audioLibraryRoot');
+        if(root) root.innerHTML='<div class="empty"><div class="empty-text">Module Listen non chargé</div><div class="empty-hint">Ctrl+F5 pour recharger</div></div>';
+      }
+    }
     if(targetView==='annales') {
       safe(()=>{
         if (view === 'sujets') switchAnnalesMode('sujets');

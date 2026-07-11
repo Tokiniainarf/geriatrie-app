@@ -1,14 +1,18 @@
 // Bump CACHE_NAME whenever core assets change so clients drop stale offline caches.
-const CACHE_NAME = 'geriatrie-v224';
+const CACHE_NAME = 'geriatrie-v225';
 // Must match scripts actually loaded by index.html (post data-bundle architecture).
+// Audio media (media/notebook-lm/*) is intentionally NOT in CORE — streamed on demand.
 const CORE = [
   './',
   './index.html',
   './style.css',
+  './audio-player.css',
   './manifest.json',
   './data-bundle.js',
   './notebook-decks-data.js',
   './notebook-interactive.js',
+  './audio-library-data.js',
+  './audio-player.js',
   './calculateurs.js',
   './quiz.js',
   './dashboard.js',

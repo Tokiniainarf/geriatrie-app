@@ -3,3 +3,5 @@ data.js.bak2
 data.js.tmp
 __pycache__/
 *.pyc
+# Gros médias NotebookLM (junction locale / hors git)
+media/
