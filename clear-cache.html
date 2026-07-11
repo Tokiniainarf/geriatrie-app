@@ -1,26 +1,52 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head><meta charset="UTF-8"><title>Nettoyage cache...</title></head>
-<body style="font-family:system-ui;text-align:center;padding:60px;background:#ECFEFF;color:#164E63">
-<h1>🧹 Nettoyage du cache...</h1>
-<p id="status">En cours...</p>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nettoyage cache PWA — Gériatrie</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+</head>
+<body style="font-family:system-ui,sans-serif;text-align:center;padding:48px 20px;background:#0f172a;color:#e2e8f0;min-height:100vh;box-sizing:border-box">
+  <h1 style="font-size:1.4rem;margin:0 0 12px">Nettoyage du cache</h1>
+  <p id="status" style="color:#94a3b8;line-height:1.5">Suppression des anciennes versions (Listen, SW)…</p>
+  <p style="margin-top:28px;font-size:0.85rem;color:#64748b">Si le lecteur Listen réapparaît encore :<br>Chrome → cadenas → Paramètres du site → Effacer les données</p>
 <script>
-(async()=>{
-  const s=document.getElementById('status');
-  try{
-    // Delete ALL caches
-    const keys=await caches.keys();
-    for(const k of keys){await caches.delete(k);s.textContent='Suppression: '+k;}
-    
-    // Unregister ALL service workers
-    const regs=await navigator.serviceWorker.getRegistrations();
-    for(const r of regs){await r.unregister();s.textContent='SW désactivé';}
-    
-    s.textContent='✅ Cache nettoyé ! Redirection...';
-    setTimeout(()=>{window.location.href='./index.html?v=226&nocache='+Date.now()},1000);
-  }catch(e){
-    s.textContent='Redirection...';
-    setTimeout(()=>{window.location.href='./index.html?v=226&nocache='+Date.now()},500);
+(async () => {
+  const s = document.getElementById('status');
+  const log = (t) => { s.textContent = t; };
+  try {
+    if (window.caches && caches.keys) {
+      const keys = await caches.keys();
+      for (const k of keys) {
+        await caches.delete(k);
+        log('Cache supprimé : ' + k);
+      }
+    }
+    if (navigator.serviceWorker) {
+      const regs = await navigator.serviceWorker.getRegistrations();
+      for (const r of regs) {
+        await r.unregister();
+        log('Service Worker désinscrit');
+      }
+    }
+    // Strip Listen leftovers if any script left nodes
+    try {
+      ['apMiniBar', 'apFullPlayer', 'vAudio'].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.remove();
+      });
+      document.querySelectorAll('.ap-mini, .ap-full, .qa-card-listen').forEach((el) => el.remove());
+    } catch (_) {}
+
+    log('Cache nettoyé. Ouverture de l’app v227…');
+    setTimeout(() => {
+      window.location.replace('./index.html?v=227&purged=' + Date.now());
+    }, 700);
+  } catch (e) {
+    log('Redirection…');
+    setTimeout(() => {
+      window.location.replace('./index.html?v=227&purged=' + Date.now());
+    }, 400);
   }
 })();
 </script>

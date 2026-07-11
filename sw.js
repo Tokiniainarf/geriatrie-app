@@ -1,5 +1,5 @@
 // Bump CACHE_NAME whenever core assets change so clients drop stale offline caches.
-const CACHE_NAME = 'geriatrie-v226';
+const CACHE_NAME = 'geriatrie-v227';
 // Must match scripts actually loaded by index.html (post data-bundle architecture).
 const CORE = [
   './',
@@ -34,14 +34,25 @@ self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys().then(keys =>
       Promise.all(keys.map(k => {
+        // Drop every previous app cache (incl. Listen-era shells)
         if (k !== CACHE_NAME) return caches.delete(k);
       }))
     ).then(() => self.clients.claim())
   );
 });
 
+self.addEventListener('message', e => {
+  if (e.data && e.data.type === 'SKIP_WAITING') self.skipWaiting();
+});
+
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
+  const url = new URL(e.request.url);
+  // Never serve removed Listen assets from any old cache
+  if (/audio-player|audio-library|audio-player\.css/i.test(url.pathname)) {
+    e.respondWith(new Response('Gone', { status: 410, statusText: 'Gone' }));
+    return;
+  }
   // Network-first for navigations & app shell; offline falls back to cache.
   e.respondWith(
     fetch(e.request).then(resp => {
@@ -53,7 +64,6 @@ self.addEventListener('fetch', e => {
     }).catch(async () => {
       const cached = await caches.match(e.request);
       if (cached) return cached;
-      // Offline navigation fallback to shell
       if (e.request.mode === 'navigate') {
         const shell = await caches.match('./index.html') || await caches.match('./');
         if (shell) return shell;
@@ -62,5 +72,3 @@ self.addEventListener('fetch', e => {
     })
   );
 });
-
-

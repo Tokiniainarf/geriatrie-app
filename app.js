@@ -209,7 +209,38 @@ function bootApp(){
   bootStep(loadFlashDeck, 'loadFlashDeck');
   bootStep(updStats, 'updStats');
   bootStep(updateThemeIcon, 'updateThemeIcon');
-  if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
+  // Purge éventuels restes DOM du module Listen (anciennes sessions SW)
+  try {
+    ['apMiniBar', 'apFullPlayer'].forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) el.remove();
+    });
+    document.querySelectorAll('.ap-mini, .ap-full, .qa-card-listen, #vAudio').forEach((el) => el.remove());
+    document.body.classList.remove('ap-mini-visible', 'ap-full-open', 'ap-is-playing');
+  } catch (_) {}
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js?v=227').then((reg) => {
+      try { reg.update(); } catch (_) {}
+      if (reg.waiting) {
+        try { reg.waiting.postMessage({ type: 'SKIP_WAITING' }); } catch (_) {}
+      }
+      reg.addEventListener('updatefound', () => {
+        const nw = reg.installing;
+        if (!nw) return;
+        nw.addEventListener('statechange', () => {
+          if (nw.state === 'installed' && navigator.serviceWorker.controller) {
+            try { nw.postMessage({ type: 'SKIP_WAITING' }); } catch (_) {}
+          }
+        });
+      });
+    }).catch(() => {});
+    let reloaded = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (reloaded) return;
+      reloaded = true;
+      try { location.reload(); } catch (_) {}
+    });
+  }
   applyInstallBarVisibility();
   window.addEventListener('beforeinstallprompt', e=>{
     e.preventDefault();
