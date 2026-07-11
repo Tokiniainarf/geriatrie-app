@@ -19,8 +19,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<link rel="stylesheet" href="style.css?v=225">
-<link rel="stylesheet" href="audio-player.css?v=225">
+<link rel="stylesheet" href="style.css?v=226">
 <style>
 /* Critical preloader (inline so it shows before CSS/JS) */
 #appPreloader{position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:radial-gradient(ellipse 80% 50% at 50% 0%,#164E63 0%,#0f1117 55%,#050508 100%);color:#EDEDEF;font-family:Figtree,system-ui,sans-serif;transition:opacity .45s ease,visibility .45s}
@@ -130,10 +129,6 @@
       <button class="qa-card" onclick="sw('dash')">
         <span class="qa-icon">📈</span>
         <span class="qa-label">Progression</span>
-      </button>
-      <button class="qa-card qa-card-listen" onclick="if(window.AudioPlayer){AudioPlayer.open()}else{sw('audio')}" title="Listen — révision audio immersive">
-        <span class="qa-icon">🎧</span>
-        <span class="qa-label">Listen</span>
       </button>
     </div>
     
@@ -306,16 +301,6 @@
 
     <div id="calc-detail-container" style="display:none">
       <div id="calc-detail-content"></div>
-    </div>
-  </div>
-
-  <!-- LISTEN — audio immersif type Spotify -->
-  <div class="view" id="vAudio">
-    <div id="audioLibraryRoot">
-      <div class="empty" style="padding:40px 16px;text-align:center">
-        <div class="empty-text" style="font-weight:800;font-size:1.2rem;color:#f4f4f8">Listen</div>
-        <div class="empty-hint" style="color:#a1a1b5;margin-top:8px">Chargement de la bibliothèque audio…</div>
-      </div>
     </div>
   </div>
 
@@ -582,19 +567,17 @@
 <script>
 (function(){
   var steps = [
-    { src: 'data-bundle.js?v=225', label: 'Contenu des chapitres…', pct: 42 },
-    { src: 'notebook-decks-data.js?v=225', label: 'Decks NotebookLM…', pct: 46 },
-    { src: 'notebook-interactive.js?v=225', label: 'Lecteur présentation…', pct: 52 },
-    { src: 'audio-library-data.js?v=225', label: 'Bibliothèque Listen…', pct: 58 },
-    { src: 'audio-player.js?v=225', label: 'Lecteur audio…', pct: 64 },
-    { src: 'calculateurs.js?v=225', label: 'Scores & calculateurs…', pct: 70 },
-    { src: 'quiz.js?v=225', label: 'Mode examen…', pct: 76 },
-    { src: 'dashboard.js?v=225', label: 'Tableau de bord…', pct: 80 },
-    { src: 'appsearch.js?v=225', label: 'Recherche…', pct: 84 },
-    { src: 'erreurs-journal.js?v=225', label: 'Fichier erreurs…', pct: 88 },
-    { src: 'graph.js?v=225', label: 'Carte des liens…', pct: 92 },
-    { src: 'brainfeed.js?v=225', label: 'BrainFeed…', pct: 96 },
-    { src: 'app.js?v=225', label: 'Interface…', pct: 100 }
+    { src: 'data-bundle.js?v=226', label: 'Contenu des chapitres…', pct: 42 },
+    { src: 'notebook-decks-data.js?v=226', label: 'Decks NotebookLM…', pct: 48 },
+    { src: 'notebook-interactive.js?v=226', label: 'Lecteur présentation…', pct: 54 },
+    { src: 'calculateurs.js?v=226', label: 'Scores & calculateurs…', pct: 60 },
+    { src: 'quiz.js?v=226', label: 'Mode examen…', pct: 68 },
+    { src: 'dashboard.js?v=226', label: 'Tableau de bord…', pct: 74 },
+    { src: 'appsearch.js?v=226', label: 'Recherche…', pct: 80 },
+    { src: 'erreurs-journal.js?v=226', label: 'Fichier erreurs…', pct: 85 },
+    { src: 'graph.js?v=226', label: 'Carte des liens…', pct: 90 },
+    { src: 'brainfeed.js?v=226', label: 'BrainFeed…', pct: 95 },
+    { src: 'app.js?v=226', label: 'Interface…', pct: 100 }
   ];
   var i = 0;
   var fill = document.getElementById('plFill');
