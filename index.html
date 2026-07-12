@@ -19,7 +19,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<link rel="stylesheet" href="style.css?v=233">
+<link rel="stylesheet" href="style.css?v=234">
 <style>
 /* Critical preloader (inline so it shows before CSS/JS) */
 #appPreloader{position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:radial-gradient(ellipse 80% 50% at 50% 0%,#164E63 0%,#0f1117 55%,#050508 100%);color:#EDEDEF;font-family:Figtree,system-ui,sans-serif;transition:opacity .45s ease,visibility .45s}
@@ -84,7 +84,7 @@
         <div class="hero-title">Gériatrie</div>
         <div class="hero-sub">5e édition · Collège National des Enseignants de Gériatrie · Pr Jacques Boddaert · Elsevier Masson 2021</div>
         <div class="hero-actions">
-          <button type="button" class="hero-btn" onclick="sw('graph')">Carte des liens</button>
+          <button type="button" class="hero-btn" onclick="sw('graph')">Parcours liés</button>
           <button type="button" class="hero-btn hero-btn-ghost" onclick="sw('fav')">Favoris</button>
         </div>
       </div>
@@ -118,10 +118,6 @@
         <span class="qa-icon">📋</span>
         <span class="qa-label">Protocoles</span>
       </button>
-      <button class="qa-card" onclick="sw('garde')">
-        <span class="qa-icon">🚑</span>
-        <span class="qa-label">Garde</span>
-      </button>
       <button class="qa-card" onclick="sw('annales')">
         <span class="qa-icon">📝</span>
         <span class="qa-label">Annales</span>
@@ -139,13 +135,24 @@
     <div id="p2"></div>
   </div>
 
-  <!-- GRAPH -->
+  <!-- PARCOURS LIES -->
   <div class="view" id="vGraph">
-    <div class="graph-bar">
-      <button type="button" class="hero-btn hero-btn-ghost" onclick="sw('home')">Retour</button>
-      <span class="graph-hint">Glisser un chapitre · clic pour ouvrir</span>
+    <div class="graph-purpose">
+      <span>Révision transversale</span>
+      <h1>Parcours liés</h1>
+      <p>Choisissez un chapitre : l’app explique les liens utiles et propose les chapitres à réviser ensuite.</p>
+      <div class="graph-purpose-legend">
+        <span><i class="same-item"></i>Même ITEM</span>
+        <span><i class="concept"></i>Concept clinique partagé</span>
+        <span><i class="same-part"></i>Même partie du manuel</span>
+      </div>
     </div>
-    <canvas id="graphCanvas"></canvas>
+    <div class="graph-stage">
+      <div class="graph-bar">
+        <span class="graph-hint">Touchez un chapitre pour construire votre parcours</span>
+      </div>
+      <canvas id="graphCanvas"></canvas>
+    </div>
   </div>
 
   <!-- SYNTHESIS + ITEMs (même écran, 2 onglets — plus de doublon Accueil) -->
@@ -360,16 +367,6 @@
     <div class="dict-list" id="dictList"></div>
   </div>
 
-  <!-- FICHES DE GARDE (checklists rapides — PAS les protocoles complets) -->
-  <div class="view" id="vGarde">
-    <div class="page-hd">
-      <h1>Orientation de garde</h1>
-      <p>Repérage rapide et priorités de sécurité — sans remplacer le protocole local</p>
-    </div>
-    <div class="src-note"><strong>Rôle :</strong> ne rien oublier lors du premier bilan. Les posologies et décisions thérapeutiques doivent être confirmées dans le protocole de l’établissement, le RCP/ANSM ou le référentiel de la spécialité.</div>
-    <div id="gardeContent"></div>
-  </div>
-
   <!-- ANNALES / ENTRAÎNEMENT -->
   <div class="view" id="vAnnales">
     <div class="page-hd">
@@ -404,28 +401,21 @@
   <!-- PROTOCOLES -->
   <div class="view" id="vProto">
     <div class="page-hd">
-      <h1>Conduites &amp; médicaments</h1>
-      <p>Deux usages séparés : démarche clinique d’un côté, fiches de molécules de l’autre</p>
+      <h1>Pratique clinique</h1>
+      <p>Une seule entrée pour décider quoi faire, puis vérifier les médicaments</p>
     </div>
     <div class="content-role-grid">
-      <div><strong>Orientation de garde</strong><span>Premier bilan et signes de gravité. Pas de prescription autonome.</span></div>
-      <div><strong>Conduites cliniques</strong><span>Démarche détaillée. « HAS » seulement si une référence vérifiable est affichée.</span></div>
-      <div><strong>Médicaments</strong><span>Révision des classes, interactions et risques. Posologie à confirmer dans le RCP/ANSM.</span></div>
+      <div><strong>Conduites</strong><span>Référentiels HAS en premier, puis synthèses pratiques classées par situation.</span></div>
+      <div><strong>Médicaments</strong><span>Classes, interactions et risques dans un espace séparé.</span></div>
     </div>
     
     <div class="sub-tab-switch">
-      <button id="btnSubProtoHas" class="active" onclick="switchProtoMode('has')">Référentiels HAS</button>
-      <button id="btnSubProtoCliniques" onclick="switchProtoMode('cliniques')">Synthèses cliniques</button>
+      <button id="btnSubProtoCliniques" class="active" onclick="switchProtoMode('cliniques')">Conduites</button>
       <button id="btnSubTraitements" onclick="switchProtoMode('traitements')">Fiches médicaments</button>
     </div>
 
-    <div id="subTabProtoHas" class="sub-tab-content">
-      <div class="src-note"><strong>Source primaire :</strong> chaque fiche ci-dessous renvoie directement à la publication HAS correspondante. La date est visible : les recommandations anciennes doivent être confrontées aux référentiels plus récents et au protocole local.</div>
-      <div id="protoHasContent"></div>
-    </div>
-
     <!-- Section Protocoles Cliniques -->
-    <div id="subTabProtoCliniques" class="sub-tab-content" style="display:none">
+    <div id="subTabProtoCliniques" class="sub-tab-content">
       <div class="proto-filters" id="protoFilters"></div>
       <div id="protoContent"></div>
     </div>
@@ -583,20 +573,20 @@
 <script>
 (function(){
   var steps = [
-    { src: 'data-bundle.js?v=233', label: 'Contenu des chapitres…', pct: 36 },
-    { src: 'practice-data.js?v=233', label: 'Entraînements structurés…', pct: 42 },
-    { src: 'annales-authentiques.js?v=233', label: 'Annales EVC sourcées…', pct: 47 },
-    { src: 'protocoles-has-officiels.js?v=233', label: 'Référentiels HAS…', pct: 52 },
-    { src: 'notebook-decks-data.js?v=233', label: 'Decks NotebookLM…', pct: 57 },
-    { src: 'notebook-interactive.js?v=233', label: 'Lecteur présentation…', pct: 62 },
-    { src: 'calculateurs.js?v=233', label: 'Scores & calculateurs…', pct: 67 },
-    { src: 'quiz.js?v=233', label: 'Mode examen…', pct: 72 },
-    { src: 'dashboard.js?v=233', label: 'Tableau de bord…', pct: 77 },
-    { src: 'appsearch.js?v=233', label: 'Recherche…', pct: 82 },
-    { src: 'erreurs-journal.js?v=233', label: 'Fichier erreurs…', pct: 87 },
-    { src: 'graph.js?v=233', label: 'Carte des liens…', pct: 92 },
-    { src: 'brainfeed.js?v=233', label: 'BrainFeed…', pct: 96 },
-    { src: 'app.js?v=233', label: 'Interface…', pct: 100 }
+    { src: 'data-bundle.js?v=234', label: 'Contenu des chapitres…', pct: 36 },
+    { src: 'practice-data.js?v=234', label: 'Entraînements structurés…', pct: 42 },
+    { src: 'annales-authentiques.js?v=234', label: 'Annales EVC intégrées…', pct: 47 },
+    { src: 'protocoles-has-officiels.js?v=234', label: 'Conduites HAS…', pct: 52 },
+    { src: 'notebook-decks-data.js?v=234', label: 'Decks NotebookLM…', pct: 57 },
+    { src: 'notebook-interactive.js?v=234', label: 'Lecteur présentation…', pct: 62 },
+    { src: 'calculateurs.js?v=234', label: 'Scores & calculateurs…', pct: 67 },
+    { src: 'quiz.js?v=234', label: 'Mode examen…', pct: 72 },
+    { src: 'dashboard.js?v=234', label: 'Tableau de bord…', pct: 77 },
+    { src: 'appsearch.js?v=234', label: 'Recherche…', pct: 82 },
+    { src: 'erreurs-journal.js?v=234', label: 'Fichier erreurs…', pct: 87 },
+    { src: 'graph.js?v=234', label: 'Parcours liés…', pct: 92 },
+    { src: 'brainfeed.js?v=234', label: 'BrainFeed…', pct: 96 },
+    { src: 'app.js?v=234', label: 'Interface…', pct: 100 }
   ];
   var i = 0;
   var fill = document.getElementById('plFill');

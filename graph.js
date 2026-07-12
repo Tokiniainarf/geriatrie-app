@@ -126,6 +126,7 @@
   let dashPhase = 0;
   let searchQuery = '';
   let tooltipEl, infoPanelEl, searchInput;
+  let selected = null;
   let dragTrail = [];
   let zoomAnim = null;
   let bounds = { minX: -400, minY: -300, maxX: 400, maxY: 300 };
@@ -136,6 +137,9 @@
   let viewSaveTimer = null;
   const VIEW_STORAGE_KEY = 'geriatrie_graph_view';
   const STATUS_COLORS = { mastered: '#22c55e', started: '#eab308', unread: '#94a3b8' };
+  const html = (value) => String(value == null ? '' : value)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 
   const PHYS = {
     repulse: 4200,
@@ -244,8 +248,18 @@
     else idx = (idx + dir + sorted.length) % sorted.length;
     kbFocusId = sorted[idx].id;
     hovered = sorted[idx];
+    selected = sorted[idx];
     updateInfoPanel();
     panToNode(sorted[idx], false);
+  }
+
+  function selectNode(node){
+    if(!node) return;
+    selected = node;
+    hovered = node;
+    kbFocusId = node.id;
+    panToNode(node, true);
+    updateInfoPanel();
   }
 
   function panToNode(node, animate){
@@ -373,11 +387,9 @@
       const actions = document.createElement('div');
       actions.className = 'graph-actions';
       actions.innerHTML =
-        '<button type="button" class="graph-btn" id="graphResetView" title="Réinitialiser zoom et position">⟲ Vue</button>' +
-        '<button type="button" class="graph-btn" id="graphExportPng" title="Exporter le graphe en PNG">PNG</button>';
+        '<button type="button" class="graph-btn" id="graphResetView" title="Réinitialiser zoom et position">⟲ Recentrer</button>';
       bar.appendChild(actions);
       actions.querySelector('#graphResetView').addEventListener('click', resetGraphView);
-      actions.querySelector('#graphExportPng').addEventListener('click', exportGraphPng);
     }
     if(!infoPanelEl){
       infoPanelEl = document.createElement('aside');
@@ -501,7 +513,7 @@
           dragTrail[0].y - dragTrail[dragTrail.length - 1].y) > 4 / scale;
       const nAt = getNodeAt(mx, my);
       if(!moved && nAt === dragging){
-        startZoomToNode(dragging);
+        selectNode(dragging);
       } else if(moved){
         const a = dragTrail[0], b = dragTrail[dragTrail.length - 1];
         const dt = Math.max(16, b.t - a.t);
@@ -521,7 +533,7 @@
   function onLeave(){
     if(!dragging) hovered = null;
     hoveredEdge = null;
-    hideInfoPanel();
+    if(!selected) hideInfoPanel();
   }
 
   function onGraphKeydown(e){
@@ -533,10 +545,11 @@
       moveKbFocus(-1);
     } else if(e.key === 'Enter'){
       const n = getKbFocusNode() || hovered;
-      if(n){ e.preventDefault(); startZoomToNode(n); }
+      if(n){ e.preventDefault(); selectNode(n); }
     } else if(e.key === 'Escape'){
       kbFocusId = null;
       hovered = null;
+      selected = null;
       hideInfoPanel();
     }
   }
@@ -624,7 +637,7 @@
         const t = e.changedTouches[0];
         const rect = canvas.getBoundingClientRect();
         const n = getNodeAt(t.clientX - rect.left, t.clientY - rect.top);
-        if(n === dragging) startZoomToNode(dragging);
+        if(n === dragging) selectNode(dragging);
       }
       dragging.fx = null;
       dragging.fy = null;
@@ -675,7 +688,7 @@
   }
 
   function updateInfoPanel(){
-    const node = hovered || getKbFocusNode();
+    const node = selected || hovered || getKbFocusNode();
     if(!infoPanelEl || !node){
       hideInfoPanel();
       return;
@@ -684,20 +697,32 @@
     const statusLabel = status === 'mastered' ? 'Maîtrisé' : status === 'started' ? 'Commencé' : 'Non lu';
     const items = node.items?.length ? node.items.join(', ') : '—';
     const cards = getCardCount(node.id);
-    const links = (adjacency.get(node.id) || []).length;
+    const nodeLinks = adjacency.get(node.id) || [];
+    const links = nodeLinks.length;
+    const related = nodeLinks.map(edge => {
+      const otherId = edge.from === node.id ? edge.to : edge.from;
+      return { node: nodeById.get(otherId), edge };
+    }).filter(x=>x.node).sort((a,b)=>(TYPE_PRIORITY[b.edge.type]||0)-(TYPE_PRIORITY[a.edge.type]||0)).slice(0,4);
+    const relatedHtml = related.length ? related.map(({node:other,edge}) =>
+      '<button type="button" class="graph-related" data-related="' + html(other.id) + '">' +
+      '<span>' + html(other.label) + '</span><small>' + html(EDGE_STYLES[edge.type]?.label || 'Lien') + (edge.meta ? ' · ' + html(edge.meta) : '') + '</small></button>'
+    ).join('') : '<p class="graph-related-empty">Aucun lien prioritaire identifié.</p>';
     infoPanelEl.innerHTML =
       '<div class="graph-info-head">' +
       '<span class="graph-info-num">Ch. ' + node.id.replace('ch', '') + '</span>' +
       '<span class="graph-info-status graph-info-status--' + status + '">' + statusLabel + '</span>' +
       '</div>' +
-      '<h3 class="graph-info-title">' + node.label + '</h3>' +
+      '<h3 class="graph-info-title">' + html(node.label) + '</h3>' +
       '<dl class="graph-info-meta">' +
-      '<div><dt>ITEM</dt><dd>' + items + '</dd></div>' +
+      '<div><dt>ITEM</dt><dd>' + html(items) + '</dd></div>' +
       '<div><dt>Fiches</dt><dd>' + cards + '</dd></div>' +
       '<div><dt>Liens</dt><dd>' + links + '</dd></div>' +
-      '<div><dt>Partie</dt><dd>' + node.part + '</dd></div>' +
+      '<div><dt>Partie</dt><dd>' + html(node.part) + '</dd></div>' +
       '</dl>' +
-      '<p class="graph-info-hint">Entrée · ouvrir · flèches · naviguer</p>';
+      '<button type="button" class="graph-open-chapter" data-open="' + html(node.id) + '">Lire ce chapitre</button>' +
+      '<div class="graph-related-list"><h4>À réviser ensuite</h4>' + relatedHtml + '</div>';
+    infoPanelEl.querySelector('[data-open]')?.addEventListener('click',()=>openChapter(node.id));
+    infoPanelEl.querySelectorAll('[data-related]').forEach(btn=>btn.addEventListener('click',()=>selectNode(nodeById.get(btn.dataset.related))));
     infoPanelEl.hidden = false;
   }
 

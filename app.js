@@ -219,7 +219,7 @@ function bootApp(){
     document.body.classList.remove('ap-mini-visible', 'ap-full-open', 'ap-is-playing');
   } catch (_) {}
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js?v=233').then((reg) => {
+    navigator.serviceWorker.register('sw.js?v=234').then((reg) => {
       try { reg.update(); } catch (_) {}
       if (reg.waiting) {
         try { reg.waiting.postMessage({ type: 'SKIP_WAITING' }); } catch (_) {}
@@ -304,6 +304,7 @@ function sw(view, opts){
     let targetView = view;
     if(view === 'sujets') targetView = 'annales';
     if(view === 'items') targetView = 'synth'; // ITEMs = onglet de Synthèses
+    if(view === 'garde') targetView = 'proto'; // ancien raccourci fusionné dans Pratique clinique
     
     // Pousser l'historique sauf navigation "Retour"
     if(!opts.back && prev && prev !== targetView){
@@ -348,7 +349,6 @@ function sw(view, opts){
     if(targetView!=='feed'&&typeof BrainFeed!=='undefined'&&BrainFeed.destroy) safe(()=>BrainFeed.destroy(), 'feed-destroy');
     if(targetView==='dash'&&typeof Dashboard!=='undefined') safe(()=>Dashboard.render(), 'dash');
     if(targetView==='erreurs'&&typeof ErrorJournal!=='undefined') safe(()=>ErrorJournal.render(), 'erreurs');
-    if(targetView==='garde') safe(renderGarde, 'garde');
     if(targetView==='dict') safe(renderDict, 'dict');
     if(targetView==='scores'){
       const Mc = (typeof Medicalcul!=='undefined') ? Medicalcul
@@ -375,7 +375,7 @@ function sw(view, opts){
         else switchAnnalesMode('authentiques');
       }, 'annales');
     }
-    if(targetView==='proto') safe(()=>switchProtoMode('has'), 'proto');
+    if(targetView==='proto') safe(()=>switchProtoMode('cliniques'), 'proto');
     if(targetView!=='quiz'&&typeof QuizMode!=='undefined'&&QuizMode.destroy) safe(()=>QuizMode.destroy(), 'quiz-destroy');
     if(targetView==='set'){
       const pd=document.getElementById('pd');
@@ -467,14 +467,31 @@ function renderAuthenticAnnales(){
     <p>${esc(a.format)} · ${a.pages} pages</p>
     <div class="official-annal-provenance"><strong>Provenance :</strong> ${esc(a.provenance)}</div>
     <div class="official-annal-note">${esc(a.note)}</div>
-    <div class="official-annal-actions"><a href="${esc(a.file)}" target="_blank" rel="noopener">Lire le PDF dans l’app</a><a href="${esc(a.sourceUrl)}" target="_blank" rel="noopener">Voir la page source</a></div>
+    <div class="official-annal-actions"><button type="button" onclick="toggleEmbeddedAnnal('${esc(a.id)}','${esc(a.file)}',this)">Lire directement ici</button></div>
+    <div class="embedded-annal" id="embedded-${esc(a.id)}" hidden><div class="embedded-annal-bar"><strong>${esc(a.title)}</strong><span>${a.pages} pages · disponible hors ligne</span></div><iframe title="${esc(a.title)}" data-src="${esc(a.file)}#toolbar=1&navpanes=0" loading="lazy"></iframe></div>
   </article>`).join('');
   const internal=s25.internal||{};
   const qcm=(internal.questions||[]).map((q,i)=>`<details class="official-qcm"><summary><span>Q${i+1}</span>${esc(q.q)}</summary><ol type="A">${(q.options||[]).map(o=>`<li>${esc(o)}</li>`).join('')}</ol><div class="official-qcm-noanswer">Énoncé uniquement : aucune correction n’est revendiquée comme officielle.</div></details>`).join('');
   const external=s25.external||{};
   el.innerHTML=`<section class="official-annals-block"><div class="official-annals-title"><span>Archives</span><h2>Ancien format 2009-2024</h2><p>Avant la réforme 2025, les sujets étaient organisés en EVCF et EVCP, sans étiquette « voie interne » ou « voie externe ».</p></div><div class="official-annals-grid">${archiveHtml}</div></section>
-  <section class="official-annals-block"><div class="official-annals-title"><span>Réforme 2025</span><h2>Voie interne</h2><p>${esc(internal.format||'')} · ${esc(internal.completeness||'')}</p></div><div class="ann-session-notice"><strong>Provenance :</strong> ${esc(internal.provenance||'')} <a href="${esc(internal.sourceUrl||'#')}" target="_blank" rel="noopener">Consulter la reproduction source</a></div><div class="official-qcm-list">${qcm}</div></section>
-  <section class="official-annals-block unavailable"><div class="official-annals-title"><span>Réforme 2025</span><h2>${esc(external.title||'Voie externe')}</h2><p>${esc(external.format||'')}</p></div><div class="official-annal-note"><strong>${esc(external.completeness||'')}</strong><br>${esc(external.note||'')}</div><a class="official-source-btn" href="${esc(external.sourceUrl||'#')}" target="_blank" rel="noopener">Vérifier le format officiel</a></section>`;
+  <section class="official-annals-block"><div class="official-annals-title"><span>Réforme 2025</span><h2>Voie interne</h2><p>${esc(internal.format||'')} · ${esc(internal.completeness||'')}</p></div><div class="ann-session-notice"><strong>Provenance :</strong> ${esc(internal.provenance||'')}. L’énoncé disponible est intégré ci-dessous, sans sortie de l’app.</div><div class="official-qcm-list">${qcm}</div></section>
+  <section class="official-annals-block unavailable"><div class="official-annals-title"><span>Réforme 2025</span><h2>${esc(external.title||'Voie externe')}</h2><p>${esc(external.format||'')}</p></div><div class="official-annal-note"><strong>${esc(external.completeness||'')}</strong><br>${esc(external.note||'')}</div></section>`;
+}
+
+function toggleEmbeddedAnnal(id,file,button){
+  const panel=document.getElementById('embedded-'+id);
+  if(!panel)return;
+  const opening=panel.hidden;
+  document.querySelectorAll('.embedded-annal').forEach(other=>{
+    if(other!==panel){other.hidden=true;const b=other.previousElementSibling?.querySelector('button');if(b)b.textContent='Lire directement ici';}
+  });
+  panel.hidden=!opening;
+  if(opening){
+    const frame=panel.querySelector('iframe');
+    if(frame&&!frame.getAttribute('src'))frame.setAttribute('src',frame.dataset.src||file);
+    button.textContent='Fermer la lecture';
+    setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'start'}),50);
+  }else button.textContent='Lire directement ici';
 }
 /* ── DAILY REVISION CARD ── */
 function renderDailyRev(){
@@ -4100,7 +4117,19 @@ function renderProto(){
       rawAll.push({...p, fallbackCategory: cat});
     });
   };
-  addProto(typeof PROTOCOLES_URGENCE!=='undefined'?PROTOCOLES_URGENCE:null,'Urgence');
+  if(typeof PROTOCOLES_HAS_OFFICIELS!=='undefined'){
+    addProto(PROTOCOLES_HAS_OFFICIELS.map(p=>({
+      ...p,
+      titre:p.title,
+      protocole:p.steps,
+      indication:p.scope,
+      categorie:'Référentiels HAS',
+      sourceKind:'has',
+      essential:true,
+      sourceLabel:`HAS · ${p.date}`
+    })),'Référentiels HAS');
+  }
+  addProto(typeof PROTOCOLES_URGENCE!=='undefined'?PROTOCOLES_URGENCE.map(p=>({...p,essential:true})):null,'Urgence');
   addProto(typeof PROTOCOLES_COMPLETS!=='undefined'?PROTOCOLES_COMPLETS:null,'Protocoles complets');
   addProto(typeof PROTOCOLES_REANIMATION!=='undefined'?PROTOCOLES_REANIMATION:null,'Réanimation');
   addProto(typeof PROTOCOLES_COGNITIF!=='undefined'?PROTOCOLES_COGNITIF:null,'Cognitif');
@@ -4112,7 +4141,8 @@ function renderProto(){
   addProto(typeof PROTOCOLES_LEGISLATION!=='undefined'?PROTOCOLES_LEGISLATION:null,'Législation');
   addProto(typeof PROTOCOLES_FORMATION!=='undefined'?PROTOCOLES_FORMATION:null,'Formation');
   
-  // FICHES_GARDE restent UNIQUEMENT dans l'onglet Garde (checklists) — pas de doublon ici.
+  // Les anciennes FICHES_GARDE ne sont plus exposées comme module distinct :
+  // les urgences utiles sont déjà couvertes par les conduites cliniques ci-dessus.
   // CLINICAL_REFERENCE stays in search/reference only — do NOT inject into protocoles.
 
   // Normalisation des catégories et dédoublonnage (titre + id exact + near-dup catégorie)
@@ -4158,7 +4188,9 @@ function renderProto(){
     const id = String(p.id || '').toLowerCase();
     const titreL = String(p.titre || p.title || '').toLowerCase();
     
-    if (lower.includes('urgence') || lower === 'rcp' || lower.includes('réanim') || lower.includes('reanim')
+    if (p.sourceKind === 'has') {
+      c = 'Référentiels HAS';
+    } else if (lower.includes('urgence') || lower === 'rcp' || lower.includes('réanim') || lower.includes('reanim')
         || id.startsWith('uv-') || id.startsWith('proto-') || id.startsWith('pr-') || id.startsWith('prcp-')) {
       c = 'Urgences & réa';
     } else if (lower.includes('antibio') || id.startsWith('abx-') || titreL.includes('infect')) {
@@ -4251,15 +4283,16 @@ function renderProto(){
   if(!all.length){el.innerHTML='<div class="empty"><div class="empty-text">Aucun protocole disponible</div></div>';return}
   
   const customOrder = {
-    'Urgences & réa': 1,
-    'Infectieux': 2,
-    'Douleur & palliatif': 3,
-    'Cardio / respiratoire / rénal': 4,
-    'Neuro & cognition': 5,
-    'Métabolisme & gériatrie': 6,
-    'Rééducation': 7,
-    'Qualité & organisation': 8,
-    'Autres protocoles': 9
+    'Référentiels HAS': 1,
+    'Urgences & réa': 2,
+    'Infectieux': 3,
+    'Douleur & palliatif': 4,
+    'Cardio / respiratoire / rénal': 5,
+    'Neuro & cognition': 6,
+    'Métabolisme & gériatrie': 7,
+    'Rééducation': 8,
+    'Qualité & organisation': 9,
+    'Autres protocoles': 10
   };
 
   const cats=[...new Set(all.map(p=>p.categorie))].sort((a, b) => {
@@ -4267,27 +4300,31 @@ function renderProto(){
   });
   if(filtEl){
     filtEl.innerHTML=`<div class="proto-filter-bar">
+      <select id="protoScopeFilter" onchange="filterProto()"><option value="essential">Essentiels</option><option value="all">Toute la bibliothèque</option></select>
       <select id="protoCatFilter" onchange="filterProto()"><option value="">Toutes catégories</option>${cats.map(c=>`<option value="${c}">${c}</option>`).join('')}</select>
-      <input type="text" id="protoSearch" placeholder="Rechercher un protocole..." oninput="filterProto()">
-      <span class="proto-count" id="protoCount">${all.length} protocoles</span>
+      <input type="text" id="protoSearch" placeholder="Rechercher une situation clinique..." oninput="filterProto()">
+      <span class="proto-count" id="protoCount"></span>
     </div>`;
   }
   window._protocoles=all;
   window.filterProto=function(){
+    const pf=document.getElementById('protoScopeFilter');
     const cf=document.getElementById('protoCatFilter');
     const sf=document.getElementById('protoSearch');
+    const scope=pf?pf.value:'essential';
     const cat=cf?cf.value:'';
     const q=sf?sf.value.toLowerCase():'';
     let filtered=window._protocoles;
+    if(scope==='essential'&&!q&&!cat)filtered=filtered.filter(p=>p.essential===true);
     if(cat)filtered=filtered.filter(p=>(p.categorie||p.category||'')===cat);
     if(q)filtered=filtered.filter(p=>(p.titre||p.title||'').toLowerCase().includes(q)||(p.indication||'').toLowerCase().includes(q));
     renderProtoList(filtered);
   };
-  renderProtoList(all);
+  window.filterProto();
 }
 function renderProtoList(list){
   const el=document.getElementById('protoContent');if(!el)return;
-  const cnt=document.getElementById('protoCount');if(cnt)cnt.textContent=list.length+' protocoles';
+  const cnt=document.getElementById('protoCount');if(cnt)cnt.textContent=list.length+' affichés · '+(window._protocoles||[]).length+' disponibles';
   const grouped={};
   list.forEach(p=>{const cat=p.categorie||p.category||'Autre';if(!grouped[cat])grouped[cat]=[];grouped[cat].push(p)});
   const entries=Object.entries(grouped);
@@ -4307,12 +4344,10 @@ function renderProtoList(list){
         const meta=getProtoMetaBlocks(p);
         const icon=p.icon||'📋';
         const hasBody=steps.length>0||meta.length>0||p.indication||p.surveillance||p.alerte||p.alert||p.contreIndications||p.effetsSecondaires;
-        const sourceUrl=String(p.sourceUrl||p.officialSourceUrl||'');
-        const verified=/^https:\/\/(?:www\.)?(?:has-sante\.fr|ansm\.sante\.fr)\//i.test(sourceUrl);
+        const verified=p.sourceKind==='has';
         return`<div class="proto-card${p.urgency==='high'?' proto-urgent':''}${hasBody?'':' proto-empty'}">
-          <span class="source-status ${verified?'official':'unverified'}">${verified?'Référentiel officiel relié':'Synthèse pédagogique · source non reliée'}</span>
+          <span class="source-status ${verified?'official':'unverified'}">${verified?esc(p.sourceLabel||'HAS · intégré dans l’app'):'Synthèse clinique interne'}</span>
           <div class="proto-card-head"><span class="proto-icon">${icon}</span><div class="proto-card-title">${esc(p.titre||p.title||'')}</div></div>
-          ${verified?`<a class="proto-source-link" href="${esc(sourceUrl)}" target="_blank" rel="noopener">Consulter la source officielle</a>`:''}
           ${p.indication?`<div class="proto-indication">${esc(p.indication)}</div>`:''}
           ${meta.map(m=>`<div class="proto-meta"><strong>${esc(m.label)} :</strong> ${esc(m.text)}</div>`).join('')}
           ${steps.length?`<ol class="proto-steps">${steps.map(s=>`<li>${esc(s)}</li>`).join('')}</ol>`:''}
@@ -4476,23 +4511,17 @@ window.applyInstallBarVisibility=applyInstallBarVisibility;
 
 /* ── TRAITEMENTS (THERAPEUTIQUE) ── */
 function switchProtoMode(mode) {
-  const btnHas = document.getElementById('btnSubProtoHas');
   const btnProto = document.getElementById('btnSubProtoCliniques');
   const btnTx = document.getElementById('btnSubTraitements');
-  const tabHas = document.getElementById('subTabProtoHas');
   const tabProto = document.getElementById('subTabProtoCliniques');
   const tabTx = document.getElementById('subTabTraitements');
 
-  if (!btnHas || !btnProto || !btnTx || !tabHas || !tabProto || !tabTx) return;
+  if (!btnProto || !btnTx || !tabProto || !tabTx) return;
 
-  [btnHas, btnProto, btnTx].forEach(btn=>btn.classList.remove('active'));
-  [tabHas, tabProto, tabTx].forEach(tab=>{tab.style.display='none';});
+  [btnProto, btnTx].forEach(btn=>btn.classList.remove('active'));
+  [tabProto, tabTx].forEach(tab=>{tab.style.display='none';});
 
-  if (mode === 'has') {
-    btnHas.classList.add('active');
-    tabHas.style.display = 'block';
-    renderHasOfficial();
-  } else if (mode === 'traitements') {
+  if (mode === 'traitements') {
     btnTx.classList.add('active');
     tabTx.style.display = 'block';
     switchTxSubMode('molecules');
@@ -4501,31 +4530,6 @@ function switchProtoMode(mode) {
     tabProto.style.display = 'block';
     renderProto();
   }
-}
-
-function renderHasOfficial(){
-  const el=document.getElementById('protoHasContent');
-  if(!el)return;
-  const list=typeof PROTOCOLES_HAS_OFFICIELS!=='undefined'?PROTOCOLES_HAS_OFFICIELS:[];
-  if(!list.length){
-    el.innerHTML='<div class="empty"><div class="empty-text">Référentiels HAS non chargés</div></div>';
-    return;
-  }
-  const cats=[...new Set(list.map(p=>p.category))];
-  el.innerHTML=`<div class="has-library-toolbar"><div><strong>${list.length} fiches HAS sourcées</strong><span>Résumé fidèle + accès direct à la publication primaire</span></div><select id="hasOfficialFilter" onchange="filterHasOfficial(this.value)"><option value="">Tous les domaines</option>${cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('')}</select></div><div id="hasOfficialList"></div>`;
-  window._hasOfficial=list;
-  window.filterHasOfficial=function(cat){renderHasOfficialList(cat?list.filter(p=>p.category===cat):list);};
-  renderHasOfficialList(list);
-}
-
-function renderHasOfficialList(list){
-  const el=document.getElementById('hasOfficialList');
-  if(!el)return;
-  el.innerHTML=list.map(p=>`<article class="has-official-card">
-    <div class="has-official-head"><span class="has-official-icon">${p.icon||'📘'}</span><div><span class="source-status official">HAS · ${esc(p.date)}</span><h3>${esc(p.title)}</h3><p>${esc(p.scope)}</p></div></div>
-    <ol>${(p.steps||[]).map(step=>`<li>${esc(step)}</li>`).join('')}</ol>
-    <a href="${esc(p.sourceUrl)}" target="_blank" rel="noopener">Ouvrir la publication HAS ↗</a>
-  </article>`).join('');
 }
 
 function switchTxSubMode(subMode) {

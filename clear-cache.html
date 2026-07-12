@@ -38,14 +38,14 @@
       document.querySelectorAll('.ap-mini, .ap-full, .qa-card-listen').forEach((el) => el.remove());
     } catch (_) {}
 
-    log('Cache nettoyé. Ouverture de l’app v233…');
+    log('Cache nettoyé. Ouverture de l’app v234…');
     setTimeout(() => {
-      window.location.replace('./index.html?v=233&purged=' + Date.now());
+      window.location.replace('./index.html?v=234&purged=' + Date.now());
     }, 700);
   } catch (e) {
     log('Redirection…');
     setTimeout(() => {
-      window.location.replace('./index.html?v=233&purged=' + Date.now());
+      window.location.replace('./index.html?v=234&purged=' + Date.now());
     }, 400);
   }
 })();
