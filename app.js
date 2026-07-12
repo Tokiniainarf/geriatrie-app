@@ -219,7 +219,7 @@ function bootApp(){
     document.body.classList.remove('ap-mini-visible', 'ap-full-open', 'ap-is-playing');
   } catch (_) {}
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js?v=232').then((reg) => {
+    navigator.serviceWorker.register('sw.js?v=233').then((reg) => {
       try { reg.update(); } catch (_) {}
       if (reg.waiting) {
         try { reg.waiting.postMessage({ type: 'SKIP_WAITING' }); } catch (_) {}
@@ -372,10 +372,10 @@ function sw(view, opts){
     if(targetView==='annales') {
       safe(()=>{
         if (view === 'sujets') switchAnnalesMode('sujets');
-        else switchAnnalesMode('annales');
+        else switchAnnalesMode('authentiques');
       }, 'annales');
     }
-    if(targetView==='proto') safe(renderProto, 'proto');
+    if(targetView==='proto') safe(()=>switchProtoMode('has'), 'proto');
     if(targetView!=='quiz'&&typeof QuizMode!=='undefined'&&QuizMode.destroy) safe(()=>QuizMode.destroy(), 'quiz-destroy');
     if(targetView==='set'){
       const pd=document.getElementById('pd');
@@ -426,26 +426,55 @@ function switchStudyMode(mode){
 window.switchStudyMode=switchStudyMode;
 
 function switchAnnalesMode(mode) {
+  const btnAuth = document.getElementById('btnSubAuthentiques');
   const btnAnn = document.getElementById('btnSubAnnales');
   const btnSuj = document.getElementById('btnSubSujets');
+  const tabAuth = document.getElementById('subTabAuthentiques');
   const tabAnn = document.getElementById('subTabAnnales');
   const tabSuj = document.getElementById('subTabSujets');
   
-  if (!tabAnn || !tabSuj) return;
+  if (!tabAuth || !tabAnn || !tabSuj) return;
+
+  [btnAuth, btnAnn, btnSuj].forEach(btn=>btn?.classList.remove('active'));
+  [tabAuth, tabAnn, tabSuj].forEach(tab=>{ tab.style.display='none'; });
   
-  if (mode === 'annales') {
+  if (mode === 'authentiques') {
+    tabAuth.style.display = 'block';
+    btnAuth?.classList.add('active');
+    renderAuthenticAnnales();
+  } else if (mode === 'annales') {
     tabAnn.style.display = 'block';
-    tabSuj.style.display = 'none';
     btnAnn?.classList.add('active');
-    btnSuj?.classList.remove('active');
     renderAnnales();
   } else {
-    tabAnn.style.display = 'none';
     tabSuj.style.display = 'block';
-    btnAnn?.classList.remove('active');
     btnSuj?.classList.add('active');
     renderSujets();
   }
+}
+
+function renderAuthenticAnnales(){
+  const el=document.getElementById('annalesAuthentiquesContent');
+  if(!el)return;
+  if(typeof ANNALES_AUTHENTIQUES==='undefined'){
+    el.innerHTML='<div class="empty"><div class="empty-text">Archives sourcées non chargées</div></div>';
+    return;
+  }
+  const archives=ANNALES_AUTHENTIQUES.archives||[];
+  const s25=ANNALES_AUTHENTIQUES.session2025||{};
+  const archiveHtml=archives.map(a=>`<article class="official-annal-card">
+    <div class="official-annal-head"><div><span class="source-status official">Sujet national reproduit · non corrigé</span><h3>${esc(a.title)}</h3></div><span class="official-annal-period">${esc(a.period)}</span></div>
+    <p>${esc(a.format)} · ${a.pages} pages</p>
+    <div class="official-annal-provenance"><strong>Provenance :</strong> ${esc(a.provenance)}</div>
+    <div class="official-annal-note">${esc(a.note)}</div>
+    <div class="official-annal-actions"><a href="${esc(a.file)}" target="_blank" rel="noopener">Lire le PDF dans l’app</a><a href="${esc(a.sourceUrl)}" target="_blank" rel="noopener">Voir la page source</a></div>
+  </article>`).join('');
+  const internal=s25.internal||{};
+  const qcm=(internal.questions||[]).map((q,i)=>`<details class="official-qcm"><summary><span>Q${i+1}</span>${esc(q.q)}</summary><ol type="A">${(q.options||[]).map(o=>`<li>${esc(o)}</li>`).join('')}</ol><div class="official-qcm-noanswer">Énoncé uniquement : aucune correction n’est revendiquée comme officielle.</div></details>`).join('');
+  const external=s25.external||{};
+  el.innerHTML=`<section class="official-annals-block"><div class="official-annals-title"><span>Archives</span><h2>Ancien format 2009-2024</h2><p>Avant la réforme 2025, les sujets étaient organisés en EVCF et EVCP, sans étiquette « voie interne » ou « voie externe ».</p></div><div class="official-annals-grid">${archiveHtml}</div></section>
+  <section class="official-annals-block"><div class="official-annals-title"><span>Réforme 2025</span><h2>Voie interne</h2><p>${esc(internal.format||'')} · ${esc(internal.completeness||'')}</p></div><div class="ann-session-notice"><strong>Provenance :</strong> ${esc(internal.provenance||'')} <a href="${esc(internal.sourceUrl||'#')}" target="_blank" rel="noopener">Consulter la reproduction source</a></div><div class="official-qcm-list">${qcm}</div></section>
+  <section class="official-annals-block unavailable"><div class="official-annals-title"><span>Réforme 2025</span><h2>${esc(external.title||'Voie externe')}</h2><p>${esc(external.format||'')}</p></div><div class="official-annal-note"><strong>${esc(external.completeness||'')}</strong><br>${esc(external.note||'')}</div><a class="official-source-btn" href="${esc(external.sourceUrl||'#')}" target="_blank" rel="noopener">Vérifier le format officiel</a></section>`;
 }
 /* ── DAILY REVISION CARD ── */
 function renderDailyRev(){
@@ -4447,26 +4476,56 @@ window.applyInstallBarVisibility=applyInstallBarVisibility;
 
 /* ── TRAITEMENTS (THERAPEUTIQUE) ── */
 function switchProtoMode(mode) {
+  const btnHas = document.getElementById('btnSubProtoHas');
   const btnProto = document.getElementById('btnSubProtoCliniques');
   const btnTx = document.getElementById('btnSubTraitements');
+  const tabHas = document.getElementById('subTabProtoHas');
   const tabProto = document.getElementById('subTabProtoCliniques');
   const tabTx = document.getElementById('subTabTraitements');
 
-  if (!btnProto || !btnTx || !tabProto || !tabTx) return;
+  if (!btnHas || !btnProto || !btnTx || !tabHas || !tabProto || !tabTx) return;
 
-  if (mode === 'traitements') {
-    btnProto.classList.remove('active');
+  [btnHas, btnProto, btnTx].forEach(btn=>btn.classList.remove('active'));
+  [tabHas, tabProto, tabTx].forEach(tab=>{tab.style.display='none';});
+
+  if (mode === 'has') {
+    btnHas.classList.add('active');
+    tabHas.style.display = 'block';
+    renderHasOfficial();
+  } else if (mode === 'traitements') {
     btnTx.classList.add('active');
-    tabProto.style.display = 'none';
     tabTx.style.display = 'block';
     switchTxSubMode('molecules');
   } else {
     btnProto.classList.add('active');
-    btnTx.classList.remove('active');
     tabProto.style.display = 'block';
-    tabTx.style.display = 'none';
     renderProto();
   }
+}
+
+function renderHasOfficial(){
+  const el=document.getElementById('protoHasContent');
+  if(!el)return;
+  const list=typeof PROTOCOLES_HAS_OFFICIELS!=='undefined'?PROTOCOLES_HAS_OFFICIELS:[];
+  if(!list.length){
+    el.innerHTML='<div class="empty"><div class="empty-text">Référentiels HAS non chargés</div></div>';
+    return;
+  }
+  const cats=[...new Set(list.map(p=>p.category))];
+  el.innerHTML=`<div class="has-library-toolbar"><div><strong>${list.length} fiches HAS sourcées</strong><span>Résumé fidèle + accès direct à la publication primaire</span></div><select id="hasOfficialFilter" onchange="filterHasOfficial(this.value)"><option value="">Tous les domaines</option>${cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('')}</select></div><div id="hasOfficialList"></div>`;
+  window._hasOfficial=list;
+  window.filterHasOfficial=function(cat){renderHasOfficialList(cat?list.filter(p=>p.category===cat):list);};
+  renderHasOfficialList(list);
+}
+
+function renderHasOfficialList(list){
+  const el=document.getElementById('hasOfficialList');
+  if(!el)return;
+  el.innerHTML=list.map(p=>`<article class="has-official-card">
+    <div class="has-official-head"><span class="has-official-icon">${p.icon||'📘'}</span><div><span class="source-status official">HAS · ${esc(p.date)}</span><h3>${esc(p.title)}</h3><p>${esc(p.scope)}</p></div></div>
+    <ol>${(p.steps||[]).map(step=>`<li>${esc(step)}</li>`).join('')}</ol>
+    <a href="${esc(p.sourceUrl)}" target="_blank" rel="noopener">Ouvrir la publication HAS ↗</a>
+  </article>`).join('');
 }
 
 function switchTxSubMode(subMode) {

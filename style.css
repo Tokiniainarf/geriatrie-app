@@ -6630,6 +6630,38 @@ body {
   #vScores .calc-grid { grid-template-columns: 1fr !important; }
 }
 
+/* v233 - annales sourcées et bibliothèque HAS */
+.official-annals-block{margin:18px 0 28px;padding:clamp(16px,3vw,28px);border:1px solid color-mix(in srgb,var(--accent) 24%,var(--border));border-radius:24px;background:color-mix(in srgb,var(--card) 96%,var(--accent) 4%);box-shadow:0 14px 34px rgba(15,23,42,.06)}
+.official-annals-title>span{display:inline-flex;padding:5px 10px;border-radius:999px;background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent);font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.official-annals-title h2{margin:10px 0 4px;font-size:clamp(1.25rem,3vw,1.75rem);letter-spacing:-.03em}
+.official-annals-title p{margin:0 0 18px;color:var(--muted);line-height:1.6}
+.official-annals-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.official-annal-card{padding:18px;border:1px solid var(--border);border-radius:18px;background:var(--card)}
+.official-annal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.official-annal-head h3{margin:10px 0 4px;font-size:1.05rem}
+.official-annal-period{font-weight:800;color:var(--accent);white-space:nowrap}
+.official-annal-card>p,.official-annal-provenance,.official-annal-note{font-size:.88rem;line-height:1.55;color:var(--muted)}
+.official-annal-provenance{margin-top:12px}.official-annal-note{margin-top:8px;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--bg) 72%,transparent)}
+.official-annal-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.official-annal-actions a,.official-source-btn,.has-official-card>a{display:inline-flex;align-items:center;justify-content:center;padding:10px 13px;border-radius:12px;background:var(--accent);color:#fff;text-decoration:none;font-size:.82rem;font-weight:800}
+.official-annal-actions a+ a{background:transparent;color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 40%,var(--border))}
+.official-qcm-list{display:grid;gap:9px}.official-qcm{border:1px solid var(--border);border-radius:15px;background:var(--card);overflow:hidden}
+.official-qcm summary{display:flex;gap:10px;align-items:flex-start;padding:14px 16px;cursor:pointer;font-weight:700;line-height:1.45;list-style:none}
+.official-qcm summary span{flex:0 0 auto;color:var(--accent);font-weight:900}.official-qcm summary::-webkit-details-marker{display:none}
+.official-qcm ol{margin:0;padding:0 22px 8px 52px;line-height:1.55}.official-qcm li{padding:3px 0}
+.official-qcm-noanswer{margin:6px 14px 14px;padding:9px 11px;border-radius:10px;background:color-mix(in srgb,#f59e0b 10%,transparent);color:var(--muted);font-size:.78rem}
+.official-annals-block.unavailable{border-style:dashed}.official-annals-block.unavailable .official-source-btn{margin-top:14px}
+.has-library-toolbar{display:flex;justify-content:space-between;align-items:center;gap:14px;margin:16px 0;padding:15px 16px;border:1px solid var(--border);border-radius:16px;background:var(--card)}
+.has-library-toolbar>div{display:flex;flex-direction:column;gap:3px}.has-library-toolbar span{font-size:.78rem;color:var(--muted)}
+.has-library-toolbar select{max-width:220px;padding:9px 12px;border:1px solid var(--border);border-radius:12px;background:var(--bg);color:var(--text)}
+#hasOfficialList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.has-official-card{display:flex;flex-direction:column;padding:18px;border:1px solid color-mix(in srgb,var(--accent) 20%,var(--border));border-radius:20px;background:var(--card);box-shadow:0 12px 28px rgba(15,23,42,.05)}
+.has-official-head{display:flex;align-items:flex-start;gap:12px}.has-official-icon{font-size:1.45rem;line-height:1}
+.has-official-head h3{margin:8px 0 5px;font-size:1.05rem}.has-official-head p{margin:0;color:var(--muted);font-size:.82rem;line-height:1.45}
+.has-official-card ol{margin:15px 0 16px;padding-left:22px;line-height:1.55;font-size:.9rem}.has-official-card li+li{margin-top:7px}
+.has-official-card>a{margin-top:auto;align-self:flex-start}
+@media(max-width:700px){.official-annals-grid,#hasOfficialList{grid-template-columns:1fr}.official-annal-head{flex-direction:column}.has-library-toolbar{align-items:stretch;flex-direction:column}.has-library-toolbar select{max-width:none;width:100%}.official-annal-actions{flex-direction:column}.official-annal-actions a{width:100%}.official-qcm summary{font-size:.88rem}.official-qcm ol{padding-left:45px;font-size:.86rem}}
+
 /* ═══════════════════════════════════════════════════════════════
    Lecteur éditorial v228 — hiérarchie nette, respiration, zéro OCR-card
    ═══════════════════════════════════════════════════════════════ */

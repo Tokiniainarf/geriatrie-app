@@ -19,7 +19,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<link rel="stylesheet" href="style.css?v=232">
+<link rel="stylesheet" href="style.css?v=233">
 <style>
 /* Critical preloader (inline so it shows before CSS/JS) */
 #appPreloader{position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:radial-gradient(ellipse 80% 50% at 50% 0%,#164E63 0%,#0f1117 55%,#050508 100%);color:#EDEDEF;font-family:Figtree,system-ui,sans-serif;transition:opacity .45s ease,visibility .45s}
@@ -373,18 +373,23 @@
   <!-- ANNALES / ENTRAÎNEMENT -->
   <div class="view" id="vAnnales">
     <div class="page-hd">
-      <h1>Entraînements EVC</h1>
-      <p>Cas pédagogiques et sujets reconstitués, avec provenance visible</p>
+      <h1>Annales EVC Gériatrie</h1>
+      <p>Sujets nationaux disponibles, séparés des entraînements reconstitués</p>
     </div>
-    <div class="src-note"><strong>Important :</strong> aucun cas n’est désormais présenté comme une annale officielle sans lien vers le document source. Les millésimes indiquent le style d’entraînement, pas une authentification CNG.</div>
+    <div class="src-note"><strong>Repère :</strong> 2009-2024 = ancien format EVCF/EVCP. À partir de 2025 : voie interne = QCM ; voie externe = EVCF + EVCP. La provenance et le niveau de complétude sont affichés sur chaque ressource.</div>
     
     <div class="sub-tab-switch">
-      <button id="btnSubAnnales" class="active" onclick="switchAnnalesMode('annales')">Cas Cliniques</button>
-      <button id="btnSubSujets" onclick="switchAnnalesMode('sujets')">Sujets Complets</button>
+      <button id="btnSubAuthentiques" class="active" onclick="switchAnnalesMode('authentiques')">Annales sourcées</button>
+      <button id="btnSubAnnales" onclick="switchAnnalesMode('annales')">Cas d’entraînement</button>
+      <button id="btnSubSujets" onclick="switchAnnalesMode('sujets')">Examens blancs</button>
+    </div>
+
+    <div id="subTabAuthentiques" class="sub-tab-content">
+      <div id="annalesAuthentiquesContent"></div>
     </div>
 
     <!-- Section Cas Cliniques (Annales) -->
-    <div id="subTabAnnales" class="sub-tab-content">
+    <div id="subTabAnnales" class="sub-tab-content" style="display:none">
       <div class="annales-filters" id="annalesFilters"></div>
       <div id="annalesContent"></div>
     </div>
@@ -409,12 +414,18 @@
     </div>
     
     <div class="sub-tab-switch">
-      <button id="btnSubProtoCliniques" class="active" onclick="switchProtoMode('cliniques')">Conduites cliniques</button>
+      <button id="btnSubProtoHas" class="active" onclick="switchProtoMode('has')">Référentiels HAS</button>
+      <button id="btnSubProtoCliniques" onclick="switchProtoMode('cliniques')">Synthèses cliniques</button>
       <button id="btnSubTraitements" onclick="switchProtoMode('traitements')">Fiches médicaments</button>
     </div>
 
+    <div id="subTabProtoHas" class="sub-tab-content">
+      <div class="src-note"><strong>Source primaire :</strong> chaque fiche ci-dessous renvoie directement à la publication HAS correspondante. La date est visible : les recommandations anciennes doivent être confrontées aux référentiels plus récents et au protocole local.</div>
+      <div id="protoHasContent"></div>
+    </div>
+
     <!-- Section Protocoles Cliniques -->
-    <div id="subTabProtoCliniques" class="sub-tab-content">
+    <div id="subTabProtoCliniques" class="sub-tab-content" style="display:none">
       <div class="proto-filters" id="protoFilters"></div>
       <div id="protoContent"></div>
     </div>
@@ -512,8 +523,8 @@
         <div class="ds" style="line-height:1.5;margin-top:6px">
           <strong>Manuel</strong> : Gériatrie 5e éd. (CNEG · Boddaert · Elsevier Masson 2021).<br>
           <strong>Flashcards / synthèses</strong> : dérivées du manuel + enrichissements pédagogiques.<br>
-          <strong>Annales</strong> : cas d’entraînement style EVC + modules par année si chargés — pas l’intégralité des sujets officiels CNG.<br>
-          <strong>Protocoles</strong> : synthèses cliniques pratiques (pas un export HAS). Vérifier HAS/ANSM pour les décisions critiques.<br>
+          <strong>Annales</strong> : recueils EVCF/EVCP 2009-2024 intégrés, extrait public 2025 interne, et entraînements clairement séparés.<br>
+          <strong>Protocoles</strong> : onglet HAS relié aux publications primaires ; synthèses cliniques et médicaments dans des onglets distincts.<br>
           <strong>Garde</strong> : checklists express (≠ protocoles complets).<br>
           <strong>Scores</strong> : échelles usuelles (MMS, MNA, GDS, TUG, Braden, CAM…).
         </div>
@@ -572,18 +583,20 @@
 <script>
 (function(){
   var steps = [
-    { src: 'data-bundle.js?v=232', label: 'Contenu des chapitres…', pct: 40 },
-    { src: 'practice-data.js?v=232', label: 'Entraînements structurés…', pct: 46 },
-    { src: 'notebook-decks-data.js?v=232', label: 'Decks NotebookLM…', pct: 51 },
-    { src: 'notebook-interactive.js?v=232', label: 'Lecteur présentation…', pct: 56 },
-    { src: 'calculateurs.js?v=232', label: 'Scores & calculateurs…', pct: 62 },
-    { src: 'quiz.js?v=232', label: 'Mode examen…', pct: 69 },
-    { src: 'dashboard.js?v=232', label: 'Tableau de bord…', pct: 75 },
-    { src: 'appsearch.js?v=232', label: 'Recherche…', pct: 81 },
-    { src: 'erreurs-journal.js?v=232', label: 'Fichier erreurs…', pct: 86 },
-    { src: 'graph.js?v=232', label: 'Carte des liens…', pct: 91 },
-    { src: 'brainfeed.js?v=232', label: 'BrainFeed…', pct: 96 },
-    { src: 'app.js?v=232', label: 'Interface…', pct: 100 }
+    { src: 'data-bundle.js?v=233', label: 'Contenu des chapitres…', pct: 36 },
+    { src: 'practice-data.js?v=233', label: 'Entraînements structurés…', pct: 42 },
+    { src: 'annales-authentiques.js?v=233', label: 'Annales EVC sourcées…', pct: 47 },
+    { src: 'protocoles-has-officiels.js?v=233', label: 'Référentiels HAS…', pct: 52 },
+    { src: 'notebook-decks-data.js?v=233', label: 'Decks NotebookLM…', pct: 57 },
+    { src: 'notebook-interactive.js?v=233', label: 'Lecteur présentation…', pct: 62 },
+    { src: 'calculateurs.js?v=233', label: 'Scores & calculateurs…', pct: 67 },
+    { src: 'quiz.js?v=233', label: 'Mode examen…', pct: 72 },
+    { src: 'dashboard.js?v=233', label: 'Tableau de bord…', pct: 77 },
+    { src: 'appsearch.js?v=233', label: 'Recherche…', pct: 82 },
+    { src: 'erreurs-journal.js?v=233', label: 'Fichier erreurs…', pct: 87 },
+    { src: 'graph.js?v=233', label: 'Carte des liens…', pct: 92 },
+    { src: 'brainfeed.js?v=233', label: 'BrainFeed…', pct: 96 },
+    { src: 'app.js?v=233', label: 'Interface…', pct: 100 }
   ];
   var i = 0;
   var fill = document.getElementById('plFill');
