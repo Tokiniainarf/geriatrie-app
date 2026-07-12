@@ -13,7 +13,7 @@ TRAITEMENT: amlodipine 10mg, gliclazide 80mg, tiotropium 18µg, amitriptyline 75
 
 CONTEXTE: Sa femme le trouve confus hier soir. Il ne la reconnaît pas, parle de manière incohérente, essaie de se lever.
 
-ÉVALUATION: T° 38.2°C. PA 140/85. FC 100. FR 22. SpO2 92% (air ambulant). MMS 14/30 (habituel 25/30). CAM positive. ECPA 6/10. Crépitants basaux droits. Globe vésical non palpé. Peau chaude et sèche.
+ÉVALUATION: T° 38.2°C. PA 140/85. FC 100. FR 22. SpO2 92% (air ambulant). MMS 14/30 (habituel 25/30). CAM positive. PAINAD 6/10. Crépitants basaux droits. Globe vésical non palpé. Peau chaude et sèche.
 
 BIOLOGIE: Hb 13.5, GB 15 000 (PNN 85%), Plaquettes 280 000. Créatinine 140 (habituelle 90). Na 148, K 4.8. Glycémie 2.5 g/L. CRP 150. PCT 6. Gaz du sang: pH 7.45, PaCO2 35, PaO2 65, HCO3 24.
 
@@ -38,7 +38,7 @@ ATCD: Alzheimer stade GDS 6, HTA (périndopril 5mg), ostéoporose (alendronate 7
 
 TRAITEMENT: périndopril 5mg, alendronate 70mg/sem, Vit D 1000UI, warfarine (dose variable), paroxétine 20mg, donépezil 10mg.
 
-ÉVALUATION: MMS 5/30. GDS-15 12/15. ADL 1/6. Tinetti 4/28. Braden 10/23. ECPA 7/10. T° 37.5°C. PA 120/70. FC 90. SpO2 95%. INR 2.8. Ecchymose frontale gauche. Douleur hanche gauche EVA 6/10. Hanche gauche en rotation externe, raccourcissement.`,
+ÉVALUATION: MMS 5/30. GDS-15 12/15. ADL 1/6. Tinetti 4/28. Braden 10/23. PAINAD 7/10. T° 37.5°C. PA 120/70. FC 90. SpO2 95%. INR 2.8. Ecchymose frontale gauche. Douleur hanche gauche EVA 6/10. Hanche gauche en rotation externe, raccourcissement.`,
     questions: [
       { q: 'Quel est le diagnostic le plus probable et quels sont les arguments ?', a: 'Fracture col fémoral gauche. Arguments: chute + douleur hanche gauche + rotation externe + raccourcissement + ecchymose frontale + ATCD ostéoporose + anticoagulant (warfarine INR 2.8) + Alzheimer (désorientation, chute). Facteurs de risque: âge 88 ans, ostéoporose, Alzheimer (Tinetti 4/28), warfarine (risque hémorragique).' },
       { q: 'Quelle est votre prise en charge immédiate ?', a: '1. Rx hanche gauche (confirmer fracture). 2. Bilan: NFS, TP/INR, iono, créatinine, groupe sanguin. 3. INR 2.8: arrêt warfarine, vitamine K1 1mg si INR > 3.5. 4. Antalgie: paracétamol IV 1g + morphine 0.05mg/kg SC. 5. Avis chirurgical orthopédique. 6. Préparation intervention (si INR < 1.5). 7. Prophylaxie TVP (HBPM post-op).' },

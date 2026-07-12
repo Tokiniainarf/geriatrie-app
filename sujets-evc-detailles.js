@@ -33,7 +33,7 @@ ATCD: Alzheimer stade GDS 5, HTA (amlodipine 5mg), FA permanente (apixaban 5mg x
 
 TRAITEMENT: amlodipine 5mg, apixaban 5mg x2, tamsulosine 0.4mg, mirtazapine 15mg, paracétamol 1g x3, donépezil 10mg.
 
-ÉVALUATION: MMS 10/30. GDS-15 10/15. ADL 2/6. Tinetti 8/28. Braden 14/23. ECPA 6/10. T° 37.5°C. PA 135/80. FC 88. SpO2 95%. Glycémie 2.1 g/L. Pas de fracture visible. Ecchymose frontale. Confus, désorienté.`,
+ÉVALUATION: MMS 10/30. GDS-15 10/15. ADL 2/6. Tinetti 8/28. Braden 14/23. PAINAD 6/10. T° 37.5°C. PA 135/80. FC 88. SpO2 95%. Glycémie 2.1 g/L. Pas de fracture visible. Ecchymose frontale. Confus, désorienté.`,
     questions: [
       { q: 'Quelle est votre prise en charge immédiate ?', a: '1. État hémodynamique (PA, FC, SpO2). 2. Examen neuro complet (GCS, pupilles, déficit). 3. Examen orthopédique (hanche, poignet, crâne). 4. ECG (syncope ? arythmie sous FA ?). 5. Bilan biologique (NFS, iono, créatinine, glycémie, troponine). 6. Rx si douleur. 7. Scanner crâne si GCS < 15 ou anticoagulant (apixaban). 8. Surveillance neuro H4.' },
       { q: 'Identifiez les facteurs de risque de chute.', a: 'Alzheimer (désorientation, noctambulisme). Hypotension orthostatique (amlodipine). Mirtazapine (sédation). FA (syncope ?). Tinetti 8/28 = risque très élevé. Braden 14/23 = risque escarre. Apixaban = risque hémorragique si chute. Glycémie 2.1 = hypoglycémie relative.' },
@@ -56,7 +56,7 @@ TRAITEMENT: tiotropium 18µg, salbutamol à la demande, périndopril 5mg, metfor
 
 CONTEXTE: Sa femme le trouve confus ce matin. Il ne la reconnaît pas, parle de manière incohérente. Agitation nocturne.
 
-ÉVALUATION: T° 38.8°C. PA 130/80. FC 110. FR 28. SpO2 88% (air ambulant). MMS 12/30 (habituel 24/30). CAM positive. ECPA 7/10. Crépitants bilatéraux. Globe vésical non palpé. Peau chaude et sèche.
+ÉVALUATION: T° 38.8°C. PA 130/80. FC 110. FR 28. SpO2 88% (air ambulant). MMS 12/30 (habituel 24/30). CAM positive. PAINAD 7/10. Crépitants bilatéraux. Globe vésical non palpé. Peau chaude et sèche.
 
 BIOLOGIE: Hb 14.5, GB 18 000 (PNN 88%), Plaquettes 320 000. Créatinine 155 (habituelle 85). Na 150, K 5.2. Glycémie 3.2 g/L. CRP 250. PCT 8. Lactates 3.5. Gaz du sang: pH 7.32, PaCO2 55, PaO2 58, HCO3 22.
 

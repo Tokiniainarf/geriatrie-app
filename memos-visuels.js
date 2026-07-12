@@ -6,7 +6,7 @@ const MEMOS_VISUELS = [
   { id: 'mv-4', titre: 'MNA (Mini Nutritional Assessment)', contenu: '✅ ≥24 normal · ⚠️ 17-23.5 risque · 🚨 <17 dénutrition → Items: IMC, perte poids, mobilité, stress, médicaments, alimentation' },
   { id: 'mv-5', titre: 'Braden (6 facteurs escarre)', contenu: '👁️ Perception · 💧 Humidité · 🚶 Activité · 🔄 Mobilité · 🍽️ Nutrition · ✋ Friction → ≤9 très élevé, 10-12 élevé, 13-14 modéré, 15-18 faible' },
   { id: 'mv-6', titre: 'Tinetti (équilibre + marche)', contenu: '⚖️ Équilibre (9 items/16) + 🚶 Marche (7 items/12) = 28 → <19 risque élevé, 19-24 modéré, ≥25 faible' },
-  { id: 'mv-7', titre: 'CAM (confusion)', contenu: '1️⃣ Début aigu + fluctuation (OBLIGATOIRE) · 2️⃣ Inattention · 3️⃣ Pensée désorganisée · 4️⃣ Niveau conscience altéré → CAM+ = (1+2) ou (1+3+4)' },
+  { id: 'mv-7', titre: 'CAM (confusion)', contenu: '1️⃣ Début aigu + fluctuation · 2️⃣ Inattention · 3️⃣ Pensée désorganisée · 4️⃣ Vigilance altérée → CAM+ = 1 + 2 + (3 ou 4)' },
   { id: 'mv-8', titre: 'ECPA (douleur non communicant)', contenu: '💨 Respiration · 🗣️ Vocalisation · 😣 Expression facale · 🧍 Corps · 🤝 Consolabilité → 0-2 pas de douleur, 3-5 légère, 6-8 modérée, 9-10 sévère' },
   { id: 'mv-9', titre: 'Critères de Beers', contenu: '🚫 BZD · 🚫 Anticholinergiques · 🚫 AINS · 🚫 Digoxine > 0.125mg · 🚫 Antipsychotiques · 🚫 Opioïdes longue durée → Tout sujet âgé > 65 ans' },
   { id: 'mv-10', titre: 'Scores d\'urgence', contenu: '🔴 qSOFA: FR≥22, PAS≤100, GCS<15 · 🔴 SOFA: défaillance d\'organe · 🔴 NIHSS: gravité AVC · 🔴 Glasgow: conscience (3-15) · 🔴 NEWS2: détérioration' },

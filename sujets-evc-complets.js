@@ -182,7 +182,7 @@ CONTEXTE SOCIAL :
 - MNA: 17/30
 - Tinetti: 8/28
 - Braden: 14/23
-- Douleur: ECPA 5/10
+- Douleur: PAINAD 5/10
 - Poids: 48 kg (IMC 18.5)
 - Albumine: 28 g/L
 
@@ -385,7 +385,7 @@ Le résident est agité, crie, essaie de se lever, dit qu'il doit "aller travail
 - FR: 20/min
 - SpO2: 95% en air ambulant
 - Glycémie capillaire: 1.8 g/L
-- ECPA: 6/10 (douleur ?)
+- PAINAD 6/10 (douleur ?)
 - Pas de globe vésical
 - Pas de foyer infectieux évident
 
@@ -403,7 +403,7 @@ Critères CAM: (1) Début aigu ✓ (2h vs habituel), (2) Inattention ✓, (3) Fl
 Démence à corps de Lewy = terrain à risque de confusion + hypersensibilité neuroleptique.
 
 2. CAUSES POSSIBLES (4 points) :
-- Douleur (ECPA 6/10, mais difficile à évaluer en DLB)
+- Douleur (PAINAD 6/10, mais difficile à évaluer en DLB)
 - Infection (T° 37.8°C, mais fièvre modérée)
 - Hypoglycémie (1.8 g/L = hypoglycémie relative chez diabétique)
 - Iatrogénie (mirtazapine = sédation, tamsulosine = confusion)
@@ -489,7 +489,7 @@ CONTEXTE SOCIAL :
 - MNA: 9/30 (dénutrition sévère)
 - Tinetti: 6/28
 - Braden: 12/23 (risque élevé escarres)
-- Douleur: ECPA 4/10
+- Douleur: PAINAD 4/10
 - Poids: 42 kg (IMC 16.2)
 - Taille: 155 cm
 - Albumine: 22 g/L

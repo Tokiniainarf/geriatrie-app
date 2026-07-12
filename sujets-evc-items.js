@@ -13,7 +13,7 @@ TRAITEMENT: périndopril 5mg, metformine 850mg x2, tiotropium 18µg, mirtazapine
 
 CONTEXTE: Sa femme le trouve confus hier soir. Il ne la reconnaît pas, parle de manière incohérente, essaie de se lever.
 
-ÉVALUATION: T° 38.5°C. PA 135/80. FC 105. FR 24. SpO2 91% (air ambulant). MMS 13/30 (habituel 25/30). CAM positive. ECPA 7/10. Crépitants basaux droits. Globe vésical non palpé. Peau chaude et sèche.
+ÉVALUATION: T° 38.5°C. PA 135/80. FC 105. FR 24. SpO2 91% (air ambulant). MMS 13/30 (habituel 25/30). CAM positive. PAINAD 7/10. Crépitants basaux droits. Globe vésical non palpé. Peau chaude et sèche.
 
 BIOLOGIE: Hb 14.0, GB 16 000 (PNN 86%), Plaquettes 290 000. Créatinine 145 (habituelle 90). Na 149, K 4.9. Glycémie 2.8 g/L. CRP 160. PCT 7. Gaz du sang: pH 7.44, PaCO2 34, PaO2 62, HCO3 23.
 
@@ -38,7 +38,7 @@ ATCD: Alzheimer stade GDS 5, HTA (amlodipine 5mg), FA permanente (warfarine INR 
 
 TRAITEMENT: amlodipine 5mg, warfarine (dose variable), alendronate 70mg/sem, Vit D 1000UI, paroxétine 20mg, donépezil 10mg.
 
-ÉVALUATION: MMS 8/30. GDS-15 10/15. ADL 2/6. Tinetti 6/28. Braden 12/23. ECPA 6/10. T° 37.0°C. PA 125/75. FC 85. SpO2 96%. INR 2.5. Ecchymose frontale gauche. Douleur hanche gauche EVA 7/10. Hanche gauche en rotation externe, raccourcissement.`,
+ÉVALUATION: MMS 8/30. GDS-15 10/15. ADL 2/6. Tinetti 6/28. Braden 12/23. PAINAD 6/10. T° 37.0°C. PA 125/75. FC 85. SpO2 96%. INR 2.5. Ecchymose frontale gauche. Douleur hanche gauche EVA 7/10. Hanche gauche en rotation externe, raccourcissement.`,
     questions: [
       { q: 'Quel est le diagnostic le plus probable ?', a: 'Fracture col fémoral gauche. Arguments: chute + douleur hanche gauche + rotation externe + raccourcissement + ecchymose frontale + ATCD ostéoporose + anticoagulant (warfarine INR 2.5) + Alzheimer (désorientation). Facteurs de risque: âge 87 ans, ostéoporose, Alzheimer (Tinetti 6/28).' },
       { q: 'Quelle est votre prise en charge immédiate ?', a: '1. Rx hanche gauche (confirmer fracture). 2. Bilan: NFS, TP/INR, iono, créatinine, groupe sanguin. 3. INR 2.5: dans la cible, pas besoin de vitamine K. 4. Antalgie: paracétamol IV 1g + morphine 0.05mg/kg SC. 5. Avis chirurgical orthopédique. 6. Prophylaxie TVP post-op.' },

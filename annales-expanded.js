@@ -54,7 +54,7 @@ const ANNALES_EXPANDED = [
   { id: 109, chapter: 'ch8', difficulty: 'A',
     title: 'Évaluation douleur chez le sujet âgé dément',
     cas: 'Mme Fournier, 88 ans, Alzheimer stade modéré (MMS 12/30). Agitation depuis 3 jours, refuse les soins, grimace lors des mobilisations.',
-    correction: 'Douleur probable mais non communicable. Utiliser ECPA (Échelle Comportementale de la Douleur chez la Personne Âgée non communicante) : 5 items (respiration, vocalisation, expression facale, corps, consolabilité). Paracétamol 1g x3/j systématique. Éviter morphine d\'emblée. Éliminer cause : infection, escarre, fracture.' },
+    correction: 'Douleur probable mais non verbalisable. Utiliser ALGOPLUS pour une douleur aiguë : 5 items binaires (visage, regard, plaintes, corps, comportements), seuil ≥ 2/5. Adapter l\'antalgie au poids, à la fonction rénale et au terrain, rechercher la cause puis réévaluer.' },
 
   // ─── CH9 : Cognition ───
   { id: 110, chapter: 'ch9', difficulty: 'A',
@@ -72,7 +72,7 @@ const ANNALES_EXPANDED = [
   { id: 112, chapter: 'ch11', difficulty: 'A',
     title: 'Syndrome confusionnel aigu — CAM',
     cas: 'M. Roux, 85 ans, post-op prothèse hanche. Nuit agitée, désorienté, arrache perfusion. MMS pré-op 27/30. Temp 38.2°C, CRP 85.',
-    correction: 'CAM+ : (1) Début aigu post-op ✓ (2) Inattention ✓ (3) Fluctuation ✓. Confusion post-opératoire (15-50% des >65 ans). Étiologie : infection (T°↑, CRP↑), douleur, hypoxie, médicaments (antalgiques, anesthésiques). Traitement : halopéridol 0.5mg PRN, correction cause, réorientation, éviter contention.' },
+    correction: 'CAM positive si 1 + 2 + (3 ou 4) : début aigu/fluctuation, inattention, puis pensée désorganisée ou vigilance altérée. Rechercher en priorité infection, douleur, hypoxie, globe, fécalome et iatrogénie. Corriger la cause, réorienter, éviter la contention ; un traitement sédatif ne se discute qu\'en cas de danger immédiat malgré les mesures non médicamenteuses.' },
 
   // ─── CH12 : Chutes ───
   { id: 113, chapter: 'ch12', difficulty: 'A',

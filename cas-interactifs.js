@@ -24,7 +24,7 @@ Examen : PA 135/85 couché, 110/70 debout. FC 78. T° 36.8°C. Confus, désorien
 
 ATCD : HTA, BPCO, dépression traitée (sertraline 100mg). Vit seule, fille à 200 km.
 
-Évolution post-op : escarne sacrée stade II découverte à J10. Agitation nocturne, arrête de manger. MMS pré-op 24/30.
+Évolution postopératoire : escarre sacrée de stade II découverte à J10. Agitation nocturne, arrêt de l'alimentation. MMS préopératoire 24/30.
 
 Examen aujourd'hui : amaigrie visiblement. IMC 17. Albumine 20 g/L. MNA 12/30. Escarre sacrée 4×3 cm avec fond fibrineux. MMS 20/30. GDS-15 13/15. ADL 2/6. Se lève avec aide, marche 10 mètres avec déambulateur.`,
     questions: [

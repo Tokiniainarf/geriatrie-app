@@ -1,0 +1,599 @@
+{
+  "generatedAt": "2026-07-12T13:54:03.094Z",
+  "summary": {
+    "ch1": {
+      "pages": 12,
+      "blocks": 160,
+      "issues": 0
+    },
+    "ch2": {
+      "pages": 12,
+      "blocks": 145,
+      "issues": 1
+    },
+    "ch3": {
+      "pages": 15,
+      "blocks": 221,
+      "issues": 0
+    },
+    "ch4": {
+      "pages": 8,
+      "blocks": 108,
+      "issues": 1
+    },
+    "ch5": {
+      "pages": 11,
+      "blocks": 157,
+      "issues": 1
+    },
+    "ch6": {
+      "pages": 17,
+      "blocks": 256,
+      "issues": 1
+    },
+    "ch7": {
+      "pages": 21,
+      "blocks": 293,
+      "issues": 0
+    },
+    "ch8": {
+      "pages": 11,
+      "blocks": 154,
+      "issues": 0
+    },
+    "ch9": {
+      "pages": 21,
+      "blocks": 354,
+      "issues": 2
+    },
+    "ch10": {
+      "pages": 11,
+      "blocks": 200,
+      "issues": 2
+    },
+    "ch11": {
+      "pages": 13,
+      "blocks": 214,
+      "issues": 5
+    },
+    "ch12": {
+      "pages": 15,
+      "blocks": 226,
+      "issues": 3
+    },
+    "ch13": {
+      "pages": 20,
+      "blocks": 192,
+      "issues": 2
+    },
+    "ch14": {
+      "pages": 19,
+      "blocks": 260,
+      "issues": 6
+    },
+    "ch15": {
+      "pages": 11,
+      "blocks": 136,
+      "issues": 5
+    },
+    "ch16": {
+      "pages": 33,
+      "blocks": 468,
+      "issues": 14
+    },
+    "ch17": {
+      "pages": 10,
+      "blocks": 164,
+      "issues": 3
+    }
+  },
+  "issueCount": 46,
+  "issues": [
+    {
+      "chapter": "ch2",
+      "index": 97,
+      "tag": "p",
+      "reasons": [
+        "début en minuscule"
+      ],
+      "text": "stress initial (hospitalisation, surtout en chirurgie) et de la moindre qualité de l'environnement (entourage professionnel ou non, iatrogénie…). Le pronostic grave de la cascade gériatrique impose une attitude…",
+      "previous": "La décompensation en cascade, dite « cascade gériatrique », est le déséquilibre en série de les fonctions suivantes : Cette cascade gériatrique se ren…",
+      "next": "Dans ce schéma physiopathologique déjà complexe du patient âgé, certaines défaillances C'est le cercle vicieux gériatrique (fig. 2.5)."
+    },
+    {
+      "chapter": "ch4",
+      "index": 47,
+      "tag": "p",
+      "reasons": [
+        "fragment très court"
+      ],
+      "text": "Au juge des tutelles.",
+      "previous": "Comment faire la demande ?",
+      "next": "rédigé par un médecin agréé inscrit sur une liste établie par le procureur de la République, liste disponible auprès des services des tutelles des tri…"
+    },
+    {
+      "chapter": "ch5",
+      "index": 39,
+      "tag": "p",
+      "reasons": [
+        "fragment très court"
+      ],
+      "text": "Comment ? Pourquoi ?",
+      "previous": "En cherchant et quantifiant le retentissement fonctionnel.",
+      "next": "Afin d'améliorer l'autonomie."
+    },
+    {
+      "chapter": "ch6",
+      "index": 111,
+      "tag": "p",
+      "reasons": [
+        "fragment très court"
+      ],
+      "text": "Interpréter la DMO",
+      "previous": "Est très prédictive du risque fracturaire ultérieur : toute diminution de 10 % ou d'une déviation standard de la DMO multiplie par deux le risque frac…",
+      "next": "l'ostéoporose densitométrique définie par l'OMS par un T-score ≤ – 2,5 ;"
+    },
+    {
+      "chapter": "ch9",
+      "index": 64,
+      "tag": "p",
+      "reasons": [
+        "fragment très court"
+      ],
+      "text": "TNC non spécifié.",
+      "previous": "Étiologie des troubles neurocognitifs majeurs (TNCM) ou légers (TNCL) d'après le DSM-5 A TNCM (probable ou possible) ou TNCL : dû à la maladie d'Alzhe…",
+      "next": "A. Faire le diagnostic de plainte mnésique ou d'équivalent sémiologique Différentes situations sont rencontrées :"
+    },
+    {
+      "chapter": "ch9",
+      "index": 194,
+      "tag": "p",
+      "reasons": [
+        "début en minuscule"
+      ],
+      "text": "ou une apathie, des actes impulsifs, une perte précoce d'empathie, des comportements persévératifs, stéréotypés ou compulsifs/ritualisés, une hyperoralité et des modifications du comportement alimentaire avec a…",
+      "previous": "une atrophie frontale et temporale antérieure bilatérale à l'IRM encéphalique (fig. 9.4).",
+      "next": "Affection potentiellement curable."
+    },
+    {
+      "chapter": "ch10",
+      "index": 97,
+      "tag": "p",
+      "reasons": [
+        "mot coupé par extraction"
+      ],
+      "text": "(anciennement mélancolie délirante) [124] L'épisode dépressif est associé à la présence d'idées délirantes et/ou d'hallucinations congruentes à l'humeur ou non. Les thématiques délirantes sont le plus souvent d…",
+      "previous": "Le risque suicidaire est élevé. Un épisode dépressif caractérisé sévère justifie une prise en charge spécialisée en hospitalisation en raison du risqu…",
+      "next": "du risque : rapport facteurs de risque ou protecteurs ;"
+    },
+    {
+      "chapter": "ch10",
+      "index": 198,
+      "tag": "p",
+      "reasons": [
+        "début en minuscule"
+      ],
+      "text": "somatique expliquant l'anorexie et la perte de poids ou bien associée classiquement à une dépression de la personne âgée : dans un premier temps biologie avec en particulier natrémie, créatininémie, glycémie, c…",
+      "previous": "❯ Les examens complémentaires vont principalement être orientés vers la recherche d'une pathologie",
+      "next": "Chez cette patiente, l'hypothèse d'un syndrome dépressif est retenue et un traitement par ISRS est débuté, à posologie adaptée à l'âge et avec project…"
+    },
+    {
+      "chapter": "ch11",
+      "index": 47,
+      "tag": "p",
+      "reasons": [
+        "fin grammaticale incomplète"
+      ],
+      "text": "Les différents sous-types de SC selon l'état psychomoteur comprennent : Le diagnostic, dans le cadre d'une approche structurée (par exemple pour les études scientifiques) ou d'un dépistage, repose sur l'utilisa…",
+      "previous": "confusion mixte : associe les deux premiers types.",
+      "next": "nécessite une formation ;"
+    },
+    {
+      "chapter": "ch11",
+      "index": 88,
+      "tag": "p",
+      "reasons": [
+        "fin grammaticale incomplète"
+      ],
+      "text": "Trouver le ou les facteurs précipitants représente le temps essentiel de la prise en charge d'un syndrome confusionnel, car sa ou leur correction représente le plus souvent le seul traitement nécessaire à la gu…",
+      "previous": "infarctus du myocarde, hypercalcémie sur ECG.",
+      "next": "Toute situation aiguë quelle qu'elle soit, iatrogène ou pathologie."
+    },
+    {
+      "chapter": "ch11",
+      "index": 173,
+      "tag": "p",
+      "reasons": [
+        "fin grammaticale incomplète"
+      ],
+      "text": "Dans le cas particulier de la maladie à corps de Lewy ou des TNCM dans la maladie de Parkinson, utilisation des neuroleptiques habituels contre-indiquée (risque majeur de syndrome malin des neuroleptiques). Dis…",
+      "previous": "En cas de délire et/ou hallucinations à l'origine d'agitation compromettant sa sécurité (examens clinique ou complémentaires ou traitement impossibles…",
+      "next": "À envisager en dernier lieu, après échec de toutes les mesures précédentes."
+    },
+    {
+      "chapter": "ch11",
+      "index": 190,
+      "tag": "p",
+      "reasons": [
+        "début en minuscule"
+      ],
+      "text": "morphinique, peu probable avec une tachypnée. Il faut perfuser la patiente et faire un bilan biologique, corriger la déshydratation, contrôler l'hémoglobine pour l'anémie postopératoire, débuter une antibiothér…",
+      "previous": "La situation s'est alors nettement améliorée, puisque la patiente a été beaucoup plus calme [28] . Mais c'est en faisant le tour à 3 h cette nuit que …",
+      "next": "la récidive lorsque l'état de vigilance de la patiente s'améliorera : traiter correctement la douleur [77] (la morphine est confusiogène mais indispen…"
+    },
+    {
+      "chapter": "ch11",
+      "index": 191,
+      "tag": "p",
+      "reasons": [
+        "début en minuscule"
+      ],
+      "text": "la récidive lorsque l'état de vigilance de la patiente s'améliorera : traiter correctement la douleur [77] (la morphine est confusiogène mais indispensable), prendre en charge la rétention aiguë d'urines [97] (…",
+      "previous": "morphinique, peu probable avec une tachypnée. Il faut perfuser la patiente et faire un bilan biologique, corriger la déshydratation, contrôler l'hémog…",
+      "next": "Enfin, il faudra mettre en place les mesures non médicamenteuses et, au mieux, transférer la patiente en gériatrie ou la faire suivre par une équipe m…"
+    },
+    {
+      "chapter": "ch12",
+      "index": 67,
+      "tag": "p",
+      "reasons": [
+        "fin grammaticale incomplète"
+      ],
+      "text": "La chute est un motif de consultation ou d'hospitalisation souvent évident, mais il faut aussi évoquer l'existence de chutes chez les patients non communiquants en présence de :",
+      "previous": "Au terme de cette première étape, le patient présente ou non un trouble de la marche source ou non de risque de chute.",
+      "next": "hématomes cutanés ;"
+    },
+    {
+      "chapter": "ch12",
+      "index": 209,
+      "tag": "p",
+      "reasons": [
+        "début en minuscule"
+      ],
+      "text": "sous la forme d'un syndrome post-chute. Il est urgent de mettre en place des mesures symptomatiques, en privilégiant le domicile, à commencer par une kinésithérapie de rééducation à la marche. Il faut également…",
+      "previous": "Les chutes sont survenues le matin au lever, mais la patiente a ressenti plusieurs fois des sensations vertigineuses en se levant après la sieste. L'E…",
+      "next": "L'ayant trouvé hypertendue, il avait introduit le diurétique thiazidique et préféré mettre un patch de dérivés nitrés. L'origine iatrogène est donc pr…"
+    },
+    {
+      "chapter": "ch12",
+      "index": 226,
+      "tag": "p",
+      "reasons": [
+        "fin grammaticale incomplète"
+      ],
+      "text": "En raison de sa fréquence et de sa gravité, le diagnostic et la prise en charge de l'hypotension orthostatique doivent être connus. La prise en charge d'un patient avec chute nécessite un plan de soins comprena…",
+      "previous": "mise en place de mesures systématiques visant principalement à prévenir la récidive.",
+      "next": ""
+    },
+    {
+      "chapter": "ch13",
+      "index": 91,
+      "tag": "p",
+      "reasons": [
+        "début en minuscule"
+      ],
+      "text": "de genou) et chez les sujets de plus de 85 ans — les mêmes molécules hépariniques sont indiquées et les anticoagulants oraux directs peuvent aussi être utilisés dans les situations de chirurgie orthopédique pro…",
+      "previous": "Traitement pharmacologique préventif des TVP (recommandations AFSSAP, 2009) Dans les situations médicales, un traitement préventif systématique par hé…",
+      "next": "suggérée dans tous les cas, surtout en cas de contre-indication au traitement médicamenteux ;"
+    },
+    {
+      "chapter": "ch13",
+      "index": 192,
+      "tag": "p",
+      "reasons": [
+        "fin grammaticale incomplète"
+      ],
+      "text": "La prévention des complications doit donc être l'objet d'un effort tout particulier de la part de l'ensemble de l'équipe soignante : Les escarres représentent une complication grave du syndrome d'immobilisation…",
+      "previous": "optimisation des apports nutritionnels.",
+      "next": ""
+    },
+    {
+      "chapter": "ch14",
+      "index": 98,
+      "tag": "p",
+      "reasons": [
+        "fin grammaticale incomplète"
+      ],
+      "text": "Les facteurs de risque de dénutrition sont nombreux et souvent multiples chez un patient âgé (tableau 14.3). Il faut en particulier noter le rôle de :",
+      "previous": "pathologies inflammatoires ou infectieuses chroniques (pathologie rhumatismale, tuberculose…).",
+      "next": "catabolisme musculaire (diminution de la masse musculaire), qui représente la première source énergétique mobilisable ;"
+    },
+    {
+      "chapter": "ch14",
+      "index": 116,
+      "tag": "p",
+      "reasons": [
+        "fragment très court"
+      ],
+      "text": "Biologie",
+      "previous": "L'indice de masse corporelle (IMC) se calcule selon la formule : Poids (kg)/Taille2 (m2). Chez une personne âgée, le seuil est plus élevé que chez l'a…",
+      "next": "Critère diagnostique et marqueur robuste de mauvais pronostic et de mortalité."
+    },
+    {
+      "chapter": "ch14",
+      "index": 136,
+      "tag": "p",
+      "reasons": [
+        "fragment très court"
+      ],
+      "text": "Sarcopenia in Older People.",
+      "previous": "Correspond à la diminution de la masse, de la force et de la fonction musculaires au cours du vieillissement (tableau 14.5 et fig. 14.1). La sarcopéni…",
+      "next": "La moitié des besoins quotidiens en eau est assurée par l'alimentation. Les personnes qui s'alimentent peu sont aussi susceptibles de boire insuffisam…"
+    },
+    {
+      "chapter": "ch14",
+      "index": 212,
+      "tag": "p",
+      "reasons": [
+        "fin grammaticale incomplète"
+      ],
+      "text": "La prise en charge nutritionnelle doit être adaptée en fonction de son acceptabilité, de sa tolérance et de la réponse nutritionnelle. La fréquence de la surveillance est variable en fonction de la situation cl…",
+      "previous": "La prévention du syndrome de renutrition inappropriée consiste à reconnaître les patients à risque, à augmenter les apports énergétiques de façon prog…",
+      "next": "poids lors de toute consultation médicale, à l'entrée de toute hospitalisation puis 1 fois par semaine en court séjour et 1 fois tous les 15 jours en …"
+    },
+    {
+      "chapter": "ch14",
+      "index": 251,
+      "tag": "p",
+      "reasons": [
+        "fragment très court"
+      ],
+      "text": "Critères Phénotypiques :",
+      "previous": "Diagnostic de la dénutrition chez le sujet âgé (≥ 70 ans) : 1 critère phénotypique + 1 critère étiologique .",
+      "next": "Perte de poids ≥ 5% en 1 mois, ou ≥ 10% en 6 mois, ou ≥ 10% par rapport au poids habituel avant le début de la maladie."
+    },
+    {
+      "chapter": "ch14",
+      "index": 255,
+      "tag": "p",
+      "reasons": [
+        "fragment très court"
+      ],
+      "text": "Critères Étiologiques :",
+      "previous": "Sarcopénie : diminution de la masse et/ou de la force musculaire.",
+      "next": "Diminution de la prise alimentaire ≥ 50% pendant plus d'une semaine, ou toute réduction des apports pendant plus de 2 semaines."
+    },
+    {
+      "chapter": "ch15",
+      "index": 31,
+      "tag": "p",
+      "reasons": [
+        "fin grammaticale incomplète"
+      ],
+      "text": "L'incontinence urinaire touche au moins 20 % des patients âgés. La prévalence de l'IU varie en fonction de l'âge, du niveau socio-économique, du surpoids et des autres comorbidités, et de l'activité physique. S…",
+      "previous": "entrée en institution.",
+      "next": "une augmentation de la fréquence de l'IU ;"
+    },
+    {
+      "chapter": "ch15",
+      "index": 39,
+      "tag": "p",
+      "reasons": [
+        "fragment très court"
+      ],
+      "text": "Pour uriner, il faut :",
+      "previous": "une augmentation de la sévérité et de la gravité de l'IU, contrastant avec un sous-diagnostic fréquent.",
+      "next": "un détrusor stable et compliant réalisant la contraction ;"
+    },
+    {
+      "chapter": "ch15",
+      "index": 69,
+      "tag": "p",
+      "reasons": [
+        "mot coupé par extraction"
+      ],
+      "text": "L'étape clinique suivante peut être toujours du ressort du gériatre et permet de préciser les circonstances de l'IU : Comorbidités Mécanisme Traitements Antagonistes alpha- Asthme, BPCO, Incontinence urinaire a…",
+      "previous": "préciser les antécédents en rapport avec l'IU : sondage vésical à demeure (en particulier laissé en place plus de 48 heures), pathologie neurologique …",
+      "next": "Rétention urinaire calciques, neuroleptiques, diabète gabapentine, pregabaline AVC, maladiede Parkinson, Constipation Anticholinergiques diabète Patho…"
+    },
+    {
+      "chapter": "ch15",
+      "index": 74,
+      "tag": "p",
+      "reasons": [
+        "début en minuscule"
+      ],
+      "text": "mobilité : pathologies fonctionnelle barrières, perfusion, etc. neurologies, orthopédiques d'IU sans qu'il n'y ait forcément de lien entre la classe pharmacologique et la pathologie sur une même ligne.",
+      "previous": "si BladderScan, réalisation d'un résidu post-mictionnel, pathologique à plus de 100 ml.",
+      "next": "préciser le type d'IU, dont le mécanisme oriente vers l'étiopathogénie des troubles (tableau 15.2) ;"
+    },
+    {
+      "chapter": "ch15",
+      "index": 136,
+      "tag": "p",
+      "reasons": [
+        "fin grammaticale incomplète"
+      ],
+      "text": "L'IU est une cause fréquente de handicap. L'IU est un syndrome gériatrique d'origine multifactorielle, dont la fréquence est augmentée avec l'âge et majorée en cas d'hospitalisation. C'est un facteur de risque …",
+      "previous": "la mise en place de mictions programmées.",
+      "next": ""
+    },
+    {
+      "chapter": "ch16",
+      "index": 12,
+      "tag": "p",
+      "reasons": [
+        "début en minuscule"
+      ],
+      "text": "indésirable médicamenteux Prescrire chez un patient âgé est un acte fréquent, mais dont la gravité doit rester à l'esprit du prescripteur. En effet, plus que tout autre, le patient âgé peut être victime de iatr…",
+      "previous": "V Savoir prescrire et surveiller une transfusion chez le patient âgé",
+      "next": "Avant toute prescription, il est donc indispensable de bien connaître les facteurs liés au patient, aux comorbidités, à leurs conséquences, aux médica…"
+    },
+    {
+      "chapter": "ch16",
+      "index": 82,
+      "tag": "p",
+      "reasons": [
+        "début en minuscule"
+      ],
+      "text": "risque concret d'underuse : remplissage dans un sepsis De garde aux urgences, vous prenez en charge un patient de 91 ans admis pour fièvre. Vous ne disposez d'aucune autre information qu'un antécédent d'œdème p…",
+      "previous": "Reste à expliquer les modifications et convaincre le patient et son entourage, évaluer l'observance, informer son médecin référent.",
+      "next": "La fréquence respiratoire est à 24/min. Vous notez une sensibilité abdominale au niveau du flanc gauche sans autre foyer infectieux. Il s'agit donc d'…"
+    },
+    {
+      "chapter": "ch16",
+      "index": 115,
+      "tag": "p",
+      "reasons": [
+        "début en minuscule"
+      ],
+      "text": "de la fibrillation atriale) et l'arrêt des anticoagulants (en raison d'une complication hémorragique majeure) est clairement en faveur de l'arrêt immédiat, en présence d'une complication qui engage le pronostic…",
+      "previous": "Vous recevez aux urgences une patiente de 92 ans, pour suspicion d'AVC, avec apparition brutale d'un déficit de l'hémicorps droit [121] dans un contex…",
+      "next": "La prise en charge du traitement anticoagulant est rappelée dans l'encadré 16.1 et initiée immédiatement."
+    },
+    {
+      "chapter": "ch16",
+      "index": 161,
+      "tag": "p",
+      "reasons": [
+        "fin grammaticale incomplète"
+      ],
+      "text": "Mais la réalisation d'une glycémie capillaire est urgente pour trois raisons : La glycémie capillaire confirme l'hypoglycémie à 1,7 mmol/l [209] , que vous corrigez immédiatement. Attention : ne pas oublier de …",
+      "previous": "La patiente est suivie pour une hypertension artérielle sous inhibiteur calcique et diurétique thiazidique, un diabète de type 2 sous sulfamide hypogl…",
+      "next": "La patiente va donc être perfusée dans un premier temps par du NaCl 9 ‰ en surveillant une correction progressive de la natrémie."
+    },
+    {
+      "chapter": "ch16",
+      "index": 198,
+      "tag": "p",
+      "reasons": [
+        "fin grammaticale incomplète"
+      ],
+      "text": "Faire une prescription médicamenteuse chez un patient âgé implique de :",
+      "previous": "En effet, le patient peut s'exprimer ou réagir à ce qu'on lui dit au cours de la maladie jusque dans les phases sévères. Toutefois, à mesure que l'éta…",
+      "next": "confirmer l'indication avec prise en compte des comorbidités (à prioriser parfois), du degré d'autonomie, de l'espérance de vie, de ce que le patient …"
+    },
+    {
+      "chapter": "ch16",
+      "index": 299,
+      "tag": "p",
+      "reasons": [
+        "fin grammaticale incomplète"
+      ],
+      "text": "L'identification des patients à risque d'EIM est une étape indispensable avant toute prescription et nécessite de cibler : Faire une prescription médicamenteuse chez un patient âgé implique de :",
+      "previous": "évaluer l'observance thérapeutique.",
+      "next": "La consommation de psychotropes est élevée en France, avec une consommation deux fois plus importante chez les femmes. Les benzodiazépines sont en pre…"
+    },
+    {
+      "chapter": "ch16",
+      "index": 331,
+      "tag": "p",
+      "reasons": [
+        "début en minuscule"
+      ],
+      "text": "escitalopram, fluoxétine, fluvoxamine, sertraline) Principaux effets secondaires des ISRS-NA (venlafaxine, minalcipran, duloxétine)",
+      "previous": "Nombreuses interactions médicamenteuses : cytochrome P450.",
+      "next": "Hypotension artérielle."
+    },
+    {
+      "chapter": "ch16",
+      "index": 404,
+      "tag": "p",
+      "reasons": [
+        "début en minuscule"
+      ],
+      "text": "doit prendre en compte différents facteurs :",
+      "previous": "Afin de prévenir les conséquences de la transfusion de CGR.",
+      "next": "contexte clinique urgent : choc hémorragique"
+    },
+    {
+      "chapter": "ch16",
+      "index": 429,
+      "tag": "p",
+      "reasons": [
+        "début en minuscule"
+      ],
+      "text": "ralentissement psychomoteur et confusion, en particulier chez le patient ayant des TNCM.",
+      "previous": "insuffisance cardiaque notamment en cas de cardiopathie ischémique, valvulaire ou hypertensive, bien contrôlée jusque-là",
+      "next": "Signes systémiques : asthénie, malaises ou lipothymies sans autre étiologie, hypotension orthostatique avec risque de chutes."
+    },
+    {
+      "chapter": "ch16",
+      "index": 431,
+      "tag": "p",
+      "reasons": [
+        "fragment très court"
+      ],
+      "text": "• Identité du patient.",
+      "previous": "Signes systémiques : asthénie, malaises ou lipothymies sans autre étiologie, hypotension orthostatique avec risque de chutes.",
+      "next": "Identification du service (avec le téléphone)."
+    },
+    {
+      "chapter": "ch16",
+      "index": 437,
+      "tag": "p",
+      "reasons": [
+        "début en minuscule"
+      ],
+      "text": "trois degrés d'urgence transfusionnelle : 1.",
+      "previous": "Degré d'urgence →",
+      "next": "Urgence vitale immédiate ( < 10 minutes), sans attente des résultats du groupe et des RAI, avec transfusion de O. 2."
+    },
+    {
+      "chapter": "ch16",
+      "index": 448,
+      "tag": "p",
+      "reasons": [
+        "fragment très court"
+      ],
+      "text": "Concordance de groupe. –",
+      "previous": "Concordance d'identité du patient. –",
+      "next": "Identification des produits sanguins labiles. –"
+    },
+    {
+      "chapter": "ch16",
+      "index": 450,
+      "tag": "p",
+      "reasons": [
+        "fragment très court"
+      ],
+      "text": "Compatibilité ABO. 4.",
+      "previous": "Identification des produits sanguins labiles. –",
+      "next": "Traçabilité de la transfusion sur la fiche de délivrance : volet blanc pour l'Établissement français du sang (EFS), volet rose pour le dossier transfu…"
+    },
+    {
+      "chapter": "ch16",
+      "index": 466,
+      "tag": "p",
+      "reasons": [
+        "début en minuscule"
+      ],
+      "text": "chez le patient âgé : seuils et objectifs transfusionnels ne dépendent pas de l'âge du patient mais certains éléments de la transfusion chez la personne âgée sont à retenir :",
+      "previous": "• les infections : elles sont très rares mais nécessitent l'arrêt immédiat de la transfusion en cas de poussée fébrile ou de frissons, la réalisation …",
+      "next": "évaluation potentiellement plus complexe des signes de mauvaise tolérance de l'anémie"
+    },
+    {
+      "chapter": "ch17",
+      "index": 31,
+      "tag": "p",
+      "reasons": [
+        "fin grammaticale incomplète"
+      ],
+      "text": "Mais ceci est très subjectif et certaines personnes qui vieillissent de manière « réussie » peuvent avoir le même type de réactions que des patients plus jeunes. Ionescu S. (1997) décrit des réactions qui n'ont…",
+      "previous": "Mécanismes psychoadaptatifs du patient atteint de maladie grave Plusieurs théories sont proposées non spécifiques au patient âgé. Kübler-Ross E. (1926…",
+      "next": "le déplacement : le patient centre ses préoccupations sur un sujet indépendant de sa maladie ;"
+    },
+    {
+      "chapter": "ch17",
+      "index": 37,
+      "tag": "p",
+      "reasons": [
+        "fin grammaticale incomplète"
+      ],
+      "text": "Le patient est faible et ignorant. Le médecin se substitue au malade dans un souci de bienveillance et de bienfaisance. Cette position vient en opposition avec la dignité, la citoyenneté et le libre arbitre qui…",
+      "previous": "la combativité ou la sublimation : ce sont des modes d'investissement psychique dans lequel le patient combat pour dépasser l'épreuve.",
+      "next": "Mais, par contraste avec les personnes très âgées, l'abandon de ce modèle est toujours bien reçu par les nouvelles générations de personnes âgées, mon…"
+    },
+    {
+      "chapter": "ch17",
+      "index": 131,
+      "tag": "p",
+      "reasons": [
+        "début en minuscule"
+      ],
+      "text": "droit. Il ne s'agit pas d'une interruption de la relation médecin-malade. Le rôle du médecin est alors : 300 3. Le patient exprime son souhait d'une sédation profonde et continue [337] . Le rôle du médecin est …",
+      "previous": "❯ selon une procédure collégiale si la personne est hors d'état de manifester sa volonté.",
+      "next": "En effet, des examens ou traitements relevant d'une obstination déraisonnable peuvent être suspendus ou ne pas être entrepris : Le rôle du médecin est…"
+    }
+  ]
+}

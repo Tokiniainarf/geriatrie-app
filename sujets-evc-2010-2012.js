@@ -56,7 +56,7 @@ HISTOIRE RÉCENTE (3 derniers mois) :
 - ADL (Katz) : 4/6 — autonome alimentation et transferts ; aide partielle toilette et habillage ; incontinence urinaire d'effort occasionnelle non traitée
 - IADL (Lawton) : 2/8 — téléphone impossible, courses impossibles, transport arrêté, médicaments en pilulier préparé par la fille, ménage et cuisine très altérés, gestion financière déléguée à la fille depuis 2 mois
 - Tinetti (marche + équilibre) : 18/28 (marche lente, pas courts, déviation latérale légère)
-- Timed Up and Go : 18 secondes (> 14 s = risque chutes élevé)
+- Timed Up and Go : 18 secondes (à interpréter avec les autres facteurs ; le seuil du manuel est > 20 s)
 - MNA court : 22/30 (à surveiller — perte de poids)
 - Douleur genoux : EVA 4/10 à la marche
 - Vision : correction portée (lunettes) ; audition : acouphènes, TV volume élevé
@@ -123,7 +123,7 @@ QUESTIONS :
 - Ergothérapie : adaptation cuisine, toilette, stratégies compensation cognitive (agenda, alarmes).
 - Psychologue ou neuropsychologue : soutien patiente + fille, gestion comportement nocturne.
 - Assistante sociale : APA, aides financières, relais hospitalisation courte si épuisement fille.
-- Objectifs : stabiliser poids, TUG < 14 s ou stabilisé, zéro chute avec fracture, maintenir ADL à 4/6, IADL stabilisées avec aides.
+- Objectifs : stabiliser le poids, améliorer ou stabiliser le TUG (avec repère de risque > 20 s), éviter toute nouvelle chute avec fracture, maintenir l'ADL à 4/6 et stabiliser l'IADL avec les aides.
 
 5. INFORMATION, CONSENTEMENT, DIRECTIVES (3 points) :
 - Capacité : patiente comprend le diagnostic globalement mais minimise — évaluer capacité décisionnelle pour chaque acte (aide à domicile, téléalarme) ; consentement éclairé adapté (information répétée, écrit simple).

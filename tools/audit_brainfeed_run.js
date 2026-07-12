@@ -1,5 +1,6 @@
 const { sb } = require('./simulate_load.js');
 const vm = require('vm');
+const path = require('path');
 
 const r = vm.runInContext('BrainFeed.audit()', sb);
 const deck = r.deck;
@@ -52,5 +53,5 @@ casCards.forEach(c => {
 report.push(`Total cas choc in deck: ${casCards.length}`);
 report.push(`Incomplete cas choc: ${badCas}`);
 
-require('fs').writeFileSync('C:/Users/tokin/geriatrie-app/tools/brainfeed_audit_report.txt', report.join('\n'), 'utf8');
+require('fs').writeFileSync(path.join(__dirname, 'brainfeed_audit_report.txt'), report.join('\n'), 'utf8');
 console.log('Report written to tools/brainfeed_audit_report.txt');

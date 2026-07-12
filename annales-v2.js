@@ -32,15 +32,15 @@ ATCD: HTA (périndopril 5mg), diabète T2 (gliclazide 60mg), BPCO (salbutamol), 
 
 TRAITEMENT POST-OP: paracétamol 1g IV x4, tramadol 100mg/j, enoxaparine 40mg SC, amoxicilline-clavulanate 2g IV.
 
-EXAMEN: T° 38.2°C. PA 140/85. FC 98. FR 22. SpO2 93% (O2 2L). MMS 16/30 (pré-op 24/30). CAM positive (début aigu, inattention, fluctuation). ECPA 5/10. Pas de déficit neurologique focal. Globe vésical non palpé. Pas de rougeur cutanée.
+EXAMEN: T° 38.2°C. PA 140/85. FC 98. FR 22. SpO2 93% (O2 2L). MMS 16/30 (pré-op 24/30). CAM positive (début aigu, inattention, fluctuation). PAINAD 5/10. Pas de déficit neurologique focal. Globe vésical non palpé. Pas de rougeur cutanée.
 
 BIOLOGIE: GB 14 000 (PNN 82%), CRP 145, créatinine 135 (habituelle 90), Na 146, K 4.5, glycémie 1.9g/L.`,
     questions: [
       { q: 'Confirmez le diagnostic avec les critères CAM.', a: 'CAM positive: (1) Début aigu et fluctuation ✓ (J2 post-op, agité la nuit). (2) Inattention ✓ (ne suit pas les consignes). (3) Pensée désorganisée ✓ (parle de ses enfants décédés). (4) Niveau de conscience altéré ✓ (agitité, désorienté). Diagnostic: confusion aiguë (delirium) post-opératoire.' },
-      { q: 'Listez les causes possibles de cette confusion.', a: '1. Post-opératoire (anesthésie, stress chirurgical). 2. Infection (T° 38.2, GB 14 000, CRP 145 → infection urinaire, pulmonaire ou plaie). 3. Déshydratation (Na 146, créatinine 135 vs 90). 4. Iatrogénie (tramadol 100mg → confusion ++). 5. Hypoglycémie (1.9 g/L sous gliclazide). 6. Douleur (ECPA 5/10). 7. Constipation (fréquente post-op).' },
+      { q: 'Listez les causes possibles de cette confusion.', a: '1. Post-opératoire (anesthésie, stress chirurgical). 2. Infection (T° 38.2, GB 14 000, CRP 145 → infection urinaire, pulmonaire ou plaie). 3. Déshydratation (Na 146, créatinine 135 vs 90). 4. Iatrogénie (tramadol 100mg → confusion ++). 5. Hypoglycémie (1.9 g/L sous gliclazide). 6. Douleur (PAINAD 5/10). 7. Constipation (fréquente post-op).' },
       { q: 'Quelle est votre prise en charge immédiate ?', a: '1. Arrêt tramadol → paracétamol IV seul. 2. Réhydratation NaCl 0.9% 500mL. 3. Correction glycémique (sucre si < 0.7, arrêt gliclazide si < 1.5). 4. ECBU + hémocultures. 5. Rx thoracique. 6. Halopéridol 0.5mg PO si agitation sévère. 7. Pas de contention. 8. Réorientation (lumière, horloge, présence familiale).' },
       { q: 'Quels médicaments NE devez-vous PAS utiliser et pourquoi ?', a: '1. BZD (lorazepam, diazepam) → aggravent la confusion, sédation paradoxale. 2. Anticholinergiques → aggravent la confusion. 3. AINS → néphrotoxiques (créatinine déjà élevée). 4. Gliclazide → hypoglycémie (1.9 g/L). 5. Tramadol → confusion ++ (à arrêter).' },
-      { q: 'Quelle surveillance mettez-vous en place ?', a: 'CAM toutes les 8h. T°, PA, FC, SpO2, glycémie toutes les 4h. Diurèse. ECPA toutes les 4h. Bilan biologique J3 (créatinine, Na, K, GB, CRP). Réévaluation à J4: si amélioration → réintroduction progressive des traitements. Si persistance → recherche cause complémentaire.' }
+      { q: 'Quelle surveillance mettez-vous en place ?', a: 'Réévaluation clinique régulière de la confusion, des constantes, de la glycémie, de la diurèse et de la douleur avec la même échelle (ici PAINAD). Adapter la fréquence et le bilan biologique à la gravité et à l\'évolution ; rechercher une cause persistante en l\'absence d\'amélioration.' }
     ],
     juryTips: 'Le jury attend que vous utilisiez la CAM de manière structurée. Le tramadol est le médicament le plus suspect (confusion chez le sujet âgé). L\'hypoglycémie à 1.9 g/L est un facteur contributif. Ne pas oublier de chercher une infection (T°, GB, CRP).'
   },
@@ -51,7 +51,7 @@ BIOLOGIE: GB 14 000 (PNN 82%), CRP 145, créatinine 135 (habituelle 90), Na 146,
 
 ATCD: Alzheimer stade GDS 5, HTA (ramipril 5mg), ostéoporose (alendronate 70mg/sem + Vit D 1000UI), FA permanente (warfarine INR 2-3), dépression (paroxétine 20mg).
 
-ÉVALUATION: MMS 8/30. GDS-15 14/15. ADL 2/6. IADL 0/8. MNA 9/30. Tinetti 6/28. Braden 12/23. ECPA 4/10. Poids 42 kg (IMC 16.2). Taille 155 cm.
+ÉVALUATION: MMS 8/30. GDS-15 14/15. ADL 2/6. IADL 0/8. MNA 9/30. Tinetti 6/28. Braden 12/23. PAINAD 4/10. Poids 42 kg (IMC 16.2). Taille 155 cm.
 
 BIOLOGIE: Albumine 22 g/L. Pré-albumine 0.08 g/L. Hb 10.5 g/dL. Vit D 8 ng/mL. Créatinine 95 (DFG 52). INR 3.8.
 
@@ -117,13 +117,13 @@ ATCD: Démence à corps de Lewy (diagnostiquée il y a 2 ans), HTA (amlodipine 5
 
 TRAITEMENT: amlodipine 5mg, metformine 500mg x2, oméprazole 20mg, tamsulosine 0.4mg, donépezil 10mg, mélatonine 2mg, mirtazapine 15mg le soir.
 
-SITUATION: Agité, crie, dit qu\'il doit "aller travailler", frappe l\'aide-soignante. T° 37.8°C. PA 150/90. FC 95. Glycémie 1.8 g/L. ECPA 6/10.`,
+SITUATION: Agité, crie, dit qu\'il doit "aller travailler", frappe l\'aide-soignante. T° 37.8°C. PA 150/90. FC 95. Glycémie 1.8 g/L. PAINAD 6/10.`,
     questions: [
       { q: 'Quel est le diagnostic et quels sont les critères diagnostiques ?', a: 'Confusion aiguë (delirium) sur démence à corps de Lewy. CAM: (1) Début aigu ✓ (2h vs habituel). (2) Inattention ✓. (3) Fluctuation ✓. (4) Niveau conscience altéré ✓. DLB = terrain à risque de confusion + hypersensibilité neuroleptique.' },
-      { q: 'Listez les causes possibles de cette agitation.', a: '1. Douleur (ECPA 6/10, difficile à évaluer en DLB). 2. Infection (T° 37.8°C). 3. Hypoglycémie (1.8 g/L = relative chez diabétique). 4. Iatrogénie (mirtazapine = sédation, tamsulosine = confusion). 5. Environnement (nuit, désorientation). 6. Constipation (fréquente sous donépezil).' },
+      { q: 'Listez les causes possibles de cette agitation.', a: '1. Douleur (PAINAD 6/10, difficile à évaluer en DLB). 2. Infection (T° 37.8°C). 3. Hypoglycémie (1.8 g/L = relative chez diabétique). 4. Iatrogénie (mirtazapine = sédation, tamsulosine = confusion). 5. Environnement (nuit, désorientation). 6. Constipation (fréquente sous donépezil).' },
       { q: 'Quels médicaments NE DEVEZ-VOUS PAS donner et pourquoi ?', a: '1. Halopéridol: CONTRE-INDIQUÉ en DLB (syndrome malin des neuroleptiques, ATCD). 2. BZD (diazépam, lorazépam): confusion paradoxale, chutes. 3. Anticholinergiques: aggravation confusion. 4. Métopimazine: neuroleptique → même risque.' },
-      { q: 'Quelle est votre prise en charge immédiate ?', a: '1. Environnement: lumière douce, voix calme, présence rassurante. 2. Pas de contention. 3. Réorientation (horloge, calendrier, photos). 4. Si douleur: paracétamol 1g PO. 5. Si hypoglycémie: sucre oral. 6. Si agitation sévère: quétiapine 12.5-25mg PO. 7. Surveillance: T°, glycémie, ECPA toutes les 2h.' },
-      { q: 'Comment prévenir les récidives ?', a: '1. Maintenir un environnement stable (même chambre, même personnel). 2. Lumière naturelle le jour, veilleuse la nuit. 3. Activités structurées la journée. 4. Éviter les changements brusques. 5. Révision médicamenteuse (mirtazapine, tamsulosine). 6. Évaluation douleur systématique (ECPA 2x/j). 7. Éducation équipe (DLB = hypersensibilité neuroleptique).' }
+      { q: 'Quelle est votre prise en charge immédiate ?', a: '1. Environnement calme, présence rassurante et réorientation. 2. Éviter la contention. 3. Rechercher et traiter douleur, hypoglycémie, infection, globe, fécalome et iatrogénie. 4. Réévaluer les constantes, la glycémie et la douleur avec la PAINAD. 5. En cas de danger immédiat malgré ces mesures, demander un avis médical pour un traitement bref, à dose minimale et surveillé.' },
+      { q: 'Comment prévenir les récidives ?', a: 'Maintenir un environnement stable et un cycle veille-sommeil régulier, corriger les déficits sensoriels, réviser les médicaments, prévenir douleur, constipation et déshydratation, utiliser une échelle de douleur adaptée et sensibiliser l\'équipe à l\'hypersensibilité aux neuroleptiques de la maladie à corps de Lewy.' }
     ],
     juryTips: 'Le piège principal est de donner de l\'halopéridol — CI absolue en DLB (ATCD syndrome malin). Le jury attend que vous connaissiez l\'hypersensibilité neuroleptique de la DLB et que vous proposiez la quétiapine comme alternative. La douleur est souvent sous-estimée chez les patients déments.'
   }

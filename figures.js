@@ -236,8 +236,8 @@ var FIGURE_META = {
   "6.6": {kind:"diagram", title:"Indications des traitements anti-ostéoporotiques"},
   "6.7": {kind:"diagram", title:"Cycle thérapeutique de l’ostéoporose primitive"},
   "7.1": {kind:"clinical", title:"Coxarthrose", sources:["images/p126_0.jpg"]},
-  "7.2": {kind:"clinical", title:"Coxarthrose polaire supérieure", sources:["images/p126_0.jpg"]},
-  "7.3": {kind:"clinical", title:"Prothèse totale de hanche à droite et coxarthrose à gauche", sources:["images/p129_0.png","images/p129_1.jpg"]},
+  "7.2": {kind:"diagram", title:"Signes radiographiques d’une coxarthrose polaire supérieure"},
+  "7.3": {kind:"clinical", title:"Prothèse totale de hanche à droite et coxarthrose à gauche", sources:["images/p129_0.png"]},
   "7.4": {kind:"clinical", title:"Arthrose fémoro-patellaire avec amincissement de l’interligne externe", sources:["images/p132_0.jpg"]},
   "7.5": {kind:"clinical", title:"Dysplasie trochléo-patellaire", sources:["images/p132_1.jpg"]},
   "7.6": {kind:"clinical", title:"Gonarthrose fémoro-tibiale interne : évolution et varus", sources:["images/p132_2.png"]},
@@ -249,7 +249,7 @@ var FIGURE_META = {
   "7.12": {kind:"clinical", title:"Calcification arciforme du ligament transverse de l’atlas", sources:["images/p139_2.jpg"]},
   "8.1": {kind:"tool", title:"Échelle visuelle analogique"},
   "8.2": {kind:"tool", title:"Échelle verbale simple"},
-  "8.3": {kind:"clinical", title:"Échelle Algoplus", sources:["images/p148_0.jpg"]},
+  "8.3": {kind:"tool", title:"Échelle Algoplus"},
   "8.4": {kind:"tool", title:"Questionnaire DN4"},
   "8.5": {kind:"diagram", title:"Algorithme d’évaluation de la douleur chez la personne âgée"},
   "9.1": {kind:"clinical", title:"Atrophie hippocampique et leucoencéphalopathie vasculaire en IRM", sources:["images/p162_0.jpg"]},
@@ -263,15 +263,15 @@ var FIGURE_META = {
   "11.2": {kind:"diagram", title:"Réserve cognitive et sévérité du facteur précipitant"},
   "11.3": {kind:"diagram", title:"Choix des examens complémentaires devant un syndrome confusionnel"},
   "11.4": {kind:"diagram", title:"Prise en charge de l’agitation du patient âgé confus"},
-  "12.1": {kind:"clinical", title:"Complications traumatiques : hématomes sous-duraux", sources:["images/p215_0.jpg","images/p215_1.jpg"]},
-  "12.2": {kind:"clinical", title:"Fractures multiples du bassin", sources:["images/crops/crop_p215_1.jpg"]},
+  "12.1": {kind:"clinical", title:"Complications traumatiques : hématomes sous-duraux", sources:["images/p215_0.jpg"]},
+  "12.2": {kind:"clinical", title:"Fractures multiples du bassin", sources:["images/p215_1.jpg"]},
   "12.3": {kind:"clinical", title:"Bloc bifasciculaire", sources:["images/p216_0.jpg"]},
   "12.4": {kind:"clinical", title:"Bloc auriculoventriculaire complet", sources:["images/p217_0.jpg"]},
   "13.1": {kind:"diagram", title:"Conséquences du syndrome d’immobilisation"},
   "13.2": {kind:"diagram", title:"Liens entre masse, force et puissance musculaires et alitement"},
   "13.3": {kind:"diagram", title:"Diminution des capacités en endurance au cours de la vie"},
   "13.4": {kind:"diagram", title:"Déconditionnement et seuil fonctionnel après alitement"},
-  "13.5": {kind:"diagram", title:"Démarche diagnostique devant une suspicion de thrombose veineuse profonde"},
+  "13.5": {kind:"clinical", title:"Fécalome sur une radiographie d’abdomen sans préparation et sur une TDM abdominopelvienne", sources:["images/p234_0.jpg"]},
   "13.6": {kind:"clinical", title:"Syndrome d’Ogilvie", sources:["images/p235_0.jpg"]},
   "13.7": {kind:"diagram", title:"Pression en fonction du positionnement du patient"},
   "13.8": {kind:"diagram", title:"Physiopathogénie de l’escarre"},
@@ -285,10 +285,19 @@ var FIGURE_META = {
   "15.3": {kind:"diagram", title:"Évaluation et traitement de l’incontinence et de la rétention aiguë"},
   "16.1": {kind:"clinical", title:"Complications du traitement par AVK", sources:["images/p294_0.jpg","images/p294_1.jpg"]},
   "16.2": {kind:"diagram", title:"Modalités d’arrêt des benzodiazépines après 65 ans"},
-  "18.1": {kind:"clinical", title:"Examen clinique de la patiente - mini-dossier progressif", sources:["images/p334_0.jpg"]},
-  "18.2": {kind:"clinical", title:"Imagerie abdominale - mini-dossier progressif", sources:["images/p343_0.jpg"]},
-  "20.1": {kind:"clinical", title:"ECG - question isolée", sources:["images/crops/crop_p368_8.jpg"]},
-  "20.2": {kind:"clinical", title:"Radiographie du col fémoral - question isolée", sources:["images/crops/crop_p371_7.jpg"]}
+  "18.1": {kind:"clinical", title:"Radiographie du bassin — signes de coxarthrose", sources:["images/p334_0.jpg"]},
+  "18.2": {kind:"clinical", title:"Érythème sacré — évaluation d’une escarre", sources:["images/p343_0.jpg"]},
+  "20.1": {kind:"clinical", title:"Imagerie cérébrale axiale — ventriculomégalie", sources:["images/p368_0.jpg"]},
+  "20.2": {kind:"clinical", title:"Escarre talonnière avec contact osseux — question isolée", sources:["images/p371_0.jpg"]}
 };
+// Le registre historique ne doit jamais contredire l’inventaire vérifié.
+// Il est dérivé mécaniquement des seuls médias cliniques du manuel.
+Object.keys(FIGURES).forEach(function (id) { delete FIGURES[id]; });
+Object.keys(FIGURE_META).forEach(function (id) {
+  var meta = FIGURE_META[id];
+  if (meta && meta.kind === 'clinical' && Array.isArray(meta.sources) && meta.sources[0]) {
+    FIGURES[id] = {src:meta.sources[0], desc:meta.title || ('Figure ' + id)};
+  }
+});
 if (typeof window !== 'undefined') window.FIGURE_META = FIGURE_META;
 

@@ -28,7 +28,7 @@ replace_block('CHIFFRES_CLES', '''  const CHIFFRES_CLES = [
     { value: 15, unit: '%', line: '... % des personnes de 65 ans et plus ont une dépression non diagnostiquée', source: 'GDS-15' },
     { value: 5, unit: ' critères', line: 'Nombre de critères de Fried : au moins ... critères = syndrome de fragilité', source: 'Fried' },
     { value: 0.8, unit: ' m/s', line: 'Seuil de vitesse de marche en dessous duquel on suspecte la fragilité : ... m/s', source: 'Fried' },
-    { value: 10, unit: ' s', line: 'Timed Up and Go : plus de ... secondes = risque de chute élevé', source: 'TUG' },
+    { value: 20, unit: ' s', line: 'Timed Up and Go : plus de ... secondes = risque de chute élevé', source: 'CNEG, chapitre 12' },
     { value: 24, unit: '/30', line: 'Seuil MMSE interprété comme « normal » chez un sujet jeune instruit : ... /30', source: 'MMSE' },
     { value: 5, unit: '/15', line: 'Seuil GDS-15 à partir duquel on dépiste une dépression : ... /15', source: 'Yesavage' },
     { value: 19, unit: '/28', line: 'Score Tinetti (POMA) inférieur à ... = risque élevé de chute', source: 'Tinetti' },

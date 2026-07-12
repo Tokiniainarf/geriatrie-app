@@ -79,9 +79,9 @@ const SITUATIONS_EVC = [
     title: 'Douleur chez le patient dément',
     situation: 'Mme Fournier, 88 ans, Alzheimer stade modéré (MMS 12/30), est agitée depuis 3 jours. Elle crie lors des soins, se raidit quand on la mobilise, a le visage crispé. Elle ne peut pas verbaliser sa douleur.',
     questions: [
-      { q: 'Comment évaluez-vous la douleur ?', a: 'Échelle ECPA (Échelle Comportementale de la Douleur chez la Personne Âgée non communicante) : 5 items cotés 0-2. 1. Respiration (normale/accélérée/rythme irrégulier). 2. Vocalisation (normale/gémissements/pleurs). 3. Expression facale (sourire/grimace/visage crispé). 4. Corps (relaxé/tendu/raidité). 5. Consolabilité (pas consolable/consolable). Score ≥ 4/10 = douleur probable.' },
+      { q: 'Comment évaluez-vous la douleur ?', a: 'Pour une douleur aiguë chez une personne non communicante, utiliser ALGOPLUS : 5 items binaires (visage, regard, plaintes, corps, comportements). Un score ≥ 2/5 justifie une prise en charge antalgique, suivie d\'une réévaluation.' },
       { q: 'Quelles sont les causes possibles ?', a: '1. Escarre (points d\'appui). 2. Fracture non diagnostiquée (chute ?). 3. Constipation/impaction fécale. 4. Infection (ITU, pneumopathie). 5. Rétention urinaire. 6. Douleur musculo-squelettique (arthrose). 7. Douleur neuropathique.' },
-      { q: 'Quel traitement antalgique ?', a: '1. Paracétamol 1g x3/j systématique (première ligne). 2. Si insuffisant : tramadol 50mg 1-2x/j (dose réduite). 3. Éviter morphine d\'emblée (effets secondaires confusion). 4. Rechercher et traiter la cause. 5. Réévaluer ECPA toutes les 24h.' }
+      { q: 'Quel traitement antalgique ?', a: 'Rechercher et traiter la cause, débuter une antalgie adaptée au poids, à la fonction rénale et au terrain, puis réévaluer rapidement avec la même échelle (ici ALGOPLUS). Un opioïde éventuel doit être titré prudemment avec surveillance de la vigilance, du transit et de la respiration.' }
     ]
   }
 ];

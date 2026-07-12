@@ -768,6 +768,36 @@
     }).join('') + '</div>';
   }
 
+  function branchGrid(items) {
+    return '<div class="faithful-branches">' + items.map(function (item) {
+      return '<section class="faithful-branch">' +
+        '<h5>' + esc(item.t) + '</h5>' +
+        (item.d ? '<p>' + esc(item.d) + '</p>' : '') +
+        (item.items && item.items.length ? '<ul>' + item.items.map(function (value) { return '<li>' + esc(value) + '</li>'; }).join('') + '</ul>' : '') +
+      '</section>';
+    }).join('') + '</div>';
+  }
+
+  function checklistTool(prefix, groups, threshold) {
+    var total = groups.reduce(function (sum, group) { return sum + group.items.length; }, 0);
+    var index = 0;
+    return '<div class="faithful-checklist" data-threshold="' + threshold + '">' +
+      groups.map(function (group) {
+        return '<fieldset><legend>' + esc(group.title) + '</legend>' + group.items.map(function (item) {
+          var id = prefix + '-' + (++index);
+          return '<label for="' + esc(id) + '"><input id="' + esc(id) + '" type="checkbox" onchange="window.updateFaithfulChecklist(this)"><span>' + esc(item) + '</span></label>';
+        }).join('') + '</fieldset>';
+      }).join('') +
+      '<div class="faithful-score"><span>Score</span><output>0 / ' + total + '</output><strong>Seuil positif : ≥ ' + threshold + '</strong></div>' +
+    '</div>';
+  }
+
+  function metricBars(rows) {
+    return '<div class="faithful-metrics">' + rows.map(function (row) {
+      return '<div class="faithful-metric"><span>' + esc(row.t) + '</span><div><i style="width:' + Number(row.v) + '%"></i></div><b>' + esc(row.d || (row.v + ' %')) + '</b></div>';
+    }).join('') + '</div>';
+  }
+
   var FAITHFUL_FIGURES = {
     '1.1': function () {
       return figCard('1.1', 'Modèle de décompensation gériatrique de Bouchon (1+2+3)',
@@ -1376,6 +1406,246 @@
     '16.2': function () { return figCard('16.2', 'Modalités d’arrêt des benzodiazépines après 65 ans', flowSteps([{t:'Informer et décider avec le patient'},{t:'Réduire progressivement',d:'paliers individualisés'},{t:'Surveiller le sevrage et le sommeil'},{t:'Maintenir les mesures non médicamenteuses'}]),'Algorithme'); }
   });
 
+  /* Révision v228 : reconstruction complète des diagrammes qui restaient
+     génériques. Les contenus ci-dessous suivent les branches, valeurs et
+     relations de la figure imprimée, avec une présentation responsive. */
+  Object.assign(FAITHFUL_FIGURES, {
+    '2.1': function () {
+      return figCard('2.1', 'Application du raisonnement gériatrique à des situations fréquentes',
+        simpleTable(['Situation', '1 — vieillissement', '2 — pathologies chroniques', '3 — facteurs précipitants'], [
+          ['Dyspnée / OAP', 'Altération de la relaxation cardiaque', 'Cardiopathie, HTA', 'Infection, anémie, fibrillation atriale rapide'],
+          ['Chute', 'Baisse proprioceptive et dégradation du baroréflexe', 'Diabète, maladie de Parkinson', 'Infection, anémie, déshydratation, globe, fécalome, douleur, nouveau traitement'],
+          ['Confusion / agitation', 'Troubles attentionnels', 'Cécité, trouble neurocognitif, dépression', 'Dysnatrémie, hypercalcémie, hypoglycémie, sevrage, déménagement, infection urinaire'],
+          ['Incontinence aiguë', 'Diminution des pressions urétrales', 'AVC, trouble neurocognitif', 'Diurétiques, confusion, constipation ou fécalome, douleur'],
+          ['Difficulté à la marche', 'Sarcopénie', 'Arthrose, surpoids, dénutrition', 'Fracture, déshydratation, AVC, anémie, modification de posologie']
+        ]), 'Matrice 1 + 2 + 3');
+    },
+    '2.4': function () {
+      return figCard('2.4', 'Exemple de cascade gériatrique', flowSteps([
+        {t:'Bronchopneumonie'}, {t:'Décompensation cardiaque'}, {t:'Insuffisance rénale'},
+        {t:'Confusion'}, {t:'Perte d’autonomie'}, {t:'Dénutrition'}
+      ]) + '<p class="faithful-note">Chaque défaillance favorise la suivante : interrompre la cascade exige de traiter la cause et de prévenir simultanément les complications fonctionnelles.</p>', 'Cascade');
+    },
+    '2.5': function () {
+      return figCard('2.5', 'Cercle vicieux dénutrition – bronchopneumonie',
+        branchGrid([
+          {t:'Dénutrition',items:['diminution de l’immunité','réduction de la force des muscles respiratoires']},
+          {t:'Conséquences respiratoires',items:['diminution de l’efficacité de la toux','apparition d’une infection respiratoire']},
+          {t:'Bronchopneumonie',items:['hypercatabolisme','anorexie']},
+          {t:'Boucle de retour',d:'Hypercatabolisme et anorexie aggravent la dénutrition.'}
+        ]), 'Cercle vicieux');
+    },
+    '2.6': function () {
+      return figCard('2.6', 'Concept de fragilité',
+        branchGrid([
+          {t:'Déterminants',items:['facteurs génétiques','environnement et parcours de vie','maladies chroniques']},
+          {t:'Réserves physiologiques',d:'Réduction multisystémique progressive.'},
+          {t:'Amplificateurs',items:['dénutrition','sarcopénie','inactivité']},
+          {t:'Fragilité',d:'Un stress minime peut provoquer une décompensation.'},
+          {t:'Évolution',items:['incapacité','dépendance','hospitalisation ou décès']}
+        ]), 'Réseau causal');
+    },
+    '5.1': function () {
+      return figCard('5.1', 'Différentes causes de surdité',
+        simpleTable(['Présentation', 'Surdité de transmission', 'Surdité de perception'], [
+          ['Unilatérale récente', 'Bouchon de cérumen, otite externe ou moyenne, traumatisme tympanique', 'Surdité brusque, traumatisme sonore, cause infectieuse ou vasculaire'],
+          ['Unilatérale ancienne', 'Séquelles tympaniques ou ossiculaires, otospongiose', 'Schwannome vestibulaire ou autre atteinte rétrocochléaire'],
+          ['Bilatérale récente', 'Bouchons bilatéraux, otite séromuqueuse', 'Ototoxicité, traumatisme sonore, infection'],
+          ['Bilatérale progressive', 'Otospongiose ou atteinte chronique de l’oreille moyenne', 'Presbyacousie, exposition chronique au bruit, ototoxicité cumulative']
+        ]), 'Arbre diagnostique');
+    },
+    '6.5': function () {
+      return figCard('6.5', 'Démarche diagnostique et thérapeutique devant une suspicion d’ostéoporose',
+        flowSteps([
+          {t:'1. Suspecter',d:'fracture de faible énergie ou facteurs de risque'},
+          {t:'2. Confirmer',d:'radiographies si fracture ; ostéodensitométrie au rachis et à la hanche'},
+          {t:'3. Éliminer une cause secondaire',d:'CRP, EPP, calcémie, phosphates, créatinine, vitamine D ± TSH'},
+          {t:'4. Confirmer l’ostéoporose primitive',d:'puis évaluation gériatrique, risque de chute et risque fracturaire ± FRAX'},
+          {t:'5. Choisir et planifier',d:'mesures générales, traitement, surveillance et réévaluation de fin de cycle'}
+        ]) + branchGrid([
+          {t:'Bilan secondaire',items:['hyperparathyroïdie et endocrinopathies','myélome','hémochromatose','malabsorption','rhumatisme inflammatoire','insuffisance rénale chronique']},
+          {t:'Décision individualisée',items:['âge et antécédents fracturaires','DMO','fracture sévère ou non','terrain cognitif et autonomie','rapport bénéfice–risque']}
+        ]), 'Algorithme en 5 étapes');
+    },
+    '6.6': function () {
+      return figCard('6.6', 'Indications des traitements anti-ostéoporotiques (GRIO 2018)',
+        simpleTable(['T-score au site le plus bas', 'Fracture sévère', 'Fracture non sévère', 'Sans fracture + facteurs de risque / chutes multiples'], [
+          ['T > −1', 'Avis du spécialiste', 'Pas de traitement', 'Pas de traitement'],
+          ['T ≤ −1 et > −2', 'Traitement', 'Avis du spécialiste', 'Pas de traitement'],
+          ['T ≤ −2 et > −3', 'Traitement', 'Traitement', 'Avis du spécialiste'],
+          ['T ≤ −3', 'Traitement', 'Traitement', 'Traitement']
+        ]), 'Matrice décisionnelle');
+    },
+    '6.7': function () {
+      return figCard('6.7', 'Cycle thérapeutique de l’ostéoporose primitive',
+        flowSteps([
+          {t:'Indication thérapeutique confirmée',d:'sans contre-indication'},
+          {t:'Cycle de 3 à 5 ans',d:'bisphosphonate ; ou tériparatide 18 mois puis anti-résorbeur ; ou dénosumab puis bisphosphonate ≥ 1 an'},
+          {t:'Objectif',d:'réduire le risque fracturaire et éviter la récidive'},
+          {t:'Suivi',d:'tolérance, observance, nouvelle fracture et DMO selon le contexte'},
+          {t:'Réévaluation en fin de cycle',d:'arrêt surveillé, poursuite ou nouveau cycle selon fracture, DMO et risque résiduel'}
+        ]) + '<p class="faithful-note">Toujours associer calcium et vitamine D si besoin, activité en charge, prévention des chutes et correction des facteurs modifiables.</p>', 'Cycle et séquences');
+    },
+    '8.1': function () {
+      return figCard('8.1', 'Échelle visuelle analogique',
+        '<div class="faithful-eva"><div><h5>Face patient</h5><span>Pas de douleur</span><input type="range" min="0" max="10" step="0.1" value="0" aria-label="Positionner l’intensité de la douleur" oninput="window.updateFaithfulRange(this)"><span>Douleur maximale imaginable</span></div><div><h5>Face de mesure</h5><output>0 / 10</output><div class="faithful-ruler">10 · 9 · 8 · 7 · 6 · 5 · 4 · 3 · 2 · 1 · 0</div></div></div>', 'Échelle interactive');
+    },
+    '8.3': function () {
+      return figCard('8.3', 'Échelle Algoplus', checklistTool('algoplus', [
+        {title:'Observer le patient',items:['Visage : expression douloureuse','Regard : inattentif, fixe ou lointain','Plaintes : gémissements ou cris','Corps : protection d’une zone, position antalgique','Comportements : agitation ou refus de mobilisation']}
+      ], 2) + '<p class="faithful-note">Chaque item vaut 0 (non) ou 1 (oui). Un score ≥ 2/5 justifie une prise en charge antalgique et une réévaluation.</p>', 'Outil interactif');
+    },
+    '8.4': function () {
+      return figCard('8.4', 'Questionnaire DN4', checklistTool('dn4', [
+        {title:'Question 1 · La douleur présente-t-elle ?',items:['Brûlures','Sensation de froid douloureux','Décharges électriques']},
+        {title:'Question 2 · Est-elle associée à ?',items:['Fourmillements','Picotements','Engourdissement','Démangeaisons']},
+        {title:'Question 3 · L’examen retrouve-t-il ?',items:['Hypoesthésie au tact','Hypoesthésie à la piqûre']},
+        {title:'Question 4 · La douleur est-elle provoquée par ?',items:['Frottement']}
+      ], 4) + '<p class="faithful-note">Dix réponses oui/non. Un score ≥ 4/10 est en faveur d’une douleur neuropathique.</p>', 'Questionnaire interactif');
+    },
+    '8.5': function () {
+      return figCard('8.5', 'Algorithme décisionnel d’évaluation de la douleur',
+        flowSteps([{t:'Essayer une auto-évaluation',d:'quel que soit le niveau cognitif'}]) + branchGrid([
+          {t:'Auto-évaluation fiable : OUI',items:['EN ≥ 3 ou EVS ≥ 2 : analgésie puis réévaluation','EN < 3 ou EVS < 2 : surveillance et confirmation par hétéro-évaluation brève']},
+          {t:'Auto-évaluation fiable : NON',items:['Algoplus ≥ 2 : analgésie puis réévaluation','Algoplus < 2 : échelle longue (Doloplus, ECPA, PACSLAC) si doute']}
+        ]), 'Arbre décisionnel');
+    },
+    '11.1': function () {
+      return figCard('11.1', 'Approches du syndrome confusionnel', branchGrid([
+        {t:'Patient asymptomatique',items:['évaluer le risque','identifier les facteurs prédisposants','réaliser une évaluation gériatrique globale','corriger les facteurs prédisposants modifiables','prévenir lors de l’exposition à un facteur précipitant']},
+        {t:'Patient symptomatique ou suspect',items:['dépister avec une échelle puis confirmer ou infirmer','évaluer le risque étiologique et iatrogène','chercher le ou les facteurs précipitants','traquer les causes graves','corriger facteurs précipitants et prédisposants modifiables']}
+      ]), 'Double filière');
+    },
+    '11.2': function () {
+      return figCard('11.2', 'Lien entre réserve cognitive et facteur précipitant', branchGrid([
+        {t:'Réserve cognitive importante',d:'Un facteur précipitant important est nécessaire, par exemple un AVC.'},
+        {t:'Réserve cognitive intermédiaire',d:'Un stress de sévérité modérée peut déclencher la confusion.'},
+        {t:'Réserve cognitive limitée',d:'Un facteur minime peut suffire, par exemple une modification de posologie.'}
+      ]) + '<p class="faithful-note">La relation est inverse : plus la réserve est basse, moins le facteur précipitant doit être sévère.</p>', 'Relation réserve–stress');
+    },
+    '11.3': function () {
+      return figCard('11.3', 'Choix des examens complémentaires devant un syndrome confusionnel',
+        simpleTable(['Étape', 'Examens selon l’orientation clinique'], [
+          ['Interrogatoire et examen', 'Médicaments et toxiques, traumatisme ; examen neurologique, cardiovasculaire, digestif, locomoteur, métabolique et infectieux'],
+          ['Première intention', 'NFS, ionogramme, créatinine et clairance, CRP, glycémie, calcémie, bandelette urinaire + ECG'],
+          ['Seconde intention ciblée', 'Gaz du sang, troponine, toxiques, bilan hépatique, hémocultures, TSH, ECBU, radiographie thoracique'],
+          ['Indications spécifiques', 'TDM cérébrale si traumatisme ou signe focal ; EEG si crise suspectée ou bilan négatif ; PL si syndrome méningé ou infectieux sans point d’appel']
+        ]), 'Bilan orienté');
+    },
+    '11.4': function () {
+      return figCard('11.4', 'Prise en charge de l’agitation du patient âgé confus',
+        flowSteps([
+          {t:'Traitement étiologique + mesures non médicamenteuses'},
+          {t:'Médicament seulement si échec et danger',d:'auto-/hétéroagressivité ou soins indispensables compromis'},
+          {t:'Privilégier la voie orale et réévaluer immédiatement'}
+        ]) + branchGrid([
+          {t:'Anxiété majeure',items:['alprazolam 0,25 mg per os','ou oxazépam 10 mg per os','renouveler uniquement si besoin après réévaluation']},
+          {t:'Agitation, agressivité, hallucinations',items:['rispéridone 0,5 mg per os ou solution buvable','ou tiapride 50 mg per os / IM','corps de Lewy ou Parkinson : discuter quétiapine ou clozapine']}
+        ]) + '<p class="faithful-note">Surveiller douleur, fécalome et rétention urinaire ; éviter cathéter, sonde et perfusion sans nécessité. Pas d’escalade automatique.</p>', 'Algorithme thérapeutique');
+    },
+    '13.1': function () {
+      return figCard('13.1', 'Conséquences du syndrome d’immobilisation',
+        simpleTable(['Organe / système', 'Conséquences de l’immobilisation'], [
+          ['Musculosquelettique', 'Baisse de puissance, force et masse ; contractures, souffrance cartilagineuse, ankylose, ostéoporose'],
+          ['Cardiovasculaire et respiratoire', 'Tachycardie de repos, baisse de perfusion myocardique et de VO₂max, hypotension orthostatique, atélectasie, congestion veineuse, hypercoagulabilité'],
+          ['Cutané', 'Escarre et macération'],
+          ['Métabolique et endocrine', 'Balance azotée négative, hypercalciurie, natriurèse, insulinorésistance, hyperlipidémie, déficits vitaminiques et minéraux'],
+          ['Neurologique et psychiatrique', 'Dépression, confusion, troubles de l’équilibre et cognitifs, compression nerveuse, baisse de l’efficience neuromusculaire'],
+          ['Gastro-intestinal et urinaire', 'Incontinence, infection ou rétention urinaire, fécalome, constipation, reflux, inhalation, saignement gastroduodénal']
+        ]), 'Tableau multiorgane');
+    },
+    '13.2': function () {
+      return figCard('13.2', 'Liens entre masse, force et puissance musculaires, et alitement',
+        metricBars([
+          {t:'Masse musculaire',v:72,d:'déclin progressif'},
+          {t:'Force musculaire',v:56,d:'déclin plus marqué'},
+          {t:'Puissance musculaire',v:40,d:'déclin le plus rapide'}
+        ]) + '<p class="faithful-note">L’alitement accentue brutalement les trois courbes. La masse conditionne surtout la réserve ; la force, le lever de chaise et l’escalier ; la puissance, la vitesse de marche et l’équilibre.</p>', 'Courbes comparées');
+    },
+    '13.3': function () {
+      return figCard('13.3', 'Diminution des capacités en endurance au cours de la vie',
+        '<svg class="faithful-chart" viewBox="0 0 680 330" role="img" aria-label="Trois trajectoires de VO2 max avec seuil de marche et effet d’une immobilisation"><line x1="70" y1="25" x2="70" y2="285" stroke="currentColor" opacity=".4"/><line x1="70" y1="285" x2="645" y2="285" stroke="currentColor" opacity=".4"/><line x1="70" y1="220" x2="645" y2="220" stroke="#ef4444" stroke-dasharray="8 5"/><text x="638" y="210" text-anchor="end" fill="#ef4444" font-size="12">Seuil de capacité de marche</text><path d="M80 55 C230 75 420 105 625 145" fill="none" stroke="#0891b2" stroke-width="5"/><path d="M80 100 C240 125 430 160 625 205" fill="none" stroke="#059669" stroke-width="5"/><path d="M80 155 C235 178 420 218 625 265" fill="none" stroke="#f59e0b" stroke-width="5"/><rect x="430" y="25" width="38" height="260" fill="rgba(239,68,68,.10)"/><text x="449" y="42" text-anchor="middle" fill="#ef4444" font-size="11" transform="rotate(90 449 42)">Immobilisation</text><text x="90" y="45" fill="#0891b2" font-size="12">Réserves élevées</text><text x="90" y="93" fill="#059669" font-size="12">Sujet moyen</text><text x="90" y="148" fill="#f59e0b" font-size="12">Sujet fragile</text><text x="355" y="318" text-anchor="middle" fill="currentColor" font-size="12">Âge : 20–29 · 30–39 · 40–49 · 50–59 · 60–69 · 70+</text><text x="18" y="165" transform="rotate(-90 18 165)" text-anchor="middle" fill="currentColor" font-size="12">VO₂max (ml/min/kg)</text></svg>', 'Courbes');
+    },
+    '13.4': function () {
+      return figCard('13.4', 'Déconditionnement après alitement : exemple chiffré',
+        simpleTable(['Activité', 'VO₂ requis', 'Avant : VO₂max 20', 'Après : VO₂max 16'], [
+          ['Marche à 5 km/h', '14 ml/min/kg', '70 %', '87,5 %'],
+          ['Habillage / toilette', '12 ml/min/kg', '60 %', '75 %'],
+          ['Repos assis', '3,5 ml/min/kg = 1 MET', '15 %', '≈ 22 %']
+        ]) + '<p class="faithful-note">Une baisse de 20 % de VO₂max fait consommer beaucoup plus de réserve pour la même tâche et rapproche la marche du maximum soutenable.</p>', 'Avant / après');
+    },
+    '13.5': function () {
+      return figCard('13.5', 'Fécalome sur radiographie et TDM abdominopelvienne', '<p class="faithful-note">La version affichée utilise le document clinique du manuel ; ce bloc est uniquement un secours textuel.</p>', 'Document clinique');
+    },
+    '13.7': function () {
+      return figCard('13.7', 'Pression en fonction du positionnement du patient',
+        '<svg class="faithful-chart" viewBox="0 0 680 310" role="img" aria-label="Décubitus dorsal et position demi-assise avec forces d’appui, friction et cisaillement"><rect x="45" y="220" width="260" height="18" rx="9" fill="#64748b" opacity=".35"/><circle cx="105" cy="160" r="26" fill="rgba(8,145,178,.20)" stroke="#0891b2"/><path d="M130 172 C175 178 218 184 275 202" fill="none" stroke="#0891b2" stroke-width="24" stroke-linecap="round"/><g stroke="#ef4444" stroke-width="4"><path d="M105 192V220"/><path d="M202 205V228"/><path d="M270 218V238"/></g><text x="175" y="270" text-anchor="middle" fill="currentColor" font-size="13" font-weight="750">Décubitus dorsal · forces d’appui</text><path d="M380 225 L610 225 L610 210 L455 210 L405 105 L385 112 L438 225Z" fill="#64748b" opacity=".22"/><circle cx="430" cy="92" r="24" fill="rgba(5,150,105,.18)" stroke="#059669"/><path d="M449 112 C480 143 502 175 520 211" fill="none" stroke="#059669" stroke-width="24" stroke-linecap="round"/><g stroke="#ef4444" stroke-width="4"><path d="M500 190L470 220"/><path d="M525 208L557 222"/></g><g stroke="#f59e0b" stroke-width="4"><path d="M470 198L505 198"/><path d="M540 216L575 216"/></g><text x="515" y="270" text-anchor="middle" fill="currentColor" font-size="13" font-weight="750">Demi-assise · cisaillement + frictions</text><text x="340" y="298" text-anchor="middle" fill="#ef4444" font-size="11">La demi-assise augmente l’étirement vasculaire au sacrum.</text></svg>', 'Schéma de forces');
+    },
+    '13.8': function () {
+      return figCard('13.8', 'Physiopathogénie de l’escarre',
+        '<div class="faithful-panels">' +
+          '<section><b>A · Unité vasculaire</b><p>Artériole : 32 mmHg · capillaire : 16–33 mmHg · veinule : 12 mmHg.</p></section>' +
+          '<section><b>B · Pression élevée et soutenue</b><p>Baisse du débit → ischémie → œdème, thrombose et occlusion lymphatique → mort cellulaire.</p></section>' +
+          '<section><b>C · Cône de pression</b><p>La pression augmente vers l’os : les dommages profonds peuvent dépasser l’atteinte cutanée visible.</p></section>' +
+          '<section><b>D · Intensité × durée</b><p>Au fauteuil, la zone dangereuse est atteinte plus vite qu’au lit ; une pression moindre devient nocive si elle se prolonge.</p></section>' +
+        '</div>', 'Quatre panneaux A–D');
+    },
+    '14.1': function () {
+      return figCard('14.1', 'Algorithme de dépistage de la sarcopénie',
+        flowSteps([{t:'Personne âgée de plus de 65 ans'},{t:'Mesurer la vitesse de marche'}]) + branchGrid([
+          {t:'Vitesse > 0,8 m/s',items:['mesurer la force de préhension','force normale : pas de sarcopénie','force basse : mesurer la masse musculaire']},
+          {t:'Vitesse < 0,8 m/s',items:['mesurer directement la masse musculaire','masse basse : sarcopénie','masse normale : pas de sarcopénie']}
+        ]), 'Arbre EWGSOP du manuel');
+    },
+    '15.1': function () {
+      return figCard('15.1', 'Distribution périphérique de l’innervation vésicale', branchGrid([
+        {t:'Remplissage vésical',items:['sympathique thoraco-lombaire actif : détrusor inhibé et sphincter lisse contracté','nerf pudendal actif : sphincter strié contracté','parasympathique sacré inhibé']},
+        {t:'Miction',items:['diminution du sympathique : relaxation du sphincter lisse','activation du parasympathique pelvien : contraction du détrusor','relaxation somatique par le nerf pudendal']}
+      ]), 'Double schéma remplissage / miction');
+    },
+    '15.2': function () {
+      return figCard('15.2', 'Comorbidités et classes pharmacologiques contribuant à l’incontinence',
+        simpleTable(['Comorbidités', 'Mécanisme', 'Traitements favorisants'], [
+          ['Asthme, BPCO, surpoids, diabète', 'Incontinence urinaire d’effort', 'Antagonistes alpha-adrénergiques, inhibiteurs de l’enzyme de conversion'],
+          ['AVC, constipation, diabète', 'Rétention urinaire', 'Anticholinergiques, inhibiteurs calciques, neuroleptiques, gabapentine, prégabaline'],
+          ['AVC, maladie de Parkinson, diabète', 'Constipation', 'Anticholinergiques'],
+          ['Pathologies neurologiques encéphaliques ou médullaires', 'Incontinence sur urgenturie', 'Anticholinestérasiques, inhibiteurs de la recapture de la sérotonine'],
+          ['Diabète, œdèmes, insuffisance cardiaque, SAOS', 'Polyurie', 'Lithium, diurétiques'],
+          ['Restriction de mobilité neurologique ou orthopédique', 'Incontinence fonctionnelle', 'Barrières, perfusion et autres iatrogénies hospitalières']
+        ]), 'Tableau mécanistique');
+    },
+    '15.3': function () {
+      return figCard('15.3', 'Évaluation et traitement de l’incontinence et de la rétention aiguë',
+        '<p class="faithful-alert">Devant toute incontinence : rechercher une rétention aiguë d’urine avec miction par regorgement.</p>' + branchGrid([
+          {t:'Évaluation initiale',items:['RAU : voussure hypogastrique, matité, douleur ou confusion','IUTR : DIAPPERS — délirium, infection, atrophie, psychologie, pharmacologie, excès de diurèse, restriction de mobilité, selles','traitement spécifique puis réévaluation']},
+          {t:'Évaluation globale',items:['comorbidités et ADL','qualité de vie, désir et préférences du patient et de l’aidant','examen neurologique, mobilité, cognition, toucher rectal et périnée','catalogue mictionnel ou protections','résidu post-mictionnel']},
+          {t:'Signes d’alerte',items:['douleur ou hématurie','infections récidivantes','masse, irradiation ou chirurgie pelvienne','prolapsus, fistule suspectée','explorations ciblées']}
+        ]) + branchGrid([
+          {t:'IUU / IUM',items:['règles hygiéno-diététiques','mictions programmées et rééducation','neuromodulation tibiale','mirabegron ou anticholinergique chez patient sélectionné']},
+          {t:'IUE',items:['mictions programmées','rééducation périnéale','traiter le symptôme prédominant si mixte']},
+          {t:'Rétention significative',items:['hétérosondage initial puis régulier si possible','sinon sonde sus-pubienne ou à demeure','réévaluer toutes les 24–48 h et tenter l’ablation','ECBU, prévention du syndrome de levée d’obstacle, traiter constipation et médicaments']}
+        ]) + '<p class="faithful-note">En cas d’échec : avis spécialisé urologie, gynécologie ou médecine physique et de réadaptation.</p>', 'Grand arbre clinique');
+    },
+    '16.2': function () {
+      return figCard('16.2', 'Arrêt des benzodiazépines après 65 ans',
+        flowSteps([
+          {t:'Prise quotidienne depuis plus de 30 jours'},
+          {t:'Vérifier que l’indication reste valide',d:'y compris en termes de durée'},
+          {t:'Explorer attentes et attachement du patient'},
+          {t:'Décision partagée d’arrêt'},
+          {t:'Arrêt progressif adapté',d:'sur 4 à 10 semaines le plus souvent'},
+          {t:'Suivi',d:'consultations rapprochées jusqu’à 1 semaine après l’arrêt, puis jusqu’à 6 mois'}
+        ]) + branchGrid([
+          {t:'Précautions particulières',items:['dépression','insomnie chronique','trouble anxieux caractérisé','troubles cognitifs ou démence','échecs antérieurs','surconsommation régulière d’alcool']},
+          {t:'Prise en charge spécialisée conjointe',items:['doses très élevées','insomnie rebelle','dépendance à l’alcool ou autre','association à d’autres psychotropes','trouble psychiatrique sévère']}
+        ]), 'Démarche ambulatoire');
+    },
+    '18.1': function () { return figCard('18.1', 'Radiographie du bassin — signes de coxarthrose', '<p class="faithful-note">Le document clinique du manuel est utilisé dans le dossier progressif.</p>', 'Document clinique'); },
+    '18.2': function () { return figCard('18.2', 'Érythème sacré — évaluation d’une escarre', '<p class="faithful-note">Le document clinique du manuel est utilisé dans le dossier progressif.</p>', 'Document clinique'); },
+    '20.1': function () { return figCard('20.1', 'Imagerie cérébrale axiale — ventriculomégalie', '<p class="faithful-note">Le document clinique est présenté sans dévoiler la réponse à la question.</p>', 'Document clinique'); },
+    '20.2': function () { return figCard('20.2', 'Escarre talonnière avec contact osseux', '<p class="faithful-note">Le document clinique du manuel est utilisé dans la question isolée.</p>', 'Document clinique'); }
+  });
+
   // simpleTable helper used inside figure cards
   function simpleTable(headers, rows) {
     return '<table class="faithful-grid">' + thead(headers) + tbody(rows.map(function (r) {
@@ -1397,6 +1667,27 @@
 
   function hasFaithfulTable(id) { return !!FAITHFUL_TABLES[id]; }
   function hasFaithfulFigure(id) { return !!FAITHFUL_FIGURES[id]; }
+
+  global.updateFaithfulChecklist = function (input) {
+    var root = input && input.closest ? input.closest('.faithful-checklist') : null;
+    if (!root) return;
+    var total = root.querySelectorAll('input[type="checkbox"]').length;
+    var score = root.querySelectorAll('input[type="checkbox"]:checked').length;
+    var threshold = Number(root.getAttribute('data-threshold') || 0);
+    var output = root.querySelector('output');
+    var status = root.querySelector('.faithful-score strong');
+    if (output) output.textContent = score + ' / ' + total;
+    root.classList.toggle('is-positive', score >= threshold);
+    if (status) status.textContent = score >= threshold
+      ? 'Seuil atteint : interpréter dans le contexte clinique'
+      : 'Seuil positif : ≥ ' + threshold;
+  };
+
+  global.updateFaithfulRange = function (input) {
+    var root = input && input.closest ? input.closest('.faithful-eva') : null;
+    var output = root && root.querySelector('output');
+    if (output) output.textContent = String(input.value).replace('.', ',') + ' / 10';
+  };
 
   global.FAITHFUL_TABLES = FAITHFUL_TABLES;
   global.FAITHFUL_FIGURES = FAITHFUL_FIGURES;

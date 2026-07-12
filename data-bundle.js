@@ -242,8 +242,8 @@ var FIGURE_META = {
   "6.6": {kind:"diagram", title:"Indications des traitements anti-ostéoporotiques"},
   "6.7": {kind:"diagram", title:"Cycle thérapeutique de l’ostéoporose primitive"},
   "7.1": {kind:"clinical", title:"Coxarthrose", sources:["images/p126_0.jpg"]},
-  "7.2": {kind:"clinical", title:"Coxarthrose polaire supérieure", sources:["images/p126_0.jpg"]},
-  "7.3": {kind:"clinical", title:"Prothèse totale de hanche à droite et coxarthrose à gauche", sources:["images/p129_0.png","images/p129_1.jpg"]},
+  "7.2": {kind:"diagram", title:"Signes radiographiques d’une coxarthrose polaire supérieure"},
+  "7.3": {kind:"clinical", title:"Prothèse totale de hanche à droite et coxarthrose à gauche", sources:["images/p129_0.png"]},
   "7.4": {kind:"clinical", title:"Arthrose fémoro-patellaire avec amincissement de l’interligne externe", sources:["images/p132_0.jpg"]},
   "7.5": {kind:"clinical", title:"Dysplasie trochléo-patellaire", sources:["images/p132_1.jpg"]},
   "7.6": {kind:"clinical", title:"Gonarthrose fémoro-tibiale interne : évolution et varus", sources:["images/p132_2.png"]},
@@ -255,7 +255,7 @@ var FIGURE_META = {
   "7.12": {kind:"clinical", title:"Calcification arciforme du ligament transverse de l’atlas", sources:["images/p139_2.jpg"]},
   "8.1": {kind:"tool", title:"Échelle visuelle analogique"},
   "8.2": {kind:"tool", title:"Échelle verbale simple"},
-  "8.3": {kind:"clinical", title:"Échelle Algoplus", sources:["images/p148_0.jpg"]},
+  "8.3": {kind:"tool", title:"Échelle Algoplus"},
   "8.4": {kind:"tool", title:"Questionnaire DN4"},
   "8.5": {kind:"diagram", title:"Algorithme d’évaluation de la douleur chez la personne âgée"},
   "9.1": {kind:"clinical", title:"Atrophie hippocampique et leucoencéphalopathie vasculaire en IRM", sources:["images/p162_0.jpg"]},
@@ -269,15 +269,15 @@ var FIGURE_META = {
   "11.2": {kind:"diagram", title:"Réserve cognitive et sévérité du facteur précipitant"},
   "11.3": {kind:"diagram", title:"Choix des examens complémentaires devant un syndrome confusionnel"},
   "11.4": {kind:"diagram", title:"Prise en charge de l’agitation du patient âgé confus"},
-  "12.1": {kind:"clinical", title:"Complications traumatiques : hématomes sous-duraux", sources:["images/p215_0.jpg","images/p215_1.jpg"]},
-  "12.2": {kind:"clinical", title:"Fractures multiples du bassin", sources:["images/crops/crop_p215_1.jpg"]},
+  "12.1": {kind:"clinical", title:"Complications traumatiques : hématomes sous-duraux", sources:["images/p215_0.jpg"]},
+  "12.2": {kind:"clinical", title:"Fractures multiples du bassin", sources:["images/p215_1.jpg"]},
   "12.3": {kind:"clinical", title:"Bloc bifasciculaire", sources:["images/p216_0.jpg"]},
   "12.4": {kind:"clinical", title:"Bloc auriculoventriculaire complet", sources:["images/p217_0.jpg"]},
   "13.1": {kind:"diagram", title:"Conséquences du syndrome d’immobilisation"},
   "13.2": {kind:"diagram", title:"Liens entre masse, force et puissance musculaires et alitement"},
   "13.3": {kind:"diagram", title:"Diminution des capacités en endurance au cours de la vie"},
   "13.4": {kind:"diagram", title:"Déconditionnement et seuil fonctionnel après alitement"},
-  "13.5": {kind:"diagram", title:"Démarche diagnostique devant une suspicion de thrombose veineuse profonde"},
+  "13.5": {kind:"clinical", title:"Fécalome sur une radiographie d’abdomen sans préparation et sur une TDM abdominopelvienne", sources:["images/p234_0.jpg"]},
   "13.6": {kind:"clinical", title:"Syndrome d’Ogilvie", sources:["images/p235_0.jpg"]},
   "13.7": {kind:"diagram", title:"Pression en fonction du positionnement du patient"},
   "13.8": {kind:"diagram", title:"Physiopathogénie de l’escarre"},
@@ -291,11 +291,20 @@ var FIGURE_META = {
   "15.3": {kind:"diagram", title:"Évaluation et traitement de l’incontinence et de la rétention aiguë"},
   "16.1": {kind:"clinical", title:"Complications du traitement par AVK", sources:["images/p294_0.jpg","images/p294_1.jpg"]},
   "16.2": {kind:"diagram", title:"Modalités d’arrêt des benzodiazépines après 65 ans"},
-  "18.1": {kind:"clinical", title:"Examen clinique de la patiente - mini-dossier progressif", sources:["images/p334_0.jpg"]},
-  "18.2": {kind:"clinical", title:"Imagerie abdominale - mini-dossier progressif", sources:["images/p343_0.jpg"]},
-  "20.1": {kind:"clinical", title:"ECG - question isolée", sources:["images/crops/crop_p368_8.jpg"]},
-  "20.2": {kind:"clinical", title:"Radiographie du col fémoral - question isolée", sources:["images/crops/crop_p371_7.jpg"]}
+  "18.1": {kind:"clinical", title:"Radiographie du bassin — signes de coxarthrose", sources:["images/p334_0.jpg"]},
+  "18.2": {kind:"clinical", title:"Érythème sacré — évaluation d’une escarre", sources:["images/p343_0.jpg"]},
+  "20.1": {kind:"clinical", title:"Imagerie cérébrale axiale — ventriculomégalie", sources:["images/p368_0.jpg"]},
+  "20.2": {kind:"clinical", title:"Escarre talonnière avec contact osseux — question isolée", sources:["images/p371_0.jpg"]}
 };
+// Le registre historique ne doit jamais contredire l’inventaire vérifié.
+// Il est dérivé mécaniquement des seuls médias cliniques du manuel.
+Object.keys(FIGURES).forEach(function (id) { delete FIGURES[id]; });
+Object.keys(FIGURE_META).forEach(function (id) {
+  var meta = FIGURE_META[id];
+  if (meta && meta.kind === 'clinical' && Array.isArray(meta.sources) && meta.sources[0]) {
+    FIGURES[id] = {src:meta.sources[0], desc:meta.title || ('Figure ' + id)};
+  }
+});
 if (typeof window !== 'undefined') window.FIGURE_META = FIGURE_META;
 
 /* --- interactive-figures.js --- */
@@ -2255,6 +2264,88 @@ var INTERACTIVE_FIGURES = {
 
 };
 
+// Correctifs relus sur les figures originales du manuel. Ces deux schémas
+// remplacent les anciennes représentations génériques sans utiliser d’image.
+INTERACTIVE_FIGURES['1.1'] = {
+  title: 'Le raisonnement gériatrique : modèle de décompensation 1 + 2 + 3 de Bouchon',
+  svg: `<style>
+    .bouchon-exact{font-family:'Figtree','Noto Sans',sans-serif;color:var(--text,#16324a)}
+    .bouchon-exact .axis{stroke:currentColor;stroke-width:1.4;opacity:.42}
+    .bouchon-exact .threshold{stroke:#ef4444;stroke-width:2;stroke-dasharray:7 5}
+    .bouchon-exact .physio{fill:none;stroke:currentColor;stroke-width:4;stroke-linecap:round}
+    .bouchon-exact .chronic{fill:none;stroke:#059669;stroke-width:5;stroke-linecap:round}
+    .bouchon-exact .acute{fill:none;stroke:#ef4444;stroke-width:4;stroke-linecap:round}
+    .bouchon-exact .recovery{fill:none;stroke:#0891b2;stroke-width:3;stroke-dasharray:6 5;marker-end:url(#bouchon-up)}
+    .bouchon-exact .label{fill:currentColor;font-size:12px;font-weight:650}
+    .bouchon-exact .tag{font-size:13px;font-weight:850}
+    .bouchon-exact .event{transition:filter .2s,stroke-width .2s}
+    .bouchon-exact .event:hover{filter:drop-shadow(0 0 5px rgba(239,68,68,.55));stroke-width:6}
+  </style>
+  <svg class="bouchon-exact" viewBox="0 0 680 390" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="bouchon-title bouchon-desc">
+    <title id="bouchon-title">Modèle de décompensation gériatrique de Bouchon</title>
+    <desc id="bouchon-desc">Le vieillissement diminue progressivement la réserve. Une maladie chronique accentue cette pente. Un stress aigu provoque une chute sous le seuil d’insuffisance, partiellement réversible par l’intervention.</desc>
+    <defs><marker id="bouchon-up" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#0891b2"/></marker></defs>
+    <line class="axis" x1="76" y1="35" x2="76" y2="330"/><line class="axis" x1="76" y1="330" x2="645" y2="330"/>
+    <text class="label" x="22" y="185" transform="rotate(-90 22 185)" text-anchor="middle">Fonction d’organe</text>
+    <text class="label" x="360" y="365" text-anchor="middle">Âge</text><text class="label" x="60" y="48" text-anchor="end">100 %</text><text class="label" x="60" y="328" text-anchor="end">0</text>
+    <line class="threshold" x1="76" y1="266" x2="645" y2="266"/><text x="635" y="254" text-anchor="end" fill="#ef4444" font-size="12" font-weight="800">Seuil d’insuffisance</text>
+    <path class="physio" d="M85 70 C195 78 300 94 418 121 C505 141 570 160 625 182"/>
+    <text class="tag" x="150" y="62" fill="currentColor">1</text><text class="label" x="168" y="62">Vieillissement physiologique</text>
+    <path class="chronic" d="M205 82 C286 111 350 150 418 206 C466 232 520 247 585 258"/>
+    <text class="tag" x="285" y="128" fill="#059669">2</text><text x="303" y="128" fill="#059669" font-size="12" font-weight="750">Maladie chronique</text>
+    <g class="event"><path class="acute" d="M414 204 L414 292"/><circle cx="414" cy="204" r="6" fill="#ef4444"/><text class="tag" x="427" y="224" fill="#ef4444">3</text><text x="447" y="224" fill="#ef4444" font-size="12" font-weight="750">Stress aigu</text></g>
+    <path class="recovery" d="M414 292 C438 272 449 247 461 226"/><text x="471" y="244" fill="#0891b2" font-size="11" font-weight="750">Effet de l’intervention</text>
+    <g class="event"><path class="acute" d="M552 250 L552 309"/><circle cx="552" cy="250" r="5" fill="#ef4444"/></g>
+    <path class="recovery" d="M552 309 C568 292 578 274 586 258"/>
+    <path d="M76 266 H414 V292 H552 V309 H645" fill="none" stroke="rgba(239,68,68,.18)" stroke-width="18"/>
+    <g transform="translate(92 292)"><rect width="270" height="31" rx="15" fill="rgba(8,145,178,.10)"/><text x="135" y="20" text-anchor="middle" fill="currentColor" font-size="11" font-weight="700">Réserve fonctionnelle encore mobilisable</text></g>
+  </svg>`
+};
+
+INTERACTIVE_FIGURES['7.2'] = {
+  title: 'Signes radiographiques d’une coxarthrose polaire supérieure',
+  svg: `<style>
+    .cox-svg{font-family:'Figtree','Noto Sans',sans-serif;color:var(--text,#16324a)}
+    .cox-svg .bone{fill:rgba(8,145,178,.10);stroke:currentColor;stroke-width:3}
+    .cox-svg .dense{fill:none;stroke:#0891b2;stroke-width:12;stroke-linecap:round}
+    .cox-svg .joint{fill:none;stroke:#f59e0b;stroke-width:4;stroke-linecap:round}
+    .cox-svg .leader{stroke:currentColor;stroke-width:1.5;opacity:.55}
+    .cox-svg .call{font-size:12px;font-weight:750;fill:currentColor}
+    .cox-svg .mark{cursor:pointer;transition:transform .18s;transform-box:fill-box;transform-origin:center}
+    .cox-svg .mark:hover{transform:scale(1.12)}
+  </style>
+  <svg class="cox-svg" viewBox="0 0 680 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="cox-title cox-desc">
+    <title id="cox-title">Coxarthrose polaire supérieure</title><desc id="cox-desc">Coupe schématique d’une hanche montrant pincement, ostéocondensation, géodes et ostéophytose.</desc>
+    <path class="bone" d="M188 70 C115 103 82 184 104 252 C125 316 185 338 244 306 C278 288 292 255 289 219 C285 172 252 128 188 70Z"/>
+    <circle class="bone" cx="286" cy="211" r="91"/>
+    <path class="bone" d="M337 280 C378 307 410 349 430 405 L335 405 C324 358 299 323 262 298Z"/>
+    <path class="joint" d="M202 125 C245 99 301 103 343 137"/><path class="dense" d="M190 142 C239 111 305 116 352 153" opacity=".9"/>
+    <path d="M178 120 Q198 88 218 121" fill="rgba(245,158,11,.28)" stroke="#f59e0b" stroke-width="3"/>
+    <g class="mark"><circle cx="246" cy="162" r="13" fill="rgba(239,68,68,.14)" stroke="#ef4444" stroke-width="3"/><circle cx="301" cy="150" r="9" fill="rgba(239,68,68,.14)" stroke="#ef4444" stroke-width="3"/></g>
+    <path class="mark" d="M362 174 Q392 157 400 187 Q373 184 355 205" fill="rgba(5,150,105,.22)" stroke="#059669" stroke-width="3"/>
+    <g><line class="leader" x1="164" y1="103" x2="72" y2="65"/><text class="call" x="24" y="55">A · Pincement supérieur</text><text x="24" y="72" fill="#f59e0b" font-size="11">interligne réduit</text></g>
+    <g><line class="leader" x1="226" y1="125" x2="492" y2="68"/><text class="call" x="500" y="58">B · Ostéocondensation</text><text x="500" y="75" fill="#0891b2" font-size="11">os sous-chondral</text></g>
+    <g><line class="leader" x1="274" y1="155" x2="510" y2="170"/><text class="call" x="520" y="165">C · Géodes</text><text x="520" y="182" fill="#ef4444" font-size="11">lacunes sous-chondrales</text></g>
+    <g><line class="leader" x1="382" y1="181" x2="520" y2="267"/><text class="call" x="530" y="264">D · Ostéophytose</text><text x="530" y="281" fill="#059669" font-size="11">rebord marginal</text></g>
+    <g fill="#164e63" font-size="10" font-weight="850">
+      <circle cx="166" cy="188" r="12" fill="#fff" stroke="#164e63"/><text x="166" y="192" text-anchor="middle">1</text>
+      <circle cx="194" cy="235" r="12" fill="#fff" stroke="#164e63"/><text x="194" y="239" text-anchor="middle">2</text>
+      <circle cx="250" cy="281" r="12" fill="#fff" stroke="#164e63"/><text x="250" y="285" text-anchor="middle">3</text>
+      <circle cx="326" cy="263" r="12" fill="#fff" stroke="#164e63"/><text x="326" y="267" text-anchor="middle">4</text>
+      <circle cx="365" cy="223" r="12" fill="#fff" stroke="#164e63"/><text x="365" y="227" text-anchor="middle">5</text>
+      <circle cx="347" cy="151" r="12" fill="#fff" stroke="#164e63"/><text x="347" y="155" text-anchor="middle">6</text>
+    </g>
+    <text x="340" y="423" text-anchor="middle" fill="currentColor" font-size="11">Touchez ou survolez les anomalies colorées pour les repérer.</text>
+  </svg>`
+};
+
+// Ces trois figures sont des arbres/matrices riches : leur version HTML
+// adaptative dans faithful-visuals.js est plus fidèle que les anciens SVG
+// résumés et reste lisible sur mobile.
+delete INTERACTIVE_FIGURES['6.5'];
+delete INTERACTIVE_FIGURES['6.6'];
+delete INTERACTIVE_FIGURES['6.7'];
+
 // ─── Helper: resolve static FIGURES asset (object {src}, array, or string) ───
 function resolveFigureSrc(figId) {
   if (typeof FIGURES === 'undefined' || !FIGURES[figId]) return null;
@@ -3072,6 +3163,36 @@ if (typeof window !== 'undefined') {
     }).join('') + '</div>';
   }
 
+  function branchGrid(items) {
+    return '<div class="faithful-branches">' + items.map(function (item) {
+      return '<section class="faithful-branch">' +
+        '<h5>' + esc(item.t) + '</h5>' +
+        (item.d ? '<p>' + esc(item.d) + '</p>' : '') +
+        (item.items && item.items.length ? '<ul>' + item.items.map(function (value) { return '<li>' + esc(value) + '</li>'; }).join('') + '</ul>' : '') +
+      '</section>';
+    }).join('') + '</div>';
+  }
+
+  function checklistTool(prefix, groups, threshold) {
+    var total = groups.reduce(function (sum, group) { return sum + group.items.length; }, 0);
+    var index = 0;
+    return '<div class="faithful-checklist" data-threshold="' + threshold + '">' +
+      groups.map(function (group) {
+        return '<fieldset><legend>' + esc(group.title) + '</legend>' + group.items.map(function (item) {
+          var id = prefix + '-' + (++index);
+          return '<label for="' + esc(id) + '"><input id="' + esc(id) + '" type="checkbox" onchange="window.updateFaithfulChecklist(this)"><span>' + esc(item) + '</span></label>';
+        }).join('') + '</fieldset>';
+      }).join('') +
+      '<div class="faithful-score"><span>Score</span><output>0 / ' + total + '</output><strong>Seuil positif : ≥ ' + threshold + '</strong></div>' +
+    '</div>';
+  }
+
+  function metricBars(rows) {
+    return '<div class="faithful-metrics">' + rows.map(function (row) {
+      return '<div class="faithful-metric"><span>' + esc(row.t) + '</span><div><i style="width:' + Number(row.v) + '%"></i></div><b>' + esc(row.d || (row.v + ' %')) + '</b></div>';
+    }).join('') + '</div>';
+  }
+
   var FAITHFUL_FIGURES = {
     '1.1': function () {
       return figCard('1.1', 'Modèle de décompensation gériatrique de Bouchon (1+2+3)',
@@ -3680,6 +3801,246 @@ if (typeof window !== 'undefined') {
     '16.2': function () { return figCard('16.2', 'Modalités d’arrêt des benzodiazépines après 65 ans', flowSteps([{t:'Informer et décider avec le patient'},{t:'Réduire progressivement',d:'paliers individualisés'},{t:'Surveiller le sevrage et le sommeil'},{t:'Maintenir les mesures non médicamenteuses'}]),'Algorithme'); }
   });
 
+  /* Révision v228 : reconstruction complète des diagrammes qui restaient
+     génériques. Les contenus ci-dessous suivent les branches, valeurs et
+     relations de la figure imprimée, avec une présentation responsive. */
+  Object.assign(FAITHFUL_FIGURES, {
+    '2.1': function () {
+      return figCard('2.1', 'Application du raisonnement gériatrique à des situations fréquentes',
+        simpleTable(['Situation', '1 — vieillissement', '2 — pathologies chroniques', '3 — facteurs précipitants'], [
+          ['Dyspnée / OAP', 'Altération de la relaxation cardiaque', 'Cardiopathie, HTA', 'Infection, anémie, fibrillation atriale rapide'],
+          ['Chute', 'Baisse proprioceptive et dégradation du baroréflexe', 'Diabète, maladie de Parkinson', 'Infection, anémie, déshydratation, globe, fécalome, douleur, nouveau traitement'],
+          ['Confusion / agitation', 'Troubles attentionnels', 'Cécité, trouble neurocognitif, dépression', 'Dysnatrémie, hypercalcémie, hypoglycémie, sevrage, déménagement, infection urinaire'],
+          ['Incontinence aiguë', 'Diminution des pressions urétrales', 'AVC, trouble neurocognitif', 'Diurétiques, confusion, constipation ou fécalome, douleur'],
+          ['Difficulté à la marche', 'Sarcopénie', 'Arthrose, surpoids, dénutrition', 'Fracture, déshydratation, AVC, anémie, modification de posologie']
+        ]), 'Matrice 1 + 2 + 3');
+    },
+    '2.4': function () {
+      return figCard('2.4', 'Exemple de cascade gériatrique', flowSteps([
+        {t:'Bronchopneumonie'}, {t:'Décompensation cardiaque'}, {t:'Insuffisance rénale'},
+        {t:'Confusion'}, {t:'Perte d’autonomie'}, {t:'Dénutrition'}
+      ]) + '<p class="faithful-note">Chaque défaillance favorise la suivante : interrompre la cascade exige de traiter la cause et de prévenir simultanément les complications fonctionnelles.</p>', 'Cascade');
+    },
+    '2.5': function () {
+      return figCard('2.5', 'Cercle vicieux dénutrition – bronchopneumonie',
+        branchGrid([
+          {t:'Dénutrition',items:['diminution de l’immunité','réduction de la force des muscles respiratoires']},
+          {t:'Conséquences respiratoires',items:['diminution de l’efficacité de la toux','apparition d’une infection respiratoire']},
+          {t:'Bronchopneumonie',items:['hypercatabolisme','anorexie']},
+          {t:'Boucle de retour',d:'Hypercatabolisme et anorexie aggravent la dénutrition.'}
+        ]), 'Cercle vicieux');
+    },
+    '2.6': function () {
+      return figCard('2.6', 'Concept de fragilité',
+        branchGrid([
+          {t:'Déterminants',items:['facteurs génétiques','environnement et parcours de vie','maladies chroniques']},
+          {t:'Réserves physiologiques',d:'Réduction multisystémique progressive.'},
+          {t:'Amplificateurs',items:['dénutrition','sarcopénie','inactivité']},
+          {t:'Fragilité',d:'Un stress minime peut provoquer une décompensation.'},
+          {t:'Évolution',items:['incapacité','dépendance','hospitalisation ou décès']}
+        ]), 'Réseau causal');
+    },
+    '5.1': function () {
+      return figCard('5.1', 'Différentes causes de surdité',
+        simpleTable(['Présentation', 'Surdité de transmission', 'Surdité de perception'], [
+          ['Unilatérale récente', 'Bouchon de cérumen, otite externe ou moyenne, traumatisme tympanique', 'Surdité brusque, traumatisme sonore, cause infectieuse ou vasculaire'],
+          ['Unilatérale ancienne', 'Séquelles tympaniques ou ossiculaires, otospongiose', 'Schwannome vestibulaire ou autre atteinte rétrocochléaire'],
+          ['Bilatérale récente', 'Bouchons bilatéraux, otite séromuqueuse', 'Ototoxicité, traumatisme sonore, infection'],
+          ['Bilatérale progressive', 'Otospongiose ou atteinte chronique de l’oreille moyenne', 'Presbyacousie, exposition chronique au bruit, ototoxicité cumulative']
+        ]), 'Arbre diagnostique');
+    },
+    '6.5': function () {
+      return figCard('6.5', 'Démarche diagnostique et thérapeutique devant une suspicion d’ostéoporose',
+        flowSteps([
+          {t:'1. Suspecter',d:'fracture de faible énergie ou facteurs de risque'},
+          {t:'2. Confirmer',d:'radiographies si fracture ; ostéodensitométrie au rachis et à la hanche'},
+          {t:'3. Éliminer une cause secondaire',d:'CRP, EPP, calcémie, phosphates, créatinine, vitamine D ± TSH'},
+          {t:'4. Confirmer l’ostéoporose primitive',d:'puis évaluation gériatrique, risque de chute et risque fracturaire ± FRAX'},
+          {t:'5. Choisir et planifier',d:'mesures générales, traitement, surveillance et réévaluation de fin de cycle'}
+        ]) + branchGrid([
+          {t:'Bilan secondaire',items:['hyperparathyroïdie et endocrinopathies','myélome','hémochromatose','malabsorption','rhumatisme inflammatoire','insuffisance rénale chronique']},
+          {t:'Décision individualisée',items:['âge et antécédents fracturaires','DMO','fracture sévère ou non','terrain cognitif et autonomie','rapport bénéfice–risque']}
+        ]), 'Algorithme en 5 étapes');
+    },
+    '6.6': function () {
+      return figCard('6.6', 'Indications des traitements anti-ostéoporotiques (GRIO 2018)',
+        simpleTable(['T-score au site le plus bas', 'Fracture sévère', 'Fracture non sévère', 'Sans fracture + facteurs de risque / chutes multiples'], [
+          ['T > −1', 'Avis du spécialiste', 'Pas de traitement', 'Pas de traitement'],
+          ['T ≤ −1 et > −2', 'Traitement', 'Avis du spécialiste', 'Pas de traitement'],
+          ['T ≤ −2 et > −3', 'Traitement', 'Traitement', 'Avis du spécialiste'],
+          ['T ≤ −3', 'Traitement', 'Traitement', 'Traitement']
+        ]), 'Matrice décisionnelle');
+    },
+    '6.7': function () {
+      return figCard('6.7', 'Cycle thérapeutique de l’ostéoporose primitive',
+        flowSteps([
+          {t:'Indication thérapeutique confirmée',d:'sans contre-indication'},
+          {t:'Cycle de 3 à 5 ans',d:'bisphosphonate ; ou tériparatide 18 mois puis anti-résorbeur ; ou dénosumab puis bisphosphonate ≥ 1 an'},
+          {t:'Objectif',d:'réduire le risque fracturaire et éviter la récidive'},
+          {t:'Suivi',d:'tolérance, observance, nouvelle fracture et DMO selon le contexte'},
+          {t:'Réévaluation en fin de cycle',d:'arrêt surveillé, poursuite ou nouveau cycle selon fracture, DMO et risque résiduel'}
+        ]) + '<p class="faithful-note">Toujours associer calcium et vitamine D si besoin, activité en charge, prévention des chutes et correction des facteurs modifiables.</p>', 'Cycle et séquences');
+    },
+    '8.1': function () {
+      return figCard('8.1', 'Échelle visuelle analogique',
+        '<div class="faithful-eva"><div><h5>Face patient</h5><span>Pas de douleur</span><input type="range" min="0" max="10" step="0.1" value="0" aria-label="Positionner l’intensité de la douleur" oninput="window.updateFaithfulRange(this)"><span>Douleur maximale imaginable</span></div><div><h5>Face de mesure</h5><output>0 / 10</output><div class="faithful-ruler">10 · 9 · 8 · 7 · 6 · 5 · 4 · 3 · 2 · 1 · 0</div></div></div>', 'Échelle interactive');
+    },
+    '8.3': function () {
+      return figCard('8.3', 'Échelle Algoplus', checklistTool('algoplus', [
+        {title:'Observer le patient',items:['Visage : expression douloureuse','Regard : inattentif, fixe ou lointain','Plaintes : gémissements ou cris','Corps : protection d’une zone, position antalgique','Comportements : agitation ou refus de mobilisation']}
+      ], 2) + '<p class="faithful-note">Chaque item vaut 0 (non) ou 1 (oui). Un score ≥ 2/5 justifie une prise en charge antalgique et une réévaluation.</p>', 'Outil interactif');
+    },
+    '8.4': function () {
+      return figCard('8.4', 'Questionnaire DN4', checklistTool('dn4', [
+        {title:'Question 1 · La douleur présente-t-elle ?',items:['Brûlures','Sensation de froid douloureux','Décharges électriques']},
+        {title:'Question 2 · Est-elle associée à ?',items:['Fourmillements','Picotements','Engourdissement','Démangeaisons']},
+        {title:'Question 3 · L’examen retrouve-t-il ?',items:['Hypoesthésie au tact','Hypoesthésie à la piqûre']},
+        {title:'Question 4 · La douleur est-elle provoquée par ?',items:['Frottement']}
+      ], 4) + '<p class="faithful-note">Dix réponses oui/non. Un score ≥ 4/10 est en faveur d’une douleur neuropathique.</p>', 'Questionnaire interactif');
+    },
+    '8.5': function () {
+      return figCard('8.5', 'Algorithme décisionnel d’évaluation de la douleur',
+        flowSteps([{t:'Essayer une auto-évaluation',d:'quel que soit le niveau cognitif'}]) + branchGrid([
+          {t:'Auto-évaluation fiable : OUI',items:['EN ≥ 3 ou EVS ≥ 2 : analgésie puis réévaluation','EN < 3 ou EVS < 2 : surveillance et confirmation par hétéro-évaluation brève']},
+          {t:'Auto-évaluation fiable : NON',items:['Algoplus ≥ 2 : analgésie puis réévaluation','Algoplus < 2 : échelle longue (Doloplus, ECPA, PACSLAC) si doute']}
+        ]), 'Arbre décisionnel');
+    },
+    '11.1': function () {
+      return figCard('11.1', 'Approches du syndrome confusionnel', branchGrid([
+        {t:'Patient asymptomatique',items:['évaluer le risque','identifier les facteurs prédisposants','réaliser une évaluation gériatrique globale','corriger les facteurs prédisposants modifiables','prévenir lors de l’exposition à un facteur précipitant']},
+        {t:'Patient symptomatique ou suspect',items:['dépister avec une échelle puis confirmer ou infirmer','évaluer le risque étiologique et iatrogène','chercher le ou les facteurs précipitants','traquer les causes graves','corriger facteurs précipitants et prédisposants modifiables']}
+      ]), 'Double filière');
+    },
+    '11.2': function () {
+      return figCard('11.2', 'Lien entre réserve cognitive et facteur précipitant', branchGrid([
+        {t:'Réserve cognitive importante',d:'Un facteur précipitant important est nécessaire, par exemple un AVC.'},
+        {t:'Réserve cognitive intermédiaire',d:'Un stress de sévérité modérée peut déclencher la confusion.'},
+        {t:'Réserve cognitive limitée',d:'Un facteur minime peut suffire, par exemple une modification de posologie.'}
+      ]) + '<p class="faithful-note">La relation est inverse : plus la réserve est basse, moins le facteur précipitant doit être sévère.</p>', 'Relation réserve–stress');
+    },
+    '11.3': function () {
+      return figCard('11.3', 'Choix des examens complémentaires devant un syndrome confusionnel',
+        simpleTable(['Étape', 'Examens selon l’orientation clinique'], [
+          ['Interrogatoire et examen', 'Médicaments et toxiques, traumatisme ; examen neurologique, cardiovasculaire, digestif, locomoteur, métabolique et infectieux'],
+          ['Première intention', 'NFS, ionogramme, créatinine et clairance, CRP, glycémie, calcémie, bandelette urinaire + ECG'],
+          ['Seconde intention ciblée', 'Gaz du sang, troponine, toxiques, bilan hépatique, hémocultures, TSH, ECBU, radiographie thoracique'],
+          ['Indications spécifiques', 'TDM cérébrale si traumatisme ou signe focal ; EEG si crise suspectée ou bilan négatif ; PL si syndrome méningé ou infectieux sans point d’appel']
+        ]), 'Bilan orienté');
+    },
+    '11.4': function () {
+      return figCard('11.4', 'Prise en charge de l’agitation du patient âgé confus',
+        flowSteps([
+          {t:'Traitement étiologique + mesures non médicamenteuses'},
+          {t:'Médicament seulement si échec et danger',d:'auto-/hétéroagressivité ou soins indispensables compromis'},
+          {t:'Privilégier la voie orale et réévaluer immédiatement'}
+        ]) + branchGrid([
+          {t:'Anxiété majeure',items:['alprazolam 0,25 mg per os','ou oxazépam 10 mg per os','renouveler uniquement si besoin après réévaluation']},
+          {t:'Agitation, agressivité, hallucinations',items:['rispéridone 0,5 mg per os ou solution buvable','ou tiapride 50 mg per os / IM','corps de Lewy ou Parkinson : discuter quétiapine ou clozapine']}
+        ]) + '<p class="faithful-note">Surveiller douleur, fécalome et rétention urinaire ; éviter cathéter, sonde et perfusion sans nécessité. Pas d’escalade automatique.</p>', 'Algorithme thérapeutique');
+    },
+    '13.1': function () {
+      return figCard('13.1', 'Conséquences du syndrome d’immobilisation',
+        simpleTable(['Organe / système', 'Conséquences de l’immobilisation'], [
+          ['Musculosquelettique', 'Baisse de puissance, force et masse ; contractures, souffrance cartilagineuse, ankylose, ostéoporose'],
+          ['Cardiovasculaire et respiratoire', 'Tachycardie de repos, baisse de perfusion myocardique et de VO₂max, hypotension orthostatique, atélectasie, congestion veineuse, hypercoagulabilité'],
+          ['Cutané', 'Escarre et macération'],
+          ['Métabolique et endocrine', 'Balance azotée négative, hypercalciurie, natriurèse, insulinorésistance, hyperlipidémie, déficits vitaminiques et minéraux'],
+          ['Neurologique et psychiatrique', 'Dépression, confusion, troubles de l’équilibre et cognitifs, compression nerveuse, baisse de l’efficience neuromusculaire'],
+          ['Gastro-intestinal et urinaire', 'Incontinence, infection ou rétention urinaire, fécalome, constipation, reflux, inhalation, saignement gastroduodénal']
+        ]), 'Tableau multiorgane');
+    },
+    '13.2': function () {
+      return figCard('13.2', 'Liens entre masse, force et puissance musculaires, et alitement',
+        metricBars([
+          {t:'Masse musculaire',v:72,d:'déclin progressif'},
+          {t:'Force musculaire',v:56,d:'déclin plus marqué'},
+          {t:'Puissance musculaire',v:40,d:'déclin le plus rapide'}
+        ]) + '<p class="faithful-note">L’alitement accentue brutalement les trois courbes. La masse conditionne surtout la réserve ; la force, le lever de chaise et l’escalier ; la puissance, la vitesse de marche et l’équilibre.</p>', 'Courbes comparées');
+    },
+    '13.3': function () {
+      return figCard('13.3', 'Diminution des capacités en endurance au cours de la vie',
+        '<svg class="faithful-chart" viewBox="0 0 680 330" role="img" aria-label="Trois trajectoires de VO2 max avec seuil de marche et effet d’une immobilisation"><line x1="70" y1="25" x2="70" y2="285" stroke="currentColor" opacity=".4"/><line x1="70" y1="285" x2="645" y2="285" stroke="currentColor" opacity=".4"/><line x1="70" y1="220" x2="645" y2="220" stroke="#ef4444" stroke-dasharray="8 5"/><text x="638" y="210" text-anchor="end" fill="#ef4444" font-size="12">Seuil de capacité de marche</text><path d="M80 55 C230 75 420 105 625 145" fill="none" stroke="#0891b2" stroke-width="5"/><path d="M80 100 C240 125 430 160 625 205" fill="none" stroke="#059669" stroke-width="5"/><path d="M80 155 C235 178 420 218 625 265" fill="none" stroke="#f59e0b" stroke-width="5"/><rect x="430" y="25" width="38" height="260" fill="rgba(239,68,68,.10)"/><text x="449" y="42" text-anchor="middle" fill="#ef4444" font-size="11" transform="rotate(90 449 42)">Immobilisation</text><text x="90" y="45" fill="#0891b2" font-size="12">Réserves élevées</text><text x="90" y="93" fill="#059669" font-size="12">Sujet moyen</text><text x="90" y="148" fill="#f59e0b" font-size="12">Sujet fragile</text><text x="355" y="318" text-anchor="middle" fill="currentColor" font-size="12">Âge : 20–29 · 30–39 · 40–49 · 50–59 · 60–69 · 70+</text><text x="18" y="165" transform="rotate(-90 18 165)" text-anchor="middle" fill="currentColor" font-size="12">VO₂max (ml/min/kg)</text></svg>', 'Courbes');
+    },
+    '13.4': function () {
+      return figCard('13.4', 'Déconditionnement après alitement : exemple chiffré',
+        simpleTable(['Activité', 'VO₂ requis', 'Avant : VO₂max 20', 'Après : VO₂max 16'], [
+          ['Marche à 5 km/h', '14 ml/min/kg', '70 %', '87,5 %'],
+          ['Habillage / toilette', '12 ml/min/kg', '60 %', '75 %'],
+          ['Repos assis', '3,5 ml/min/kg = 1 MET', '15 %', '≈ 22 %']
+        ]) + '<p class="faithful-note">Une baisse de 20 % de VO₂max fait consommer beaucoup plus de réserve pour la même tâche et rapproche la marche du maximum soutenable.</p>', 'Avant / après');
+    },
+    '13.5': function () {
+      return figCard('13.5', 'Fécalome sur radiographie et TDM abdominopelvienne', '<p class="faithful-note">La version affichée utilise le document clinique du manuel ; ce bloc est uniquement un secours textuel.</p>', 'Document clinique');
+    },
+    '13.7': function () {
+      return figCard('13.7', 'Pression en fonction du positionnement du patient',
+        '<svg class="faithful-chart" viewBox="0 0 680 310" role="img" aria-label="Décubitus dorsal et position demi-assise avec forces d’appui, friction et cisaillement"><rect x="45" y="220" width="260" height="18" rx="9" fill="#64748b" opacity=".35"/><circle cx="105" cy="160" r="26" fill="rgba(8,145,178,.20)" stroke="#0891b2"/><path d="M130 172 C175 178 218 184 275 202" fill="none" stroke="#0891b2" stroke-width="24" stroke-linecap="round"/><g stroke="#ef4444" stroke-width="4"><path d="M105 192V220"/><path d="M202 205V228"/><path d="M270 218V238"/></g><text x="175" y="270" text-anchor="middle" fill="currentColor" font-size="13" font-weight="750">Décubitus dorsal · forces d’appui</text><path d="M380 225 L610 225 L610 210 L455 210 L405 105 L385 112 L438 225Z" fill="#64748b" opacity=".22"/><circle cx="430" cy="92" r="24" fill="rgba(5,150,105,.18)" stroke="#059669"/><path d="M449 112 C480 143 502 175 520 211" fill="none" stroke="#059669" stroke-width="24" stroke-linecap="round"/><g stroke="#ef4444" stroke-width="4"><path d="M500 190L470 220"/><path d="M525 208L557 222"/></g><g stroke="#f59e0b" stroke-width="4"><path d="M470 198L505 198"/><path d="M540 216L575 216"/></g><text x="515" y="270" text-anchor="middle" fill="currentColor" font-size="13" font-weight="750">Demi-assise · cisaillement + frictions</text><text x="340" y="298" text-anchor="middle" fill="#ef4444" font-size="11">La demi-assise augmente l’étirement vasculaire au sacrum.</text></svg>', 'Schéma de forces');
+    },
+    '13.8': function () {
+      return figCard('13.8', 'Physiopathogénie de l’escarre',
+        '<div class="faithful-panels">' +
+          '<section><b>A · Unité vasculaire</b><p>Artériole : 32 mmHg · capillaire : 16–33 mmHg · veinule : 12 mmHg.</p></section>' +
+          '<section><b>B · Pression élevée et soutenue</b><p>Baisse du débit → ischémie → œdème, thrombose et occlusion lymphatique → mort cellulaire.</p></section>' +
+          '<section><b>C · Cône de pression</b><p>La pression augmente vers l’os : les dommages profonds peuvent dépasser l’atteinte cutanée visible.</p></section>' +
+          '<section><b>D · Intensité × durée</b><p>Au fauteuil, la zone dangereuse est atteinte plus vite qu’au lit ; une pression moindre devient nocive si elle se prolonge.</p></section>' +
+        '</div>', 'Quatre panneaux A–D');
+    },
+    '14.1': function () {
+      return figCard('14.1', 'Algorithme de dépistage de la sarcopénie',
+        flowSteps([{t:'Personne âgée de plus de 65 ans'},{t:'Mesurer la vitesse de marche'}]) + branchGrid([
+          {t:'Vitesse > 0,8 m/s',items:['mesurer la force de préhension','force normale : pas de sarcopénie','force basse : mesurer la masse musculaire']},
+          {t:'Vitesse < 0,8 m/s',items:['mesurer directement la masse musculaire','masse basse : sarcopénie','masse normale : pas de sarcopénie']}
+        ]), 'Arbre EWGSOP du manuel');
+    },
+    '15.1': function () {
+      return figCard('15.1', 'Distribution périphérique de l’innervation vésicale', branchGrid([
+        {t:'Remplissage vésical',items:['sympathique thoraco-lombaire actif : détrusor inhibé et sphincter lisse contracté','nerf pudendal actif : sphincter strié contracté','parasympathique sacré inhibé']},
+        {t:'Miction',items:['diminution du sympathique : relaxation du sphincter lisse','activation du parasympathique pelvien : contraction du détrusor','relaxation somatique par le nerf pudendal']}
+      ]), 'Double schéma remplissage / miction');
+    },
+    '15.2': function () {
+      return figCard('15.2', 'Comorbidités et classes pharmacologiques contribuant à l’incontinence',
+        simpleTable(['Comorbidités', 'Mécanisme', 'Traitements favorisants'], [
+          ['Asthme, BPCO, surpoids, diabète', 'Incontinence urinaire d’effort', 'Antagonistes alpha-adrénergiques, inhibiteurs de l’enzyme de conversion'],
+          ['AVC, constipation, diabète', 'Rétention urinaire', 'Anticholinergiques, inhibiteurs calciques, neuroleptiques, gabapentine, prégabaline'],
+          ['AVC, maladie de Parkinson, diabète', 'Constipation', 'Anticholinergiques'],
+          ['Pathologies neurologiques encéphaliques ou médullaires', 'Incontinence sur urgenturie', 'Anticholinestérasiques, inhibiteurs de la recapture de la sérotonine'],
+          ['Diabète, œdèmes, insuffisance cardiaque, SAOS', 'Polyurie', 'Lithium, diurétiques'],
+          ['Restriction de mobilité neurologique ou orthopédique', 'Incontinence fonctionnelle', 'Barrières, perfusion et autres iatrogénies hospitalières']
+        ]), 'Tableau mécanistique');
+    },
+    '15.3': function () {
+      return figCard('15.3', 'Évaluation et traitement de l’incontinence et de la rétention aiguë',
+        '<p class="faithful-alert">Devant toute incontinence : rechercher une rétention aiguë d’urine avec miction par regorgement.</p>' + branchGrid([
+          {t:'Évaluation initiale',items:['RAU : voussure hypogastrique, matité, douleur ou confusion','IUTR : DIAPPERS — délirium, infection, atrophie, psychologie, pharmacologie, excès de diurèse, restriction de mobilité, selles','traitement spécifique puis réévaluation']},
+          {t:'Évaluation globale',items:['comorbidités et ADL','qualité de vie, désir et préférences du patient et de l’aidant','examen neurologique, mobilité, cognition, toucher rectal et périnée','catalogue mictionnel ou protections','résidu post-mictionnel']},
+          {t:'Signes d’alerte',items:['douleur ou hématurie','infections récidivantes','masse, irradiation ou chirurgie pelvienne','prolapsus, fistule suspectée','explorations ciblées']}
+        ]) + branchGrid([
+          {t:'IUU / IUM',items:['règles hygiéno-diététiques','mictions programmées et rééducation','neuromodulation tibiale','mirabegron ou anticholinergique chez patient sélectionné']},
+          {t:'IUE',items:['mictions programmées','rééducation périnéale','traiter le symptôme prédominant si mixte']},
+          {t:'Rétention significative',items:['hétérosondage initial puis régulier si possible','sinon sonde sus-pubienne ou à demeure','réévaluer toutes les 24–48 h et tenter l’ablation','ECBU, prévention du syndrome de levée d’obstacle, traiter constipation et médicaments']}
+        ]) + '<p class="faithful-note">En cas d’échec : avis spécialisé urologie, gynécologie ou médecine physique et de réadaptation.</p>', 'Grand arbre clinique');
+    },
+    '16.2': function () {
+      return figCard('16.2', 'Arrêt des benzodiazépines après 65 ans',
+        flowSteps([
+          {t:'Prise quotidienne depuis plus de 30 jours'},
+          {t:'Vérifier que l’indication reste valide',d:'y compris en termes de durée'},
+          {t:'Explorer attentes et attachement du patient'},
+          {t:'Décision partagée d’arrêt'},
+          {t:'Arrêt progressif adapté',d:'sur 4 à 10 semaines le plus souvent'},
+          {t:'Suivi',d:'consultations rapprochées jusqu’à 1 semaine après l’arrêt, puis jusqu’à 6 mois'}
+        ]) + branchGrid([
+          {t:'Précautions particulières',items:['dépression','insomnie chronique','trouble anxieux caractérisé','troubles cognitifs ou démence','échecs antérieurs','surconsommation régulière d’alcool']},
+          {t:'Prise en charge spécialisée conjointe',items:['doses très élevées','insomnie rebelle','dépendance à l’alcool ou autre','association à d’autres psychotropes','trouble psychiatrique sévère']}
+        ]), 'Démarche ambulatoire');
+    },
+    '18.1': function () { return figCard('18.1', 'Radiographie du bassin — signes de coxarthrose', '<p class="faithful-note">Le document clinique du manuel est utilisé dans le dossier progressif.</p>', 'Document clinique'); },
+    '18.2': function () { return figCard('18.2', 'Érythème sacré — évaluation d’une escarre', '<p class="faithful-note">Le document clinique du manuel est utilisé dans le dossier progressif.</p>', 'Document clinique'); },
+    '20.1': function () { return figCard('20.1', 'Imagerie cérébrale axiale — ventriculomégalie', '<p class="faithful-note">Le document clinique est présenté sans dévoiler la réponse à la question.</p>', 'Document clinique'); },
+    '20.2': function () { return figCard('20.2', 'Escarre talonnière avec contact osseux', '<p class="faithful-note">Le document clinique du manuel est utilisé dans la question isolée.</p>', 'Document clinique'); }
+  });
+
   // simpleTable helper used inside figure cards
   function simpleTable(headers, rows) {
     return '<table class="faithful-grid">' + thead(headers) + tbody(rows.map(function (r) {
@@ -3701,6 +4062,27 @@ if (typeof window !== 'undefined') {
 
   function hasFaithfulTable(id) { return !!FAITHFUL_TABLES[id]; }
   function hasFaithfulFigure(id) { return !!FAITHFUL_FIGURES[id]; }
+
+  global.updateFaithfulChecklist = function (input) {
+    var root = input && input.closest ? input.closest('.faithful-checklist') : null;
+    if (!root) return;
+    var total = root.querySelectorAll('input[type="checkbox"]').length;
+    var score = root.querySelectorAll('input[type="checkbox"]:checked').length;
+    var threshold = Number(root.getAttribute('data-threshold') || 0);
+    var output = root.querySelector('output');
+    var status = root.querySelector('.faithful-score strong');
+    if (output) output.textContent = score + ' / ' + total;
+    root.classList.toggle('is-positive', score >= threshold);
+    if (status) status.textContent = score >= threshold
+      ? 'Seuil atteint : interpréter dans le contexte clinique'
+      : 'Seuil positif : ≥ ' + threshold;
+  };
+
+  global.updateFaithfulRange = function (input) {
+    var root = input && input.closest ? input.closest('.faithful-eva') : null;
+    var output = root && root.querySelector('output');
+    if (output) output.textContent = String(input.value).replace('.', ',') + ' / 10';
+  };
 
   global.FAITHFUL_TABLES = FAITHFUL_TABLES;
   global.FAITHFUL_FIGURES = FAITHFUL_FIGURES;
@@ -4637,7 +5019,7 @@ const ANNALES_EXPANDED = [
   { id: 109, chapter: 'ch8', difficulty: 'A',
     title: 'Évaluation douleur chez le sujet âgé dément',
     cas: 'Mme Fournier, 88 ans, Alzheimer stade modéré (MMS 12/30). Agitation depuis 3 jours, refuse les soins, grimace lors des mobilisations.',
-    correction: 'Douleur probable mais non communicable. Utiliser ECPA (Échelle Comportementale de la Douleur chez la Personne Âgée non communicante) : 5 items (respiration, vocalisation, expression facale, corps, consolabilité). Paracétamol 1g x3/j systématique. Éviter morphine d\'emblée. Éliminer cause : infection, escarre, fracture.' },
+    correction: 'Douleur probable mais non verbalisable. Utiliser ALGOPLUS pour une douleur aiguë : 5 items binaires (visage, regard, plaintes, corps, comportements), seuil ≥ 2/5. Adapter l\'antalgie au poids, à la fonction rénale et au terrain, rechercher la cause puis réévaluer.' },
 
   // ─── CH9 : Cognition ───
   { id: 110, chapter: 'ch9', difficulty: 'A',
@@ -4655,7 +5037,7 @@ const ANNALES_EXPANDED = [
   { id: 112, chapter: 'ch11', difficulty: 'A',
     title: 'Syndrome confusionnel aigu — CAM',
     cas: 'M. Roux, 85 ans, post-op prothèse hanche. Nuit agitée, désorienté, arrache perfusion. MMS pré-op 27/30. Temp 38.2°C, CRP 85.',
-    correction: 'CAM+ : (1) Début aigu post-op ✓ (2) Inattention ✓ (3) Fluctuation ✓. Confusion post-opératoire (15-50% des >65 ans). Étiologie : infection (T°↑, CRP↑), douleur, hypoxie, médicaments (antalgiques, anesthésiques). Traitement : halopéridol 0.5mg PRN, correction cause, réorientation, éviter contention.' },
+    correction: 'CAM positive si 1 + 2 + (3 ou 4) : début aigu/fluctuation, inattention, puis pensée désorganisée ou vigilance altérée. Rechercher en priorité infection, douleur, hypoxie, globe, fécalome et iatrogénie. Corriger la cause, réorienter, éviter la contention ; un traitement sédatif ne se discute qu\'en cas de danger immédiat malgré les mesures non médicamenteuses.' },
 
   // ─── CH12 : Chutes ───
   { id: 113, chapter: 'ch12', difficulty: 'A',
@@ -4739,7 +5121,6 @@ const ANNALES_EXPANDED = [
     cas: 'Quelle est la différence entre acharnement thérapeutique et obstination déraisonnable ?',
     correction: 'C\'est la même chose — "obstination déraisonnable" est le terme légal (loi Leonetti 2005). Actes inutiles, disproportionnés ou n\'ayant d\'autre effet que le maintien artificiel de la vie. Interdits. Critères d\'arrêt : actes futiles, souffrance injustifiée, maintien artificiel. Le patient peut refuser tout traitement (sauf obligations légales). La sédation terminale est autorisée (midazolam).' },
 ];
-
 
 /* --- has-reco.js --- */
 const HAS_RECOMMANDATIONS = [
@@ -6816,13 +7197,12 @@ const SITUATIONS_EVC = [
     title: 'Douleur chez le patient dément',
     situation: 'Mme Fournier, 88 ans, Alzheimer stade modéré (MMS 12/30), est agitée depuis 3 jours. Elle crie lors des soins, se raidit quand on la mobilise, a le visage crispé. Elle ne peut pas verbaliser sa douleur.',
     questions: [
-      { q: 'Comment évaluez-vous la douleur ?', a: 'Échelle ECPA (Échelle Comportementale de la Douleur chez la Personne Âgée non communicante) : 5 items cotés 0-2. 1. Respiration (normale/accélérée/rythme irrégulier). 2. Vocalisation (normale/gémissements/pleurs). 3. Expression facale (sourire/grimace/visage crispé). 4. Corps (relaxé/tendu/raidité). 5. Consolabilité (pas consolable/consolable). Score ≥ 4/10 = douleur probable.' },
+      { q: 'Comment évaluez-vous la douleur ?', a: 'Pour une douleur aiguë chez une personne non communicante, utiliser ALGOPLUS : 5 items binaires (visage, regard, plaintes, corps, comportements). Un score ≥ 2/5 justifie une prise en charge antalgique, suivie d\'une réévaluation.' },
       { q: 'Quelles sont les causes possibles ?', a: '1. Escarre (points d\'appui). 2. Fracture non diagnostiquée (chute ?). 3. Constipation/impaction fécale. 4. Infection (ITU, pneumopathie). 5. Rétention urinaire. 6. Douleur musculo-squelettique (arthrose). 7. Douleur neuropathique.' },
-      { q: 'Quel traitement antalgique ?', a: '1. Paracétamol 1g x3/j systématique (première ligne). 2. Si insuffisant : tramadol 50mg 1-2x/j (dose réduite). 3. Éviter morphine d\'emblée (effets secondaires confusion). 4. Rechercher et traiter la cause. 5. Réévaluer ECPA toutes les 24h.' }
+      { q: 'Quel traitement antalgique ?', a: 'Rechercher et traiter la cause, débuter une antalgie adaptée au poids, à la fonction rénale et au terrain, puis réévaluer rapidement avec la même échelle (ici ALGOPLUS). Un opioïde éventuel doit être titré prudemment avec surveillance de la vigilance, du transit et de la respiration.' }
     ]
   }
 ];
-
 
 /* --- cas-interactifs.js --- */
 // Cas cliniques interactifs — Simulation EVC complète
@@ -6851,7 +7231,7 @@ Examen : PA 135/85 couché, 110/70 debout. FC 78. T° 36.8°C. Confus, désorien
 
 ATCD : HTA, BPCO, dépression traitée (sertraline 100mg). Vit seule, fille à 200 km.
 
-Évolution post-op : escarne sacrée stade II découverte à J10. Agitation nocturne, arrête de manger. MMS pré-op 24/30.
+Évolution postopératoire : escarre sacrée de stade II découverte à J10. Agitation nocturne, arrêt de l'alimentation. MMS préopératoire 24/30.
 
 Examen aujourd'hui : amaigrie visiblement. IMC 17. Albumine 20 g/L. MNA 12/30. Escarre sacrée 4×3 cm avec fond fibrineux. MMS 20/30. GDS-15 13/15. ADL 2/6. Se lève avec aide, marche 10 mètres avec déambulateur.`,
     questions: [
@@ -6862,7 +7242,6 @@ Examen aujourd'hui : amaigrie visiblement. IMC 17. Albumine 20 g/L. MNA 12/30. E
     juryTips: 'Cascade nutrition → escarre → dépendance = classique. Le jury veut voir que vous comprenez le cercle vicieux et que vous proposez une prise en charge MULTIDISCIPLINAIRE (médecin + diététicien + kiné + IDE + psychologue).'
   }
 ];
-
 
 /* --- epreuves-externes.js --- */
 // Epreuves externes — Guide complet pour la certification
@@ -7630,7 +8009,7 @@ const PIEGES_EXAM_EXT = [
 /* --- memos-rapides.js --- */
 // Mémos rapides — Aide-mémoire pour révision express
 const MEMOS_RAPIDES = [
-  { id: 'mr-1', titre: 'GDS (Gravité démence)', emoji: '🧠',
+  { id: 'mr-1', titre: 'GDS (Global Deterioration Scale)', emoji: '🧠',
     contenu: 'GDS 1 = normal · GDS 2 = déclin très léger · GDS 3 = déclin léger · GDS 4 = déclin modéré · GDS 5 = déclin modéré-sévère · GDS 6 = déclin sévère · GDS 7 = déclin très sévère',
     mnemo: 'GDS = Geriatric Depression Scale ≠ GDS Global Deterioration Scale (confusion fréquente !)' },
   { id: 'mr-2', titre: 'ADL (Katz) — les 6', emoji: '📋',
@@ -7647,15 +8026,15 @@ const MEMOS_RAPIDES = [
     mnemo: 'BAOAAD → BZD, AINS, Opioïdes, Anticholinergiques, Antipsychotiques, Digoxine' },
   { id: 'mr-6', titre: 'CAM — diagnostic confusion', emoji: '🧠',
     contenu: '(1) Début aigu + fluctuation · (2) Inattention · (3) Pensée désorganisée · (4) Niveau conscience altéré',
-    mnemo: 'CAM+ = (1) OBLIGATOIRE + (2) OU (3+4). Se souvenir : "DINA" = Début, Inattention, N-conscience, Altération pensée' },
+    mnemo: 'CAM+ = 1 + 2 + (3 ou 4). Début aigu/fluctuation ET inattention, avec pensée désorganisée OU vigilance altérée.' },
   { id: 'mr-7', titre: 'Braden — 6 facteurs escarre', emoji: '🏥',
     contenu: '1. Perception sensorielle · 2. Humidité · 3. Activité · 4. Mobilité · 5. Nutrition · 6. Friction/cisaillement',
     mnemo: 'PHAMNF → Perception, Humidité, Activité, Mobilité, Nutrition, Friction' },
-  { id: 'mr-8', titre: 'Échelle d\'ECPA (douleur non communicant)', emoji: '💊',
-    contenu: '1. Respiration · 2. Vocalisation · 3. Expression facale · 4. Corps · 5. Consolabilité',
-    mnemo: 'RVEBC → Respiration, Vocalisation, Expression, Body, Consolabilité' },
+  { id: 'mr-8', titre: 'ALGOPLUS — douleur aiguë non communicante', emoji: '💊',
+    contenu: '5 items binaires : visage · regard · plaintes · corps · comportements',
+    mnemo: 'Score ≥ 2/5 : douleur probable justifiant une prise en charge antalgique et une réévaluation.' },
   { id: 'mr-9', titre: 'Tinetti — équilibre + marche', emoji: '🚶',
-    contenu: 'Équilibre (9 items/16) : assis, debout, poussé, yeux fermés, pivot, siège. Marche (7 items/12) : initiation, longueur, hauteur, symérie, continuité, trajectoire, tronc.',
+    contenu: 'Équilibre (9 items/16) : assis, debout, poussé, yeux fermés, pivot, siège. Marche (7 items/12) : initiation, longueur, hauteur, symétrie, continuité, trajectoire, tronc.',
     mnemo: '< 19 risque élevé · 19-24 modéré · ≥ 25 faible' },
   { id: 'mr-10', titre: 'MNA — seuils nutritionnels', emoji: '🍽️',
     contenu: '≥ 24 = normal · 17-23.5 = risque de dénutrition · < 17 = dénutrition',
@@ -7668,32 +8047,30 @@ const MEMOS_RAPIDES = [
     mnemo: '< 14 = risque élevé. 5 items × 4 = 20 max. Seuil = 14.' }
 ];
 
-
 /* --- quiz-urgence.js --- */
 // Quiz d'urgence — Questions rapides pour gardes et révisions
 const QUIZ_URGENCE = [
   { id: 'qu-1', question: 'Seuil de glycémie définissant une hypoglycémie ?', reponse: '< 0.7 g/L (3.9 mmol/L)', categorie: 'urgence', diffculte: 'A' },
   { id: 'qu-2', question: 'Délai max pour la thrombolyse dans l\'AVC ischémique ?', reponse: '4.5 heures (fenêtre thérapeutique)', categorie: 'urgence', diffculte: 'A' },
   { id: 'qu-3', question: 'Que faire EN PREMIER en cas d\'hyperkaliémie avec ECG anormal ?', reponse: 'Gluconate de calcium 10% 10mL IV (protection myocardique)', categorie: 'urgence', diffculte: 'A' },
-  { id: 'qu-4', question: 'Vitesse max de correction de l\'hyponatrémie ?', reponse: '8-10 mmol/L/24h (risque de myélinolyse osmotique si trop rapide)', categorie: 'urgence', diffculte: 'A' },
-  { id: 'qu-5', question: 'Antibiothérapie probabiliste du sepsis gériatrique ?', reponse: 'Amoxicilline-clavulanat 2g IV + gentamicine 5mg/kg (dans l\'heure)', categorie: 'urgence', diffculte: 'A' },
+  { id: 'qu-4', question: 'Quelle limite de correction retenir devant une hyponatrémie chronique ?', reponse: 'Ne pas dépasser 8 mmol/L sur 24 h, avec une cible souvent plus basse chez les patients à haut risque de démyélinisation osmotique et une surveillance biologique rapprochée.', categorie: 'urgence', diffculte: 'A' },
+  { id: 'qu-5', question: 'Comment choisir l\'antibiothérapie probabiliste d\'un sepsis chez une personne âgée ?', reponse: 'La débuter rapidement après les prélèvements sans retarder le traitement, puis l\'adapter au foyer suspecté, à la gravité, à l\'écologie locale, aux allergies, au poids et à la fonction rénale. Il n\'existe pas un schéma unique pour tous les sepsis.', categorie: 'urgence', diffculte: 'A' },
   { id: 'qu-6', question: 'SpO2 cible chez un BPCO exacerbé ?', reponse: '88-92% (éviter l\'hypercapnie avec O2 haut débit)', categorie: 'urgence', diffculte: 'A' },
-  { id: 'qu-7', question: 'Score de confusion le plus utilisé (acronyme) ?', reponse: 'CAM (Confusion Assessment Method). CAM+ si (1+2) ou (1+3+4)', categorie: 'geriatrie', diffculte: 'A' },
-  { id: 'qu-8', question: 'Seuil MMS définissant un trouble cognitif ?', reponse: '< 24 (18-23 léger, < 18 modéré/sévère). Corriger âge et scolarité.', categorie: 'geriatrie', diffculte: 'A' },
+  { id: 'qu-7', question: 'Quel outil clinique est le plus utilisé pour dépister un delirium ?', reponse: 'La CAM (Confusion Assessment Method) : 1 + 2 + (3 ou 4), soit début aigu/fluctuation ET inattention, associés à une pensée désorganisée OU une vigilance altérée.', categorie: 'geriatrie', diffculte: 'A' },
+  { id: 'qu-8', question: 'Comment interpréter un MMS inférieur à 24/30 ?', reponse: 'C\'est un signal d\'alerte cognitif, pas un diagnostic à lui seul. Interpréter selon l\'âge, la scolarité, la langue, les déficits sensoriels, l\'état aigu et le retentissement fonctionnel.', categorie: 'geriatrie', diffculte: 'A' },
   { id: 'qu-9', question: 'Critères de Fried de la fragilité ?', reponse: 'Perte poids, Épuisement, Faiblesse, Lenteur, Inactivité. ≥ 3 = fragile.', categorie: 'geriatrie', diffculte: 'A' },
-  { id: 'qu-10', question: 'Que prescrire en 1ère ligne pour la douleur du sujet âgé ?', reponse: 'Paracétamol 1g x3/j (max 3g/j si < 50kg). Éviter AINS systématiquement.', categorie: 'geriatrie', diffculte: 'A' },
-  { id: 'qu-11', question: 'Que faire devant une chute chez un sujet sous anticoagulant ?', reponse: 'Scanner cérébral systématique (même sans trauma visible). Risque d\'hématome sous-dural.', categorie: 'urgence', diffculte: 'A' },
+  { id: 'qu-10', question: 'Quel est le principe de première intention devant une douleur chez une personne âgée ?', reponse: 'Caractériser et traiter la cause, choisir une antalgie adaptée au type de douleur, au poids, au foie et au rein, puis réévaluer rapidement efficacité et tolérance. Le paracétamol peut convenir à certaines douleurs nociceptives, à dose individualisée.', categorie: 'geriatrie', diffculte: 'A' },
+  { id: 'qu-11', question: 'Quelle conduite tenir après une chute sous anticoagulant avec traumatisme crânien possible ?', reponse: 'Évaluer sans délai les signes neurologiques et la cinétique, vérifier le traitement anticoagulant et appliquer le protocole de traumatisme crânien, avec indication large de scanner cérébral si impact crânien avéré ou incertain.', categorie: 'urgence', diffculte: 'A' },
   { id: 'qu-12', question: 'Combien de points au Tinetti pour un risque élevé de chute ?', reponse: '< 19 = risque élevé. 19-24 = modéré. ≥ 25 = faible.', categorie: 'geriatrie', diffculte: 'A' },
-  { id: 'qu-13', question: 'Quel score pour évaluer la douleur chez un patient non communicant ?', reponse: 'ECPA (Échelle Comportementale de la Douleur chez la Personne Âgée). 5 items, seuil ≥ 4/10.', categorie: 'geriatrie', diffculte: 'A' },
-  { id: 'qu-14', question: 'Dose de furosémide IV en première intention pour un OAP ?', reponse: '40-80 mg IV (dose selon traitement diurétique habituel)', categorie: 'urgence', diffculte: 'A' },
-  { id: 'qu-15', question: 'Quel médicament de l\'HTA est le plus iatrogène pour les chutes ?', reponse: 'Les diurétiques (déshydratation, hypotension orthostatique) et les alpha-bloquants (tamsulosine)', categorie: 'geriatrie', diffculte: 'A' },
-  { id: 'qu-16', question: 'Seuil d\'albumine définissant la dénutrition ?', reponse: '< 35 g/L (3.5 g/dL). < 30 = dénutrition sévère.', categorie: 'geriatrie', diffculte: 'A' },
-  { id: 'qu-17', question: 'Que faire en 1ère intention devant un sepsis ?', reponse: 'Hémocultures x2 AVANT antibio + lactates + remplissage NaCl 500mL/30min + antibio dans l\'heure', categorie: 'urgence', diffculte: 'A' },
+  { id: 'qu-13', question: 'Quelle échelle brève utiliser pour une douleur aiguë chez un patient non communicant ?', reponse: 'ALGOPLUS : 5 items binaires (visage, regard, plaintes, corps, comportements), avec un seuil validé à 2/5.', categorie: 'geriatrie', diffculte: 'A' },
+  { id: 'qu-14', question: 'Comment raisonner l\'usage d\'un diurétique IV devant un OAP ?', reponse: 'Confirmer la congestion et la gravité, tenir compte du traitement diurétique habituel, de la pression artérielle et de la fonction rénale, puis surveiller diurèse, ionogramme et réponse clinique. La dose n\'est pas universelle.', categorie: 'urgence', diffculte: 'A' },
+  { id: 'qu-15', question: 'Quels antihypertenseurs rechercher en priorité dans une chute avec hypotension orthostatique ?', reponse: 'Revoir l\'ensemble du traitement ; diurétiques, alpha-bloquants et vasodilatateurs peuvent contribuer selon le terrain. La décision repose sur les mesures couchée/debout et le rapport bénéfice-risque individuel.', categorie: 'geriatrie', diffculte: 'A' },
+  { id: 'qu-16', question: 'L\'albuminémie suffit-elle à diagnostiquer une dénutrition ?', reponse: 'Non. Le diagnostic repose sur des critères phénotypiques et étiologiques ; l\'albuminémie aide surtout à apprécier la gravité et doit être interprétée avec l\'inflammation, l\'hydratation et les comorbidités.', categorie: 'geriatrie', diffculte: 'A' },
+  { id: 'qu-17', question: 'Quelles sont les premières priorités devant un sepsis ?', reponse: 'Évaluer ABC et la perfusion, prélever lactate et hémocultures sans retarder l\'antibiothérapie, débuter rapidement un traitement adapté au foyer, réévaluer prudemment le remplissage et organiser la surveillance rapprochée.', categorie: 'urgence', diffculte: 'A' },
   { id: 'qu-18', question: 'Loi encadrant la fin de vie en France ?', reponse: 'Loi Claeys-Leonetti (2016). Interdit l\'obstination déraisonnable. Autorise la sédation profonde et continue.', categorie: 'ethique', diffculte: 'A' },
   { id: 'qu-19', question: 'Seuil MNA pour la dénutrition ?', reponse: '< 17 = dénutrition. 17-23.5 = risque de dénutrition. ≥ 24 = normal.', categorie: 'geriatrie', diffculte: 'A' },
-  { id: 'qu-20', question: 'Médicament contre-indiqué chez tout sujet âgé ?', reponse: 'AINS (risque rénal, digestif, cardiovasculaire). Aussi BZD longue durée et anticholinergiques (Beers).', categorie: 'geriatrie', diffculte: 'A' }
+  { id: 'qu-20', question: 'Existe-t-il un médicament contre-indiqué du seul fait de l\'âge ?', reponse: 'Non. L\'âge seul ne suffit pas : vérifier indication, terrain, fonction rénale et hépatique, interactions et alternatives. Les AINS, benzodiazépines et anticholinergiques exigent une vigilance particulière mais ne se résument pas à une interdiction universelle.', categorie: 'geriatrie', diffculte: 'A' }
 ];
-
 
 /* --- ressources-evc.js --- */
 // Biblio et ressources pour préparation EVC Gériatrie
@@ -8933,7 +9310,7 @@ const SYNTHESIS_EXPANDED = [
         points: [
           'Intrinsèques : fragilité, déficit sensoriel, parkinsonisme, neuropathie, douleur.',
           'Extrinsèques : tapis, éclairage, chaussures, obstacles.',
-          'Tinetti < 24/28 ou Timed Up and Go > 14 s = risque élevé.',
+          'Tinetti < 24/28 signale un risque (< 19 : risque élevé) ; Timed Up and Go > 20 s signale un risque de chute.',
           '50 % des chutes ont une cause médicamenteuse identifiable.',
           '💎 Perle : toute chute = révision médicamenteuse systématique (BZD, antihypertenseurs, psychotropes).'
         ]
@@ -10227,34 +10604,34 @@ const CLINICAL_REFERENCE = [
 
   // ── SCORES CLINIQUES ──
   { id: 'cr-16', category: 'Scores', title: 'MMS (MMSE) — Évaluation cognitive',
-    content: 'Orientation (10) + Mémorisation (6) + Attention (5) + Langage (8) + Praxies (1) = 30. Seuils: ≥24 normal, 18-23 léger, <18 modéré/sévère. Corriger âge et scolarité.',
+    content: 'Score sur 30 explorant orientation, apprentissage/rappel, attention-calcul, langage et praxies. Un score < 24 est un signal d\'alerte usuel, mais l\'interprétation doit tenir compte de l\'âge, de la scolarité, des déficits sensoriels et du contexte clinique.',
     tags: ['cognition', 'dépistage', '5 min'] },
   { id: 'cr-17', category: 'Scores', title: 'GDS-15 (Yesavage) — Dépression',
-    content: '15 questions oui/non. Seuils: 0-4 normal, 5-8 légère, 9-11 modérée, 12-15 sévère. Spécifique sujet âgé (exclut symptômes somatiques).',
+    content: '15 questions oui/non. Un score ≥ 5 doit faire rechercher un épisode dépressif ; l\'échelle est un outil de dépistage et ne suffit pas à poser le diagnostic.',
     tags: ['dépression', 'dépistage', '5 min'] },
   { id: 'cr-18', category: 'Scores', title: 'ADL (Katz) — Autonomie de base',
-    content: '6 items: Baignade, Habillage, Toilette, Transferts, Continence, Alimentation. A=autonome, G=dépendant ≥2 activités.',
+    content: '6 activités de base : toilette, habillage, usage des toilettes, transferts, continence et alimentation. Chaque item est coté 0 ou 1 ; un total de 6 correspond à une autonomie complète.',
     tags: ['autonomie', 'fonctionnel', '3 min'] },
   { id: 'cr-19', category: 'Scores', title: 'Tinetti — Équilibre et marche',
     content: 'Équilibre (9 items/16) + Marche (7 items/12) = 28. <19 risque élevé, 19-24 modéré, ≥25 faible. Prédicteur chutes.',
     tags: ['chutes', 'équilibre', '5 min'] },
   { id: 'cr-20', category: 'Scores', title: 'Braden — Risque escarre',
-    content: '6 items (1-4): Perception, Humidité, Activité, Mobilité, Nutrition, Friction. ≤9 très élevé, 10-12 élevé, 13-14 modéré, 15-18 faible.',
+    content: '6 dimensions : perception sensorielle, humidité, activité, mobilité, nutrition et friction/cisaillement. Cinq sont cotées de 1 à 4 et friction/cisaillement de 1 à 3, pour un total de 6 à 23 ; plus le score est bas, plus le risque est élevé.',
     tags: ['escarre', 'prévention', '3 min'] },
   { id: 'cr-21', category: 'Scores', title: 'MNA — Évaluation nutritionnelle',
     content: '≥24 normal, 17-23.5 risque, <17 dénutrition. Gold standard gériatrie. Items: IMC, perte poids, mobilité, stress, médicaments, alimentation.',
     tags: ['nutrition', 'dénutrition', '5 min'] },
   { id: 'cr-22', category: 'Scores', title: 'CAM — Confusion',
-    content: '(1) Début aigu + fluctuation OBLIGATOIRE. (2) Inattention. (3) Pensée désorganisée. (4) Niveau conscience altéré. CAM+ = (1+2) ou (1+3+4).',
+    content: '(1) Début aigu + fluctuation. (2) Inattention. (3) Pensée désorganisée. (4) Niveau de vigilance altéré. CAM+ = 1 + 2 + (3 ou 4).',
     tags: ['confusion', 'delirium', '5 min'] },
-  { id: 'cr-23', category: 'Scores', title: 'ECPA — Douleur non communicant',
-    content: '5 items (0-2): Respiration, Vocalisation, Expression facale, Corps, Consolabilité. ≥4/10 = douleur probable.',
+  { id: 'cr-23', category: 'Scores', title: 'ALGOPLUS — Douleur aiguë non communicante',
+    content: '5 items binaires : visage, regard, plaintes, corps, comportements. Un score ≥ 2/5 justifie une prise en charge antalgique et une réévaluation.',
     tags: ['douleur', 'Alzheimer', '2 min'] },
   { id: 'cr-24', category: 'Scores', title: 'FRAX — Risque fracturaire',
-    content: 'Score à 10 ans: âge, sexe, IMC, fracture, parent, tabac, corticoïdes, AR, ostéoporose, alcool. >3% fracture majeure ou >20% hanche = traiter.',
+    content: 'Probabilité fracturaire à 10 ans : âge, sexe, IMC, fracture antérieure, antécédent parental, tabac, corticoïdes, polyarthrite rhumatoïde, ostéoporose secondaire et alcool. L\'interprétation dépend du contexte clinique et des seuils nationaux.',
     tags: ['ostéoporose', 'fracture', 'DEXA'] },
   { id: 'cr-25', category: 'Scores', title: 'Charlson — Comorbidités',
-    content: '17 pathologies pondérées (1-6 pts). 0-1 faible, 2-3 modéré, 4-5 élevé, ≥6 très élevé. Prédicteur mortalité 10 ans.',
+    content: 'Indice pondérant les comorbidités pour estimer un risque pronostique. Le calcul dépend de la version utilisée et peut intégrer l\'âge ; il complète l\'évaluation clinique sans la remplacer.',
     tags: ['comorbidités', 'pronostic', '5 min'] },
 
   // ── PROTOCOLES URGENCE ──
@@ -10294,7 +10671,6 @@ const CLINICAL_REFERENCE = [
     content: 'HbA1c: <7% (jeune), 7-8% (sujet âgé autonome), <8.5% (fragile/dépendant). Ne pas viser <7% chez >75 ans (hypoglycémie). Fructosamine: alternative si hémoglobinopathie.',
     tags: ['HbA1c', 'diabète', 'cible'] }
 ];
-
 
 /* --- items-evc.js --- */
 // Items EVC — Liste complète des items de gériatrie avec objectifs (alignés sur le programme officiel EDN/R2C et le livre CEN)
@@ -11585,7 +11961,7 @@ const CAS_EVC_2024 = [
       { q: 'Quelles mesures non médicamenteuses prescrivez-vous ?', a: 'Rééducation équilibre (kiné 3x/sem), Vit D 800UI/j, correction visuelle, adaptation domicile (éclairage, barres antidérapantes, retrait tapis), chaussures antidérapantes, signal d\'appel à portée.', points: 3 }
     ], juryTips: 'Cascade iatrogénique: BZD → chute → douleur → tramadol → chute → fracture. Le jury veut voir que vous cassez la cascade.' },
   { id: 'evc24-3', chapter: 'ch14', difficulty: 'A', title: 'Dénutrition et escarre en SSR',
-    situation: 'Mme Garcia, 86 ans, SSR post-fracture col fémoral. Perte 7 kg en 2 mois. IMC 17.5. Albumine 22g/L. MNA 13/30. Escarne sacrée stade II. MMS 22/30. GDS-15 11/15. Vit seule, fille à 300 km.',
+    situation: 'Mme Garcia, 86 ans, SSR post-fracture du col fémoral. Perte de 7 kg en 2 mois. IMC 17,5. Albumine 22 g/L. MNA 13/30. Escarre sacrée de stade II. MMS 22/30. GDS-15 11/15. Vit seule, fille à 300 km.',
     questions: [
       { q: 'Analysez le cercle vicieux dénutrition-escarre-dépendance.', a: 'Dénutrition (MNA 13, albumine 22) → fonte musculaire + fragilité cutanée → escarre (stade II) → douleur + infection → anorexie → aggravation dénutrition → retard cicatrisation → perte autonomie → dépression (GDS 11). Cercle vicieux classique.', points: 4 },
       { q: 'Proposez un plan nutritionnel complet.', a: '1. Enrichissement alimentaire (crème, beurre, fromage). 2. CNO x3/j (Delical, Fresubin). 3. Protéines 1.5g/kg/j. 4. Vit D 800UI + Ca 1.2g. 5. Si échec 1 semaine: nutrition entérale par SNG → PEG. 6. Fractionnement 6 repas/j. 7. Aide repas à domicile.', points: 4 },
@@ -11606,7 +11982,6 @@ const CAS_EVC_2024 = [
       { q: 'Quelle stratégie de déprescription ?', a: '1. Arrêt oxazepam (sevrage 2-4 semaines). 2. Arrêt amitriptyline (demi-dose 1 semaine). 3. Arrêt codéine. 4. Réduire amlodipine 10→5mg. 5. Surveillance glycémique (HbA1c < 8% = OK). 6. Réévaluation à 1 mois.', points: 4 }
     ], juryTips: 'Cascade iatrogénique = classique EVC. Le jury veut que vous identifiiez TOUS les médicaments inappropriés et expliquiez la cascade.' }
 ];
-
 
 /* --- protocoles-reanimation.js --- */
 // Protocoles de réanimation gériatrique — Conduites à tenir
@@ -11635,13 +12010,12 @@ const PROTOCOLES_REANIMATION = [
 const AIDE_MEMOIRE_RAPIDE = [
   { id: 'amr-1', categorie: 'Constantes vitales', items: ['PA: < 140/90 (cible 130-140/80-90 chez > 75 ans)', 'FC: 60-100 bpm', 'T°: 36.5-37.5°C (< 36 = hypothermie chez sujet âgé)', 'SpO2: > 92% (88-92% si BPCO)', 'FR: 12-20/min', 'Glycémie: 0.7-1.1 g/L (4-6 mmol/L)'] },
   { id: 'amr-2', categorie: 'Échelles de base', items: ['MMS: ≥ 24 normal, 18-23 léger, < 18 sévère', 'GDS-15: 0-4 normal, 5-8 légère, 9-11 modérée, 12-15 sévère', 'ADL (Katz): A=autonome, G=dépendant ≥ 2', 'IADL (Lawton): 0-8 (8=autonome)', 'MNA: ≥ 24 normal, 17-23.5 risque, < 17 dénutrition', 'Tinetti: < 19 risque élevé, 19-24 modéré, ≥ 25 faible', 'Braden: ≤ 9 très élevé, 10-12 élevé, 13-14 modéré'] },
-  { id: 'amr-3', categorie: 'Antalgie', items: ['1ère ligne: Paracétamol 1g x3/j (max 3g/j)', '2ème ligne: Tramadol 25-50mg (réduire si > 75 ans)', '3ème ligne: Morphine 0.05-0.1mg/kg SC', 'Douleur non communicante: ECPA (≥ 4 = douleur)', 'ÉVITER AINS chez sujet âgé', 'ÉVITER codéine (constipation, confusion)'] },
+  { id: 'amr-3', categorie: 'Antalgie', items: ['1ère ligne : paracétamol, dose adaptée au poids et au terrain', 'Opioïde : débuter bas, titrer et surveiller vigilance, transit et fonction rénale', 'Douleur aiguë non communicante : ALGOPLUS (≥ 2/5)', 'Éviter les AINS en traitement systématique ou prolongé', 'Réévaluer efficacité et tolérance après chaque adaptation'] },
   { id: 'amr-4', categorie: 'Critères de Beers', items: ['BZD (diazépam, lorazépam) → chutes, confusion', 'Anticholinergiques (amitriptyline) → confusion, constipation', 'AINS (ibuprofène, diclofénac) → IRA, HAD', 'Digoxine > 0.125mg → toxicité', 'Antipsychotiques → AVC, mortalité', 'Opioïdes longue durée → sédation, chute'] },
-  { id: 'amr-5', categorie: 'Confusion (CAM)', items: ['(1) Début aigu + fluctuation OBLIGATOIRE', '(2) Inattention', '(3) Pensée désorganisée', '(4) Niveau conscience altéré', 'CAM+ = (1+2) ou (1+3+4)', 'Causes: infection, médicaments, métabolique, douleur', 'Traitement: cause + halopéridol 0.5mg si agitation'] },
+  { id: 'amr-5', categorie: 'Confusion (CAM)', items: ['(1) Début aigu + fluctuation', '(2) Inattention', '(3) Pensée désorganisée', '(4) Niveau de vigilance altéré', 'CAM+ = 1 + 2 + (3 ou 4)', 'Rechercher en urgence : infection, médicament, trouble métabolique, douleur, globe ou fécalome', 'Traiter la cause et privilégier les mesures non médicamenteuses ; sédation seulement si danger immédiat'] },
   { id: 'amr-6', categorie: 'Lois et éthique', items: ['Loi Kouchner 2002: consentement, personne de confiance', 'Loi Leonetti 2005: interdiction obstination déraisonnable', 'Loi Claeys-Leonetti 2016: sédation profonde et continue', 'Directives anticipées: contraignantes si valides', 'DNR: documenté dans le dossier'] },
   { id: 'amr-7', categorie: 'Scores d\'urgence', items: ['SOFA: défaillance d\'organe dans le sepsis', 'qSOFA: FR ≥ 22, PAS ≤ 100, GCS < 15', 'NIHSS: gravité AVC (0-42)', 'Glasgow: conscience (3-15)', 'NEWS2: détérioration (0-20)', 'CHA2DS2-VASc: anticoagulation FA', 'HAS-BLED: risque hémorragique'] }
 ];
-
 
 /* --- cas-evc-2023.js --- */
 // Cas EVC 2023 — Dix scénarios d'examen (année 2023, gériatrie / médecine générale)
@@ -11908,7 +12282,7 @@ const MINI_DOSSIERS = [
     etape: 2, contenu: 'Bilan: Hb 9.2 g/dL, Plaquettes 98, Créatinine 180 µmol/L (DFG 28), K 5.8 mmol/L, Lactates 4.2 mmol/L. FAST positif (épanchement abdominal). Scanner: fracture bassin, hémopéritoine, contusion rénale gauche.',
     question: 'Quelle stratégie thérapeutique ?', reponse: '1. Urgence vitale: transfusion (2 CGR), correction K (gluconate Ca + insuline). 2. Avis chirurgical urgent (hémopéritoine). 3. Adaptation doses (DFG 28). 4. Surveiller lactates.' },
   { id: 'md-3', titre: 'Patient polytraumatisé âgé — étape 3',
-    etape: 3, contenu: 'Post-op J3: conscient, stable hémodynamiquement. Mais confus la nuit, arrache sondrain. MMS pré-op 25/20. T° 38.2°C. CRP 185. ECBU positif (E. coli). Escarne sacrée stade I.',
+    etape: 3, contenu: 'À J3 postopératoire : conscient et stable sur le plan hémodynamique, mais confus la nuit et arrachant son dispositif de drainage. MMS préopératoire 25/30. T° 38,2 °C. CRP 185 mg/L. ECBU positif à E. coli. Escarre sacrée de stade I.',
     question: 'Gérez la confusion et l\'escarre.', reponse: 'Confusion = delirium post-op + infection (ECBU positif). Traitement: antibio (amox-clav), halopéridol 0.5mg si agitation, réorientation. Escarre: matelas anti-escarres, changement position H2, soins locaux.' },
   { id: 'md-4', titre: 'Mme Dupont, 78 ans — consultation gériatrique étape 1',
     etape: 1, contenu: 'Mme Dupont consulte pour "n\'est plus comme avant". Sa fille rapporte: oublis fréquents (rendez-vous, prénoms), ne cuisine plus, a perdu 5 kg en 3 mois, ne sort plus. Vit seule depuis le décès de son mari il y a 8 mois. ATCD: HTA, dépression traitée (sertraline 50mg).',
@@ -11917,7 +12291,6 @@ const MINI_DOSSIERS = [
     etape: 2, contenu: 'Résultats: MMS 21/30, GDS-15 14/15, ADL 5/6, IADL 3/8, MNA 18/30. Albumine 28 g/L. TSH normale, B12 normale. IRM: atrophie hippocampique bilatérale modérée.',
     question: 'Quel diagnostic et quelle prise en charge ?', reponse: '1. Dépression majeure (GDS 14) + probable démence débutante (MMS 21, atrophie hippocampique). 2. Pseudodémence vs démence: traiter la dépression d\'abord. 3. Sertraline 50→100mg. 4. Nutrition: enrichissement + CNO. 5. Réévaluation MMS à 3 mois.' }
 ];
-
 
 /* --- checklist-sortie.js --- */
 // Checklist de sortie d'hospitalisation — Transition soins
@@ -12445,14 +12818,13 @@ const MEMOS_VISUELS = [
   { id: 'mv-4', titre: 'MNA (Mini Nutritional Assessment)', contenu: '✅ ≥24 normal · ⚠️ 17-23.5 risque · 🚨 <17 dénutrition → Items: IMC, perte poids, mobilité, stress, médicaments, alimentation' },
   { id: 'mv-5', titre: 'Braden (6 facteurs escarre)', contenu: '👁️ Perception · 💧 Humidité · 🚶 Activité · 🔄 Mobilité · 🍽️ Nutrition · ✋ Friction → ≤9 très élevé, 10-12 élevé, 13-14 modéré, 15-18 faible' },
   { id: 'mv-6', titre: 'Tinetti (équilibre + marche)', contenu: '⚖️ Équilibre (9 items/16) + 🚶 Marche (7 items/12) = 28 → <19 risque élevé, 19-24 modéré, ≥25 faible' },
-  { id: 'mv-7', titre: 'CAM (confusion)', contenu: '1️⃣ Début aigu + fluctuation (OBLIGATOIRE) · 2️⃣ Inattention · 3️⃣ Pensée désorganisée · 4️⃣ Niveau conscience altéré → CAM+ = (1+2) ou (1+3+4)' },
+  { id: 'mv-7', titre: 'CAM (confusion)', contenu: '1️⃣ Début aigu + fluctuation · 2️⃣ Inattention · 3️⃣ Pensée désorganisée · 4️⃣ Vigilance altérée → CAM+ = 1 + 2 + (3 ou 4)' },
   { id: 'mv-8', titre: 'ECPA (douleur non communicant)', contenu: '💨 Respiration · 🗣️ Vocalisation · 😣 Expression facale · 🧍 Corps · 🤝 Consolabilité → 0-2 pas de douleur, 3-5 légère, 6-8 modérée, 9-10 sévère' },
   { id: 'mv-9', titre: 'Critères de Beers', contenu: '🚫 BZD · 🚫 Anticholinergiques · 🚫 AINS · 🚫 Digoxine > 0.125mg · 🚫 Antipsychotiques · 🚫 Opioïdes longue durée → Tout sujet âgé > 65 ans' },
   { id: 'mv-10', titre: 'Scores d\'urgence', contenu: '🔴 qSOFA: FR≥22, PAS≤100, GCS<15 · 🔴 SOFA: défaillance d\'organe · 🔴 NIHSS: gravité AVC · 🔴 Glasgow: conscience (3-15) · 🔴 NEWS2: détérioration' },
   { id: 'mv-11', titre: 'Lois fin de vie', contenu: '📜 Kouchner 2002: consentement + personne confiance · 📜 Leonetti 2005: CI obstination déraisonnable · 📜 Claeys-Leonetti 2016: sédation profonde continue' },
   { id: 'mv-12', titre: 'Antalgie sujet âgé', contenu: '1️⃣ Paracétamol 1g x3/j · 2️⃣ Tramadol 25-50mg (réduire si >75 ans) · 3️⃣ Morphine 0.05-0.1mg/kg · 🚫 ÉVITER AINS · 🚫 ÉVITER codéine' }
 ];
-
 
 /* --- effets-indesirables.js --- */
 // Effets indésirables — Référence gériatrique (25 molécules courantes)
@@ -15017,7 +15389,7 @@ const GUIDES_PHYSIOTHERAPIE = [
   {
     id: 'physio-1',
     titre: 'Rééducation post-chute',
-    contenu: 'Après une chute (avec ou sans fracture), la rééducation kinésithérapique vise la reprise sécurisée de la mobilité, la correction des facteurs de risque et la confiance retrouvée. En gériatrie, la peur de rechuter (syndrome post-chute) est un frein majeur à l\'autonomie.\n\nÉVALUATION INITIALE :\n- Circonstances de la chute (syncope, glissade, tripage, freezing).\n- Blessures : contusion, fracture (hanche, poignet, humérus), traumatisme crânien.\n- Scores : TUG, Tinetti, Timed Up and Go avec double tâche si cognition suspectée.\n- Revue médicamenteuse (psychotropes, antihypertenseurs), vision, podologie, hypotension orthostatique.\n- Force quadriceps, amplitude chevilles, proprioception.\n\nPRISE EN CHARGE KINÉSITHÉRAPIQUE :\n- Antalgie et respect des contraintes orthopédiques si fracture.\n- Renforcement progressif : chaîne postérieure, abdominaux profonds, extenseurs hanche.\n- Rééducation équilibre : appuis unipodaux sécurisés, transferts de poids, perturbations contrôlées.\n- Marche : reprise avec aide technique adaptée, travail du démarrage et des pivots.\n- Éducation : lever progressif, chaussures, environnement (tapis, seuils), hydratation.\n- Exposition graduée à la peur (pas d\'évitement prolongé du lever).\n\nPLURIDISCIPLINARITÉ :\n- Médecin : bilan cardio, orthostatique, ostéoporose post-fracture.\n- Ergothérapie : aides techniques, aménagement domicile.\n- Orthophoniste si dysphagie post-traumatisme crânien.\n\nOBJECTIFS MESURABLES :\n- TUG < 12–14 s ou amélioration > 1 s significative.\n- Marche > 300 m avec aide prévue au domicile.\n- Une chute ou moins en 3 mois après programme structuré.\n\nSORTIE ET SUIVI :\n- Programme d\'exercices à domicile 3–5 séances/semaine.\n- Activité physique régulière (marche, renforcement léger).\n- Réévaluation à 1 et 3 mois.',
+    contenu: 'Après une chute (avec ou sans fracture), la rééducation kinésithérapique vise la reprise sécurisée de la mobilité, la correction des facteurs de risque et la confiance retrouvée. En gériatrie, la peur de rechuter (syndrome post-chute) est un frein majeur à l\'autonomie.\n\nÉVALUATION INITIALE :\n- Circonstances de la chute (syncope, glissade, trébuchement, freezing).\n- Blessures : contusion, fracture (hanche, poignet, humérus), traumatisme crânien.\n- Tests : TUG, Tinetti et double tâche si un trouble cognitif est suspecté.\n- Revue médicamenteuse (psychotropes, antihypertenseurs), vision, podologie, hypotension orthostatique.\n- Force quadriceps, amplitude chevilles, proprioception.\n\nPRISE EN CHARGE KINÉSITHÉRAPIQUE :\n- Antalgie et respect des contraintes orthopédiques si fracture.\n- Renforcement progressif : chaîne postérieure, abdominaux profonds, extenseurs hanche.\n- Rééducation équilibre : appuis unipodaux sécurisés, transferts de poids, perturbations contrôlées.\n- Marche : reprise avec aide technique adaptée, travail du démarrage et des pivots.\n- Éducation : lever progressif, chaussures, environnement (tapis, seuils), hydratation.\n- Exposition graduée à la peur (pas d\'évitement prolongé du lever).\n\nPLURIDISCIPLINARITÉ :\n- Médecin : bilan cardio, orthostatique, ostéoporose post-fracture.\n- Ergothérapie : aides techniques, aménagement domicile.\n- Orthophoniste si dysphagie post-traumatisme crânien.\n\nOBJECTIFS MESURABLES :\n- Amélioration du TUG par rapport à la valeur initiale ; un temps > 20 s reste un signal de risque dans le référentiel CNEG.\n- Marche > 300 m avec aide prévue au domicile.\n- Une chute ou moins en 3 mois après programme structuré.\n\nSORTIE ET SUIVI :\n- Programme d\'exercices à domicile 3–5 séances/semaine.\n- Activité physique régulière (marche, renforcement léger).\n- Réévaluation à 1 et 3 mois.',
     points_cles: ['TUG et Tinetti à l\'admission', 'Peur de chuter = programme gradué', 'Renforcement quadriceps + équilibre', 'Facteurs médicamenteux et orthostatiques']
   },
   {
@@ -17652,7 +18024,7 @@ const CHIFFRES_CLES_MEDICAUX = [
   { id: 'ccm-35', chiffre: '3 g/j', contexte: 'Dose maximale recommandée de paracétamol chez adulte (ajuster si IRC sévère ou alcoolisme).', source: 'RCP paracétamol / ANSM', importance: 'Première ligne douleur ; éviter surdosage inadvertent.' },
   { id: 'ccm-36', chiffre: '50 %', contexte: 'Sensibilité clinique de la fièvre pour détecter une infection bactérienne chez le très vieux sujet (fièvre absente fréquente).', source: 'Infectiologie gériatrique', importance: 'Ne pas exclure infection sur absence de fièvre ; CRP et clinique.' },
   { id: 'ccm-37', chiffre: '20 %', contexte: 'Taux de mortalité hospitalière pour sepsis chez les ≥ 85 ans (variable selon terrain).', source: 'Cohorts sepsis âgé', importance: 'Antibiothérapie précoce ; objectifs de soins réalistes.' },
-  { id: 'ccm-38', chiffre: '14 s', contexte: 'Seuil du Timed Up and Go associé à risque élevé de chutes chez le sujet âgé communautaire.', source: 'Validation TUG', importance: 'TUG simple en consultation ; orientation rééducation si > 14 s.' },
+  { id: 'ccm-38', chiffre: '20 s', contexte: 'Seuil du Timed Up and Go associé au risque de chute dans le référentiel CNEG/HAS utilisé par l\'app.', source: 'CNEG, chapitre 12', importance: 'TUG simple en consultation ; une durée > 20 s appelle une évaluation multifactorielle.' },
   { id: 'ccm-39', chiffre: '24', contexte: 'Score MMS seuil usuel de trouble cognitif (à corriger âge et scolarité).', source: 'Folstein MMSE', importance: 'Dépistage ; orientation consultation mémoire si < 24.' },
   { id: 'ccm-40', chiffre: '11', contexte: 'Score MNA-SF ≤ 11 définissant la dénutrition protéino-énergétique.', source: 'MNA Nestlé', importance: 'Compléments nutritionnels et bilan étiologique.' },
   { id: 'ccm-41', chiffre: '5', contexte: 'Nombre de médicaments chroniques définissant la polymédication.', source: 'Consensus gériatrie pharmacie', importance: 'Seuil pour revue médicamenteuse structurée.' },
@@ -17702,7 +18074,7 @@ const GUIDES_CONSULTATION = [
     id: 'gc-5',
     titre: 'Consultation chutes et prévention des chutes',
     categorie: 'Chutes',
-    contenu: 'Une consultation dédiée aux chutes analyse chaque épisode et met en place une prévention multifactorielle (recommandation HAS).\n\nDÉFINITION ET ENJEU :\n- Chute = événement involontaire au sol ou niveau inférieur.\n- 30–40 % des > 65 ans chutent chaque année ; récidive fréquente ; conséquences : fracture, perte d\'autonomie, peur de tomber.\n\nANAMNÈSE DE LA CHUTE :\n- Circonstances (lever nocturne, tapis, escalier), prodromes (vertige, lipothymie), perte de connaissance.\n- Nombre de chutes sur 12 mois ; blessures ; hospitalisations.\n- Peur de tomber (échelle FES-I si disponible).\n\nÉVALUATION MULTIFACTORIELLE :\n1. Marche et équilibre : Tinetti, Timed Up and Go (TUG > 14 s = risque élevé), appui unipodal.\n2. Vision, audition, podologie (chaussures, ongles, neuropathie).\n3. Médicaments à risque : benzodiazépines, psychotropes, antihypertenseurs, opioïdes, 4+ médicaments.\n4. Orthostatisme : PA couché/debout à 1 et 3 min.\n5. Cognition et dépression (facteurs de risque).\n6. Environnement : visite domicile ou questionnaire (éclairage, barres, tapis).\n\nEXAMENS SI INDICATION :\n- ECG, Holter si syncope suspectée ; écho doppler TSA si AIT ; DEXA si fracture.\n- Ionogramme, DFG, glycémie, B12 si troubles équilibre inexpliqués.\n\nINTERVENTIONS (plan personnalisé) :\n- Exercices équilibre/renforcement (kiné, OSS).\n- Correction vision ; chaussures adaptées ; podologie.\n- Révision médicamenteuse (arrêt BZD prioritaire).\n- Adaptation domicile (ergothérapeute, MDPH).\n- Supplémentation vitamine D si carence (25-OH-D < 30 ng/mL).\n\nSUIVI :\n- Réévaluation à 3 mois : nombre de chutes, TUG, observance exercices.',
+    contenu: 'Une consultation dédiée aux chutes analyse chaque épisode et met en place une prévention multifactorielle (recommandation HAS).\n\nDÉFINITION ET ENJEU :\n- Chute = événement involontaire au sol ou niveau inférieur.\n- 30–40 % des > 65 ans chutent chaque année ; récidive fréquente ; conséquences : fracture, perte d\'autonomie, peur de tomber.\n\nANAMNÈSE DE LA CHUTE :\n- Circonstances (lever nocturne, tapis, escalier), prodromes (vertige, lipothymie), perte de connaissance.\n- Nombre de chutes sur 12 mois ; blessures ; hospitalisations.\n- Peur de tomber (échelle FES-I si disponible).\n\nÉVALUATION MULTIFACTORIELLE :\n1. Marche et équilibre : Tinetti, Timed Up and Go (TUG > 20 s = risque dans le référentiel CNEG), appui unipodal.\n2. Vision, audition, podologie (chaussures, ongles, neuropathie).\n3. Médicaments à risque : benzodiazépines, psychotropes, antihypertenseurs, opioïdes, 4+ médicaments.\n4. Orthostatisme : PA couché/debout à 1 et 3 min.\n5. Cognition et dépression (facteurs de risque).\n6. Environnement : visite domicile ou questionnaire (éclairage, barres, tapis).\n\nEXAMENS SI INDICATION :\n- ECG, Holter si syncope suspectée ; écho doppler TSA si AIT ; DEXA si fracture.\n- Ionogramme, DFG, glycémie, B12 si troubles équilibre inexpliqués.\n\nINTERVENTIONS (plan personnalisé) :\n- Exercices équilibre/renforcement (kiné, OSS).\n- Correction vision ; chaussures adaptées ; podologie.\n- Révision médicamenteuse (arrêt BZD prioritaire).\n- Adaptation domicile (ergothérapeute, MDPH).\n- Supplémentation vitamine D si carence (25-OH-D < 30 ng/mL).\n\nSUIVI :\n- Réévaluation à 3 mois : nombre de chutes, TUG, observance exercices.',
     points_cles: ['Anamnèse précise de chaque chute', 'TUG + Tinetti + orthostatisme', 'Réduire psychotropes et BZD', 'Exercice + domicile + vitamine D']
   },
   {
@@ -17929,7 +18301,7 @@ const SYNDROMES_GERIATRIQUES = [
     prevalence: 'Environ 30 % des ≥65 ans chutent chaque année ; 50 % des ≥80 ans. Récurrence : 40-50 % dans l\'année. 10 % des chutes entraînent une fracture (poignet, hanche). 1ère cause de traumatismes graves et de décès accidentel chez le sujet âgé.',
     physiopathologie: 'Interaction facteurs intrinsèques (troubles équilibre/gait, hypotension orthostatique, déficits sensoriels, sarcopénie, troubles cognitifs, parkinsonisme) et extrinsèques (glissades, obstacles, éclairage, chaussures, médicaments sédatifs). Boucle peur de chuter → déconditionnement → fragilité → nouvelles chutes.',
     signes_cliniques: 'Chute avec ou sans syncope ; blessures (hématome, fracture, traumatisme crânien). Peur de chuter, restriction des déplacements, déclin autonomie. Signes associés à rechercher : orthostatisme, arythmie, déficit neurologique focal, delirium post-chute.',
-    diagnostic: 'Anamnèse détaillée (circonstances, prodromes, perte de connaissance). Examen : Tinetti, TUG (Timed Up and Go >12-14 s = risque), test appui unipodal, marche, PA couché/debout. Bilan ciblé : ECG, glycémie, iono, NFS, TSH, imagerie si traumatisme ou anticoagulation. Outil STRATIFY ou Morse en institution.',
+    diagnostic: 'Anamnèse détaillée (circonstances, prodromes, perte de connaissance). Examen : Tinetti, TUG (Timed Up and Go > 20 s = risque dans le référentiel CNEG), test d\'appui unipodal, marche, PA couchée/debout. Bilan ciblé : ECG, glycémie, ionogramme, NFS, TSH, imagerie selon les signes cliniques et le contexte traumatique. Outil STRATIFY ou Morse en institution.',
     traitement: 'Rééducation multifactorielle : APA, kinésithérapie équilibre, correction troubles visuels, adaptation domicile (délestage, barres). Traitement orthostatisme, arythmie, parkinson. Révision médicamenteuse (BZD, psychotropes, antihypertenseurs). Ostéoporose si fracture de fragilité. Éducation patient/aidant.',
     prevention: 'Dépistage annuel du risque de chute, exercices équilibre/progression résistance, vitamine D 800-1000 UI/j si carence, chaussures adaptées, éclairage, suppression obstacles, revue médicamenteuse systématique, correction hypotension orthostatique.',
     pronostic: 'Chute isolée sans fracture : récupération souvent bonne avec prévention. Fracture de hanche : mortalité à 1 an 20-30 %, 50 % perte d\'autonomie persistante. Récurrence fréquente sans intervention multifactorielle. Peur de chuter majore le risque de dépendance.'
@@ -18012,7 +18384,7 @@ const SYNDROMES_GERIATRIQUES = [
     definition: 'Expérience sensorielle et émotionnelle désagréable liée à une lésion tissulaire réelle ou potentielle. Chez le sujet âgé : douleur chronique fréquente (arthrose, neuropathie, cancer), souvent sous-traitée et sous-déclarée ; expression atypique (agitation, refus soins) si troubles cognitifs.',
     prevalence: '50-80 % des ≥65 ans en institution rapportent une douleur chronique ; 25-50 % en communauté. Douleur non contrôlée = facteur de chutes, dépression, anorexie, delirium.',
     physiopathologie: 'Modifications perception : ↓ fibres Aβ, altération descending inhibition, comorbidités inflammatoires. Barrières communication (aphasie, démence, surdité). Peur des opioïdes chez soignants et patients. Douleur nociceptive, neuropathique (diabète, zona) ou mixte.',
-    signes_cliniques: 'Plainte verbale, grimaces, protection posturale, agitation (surtout démence), anorexie, insomnia. ECPA si non communicant : respiration, vocalisation, visage, corps, consolabilité (≥4/10 = douleur probable). DOLOPLUS-2 alternative.',
+    signes_cliniques: 'Plainte verbale, grimaces, protection posturale, agitation (surtout en cas de trouble cognitif), anorexie, insomnie. ALGOPLUS pour la douleur aiguë non communicable : visage, regard, plaintes, corps, comportements (seuil ≥ 2/5). ECPA ou DOLOPLUS-2 sont des échelles plus longues selon le contexte.',
     diagnostic: 'Échelle adaptée (EVA si possible, EN, ECPA, Algoplus). Localisation, chronologie, facteurs aggravants. Rechercher cause somatique : fracture occulte, infection, ischémie, constipation, rétention. Ne pas attribuer systématiquement à l\'âge.',
     traitement: 'WHO ladder adaptée : paracétamol 1g x3/j (max 3g si fragile). Tramadol prudence (confusion, chutes). Opioïdes faibles puis forts si besoin, titration lente, laxatifs prophylactiques. Topiques (AINS locaux limités). Duloxétine/gabapentinoïdes si neuropathique. Non-médicamenteux : physio, TENS, mobilisation. Traiter dépression et insomnia.',
     prevention: 'Dépistage systématique douleur à chaque consultation, protocoles post-op, éviter immobilisation prolongée, éducation équipes EHPAD, révision médicaments douloureux (statines myalgies, etc.).',
@@ -18571,8 +18943,8 @@ const GUIDES_PRATIQUES = [
     contenu: 'Le Mini Mental State Examination (MMS/MMSE) est le test de dépistage cognitif le plus utilisé en gériatrie. Il évalue 5 domaines sur 30 points.\n\nPROTOCOLE :\n1. ORIENTATION (10 points) : Demander la date complète (jour, mois, année, jour de la semaine, saison) = 5 points. Demander le lieu (pays, ville, hôpital, service, étage) = 5 points.\n2. MÉMORISATION (6 points) : Dire 3 mots (ex: "pomme, table, penny"). Le patient doit les répéter immédiatement. Chaque mot répété = 2 points. Enregistrer quels mots sont rappelés.\n3. ATTENTION/CALCUL (5 points) : Soustraire 7 de 100 en continu (93, 86, 79, 72, 65). Chaque bonne réponse = 1 point. Alternative : épeler "MONDE" à l\'envers.\n4. RAPPEL (3 points) : Demander les 3 mots de l\'étape 2. Chaque mot rappelé = 1 point.\n5. LANGAGE (6 points) : Nommer 2 objets (crayon, montre) = 2 points. Répéter "Pas de si, mais ou et" = 1 point. Comprendre 3 ordres ("Prenez ce papier, pliez-le en deux, posez-le par terre") = 3 points.\n6. PRAXIES (1 point) : Écrire une phrase = 1 point.\n\nINTERPRÉTATION : ≥ 24 = normal. 18-23 = trouble cognitif léger. < 18 = trouble modéré/sévère. CORRIGER pour l\'âge (-1 point si > 75 ans) et le niveau scolaire (-1 point si < 8 ans d\'étude).',
     points_cles: ['30 points total', 'Corriger âge et scolarité', '< 24 = trouble cognitif', '5 domaines évalués'] },
   { id: 'gp-2', titre: 'Comment évaluer la douleur chez un non-communicant', categorie: 'Douleur',
-    contenu: 'Chez le sujet âgé non communicant (Alzheimer sévère, AVC, coma), la douleur ne peut être auto-évaluée. Utiliser l\'ECPA.\n\nÉCHELLE ECPA (5 items, chacun coté 0-2) :\n1. RESPIRATION : 0 = normale. 1 = intermittente, soupirs. 2 = rythme irrégulier, apnées.\n2. VOCALISATION : 0 = aucune. 1 = gémissements, plaintes. 2 = cris, pleurs.\n3. EXPRESSION FACIALE : 0 = détendue, sourire. 1 = crispée, froncée. 2 = visage douloureux, yeux fermés.\n4. CORPS : 0 = détendu, position normale. 1 = tension, raideur. 2 = rigidité, retrait, protection.\n5. CONSOLABILITÉ : 0 = pas besoin. 1 = se calme avec contact verbal. 2 = ne se calme pas.\n\nSCORE : 0-2 = pas de douleur. 3-5 = douleur légère. 6-8 = douleur modérée. 9-10 = douleur sévère.\n\nCONDUITE : Si ECPA ≥ 4 → prescrire paracétamol 1g. Si ≥ 6 → paracétamol + tramadol 25-50mg. Rechercher la CAUSE (escarre, fracture, infection, constipation, rétention).',
-    points_cles: ['ECPA = 5 items × 2 points', '≥ 4 = douleur probable', 'Toujours chercher la cause', 'Réévaluer toutes les 4h'] },
+    contenu: 'Chez une personne âgée qui ne peut pas s\'autoévaluer, la douleur doit être recherchée par une hétéroévaluation adaptée.\n\nALGOPLUS — DOULEUR AIGUË :\n- 5 items binaires : visage, regard, plaintes, corps, comportements.\n- Score seuil validé à 2/5.\n- Passation en moins d\'une minute.\n\nAUTRES CONTEXTES :\n- DOLOPLUS-2 est plutôt utilisée pour une douleur chronique.\n- ECPA est une échelle longue à 8 items, cotés de 0 à 4, pour un total de 0 à 32.\n\nCONDUITE : rechercher la cause (escarre, fracture, infection, constipation, rétention), traiter selon le terrain, puis réévaluer avec la même échelle.',
+    points_cles: ['ALGOPLUS = 5 items binaires', 'Seuil ≥ 2/5', 'ECPA = 8 items, score 0–32', 'Toujours rechercher la cause et réévaluer'] },
   { id: 'gp-3', titre: 'Comment rédiger des directives anticipées', categorie: 'Éthique',
     contenu: 'Les directives anticipées sont encadrées par la loi Claeys-Leonetti (2016). Elles sont contraignantes si elles remplissent les conditions.\n\nCONDITIONS DE VALIDITÉ :\n- Patient majeur capable d\'exprimer sa volonté\n- Rédigées par écrit, datées et signées\n- Avec 2 témoins (dont 1 médecin) OU devant notaire\n- Valables 5 ans (renouvelables)\n- Modifiables ou révocables à tout moment\n\nCONTENU RECOMMANDÉ :\n1. Situation personnelle : nom, prénom, date de naissance\n2. Maladie ou situation concernée\n3. Soins acceptés ou refusés (dialyse, réanimation, intubation, nutrition artificielle)\n4. Conditions de fin de vie (sédation, arrêt traitement)\n5. Personne de confiance désignée\n6. Valeurs personnelles (ce qui compte pour vous)\n\nMODÈLE DE PHRASE : "Si je suis dans un état irréversible et que ma maladie met ma vie en danger, je refuse [X] et j\'accepte [Y]. Je souhaite que les soins soient orientés vers mon confort et ma dignité."',
     points_cles: ['Loi Claeys-Leonetti 2016', 'Écrit, daté, signé, 2 témoins', 'Valables 5 ans', 'Contraignantes si valides'] },
@@ -18583,7 +18955,6 @@ const GUIDES_PRATIQUES = [
     contenu: 'La revue médicamenteuse est un acte thérapeutique essentiel chez le sujet âgé polymédiqué.\n\nÉTAPES :\n1. LISTER tous les médicaments (y compris OTC, phytothérapie, compléments)\n2. VÉRIFIER les indications (chaque médicament a-t-il une indication valide ?)\n3. IDENTIFIER les médicaments inappropriés (critères de Beers, STOPP/START)\n4. VÉRIFIER les interactions (base de données, pharmacien)\n5. ADAPTER les doses au DFG (clearance rénale)\n6. SIMPLIFIER le schéma (1 prise/j si possible, pilulier)\n7. PLANIFIER la déprescription (arrêt progressif des médicaments inappropriés)\n8. DOCUMENTER les changements dans le dossier\n\nCHECKLIST BEERS :\n- BZD (diazépam, lorazépam) → arrêter\n- Anticholinergiques (amitriptyline) → arrêter\n- AINS (ibuprofène, diclofénac) → arrêter\n- Digoxine > 0.125mg → réduire\n- Antipsychotiques → réduire/arrêter\n\nDÉPRESCRIPTION :\n- Toujours arrêter PROGRESSIVEMENT\n- Un médicament à la fois\n- Surveiller les effets de sevrage\n- Expliquer au patient pourquoi on arrête',
     points_cles: ['≥ 5 médicaments = polymédication', 'Critères de Beers', 'Arrêt progressif', 'Un médicament à la fois'] }
 ];
-
 
 /* --- paroles-experts.js --- */
 // Paroles d'experts — Citations de gériatres et éducateurs médicaux
@@ -19991,7 +20362,7 @@ CONTEXTE SOCIAL :
 - MNA: 17/30
 - Tinetti: 8/28
 - Braden: 14/23
-- Douleur: ECPA 5/10
+- Douleur: PAINAD 5/10
 - Poids: 48 kg (IMC 18.5)
 - Albumine: 28 g/L
 
@@ -20194,7 +20565,7 @@ Le résident est agité, crie, essaie de se lever, dit qu'il doit "aller travail
 - FR: 20/min
 - SpO2: 95% en air ambulant
 - Glycémie capillaire: 1.8 g/L
-- ECPA: 6/10 (douleur ?)
+- PAINAD 6/10 (douleur ?)
 - Pas de globe vésical
 - Pas de foyer infectieux évident
 
@@ -20212,7 +20583,7 @@ Critères CAM: (1) Début aigu ✓ (2h vs habituel), (2) Inattention ✓, (3) Fl
 Démence à corps de Lewy = terrain à risque de confusion + hypersensibilité neuroleptique.
 
 2. CAUSES POSSIBLES (4 points) :
-- Douleur (ECPA 6/10, mais difficile à évaluer en DLB)
+- Douleur (PAINAD 6/10, mais difficile à évaluer en DLB)
 - Infection (T° 37.8°C, mais fièvre modérée)
 - Hypoglycémie (1.8 g/L = hypoglycémie relative chez diabétique)
 - Iatrogénie (mirtazapine = sédation, tamsulosine = confusion)
@@ -20298,7 +20669,7 @@ CONTEXTE SOCIAL :
 - MNA: 9/30 (dénutrition sévère)
 - Tinetti: 6/28
 - Braden: 12/23 (risque élevé escarres)
-- Douleur: ECPA 4/10
+- Douleur: PAINAD 4/10
 - Poids: 42 kg (IMC 16.2)
 - Taille: 155 cm
 - Albumine: 22 g/L
@@ -20369,7 +20740,6 @@ QUESTIONS :
     juryTips: 'Le jury attend une analyse complète de la dénutrition (causes, conséquences, plan nutritionnel). L\'INR à 3.8 est un piège — il faut l\'expliquer (déshydratation ? interaction ?) et le gérer. L\'attitude éthique est cruciale — ne pas proposer de nutrition artificielle sans discussion avec la famille en Alzheimer sévère. Le pronostic est sombre mais le maintien de la qualité de vie est l\'objectif principal.'
   }
 ];
-
 
 /* --- sujets-evc-2019-2021.js --- */
 // ═══════════════════════════════════════════════════════════════
@@ -21990,7 +22360,7 @@ HISTOIRE RÉCENTE (3 derniers mois) :
 - ADL (Katz) : 4/6 — autonome alimentation et transferts ; aide partielle toilette et habillage ; incontinence urinaire d'effort occasionnelle non traitée
 - IADL (Lawton) : 2/8 — téléphone impossible, courses impossibles, transport arrêté, médicaments en pilulier préparé par la fille, ménage et cuisine très altérés, gestion financière déléguée à la fille depuis 2 mois
 - Tinetti (marche + équilibre) : 18/28 (marche lente, pas courts, déviation latérale légère)
-- Timed Up and Go : 18 secondes (> 14 s = risque chutes élevé)
+- Timed Up and Go : 18 secondes (à interpréter avec les autres facteurs ; le seuil du manuel est > 20 s)
 - MNA court : 22/30 (à surveiller — perte de poids)
 - Douleur genoux : EVA 4/10 à la marche
 - Vision : correction portée (lunettes) ; audition : acouphènes, TV volume élevé
@@ -22057,7 +22427,7 @@ QUESTIONS :
 - Ergothérapie : adaptation cuisine, toilette, stratégies compensation cognitive (agenda, alarmes).
 - Psychologue ou neuropsychologue : soutien patiente + fille, gestion comportement nocturne.
 - Assistante sociale : APA, aides financières, relais hospitalisation courte si épuisement fille.
-- Objectifs : stabiliser poids, TUG < 14 s ou stabilisé, zéro chute avec fracture, maintenir ADL à 4/6, IADL stabilisées avec aides.
+- Objectifs : stabiliser le poids, améliorer ou stabiliser le TUG (avec repère de risque > 20 s), éviter toute nouvelle chute avec fracture, maintenir l'ADL à 4/6 et stabiliser l'IADL avec les aides.
 
 5. INFORMATION, CONSENTEMENT, DIRECTIVES (3 points) :
 - Capacité : patiente comprend le diagnostic globalement mais minimise — évaluer capacité décisionnelle pour chaque acte (aide à domicile, téléalarme) ; consentement éclairé adapté (information répétée, écrit simple).
@@ -23709,15 +24079,15 @@ ATCD: HTA (périndopril 5mg), diabète T2 (gliclazide 60mg), BPCO (salbutamol), 
 
 TRAITEMENT POST-OP: paracétamol 1g IV x4, tramadol 100mg/j, enoxaparine 40mg SC, amoxicilline-clavulanate 2g IV.
 
-EXAMEN: T° 38.2°C. PA 140/85. FC 98. FR 22. SpO2 93% (O2 2L). MMS 16/30 (pré-op 24/30). CAM positive (début aigu, inattention, fluctuation). ECPA 5/10. Pas de déficit neurologique focal. Globe vésical non palpé. Pas de rougeur cutanée.
+EXAMEN: T° 38.2°C. PA 140/85. FC 98. FR 22. SpO2 93% (O2 2L). MMS 16/30 (pré-op 24/30). CAM positive (début aigu, inattention, fluctuation). PAINAD 5/10. Pas de déficit neurologique focal. Globe vésical non palpé. Pas de rougeur cutanée.
 
 BIOLOGIE: GB 14 000 (PNN 82%), CRP 145, créatinine 135 (habituelle 90), Na 146, K 4.5, glycémie 1.9g/L.`,
     questions: [
       { q: 'Confirmez le diagnostic avec les critères CAM.', a: 'CAM positive: (1) Début aigu et fluctuation ✓ (J2 post-op, agité la nuit). (2) Inattention ✓ (ne suit pas les consignes). (3) Pensée désorganisée ✓ (parle de ses enfants décédés). (4) Niveau de conscience altéré ✓ (agitité, désorienté). Diagnostic: confusion aiguë (delirium) post-opératoire.' },
-      { q: 'Listez les causes possibles de cette confusion.', a: '1. Post-opératoire (anesthésie, stress chirurgical). 2. Infection (T° 38.2, GB 14 000, CRP 145 → infection urinaire, pulmonaire ou plaie). 3. Déshydratation (Na 146, créatinine 135 vs 90). 4. Iatrogénie (tramadol 100mg → confusion ++). 5. Hypoglycémie (1.9 g/L sous gliclazide). 6. Douleur (ECPA 5/10). 7. Constipation (fréquente post-op).' },
+      { q: 'Listez les causes possibles de cette confusion.', a: '1. Post-opératoire (anesthésie, stress chirurgical). 2. Infection (T° 38.2, GB 14 000, CRP 145 → infection urinaire, pulmonaire ou plaie). 3. Déshydratation (Na 146, créatinine 135 vs 90). 4. Iatrogénie (tramadol 100mg → confusion ++). 5. Hypoglycémie (1.9 g/L sous gliclazide). 6. Douleur (PAINAD 5/10). 7. Constipation (fréquente post-op).' },
       { q: 'Quelle est votre prise en charge immédiate ?', a: '1. Arrêt tramadol → paracétamol IV seul. 2. Réhydratation NaCl 0.9% 500mL. 3. Correction glycémique (sucre si < 0.7, arrêt gliclazide si < 1.5). 4. ECBU + hémocultures. 5. Rx thoracique. 6. Halopéridol 0.5mg PO si agitation sévère. 7. Pas de contention. 8. Réorientation (lumière, horloge, présence familiale).' },
       { q: 'Quels médicaments NE devez-vous PAS utiliser et pourquoi ?', a: '1. BZD (lorazepam, diazepam) → aggravent la confusion, sédation paradoxale. 2. Anticholinergiques → aggravent la confusion. 3. AINS → néphrotoxiques (créatinine déjà élevée). 4. Gliclazide → hypoglycémie (1.9 g/L). 5. Tramadol → confusion ++ (à arrêter).' },
-      { q: 'Quelle surveillance mettez-vous en place ?', a: 'CAM toutes les 8h. T°, PA, FC, SpO2, glycémie toutes les 4h. Diurèse. ECPA toutes les 4h. Bilan biologique J3 (créatinine, Na, K, GB, CRP). Réévaluation à J4: si amélioration → réintroduction progressive des traitements. Si persistance → recherche cause complémentaire.' }
+      { q: 'Quelle surveillance mettez-vous en place ?', a: 'Réévaluation clinique régulière de la confusion, des constantes, de la glycémie, de la diurèse et de la douleur avec la même échelle (ici PAINAD). Adapter la fréquence et le bilan biologique à la gravité et à l\'évolution ; rechercher une cause persistante en l\'absence d\'amélioration.' }
     ],
     juryTips: 'Le jury attend que vous utilisiez la CAM de manière structurée. Le tramadol est le médicament le plus suspect (confusion chez le sujet âgé). L\'hypoglycémie à 1.9 g/L est un facteur contributif. Ne pas oublier de chercher une infection (T°, GB, CRP).'
   },
@@ -23728,7 +24098,7 @@ BIOLOGIE: GB 14 000 (PNN 82%), CRP 145, créatinine 135 (habituelle 90), Na 146,
 
 ATCD: Alzheimer stade GDS 5, HTA (ramipril 5mg), ostéoporose (alendronate 70mg/sem + Vit D 1000UI), FA permanente (warfarine INR 2-3), dépression (paroxétine 20mg).
 
-ÉVALUATION: MMS 8/30. GDS-15 14/15. ADL 2/6. IADL 0/8. MNA 9/30. Tinetti 6/28. Braden 12/23. ECPA 4/10. Poids 42 kg (IMC 16.2). Taille 155 cm.
+ÉVALUATION: MMS 8/30. GDS-15 14/15. ADL 2/6. IADL 0/8. MNA 9/30. Tinetti 6/28. Braden 12/23. PAINAD 4/10. Poids 42 kg (IMC 16.2). Taille 155 cm.
 
 BIOLOGIE: Albumine 22 g/L. Pré-albumine 0.08 g/L. Hb 10.5 g/dL. Vit D 8 ng/mL. Créatinine 95 (DFG 52). INR 3.8.
 
@@ -23794,18 +24164,17 @@ ATCD: Démence à corps de Lewy (diagnostiquée il y a 2 ans), HTA (amlodipine 5
 
 TRAITEMENT: amlodipine 5mg, metformine 500mg x2, oméprazole 20mg, tamsulosine 0.4mg, donépezil 10mg, mélatonine 2mg, mirtazapine 15mg le soir.
 
-SITUATION: Agité, crie, dit qu\'il doit "aller travailler", frappe l\'aide-soignante. T° 37.8°C. PA 150/90. FC 95. Glycémie 1.8 g/L. ECPA 6/10.`,
+SITUATION: Agité, crie, dit qu\'il doit "aller travailler", frappe l\'aide-soignante. T° 37.8°C. PA 150/90. FC 95. Glycémie 1.8 g/L. PAINAD 6/10.`,
     questions: [
       { q: 'Quel est le diagnostic et quels sont les critères diagnostiques ?', a: 'Confusion aiguë (delirium) sur démence à corps de Lewy. CAM: (1) Début aigu ✓ (2h vs habituel). (2) Inattention ✓. (3) Fluctuation ✓. (4) Niveau conscience altéré ✓. DLB = terrain à risque de confusion + hypersensibilité neuroleptique.' },
-      { q: 'Listez les causes possibles de cette agitation.', a: '1. Douleur (ECPA 6/10, difficile à évaluer en DLB). 2. Infection (T° 37.8°C). 3. Hypoglycémie (1.8 g/L = relative chez diabétique). 4. Iatrogénie (mirtazapine = sédation, tamsulosine = confusion). 5. Environnement (nuit, désorientation). 6. Constipation (fréquente sous donépezil).' },
+      { q: 'Listez les causes possibles de cette agitation.', a: '1. Douleur (PAINAD 6/10, difficile à évaluer en DLB). 2. Infection (T° 37.8°C). 3. Hypoglycémie (1.8 g/L = relative chez diabétique). 4. Iatrogénie (mirtazapine = sédation, tamsulosine = confusion). 5. Environnement (nuit, désorientation). 6. Constipation (fréquente sous donépezil).' },
       { q: 'Quels médicaments NE DEVEZ-VOUS PAS donner et pourquoi ?', a: '1. Halopéridol: CONTRE-INDIQUÉ en DLB (syndrome malin des neuroleptiques, ATCD). 2. BZD (diazépam, lorazépam): confusion paradoxale, chutes. 3. Anticholinergiques: aggravation confusion. 4. Métopimazine: neuroleptique → même risque.' },
-      { q: 'Quelle est votre prise en charge immédiate ?', a: '1. Environnement: lumière douce, voix calme, présence rassurante. 2. Pas de contention. 3. Réorientation (horloge, calendrier, photos). 4. Si douleur: paracétamol 1g PO. 5. Si hypoglycémie: sucre oral. 6. Si agitation sévère: quétiapine 12.5-25mg PO. 7. Surveillance: T°, glycémie, ECPA toutes les 2h.' },
-      { q: 'Comment prévenir les récidives ?', a: '1. Maintenir un environnement stable (même chambre, même personnel). 2. Lumière naturelle le jour, veilleuse la nuit. 3. Activités structurées la journée. 4. Éviter les changements brusques. 5. Révision médicamenteuse (mirtazapine, tamsulosine). 6. Évaluation douleur systématique (ECPA 2x/j). 7. Éducation équipe (DLB = hypersensibilité neuroleptique).' }
+      { q: 'Quelle est votre prise en charge immédiate ?', a: '1. Environnement calme, présence rassurante et réorientation. 2. Éviter la contention. 3. Rechercher et traiter douleur, hypoglycémie, infection, globe, fécalome et iatrogénie. 4. Réévaluer les constantes, la glycémie et la douleur avec la PAINAD. 5. En cas de danger immédiat malgré ces mesures, demander un avis médical pour un traitement bref, à dose minimale et surveillé.' },
+      { q: 'Comment prévenir les récidives ?', a: 'Maintenir un environnement stable et un cycle veille-sommeil régulier, corriger les déficits sensoriels, réviser les médicaments, prévenir douleur, constipation et déshydratation, utiliser une échelle de douleur adaptée et sensibiliser l\'équipe à l\'hypersensibilité aux neuroleptiques de la maladie à corps de Lewy.' }
     ],
     juryTips: 'Le piège principal est de donner de l\'halopéridol — CI absolue en DLB (ATCD syndrome malin). Le jury attend que vous connaissiez l\'hypersensibilité neuroleptique de la DLB et que vous proposiez la quétiapine comme alternative. La douleur est souvent sous-estimée chez les patients déments.'
   }
 ];
-
 
 /* --- sujets-evc-2004-2006.js --- */
 // ═══════════════════════════════════════════════════════════════
@@ -24479,7 +24848,7 @@ QUESTIONS :
 - Consultation gériatre / rhumatologue M1 et M3 : DMO contrôle, tolérance biphosphonate, TUG.
 - Assistante sociale : aide ménage, portage repas, téléalarme.
 - Chirurgien orthopédique : contrôle Rx M6.
-- Objectifs : marche autonome avec aide technique, TUG < 20 s puis < 14 s, pas de nouvelle chute, traitement anti-ostéoporotique en cours.
+- Objectifs : marche autonome avec l'aide technique adaptée, TUG < 20 s puis progression individualisée, absence de nouvelle chute et traitement anti-ostéoporotique en cours.
 
 5. RETOUR DOMICILE ET CRITÈRES (3 points) :
 - Faisabilité : fils disponible, ascenseur, aménagements réalisés avant sortie ; visite domicile ergo idéale.
@@ -25470,7 +25839,7 @@ ATCD: Alzheimer stade GDS 5, HTA (amlodipine 5mg), FA permanente (apixaban 5mg x
 
 TRAITEMENT: amlodipine 5mg, apixaban 5mg x2, tamsulosine 0.4mg, mirtazapine 15mg, paracétamol 1g x3, donépezil 10mg.
 
-ÉVALUATION: MMS 10/30. GDS-15 10/15. ADL 2/6. Tinetti 8/28. Braden 14/23. ECPA 6/10. T° 37.5°C. PA 135/80. FC 88. SpO2 95%. Glycémie 2.1 g/L. Pas de fracture visible. Ecchymose frontale. Confus, désorienté.`,
+ÉVALUATION: MMS 10/30. GDS-15 10/15. ADL 2/6. Tinetti 8/28. Braden 14/23. PAINAD 6/10. T° 37.5°C. PA 135/80. FC 88. SpO2 95%. Glycémie 2.1 g/L. Pas de fracture visible. Ecchymose frontale. Confus, désorienté.`,
     questions: [
       { q: 'Quelle est votre prise en charge immédiate ?', a: '1. État hémodynamique (PA, FC, SpO2). 2. Examen neuro complet (GCS, pupilles, déficit). 3. Examen orthopédique (hanche, poignet, crâne). 4. ECG (syncope ? arythmie sous FA ?). 5. Bilan biologique (NFS, iono, créatinine, glycémie, troponine). 6. Rx si douleur. 7. Scanner crâne si GCS < 15 ou anticoagulant (apixaban). 8. Surveillance neuro H4.' },
       { q: 'Identifiez les facteurs de risque de chute.', a: 'Alzheimer (désorientation, noctambulisme). Hypotension orthostatique (amlodipine). Mirtazapine (sédation). FA (syncope ?). Tinetti 8/28 = risque très élevé. Braden 14/23 = risque escarre. Apixaban = risque hémorragique si chute. Glycémie 2.1 = hypoglycémie relative.' },
@@ -25493,7 +25862,7 @@ TRAITEMENT: tiotropium 18µg, salbutamol à la demande, périndopril 5mg, metfor
 
 CONTEXTE: Sa femme le trouve confus ce matin. Il ne la reconnaît pas, parle de manière incohérente. Agitation nocturne.
 
-ÉVALUATION: T° 38.8°C. PA 130/80. FC 110. FR 28. SpO2 88% (air ambulant). MMS 12/30 (habituel 24/30). CAM positive. ECPA 7/10. Crépitants bilatéraux. Globe vésical non palpé. Peau chaude et sèche.
+ÉVALUATION: T° 38.8°C. PA 130/80. FC 110. FR 28. SpO2 88% (air ambulant). MMS 12/30 (habituel 24/30). CAM positive. PAINAD 7/10. Crépitants bilatéraux. Globe vésical non palpé. Peau chaude et sèche.
 
 BIOLOGIE: Hb 14.5, GB 18 000 (PNN 88%), Plaquettes 320 000. Créatinine 155 (habituelle 85). Na 150, K 5.2. Glycémie 3.2 g/L. CRP 250. PCT 8. Lactates 3.5. Gaz du sang: pH 7.32, PaCO2 55, PaO2 58, HCO3 22.
 
@@ -25509,7 +25878,6 @@ IMAGERIE: Rx thoracique: infiltrat bilatéral. TDM cérébral: pas de lésion ai
   }
 ];
 
-
 /* --- sujets-evc-supp.js --- */
 // Vrais sujets EVC — Sujets détaillés supplémentaires
 const SUJETS_EVC_SUPP = [
@@ -25522,7 +25890,7 @@ const SUJETS_EVC_SUPP = [
 
 ATCD: Alzheimer stade GDS 5, HTA (ramipril 5mg), ostéoporose (alendronate 70mg/sem + Vit D 1000UI), FA permanente (warfarine INR 2-3), dépression (paroxétine 20mg).
 
-ÉVALUATION: MMS 8/30. GDS-15 14/15. ADL 2/6. IADL 0/8. MNA 9/30. Tinetti 6/28. Braden 12/23. ECPA 4/10. Poids 42 kg (IMC 16.2). Taille 155 cm. Albumine 22 g/L. Pré-albumine 0.08 g/L. Hb 10.5 g/dL. Vit D 8 ng/mL. Créatinine 95 (DFG 52). INR 3.8.
+ÉVALUATION: MMS 8/30. GDS-15 14/15. ADL 2/6. IADL 0/8. MNA 9/30. Tinetti 6/28. Braden 12/23. PAINAD 4/10. Poids 42 kg (IMC 16.2). Taille 155 cm. Albumine 22 g/L. Pré-albumine 0.08 g/L. Hb 10.5 g/dL. Vit D 8 ng/mL. Créatinine 95 (DFG 52). INR 3.8.
 
 EXAMEN: Escarre sacrée stade II (3x4 cm, fond fibrineux). Peau sèche, turgescence diminuée. Sarcopénie sévère.`,
     questions: [
@@ -25545,7 +25913,7 @@ ATCD: Alzheimer stade GDS 5, HTA (amlodipine 5mg), FA permanente (apixaban 5mg x
 
 TRAITEMENT: amlodipine 5mg, apixaban 5mg x2, tamsulosine 0.4mg, mirtazapine 15mg, paracétamol 1g x3, donépezil 10mg.
 
-ÉVALUATION: MMS 10/30. GDS-15 10/15. ADL 2/6. Tinetti 8/28. Braden 14/23. ECPA 6/10. T° 37.5°C. PA 135/80. FC 88. SpO2 95%. Glycémie 2.1 g/L. Pas de fracture visible. Ecchymose frontale. Confus, désorienté.`,
+ÉVALUATION: MMS 10/30. GDS-15 10/15. ADL 2/6. Tinetti 8/28. Braden 14/23. PAINAD 6/10. T° 37.5°C. PA 135/80. FC 88. SpO2 95%. Glycémie 2.1 g/L. Pas de fracture visible. Ecchymose frontale. Confus, désorienté.`,
     questions: [
       { q: 'Quelle est votre prise en charge immédiate ?', a: '1. État hémodynamique (PA, FC, SpO2). 2. Examen neuro complet (GCS, pupilles, déficit). 3. Examen orthopédique (hanche, poignet, crâne). 4. ECG (syncope ? arythmie sous FA ?). 5. Bilan biologique (NFS, iono, créatinine, glycémie, troponine). 6. Rx si douleur. 7. Scanner crâne si GCS < 15 ou anticoagulant (apixaban). 8. Surveillance neuro H4.' },
       { q: 'Identifiez les facteurs de risque de chute.', a: 'Alzheimer (désorientation, noctambulisme). Hypotension orthostatique (amlodipine). Mirtazapine (sédation). FA (syncope ?). Tinetti 8/28 = risque très élevé. Braden 14/23 = risque escarre. Apixaban = risque hémorragique si chute. Glycémie 2.1 = hypoglycémie relative.' },
@@ -25568,7 +25936,7 @@ TRAITEMENT: tiotropium 18µg, salbutamol à la demande, périndopril 5mg, metfor
 
 CONTEXTE: Sa femme le trouve confus ce matin. Il ne la reconnaît pas, parle de manière incohérente. Agitation nocturne.
 
-ÉVALUATION: T° 38.8°C. PA 130/80. FC 110. FR 28. SpO2 88% (air ambulant). MMS 12/30 (habituel 24/30). CAM positive. ECPA 7/10. Crépitants bilatéraux. Globe vésical non palpé. Peau chaude et sèche.
+ÉVALUATION: T° 38.8°C. PA 130/80. FC 110. FR 28. SpO2 88% (air ambulant). MMS 12/30 (habituel 24/30). CAM positive. PAINAD 7/10. Crépitants bilatéraux. Globe vésical non palpé. Peau chaude et sèche.
 
 BIOLOGIE: Hb 14.5, GB 18 000 (PNN 88%), Plaquettes 320 000. Créatinine 155 (habituelle 85). Na 150, K 5.2. Glycémie 3.2 g/L. CRP 250. PCT 8. Lactates 3.5. Gaz du sang: pH 7.32, PaCO2 55, PaO2 58, HCO3 22.
 
@@ -25583,7 +25951,6 @@ IMAGERIE: Rx thoracique: infiltrat bilatéral. TDM cérébral: pas de lésion ai
     juryTips: 'Le piège: oxygénothérapie à haut débit chez le BPCO → hypercapnie → coma. Le jury attend que vous connaissiez la cible SpO2 88-92% en BPCO et que vous sachiez quand mettre en VNI. L\'arrêt de la metformine est obligatoire en IRA.'
   }
 ];
-
 
 /* --- mega-flashcards-4.js --- */
 /* ═══════════════════════════════════════════════════════════════
@@ -31292,9 +31659,9 @@ TRAITEMENT: amlodipine 5mg, apixaban 2.5mg x2, tamsulosine 0.4mg, sertraline 50m
 
 CONTEXTE: Vit avec sa femme. Aide à domicile 2h/j. Depuis 2 semaines: crie la nuit, frappe sa femme, dit qu'il veut rentrer chez lui (il est chez lui). Refuse de manger. Ne dort pas.
 
-ÉVALUATION: MMS 6/30. GDS-15 8/15. ADL 2/6. ECPA 5/10. T° 37.2°C. PA 130/80. FC 78. Glycémie 1.4 g/L. Pas de globe vésical. Transit: pas de selle depuis 4 jours. Peau: escarre talon droit stade I.`,
+ÉVALUATION: MMS 6/30. GDS-15 8/15. ADL 2/6. PAINAD 5/10. T° 37.2°C. PA 130/80. FC 78. Glycémie 1.4 g/L. Pas de globe vésical. Transit: pas de selle depuis 4 jours. Peau: escarre talon droit stade I.`,
     questions: [
-      { q: 'Listez les causes possibles de cette agitation.', a: '1. Douleur (ECPA 5/10, escarre talon, constipation 4 jours). 2. Constipation (fréquente sous donépezil, 4 jours sans selle). 3. Hypoglycémie (1.4 g/L = basse). 4. Faim (refuse de manger). 5. Infection (T° 37.2°C = limite). 6. Environnement (dit "rentrer chez lui" = désorientation). 7. Médicaments (sertraline peut aggraver l\'agitation). 8. Escarre (douleur au talon).' },
+      { q: 'Listez les causes possibles de cette agitation.', a: '1. Douleur (PAINAD 5/10, escarre talon, constipation 4 jours). 2. Constipation (fréquente sous donépezil, 4 jours sans selle). 3. Hypoglycémie (1.4 g/L = basse). 4. Faim (refuse de manger). 5. Infection (T° 37.2°C = limite). 6. Environnement (dit "rentrer chez lui" = désorientation). 7. Médicaments (sertraline peut aggraver l\'agitation). 8. Escarre (douleur au talon).' },
       { q: 'Quelle est votre prise en charge immédiate ?', a: '1. Douleur: paracétamol 1g PO. 2. Constipation: macrogol 1 sachet + si échec lavement. 3. Glycémie: sucre oral (1.4 g/L). 4. ECBU (infection ?). 5. NFS, CRP, iono. 6. Environnement: lumière, calme, présence. 7. Pas de contention. 8. Si agitation sévère: quétiapine 12.5mg PO (PAS halopéridol = DLB ?).' },
       { q: 'Pourquoi ne donnez-vous PAS d\'halopéridol ?', a: '1. Alzheimer avancé = risque extrapyramidal. 2. DLB possible (fluctuations, hallucinations ?) = hypersensibilité neuroleptique. 3. ATCD de démence = risque de syndrome malin. 4. Critères Beers = antipsychotiques augmentent mortalité. 5. Alternative: quétiapine 12.5-25mg (moins de risque).' },
       { q: 'Comment gérez-vous l\'escarre talon stade I ?', a: '1. Matelas anti-escarres. 2. Changement position H2. 3. Talons en l\'air (coussin). 4. Hydratation cutanée. 5. Nutrition enrichie (si accepte). 6. Surveillance quotidienne. 7. Si stade II: pansement hydrocolloïde.' },
@@ -31351,7 +31718,6 @@ CONTEXTE SOCIAL: Vit seule en RDC. Escalier 1 étage pour la chambre. Fille à 2
     juryTips: 'Le jury attend une évaluation complète de l\'autonomie (ADL, IADL, Tinetti) et une planification de la sortie dès l\'admission en SSR. La prophylaxie TVP est obligatoire post-chirurgie orthopédique. La Vit D doit être augmentée pour la prévention de fracture.'
   }
 ];
-
 
 /* --- guides-geriatrie-palliative-avancee.js --- */
 // Guides gériatrie palliative avancée — Protocoles fin de vie et soins de confort
@@ -31434,7 +31800,7 @@ TRAITEMENT: amlodipine 10mg, gliclazide 80mg, tiotropium 18µg, amitriptyline 75
 
 CONTEXTE: Sa femme le trouve confus hier soir. Il ne la reconnaît pas, parle de manière incohérente, essaie de se lever.
 
-ÉVALUATION: T° 38.2°C. PA 140/85. FC 100. FR 22. SpO2 92% (air ambulant). MMS 14/30 (habituel 25/30). CAM positive. ECPA 6/10. Crépitants basaux droits. Globe vésical non palpé. Peau chaude et sèche.
+ÉVALUATION: T° 38.2°C. PA 140/85. FC 100. FR 22. SpO2 92% (air ambulant). MMS 14/30 (habituel 25/30). CAM positive. PAINAD 6/10. Crépitants basaux droits. Globe vésical non palpé. Peau chaude et sèche.
 
 BIOLOGIE: Hb 13.5, GB 15 000 (PNN 85%), Plaquettes 280 000. Créatinine 140 (habituelle 90). Na 148, K 4.8. Glycémie 2.5 g/L. CRP 150. PCT 6. Gaz du sang: pH 7.45, PaCO2 35, PaO2 65, HCO3 24.
 
@@ -31459,7 +31825,7 @@ ATCD: Alzheimer stade GDS 6, HTA (périndopril 5mg), ostéoporose (alendronate 7
 
 TRAITEMENT: périndopril 5mg, alendronate 70mg/sem, Vit D 1000UI, warfarine (dose variable), paroxétine 20mg, donépezil 10mg.
 
-ÉVALUATION: MMS 5/30. GDS-15 12/15. ADL 1/6. Tinetti 4/28. Braden 10/23. ECPA 7/10. T° 37.5°C. PA 120/70. FC 90. SpO2 95%. INR 2.8. Ecchymose frontale gauche. Douleur hanche gauche EVA 6/10. Hanche gauche en rotation externe, raccourcissement.`,
+ÉVALUATION: MMS 5/30. GDS-15 12/15. ADL 1/6. Tinetti 4/28. Braden 10/23. PAINAD 7/10. T° 37.5°C. PA 120/70. FC 90. SpO2 95%. INR 2.8. Ecchymose frontale gauche. Douleur hanche gauche EVA 6/10. Hanche gauche en rotation externe, raccourcissement.`,
     questions: [
       { q: 'Quel est le diagnostic le plus probable et quels sont les arguments ?', a: 'Fracture col fémoral gauche. Arguments: chute + douleur hanche gauche + rotation externe + raccourcissement + ecchymose frontale + ATCD ostéoporose + anticoagulant (warfarine INR 2.8) + Alzheimer (désorientation, chute). Facteurs de risque: âge 88 ans, ostéoporose, Alzheimer (Tinetti 4/28), warfarine (risque hémorragique).' },
       { q: 'Quelle est votre prise en charge immédiate ?', a: '1. Rx hanche gauche (confirmer fracture). 2. Bilan: NFS, TP/INR, iono, créatinine, groupe sanguin. 3. INR 2.8: arrêt warfarine, vitamine K1 1mg si INR > 3.5. 4. Antalgie: paracétamol IV 1g + morphine 0.05mg/kg SC. 5. Avis chirurgical orthopédique. 6. Préparation intervention (si INR < 1.5). 7. Prophylaxie TVP (HBPM post-op).' },
@@ -31493,7 +31859,6 @@ CONTEXTE: Vit seule. Fille à 300 km. Depuis 1 an: oublis fréquents, ne cuisine
     juryTips: 'Le jury attend que vous distinguiez pseudodémence (dépression) vs démence vraie. L\'amitriptyline est le piège principal — anticholinergique qui aggrave les troubles cognitifs. L\'hypotension orthostatique explique la fatigue.'
   }
 ];
-
 
 /* --- guides-geriatrie-nutrition-avancee.js --- */
 // Guides gériatrie nutrition avancée — Protocoles évaluation et prise en charge nutritionnelle
@@ -31576,7 +31941,7 @@ TRAITEMENT: ramipril 5mg, gliclazide 60mg, warfarine (dose variable), salbutamol
 
 CONTEXTE: Vit seul. Aide à domicile 1h/j. Refuse de manger depuis 2 mois. Reste au lit.
 
-ÉVALUATION: MMS 6/30. GDS-15 14/15. ADL 1/6. IADL 0/8. MNA 7/30. Tinetti 2/28. Braden 8/23. ECPA 8/10. Poids 45 kg (IMC 16.0). Taille 160 cm. Albumine 18 g/L. Pré-albumine 0.05 g/L. Hb 9.5 g/dL. Vit D 5 ng/mL. Créatinine 120 (DFG 45). INR 3.5.
+ÉVALUATION: MMS 6/30. GDS-15 14/15. ADL 1/6. IADL 0/8. MNA 7/30. Tinetti 2/28. Braden 8/23. PAINAD 8/10. Poids 45 kg (IMC 16.0). Taille 160 cm. Albumine 18 g/L. Pré-albumine 0.05 g/L. Hb 9.5 g/dL. Vit D 5 ng/mL. Créatinine 120 (DFG 45). INR 3.5.
 
 EXAMEN: Escarres sacrée stade III (5x6 cm, fond nécrotique), talon droit stade II (3x3 cm), trochanter gauche stade I. Peau sèche, turgescence diminuée. Sarcopénie sévère. État grabataire.`,
     questions: [
@@ -31639,7 +32004,6 @@ CONTEXTE: Vit seule. Fille à 50 km. Depuis 6 mois: ne sort plus, ne cuisine plu
     juryTips: 'Le jury attend une analyse globale de la perte d\'autonomie (pas seulement médicale). La dépression est un facteur majeur de perte d\'autonomie chez le sujet âgé. L\'arthrose explique la limitation fonctionnelle.'
   }
 ];
-
 
 /* --- guides-geriatrie-cardio-avancee.js --- */
 // Guides gériatrie cardiologie avancée — Protocoles urgences et situations complexes
@@ -31722,7 +32086,7 @@ TRAITEMENT: périndopril 5mg, metformine 850mg x2, tiotropium 18µg, mirtazapine
 
 CONTEXTE: Sa femme le trouve confus hier soir. Il ne la reconnaît pas, parle de manière incohérente, essaie de se lever.
 
-ÉVALUATION: T° 38.5°C. PA 135/80. FC 105. FR 24. SpO2 91% (air ambulant). MMS 13/30 (habituel 25/30). CAM positive. ECPA 7/10. Crépitants basaux droits. Globe vésical non palpé. Peau chaude et sèche.
+ÉVALUATION: T° 38.5°C. PA 135/80. FC 105. FR 24. SpO2 91% (air ambulant). MMS 13/30 (habituel 25/30). CAM positive. PAINAD 7/10. Crépitants basaux droits. Globe vésical non palpé. Peau chaude et sèche.
 
 BIOLOGIE: Hb 14.0, GB 16 000 (PNN 86%), Plaquettes 290 000. Créatinine 145 (habituelle 90). Na 149, K 4.9. Glycémie 2.8 g/L. CRP 160. PCT 7. Gaz du sang: pH 7.44, PaCO2 34, PaO2 62, HCO3 23.
 
@@ -31747,7 +32111,7 @@ ATCD: Alzheimer stade GDS 5, HTA (amlodipine 5mg), FA permanente (warfarine INR 
 
 TRAITEMENT: amlodipine 5mg, warfarine (dose variable), alendronate 70mg/sem, Vit D 1000UI, paroxétine 20mg, donépezil 10mg.
 
-ÉVALUATION: MMS 8/30. GDS-15 10/15. ADL 2/6. Tinetti 6/28. Braden 12/23. ECPA 6/10. T° 37.0°C. PA 125/75. FC 85. SpO2 96%. INR 2.5. Ecchymose frontale gauche. Douleur hanche gauche EVA 7/10. Hanche gauche en rotation externe, raccourcissement.`,
+ÉVALUATION: MMS 8/30. GDS-15 10/15. ADL 2/6. Tinetti 6/28. Braden 12/23. PAINAD 6/10. T° 37.0°C. PA 125/75. FC 85. SpO2 96%. INR 2.5. Ecchymose frontale gauche. Douleur hanche gauche EVA 7/10. Hanche gauche en rotation externe, raccourcissement.`,
     questions: [
       { q: 'Quel est le diagnostic le plus probable ?', a: 'Fracture col fémoral gauche. Arguments: chute + douleur hanche gauche + rotation externe + raccourcissement + ecchymose frontale + ATCD ostéoporose + anticoagulant (warfarine INR 2.5) + Alzheimer (désorientation). Facteurs de risque: âge 87 ans, ostéoporose, Alzheimer (Tinetti 6/28).' },
       { q: 'Quelle est votre prise en charge immédiate ?', a: '1. Rx hanche gauche (confirmer fracture). 2. Bilan: NFS, TP/INR, iono, créatinine, groupe sanguin. 3. INR 2.5: dans la cible, pas besoin de vitamine K. 4. Antalgie: paracétamol IV 1g + morphine 0.05mg/kg SC. 5. Avis chirurgical orthopédique. 6. Prophylaxie TVP post-op.' },
@@ -31781,7 +32145,6 @@ CONTEXTE: Vit seule. Fille à 300 km. Depuis 1 an: oublis fréquents, ne cuisine
     juryTips: 'Le jury attend que vous distinguiez pseudodémence (dépression) vs démence vraie. L\'amitriptyline est le piège principal — anticholinergique qui aggrave les troubles cognitifs. L\'hypotension orthostatique explique la fatigue.'
   }
 ];
-
 
 /* --- flashcards-evc.js --- */
 /* ===============================================================

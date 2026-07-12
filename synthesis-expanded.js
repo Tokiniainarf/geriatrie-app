@@ -536,7 +536,7 @@ const SYNTHESIS_EXPANDED = [
         points: [
           'Intrinsèques : fragilité, déficit sensoriel, parkinsonisme, neuropathie, douleur.',
           'Extrinsèques : tapis, éclairage, chaussures, obstacles.',
-          'Tinetti < 24/28 ou Timed Up and Go > 14 s = risque élevé.',
+          'Tinetti < 24/28 signale un risque (< 19 : risque élevé) ; Timed Up and Go > 20 s signale un risque de chute.',
           '50 % des chutes ont une cause médicamenteuse identifiable.',
           '💎 Perle : toute chute = révision médicamenteuse systématique (BZD, antihypertenseurs, psychotropes).'
         ]

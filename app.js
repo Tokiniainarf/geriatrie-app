@@ -219,7 +219,7 @@ function bootApp(){
     document.body.classList.remove('ap-mini-visible', 'ap-full-open', 'ap-is-playing');
   } catch (_) {}
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js?v=227').then((reg) => {
+    navigator.serviceWorker.register('sw.js?v=231').then((reg) => {
       try { reg.update(); } catch (_) {}
       if (reg.waiting) {
         try { reg.waiting.postMessage({ type: 'SKIP_WAITING' }); } catch (_) {}
@@ -577,13 +577,15 @@ function renderHome(){
   if(!p1||!p2)return;p1.innerHTML=p2.innerHTML='';
   // Update stats (null-safe — never crash boot)
   const chapters=(typeof APP_DATA!=='undefined'&&APP_DATA.chapters)||[];
-  const totalFigs=typeof FIGURES!=='undefined'?Object.keys(FIGURES).length:0;
+  const totalFigs=typeof FIGURE_META!=='undefined'
+    ?Object.keys(FIGURE_META).length
+    :(typeof FIGURES!=='undefined'?Object.keys(FIGURES).length:0);
   const totalItems=chapters.reduce((s,ch)=>s+(ch.items?ch.items.length:0),0);
   const statsBar=document.getElementById('statsBar')||document.querySelector('.stats-bar');
   if(statsBar){
     statsBar.innerHTML=`
     <div class="stat"><span class="stat-num">${chapters.length}</span><span class="stat-label">chap.</span></div>
-    <div class="stat"><span class="stat-num">${totalFigs}</span><span class="stat-label">fig.</span></div>
+    <div class="stat"><span class="stat-num">${totalFigs}</span><span class="stat-label">visuels</span></div>
     <div class="stat"><span class="stat-num">${totalItems}</span><span class="stat-label">ITEMs</span></div>
     <div class="stat"><span class="stat-num">${S.read.length}</span><span class="stat-label">lus</span></div>
     <div class="stat stat-click" role="button" tabindex="0" onclick="sw('fav')" onkeydown="if(event.key==='Enter')sw('fav')"><span class="stat-num" id="statFav">${S.bm.length}</span><span class="stat-label">fav.</span></div>`;
@@ -783,6 +785,272 @@ function updateReaderStatus(cc, isPractice){
   window.addEventListener('scroll', window._readerProgressHandler, { passive: true });
   window._readerProgressHandler();
 }
+const KNOWLEDGE_BODY_PAGE_RANGES = {
+  ch1:[30,41], ch2:[45,56], ch3:[58,72], ch4:[76,83],
+  ch5:[87,97], ch6:[100,116], ch7:[120,140], ch8:[142,152],
+  ch9:[155,175], ch10:[179,189], ch11:[194,206], ch12:[209,223],
+  ch13:[226,245], ch14:[248,266], ch15:[269,279], ch16:[284,316],
+  ch17:[319,328]
+};
+const CHAPTER_GROUP_HEADINGS = {
+  ch7:['Généralités','Coxarthrose','Gonarthrose','Arthrose digitale'],
+  ch16:['Bon usage des psychotropes','Savoir quand et comment transfuser un patient âgé en concentrés de globules rouges']
+};
+const CHAPTER_PAGE_BREAK = '§§CHAPTER_PAGE_BREAK§§';
+
+function normalizeReaderEntityText(text){
+  return String(text||'')
+    .replace(/&(?:amp;)?#39;|&apos;/gi,"'")
+    .replace(/&(?:amp;)?quot;/gi,'"')
+    .replace(/&(?:amp;)?nbsp;/gi,' ')
+    .replace(/&amp;/gi,'&');
+}
+
+function prepareKnowledgePages(chId, chunks){
+  const range = KNOWLEDGE_BODY_PAGE_RANGES[chId];
+  const selected = range
+    ? chunks.filter(c => Number(c[0]) >= range[0] && Number(c[0]) <= range[1])
+    : chunks.slice();
+  const firstLineCounts = new Map();
+  selected.forEach(c => {
+    const first = String(c[1]||'').replace(/\r/g,'').split('\n').map(s=>s.trim()).find(Boolean)||'';
+    const key = first.toLocaleLowerCase('fr');
+    if(key) firstLineCounts.set(key,(firstLineCounts.get(key)||0)+1);
+  });
+  const groups = new Set((CHAPTER_GROUP_HEADINGS[chId]||[]).map(s=>s.toLocaleLowerCase('fr')));
+  const keptGroupHeaders = new Set();
+  return selected.map(c => {
+    let lines = normalizeReaderEntityText(c[1]).replace(/\r/g,'').split('\n').map(s=>s.trim());
+    while(lines.length && !lines[0]) lines.shift();
+    if(lines.length){
+      const key = lines[0].toLocaleLowerCase('fr');
+      const repeated = (firstLineCounts.get(key)||0) > 1;
+      const running = RUN_HDR_RE.test(lines[0]) || repeated;
+      if(running){
+        if(groups.has(key) && !keptGroupHeaders.has(key)) keptGroupHeaders.add(key);
+        else lines.shift();
+      }
+    }
+    while(lines.length && (/^[▼\s]+$/.test(lines[lines.length-1]) || !lines[lines.length-1])) lines.pop();
+    return lines.join('\n') + '\n' + CHAPTER_PAGE_BREAK;
+  }).join('\n');
+}
+
+// Encadrés dont la mise en page en colonnes est perdue par l'extraction PDF.
+// Leur contenu a été relu dans le manuel puis remis en ordre sous forme de
+// vrais composants HTML. Les données OCR brutes sont ignorées au rendu.
+const FAITHFUL_ENCADRES = {
+  '1.3': {
+    title:'Vieillissement des organes', rank:'B', wide:true,
+    sections:[
+      {title:"Composition de l'organisme et métabolisme",bullets:[
+        'Diminution de la masse maigre, en particulier en cas de sédentarité, donc de la masse musculaire : sarcopénie.',
+        'Augmentation de la masse grasse, en particulier viscérale.',
+        "Augmentation modérée de la résistance à l'insuline en exploration dynamique."
+      ]},
+      {title:'Organes des sens',bullets:[
+        "Presbytie : diminution de l'accommodation gênant la lecture de près.",
+        'Cataracte : opacification progressive du cristallin retentissant sur la vision.',
+        "Presbyacousie : diminution progressive de l'audition portant principalement sur les sons aigus."
+      ]},
+      {title:'Système nerveux central',bullets:[
+        'Augmentation des temps de réaction.',
+        "Diminution modérée des performances mnésiques lors de l'acquisition d'informations nouvelles, sans retentissement sur les actes de la vie quotidienne.",
+        'Diminution des capacités attentionnelles, notamment lors des doubles tâches.',
+        'Diminution et déstructuration du sommeil.',
+        "Diminution de la sensation de soif par réduction de la sensibilité des osmorécepteurs et modification du métabolisme de l'arginine-vasopressine."
+      ]},
+      {title:'Système nerveux périphérique',paragraphs:["Diminution de la sensibilité proprioceptive, qui favorise l'instabilité posturale :"],bullets:[
+        'diminution du nombre de fibres fonctionnelles ;',
+        'augmentation des temps de conduction des nerfs.'
+      ]},
+      {title:'Système nerveux autonome',bullets:[
+        "Diminution de la sensibilité des récepteurs aux catécholamines, avec augmentation réactionnelle de leurs taux plasmatiques et de l'activité des nerfs sympathiques.",
+        "Diminution du fonctionnement de la boucle baroréflexe, favorisant l'hypotension orthostatique.",
+        "Diminution de la fréquence cardiaque maximale à l'effort, favorisant l'incapacité à l'effort."
+      ]},
+      {title:'Appareil respiratoire',bullets:[
+        'Diminution de la capacité ventilatoire par diminution de la compliance pulmonaire et thoracique, du volume et de la force des muscles respiratoires.'
+      ]},
+      {title:'Appareil digestif',bullets:[
+        "Modifications de l'appareil bucco-dentaire, avec perte d'appétit.",
+        'Diminution du flux salivaire.',
+        'Diminution de la sécrétion acide des cellules pariétales gastriques et hypochlorhydrie gastrique.',
+        "Diminution du péristaltisme, d'où un ralentissement du transit intestinal.",
+        'Diminution de la masse et du débit sanguin hépatiques.'
+      ]},
+      {title:'Appareil locomoteur',subsections:[
+        {title:'Muscle squelettique',bullets:[
+          'Diminution de la masse musculaire (sarcopénie), de la force et de la rapidité de réaction musculaire.',
+          'Diminution de la densité en fibres musculaires, principalement de type II.'
+        ]},
+        {title:'Os',bullets:[
+          "Diminution de la densité minérale osseuse, ou ostéopénie, principalement chez la femme sous l'effet de la privation œstrogénique de la ménopause.",
+          "Diminution de la résistance mécanique de l'os."
+        ]},
+        {title:'Cartilage',bullets:[
+          "Diminution de son contenu en eau et réduction du nombre de chondrocytes.",
+          'Amincissement du cartilage et altération de ses propriétés mécaniques.'
+        ]}
+      ]},
+      {title:'Appareil urinaire',bullets:[
+        'Diminution de la taille des reins et de la masse rénale, surtout corticale.',
+        'Diminution néphronique : perte de 20 à 40 % des glomérules fonctionnels à 70 ans.',
+        'Diminution du débit de filtration glomérulaire de 0,5 à 1 ml/min/1,73 m² en moyenne par an à partir de 50 ans.',
+        "Diminution de l'adaptation en cas de perte d'eau ou de sel.",
+        'Diminution de la capacité des reins à concentrer ou à diluer les urines.'
+      ]},
+      {title:'Organes sexuels',bullets:[
+        "Avec la ménopause, involution de l'utérus et des glandes mammaires, et perte de la fonction de reproduction.",
+        "Avec l'andropause, diminution progressive de la sécrétion de testostérone, variable d'un individu à l'autre.",
+        'Augmentation du volume de la prostate.'
+      ]},
+      {title:'Peau et phanères',subsections:[
+        {title:'Peau',paragraphs:["Dégradation du tissu élastique, épaississement fibreux du derme, aplanissement de la jonction dermo-épidermique et diminution du nombre de mélanocytes."]},
+        {title:'Cheveux et ongles',bullets:[
+          'Diminution de la vitesse de croissance.',
+          'Diminution du nombre de mélanocytes, avec grisonnement des cheveux.',
+          "Diminution de l'activité des glandes sébacées et sudoripares, avec sécheresse cutanée."
+        ]}
+      ]},
+      {title:'Système immunitaire',subsections:[
+        {title:'Système inné',bullets:["État pro-inflammatoire (inflamm-aging), avec augmentation de l'IL-6."]},
+        {title:'Système adaptatif',bullets:[
+          'Augmentation du compartiment mémoire et oligoclonalité.',
+          "Diminution du nombre de cellules naïves par involution thymique, à l'origine d'une restriction du répertoire T.",
+          "Diminution du taux et de l'affinité des anticorps."
+        ]}
+      ]}
+    ]
+  },
+  '3.1': {
+    title:"Axes du Plan national d'action de prévention de la perte d'autonomie", rank:'B',
+    bullets:[
+      "Préservation de l'autonomie et prévention primaire : améliorer les grands déterminants de la santé et de l'autonomie, éduquer à la santé et développer une culture de l'autonomie tout au long de la vie.",
+      "Prévenir les pertes d'autonomie évitables au cours de l'avancée en âge : prévention secondaire.",
+      "Éviter l'aggravation des situations déjà caractérisées par une incapacité : prévention tertiaire.",
+      'Réduire les inégalités sociales et territoriales de santé.',
+      'Former les professionnels à la prévention de la perte d’autonomie.',
+      "Développer la recherche et les stratégies d'évaluation."
+    ]
+  },
+  '5.1': {
+    title:'Appareillage auditif', rank:'B',
+    bullets:[
+      'Indiqué dès que la perte dépasse 30 dB sur les fréquences conversationnelles (1 000 et 2 000 Hz) ou 30 % en audiométrie vocale sur la meilleure oreille.',
+      "Améliore la communication mais ne permet pas un retour à une audition normale : il faut en avertir le patient.",
+      "Doit être précoce, car l'adaptation est meilleure lorsque le patient est moins âgé et la surdité moins marquée.",
+      'Doit être bilatéral pour favoriser la stéréophonie, la localisation spatiale et la discrimination verbale en milieu bruyant.',
+      'Doit être porté toute la journée, du lever au coucher.',
+      "Doit être porté plusieurs semaines et réglé par l'audioprothésiste pour atteindre son objectif."
+    ]
+  },
+  '6.1': {
+    title:"Indications et remboursement de l'ostéodensitométrie (HAS, 2011)",
+    intro:["L'ostéodensitométrie doit être réalisée dès que l'on évoque la possibilité d'une ostéoporose. La mesure de la densité minérale osseuse n'est utile que chez les personnes présentant des facteurs de risque. Elle est remboursée dans les situations suivantes."],
+    sections:[
+      {title:"En cas de signes d'ostéoporose",bullets:[
+        "Découverte ou confirmation radiologique d'une fracture vertébrale sans contexte traumatique ni tumoral évident [65, 227, 228].",
+        "Antécédent personnel de fracture périphérique sans traumatisme majeur, hors fractures du crâne, des orteils, des doigts et du rachis cervical."
+      ]},
+      {title:"En cas de pathologie ou traitement potentiellement inducteur d'ostéoporose",bullets:[
+        "Corticothérapie systémique prescrite pour au moins 3 mois consécutifs, à une dose supérieure à 7,5 mg/j d'équivalent prednisone.",
+        "Antécédent documenté de pathologie ou de traitement inducteur : hyperthyroïdie évolutive non traitée, hypercorticisme, hyperparathyroïdie primitive, hypogonadisme prolongé — dont androgénoprivation par orchidectomie ou analogue de la GnRH — ou ostéogenèse imparfaite."
+      ]},
+      {title:'Chez les femmes ménopausées',bullets:[
+        'Antécédent de fracture du col fémoral sans traumatisme majeur chez un parent au premier degré.',
+        'Indice de masse corporelle inférieur à 19 kg/m².',
+        'Ménopause avant 40 ans, quelle qu’en soit la cause.',
+        "Antécédent de corticothérapie prolongée de plus de 3 mois à une dose supérieure à 7,5 mg/j d'équivalent prednisone."
+      ]}
+    ]
+  },
+  '9.3': {
+    title:"Troubles comportementaux de la maladie d'Alzheimer d'après le Neuro-Psychiatric Inventory", rank:'A',
+    bullets:[
+      'Dépression ou dysphorie.','Anxiété.','Irritabilité ou labilité.','Apathie.','Exaltation ou euphorie.','Désinhibition.',
+      'Idées délirantes.','Hallucinations.','Agitation ou agressivité.','Comportements moteurs aberrants.','Troubles du sommeil.','Troubles de l’appétit.'
+    ],
+    source:'Cummings JL et al. The Neuropsychiatric Inventory: comprehensive assessment of psychopathology in dementia. Neurology 1994 ; 44 : 2308–14.'
+  },
+  '10.1': {
+    title:"Critères diagnostiques de l'état dépressif caractérisé selon le DSM-5", rank:'A',
+    intro:["Le diagnostic d'un épisode caractérisé nécessite au moins cinq symptômes présents pendant au moins 2 semaines."],
+    sections:[
+      {title:"Au moins l'un des symptômes clefs",bullets:['Humeur dépressive [123].',"Perte d'intérêt ou de plaisir."]},
+      {title:'Et parmi les autres symptômes',bullets:[
+        "Fatigue ou perte d'énergie [21].",'Sentiment de dévalorisation ou culpabilité excessive.','Pensées de mort ou idées suicidaires.',
+        "Difficultés de l'aptitude à penser, de concentration ou indécision [129].",'Agitation ou ralentissement psychomoteur [114, 117].',
+        'Insomnie ou hypersomnie [135].',"Diminution ou augmentation de l'appétit ou du poids [17]."
+      ]}
+    ]
+  },
+  '13.1': {
+    title:'Physiopathologie', rank:'A',
+    intro:["Comprendre la formation d'une escarre"],
+    sections:[
+      {paragraphs:["La compréhension des mécanismes physiopathologiques qui favorisent l'escarre, illustrés par la figure 13.7, permet de mieux assurer sa prévention et son traitement. La pression s'exerce sur les tissus mous par des forces d'appui perpendiculaires aux plans cutanés, mais aussi par des forces de cisaillement obliques et de friction."]},
+      {rank:'B',paragraphs:[
+        "La microcirculation reste possible lorsque la pression hydrostatique artériolaire de 32 mmHg n'est pas dépassée par la compression externe. Au-delà, le débit diminue et une ischémie initialement réversible peut survenir. Si cette pression persiste ou se répète, l'inflammation favorise les thrombus puis l'occlusion vasculaire ; l'anoxie conduit à la nécrose des tissus cutanés et sous-cutanés et à l'escarre (fig. 13.8A et B).",
+        "Les pressions maximales se situent près des proéminences osseuses, à l'interface os-muscle. Elles peuvent y être quatre fois supérieures, expliquant une destruction profonde plus importante qu'en surface (fig. 13.8C).",
+        "La gravité dépend de la durée, du sens d'application et de la macération. Assis, la pression ischiatique atteint 100 à 200 mmHg et le danger survient plus vite qu'en décubitus, où la pression d'interface est deux fois moindre. Les frictions lors de la remontée au lit sont plus dangereuses que l'appui ; le cisaillement sacré en position demi-assise est le plus ischémiant par étirement ou plicature des vaisseaux. La macération majore tous ces effets (fig. 13.8D)."
+      ]}
+    ]
+  },
+  '15.1': {
+    title:'Comprendre la miction', rank:'B',
+    intro:['Pour uriner, il faut :'],
+    bullets:[
+      'un détrusor stable et compliant réalisant la contraction ;','des sphincters compétents ;','un urètre sans obstacle ;',
+      'un système nerveux fonctionnel inhibant le réflexe mictionnel et assurant la synergie entre contraction du détrusor et relaxation sphinctérienne ;',
+      "des urines sans élément pouvant obstruer l'urètre, tel un caillot."
+    ],
+    paragraphs:[
+      'La continence est un phénomène réflexe à contrôle volontaire, dépendant du système nerveux central et périphérique — structures supra-pontiques, sympathique thoraco-lombaire, nerf pudendal et parasympathique sacré — mais aussi du détrusor, de l’urothélium, de la musculature périnéale et du système hormonal.',
+      "En conditions normales, le tonus sympathique contracte le sphincter lisse et inhibe le détrusor. La décision d'uriner lève cette inhibition :"
+    ],
+    ordered:[
+      'diminution du tonus sympathique, entraînant la relaxation du sphincter lisse ;',
+      'activation du tonus parasympathique, entraînant la contraction du détrusor ;',
+      'relaxation du sphincter strié par le nerf pudendal.'
+    ],
+    conclusion:'L’ensemble permet une miction volontaire, rapide, facile et complète.'
+  }
+};
+
+const FAITHFUL_ENCADRE_ENDS = {
+  '1.3':/^(?:\d{2,3}\s+)?Fig\.?\s*1\.2\b/i,
+  '3.1':/^Dans la prévention primaire\b/i,
+  '5.1':/^B\s+Plusieurs types d'aides auditives\b/i,
+  '6.1':/^(?:[•\-–]\s*)?Est exprimée en\b/i,
+  '9.3':/^À ce stade\b/i,
+  '10.1':/^B\.\s+Épidémiologie\b/i,
+  '13.1':null,
+  '15.1':/^(?:\d{2,3}\s+)?Fig\.?\s*15\.1\b/i
+};
+
+function buildEncadreBlock(id){
+  const data=FAITHFUL_ENCADRES[id];
+  if(!data)return '';
+  const text=value=>esc(String(value||'')).replace(/\[\s*(\d{2,3}(?:\s*,\s*\d{2,3})*)\s*\]/g,match=>`<span class="cite-quiet">${match}</span>`);
+  const paragraphs=values=>(values||[]).map(value=>`<p>${text(value)}</p>`).join('');
+  const bullets=values=>(values||[]).length?`<ul>${values.map(value=>`<li>${text(value)}</li>`).join('')}</ul>`:'';
+  const ordered=values=>(values||[]).length?`<ol>${values.map(value=>`<li>${text(value)}</li>`).join('')}</ol>`:'';
+  const rank=value=>value?`<span class="reader-rank">Rang ${esc(value)}</span>`:'';
+  const section=value=>`<section class="reader-encadre-section">
+    ${(value.title||value.rank)?`<header>${value.title?`<h5>${text(value.title)}</h5>`:''}${rank(value.rank)}</header>`:''}
+    ${paragraphs(value.paragraphs)}${bullets(value.bullets)}${ordered(value.ordered)}
+    ${(value.subsections||[]).map(sub=>`<div class="reader-encadre-sub"><h6>${text(sub.title)}</h6>${paragraphs(sub.paragraphs)}${bullets(sub.bullets)}</div>`).join('')}
+  </section>`;
+  return `<aside class="reader-encadre${data.wide?' reader-encadre-wide':''}" data-encadre="${escAttr(id)}">
+    <header class="reader-encadre-head"><div><span class="reader-encadre-kicker">Repère clinique</span><h4>${text(data.title)}</h4></div>${rank(data.rank)}</header>
+    ${paragraphs(data.intro)}${bullets(data.bullets)}${paragraphs(data.paragraphs)}${ordered(data.ordered)}
+    ${data.conclusion?`<p class="reader-encadre-conclusion">${text(data.conclusion)}</p>`:''}
+    ${(data.sections||[]).length?`<div class="reader-encadre-content">${data.sections.map(section).join('')}</div>`:''}
+    ${data.source?`<p class="reader-encadre-source">${text(data.source)}</p>`:''}
+  </aside>`;
+}
+
 function renderChapterContent(){
   const cc=document.getElementById('chContent');if(!cc)return;
   if(typeof APP_DATA==='undefined'||!APP_DATA.content){
@@ -794,17 +1062,10 @@ function renderChapterContent(){
     cc.innerHTML='<div class="empty"><div class="empty-icon">📖</div><div class="empty-text">Contenu indisponible</div><div class="empty-hint">Ce chapitre sera bientôt disponible</div></div>';
     return;
   }
-  // Practice chapters: unweave each page before join to limit column bleed across pages
   const isPractice = S.ch==='ch18'||S.ch==='ch19'||S.ch==='ch20';
-  const raw = chunks.map((c) => {
-    let t = String(c[1] || '').trim();
-    if (!t) return '';
-    if (/^this page intentionally left blank$/i.test(t)) return '';
-    if (isPractice && typeof unweaveTwoColumnOCR === 'function') {
-      try { t = unweaveTwoColumnOCR(t); } catch (_) {}
-    }
-    return t;
-  }).filter(Boolean).join('\n\n');
+  const raw = isPractice
+    ? chunks.map(c=>String(c[1]||'').trim()).filter(Boolean).join('\n\n')
+    : prepareKnowledgePages(S.ch, chunks);
   try {
     cc.innerHTML = renderChapter(raw, S.ch);
   } catch (e) {
@@ -816,27 +1077,17 @@ function renderChapterContent(){
   if (isPractice) {
     cc.classList.add('practice-reader');
     cc.classList.remove('study-reader', 'dense-mode');
+    injectEducationalVisuals(S.ch, cc);
     updateReaderStatus(cc, true);
   } else {
     cc.classList.remove('practice-reader');
     // Dense mode is opt-in only — never auto-hide educational figures on mobile
     const denseOn = localStorage.getItem('gdense') === '1';
     cc.classList.toggle('dense-mode', denseOn);
-    applyConceptLinks();
+    // Le lecteur reste typographique : pas de soulignements pointillés sur
+    // chaque terme médical. La navigation du glossaire reste disponible.
     // Images IA educational/ EN PLUS des figures refaites (SVG/HTML)
     injectEducationalVisuals(S.ch, cc);
-    // La figure 1.1 est le schéma fondateur du chapitre : la rendre visible
-    // immédiatement après le plan, sans supprimer les autres illustrations.
-    if (S.ch === 'ch1') {
-      const mainFig = cc.querySelector('.fig-media[data-fig="1.1"]');
-      const figure = mainFig && mainFig.closest('figure');
-      if (figure) {
-        figure.classList.add('fig-spotlight');
-        const outline = cc.querySelector('.ch-outline-nav, .ch-outline');
-        if (outline && outline.parentNode) outline.parentNode.insertBefore(figure, outline.nextSibling);
-        else if (cc.firstChild) cc.insertBefore(figure, cc.firstChild);
-      }
-    }
     // Smooth outline anchors
     cc.querySelectorAll('.outline-link').forEach(a => {
       if (!a || typeof a.addEventListener !== 'function') return;
@@ -861,105 +1112,48 @@ function renderChapterContent(){
 
 function injectEducationalVisuals(chId, cc) {
   if (!cc || typeof createEduVisualWrapper !== 'function') return;
+  const manifest = (typeof EDU_VISUALS !== 'undefined' && Array.isArray(EDU_VISUALS[chId]))
+    ? EDU_VISUALS[chId].filter(v=>v&&v.img&&!isPdfCapturePath(v.img)) : [];
+  const unique = manifest.filter((v,i,a)=>a.findIndex(x=>x.img===v.img)===i);
+  if(!unique.length) return;
+  const unplaced=[];
+  const contentTargets=Array.from(cc.querySelectorAll(
+    '.para-card p, .reader-list-card, .note-soft, .sub-head, .section-title, .pqcm-vignette, .pqcm-stem'
+  ));
 
-  const addedSrcs = new Set();
-  // Remade educational figures (Grok Imagine) — show several per chapter
-  const MAX_VISUALS = 8;
-  const isQAChapter = ['ch18','ch19','ch20'].includes(chId);
-
-  // Prefer curated EDU_VISUALS (already remade, not PDF captures)
-  let candidates = [];
-  if (typeof EDU_VISUALS !== 'undefined' && EDU_VISUALS[chId]) {
-    EDU_VISUALS[chId].forEach(v => {
-      if (v && v.img && !isPdfCapturePath(v.img)) candidates.push(v.img);
-    });
-  }
-  // EDU_VISUALS is the authoritative asset manifest. Avoid synthesizing
-  // filenames here: later chapters intentionally have fewer than six images,
-  // and guessed paths generated avoidable 404 responses while reading.
-  candidates = [...new Set(candidates)].filter(s => !isPdfCapturePath(s)).slice(0, MAX_VISUALS + 4);
-
-  // Targeted match inserts first (context-aware)
-  if (typeof EDU_VISUALS !== 'undefined' && EDU_VISUALS[chId]) {
-    EDU_VISUALS[chId].forEach(v => {
-      if (!v || !v.img || addedSrcs.has(v.img) || addedSrcs.size >= MAX_VISUALS) return;
-      let re;
-      try { re = new RegExp(v.match || '.*', 'i'); } catch { re = /./; }
-      const targets = cc.querySelectorAll('h3, .sub-head, .section-title, .para-card, header');
-      for (let el of targets) {
-        if (re.test((el.textContent || el.innerText || ''))) {
-          const w = createEduVisualWrapper(v.img, v.note || `Illustration ${chId}`);
-          if (w && el.parentNode) {
-            // Hide broken images so reading isn't littered with empty boxes
-            const img = w.querySelector('img, video');
-            if (img) img.onerror = function(){ const wrap=this.closest('.edu-visual-wrapper'); if(wrap) wrap.remove(); };
-            el.parentNode.insertBefore(w, el.nextSibling);
-            addedSrcs.add(v.img);
-            break;
-          }
-        }
-      }
-    });
-  }
-
-  // Collect solid insertion points for spaced placement
-  let blocks = Array.from(cc.querySelectorAll('.para-card, h3.sub-head, .sub-head, .section-head'));
-  if (blocks.length < 2) {
-    blocks = Array.from(cc.querySelectorAll('h3, .para-card, section'));
-  }
-  if (isQAChapter || addedSrcs.size >= MAX_VISUALS) {
-    blocks = [];
-  }
-
-  // Spaced insert of remaining candidates (cap MAX_VISUALS)
-  let placed = cc.querySelectorAll('figure.edu-visual-wrapper').length;
-  let cIdx = 0;
-  for (let b of blocks) {
-    if (placed >= MAX_VISUALS) break;
-    if (cIdx >= candidates.length) break;
-    let src = candidates[cIdx];
-    let guard=0;
-    while (addedSrcs.has(src) && guard < candidates.length) { cIdx++; src = candidates[cIdx % candidates.length]; guard++; }
-    if (addedSrcs.has(src)) break;
-
-    const nxt = b.nextSibling;
-    if (nxt && nxt.classList && nxt.classList.contains('edu-visual-wrapper')) {
-      cIdx++; continue;
+  const completeAnchor=(el)=>{
+    const card=el.closest('.pqcm-card');
+    if(card)return card;
+    const block=el.closest('.para-card, .reader-list-card, .note-soft');
+    if(block)return block;
+    if(el.matches('.sub-head, .section-title')){
+      const section=el.closest('.manual-section')||el.parentElement;
+      const body=section&&section.querySelector('.para-card, .reader-list-card, .def-block');
+      return body||el.closest('.section-head')||el;
     }
+    return el;
+  };
 
-    const w = createEduVisualWrapper(src, `Illustration : ${chId}`);
-    if (w && b.parentNode) {
-      const media = w.querySelector('img, video');
-      if (media) media.onerror = function(){ const wrap=this.closest('.edu-visual-wrapper'); if(wrap) wrap.remove(); };
-      b.parentNode.insertBefore(w, b.nextSibling);
-      addedSrcs.add(src);
-      placed++;
+  unique.forEach(v=>{
+    let matcher;
+    try{matcher=new RegExp(v.match||'a^','i')}catch(_){matcher=/a^/}
+    const target=contentTargets.find(el=>matcher.test(el.textContent||''));
+    const anchor=target&&completeAnchor(target);
+    const wrapper=createEduVisualWrapper(v.img,v.note||'Illustration pédagogique');
+    if(anchor&&anchor.parentNode&&wrapper){
+      anchor.parentNode.insertBefore(wrapper,anchor.nextSibling);
+    }else if(wrapper){
+      unplaced.push(wrapper);
     }
-    cIdx++;
-  }
+  });
 
-  // Optional light fill only if chapter has almost no visuals (never force 6)
-  let currentCount = cc.querySelectorAll('figure.edu-visual-wrapper').length;
-  if (!isQAChapter && currentCount < 2) {
-    for (const src of candidates) {
-      if (currentCount >= 2 || addedSrcs.has(src)) continue;
-      const w = createEduVisualWrapper(src, `Illustration ${chId}`);
-      if (w) {
-        const media = w.querySelector('img, video');
-        if (media) media.onerror = function(){ const wrap=this.closest('.edu-visual-wrapper'); if(wrap) wrap.remove(); };
-        cc.appendChild(w);
-        addedSrcs.add(src);
-        currentCount++;
-      }
-    }
-  }
-
-  // For ch1, ensure the key summary "Les deux éléments clefs du bien vieillir" appears at the end as a highlighted box (not inside vitamin D or other sections)
-  if (S.ch === 'ch1') {
-    const keyPointHtml = `<div class="para-card key-point"><p>Les deux éléments clefs du bien vieillir comprennent : alimentation adaptée (ni trop dans la jeunesse, ni trop peu dans la vieillesse) ; maintien ou reprise d\'une activité physique adaptée.</p></div>`;
-    if (!cc.innerHTML.includes('éléments clefs du bien vieillir')) {
-      cc.innerHTML += keyPointHtml;
-    }
+  if(unplaced.length){
+    const gallery=document.createElement('section');
+    gallery.className='edu-visual-gallery';
+    gallery.setAttribute('aria-label','Illustrations pédagogiques complémentaires');
+    gallery.innerHTML='<h2>Illustrations pédagogiques complémentaires</h2>';
+    unplaced.forEach(wrapper=>gallery.appendChild(wrapper));
+    cc.appendChild(gallery);
   }
 }
 
@@ -990,21 +1184,14 @@ function createEduVisualWrapper(src, captionText) {
     mediaEl.loop = true;
     mediaEl.playsInline = true;
     mediaEl.setAttribute('aria-label', captionText);
-    mediaEl.onerror = function() {
-      if (this.parentNode && this.parentNode.classList.contains('edu-visual-wrapper')) {
-        this.parentNode.style.display = 'none';
-      }
-    };
+    mediaEl.onerror = function() { this.closest('.edu-visual-wrapper')?.classList.add('media-error'); };
   } else {
     mediaEl = document.createElement('img');
     mediaEl.src = src;
     mediaEl.className = 'edu-chapter-visual';
     mediaEl.alt = captionText || 'Illustration';
     mediaEl.loading = 'lazy';
-    mediaEl.onerror = function() { 
-      this.style.display='none'; 
-      if (this.parentNode && this.parentNode.classList.contains('edu-visual-wrapper')) this.parentNode.style.display='none';
-    };
+    mediaEl.onerror = function() { this.closest('.edu-visual-wrapper')?.classList.add('media-error'); };
   }
   const cap = document.createElement('figcaption');
   cap.textContent = captionText || 'Visuel éducatif';
@@ -1032,8 +1219,10 @@ const SYLLABUS_ROW_RE=/^[A-D]\s+(Définition|Épidémiologie|Éléments|Prévale
 const SECTION_RE=/^([IVX]+)\.\s+(.+)/;
 const LETTER_RE=/^([A-Z])\.\s+(.+)/;
 const RANG_RE=/^([AB])\s+(.+)/;
-const BULLET_RE=/^[•\-–]\s*(.+)/;
-const DIAGRAM_RE=/^(Fonction|d'organe|Réserve|Seuil|Effet|100\s*%|0\s+Âge|\d\s+(Vieillissement|Maladie|Stress)|Fig\.\s*\d)/i;
+const BULLET_RE=/^[•❯\-–]\s*(.+)/;
+// Libellés isolés du schéma 1.1. Les anciennes alternatives sans borne
+// supprimaient aussi de vraies phrases commençant par « fonctionnelle… ».
+const DIAGRAM_RE=/^(?:Fonction|d['’]organe|Réserve(?: fonctionnelle)?|Seuil d['’]insuffisance|Effet de l['’]intervention|100\s*%|0\s+Âge|\d\s+(?:Vieillissement|Maladie|Stress)(?:\b.*)?|Fig\.\s*\d)\s*$/i;
 const NUM_LIST_RE=/^(\d{1,2})[\.)]\s+(.+)/;
 
 function preprocessAppData(appData){
@@ -1063,79 +1252,9 @@ function preprocessAppData(appData){
     data.content[chId] = filtered;
   }
 
-  const normalize = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');
-  const chapters = data.chapters;
-  
-  for (let i = 0; i < chapters.length - 1; i++) {
-    const chId = chapters[i].id;
-    const nextChId = chapters[i+1].id;
-    const pages = data.content[chId];
-    if (!pages || !pages.length) {
-      continue;
-    }
-    if (!data.content[nextChId]) {
-      data.content[nextChId] = [];
-    }
-    const nextPages = data.content[nextChId];
-    
-    const nextFirstPageNum = nextPages.length ? nextPages[0][0] : -1;
-    let candidate = -1;
-    
-    // Detection A ('stnioP')
-    for (let idx = Math.floor(pages.length / 2); idx < pages.length; idx++) {
-      if (pages[idx][1].includes('stnioP')) {
-        candidate = idx + 1;
-        break;
-      }
-    }
-    
-    // Detection B (Fallback Title)
-    if (candidate === -1) {
-      const normTitle = normalize(chapters[i+1].t);
-      for (let idx = Math.floor(pages.length / 2); idx < pages.length; idx++) {
-        if (normalize(pages[idx][1]).includes(normTitle)) {
-          candidate = idx;
-          break;
-        }
-      }
-    }
-    
-    // Backwards Expansion for Blank Pages
-    if (candidate !== -1) {
-      while (candidate > 0) {
-        const prevPageText = pages[candidate - 1][1].toLowerCase();
-        if (prevPageText.includes("this page intentionally left blank")) {
-          candidate--;
-        } else {
-          break;
-        }
-      }
-    }
-    
-    // Validation Gating
-    if (candidate !== -1 && candidate < pages.length) {
-      const pagesToMove = pages.slice(candidate);
-      const lastPageNum = pagesToMove[pagesToMove.length - 1][0];
-      const pageGap = nextFirstPageNum !== -1 ? (nextFirstPageNum - lastPageNum) : 1;
-      
-      const gapCheck = pageGap > 0 && pageGap <= 2;
-      const sizeCheck = pagesToMove.length <= 4;
-      
-      let hasNonBlank = false;
-      for (const p of pagesToMove) {
-        const text = p[1].toLowerCase();
-        if (!text.includes("this page intentionally left blank") && text.trim().length > 0) {
-          hasNonBlank = true;
-          break;
-        }
-      }
-      
-      if (gapCheck && sizeCheck && hasNonBlank) {
-        const moved = pages.splice(candidate);
-        nextPages.unshift(...moved);
-      }
-    }
-  }
+  // Page ownership is curated in data.js. Do not mutate chapter boundaries at
+  // runtime: a previous title-substring heuristic moved legitimate course pages
+  // whenever the next chapter happened to be mentioned in prose.
 }
 if (typeof APP_DATA !== 'undefined' && (typeof document === 'undefined' || !document.getElementById)) {
   preprocessAppData();
@@ -1425,17 +1544,18 @@ function extractAnswerBlock(block){
 function renderQcmInteractiveCard(card, idx){
   const id='pqcm-'+idx;
   const opts=card.options||[];
+  const single=card.selection==='QRU';
   const optHtml=opts.map((o,i)=>{
     const lid=id+'-o'+i;
     return `<label class="pqcm-opt" for="${lid}">
-      <input type="checkbox" id="${lid}" class="pqcm-check" data-card="${id}">
+      <input type="${single?'radio':'checkbox'}" ${single?`name="${id}-choice"`:''} id="${lid}" class="pqcm-check" data-card="${id}">
       <span class="pqcm-letter">${escHtml(o.letter)}</span>
       <span class="pqcm-opt-text">${escHtml(o.text)}</span>
     </label>`;
   }).join('');
   const maxBadge=card.max?`<span class="pqcm-badge">Max ${escHtml(String(card.max))}</span>`:'';
   const rangBadge=card.rang?`<span class="pqcm-rang rang-${String(card.rang).toLowerCase()}">Rang ${escHtml(card.rang)}</span>`:'';
-  const typeBadge=`<span class="pqcm-type">${escHtml(card.type||'QCM')}</span>`;
+  const typeBadge=`<span class="pqcm-type">${escHtml(card.selection||card.type||'QCM')}</span>`;
   const answerBlock=card.answer
     ? `<div class="pqcm-answer" id="${id}-ans" hidden>
         <div class="pqcm-answer-label">Correction</div>
@@ -1444,12 +1564,18 @@ function renderQcmInteractiveCard(card, idx){
       <button type="button" class="pqcm-reveal" onclick="togglePracticeAnswer('${id}')">Voir la correction</button>`
     : '';
   const vignette=card.vignette
-    ? `<div class="pqcm-vignette">${escHtml(card.vignette)}</div>` : '';
+    ? (card.vignette.length>620
+      ? `<details class="pqcm-vignette pqcm-vignette-long" open><summary>Contexte clinique</summary><div>${escHtml(card.vignette)}</div></details>`
+      : `<div class="pqcm-vignette">${escHtml(card.vignette)}</div>`)
+    : '';
+  const figure=card.figureId&&typeof buildFigureBlock==='function'
+    ? buildFigureBlock(card.figureId,'') : '';
   return `<article class="pqcm-card" id="${id}" data-qtype="${escHtml(card.type||'')}">
     <header class="pqcm-hdr">${typeBadge}${rangBadge}${maxBadge}
       <span class="pqcm-num">${escHtml(card.label||('Q'+(idx+1)))}</span>
     </header>
     ${vignette}
+    ${figure}
     <div class="pqcm-stem">${escHtml(card.stem)}</div>
     ${optHtml?`<div class="pqcm-options" role="group">${optHtml}</div>`:''}
     ${answerBlock}
@@ -1641,7 +1767,9 @@ function renderPracticeChapter(raw, chId){
     ch20:{ h:'Questions isolées', s:'QRM / QRU isolées · rang A ou B indiqué' }
   };
   const meta=titles[chId]||{ h:'Entraînement', s:'' };
-  const { intro, items }=parsePracticeItems(raw, chId);
+  const items=(typeof PRACTICE_DATA!=='undefined'&&Array.isArray(PRACTICE_DATA[chId]))
+    ? PRACTICE_DATA[chId] : parsePracticeItems(raw, chId).items;
+  const intro='';
 
   if(!items.length){
     // Dernier recours : affichage structuré brut nettoyé (toujours mieux que le livre cassé)
@@ -1659,7 +1787,25 @@ function renderPracticeChapter(raw, chId){
     <button type="button" class="practice-tool-btn ghost" onclick="revealAllPractice(false)">Tout masquer</button>
   </div>`;
 
-  const cards=items.map((it,i)=>renderQcmInteractiveCard(it,i)).join('');
+  let cards='';
+  if(chId==='ch18'||chId==='ch19'){
+    const groups=[];
+    const byLabel=new Map();
+    items.forEach((item,index)=>{
+      const label=String(item.label||'').split(' · ')[0]||'Cas clinique';
+      let group=byLabel.get(label);
+      if(!group){group={label,vignette:item.vignette||'',entries:[]};byLabel.set(label,group);groups.push(group)}
+      if(!group.vignette&&item.vignette)group.vignette=item.vignette;
+      group.entries.push({item,index});
+    });
+    cards=groups.map((group,groupIndex)=>`<section class="practice-case" data-case="${escHtml(group.label)}">
+      <header class="practice-case-head"><div><span>Cas clinique ${groupIndex+1}/${groups.length}</span><h3>${escHtml(group.label)}</h3></div><b>${group.entries.length} question${group.entries.length>1?'s':''}</b></header>
+      ${group.vignette?`<details class="practice-case-context" open><summary>Contexte clinique</summary><div>${escHtml(group.vignette)}</div></details>`:''}
+      <div class="practice-case-questions">${group.entries.map(entry=>renderQcmInteractiveCard({...entry.item,vignette:''},entry.index)).join('')}</div>
+    </section>`).join('');
+  }else{
+    cards=items.map((it,i)=>renderQcmInteractiveCard(it,i)).join('');
+  }
   const introHtml=intro && intro.length>40
     ? `<div class="practice-intro">${escHtml(intro.slice(0,600))}</div>` : '';
 
@@ -1690,6 +1836,8 @@ function renderChapter(raw,chId){
     return renderPracticeChapter(raw, chId);
   }
   const ch=APP_DATA.chapters.find(c=>c.id===chId);
+  const canonicalGroups=CHAPTER_GROUP_HEADINGS[chId]||[];
+  const canonicalGroupKeys=new Set(canonicalGroups.map(s=>s.toLocaleLowerCase('fr')));
   const titleRe=ch?new RegExp('^'+ch.t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\s*$','i'):null;
   
   // 0. Fix OCR column-merge artifacts: "word1- INJECTED_COLUMN_TEXT\nword1_suffix" → "word1word1_suffix\nINJECTED_COLUMN_TEXT"
@@ -1714,6 +1862,24 @@ function renderChapter(raw,chId){
 
   // 2. Fix standard hyphenations at end of lines (suffix must be lowercase)
   text = text.replace(/([a-zA-Zà-öø-ÿœŒæÆÀ-ÖØ-ß]+)-\s*\n\s*([a-zà-öø-ÿœŒæÆÀ-ÖØ-ß]+)/g, '$1$2');
+  // Normalise les renvois scindés par l'OCR sans toucher aux décimales.
+  text = text.replace(/\b((?:fig(?:ure)?|tableau)\.?\s*\d+)\.\s+(\d+)\b/gi, '$1.$2');
+  // Les marqueurs de liste peuvent être rejetés en fin de ligne par
+  // l'extraction en colonnes. Les replacer devant leur item restaure les
+  // listes (particulièrement le module transfusion du chapitre 16).
+  text = text.replace(/[ \t]*•[ \t]*\n[ \t]*/g, '\n• ')
+             .replace(/([:.;])\s*•\s*/g, '$1\n• ')
+             .replace(/:\s*[–-]\s*\n\s*(?=[a-zà-öø-ÿœæ])/g, ':\n• ');
+  // Numéros de page injectés juste devant un titre ou une puce.
+  text = text.replace(/(?:^|\n)\s*\d{2,3}\s+(?=(?:[IVX]+\.\s+[A-ZÀ-ÖØ-Þ]|[•–-]\s*))/gm, '\n');
+  // Corrections certaines de césures/artefacts relevés dans le corps du manuel.
+  text = text.replace(/\bpré-sence\b/gi, 'présence')
+             .replace(/\borhophonistes?\b/gi, match => /^O/.test(match) ? 'Orthophonistes' : 'orthophonistes')
+             .replace(/\bdémarcheparcours\b/gi, 'démarche parcours')
+             .replace(/\bhyperlipidérnie\b/gi, 'hyperlipidémie')
+             .replace(/\bvitarninique\b/gi, 'vitaminique')
+             .replace(/\binsulino résistance\b/gi, 'insulinorésistance')
+             .replace(/\be diminution doit\b/g, 'Cette diminution doit');
 
   // 2b. Strip page headers/footers appended inline by sort=True extraction
   text = text.replace(/\s{3,}(Connaissances|Points|Entraînement|Gériatrie)\s*\d*\s*$/gm, '');
@@ -1736,8 +1902,9 @@ function renderChapter(raw,chId){
   // papier (situations de départ, numéros 239, 266…, tableau Rang/Rubrique).
   // Ce ne sont pas des paragraphes de cours : on les retire du lecteur sans
   // toucher aux données source ni aux renvois cliniques dans le texte.
-  const hasBookPreamble = rawLines.slice(0, 90).some(l =>
-    /^Situations?\s+de\s+départ/i.test(l) || /^Item, objectifs pédagogiques/i.test(l)
+  const hasBookPreamble = rawLines.slice(0, 140).some(l =>
+    /^Situations?\s+de\s+départ/i.test(l) || /^Items?, objectifs pédagogiques/i.test(l) ||
+    /^Rang\s+Rubrique\s+Intitulé/i.test(l) || /^ITEM\s+\d+/i.test(l)
   );
   const readerLines = [];
   let skippingBookPreamble = hasBookPreamble;
@@ -1792,12 +1959,37 @@ function renderChapter(raw,chId){
       }
     }
     
+    // Rebuild headings whose title wraps onto the next physical line.
+    const structural = SECTION_RE.test(l) || (LETTER_RE.test(l) && !/^[IVX]\./.test(l));
+    if(structural && i+1<readerLines.length){
+      let next=readerLines[i+1];
+      const nextIsStructure=!next || next===CHAPTER_PAGE_BREAK || SECTION_RE.test(next) || LETTER_RE.test(next) ||
+        RANG_RE.test(next) || BULLET_RE.test(next) || /^Fig\.|^Tableau\s|^Encadré\s/i.test(next);
+      const currentTitle=(l.match(SECTION_RE)||l.match(LETTER_RE)||[])[2]||'';
+      const shouldMerge=!nextIsStructure && (l.length+next.length<190) &&
+        (/^[a-zà-öø-ÿœæ]/.test(next) || /(?:\b(?:de|du|des|d'|et|ou|pour|chez|au|aux|sur|avec|sans|en|le|la|les)|[:(])$/i.test(currentTitle));
+      if(shouldMerge){ l+=' '+next; i++; }
+    }
+    // Titres numérotés et intertitres éditoriaux coupés sur deux lignes.
+    // Leur réunion avant classification évite « médicamenteux » ou
+    // « en charge d'un patient… » affichés comme paragraphes isolés.
+    if(i+1<readerLines.length){
+      const next=readerLines[i+1];
+      const numberMatch=l.match(NUM_LIST_RE);
+      const wrappedNumber=numberMatch && next && next!==CHAPTER_PAGE_BREAK &&
+        !SECTION_RE.test(next) && !LETTER_RE.test(next) && !BULLET_RE.test(next) &&
+        !/[.!?;:]$/.test(numberMatch[2]) && /^[a-zà-öø-ÿœæ0-9]/.test(next) &&
+        l.length+next.length<175;
+      const wrappedEditorial=/^(?:Exemples|Principes|Critères|Facteurs|Évaluation|Organisation|Intégration|Conséquences|Indications|Modalités|Surveillance|Traitement|Diagnostic|Démarche|Prévention|Causes|Tableau clinique)\b/i.test(l) &&
+        !/[.!?;:]$/.test(l) && /^[a-zà-öø-ÿœæ]/.test(next||'') && l.length+String(next||'').length<175;
+      if(wrappedNumber||wrappedEditorial){l+=' '+next;i++}
+    }
     preprocessedLines.push(l);
   }
 
   // 4. Filter OCR junk, keeping empty lines for paragraph breaks (protect group titles)
   let lines = preprocessedLines.filter((l,i,arr)=>{
-    if(l === '') return true;
+    if(l === '' || l===CHAPTER_PAGE_BREAK) return true;
     if (/^(Longévité moyenne|Longévité maximale|Espérance de vie(?: sans incapacité)?)\s+/i.test(l)) return true;
     if(RUN_HDR_RE.test(l))return false;
     if(SKIP_LINE_RE.test(l))return false;
@@ -1810,13 +2002,15 @@ function renderChapter(raw,chId){
     return true;
   });
 
-  // Filter ITEM table rows before first section + kill short garbage
+  // Filter ITEM table rows before first section. The canonical page slice means
+  // this first section is the real course body, not the cover outline.
   let firstSec=-1;
   for(let i=0;i<lines.length;i++){if(SECTION_RE.test(lines[i])||LETTER_RE.test(lines[i])){firstSec=i;break}}
   if(firstSec>0){
     lines=lines.filter((l,i)=>{
-      if(l === '') return true;
+      if(l === '' || l===CHAPTER_PAGE_BREAK) return true;
       if (/^(Longévité moyenne|Longévité maximale|Espérance de vie(?: sans incapacité)?)\s+/i.test(l)) return true;
+      if(canonicalGroupKeys.has(l.toLocaleLowerCase('fr')))return true;
       if(i>=firstSec)return true;
       if(RANG_RE.test(l))return true;
       if(/Situations?\s+de\s+départ/i.test(l))return true;
@@ -1828,32 +2022,99 @@ function renderChapter(raw,chId){
       return false;
     });
   }
-  // Kill remaining short non-sentence fragments (common OCR junk, protecting group titles and mashed table cells)
-  lines = lines.filter(l => {
-    if(l === '') return true;
-    if (/^(Longévité moyenne|Longévité maximale|Espérance de vie(?: sans incapacité)?)\s+/i.test(l)) return true;
-    if (l.length >= 50) return true;
-    if (RANG_RE.test(l)) return true;
-    if (BULLET_RE.test(l) || SECTION_RE.test(l) || LETTER_RE.test(l)) return true;
-    if (/^Fig\.|Tableau|Encadré|^\d{2,3}\s*/.test(l)) return true;
-    if (/[.!?]$/.test(l)) return true;
-    if (l.includes('→')) return true;
-    if (/^Situations?\s+de\s+départ/i.test(l)) return true;
-    if (/^En lien avec/i.test(l)) return true;
-    if (/Question|QRM|key.?feature|mini.?dossier|énoncé/i.test(l)) return true; // protect QA/practice content for ch18-20
-    return false;
-  });
+  // Never delete a short line merely because OCR wrapped it. Short lines are
+  // resolved later as headings, continuations or list content.
 
   // Clean embedded side headers like "Connaissances" that leak from page layout into paragraphs (common in ch1 and others)
   // Also clean copyright, page nums, ▼ Gériatrie markers that sometimes leak
   lines = lines.map(l => l.replace(/\s{3,}(Connaissances|Points clés|Entraînement|Gériatrie|Rang Rubrique|Intitulé Descriptif)\s*/gi, ' ')
                           .replace(/\bConnaissances\s+(?=[•\-])/gi, '')
                           .replace(/▼\s*Gériatrie\s*©\s*\d{4}[^\n]*/gi, '')
-                          .replace(/\s+\d{1,3}\s*$/,'') // trailing page nums
+                          // Numéro de page seulement lorsqu'il est séparé du
+                          // contenu par une vraie gouttière de mise en page.
+                          .replace(/\s{3,}\d{1,3}\s*$/,'')
                           .replace(/\s*ITEM\s+\d+[\s\-–]*/gi, ' ') // stray ITEM refs
                           .trim());
-  // R2 — Filtrer les listes de sections internes (TOC dupliquees dans le corps)
-  // Proteger les 40 premieres lignes
+  // Internal paper-program blocks (situations / ITEM / Rang tables) are useful
+  // metadata but not reading content. Keep the group heading immediately before
+  // them, then resume at the first real Roman section.
+  {
+    const cleaned=[];
+    let skippingProgram=false;
+    for(const line of lines){
+      if(/^Situations?\s+de\s+départ/i.test(line)){skippingProgram=true;continue}
+      if(skippingProgram){
+        if(SECTION_RE.test(line)){skippingProgram=false;cleaned.push(line)}
+        continue;
+      }
+      cleaned.push(line);
+    }
+    lines=cleaned;
+  }
+
+  // A few continuation pages place the remaining ITEM/Rang table inside the
+  // first page of the actual course (notably the transfusion module).  In the
+  // PDF extraction its four-column header can arrive either as one line or as
+  // four isolated words.  Remove that paper-only table through the page break,
+  // while retaining any prose that precedes an inline header.
+  {
+    const cleaned=[];
+    let skippingSyllabusTable=false;
+    for(let i=0;i<lines.length;i++){
+      const line=lines[i];
+      if(line===CHAPTER_PAGE_BREAK){
+        skippingSyllabusTable=false;
+        cleaned.push(line);
+        continue;
+      }
+      if(skippingSyllabusTable){
+        if(SECTION_RE.test(line)){
+          skippingSyllabusTable=false;
+          cleaned.push(line);
+        }
+        continue;
+      }
+      const inlineHeader=String(line||'').match(/^(.*?)\s*Rang\s+Rubrique\s+Intitulé(?:\s+Descriptif)?\s*$/i);
+      const splitHeader=/^Rang$/i.test(line||'') &&
+        /^Rubrique$/i.test(lines[i+1]||'') &&
+        /^Intitulé$/i.test(lines[i+2]||'');
+      if(inlineHeader||splitHeader){
+        const prefix=(inlineHeader?.[1]||'').trim();
+        if(prefix)cleaned.push(prefix);
+        skippingSyllabusTable=true;
+        if(splitHeader)i+=/^Descriptif$/i.test(lines[i+3]||'')?3:2;
+        continue;
+      }
+      cleaned.push(line);
+    }
+    lines=cleaned;
+  }
+
+  // Some group titles themselves wrap (notably the transfusion module in ch16).
+  if(canonicalGroups.length){
+    const merged=[];
+    for(let i=0;i<lines.length;i++){
+      let line=lines[i];
+      for(const group of canonicalGroups){
+        if(group.toLocaleLowerCase('fr').startsWith(line.toLocaleLowerCase('fr')) &&
+           line.toLocaleLowerCase('fr')!==group.toLocaleLowerCase('fr')){
+          let candidate=line;
+          let j=i+1;
+          while(j<lines.length && candidate.length<group.length+8){
+            candidate=(candidate+' '+lines[j]).replace(/\s+/g,' ').trim();
+            if(candidate.toLocaleLowerCase('fr')===group.toLocaleLowerCase('fr')){line=candidate;i=j;break}
+            if(!group.toLocaleLowerCase('fr').startsWith(candidate.toLocaleLowerCase('fr')))break;
+            j++;
+          }
+        }
+      }
+      merged.push(line);
+    }
+    lines=merged;
+  }
+
+  // Retain all real structural headings; the cover/syllabus has already been
+  // removed by canonical page boundaries and the program-state pass above.
   const preambleHeadings = new Set();
   for (let pi = 0; pi < Math.min(lines.length, 40); pi++) {
     if (SECTION_RE.test(lines[pi]) || LETTER_RE.test(lines[pi])) preambleHeadings.add(lines[pi]);
@@ -1864,36 +2125,7 @@ function renderChapter(raw,chId){
     if (/^Fig\.|Tableau|Encadré|^\d{2,3}\s+/.test(txt)) return false;
     return txt.length > 10 && /[a-zA-Zà-öø-ÿœŒæÆÀ-ÖØ-ß]/.test(txt);
   };
-  const isLongDoc = lines.length > 8;
-  lines = lines.filter((l, i) => {
-    if(l === '') return true;
-    if (isLongDoc && (i < 40 || preambleHeadings.has(l))) return true;
-    const isSec = SECTION_RE.test(l);
-    const isLet = LETTER_RE.test(l) && !/^[IVX]\./.test(l);
-    if (!isSec && !isLet) return true;
-
-    let hasBody = false;
-    for (let j = i + 1; j < lines.length; j++) {
-      if (!lines[j]) continue;
-      if (SECTION_RE.test(lines[j]) || LETTER_RE.test(lines[j])) break;
-      if (isProseLine(lines[j])) { hasBody = true; break; }
-    }
-    if (hasBody) return true;
-
-    const re = isSec ? SECTION_RE : LETTER_RE;
-    let nxtFound = false, prvFound = false;
-    for (let j = i + 1, cnt = 0; j < lines.length && cnt < 5; j++) {
-      if (!lines[j]) continue; cnt++;
-      if (re.test(lines[j])) { nxtFound = true; break; }
-      if (isProseLine(lines[j])) break;
-    }
-    for (let j = i - 1, cnt = 0; j >= 0 && cnt < 5; j--) {
-      if (!lines[j]) continue; cnt++;
-      if (re.test(lines[j])) { prvFound = true; break; }
-      if (isProseLine(lines[j])) break;
-    }
-    return !(nxtFound || prvFound);
-  });
+  lines = lines.filter(l=>l===CHAPTER_PAGE_BREAK || l==='' || !SKIP_LINE_RE.test(l));
 
   // ── Content hygiene: OCR fragments, consecutive/near-duplicate lines ──
   const normKey = (s) => String(s || '')
@@ -1960,8 +2192,109 @@ function renderChapter(raw,chId){
     lines = out;
   }
 
-  let html='';let paraBuf=[];let bulletBuf=[];let inSection=false;let inSit=false;let sitItems=[];let inCallout=false;let calloutTitle='';let calloutBuf=[];let inNumList=false;let numBuf=[];let pastPreamble=false;let lettrinePlaced=false; let seenFigs=new Set(); let seenTabs=new Set(); let seenFigSrcs=new Set(); let seenTabSrcs=new Set();
+  // Les formulaires Algoplus et DN4 sont recréés comme outils interactifs.
+  // Écarter leur grille OCR brute (située avant la légende) évite une seconde
+  // copie illisible et, pour le DN4, quatre faux QCM dans le cours.
+  if(chId==='ch8'){
+    const cleaned=[];
+    let skipUntilFigure='';
+    let dn4TitleSeen=0;
+    for(let i=0;i<lines.length;i++){
+      const line=lines[i];
+      if(skipUntilFigure){
+        if(new RegExp('^(?:\\d{2,3}\\s+)?Fig\\.?\\s*'+skipUntilFigure.replace('.','\\.')+'\\b','i').test(line)){
+          skipUntilFigure='';
+          cleaned.push(line);
+        }
+        continue;
+      }
+      if(/^Evaluation de la douleur Identification du patient$/i.test(line)){
+        skipUntilFigure='8.3';
+        continue;
+      }
+      if(/^Essayer d'obtenir une auto-évaluation de la douleur/i.test(line)){
+        skipUntilFigure='8.5';
+        continue;
+      }
+      if(/^Questionnaire DN4$/i.test(line)){
+        dn4TitleSeen++;
+        const next=lines.slice(i+1).find(value=>value&&value!==CHAPTER_PAGE_BREAK)||'';
+        if(dn4TitleSeen>1 && /^Répondez au/i.test(next)){
+          skipUntilFigure='8.4';
+          continue;
+        }
+      }
+      cleaned.push(line);
+    }
+    lines=cleaned;
+  }
+
+  // Les textes internes de ces schémas/tableaux sont déjà reconstruits en
+  // HTML/SVG fidèle. Retirer leur extraction multicolonne évite qu'elle soit
+  // relue une seconde fois comme du cours désordonné.
+  const preCaptionSkips={
+    ch5:[[/^Surdité$/i,/^Fig\.?\s*5\.1\b/i]],
+    ch6:[
+      [/^1\s+Dépister l'ostéoporose/i,/^Fig\.?\s*6\.5\b/i],
+      [/^Absence de$/i,/^Fig\.?\s*6\.6\b/i],
+      [/^Objectifs\s*→\s*Réduire le risque fracturaire/i,/^Fig\.?\s*6\.7\b/i]
+    ],
+    ch11:[
+      [/^Patient asymptomatique Patient symptomatique/i,/^Fig\.?\s*11\.1\b/i],
+      [/^En présence d'une réserve cognitive$/i,/^Fig\.?\s*11\.2\b/i],
+      [/^INTERROGATOIRE TDMc\s*:/i,/^Fig\.?\s*11\.3\b/i],
+      [/^Traitement étiologique Mesures non médicamenteuses/i,/^Fig\.?\s*11\.4\b/i]
+    ],
+    ch13:[
+      [/^Organe\/système Conséquences de l'immobilisation/i,/^Fig\.?\s*13\.1\b/i],
+      [/^Avant immobilisation$/i,/^Fig\.?\s*13\.4\b/i],
+      [/^Frictions$/i,/^Fig\.?\s*13\.7\b/i],
+      [/^Pression élevée et soutenue$/i,/^Fig\.?\s*13\.8\b/i]
+    ],
+    ch16:[
+      [/^Allo-immunisation isolée$/i,/^Tableau\s+16\.5\b/i],
+      [/^Signes cardinaux$/i,/^Tableau\s+16\.6\b/i]
+    ]
+  };
+  if(preCaptionSkips[chId]){
+    const cleaned=[];let target=null;
+    for(const line of lines){
+      if(target){
+        if(target.test(line)){cleaned.push(line);target=null}
+        continue;
+      }
+      const spec=preCaptionSkips[chId].find(([start])=>start.test(line));
+      if(spec){target=spec[1];continue}
+      cleaned.push(line);
+    }
+    lines=cleaned;
+  }
+
+  // Captions des tableaux restaurés (pages 311–318) extraites verticalement.
+  if(chId==='ch16'){
+    const cleaned=[];
+    for(let i=0;i<lines.length;i++){
+      const match=String(lines[i]||'').match(/^Tableau\s+(16\.[56])\.?\s*$/i);
+      if(!match){cleaned.push(lines[i]);continue}
+      const title=[];let j=i+1;const expected=match[1]==='16.5'?2:1;
+      while(j<lines.length && title.length<expected && lines[j]!==CHAPTER_PAGE_BREAK){
+        const value=String(lines[j]||'').trim();
+        if(value && !/^[AB]$/.test(value))title.push(value);
+        j++;
+      }
+      cleaned.push(`Tableau ${match[1]}. ${title.join(' ')}`.trim());
+      i=j-1;
+    }
+    lines=cleaned;
+  }
+
+  let html='';let paraBuf=[];let bulletBuf=[];let inSection=false;let inSit=false;let sitItems=[];let inCallout=false;let calloutTitle='';let calloutBuf=[];let inNumList=false;let numBuf=[];let pastPreamble=true;let lettrinePlaced=false; let seenFigs=new Set(); let seenTabs=new Set(); let seenFigSrcs=new Set(); let seenTabSrcs=new Set(); let deferredFigureHtml='';
   const seenParaKeys = new Set();
+  const seenEncadres = new Set();
+  let skippingEncadreOcr = null;
+  const outlineEntries=[];
+  let skippingTableOcr=false;
+  let skippedTableLines=0;
 
   let inQCM = false;
   let qcmStem = [];
@@ -2019,19 +2352,59 @@ function renderChapter(raw,chId){
     });
   }
 
+  function editorialParagraphs(text){
+    const dotToken='§DOT§';
+    const protectedText=String(text||'')
+      .replace(/\b(?:M|Mme|Mlle|Dr|Pr|J|P|cf|fig|p|pp)\.(?=\s|[-–]|$)/gi, value=>value.replace('.',dotToken))
+      // Préserver J.-P. ou J. Bouchon, mais laisser A. et B. jouer leur
+      // rôle de séparateur dans les légendes multipanneaux.
+      .replace(/\b([A-ZÀ-ÖØ-Þ])\.(?=[-–][A-ZÀ-ÖØ-Þ]\.)/g, '$1'+dotToken)
+      .replace(/(\d)\.(?=\d)/g, '$1'+dotToken);
+    const sentences=(protectedText.match(/[^.!?]+(?:[.!?]+[»”')\]]*|$)/g)||[protectedText])
+      .map(sentence=>sentence.replaceAll(dotToken,'.'));
+    const chunks=[];let current='';
+    const splitLongSentence=value=>{
+      const parts=[];let rest=value.trim();
+      while(rest.length>620){
+        let cut=-1;
+        for(const token of ['; ',': ',', ']){
+          const candidate=rest.lastIndexOf(token,620);
+          if(candidate>=420){cut=candidate+token.length-1;break}
+        }
+        if(cut<420)cut=rest.lastIndexOf(' ',600);
+        if(cut<300)cut=620;
+        parts.push(rest.slice(0,cut+1).trim());
+        rest=rest.slice(cut+1).trim();
+      }
+      if(rest)parts.push(rest);
+      return parts;
+    };
+    for(const sentence of sentences){
+      const clean=sentence.trim();if(!clean)continue;
+      if(clean.length>620){
+        if(current){chunks.push(current);current=''}
+        chunks.push(...splitLongSentence(clean));
+        continue;
+      }
+      if(current && current.length+clean.length+1>620){chunks.push(current);current=clean}
+      else current=(current+' '+clean).trim();
+      if(current.length>360 && /[.!?][»”')\]]*$/.test(current)){chunks.push(current);current=''}
+    }
+    if(current)chunks.push(current);
+    return chunks.length?chunks:[text];
+  }
   function flushPara(rang){
     if(!paraBuf.length)return;
     const merged=paraBuf.join(" ").replace(/\s+/g," ").trim();
     paraBuf=[];
     if(merged.length<12)return;
-    // Skip exact paragraph repeats only for long prose (page joins / OCR doubles)
-    const pKey = normKey(merged);
-    if (pKey.length > 90 && seenParaKeys.has(pKey)) return;
-    if (pKey.length > 90) seenParaKeys.add(pKey);
-    const chip=rang?`<span class="rang-inline rang-${rang==="A"?"a":"b"}">Rang ${rang}</span>`:"";
-    // Pas de lettrine « livre » — lecture type fiche d'étude
-    let escaped = replaceCitations(esc(merged));
-    html+=`<div class="para-card study-block">${chip}<p>${escaped}</p></div>`;
+    editorialParagraphs(merged).forEach(part=>{
+      const pKey=normKey(part);
+      if(pKey.length>90&&seenParaKeys.has(pKey))return;
+      if(pKey.length>90)seenParaKeys.add(pKey);
+      html+=`<div class="para-card study-block"><p>${replaceCitations(esc(part))}</p></div>`;
+    });
+    if(deferredFigureHtml){html+=deferredFigureHtml;deferredFigureHtml=''}
   }
 
   function flushBullets(){
@@ -2047,10 +2420,11 @@ function renderChapter(raw,chId){
   function flushCallout(){
     // Encadrés livre : fondus en prose simple (pas de gros cartons inutiles)
     if(!calloutBuf.length&&!calloutTitle){inCallout=false;return}
-    const body = calloutBuf.map(p => replaceCitations(esc(p))).join(' ');
-    if(body.length > 20){
+    const plainBody = calloutBuf.join(' ').replace(/\s+/g,' ').trim();
+    if(plainBody.length > 20){
       const t = calloutTitle && !/^Encadré\s*[\d.]*$/i.test(calloutTitle) ? calloutTitle : '';
-      html += `<div class="para-card study-block note-soft">${t?`<strong class="note-soft-title">${esc(t)}</strong> `:''}<p>${body}</p></div>`;
+      const body = editorialParagraphs(plainBody).map(p=>`<p>${replaceCitations(esc(p))}</p>`).join('');
+      html += `<div class="para-card study-block note-soft">${t?`<strong class="note-soft-title">${esc(t)}</strong>`:''}${body}</div>`;
     }
     calloutBuf=[];calloutTitle='';inCallout=false;
   }
@@ -2074,8 +2448,53 @@ function renderChapter(raw,chId){
 
   for(let i=0;i<lines.length;i++){
     let l=lines[i];
+    if(l===CHAPTER_PAGE_BREAK){
+      skippingEncadreOcr=null;
+      const pending=paraBuf.join(' ').trim();
+      // Une fin de page n'est pas une fin de phrase. Conserver le tampon
+      // lorsque la phrase continue sur la page suivante évite les débuts
+      // orphelins (« été validée… », « sous la forme… »).
+      if(pending && /[.!?][»”')\]]*$/.test(pending))flushPara();
+      if(bulletBuf.length && /[.!?;:]$/.test(bulletBuf[bulletBuf.length-1]))flushBullets();
+      if(inCallout&&calloutBuf.length)flushCallout();
+      // Les grands tableaux (ADL, AGGIR, transfusion…) occupent souvent deux
+      // pages : continuer à ignorer leur extraction brute jusqu'au vrai
+      // redémarrage éditorial.
+      continue;
+    }
+    if(skippingEncadreOcr){
+      const end=FAITHFUL_ENCADRE_ENDS[skippingEncadreOcr];
+      if(end&&end.test(l)){
+        skippingEncadreOcr=null;
+        i--;
+      }
+      continue;
+    }
     if(l === '▼'){flushPara();flushBullets();flushNumList();flushCallout();flushSituations();flushQCM();continue}
-    if(!l){flushBullets();flushNumList();if(inCallout)flushCallout();continue}
+    if(!l){flushPara();flushBullets();flushNumList();if(inCallout)flushCallout();continue}
+
+    const groupLabel=canonicalGroups.find(g=>g.toLocaleLowerCase('fr')===l.toLocaleLowerCase('fr'));
+    if(groupLabel){
+      flushPara();flushBullets();flushNumList();flushCallout();closeSection();
+      const groupAnchor='group-'+Math.abs(hashStr(groupLabel)).toString(36);
+      html+=`<h2 class="chapter-group" id="${groupAnchor}">${esc(groupLabel)}</h2>`;
+      outlineEntries.push({type:'group',title:groupLabel,id:groupAnchor});
+      continue;
+    }
+
+    if(skippingTableOcr){
+      const numericCandidate=l.match(NUM_LIST_RE);
+      const numericRestart=!!numericCandidate && numericCandidate[2].length<=82 &&
+        !NUM_LIST_RE.test(lines[i+1]||'') && !/^[a-zà-öø-ÿœæ]/.test(lines[i+1]||'');
+      const structural=SECTION_RE.test(l)||LETTER_RE.test(l)||canonicalGroupKeys.has(l.toLocaleLowerCase('fr'))||
+        numericRestart||/^(?:Important|Essentiel|À retenir|Points clés)\b/i.test(l)||
+        /^(?:\d{2,3}\s+)?Fig\.?\s*\d+\.\d+|^Tableau\s+\d+\.\d+|^Encadré\s+/i.test(l);
+      const proseRestart=skippedTableLines>=2 &&
+        /^(?:Le|La|Les|L'|Un|Une|Il|Elle|Cette|Ce|Ces|Ainsi|Pour|Chez|Dans|En\s|Au\s|Après|Avant)\b/i.test(l) &&
+        l.length>65 && /\b(?:est|sont|a été|ont été|doit|doivent|permet|utilise|évalue|repose|correspond|constitue|nécessite|comprend|concerne|présente|associe|entraîne|favorise|indique|recommande)\b/i.test(l);
+      if(structural||proseRestart){skippingTableOcr=false;skippedTableLines=0;i--;continue}
+      skippedTableLines++;continue;
+    }
 
     // QCM Handling (knowledge chapters only — practice uses renderPracticeChapter)
     const isQcmMarker = /^(Question\s+\d+|Réponse\s*:|[AB]\s*QRM\s*\d|QRM\s*\d|QRU\s*\d|KFP\s*\d)/i.test(l);
@@ -2099,13 +2518,13 @@ function renderChapter(raw,chId){
       // LETTER_RE alone is NOT structural here — A./B. are options
       const isStructural = SECTION_RE.test(l) || /^Situations?\s+de\s+départ/i.test(l) || /^Encadré\s+/i.test(l) || /^Tableau\s+/i.test(l) || /^Fig\.\s*\d/i.test(l) || RANG_RE.test(l) || /^(Question\s+\d+|KFP\s*\d|[AB]\s*QRM)/i.test(l);
 
-      if (isListItem || isMergedListItem) {
+      if (isStructural) {
+        flushQCM();
+        // fall through to figures/tables/sections before treating “8.4” as an option
+      } else if (isListItem || isMergedListItem) {
         qcmOpts.push(...splitOptions(l));
         markBodyStart();
         continue;
-      } else if (isStructural) {
-        flushQCM();
-        // fall through to reprocess line as normal structure
       } else {
         if (qcmOpts.length > 0) {
           flushQCM();
@@ -2205,8 +2624,23 @@ function renderChapter(raw,chId){
       }
     }
 
-    const enc=l.match(/^Encadré\s+([\d.]+)/i);
-    if(enc){flushBullets();flushNumList();flushCallout();calloutTitle='Encadré '+enc[1];inCallout=true;continue}
+    // Un renvoi coupé « encadré 3.2) et… » reste du texte courant ; seul un
+    // véritable intitulé d'encadré ouvre un bloc.
+    const enc=l.match(/^Encadré\s+(\d+\.\d+)\.?(?=\s|$)/i);
+    if(enc){
+      const encId=enc[1].replace(/\.+$/,'');
+      const faithful=buildEncadreBlock(encId);
+      flushPara();flushBullets();flushNumList();flushCallout();
+      if(faithful){
+        if(!seenEncadres.has(encId)){
+          html+=faithful;
+          seenEncadres.add(encId);
+        }
+        skippingEncadreOcr=encId;
+        continue;
+      }
+      calloutTitle='Encadré '+encId;inCallout=true;continue;
+    }
     if(inCallout){
       if(SECTION_RE.test(l)||LETTER_RE.test(l)||/^Tableau\s+/i.test(l)||/^Fig\.?\s*\d+\.\d+/i.test(l)){flushCallout()}
       else if(BULLET_RE.test(l)){calloutBuf.push(l.match(BULLET_RE)[1]);continue}
@@ -2216,18 +2650,46 @@ function renderChapter(raw,chId){
 
     // Figures: only caption lines starting with Fig. (never mid-paragraph citations)
     // Capture id as d+.d+ only (not "1.1." with trailing dot — that broke lookups)
-    const figM=l.match(/^Fig\.?\s*(\d+\.\d+)\.?\s*([AB])?\s*(.*)$/i);
+    const figM=l.match(/^(?:\d{2,3}\s+)?Fig\.?\s*(\d+\.\d+)\.?\s*([AB])?\s*(.*)$/i);
     if(figM){
-      flushPara();flushBullets();flushNumList();
+      flushBullets();flushNumList();
       const figId=figM[1];
-      const figTitle=(figM[3]||'').trim();
+      let figTitle=(figM[3]||'').trim();
       if(!seenFigs) seenFigs = new Set();
       if(seenFigs.has(figId)) continue;
       seenFigs.add(figId);
+      const captionParts=[];
+      let nextIndex=i+1;
+      // La légende principale elle-même peut être césurée sur deux lignes.
+      while(nextIndex<lines.length && /^[a-zà-öø-ÿœæ]/.test(lines[nextIndex]||'') &&
+            !/[.!?][»”')\]]*$/.test(figTitle)){
+        figTitle+=' '+lines[nextIndex];
+        nextIndex++;
+      }
+      while(nextIndex<lines.length){
+        const continuation=lines[nextIndex]||'';
+        if(/^(?:Source\s*:|D'après\s*:|\([A-Z]\)|[A-E](?:\s+à\s+[A-E])?\.)/i.test(continuation)){
+          captionParts.push(continuation);nextIndex++;continue;
+        }
+        // Une légende multipanneaux peut être coupée au milieu d'une phrase
+        // par la fin de colonne. La rattacher ici évite un paragraphe orphelin
+        // (« atriale… », « composante… ») sous la figure.
+        if(captionParts.length && /^[a-zà-öø-ÿœæ]/.test(continuation) &&
+           !/[.!?][»”')\]]*$/.test(captionParts[captionParts.length-1])){
+          captionParts[captionParts.length-1]+=' '+continuation;
+          nextIndex++;
+          continue;
+        }
+        break;
+      }
+      if(nextIndex>i+1)i=nextIndex-1;
       const block = (typeof buildFigureBlock==='function')
         ? buildFigureBlock(figId, figTitle)
         : '';
-      if(block) html+=block;
+      const figureHtml=(block||'')+(captionParts.length?`<p class="figure-source-note">${replaceCitations(esc(captionParts.join(' ')))}</p>`:'');
+      const pending=paraBuf.join(' ').replace(/\s+/g,' ').trim();
+      if(pending && !/[.!?][»”')\]]*$/.test(pending))deferredFigureHtml+=figureHtml;
+      else{flushPara();if(figureHtml)html+=figureHtml}
       continue;
     }
 
@@ -2244,6 +2706,7 @@ function renderChapter(raw,chId){
         ? buildTableBlock(tabId, tabTitle)
         : `<div class="table-lead"><span class="table-badge">Tableau ${esc(tabId)}</span><span>${esc(tabTitle)}</span></div>`;
       if(block) html+=block;
+      skippingTableOcr=true;skippedTableLines=0;
       continue;
     }
 
@@ -2270,6 +2733,7 @@ function renderChapter(raw,chId){
       flushPara();flushBullets();flushNumList();closeSection();
       const secAnchor = 'sec-' + String(secM[1]).replace(/[^A-Za-z0-9]/g,'') + '-' + Math.abs(hashStr(secM[2])).toString(36).slice(0,5);
       html+=`<section class="manual-section" id="${secAnchor}"><header class="section-head"><span class="section-num">${esc(secM[1])}</span><span class="section-title">${esc(secM[2])}</span></header><div class="section-body">`;
+      outlineEntries.push({type:'section',num:secM[1],title:secM[2],id:secAnchor});
       inSection=true;lettrinePlaced=false;continue;
     }
 
@@ -2313,7 +2777,14 @@ function renderChapter(raw,chId){
     }
 
     const numM=l.match(NUM_LIST_RE);
-    if(numM&&numM[2].length<120){
+    if(numM&&numM[2].length<360){
+      const numberedHeading=numM[2].length<=82 && /^[A-ZÀ-ÖØ-Þ]/.test(numM[2]) && !/[.;:!?]$/.test(numM[2]) &&
+        !NUM_LIST_RE.test(lines[i+1]||'');
+      if(numberedHeading){
+        flushPara();flushBullets();flushNumList();
+        html+=`<h4 class="minor-head numbered-minor"><span>${esc(numM[1])}</span> ${esc(numM[2])}</h4>`;
+        continue;
+      }
       flushBullets();
       inNumList=true;numBuf.push(numM[2]);continue;
     }
@@ -2356,7 +2827,8 @@ function renderChapter(raw,chId){
       const isStruct=SECTION_RE.test(l)||LETTER_RE.test(l)||/^Situations?\s+de\s+départ/i.test(l)||/^Encadré\s+/i.test(l)||/^Tableau\s+/i.test(l)||/^Fig\.\s*\d/i.test(l)||RANG_RE.test(l);
       const previous = bulletBuf[bulletBuf.length-1].trim();
       const previousComplete = /[.!?;:]$/.test(previous);
-      if(!isStruct && !BULLET_RE.test(l) && !previousComplete && l.length<240){
+      const openParenthesis=(previous.match(/\(/g)||[]).length>(previous.match(/\)/g)||[]).length;
+      if(!isStruct && !BULLET_RE.test(l) && (!previousComplete||openParenthesis) && l.length<240){
         bulletBuf[bulletBuf.length-1]+=' '+l;continue;
       }
       flushBullets();
@@ -2369,6 +2841,13 @@ function renderChapter(raw,chId){
     const rangM=l.match(RANG_RE);
     if(rangM&&!/Rubrique|Intitulé|Descriptif|Connaître|Modifications|Éléments physiopathologiques/.test(l)){
       const body=rangM[2];
+      const rangNext=lines.slice(i+1).find(value=>value&&value!==CHAPTER_PAGE_BREAK)||'';
+      if(body.length<=70 && /:$/.test(body) && BULLET_RE.test(rangNext)){
+        flushPara();flushBullets();flushNumList();
+        html+=`<h4 class="minor-head">${esc(body)}</h4>`;
+        markBodyStart();
+        continue;
+      }
       // If body starts with prose words, treat as paragraph not rang annotation
       const isProse=/^(Le |La |Les |L'|Il |Elle |Pour |C'est|Ainsi|On |En |Un |Une |Cette |Ce |Cela |De |Du |Des |Dans |Avec |Son |Sa |Ses |Sur |Par |Au |Aux |Tout |Tous |Bien |Mais |Or |Donc |Chez|Avec|Après|Avant|Depuis)/i.test(body);
       if(isProse){
@@ -2376,11 +2855,9 @@ function renderChapter(raw,chId){
         markBodyStart();
         continue;
       }
-      if(body.length<100&&!/[.;:]$/.test(body)){
-        flushPara();html+=`<div class="def-block"><span class="rang-badge ${rangM[1]==='A'?'rang-a':'rang-b'}">Rang ${rangM[1]}</span><span class="def-text">${replaceCitations(esc(body))}</span></div>`;
-        continue;
-      }
-      paraBuf.push(body);flushPara(rangM[1]);markBodyStart();continue;
+      // Rang A/B is metadata from the syllabus margin, not a content card.
+      // Strip the marker while preserving every word of the associated text.
+      paraBuf.push(body);markBodyStart();continue;
     }
 
     if(!pastPreamble){
@@ -2397,26 +2874,53 @@ function renderChapter(raw,chId){
 
     if(/^(\d{1,3})$/.test(l))continue;
     if(/^diagnostic et thérapeutique/i.test(l))continue;
-    if(/^\w{4,20}$/.test(l)&&!/^(Fig|Tableau|Encadré)/i.test(l))continue;
+    if(/^Démarche$/i.test(l)){
+      // The following Roman list repeats the actual section headings. The
+      // complete interactive outline is generated from those real sections.
+      // Stop as soon as the Roman numbering restarts (usually the second
+      // "I."): that line is the first real section and must remain visible.
+      let j=i+1;
+      let previousRomanValue=0;
+      while(j<lines.length&&SECTION_RE.test(lines[j])){
+        const planSection=lines[j].match(SECTION_RE);
+        const romanValue=({I:1,II:2,III:3,IV:4,V:5,VI:6,VII:7,VIII:8,IX:9,X:10})[String(planSection?.[1]||'').toUpperCase()]||0;
+        if(previousRomanValue && romanValue && romanValue<=previousRomanValue)break;
+        previousRomanValue=romanValue||previousRomanValue;
+        j++;
+      }
+      if(j>i+2){i=j-1;continue}
+    }
+    if(/^(?:FOCUS|Mises? en situation|Points particuliers|clés)$/i.test(l)){
+      flushPara();flushBullets();flushNumList();
+      const label=/^clés$/i.test(l)?'Points clés':l;
+      html+=`<h4 class="reader-kicker">${esc(label)}</h4>`;
+      continue;
+    }
+    const nextMeaningful=lines.slice(i+1).find(x=>x&&x!==CHAPTER_PAGE_BREAK)||'';
+    const colonHeading=l.length<=70 && /^[A-ZÀ-ÖØ-Þ]/.test(l) && /:$/.test(l) &&
+      !RANG_RE.test(l) && !/^\d/.test(l) && nextMeaningful.length>15;
+    const standaloneHeading=l.length<=70 && /^[A-ZÀ-ÖØ-Þ]/.test(l) && !/[.!?;:]$/.test(l) &&
+      !RANG_RE.test(l) && !/^\d/.test(l) && !/^(?:Connaissances|Gériatrie|A|B|C|D|E)$/i.test(l) &&
+      (BULLET_RE.test(nextMeaningful)||nextMeaningful.length>35);
+    if(standaloneHeading||colonHeading){
+      flushPara();flushBullets();flushNumList();
+      html+=`<h4 class="minor-head">${esc(l)}</h4>`;
+      continue;
+    }
     if(/^[→\u25bc]$/.test(l.trim()))continue;
-    if(l.length<15&&!/[.!?]/.test(l)&&!/^[A-Z]\./.test(l)&&!BULLET_RE.test(l)&&!SECTION_RE.test(l)&&!LETTER_RE.test(l))continue;
     // Bruit OCR : légendes de schéma déjà remplacées par l'image FIGURES
     if(/^(Fonction|d'organe|Réserve fonctionnelle|Seuil d'insuffisance|Effet de l'intervention|100\s*%|0\s*Âge)\b/i.test(l)) continue;
-    if(/^\d\s+(Vieillissement|Maladie|Stress)\b/i.test(l)) continue;
+    if(/^\d\s+(Vieillissement|Maladie|Stress|Réserve fonctionnelle)\b/i.test(l)) continue;
     // Lignes "239 Explication…" hors bloc situations = numéros de situation EDN, pas utiles en corps
     if(/^\d{2,3}\s+[A-ZÀ-ÖØ-Þ]/.test(l) && SITUATION_NUMBERS.has(parseInt(l,10))) continue;
     // OCR garbage - catch specific patterns that leak through preamble
-    if(/Bouchon\s*\)/.test(l))continue;
-    if(/vieillissemnt|viellissement/.test(l))continue;
-    if(/physiopathologiques\s+physiopathologiques/i.test(l))continue;
-    if(/et sans incapacité/i.test(l)&&!(/espérance de vie/i.test(l)))continue;
-    if(/\bgine\b/.test(l))continue;
-    if(/physiopathologiques.*(gine|agents étiologiques)/i.test(l))continue;
-    if(/anthropologiques\s+populationnel/i.test(l))continue;
+    l=l.replace(/\bviellissement\b/gi,'vieillissement')
+       .replace(/\bvieillissemnt\b/gi,'vieillissement')
+       .replace(/physiopathologiques\s+physiopathologiques/gi,'physiopathologiques');
 
     paraBuf.push(l);
   }
-  flushPara();flushBullets();flushNumList();flushQCM();if(inCallout)flushCallout();flushSituations();closeSection();
+  flushPara();flushBullets();flushNumList();flushQCM();if(inCallout)flushCallout();flushSituations();if(deferredFigureHtml){html+=deferredFigureHtml;deferredFigureHtml=''}closeSection();
   // Strip empty sub-heads and empty paragraphs (OCR debris)
   html = html.replace(/<h3 class="sub-head"><span class="sub-letter">[^<]*<\/span>\s*<\/h3>/g, '');
   html = html.replace(/<div class="para-card(?: study-block)?"><p>\s*<\/p><\/div>/g, '');
@@ -2445,50 +2949,27 @@ function renderChapter(raw,chId){
                .replace(/&amp;/gi, '&')
                .replace(/&[a-z0-9]+;/gi, '');
     const plainText = text.trim();
-    if (plainText.length < 20) {
+    const hasLearningObject=/(?:fig-block|faithful-table|manual-clinical-figure|edu-visual-wrapper)/.test(cleanBodyHtml);
+    if (plainText.length < 20 && !hasLearningObject) {
       return '';
     }
     return match;
   });
 
-  // Outline from kept sections (regex allows id= on section)
-  const first35Nums = new Set();
-  for (const key of first35Headings) {
-    const bar = key.indexOf('|');
-    if (bar > 0) first35Nums.add(key.substring(0, bar));
-  }
-  const keptSections = [];
-  const secRegex = /<section class="manual-section"[^>]*>\s*<header class="section-head"><span class="section-num">(.*?)<\/span><span class="section-title">(.*?)<\/span>/g;
-  let match;
-  while ((match = secRegex.exec(html)) !== null) {
-    const num = match[1];
-    const title = match[2];
-    const key = num + '|' + title;
-    if (first35Headings.has(key) || first35Nums.has(num)) {
-      // capture id from full match window
-      const openTag = html.slice(match.index, match.index + 120);
-      const idM = openTag.match(/\bid="([^"]+)"/);
-      keptSections.push({ num, title, id: idM ? idM[1] : '' });
-    }
-  }
-
-  // Prefer first35 TOC sections; if filter too strict, fall back to all kept sections with titles
-  let outlineSrc = keptSections.filter(s => s.num && s.title && String(s.title).trim().length > 1);
-  if (outlineSrc.length < 3) {
-    // Rebuild from all rendered sections with non-empty titles
-    outlineSrc = [];
-    const allSecRe = /<section class="manual-section"[^>]*\bid="([^"]*)"[^>]*>\s*<header class="section-head"><span class="section-num">([^<]*)<\/span><span class="section-title">([^<]*)<\/span>/g;
-    let am;
-    while ((am = allSecRe.exec(html)) !== null) {
-      if (am[2].trim() && am[3].trim()) outlineSrc.push({ id: am[1], num: am[2], title: am[3] });
-    }
-  }
-  // Keep threshold at 3 (matches TOC richness of real chapters; ch2/ch17 stay clean)
-  if (outlineSrc.length >= 3) {
-    const outlineItems = outlineSrc.slice(0, 14).map((s, i) => {
-      const href = s.id || ('sec-auto-' + i);
-      return `<li><a href="#${href}" class="outline-link"><span class="outline-num">${esc(s.num)}</span> ${esc(s.title)}</a></li>`;
-    }).join('');
+  // Complete hierarchical outline. No silent 14-entry cap: chapters with
+  // several clinical groups (arthrose, prescribing) keep their full tree.
+  if (outlineEntries.filter(e=>e.type==='section').length >= 2) {
+    let outlineItems='';let groupOpen=false;
+    outlineEntries.forEach(entry=>{
+      if(entry.type==='group'){
+        if(groupOpen)outlineItems+='</ul></li>';
+        outlineItems+=`<li class="outline-group"><a href="#${entry.id}" class="outline-link">${esc(entry.title)}</a><ul>`;
+        groupOpen=true;
+      }else{
+        outlineItems+=`<li><a href="#${entry.id}" class="outline-link"><span class="outline-num">${esc(entry.num)}</span> ${esc(entry.title)}</a></li>`;
+      }
+    });
+    if(groupOpen)outlineItems+='</ul></li>';
     // Plan: NOT sticky (sticky covered body text on scroll). Collapsed by default on narrow screens via CSS.
     const outlineHtml = `<nav class="ch-outline ch-outline-nav collapsed" aria-label="Plan du chapitre">
       <div class="outline-hd">
@@ -2505,28 +2986,6 @@ function renderChapter(raw,chId){
     '<div class="para-card key-point"><p>$1</p></div>');
   html = html.replace(/<div class="para-card"><p>([^<]*(?:Les deux éléments clefs du bien vieillir|points clés (?:du bien vieillir|sur les|du diabète|sur les vaccins))[^<]*)<\/p><\/div>/gi,
     '<div class="para-card key-point"><p>$1</p></div>');
-
-  // Build "Points clés" panel from key-points + def-blocks + rang badges
-  const keySnips = [];
-  const kpRe = /class="(?:para-card key-point|key-point|def-block)"[^>]*>([\s\S]*?)<\/div>/gi;
-  let km;
-  while ((km = kpRe.exec(html)) !== null && keySnips.length < 6) {
-    const plain = km[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-    if (plain.length > 30 && plain.length < 320) keySnips.push(plain);
-  }
-  // Also pull first rang-A one-liners
-  const raRe = /rang-inline rang-a[\s\S]*?<\/span>([^<]{20,160})/gi;
-  while ((km = raRe.exec(html)) !== null && keySnips.length < 8) {
-    const plain = km[1].replace(/\s+/g, ' ').trim();
-    if (plain.length > 24) keySnips.push(plain);
-  }
-  if (keySnips.length >= 2) {
-    const kpHtml = `<aside class="key-panel" aria-label="Points clés">
-      <div class="key-panel-hd">⚡ Points clés</div>
-      <ul class="key-panel-list">${keySnips.slice(0, 6).map(k => `<li>${esc(k)}</li>`).join('')}</ul>
-    </aside>`;
-    html = kpHtml + html;
-  }
 
   // Final pass to remove any remaining embedded headers inside paragraphs
   html = html.replace(/>([^<]*?)\s{2,}(Connaissances|Points clés|Gériatrie ©)[^<]{0,30}</gi, '>$1<');
@@ -3088,8 +3547,10 @@ function renderSynthesis(){
     html+=SYNTHESIS_EXPANDED.map((card,i)=>renderSynthChapterCard(card,i)).join('');
   }
   if(hasClassic){
+    const expandedTitles=new Set((hasExpanded?SYNTHESIS_EXPANDED:[]).map(card=>(card.title||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim()));
+    const transverseCards=SYNTHESIS.filter(card=>!expandedTitles.has((card.title||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim()));
     html+=`<div class="synth-group-hd synth-group-theme"><h2>Fiches transversales</h2><p>Modèles et tableaux de référence (SYNTHESIS)</p></div>`;
-    html+=SYNTHESIS.map(card=>renderSynthThemeCard(card)).join('');
+    html+=transverseCards.map(card=>renderSynthThemeCard(card)).join('');
   }
   html+=`<div id="synthEmpty" class="synth-empty" style="display:none"><div class="empty-icon">🔍</div><div class="empty-text">Aucune fiche ne correspond à votre recherche</div></div>`;
   grid.innerHTML=html;
@@ -3139,7 +3600,7 @@ function shuffleFlash() {
   renderFlashcard();
 }
 
-/** Collect every flashcard source (shared by flash tab + BrainFeed). */
+/** Collect the editorial flashcard sources shared by the flash tab and BrainFeed. */
 function collectAllFlashcards(){
   const all = [];
   const push = (arr) => {
@@ -3151,7 +3612,9 @@ function collectAllFlashcards(){
   push(typeof FLASHCARDS_C !== 'undefined' ? FLASHCARDS_C : null);
   push(typeof FLASHCARDS_MEMOS !== 'undefined' ? FLASHCARDS_MEMOS : null);
   push(typeof FLASHCARDS_EXPANDED !== 'undefined' ? FLASHCARDS_EXPANDED : null);
-  push(typeof REVISION_FLASHCARDS !== 'undefined' ? REVISION_FLASHCARDS : null);
+  // REVISION_FLASHCARDS is a legacy OCR-derived index of chapter excerpts.
+  // It is kept in the bundle for traceability, but its generic "Points clés"
+  // prompts and truncated answers are not study cards and must not be rendered.
   push(typeof MEGA_FLASHCARDS !== 'undefined' ? MEGA_FLASHCARDS : null);
   push(typeof EVC_FLASHCARDS !== 'undefined' ? EVC_FLASHCARDS : null);
   push(typeof MEGA_FLASHCARDS_2 !== 'undefined' ? MEGA_FLASHCARDS_2 : null);
@@ -3176,6 +3639,7 @@ function filterDeck(){
     return numA - numB;
   });
 
+  const seen = new Set();
   return all.filter(c => {
     if (!c || c._deleted) return false;
     if (!c.question && !c.q) return false;
@@ -3184,7 +3648,12 @@ function filterDeck(){
     if (!c.answer && c.a) c.answer = c.a;
     const matchRang = (flashFilter === 'all' || c.rang === flashFilter || (!c.rang && flashFilter === 'all'));
     const matchChap = (flashChapFilter === 'all' || c.chapter === flashChapFilter);
-    return matchRang && matchChap;
+    if(!matchRang || !matchChap)return false;
+    const signature=((c.question||c.q||'')+'|'+(c.answer||c.a||''))
+      .toLowerCase().replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();
+    if(signature&&seen.has(signature))return false;
+    if(signature)seen.add(signature);
+    return true;
   });
 }
 function filterFlash(rang,btn){flashFilter=rang;document.querySelectorAll('.flash-filt').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');loadFlashDeck()}
@@ -3444,7 +3913,8 @@ function renderAnnales(){
   const all=[];
   if(typeof ANNALES!=='undefined')all.push(...ANNALES.map(a=>({...a,_src:'base'})));
   if(typeof ANNALES_EXPANDED!=='undefined')all.push(...ANNALES_EXPANDED.map(a=>({...a,_src:'expanded'})));
-  if(typeof ANNALES_ARCHIVE!=='undefined')all.push(...ANNALES_ARCHIVE.map(a=>({...a,_src:'archive'})));
+  // ANNALES_ARCHIVE reste disponible dans le bundle pour traçabilité, mais ses
+  // 36 cas générés répètent le même gabarit de station et ne sont pas éditoriaux.
   if(typeof ANNALES_V2!=='undefined')all.push(...ANNALES_V2.map(a=>({...a,_src:'v2'})));
   if(typeof CAS_INTERACTIFS!=='undefined')all.push(...CAS_INTERACTIFS.map(a=>({...a,_src:'cas'})));
   if(typeof SITUATIONS_EVC!=='undefined')all.push(...SITUATIONS_EVC.map(a=>({...a,_src:'situations'})));

@@ -15,7 +15,7 @@ const CAS_EVC_2024 = [
       { q: 'Quelles mesures non médicamenteuses prescrivez-vous ?', a: 'Rééducation équilibre (kiné 3x/sem), Vit D 800UI/j, correction visuelle, adaptation domicile (éclairage, barres antidérapantes, retrait tapis), chaussures antidérapantes, signal d\'appel à portée.', points: 3 }
     ], juryTips: 'Cascade iatrogénique: BZD → chute → douleur → tramadol → chute → fracture. Le jury veut voir que vous cassez la cascade.' },
   { id: 'evc24-3', chapter: 'ch14', difficulty: 'A', title: 'Dénutrition et escarre en SSR',
-    situation: 'Mme Garcia, 86 ans, SSR post-fracture col fémoral. Perte 7 kg en 2 mois. IMC 17.5. Albumine 22g/L. MNA 13/30. Escarne sacrée stade II. MMS 22/30. GDS-15 11/15. Vit seule, fille à 300 km.',
+    situation: 'Mme Garcia, 86 ans, SSR post-fracture du col fémoral. Perte de 7 kg en 2 mois. IMC 17,5. Albumine 22 g/L. MNA 13/30. Escarre sacrée de stade II. MMS 22/30. GDS-15 11/15. Vit seule, fille à 300 km.',
     questions: [
       { q: 'Analysez le cercle vicieux dénutrition-escarre-dépendance.', a: 'Dénutrition (MNA 13, albumine 22) → fonte musculaire + fragilité cutanée → escarre (stade II) → douleur + infection → anorexie → aggravation dénutrition → retard cicatrisation → perte autonomie → dépression (GDS 11). Cercle vicieux classique.', points: 4 },
       { q: 'Proposez un plan nutritionnel complet.', a: '1. Enrichissement alimentaire (crème, beurre, fromage). 2. CNO x3/j (Delical, Fresubin). 3. Protéines 1.5g/kg/j. 4. Vit D 800UI + Ca 1.2g. 5. Si échec 1 semaine: nutrition entérale par SNG → PEG. 6. Fractionnement 6 repas/j. 7. Aide repas à domicile.', points: 4 },

@@ -317,19 +317,20 @@ const AppSearch = (() => {
       });
     }
 
-    // CLINICAL_REFERENCE
+    // Only the validated score cards from the legacy clinical reference are
+    // searchable. Its old dose/protocol snippets were generic, not patient-
+    // specific, and duplicated the dedicated Calculators/Protocols modules.
     if (typeof CLINICAL_REFERENCE !== 'undefined') {
-      CLINICAL_REFERENCE.forEach(cr => {
+      CLINICAL_REFERENCE.filter(cr => cr.category === 'Scores').forEach(cr => {
         const body = [cr.category, cr.title, cr.content, (cr.tags || []).join(' ')].join(' ');
-        const isUrgence = cr.category === 'Urgence';
         allContent.push({
           type: 'reference',
           id: cr.id,
           title: (cr.category ? cr.category + ' — ' : '') + (cr.title || ''),
           text: body,
           detailText: cr.content || body,
-          view: isUrgence ? 'proto' : 'reference',
-          link: () => (isUrgence ? navProtoSearch(cr.title || '') : openDetailModal(allContent.find(c => c.type === 'reference' && c.id === cr.id) || { type: 'reference', title: cr.title, text: body, detailText: cr.content }))
+          view: 'reference',
+          link: () => openDetailModal(allContent.find(c => c.type === 'reference' && c.id === cr.id) || { type: 'reference', title: cr.title, text: body, detailText: cr.content })
         });
       });
     }

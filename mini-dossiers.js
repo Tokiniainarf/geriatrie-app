@@ -7,7 +7,7 @@ const MINI_DOSSIERS = [
     etape: 2, contenu: 'Bilan: Hb 9.2 g/dL, Plaquettes 98, Créatinine 180 µmol/L (DFG 28), K 5.8 mmol/L, Lactates 4.2 mmol/L. FAST positif (épanchement abdominal). Scanner: fracture bassin, hémopéritoine, contusion rénale gauche.',
     question: 'Quelle stratégie thérapeutique ?', reponse: '1. Urgence vitale: transfusion (2 CGR), correction K (gluconate Ca + insuline). 2. Avis chirurgical urgent (hémopéritoine). 3. Adaptation doses (DFG 28). 4. Surveiller lactates.' },
   { id: 'md-3', titre: 'Patient polytraumatisé âgé — étape 3',
-    etape: 3, contenu: 'Post-op J3: conscient, stable hémodynamiquement. Mais confus la nuit, arrache sondrain. MMS pré-op 25/20. T° 38.2°C. CRP 185. ECBU positif (E. coli). Escarne sacrée stade I.',
+    etape: 3, contenu: 'À J3 postopératoire : conscient et stable sur le plan hémodynamique, mais confus la nuit et arrachant son dispositif de drainage. MMS préopératoire 25/30. T° 38,2 °C. CRP 185 mg/L. ECBU positif à E. coli. Escarre sacrée de stade I.',
     question: 'Gérez la confusion et l\'escarre.', reponse: 'Confusion = delirium post-op + infection (ECBU positif). Traitement: antibio (amox-clav), halopéridol 0.5mg si agitation, réorientation. Escarre: matelas anti-escarres, changement position H2, soins locaux.' },
   { id: 'md-4', titre: 'Mme Dupont, 78 ans — consultation gériatrique étape 1',
     etape: 1, contenu: 'Mme Dupont consulte pour "n\'est plus comme avant". Sa fille rapporte: oublis fréquents (rendez-vous, prénoms), ne cuisine plus, a perdu 5 kg en 3 mois, ne sort plus. Vit seule depuis le décès de son mari il y a 8 mois. ATCD: HTA, dépression traitée (sertraline 50mg).',

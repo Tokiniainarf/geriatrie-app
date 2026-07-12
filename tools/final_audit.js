@@ -1,6 +1,7 @@
 const { sb } = require('./simulate_load.js');
 const vm = require('vm');
 const fs = require('fs');
+const path = require('path');
 
 const APP_DATA = vm.runInContext('APP_DATA', sb);
 
@@ -37,5 +38,5 @@ leaks.forEach(w => {
 if (!leakCount) report.push('Chapter render: no header/footer leaks');
 
 report.push('=== END ===');
-fs.writeFileSync('C:/Users/tokin/geriatrie-app/tools/final_audit_report.txt', report.join('\n'), 'utf8');
+fs.writeFileSync(path.join(__dirname, 'final_audit_report.txt'), report.join('\n'), 'utf8');
 console.log('Final audit written to tools/final_audit_report.txt');

@@ -13,7 +13,7 @@ TRAITEMENT: ramipril 5mg, gliclazide 60mg, warfarine (dose variable), salbutamol
 
 CONTEXTE: Vit seul. Aide à domicile 1h/j. Refuse de manger depuis 2 mois. Reste au lit.
 
-ÉVALUATION: MMS 6/30. GDS-15 14/15. ADL 1/6. IADL 0/8. MNA 7/30. Tinetti 2/28. Braden 8/23. ECPA 8/10. Poids 45 kg (IMC 16.0). Taille 160 cm. Albumine 18 g/L. Pré-albumine 0.05 g/L. Hb 9.5 g/dL. Vit D 5 ng/mL. Créatinine 120 (DFG 45). INR 3.5.
+ÉVALUATION: MMS 6/30. GDS-15 14/15. ADL 1/6. IADL 0/8. MNA 7/30. Tinetti 2/28. Braden 8/23. PAINAD 8/10. Poids 45 kg (IMC 16.0). Taille 160 cm. Albumine 18 g/L. Pré-albumine 0.05 g/L. Hb 9.5 g/dL. Vit D 5 ng/mL. Créatinine 120 (DFG 45). INR 3.5.
 
 EXAMEN: Escarres sacrée stade III (5x6 cm, fond nécrotique), talon droit stade II (3x3 cm), trochanter gauche stade I. Peau sèche, turgescence diminuée. Sarcopénie sévère. État grabataire.`,
     questions: [

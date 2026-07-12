@@ -275,7 +275,7 @@ QUESTIONS :
 - Consultation gériatre / rhumatologue M1 et M3 : DMO contrôle, tolérance biphosphonate, TUG.
 - Assistante sociale : aide ménage, portage repas, téléalarme.
 - Chirurgien orthopédique : contrôle Rx M6.
-- Objectifs : marche autonome avec aide technique, TUG < 20 s puis < 14 s, pas de nouvelle chute, traitement anti-ostéoporotique en cours.
+- Objectifs : marche autonome avec l'aide technique adaptée, TUG < 20 s puis progression individualisée, absence de nouvelle chute et traitement anti-ostéoporotique en cours.
 
 5. RETOUR DOMICILE ET CRITÈRES (3 points) :
 - Faisabilité : fils disponible, ascenseur, aménagements réalisés avant sortie ; visite domicile ergo idéale.

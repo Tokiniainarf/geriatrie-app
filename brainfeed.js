@@ -63,7 +63,7 @@ const BrainFeed = (() => {
     { value: 15, unit: '%', line: '... % des personnes de 65 ans et plus ont une dépression non diagnostiquée', source: 'GDS-15' },
     { value: 5, unit: ' critères', line: 'Nombre de critères de Fried : au moins ... critères = syndrome de fragilité', source: 'Fried' },
     { value: 0.8, unit: ' m/s', line: 'Seuil de vitesse de marche en dessous duquel on suspecte la fragilité : ... m/s', source: 'Fried' },
-    { value: 10, unit: ' s', line: 'Timed Up and Go : plus de ... secondes = risque de chute élevé', source: 'TUG' },
+    { value: 20, unit: ' s', line: 'Timed Up and Go : plus de ... secondes = risque de chute élevé', source: 'CNEG, chapitre 12' },
     { value: 24, unit: '/30', line: 'Seuil MMSE interprété comme « normal » chez un sujet jeune instruit : ... /30', source: 'MMSE' },
     { value: 5, unit: '/15', line: 'Seuil GDS-15 à partir duquel on dépiste une dépression : ... /15', source: 'Yesavage' },
     { value: 19, unit: '/28', line: 'Score Tinetti (POMA) inférieur à ... = risque élevé de chute', source: 'Tinetti' },
@@ -203,7 +203,8 @@ const BrainFeed = (() => {
     push(typeof FLASHCARDS_C !== 'undefined' ? FLASHCARDS_C : null);
     push(typeof FLASHCARDS_MEMOS !== 'undefined' ? FLASHCARDS_MEMOS : null);
     push(typeof FLASHCARDS_EXPANDED !== 'undefined' ? FLASHCARDS_EXPANDED : null);
-    push(typeof REVISION_FLASHCARDS !== 'undefined' ? REVISION_FLASHCARDS : null);
+    // Legacy OCR-derived chapter excerpts are intentionally excluded: they are
+    // traceable in the bundle but are not editorial flashcards.
     push(typeof MEGA_FLASHCARDS !== 'undefined' ? MEGA_FLASHCARDS : null);
     push(typeof EVC_FLASHCARDS !== 'undefined' ? EVC_FLASHCARDS : null);
     push(typeof MEGA_FLASHCARDS_2 !== 'undefined' ? MEGA_FLASHCARDS_2 : null);
@@ -414,21 +415,24 @@ const BrainFeed = (() => {
     }));
 
     const annales = [];
-    if (typeof ANNALES !== 'undefined') annales.push(...ANNALES);
-    if (typeof ANNALES_EXPANDED !== 'undefined') annales.push(...ANNALES_EXPANDED);
-    if (typeof ANNALES_ARCHIVE !== 'undefined') annales.push(...ANNALES_ARCHIVE);
-    if (typeof ANNALES_V2 !== 'undefined') annales.push(...ANNALES_V2);
-    if (typeof CAS_INTERACTIFS !== 'undefined') annales.push(...CAS_INTERACTIFS);
-    if (typeof SITUATIONS_EVC !== 'undefined') annales.push(...SITUATIONS_EVC);
+    // Curated recent cases come first so a later duplicate never replaces the
+    // richer/current version with a legacy vignette.
     if (typeof CAS_EVC_2024 !== 'undefined') annales.push(...CAS_EVC_2024);
     if (typeof CAS_EVC_2023 !== 'undefined') annales.push(...CAS_EVC_2023);
     if (typeof CAS_EVC_2020_2022 !== 'undefined') annales.push(...CAS_EVC_2020_2022);
     if (typeof CAS_EVC_2018_2019 !== 'undefined') annales.push(...CAS_EVC_2018_2019);
     if (typeof CAS_EVC_2015_2017 !== 'undefined') annales.push(...CAS_EVC_2015_2017);
     if (typeof CAS_EVC_2010_2014 !== 'undefined') annales.push(...CAS_EVC_2010_2014);
+    if (typeof ANNALES_V2 !== 'undefined') annales.push(...ANNALES_V2);
+    if (typeof CAS_INTERACTIFS !== 'undefined') annales.push(...CAS_INTERACTIFS);
+    if (typeof SITUATIONS_EVC !== 'undefined') annales.push(...SITUATIONS_EVC);
+    if (typeof ANNALES !== 'undefined') annales.push(...ANNALES);
+    if (typeof ANNALES_EXPANDED !== 'undefined') annales.push(...ANNALES_EXPANDED);
+    // ANNALES_ARCHIVE is intentionally not injected: its 36 generated cases
+    // repeat the same long station template and add no feed-level decision.
 
     const casChoc = [];
-    const seenCases = new Set();
+    const seenCases = [];
     annales.forEach(a => {
       let diagnosis = '';
       if (a.questions && a.questions.length) {
@@ -449,10 +453,19 @@ const BrainFeed = (() => {
       const ageMatch = text.match(/(\d{2,3})\s*ans/);
       const ageKey = ageMatch ? ageMatch[1] : '';
       
-      const dupKey = (a.chapter || '') + '_' + nameKey + '_' + ageKey;
-      if (nameKey && ageKey) {
-        if (seenCases.has(dupKey)) return;
-        seenCases.add(dupKey);
+      const caseTokens = new Set(String(text).normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase().replace(/\b\d+(?:[.,]\d+)?\b/g, ' ').replace(/[^a-z]+/g, ' ')
+        .split(/\s+/).filter(word => word.length > 3 && !/^(avec|dans|pour|chez|elle|il|vous|patient|patiente|monsieur|madame)$/.test(word)));
+      if (nameKey) {
+        const duplicate = seenCases.some(previous => {
+          if (previous.name !== nameKey.toLowerCase()) return false;
+          let common = 0;
+          caseTokens.forEach(token => { if (previous.tokens.has(token)) common++; });
+          const union = caseTokens.size + previous.tokens.size - common;
+          return union > 0 && common / union >= 0.60;
+        });
+        if (duplicate) return;
+        seenCases.push({ name: nameKey.toLowerCase(), tokens: caseTokens, age: ageKey });
       }
 
       casChoc.push({
@@ -571,10 +584,10 @@ const BrainFeed = (() => {
     // 20+ visual explanation cards for the feed (videos and images to illustrate mechanisms)
     const visualMedias = [
       // Enriched with new targeted diagrams for usefulness (Imagine generated)
-      {media: 'images/chapters/educational/chute-multifactorielle-diagram.jpg', isVideo: false, title: 'Chutes multifactorielle - Diagramme explicatif'},
+      {media: 'images/chapters/educational/chute-multifactorielle-diagram.jpg', isVideo: false, title: 'Chutes multifactorielles - Diagramme explicatif'},
       // New 9:16 reel-optimized feed-vis generated (images + videos) - full vertical feel + French captions integrated
-      {media: 'images/feed/illustrative/feed-vis-22.jpg', isVideo: false, title: 'Chutes multifactorielle'},
-      {media: 'images/feed/videos/feed-vis-22.mp4', isVideo: true, title: 'Chutes multifactorielle - Vidéo'},
+      {media: 'images/feed/illustrative/feed-vis-22.jpg', isVideo: false, title: 'Chutes multifactorielles'},
+      {media: 'images/feed/videos/feed-vis-22.mp4', isVideo: true, title: 'Chutes multifactorielles - Vidéo'},
       {media: 'images/feed/illustrative/feed-vis-23.jpg', isVideo: false, title: 'Cycle dénutrition-sarcopénie'},
       {media: 'images/feed/videos/feed-vis-23.mp4', isVideo: true, title: 'Cycle dénutrition - Animation'},
       {media: 'images/feed/illustrative/feed-vis-24.jpg', isVideo: false, title: 'Causes réversibles du delirium'},
@@ -584,8 +597,8 @@ const BrainFeed = (() => {
       // Existing layout-optimized (compact 9/16 for better text flow)
       {media: 'images/feed/illustrative/delirium-mecanisme-reel.jpg', isVideo: false, title: 'Mécanisme du delirium (compact)'},
       {media: 'images/feed/videos/delirium-mecanisme-compact.mp4', isVideo: true, title: 'Mécanisme du delirium - Vidéo'},
-      {media: 'images/feed/illustrative/chute-multifactorielle-reel.jpg', isVideo: false, title: 'Chutes multifactoriels (compact)'},
-      {media: 'images/feed/videos/chute-multifactorielle-compact.mp4', isVideo: true, title: 'Chutes multifactoriels - Vidéo'},
+      {media: 'images/feed/illustrative/chute-multifactorielle-reel.jpg', isVideo: false, title: 'Chutes multifactorielles (compact)'},
+      {media: 'images/feed/videos/chute-multifactorielle-compact.mp4', isVideo: true, title: 'Chutes multifactorielles - Vidéo'},
       {media: 'images/feed/illustrative/denutrition-cycle-reel.jpg', isVideo: false, title: 'Cycle de dénutrition (compact)'},
       {media: 'images/feed/videos/denutrition-cycle-compact.mp4', isVideo: true, title: 'Cycle de dénutrition - Vidéo'},
       {media: 'images/chapters/educational/ch13-cascade-immobilisation.jpg', isVideo: false, title: 'Cascade d\'immobilisation'},
@@ -595,8 +608,8 @@ const BrainFeed = (() => {
       {media: 'images/chapters/educational/ch17-soins-palliatifs-decision.jpg', isVideo: false, title: 'Décision soins palliatifs'},
       {media: 'images/chapters/educational/ch19-20-keyfeatures-revision.jpg', isVideo: false, title: 'Key features et révision'},
       // Keep previous feed-vis for variety
-      {media: 'images/feed/illustrative/feed-vis-1.jpg', isVideo: false, title: 'Chutes multifactorielle'},
-      {media: 'images/feed/videos/feed-vis-1.mp4', isVideo: true, title: 'Chutes multifactorielle - Mécanisme'},
+      {media: 'images/feed/illustrative/feed-vis-1.jpg', isVideo: false, title: 'Chutes multifactorielles'},
+      {media: 'images/feed/videos/feed-vis-1.mp4', isVideo: true, title: 'Chutes multifactorielles - Mécanisme'},
       {media: 'images/feed/illustrative/feed-vis-2.jpg', isVideo: false, title: 'Mécanisme du delirium'},
       {media: 'images/feed/videos/feed-vis-2.mp4', isVideo: true, title: 'Mécanisme du delirium'},
       {media: 'images/feed/illustrative/feed-vis-3.jpg', isVideo: false, title: 'Critères de Fried (fragilité)'},
@@ -667,19 +680,33 @@ const BrainFeed = (() => {
         isVideo: !!v.isVideo
       }));
 
-    // Pair image+video by theme title for richer cards
+    // One useful card per concept: pair its image and video instead of showing
+    // the same lesson twice in a single scrolling session.
+    const visualTopic = (card) => {
+      const title = String(card.question || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+      if (/chutes? multifactor/.test(title)) return 'chutes-multifactorielles';
+      if (/mecanisme.*delirium|delirium.*mecanisme/.test(title)) return 'delirium-mecanisme';
+      if (/causes.*delirium|delirium.*causes/.test(title)) return 'delirium-causes';
+      if (/cycle.*denutrition|denutrition.*sarcopen/.test(title)) return 'denutrition-cycle';
+      if (/criteres.*fried/.test(title)) return 'fried';
+      const mediaNumber = String(card.media || '').match(/feed-vis-(\d+)/i);
+      if (mediaNumber) return 'feed-vis-' + mediaNumber[1];
+      return title.replace(/\([^)]*\)/g, ' ').replace(/\s*-\s*(video|animation|mecanisme|risques|consequences|etapes et seuils|diagramme explicatif).*$/i, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    };
     const byTitle = {};
     visualExplanations.forEach(v => {
-      const key = (v.question || '').replace(/\s*-\s*(vidéo|animation).*$/i, '').trim().toLowerCase();
+      const key = visualTopic(v);
       if (!byTitle[key]) byTitle[key] = v;
       else if (v.isVideo && !byTitle[key].isVideo) {
-        byTitle[key].video = v.media;
-      } else if (!v.isVideo && byTitle[key].isVideo) {
+        const poster = byTitle[key].media;
+        byTitle[key] = { ...v, image: poster, question: byTitle[key].question };
+      } else if (!v.isVideo && byTitle[key].isVideo && !byTitle[key].image) {
         byTitle[key].image = v.media;
       }
     });
+    const uniqueVisualExplanations = Object.values(byTitle);
 
-    return { memoJour, casChoc, quizFlash, chiffreCle, citation, piegeExam, visualExplanations, allFlash, srs };
+    return { memoJour, casChoc, quizFlash, chiffreCle, citation, piegeExam, visualExplanations: uniqueVisualExplanations, allFlash, srs };
   }
 
   function buildLegacyPools(allFlash, srs) {

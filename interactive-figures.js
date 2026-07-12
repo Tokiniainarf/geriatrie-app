@@ -1954,6 +1954,88 @@ var INTERACTIVE_FIGURES = {
 
 };
 
+// Correctifs relus sur les figures originales du manuel. Ces deux schémas
+// remplacent les anciennes représentations génériques sans utiliser d’image.
+INTERACTIVE_FIGURES['1.1'] = {
+  title: 'Le raisonnement gériatrique : modèle de décompensation 1 + 2 + 3 de Bouchon',
+  svg: `<style>
+    .bouchon-exact{font-family:'Figtree','Noto Sans',sans-serif;color:var(--text,#16324a)}
+    .bouchon-exact .axis{stroke:currentColor;stroke-width:1.4;opacity:.42}
+    .bouchon-exact .threshold{stroke:#ef4444;stroke-width:2;stroke-dasharray:7 5}
+    .bouchon-exact .physio{fill:none;stroke:currentColor;stroke-width:4;stroke-linecap:round}
+    .bouchon-exact .chronic{fill:none;stroke:#059669;stroke-width:5;stroke-linecap:round}
+    .bouchon-exact .acute{fill:none;stroke:#ef4444;stroke-width:4;stroke-linecap:round}
+    .bouchon-exact .recovery{fill:none;stroke:#0891b2;stroke-width:3;stroke-dasharray:6 5;marker-end:url(#bouchon-up)}
+    .bouchon-exact .label{fill:currentColor;font-size:12px;font-weight:650}
+    .bouchon-exact .tag{font-size:13px;font-weight:850}
+    .bouchon-exact .event{transition:filter .2s,stroke-width .2s}
+    .bouchon-exact .event:hover{filter:drop-shadow(0 0 5px rgba(239,68,68,.55));stroke-width:6}
+  </style>
+  <svg class="bouchon-exact" viewBox="0 0 680 390" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="bouchon-title bouchon-desc">
+    <title id="bouchon-title">Modèle de décompensation gériatrique de Bouchon</title>
+    <desc id="bouchon-desc">Le vieillissement diminue progressivement la réserve. Une maladie chronique accentue cette pente. Un stress aigu provoque une chute sous le seuil d’insuffisance, partiellement réversible par l’intervention.</desc>
+    <defs><marker id="bouchon-up" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#0891b2"/></marker></defs>
+    <line class="axis" x1="76" y1="35" x2="76" y2="330"/><line class="axis" x1="76" y1="330" x2="645" y2="330"/>
+    <text class="label" x="22" y="185" transform="rotate(-90 22 185)" text-anchor="middle">Fonction d’organe</text>
+    <text class="label" x="360" y="365" text-anchor="middle">Âge</text><text class="label" x="60" y="48" text-anchor="end">100 %</text><text class="label" x="60" y="328" text-anchor="end">0</text>
+    <line class="threshold" x1="76" y1="266" x2="645" y2="266"/><text x="635" y="254" text-anchor="end" fill="#ef4444" font-size="12" font-weight="800">Seuil d’insuffisance</text>
+    <path class="physio" d="M85 70 C195 78 300 94 418 121 C505 141 570 160 625 182"/>
+    <text class="tag" x="150" y="62" fill="currentColor">1</text><text class="label" x="168" y="62">Vieillissement physiologique</text>
+    <path class="chronic" d="M205 82 C286 111 350 150 418 206 C466 232 520 247 585 258"/>
+    <text class="tag" x="285" y="128" fill="#059669">2</text><text x="303" y="128" fill="#059669" font-size="12" font-weight="750">Maladie chronique</text>
+    <g class="event"><path class="acute" d="M414 204 L414 292"/><circle cx="414" cy="204" r="6" fill="#ef4444"/><text class="tag" x="427" y="224" fill="#ef4444">3</text><text x="447" y="224" fill="#ef4444" font-size="12" font-weight="750">Stress aigu</text></g>
+    <path class="recovery" d="M414 292 C438 272 449 247 461 226"/><text x="471" y="244" fill="#0891b2" font-size="11" font-weight="750">Effet de l’intervention</text>
+    <g class="event"><path class="acute" d="M552 250 L552 309"/><circle cx="552" cy="250" r="5" fill="#ef4444"/></g>
+    <path class="recovery" d="M552 309 C568 292 578 274 586 258"/>
+    <path d="M76 266 H414 V292 H552 V309 H645" fill="none" stroke="rgba(239,68,68,.18)" stroke-width="18"/>
+    <g transform="translate(92 292)"><rect width="270" height="31" rx="15" fill="rgba(8,145,178,.10)"/><text x="135" y="20" text-anchor="middle" fill="currentColor" font-size="11" font-weight="700">Réserve fonctionnelle encore mobilisable</text></g>
+  </svg>`
+};
+
+INTERACTIVE_FIGURES['7.2'] = {
+  title: 'Signes radiographiques d’une coxarthrose polaire supérieure',
+  svg: `<style>
+    .cox-svg{font-family:'Figtree','Noto Sans',sans-serif;color:var(--text,#16324a)}
+    .cox-svg .bone{fill:rgba(8,145,178,.10);stroke:currentColor;stroke-width:3}
+    .cox-svg .dense{fill:none;stroke:#0891b2;stroke-width:12;stroke-linecap:round}
+    .cox-svg .joint{fill:none;stroke:#f59e0b;stroke-width:4;stroke-linecap:round}
+    .cox-svg .leader{stroke:currentColor;stroke-width:1.5;opacity:.55}
+    .cox-svg .call{font-size:12px;font-weight:750;fill:currentColor}
+    .cox-svg .mark{cursor:pointer;transition:transform .18s;transform-box:fill-box;transform-origin:center}
+    .cox-svg .mark:hover{transform:scale(1.12)}
+  </style>
+  <svg class="cox-svg" viewBox="0 0 680 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="cox-title cox-desc">
+    <title id="cox-title">Coxarthrose polaire supérieure</title><desc id="cox-desc">Coupe schématique d’une hanche montrant pincement, ostéocondensation, géodes et ostéophytose.</desc>
+    <path class="bone" d="M188 70 C115 103 82 184 104 252 C125 316 185 338 244 306 C278 288 292 255 289 219 C285 172 252 128 188 70Z"/>
+    <circle class="bone" cx="286" cy="211" r="91"/>
+    <path class="bone" d="M337 280 C378 307 410 349 430 405 L335 405 C324 358 299 323 262 298Z"/>
+    <path class="joint" d="M202 125 C245 99 301 103 343 137"/><path class="dense" d="M190 142 C239 111 305 116 352 153" opacity=".9"/>
+    <path d="M178 120 Q198 88 218 121" fill="rgba(245,158,11,.28)" stroke="#f59e0b" stroke-width="3"/>
+    <g class="mark"><circle cx="246" cy="162" r="13" fill="rgba(239,68,68,.14)" stroke="#ef4444" stroke-width="3"/><circle cx="301" cy="150" r="9" fill="rgba(239,68,68,.14)" stroke="#ef4444" stroke-width="3"/></g>
+    <path class="mark" d="M362 174 Q392 157 400 187 Q373 184 355 205" fill="rgba(5,150,105,.22)" stroke="#059669" stroke-width="3"/>
+    <g><line class="leader" x1="164" y1="103" x2="72" y2="65"/><text class="call" x="24" y="55">A · Pincement supérieur</text><text x="24" y="72" fill="#f59e0b" font-size="11">interligne réduit</text></g>
+    <g><line class="leader" x1="226" y1="125" x2="492" y2="68"/><text class="call" x="500" y="58">B · Ostéocondensation</text><text x="500" y="75" fill="#0891b2" font-size="11">os sous-chondral</text></g>
+    <g><line class="leader" x1="274" y1="155" x2="510" y2="170"/><text class="call" x="520" y="165">C · Géodes</text><text x="520" y="182" fill="#ef4444" font-size="11">lacunes sous-chondrales</text></g>
+    <g><line class="leader" x1="382" y1="181" x2="520" y2="267"/><text class="call" x="530" y="264">D · Ostéophytose</text><text x="530" y="281" fill="#059669" font-size="11">rebord marginal</text></g>
+    <g fill="#164e63" font-size="10" font-weight="850">
+      <circle cx="166" cy="188" r="12" fill="#fff" stroke="#164e63"/><text x="166" y="192" text-anchor="middle">1</text>
+      <circle cx="194" cy="235" r="12" fill="#fff" stroke="#164e63"/><text x="194" y="239" text-anchor="middle">2</text>
+      <circle cx="250" cy="281" r="12" fill="#fff" stroke="#164e63"/><text x="250" y="285" text-anchor="middle">3</text>
+      <circle cx="326" cy="263" r="12" fill="#fff" stroke="#164e63"/><text x="326" y="267" text-anchor="middle">4</text>
+      <circle cx="365" cy="223" r="12" fill="#fff" stroke="#164e63"/><text x="365" y="227" text-anchor="middle">5</text>
+      <circle cx="347" cy="151" r="12" fill="#fff" stroke="#164e63"/><text x="347" y="155" text-anchor="middle">6</text>
+    </g>
+    <text x="340" y="423" text-anchor="middle" fill="currentColor" font-size="11">Touchez ou survolez les anomalies colorées pour les repérer.</text>
+  </svg>`
+};
+
+// Ces trois figures sont des arbres/matrices riches : leur version HTML
+// adaptative dans faithful-visuals.js est plus fidèle que les anciens SVG
+// résumés et reste lisible sur mobile.
+delete INTERACTIVE_FIGURES['6.5'];
+delete INTERACTIVE_FIGURES['6.6'];
+delete INTERACTIVE_FIGURES['6.7'];
+
 // ─── Helper: resolve static FIGURES asset (object {src}, array, or string) ───
 function resolveFigureSrc(figId) {
   if (typeof FIGURES === 'undefined' || !FIGURES[figId]) return null;

@@ -1,190 +1,224 @@
 === BRAINFEED FULL AUDIT ===
-Deck size: 98
-Type distribution: {"chiffre_cle":13,"memo_jour":17,"cas_choc":17,"reco":5,"quiz_flash":19,"synthesis":3,"flash":5,"citation":5,"piege_exam":12,"case":2}
+Deck size: 71
+Type distribution: {"quiz_flash":24,"cas_choc":21,"visual":14,"piege_exam":12}
 
 === POOL SIZES ===
-memoJour: 30
-casChoc: 172
-quizFlash: 366
+memoJour: 0
+casChoc: 110
+quizFlash: 24
 chiffreCle: 15
 citation: 8
 piegeExam: 12
-allFlash: 346
+visualExplanations: 29
+allFlash: 1000
 srs: N/A
 
 === SAMPLE CARDS ===
 
---- 1. chiffre_cle (id=ck-12) ---
-Line: Environ ... % des personnes de 85 ans et plus ont un trouble cognitif déclaré
-
---- 2. chiffre_cle (id=ck-10) ---
-Line: Environ ... % des personnes de 65 ans et plus présentent une polymédication
-
---- 3. memo_jour (id=mj-memo-8) ---
-Title: MÉMO FLASH
-Question: Échelle de Tinetti (POMA) : composition et interprétation ?
-
---- 4. cas_choc (id=cc-arch-2021-2) ---
-Vignette: M. Caron, 83 ans, veuf 4 mois, alité, isolement, anorexie, -5 kg. GDS-15 13/15, MMSE 28/30. Bilan somatique normal. Culpabilité, pas de projet suicidaire actif. Interrogatoire complété par l'aidant : 
-
---- 5. reco (id=has-15) ---
-Question: Conséquences de l'alitement — Limiter les complications de l'immobilisation prolongée chez le sujet âgé.
-
---- 6. cas_choc (id=cc-13) ---
-Vignette: Mme Petit, 78 ans, vit seule. Elle gère ses repas et sa toilette seule, mais a besoin d'aide pour les courses, le ménage et la gestion administrative. Elle ne sort plus seule par peur des chutes. AGGI
-
---- 7. quiz_flash (id=qf-6) ---
-Question: Modèle de Bouchon en gériatrie ?
+--- 1. quiz_flash (id=qf-curated-fried) ---
+Question: À partir de combien de critères de Fried parle-t-on de fragilité ?
 Options:
-  A. Surveillance simple
-  B. Présence de ≥ 5 maladies chroniques chez le même patient
-  C. Contre-indication absolue
-  D. 1 + 2 + 3 ✓
+  A. Au moins 3 critères sur 5. ✓
+  B. 1 critère sur 5.
+  C. 2 critères sur 5.
+  D. 5 critères sont nécessaires pour toute pré-fragilité.
 
---- 8. memo_jour (id=mj-memo-26) ---
-Title: MÉMO FLASH
-Question: Palliative Prognostic Score (PaP) : variables mnémotechniques ?
+--- 2. cas_choc (id=cc-11) ---
+Vignette: M. Blanc, 82 ans, consulte pour chutes et troubles de la mémoire. Il prend 12 médicaments : losartan, aspirine, clopidogrel, atorvastatine, metformine, gliclazide, oméprazole, lorazépam, codéine, para
 
---- 9. synthesis (id=syn-0) ---
-Question: Modèle de Bouchon (1+2+3)
+--- 3. visual (id=vis-31) ---
+Question: Polymédication et iatrogénie
 
---- 10. quiz_flash (id=qf-119) ---
-Question: Quels sont les 6 GIR et qui ouvrent droit à l'APA ?
+--- 4. piege_exam (id=px-1) ---
+Trap: Delirium = agitation seulement
+
+--- 5. quiz_flash (id=qf-curated-tinetti) ---
+Question: Quel score Tinetti évoque un risque élevé de chute ?
 Options:
-  A. Contre-indication absolue
-  B. GIR 1-2 : dépendance lourde → APA établissement ou domicile ✓
-  C. Surveillance simple
-  D. Âge ≥ 60 ans, résidence stable en France, GIR 1 à 4 (évaluation MDPH/équipe...
+  A. Un score supérieur à 26 sur 28.
+  B. Le Tinetti ne comporte aucun seuil de risque.
+  C. Un score de 28 sur 28.
+  D. Un score inférieur à 19 sur 28. ✓
 
---- 11. quiz_flash (id=qf-309) ---
-Question: Qu'est-ce que la cascade iatrogénique ?
+--- 6. quiz_flash (id=qf-curated-lewy) ---
+Question: Pourquoi faut-il être prudent avec les neuroleptiques dans une démence à corps de Lewy ?
 Options:
-  A. Benzodiazépines (chute, confusion)
-  B. Aucun traitement nécessaire
-  C. Prescription d'un médicament pour traiter l'effet indésirable d'un autre médicam ✓
-  D. Hospitalisation systématique
+  A. Ils n’ont aucun effet sur la marche ou la vigilance.
+  B. Ils améliorent toujours la cognition à long terme.
+  C. Une hypersensibilité peut entraîner une aggravation neurologique et des effets i ✓
+  D. Ils sont obligatoires dès le diagnostic.
 
---- 12. quiz_flash (id=qf-memo-3) ---
-Question: MMSE (MMS) : que évalue-t-on et seuils mnémotechniques ?
+--- 7. cas_choc (id=cc-104) ---
+Vignette: Mme Bernard, 78 ans, arthrose genou sévère. ADL 6/6 (autonome), IADL 4/8 (ne fait plus les courses, cuisine difficilement, ne prend plus les transports, ne gère plus son argent).
+
+--- 8. visual (id=vis-41) ---
+Question: Ostéoporose et risque de fracture
+
+--- 9. piege_exam (id=px-5) ---
+Trap: Douleur sous-estimée
+
+--- 10. quiz_flash (id=qf-curated-adl-iadl) ---
+Question: Quel couple d’échelles permet de distinguer autonomie de base et autonomie instrumentale ?
 Options:
-  A. Score normal ≥ 25/30
-  B. Score toujours interprété brut
-  C. MMSE (Mini Mental State Examination) : /30
-  D. 30 points : Orientation (10) · Mémorisation/rappel (6) · Attention/calcul (5) ·  ✓
+  A. GDS-15 pour l’autonomie de base et MNA pour l’autonomie instrumentale.
+  B. MMS pour l’autonomie de base et CAM pour l’autonomie instrumentale.
+  C. ADL de Katz pour les activités de base et IADL de Lawton pour les activités inst ✓
+  D. Tinetti pour l’autonomie de base et TUG pour l’autonomie instrumentale.
 
---- 13. reco (id=has-3) ---
-Question: Dénutrition du sujet âgé
-
---- 14. flash (id=fc-mega-54) ---
-Question: Delirium hypoactif : proportion ?
-
---- 15. cas_choc (id=cc-115) ---
-Vignette: Mme Petit, 82 ans, perte 6 kg en 3 mois. IMC 19. MNA 17/30. Perte appétit, mange seul mais peu. Dentition mauvaise.
-
---- 16. cas_choc (id=cc-arch-2024-5) ---
-Vignette: M. Blanc, 84 ans, chute puis confusion. Na+ 125, thiazidique + ISRS. TUG 19 s. Prioriser diagnostics et examens. Interrogatoire complété par l'aidant : mode de vie, autonomie antérieure (ADL/IADL), ch
-
---- 17. cas_choc (id=cc-111) ---
-Vignette: Mme Girard, 78 ans, plainte mnésique 3 mois. MMS 20/30, GDS-15 12/15. Décès mari il y a 6 mois. Perte appétit, insomnie, pleurs.
-
---- 18. citation (id=cit-3) ---
-Text: « La polymédication est le plus fréquent des facteurs de risque iatrogène. »
-
---- 19. synthesis (id=syn-5) ---
-Question: Évaluation de l'autonomie
-
---- 20. memo_jour (id=mj-memo-12) ---
-Title: MÉMO FLASH
-Question: Échelle de Norton : items et seuil ?
-
---- 21. memo_jour (id=mj-memo-27) ---
-Title: MÉMO FLASH
-Question: PPS (Palliative Performance Scale) : seuils usuels ?
-
---- 22. quiz_flash (id=qf-mega-66) ---
-Question: MNA version complète : seuils ?
+--- 11. quiz_flash (id=qf-curated-cam) ---
+Question: Quel outil valide le dépistage d’un delirium au lit du patient ?
 Options:
-  A. ≥24 normal, 17-23,5 risque, <17 dénutrition ✓
-  B. MNA (Mini Nutritional Assessment) : /30 points
-  C. Score normal ≥ 25/30
-  D. Score toujours interprété brut
+  A. Le Tinetti, qui évalue l’équilibre et la marche.
+  B. La GDS-15, centrée sur les symptômes dépressifs.
+  C. Le MMS seul, interprété sans données antérieures.
+  D. La CAM : début aigu et fluctuant, trouble attentionnel, avec pensée désorganisée ✓
 
---- 23. quiz_flash (id=qf-mega-91) ---
-Question: Hydrocephalie normotensive : triade ?
-Options:
-  A. Marche magnétique, incontinence urinaire, troubles cognitifs ✓
-  B. Signe de décompensation cardiaque
-  C. Post-traumatisme mineur, troubles cognition, hémiplégie
-  D. Manifestation iatrogène
-
---- 24. citation (id=cit-2) ---
-Text: « Le bon médicament, à la bonne dose, pour le bon patient, au bon moment. »
-
---- 25. cas_choc (id=cc-4) ---
-Vignette: M. Durand, 76 ans, amené par sa fille qui note des troubles de mémoire depuis 1 an, des difficultés à gérer ses comptes, des oublis de rendez-vous. Il se perd parfois dans son quartier. Épisode d'agit
-
---- 26. citation (id=cit-1) ---
-Text: « Une chute n'est jamais un accident : c'est toujours un symptôme. »
-
---- 27. piege_exam (id=px-4) ---
-Trap: Chute = accident
-
---- 28. cas_choc (id=cc-evc19-3) ---
+--- 12. cas_choc (id=cc-evc19-3) ---
 Vignette: Mme Arnaud, 84 ans, Alzheimer connu (MMS habituel 20/30). Admission EHPAD il y a 3 ans. Depuis 48 h : somnolence diurne, hallucinations visuelles, agitation nocturne. T° 37,8 °C. Na+ 152 mmol/L. Pas d
 
---- 29. reco (id=has-13) ---
-Question: Troubles sensoriels du sujet âgé
+--- 13. visual (id=vis-51) ---
+Question: Dépression vs pseudo-démence
 
---- 30. case (id=ann-123) ---
-Question: Différencier démence à corps de Lewy et maladie d'Alzheimer sur 3 critères cliniques.
+--- 14. piege_exam (id=px-8) ---
+Trap: Polymédication = seulement ≥ 5 médicaments
 
---- 31. memo_jour (id=mj-memo-19) ---
-Title: MÉMO FLASH
-Question: FRAX : que retient-on pour l'EDN (sans calculatrice) ?
-
---- 32. piege_exam (id=px-11) ---
-Trap: AOMI = aspirine systématique
-
---- 33. quiz_flash (id=qf-mega-74) ---
-Question: Rééducation périnéale : indication ?
+--- 15. quiz_flash (id=qf-curated-palliative) ---
+Question: Quel est l’objectif de la sédation en situation palliative ?
 Options:
-  A. Pose systématique de sonde à demeure
-  B. IUE (effort) : fuites à l'effort, toux, éternuement
-  C. Incontinence effort/urgenturie légère-modérée, PA mobile ✓
-  D. Pas de rééducation périnéale
+  A. Éviter systématiquement la discussion collégiale.
+  B. Soulager une souffrance réfractaire, sans intention de provoquer la mort. ✓
+  C. Provoquer le décès lorsque la demande familiale est forte.
+  D. Remplacer toute évaluation de la douleur et de l’anxiété.
 
---- 34. memo_jour (id=mj-memo-7) ---
-Title: MÉMO FLASH
-Question: DIAPPERS : rappel mnémotechnique des causes réversibles de confusion ?
-
---- 35. quiz_flash (id=qf-121) ---
-Question: Définition des directives anticipées ?
+--- 16. quiz_flash (id=qf-curated-bouchon-3) ---
+Question: Dans le modèle 1 + 2 + 3 de Bouchon, que représente le facteur 3 ?
 Options:
-  A. Document écrit par une personne majeure pour exprimer ses souhaits de fin de vie ✓
-  B. Un symptôme non spécifique
-  C. Droit à l'information et au consentement (base Kouchner)
-  D. Un médicament
+  A. Le niveau d’autonomie antérieur.
+  B. La maladie chronique déjà connue.
+  C. Un facteur précipitant aigu, souvent réversible et à rechercher en priorité. ✓
+  D. Le vieillissement physiologique de l’organe.
 
---- 36. chiffre_cle (id=ck-14) ---
-Line: Apport protéique recommandé : 1–1,2 g/kg/j, soit environ ... g/j pour un sujet de 60 kg
+--- 17. cas_choc (id=cc-10) ---
+Vignette: M. Garnier, 88 ans, en phase terminale d'un cancer du pancréas métastatique. Il est conscient, souffre (EVA 8/10), demande à « ne plus souffrir ». Sa fille souhaite « qu'on fasse tout ». L'équipe médi
 
---- 37. citation (id=cit-6) ---
-Text: « La prévention de la perte d'autonomie passe par la préservation de l'activité physique. »
+--- 18. visual (id=vis-61) ---
+Question: Capacité décisionnelle et éthique
 
---- 38. cas_choc (id=cc-evc20-2) ---
-Vignette: M. Lemaire, 77 ans, gonalgies bilatérales depuis 10 ans, raideur matinale < 30 min. Difficulté escaliers, canne occasionnelle. ATCD : HTA, RGO. Traitement : ibuprofène 400 mg x3/j auto-médication + om
+--- 19. piege_exam (id=px-10) ---
+Trap: Sédation profonde = euthanasie
 
---- 39. memo_jour (id=mj-memo-17) ---
-Title: MÉMO FLASH
-Question: Mnémotechnique OMS palier 1-2-3 (rappel posologie PA) ?
+--- 20. quiz_flash (id=qf-curated-delirium-bzd) ---
+Question: Quelle attitude adopter devant un delirium avec agitation sans sevrage alcoolique ?
+Options:
+  A. Prescrire une benzodiazépine systématiquement pour obtenir le sommeil.
+  B. Conclure à une démence irréversible sans bilan étiologique.
+  C. Augmenter les anticholinergiques pour diminuer l’agitation.
+  D. Chercher et traiter la cause ; éviter les benzodiazépines qui aggravent confusio ✓
 
---- 40. chiffre_cle (id=ck-6) ---
-Line: Seuil GDS-15 à partir duquel on dépiste une dépression : ... /15
+--- 21. quiz_flash (id=qf-curated-tug) ---
+Question: Quel résultat du Timed Up and Go (TUG) alerte sur un risque élevé de chute ?
+Options:
+  A. Un temps de 5 secondes exactement.
+  B. Un temps supérieur à 20 secondes. ✓
+  C. Un temps inférieur à 10 secondes.
+  D. Le TUG ne renseigne jamais sur la mobilité.
+
+--- 22. cas_choc (id=cc-evc18-2) ---
+Vignette: M. Roche, 86 ans, démence Alzheimer stade modéré (MMS 18/30), vit en EHPAD. Refuse le traitement d'une pneumonie (antibiothérapie, oxygène). Personne de confiance : son fils, désigné sur la carte Vita
+
+--- 23. visual (id=vis-55) ---
+Question: Sarcopénie et vitesse de marche
+
+--- 24. piege_exam (id=px-9) ---
+Trap: Autonomie préservée = pas de bilan gériatrique
+
+--- 25. quiz_flash (id=qf-curated-pseudodementia) ---
+Question: Pourquoi une dépression peut-elle imiter un trouble neurocognitif ?
+Options:
+  A. Elle rend la GDS-15 inutile.
+  B. Elle exclut toute évaluation cognitive.
+  C. Elle entraîne toujours un delirium aigu.
+  D. Elle peut donner une plainte cognitive et un ralentissement réversibles après pr ✓
+
+--- 26. quiz_flash (id=qf-curated-osteoporosis) ---
+Question: Quel T-score définit l’ostéoporose densitométrique ?
+Options:
+  A. Un T-score supérieur à +2,5.
+  B. Un T-score supérieur ou égal à −1.
+  C. Un T-score compris entre 0 et +1.
+  D. Un T-score inférieur ou égal à −2,5. ✓
+
+--- 27. cas_choc (id=cc-evc19-2) ---
+Vignette: Mme Colin, 91 ans, cancer bronchique métastatique, refus de nutrition artificielle et de chimiothérapie documentés. Dyspnée majeure, agitation réfractaire aux morphiniques titrés. Équipe et famille de
+
+--- 28. visual (id=vis-57) ---
+Question: Score Tinetti (POMA)
+
+--- 29. piege_exam (id=px-6) ---
+Trap: Arrêt brutal des psychotropes
+
+--- 30. quiz_flash (id=qf-curated-polypharmacy) ---
+Question: À partir de quel nombre de médicaments parle-t-on habituellement de polymédication ?
+Options:
+  A. La polymédication ne dépend jamais du nombre de traitements.
+  B. Cinq médicaments ou plus pris quotidiennement. ✓
+  C. Deux médicaments ou plus.
+  D. Uniquement dix médicaments ou plus.
+
+--- 31. quiz_flash (id=qf-curated-gds) ---
+Question: Quel score GDS-15 doit faire évoquer une dépression ?
+Options:
+  A. Un score d’au moins 5 sur 15. ✓
+  B. La GDS-15 ne sert pas au dépistage.
+  C. Un score de 1 sur 15 sans symptôme associé.
+  D. Un score de 0 sur 15.
+
+--- 32. cas_choc (id=cc-evc11-3) ---
+Vignette: M. Garnier, 79 ans, EVA 7/10. DFG 44. Gabapentine, somnolence, chutes.
+
+--- 33. visual (id=vis-20) ---
+Question: Décision soins palliatifs
+
+--- 34. piege_exam (id=px-7) ---
+Trap: Albumine basse = dénutrition
+
+--- 35. quiz_flash (id=qf-curated-delirium-cause) ---
+Question: Quel facteur doit être recherché sans délai devant un delirium récent ?
+Options:
+  A. Une cause aiguë réversible : infection, douleur, globe, fécalome, iatrogénie ou  ✓
+  B. Une décision d’institutionnalisation immédiate.
+  C. Seulement l’âge chronologique du patient.
+  D. Uniquement les antécédents de démence.
+
+--- 36. quiz_flash (id=qf-curated-renal-prescription) ---
+Question: Quel réflexe de prescription est indispensable chez une personne âgée ?
+Options:
+  A. Adapter la dose des médicaments à la fonction rénale et réévaluer régulièrement  ✓
+  B. Arrêter brutalement tous les psychotropes.
+  C. Multiplier les traitements pour chaque symptôme isolé.
+  D. Conserver les doses adultes sans tenir compte de la fonction rénale.
+
+--- 37. cas_choc (id=cc-2) ---
+Vignette: M. Martin, 79 ans, hospitalisé pour pneumopathie. Son infirmière le trouve agité, désorienté dans la nuit, il tire sa perfusion. Il était orienté le matin. PMH: BPCO, insuffisance rénale modérée (DFG
+
+--- 38. visual (id=vis-47) ---
+Question: Incontinence et causes réversibles (DIAPPERS)
+
+--- 39. piege_exam (id=px-3) ---
+Trap: MMS sans correction âge/éducation
+
+--- 40. quiz_flash (id=qf-curated-orthostatic) ---
+Question: Quel examen simple fait partie du bilan initial après une chute ?
+Options:
+  A. La mesure de la pression artérielle couchée puis debout, à la recherche d’une hy ✓
+  B. Un scanner cérébral systématique en l’absence de signe d’alerte.
+  C. Une contention systématique avant toute évaluation.
+  D. Une épreuve d’effort maximale chez tout patient.
 
 === QUIZ INTEGRITY ===
-Total quiz cards in deck: 19
+Total quiz cards in deck: 24
 Malformed quiz cards: 0
 
 === CAS CHOC INTEGRITY ===
-Total cas choc in deck: 17
+Total cas choc in deck: 21
 Incomplete cas choc: 0
