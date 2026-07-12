@@ -462,21 +462,66 @@ function renderAuthenticAnnales(){
   }
   const archives=ANNALES_AUTHENTIQUES.archives||[];
   const s25=ANNALES_AUTHENTIQUES.session2025||{};
-  const archiveHtml=archives.map(a=>`<article class="official-annal-card">
+  const archiveHtml=archives.map(a=>`<article class="official-annal-card compact">
     <div class="official-annal-head"><div><span class="source-status official">Sujet national reproduit · non corrigé</span><h3>${esc(a.title)}</h3></div><span class="official-annal-period">${esc(a.period)}</span></div>
     <p>${esc(a.format)} · ${a.pages} pages</p>
     <div class="official-annal-provenance"><strong>Provenance :</strong> ${esc(a.provenance)}</div>
     <div class="official-annal-note">${esc(a.note)}</div>
-    <div class="official-annal-actions"><button type="button" onclick="toggleEmbeddedAnnal('${esc(a.id)}','${esc(a.file)}',this)">Lire directement ici</button></div>
+    <div class="official-annal-actions"><button type="button" onclick="toggleEmbeddedAnnal('${esc(a.id)}','${esc(a.file)}',this)">Ouvrir le fac-similé</button></div>
     <div class="embedded-annal" id="embedded-${esc(a.id)}" hidden><div class="embedded-annal-bar"><strong>${esc(a.title)}</strong><span>${a.pages} pages · disponible hors ligne</span></div><iframe title="${esc(a.title)}" data-src="${esc(a.file)}#toolbar=1&navpanes=0" loading="lazy"></iframe></div>
   </article>`).join('');
   const internal=s25.internal||{};
   const qcm=(internal.questions||[]).map((q,i)=>`<details class="official-qcm"><summary><span>Q${i+1}</span>${esc(q.q)}</summary><ol type="A">${(q.options||[]).map(o=>`<li>${esc(o)}</li>`).join('')}</ol><div class="official-qcm-noanswer">Énoncé uniquement : aucune correction n’est revendiquée comme officielle.</div></details>`).join('');
   const external=s25.external||{};
-  el.innerHTML=`<section class="official-annals-block"><div class="official-annals-title"><span>Archives</span><h2>Ancien format 2009-2024</h2><p>Avant la réforme 2025, les sujets étaient organisés en EVCF et EVCP, sans étiquette « voie interne » ou « voie externe ».</p></div><div class="official-annals-grid">${archiveHtml}</div></section>
+  el.innerHTML=`<section class="official-annals-block"><div class="official-annals-title"><span>Archives intégrées</span><h2>Vrais sujets 2009-2024</h2><p>Choisissez EVCF ou EVCP, une session, puis lisez uniquement le cas et les questions. Le texte reste non corrigé.</p></div><div id="annalesTextExplorer"></div><details class="annal-facsimiles"><summary>Contrôler le fac-similé original (${archives.reduce((n,a)=>n+(a.pages||0),0)} pages, hors ligne)</summary><div class="official-annals-grid">${archiveHtml}</div></details></section>
   <section class="official-annals-block"><div class="official-annals-title"><span>Réforme 2025</span><h2>Voie interne</h2><p>${esc(internal.format||'')} · ${esc(internal.completeness||'')}</p></div><div class="ann-session-notice"><strong>Provenance :</strong> ${esc(internal.provenance||'')}. L’énoncé disponible est intégré ci-dessous, sans sortie de l’app.</div><div class="official-qcm-list">${qcm}</div></section>
   <section class="official-annals-block unavailable"><div class="official-annals-title"><span>Réforme 2025</span><h2>${esc(external.title||'Voie externe')}</h2><p>${esc(external.format||'')}</p></div><div class="official-annal-note"><strong>${esc(external.completeness||'')}</strong><br>${esc(external.note||'')}</div></section>`;
+  initAnnalesTextExplorer();
 }
+
+function initAnnalesTextExplorer(){
+  const host=document.getElementById('annalesTextExplorer');
+  if(!host)return;
+  if(typeof ANNALES_TEXTE==='undefined'){
+    host.innerHTML='<div class="empty"><div class="empty-text">Texte des annales non chargé</div></div>';
+    return;
+  }
+  const previous=window._annalesTextState||{};
+  window._annalesTextState={code:previous.code||'EVCF',session:previous.session||'',query:previous.query||''};
+  renderAnnalesTextExplorer();
+}
+
+function renderAnnalesTextExplorer(){
+  const host=document.getElementById('annalesTextExplorer');
+  if(!host||typeof ANNALES_TEXTE==='undefined')return;
+  const state=window._annalesTextState||{code:'EVCF',session:'',query:''};
+  const collection=ANNALES_TEXTE.collections[state.code]||ANNALES_TEXTE.collections.EVCF;
+  const sessions=collection.sessions||[];
+  if(!state.session||!sessions.some(s=>s.id===state.session))state.session=(sessions[sessions.length-1]||{}).id||'';
+  const query=String(state.query||'').trim().toLowerCase();
+  const visible=query
+    ? sessions.filter(s=>s.pages.some(p=>String(p.text||'').toLowerCase().includes(query)))
+    : sessions.filter(s=>s.id===state.session);
+  const renderText=(text)=>String(text||'').split(/\n\s*\n/).filter(Boolean).map(block=>{
+    const q=block.match(/^(Question(?:s)?(?:\s+n?[°o]?\s*\d+)?\s*:?)\s*(.*)$/is);
+    if(q)return`<div class="annal-question"><span>${esc(q[1].replace(/\s*:$/,''))}</span><p>${esc(q[2]||'Énoncé à traiter')}</p></div>`;
+    if(/^Sujet\b/i.test(block))return`<div class="annal-case"><strong>Cas clinique</strong><p>${esc(block.replace(/^Sujet\s*:?[ \t]*/i,''))}</p></div>`;
+    return`<p class="annal-stem">${esc(block)}</p>`;
+  }).join('');
+  const results=visible.map(s=>`<article class="annal-session-card">
+    <header><div><span>${state.code}</span><h3>${esc(s.label)}</h3></div><small>Pages source ${s.pageStart}${s.pageEnd!==s.pageStart?'–'+s.pageEnd:''}</small></header>
+    ${s.pages.filter(p=>!query||String(p.text||'').toLowerCase().includes(query)).map(p=>`<section class="annal-page-text">${renderText(p.text)}</section>`).join('')}
+    <aside class="annal-method"><strong>Conseil de méthode</strong><span>Répondez d’abord en mots-clés et hiérarchisez : diagnostic, gravité, étiologies, conduite et surveillance. Aucune correction officielle n’est ajoutée à l’énoncé.</span></aside>
+  </article>`).join('');
+  host.innerHTML=`<div class="annal-explorer-controls">
+    <div class="annal-format-switch" role="group" aria-label="Type d'épreuve"><button class="${state.code==='EVCF'?'active':''}" onclick="setAnnalesTextCode('EVCF')">EVCF · Fondamentale</button><button class="${state.code==='EVCP'?'active':''}" onclick="setAnnalesTextCode('EVCP')">EVCP · Pratique</button></div>
+    <label><span>Session</span><select onchange="setAnnalesTextSession(this.value)">${sessions.map(s=>`<option value="${esc(s.id)}" ${s.id===state.session?'selected':''}>${esc(s.label)}</option>`).join('')}</select></label>
+    <label class="annal-search"><span>Rechercher dans ${state.code}</span><input type="search" value="${esc(state.query||'')}" placeholder="Ex. confusion, chute, Alzheimer…" oninput="setAnnalesTextQuery(this.value)"></label>
+  </div><div class="annal-results-note">${query?`${visible.length} session${visible.length>1?'s':''} contenant « ${esc(state.query)} »`:`${esc(collection.title)} · ${sessions.length} sessions présentes dans le recueil · aucune année absente reconstituée`}</div>${results||'<div class="empty"><div class="empty-text">Aucun résultat dans ce recueil</div></div>'}`;
+}
+function setAnnalesTextCode(code){window._annalesTextState={code,session:'',query:''};renderAnnalesTextExplorer()}
+function setAnnalesTextSession(session){window._annalesTextState.session=session;window._annalesTextState.query='';renderAnnalesTextExplorer()}
+function setAnnalesTextQuery(query){window._annalesTextState.query=query;renderAnnalesTextExplorer();const input=document.querySelector('#annalesTextExplorer .annal-search input');if(input){input.focus();input.setSelectionRange(query.length,query.length)}}
 
 function toggleEmbeddedAnnal(id,file,button){
   const panel=document.getElementById('embedded-'+id);
@@ -4140,9 +4185,21 @@ function renderProto(){
   addProto(typeof PROTOCOLES_QUALITE!=='undefined'?PROTOCOLES_QUALITE:null,'Qualité');
   addProto(typeof PROTOCOLES_LEGISLATION!=='undefined'?PROTOCOLES_LEGISLATION:null,'Législation');
   addProto(typeof PROTOCOLES_FORMATION!=='undefined'?PROTOCOLES_FORMATION:null,'Formation');
-  
-  // Les anciennes FICHES_GARDE ne sont plus exposées comme module distinct :
-  // les urgences utiles sont déjà couvertes par les conduites cliniques ci-dessus.
+
+  // Mode garde volontairement court : seules les fiches sans posologie fixe ni
+  // automatisme diagnostique de l'ancien module sont réutilisées.
+  if(typeof FICHES_GARDE!=='undefined'){
+    const safeGuardIds=new Set(['garde-1','garde-2','garde-3']);
+    addProto(FICHES_GARDE.filter(p=>safeGuardIds.has(p.id)).map(p=>({
+      ...p,
+      titre:p.title,
+      protocole:p.checklist,
+      categorie:'Garde rapide',
+      sourceKind:'garde',
+      sourceLabel:'Repère de garde · vérifier le protocole local',
+      essential:true
+    })),'Garde rapide');
+  }
   // CLINICAL_REFERENCE stays in search/reference only — do NOT inject into protocoles.
 
   // Normalisation des catégories et dédoublonnage (titre + id exact + near-dup catégorie)
@@ -4190,6 +4247,8 @@ function renderProto(){
     
     if (p.sourceKind === 'has') {
       c = 'Référentiels HAS';
+    } else if (p.sourceKind === 'garde') {
+      c = 'Garde rapide';
     } else if (lower.includes('urgence') || lower === 'rcp' || lower.includes('réanim') || lower.includes('reanim')
         || id.startsWith('uv-') || id.startsWith('proto-') || id.startsWith('pr-') || id.startsWith('prcp-')) {
       c = 'Urgences & réa';
@@ -4283,8 +4342,9 @@ function renderProto(){
   if(!all.length){el.innerHTML='<div class="empty"><div class="empty-text">Aucun protocole disponible</div></div>';return}
   
   const customOrder = {
-    'Référentiels HAS': 1,
-    'Urgences & réa': 2,
+    'Garde rapide': 1,
+    'Référentiels HAS': 2,
+    'Urgences & réa': 3,
     'Infectieux': 3,
     'Douleur & palliatif': 4,
     'Cardio / respiratoire / rénal': 5,
@@ -4300,7 +4360,7 @@ function renderProto(){
   });
   if(filtEl){
     filtEl.innerHTML=`<div class="proto-filter-bar">
-      <select id="protoScopeFilter" onchange="filterProto()"><option value="essential">Essentiels</option><option value="all">Toute la bibliothèque</option></select>
+      <select id="protoScopeFilter" onchange="filterProto()"><option value="essential">Essentiels</option><option value="garde">Garde rapide</option><option value="has">Références HAS</option><option value="all">Toute la bibliothèque</option></select>
       <select id="protoCatFilter" onchange="filterProto()"><option value="">Toutes catégories</option>${cats.map(c=>`<option value="${c}">${c}</option>`).join('')}</select>
       <input type="text" id="protoSearch" placeholder="Rechercher une situation clinique..." oninput="filterProto()">
       <span class="proto-count" id="protoCount"></span>
@@ -4316,6 +4376,8 @@ function renderProto(){
     const q=sf?sf.value.toLowerCase():'';
     let filtered=window._protocoles;
     if(scope==='essential'&&!q&&!cat)filtered=filtered.filter(p=>p.essential===true);
+    if(scope==='garde')filtered=filtered.filter(p=>p.sourceKind==='garde');
+    if(scope==='has')filtered=filtered.filter(p=>p.sourceKind==='has');
     if(cat)filtered=filtered.filter(p=>(p.categorie||p.category||'')===cat);
     if(q)filtered=filtered.filter(p=>(p.titre||p.title||'').toLowerCase().includes(q)||(p.indication||'').toLowerCase().includes(q));
     renderProtoList(filtered);
@@ -4345,8 +4407,9 @@ function renderProtoList(list){
         const icon=p.icon||'📋';
         const hasBody=steps.length>0||meta.length>0||p.indication||p.surveillance||p.alerte||p.alert||p.contreIndications||p.effetsSecondaires;
         const verified=p.sourceKind==='has';
+        const guard=p.sourceKind==='garde';
         return`<div class="proto-card${p.urgency==='high'?' proto-urgent':''}${hasBody?'':' proto-empty'}">
-          <span class="source-status ${verified?'official':'unverified'}">${verified?esc(p.sourceLabel||'HAS · intégré dans l’app'):'Synthèse clinique interne'}</span>
+          <span class="source-status ${verified?'official':guard?'guard':'unverified'}">${verified?esc(p.sourceLabel||'HAS · intégré dans l’app'):guard?esc(p.sourceLabel||'Repère de garde'):'Synthèse clinique interne'}</span>
           <div class="proto-card-head"><span class="proto-icon">${icon}</span><div class="proto-card-title">${esc(p.titre||p.title||'')}</div></div>
           ${p.indication?`<div class="proto-indication">${esc(p.indication)}</div>`:''}
           ${meta.map(m=>`<div class="proto-meta"><strong>${esc(m.label)} :</strong> ${esc(m.text)}</div>`).join('')}

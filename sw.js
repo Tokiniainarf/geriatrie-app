@@ -1,5 +1,5 @@
 // Bump CACHE_NAME whenever core assets change so clients drop stale offline caches.
-const CACHE_NAME = 'geriatrie-v234';
+const CACHE_NAME = 'geriatrie-v235';
 // Must match scripts actually loaded by index.html (post data-bundle architecture).
 const CORE = [
   './',
@@ -9,6 +9,7 @@ const CORE = [
   './data-bundle.js',
   './practice-data.js',
   './annales-authentiques.js',
+  './annales-texte.js',
   './protocoles-has-officiels.js',
   './notebook-decks-data.js',
   './notebook-interactive.js',
