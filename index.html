@@ -19,7 +19,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<link rel="stylesheet" href="style.css?v=231">
+<link rel="stylesheet" href="style.css?v=232">
 <style>
 /* Critical preloader (inline so it shows before CSS/JS) */
 #appPreloader{position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:radial-gradient(ellipse 80% 50% at 50% 0%,#164E63 0%,#0f1117 55%,#050508 100%);color:#EDEDEF;font-family:Figtree,system-ui,sans-serif;transition:opacity .45s ease,visibility .45s}
@@ -363,20 +363,20 @@
   <!-- FICHES DE GARDE (checklists rapides — PAS les protocoles complets) -->
   <div class="view" id="vGarde">
     <div class="page-hd">
-      <h1>Fiches de garde</h1>
-      <p>Checklists express pour la nuit / SAU · distinctes des protocoles détaillés</p>
+      <h1>Orientation de garde</h1>
+      <p>Repérage rapide et priorités de sécurité — sans remplacer le protocole local</p>
     </div>
-    <div class="src-note">10 situations urgentes (chute, delirium, douleur…). Pour le détail thérapeutique → onglet Protocoles.</div>
+    <div class="src-note"><strong>Rôle :</strong> ne rien oublier lors du premier bilan. Les posologies et décisions thérapeutiques doivent être confirmées dans le protocole de l’établissement, le RCP/ANSM ou le référentiel de la spécialité.</div>
     <div id="gardeContent"></div>
   </div>
 
   <!-- ANNALES / ENTRAÎNEMENT -->
   <div class="view" id="vAnnales">
     <div class="page-hd">
-      <h1>Annales &amp; cas cliniques</h1>
-      <p>Entraînement style EVC — cas pédagogiques + sujets datés quand disponibles</p>
+      <h1>Entraînements EVC</h1>
+      <p>Cas pédagogiques et sujets reconstitués, avec provenance visible</p>
     </div>
-    <div class="src-note">Pas une base officielle CNG/CNCI exhaustive. Mélange de cas rédigés pour l’app (manuel CNEG) et de cas type EVC par année lorsque le module est chargé. Toujours croiser avec les sujets officiels.</div>
+    <div class="src-note"><strong>Important :</strong> aucun cas n’est désormais présenté comme une annale officielle sans lien vers le document source. Les millésimes indiquent le style d’entraînement, pas une authentification CNG.</div>
     
     <div class="sub-tab-switch">
       <button id="btnSubAnnales" class="active" onclick="switchAnnalesMode('annales')">Cas Cliniques</button>
@@ -399,14 +399,18 @@
   <!-- PROTOCOLES -->
   <div class="view" id="vProto">
     <div class="page-hd">
-      <h1>Protocoles &amp; traitements</h1>
-      <p>Conduites cliniques de synthèse + médiathèque — pas un clone intégral des reco HAS</p>
+      <h1>Conduites &amp; médicaments</h1>
+      <p>Deux usages séparés : démarche clinique d’un côté, fiches de molécules de l’autre</p>
     </div>
-    <div class="src-note">Synthèses pratiques (urgence, ATB, cardio, neuro…) inspirées des standards gériatriques. Les reco HAS ponctuelles existent en données annexes ; toujours vérifier la source HAS/ANSM officielle pour une décision critique.</div>
+    <div class="content-role-grid">
+      <div><strong>Orientation de garde</strong><span>Premier bilan et signes de gravité. Pas de prescription autonome.</span></div>
+      <div><strong>Conduites cliniques</strong><span>Démarche détaillée. « HAS » seulement si une référence vérifiable est affichée.</span></div>
+      <div><strong>Médicaments</strong><span>Révision des classes, interactions et risques. Posologie à confirmer dans le RCP/ANSM.</span></div>
+    </div>
     
     <div class="sub-tab-switch">
-      <button id="btnSubProtoCliniques" class="active" onclick="switchProtoMode('cliniques')">Protocoles</button>
-      <button id="btnSubTraitements" onclick="switchProtoMode('traitements')">Médicaments</button>
+      <button id="btnSubProtoCliniques" class="active" onclick="switchProtoMode('cliniques')">Conduites cliniques</button>
+      <button id="btnSubTraitements" onclick="switchProtoMode('traitements')">Fiches médicaments</button>
     </div>
 
     <!-- Section Protocoles Cliniques -->
@@ -421,7 +425,7 @@
         <button id="btnTxMolecules" class="active" onclick="switchTxSubMode('molecules')" style="font-size:0.8rem; padding:6px 12px; flex:1; min-width:80px;">Médiathèque</button>
         <button id="btnTxInteractions" onclick="switchTxSubMode('interactions')" style="font-size:0.8rem; padding:6px 12px; flex:1; min-width:80px;">Interactions</button>
         <button id="btnTxEffets" onclick="switchTxSubMode('effets')" style="font-size:0.8rem; padding:6px 12px; flex:1; min-width:80px;">Effets / Syndromes</button>
-        <button id="btnTxUrgence" onclick="switchTxSubMode('urgence')" style="font-size:0.8rem; padding:6px 12px; flex:1; min-width:80px;">Urgences & Doses</button>
+        <button id="btnTxUrgence" onclick="switchTxSubMode('urgence')" style="font-size:0.8rem; padding:6px 12px; flex:1; min-width:80px;">Urgence · à confirmer</button>
       </div>
 
       <!-- Content for Molecules -->
@@ -460,6 +464,7 @@
 
       <!-- Content for Urgence -->
       <div id="txSubTabUrgence" class="tx-sub-tab-content" style="display:none">
+        <div class="src-note"><strong>Attention :</strong> aide de révision uniquement. Vérifier dose, voie, adaptation rénale, contre-indications et protocole local avant utilisation clinique.</div>
         <div class="calc-toolbar">
           <input type="search" class="calc-search" id="txSearchUrgence" placeholder="Rechercher un traitement d'urgence ou une posologie..." autocomplete="off">
         </div>
@@ -567,18 +572,18 @@
 <script>
 (function(){
   var steps = [
-    { src: 'data-bundle.js?v=231', label: 'Contenu des chapitres…', pct: 40 },
-    { src: 'practice-data.js?v=231', label: 'Entraînements structurés…', pct: 46 },
-    { src: 'notebook-decks-data.js?v=231', label: 'Decks NotebookLM…', pct: 51 },
-    { src: 'notebook-interactive.js?v=231', label: 'Lecteur présentation…', pct: 56 },
-    { src: 'calculateurs.js?v=231', label: 'Scores & calculateurs…', pct: 62 },
-    { src: 'quiz.js?v=231', label: 'Mode examen…', pct: 69 },
-    { src: 'dashboard.js?v=231', label: 'Tableau de bord…', pct: 75 },
-    { src: 'appsearch.js?v=231', label: 'Recherche…', pct: 81 },
-    { src: 'erreurs-journal.js?v=231', label: 'Fichier erreurs…', pct: 86 },
-    { src: 'graph.js?v=231', label: 'Carte des liens…', pct: 91 },
-    { src: 'brainfeed.js?v=231', label: 'BrainFeed…', pct: 96 },
-    { src: 'app.js?v=231', label: 'Interface…', pct: 100 }
+    { src: 'data-bundle.js?v=232', label: 'Contenu des chapitres…', pct: 40 },
+    { src: 'practice-data.js?v=232', label: 'Entraînements structurés…', pct: 46 },
+    { src: 'notebook-decks-data.js?v=232', label: 'Decks NotebookLM…', pct: 51 },
+    { src: 'notebook-interactive.js?v=232', label: 'Lecteur présentation…', pct: 56 },
+    { src: 'calculateurs.js?v=232', label: 'Scores & calculateurs…', pct: 62 },
+    { src: 'quiz.js?v=232', label: 'Mode examen…', pct: 69 },
+    { src: 'dashboard.js?v=232', label: 'Tableau de bord…', pct: 75 },
+    { src: 'appsearch.js?v=232', label: 'Recherche…', pct: 81 },
+    { src: 'erreurs-journal.js?v=232', label: 'Fichier erreurs…', pct: 86 },
+    { src: 'graph.js?v=232', label: 'Carte des liens…', pct: 91 },
+    { src: 'brainfeed.js?v=232', label: 'BrainFeed…', pct: 96 },
+    { src: 'app.js?v=232', label: 'Interface…', pct: 100 }
   ];
   var i = 0;
   var fill = document.getElementById('plFill');

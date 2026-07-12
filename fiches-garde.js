@@ -11,42 +11,40 @@ const FICHES_GARDE = [
     checklist: [
       'Examen clinique complet (neuro, cardio, locomoteur)',
       'Rechercher fracture : hanche, poignet, vertèbre',
-      'ECG (chute = syncope ?)',
-      'Bilan : NFS, iono, créatinine, glycémie, TSH',
+      'ECG si malaise, perte de connaissance ou suspicion cardiaque',
+      'Examens complémentaires orientés par la clinique ; glycémie si diabète',
       'Révision médicamenteuse (BZD, antihypertenseurs)',
-      'Si anticoagulant : scanner cerebral si choc',
+      'Si traumatisme crânien ou signe neurologique : appliquer la filière locale d’imagerie, avec vigilance accrue sous anticoagulant',
       'Évaluation Tinetti + risque de re-chute'
     ],
-    alert: 'Si patient sous anticoagulant → scanner crânien systématique même sans trauma visible'
+    alert: 'HAS : pas d’imagerie cérébrale systématique après une chute sans indication clinique précise.'
   },
   {
     id: 'garde-2', title: 'Confusion aiguë (delirium)',
     icon: '🧠', urgency: 'high',
     tags: ['confusion', 'delirium', 'CAM'],
     checklist: [
-      'CAM : (1) Début aigu + (2) Inattention OU (1+3+4)',
-      'ECBU (infection urinaire = cause #1)',
-      'NFS, CRP, iono, glycémie, gaz du sang',
+      'CAM positive : début aigu/fluctuation + inattention + (pensée désorganisée ou niveau de conscience altéré)',
+      'Rechercher méthodiquement une cause aiguë : infection, douleur, globe, fécalome, déshydratation, hypoxie, trouble métabolique ou médicament',
+      'Examens biologiques et microbiologiques guidés par l’interrogatoire et l’examen',
       'Température (hypothermie possible chez sujet âgé)',
       'Révision médicamenteuse (anticholinergiques, opioïdes)',
-      'Rechercher rétention urinaire (sondage si globe)',
-      'Halopéridol 0.5mg PO/IM si agitation (éviter si DLB)',
+      'Rechercher un globe vésical ; traiter la cause selon le protocole local',
+      'Traitement médicamenteux seulement si danger ou soins indispensables compromis, à faible dose et pour la durée la plus courte',
       'Éviter contention, réorienter, horloge/calendrier'
     ],
-    alert: 'CONTRE-INDIQUER neuroleptiques si démence à corps de Lewy (hypersensibilité)'
+    alert: 'Éviter les neuroleptiques en cas de maladie à corps de Lewy ; privilégier d’abord les mesures non médicamenteuses.'
   },
   {
     id: 'garde-3', title: 'Douleur aiguë',
     icon: '💊', urgency: 'medium',
     tags: ['douleur', 'antalgie', 'EVA'],
     checklist: [
-      'Évaluation : EVA si communicant, ECPA si non communicant',
-      '1ère ligne : paracétamol 1g IV/PO (max 3g/j si < 50kg)',
-      '2ème ligne : tramadol 50mg (réduire si > 75 ans)',
-      '3ème ligne : morphine SC 0.1mg/kg (titration)',
-      'Si douleur neuropathique : gabapentine/pregabaline',
+      'Évaluation : auto-évaluation si possible ; Algoplus pour douleur aiguë non communicante, ECPA/Doloplus selon contexte',
+      'Choisir l’antalgique selon intensité, cause, poids, fonction rénale/hépatique, traitements et fragilité',
+      'Éviter les automatismes de palier et réévaluer après chaque intervention',
       'Rechercher cause : fracture, infection, constipation, rétention',
-      'Réévaluer toutes les 4h'
+      'Réévaluer avec la même échelle et adapter la fréquence à la situation'
     ],
     alert: 'Éviter AINS chez le sujet âgé (risque rénal, digestif, cardiovasculaire)'
   },

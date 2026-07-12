@@ -15,16 +15,16 @@ srs: N/A
 
 === SAMPLE CARDS ===
 
---- 1. quiz_flash (id=qf-curated-fried) ---
-Question: À partir de combien de critères de Fried parle-t-on de fragilité ?
+--- 1. quiz_flash (id=qf-curated-hypoactive) ---
+Question: Pourquoi un delirium hypoactif doit-il être activement recherché ?
 Options:
-  A. Au moins 3 critères sur 5. ✓
-  B. 1 critère sur 5.
-  C. 2 critères sur 5.
-  D. 5 critères sont nécessaires pour toute pré-fragilité.
+  A. Il ne nécessite aucune recherche de cause aiguë.
+  B. Il est peu bruyant mais associé à un risque de retard diagnostique et à un mauva ✓
+  C. Il correspond toujours à une dépression chronique.
+  D. Il confirme une maladie d’Alzheimer à début brutal.
 
---- 2. cas_choc (id=cc-11) ---
-Vignette: M. Blanc, 82 ans, consulte pour chutes et troubles de la mémoire. Il prend 12 médicaments : losartan, aspirine, clopidogrel, atorvastatine, metformine, gliclazide, oméprazole, lorazépam, codéine, para
+--- 2. cas_choc (id=cc-118) ---
+Vignette: Mme Morel, 92 ans, cancer pancréatique stade IV. Performance status 4. Refuse chimiothérapie. Douleur 8/10, dyspnée, anxiété.
 
 --- 3. visual (id=vis-31) ---
 Question: Polymédication et iatrogénie
@@ -32,188 +32,188 @@ Question: Polymédication et iatrogénie
 --- 4. piege_exam (id=px-1) ---
 Trap: Delirium = agitation seulement
 
---- 5. quiz_flash (id=qf-curated-tinetti) ---
-Question: Quel score Tinetti évoque un risque élevé de chute ?
-Options:
-  A. Un score supérieur à 26 sur 28.
-  B. Le Tinetti ne comporte aucun seuil de risque.
-  C. Un score de 28 sur 28.
-  D. Un score inférieur à 19 sur 28. ✓
-
---- 6. quiz_flash (id=qf-curated-lewy) ---
-Question: Pourquoi faut-il être prudent avec les neuroleptiques dans une démence à corps de Lewy ?
-Options:
-  A. Ils n’ont aucun effet sur la marche ou la vigilance.
-  B. Ils améliorent toujours la cognition à long terme.
-  C. Une hypersensibilité peut entraîner une aggravation neurologique et des effets i ✓
-  D. Ils sont obligatoires dès le diagnostic.
-
---- 7. cas_choc (id=cc-104) ---
-Vignette: Mme Bernard, 78 ans, arthrose genou sévère. ADL 6/6 (autonome), IADL 4/8 (ne fait plus les courses, cuisine difficilement, ne prend plus les transports, ne gère plus son argent).
-
---- 8. visual (id=vis-41) ---
-Question: Ostéoporose et risque de fracture
-
---- 9. piege_exam (id=px-5) ---
-Trap: Douleur sous-estimée
-
---- 10. quiz_flash (id=qf-curated-adl-iadl) ---
-Question: Quel couple d’échelles permet de distinguer autonomie de base et autonomie instrumentale ?
-Options:
-  A. GDS-15 pour l’autonomie de base et MNA pour l’autonomie instrumentale.
-  B. MMS pour l’autonomie de base et CAM pour l’autonomie instrumentale.
-  C. ADL de Katz pour les activités de base et IADL de Lawton pour les activités inst ✓
-  D. Tinetti pour l’autonomie de base et TUG pour l’autonomie instrumentale.
-
---- 11. quiz_flash (id=qf-curated-cam) ---
-Question: Quel outil valide le dépistage d’un delirium au lit du patient ?
-Options:
-  A. Le Tinetti, qui évalue l’équilibre et la marche.
-  B. La GDS-15, centrée sur les symptômes dépressifs.
-  C. Le MMS seul, interprété sans données antérieures.
-  D. La CAM : début aigu et fluctuant, trouble attentionnel, avec pensée désorganisée ✓
-
---- 12. cas_choc (id=cc-evc19-3) ---
-Vignette: Mme Arnaud, 84 ans, Alzheimer connu (MMS habituel 20/30). Admission EHPAD il y a 3 ans. Depuis 48 h : somnolence diurne, hallucinations visuelles, agitation nocturne. T° 37,8 °C. Na+ 152 mmol/L. Pas d
-
---- 13. visual (id=vis-51) ---
-Question: Dépression vs pseudo-démence
-
---- 14. piege_exam (id=px-8) ---
-Trap: Polymédication = seulement ≥ 5 médicaments
-
---- 15. quiz_flash (id=qf-curated-palliative) ---
-Question: Quel est l’objectif de la sédation en situation palliative ?
-Options:
-  A. Éviter systématiquement la discussion collégiale.
-  B. Soulager une souffrance réfractaire, sans intention de provoquer la mort. ✓
-  C. Provoquer le décès lorsque la demande familiale est forte.
-  D. Remplacer toute évaluation de la douleur et de l’anxiété.
-
---- 16. quiz_flash (id=qf-curated-bouchon-3) ---
-Question: Dans le modèle 1 + 2 + 3 de Bouchon, que représente le facteur 3 ?
-Options:
-  A. Le niveau d’autonomie antérieur.
-  B. La maladie chronique déjà connue.
-  C. Un facteur précipitant aigu, souvent réversible et à rechercher en priorité. ✓
-  D. Le vieillissement physiologique de l’organe.
-
---- 17. cas_choc (id=cc-10) ---
-Vignette: M. Garnier, 88 ans, en phase terminale d'un cancer du pancréas métastatique. Il est conscient, souffre (EVA 8/10), demande à « ne plus souffrir ». Sa fille souhaite « qu'on fasse tout ». L'équipe médi
-
---- 18. visual (id=vis-61) ---
-Question: Capacité décisionnelle et éthique
-
---- 19. piege_exam (id=px-10) ---
-Trap: Sédation profonde = euthanasie
-
---- 20. quiz_flash (id=qf-curated-delirium-bzd) ---
-Question: Quelle attitude adopter devant un delirium avec agitation sans sevrage alcoolique ?
-Options:
-  A. Prescrire une benzodiazépine systématiquement pour obtenir le sommeil.
-  B. Conclure à une démence irréversible sans bilan étiologique.
-  C. Augmenter les anticholinergiques pour diminuer l’agitation.
-  D. Chercher et traiter la cause ; éviter les benzodiazépines qui aggravent confusio ✓
-
---- 21. quiz_flash (id=qf-curated-tug) ---
-Question: Quel résultat du Timed Up and Go (TUG) alerte sur un risque élevé de chute ?
-Options:
-  A. Un temps de 5 secondes exactement.
-  B. Un temps supérieur à 20 secondes. ✓
-  C. Un temps inférieur à 10 secondes.
-  D. Le TUG ne renseigne jamais sur la mobilité.
-
---- 22. cas_choc (id=cc-evc18-2) ---
-Vignette: M. Roche, 86 ans, démence Alzheimer stade modéré (MMS 18/30), vit en EHPAD. Refuse le traitement d'une pneumonie (antibiothérapie, oxygène). Personne de confiance : son fils, désigné sur la carte Vita
-
---- 23. visual (id=vis-55) ---
-Question: Sarcopénie et vitesse de marche
-
---- 24. piege_exam (id=px-9) ---
-Trap: Autonomie préservée = pas de bilan gériatrique
-
---- 25. quiz_flash (id=qf-curated-pseudodementia) ---
-Question: Pourquoi une dépression peut-elle imiter un trouble neurocognitif ?
-Options:
-  A. Elle rend la GDS-15 inutile.
-  B. Elle exclut toute évaluation cognitive.
-  C. Elle entraîne toujours un delirium aigu.
-  D. Elle peut donner une plainte cognitive et un ralentissement réversibles après pr ✓
-
---- 26. quiz_flash (id=qf-curated-osteoporosis) ---
-Question: Quel T-score définit l’ostéoporose densitométrique ?
-Options:
-  A. Un T-score supérieur à +2,5.
-  B. Un T-score supérieur ou égal à −1.
-  C. Un T-score compris entre 0 et +1.
-  D. Un T-score inférieur ou égal à −2,5. ✓
-
---- 27. cas_choc (id=cc-evc19-2) ---
-Vignette: Mme Colin, 91 ans, cancer bronchique métastatique, refus de nutrition artificielle et de chimiothérapie documentés. Dyspnée majeure, agitation réfractaire aux morphiniques titrés. Équipe et famille de
-
---- 28. visual (id=vis-57) ---
-Question: Score Tinetti (POMA)
-
---- 29. piege_exam (id=px-6) ---
-Trap: Arrêt brutal des psychotropes
-
---- 30. quiz_flash (id=qf-curated-polypharmacy) ---
+--- 5. quiz_flash (id=qf-curated-polypharmacy) ---
 Question: À partir de quel nombre de médicaments parle-t-on habituellement de polymédication ?
 Options:
-  A. La polymédication ne dépend jamais du nombre de traitements.
-  B. Cinq médicaments ou plus pris quotidiennement. ✓
-  C. Deux médicaments ou plus.
-  D. Uniquement dix médicaments ou plus.
+  A. Cinq médicaments ou plus pris quotidiennement. ✓
+  B. Uniquement dix médicaments ou plus.
+  C. La polymédication ne dépend jamais du nombre de traitements.
+  D. Deux médicaments ou plus.
 
---- 31. quiz_flash (id=qf-curated-gds) ---
+--- 6. quiz_flash (id=qf-curated-gds) ---
 Question: Quel score GDS-15 doit faire évoquer une dépression ?
 Options:
-  A. Un score d’au moins 5 sur 15. ✓
+  A. Un score de 0 sur 15.
   B. La GDS-15 ne sert pas au dépistage.
-  C. Un score de 1 sur 15 sans symptôme associé.
-  D. Un score de 0 sur 15.
+  C. Un score d’au moins 5 sur 15. ✓
+  D. Un score de 1 sur 15 sans symptôme associé.
 
---- 32. cas_choc (id=cc-evc11-3) ---
-Vignette: M. Garnier, 79 ans, EVA 7/10. DFG 44. Gabapentine, somnolence, chutes.
+--- 7. cas_choc (id=cc-120) ---
+Vignette: Mme Lambert, 80 ans, post-chirurgie fracture poignet. Agitée la nuit, orientée le jour. MMS pré-op 26/30.
 
---- 33. visual (id=vis-20) ---
-Question: Décision soins palliatifs
+--- 8. visual (id=vis-61) ---
+Question: Capacité décisionnelle et éthique
 
---- 34. piege_exam (id=px-7) ---
-Trap: Albumine basse = dénutrition
+--- 9. piege_exam (id=px-10) ---
+Trap: Sédation profonde = euthanasie
 
---- 35. quiz_flash (id=qf-curated-delirium-cause) ---
-Question: Quel facteur doit être recherché sans délai devant un delirium récent ?
+--- 10. quiz_flash (id=qf-curated-bouchon-3) ---
+Question: Dans le modèle 1 + 2 + 3 de Bouchon, que représente le facteur 3 ?
 Options:
-  A. Une cause aiguë réversible : infection, douleur, globe, fécalome, iatrogénie ou  ✓
-  B. Une décision d’institutionnalisation immédiate.
-  C. Seulement l’âge chronologique du patient.
-  D. Uniquement les antécédents de démence.
+  A. Un facteur précipitant aigu, souvent réversible et à rechercher en priorité. ✓
+  B. Le niveau d’autonomie antérieur.
+  C. Le vieillissement physiologique de l’organe.
+  D. La maladie chronique déjà connue.
 
---- 36. quiz_flash (id=qf-curated-renal-prescription) ---
-Question: Quel réflexe de prescription est indispensable chez une personne âgée ?
+--- 11. quiz_flash (id=qf-curated-bedrest) ---
+Question: Quelle mesure prévient le mieux le syndrome d’immobilisation ?
 Options:
-  A. Adapter la dose des médicaments à la fonction rénale et réévaluer régulièrement  ✓
-  B. Arrêter brutalement tous les psychotropes.
-  C. Multiplier les traitements pour chaque symptôme isolé.
-  D. Conserver les doses adultes sans tenir compte de la fonction rénale.
+  A. Le repos strict prolongé pour éviter toute chute.
+  B. La mobilisation et la réadaptation précoces, dès que l’état clinique le permet. ✓
+  C. La contention au lit comme mesure de première intention.
+  D. La suppression de toute aide technique.
 
---- 37. cas_choc (id=cc-2) ---
-Vignette: M. Martin, 79 ans, hospitalisé pour pneumopathie. Son infirmière le trouve agité, désorienté dans la nuit, il tire sa perfusion. Il était orienté le matin. PMH: BPCO, insuffisance rénale modérée (DFG
+--- 12. cas_choc (id=cc-101) ---
+Vignette: Mme Dupont, 82 ans, consulte pour fatigue. GDS 2, ADL 6/6, IADL 8/8. NFS, TSH, glycémie normales. Elle marche 30min/j, vit seule, lit le journal.
 
---- 38. visual (id=vis-47) ---
+--- 13. visual (id=vis-47) ---
 Question: Incontinence et causes réversibles (DIAPPERS)
 
---- 39. piege_exam (id=px-3) ---
-Trap: MMS sans correction âge/éducation
+--- 14. piege_exam (id=px-5) ---
+Trap: Douleur sous-estimée
 
---- 40. quiz_flash (id=qf-curated-orthostatic) ---
-Question: Quel examen simple fait partie du bilan initial après une chute ?
+--- 15. quiz_flash (id=qf-curated-osteoporosis) ---
+Question: Quel T-score définit l’ostéoporose densitométrique ?
 Options:
-  A. La mesure de la pression artérielle couchée puis debout, à la recherche d’une hy ✓
-  B. Un scanner cérébral systématique en l’absence de signe d’alerte.
-  C. Une contention systématique avant toute évaluation.
-  D. Une épreuve d’effort maximale chez tout patient.
+  A. Un T-score inférieur ou égal à −2,5. ✓
+  B. Un T-score compris entre 0 et +1.
+  C. Un T-score supérieur ou égal à −1.
+  D. Un T-score supérieur à +2,5.
+
+--- 16. quiz_flash (id=qf-curated-cam) ---
+Question: Quel outil valide le dépistage d’un delirium au lit du patient ?
+Options:
+  A. La CAM : début aigu et fluctuant, trouble attentionnel, avec pensée désorganisée ✓
+  B. Le Tinetti, qui évalue l’équilibre et la marche.
+  C. Le MMS seul, interprété sans données antérieures.
+  D. La GDS-15, centrée sur les symptômes dépressifs.
+
+--- 17. cas_choc (id=cc-evc23-10) ---
+Vignette: M. Perrin, 91 ans, démence Alzheimer stade sévère (MMS 8), pneumopathie aspiration récurrente. Troisième épisode en 4 mois. Refus famille de réhospitaliser. Patiente grabataire, dysphagie, déshydratat
+
+--- 18. visual (id=vis-5) ---
+Question: Cycle dénutrition-sarcopénie
+
+--- 19. piege_exam (id=px-7) ---
+Trap: Albumine basse = dénutrition
+
+--- 20. quiz_flash (id=qf-curated-tinetti) ---
+Question: Quel score Tinetti évoque un risque élevé de chute ?
+Options:
+  A. Le Tinetti ne comporte aucun seuil de risque.
+  B. Un score inférieur à 19 sur 28. ✓
+  C. Un score supérieur à 26 sur 28.
+  D. Un score de 28 sur 28.
+
+--- 21. quiz_flash (id=qf-curated-presbyacousie) ---
+Question: Quelle proposition décrit le mieux la presbyacousie ?
+Options:
+  A. Une surdité unilatérale brutale à traiter comme une urgence vasculaire.
+  B. Une perte auditive forcément due à un bouchon de cérumen.
+  C. Une baisse progressive, bilatérale et symétrique de l’audition, avec indication  ✓
+  D. Une douleur aiguë d’oreille avec fièvre.
+
+--- 22. cas_choc (id=cc-103) ---
+Vignette: M. Martin, 85 ans, chute à domicile. Veuve, 3 AVC, diabète type 2, MMS 22/30, ADL 4/6, IADL 3/8, albumine 28g/L, MNA 17.
+
+--- 23. visual (id=vis-49) ---
+Question: Prévention des escarres (Braden)
+
+--- 24. piege_exam (id=px-0) ---
+Trap: Dépression vs démence
+
+--- 25. quiz_flash (id=qf-curated-mna) ---
+Question: Comment interpréter un MNA-SF à 7/14 ?
+Options:
+  A. Il élimine une sarcopénie.
+  B. Il correspond à un statut nutritionnel normal.
+  C. Il indique seulement un surpoids.
+  D. Il évoque une dénutrition et impose une évaluation et une prise en charge nutrit ✓
+
+--- 26. quiz_flash (id=qf-curated-ecpa) ---
+Question: Quelle échelle privilégier pour évaluer la douleur chez un patient non communicant ?
+Options:
+  A. L’EVA verbale uniquement.
+  B. L’ECPA, fondée sur l’observation comportementale. ✓
+  C. La GDS-15, qui dépiste la dépression.
+  D. Le MMS, qui mesure la mémoire.
+
+--- 27. cas_choc (id=cc-8) ---
+Vignette: M. Fournier, 85 ans, 8 médicaments/jour : amlodipine, metformine, oméprazole, lorazépam, diclofénac, diphénhydramine, atorvastatine, aspirine. DFG 35 ml/min. Chutes récidivantes, constipation, somnole
+
+--- 28. visual (id=vis-37) ---
+Question: Déficits sensoriels
+
+--- 29. piege_exam (id=px-8) ---
+Trap: Polymédication = seulement ≥ 5 médicaments
+
+--- 30. quiz_flash (id=qf-curated-delirium-bzd) ---
+Question: Quelle attitude adopter devant un delirium avec agitation sans sevrage alcoolique ?
+Options:
+  A. Conclure à une démence irréversible sans bilan étiologique.
+  B. Chercher et traiter la cause ; éviter les benzodiazépines qui aggravent confusio ✓
+  C. Augmenter les anticholinergiques pour diminuer l’agitation.
+  D. Prescrire une benzodiazépine systématiquement pour obtenir le sommeil.
+
+--- 31. quiz_flash (id=qf-curated-fried) ---
+Question: À partir de combien de critères de Fried parle-t-on de fragilité ?
+Options:
+  A. 5 critères sont nécessaires pour toute pré-fragilité.
+  B. 2 critères sur 5.
+  C. 1 critère sur 5.
+  D. Au moins 3 critères sur 5. ✓
+
+--- 32. cas_choc (id=cc-evc24-2) ---
+Vignette: Mme Petit, 83 ans, 4 chutes en 3 mois. Dernière chute avec fracture poignet. Prend: lorazepam 2mg, amlodipine 10mg, furosémide 40mg, tramadol 50mg. PA couché 145/85, debout 110/65. Tinetti 16/28.
+
+--- 33. visual (id=vis-55) ---
+Question: Sarcopénie et vitesse de marche
+
+--- 34. piege_exam (id=px-6) ---
+Trap: Arrêt brutal des psychotropes
+
+--- 35. quiz_flash (id=qf-curated-lewy) ---
+Question: Pourquoi faut-il être prudent avec les neuroleptiques dans une démence à corps de Lewy ?
+Options:
+  A. Ils sont obligatoires dès le diagnostic.
+  B. Ils n’ont aucun effet sur la marche ou la vigilance.
+  C. Ils améliorent toujours la cognition à long terme.
+  D. Une hypersensibilité peut entraîner une aggravation neurologique et des effets i ✓
+
+--- 36. quiz_flash (id=qf-curated-pseudodementia) ---
+Question: Pourquoi une dépression peut-elle imiter un trouble neurocognitif ?
+Options:
+  A. Elle entraîne toujours un delirium aigu.
+  B. Elle rend la GDS-15 inutile.
+  C. Elle peut donner une plainte cognitive et un ralentissement réversibles après pr ✓
+  D. Elle exclut toute évaluation cognitive.
+
+--- 37. cas_choc (id=cc-11) ---
+Vignette: M. Blanc, 82 ans, consulte pour chutes et troubles de la mémoire. Il prend 12 médicaments : losartan, aspirine, clopidogrel, atorvastatine, metformine, gliclazide, oméprazole, lorazépam, codéine, para
+
+--- 38. visual (id=vis-43) ---
+Question: Hypotension orthostatique
+
+--- 39. piege_exam (id=px-11) ---
+Trap: AOMI = aspirine systématique
+
+--- 40. quiz_flash (id=qf-curated-palliative) ---
+Question: Quel est l’objectif de la sédation en situation palliative ?
+Options:
+  A. Provoquer le décès lorsque la demande familiale est forte.
+  B. Soulager une souffrance réfractaire, sans intention de provoquer la mort. ✓
+  C. Remplacer toute évaluation de la douleur et de l’anxiété.
+  D. Éviter systématiquement la discussion collégiale.
 
 === QUIZ INTEGRITY ===
 Total quiz cards in deck: 24

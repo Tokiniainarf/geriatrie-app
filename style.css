@@ -7011,3 +7011,13 @@ body {
   .practice-case-context > div { font-size: .86rem; }
   .edu-visual-gallery { grid-template-columns: 1fr; }
 }
+.content-role-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:12px 0 16px}
+.content-role-grid>div{display:flex;flex-direction:column;gap:5px;padding:14px;border:1px solid color-mix(in srgb,var(--teal-accent) 28%,transparent);border-radius:14px;background:color-mix(in srgb,var(--card) 92%,var(--teal-accent) 8%)}
+.content-role-grid strong{font-size:.88rem;color:var(--text)}
+.content-role-grid span{font-size:.78rem;line-height:1.45;color:var(--muted)}
+.source-status{display:inline-flex;align-items:center;gap:5px;width:max-content;margin:0 0 8px;padding:4px 8px;border-radius:999px;font-size:.69rem;font-weight:750;letter-spacing:.02em}
+.source-status.training{background:rgba(245,158,11,.13);color:#b45309;border:1px solid rgba(245,158,11,.3)}
+.source-status.official{background:rgba(16,185,129,.13);color:#047857;border:1px solid rgba(16,185,129,.3)}
+.source-status.unverified{background:rgba(239,68,68,.1);color:#b91c1c;border:1px solid rgba(239,68,68,.24)}
+.ann-session-notice{margin:0 0 14px;padding:14px 16px;border-radius:14px;border:1px solid rgba(14,165,233,.25);background:rgba(14,165,233,.07);font-size:.84rem;line-height:1.55;color:var(--text)}
+@media(max-width:720px){.content-role-grid{grid-template-columns:1fr}.content-role-grid>div{padding:12px}}

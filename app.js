@@ -219,7 +219,7 @@ function bootApp(){
     document.body.classList.remove('ap-mini-visible', 'ap-full-open', 'ap-is-playing');
   } catch (_) {}
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js?v=231').then((reg) => {
+    navigator.serviceWorker.register('sw.js?v=232').then((reg) => {
       try { reg.update(); } catch (_) {}
       if (reg.waiting) {
         try { reg.waiting.postMessage({ type: 'SKIP_WAITING' }); } catch (_) {}
@@ -3794,7 +3794,9 @@ function renderGarde(){
     el.innerHTML='<div class="empty"><div class="empty-icon">🚨</div><div class="empty-text">Fiches indisponibles</div><div class="empty-hint">Rechargez l\'application</div></div>';
     return;
   }
-  el.innerHTML='<div class="garde-grid">'+FICHES_GARDE.map(f=>`
+  el.innerHTML='<div class="garde-grid">'+FICHES_GARDE.map(f=>{
+    const orientation=(f.checklist||[]).filter(item=>!/(?:\b\d+(?:[.,]\d+)?\s*(?:mg|µg|g\/j|ml)\b|\b(?:injecter|administrer|bolus|perfusion)\b)/i.test(item));
+    return`
     <div class="garde-card garde-urgency-${esc(f.urgency)}" id="${esc(f.id)}">
       <div class="garde-card-head" onclick="this.parentElement.classList.toggle('open')">
         <span class="garde-card-icon" aria-hidden="true">${f.icon}</span>
@@ -3802,10 +3804,11 @@ function renderGarde(){
         <span class="garde-card-chevron" aria-hidden="true">▾</span>
       </div>
       <div class="garde-card-body">
-        <ul class="garde-checklist">${f.checklist.map(item=>`<li>${esc(item)}</li>`).join('')}</ul>
+        <span class="source-status unverified">Orientation pédagogique · protocole local prioritaire</span>
+        <ul class="garde-checklist">${orientation.map(item=>`<li>${esc(item)}</li>`).join('')}</ul>
         ${f.alert?`<div class="garde-alert" role="note">${esc(f.alert)}</div>`:''}
       </div>
-    </div>`).join('')+'</div>';
+    </div>`}).join('')+'</div>';
   const firstGarde=el.querySelector('.garde-card');
   if(firstGarde)firstGarde.classList.add('open');
 }
@@ -3883,8 +3886,9 @@ function renderSujets(){
 function renderSujetsList(list){
   const el=document.getElementById('sujetsContent');if(!el)return;
   if(!list.length){el.innerHTML='<div class="empty"><div class="empty-text">Aucun sujet pour ce filtre</div></div>';return;}
-  el.innerHTML=list.map(s=>`
+  el.innerHTML=`<div class="ann-session-notice"><strong>Session 2025 :</strong> l’épreuve externe comporte officiellement deux écrits de 2 h (connaissances fondamentales et pratiques) le même jour ; la voie interne comporte un QCM de 2 h. Aucun sujet 2025 de gériatrie n’est intégré faute de document officiel public vérifiable.</div>`+list.map(s=>`
     <div class="sujet-card">
+      <span class="source-status training">Entraînement reconstitué · non officiel</span>
       <div class="sujet-header">
         <span class="sujet-annee">${s.annee} — ${s.session||''}</span>
         <span class="sujet-duree">⏱ ${s.duree||'—'}</span>
@@ -3926,13 +3930,18 @@ function renderAnnales(){
   if(typeof CAS_EVC_2015_2017!=='undefined')all.push(...CAS_EVC_2015_2017.map(a=>({...a,year:a.year||(a.id.includes('15')?2015:(a.id.includes('16')?2016:2017)),_src:'evc15_17'})));
   if(typeof CAS_EVC_2010_2014!=='undefined')all.push(...CAS_EVC_2010_2014.map(a=>({...a,year:a.year||(a.id.includes('10')?2010:(a.id.includes('11')?2011:(a.id.includes('12')?2012:(a.id.includes('13')?2013:2014)))),_src:'evc10_14'})));
   if(!all.length){el.innerHTML='<div class="empty"><div class="empty-text">Aucune annale disponible</div></div>';return}
+  all.forEach(a=>{
+    const url=String(a.officialSourceUrl||a.sourceUrl||'');
+    a._official=a.official===true && /^https:\/\/(?:www\.)?(?:cng\.sante\.fr|sante\.gouv\.fr)\//i.test(url);
+    a._sourceLabel=a._official?'Sujet officiel vérifié':'Entraînement reconstitué · non officiel';
+  });
   // Years available
   const years=[...new Set(all.map(a=>a.year).filter(Boolean))].sort((a,b)=>b-a);
   const chapters=[...new Set(all.map(a=>a.chapter).filter(Boolean))];
   // Filters
   if(filtEl){
     filtEl.innerHTML=`<div class="ann-filter-bar">
-      <select id="annYearFilter" onchange="filterAnnales()"><option value="">Toutes les années</option>${years.map(y=>`<option value="${y}">${y}</option>`).join('')}</select>
+      <select id="annYearFilter" onchange="filterAnnales()"><option value="">Tous les styles</option>${years.map(y=>`<option value="${y}">Style ${y}</option>`).join('')}</select>
       <select id="annChapFilter" onchange="filterAnnales()"><option value="">Tous les chapitres</option>${chapters.map(c=>{const ch=APP_DATA.chapters.find(x=>x.id===c);return`<option value="${c}">${c.replace('ch','')} — ${ch?ch.t:c}</option>`}).join('')}</select>
       <span class="ann-count" id="annCount">${all.length} cas</span>
     </div>`;
@@ -3963,12 +3972,12 @@ function renderAnnalesList(){
     el.innerHTML='<div class="empty"><div class="empty-icon">📋</div><div class="empty-text">Aucun cas pour ces filtres</div><div class="empty-hint">Réinitialisez année ou chapitre</div></div>';
     return;
   }
-  el.innerHTML=sortedKeys.map((year,yi)=>{
+  el.innerHTML=`<div class="ann-session-notice"><strong>Authentification :</strong> les cas actuels sont des entraînements pédagogiques. « Matin/soir » et « CROQ » sont des modes d’entraînement de l’app, pas des libellés officiels authentifiés. Pour 2025 : aucune annale de gériatrie n’est affichée sans PDF source CNG.</div>`+sortedKeys.map((year,yi)=>{
     const cases=groups[year];
     const openCls=yi===0?' open':'';
     return`<div class="ann-year-group${openCls}">
       <div class="ann-year-header" onclick="this.parentElement.classList.toggle('open')">
-        <span class="ann-year-label">${year}</span>
+        <span class="ann-year-label">${cases.some(c=>c._official)?year:'Style '+year}</span>
         <span class="ann-year-count">${cases.length} cas</span>
         <span class="ann-chevron">▾</span>
       </div>
@@ -3976,7 +3985,8 @@ function renderAnnalesList(){
         const chName=APP_DATA.chapters.find(c=>c.id===a.chapter);
         const diffBadge=a.difficulty?`<span class="rang-badge rang-${a.difficulty.toLowerCase()}">Rang ${a.difficulty}</span>`:'';
         const questions=a.questions?a.questions.map((q,i)=>`<div class="ann-q"><div class="ann-q-text"><strong>Q${i+1}:</strong> ${esc(q.q||q.question||'')}</div><div class="ann-a-text ann-a-hidden" style="display:none" id="ans-${a.id}-${i}">${esc(q.a||q.answer||'')}</div><button type="button" class="ann-reveal-btn" onclick="toggleAnnAnswer('ans-${a.id}-${i}',this)">Voir réponse</button></div>`).join(''):(a.correction||a.reponse?`<div class="ann-q"><div class="ann-a-text ann-a-hidden" style="display:none" id="ans-${a.id}">${esc(a.correction||a.reponse)}</div><button type="button" class="ann-reveal-btn" onclick="toggleAnnAnswer('ans-${a.id}',this)">Voir réponse</button></div>`:'');
-        return`<div class="ann-card">
+         return`<div class="ann-card">
+           <span class="source-status ${a._official?'official':'training'}">${esc(a._sourceLabel)}</span>
           <div class="ann-card-head">${diffBadge}<span class="ann-card-ch">${chName?chName.t:a.chapter||''}</span></div>
           <div class="ann-card-title">${esc(a.title||a.titre||'')}</div>
           <div class="ann-card-situation">${esc(a.situation||a.cas||a.case||'')}</div>
@@ -4268,8 +4278,12 @@ function renderProtoList(list){
         const meta=getProtoMetaBlocks(p);
         const icon=p.icon||'📋';
         const hasBody=steps.length>0||meta.length>0||p.indication||p.surveillance||p.alerte||p.alert||p.contreIndications||p.effetsSecondaires;
+        const sourceUrl=String(p.sourceUrl||p.officialSourceUrl||'');
+        const verified=/^https:\/\/(?:www\.)?(?:has-sante\.fr|ansm\.sante\.fr)\//i.test(sourceUrl);
         return`<div class="proto-card${p.urgency==='high'?' proto-urgent':''}${hasBody?'':' proto-empty'}">
+          <span class="source-status ${verified?'official':'unverified'}">${verified?'Référentiel officiel relié':'Synthèse pédagogique · source non reliée'}</span>
           <div class="proto-card-head"><span class="proto-icon">${icon}</span><div class="proto-card-title">${esc(p.titre||p.title||'')}</div></div>
+          ${verified?`<a class="proto-source-link" href="${esc(sourceUrl)}" target="_blank" rel="noopener">Consulter la source officielle</a>`:''}
           ${p.indication?`<div class="proto-indication">${esc(p.indication)}</div>`:''}
           ${meta.map(m=>`<div class="proto-meta"><strong>${esc(m.label)} :</strong> ${esc(m.text)}</div>`).join('')}
           ${steps.length?`<ol class="proto-steps">${steps.map(s=>`<li>${esc(s)}</li>`).join('')}</ol>`:''}
@@ -4509,6 +4523,7 @@ function renderMeds() {
 
         html += `
           <div class="calc-card med-card" data-class="${esc(className)}" style="border-left: 4px solid ${isPim ? 'var(--danger, #ef4444)' : 'var(--accent, #0891b2)'}">
+            <span class="source-status unverified">Fiche de révision · RCP/ANSM à vérifier</span>
             <div class="calc-card-hdr">
               <span class="calc-card-nom">${esc(med.nom)}</span>
               <span class="calc-badge">${esc(className.toUpperCase())}</span>
@@ -4540,6 +4555,7 @@ function renderInteractions() {
 
   content.innerHTML = INTERACTIONS_CRITIQUES.map(item => `
     <div class="calc-card interaction-card" style="border-left: 4px solid var(--danger, #ef4444); background:rgba(239,68,68,0.03);">
+      <span class="source-status unverified">Alerte pédagogique · base d’interactions à confirmer</span>
       <div class="calc-card-hdr">
         <span class="calc-card-nom" style="color:var(--danger,#ef4444); font-weight:bold;">${esc(item.drugA)} + ${esc(item.drugB)}</span>
         <span class="calc-badge" style="background:var(--danger,#ef4444); color:white;">RISQUE CRITIQUE</span>
@@ -4562,6 +4578,7 @@ function renderEffets() {
 
   content.innerHTML = EFFETS_INDESIRABLES.map(item => `
     <div class="calc-card effet-card" style="border-left: 4px solid var(--warning, #f59e0b);">
+      <span class="source-status unverified">Fiche de révision · pharmacovigilance/RCP à vérifier</span>
       <div class="calc-card-hdr">
         <span class="calc-card-nom">${esc(item.medicament)}</span>
         <span class="calc-badge">${esc(item.classe)}</span>
@@ -4589,12 +4606,15 @@ function renderUrgence() {
   MEDICAMENTS_URGENCE.forEach(item => {
     html += `
       <div class="calc-card urg-card" style="border-left: 4px solid #3b82f6;">
+        <span class="source-status unverified">Dose non validée localement · confirmation obligatoire</span>
         <div class="calc-card-hdr">
-          <span class="calc-card-nom" style="color:#3b82f6; font-weight:bold;">🚨 ${esc(item.nom || item.title)}</span>
+          <span class="calc-card-nom" style="color:#3b82f6; font-weight:bold;">🚨 ${esc(item.medicament || item.nom || item.title)}</span>
           <span class="calc-badge" style="background:#3b82f6; color:white;">URGENCE</span>
         </div>
         <div class="med-details" style="display:flex; flex-direction:column; gap:8px; margin-top:8px;">
           ${item.indication ? `<div><strong>Indication :</strong> <span class="fs-sm">${esc(item.indication)}</span></div>` : ''}
+          ${item.dose_adulte ? `<div><strong>Dose adulte indicative :</strong> <span class="fs-sm">${esc(item.dose_adulte)}</span></div>` : ''}
+          ${item.dose_sujet_age ? `<div><strong>Adaptation proposée dans la fiche :</strong> <span class="fs-sm">${esc(item.dose_sujet_age)}</span></div>` : ''}
           ${item.posologie ? `<div><strong>Posologie / Protocole d'administration :</strong> <span class="fs-sm">${esc(item.posologie)}</span></div>` : ''}
           ${item.dilution ? `<div><strong>Dilution / Préparation :</strong> <span class="fs-sm">${esc(item.dilution)}</span></div>` : ''}
           ${item.surveillance ? `<div><strong>Surveillance critique :</strong> <span class="fs-sm">${esc(item.surveillance)}</span></div>` : ''}

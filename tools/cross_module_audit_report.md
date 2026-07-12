@@ -1,4 +1,4 @@
-# Audit transversal de pertinence et répétitions — v231
+# Audit transversal de pertinence et répétitions — v232
 
 - 141 jeux de données structurés chargés, 2983 enregistrements.
 - BrainFeed rendu : 71 cartes (quiz_flash 24, cas_choc 21, visual 14, piege_exam 12).
