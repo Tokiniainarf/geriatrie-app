@@ -7087,3 +7087,24 @@ body {
 @media(max-width:760px){.annal-explorer-controls{grid-template-columns:1fr}.annal-format-switch button{flex:1}.annal-question{grid-template-columns:1fr;gap:8px}.annal-session-card{padding:16px;border-radius:17px}.annal-method{display:grid}.annal-session-card>header{align-items:flex-start}.annal-session-card>header small{text-align:right}}
 @media(max-width:560px){.proto-filter-bar{display:grid;grid-template-columns:1fr 1fr}.proto-filter-bar select{min-width:0;width:100%}.proto-filter-bar input{grid-column:1 / -1;min-width:0;width:100%}.proto-count{grid-column:1 / -1}}
 @media(max-width:560px){#vAnnales .sub-tab-switch{overflow:visible}#vAnnales .sub-tab-switch button{flex:1 1 0;min-width:0;padding:8px 5px;white-space:normal;line-height:1.2}}
+
+/* v236 — Pulse devient une courte séance verticale, avec figures natives. */
+#vFeed .bf-visual-page { padding: 14px 14px 86px !important; background: radial-gradient(circle at 50% 12%, #174c62 0, #071b2a 48%, #04111b 100%) !important; }
+#vFeed .bf-visual-stack { width: min(100%, 460px); min-height: 0; height: 100%; gap: 10px; }
+#vFeed .bf-visual-caption { padding: 0 3px 4px; background: transparent; text-align: left; }
+#vFeed .bf-visual-kicker { margin: 0 0 5px; color: #8ce3df; font: 800 .64rem/1.2 var(--sans); letter-spacing: .12em; }
+#vFeed .bf-visual-title { margin: 0 0 5px; color: #fff; font: 800 clamp(1.1rem, 3.8vw, 1.4rem)/1.22 var(--sans); letter-spacing: -.025em; }
+#vFeed .bf-visual-sub { margin: 0; color: rgba(230,246,248,.78); font: 500 .88rem/1.5 var(--sans); opacity: 1; }
+#vFeed .bf-visual-caption .bf-action-reveal { width: auto; min-height: 42px; margin-top: 10px; padding: 10px 14px; background: linear-gradient(135deg, #8ce3df, #77c8ef); color: #06202a; font-weight: 800; }
+#vFeed .bf-native-diagram-wrap { display: grid; place-items: center; min-height: 0; max-height: none; aspect-ratio: 9 / 12.8; padding: 10px; border: 1px solid rgba(163,237,237,.18); border-radius: 26px; background: linear-gradient(160deg, rgba(20,75,92,.96), rgba(6,28,43,.98)); box-shadow: 0 24px 50px rgba(0,0,0,.28), inset 0 1px rgba(255,255,255,.07); }
+.bf-native-diagram { width: 100%; height: 100%; display: grid; grid-template-rows: auto 1fr auto; align-items: center; padding: clamp(12px, 3vw, 22px); color: #eaf9fa; font-family: var(--sans); box-sizing: border-box; }
+.bf-diagram-eyebrow { margin: 0; color: #8ce3df; font: 850 .65rem/1.2 var(--sans); letter-spacing: .14em; text-align: center; }
+.bf-diagram-orbit { position: relative; width: min(100%, 330px); aspect-ratio: 1; margin: auto; }
+.bf-diagram-center { position: absolute; inset: 31%; display: grid; place-content: center; gap: 4px; padding: 9px; border: 1px solid rgba(173,243,242,.55); border-radius: 50%; background: radial-gradient(circle at 35% 25%, rgba(125,227,223,.62), rgba(20,89,111,.96)); color: #fff; text-align: center; box-shadow: 0 0 0 12px rgba(135,224,225,.055), 0 0 32px rgba(89,212,215,.3); }
+.bf-diagram-center span { font-size: 1.35rem; line-height: 1; }.bf-diagram-center strong { font-size: clamp(.68rem, 2.2vw, .85rem); line-height: 1.08; letter-spacing: .04em; }
+.bf-diagram-node { position: absolute; width: 38%; min-height: 50px; display: flex; align-items: center; gap: 6px; padding: 7px; border: 1px solid rgba(177,239,242,.18); border-radius: 13px; background: rgba(2,20,31,.48); box-sizing: border-box; box-shadow: 0 7px 18px rgba(0,0,0,.13); }.bf-diagram-node > span { font-size: 1rem; }.bf-diagram-node b { font-size: clamp(.62rem, 1.9vw, .73rem); line-height: 1.25; font-weight: 720; }
+.bf-diagram-node.node-1 { top: 2%; left: 31%; }.bf-diagram-node.node-2 { top: 26%; right: 0; }.bf-diagram-node.node-3 { bottom: 17%; right: 2%; }.bf-diagram-node.node-4 { bottom: 17%; left: 2%; }.bf-diagram-node.node-5 { top: 26%; left: 0; }
+.bf-diagram-node b { color: rgba(232,250,251,.72); }.bf-native-diagram.is-revealed .bf-diagram-node b { color: #fff; }.bf-native-diagram.is-revealed .bf-diagram-node { border-color: rgba(141,232,225,.42); background: rgba(25,100,114,.56); }
+.bf-diagram-footer { margin: 4px 0 0; color: rgba(232,250,251,.73); font-size: .73rem; line-height: 1.4; text-align: center; }
+#vFeed .bf-visual-answer-page { background: radial-gradient(circle at 50% 12%, #1b625d 0, #092b39 52%, #04111b 100%) !important; }
+@media (max-width: 420px) { #vFeed .bf-visual-page { padding-inline: 10px !important; }.bf-diagram-node { min-height: 45px; padding: 6px; }.bf-diagram-node b { font-size: .61rem; }.bf-native-diagram-wrap { border-radius: 21px; } }

@@ -19,7 +19,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<link rel="stylesheet" href="style.css?v=235">
+<link rel="stylesheet" href="style.css?v=236">
 <style>
 /* Critical preloader (inline so it shows before CSS/JS) */
 #appPreloader{position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:radial-gradient(ellipse 80% 50% at 50% 0%,#164E63 0%,#0f1117 55%,#050508 100%);color:#EDEDEF;font-family:Figtree,system-ui,sans-serif;transition:opacity .45s ease,visibility .45s}
@@ -324,15 +324,13 @@
       <div class="bf-stats-bar">
         <span id="bfStreak">Jour 1</span>
         <span id="bfPoints">0 pts</span>
-        <span id="bfCounter">0 / 50</span>
+        <span id="bfCounter">0 / 20</span>
       </div>
     </div>
     <div class="bf-session-tabs" id="bfSessionTabs" role="tablist" aria-label="Choisir une séance de révision">
-      <button type="button" class="bf-session-tab active" data-session="mix" onclick="BrainFeed.selectSession('mix')" role="tab" aria-selected="true">Pour toi</button>
-      <button type="button" class="bf-session-tab" data-session="quiz" onclick="BrainFeed.selectSession('quiz')" role="tab" aria-selected="false">Flash</button>
+      <button type="button" class="bf-session-tab active" data-session="mix" onclick="BrainFeed.selectSession('mix')" role="tab" aria-selected="true">Aujourd’hui</button>
       <button type="button" class="bf-session-tab" data-session="cas" onclick="BrainFeed.selectSession('cas')" role="tab" aria-selected="false">Cas EVC</button>
       <button type="button" class="bf-session-tab" data-session="visual" onclick="BrainFeed.selectSession('visual')" role="tab" aria-selected="false">Visuels</button>
-      <button type="button" class="bf-session-tab" data-session="pieges" onclick="BrainFeed.selectSession('pieges')" role="tab" aria-selected="false">Pièges EVC</button>
     </div>
     <div class="bf-progress-track"><div class="bf-progress-fill" id="bfProgress"></div></div>
     <div class="bf-feed" id="bfFeed">
@@ -582,12 +580,12 @@
     { src: 'notebook-interactive.js?v=235', label: 'Lecteur présentation…', pct: 65 },
     { src: 'calculateurs.js?v=235', label: 'Scores & calculateurs…', pct: 70 },
     { src: 'quiz.js?v=235', label: 'Mode examen…', pct: 75 },
-    { src: 'dashboard.js?v=235', label: 'Tableau de bord…', pct: 80 },
+    { src: 'dashboard.js?v=236', label: 'Tableau de bord…', pct: 80 },
     { src: 'appsearch.js?v=235', label: 'Recherche…', pct: 85 },
     { src: 'erreurs-journal.js?v=235', label: 'Fichier erreurs…', pct: 89 },
     { src: 'graph.js?v=235', label: 'Parcours liés…', pct: 93 },
-    { src: 'brainfeed.js?v=235', label: 'BrainFeed…', pct: 97 },
-    { src: 'app.js?v=235', label: 'Interface…', pct: 100 }
+    { src: 'brainfeed.js?v=236', label: 'BrainFeed…', pct: 97 },
+    { src: 'app.js?v=236', label: 'Interface…', pct: 100 }
   ];
   var i = 0;
   var fill = document.getElementById('plFill');

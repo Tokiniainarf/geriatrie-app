@@ -3,7 +3,7 @@
    ═══════════════════════════════════════════════════════════════ */
 
 const Dashboard = (() => {
-  const DAILY_GOAL = 50;
+  const DAILY_GOAL = 20;
   const CARD_MINUTES = 0.75;
   const REVIEW_MINUTES = 0.45;
 

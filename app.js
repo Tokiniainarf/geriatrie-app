@@ -551,7 +551,7 @@ function renderDailyRev(){
   const stats=loadBfStats();
   const streak=stats.streak||0;
   const dailyDone=stats.dailyDone||0;
-  const goal=50;
+  const goal=20;
   const pct=Math.min(100,Math.round((dailyDone/goal)*100));
   el.style.display='block';
   el.innerHTML=`

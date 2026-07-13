@@ -30,6 +30,8 @@ const BrainFeed = (() => {
   let renderedRange = { start: 0, end: 0 };
   const BATCH_SIZE = 6;
   let activeTimers = new Map();
+  let completedCardIds = new Set();
+  let feedScrollHandler = null;
 
   const TYPE_RATIO = {
     // Le feed est une séance de révision, pas un mélange de citations,
@@ -118,6 +120,33 @@ const BrainFeed = (() => {
     { id:'polypharmacy', chapter:'ch16', question:'À partir de quel nombre de médicaments parle-t-on habituellement de polymédication ?', correct:'Cinq médicaments ou plus pris quotidiennement.', wrong:['Deux médicaments ou plus.', 'Uniquement dix médicaments ou plus.', 'La polymédication ne dépend jamais du nombre de traitements.'], explanation:'Au-delà de cinq médicaments, le risque d’interactions et d’effets indésirables augmente. La pertinence de chaque traitement doit être réévaluée.' },
     { id:'delirium-cause', chapter:'ch11', question:'Quel facteur doit être recherché sans délai devant un delirium récent ?', correct:'Une cause aiguë réversible : infection, douleur, globe, fécalome, iatrogénie ou trouble métabolique.', wrong:['Seulement l’âge chronologique du patient.', 'Uniquement les antécédents de démence.', 'Une décision d’institutionnalisation immédiate.'], explanation:'Un delirium récent a toujours une cause à rechercher. Les présentations sont souvent atypiques chez la personne âgée.' },
     { id:'gir', chapter:'ch3', question:'Que mesure principalement le GIR ?', correct:'Le niveau de dépendance pour les actes de la vie quotidienne afin d’orienter notamment l’APA.', wrong:['La sévérité d’une dépression.', 'Le risque de dénutrition.', 'Le risque hémorragique sous anticoagulant.'], explanation:'La grille AGGIR classe la perte d’autonomie de GIR 1 à GIR 6. Elle ne remplace pas l’évaluation clinique globale.' }
+  ];
+
+  // Cartes volontairement courtes, vérifiées et orientées vers une décision.
+  // Elles remplacent les extraits OCR et les pièges catégoriques dans Pulse.
+  const DAILY_MEMOS = [
+    { id:'bouchon', chapter:'ch2', question:'Devant une décompensation gériatrique, quel raisonnement résume le modèle 1 + 2 + 3 ?', mnemonic:'1 + 2 + 3', detail:'1 : vieillissement et baisse de réserve. 2 : maladies chroniques. 3 : facteur aigu précipitant. Le facteur 3 est souvent le premier levier à identifier et corriger.' },
+    { id:'diappers', chapter:'ch15', question:'Quel mémo aide à rechercher une cause réversible d’incontinence récente ?', mnemonic:'DIAPPERS', detail:'Delirium, Infection, Atrophie, Pharmaceutiques, Psychologiques, Excès de diurèse, Restriction de mobilité, Selles impactées. Le mémo guide l’interrogatoire ; il ne remplace pas l’examen clinique.' },
+    { id:'chute', chapter:'ch12', question:'Quels quatre axes garder en tête après une chute ?', mnemonic:'CAUSES + CONSÉQUENCES', detail:'Rechercher circonstance et gravité, hypotension orthostatique et médicaments, marche/vision/cognition, puis environnement. Une chute est un symptôme à expliquer.' },
+    { id:'eggs', chapter:'ch3', question:'Quelles dimensions doit couvrir une évaluation gériatrique globale ?', mnemonic:'MÉDICAL · FONCTIONNEL · COGNITIF · SOCIAL', detail:'Elle articule maladies et médicaments, autonomie, cognition/humeur, nutrition/mobilité et contexte social. Le résultat doit déboucher sur un plan de soins individualisé.' },
+    { id:'delirium', chapter:'ch11', question:'Quel réflexe adopter devant une confusion aiguë ?', mnemonic:'RECONNAÎTRE → CHERCHER → CORRIGER', detail:'Confirmer le caractère aigu et fluctuant avec atteinte attentionnelle, rechercher une cause réversible et traiter le facteur précipitant sans banaliser une forme hypoactive.' }
+  ];
+
+  const CURATED_PIEGES = [
+    { id:'chute-symptome', chapter:'ch12', trap:'« C’est seulement une chute accidentelle. »', explain:'Une chute est un symptôme. Rechercher les circonstances, une gravité immédiate, l’orthostatisme, la iatrogénie, la marche, la vision et l’environnement.' },
+    { id:'delirium-hypoactif', chapter:'ch11', trap:'« Un delirium est forcément agité. »', explain:'Une forme hypoactive est fréquente et discrète : retrait, somnolence ou ralentissement peuvent traduire une confusion aiguë et justifient la même recherche étiologique.' },
+    { id:'mms-isole', chapter:'ch9', trap:'« Un MMS isolé pose le diagnostic de démence. »', explain:'Un score cognitif s’interprète avec le niveau antérieur, l’autonomie, l’examen clinique et la recherche de causes réversibles. Il ne suffit pas à lui seul.' },
+    { id:'albumine', chapter:'ch14', trap:'« Une albumine basse suffit à diagnostiquer une dénutrition. »', explain:'L’albumine est influencée notamment par l’inflammation et l’hydratation. Le diagnostic nutritionnel repose sur une évaluation clinique, pondérale, des apports et des critères validés.' },
+    { id:'douleur', chapter:'ch8', trap:'« Sans plainte verbale, il n’y a pas de douleur. »', explain:'Chez une personne non communicante, observer le comportement avec une échelle adaptée comme l’ECPA et réévaluer après une intervention antalgique.' },
+    { id:'prescription', chapter:'ch16', trap:'« Une ordonnance ancienne reste adaptée si elle est tolérée. »', explain:'Toute prescription doit être régulièrement réévaluée : indication, bénéfice attendu, risque iatrogène, fonction rénale, interactions et possibilité de simplification.' },
+    { id:'contention', chapter:'ch13', trap:'« La contention prévient simplement les chutes. »', explain:'Elle expose à des risques physiques et psychiques. Chercher d’abord les causes, la surveillance, les adaptations environnementales et les alternatives individualisées.' },
+    { id:'depression', chapter:'ch10', trap:'« Les troubles cognitifs nouveaux sont forcément neurodégénératifs. »', explain:'Dépression, delirium, médicaments, troubles sensoriels et causes métaboliques peuvent contribuer à une plainte cognitive. Leur recherche fait partie de l’évaluation.' }
+  ];
+
+  const EDUCATIONAL_DIAGRAMS = [
+    { id:'delirium', chapter:'ch11', title:'Delirium : causes à rechercher', question:'Devant une confusion aiguë, quelles causes réversibles veux-tu vérifier sans tarder ?', answer:'Confirmer le caractère aigu et fluctuant, puis rechercher notamment infection, douleur, globe/rétention, fécalome, iatrogénie et désordre métabolique. Prioriser selon les constantes et l’examen clinique.', kind:'delirium' },
+    { id:'fall', chapter:'ch12', title:'Chute : modèle multifactoriel', question:'Après une chute, quels grands domaines doivent être explorés ?', answer:'Articuler facteurs intrinsèques, médicaments, situation aiguë et environnement. Évaluer aussi les conséquences traumatiques, fonctionnelles et la peur de rechuter.', kind:'fall' },
+    { id:'nutrition', chapter:'ch14', title:'Dénutrition et sarcopénie', question:'Comment se met en place le cercle dénutrition–sarcopénie ?', answer:'Baisse des apports, inflammation et maladie aiguë favorisent perte musculaire, faiblesse, baisse de mobilité et dépendance ; chacune peut à son tour aggraver les apports. Le dépistage précoce permet d’interrompre le cercle.', kind:'nutrition' }
   ];
 
   function loadSRS() {
@@ -400,18 +429,13 @@ const BrainFeed = (() => {
   function buildSpecialPools() {
     const allFlash = getAllFlash();
     const srs = loadSRS();
-    const memos = typeof FLASHCARDS_MEMOS !== 'undefined' ? [...FLASHCARDS_MEMOS] : [];
-    const dailyMemo = memos[hashDay('memo') % Math.max(1, memos.length)];
-
-    const memoJour = memos.map((m, i) => ({
+    const dailyMemo = DAILY_MEMOS[hashDay('memo') % DAILY_MEMOS.length];
+    const memoJour = DAILY_MEMOS.map(m => ({
       type: 'memo_jour', id: 'mj-' + m.id,
-      chapter: m.chapter, rang: m.rang,
-      title: i === (hashDay('daily') % memos.length) ? 'MÉMO DU JOUR' : 'MÉMO FLASH',
-      mnemonic: (m.answer || '').split(/[.·]/)[0].trim(),
-      detail: m.answer,
-      question: m.question,
-      tags: m.tags || [],
-      priority: m.id === dailyMemo?.id ? 2 : 1
+      chapter: m.chapter, rang: 'A', title: m.id === dailyMemo.id ? 'MÉMO DU JOUR' : 'MÉMO FLASH',
+      mnemonic: m.mnemonic, detail: m.detail, question: m.question, tags: ['Rappel actif'],
+      priority: m.id === dailyMemo.id ? 2 : 1,
+      srsKey: 'memo-' + m.id, srs: srs['memo-' + m.id] || { ease: 2.5, interval: 0, nextReview: 0 }
     }));
 
     const annales = [];
@@ -475,7 +499,9 @@ const BrainFeed = (() => {
         diagnosis: diagnosis,
         juryTips: conciseCaseText(a.juryTips || '', 150),
         timer: 30,
-        tags: ['Urgence', 'Cas choc']
+        tags: ['Cas d’entraînement', 'Raisonnement clinique'],
+        srsKey: 'case-' + a.id,
+        srs: srs['case-' + a.id] || { ease: 2.5, interval: 0, nextReview: 0 }
       });
     });
 
@@ -539,11 +565,13 @@ const BrainFeed = (() => {
       tags: ['Inspiration']
     }));
 
-    const piegeExam = PIEGES_EXAM.map((p, i) => ({
-      type: 'piege_exam', id: 'px-' + i,
-      chapter: '', rang: 'A',
+    const piegeExam = CURATED_PIEGES.map((p, i) => ({
+      type: 'piege_exam', id: 'px-' + p.id,
+      chapter: p.chapter, rang: 'A',
       trap: p.trap, explain: p.explain,
-      tags: ['Piège EDN']
+      tags: ['Erreur fréquente', 'À éviter'],
+      srsKey: 'trap-' + p.id,
+      srs: srs['trap-' + p.id] || { ease: 2.5, interval: 0, nextReview: 0 }
     }));
 
     // Attach illustrative media for key mechanisms (new explanatory visuals, texts untouched)
@@ -569,18 +597,6 @@ const BrainFeed = (() => {
         p.image = 'images/feed/illustrative/feed-vis-17.jpg';
       }
     });
-    // Add external pieges-exam.js
-    if (typeof PIEGES_EXAM_EXT !== 'undefined') {
-      PIEGES_EXAM_EXT.forEach(p => {
-        piegeExam.push({
-          type: 'piege_exam', id: 'pxe-' + p.id,
-          chapter: p.chapitre || '', rang: 'A',
-          trap: p.piege, explain: p.reponse + (p.conseil ? ' — ' + p.conseil : ''),
-          tags: ['Piège EVC']
-        });
-      });
-    }
-
     // 20+ visual explanation cards for the feed (videos and images to illustrate mechanisms)
     const visualMedias = [
       // Enriched with new targeted diagrams for usefulness (Imagine generated)
@@ -705,8 +721,15 @@ const BrainFeed = (() => {
       }
     });
     const uniqueVisualExplanations = Object.values(byTitle);
+    const nativeDiagrams = EDUCATIONAL_DIAGRAMS.map(d => ({
+      type: 'visual', id: 'diagram-' + d.id, chapter: d.chapter,
+      question: d.question, answer: d.answer, title: d.title, diagram: d.kind,
+      tags: ['Figure interactive', 'Rappel actif'],
+      srsKey: 'diagram-' + d.id,
+      srs: srs['diagram-' + d.id] || { ease: 2.5, interval: 0, nextReview: 0 }
+    }));
 
-    return { memoJour, casChoc, quizFlash, chiffreCle, citation, piegeExam, visualExplanations: uniqueVisualExplanations, allFlash, srs };
+    return { memoJour, casChoc, quizFlash, chiffreCle, citation, piegeExam, visualExplanations: [...nativeDiagrams, ...uniqueVisualExplanations], allFlash, srs };
   }
 
   function buildLegacyPools(allFlash, srs) {
@@ -847,43 +870,97 @@ const BrainFeed = (() => {
     return out;
   }
 
-  function buildDeck() {
+  function freshFeedDay(stats) {
     const today = new Date().toDateString();
-    const stats = loadStats();
-    if (stats.lastDay !== today) {
-      const yesterday = new Date(Date.now() - 86400000).toDateString();
-      if (stats.lastDay === yesterday) stats.streak = (stats.streak || 0) + 1;
-      else if (stats.lastDay !== today) stats.streak = 1;
+    if (stats.dailyDate !== today) {
       stats.dailyDone = 0;
-      stats.lastDay = today;
+      stats.dailyDate = today;
       saveStats(stats);
     }
-    streak = stats.streak || 1;
+  }
+
+  function isHighYieldFeedCase(card) {
+    if (!card) return false;
+    const vignette = String(card.vignette || '').replace(/\s+/g, ' ').trim();
+    const rawAnswer = String(card.diagnosis || '');
+    const parts = rawAnswer.split(/<\/strong>\s*<br\s*\/?\s*>/i);
+    const prompt = String(parts[0] || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+    const answer = String(parts.slice(1).join(' ') || rawAnswer).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+    if (vignette.length < 90 || vignette.length > 360 || answer.length < 90) return false;
+    if (/…|\.\.\./.test(answer)) return false;
+    const expected = prompt.match(/\b([2-5])\s+(?:diagnostics?|facteurs?|causes?|mesures?|étapes?|objectifs?|éléments?)/i);
+    if (expected) {
+      const requiredLastItem = new RegExp(`(?:^|\\s)${expected[1]}[.)]\\s`);
+      if (!requiredLastItem.test(answer)) return false;
+    }
+    return true;
+  }
+
+  function buildDailyDeck(pools) {
+    const all = dedupeDeck([
+      ...pools.quizFlash, ...pools.memoJour, ...pools.casChoc,
+      ...pools.piegeExam, ...pools.visualExplanations
+    ]);
+    const seen = new Set();
+    const isDue = (card) => card.srsKey && Object.prototype.hasOwnProperty.call(pools.srs, card.srsKey) && pools.srs[card.srsKey].nextReview <= Date.now();
+    const add = (list, count) => {
+      const available = list.filter(card => !seen.has(card.id));
+      const due = available.filter(isDue).sort((a, b) => (a.srs.nextReview || 0) - (b.srs.nextReview || 0));
+      const fresh = pickN(available.filter(card => !isDue(card)), Math.max(0, count - due.length));
+      const accepted = [...due.slice(0, count), ...fresh].slice(0, count);
+      accepted.forEach(card => seen.add(card.id));
+      return accepted;
+    };
+    const strongCases = pools.casChoc.filter(isHighYieldFeedCase);
+    const diagrams = pools.visualExplanations.filter(card => card.diagram);
+    const mediaVisuals = pools.visualExplanations.filter(card => !card.diagram);
+    const cards = [
+      ...add(pools.quizFlash, 8),
+      ...add(strongCases, 3),
+      ...add(pools.memoJour, 3),
+      ...add(pools.piegeExam, 2),
+      ...add(diagrams, 3),
+      ...add(mediaVisuals, 1)
+    ];
+    if (cards.length < DAILY_GOAL) cards.push(...add(all, DAILY_GOAL - cards.length));
+    // Le flux doit alterner les formats, sans prétendre que l'infini est utile.
+    const cadence = ['quiz_flash', 'cas_choc', 'memo_jour', 'piege_exam', 'visual'];
+    const buckets = Object.fromEntries(cadence.map(type => [type, cards.filter(card => card.type === type)]));
+    const ordered = [];
+    while (ordered.length < cards.length) {
+      let moved = false;
+      cadence.forEach(type => {
+        const card = buckets[type]?.shift();
+        if (card) { ordered.push(card); moved = true; }
+      });
+      if (!moved) break;
+    }
+    return ordered.slice(0, DAILY_GOAL);
+  }
+
+  function buildDeck() {
+    const stats = loadStats();
+    freshFeedDay(stats);
+    streak = stats.streak || 0;
     points = stats.points || 0;
     dailyDone = stats.dailyDone || 0;
 
     const pools = buildSpecialPools();
-    const mixed = dedupeDeck(interleaveDeck(pools, 96));
-    const sessionTypes = {
-      mix: null,
-      cas: new Set(['cas_choc']),
-      quiz: new Set(['quiz_flash']),
-      pieges: new Set(['piege_exam', 'memo_jour']),
-      visual: new Set(['visual'])
-    };
-    const allowed = sessionTypes[activeSession] || null;
-    const selected = allowed ? mixed.filter(card => allowed.has(card.type)) : mixed;
-    // Une séance doit rester utilisable même si une source locale est incomplète.
-    return selected.length ? selected : mixed;
+    const mixed = buildDailyDeck(pools);
+    if (activeSession === 'cas') return pickN(pools.casChoc.filter(isHighYieldFeedCase), DAILY_GOAL);
+    if (activeSession === 'visual') {
+      const diagrams = pools.visualExplanations.filter(card => card.diagram);
+      const media = pools.visualExplanations.filter(card => !card.diagram);
+      return dedupeDeck([...diagrams, ...pickN(media, Math.max(0, DAILY_GOAL - diagrams.length))]);
+    }
+    return mixed;
   }
 
   function updateSessionChrome() {
     const labels = {
-      mix: 'Rappels courts · cas EVC · visuels · répétition espacée',
-      cas: 'Cas cliniques courts · raisonnement et décision',
-      quiz: 'Quiz de rappel actif · réponses expliquées',
-      pieges: 'Pièges EVC · erreurs à éviter le jour J',
-      visual: 'Figures et illustrations · apprendre en regardant'
+      mix: '20 cartes ciblées · rappel actif · progression réelle',
+      cas: 'Cas courts · raisonner avant de révéler',
+      visual: 'Figures interactives · voir, prévoir, retenir'
     };
     document.querySelectorAll('#bfSessionTabs .bf-session-tab').forEach(tab => {
       const on = tab.dataset.session === activeSession;
@@ -897,7 +974,7 @@ const BrainFeed = (() => {
   }
 
   function selectSession(session) {
-    if (!['mix', 'cas', 'quiz', 'pieges', 'visual'].includes(session)) session = 'mix';
+    if (!['mix', 'cas', 'visual'].includes(session)) session = 'mix';
     activeSession = session;
     try { localStorage.setItem('bf_session', activeSession); } catch (_) {}
     if (observer) observer.disconnect();
@@ -907,11 +984,12 @@ const BrainFeed = (() => {
     idx = 0;
     combo = 0;
     quizCombo = 0;
+    completedCardIds = new Set();
     const feed = document.getElementById('bfFeed');
     if (feed) feed.scrollTop = 0;
     updateSessionChrome();
     renderSlides();
-    showToast({ mix: 'Séance Pour toi', cas: 'Séance cas EVC', quiz: 'Séance flash', pieges: 'Séance pièges EVC', visual: 'Séance visuelle' }[activeSession]);
+    showToast({ mix: 'Séance du jour', cas: 'Cas d’entraînement', visual: 'Figures interactives' }[activeSession]);
   }
 
   function getChapterName(chId) {
@@ -926,10 +1004,42 @@ const BrainFeed = (() => {
     return d.innerHTML;
   }
 
+  function renderEducationalDiagram(kind, revealed) {
+    const diagrams = {
+      delirium: {
+        eyebrow: 'CONFUSION AIGUË', center: 'DELIRIUM', icon: '⚡',
+        nodes: [['🫁', 'Hypoxie / infection'], ['💊', 'Iatrogénie'], ['🩺', 'Douleur'], ['↔', 'Globe / fécalome'], ['⚗', 'Trouble métabolique']],
+        footer: 'Aigu + fluctuant + inattention = urgence diagnostique'
+      },
+      fall: {
+        eyebrow: 'APRÈS UNE CHUTE', center: 'ÉVALUER', icon: '↘',
+        nodes: [['🧍', 'Marche · vision · cognition'], ['💊', 'Médicaments'], ['🫀', 'Orthostatisme · cause aiguë'], ['🏠', 'Environnement'], ['🩹', 'Conséquences et peur de chuter']],
+        footer: 'Une chute est un symptôme : penser multifactoriel'
+      },
+      nutrition: {
+        eyebrow: 'CERCLE VICIEUX', center: 'FONTE\nMUSCULAIRE', icon: '↻',
+        nodes: [['🍽', 'Baisse des apports'], ['🦠', 'Inflammation / maladie aiguë'], ['🦵', 'Faiblesse et mobilité réduite'], ['🧩', 'Perte d’autonomie'], ['↻', 'Risque de nouvelle dénutrition']],
+        footer: 'Dépister tôt pour interrompre la cascade'
+      }
+    };
+    const d = diagrams[kind] || diagrams.delirium;
+    const nodes = d.nodes.map(([icon, label], i) => `
+      <div class="bf-diagram-node node-${i + 1}">
+        <span aria-hidden="true">${icon}</span><b>${revealed ? esc(label) : '…'}</b>
+      </div>`).join('');
+    return `<div class="bf-native-diagram bf-native-${kind} ${revealed ? 'is-revealed' : ''}" role="img" aria-label="${esc(d.eyebrow)} : ${revealed ? esc(d.footer) : 'réponse à révéler'}">
+      <p class="bf-diagram-eyebrow">${esc(d.eyebrow)}</p>
+      <div class="bf-diagram-orbit">${nodes}<div class="bf-diagram-center"><span>${d.icon}</span><strong>${d.center.replace('\n', '<br>')}</strong></div></div>
+      <p class="bf-diagram-footer">${revealed ? esc(d.footer) : 'Formule mentalement les éléments avant de révéler.'}</p>
+    </div>`;
+  }
+
   function renderVisual(card, slideIdx) {
     const src = card.media || card.video || card.image || '';
     const isVid = card.isVideo || /\.mp4($|\?)/i.test(src);
-    const mediaHtml = isVid
+    const mediaHtml = card.diagram
+      ? renderEducationalDiagram(card.diagram, false)
+      : isVid
       ? `<video class="bf-visual-media" src="${src}" muted loop playsinline autoplay controls
            onerror="this.closest('.bf-media-container')?.classList.add('bf-media-missing')"></video>`
       : `<img class="bf-visual-media" src="${src}" alt="${esc(card.question || '')}" loading="lazy"
@@ -938,13 +1048,27 @@ const BrainFeed = (() => {
       <div class="bf-horiz-scroll" id="bfScroll-${slideIdx}">
         <div class="bf-horiz-page page-1 bf-visual-page">
           <div class="bf-visual-stack">
-            <div class="bf-media-container bf-reel-media">
+            <div class="bf-media-container bf-reel-media ${card.diagram ? 'bf-native-diagram-wrap' : ''}">
               ${mediaHtml}
               <div class="bf-media-fallback">Média indisponible</div>
             </div>
             <div class="bf-visual-caption">
-              <p class="bf-visual-title">${esc(card.question)}</p>
+              <p class="bf-visual-kicker">FIGURE INTERACTIVE</p>
+              <p class="bf-visual-title">${esc(card.title || card.question)}</p>
+              <p class="bf-visual-sub">${esc(card.question)}</p>
+              <button type="button" class="bf-action-reveal" data-bf-reveal="${slideIdx}">Révéler et mémoriser</button>
+            </div>
+          </div>
+        </div>
+        <div class="bf-horiz-page page-2 bf-visual-page bf-visual-answer-page">
+          <div class="bf-visual-stack">
+            <div class="bf-media-container bf-reel-media ${card.diagram ? 'bf-native-diagram-wrap' : ''}">
+              ${card.diagram ? renderEducationalDiagram(card.diagram, true) : mediaHtml}
+            </div>
+            <div class="bf-visual-caption">
+              <p class="bf-visual-kicker">À RETENIR</p>
               <p class="bf-visual-sub">${esc(card.answer || 'Illustration clinique')}</p>
+              <span class="bf-swipe-left-hint">← Revoir la figure</span>
             </div>
           </div>
         </div>
@@ -1036,23 +1160,9 @@ const BrainFeed = (() => {
       return regex.test(answerText);
     });
 
-    let coachingTip = card.juryTips || '';
-    if (!coachingTip) {
-      const cardTextLower = (card.question + ' ' + answerText + ' ' + (card.tags || []).join(' ')).toLowerCase();
-      if (/\b(iatrogé|polymédic|beers|stopp|start|effets indésirables|interaction|surdosage|bzd|benzodiazépine)\b/i.test(cardTextLower)) {
-        coachingTip = "Citez systématiquement la revue médicamenteuse (critères STOPP/Beers) et proposez l'arrêt/adaptation des psychotropes ou anti-hypertenseurs suspects.";
-      } else if (/\b(chute|chuter|chutes|tinetti|tug|instabilité|équilibre)\b/i.test(cardTextLower)) {
-        coachingTip = "Une chute = bilan orthostatique, vision et médicament. Citez le test TUG (> 20s) et le score de Tinetti.";
-      } else if (/\b(nutri|dénutri|mna|albumine|amaigrissement|perte de poids)\b/i.test(cardTextLower)) {
-        coachingTip = "Mémorisez les seuils HAS : IMC < 21 (ou < 22 si > 75 ans) et albumine < 30 g/L pour la dénutrition sévère.";
-      } else if (/\b(confu|delirium|cam|agitation|confusionnelle)\b/i.test(cardTextLower)) {
-        coachingTip = "Pour un delirium, appliquez les critères de la CAM. Cherchez d'abord une cause réversible (globe, fécalome, douleur, infection).";
-      } else if (/\b(démence|cognitive|mms|moca|alzheimer|lewy|vasculaire)\b/i.test(cardTextLower)) {
-        coachingTip = "Éliminez toujours les causes réversibles (hypothyroïdie, carence B12/folates) et la dépression avant de diagnostiquer une démence.";
-      } else if (/\b(éthique|fin de vie|directives anticipées|personne de confiance|claeys|leonetti)\b/i.test(cardTextLower)) {
-        coachingTip = "Cadre légal Leonetti : pas d'obstination déraisonnable, recueil des directives anticipées et désignation de la personne de confiance.";
-      }
-    }
+    // Aucun conseil fabriqué automatiquement : il risquait d'ajouter un seuil
+    // imprécis à une carte dont le contenu était pourtant correct.
+    const coachingTip = card.coachingTip || '';
 
     let keywordsHtml = '';
     if (foundKeywords.length) {
@@ -1182,14 +1292,14 @@ const BrainFeed = (() => {
           <div class="bf-bg-emoji">🚑</div>
           <article class="bf-card-content bf-card-shell">
             <header class="bf-card-hdr">
-              <span class="bf-type-badge">🚑 CAS CHOC</span>
+              <span class="bf-type-badge">🚑 CAS D’ENTRAÎNEMENT</span>
               <div class="bf-choc-timer" data-seconds="${card.timer}">
                 <svg class="bf-choc-ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16" class="bf-choc-ring-bg"/><circle cx="18" cy="18" r="16" class="bf-choc-ring-fg"/></svg>
                 <span class="bf-choc-time">${card.timer}</span>
               </div>
             </header>
             <main class="bf-card-main scrollable">
-              <p class="bf-choc-sub">Tu as <strong>${card.timer} secondes</strong> pour poser ton diagnostic :</p>
+              <p class="bf-choc-sub">Tu as <strong>${card.timer} secondes</strong> pour formuler ta conduite :</p>
               <div class="bf-choc-vignette">${esc(card.vignette)}</div>
             </main>
             <footer class="bf-card-ftr">
@@ -1202,7 +1312,7 @@ const BrainFeed = (() => {
           <div class="bf-bg-emoji">🩺</div>
           <article class="bf-card-content bf-card-shell">
             <header class="bf-card-hdr">
-              <span class="bf-type-badge">🩺 Diagnostic gériatrique</span>
+              <span class="bf-type-badge">🩺 Réponse structurée</span>
             </header>
             <main class="bf-card-main scrollable">
               ${formatRichAnswer(card)}
@@ -1247,7 +1357,7 @@ const BrainFeed = (() => {
           <div class="bf-bg-emoji">📖</div>
           <article class="bf-card-content bf-card-shell">
             <header class="bf-card-hdr">
-              <span class="bf-type-badge">📖 Explication d'expert</span>
+              <span class="bf-type-badge">📖 Explication</span>
             </header>
             <main class="bf-card-main scrollable">
               ${formatRichAnswer(card)}
@@ -1351,7 +1461,7 @@ const BrainFeed = (() => {
           <div class="bf-bg-emoji">🪤</div>
           <article class="bf-card-content bf-card-shell">
             <header class="bf-card-hdr">
-              <span class="bf-type-badge">🪤 PIÈGE D'EXAM</span>
+              <span class="bf-type-badge">🪤 ERREUR FRÉQUENTE</span>
             </header>
             <main class="bf-card-main">
               <div class="bf-trap-wrong">
@@ -1372,7 +1482,7 @@ const BrainFeed = (() => {
           <div class="bf-bg-emoji">✅</div>
           <article class="bf-card-content bf-card-shell">
             <header class="bf-card-hdr">
-              <span class="bf-type-badge">✅ Règle académique</span>
+              <span class="bf-type-badge">✅ À retenir</span>
             </header>
             <main class="bf-card-main scrollable">
               ${formatRichAnswer(card)}
@@ -1399,6 +1509,7 @@ const BrainFeed = (() => {
         // scrollTo est plus déterministe que scrollBy après un rerender du feed.
         try { scroller.scrollTo({ left: target, behavior: 'smooth' }); }
         catch (_) { scroller.scrollLeft = target; }
+        slide.dataset.revealed = '1';
         requestAnimationFrame(() => {
           if (scroller.scrollLeft < Math.min(8, target)) scroller.scrollLeft = target;
         });
@@ -1445,15 +1556,8 @@ const BrainFeed = (() => {
         });
         slide.querySelector('.bf-quiz-expl')?.classList.remove('hidden');
         slide.dataset.quizDone = '1';
-        if (correct) {
-          if (card.srsKey) updateSRS(card, true);
-          registerCorrect(true);
-        } else {
-          if (card.srsKey) updateSRS(card, false);
-          combo = 0;
-          quizCombo = 0;
-          playSound('buzz');
-        }
+        slide.dataset.revealed = '1';
+        completeCard(card, correct, true);
       });
     });
 
@@ -1747,40 +1851,75 @@ const BrainFeed = (() => {
     }
   }
 
-  function registerCorrect(fromQuiz) {
-    combo++;
-    if (fromQuiz) quizCombo++;
-    playSound('ding');
-    const bonus = 10 + Math.min(combo * 2, 24);
-    points += bonus;
-    dailyDone++;
+  function completeCard(card, correct, fromQuiz = false) {
+    if (!card || completedCardIds.has(card.id)) return false;
+    completedCardIds.add(card.id);
+    if (card.srsKey) updateSRS(card, correct);
+
+    const today = new Date().toDateString();
+    const yesterday = new Date(Date.now() - 86400000).toDateString();
     const stats = loadStats();
-    stats.totalCards = (stats.totalCards || 0) + 1;
-    stats.points = points;
-    stats.dailyDone = dailyDone;
-    stats.streak = streak;
-    stats.lastDay = new Date().toDateString();
-    saveStats(stats);
-    showCombo();
-    if (combo === COMBO_CONFETTI_AT) {
-      sessionCombo10Unlocked = true;
-      launchConfetti('bfComboConfetti');
-      showToast(`🎉 COMBO x${combo} !`);
+    freshFeedDay(stats);
+    if (stats.lastStudyDay !== today) {
+      stats.streak = stats.lastStudyDay === yesterday ? (stats.streak || 0) + 1 : 1;
+      stats.lastStudyDay = today;
     }
+    streak = stats.streak || 1;
+    dailyDone = Math.min(DAILY_GOAL, (stats.dailyDone || 0) + 1);
+    stats.dailyDone = dailyDone;
+    stats.totalCards = (stats.totalCards || 0) + 1;
+    stats.correctCards = (stats.correctCards || 0) + (correct ? 1 : 0);
+    stats.activityByDay = stats.activityByDay || {};
+    const key = new Date().toISOString().slice(0, 10);
+    stats.activityByDay[key] = (stats.activityByDay[key] || 0) + 1;
+
+    if (correct) {
+      combo++;
+      if (fromQuiz) quizCombo++;
+      const bonus = 10 + Math.min(combo * 2, 24);
+      points += bonus;
+      playSound('ding');
+      showCombo();
+      if (combo === COMBO_CONFETTI_AT) {
+        sessionCombo10Unlocked = true;
+        launchConfetti('bfComboConfetti');
+        showToast(`🎉 COMBO x${combo} !`);
+      }
+    } else {
+      combo = 0;
+      quizCombo = 0;
+      playSound('buzz');
+    }
+    stats.points = points;
+    saveStats(stats);
     checkAchievements();
-    if (dailyDone === DAILY_GOAL) checkDailyGoal();
+    if (dailyDone >= DAILY_GOAL) checkDailyGoal();
     updateHeader();
+    return true;
+  }
+
+  function activeSlide() {
+    return document.getElementById('bfFeed')?.querySelector(`.bf-slide[data-idx="${idx}"]`);
+  }
+
+  function requireRevealed(card) {
+    const slide = activeSlide();
+    if (card.type === 'quiz_flash') {
+      showToast('Choisis une réponse sur la carte');
+      return false;
+    }
+    if (!slide?.dataset.revealed) {
+      showToast('Révèle d’abord la réponse, puis auto-évalue-toi');
+      return false;
+    }
+    return true;
   }
 
   function actionKnow() {
     const card = deck[idx];
     if (!card) return;
-    if (card.type === 'quiz_flash') {
-      showToast('Réponds au quiz sur la carte');
-      return;
-    }
-    if (card.srsKey) updateSRS(card, true);
-    registerCorrect(false);
+    if (!requireRevealed(card) || completedCardIds.has(card.id)) return;
+    if (!completeCard(card, true)) return;
     showToast(combo >= COMBO_BONUS_AT ? `🔥 COMBO x${combo} !` : `+${10 + Math.min(combo * 2, 24)} pts`);
     scrollToNext();
   }
@@ -1788,15 +1927,9 @@ const BrainFeed = (() => {
   function actionDontKnow() {
     const card = deck[idx];
     if (!card) return;
-    if (card.srsKey) updateSRS(card, false);
-    combo = 0;
-    quizCombo = 0;
-    playSound('buzz');
-    const removed = deck.splice(idx, 1)[0];
-    deck.splice(Math.min(idx + 3, deck.length), 0, removed);
-    updateStats();
-    updateHeader();
-    showToast('↩️ Revu dans 3 cartes');
+    if (!requireRevealed(card) || completedCardIds.has(card.id)) return;
+    if (!completeCard(card, false)) return;
+    showToast('Programmé pour une nouvelle révision');
     scrollToNext();
   }
 
@@ -1804,15 +1937,12 @@ const BrainFeed = (() => {
     const card = deck[slideIdx];
     if (!card) return;
     const favs = loadFavs();
-    if (!favs.includes(card.id)) {
+    const alreadySaved = favs.includes(card.id);
+    if (!alreadySaved) {
       favs.push(card.id);
       saveFavs(favs);
     }
-    if (card.chapter && typeof quickBm === 'function') quickBm(card.chapter);
-    points += 5;
-    updateStats();
-    updateHeader();
-    showToast('❤️ Favori');
+    showToast(alreadySaved ? '❤️ Déjà gardé' : '❤️ Gardé pour plus tard');
   }
 
   function actionFav() {
@@ -1953,7 +2083,15 @@ const BrainFeed = (() => {
   }
 
   function checkDailyGoal() {
-    if (dailyDone >= DAILY_GOAL) showBfCelebration();
+    if (dailyDone < DAILY_GOAL) return;
+    const stats = loadStats();
+    const today = new Date().toDateString();
+    if (stats.goalCelebratedDate === today) return;
+    stats.goalCelebratedDate = today;
+    points += 50;
+    stats.points = points;
+    saveStats(stats);
+    showBfCelebration();
   }
 
   function showBfCelebration() {
@@ -1974,20 +2112,19 @@ const BrainFeed = (() => {
     cel.classList.add('show');
     requestAnimationFrame(() => launchConfetti('bfConfetti'));
     checkAchievements();
-    points += 50;
-    updateStats();
     updateHeader();
   }
 
   function init() {
     try {
       const stored = localStorage.getItem('bf_session');
-      if (['mix', 'cas', 'quiz', 'pieges'].includes(stored)) activeSession = stored;
+      if (['mix', 'cas', 'visual'].includes(stored)) activeSession = stored;
     } catch (_) {}
     deck = buildDeck();
     idx = 0;
     combo = 0;
     quizCombo = 0;
+    completedCardIds = new Set();
     sessionCombo10Unlocked = false;
     ensureFeedChrome();
     updateSessionChrome();
@@ -1997,10 +2134,12 @@ const BrainFeed = (() => {
 
     const feed = document.getElementById('bfFeed');
     if (feed) {
-      feed.addEventListener('scroll', () => {
+      if (feedScrollHandler) feed.removeEventListener('scroll', feedScrollHandler);
+      feedScrollHandler = () => {
         const scrollBottom = feed.scrollHeight - feed.scrollTop - feed.clientHeight;
         if (scrollBottom < feed.clientHeight && renderedRange.end < deck.length) loadMoreSlides();
-      }, { passive: true });
+      };
+      feed.addEventListener('scroll', feedScrollHandler, { passive: true });
     }
 
     let comboBadge = document.getElementById('bfComboBadge');
@@ -2020,7 +2159,23 @@ const BrainFeed = (() => {
     activeTimers.forEach(t => clearTimeout(t));
     activeTimers.clear();
     document.removeEventListener('keydown', onKeyDown);
+    const feed = document.getElementById('bfFeed');
+    if (feed && feedScrollHandler) feed.removeEventListener('scroll', feedScrollHandler);
+    feedScrollHandler = null;
   }
 
-  return { init, destroy, actionKnow, actionDontKnow, actionFav, shareCard, renderSlides, selectSession, audit: () => ({ deck: interleaveDeck(buildSpecialPools(), 96), pools: buildSpecialPools() }) };
+  return {
+    init,
+    destroy,
+    actionKnow,
+    actionDontKnow,
+    actionFav,
+    shareCard,
+    renderSlides,
+    selectSession,
+    audit: () => {
+      const pools = buildSpecialPools();
+      return { deck: buildDailyDeck(pools), pools };
+    }
+  };
 })();

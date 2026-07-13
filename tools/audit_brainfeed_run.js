@@ -53,5 +53,6 @@ casCards.forEach(c => {
 report.push(`Total cas choc in deck: ${casCards.length}`);
 report.push(`Incomplete cas choc: ${badCas}`);
 
-require('fs').writeFileSync(path.join(__dirname, 'brainfeed_audit_report.txt'), report.join('\n'), 'utf8');
+const cleanReport = report.join('\n').split('\n').map(line => line.trimEnd()).join('\n') + '\n';
+require('fs').writeFileSync(path.join(__dirname, 'brainfeed_audit_report.txt'), cleanReport, 'utf8');
 console.log('Report written to tools/brainfeed_audit_report.txt');
