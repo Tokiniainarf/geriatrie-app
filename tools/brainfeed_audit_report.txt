@@ -1,119 +1,155 @@
 === BRAINFEED FULL AUDIT ===
-Deck size: 20
-Type distribution: {"quiz_flash":8,"cas_choc":3,"memo_jour":3,"piege_exam":2,"visual":4}
+Deck size: 40
+Type distribution: {"flash":14,"quiz_flash":8,"cas_choc":8,"memo_jour":3,"piege_exam":3,"visual":2,"chiffre_cle":2}
 
 === POOL SIZES ===
 memoJour: 5
-casChoc: 110
+casChoc: 331
 quizFlash: 24
 chiffreCle: 15
 citation: 8
 piegeExam: 8
+flashRecall: 84
 visualExplanations: 32
 allFlash: 1000
 srs: N/A
 
 === SAMPLE CARDS ===
 
---- 1. quiz_flash (id=qf-curated-presbyacousie) ---
-Question: Quelle proposition décrit le mieux la presbyacousie ?
+--- 1. flash (id=fc-4000) ---
+Question: Quel est l'apport nutritionnel minimum recommandé par jour chez le sujet de plus de 70 ans hospitalisé ?
+
+--- 2. quiz_flash (id=qf-curated-delirium-bzd) ---
+Question: Quelle attitude adopter devant un delirium avec agitation sans sevrage alcoolique ?
 Options:
-  A. Une perte auditive forcément due à un bouchon de cérumen.
-  B. Une surdité unilatérale brutale à traiter comme une urgence vasculaire.
-  C. Une baisse progressive, bilatérale et symétrique de l’audition, avec indication  ✓
-  D. Une douleur aiguë d’oreille avec fièvre.
+  A. Prescrire une benzodiazépine systématiquement pour obtenir le sommeil.
+  B. Conclure à une démence irréversible sans bilan étiologique.
+  C. Chercher et traiter la cause ; éviter les benzodiazépines qui aggravent confusio ✓
+  D. Augmenter les anticholinergiques pour diminuer l’agitation.
 
---- 2. cas_choc (id=cc-evc23-7) ---
-Vignette: Mme Blanc, 92 ans, EHPAD. Somnolence depuis 48 h, refus alimentation. Pas de fièvre, pas de brûlures. Sondée à demeure depuis 2 ans. ECBU prélevé sans symptôme : leucocyturie, E. coli multi-sensible.
+--- 3. cas_choc (id=cc-15-q2) ---
+Vignette: M. Henri, 76 ans, marche lentement avec sa femme.
 
---- 3. memo_jour (id=mj-diappers) ---
-Title: MÉMO DU JOUR
-Question: Quel mémo aide à rechercher une cause réversible d’incontinence récente ?
+Question : Quel programme de prévention ?
 
---- 4. piege_exam (id=px-douleur) ---
-Trap: « Sans plainte verbale, il n’y a pas de douleur. »
-
---- 5. visual (id=diagram-delirium) ---
-Title: Delirium : causes à rechercher
-Question: Devant une confusion aiguë, quelles causes réversibles veux-tu vérifier sans tarder ?
-
---- 6. quiz_flash (id=qf-curated-pseudodementia) ---
-Question: Pourquoi une dépression peut-elle imiter un trouble neurocognitif ?
-Options:
-  A. Elle peut donner une plainte cognitive et un ralentissement réversibles après pr ✓
-  B. Elle rend la GDS-15 inutile.
-  C. Elle exclut toute évaluation cognitive.
-  D. Elle entraîne toujours un delirium aigu.
-
---- 7. cas_choc (id=cc-113) ---
-Vignette: Mme Thomas, 80 ans, 3 chutes en 6 mois. Prend amlodipine 10mg, lorazepam 1mg. Tinetti 18/28, vision 3/10, hypotension orthostatique.
-
---- 8. memo_jour (id=mj-bouchon) ---
-Title: MÉMO FLASH
-Question: Devant une décompensation gériatrique, quel raisonnement résume le modèle 1 + 2 + 3 ?
-
---- 9. piege_exam (id=px-contention) ---
-Trap: « La contention prévient simplement les chutes. »
-
---- 10. visual (id=diagram-nutrition) ---
-Title: Dénutrition et sarcopénie
-Question: Comment se met en place le cercle dénutrition–sarcopénie ?
-
---- 11. quiz_flash (id=qf-curated-fried) ---
-Question: À partir de combien de critères de Fried parle-t-on de fragilité ?
-Options:
-  A. Au moins 3 critères sur 5. ✓
-  B. 1 critère sur 5.
-  C. 2 critères sur 5.
-  D. 5 critères sont nécessaires pour toute pré-fragilité.
-
---- 12. cas_choc (id=cc-evc22-2) ---
-Vignette: M. Bonnet, 81 ans, douleur hanche droite invalidante, distance marche < 100 m, canne permanente. Rx : pincement joint coxo-fémoral, géodésie. ATCD : BPCO modérée, FEVG 50 %. Traitement : paracétamol i
-
---- 13. memo_jour (id=mj-eggs) ---
+--- 4. memo_jour (id=mj-eggs) ---
 Title: MÉMO FLASH
 Question: Quelles dimensions doit couvrir une évaluation gériatrique globale ?
 
---- 14. visual (id=diagram-fall) ---
-Title: Chute : modèle multifactoriel
-Question: Après une chute, quels grands domaines doivent être explorés ?
+--- 5. piege_exam (id=px-delirium-hypoactif) ---
+Trap: « Un delirium est forcément agité. »
 
---- 15. quiz_flash (id=qf-curated-braden) ---
+--- 6. visual (id=vis-11) ---
+Question: Mécanisme du delirium (compact)
+
+--- 7. chiffre_cle (id=ck-14) ---
+Line: Apport protéique recommandé : 1–1,2 g/kg/j, soit environ ... g/j au minimum pour un sujet de 60 kg
+
+--- 8. flash (id=fc-3999) ---
+Question: Qu'est-ce que le syndrome d'immobilisation et ses complications cardiovasculaires majeures ?
+
+--- 9. quiz_flash (id=qf-curated-orthostatic) ---
+Question: Quel examen simple fait partie du bilan initial après une chute ?
+Options:
+  A. Un scanner cérébral systématique en l’absence de signe d’alerte.
+  B. La mesure de la pression artérielle couchée puis debout, à la recherche d’une hy ✓
+  C. Une contention systématique avant toute évaluation.
+  D. Une épreuve d’effort maximale chez tout patient.
+
+--- 10. cas_choc (id=cc-14-q2) ---
+Vignette: Mme Duval, 80 ans, consulte pour des fuites urinaires survenant lors de la toux, de l'éternuement et de l'effort physique. Pas de nycturie, pas de dysurie.
+
+Question : Quelle prise en charge ?
+
+--- 11. memo_jour (id=mj-delirium) ---
+Title: MÉMO FLASH
+Question: Quel réflexe adopter devant une confusion aiguë ?
+
+--- 12. piege_exam (id=px-douleur) ---
+Trap: « Sans plainte verbale, il n’y a pas de douleur. »
+
+--- 13. visual (id=diagram-nutrition) ---
+Title: Dénutrition et sarcopénie
+Question: Comment se met en place le cercle dénutrition–sarcopénie ?
+
+--- 14. chiffre_cle (id=ck-13) ---
+Line: Perte de poids significative si ≥ 5 % en ... mois ou ≥ 10 % en 6 mois
+
+--- 15. flash (id=fc-3998) ---
+Question: Comment évaluer l'observance thérapeutique chez un patient vivant seul atteint d'Alzheimer modéré ?
+
+--- 16. quiz_flash (id=qf-curated-cam) ---
+Question: Quel outil valide le dépistage d’un delirium au lit du patient ?
+Options:
+  A. La GDS-15, centrée sur les symptômes dépressifs.
+  B. Le Tinetti, qui évalue l’équilibre et la marche.
+  C. Le MMS seul, interprété sans données antérieures.
+  D. La CAM : début aigu et fluctuant, trouble attentionnel, avec pensée désorganisée ✓
+
+--- 17. cas_choc (id=cc-14-q1) ---
+Vignette: Mme Duval, 80 ans, consulte pour des fuites urinaires survenant lors de la toux, de l'éternuement et de l'effort physique. Pas de nycturie, pas de dysurie.
+
+Question : Quel type d'incontinence ?
+
+--- 18. memo_jour (id=mj-bouchon) ---
+Title: MÉMO FLASH
+Question: Devant une décompensation gériatrique, quel raisonnement résume le modèle 1 + 2 + 3 ?
+
+--- 19. piege_exam (id=px-albumine) ---
+Trap: « Une albumine basse suffit à diagnostiquer une dénutrition. »
+
+--- 20. flash (id=fc-3997) ---
+Question: Pourquoi la co-prescription de colchicine et de macrolides est-elle formellement contre-indiquée ?
+
+--- 21. quiz_flash (id=qf-curated-gds) ---
+Question: Quel score GDS-15 doit faire évoquer une dépression ?
+Options:
+  A. Un score de 1 sur 15 sans symptôme associé.
+  B. Un score d’au moins 5 sur 15. ✓
+  C. Un score de 0 sur 15.
+  D. La GDS-15 ne sert pas au dépistage.
+
+--- 22. cas_choc (id=cc-13-q2) ---
+Vignette: Mme Petit, 78 ans, vit seule. Elle gère ses repas et sa toilette seule, mais a besoin d'aide pour les courses, le ménage et la gestion administrative.
+
+Question : Quels droits ouvre ce GIR ?
+
+--- 23. flash (id=fc-3996) ---
+Question: Qu'est-ce que le plan personnalisé de compensation (PPC) pour la dépendance ?
+
+--- 24. quiz_flash (id=qf-curated-braden) ---
 Question: Comment évolue le risque d’escarre sur l’échelle de Braden ?
 Options:
-  A. Il augmente lorsque le score augmente.
+  A. Il augmente lorsque le score diminue. ✓
   B. Il est indépendant de la mobilité et de la nutrition.
   C. Il ne concerne que les patients en réanimation.
-  D. Il augmente lorsque le score diminue. ✓
+  D. Il augmente lorsque le score augmente.
 
---- 16. visual (id=vis-57) ---
-Question: Score Tinetti (POMA)
+--- 25. cas_choc (id=cc-evc18-5-q2) ---
+Vignette: M. Girard, 85 ans, polymédiqué : metformine 1000 mg ×2, gliclazide 60 mg, ramipril 10 mg, spironolactone 25 mg, apixaban 5 mg ×2, furosémide 40 mg, allopurinol 200 mg.
 
---- 17. quiz_flash (id=qf-curated-polypharmacy) ---
-Question: À partir de quel nombre de médicaments parle-t-on habituellement de polymédication ?
+Question : Proposez une révisio
+
+--- 26. flash (id=fc-3995) ---
+Question: Comment le médecin coordonnateur organise-t-il la prévention de la iatrogénie en EHPAD ?
+
+--- 27. quiz_flash (id=qf-curated-lewy) ---
+Question: Pourquoi faut-il être prudent avec les neuroleptiques dans une démence à corps de Lewy ?
 Options:
-  A. La polymédication ne dépend jamais du nombre de traitements.
-  B. Uniquement dix médicaments ou plus.
-  C. Cinq médicaments ou plus pris quotidiennement. ✓
-  D. Deux médicaments ou plus.
+  A. Une hypersensibilité peut entraîner une aggravation neurologique et des effets i ✓
+  B. Ils n’ont aucun effet sur la marche ou la vigilance.
+  C. Ils sont obligatoires dès le diagnostic.
+  D. Ils améliorent toujours la cognition à long terme.
 
---- 18. quiz_flash (id=qf-curated-delirium-cause) ---
-Question: Quel facteur doit être recherché sans délai devant un delirium récent ?
-Options:
-  A. Une décision d’institutionnalisation immédiate.
-  B. Uniquement les antécédents de démence.
-  C. Seulement l’âge chronologique du patient.
-  D. Une cause aiguë réversible : infection, douleur, globe, fécalome, iatrogénie ou  ✓
+--- 28. cas_choc (id=cc-evc18-5-q1) ---
+Vignette: M. Girard, 85 ans, polymédiqué : metformine 1000 mg ×2, gliclazide 60 mg, ramipril 10 mg, spironolactone 25 mg, apixaban 5 mg ×2, furosémide 40 mg, allopurinol 200 mg.
 
---- 19. quiz_flash (id=qf-curated-osteoporosis) ---
-Question: Quel T-score définit l’ostéoporose densitométrique ?
-Options:
-  A. Un T-score inférieur ou égal à −2,5. ✓
-  B. Un T-score compris entre 0 et +1.
-  C. Un T-score supérieur ou égal à −1.
-  D. Un T-score supérieur à +2,5.
+Question : Quels médicaments so
 
---- 20. quiz_flash (id=qf-curated-ecpa) ---
+--- 29. flash (id=fc-3994) ---
+Question: Quelle est la définition clinique d'un syndrome de glissement gériatrique ?
+
+--- 30. quiz_flash (id=qf-curated-ecpa) ---
 Question: Quelle échelle privilégier pour évaluer la douleur chez un patient non communicant ?
 Options:
   A. Le MMS, qui mesure la mémoire.
@@ -121,10 +157,49 @@ Options:
   C. L’EVA verbale uniquement.
   D. La GDS-15, qui dépiste la dépression.
 
+--- 31. cas_choc (id=cc-evc18-4-q3) ---
+Vignette: Mme Faure, 81 ans, hospitalisée 10 jours pour décompensation cardiaque. Perte 4 kg depuis l'entrée.
+
+Question : Indications et limites de la nutrition artificielle chez elle.
+
+--- 32. flash (id=fc-3993) ---
+Question: Comment prendre en charge une incontinence urinaire par impériosité (hyperactivité vésicale) ?
+
+--- 33. quiz_flash (id=qf-curated-palliative) ---
+Question: Quel est l’objectif de la sédation en situation palliative ?
+Options:
+  A. Remplacer toute évaluation de la douleur et de l’anxiété.
+  B. Éviter systématiquement la discussion collégiale.
+  C. Provoquer le décès lorsque la demande familiale est forte.
+  D. Soulager une souffrance réfractaire, sans intention de provoquer la mort. ✓
+
+--- 34. cas_choc (id=cc-evc18-4-q2) ---
+Vignette: Mme Faure, 81 ans, hospitalisée 10 jours pour décompensation cardiaque. Perte 4 kg depuis l'entrée.
+
+Question : Plan nutritionnel à l'hôpital puis à la sortie.
+
+--- 35. flash (id=fc-3992) ---
+Question: Qu'est-ce que l'incontinence urinaire d'effort et ses options thérapeutiques ?
+
+--- 36. flash (id=fc-3991) ---
+Question: Comment le médecin doit-il dépister une confusion aiguë (delirium) chez un patient agité ?
+
+--- 37. flash (id=fc-3990) ---
+Question: Quelles sont les trois causes majeures de baisse chronique réversible de la vision chez le sujet âgé ?
+
+--- 38. flash (id=fc-3989) ---
+Question: Quelle est la définition de la presbyacousie et son traitement de référence ?
+
+--- 39. flash (id=fc-3988) ---
+Question: Qu'est-ce que le score NRS-2002 et quelle est sa particularité gériatrique ?
+
+--- 40. flash (id=fc-3987) ---
+Question: Comment calculer la perte de poids cliniquement significative chez une personne âgée ?
+
 === QUIZ INTEGRITY ===
 Total quiz cards in deck: 8
 Malformed quiz cards: 0
 
 === CAS CHOC INTEGRITY ===
-Total cas choc in deck: 3
+Total cas choc in deck: 8
 Incomplete cas choc: 0

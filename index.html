@@ -19,7 +19,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<link rel="stylesheet" href="style.css?v=236">
+<link rel="stylesheet" href="style.css?v=237">
 <style>
 /* Critical preloader (inline so it shows before CSS/JS) */
 #appPreloader{position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:radial-gradient(ellipse 80% 50% at 50% 0%,#164E63 0%,#0f1117 55%,#050508 100%);color:#EDEDEF;font-family:Figtree,system-ui,sans-serif;transition:opacity .45s ease,visibility .45s}
@@ -319,7 +319,7 @@
       </button>
       <div class="bf-header-title">
         <strong>Pulse</strong>
-        <span>Rappels courts · cas EVC · visuels · répétition espacée</span>
+        <span>Ton feed clinique quotidien</span>
       </div>
       <div class="bf-stats-bar">
         <span id="bfStreak">Jour 1</span>
@@ -328,26 +328,32 @@
       </div>
     </div>
     <div class="bf-session-tabs" id="bfSessionTabs" role="tablist" aria-label="Choisir une séance de révision">
-      <button type="button" class="bf-session-tab active" data-session="mix" onclick="BrainFeed.selectSession('mix')" role="tab" aria-selected="true">Aujourd’hui</button>
-      <button type="button" class="bf-session-tab" data-session="cas" onclick="BrainFeed.selectSession('cas')" role="tab" aria-selected="false">Cas EVC</button>
-      <button type="button" class="bf-session-tab" data-session="visual" onclick="BrainFeed.selectSession('visual')" role="tab" aria-selected="false">Visuels</button>
+      <button type="button" class="bf-session-tab active" data-session="mix" onclick="BrainFeed.selectSession('mix')" role="tab" aria-selected="true">✨ Pour toi</button>
+      <button type="button" class="bf-session-tab" data-session="flash" onclick="BrainFeed.selectSession('flash')" role="tab" aria-selected="false">🧠 Flash</button>
+      <button type="button" class="bf-session-tab" data-session="cas" onclick="BrainFeed.selectSession('cas')" role="tab" aria-selected="false">🩺 Cas / CROQ</button>
+      <button type="button" class="bf-session-tab" data-session="pieges" onclick="BrainFeed.selectSession('pieges')" role="tab" aria-selected="false">⚠️ Pièges</button>
+      <button type="button" class="bf-session-tab" data-session="visual" onclick="BrainFeed.selectSession('visual')" role="tab" aria-selected="false">🎬 Visuels</button>
     </div>
     <div class="bf-progress-track"><div class="bf-progress-fill" id="bfProgress"></div></div>
     <div class="bf-feed" id="bfFeed">
       <!-- Slides rendered dynamically by brainfeed.js -->
     </div>
-    <div class="bf-actions">
-      <button class="bf-action-btn bf-action-fail" onclick="BrainFeed.actionDontKnow()" aria-label="Je ne sais pas">
-        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        <span>À revoir</span>
-      </button>
-      <button class="bf-action-btn bf-action-fav" onclick="BrainFeed.actionFav()" aria-label="Sauvegarder">
+    <div class="bf-actions" aria-label="Actions de la publication">
+      <button class="bf-action-btn bf-action-fav" id="bfFavAction" onclick="BrainFeed.actionFav()" aria-label="Garder cette carte">
         <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         <span>Garder</span>
       </button>
-      <button class="bf-action-btn bf-action-know" onclick="BrainFeed.actionKnow()" aria-label="Je sais">
+      <button class="bf-action-btn bf-action-share" onclick="BrainFeed.shareCard()" aria-label="Partager cette carte">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3v12"/><path d="m7 8 5-5 5 5"/><path d="M5 13v6h14v-6"/></svg>
+        <span>Partager</span>
+      </button>
+      <button class="bf-action-btn bf-action-know" onclick="BrainFeed.actionKnow()" aria-label="Je maîtrise cette carte">
         <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
         <span>Acquis</span>
+      </button>
+      <button class="bf-action-btn bf-action-fail" onclick="BrainFeed.actionDontKnow()" aria-label="Revoir cette carte">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        <span>À revoir</span>
       </button>
     </div>
     <div class="bf-toast" id="bfToast"></div>
@@ -374,17 +380,17 @@
     <div class="src-note"><strong>Repère :</strong> 2009-2024 = ancien format EVCF/EVCP. À partir de 2025 : voie interne = QCM ; voie externe = EVCF + EVCP. La provenance et le niveau de complétude sont affichés sur chaque ressource.</div>
     
     <div class="sub-tab-switch">
-      <button id="btnSubAuthentiques" class="active" onclick="switchAnnalesMode('authentiques')">Annales sourcées</button>
-      <button id="btnSubAnnales" onclick="switchAnnalesMode('annales')">Cas d’entraînement</button>
-      <button id="btnSubSujets" onclick="switchAnnalesMode('sujets')">Examens blancs</button>
+      <button id="btnSubAnnales" class="active" onclick="switchAnnalesMode('annales')">Cas corrigés</button>
+      <button id="btnSubAuthentiques" onclick="switchAnnalesMode('authentiques')">Sujets officiels</button>
+      <button id="btnSubSujets" onclick="switchAnnalesMode('sujets')">Examens corrigés</button>
     </div>
 
-    <div id="subTabAuthentiques" class="sub-tab-content">
+    <div id="subTabAuthentiques" class="sub-tab-content" style="display:none">
       <div id="annalesAuthentiquesContent"></div>
     </div>
 
     <!-- Section Cas Cliniques (Annales) -->
-    <div id="subTabAnnales" class="sub-tab-content" style="display:none">
+    <div id="subTabAnnales" class="sub-tab-content">
       <div class="annales-filters" id="annalesFilters"></div>
       <div id="annalesContent"></div>
     </div>
@@ -573,7 +579,7 @@
   var steps = [
     { src: 'data-bundle.js?v=235', label: 'Contenu des chapitres…', pct: 34 },
     { src: 'practice-data.js?v=235', label: 'Entraînements structurés…', pct: 40 },
-    { src: 'annales-authentiques.js?v=235', label: 'Sources des annales…', pct: 45 },
+    { src: 'annales-authentiques.js?v=237', label: 'Sources des annales…', pct: 45 },
     { src: 'annales-texte.js?v=235', label: 'Sujets EVC recherchables…', pct: 50 },
     { src: 'protocoles-has-officiels.js?v=235', label: 'Conduites HAS…', pct: 55 },
     { src: 'notebook-decks-data.js?v=235', label: 'Decks NotebookLM…', pct: 60 },
@@ -584,8 +590,8 @@
     { src: 'appsearch.js?v=235', label: 'Recherche…', pct: 85 },
     { src: 'erreurs-journal.js?v=235', label: 'Fichier erreurs…', pct: 89 },
     { src: 'graph.js?v=235', label: 'Parcours liés…', pct: 93 },
-    { src: 'brainfeed.js?v=236', label: 'BrainFeed…', pct: 97 },
-    { src: 'app.js?v=236', label: 'Interface…', pct: 100 }
+    { src: 'brainfeed.js?v=237', label: 'BrainFeed…', pct: 97 },
+    { src: 'app.js?v=237', label: 'Interface…', pct: 100 }
   ];
   var i = 0;
   var fill = document.getElementById('plFill');

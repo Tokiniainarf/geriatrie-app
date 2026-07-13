@@ -219,7 +219,7 @@ function bootApp(){
     document.body.classList.remove('ap-mini-visible', 'ap-full-open', 'ap-is-playing');
   } catch (_) {}
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js?v=236').then((reg) => {
+    navigator.serviceWorker.register('sw.js?v=237').then((reg) => {
       try { reg.update(); } catch (_) {}
       if (reg.waiting) {
         try { reg.waiting.postMessage({ type: 'SKIP_WAITING' }); } catch (_) {}
@@ -372,7 +372,7 @@ function sw(view, opts){
     if(targetView==='annales') {
       safe(()=>{
         if (view === 'sujets') switchAnnalesMode('sujets');
-        else switchAnnalesMode('authentiques');
+        else switchAnnalesMode('annales');
       }, 'annales');
     }
     if(targetView==='proto') safe(()=>switchProtoMode('cliniques'), 'proto');
@@ -473,7 +473,7 @@ function renderAuthenticAnnales(){
   const internal=s25.internal||{};
   const qcm=(internal.questions||[]).map((q,i)=>`<details class="official-qcm"><summary><span>Q${i+1}</span>${esc(q.q)}</summary><ol type="A">${(q.options||[]).map(o=>`<li>${esc(o)}</li>`).join('')}</ol><div class="official-qcm-noanswer">Énoncé uniquement : aucune correction n’est revendiquée comme officielle.</div></details>`).join('');
   const external=s25.external||{};
-  el.innerHTML=`<section class="official-annals-block"><div class="official-annals-title"><span>Archives intégrées</span><h2>Vrais sujets 2009-2024</h2><p>Choisissez EVCF ou EVCP, une session, puis lisez uniquement le cas et les questions. Le texte reste non corrigé.</p></div><div id="annalesTextExplorer"></div><details class="annal-facsimiles"><summary>Contrôler le fac-similé original (${archives.reduce((n,a)=>n+(a.pages||0),0)} pages, hors ligne)</summary><div class="official-annals-grid">${archiveHtml}</div></details></section>
+  el.innerHTML=`<div class="ann-correction-cta"><div><strong>Tu cherches les réponses ?</strong><span>Les sujets nationaux ci-dessous ne contiennent pas de corrigé officiel. L’app propose séparément 503 réponses pédagogiques et 90 réponses d’examens.</span></div><button type="button" onclick="switchAnnalesMode('annales')">Ouvrir les cas corrigés</button></div><section class="official-annals-block"><div class="official-annals-title"><span>Archives intégrées</span><h2>Vrais sujets 2009-2024</h2><p>Choisissez EVCF ou EVCP, une session, puis lisez uniquement le cas et les questions. Le texte reste non corrigé.</p></div><div id="annalesTextExplorer"></div><details class="annal-facsimiles"><summary>Contrôler le fac-similé original (${archives.reduce((n,a)=>n+(a.pages||0),0)} pages, hors ligne)</summary><div class="official-annals-grid">${archiveHtml}</div></details></section>
   <section class="official-annals-block"><div class="official-annals-title"><span>Réforme 2025</span><h2>Voie interne</h2><p>${esc(internal.format||'')} · ${esc(internal.completeness||'')}</p></div><div class="ann-session-notice"><strong>Provenance :</strong> ${esc(internal.provenance||'')}. L’énoncé disponible est intégré ci-dessous, sans sortie de l’app.</div><div class="official-qcm-list">${qcm}</div></section>
   <section class="official-annals-block unavailable"><div class="official-annals-title"><span>Réforme 2025</span><h2>${esc(external.title||'Voie externe')}</h2><p>${esc(external.format||'')}</p></div><div class="official-annal-note"><strong>${esc(external.completeness||'')}</strong><br>${esc(external.note||'')}</div></section>`;
   initAnnalesTextExplorer();
@@ -3913,14 +3913,29 @@ function toggleAnnAnswer(ansId,btn){
     e.classList.add('ann-a-visible');
     btn.textContent='Masquer';
     btn.classList.add('ann-reveal-open');
+    btn.setAttribute('aria-expanded','true');
   }else{
     e.style.display='none';
     e.classList.remove('ann-a-visible');
     btn.textContent='Voir réponse';
     btn.classList.remove('ann-reveal-open');
+    btn.setAttribute('aria-expanded','false');
   }
 }
 window.toggleAnnAnswer=toggleAnnAnswer;
+
+function hasUnsafeGlycemiaMismatch(value){
+  const text=String(value||'').replace(/,/g,'.');
+  if(!/hypoglyc|sucre oral|glucose 30\s*%|\bG30\b/i.test(text))return false;
+  return[...text.matchAll(/(\d+(?:\.\d+)?)\s*g\s*\/\s*l/gi)].some(m=>Number(m[1])>0.70);
+}
+
+function renderSafeTrainingAnswer(value){
+  const answer=String(value||'').trim();
+  if(!answer)return'<div class="ann-answer-missing">Réponse pédagogique non renseignée.</div>';
+  if(hasUnsafeGlycemiaMismatch(answer))return'<div class="ann-answer-warning"><strong>Réponse suspendue</strong><span>Une incohérence d’unité glycémique a été détectée dans ce corrigé reconstitué. Il n’est pas affiché tant qu’il n’a pas été validé.</span></div>';
+  return esc(answer).replace(/\n/g,'<br>');
+}
 
 /* ── SUJETS EVC COMPLETS ── */
 function mergeSujetsPools(){
@@ -3977,7 +3992,14 @@ function renderSujets(){
 function renderSujetsList(list){
   const el=document.getElementById('sujetsContent');if(!el)return;
   if(!list.length){el.innerHTML='<div class="empty"><div class="empty-text">Aucun sujet pour ce filtre</div></div>';return;}
-  el.innerHTML=`<div class="ann-session-notice"><strong>Session 2025 :</strong> l’épreuve externe comporte officiellement deux écrits de 2 h (connaissances fondamentales et pratiques) le même jour ; la voie interne comporte un QCM de 2 h. Aucun sujet 2025 de gériatrie n’est intégré faute de document officiel public vérifiable.</div>`+list.map(s=>`
+  el.innerHTML=`<div class="ann-session-notice"><strong>Corrigés pédagogiques :</strong> ces examens sont des entraînements reconstitués et non des corrigés officiels. Les réponses sont maintenant affichées question par question ; toute incohérence détectée est suspendue au lieu d’être présentée comme vraie.</div>`+list.map(s=>{
+    const safeId=String(s.id||'sujet').replace(/[^a-z0-9_-]/gi,'-');
+    const questionBlocks=Array.isArray(s.questions)&&s.questions.length?s.questions.map((q,i)=>{
+      const answerId=`sujet-answer-${safeId}-${i}`;
+      return`<article class="sujet-question"><div class="sujet-question-head"><span>Question ${i+1}</span><p>${esc(q.q||q.question||'')}</p></div><button type="button" class="ann-reveal-btn" aria-expanded="false" aria-controls="${answerId}" onclick="toggleAnnAnswer('${answerId}',this)">Voir réponse</button><div class="sujet-corrige ann-a-hidden" id="${answerId}" style="display:none"><div class="sujet-corrige-title">Corrigé pédagogique</div><div class="sujet-corrige-text">${renderSafeTrainingAnswer(q.a||q.answer||'')}</div></div></article>`;
+    }).join(''):'';
+    const wholeCorrection=!questionBlocks&&(s.corrigé||s.corrige)?`<button type="button" class="ann-reveal-btn" aria-expanded="false" aria-controls="sujet-corrige-${safeId}" onclick="toggleAnnAnswer('sujet-corrige-${safeId}',this)">Voir le corrigé</button><div class="sujet-corrige ann-a-hidden" id="sujet-corrige-${safeId}" style="display:none"><div class="sujet-corrige-title">Corrigé pédagogique</div><div class="sujet-corrige-text">${renderSafeTrainingAnswer(s.corrigé||s.corrige||'')}</div>${s.juryTips&&!hasUnsafeGlycemiaMismatch(s.juryTips)?`<div class="ann-jury-tip">💡 Jury: ${esc(s.juryTips)}</div>`:''}</div>`:'';
+    return`
     <div class="sujet-card">
       <span class="source-status training">Entraînement reconstitué · non officiel</span>
       <div class="sujet-header">
@@ -3988,15 +4010,11 @@ function renderSujetsList(list){
       <div class="sujet-consigne"><strong>Consigne :</strong> ${esc(s.consigne||'')}</div>
       <div class="sujet-body">
         <div class="sujet-text" id="sujet-text-${s.id}">${esc(s.sujet||'').replace(/\n/g,'<br>')}</div>
-        <button class="ann-reveal-btn" onclick="var e=document.getElementById('sujet-corrige-${s.id}');e.style.display=e.style.display==='none'?'block':'none';this.textContent=e.style.display==='none'?'Voir le corrigé':'Masquer le corrigé'">Voir le corrigé</button>
-        <div class="sujet-corrige" id="sujet-corrige-${s.id}" style="display:none">
-          <div class="sujet-corrige-title">📝 Corrigé détaillé</div>
-          <div class="sujet-corrige-text">${esc(s.corrigé||s.corrige||'').replace(/\n/g,'<br>')}</div>
-          ${s.juryTips?`<div class="ann-jury-tip">💡 Jury: ${esc(s.juryTips)}</div>`:''}
-        </div>
+        ${questionBlocks?`<div class="sujet-question-list">${questionBlocks}</div>`:wholeCorrection||'<div class="ann-answer-missing">Corrigé pédagogique non renseigné.</div>'}
+        ${questionBlocks&&s.juryTips&&!hasUnsafeGlycemiaMismatch(s.juryTips)?`<div class="ann-jury-tip">💡 Jury: ${esc(s.juryTips)}</div>`:''}
       </div>
     </div>
-  `).join('');
+  `}).join('');
 }
 
 /* ── ANNALES EVC PAR ANNÉE ── */
@@ -4075,14 +4093,14 @@ function renderAnnalesList(){
       <div class="ann-year-body">${cases.map(a=>{
         const chName=APP_DATA.chapters.find(c=>c.id===a.chapter);
         const diffBadge=a.difficulty?`<span class="rang-badge rang-${a.difficulty.toLowerCase()}">Rang ${a.difficulty}</span>`:'';
-        const questions=a.questions?a.questions.map((q,i)=>`<div class="ann-q"><div class="ann-q-text"><strong>Q${i+1}:</strong> ${esc(q.q||q.question||'')}</div><div class="ann-a-text ann-a-hidden" style="display:none" id="ans-${a.id}-${i}">${esc(q.a||q.answer||'')}</div><button type="button" class="ann-reveal-btn" onclick="toggleAnnAnswer('ans-${a.id}-${i}',this)">Voir réponse</button></div>`).join(''):(a.correction||a.reponse?`<div class="ann-q"><div class="ann-a-text ann-a-hidden" style="display:none" id="ans-${a.id}">${esc(a.correction||a.reponse)}</div><button type="button" class="ann-reveal-btn" onclick="toggleAnnAnswer('ans-${a.id}',this)">Voir réponse</button></div>`:'');
+        const questions=a.questions?a.questions.map((q,i)=>`<div class="ann-q"><div class="ann-q-text"><strong>Q${i+1}:</strong> ${esc(q.q||q.question||'')}</div><div class="ann-a-text ann-a-hidden" style="display:none" id="ans-${a.id}-${i}">${renderSafeTrainingAnswer(q.a||q.answer||'')}</div><button type="button" class="ann-reveal-btn" aria-expanded="false" aria-controls="ans-${a.id}-${i}" onclick="toggleAnnAnswer('ans-${a.id}-${i}',this)">Voir réponse</button></div>`).join(''):(a.correction||a.reponse?`<div class="ann-q"><div class="ann-a-text ann-a-hidden" style="display:none" id="ans-${a.id}">${renderSafeTrainingAnswer(a.correction||a.reponse)}</div><button type="button" class="ann-reveal-btn" aria-expanded="false" aria-controls="ans-${a.id}" onclick="toggleAnnAnswer('ans-${a.id}',this)">Voir réponse</button></div>`:'');
          return`<div class="ann-card">
            <span class="source-status ${a._official?'official':'training'}">${esc(a._sourceLabel)}</span>
           <div class="ann-card-head">${diffBadge}<span class="ann-card-ch">${chName?chName.t:a.chapter||''}</span></div>
           <div class="ann-card-title">${esc(a.title||a.titre||'')}</div>
           <div class="ann-card-situation">${esc(a.situation||a.cas||a.case||'')}</div>
           ${questions}
-          ${a.juryTips?`<div class="ann-jury-tip">💡 Jury: ${esc(a.juryTips)}</div>`:''}
+          ${a.juryTips&&!hasUnsafeGlycemiaMismatch(a.juryTips)?`<div class="ann-jury-tip">💡 Jury: ${esc(a.juryTips)}</div>`:''}
         </div>`;
       }).join('')}</div>
     </div>`;

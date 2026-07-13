@@ -13,6 +13,7 @@ const BrainFeed = (() => {
   let quizCombo = 0;
   let activeSession = 'mix';
   const DAILY_GOAL = 20;
+  const FEED_LENGTH = 40;
   const COMBO_BONUS_AT = 5;
   const COMBO_CONFETTI_AT = 10;
   const ACHIEVEMENTS = [
@@ -63,19 +64,19 @@ const BrainFeed = (() => {
   const CHIFFRES_CLES = [
     { value: 30, unit: '%', line: '... % des personnes de 65 ans et plus chutent au moins une fois par an', source: 'HAS' },
     { value: 15, unit: '%', line: '... % des personnes de 65 ans et plus ont une dépression non diagnostiquée', source: 'GDS-15' },
-    { value: 5, unit: ' critères', line: 'Nombre de critères de Fried : au moins ... critères = syndrome de fragilité', source: 'Fried' },
+    { value: 3, unit: ' critères', line: 'Nombre de critères de Fried : au moins ... critères = syndrome de fragilité', source: 'Fried' },
     { value: 0.8, unit: ' m/s', line: 'Seuil de vitesse de marche en dessous duquel on suspecte la fragilité : ... m/s', source: 'Fried' },
     { value: 20, unit: ' s', line: 'Timed Up and Go : plus de ... secondes = risque de chute élevé', source: 'CNEG, chapitre 12' },
     { value: 24, unit: '/30', line: 'Seuil MMSE interprété comme « normal » chez un sujet jeune instruit : ... /30', source: 'MMSE' },
     { value: 5, unit: '/15', line: 'Seuil GDS-15 à partir duquel on dépiste une dépression : ... /15', source: 'Yesavage' },
     { value: 19, unit: '/28', line: 'Score Tinetti (POMA) inférieur à ... = risque élevé de chute', source: 'Tinetti' },
-    { value: 23.5, unit: '/30', line: 'Seuil MNA entre dénutrition et risque de dénutrition : ... /30', source: 'MNA' },
+    { value: 17, unit: '/30', line: 'Seuil MNA entre dénutrition et risque de dénutrition : ... /30', source: 'MNA' },
     { value: 5, unit: ' médicaments', line: 'À partir de ... médicaments quotidiens, on parle de polymédication', source: 'SFGG' },
     { value: 30, unit: '%', line: 'Environ ... % des personnes de 65 ans et plus présentent une polymédication', source: 'Institut de la longévité' },
     { value: 50, unit: '%', line: '... % des personnes de 65 ans et plus ont au moins deux affections chroniques', source: 'Comorbidité' },
     { value: 20, unit: '%', line: 'Environ ... % des personnes de 85 ans et plus ont un trouble cognitif déclaré', source: 'Démographie' },
-    { value: 6, unit: ' mois', line: 'Perte de poids significative si ≥ 5 % en ... mois ou ≥ 10 % en 6 mois', source: 'Dénutrition' },
-    { value: 30, unit: ' mg/j', line: 'Apport protéique recommandé : 1–1,2 g/kg/j, soit environ ... g/j pour un sujet de 60 kg', source: 'Nutrition' }
+    { value: 1, unit: ' mois', line: 'Perte de poids significative si ≥ 5 % en ... mois ou ≥ 10 % en 6 mois', source: 'Dénutrition' },
+    { value: 60, unit: ' à 72 g/j', line: 'Apport protéique recommandé : 1–1,2 g/kg/j, soit environ ... g/j au minimum pour un sujet de 60 kg', source: 'Nutrition' }
   ];
 
   const PIEGES_EXAM = [
@@ -218,6 +219,27 @@ const BrainFeed = (() => {
     const s = d + seed;
     for (let i = 0; i < s.length; i++) h = ((h << 5) - h) + s.charCodeAt(i) | 0;
     return Math.abs(h);
+  }
+
+  function motionOK() {
+    return !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }
+
+  function haptic(pattern = 8) {
+    try { if (navigator.vibrate) navigator.vibrate(pattern); } catch (_) {}
+  }
+
+  function dayPick(pool, n, salt = '') {
+    return [...pool]
+      .sort((a, b) => hashDay(`${salt}|${a.id || a.question || ''}`) - hashDay(`${salt}|${b.id || b.question || ''}`))
+      .slice(0, Math.min(n, pool.length));
+  }
+
+  function hasUnsafeGlycemiaMismatch(value) {
+    const text = String(value || '').replace(/,/g, '.');
+    if (!/hypoglyc|sucre oral|glucose 30\s*%|\bG30\b/i.test(text)) return false;
+    return [...text.matchAll(/(\d+(?:\.\d+)?)\s*g\s*\/\s*l/gi)]
+      .some(match => Number(match[1]) > 0.70);
   }
 
   function getAllFlash() {
@@ -458,20 +480,7 @@ const BrainFeed = (() => {
     const casChoc = [];
     const seenCases = [];
     annales.forEach(a => {
-      let diagnosis = '';
-      if (a.questions && a.questions.length) {
-        diagnosis = a.questions.slice(0, 1).map((q, i) => {
-          const prompt = conciseCaseText(q.q || q.question || '', 120);
-          const answer = conciseCaseText(q.a || q.answer || '', 230);
-          return `<strong>${i + 1}. ${prompt}</strong><br>${answer}`;
-        }).join('<br><br>');
-      } else {
-        diagnosis = conciseCaseText(a.correction || a.reponse || '', 520);
-      }
-      if (!diagnosis) return;
-
       const text = a.situation || a.cas || a.case || a.title || '';
-      if (!isCaseChocReady(text, diagnosis)) return;
       const nameMatch = text.match(/M(?:me|\.?Monsieur|\.)\s+([A-ZÀ-ÖØ-Þ][a-zà-öø-ÿ'-]+)/);
       const nameKey = nameMatch ? nameMatch[1] : '';
       const ageMatch = text.match(/(\d{2,3})\s*ans/);
@@ -492,16 +501,33 @@ const BrainFeed = (() => {
         seenCases.push({ name: nameKey.toLowerCase(), tokens: caseTokens, age: ageKey });
       }
 
-      casChoc.push({
-        type: 'cas_choc', id: 'cc-' + a.id,
-        chapter: a.chapter, rang: a.difficulty || 'A',
-        vignette: a.situation || a.cas || a.case || a.title || '',
-        diagnosis: diagnosis,
-        juryTips: conciseCaseText(a.juryTips || '', 150),
-        timer: 30,
-        tags: ['Cas d’entraînement', 'Raisonnement clinique'],
-        srsKey: 'case-' + a.id,
-        srs: srs['case-' + a.id] || { ease: 2.5, interval: 0, nextReview: 0 }
+      const sourceQuestions = Array.isArray(a.questions) && a.questions.length
+        ? a.questions
+            .map((q, i) => ({
+              index: i,
+              prompt: conciseCaseText(q.q || q.question || '', 125),
+              answer: conciseCaseText(q.a || q.answer || '', 360)
+            }))
+            .filter(q => q.prompt && q.answer && !hasUnsafeGlycemiaMismatch(`${q.prompt} ${q.answer}`))
+        : [{ index: 0, prompt: 'Quelle est votre conduite ?', answer: conciseCaseText(a.correction || a.reponse || '', 420) }];
+
+      sourceQuestions.forEach(q => {
+        if (!q.answer || hasUnsafeGlycemiaMismatch(q.answer)) return;
+        const vignette = `${conciseCaseText(text, 210)}\n\nQuestion : ${q.prompt}`;
+        const diagnosis = `<strong>${q.prompt}</strong><br>${q.answer}`;
+        if (!isCaseChocReady(vignette, diagnosis)) return;
+        const key = `case-${a.id}-q${q.index + 1}`;
+        casChoc.push({
+          type: 'cas_choc', id: `cc-${a.id}-q${q.index + 1}`,
+          chapter: a.chapter, rang: a.difficulty || 'A',
+          vignette,
+          diagnosis,
+          juryTips: conciseCaseText(a.juryTips || '', 150),
+          timer: 30,
+          tags: ['Cas / CROQ d’entraînement', 'Raisonnement clinique'],
+          srsKey: key,
+          srs: srs[key] || { ease: 2.5, interval: 0, nextReview: 0 }
+        });
       });
     });
 
@@ -729,7 +755,24 @@ const BrainFeed = (() => {
       srs: srs['diagram-' + d.id] || { ease: 2.5, interval: 0, nextReview: 0 }
     }));
 
-    return { memoJour, casChoc, quizFlash, chiffreCle, citation, piegeExam, visualExplanations: [...nativeDiagrams, ...uniqueVisualExplanations], allFlash, srs };
+    const flashRecall = [];
+    const seenFlashQuestions = new Set();
+    allFlash.filter(isQuizReadyFlash).forEach((fc, i) => {
+      const question = String(fc.question || fc.q || '').replace(/\s+/g, ' ').trim();
+      const answer = String(fc.answer || fc.a || '').replace(/\s+/g, ' ').trim();
+      const signature = question.toLowerCase();
+      if (seenFlashQuestions.has(signature) || hasUnsafeGlycemiaMismatch(`${question} ${answer}`)) return;
+      seenFlashQuestions.add(signature);
+      const rawKey = fc.id || `quality-${i}`;
+      flashRecall.push({
+        type: 'flash', id: `fc-${rawKey}`, chapter: fc.chapter, rang: fc.rang || 'A',
+        question, answer, tags: fc.tags || ['Rappel essentiel'],
+        srsKey: rawKey,
+        srs: srs[rawKey] || { ease: 2.5, interval: 0, nextReview: 0 }
+      });
+    });
+
+    return { memoJour, casChoc, quizFlash, chiffreCle, citation, piegeExam, flashRecall, visualExplanations: [...nativeDiagrams, ...uniqueVisualExplanations], allFlash, srs };
   }
 
   function buildLegacyPools(allFlash, srs) {
@@ -898,15 +941,15 @@ const BrainFeed = (() => {
 
   function buildDailyDeck(pools) {
     const all = dedupeDeck([
-      ...pools.quizFlash, ...pools.memoJour, ...pools.casChoc,
-      ...pools.piegeExam, ...pools.visualExplanations
+      ...pools.quizFlash, ...pools.flashRecall, ...pools.memoJour, ...pools.casChoc,
+      ...pools.piegeExam, ...pools.chiffreCle, ...pools.visualExplanations
     ]);
     const seen = new Set();
     const isDue = (card) => card.srsKey && Object.prototype.hasOwnProperty.call(pools.srs, card.srsKey) && pools.srs[card.srsKey].nextReview <= Date.now();
-    const add = (list, count) => {
+    const add = (list, count, salt = '') => {
       const available = list.filter(card => !seen.has(card.id));
       const due = available.filter(isDue).sort((a, b) => (a.srs.nextReview || 0) - (b.srs.nextReview || 0));
-      const fresh = pickN(available.filter(card => !isDue(card)), Math.max(0, count - due.length));
+      const fresh = dayPick(available.filter(card => !isDue(card)), Math.max(0, count - due.length), salt);
       const accepted = [...due.slice(0, count), ...fresh].slice(0, count);
       accepted.forEach(card => seen.add(card.id));
       return accepted;
@@ -914,17 +957,32 @@ const BrainFeed = (() => {
     const strongCases = pools.casChoc.filter(isHighYieldFeedCase);
     const diagrams = pools.visualExplanations.filter(card => card.diagram);
     const mediaVisuals = pools.visualExplanations.filter(card => !card.diagram);
-    const cards = [
-      ...add(pools.quizFlash, 8),
-      ...add(strongCases, 3),
-      ...add(pools.memoJour, 3),
-      ...add(pools.piegeExam, 2),
-      ...add(diagrams, 3),
-      ...add(mediaVisuals, 1)
+    const core = [
+      ...add(pools.flashRecall, 6, 'core-flash'),
+      ...add(pools.quizFlash, 4, 'core-quiz'),
+      ...add(strongCases, 4, 'core-cas'),
+      ...add(pools.memoJour, 2, 'core-memo'),
+      ...add(pools.piegeExam, 2, 'core-piege'),
+      ...add([...diagrams, ...mediaVisuals], 1, 'core-visual'),
+      ...add(pools.chiffreCle, 1, 'core-chiffre')
     ];
-    if (cards.length < DAILY_GOAL) cards.push(...add(all, DAILY_GOAL - cards.length));
-    // Le flux doit alterner les formats, sans prétendre que l'infini est utile.
-    const cadence = ['quiz_flash', 'cas_choc', 'memo_jour', 'piege_exam', 'visual'];
+    if (core.length < DAILY_GOAL) core.push(...add(all, DAILY_GOAL - core.length, 'core-fill'));
+    const bonus = [
+      ...add(pools.flashRecall, 8, 'bonus-flash'),
+      ...add(pools.quizFlash, 4, 'bonus-quiz'),
+      ...add(strongCases, 4, 'bonus-cas'),
+      ...add(pools.memoJour, 1, 'bonus-memo'),
+      ...add(pools.piegeExam, 1, 'bonus-piege'),
+      ...add([...mediaVisuals, ...diagrams], 1, 'bonus-visual'),
+      ...add(pools.chiffreCle, 1, 'bonus-chiffre')
+    ];
+    if (core.length + bonus.length < FEED_LENGTH) bonus.push(...add(all, FEED_LENGTH - core.length - bonus.length, 'bonus-fill'));
+    const cards = [
+      ...core.slice(0, DAILY_GOAL).map(card => ({ ...card, feedTier: 'essential' })),
+      ...bonus.map(card => ({ ...card, feedTier: 'bonus' }))
+    ];
+    // Alternance éditoriale : rappel, décision, défi puis respiration visuelle.
+    const cadence = ['flash', 'quiz_flash', 'cas_choc', 'memo_jour', 'piege_exam', 'visual', 'chiffre_cle'];
     const buckets = Object.fromEntries(cadence.map(type => [type, cards.filter(card => card.type === type)]));
     const ordered = [];
     while (ordered.length < cards.length) {
@@ -935,7 +993,7 @@ const BrainFeed = (() => {
       });
       if (!moved) break;
     }
-    return ordered.slice(0, DAILY_GOAL);
+    return ordered.slice(0, FEED_LENGTH);
   }
 
   function buildDeck() {
@@ -947,20 +1005,24 @@ const BrainFeed = (() => {
 
     const pools = buildSpecialPools();
     const mixed = buildDailyDeck(pools);
-    if (activeSession === 'cas') return pickN(pools.casChoc.filter(isHighYieldFeedCase), DAILY_GOAL);
+    if (activeSession === 'flash') return dayPick(dedupeDeck(pools.flashRecall), 32, 'session-flash');
+    if (activeSession === 'cas') return dayPick(pools.casChoc.filter(isHighYieldFeedCase), 30, 'session-cas');
+    if (activeSession === 'pieges') return dayPick(dedupeDeck([...pools.piegeExam, ...pools.quizFlash]), 28, 'session-pieges');
     if (activeSession === 'visual') {
       const diagrams = pools.visualExplanations.filter(card => card.diagram);
       const media = pools.visualExplanations.filter(card => !card.diagram);
-      return dedupeDeck([...diagrams, ...pickN(media, Math.max(0, DAILY_GOAL - diagrams.length))]);
+      return dayPick(dedupeDeck([...media, ...diagrams]), 28, 'session-visual');
     }
     return mixed;
   }
 
   function updateSessionChrome() {
     const labels = {
-      mix: '20 cartes ciblées · rappel actif · progression réelle',
-      cas: 'Cas courts · raisonner avant de révéler',
-      visual: 'Figures interactives · voir, prévoir, retenir'
+      mix: '20 essentiels + bonus · rappels, cas, pièges et visuels',
+      flash: 'Rappels courts · priorité aux cartes dues',
+      cas: 'Cas / CROQ d’entraînement · une décision à la fois',
+      pieges: 'Pièges EVC · reconnaître l’erreur avant de corriger',
+      visual: 'Figures et vidéos éducatives · voir, prévoir, retenir'
     };
     document.querySelectorAll('#bfSessionTabs .bf-session-tab').forEach(tab => {
       const on = tab.dataset.session === activeSession;
@@ -974,7 +1036,7 @@ const BrainFeed = (() => {
   }
 
   function selectSession(session) {
-    if (!['mix', 'cas', 'visual'].includes(session)) session = 'mix';
+    if (!['mix', 'flash', 'cas', 'pieges', 'visual'].includes(session)) session = 'mix';
     activeSession = session;
     try { localStorage.setItem('bf_session', activeSession); } catch (_) {}
     if (observer) observer.disconnect();
@@ -989,7 +1051,7 @@ const BrainFeed = (() => {
     if (feed) feed.scrollTop = 0;
     updateSessionChrome();
     renderSlides();
-    showToast({ mix: 'Séance du jour', cas: 'Cas d’entraînement', visual: 'Figures interactives' }[activeSession]);
+    showToast({ mix: '✨ Pour toi', flash: '🧠 Rappels essentiels', cas: '🩺 Cas / CROQ', pieges: '⚠️ Pièges EVC', visual: '🎬 Visuels éducatifs' }[activeSession]);
   }
 
   function getChapterName(chId) {
@@ -1097,6 +1159,21 @@ const BrainFeed = (() => {
     } else {
       slide.innerHTML = renderClassicCard(card, slideIdx);
     }
+
+    const socialTypes = {
+      flash: ['🧠', 'Rappel essentiel'], synthesis: ['📚', 'Synthèse'], case: ['🩺', 'Cas clinique'], reco: ['✅', 'Référence'],
+      memo_jour: ['🧩', 'Mémo'], cas_choc: ['🚑', 'Cas / CROQ'], quiz_flash: ['⚡', 'Quiz flash'],
+      chiffre_cle: ['📊', 'Chiffre clé'], citation: ['💬', 'Repère'], piege_exam: ['⚠️', 'Piège EVC'], visual: ['🎬', 'Visuel éducatif']
+    };
+    const [avatar, typeName] = socialTypes[card.type] || ['✨', 'Pulse'];
+    const chapter = getChapterName(card.chapter);
+    slide.querySelectorAll('.bf-horiz-page').forEach((page, pageIndex) => {
+      const author = document.createElement('div');
+      author.className = 'bf-social-author';
+      author.innerHTML = `<span class="bf-social-avatar" aria-hidden="true">${avatar}</span><span class="bf-social-copy"><strong>Pulse Gériatrie</strong><small>${esc(typeName)}${chapter ? ` · ${esc(chapter)}` : ''}</small></span><span class="bf-social-position">${slideIdx + 1}<small>/${deck.length}</small>${pageIndex ? '<i>réponse</i>' : ''}</span>`;
+      page.appendChild(author);
+    });
+    slide.dataset.tier = card.feedTier || (activeSession === 'mix' && slideIdx < DAILY_GOAL ? 'essential' : 'session');
 
     bindSlideInteractions(slide, card, slideIdx);
     return slide;
@@ -1506,8 +1583,9 @@ const BrainFeed = (() => {
         const scroller = slide.querySelector('.bf-horiz-scroll');
         if (!scroller) return;
         const target = Math.max(scroller.clientWidth, scroller.scrollWidth - scroller.clientWidth);
+        haptic(7);
         // scrollTo est plus déterministe que scrollBy après un rerender du feed.
-        try { scroller.scrollTo({ left: target, behavior: 'smooth' }); }
+        try { scroller.scrollTo({ left: target, behavior: motionOK() ? 'smooth' : 'auto' }); }
         catch (_) { scroller.scrollLeft = target; }
         slide.dataset.revealed = '1';
         requestAnimationFrame(() => {
@@ -1523,6 +1601,8 @@ const BrainFeed = (() => {
         panel.dataset.revealed = '1';
         panel.classList.add('revealed');
         memoBtn.style.display = 'none';
+        slide.dataset.revealed = '1';
+        haptic(7);
       });
     }
 
@@ -1532,6 +1612,8 @@ const BrainFeed = (() => {
         slide.querySelector('.bf-choc-answer')?.classList.remove('hidden');
         chocReveal.style.display = 'none';
         stopCasChocTimer(slideIdx);
+        slide.dataset.revealed = '1';
+        haptic(7);
       });
     }
 
@@ -1540,6 +1622,8 @@ const BrainFeed = (() => {
       trapBtn.addEventListener('click', () => {
         slide.querySelector('.bf-trap-right')?.classList.remove('hidden');
         trapBtn.style.display = 'none';
+        slide.dataset.revealed = '1';
+        haptic(7);
       });
     }
 
@@ -1557,6 +1641,7 @@ const BrainFeed = (() => {
         slide.querySelector('.bf-quiz-expl')?.classList.remove('hidden');
         slide.dataset.quizDone = '1';
         slide.dataset.revealed = '1';
+        haptic(correct ? 12 : [18, 35, 18]);
         completeCard(card, correct, true);
       });
     });
@@ -1566,25 +1651,14 @@ const BrainFeed = (() => {
 
   function setupDoubleTap(slide, slideIdx) {
     let lastTap = 0;
-    slide.addEventListener('click', (e) => {
-      // Ignorer si clic sur bouton d'action ou de quiz
-      if (e.target.closest('button') || e.target.closest('.bf-quiz-opt')) return;
-      
-      const now = Date.now();
-      const delay = now - lastTap;
-      if (delay < 300 && delay > 0) {
-        // Double tap détecté !
-        triggerDoubleTapHeart(slide, slideIdx);
-      }
-      lastTap = now;
-    });
-
-    slide.addEventListener('touchstart', (e) => {
+    slide.addEventListener('pointerup', (e) => {
       if (e.target.closest('button') || e.target.closest('.bf-quiz-opt')) return;
       const now = Date.now();
       const delay = now - lastTap;
       if (delay < 300 && delay > 0) {
         triggerDoubleTapHeart(slide, slideIdx);
+        lastTap = 0;
+        return;
       }
       lastTap = now;
     }, { passive: true });
@@ -1609,7 +1683,7 @@ const BrainFeed = (() => {
     heart.classList.add('animate');
     
     // Action favori
-    actionFavForIdx(slideIdx);
+    actionFavForIdx(slideIdx, true);
   }
 
   function startCasChocTimer(slideIdx, seconds) {
@@ -1647,6 +1721,10 @@ const BrainFeed = (() => {
     if (!num || num.dataset.animated === '1') return;
     num.dataset.animated = '1';
     const target = parseFloat(num.dataset.target);
+    if (!motionOK()) {
+      num.textContent = Number.isInteger(target) ? target : target.toFixed(1).replace('.', ',');
+      return;
+    }
     const isFloat = !Number.isInteger(target);
     let start = 0;
     const dur = 900;
@@ -1731,8 +1809,14 @@ const BrainFeed = (() => {
     if (!feed) feed = document.getElementById('bfFeed');
     if (!feed) return;
     feed.querySelectorAll('.bf-slide').forEach(s => {
-      s.classList.toggle('bf-slide-active', parseInt(s.dataset.idx, 10) === idx);
+      const on = parseInt(s.dataset.idx, 10) === idx;
+      s.classList.toggle('bf-slide-active', on);
+      if (on && s.dataset.entered !== '1') {
+        s.dataset.entered = '1';
+        s.classList.add('bf-reel-enter');
+      }
     });
+    updateActionRail();
   }
 
   function checkAchievements() {
@@ -1920,6 +2004,8 @@ const BrainFeed = (() => {
     if (!card) return;
     if (!requireRevealed(card) || completedCardIds.has(card.id)) return;
     if (!completeCard(card, true)) return;
+    activeSlide()?.classList.add('bf-feedback-success');
+    haptic(14);
     showToast(combo >= COMBO_BONUS_AT ? `🔥 COMBO x${combo} !` : `+${10 + Math.min(combo * 2, 24)} pts`);
     scrollToNext();
   }
@@ -1929,11 +2015,24 @@ const BrainFeed = (() => {
     if (!card) return;
     if (!requireRevealed(card) || completedCardIds.has(card.id)) return;
     if (!completeCard(card, false)) return;
+    activeSlide()?.classList.add('bf-feedback-review');
+    haptic([18, 35, 18]);
     showToast('Programmé pour une nouvelle révision');
     scrollToNext();
   }
 
-  function actionFavForIdx(slideIdx) {
+  function updateActionRail() {
+    const btn = document.getElementById('bfFavAction');
+    if (!btn) return;
+    const card = deck[idx];
+    const saved = !!card && loadFavs().includes(card.id);
+    btn.classList.toggle('is-saved', saved);
+    btn.setAttribute('aria-label', saved ? 'Retirer cette carte des favoris' : 'Garder cette carte');
+    const label = btn.querySelector('span');
+    if (label) label.textContent = saved ? 'Gardé' : 'Garder';
+  }
+
+  function actionFavForIdx(slideIdx, forceSave = false) {
     const card = deck[slideIdx];
     if (!card) return;
     const favs = loadFavs();
@@ -1941,8 +2040,13 @@ const BrainFeed = (() => {
     if (!alreadySaved) {
       favs.push(card.id);
       saveFavs(favs);
+    } else if (!forceSave) {
+      favs.splice(favs.indexOf(card.id), 1);
+      saveFavs(favs);
     }
-    showToast(alreadySaved ? '❤️ Déjà gardé' : '❤️ Gardé pour plus tard');
+    updateActionRail();
+    haptic(9);
+    showToast(alreadySaved && !forceSave ? 'Retiré des favoris' : '❤️ Gardé pour plus tard');
   }
 
   function actionFav() {
@@ -1952,8 +2056,12 @@ const BrainFeed = (() => {
   function scrollToNext() {
     const feed = document.getElementById('bfFeed');
     if (!feed) return;
+    if (idx + 1 >= deck.length) {
+      showToast('Fin de cette sélection · change de rubrique pour continuer');
+      return;
+    }
     const nextSlide = feed.querySelector(`.bf-slide[data-idx="${idx + 1}"]`);
-    if (nextSlide) nextSlide.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (nextSlide) nextSlide.scrollIntoView({ behavior: motionOK() ? 'smooth' : 'auto', block: 'start' });
     else {
       idx++;
       if (idx < deck.length) renderSlides();
@@ -2010,7 +2118,7 @@ const BrainFeed = (() => {
     setTimeout(() => t.classList.remove('show'), 2200);
   }
 
-  function shareCard(slideIdx) {
+  function shareCard(slideIdx = idx) {
     const card = deck[slideIdx];
     if (!card) return;
     let text = '';
@@ -2043,6 +2151,7 @@ const BrainFeed = (() => {
   }
 
   function launchConfetti(canvasId = 'bfConfetti') {
+    if (!motionOK()) return;
     const canvas = document.getElementById(canvasId);
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -2118,7 +2227,7 @@ const BrainFeed = (() => {
   function init() {
     try {
       const stored = localStorage.getItem('bf_session');
-      if (['mix', 'cas', 'visual'].includes(stored)) activeSession = stored;
+      if (['mix', 'flash', 'cas', 'pieges', 'visual'].includes(stored)) activeSession = stored;
     } catch (_) {}
     deck = buildDeck();
     idx = 0;
