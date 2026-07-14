@@ -49,7 +49,7 @@ const MEGA_FLASHCARDS_7 = [
     id: 3956,
     chapter: "ch20",
     rang: "B",
-    question: "Comment poser le diagnostic de syndrome de glissement chez une patiente de 92 ans hospitalisée pour pneumonie guérie ?",
+    question: "Quels critères font évoquer un syndrome de glissement après guérison d’une pneumonie chez une patiente de 92 ans ?",
     answer: "Refus alimentaire complet persistant après la guérison de l'infection aiguë, accompagné d'un mutisme oppositionnel, d'un refus de se lever et d'un repli sur soi, sans syndrome inflammatoire biologique.",
     tags: ["Syndrome de glissement", "Dépression", "Clinique"]
   },
@@ -113,7 +113,7 @@ const MEGA_FLASHCARDS_7 = [
     id: 3964,
     chapter: "ch20",
     rang: "B",
-    question: "Quel est le risque de la prescription systématique d'anti-H1 (hydroxyzine) pour anxiété chez le sujet de plus de 80 ans ?",
+    question: "Pourquoi éviter la prescription systématique d’hydroxyzine chez une personne de plus de 80 ans ?",
     answer: "L'hydroxyzine possède une charge anticholinergique forte (ACB=3). Elle expose à un risque majeur de confusion mentale, de chutes (somnolence), de constipation sévère et de rétention d'urine.",
     tags: ["Hydroxyzine", "Anticholinergiques", "STOPP"]
   },

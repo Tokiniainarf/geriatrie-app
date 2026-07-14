@@ -13903,21 +13903,21 @@ const CAS_EVC_2018_2019 = [
     chapter: 'ch16',
     difficulty: 'A',
     title: 'Déprescription des benzodiazépines au long cours',
-    situation: 'Mme Vasseur, 79 ans, insomnie chronique. Lorazépam 2 mg et zolpidem 10 mg chaque soir depuis 12 ans. Chutes ×2 dernier mois. MMS 27. Pas d\'anxiété majeure (GDS-15 6). Demande « mes somnifères » au médecin traitant. DFG 58.',
+    situation: 'Mme Vasseur, 79 ans, insomnie chronique. Lorazépam 2 mg et zolpidem 10 mg chaque soir depuis 12 ans. Chutes ×2 le dernier mois. MMS 27/30. GDS-15 à 6/15, à explorer. Elle demande le renouvellement de « ses somnifères » au médecin traitant. DFG 58 mL/min.',
     questions: [
       {
-        q: 'Risques des hypnotiques et benzodiazépines chez elle.',
-        a: 'Chutes, fractures, confusion, dépendance, syndrome de sevrage, conduite automatisme (zolpidem), tolérance. Critères Beers : éviter BZD et Z-drugs au long cours. MMS encore bon mais risque cognitif accru. Insomnie souvent comportementale + anxiété légère non traitée.',
+        q: 'Quels sont chez elle les risques des hypnotiques et des benzodiazépines au long cours ?',
+        a: 'Somnolence et baisse de vigilance, troubles de la mémoire, chutes et fractures, accidents de conduite ou comportements automatiques avec le zolpidem. S’ajoutent la tolérance, la dépendance et le risque de syndrome de sevrage en cas d’arrêt brutal. Le bénéfice et l’indication de chaque molécule doivent donc être réévalués.',
         points: 4
       },
       {
-        q: 'Stratégie de déprescription étape par étape.',
-        a: 'Accord patient après explication bénéfice/risque. Arrêt zolpidem en premier (1/2 dose 2 semaines puis stop). Lorazépam : substitution diazépam équivalent puis réduction 10–25 % toutes 1–2 semaines (durée 2–4 mois). TCC-I ou hygiène sommeil (lever fixe, pas écran, activité jour). Pas de nouveau psychotrope systématique ; melatonine 2 mg possible.',
+        q: 'Proposez une stratégie de déprescription progressive et partagée.',
+        a: 'Réévaluer les indications, expliquer les bénéfices attendus et décider avec la patiente d’un calendrier écrit. Diminuer progressivement, par paliers adaptés aux symptômes, sur quelques semaines à plusieurs mois ; ralentir ou revenir au palier précédent si des signes non graves apparaissent. Une substitution par diazépam n’est pas systématique : elle ne se discute que dans certaines situations de dépendance ou d’échecs antérieurs, après vérification hépatique. Associer agenda sommeil-éveil, règles de sommeil et accompagnement non médicamenteux, sans traitement substitutif automatique.',
         points: 5
       },
       {
-        q: 'Surveillance et critères de réussite.',
-        a: 'Fréquence chutes, somnolence diurne, anxiété (GAD-7). Pas de réhospitalisation pour sevrage si lenteur. Réussite = arrêt complet ou dose minimale occasionnelle, amélioration vigilance. Kiné prévention chutes pendant sevrage.',
+        q: 'Que surveiller pendant le sevrage et comment définir sa réussite ?',
+        a: 'Surveiller l’insomnie rebond, l’anxiété, l’irritabilité, les symptômes sensoriels, la somnolence diurne et les chutes. Une confusion, des hallucinations, des troubles de vigilance ou des convulsions imposent une évaluation urgente et une hospitalisation. L’arrêt est l’objectif, mais une diminution durable de dose constitue déjà un résultat favorable ; rechercher aussi une meilleure vigilance et l’absence de nouvelle chute.',
         points: 3
       }
     ],
@@ -27779,7 +27779,7 @@ const MEGA_FLASHCARDS_6 = [
     id: 3925,
     chapter: "ch19",
     rang: "B",
-    question: "Comment gérer le secret médical face aux proches d'un patient qui ne souhaite pas leur divulguer son diagnostic de cancer ?",
+    question: "Que répondre aux proches si le patient refuse que son diagnostic de cancer leur soit divulgué ?",
     answer: "Le secret médical s'impose au médecin, même vis-à-vis de la famille et des enfants. Si le patient s'oppose à la transmission d'informations, le médecin a le devoir éthique et légal de respecter cette volonté.",
     tags: ["Secret médical", "Famille", "Droit"]
   },
@@ -27907,7 +27907,7 @@ const MEGA_FLASHCARDS_6 = [
     id: 3941,
     chapter: "ch19",
     rang: "B",
-    question: "Comment organiser le consentement pour une intervention chirurgicale programmée chez un patient sous curatelle simple ?",
+    question: "Comment recueillir le consentement d’un patient sous curatelle simple avant une chirurgie programmée ?",
     answer: "Le patient signe son consentement de manière autonome. Le curateur doit être informé et assister le patient s'il a des difficultés de compréhension, mais sa signature n'est pas obligatoirement exigée par la loi.",
     tags: ["Curatelle", "Consentement", "Chirurgie"]
   },
@@ -28440,7 +28440,7 @@ const MEGA_FLASHCARDS_7 = [
     id: 3956,
     chapter: "ch20",
     rang: "B",
-    question: "Comment poser le diagnostic de syndrome de glissement chez une patiente de 92 ans hospitalisée pour pneumonie guérie ?",
+    question: "Quels critères font évoquer un syndrome de glissement après guérison d’une pneumonie chez une patiente de 92 ans ?",
     answer: "Refus alimentaire complet persistant après la guérison de l'infection aiguë, accompagné d'un mutisme oppositionnel, d'un refus de se lever et d'un repli sur soi, sans syndrome inflammatoire biologique.",
     tags: ["Syndrome de glissement", "Dépression", "Clinique"]
   },
@@ -28504,7 +28504,7 @@ const MEGA_FLASHCARDS_7 = [
     id: 3964,
     chapter: "ch20",
     rang: "B",
-    question: "Quel est le risque de la prescription systématique d'anti-H1 (hydroxyzine) pour anxiété chez le sujet de plus de 80 ans ?",
+    question: "Pourquoi éviter la prescription systématique d’hydroxyzine chez une personne de plus de 80 ans ?",
     answer: "L'hydroxyzine possède une charge anticholinergique forte (ACB=3). Elle expose à un risque majeur de confusion mentale, de chutes (somnolence), de constipation sévère et de rétention d'urine.",
     tags: ["Hydroxyzine", "Anticholinergiques", "STOPP"]
   },

@@ -240,21 +240,21 @@ const CAS_EVC_2018_2019 = [
     chapter: 'ch16',
     difficulty: 'A',
     title: 'Déprescription des benzodiazépines au long cours',
-    situation: 'Mme Vasseur, 79 ans, insomnie chronique. Lorazépam 2 mg et zolpidem 10 mg chaque soir depuis 12 ans. Chutes ×2 dernier mois. MMS 27. Pas d\'anxiété majeure (GDS-15 6). Demande « mes somnifères » au médecin traitant. DFG 58.',
+    situation: 'Mme Vasseur, 79 ans, insomnie chronique. Lorazépam 2 mg et zolpidem 10 mg chaque soir depuis 12 ans. Chutes ×2 le dernier mois. MMS 27/30. GDS-15 à 6/15, à explorer. Elle demande le renouvellement de « ses somnifères » au médecin traitant. DFG 58 mL/min.',
     questions: [
       {
-        q: 'Risques des hypnotiques et benzodiazépines chez elle.',
-        a: 'Chutes, fractures, confusion, dépendance, syndrome de sevrage, conduite automatisme (zolpidem), tolérance. Critères Beers : éviter BZD et Z-drugs au long cours. MMS encore bon mais risque cognitif accru. Insomnie souvent comportementale + anxiété légère non traitée.',
+        q: 'Quels sont chez elle les risques des hypnotiques et des benzodiazépines au long cours ?',
+        a: 'Somnolence et baisse de vigilance, troubles de la mémoire, chutes et fractures, accidents de conduite ou comportements automatiques avec le zolpidem. S’ajoutent la tolérance, la dépendance et le risque de syndrome de sevrage en cas d’arrêt brutal. Le bénéfice et l’indication de chaque molécule doivent donc être réévalués.',
         points: 4
       },
       {
-        q: 'Stratégie de déprescription étape par étape.',
-        a: 'Accord patient après explication bénéfice/risque. Arrêt zolpidem en premier (1/2 dose 2 semaines puis stop). Lorazépam : substitution diazépam équivalent puis réduction 10–25 % toutes 1–2 semaines (durée 2–4 mois). TCC-I ou hygiène sommeil (lever fixe, pas écran, activité jour). Pas de nouveau psychotrope systématique ; melatonine 2 mg possible.',
+        q: 'Proposez une stratégie de déprescription progressive et partagée.',
+        a: 'Réévaluer les indications, expliquer les bénéfices attendus et décider avec la patiente d’un calendrier écrit. Diminuer progressivement, par paliers adaptés aux symptômes, sur quelques semaines à plusieurs mois ; ralentir ou revenir au palier précédent si des signes non graves apparaissent. Une substitution par diazépam n’est pas systématique : elle ne se discute que dans certaines situations de dépendance ou d’échecs antérieurs, après vérification hépatique. Associer agenda sommeil-éveil, règles de sommeil et accompagnement non médicamenteux, sans traitement substitutif automatique.',
         points: 5
       },
       {
-        q: 'Surveillance et critères de réussite.',
-        a: 'Fréquence chutes, somnolence diurne, anxiété (GAD-7). Pas de réhospitalisation pour sevrage si lenteur. Réussite = arrêt complet ou dose minimale occasionnelle, amélioration vigilance. Kiné prévention chutes pendant sevrage.',
+        q: 'Que surveiller pendant le sevrage et comment définir sa réussite ?',
+        a: 'Surveiller l’insomnie rebond, l’anxiété, l’irritabilité, les symptômes sensoriels, la somnolence diurne et les chutes. Une confusion, des hallucinations, des troubles de vigilance ou des convulsions imposent une évaluation urgente et une hospitalisation. L’arrêt est l’objectif, mais une diminution durable de dose constitue déjà un résultat favorable ; rechercher aussi une meilleure vigilance et l’absence de nouvelle chute.',
         points: 3
       }
     ],

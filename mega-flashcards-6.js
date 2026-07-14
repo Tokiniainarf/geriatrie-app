@@ -201,7 +201,7 @@ const MEGA_FLASHCARDS_6 = [
     id: 3925,
     chapter: "ch19",
     rang: "B",
-    question: "Comment gérer le secret médical face aux proches d'un patient qui ne souhaite pas leur divulguer son diagnostic de cancer ?",
+    question: "Que répondre aux proches si le patient refuse que son diagnostic de cancer leur soit divulgué ?",
     answer: "Le secret médical s'impose au médecin, même vis-à-vis de la famille et des enfants. Si le patient s'oppose à la transmission d'informations, le médecin a le devoir éthique et légal de respecter cette volonté.",
     tags: ["Secret médical", "Famille", "Droit"]
   },
@@ -329,7 +329,7 @@ const MEGA_FLASHCARDS_6 = [
     id: 3941,
     chapter: "ch19",
     rang: "B",
-    question: "Comment organiser le consentement pour une intervention chirurgicale programmée chez un patient sous curatelle simple ?",
+    question: "Comment recueillir le consentement d’un patient sous curatelle simple avant une chirurgie programmée ?",
     answer: "Le patient signe son consentement de manière autonome. Le curateur doit être informé et assister le patient s'il a des difficultés de compréhension, mais sa signature n'est pas obligatoirement exigée par la loi.",
     tags: ["Curatelle", "Consentement", "Chirurgie"]
   },

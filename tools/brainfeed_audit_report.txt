@@ -4,13 +4,13 @@ Type distribution: {"flash":14,"quiz_flash":8,"cas_choc":8,"memo_jour":3,"piege_
 
 === POOL SIZES ===
 memoJour: 5
-casChoc: 331
+casChoc: 292
 quizFlash: 24
-chiffreCle: 15
+chiffreCle: 10
 citation: 8
 piegeExam: 8
 flashRecall: 84
-visualExplanations: 32
+visualExplanations: 20
 allFlash: 1000
 srs: N/A
 
@@ -18,183 +18,228 @@ srs: N/A
 
 --- 1. flash (id=fc-4000) ---
 Question: Quel est l'apport nutritionnel minimum recommandé par jour chez le sujet de plus de 70 ans hospitalisé ?
+Answer: Un apport énergétique minimum de 30 kcal/kg/jour, à associer à un apport protéique de 1.2 à 1.5 g/kg/jour pour prévenir la dénutrition hospitalière et limiter la fonte musculaire.
 
---- 2. quiz_flash (id=qf-curated-delirium-bzd) ---
-Question: Quelle attitude adopter devant un delirium avec agitation sans sevrage alcoolique ?
+--- 2. quiz_flash (id=qf-curated-ecpa) ---
+Question: Quelle échelle comportementale peut évaluer la douleur chez une personne âgée non communicante ?
+Answer: Toujours rechercher d’abord une auto-évaluation si elle reste possible. Sinon, une échelle comportementale adaptée comme l’ECPA aide à objectiver la douleur et à réévaluer l’effet du traitement.
+Expected keywords: auto-évaluation si possible · ECPA · observation comportementale · réévaluation
 Options:
-  A. Prescrire une benzodiazépine systématiquement pour obtenir le sommeil.
-  B. Conclure à une démence irréversible sans bilan étiologique.
-  C. Chercher et traiter la cause ; éviter les benzodiazépines qui aggravent confusio ✓
-  D. Augmenter les anticholinergiques pour diminuer l’agitation.
+  A. Le MMS, qui mesure la mémoire.
+  B. La GDS-15, qui dépiste la dépression.
+  C. L’EVA verbale uniquement.
+  D. L’ECPA, fondée sur l’observation avant et pendant les soins. ✓
 
---- 3. cas_choc (id=cc-15-q2) ---
-Vignette: M. Henri, 76 ans, marche lentement avec sa femme.
+--- 3. cas_choc (id=cc-9-q3) ---
+Vignette: Mme Rousseau, 90 ans, alitée depuis 10 jours après un AVC. IMC 18, incontinente, albumine 22 g/L. L'infirmière constate une rougeur au niveau du sacrum qui ne disparaît pas à la pression (stade 1). Score de Waterlow : 22.
+Prompt: Comment prendre en charge cette escarre de stade 1 ?
+Answer: 1. Soulager la pression (ne plus positionner sur le sacrum). 2. Pansement hydrocolloide ou film transparent pour protection. 3. Pas de désinfectant cutané (cytotoxique). 4. Améliorer l'état nutritionnel (réalimentation). 5. Surveillance quotidienne de l'évolution. 6. Si stade 2+ : consultation plaie et cicatrisation.
 
-Question : Quel programme de prévention ?
-
---- 4. memo_jour (id=mj-eggs) ---
+--- 4. memo_jour (id=mj-bouchon) ---
 Title: MÉMO FLASH
-Question: Quelles dimensions doit couvrir une évaluation gériatrique globale ?
+Question: Devant une décompensation gériatrique, quel raisonnement résume le modèle 1 + 2 + 3 ?
+Answer: 1 : vieillissement et baisse de réserve. 2 : maladies chroniques. 3 : facteur aigu précipitant. Le facteur 3 est souvent le premier levier à identifier et corriger.
+Expected keywords: baisse de réserve · maladies chroniques · facteur aigu précipitant
 
---- 5. piege_exam (id=px-delirium-hypoactif) ---
-Trap: « Un delirium est forcément agité. »
+--- 5. piege_exam (id=px-chute-symptome) ---
+Trap: « C’est seulement une chute accidentelle. »
+Answer: Une chute est un symptôme. Rechercher les circonstances, une gravité immédiate, l’orthostatisme, la iatrogénie, la marche, la vision et l’environnement.
+Expected keywords: gravité immédiate · hypotension orthostatique · iatrogénie · bilan multifactoriel
 
---- 6. visual (id=vis-11) ---
-Question: Mécanisme du delirium (compact)
+--- 6. visual (id=diagram-fall) ---
+Title: Chute : modèle multifactoriel
+Question: Après une chute, quels grands domaines doivent être explorés ?
+Answer: Articuler facteurs intrinsèques, médicaments, situation aiguë et environnement. Évaluer aussi les conséquences traumatiques, fonctionnelles et la peur de rechuter.
 
---- 7. chiffre_cle (id=ck-14) ---
-Line: Apport protéique recommandé : 1–1,2 g/kg/j, soit environ ... g/j au minimum pour un sujet de 60 kg
+--- 7. chiffre_cle (id=ck-9) ---
+Line: Ostéoporose densitométrique : T-score ≤ ...
 
 --- 8. flash (id=fc-3999) ---
 Question: Qu'est-ce que le syndrome d'immobilisation et ses complications cardiovasculaires majeures ?
+Answer: Dégradation physiologique liée à l'alitement prolongé. Complications cardiovasculaires : hypotension orthostatique sévère au lever, phlébite et embolie pulmonaire (maladie thromboembolique veineuse).
 
---- 9. quiz_flash (id=qf-curated-orthostatic) ---
-Question: Quel examen simple fait partie du bilan initial après une chute ?
+--- 9. quiz_flash (id=qf-curated-lewy) ---
+Question: Pourquoi faut-il être prudent avec les neuroleptiques dans une démence à corps de Lewy ?
+Answer: Les hallucinations visuelles et les fluctuations cognitives évoquent une démence à corps de Lewy. Toute prescription psychotrope doit être très prudente.
+Expected keywords: hypersensibilité aux neuroleptiques · fluctuations · hallucinations visuelles · prudence
 Options:
-  A. Un scanner cérébral systématique en l’absence de signe d’alerte.
-  B. La mesure de la pression artérielle couchée puis debout, à la recherche d’une hy ✓
-  C. Une contention systématique avant toute évaluation.
-  D. Une épreuve d’effort maximale chez tout patient.
+  A. Une hypersensibilité peut entraîner une aggravation neurologique et des effets i ✓
+  B. Ils améliorent toujours la cognition à long terme.
+  C. Ils n’ont aucun effet sur la marche ou la vigilance.
+  D. Ils sont obligatoires dès le diagnostic.
 
---- 10. cas_choc (id=cc-14-q2) ---
-Vignette: Mme Duval, 80 ans, consulte pour des fuites urinaires survenant lors de la toux, de l'éternuement et de l'effort physique. Pas de nycturie, pas de dysurie.
+--- 10. cas_choc (id=cc-9-q2) ---
+Vignette: Mme Rousseau, 90 ans, alitée depuis 10 jours après un AVC. IMC 18, incontinente, albumine 22 g/L. L'infirmière constate une rougeur au niveau du sacrum qui ne disparaît pas à la pression (stade 1). Score de Waterlow : 22.
+Prompt: Quelle stratégie de prévention ?
+Answer: 1. Matelas anti-escarres (alternant ou à pression constante). 2. Changement de position toutes les 2 heures. 3. Soins cutanés : hydratation, protection contre l'humidité (changes). 4. Supplémentation nutritionnelle (CNO, enrichissement). 5. Mobilisation précoce. 6. Surveillance cutanée quotidienne. 7. Réduction de la pression : surélevation talons, coussins.
 
-Question : Quelle prise en charge ?
+--- 11. memo_jour (id=mj-chute) ---
+Title: MÉMO DU JOUR
+Question: Quels quatre axes garder en tête après une chute ?
+Answer: Rechercher circonstance et gravité, hypotension orthostatique et médicaments, marche/vision/cognition, puis environnement. Une chute est un symptôme à expliquer.
+Expected keywords: gravité immédiate · hypotension orthostatique · iatrogénie · marche et environnement
 
---- 11. memo_jour (id=mj-delirium) ---
-Title: MÉMO FLASH
-Question: Quel réflexe adopter devant une confusion aiguë ?
-
---- 12. piege_exam (id=px-douleur) ---
-Trap: « Sans plainte verbale, il n’y a pas de douleur. »
+--- 12. piege_exam (id=px-prescription) ---
+Trap: « Une ordonnance ancienne reste adaptée si elle est tolérée. »
+Answer: Toute prescription doit être régulièrement réévaluée : indication, bénéfice attendu, risque iatrogène, fonction rénale, interactions et possibilité de simplification.
+Expected keywords: indication · fonction rénale · interactions · déprescription
 
 --- 13. visual (id=diagram-nutrition) ---
 Title: Dénutrition et sarcopénie
 Question: Comment se met en place le cercle dénutrition–sarcopénie ?
+Answer: Baisse des apports, inflammation et maladie aiguë favorisent perte musculaire, faiblesse, baisse de mobilité et dépendance ; chacune peut à son tour aggraver les apports. Le dépistage précoce permet d’interrompre le cercle.
 
---- 14. chiffre_cle (id=ck-13) ---
-Line: Perte de poids significative si ≥ 5 % en ... mois ou ≥ 10 % en 6 mois
+--- 14. chiffre_cle (id=ck-0) ---
+Line: Phénotype de Fried : au moins ... critères définissent la fragilité
 
 --- 15. flash (id=fc-3998) ---
 Question: Comment évaluer l'observance thérapeutique chez un patient vivant seul atteint d'Alzheimer modéré ?
+Answer: Interroger les soignants à domicile, inspecter le pilulier, vérifier la régularité des renouvellements d'ordonnances en pharmacie et mettre en place un passage infirmier quotidien.
 
---- 16. quiz_flash (id=qf-curated-cam) ---
-Question: Quel outil valide le dépistage d’un delirium au lit du patient ?
+--- 16. quiz_flash (id=qf-curated-bedrest) ---
+Question: Quelle mesure prévient le mieux le syndrome d’immobilisation ?
+Answer: L’alitement favorise perte musculaire, escarres, thrombose, confusion et perte d’autonomie. La prévention repose sur mobilisation, soins de peau, nutrition et évaluation quotidienne.
+Expected keywords: mobilisation précoce · réadaptation · prévenir les complications
 Options:
-  A. La GDS-15, centrée sur les symptômes dépressifs.
-  B. Le Tinetti, qui évalue l’équilibre et la marche.
-  C. Le MMS seul, interprété sans données antérieures.
-  D. La CAM : début aigu et fluctuant, trouble attentionnel, avec pensée désorganisée ✓
+  A. La mobilisation et la réadaptation précoces, dès que l’état clinique le permet. ✓
+  B. La contention au lit comme mesure de première intention.
+  C. Le repos strict prolongé pour éviter toute chute.
+  D. La suppression de toute aide technique.
 
---- 17. cas_choc (id=cc-14-q1) ---
-Vignette: Mme Duval, 80 ans, consulte pour des fuites urinaires survenant lors de la toux, de l'éternuement et de l'effort physique. Pas de nycturie, pas de dysurie.
+--- 17. cas_choc (id=cc-9-q1) ---
+Vignette: Mme Rousseau, 90 ans, alitée depuis 10 jours après un AVC. IMC 18, incontinente, albumine 22 g/L. L'infirmière constate une rougeur au niveau du sacrum qui ne disparaît pas à la pression (stade 1). Score de Waterlow : 22.
+Prompt: Interprétez le score de Waterlow.
+Answer: Waterlow > 20 = risque très élevé (ici 22). Facteurs : âge > 75, IMC < 20 (malnutrition), alitement, incontinence, hypoalbuminémie < 35 g/L. Classification des escarres : Stade 1 = érythème persistant (pas de perte cutanée), Stade 2 = décollement cutané, Stade 3 = nécrose du derme, Stade 4 = nécrose des tissus profonds.
 
-Question : Quel type d'incontinence ?
-
---- 18. memo_jour (id=mj-bouchon) ---
+--- 18. memo_jour (id=mj-delirium) ---
 Title: MÉMO FLASH
-Question: Devant une décompensation gériatrique, quel raisonnement résume le modèle 1 + 2 + 3 ?
+Question: Quel réflexe adopter devant une confusion aiguë ?
+Answer: Confirmer le caractère aigu et fluctuant avec atteinte attentionnelle, rechercher une cause réversible et traiter le facteur précipitant sans banaliser une forme hypoactive.
+Expected keywords: début aigu et fluctuant · inattention · facteur déclenchant · forme hypoactive
 
 --- 19. piege_exam (id=px-albumine) ---
 Trap: « Une albumine basse suffit à diagnostiquer une dénutrition. »
+Answer: Non. Selon la HAS 2021, l’albuminémie n’est pas un critère diagnostique : elle évalue la sévérité une fois la dénutrition diagnostiquée. Le diagnostic associe au moins un critère phénotypique et un critère étiologique.
+Expected keywords: pas un critère diagnostique · critère de sévérité · critère phénotypique + étiologique
 
 --- 20. flash (id=fc-3997) ---
 Question: Pourquoi la co-prescription de colchicine et de macrolides est-elle formellement contre-indiquée ?
+Answer: Les macrolides (clarithromycine, érythromycine) bloquent le CYP3A4, ce qui arrête le métabolisme de la colchicine. La toxicité cumulative de la colchicine provoque une aplasie médullaire mortelle.
 
---- 21. quiz_flash (id=qf-curated-gds) ---
-Question: Quel score GDS-15 doit faire évoquer une dépression ?
+--- 21. quiz_flash (id=qf-curated-cam) ---
+Question: Quel outil validé peut dépister un delirium au lit du patient ?
+Answer: La CAM aide à identifier le syndrome confusionnel aigu. Le diagnostic reste clinique et impose de rechercher rapidement un ou plusieurs facteurs déclenchants.
+Expected keywords: CAM · début aigu et fluctuant · inattention · pensée désorganisée ou vigilance
 Options:
-  A. Un score de 1 sur 15 sans symptôme associé.
-  B. Un score d’au moins 5 sur 15. ✓
-  C. Un score de 0 sur 15.
-  D. La GDS-15 ne sert pas au dépistage.
+  A. La CAM : début aigu et fluctuant, trouble attentionnel, avec pensée désorganisée ✓
+  B. Le MMS seul, interprété sans données antérieures.
+  C. La GDS-15, centrée sur les symptômes dépressifs.
+  D. Le Tinetti, qui évalue l’équilibre et la marche.
 
---- 22. cas_choc (id=cc-13-q2) ---
-Vignette: Mme Petit, 78 ans, vit seule. Elle gère ses repas et sa toilette seule, mais a besoin d'aide pour les courses, le ménage et la gestion administrative.
-
-Question : Quels droits ouvre ce GIR ?
+--- 22. cas_choc (id=cc-8-q3) ---
+Vignette: M. Fournier, 85 ans, 8 médicaments/jour : amlodipine, metformine, oméprazole, lorazépam, diclofénac, diphénhydramine, atorvastatine, aspirine. DFG 35 ml/min. Chutes récidivantes, constipation, somnolence diurne.
+Prompt: Quels critères Beers sont enfreints ici ?
+Answer: 1. Benzodiazépines (lorazépam) : risque de chute, dépendance, troubles cognitifs. 2. AINS (diclofénac) : risque rénal, GI, cardiovasculaire. 3. Anticholinergiques (diphénhydramine) : confusion, rétention, constipation, sécheresse buccale. 4. IPP prolongé sans réévaluation (risque C. difficile, hypomagnésémie).
 
 --- 23. flash (id=fc-3996) ---
 Question: Qu'est-ce que le plan personnalisé de compensation (PPC) pour la dépendance ?
+Answer: Document rédigé par l'équipe d'évaluation de l'APA détaillant les aides humaines (auxiliaires de vie) et techniques nécessaires pour compenser la perte d'autonomie du patient à son domicile.
 
---- 24. quiz_flash (id=qf-curated-braden) ---
-Question: Comment évolue le risque d’escarre sur l’échelle de Braden ?
+--- 24. quiz_flash (id=qf-curated-diappers) ---
+Question: Devant une incontinence urinaire récente, quelle première démarche est justifiée ?
+Answer: Une incontinence aiguë peut être liée à une infection, un médicament, une constipation, une rétention, une confusion ou un handicap. La cause doit être recherchée avant l’étiquetage chronique.
+Expected keywords: cause transitoire · DIAPPERS · avant traitement symptomatique
 Options:
-  A. Il augmente lorsque le score diminue. ✓
-  B. Il est indépendant de la mobilité et de la nutrition.
-  C. Il ne concerne que les patients en réanimation.
-  D. Il augmente lorsque le score augmente.
+  A. Poser d’emblée une sonde à demeure au long cours.
+  B. Rechercher une cause transitoire et réversible, notamment selon le mémo DIAPPERS ✓
+  C. Considérer l’incontinence comme normale avec l’âge.
+  D. Prescrire un anticholinergique sans évaluation clinique.
 
---- 25. cas_choc (id=cc-evc18-5-q2) ---
-Vignette: M. Girard, 85 ans, polymédiqué : metformine 1000 mg ×2, gliclazide 60 mg, ramipril 10 mg, spironolactone 25 mg, apixaban 5 mg ×2, furosémide 40 mg, allopurinol 200 mg.
-
-Question : Proposez une révisio
+--- 25. cas_choc (id=cc-evc-8-q3) ---
+Vignette: Mme Fournier, 88 ans, Alzheimer stade modéré (MMS 12/30), est agitée depuis 3 jours. Elle crie lors des soins, se raidit quand on la mobilise, a le visage crispé. Elle ne peut pas verbaliser sa douleur.
+Prompt: Quel traitement antalgique ?
+Answer: Rechercher et traiter la cause, débuter une antalgie adaptée au poids, à la fonction rénale et au terrain, puis réévaluer rapidement avec la même échelle (ici ALGOPLUS). Un opioïde éventuel doit être titré prudemment avec surveillance de la vigilance, du transit et de la respiration.
 
 --- 26. flash (id=fc-3995) ---
 Question: Comment le médecin coordonnateur organise-t-il la prévention de la iatrogénie en EHPAD ?
+Answer: En animant régulièrement des commissions de coordination gérontologique pour réviser les ordonnances des résidents, en promouvant l'arrêt des psychotropes et des traitements inutiles au long cours.
 
---- 27. quiz_flash (id=qf-curated-lewy) ---
-Question: Pourquoi faut-il être prudent avec les neuroleptiques dans une démence à corps de Lewy ?
+--- 27. quiz_flash (id=qf-curated-tinetti) ---
+Question: Quel score de Tinetti évoque un risque élevé de chute ?
+Answer: Le Tinetti évalue équilibre et marche. Un score < 20/28 signale un risque élevé et doit conduire à rechercher des facteurs corrigibles.
+Expected keywords: équilibre et marche · < 20/28 · facteurs corrigibles
 Options:
-  A. Une hypersensibilité peut entraîner une aggravation neurologique et des effets i ✓
-  B. Ils n’ont aucun effet sur la marche ou la vigilance.
-  C. Ils sont obligatoires dès le diagnostic.
-  D. Ils améliorent toujours la cognition à long terme.
+  A. Un score supérieur à 26 sur 28.
+  B. Le Tinetti ne comporte aucun seuil de risque.
+  C. Un score de 28 sur 28.
+  D. Un score inférieur à 20 sur 28. ✓
 
---- 28. cas_choc (id=cc-evc18-5-q1) ---
-Vignette: M. Girard, 85 ans, polymédiqué : metformine 1000 mg ×2, gliclazide 60 mg, ramipril 10 mg, spironolactone 25 mg, apixaban 5 mg ×2, furosémide 40 mg, allopurinol 200 mg.
+--- 28. cas_choc (id=cc-evc-8-q2) ---
+Vignette: Mme Fournier, 88 ans, Alzheimer stade modéré (MMS 12/30), est agitée depuis 3 jours. Elle crie lors des soins, se raidit quand on la mobilise, a le visage crispé. Elle ne peut pas verbaliser sa douleur.
+Prompt: Quelles sont les causes possibles ?
+Answer: 1. Escarre (points d'appui). 2. Fracture non diagnostiquée (chute ?). 3. Constipation/impaction fécale. 4. Infection (ITU, pneumopathie). 5. Rétention urinaire. 6. Douleur musculo-squelettique (arthrose). 7. Douleur neuropathique.
 
-Question : Quels médicaments so
+--- 29. flash (id=fc-3656) ---
+Question: Quels sont les apports nutritionnels conseillés en fibres chez la personne âgée ?
+Answer: L'apport recommandé en fibres alimentaires est de 25 à 30 g/jour. Les fibres (fruits, légumes, céréales complètes) améliorent le transit intestinal, préviennent la constipation et stabilisent la glycémie post-prandiale.
 
---- 29. flash (id=fc-3994) ---
-Question: Quelle est la définition clinique d'un syndrome de glissement gériatrique ?
-
---- 30. quiz_flash (id=qf-curated-ecpa) ---
-Question: Quelle échelle privilégier pour évaluer la douleur chez un patient non communicant ?
+--- 30. quiz_flash (id=qf-curated-pseudodementia) ---
+Question: Pourquoi une dépression peut-elle imiter un trouble neurocognitif ?
+Answer: Face à une plainte cognitive, rechercher une dépression et d’autres causes réversibles avant de conclure à une maladie neurodégénérative.
+Expected keywords: dépression · plainte cognitive · causes réversibles · réévaluation
 Options:
-  A. Le MMS, qui mesure la mémoire.
-  B. L’ECPA, fondée sur l’observation comportementale. ✓
-  C. L’EVA verbale uniquement.
-  D. La GDS-15, qui dépiste la dépression.
+  A. Elle exclut toute évaluation cognitive.
+  B. Elle peut donner une plainte cognitive et un ralentissement réversibles après pr ✓
+  C. Elle entraîne toujours un delirium aigu.
+  D. Elle rend la GDS-15 inutile.
 
---- 31. cas_choc (id=cc-evc18-4-q3) ---
-Vignette: Mme Faure, 81 ans, hospitalisée 10 jours pour décompensation cardiaque. Perte 4 kg depuis l'entrée.
+--- 31. cas_choc (id=cc-evc-8-q1) ---
+Vignette: Mme Fournier, 88 ans, Alzheimer stade modéré (MMS 12/30), est agitée depuis 3 jours. Elle crie lors des soins, se raidit quand on la mobilise, a le visage crispé. Elle ne peut pas verbaliser sa douleur.
+Prompt: Comment évaluez-vous la douleur ?
+Answer: Pour une douleur aiguë chez une personne non communicante, utiliser ALGOPLUS : 5 items binaires (visage, regard, plaintes, corps, comportements). Un score ≥ 2/5 justifie une prise en charge antalgique, suivie d'une réévaluation.
 
-Question : Indications et limites de la nutrition artificielle chez elle.
+--- 32. flash (id=fc-3665) ---
+Question: Quel est le critère phénotypique lié à la perte de poids pour la dénutrition (HAS 2021) ?
+Answer: Une perte de poids ≥ 5 % en 1 mois, ou ≥ 10 % en 6 mois, ou ≥ 10 % par rapport au poids habituel avant le début de la maladie.
 
---- 32. flash (id=fc-3993) ---
-Question: Comment prendre en charge une incontinence urinaire par impériosité (hyperactivité vésicale) ?
-
---- 33. quiz_flash (id=qf-curated-palliative) ---
-Question: Quel est l’objectif de la sédation en situation palliative ?
+--- 33. quiz_flash (id=qf-curated-adl-iadl) ---
+Question: Quel couple d’échelles permet de distinguer autonomie de base et autonomie instrumentale ?
+Answer: Le MMS explore la cognition, pas l’autonomie. Les ADL et IADL objectivent le retentissement fonctionnel au quotidien.
+Expected keywords: ADL de Katz · IADL de Lawton · retentissement fonctionnel
 Options:
-  A. Remplacer toute évaluation de la douleur et de l’anxiété.
-  B. Éviter systématiquement la discussion collégiale.
-  C. Provoquer le décès lorsque la demande familiale est forte.
-  D. Soulager une souffrance réfractaire, sans intention de provoquer la mort. ✓
+  A. GDS-15 pour l’autonomie de base et MNA pour l’autonomie instrumentale.
+  B. ADL de Katz pour les activités de base et IADL de Lawton pour les activités inst ✓
+  C. MMS pour l’autonomie de base et CAM pour l’autonomie instrumentale.
+  D. Tinetti pour l’autonomie de base et TUG pour l’autonomie instrumentale.
 
---- 34. cas_choc (id=cc-evc18-4-q2) ---
-Vignette: Mme Faure, 81 ans, hospitalisée 10 jours pour décompensation cardiaque. Perte 4 kg depuis l'entrée.
+--- 34. cas_choc (id=cc-evc-7-q3) ---
+Vignette: Mme Duval, 72 ans, consulte pour fuites urinaires depuis 6 mois. Elle fuit quand elle tousse, rit ou porte des charges. 3 accouchements vaginaux. Polyurie non. Pas de dysurie. ECBU négatif.
+Prompt: Quel traitement première ligne ?
+Answer: Rééducation périnéale par kinésithérapeute spécialisé : biofeedback, électrostimulation, exercices de Kegel. 3 séances/semaine pendant 3 mois. Objectif : contraction volontaire du plancher pelvien. Si échec après 3 mois : chirurgie (TVT — bandelette sous-urétrale). Éviter anticholinergiques (inefficace sur incontinence d'effort).
 
-Question : Plan nutritionnel à l'hôpital puis à la sortie.
+--- 35. flash (id=fc-3666) ---
+Question: Quel est le seuil d'IMC définissant la dénutrition (critère phénotypique) chez le sujet âgé ?
+Answer: Un Indice de Masse Corporelle (IMC) inférieur à 22 kg/m² chez une personne âgée de 70 ans et plus.
 
---- 35. flash (id=fc-3992) ---
-Question: Qu'est-ce que l'incontinence urinaire d'effort et ses options thérapeutiques ?
+--- 36. flash (id=fc-3667) ---
+Question: En quoi consiste le critère phénotypique de réduction de la masse musculaire ?
+Answer: C'est la présence d'une sarcopénie confirmée par une mesure de la composition corporelle (DEXA ou impédancemétrie montrant un indice de masse squelettique appendiculaire bas) et/ou d'une fonction musculaire altérée.
 
---- 36. flash (id=fc-3991) ---
-Question: Comment le médecin doit-il dépister une confusion aiguë (delirium) chez un patient agité ?
+--- 37. flash (id=fc-3668) ---
+Question: Comment se définit le critère étiologique de réduction des apports alimentaires (HAS 2021) ?
+Answer: C'est une diminution des ingestas ≥ 50 % pendant plus d'une semaine, ou toute réduction quantitative ou qualitative des apports pendant plus de deux semaines par rapport aux besoins habituels.
 
---- 37. flash (id=fc-3990) ---
-Question: Quelles sont les trois causes majeures de baisse chronique réversible de la vision chez le sujet âgé ?
+--- 38. flash (id=fc-3670) ---
+Question: Qu'englobe le critère étiologique d'agression pathologique ou d'hypercatabolisme ?
+Answer: Toute pathologie aiguë (infection sévère, sepsis, traumatisme majeur, chirurgie lourde) ou chronique active (cancers évolutifs, insuffisance d'organe décompensée, syndrome inflammatoire systémique biologique chronique).
 
---- 38. flash (id=fc-3989) ---
-Question: Quelle est la définition de la presbyacousie et son traitement de référence ?
+--- 39. flash (id=fc-3684) ---
+Question: Quelle est la présentation la plus fréquente de déshydratation chez le sujet âgé ?
+Answer: La déshydratation globale ou mixte (intracellulaire + extracellulaire), qui combine la perte de poids, l'hypotension, la sécheresse buccale et une hypernatrémie modérée avec élévation de l'urée sanguine.
 
---- 39. flash (id=fc-3988) ---
-Question: Qu'est-ce que le score NRS-2002 et quelle est sa particularité gériatrique ?
-
---- 40. flash (id=fc-3987) ---
-Question: Comment calculer la perte de poids cliniquement significative chez une personne âgée ?
+--- 40. flash (id=fc-3694) ---
+Question: Quelles sont les conséquences cliniques d'une carence sévère en folates (Vitamine B9) ?
+Answer: Une anémie macrocytaire arégénérative, des troubles neuropsychologiques (apathie, syndrome confusionnel, aggravation de troubles cognitifs) et un risque accru de lésions cutanées (escarres).
 
 === QUIZ INTEGRITY ===
 Total quiz cards in deck: 8
@@ -203,3 +248,14 @@ Malformed quiz cards: 0
 === CAS CHOC INTEGRITY ===
 Total cas choc in deck: 8
 Incomplete cas choc: 0
+
+=== CONTENT QUALITY GATES ===
+Duplicate normalized questions across pools: 0
+Flash questions: 84; maximum length: 114; over 115 characters: 0
+OCR/HTML artifacts in eligible cards: 0
+Source cas/CROQ pool: 292; complete feed-eligible cases: 255
+Artificially truncated cas/CROQ: 0
+Cards with explicit editorial keywords: 37
+Cards with implicit/non-editorial keywords: 0
+Visual lessons: 20; missing local media: 0
+Final gate: PASS

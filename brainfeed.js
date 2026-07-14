@@ -29,7 +29,7 @@ const BrainFeed = (() => {
   let audioCtx = null;
   let sessionCombo10Unlocked = false;
   let renderedRange = { start: 0, end: 0 };
-  const BATCH_SIZE = 6;
+  const BATCH_SIZE = 5;
   let activeTimers = new Map();
   let completedCardIds = new Set();
   let feedScrollHandler = null;
@@ -61,22 +61,19 @@ const BrainFeed = (() => {
     { text: '« La nutrition est un médicament : il faut la prescrire et la réévaluer. »', author: 'MNA' }
   ];
 
+  // Seulement des seuils cliniques actionnables. Les pourcentages épidémiologiques
+  // approximatifs ont été retirés : ils vieillissent vite et n'aident pas à décider.
   const CHIFFRES_CLES = [
-    { value: 30, unit: '%', line: '... % des personnes de 65 ans et plus chutent au moins une fois par an', source: 'HAS' },
-    { value: 15, unit: '%', line: '... % des personnes de 65 ans et plus ont une dépression non diagnostiquée', source: 'GDS-15' },
-    { value: 3, unit: ' critères', line: 'Nombre de critères de Fried : au moins ... critères = syndrome de fragilité', source: 'Fried' },
-    { value: 0.8, unit: ' m/s', line: 'Seuil de vitesse de marche en dessous duquel on suspecte la fragilité : ... m/s', source: 'Fried' },
-    { value: 20, unit: ' s', line: 'Timed Up and Go : plus de ... secondes = risque de chute élevé', source: 'CNEG, chapitre 12' },
-    { value: 24, unit: '/30', line: 'Seuil MMSE interprété comme « normal » chez un sujet jeune instruit : ... /30', source: 'MMSE' },
-    { value: 5, unit: '/15', line: 'Seuil GDS-15 à partir duquel on dépiste une dépression : ... /15', source: 'Yesavage' },
-    { value: 19, unit: '/28', line: 'Score Tinetti (POMA) inférieur à ... = risque élevé de chute', source: 'Tinetti' },
-    { value: 17, unit: '/30', line: 'Seuil MNA entre dénutrition et risque de dénutrition : ... /30', source: 'MNA' },
-    { value: 5, unit: ' médicaments', line: 'À partir de ... médicaments quotidiens, on parle de polymédication', source: 'SFGG' },
-    { value: 30, unit: '%', line: 'Environ ... % des personnes de 65 ans et plus présentent une polymédication', source: 'Institut de la longévité' },
-    { value: 50, unit: '%', line: '... % des personnes de 65 ans et plus ont au moins deux affections chroniques', source: 'Comorbidité' },
-    { value: 20, unit: '%', line: 'Environ ... % des personnes de 85 ans et plus ont un trouble cognitif déclaré', source: 'Démographie' },
-    { value: 1, unit: ' mois', line: 'Perte de poids significative si ≥ 5 % en ... mois ou ≥ 10 % en 6 mois', source: 'Dénutrition' },
-    { value: 60, unit: ' à 72 g/j', line: 'Apport protéique recommandé : 1–1,2 g/kg/j, soit environ ... g/j au minimum pour un sujet de 60 kg', source: 'Nutrition' }
+    { value: 3, unit: ' critères sur 5', line: 'Phénotype de Fried : au moins ... critères définissent la fragilité', source: 'Fried' },
+    { value: 20, unit: ' secondes', line: 'Timed Up and Go : un temps ≥ ... signale un déficit de mobilité et un risque de chute', source: 'HAS — chutes répétées' },
+    { value: 20, unit: '/28', line: 'Score de Tinetti inférieur à ... : risque élevé de chute', source: 'HAS — risque de chute' },
+    { value: 5, unit: '/15', line: 'GDS-15 : un score ≥ ... justifie une évaluation clinique de la dépression', source: 'GDS-15' },
+    { value: 7, unit: '/14', line: 'MNA-SF : un score ≤ ... évoque une dénutrition', source: 'MNA-SF' },
+    { value: 5, unit: ' médicaments', line: 'Définition usuelle de la polymédication : au moins ... traitements quotidiens', source: 'CNEG — prescription' },
+    { value: 5, unit: '% en 1 mois', line: 'Dénutrition après 70 ans : une perte de poids ≥ ... est un critère phénotypique', source: 'HAS 2021' },
+    { value: 22, unit: ' kg/m²', line: 'Après 70 ans, un IMC < ... est un critère phénotypique de dénutrition à associer à un critère étiologique', source: 'HAS 2021' },
+    { value: 20, unit: ' mmHg PAS', line: 'Hypotension orthostatique : baisse ≥ ... ou ≥ 10 mmHg de PAD dans les 3 minutes', source: 'HAS — HTA' },
+    { value: -2.5, unit: ' T-score', line: 'Ostéoporose densitométrique : T-score ≤ ...', source: 'CNEG — ostéoporose' }
   ];
 
   const PIEGES_EXAM = [
@@ -98,16 +95,16 @@ const BrainFeed = (() => {
   // Chaque réponse erronée correspond au même problème clinique que la bonne réponse.
   const CURATED_QUIZZES = [
     { id:'bouchon-3', chapter:'ch2', question:'Dans le modèle 1 + 2 + 3 de Bouchon, que représente le facteur 3 ?', correct:'Un facteur précipitant aigu, souvent réversible et à rechercher en priorité.', wrong:['Le vieillissement physiologique de l’organe.', 'La maladie chronique déjà connue.', 'Le niveau d’autonomie antérieur.'], explanation:'Le raisonnement gériatrique distingue le vieillissement (1), les comorbidités (2) et le stress aigu décompensant (3). Identifier et corriger ce dernier est souvent le levier immédiat.' },
-    { id:'cam', chapter:'ch11', question:'Quel outil valide le dépistage d’un delirium au lit du patient ?', correct:'La CAM : début aigu et fluctuant, trouble attentionnel, avec pensée désorganisée ou vigilance altérée.', wrong:['Le MMS seul, interprété sans données antérieures.', 'La GDS-15, centrée sur les symptômes dépressifs.', 'Le Tinetti, qui évalue l’équilibre et la marche.'], explanation:'La CAM est un outil de dépistage du syndrome confusionnel aigu. Un MMS ne permet pas, à lui seul, de distinguer un delirium d’un trouble cognitif chronique.' },
+    { id:'cam', chapter:'ch11', question:'Quel outil validé peut dépister un delirium au lit du patient ?', correct:'La CAM : début aigu et fluctuant, trouble attentionnel, avec pensée désorganisée ou vigilance altérée.', wrong:['Le MMS seul, interprété sans données antérieures.', 'La GDS-15, centrée sur les symptômes dépressifs.', 'Le Tinetti, qui évalue l’équilibre et la marche.'], explanation:'La CAM aide à identifier le syndrome confusionnel aigu. Le diagnostic reste clinique et impose de rechercher rapidement un ou plusieurs facteurs déclenchants.' },
     { id:'delirium-bzd', chapter:'ch11', question:'Quelle attitude adopter devant un delirium avec agitation sans sevrage alcoolique ?', correct:'Chercher et traiter la cause ; éviter les benzodiazépines qui aggravent confusion et risque de chute.', wrong:['Prescrire une benzodiazépine systématiquement pour obtenir le sommeil.', 'Augmenter les anticholinergiques pour diminuer l’agitation.', 'Conclure à une démence irréversible sans bilan étiologique.'], explanation:'Le delirium est une urgence diagnostique. Les benzodiazépines sont surtout indiquées dans le sevrage alcoolique ou des indications très ciblées.' },
     { id:'hypoactive', chapter:'ch11', question:'Pourquoi un delirium hypoactif doit-il être activement recherché ?', correct:'Il est peu bruyant mais associé à un risque de retard diagnostique et à un mauvais pronostic.', wrong:['Il correspond toujours à une dépression chronique.', 'Il ne nécessite aucune recherche de cause aiguë.', 'Il confirme une maladie d’Alzheimer à début brutal.'], explanation:'Somnolence, retrait ou apathie peuvent révéler un delirium hypoactif. Il faut rechercher infection, douleur, fécalome, globe, iatrogénie ou trouble métabolique.' },
     { id:'orthostatic', chapter:'ch12', question:'Quel examen simple fait partie du bilan initial après une chute ?', correct:'La mesure de la pression artérielle couchée puis debout, à la recherche d’une hypotension orthostatique.', wrong:['Une épreuve d’effort maximale chez tout patient.', 'Une contention systématique avant toute évaluation.', 'Un scanner cérébral systématique en l’absence de signe d’alerte.'], explanation:'Une chute est un symptôme. L’orthostatisme, les médicaments, la vision, la marche et l’environnement doivent être évalués.' },
-    { id:'tug', chapter:'ch12', question:'Quel résultat du Timed Up and Go (TUG) alerte sur un risque élevé de chute ?', correct:'Un temps supérieur à 20 secondes.', wrong:['Un temps inférieur à 10 secondes.', 'Un temps de 5 secondes exactement.', 'Le TUG ne renseigne jamais sur la mobilité.'], explanation:'Le TUG explore le lever, la marche, le demi-tour et le retour assis. Un temps prolongé justifie une évaluation multifactorielle de la chute.' },
-    { id:'tinetti', chapter:'ch12', question:'Quel score Tinetti évoque un risque élevé de chute ?', correct:'Un score inférieur à 19 sur 28.', wrong:['Un score supérieur à 26 sur 28.', 'Un score de 28 sur 28.', 'Le Tinetti ne comporte aucun seuil de risque.'], explanation:'Le Tinetti évalue équilibre et marche. Un score bas doit conduire à rechercher des facteurs corrigibles et à proposer une prise en charge adaptée.' },
+    { id:'tug', chapter:'ch12', question:'Quel résultat du Timed Up and Go (TUG) alerte sur un risque de chute ?', correct:'Un temps de 20 secondes ou plus.', wrong:['Un temps inférieur à 10 secondes.', 'Un temps de 5 secondes exactement.', 'Le TUG ne renseigne jamais sur la mobilité.'], explanation:'Le TUG explore le lever, la marche sur 3 mètres, le demi-tour et le retour assis. Le repère HAS est ≥ 20 secondes ; il conduit à une évaluation multifactorielle, pas à une conclusion isolée.' },
+    { id:'tinetti', chapter:'ch12', question:'Quel score de Tinetti évoque un risque élevé de chute ?', correct:'Un score inférieur à 20 sur 28.', wrong:['Un score supérieur à 26 sur 28.', 'Un score de 28 sur 28.', 'Le Tinetti ne comporte aucun seuil de risque.'], explanation:'Le Tinetti évalue équilibre et marche. Un score < 20/28 signale un risque élevé et doit conduire à rechercher des facteurs corrigibles.' },
     { id:'fried', chapter:'ch1', question:'À partir de combien de critères de Fried parle-t-on de fragilité ?', correct:'Au moins 3 critères sur 5.', wrong:['1 critère sur 5.', '2 critères sur 5.', '5 critères sont nécessaires pour toute pré-fragilité.'], explanation:'Les critères sont perte de poids involontaire, fatigue, faible activité, lenteur de marche et faiblesse musculaire. Un ou deux critères définissent la pré-fragilité.' },
     { id:'mna', chapter:'ch14', question:'Comment interpréter un MNA-SF à 7/14 ?', correct:'Il évoque une dénutrition et impose une évaluation et une prise en charge nutritionnelle.', wrong:['Il correspond à un statut nutritionnel normal.', 'Il élimine une sarcopénie.', 'Il indique seulement un surpoids.'], explanation:'Pour le MNA-SF : 12–14 = statut normal, 8–11 = risque de dénutrition et ≤ 7 = dénutrition.' },
     { id:'adl-iadl', chapter:'ch3', question:'Quel couple d’échelles permet de distinguer autonomie de base et autonomie instrumentale ?', correct:'ADL de Katz pour les activités de base et IADL de Lawton pour les activités instrumentales.', wrong:['MMS pour l’autonomie de base et CAM pour l’autonomie instrumentale.', 'GDS-15 pour l’autonomie de base et MNA pour l’autonomie instrumentale.', 'Tinetti pour l’autonomie de base et TUG pour l’autonomie instrumentale.'], explanation:'Le MMS explore la cognition, pas l’autonomie. Les ADL et IADL objectivent le retentissement fonctionnel au quotidien.' },
-    { id:'ecpa', chapter:'ch8', question:'Quelle échelle privilégier pour évaluer la douleur chez un patient non communicant ?', correct:'L’ECPA, fondée sur l’observation comportementale.', wrong:['L’EVA verbale uniquement.', 'Le MMS, qui mesure la mémoire.', 'La GDS-15, qui dépiste la dépression.'], explanation:'La douleur est souvent sous-déclarée chez la personne âgée. Une échelle comportementale est adaptée en cas de troubles cognitifs ou de communication.' },
+    { id:'ecpa', chapter:'ch8', question:'Quelle échelle comportementale peut évaluer la douleur chez une personne âgée non communicante ?', correct:'L’ECPA, fondée sur l’observation avant et pendant les soins.', wrong:['L’EVA verbale uniquement.', 'Le MMS, qui mesure la mémoire.', 'La GDS-15, qui dépiste la dépression.'], explanation:'Toujours rechercher d’abord une auto-évaluation si elle reste possible. Sinon, une échelle comportementale adaptée comme l’ECPA aide à objectiver la douleur et à réévaluer l’effet du traitement.' },
     { id:'braden', chapter:'ch13', question:'Comment évolue le risque d’escarre sur l’échelle de Braden ?', correct:'Il augmente lorsque le score diminue.', wrong:['Il augmente lorsque le score augmente.', 'Il est indépendant de la mobilité et de la nutrition.', 'Il ne concerne que les patients en réanimation.'], explanation:'Braden prend notamment en compte mobilité, activité, humidité, nutrition, friction et cisaillement. Un score bas impose des mesures préventives.' },
     { id:'osteoporosis', chapter:'ch6', question:'Quel T-score définit l’ostéoporose densitométrique ?', correct:'Un T-score inférieur ou égal à −2,5.', wrong:['Un T-score supérieur à +2,5.', 'Un T-score compris entre 0 et +1.', 'Un T-score supérieur ou égal à −1.'], explanation:'L’ostéopénie correspond à un T-score entre −1 et −2,5. Le contexte fracturaire et les facteurs de risque orientent la prise en charge.' },
     { id:'diappers', chapter:'ch15', question:'Devant une incontinence urinaire récente, quelle première démarche est justifiée ?', correct:'Rechercher une cause transitoire et réversible, notamment selon le mémo DIAPPERS.', wrong:['Poser d’emblée une sonde à demeure au long cours.', 'Considérer l’incontinence comme normale avec l’âge.', 'Prescrire un anticholinergique sans évaluation clinique.'], explanation:'Une incontinence aiguë peut être liée à une infection, un médicament, une constipation, une rétention, une confusion ou un handicap. La cause doit être recherchée avant l’étiquetage chronique.' },
@@ -119,7 +116,7 @@ const BrainFeed = (() => {
     { id:'presbyacousie', chapter:'ch5', question:'Quelle proposition décrit le mieux la presbyacousie ?', correct:'Une baisse progressive, bilatérale et symétrique de l’audition, avec indication d’appareillage auditif si retentissement.', wrong:['Une surdité unilatérale brutale à traiter comme une urgence vasculaire.', 'Une douleur aiguë d’oreille avec fièvre.', 'Une perte auditive forcément due à un bouchon de cérumen.'], explanation:'La presbyacousie est fréquente et favorise isolement, troubles de communication et déclin fonctionnel. Un dépistage et un appareillage précoce sont utiles.' },
     { id:'pseudodementia', chapter:'ch10', question:'Pourquoi une dépression peut-elle imiter un trouble neurocognitif ?', correct:'Elle peut donner une plainte cognitive et un ralentissement réversibles après prise en charge adaptée.', wrong:['Elle entraîne toujours un delirium aigu.', 'Elle exclut toute évaluation cognitive.', 'Elle rend la GDS-15 inutile.'], explanation:'Face à une plainte cognitive, rechercher une dépression et d’autres causes réversibles avant de conclure à une maladie neurodégénérative.' },
     { id:'polypharmacy', chapter:'ch16', question:'À partir de quel nombre de médicaments parle-t-on habituellement de polymédication ?', correct:'Cinq médicaments ou plus pris quotidiennement.', wrong:['Deux médicaments ou plus.', 'Uniquement dix médicaments ou plus.', 'La polymédication ne dépend jamais du nombre de traitements.'], explanation:'Au-delà de cinq médicaments, le risque d’interactions et d’effets indésirables augmente. La pertinence de chaque traitement doit être réévaluée.' },
-    { id:'delirium-cause', chapter:'ch11', question:'Quel facteur doit être recherché sans délai devant un delirium récent ?', correct:'Une cause aiguë réversible : infection, douleur, globe, fécalome, iatrogénie ou trouble métabolique.', wrong:['Seulement l’âge chronologique du patient.', 'Uniquement les antécédents de démence.', 'Une décision d’institutionnalisation immédiate.'], explanation:'Un delirium récent a toujours une cause à rechercher. Les présentations sont souvent atypiques chez la personne âgée.' },
+    { id:'delirium-cause', chapter:'ch11', question:'Que faut-il rechercher sans délai devant un delirium récent ?', correct:'Un ou plusieurs facteurs déclenchants : infection, douleur, globe, fécalome, iatrogénie ou trouble métabolique.', wrong:['Seulement l’âge chronologique du patient.', 'Uniquement les antécédents de démence.', 'Une décision d’institutionnalisation immédiate.'], explanation:'Le delirium est une urgence clinique souvent multifactorielle. L’objectif est d’identifier et de corriger rapidement les facteurs déclenchants.' },
     { id:'gir', chapter:'ch3', question:'Que mesure principalement le GIR ?', correct:'Le niveau de dépendance pour les actes de la vie quotidienne afin d’orienter notamment l’APA.', wrong:['La sévérité d’une dépression.', 'Le risque de dénutrition.', 'Le risque hémorragique sous anticoagulant.'], explanation:'La grille AGGIR classe la perte d’autonomie de GIR 1 à GIR 6. Elle ne remplace pas l’évaluation clinique globale.' }
   ];
 
@@ -135,13 +132,13 @@ const BrainFeed = (() => {
 
   const CURATED_PIEGES = [
     { id:'chute-symptome', chapter:'ch12', trap:'« C’est seulement une chute accidentelle. »', explain:'Une chute est un symptôme. Rechercher les circonstances, une gravité immédiate, l’orthostatisme, la iatrogénie, la marche, la vision et l’environnement.' },
-    { id:'delirium-hypoactif', chapter:'ch11', trap:'« Un delirium est forcément agité. »', explain:'Une forme hypoactive est fréquente et discrète : retrait, somnolence ou ralentissement peuvent traduire une confusion aiguë et justifient la même recherche étiologique.' },
-    { id:'mms-isole', chapter:'ch9', trap:'« Un MMS isolé pose le diagnostic de démence. »', explain:'Un score cognitif s’interprète avec le niveau antérieur, l’autonomie, l’examen clinique et la recherche de causes réversibles. Il ne suffit pas à lui seul.' },
-    { id:'albumine', chapter:'ch14', trap:'« Une albumine basse suffit à diagnostiquer une dénutrition. »', explain:'L’albumine est influencée notamment par l’inflammation et l’hydratation. Le diagnostic nutritionnel repose sur une évaluation clinique, pondérale, des apports et des critères validés.' },
+    { id:'delirium-hypoactif', chapter:'ch11', trap:'« Un delirium est forcément agité. »', explain:'Non. Le delirium peut être hypoactif : retrait, calme inhabituel, somnolence, réponses lentes ou baisse de mobilité. Rechercher un début aigu et fluctuant avec inattention ou vigilance modifiée, puis une cause déclenchante ; c’est une urgence étiologique même sans agitation.' },
+    { id:'mms-isole', chapter:'ch9', trap:'« Un MMSE isolé suffit à diagnostiquer un trouble neurocognitif majeur. »', explain:'Non. Le score s’interprète avec l’histoire et l’évolution, le niveau antérieur, le retentissement sur l’autonomie, l’examen clinique et la recherche de causes réversibles. Il ne pose jamais le diagnostic à lui seul.' },
+    { id:'albumine', chapter:'ch14', trap:'« Une albumine basse suffit à diagnostiquer une dénutrition. »', explain:'Non. Selon la HAS 2021, l’albuminémie n’est pas un critère diagnostique : elle évalue la sévérité une fois la dénutrition diagnostiquée. Le diagnostic associe au moins un critère phénotypique et un critère étiologique.' },
     { id:'douleur', chapter:'ch8', trap:'« Sans plainte verbale, il n’y a pas de douleur. »', explain:'Chez une personne non communicante, observer le comportement avec une échelle adaptée comme l’ECPA et réévaluer après une intervention antalgique.' },
     { id:'prescription', chapter:'ch16', trap:'« Une ordonnance ancienne reste adaptée si elle est tolérée. »', explain:'Toute prescription doit être régulièrement réévaluée : indication, bénéfice attendu, risque iatrogène, fonction rénale, interactions et possibilité de simplification.' },
-    { id:'contention', chapter:'ch13', trap:'« La contention prévient simplement les chutes. »', explain:'Elle expose à des risques physiques et psychiques. Chercher d’abord les causes, la surveillance, les adaptations environnementales et les alternatives individualisées.' },
-    { id:'depression', chapter:'ch10', trap:'« Les troubles cognitifs nouveaux sont forcément neurodégénératifs. »', explain:'Dépression, delirium, médicaments, troubles sensoriels et causes métaboliques peuvent contribuer à une plainte cognitive. Leur recherche fait partie de l’évaluation.' }
+    { id:'contention', chapter:'ch13', trap:'« La contention est une façon simple de prévenir les chutes. »', explain:'Non. Elle peut aggraver agitation, blessures, perte de mobilité et dépendance. Elle reste exceptionnelle, limitée dans le temps, prescrite et surveillée après recherche des causes et mise en place d’alternatives individualisées.' },
+    { id:'depression', chapter:'ch10', trap:'« Tout trouble cognitif nouveau est forcément neurodégénératif. »', explain:'Non. La temporalité oriente : un début aigu et fluctuant fait rechercher un delirium. Dépression, médicaments, déficits sensoriels et causes métaboliques doivent aussi être évalués avant de conclure.' }
   ];
 
   const EDUCATIONAL_DIAGRAMS = [
@@ -149,6 +146,48 @@ const BrainFeed = (() => {
     { id:'fall', chapter:'ch12', title:'Chute : modèle multifactoriel', question:'Après une chute, quels grands domaines doivent être explorés ?', answer:'Articuler facteurs intrinsèques, médicaments, situation aiguë et environnement. Évaluer aussi les conséquences traumatiques, fonctionnelles et la peur de rechuter.', kind:'fall' },
     { id:'nutrition', chapter:'ch14', title:'Dénutrition et sarcopénie', question:'Comment se met en place le cercle dénutrition–sarcopénie ?', answer:'Baisse des apports, inflammation et maladie aiguë favorisent perte musculaire, faiblesse, baisse de mobilité et dépendance ; chacune peut à son tour aggraver les apports. Le dépistage précoce permet d’interrompre le cercle.', kind:'nutrition' }
   ];
+
+  // Repères éditoriaux explicites. Aucun mot n'est désormais déclaré « requis »
+  // simplement parce qu'il apparaît dans le texte de la réponse.
+  const CURATED_KEYWORDS = {
+    'mj-bouchon': ['baisse de réserve', 'maladies chroniques', 'facteur aigu précipitant'],
+    'mj-diappers': ['DIAPPERS', 'cause réversible', 'examen clinique'],
+    'mj-chute': ['gravité immédiate', 'hypotension orthostatique', 'iatrogénie', 'marche et environnement'],
+    'mj-eggs': ['médical et traitements', 'autonomie', 'cognition et humeur', 'nutrition et mobilité', 'contexte social'],
+    'mj-delirium': ['début aigu et fluctuant', 'inattention', 'facteur déclenchant', 'forme hypoactive'],
+    'px-chute-symptome': ['gravité immédiate', 'hypotension orthostatique', 'iatrogénie', 'bilan multifactoriel'],
+    'px-delirium-hypoactif': ['delirium hypoactif', 'début aigu et fluctuant', 'inattention', 'cause déclenchante'],
+    'px-mms-isole': ['histoire et évolution', 'retentissement sur l’autonomie', 'causes réversibles', 'évaluation globale'],
+    'px-albumine': ['pas un critère diagnostique', 'critère de sévérité', 'critère phénotypique + étiologique'],
+    'px-douleur': ['auto-évaluation si possible', 'échelle comportementale', 'réévaluation antalgique'],
+    'px-prescription': ['indication', 'fonction rénale', 'interactions', 'déprescription'],
+    'px-contention': ['mesure exceptionnelle', 'alternatives', 'durée limitée', 'surveillance'],
+    'px-depression': ['temporalité', 'delirium si aigu et fluctuant', 'causes réversibles', 'évaluation cognitive'],
+    'qf-curated-bouchon-3': ['facteur aigu précipitant', 'réversible', 'prioritaire'],
+    'qf-curated-cam': ['CAM', 'début aigu et fluctuant', 'inattention', 'pensée désorganisée ou vigilance'],
+    'qf-curated-delirium-bzd': ['recherche étiologique', 'mesures non médicamenteuses', 'éviter les benzodiazépines'],
+    'qf-curated-hypoactive': ['retrait ou somnolence', 'réponses lentes', 'cause aiguë', 'mauvais pronostic'],
+    'qf-curated-orthostatic': ['pression couchée puis debout', 'hypotension orthostatique', 'bilan de chute'],
+    'qf-curated-tug': ['3 mètres', '≥ 20 secondes', 'évaluation multifactorielle'],
+    'qf-curated-tinetti': ['équilibre et marche', '< 20/28', 'facteurs corrigibles'],
+    'qf-curated-fried': ['3 critères sur 5', 'pré-fragilité si 1 ou 2', 'phénotype de Fried'],
+    'qf-curated-mna': ['MNA-SF', '≤ 7/14', 'évaluation nutritionnelle'],
+    'qf-curated-adl-iadl': ['ADL de Katz', 'IADL de Lawton', 'retentissement fonctionnel'],
+    'qf-curated-ecpa': ['auto-évaluation si possible', 'ECPA', 'observation comportementale', 'réévaluation'],
+    'qf-curated-braden': ['score bas = risque élevé', 'mobilité', 'humidité', 'nutrition'],
+    'qf-curated-osteoporosis': ['T-score ≤ −2,5', 'ostéopénie entre −1 et −2,5', 'contexte fracturaire'],
+    'qf-curated-diappers': ['cause transitoire', 'DIAPPERS', 'avant traitement symptomatique'],
+    'qf-curated-renal-prescription': ['fonction rénale', 'dose adaptée', 'bénéfice-risque', 'réévaluation'],
+    'qf-curated-gds': ['GDS-15 ≥ 5', 'dépistage', 'évaluation clinique', 'risque suicidaire'],
+    'qf-curated-palliative': ['souffrance réfractaire', 'proportionnalité', 'traçabilité', 'collégialité'],
+    'qf-curated-lewy': ['hypersensibilité aux neuroleptiques', 'fluctuations', 'hallucinations visuelles', 'prudence'],
+    'qf-curated-bedrest': ['mobilisation précoce', 'réadaptation', 'prévenir les complications'],
+    'qf-curated-presbyacousie': ['bilatérale et progressive', 'retentissement', 'appareillage auditif'],
+    'qf-curated-pseudodementia': ['dépression', 'plainte cognitive', 'causes réversibles', 'réévaluation'],
+    'qf-curated-polypharmacy': ['définition usuelle ≥ 5', 'pertinence de chaque traitement', 'iatrogénie'],
+    'qf-curated-delirium-cause': ['urgence clinique', 'facteurs déclenchants', 'souvent multifactoriel', 'corriger la cause'],
+    'qf-curated-gir': ['AGGIR', 'GIR 1 à 6', 'perte d’autonomie', 'APA']
+  };
 
   function loadSRS() {
     try { return JSON.parse(localStorage.getItem('bf_srs')) || {}; } catch { return {}; }
@@ -291,20 +330,31 @@ const BrainFeed = (() => {
   function isCaseChocReady(vignette, diagnosis) {
     const stem = String(vignette || '').replace(/\s+/g, ' ').trim();
     const correction = String(diagnosis || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
-    // A feed card is a short clinical decision, never a copied EVC template.
-    if (stem.length < 70 || stem.length > 360 || correction.length < 35 || correction.length > 600) return false;
+    // Une carte reste concise, mais aucune donnée n'est coupée pour rentrer.
+    if (stem.length < 70 || stem.length > 650 || correction.length < 35 || correction.length > 620) return false;
+    if (/…|\.\.\./.test(stem + ' ' + correction)) return false;
     if (!/\b\d{2,3}\s*ans\b/i.test(stem)) return false;
     if (/interrogatoire complété|examen clinique complet|constantes répétées|réunion de staff|dossier mentionne|station EVC|candidat dispose de|référentiels français|questions du jury/i.test(stem + ' ' + correction)) return false;
     return true;
   }
 
-  function conciseCaseText(value, max = 220) {
-    let text = String(value || '').replace(/<[^>]*>/g, ' ').replace(/[•●➔]/g, ' ').replace(/\s+/g, ' ').trim();
-    const sentences = text.split(/(?<=[.!?])\s+/).filter(Boolean);
-    text = sentences.slice(0, 2).join(' ') || text;
-    if (text.length <= max) return text;
-    const cut = text.lastIndexOf(' ', max - 1);
-    return text.slice(0, cut > 80 ? cut : max).replace(/[,:;\s]+$/, '') + '…';
+  function normaliseCaseText(value) {
+    return String(value || '')
+      .replace(/<br\s*\/?\s*>/gi, '\n')
+      .replace(/<\/p\s*>/gi, '\n')
+      .replace(/<[^>]*>/g, ' ')
+      .replace(/[●➔]/g, '•')
+      .replace(/[ \t]+/g, ' ')
+      .replace(/\s*\n\s*/g, '\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+  }
+
+  function completeCaseText(value, max) {
+    const text = normaliseCaseText(value);
+    // Une carte incomplète est exclue, jamais terminée artificiellement par « … ».
+    if (!text || text.length > max || /…|\.\.\./.test(text)) return '';
+    return text;
   }
 
   function buildQuizOptions(correctAnswer, allFlash, fc) {
@@ -456,6 +506,7 @@ const BrainFeed = (() => {
       type: 'memo_jour', id: 'mj-' + m.id,
       chapter: m.chapter, rang: 'A', title: m.id === dailyMemo.id ? 'MÉMO DU JOUR' : 'MÉMO FLASH',
       mnemonic: m.mnemonic, detail: m.detail, question: m.question, tags: ['Rappel actif'],
+      expectedKeywords: CURATED_KEYWORDS['mj-' + m.id] || [],
       priority: m.id === dailyMemo.id ? 2 : 1,
       srsKey: 'memo-' + m.id, srs: srs['memo-' + m.id] || { ease: 2.5, interval: 0, nextReview: 0 }
     }));
@@ -501,29 +552,32 @@ const BrainFeed = (() => {
         seenCases.push({ name: nameKey.toLowerCase(), tokens: caseTokens, age: ageKey });
       }
 
+      const caseText = completeCaseText(text, 450);
+      if (!caseText) return;
+
       const sourceQuestions = Array.isArray(a.questions) && a.questions.length
         ? a.questions
             .map((q, i) => ({
               index: i,
-              prompt: conciseCaseText(q.q || q.question || '', 125),
-              answer: conciseCaseText(q.a || q.answer || '', 360)
+              prompt: completeCaseText(q.q || q.question || '', 170),
+              answer: completeCaseText(q.a || q.answer || '', 620)
             }))
             .filter(q => q.prompt && q.answer && !hasUnsafeGlycemiaMismatch(`${q.prompt} ${q.answer}`))
-        : [{ index: 0, prompt: 'Quelle est votre conduite ?', answer: conciseCaseText(a.correction || a.reponse || '', 420) }];
+        : [{ index: 0, prompt: 'Quelle est votre conduite ?', answer: completeCaseText(a.correction || a.reponse || '', 620) }];
 
       sourceQuestions.forEach(q => {
         if (!q.answer || hasUnsafeGlycemiaMismatch(q.answer)) return;
-        const vignette = `${conciseCaseText(text, 210)}\n\nQuestion : ${q.prompt}`;
-        const diagnosis = `<strong>${q.prompt}</strong><br>${q.answer}`;
-        if (!isCaseChocReady(vignette, diagnosis)) return;
+        const fullStem = `${caseText}\n\nQuestion : ${q.prompt}`;
+        if (!isCaseChocReady(fullStem, q.answer)) return;
         const key = `case-${a.id}-q${q.index + 1}`;
         casChoc.push({
           type: 'cas_choc', id: `cc-${a.id}-q${q.index + 1}`,
           chapter: a.chapter, rang: a.difficulty || 'A',
-          vignette,
-          diagnosis,
-          juryTips: conciseCaseText(a.juryTips || '', 150),
-          timer: 30,
+          vignette: caseText,
+          prompt: q.prompt,
+          diagnosis: q.answer,
+          juryTips: completeCaseText(a.juryTips || '', 220),
+          timer: fullStem.length > 470 ? 45 : 30,
           tags: ['Cas / CROQ d’entraînement', 'Raisonnement clinique'],
           srsKey: key,
           srs: srs[key] || { ease: 2.5, interval: 0, nextReview: 0 }
@@ -542,6 +596,7 @@ const BrainFeed = (() => {
         ...q.wrong.map(text => ({ text, correct: false }))
       ]),
       explanation: q.explanation,
+      expectedKeywords: CURATED_KEYWORDS['qf-curated-' + q.id] || [],
       srsKey: 'curated-' + q.id,
       srs: srs['curated-' + q.id] || { ease: 2.5, interval: 0, nextReview: 0 },
       tags: ['Révision clinique', 'EVC']
@@ -595,6 +650,7 @@ const BrainFeed = (() => {
       type: 'piege_exam', id: 'px-' + p.id,
       chapter: p.chapter, rang: 'A',
       trap: p.trap, explain: p.explain,
+      expectedKeywords: CURATED_KEYWORDS['px-' + p.id] || [],
       tags: ['Erreur fréquente', 'À éviter'],
       srsKey: 'trap-' + p.id,
       srs: srs['trap-' + p.id] || { ease: 2.5, interval: 0, nextReview: 0 }
@@ -699,6 +755,47 @@ const BrainFeed = (() => {
       // Prefer known existing roots; runtime 404 still handled by onerror
       return /images\/(feed|chapters)\//.test(path);
     };
+    const verifiedFeedVisualTitles = {
+      1: 'Test Timed Up and Go (TUG)',
+      2: 'Chute : facteurs de risque multifactoriels',
+      3: 'Polymédication et iatrogénie',
+      4: 'Delirium : vulnérabilité et facteurs précipitants',
+      5: 'Phénotype de fragilité de Fried',
+      6: 'Vieillissement cellulaire et réserve fonctionnelle',
+      7: 'Déficits sensoriels : vision et audition',
+      8: 'Dénutrition et dépistage nutritionnel',
+      9: 'Ostéoporose et risque fracturaire',
+      10: 'Évaluation gériatrique globale',
+      11: 'Incontinence : causes réversibles (DIAPPERS)',
+      12: 'Hypotension orthostatique',
+      13: 'Dépression et trouble neurocognitif : les différencier',
+      14: 'Escarres : échelle de Braden et prévention',
+      15: 'Sarcopénie et vitesse de marche',
+      16: 'Delirium : causes réversibles',
+      17: 'Médicaments potentiellement inappropriés',
+      18: 'Score de Tinetti : équilibre et marche',
+      19: 'Globe vésical et fécalome',
+      20: 'Capacité décisionnelle et éthique',
+      21: 'Sarcopénie : mécanismes et prise en charge',
+      22: 'Cercle dénutrition–sarcopénie',
+      23: 'Delirium : causes réversibles',
+      24: 'Chutes multifactorielles',
+      25: 'Fragilité : critères de Fried',
+      26: 'Polymédication et critères de Beers'
+    };
+    // Ces posters ont été relus visuellement. Les autres fichiers restent dans
+    // l'application, mais ne sont pas proposés dans Pulse tant que leur texte
+    // embarqué comporte un seuil simplifié, une coquille ou une règle ambiguë.
+    const feedVisualAllowlist = new Set([2, 6, 7, 10, 11, 14, 18, 21, 22, 24]);
+    const visualNumber = (path) => {
+      const match = String(path || '').match(/feed-vis-(\d+)/i);
+      return match ? Number(match[1]) : 0;
+    };
+    const verifiedVisualTitle = (media, fallback) => verifiedFeedVisualTitles[visualNumber(media)] || fallback;
+    const isReviewedVisual = (media) => {
+      const number = visualNumber(media);
+      return !number || feedVisualAllowlist.has(number);
+    };
     const visualCue = (title) => {
       const t = String(title || '').toLowerCase();
       if (/chute/.test(t)) return 'Repérez les facteurs intrinsèques, les médicaments et l’environnement : une chute appelle toujours une évaluation multifactorielle.';
@@ -709,15 +806,18 @@ const BrainFeed = (() => {
       if (/douleur|ecpa/.test(t)) return 'Auto-évaluation si possible ; sinon observer le comportement avec une échelle adaptée, puis réévaluer après traitement.';
       if (/incontinence|diappers/.test(t)) return 'Avant d’étiqueter une incontinence chronique, recherchez une cause aiguë et réversible avec DIAPPERS.';
       if (/escarre|braden/.test(t)) return 'Le risque augmente quand le score de Braden baisse : décharge, mobilisation, peau et nutrition sont indissociables.';
+      if (/sensoriel|vision|audition/.test(t)) return 'Rechercher le retentissement fonctionnel et social, corriger ce qui peut l’être et proposer les aides visuelles ou auditives adaptées.';
+      if (/évaluation gériatrique globale/.test(t)) return 'Relier dimensions médicale, fonctionnelle, cognitive, psychique, nutritionnelle et sociale pour construire un plan de soins individualisé.';
+      if (/tinetti/.test(t)) return 'Le score associe équilibre et marche ; un résultat bas signale un risque de chute et appelle une évaluation multifactorielle.';
       return 'Observez le mécanisme, formulez le message clinique en une phrase, puis faites défiler pour le rappeler sans support.';
     };
     const visualExplanations = visualMedias
-      .filter(v => mediaOk(v.media))
+      .filter(v => mediaOk(v.media) && isReviewedVisual(v.media))
       .map((v, i) => ({
         type: 'visual',
         id: 'vis-' + (i + 1),
-        question: v.title,
-        answer: visualCue(v.title),
+        question: verifiedVisualTitle(v.media, v.title),
+        answer: visualCue(verifiedVisualTitle(v.media, v.title)),
         media: v.media,
         isVideo: !!v.isVideo
       }));
@@ -925,18 +1025,23 @@ const BrainFeed = (() => {
   function isHighYieldFeedCase(card) {
     if (!card) return false;
     const vignette = String(card.vignette || '').replace(/\s+/g, ' ').trim();
-    const rawAnswer = String(card.diagnosis || '');
-    const parts = rawAnswer.split(/<\/strong>\s*<br\s*\/?\s*>/i);
-    const prompt = String(parts[0] || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
-    const answer = String(parts.slice(1).join(' ') || rawAnswer).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
-    if (vignette.length < 90 || vignette.length > 360 || answer.length < 90) return false;
-    if (/…|\.\.\./.test(answer)) return false;
+    const prompt = String(card.prompt || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+    const answer = String(card.diagnosis || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+    if (vignette.length < 70 || vignette.length > 450 || prompt.length < 12 || prompt.length > 170) return false;
+    if (answer.length < 70 || answer.length > 620) return false;
+    if (/…|\.\.\./.test(vignette + ' ' + prompt + ' ' + answer)) return false;
     const expected = prompt.match(/\b([2-5])\s+(?:diagnostics?|facteurs?|causes?|mesures?|étapes?|objectifs?|éléments?)/i);
     if (expected) {
       const requiredLastItem = new RegExp(`(?:^|\\s)${expected[1]}[.)]\\s`);
       if (!requiredLastItem.test(answer)) return false;
     }
     return true;
+  }
+
+  function isCompactFeedCase(card) {
+    const answer = String(card?.diagnosis || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+    const totalPrompt = `${card?.vignette || ''} ${card?.prompt || ''}`.replace(/\s+/g, ' ').trim();
+    return isHighYieldFeedCase(card) && totalPrompt.length <= 470 && answer.length <= 430;
   }
 
   function buildDailyDeck(pools) {
@@ -954,7 +1059,7 @@ const BrainFeed = (() => {
       accepted.forEach(card => seen.add(card.id));
       return accepted;
     };
-    const strongCases = pools.casChoc.filter(isHighYieldFeedCase);
+    const strongCases = pools.casChoc.filter(isCompactFeedCase);
     const diagrams = pools.visualExplanations.filter(card => card.diagram);
     const mediaVisuals = pools.visualExplanations.filter(card => !card.diagram);
     const core = [
@@ -1099,13 +1204,19 @@ const BrainFeed = (() => {
   function renderVisual(card, slideIdx) {
     const src = card.media || card.video || card.image || '';
     const isVid = card.isVideo || /\.mp4($|\?)/i.test(src);
+    const poster = card.image ? ` poster="${esc(card.image)}"` : '';
     const mediaHtml = card.diagram
       ? renderEducationalDiagram(card.diagram, false)
       : isVid
-      ? `<video class="bf-visual-media" src="${src}" muted loop playsinline autoplay controls
+      ? `<video class="bf-visual-media" data-src="${src}" muted loop playsinline controls preload="none"${poster}
            onerror="this.closest('.bf-media-container')?.classList.add('bf-media-missing')"></video>`
       : `<img class="bf-visual-media" src="${src}" alt="${esc(card.question || '')}" loading="lazy"
            onerror="this.closest('.bf-media-container')?.classList.add('bf-media-missing')">`;
+    const answerMediaHtml = card.diagram
+      ? renderEducationalDiagram(card.diagram, true)
+      : (isVid && card.image)
+      ? `<img class="bf-visual-media" src="${esc(card.image)}" alt="${esc(card.question || '')}" loading="lazy">`
+      : mediaHtml;
     return `
       <div class="bf-horiz-scroll" id="bfScroll-${slideIdx}">
         <div class="bf-horiz-page page-1 bf-visual-page">
@@ -1125,7 +1236,7 @@ const BrainFeed = (() => {
         <div class="bf-horiz-page page-2 bf-visual-page bf-visual-answer-page">
           <div class="bf-visual-stack">
             <div class="bf-media-container bf-reel-media ${card.diagram ? 'bf-native-diagram-wrap' : ''}">
-              ${card.diagram ? renderEducationalDiagram(card.diagram, true) : mediaHtml}
+              ${answerMediaHtml}
             </div>
             <div class="bf-visual-caption">
               <p class="bf-visual-kicker">À RETENIR</p>
@@ -1193,12 +1304,9 @@ const BrainFeed = (() => {
       answerText = card.explain || '';
     }
 
-    const keywords = [
-      'MMS', 'MMSE', 'GDS-15', 'GDS', 'Fried', 'CAM', 'Tinetti', 'TUG', 'Beers', 'STOPP', 'START', 'HAS', 'GIR', 'AGGIR',
-      'APA', 'ALD', 'MNA', 'IMC', 'IADL', 'ADL', 'DIAPPERS', 'ECPA', 'Bouchon', 'iatrogénie', 'dénutrition', 'delirium',
-      'fragilité', 'confusion', 'chute', 'sevrage', 'sarcopénie', 'amoxicilline', 'Donepezil', 'tramadol', 'zolpidem',
-      'lorazépam', 'Halopéridol', 'contention', 'directives anticipées', 'personne de confiance', 'Claeys-Leonetti', 'Leonetti'
-    ];
+    const expectedKeywords = Array.isArray(card.expectedKeywords)
+      ? card.expectedKeywords.filter(Boolean).slice(0, 5)
+      : [];
 
     let formatted = answerText;
     // Pre-clean: remove OCR artifacts and normalize whitespace
@@ -1226,28 +1334,17 @@ const BrainFeed = (() => {
       }
     }
 
-    // Highlight keywords with clean styling
-    keywords.forEach(kw => {
-      const regex = new RegExp(`\\b(${kw}s?)\\b`, 'gi');
-      formatted = formatted.replace(regex, `<span class="bf-keyword" style="font-weight: 700; color: var(--teal-accent); background: rgba(20, 184, 166, 0.08); padding: 1px 4px; border-radius: 4px; border: 1px solid rgba(20, 184, 166, 0.15); font-family: var(--sans);">$1</span>`);
-    });
-
-    const foundKeywords = keywords.filter(kw => {
-      const regex = new RegExp(`\\b${kw}\\b`, 'i');
-      return regex.test(answerText);
-    });
-
     // Aucun conseil fabriqué automatiquement : il risquait d'ajouter un seuil
     // imprécis à une carte dont le contenu était pourtant correct.
     const coachingTip = card.coachingTip || '';
 
     let keywordsHtml = '';
-    if (foundKeywords.length) {
+    if (expectedKeywords.length) {
       keywordsHtml = `
         <div class="bf-coach-keywords" style="margin-top: 14px; padding-top: 10px; border-top: 1px dashed var(--border); display: flex; flex-direction: column; gap: 6px;">
-          <span style="font-size: 0.8rem; font-weight: bold; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">🔑 Mots-clés requis</span>
+          <span class="bf-keyword-heading" style="font-size: 0.8rem; font-weight: bold; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">🔑 Pour une réponse complète</span>
           <div class="bf-keyword-tags" style="display: flex; flex-wrap: wrap; gap: 6px;">
-            ${foundKeywords.map(k => `<span class="bf-keyword-tag" style="font-size: 0.75rem; background: var(--bg-body); border: 1px solid var(--border); color: var(--text); padding: 2px 8px; border-radius: 99px; font-weight: 500;">${k}</span>`).join('')}
+            ${expectedKeywords.map(k => `<span class="bf-keyword-tag" style="font-size: 0.75rem; background: var(--bg-body); border: 1px solid var(--border); color: var(--text); padding: 2px 8px; border-radius: 99px; font-weight: 500;">${esc(k)}</span>`).join('')}
           </div>
         </div>
       `;
@@ -1369,15 +1466,18 @@ const BrainFeed = (() => {
           <div class="bf-bg-emoji">🚑</div>
           <article class="bf-card-content bf-card-shell">
             <header class="bf-card-hdr">
-              <span class="bf-type-badge">🚑 CAS D’ENTRAÎNEMENT</span>
+              <span class="bf-type-badge">🩺 CAS / CROQ EVC</span>
               <div class="bf-choc-timer" data-seconds="${card.timer}">
                 <svg class="bf-choc-ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16" class="bf-choc-ring-bg"/><circle cx="18" cy="18" r="16" class="bf-choc-ring-fg"/></svg>
                 <span class="bf-choc-time">${card.timer}</span>
               </div>
             </header>
             <main class="bf-card-main scrollable">
-              <p class="bf-choc-sub">Tu as <strong>${card.timer} secondes</strong> pour formuler ta conduite :</p>
-              <div class="bf-choc-vignette">${esc(card.vignette)}</div>
+              <p class="bf-choc-sub">⏱ Réponse ciblée · <strong>${card.timer} secondes</strong></p>
+              <div class="bf-croq-case">
+                <p class="bf-croq-vignette">${esc(card.vignette)}</p>
+                <div class="bf-croq-question"><span>Question</span><p>${esc(card.prompt || 'Quelle est votre conduite ?')}</p></div>
+              </div>
             </main>
             <footer class="bf-card-ftr">
               <button type="button" class="bf-action-reveal" data-bf-reveal="${slideIdx}" data-stop-timer="1">Révéler la réponse ➔</button>
@@ -1392,6 +1492,7 @@ const BrainFeed = (() => {
               <span class="bf-type-badge">🩺 Réponse structurée</span>
             </header>
             <main class="bf-card-main scrollable">
+              <div class="bf-croq-answer-prompt"><span>Question</span><p>${esc(card.prompt || '')}</p></div>
               ${formatRichAnswer(card)}
             </main>
             <footer class="bf-card-ftr">
@@ -1574,7 +1675,39 @@ const BrainFeed = (() => {
       </div>`;
   }
 
+  function syncSlideMedia(slide, active = true) {
+    if (!slide) return;
+    const scroller = slide.querySelector('.bf-horiz-scroll');
+    const pages = [...slide.querySelectorAll('.bf-horiz-page')];
+    const pageIndex = scroller
+      ? Math.round(scroller.scrollLeft / Math.max(1, scroller.clientWidth))
+      : 0;
+    const visiblePage = pages[Math.max(0, Math.min(pageIndex, pages.length - 1))];
+    slide.querySelectorAll('video').forEach(video => {
+      if (!active || !visiblePage?.contains(video)) {
+        try { video.pause(); } catch (_) {}
+        return;
+      }
+      try {
+        // Les vidéos hors écran ne téléchargent ni ne décodent rien. La source
+        // n'est attachée qu'au Reel réellement visible, puis reste en mémoire
+        // pour éviter un rechargement lors d'un retour sur la carte.
+        if (!video.getAttribute('src') && video.dataset.src) video.src = video.dataset.src;
+        video.muted = true;
+        video.play().catch(() => {});
+      } catch (_) {}
+    });
+  }
+
   function bindSlideInteractions(slide, card, slideIdx) {
+    const horizontalScroller = slide.querySelector('.bf-horiz-scroll');
+    if (horizontalScroller) {
+      let mediaFrame = 0;
+      horizontalScroller.addEventListener('scroll', () => {
+        if (mediaFrame) cancelAnimationFrame(mediaFrame);
+        mediaFrame = requestAnimationFrame(() => syncSlideMedia(slide, slide.classList.contains('bf-slide-active')));
+      }, { passive: true });
+    }
     slide.querySelectorAll('[data-bf-reveal]').forEach(btn => {
       btn.addEventListener('click', (event) => {
         event.preventDefault();
@@ -1591,6 +1724,7 @@ const BrainFeed = (() => {
         requestAnimationFrame(() => {
           if (scroller.scrollLeft < Math.min(8, target)) scroller.scrollLeft = target;
         });
+        setTimeout(() => syncSlideMedia(slide, true), motionOK() ? 360 : 0);
       });
     });
 
@@ -1701,7 +1835,7 @@ const BrainFeed = (() => {
         ring.style.strokeDashoffset = `${(1 - pct) * 100}`;
       }
       if (left <= 0) {
-        slide.querySelector('.bf-choc-vignette')?.classList.add('bf-choc-pulse');
+        slide.querySelector('.bf-croq-question')?.classList.add('bf-choc-pulse');
         return;
       }
       left--;
@@ -1746,7 +1880,6 @@ const BrainFeed = (() => {
     const end = Math.min(idx + BATCH_SIZE, deck.length);
     for (let i = idx; i < end; i++) {
       const slide = renderSlide(deck[i], i);
-      if (i === idx) slide.classList.add('bf-slide-enter');
       feed.appendChild(slide);
     }
     renderedRange = { start: idx, end: end };
@@ -1764,7 +1897,7 @@ const BrainFeed = (() => {
       entries.forEach(entry => {
         // Pause videos when off-screen
         if (!entry.isIntersecting) {
-          entry.target.querySelectorAll('video').forEach(v => { try { v.pause(); } catch (_) {} });
+          syncSlideMedia(entry.target, false);
           return;
         }
         if (entry.intersectionRatio > 0.55) {
@@ -1782,13 +1915,11 @@ const BrainFeed = (() => {
             if (card) startCasChocTimer(slideIdx, card.timer || 30);
           }
           if (type === 'chiffre_cle') animateStatNumber(entry.target);
-          // Autoplay visual / embedded videos on active slide
-          entry.target.querySelectorAll('video').forEach(v => {
-            try { v.muted = true; v.play().catch(() => {}); } catch (_) {}
-          });
+          // Une seule vidéo est décodée : la page horizontale réellement visible.
+          syncSlideMedia(entry.target, true);
         }
       });
-    }, { root: feed, threshold: [0.55, 0.75] });
+    }, { root: feed, threshold: [0, 0.6] });
 
     feed.querySelectorAll('.bf-slide').forEach(slide => observer.observe(slide));
   }
@@ -1797,11 +1928,15 @@ const BrainFeed = (() => {
     const feed = document.getElementById('bfFeed');
     if (!feed) return;
     const end = Math.min(renderedRange.end + BATCH_SIZE, deck.length);
+    const fragment = document.createDocumentFragment();
+    const appended = [];
     for (let i = renderedRange.end; i < end; i++) {
       const slide = renderSlide(deck[i], i);
-      feed.appendChild(slide);
-      observer.observe(slide);
+      fragment.appendChild(slide);
+      appended.push(slide);
     }
+    feed.appendChild(fragment);
+    appended.forEach(slide => observer.observe(slide));
     renderedRange.end = end;
   }
 
@@ -1811,10 +1946,7 @@ const BrainFeed = (() => {
     feed.querySelectorAll('.bf-slide').forEach(s => {
       const on = parseInt(s.dataset.idx, 10) === idx;
       s.classList.toggle('bf-slide-active', on);
-      if (on && s.dataset.entered !== '1') {
-        s.dataset.entered = '1';
-        s.classList.add('bf-reel-enter');
-      }
+      syncSlideMedia(s, on);
     });
     updateActionRail();
   }

@@ -7536,3 +7536,247 @@ body {
   .bf-native-diagram.is-revealed .bf-diagram-node,
   .bf-native-diagram.is-revealed .bf-diagram-center { animation: none !important; }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   v238 — Pulse stable : aucune réapparition au scroll, médias 9:16
+   plein cadre, CROQ clinique et typographie de lecture.
+   ═══════════════════════════════════════════════════════════════ */
+#vFeed,
+#vFeed .bf-feed,
+#vFeed .bf-slide,
+#vFeed .bf-horiz-page,
+#vFeed .bf-card-content,
+#vFeed .bf-card-shell {
+  height: 100svh !important;
+  min-height: 100svh !important;
+}
+#vFeed .bf-feed {
+  scroll-behavior: auto !important;
+  overscroll-behavior-y: none;
+  background: #03070d !important;
+}
+#vFeed .bf-slide,
+#vFeed .bf-slide.bf-slide-active {
+  filter: none !important;
+  transition: none !important;
+  background-color: #07131e !important;
+  contain: layout paint style;
+}
+#vFeed .bf-slide::before { display: none !important; }
+#vFeed .bf-horiz-page::before,
+#vFeed .bf-horiz-page::after {
+  animation: none !important;
+  filter: none !important;
+}
+#vFeed .bf-horiz-page::before {
+  opacity: .28;
+  transform: none !important;
+}
+#vFeed .bf-bg-emoji { filter: none !important; }
+#vFeed .bf-card-main.scrollable {
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+}
+#vFeed .bf-slide-active.bf-reel-enter .bf-social-author,
+#vFeed .bf-slide-active.bf-reel-enter .bf-card-hdr,
+#vFeed .bf-slide-active.bf-reel-enter .bf-card-main,
+#vFeed .bf-slide-active.bf-reel-enter .bf-card-ftr,
+#vFeed .bf-slide-enter {
+  animation: none !important;
+}
+#vFeed .bf-action-reveal,
+#vFeed .bf-swipe-left-hint { animation: none !important; }
+
+/* Les transparences restent lisibles sans recalculer un flou plein écran. */
+#vFeed .bf-close-btn,
+#vFeed .bf-stats-bar span,
+#vFeed .bf-session-tab,
+#vFeed .bf-action-btn,
+#vFeed .bf-action-reveal,
+#vFeed .bf-type-badge,
+#vFeed .bf-rang,
+#vFeed .bf-card-chapter,
+#vFeed .bf-tag,
+#vFeed .bf-choc-vignette,
+#vFeed .bf-croq-case,
+#vFeed .bf-croq-question,
+#vFeed .bf-quiz-opt {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+#vFeed .bf-session-tab { background: rgba(3,11,18,.82) !important; }
+#vFeed .bf-action-btn { background: rgba(2,8,15,.76) !important; }
+#vFeed .bf-type-badge,
+#vFeed .bf-rang,
+#vFeed .bf-card-chapter,
+#vFeed .bf-tag { background: rgba(2,10,17,.66) !important; }
+
+/* Texte plus généreux, particulièrement au verso et dans les choix. */
+#vFeed .bf-answer-body,
+#vFeed .bf-rich-answer,
+#vFeed .bf-answer-body p,
+#vFeed .bf-answer-body li {
+  font-size: clamp(1.05rem, 3.15vw, 1.2rem) !important;
+  line-height: 1.67 !important;
+  letter-spacing: -.012em;
+}
+#vFeed .bf-answer-list { padding-left: 1.25rem !important; }
+#vFeed .bf-answer-list li + li { margin-top: .58rem !important; }
+#vFeed .bf-quiz-opt,
+#vFeed .bf-quiz-opt-text {
+  font-size: clamp(.96rem, 2.65vw, 1.04rem) !important;
+  line-height: 1.42 !important;
+}
+#vFeed .bf-keyword-heading {
+  color: rgba(255,255,255,.75) !important;
+  font-size: .78rem !important;
+}
+#vFeed .bf-keyword-tag {
+  padding: 5px 9px !important;
+  color: #fff !important;
+  background: rgba(2,8,16,.58) !important;
+  border-color: rgba(255,255,255,.22) !important;
+  font-size: .84rem !important;
+  line-height: 1.25 !important;
+  font-weight: 680 !important;
+}
+#vFeed .bf-social-copy strong { font-size: .93rem; }
+#vFeed .bf-social-copy small { font-size: .74rem; }
+#vFeed .bf-type-badge { font-size: .78rem; }
+#vFeed .bf-action-btn span { font-size: .64rem; }
+
+/* Cas / CROQ : identité clinique distincte et énoncé hiérarchisé. */
+#vFeed .bf-theme-choc {
+  background: linear-gradient(155deg, #06334d 0%, #0b6670 52%, #164e63 100%) !important;
+}
+#vFeed .bf-theme-choc-back {
+  background: linear-gradient(155deg, #05283b 0%, #115e59 50%, #12345a 100%) !important;
+}
+#vFeed .bf-choc-sub {
+  margin: 0 0 4px !important;
+  color: rgba(226,252,250,.82) !important;
+  font-size: .86rem !important;
+  letter-spacing: .01em;
+}
+#vFeed .bf-croq-case {
+  display: grid;
+  gap: 13px;
+  padding: 15px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 20px;
+  background: rgba(2,18,27,.4);
+  box-shadow: 0 18px 38px rgba(0,0,0,.13);
+}
+#vFeed .bf-croq-vignette {
+  margin: 0;
+  color: rgba(246,254,255,.9);
+  font-size: clamp(1.02rem, 3.05vw, 1.14rem);
+  font-weight: 560;
+  line-height: 1.62;
+  letter-spacing: -.012em;
+  white-space: pre-line;
+  text-align: left !important;
+}
+#vFeed .bf-croq-question,
+#vFeed .bf-croq-answer-prompt {
+  display: grid;
+  gap: 5px;
+  padding: 12px 13px;
+  border: 1px solid rgba(151,246,226,.36);
+  border-radius: 14px;
+  background: rgba(105,231,211,.13);
+}
+#vFeed .bf-croq-question > span,
+#vFeed .bf-croq-answer-prompt > span {
+  color: #a7f3e7;
+  font-size: .68rem;
+  font-weight: 850;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+#vFeed .bf-croq-question p,
+#vFeed .bf-croq-answer-prompt p {
+  margin: 0 !important;
+  color: #fff !important;
+  font-size: clamp(1.14rem, 3.7vw, 1.32rem) !important;
+  font-weight: 790;
+  line-height: 1.35 !important;
+  letter-spacing: -.025em;
+  text-align: left !important;
+}
+#vFeed .bf-croq-answer-prompt { margin-bottom: 5px; }
+
+/* Poster/vidéo : largeur complète du Reel et légende superposée. */
+#vFeed .bf-visual-page {
+  padding: max(108px, calc(env(safe-area-inset-top) + 94px)) 0 0 !important;
+  overflow: hidden !important;
+}
+#vFeed .bf-visual-stack {
+  position: relative;
+  width: 100% !important;
+  max-width: none !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  gap: 0 !important;
+}
+#vFeed .bf-reel-media,
+#vFeed .bf-native-diagram-wrap {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  aspect-ratio: auto !important;
+  box-shadow: none !important;
+  background: #02070b !important;
+}
+#vFeed .bf-reel-media > .bf-visual-media,
+#vFeed .bf-reel-media > img,
+#vFeed .bf-reel-media > video {
+  width: 100% !important;
+  height: 100% !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  object-fit: contain !important;
+  background: #02070b !important;
+}
+#vFeed .bf-visual-caption {
+  position: absolute;
+  left: 0;
+  right: 62px;
+  bottom: 0;
+  z-index: 5;
+  padding: 88px 16px max(20px, env(safe-area-inset-bottom)) !important;
+  background: linear-gradient(transparent, rgba(1,6,11,.86) 44%, rgba(1,6,11,.97));
+  pointer-events: none;
+}
+#vFeed .bf-visual-caption .bf-action-reveal { pointer-events: auto; }
+#vFeed .bf-visual-title {
+  font-size: clamp(1.32rem, 5vw, 1.9rem) !important;
+  line-height: 1.18 !important;
+}
+#vFeed .bf-visual-sub {
+  color: rgba(245,253,255,.9) !important;
+  font-size: clamp(.94rem, 2.75vw, 1.05rem) !important;
+  line-height: 1.5 !important;
+}
+#vFeed .bf-native-diagram { padding: max(20px, 4vw) !important; }
+
+@media (max-width: 520px) {
+  #vFeed .bf-question-text,
+  #vFeed .bf-quiz-q {
+    font-size: clamp(1.38rem, 6.1vw, 1.72rem) !important;
+    line-height: 1.2 !important;
+  }
+  #vFeed .bf-card-content,
+  #vFeed .bf-card-shell {
+    padding-top: max(170px, calc(env(safe-area-inset-top) + 154px)) !important;
+  }
+  #vFeed .bf-visual-page { padding-left: 0 !important; padding-right: 0 !important; }
+  #vFeed .bf-visual-caption { right: 60px; padding-left: 14px !important; }
+}
