@@ -7780,3 +7780,6 @@ body {
   #vFeed .bf-visual-page { padding-left: 0 !important; padding-right: 0 !important; }
   #vFeed .bf-visual-caption { right: 60px; padding-left: 14px !important; }
 }
+
+/* HAS protocol source links */
+.proto-source-link{display:inline-flex;margin-top:10px;font-size:.8rem;font-weight:700;color:var(--accent,#22d3ee);text-decoration:underline;text-underline-offset:3px}

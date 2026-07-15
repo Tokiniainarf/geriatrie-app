@@ -4437,6 +4437,7 @@ function renderProtoList(list){
           ${p.surveillance?`<div class="proto-surveillance">📊 ${esc(p.surveillance)}</div>`:''}
           ${p.effetsSecondaires?`<div class="proto-surveillance">⚡ EI: ${esc(p.effetsSecondaires)}</div>`:''}
           ${p.contreIndications?`<div class="proto-ci">🚫 CI: ${esc(p.contreIndications)}</div>`:''}
+          ${p.sourceUrl?`<a class="proto-source-link" href="${esc(p.sourceUrl)}" target="_blank" rel="noopener">Ouvrir la source HAS ↗</a>`:''}
         </div>`;
       }).join('')}</div>
     </div>`).join('');
