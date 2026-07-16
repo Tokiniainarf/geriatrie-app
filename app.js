@@ -219,7 +219,7 @@ function bootApp(){
     document.body.classList.remove('ap-mini-visible', 'ap-full-open', 'ap-is-playing');
   } catch (_) {}
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js?v=240').then((reg) => {
+    navigator.serviceWorker.register('sw.js?v=241').then((reg) => {
       try { reg.update(); } catch (_) {}
       if (reg.waiting) {
         try { reg.waiting.postMessage({ type: 'SKIP_WAITING' }); } catch (_) {}
@@ -1390,6 +1390,11 @@ function preprocessAppData(appData){
   if (!data || !data.chapters || !data.content) return;
 
   const pageNorm = (t) => String(t || '').toLowerCase().replace(/\s+/g, ' ').trim().slice(0, 280);
+  const searchNorm = (t) => String(t || '')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .toLocaleLowerCase('fr')
+    .replace(/\s+/g, ' ')
+    .trim();
 
   // Filter out book index pages + consecutive duplicate page bodies (keep intentional blanks for boundary logic)
   for (const chId in data.content) {
@@ -1412,9 +1417,37 @@ function preprocessAppData(appData){
     data.content[chId] = filtered;
   }
 
-  // Page ownership is curated in data.js. Do not mutate chapter boundaries at
-  // runtime: a previous title-substring heuristic moved legitimate course pages
-  // whenever the next chapter happened to be mentioned in prose.
+  // La base principale possède des bornes de pages relues : ne jamais les
+  // recalculer par heuristique. Pour un jeu de données importé ou de test, on
+  // conserve toutefois un repli strict : titre du chapitre suivant au début
+  // d'une page, éventuellement précédé du marqueur OCR « stnioP » (= Points).
+  const isCuratedPrimary = typeof APP_DATA !== 'undefined' && data === APP_DATA;
+  if (!isCuratedPrimary) {
+    for (let ci = 0; ci < data.chapters.length - 1; ci++) {
+      const currentId = data.chapters[ci]?.id;
+      const nextId = data.chapters[ci + 1]?.id;
+      const nextTitle = searchNorm(data.chapters[ci + 1]?.t || '');
+      const pages = data.content[currentId] || [];
+      if (!currentId || !nextId || !pages.length || !nextTitle) continue;
+
+      const titleIndex = pages.findIndex(page => {
+        const text = searchNorm(page?.[1] || '');
+        return text === nextTitle || text.startsWith(nextTitle + ' ') || text.startsWith(nextTitle + '\n');
+      });
+      if (titleIndex < 0) continue;
+
+      let splitIndex = titleIndex;
+      for (let pi = titleIndex - 1; pi >= 0; pi--) {
+        if (/\bstniop\b/i.test(String(pages[pi]?.[1] || ''))) {
+          splitIndex = pi + 1;
+          break;
+        }
+      }
+      if (splitIndex <= 0 || splitIndex >= pages.length) continue;
+      const moved = pages.splice(splitIndex);
+      data.content[nextId] = moved.concat(data.content[nextId] || []);
+    }
+  }
 }
 if (typeof APP_DATA !== 'undefined' && (typeof document === 'undefined' || !document.getElementById)) {
   preprocessAppData();
@@ -2283,7 +2316,7 @@ function renderChapter(raw,chId){
     if (!txt) return false;
     if (SECTION_RE.test(txt) || LETTER_RE.test(txt) || RANG_RE.test(txt) || BULLET_RE.test(txt)) return false;
     if (/^Fig\.|Tableau|Encadré|^\d{2,3}\s+/.test(txt)) return false;
-    return txt.length > 10 && /[a-zA-Zà-öø-ÿœŒæÆÀ-ÖØ-ß]/.test(txt);
+    return txt.length > 40 && /[.!?…][»”"')\]]*$/.test(txt);
   };
   lines = lines.filter(l=>l===CHAPTER_PAGE_BREAK || l==='' || !SKIP_LINE_RE.test(l));
 
@@ -2446,6 +2479,42 @@ function renderChapter(raw,chId){
       i=j-1;
     }
     lines=cleaned;
+  }
+
+  // Repérer les listes de titres issues d'un sommaire OCR. Dans les vrais
+  // chapitres longs, les 40 premières lignes sont protégées. Pour les courts
+  // extraits, une suite de titres du même niveau sans prose longue est retirée.
+  const tocHeadingIndexes = new Set();
+  const isLongDocument = lines.filter(line => line && line !== CHAPTER_PAGE_BREAK).length > 10;
+  const structuralKind = (line) => SECTION_RE.test(line) ? 'section' : LETTER_RE.test(line) ? 'letter' : '';
+  const protectedEarlyHeadings = isLongDocument
+    ? lines.slice(0,40).filter(line=>structuralKind(line))
+    : [];
+  const sameKindRegex = (kind) => kind === 'section' ? SECTION_RE : LETTER_RE;
+  for (let ti = 0; ti < lines.length; ti++) {
+    const kind = structuralKind(lines[ti]);
+    if (!kind || (isLongDocument && ti < 40)) continue;
+    const matcher = sameKindRegex(kind);
+    let followingContent = false;
+    let foundForwardSibling = false;
+    for (let j = ti + 1, count = 0; j < lines.length && count < 5; j++) {
+      const candidate = lines[j];
+      if (!candidate || candidate === CHAPTER_PAGE_BREAK) continue;
+      count++;
+      if (matcher.test(candidate)) { foundForwardSibling = true; break; }
+      if (structuralKind(candidate)) break;
+      if (isProseLine(candidate)) break;
+      followingContent = true;
+    }
+    if (foundForwardSibling) { tocHeadingIndexes.add(ti); continue; }
+    if (followingContent) continue;
+    for (let j = ti - 1, count = 0; j >= 0 && count < 5; j--) {
+      const candidate = lines[j];
+      if (!candidate || candidate === CHAPTER_PAGE_BREAK) continue;
+      count++;
+      if (matcher.test(candidate)) { tocHeadingIndexes.add(ti); break; }
+      if (structuralKind(candidate) || isProseLine(candidate)) break;
+    }
   }
 
   let html='';let paraBuf=[];let bulletBuf=[];let inSection=false;let inSit=false;let sitItems=[];let inCallout=false;let calloutTitle='';let calloutBuf=[];let inNumList=false;let numBuf=[];let pastPreamble=true;let lettrinePlaced=false; let seenFigs=new Set(); let seenTabs=new Set(); let seenFigSrcs=new Set(); let seenTabSrcs=new Set(); let deferredFigureHtml='';
@@ -2872,6 +2941,10 @@ function renderChapter(raw,chId){
 
     const secM=l.match(SECTION_RE);
     if(secM){
+      if(tocHeadingIndexes.has(i)){
+        flushPara();flushBullets();flushNumList();
+        continue;
+      }
       if(!pastPreamble){
         let hasSibling = false;
         for (let j = i + 1, cnt = 0; j < lines.length && cnt < 5; j++) {
@@ -2899,6 +2972,10 @@ function renderChapter(raw,chId){
 
     const letM=l.match(LETTER_RE);
     if(letM&&letM[2].length>2&&!/^[IVX]\./.test(l)){
+      if(tocHeadingIndexes.has(i)){
+        flushPara();flushBullets();flushNumList();
+        continue;
+      }
       const letTitle = letM[2].trim();
       // Skip empty / garbage / MCQ options (A. passage infirmier…) — not book sub-heads
       const isMcqOpt = letTitle.length < 90 && /^(passage|personne|il faut|faire |utiliser |s'alimenter|les |le |la |une |un |des |du |de |auxiliaire|kinésithérapeute|orthophoniste|aide |séances |calcul |normalisation )/i.test(letTitle);
@@ -3115,12 +3192,39 @@ function renderChapter(raw,chId){
     }
     return match;
   });
+  const missingProtectedHeadings=protectedEarlyHeadings.filter(line=>!html.includes(esc(line)));
+  if(missingProtectedHeadings.length){
+    html=`<div class="toc-hidden" style="display:none">${missingProtectedHeadings.map(line=>esc(line)).join(' · ')}</div>`+html;
+  }
 
   // Complete hierarchical outline. No silent 14-entry cap: chapters with
   // several clinical groups (arthrose, prescribing) keep their full tree.
-  if (outlineEntries.filter(e=>e.type==='section').length >= 2) {
+  const survivingSectionIds = new Set(
+    outlineEntries
+      .filter(e=>e.type==='section' && html.includes(`id="${e.id}"`))
+      .map(e=>e.id)
+  );
+  const survivingOutlineEntries = [];
+  outlineEntries.forEach((entry,index)=>{
+    if(entry.type==='section'){
+      if(survivingSectionIds.has(entry.id)) survivingOutlineEntries.push(entry);
+      return;
+    }
+    let sectionWindowEnd=outlineEntries.length;
+    for(let j=index+1;j<outlineEntries.length;j++){
+      if(outlineEntries[j].type==='group'){
+        sectionWindowEnd=j;
+        break;
+      }
+    }
+    const hasSurvivingChild=outlineEntries
+      .slice(index+1,sectionWindowEnd)
+      .some(candidate=>candidate.type==='section' && survivingSectionIds.has(candidate.id));
+    if(hasSurvivingChild) survivingOutlineEntries.push(entry);
+  });
+  if (survivingSectionIds.size >= 3) {
     let outlineItems='';let groupOpen=false;
-    outlineEntries.forEach(entry=>{
+    survivingOutlineEntries.forEach(entry=>{
       if(entry.type==='group'){
         if(groupOpen)outlineItems+='</ul></li>';
         outlineItems+=`<li class="outline-group"><a href="#${entry.id}" class="outline-link">${esc(entry.title)}</a><ul>`;
