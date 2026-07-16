@@ -219,7 +219,7 @@ function bootApp(){
     document.body.classList.remove('ap-mini-visible', 'ap-full-open', 'ap-is-playing');
   } catch (_) {}
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js?v=238').then((reg) => {
+    navigator.serviceWorker.register('sw.js?v=240').then((reg) => {
       try { reg.update(); } catch (_) {}
       if (reg.waiting) {
         try { reg.waiting.postMessage({ type: 'SKIP_WAITING' }); } catch (_) {}
@@ -471,12 +471,58 @@ function renderAuthenticAnnales(){
     <div class="embedded-annal" id="embedded-${esc(a.id)}" hidden><div class="embedded-annal-bar"><strong>${esc(a.title)}</strong><span>${a.pages} pages · disponible hors ligne</span></div><iframe title="${esc(a.title)}" data-src="${esc(a.file)}#toolbar=1&navpanes=0" loading="lazy"></iframe></div>
   </article>`).join('');
   const internal=s25.internal||{};
-  const qcm=(internal.questions||[]).map((q,i)=>`<details class="official-qcm"><summary><span>Q${i+1}</span>${esc(q.q)}</summary><ol type="A">${(q.options||[]).map(o=>`<li>${esc(o)}</li>`).join('')}</ol><div class="official-qcm-noanswer">Énoncé uniquement : aucune correction n’est revendiquée comme officielle.</div></details>`).join('');
+  const qcmCorrections=typeof ANNALES_CORRECTIONS!=='undefined'?(ANNALES_CORRECTIONS.qcm2025||[]):[];
+  const qcm=(internal.questions||[]).map((q,i)=>{
+    const correction=qcmCorrections[i];
+    const answerId=`official-qcm-answer-${i}`;
+    const options=q.options||[];
+    const answerHtml=correction?`<div class="official-qcm-answer-head">Réponse pédagogique proposée</div><ul>${(correction.answer||[]).map(a=>`<li>${esc(a)}</li>`).join('')}</ul>${correction.note?`<p>${esc(correction.note)}</p>`:''}`:'<p>Réponse pédagogique non encore validée.</p>';
+    return`<details class="official-qcm"><summary><span>Q${i+1}</span>${esc(q.q)}</summary><ol type="A">${options.map((o,oi)=>`<li class="${correction?.correct?.includes(oi)?'official-option-correct':''}">${esc(o)}</li>`).join('')}</ol><button type="button" class="ann-reveal-btn official-answer-toggle" aria-expanded="false" aria-controls="${answerId}" onclick="toggleAnnAnswer('${answerId}',this)">Afficher la réponse</button><div class="official-correction ann-a-hidden" id="${answerId}" style="display:none">${answerHtml}<small>Corrigé pédagogique non officiel.</small></div></details>`;
+  }).join('');
   const external=s25.external||{};
-  el.innerHTML=`<div class="ann-correction-cta"><div><strong>Tu cherches les réponses ?</strong><span>Les sujets nationaux ci-dessous ne contiennent pas de corrigé officiel. L’app propose séparément 503 réponses pédagogiques et 90 réponses d’examens.</span></div><button type="button" onclick="switchAnnalesMode('annales')">Ouvrir les cas corrigés</button></div><section class="official-annals-block"><div class="official-annals-title"><span>Archives intégrées</span><h2>Vrais sujets 2009-2024</h2><p>Choisissez EVCF ou EVCP, une session, puis lisez uniquement le cas et les questions. Le texte reste non corrigé.</p></div><div id="annalesTextExplorer"></div><details class="annal-facsimiles"><summary>Contrôler le fac-similé original (${archives.reduce((n,a)=>n+(a.pages||0),0)} pages, hors ligne)</summary><div class="official-annals-grid">${archiveHtml}</div></details></section>
+  el.innerHTML=`<div class="ann-correction-cta"><div><strong>Réponds, puis vérifie juste dessous</strong><span>Les sessions 2023-2024 et l’extrait 2025 disposent maintenant de corrigés pédagogiques question par question. Ils sont distingués des énoncés nationaux et ne sont pas présentés comme un barème officiel.</span></div><button type="button" onclick="switchAnnalesMode('annales')">Ouvrir les cas corrigés</button></div><section class="official-annals-block"><div class="official-annals-title"><span>Archives intégrées</span><h2>Vrais sujets 2009-2024</h2><p>Choisissez EVCF ou EVCP et une session. Formulez votre réponse, puis utilisez « Afficher la réponse » sous chaque question.</p></div><div id="annalesTextExplorer"></div><details class="annal-facsimiles"><summary>Contrôler le fac-similé original (${archives.reduce((n,a)=>n+(a.pages||0),0)} pages, hors ligne)</summary><div class="official-annals-grid">${archiveHtml}</div></details></section>
   <section class="official-annals-block"><div class="official-annals-title"><span>Réforme 2025</span><h2>Voie interne</h2><p>${esc(internal.format||'')} · ${esc(internal.completeness||'')}</p></div><div class="ann-session-notice"><strong>Provenance :</strong> ${esc(internal.provenance||'')}. L’énoncé disponible est intégré ci-dessous, sans sortie de l’app.</div><div class="official-qcm-list">${qcm}</div></section>
   <section class="official-annals-block unavailable"><div class="official-annals-title"><span>Réforme 2025</span><h2>${esc(external.title||'Voie externe')}</h2><p>${esc(external.format||'')}</p></div><div class="official-annal-note"><strong>${esc(external.completeness||'')}</strong><br>${esc(external.note||'')}</div></section>`;
   initAnnalesTextExplorer();
+}
+
+function formatOfficialCorrection(correction){
+  if(!correction)return'<p>Ce corrigé pédagogique n’est pas encore validé pour cette question ancienne. Utilisez le fac-similé et les chapitres liés plutôt qu’une réponse inventée.</p>';
+  const items=Array.isArray(correction)?correction:[String(correction)];
+  return`<ul>${items.filter(Boolean).map(item=>`<li>${esc(item)}</li>`).join('')}</ul>`;
+}
+
+function legacyOfficialCorrection(question){
+  const q=String(question||'').toLowerCase();
+  const rules=[
+    [/hypotension orthostatique/,['Mesurer la pression après repos couché puis debout à 1 et 3 minutes, avec la fréquence cardiaque et les symptômes.','Retenir une baisse de PAS ≥ 20 mmHg ou de PAD ≥ 10 mmHg dans les 3 minutes ; rechercher médicaments, hypovolémie et dysautonomie.']],
+    [/syndrome confusionnel|confusion/,['Confirmer le début aigu et fluctuant avec inattention ou vigilance modifiée.','Rechercher et corriger infection, hypoxie, douleur, globe, fécalome, médicament et trouble métabolique ; privilégier les mesures non médicamenteuses.']],
+    [/chute/,['Évaluer d’abord gravité, traumatisme et temps au sol.','Rechercher hypotension orthostatique, iatrogénie, trouble de marche, vision, cognition, cause aiguë et environnement, puis proposer prévention multifactorielle.']],
+    [/dénutri|nutritionnel|amaigrissement/,['Associer au moins un critère phénotypique à un critère étiologique ; un IMC élevé n’exclut pas une dénutrition.','Documenter perte de poids, IMC, ingesta, force/masse musculaire, dysphagie et inflammation, puis individualiser enrichissement, protéines et suivi.']],
+    [/alzheimer|démence|trouble neurocognitif/,['Documenter déclin cognitif, évolution et retentissement sur l’autonomie avec l’aidant.','Rechercher delirium, dépression, médicaments, déficits sensoriels et causes métaboliques ; compléter par évaluation cognitive, biologie et imagerie selon le contexte.']],
+    [/corps de lewy/,['Rechercher fluctuations cognitives, hallucinations visuelles, syndrome parkinsonien et trouble comportemental en sommeil paradoxal.','Évaluer dysautonomie et chutes ; prudence majeure avec les neuroleptiques.']],
+    [/insuffisance cardiaque/,['Rechercher congestion et bas débit, facteur déclenchant, ECG, radiographie thoracique, biologie rénale/ionogramme et peptide natriurétique selon le contexte.','Traiter le facteur déclenchant, oxygéner si besoin, utiliser les diurétiques avec surveillance du poids, de la fonction rénale et du potassium.']],
+    [/pneumoni|infection respiratoire/,['Évaluer gravité : fréquence respiratoire, saturation, pression, vigilance, fonction rénale et capacité à s’alimenter.','Imagerie thoracique, antibiothérapie probabiliste adaptée au lieu de vie et à la gravité, oxygène si nécessaire, hydratation prudente et prévention de la perte fonctionnelle.']],
+    [/ostéopor|fracture/,['Rechercher fracture de fragilité et facteurs de risque, mesurer la DMO à la hanche et au rachis si indiqué et rechercher les causes secondaires.','Associer activité/équilibre, calcium alimentaire, vitamine D selon besoin et traitement anti-ostéoporotique selon risque fracturaire.']],
+    [/escarre/,['Stadifier la lésion et rechercher douleur, infection, perfusion et facteurs nutritionnels.','Décharger, repositionner de façon individualisée, utiliser un support adapté, mobiliser, protéger la peau et corriger dénutrition/humidité.']],
+    [/douleur/,['Privilégier l’auto-évaluation si possible ; sinon utiliser une échelle comportementale validée comme ALGOPLUS, ECPA ou DOLOPLUS-2 selon le contexte.','Traiter puis réévaluer efficacité, vigilance, transit, fonction rénale et risque de chute.']],
+    [/anémie|hémogramme|macrocyt/,['Caractériser par VGM, réticulocytes et contexte inflammatoire, puis rechercher carence martiale, B12/folates, saignement, insuffisance rénale, hémolyse ou syndrome médullaire.','La transfusion dépend de la tolérance et des comorbidités, pas de l’âge seul.']],
+    [/hyponatr|natrémie/,['Confirmer osmolarité et glycémie, évaluer volume extracellulaire, urines et médicaments.','Traiter la cause ; si symptômes neurologiques sévères, correction contrôlée en milieu surveillé sans dépasser habituellement 8 à 10 mmol/L sur 24 heures.']],
+    [/avc|accident vasculaire/,['Préciser heure de début, déficit NIHSS, glycémie, constantes et traitements anticoagulants.','Imagerie cérébrale urgente, bilan vasculaire/cardiaque et discussion de reperfusion selon délai, autonomie antérieure, contre-indications et filière neurovasculaire.']],
+    [/iatrog|médicament|ordonnance|prescription/,['Revoir indication, bénéfice actuel, dose rénale, interactions, durée, observance et effets indésirables de chaque médicament.','Prioriser simplification et déprescription progressive avec surveillance et décision partagée.']],
+    [/dépress|suicid/,['Rechercher humeur, anhédonie, ralentissement, sommeil, appétit, culpabilité et idées suicidaires avec scénario et moyens disponibles.','Évaluer urgence, isolement, traitements et causes somatiques ; organiser protection et suivi rapproché.']],
+    [/fragilit|fried/,['Critères de Fried : perte de poids, épuisement, faiblesse, lenteur et faible activité.','Un ou deux critères indiquent une pré-fragilité ; trois ou plus une fragilité, à compléter par une évaluation gériatrique globale.']]
+  ];
+  const match=rules.find(([pattern])=>pattern.test(q));
+  return match?match[1]:null;
+}
+
+function officialCorrectionFor(sessionId,index,question){
+  if(typeof ANNALES_CORRECTIONS!=='undefined'){
+    const exact=ANNALES_CORRECTIONS.sessions?.[sessionId]?.[index];
+    if(exact)return exact;
+  }
+  return legacyOfficialCorrection(question);
 }
 
 function initAnnalesTextExplorer(){
@@ -502,17 +548,40 @@ function renderAnnalesTextExplorer(){
   const visible=query
     ? sessions.filter(s=>s.pages.some(p=>String(p.text||'').toLowerCase().includes(query)))
     : sessions.filter(s=>s.id===state.session);
-  const renderText=(text)=>String(text||'').split(/\n\s*\n/).filter(Boolean).map(block=>{
-    const q=block.match(/^(Question(?:s)?(?:\s+n?[°o]?\s*\d+)?\s*:?)\s*(.*)$/is);
-    if(q)return`<div class="annal-question"><span>${esc(q[1].replace(/\s*:$/,''))}</span><p>${esc(q[2]||'Énoncé à traiter')}</p></div>`;
-    if(/^Sujet\b/i.test(block))return`<div class="annal-case"><strong>Cas clinique</strong><p>${esc(block.replace(/^Sujet\s*:?[ \t]*/i,''))}</p></div>`;
-    return`<p class="annal-stem">${esc(block)}</p>`;
+  const results=visible.map(s=>{
+    let questionIndex=0;
+    const seenQuestions=new Set();
+    const renderText=(text)=>String(text||'')
+      .replace(/(?=Question(?:s)?(?:\s+n?[°o]?\s*\d+)?\s*:)/gi,'\n\n')
+      .split(/\n\s*\n/)
+      .filter(Boolean)
+      .map(block=>{
+        const q=block.match(/^(Question(?:s)?(?:\s+n?[°o]?\s*\d+)?\s*:?)\s*(.*)$/is);
+        if(q){
+          const questionText=String(q[2]||'Énoncé à traiter').replace(/\s+/g,' ').trim();
+          const duplicateKey=questionText.toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim();
+          if(duplicateKey&&seenQuestions.has(duplicateKey))return'';
+          if(duplicateKey)seenQuestions.add(duplicateKey);
+          const currentIndex=questionIndex++;
+          const correction=officialCorrectionFor(s.id,currentIndex,questionText);
+          const answerId=`official-answer-${String(s.id).replace(/[^a-z0-9_-]/gi,'-')}-${currentIndex}`;
+          const correctionLabel=correction?'Corrigé pédagogique':'Réponse en cours de validation';
+          const disclaimer=typeof ANNALES_CORRECTIONS!=='undefined'?(ANNALES_CORRECTIONS.meta?.disclaimer||'Corrigé pédagogique non officiel.'):'Corrigé pédagogique non officiel.';
+          return`<article class="annal-question-card"><div class="annal-question"><span>${esc(q[1].replace(/\s*:$/,''))}</span><p>${esc(questionText)}</p></div><button type="button" class="ann-reveal-btn official-answer-toggle" aria-expanded="false" aria-controls="${answerId}" onclick="toggleAnnAnswer('${answerId}',this)">Afficher la réponse</button><div class="official-correction ann-a-hidden" id="${answerId}" style="display:none"><div class="official-correction-label">${correctionLabel}</div>${formatOfficialCorrection(correction)}<small>${esc(disclaimer)}</small></div></article>`;
+        }
+        if(/^Sujet\b/i.test(block))return`<div class="annal-case"><strong>Cas clinique</strong><p>${esc(block.replace(/^Sujet\s*:?[ \t]*/i,''))}</p></div>`;
+        return`<p class="annal-stem">${esc(block)}</p>`;
+      }).join('');
+    const pages=s.pages.filter(p=>!query||String(p.text||'').toLowerCase().includes(query));
+    const coverage=typeof ANNALES_CORRECTIONS!=='undefined'&&ANNALES_CORRECTIONS.sessions?.[s.id]
+      ? '<span class="annal-coverage complete">Corrigé détaillé intégré</span>'
+      : '<span class="annal-coverage partial">Trames thématiques quand disponibles</span>';
+    return`<article class="annal-session-card">
+      <header><div><span>${state.code}</span><h3>${esc(s.label)}</h3>${coverage}</div><small>Pages source ${s.pageStart}${s.pageEnd!==s.pageStart?'–'+s.pageEnd:''}</small></header>
+      ${pages.map(p=>`<section class="annal-page-text">${renderText(p.text)}</section>`).join('')}
+      <aside class="annal-method"><strong>Conseil de méthode</strong><span>Répondez d’abord en mots-clés, puis affichez la trame. Les réponses sont pédagogiques et non un barème officiel du CNG.</span></aside>
+    </article>`;
   }).join('');
-  const results=visible.map(s=>`<article class="annal-session-card">
-    <header><div><span>${state.code}</span><h3>${esc(s.label)}</h3></div><small>Pages source ${s.pageStart}${s.pageEnd!==s.pageStart?'–'+s.pageEnd:''}</small></header>
-    ${s.pages.filter(p=>!query||String(p.text||'').toLowerCase().includes(query)).map(p=>`<section class="annal-page-text">${renderText(p.text)}</section>`).join('')}
-    <aside class="annal-method"><strong>Conseil de méthode</strong><span>Répondez d’abord en mots-clés et hiérarchisez : diagnostic, gravité, étiologies, conduite et surveillance. Aucune correction officielle n’est ajoutée à l’énoncé.</span></aside>
-  </article>`).join('');
   host.innerHTML=`<div class="annal-explorer-controls">
     <div class="annal-format-switch" role="group" aria-label="Type d'épreuve"><button class="${state.code==='EVCF'?'active':''}" onclick="setAnnalesTextCode('EVCF')">EVCF · Fondamentale</button><button class="${state.code==='EVCP'?'active':''}" onclick="setAnnalesTextCode('EVCP')">EVCP · Pratique</button></div>
     <label><span>Session</span><select onchange="setAnnalesTextSession(this.value)">${sessions.map(s=>`<option value="${esc(s.id)}" ${s.id===state.session?'selected':''}>${esc(s.label)}</option>`).join('')}</select></label>
@@ -3911,13 +3980,13 @@ function toggleAnnAnswer(ansId,btn){
   if(hidden){
     e.style.display='block';
     e.classList.add('ann-a-visible');
-    btn.textContent='Masquer';
+    btn.textContent='Masquer la réponse';
     btn.classList.add('ann-reveal-open');
     btn.setAttribute('aria-expanded','true');
   }else{
     e.style.display='none';
     e.classList.remove('ann-a-visible');
-    btn.textContent='Voir réponse';
+    btn.textContent='Afficher la réponse';
     btn.classList.remove('ann-reveal-open');
     btn.setAttribute('aria-expanded','false');
   }

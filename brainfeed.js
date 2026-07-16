@@ -665,7 +665,7 @@ const BrainFeed = (() => {
       }
       if (t.includes('delirium') && (t.includes('agitation') || t.includes('benzodiazépine'))) {
         p.video = 'images/feed/illustrative/delirium-mecanisme.mp4';
-        p.image = 'images/feed/illustrative/delirium-mecanisme.jpg';
+        p.image = 'images/feed/educatif/delirium-hypoactif.webp';
       }
       if (t.includes('polymédication')) {
         p.image = 'images/feed/illustrative/polymedication-iatrogene.jpg';
@@ -678,9 +678,18 @@ const BrainFeed = (() => {
       if (t.includes('sarcopénie') || t.includes('marche')) {
         p.image = 'images/feed/illustrative/feed-vis-17.jpg';
       }
+      if (t.includes('ordonnance') || t.includes('prescription')) {
+        p.image = 'images/feed/educatif/revue-medicamenteuse.webp';
+      }
     });
     // 20+ visual explanation cards for the feed (videos and images to illustrate mechanisms)
     const visualMedias = [
+      // Rappels 9:16 relus : l'image reste volontairement sans texte ;
+      // le message clinique accessible est porté par la carte Pulse.
+      {media: 'images/feed/educatif/delirium-hypoactif.webp', isVideo: false, title: 'Delirium hypoactif : le calme trompeur'},
+      {media: 'images/feed/educatif/hypotension-orthostatique.webp', isVideo: false, title: 'Hypotension orthostatique : lever sécurisé'},
+      {media: 'images/feed/educatif/revue-medicamenteuse.webp', isVideo: false, title: 'Revue médicamenteuse partagée'},
+      {media: 'images/feed/educatif/denutrition-sarcopenie.webp', isVideo: false, title: 'Rompre le cercle dénutrition–sarcopénie'},
       // Enriched with new targeted diagrams for usefulness (Imagine generated)
       {media: 'images/chapters/educational/chute-multifactorielle-diagram.jpg', isVideo: false, title: 'Chutes multifactorielles - Diagramme explicatif'},
       // New 9:16 reel-optimized feed-vis generated (images + videos) - full vertical feel + French captions integrated
@@ -799,6 +808,7 @@ const BrainFeed = (() => {
     const visualCue = (title) => {
       const t = String(title || '').toLowerCase();
       if (/chute/.test(t)) return 'Repérez les facteurs intrinsèques, les médicaments et l’environnement : une chute appelle toujours une évaluation multifactorielle.';
+      if (/orthostatique/.test(t)) return 'Mesurez couché puis debout, recherchez les symptômes et sécurisez le lever : l’absence de tachycardie oriente vers une dysautonomie ou un traitement chronotrope.';
       if (/delirium/.test(t)) return 'Retenez la séquence : reconnaître la fluctuation et l’inattention, rechercher une cause aiguë, corriger le facteur précipitant.';
       if (/dénutrition|nutrition|sarcop/.test(t)) return 'Reliez perte d’apports, inflammation et fonte musculaire ; dépister tôt permet d’interrompre le cercle vicieux.';
       if (/fried|fragilit/.test(t)) return 'Cinq critères, trois pour la fragilité : perte de poids, fatigue, faiblesse, lenteur et faible activité.';
@@ -1129,11 +1139,18 @@ const BrainFeed = (() => {
       pieges: 'Pièges EVC · reconnaître l’erreur avant de corriger',
       visual: 'Figures et vidéos éducatives · voir, prévoir, retenir'
     };
+    let activeTab = null;
     document.querySelectorAll('#bfSessionTabs .bf-session-tab').forEach(tab => {
       const on = tab.dataset.session === activeSession;
       tab.classList.toggle('active', on);
       tab.setAttribute('aria-selected', on ? 'true' : 'false');
+      if (on) activeTab = tab;
     });
+    const tabs = document.getElementById('bfSessionTabs');
+    if (tabs && activeTab) {
+      const left = Math.max(0, activeTab.offsetLeft - (tabs.clientWidth - activeTab.offsetWidth) / 2);
+      tabs.scrollTo({ left, behavior: motionOK() ? 'smooth' : 'auto' });
+    }
     const subtitle = document.querySelector('#vFeed .bf-header-title span');
     if (subtitle) subtitle.textContent = labels[activeSession] || labels.mix;
     const counter = document.getElementById('bfCounter');
@@ -1521,7 +1538,7 @@ const BrainFeed = (() => {
             <header class="bf-card-hdr">
               <span class="bf-type-badge">⚡ QUIZ FLASH</span>
             </header>
-            <main class="bf-card-main">
+            <main class="bf-card-main scrollable">
               <h2 class="bf-quiz-q">${esc(card.question)}</h2>
               <div class="bf-quiz-options">${opts}</div>
             </main>

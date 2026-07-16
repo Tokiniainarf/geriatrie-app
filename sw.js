@@ -1,5 +1,5 @@
 // Bump CACHE_NAME whenever core assets change so clients drop stale offline caches.
-const CACHE_NAME = 'geriatrie-v239';
+const CACHE_NAME = 'geriatrie-v240';
 // Must match scripts actually loaded by index.html (post data-bundle architecture).
 const CORE = [
   './',
@@ -10,6 +10,7 @@ const CORE = [
   './practice-data.js',
   './annales-authentiques.js',
   './annales-texte.js',
+  './annales-corrections.js',
   './protocoles-has-officiels.js',
   './notebook-decks-data.js',
   './notebook-interactive.js',
@@ -21,6 +22,10 @@ const CORE = [
   './graph.js',
   './brainfeed.js',
   './app.js',
+  './images/feed/educatif/delirium-hypoactif.webp',
+  './images/feed/educatif/hypotension-orthostatique.webp',
+  './images/feed/educatif/revue-medicamenteuse.webp',
+  './images/feed/educatif/denutrition-sarcopenie.webp',
   './assets/annales/evcf-geriatrie-2009-2024.pdf',
   './assets/annales/evcp-geriatrie-2009-2024.pdf',
   './icons/icon-192.png',
