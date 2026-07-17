@@ -7,7 +7,7 @@ const INTERACTIVE_NOTEBOOKS = [
     "chapter": "ch1",
     "title": "Biologie du vieillissement",
     "source": "NotebookLM · Decoding_Geriatric_Biology.pdf",
-    "color": "#7C3AED",
+    "color": "#2563EB",
     "dir": "images/notebooks/ch01-biology",
     "pageCount": 13,
     "pdf": "Decoding_Geriatric_Biology.pdf"
@@ -163,7 +163,7 @@ const INTERACTIVE_NOTEBOOKS = [
     "chapter": "ch9",
     "title": "BPSD 2024",
     "source": "NotebookLM · 2024_BPSD_Clinical_Management.pdf",
-    "color": "#6D28D9",
+    "color": "#1D4ED8",
     "dir": "images/notebooks/ch09-bpsd",
     "pageCount": 12,
     "pdf": "2024_BPSD_Clinical_Management.pdf"
@@ -175,7 +175,7 @@ const INTERACTIVE_NOTEBOOKS = [
     "chapter": "ch9",
     "title": "Troubles neurocognitifs",
     "source": "NotebookLM · Geriatric_Neurocognitive_Blueprint.pdf",
-    "color": "#6D28D9",
+    "color": "#1D4ED8",
     "dir": "images/notebooks/ch09-neuro",
     "pageCount": 19,
     "pdf": "Geriatric_Neurocognitive_Blueprint.pdf"
@@ -211,7 +211,7 @@ const INTERACTIVE_NOTEBOOKS = [
     "chapter": "ch12",
     "title": "Chutes",
     "source": "NotebookLM · Blueprint_des_Chutes_Gériatriques.pdf",
-    "color": "#4C1D95",
+    "color": "#1E3A8A",
     "dir": "images/notebooks/ch12-chutes",
     "pageCount": 13,
     "pdf": "Blueprint_des_Chutes_Gériatriques.pdf"
@@ -307,7 +307,7 @@ const INTERACTIVE_NOTEBOOKS = [
     "chapter": "transversal",
     "title": "BPCO (transversal EVC)",
     "source": "NotebookLM · Stratégie_BPCO_EVC.pdf",
-    "color": "#7C3AED",
+    "color": "#2563EB",
     "dir": "images/notebooks/chx-bpco",
     "pageCount": 13,
     "pdf": "Stratégie_BPCO_EVC.pdf"

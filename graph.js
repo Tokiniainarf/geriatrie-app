@@ -2,7 +2,7 @@
 (function(){
   const EDGE_COLORS = {
     sameItem: '#F59E0B',
-    concept: '#D946EF',
+    concept: '#FF5D7A',
     samePart: '#0EA5E9'
   };
   const EDGE_STYLES = {
@@ -11,9 +11,9 @@
     samePart: { dash: [2, 5], label: 'Même partie', line: 'dotted' }
   };
   const CH_COLORS = typeof window !== 'undefined' && window.CH_COLORS ? window.CH_COLORS : {
-    ch1:'#7C3AED',ch2:'#10B981',ch3:'#F59E0B',ch4:'#F43F5E',ch5:'#0EA5E9',ch6:'#EC4899',ch7:'#8B5CF6',ch8:'#EF4444',
-    ch9:'#14B8A6',ch10:'#F97316',ch11:'#6366F1',ch12:'#D946EF',ch13:'#0284C7',ch14:'#22C55E',ch15:'#E11D48',
-    ch16:'#A855F7',ch17:'#F59E0B',ch18:'#059669',ch19:'#EC4899',ch20:'#3B82F6'
+    ch1:'#2563EB',ch2:'#10B981',ch3:'#F59E0B',ch4:'#F43F5E',ch5:'#0EA5E9',ch6:'#EC4899',ch7:'#3B82F6',ch8:'#EF4444',
+    ch9:'#14B8A6',ch10:'#F97316',ch11:'#2563EB',ch12:'#FF5D7A',ch13:'#0284C7',ch14:'#22C55E',ch15:'#E11D48',
+    ch16:'#0EA5E9',ch17:'#F59E0B',ch18:'#059669',ch19:'#EC4899',ch20:'#3B82F6'
   };
   const TYPE_PRIORITY = { concept: 3, sameItem: 2, samePart: 1 };
 
@@ -33,7 +33,7 @@
         id: ch.id,
         label: String(ch.t || ch.id).replace(/^.*?:\s*/, ''),
         full: ch.t || ch.id,
-        color: CH_COLORS[ch.id] || '#7C3AED',
+        color: CH_COLORS[ch.id] || '#2563EB',
         part: ch.part,
         items: ch.items || [],
         x: (Math.random() - 0.5) * 200,
@@ -1151,7 +1151,7 @@
     const vh = (H / scale) * s;
     mctx.fillStyle = 'rgba(8,145,178,0.12)';
     mctx.fillRect(vx0, vy0, vw, vh);
-    mctx.strokeStyle = '#D946EF';
+    mctx.strokeStyle = '#FF5D7A';
     mctx.lineWidth = 1.5;
     mctx.strokeRect(vx0, vy0, vw, vh);
   }

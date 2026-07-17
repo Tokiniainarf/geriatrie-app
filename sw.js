@@ -1,6 +1,7 @@
 // Bump CACHE_NAME whenever core assets change so clients drop stale offline caches.
-const CACHE_NAME = 'geriatrie-v250';
+const CACHE_NAME = 'geriatrie-v252';
 // Must match scripts actually loaded by index.html (post data-bundle architecture).
+// Do NOT pre-cache large media: a failed install left users with broken offline media.
 const CORE = [
   './',
   './index.html',
@@ -23,15 +24,14 @@ const CORE = [
   './graph.js',
   './brainfeed.js',
   './app.js',
-  './images/feed/educatif/delirium-hypoactif.webp',
-  './images/feed/educatif/hypotension-orthostatique.webp',
-  './images/feed/educatif/revue-medicamenteuse.webp',
-  './images/feed/educatif/denutrition-sarcopenie.webp',
-  './assets/annales/evcf-geriatrie-2009-2024.pdf',
-  './assets/annales/evcp-geriatrie-2009-2024.pdf',
   './icons/icon-192.png',
   './icons/icon-512.png'
 ];
+
+const isMediaPath = (pathname) =>
+  /\.(?:jpg|jpeg|png|webp|gif|svg|avif|mp4|webm|pdf)(?:$|\?)/i.test(pathname) ||
+  /\/images\//i.test(pathname) ||
+  /\/assets\//i.test(pathname);
 
 self.addEventListener('install', e => {
   e.waitUntil(
@@ -46,7 +46,7 @@ self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys().then(keys =>
       Promise.all(keys.map(k => {
-        // Drop every previous app cache (incl. Listen-era shells)
+        // Drop every previous app cache (incl. Listen-era shells + bad media)
         if (k !== CACHE_NAME) return caches.delete(k);
       }))
     ).then(() => self.clients.claim())
@@ -63,6 +63,13 @@ self.addEventListener('fetch', e => {
   // Never serve removed Listen assets from any old cache
   if (/audio-player|audio-library|audio-player\.css/i.test(url.pathname)) {
     e.respondWith(new Response('Gone', { status: 410, statusText: 'Gone' }));
+    return;
+  }
+  // Media: network-only. Caching failed/partial media caused mass "Média indisponible".
+  if (isMediaPath(url.pathname)) {
+    e.respondWith(
+      fetch(e.request).catch(() => caches.match(e.request).then(c => c || new Response('Media offline', { status: 503 })))
+    );
     return;
   }
   // Network-first for navigations & app shell; offline falls back to cache.

@@ -1221,26 +1221,32 @@ const BrainFeed = (() => {
   function renderVisual(card, slideIdx) {
     const src = card.media || card.video || card.image || '';
     const isVid = card.isVideo || /\.mp4($|\?)/i.test(src);
-    const poster = card.image ? ` poster="${esc(card.image)}"` : '';
+    const posterSrc = card.image || (!isVid ? src : '');
+    const poster = posterSrc ? ` poster="${esc(posterSrc)}"` : '';
+    // Always set src (not only data-src): lazy data-src never loaded when
+    // IntersectionObserver missed the active slide → black frame + "Média indisponible".
     const mediaHtml = card.diagram
       ? renderEducationalDiagram(card.diagram, false)
       : isVid
-      ? `<video class="bf-visual-media" data-src="${src}" muted loop playsinline controls preload="none"${poster}
-           onerror="this.closest('.bf-media-container')?.classList.add('bf-media-missing')"></video>`
-      : `<img class="bf-visual-media" src="${src}" alt="${esc(card.question || '')}" loading="lazy"
-           onerror="this.closest('.bf-media-container')?.classList.add('bf-media-missing')">`;
+      ? `<video class="bf-visual-media" src="${esc(src)}" data-src="${esc(src)}" muted loop playsinline controls preload="metadata"${poster}
+           onerror="this.dataset.err='1'; if(!this.poster){ this.closest('.bf-media-container')?.classList.add('bf-media-missing'); }"></video>`
+      : src
+      ? `<img class="bf-visual-media" src="${esc(src)}" alt="${esc(card.question || '')}" loading="eager" decoding="async"
+           onerror="this.closest('.bf-media-container')?.classList.add('bf-media-missing')">`
+      : '';
     const answerMediaHtml = card.diagram
       ? renderEducationalDiagram(card.diagram, true)
-      : (isVid && card.image)
-      ? `<img class="bf-visual-media" src="${esc(card.image)}" alt="${esc(card.question || '')}" loading="lazy">`
+      : (isVid && posterSrc)
+      ? `<img class="bf-visual-media" src="${esc(posterSrc)}" alt="${esc(card.question || '')}" loading="eager" decoding="async"
+           onerror="this.closest('.bf-media-container')?.classList.add('bf-media-missing')">`
       : mediaHtml;
     return `
       <div class="bf-horiz-scroll" id="bfScroll-${slideIdx}">
         <div class="bf-horiz-page page-1 bf-visual-page">
           <div class="bf-visual-stack">
-            <div class="bf-media-container bf-reel-media ${card.diagram ? 'bf-native-diagram-wrap' : ''}">
-              ${mediaHtml}
-              <div class="bf-media-fallback">Média indisponible</div>
+            <div class="bf-media-container bf-reel-media ${card.diagram ? 'bf-native-diagram-wrap' : ''}${!mediaHtml && !card.diagram ? ' bf-media-missing' : ''}">
+              ${mediaHtml || ''}
+              <div class="bf-media-fallback" hidden aria-hidden="true">Média indisponible</div>
             </div>
             <div class="bf-visual-caption">
               <p class="bf-visual-kicker">FIGURE INTERACTIVE</p>
@@ -1701,18 +1707,26 @@ const BrainFeed = (() => {
       : 0;
     const visiblePage = pages[Math.max(0, Math.min(pageIndex, pages.length - 1))];
     slide.querySelectorAll('video').forEach(video => {
+      try {
+        if (!video.getAttribute('src') && video.dataset.src) {
+          video.src = video.dataset.src;
+        }
+      } catch (_) {}
       if (!active || !visiblePage?.contains(video)) {
         try { video.pause(); } catch (_) {}
         return;
       }
       try {
-        // Les vidéos hors écran ne téléchargent ni ne décodent rien. La source
-        // n'est attachée qu'au Reel réellement visible, puis reste en mémoire
-        // pour éviter un rechargement lors d'un retour sur la carte.
-        if (!video.getAttribute('src') && video.dataset.src) video.src = video.dataset.src;
         video.muted = true;
-        video.play().catch(() => {});
+        const p = video.play();
+        if (p && typeof p.catch === 'function') p.catch(() => {});
       } catch (_) {}
+    });
+    // Eager-decode nearby images so captions don't sit on empty shells
+    slide.querySelectorAll('img[src]').forEach(img => {
+      if (!img.complete || img.naturalWidth === 0) {
+        try { img.loading = 'eager'; img.decode?.().catch(() => {}); } catch (_) {}
+      }
     });
   }
 
@@ -2306,7 +2320,7 @@ const BrainFeed = (() => {
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    const colors = ['#22D3EE', '#34D399', '#FBBF24', '#F472B6', '#A78BFA', '#FB7185'];
+    const colors = ['#22D3EE', '#34D399', '#FBBF24', '#F472B6', '#60A5FA', '#FB7185'];
     const pieces = Array.from({ length: 120 }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height - canvas.height,
@@ -2428,6 +2442,7 @@ const BrainFeed = (() => {
     actionKnow,
     actionDontKnow,
     actionFav,
+    actionFavForIdx,
     shareCard,
     renderSlides,
     selectSession,
@@ -2436,4 +2451,36 @@ const BrainFeed = (() => {
       return { deck: buildDailyDeck(pools), pools };
     }
   };
+})();
+
+// Expose for inline handlers + cross-scope access (const is not a window property).
+if (typeof window !== 'undefined') window.BrainFeed = BrainFeed;
+
+/* Pulse Social : double-tap sur une carte pour la garder (geste Instagram) */
+(function () {
+  function spawnHeart(x, y) {
+    var heart = document.createElement('div');
+    heart.className = 'bf-heart-burst';
+    heart.textContent = '❤️';
+    heart.style.left = x + 'px';
+    heart.style.top = y + 'px';
+    document.body.appendChild(heart);
+    setTimeout(function () { heart.remove(); }, 900);
+  }
+  var feedEl = document.getElementById('bfFeed');
+  if (feedEl) {
+    feedEl.addEventListener('dblclick', function (e) {
+      var slide = e.target && e.target.closest ? e.target.closest('.bf-slide') : null;
+      if (!slide) return;
+      e.preventDefault();
+      spawnHeart(e.clientX, e.clientY);
+      try {
+        var slideIdx = parseInt(slide.dataset.idx || '0', 10);
+        var api = (typeof window !== 'undefined' && window.BrainFeed) || (typeof BrainFeed !== 'undefined' ? BrainFeed : null);
+        if (api && typeof api.actionFavForIdx === 'function') {
+          api.actionFavForIdx(slideIdx, true);
+        }
+      } catch (err) {}
+    });
+  }
 })();

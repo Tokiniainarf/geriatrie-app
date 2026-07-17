@@ -621,3 +621,54 @@ const QuizMode = (() => {
 
   return { startQuiz, startCustomQuiz, revealAnswer, eval, reviewWrong, nextReview, destroy };
 })();
+
+/* Quiz Pop : confettis + compteur animé sur l'écran de résultats */
+(function () {
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function launchConfetti() {
+    var host = document.getElementById('quizContent');
+    if (!host || reduced) return;
+    var colors = ['#2563EB', '#0EA5E9', '#10B981', '#F59E0B', '#FF5D7A', '#EC4899'];
+    var box = document.createElement('div');
+    box.className = 'quiz-confetti';
+    for (var i = 0; i < 30; i++) {
+      var p = document.createElement('i');
+      p.style.left = (4 + Math.random() * 92) + '%';
+      p.style.background = colors[i % colors.length];
+      p.style.animationDelay = (Math.random() * 0.4) + 's';
+      p.style.animationDuration = (1.2 + Math.random() * 0.9) + 's';
+      if (i % 3 === 0) p.className = 'round';
+      box.appendChild(p);
+    }
+    host.appendChild(box);
+    setTimeout(function () { box.remove(); }, 2800);
+  }
+
+  function animateScore(el) {
+    var m = el.textContent.match(/(\d+)\s*\/\s*(\d+)\s*\((\d+)%\)/);
+    if (!m || reduced) return;
+    var s = +m[1], t = +m[2], p = +m[3], start = null;
+    function step(ts) {
+      if (!start) start = ts;
+      var k = Math.min(1, (ts - start) / 950);
+      var e = 1 - Math.pow(1 - k, 3);
+      el.textContent = Math.round(s * e) + ' / ' + t + ' (' + Math.round(p * e) + '%)';
+      if (k < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  var host = document.getElementById('quizContent');
+  if (host) {
+    new MutationObserver(function () {
+      var res = host.querySelector('.quiz-results:not(.quiz-pop-done)');
+      if (res) {
+        res.classList.add('quiz-pop-done');
+        launchConfetti();
+        var score = res.querySelector('.quiz-results-score');
+        if (score) animateScore(score);
+      }
+    }).observe(host, { childList: true, subtree: true });
+  }
+})();

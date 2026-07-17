@@ -1,5 +1,5 @@
 /* Gériatrie 2026 — Manuel Interactif v3 */
-const CH_COLORS={ch1:'#7C3AED',ch2:'#10B981',ch3:'#F59E0B',ch4:'#F43F5E',ch5:'#0EA5E9',ch6:'#EC4899',ch7:'#8B5CF6',ch8:'#EF4444',ch9:'#14B8A6',ch10:'#F97316',ch11:'#6366F1',ch12:'#D946EF',ch13:'#0284C7',ch14:'#22C55E',ch15:'#E11D48',ch16:'#A855F7',ch17:'#F59E0B',ch18:'#059669',ch19:'#EC4899',ch20:'#3B82F6'};
+const CH_COLORS={ch1:'#2563EB',ch2:'#10B981',ch3:'#F59E0B',ch4:'#F43F5E',ch5:'#0EA5E9',ch6:'#EC4899',ch7:'#3B82F6',ch8:'#EF4444',ch9:'#14B8A6',ch10:'#F97316',ch11:'#2563EB',ch12:'#FF5D7A',ch13:'#0284C7',ch14:'#22C55E',ch15:'#E11D48',ch16:'#0EA5E9',ch17:'#F59E0B',ch18:'#059669',ch19:'#EC4899',ch20:'#3B82F6'};
 const BM_SVG={on:'<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.77 5.82 22 7 14.14l-5-4.87 6.91-1.01z"/></svg>',off:'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.77 5.82 22 7 14.14l-5-4.87 6.91-1.01z"/></svg>'};
 
 function safeJSON(k,f){try{return JSON.parse(localStorage.getItem(k))||f}catch{return f}}
@@ -219,7 +219,7 @@ function bootApp(){
     document.body.classList.remove('ap-mini-visible', 'ap-full-open', 'ap-is-playing');
   } catch (_) {}
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js?v=241').then((reg) => {
+    navigator.serviceWorker.register('sw.js?v=252').then((reg) => {
       try { reg.update(); } catch (_) {}
       if (reg.waiting) {
         try { reg.waiting.postMessage({ type: 'SKIP_WAITING' }); } catch (_) {}
@@ -820,7 +820,7 @@ function showCh(id){
   S.ch=id;
   if(!S.read.includes(id)){ S.read.push(id); localStorage.setItem('grd',JSON.stringify(S.read)); updStats(); }
   const heroEl=document.getElementById('chHero');
-  if(heroEl) heroEl.style.background=`linear-gradient(145deg,${CH_COLORS[id]||'#7C3AED'},#4C1D95)`;
+  if(heroEl) heroEl.style.background=`linear-gradient(145deg,${CH_COLORS[id]||'#2563EB'},#1E3A8A)`;
   const chNum=document.getElementById('chNum'); if(chNum) chNum.textContent=id.replace('ch','');
   const chT=document.getElementById('chT'); if(chT) chT.textContent=ch.t;
   // Chapter hero image (AI-generated or fallback to PDF illustration)
@@ -1343,6 +1343,7 @@ function createEduVisualWrapper(src, captionText) {
     mediaEl.muted = true;
     mediaEl.loop = true;
     mediaEl.playsInline = true;
+    mediaEl.preload = 'metadata';
     mediaEl.setAttribute('aria-label', captionText);
     mediaEl.onerror = function() { this.closest('.edu-visual-wrapper')?.classList.add('media-error'); };
   } else {
@@ -1350,7 +1351,10 @@ function createEduVisualWrapper(src, captionText) {
     mediaEl.src = src;
     mediaEl.className = 'edu-chapter-visual';
     mediaEl.alt = captionText || 'Illustration';
-    mediaEl.loading = 'lazy';
+    // Eager: lazy images below the fold often never decoded → empty figure
+    // shells that look like “média indisponible”.
+    mediaEl.loading = 'eager';
+    mediaEl.decoding = 'async';
     mediaEl.onerror = function() { this.closest('.edu-visual-wrapper')?.classList.add('media-error'); };
   }
   const cap = document.createElement('figcaption');
@@ -3677,7 +3681,7 @@ function renderSynthThemeSections(card){
 }
 function renderSynthChapterCard(card,idx){
   const chId=synthChIdFromExpanded(card,idx);
-  const color=CH_COLORS[chId]||'#7C3AED';
+  const color=CH_COLORS[chId]||'#2563EB';
   const num=chId.replace('ch','');
   const nSec=(card.sections||[]).length;
   const mastered=isSynthMastered(chId);
@@ -4944,10 +4948,10 @@ function renderUrgence() {
   if (typeof DOSES_URGENCE !== 'undefined') {
     DOSES_URGENCE.forEach(item => {
       html += `
-        <div class="calc-card urg-card" style="border-left: 4px solid #6366f1;">
+        <div class="calc-card urg-card" style="border-left: 4px solid #2563EB;">
           <div class="calc-card-hdr">
             <span class="calc-card-nom">⚡ ${esc(item.nom || item.title || 'Calcul de dose')}</span>
-            <span class="calc-badge" style="background:#6366f1; color:white;">DOSE URGENT</span>
+            <span class="calc-badge" style="background:#2563EB; color:white;">DOSE URGENT</span>
           </div>
           <div class="med-details" style="display:flex; flex-direction:column; gap:8px; margin-top:8px;">
             ${item.classe ? `<div><strong>Classe :</strong> <span class="fs-sm">${esc(item.classe)}</span></div>` : ''}

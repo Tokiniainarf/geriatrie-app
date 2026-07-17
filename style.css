@@ -1,26 +1,26 @@
 /* ================================================================
    Gériatrie — Manuel numérique · Édition Pop 2025
-   Fond clair coloré · violet #7C3AED · ludique & moderne
+   Fond clair coloré · bleu #2563EB · ludique & moderne
    ================================================================ */
 
 :root {
-  --bg-deep: #F6F4FE;
+  --bg-deep: #F3F7FE;
   --bg-base: #FFFFFF;
   --bg-elevated: rgba(255, 255, 255, 0.92);
   --bg-card: rgba(255, 255, 255, 0.8);
   --bg-card-hover: rgba(255, 255, 255, 0.98);
   --glass: rgba(255, 255, 255, 0.7);
-  --glass-border: #E9E4FA;
-  --glass-border-strong: #D6CDF7;
+  --glass-border: #E2EAF9;
+  --glass-border-strong: #C9D8F5;
   --nav-glass: rgba(255, 255, 255, 0.85);
-  --text: #251D4E;
-  --text2: #4B4574;
-  --text3: #7C78A3;
-  --accent: #7C3AED;
-  --accent-2: #D946EF;
+  --text: #16264A;
+  --text2: #3C4A6E;
+  --text3: #71809E;
+  --accent: #2563EB;
+  --accent-2: #FF5D7A;
   --accent-cta: #FF5D7A;
-  --accent-glow: rgba(124, 58, 237, 0.22);
-  --accent-soft: rgba(124, 58, 237, 0.09);
+  --accent-glow: rgba(37, 99, 235, 0.22);
+  --accent-soft: rgba(37, 99, 235, 0.09);
   --green: #10B981;
   --red: #F43F5E;
   --blue: #0EA5E9;
@@ -30,8 +30,8 @@
   --sky: #0EA5E9;
   --coral: #FF5D7A;
   --amber: #F59E0B;
-  --grad-brand: linear-gradient(135deg, #7C3AED 0%, #D946EF 55%, #FF5D7A 100%);
-  --grad-fun: linear-gradient(90deg, #7C3AED, #D946EF, #FF5D7A, #F59E0B, #10B981, #0EA5E9);
+  --grad-brand: linear-gradient(135deg, #2563EB 0%, #0EA5E9 50%, #FF5D7A 100%);
+  --grad-fun: linear-gradient(90deg, #2563EB, #0EA5E9, #10B981, #F59E0B, #FF5D7A, #EC4899);
   --radius: 22px;
   --radius-sm: 14px;
   --bottom: 72px;
@@ -39,33 +39,33 @@
   --sans: 'Figtree', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
   --display: 'Fredoka', 'Figtree', -apple-system, system-ui, sans-serif;
   --reader: 'Literata', 'Georgia', serif;
-  --shadow-soft: 0 12px 40px rgba(124, 58, 237, 0.14);
-  --shadow-card: 0 4px 20px rgba(76, 58, 140, 0.09);
-  --shadow-pop: 0 8px 24px rgba(124, 58, 237, 0.18), 0 2px 6px rgba(124, 58, 237, 0.08);
+  --shadow-soft: 0 12px 40px rgba(37, 99, 235, 0.14);
+  --shadow-card: 0 4px 20px rgba(37, 62, 130, 0.09);
+  --shadow-pop: 0 8px 24px rgba(37, 99, 235, 0.18), 0 2px 6px rgba(37, 99, 235, 0.08);
 }
 
 [data-theme="dark"] {
-  --bg-deep: #131022;
-  --bg-base: #1A1730;
-  --bg-elevated: rgba(30, 26, 52, 0.94);
+  --bg-deep: #0E1626;
+  --bg-base: #152038;
+  --bg-elevated: rgba(21, 32, 56, 0.94);
   --bg-card: rgba(255, 255, 255, 0.05);
   --bg-card-hover: rgba(255, 255, 255, 0.09);
   --glass: rgba(255, 255, 255, 0.07);
   --glass-border: rgba(255, 255, 255, 0.12);
   --glass-border-strong: rgba(255, 255, 255, 0.2);
-  --nav-glass: rgba(19, 16, 34, 0.85);
-  --text: #F1EFFF;
-  --text2: #A9A4CC;
-  --text3: #6F6A94;
-  --accent: #A78BFA;
-  --accent-2: #E879F9;
+  --nav-glass: rgba(14, 22, 38, 0.85);
+  --text: #EFF4FF;
+  --text2: #9AA8CC;
+  --text3: #6B7894;
+  --accent: #60A5FA;
+  --accent-2: #FB7185;
   --accent-cta: #FB7185;
-  --accent-glow: rgba(167, 139, 250, 0.3);
-  --accent-soft: rgba(167, 139, 250, 0.14);
-  --grad-brand: linear-gradient(135deg, #8B5CF6 0%, #D946EF 55%, #FB7185 100%);
+  --accent-glow: rgba(96, 165, 250, 0.3);
+  --accent-soft: rgba(96, 165, 250, 0.14);
+  --grad-brand: linear-gradient(135deg, #3B82F6 0%, #38BDF8 50%, #FB7185 100%);
   --shadow-soft: 0 10px 36px rgba(0, 0, 0, 0.45);
   --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.3);
-  --shadow-pop: 0 8px 28px rgba(139, 92, 246, 0.35), 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-pop: 0 8px 28px rgba(59, 130, 246, 0.35), 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -75,8 +75,8 @@ body {
   color: var(--text);
   background-color: var(--bg-deep);
   background-image:
-    radial-gradient(ellipse 80% 50% at 12% -8%, rgba(124, 58, 237, 0.12), transparent 55%),
-    radial-gradient(ellipse 60% 45% at 92% 2%, rgba(217, 70, 239, 0.12), transparent 50%),
+    radial-gradient(ellipse 80% 50% at 12% -8%, rgba(37, 99, 235, 0.12), transparent 55%),
+    radial-gradient(ellipse 60% 45% at 92% 2%, rgba(255, 93, 122, 0.12), transparent 50%),
     radial-gradient(ellipse 55% 42% at 88% 92%, rgba(16, 185, 129, 0.12), transparent 55%),
     radial-gradient(ellipse 55% 40% at 4% 96%, rgba(14, 165, 233, 0.12), transparent 52%);
   background-attachment: fixed;
@@ -84,8 +84,8 @@ body {
 }
 [data-theme="dark"] body {
   background-image:
-    radial-gradient(ellipse 70% 45% at 18% -5%, rgba(139, 92, 246, 0.18), transparent 55%),
-    radial-gradient(ellipse 55% 40% at 92% 8%, rgba(217, 70, 239, 0.12), transparent 50%),
+    radial-gradient(ellipse 70% 45% at 18% -5%, rgba(59, 130, 246, 0.18), transparent 55%),
+    radial-gradient(ellipse 55% 40% at 92% 8%, rgba(255, 93, 122, 0.12), transparent 50%),
     radial-gradient(ellipse 60% 45% at 50% 105%, rgba(14, 165, 233, 0.12), transparent 55%);
   background-color: var(--bg-deep);
 }
@@ -182,7 +182,8 @@ input { font-family: inherit; font-size: inherit; }
 
 /* ── BOTTOM NAV (glassmorphism) ── */
 .bottom-nav {
-  position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+  /* Above immersive #vFeed (z-index 1000) so tabs stay tappable */
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 1100;
   background: var(--nav-glass);
   backdrop-filter: blur(20px) saturate(1.35);
   -webkit-backdrop-filter: blur(20px) saturate(1.35);
@@ -1664,8 +1665,11 @@ input[type="range"] { width: 100px; accent-color: var(--accent); }
    BrainFeed 2.0 — Reels-style feed, 6 formats uniques
    ═══════════════════════════════════════════════════ */
 #vFeed {
-  position: fixed; inset: 0; z-index: 1000; height: 100dvh; width: 100vw;
+  /* Leave room for bottom-nav so feed cards don't swallow tab clicks */
+  position: fixed; top: 0; left: 0; right: 0; bottom: var(--bottom);
+  z-index: 1000; height: auto; width: 100vw; max-width: 100%;
   padding: 0; display: none; flex-direction: column; overflow: hidden; background: #050508;
+  padding-bottom: env(safe-area-inset-bottom, 0);
 }
 #vFeed.active { display: flex; }
 
@@ -2141,7 +2145,7 @@ input[type="range"] { width: 100px; accent-color: var(--accent); }
   color: #e9d5ff; margin-bottom: 16px;
 }
 .bf-memo-daily {
-  color: #f0abfc;
+  color: #FDA4AF;
   text-shadow: 0 0 20px rgba(236,72,153,.8), 0 0 40px rgba(168,85,247,.6);
   animation: bf-neon-pulse 2.5s ease-in-out infinite;
 }
@@ -2152,7 +2156,7 @@ input[type="range"] { width: 100px; accent-color: var(--accent); }
 .bf-memo-prompt { font-size: .95rem; color: rgba(255,255,255,.65); line-height: 1.5; margin-bottom: 20px; }
 .bf-memo-reveal-btn {
   padding: 12px 24px; border-radius: 99px; font-weight: 700; font-size: .82rem;
-  background: linear-gradient(135deg, #a855f7, #ec4899); color: #fff;
+  background: linear-gradient(135deg, #0EA5E9, #ec4899); color: #fff;
   box-shadow: 0 8px 28px rgba(168,85,247,.45);
 }
 .bf-memo-glow-wrap { max-height: 0; overflow: hidden; opacity: 0; transition: all .6s cubic-bezier(.16,1,.3,1); }
@@ -2161,7 +2165,7 @@ input[type="range"] { width: 100px; accent-color: var(--accent); }
   font-size: clamp(1.5rem, 6vw, 2.2rem); font-weight: 900; line-height: 1.2;
   color: #fff;
   text-shadow:
-    0 0 10px #c084fc, 0 0 25px #a855f7, 0 0 50px rgba(236,72,153,.6);
+    0 0 10px #c084fc, 0 0 25px #0EA5E9, 0 0 50px rgba(236,72,153,.6);
   animation: bf-memo-reveal .8s ease-out;
 }
 @keyframes bf-memo-reveal {
@@ -2289,7 +2293,7 @@ input[type="range"] { width: 100px; accent-color: var(--accent); }
   border-radius: 32px;
 }
 .bf-quote-mark { font-size: 4rem; line-height: .5; color: rgba(216,180,254,.35); font-family: Georgia, serif; }
-.bf-quote-text { font-size: 1.2rem; font-style: italic; line-height: 1.65; color: #f5f3ff; margin: 16px 0 20px; text-align: center; }
+.bf-quote-text { font-size: 1.2rem; font-style: italic; line-height: 1.65; color: #EFF6FF; margin: 16px 0 20px; text-align: center; }
 /* Ensure text in feed cards without visual media is centered */
 #vFeed .bf-card-content:not(:has(img)):not(:has(video)) p,
 #vFeed .bf-card-content:not(:has(img)):not(:has(video)) .bf-quote-text,
@@ -2302,7 +2306,7 @@ input[type="range"] { width: 100px; accent-color: var(--accent); }
 #vFeed .bf-card-content:not(:has(img)):not(:has(video)) .bf-quiz-options {
   align-items: center;
 }
-.bf-quote-author { font-size: .88rem; color: #c4b5fd; font-style: normal; font-weight: 600; }
+.bf-quote-author { font-size: .88rem; color: #93C5FD; font-style: normal; font-weight: 600; }
 .bf-quote-badge {
   display: inline-block; margin-top: 20px; font-size: .65rem; font-weight: 800;
   letter-spacing: .2em; color: rgba(196,181,253,.5);
@@ -2348,11 +2352,12 @@ input[type="range"] { width: 100px; accent-color: var(--accent); }
   border: 1px solid rgba(255,255,255,.06);
 }
 
-/* Bottom actions bar */
+/* Bottom actions bar (sits above the app bottom-nav, not over it) */
 .bf-actions {
   position: absolute; bottom: 0; left: 0; right: 0; z-index: 20;
   display: flex; gap: 10px; padding: 12px 20px 16px;
   background: linear-gradient(0deg, rgba(0,0,0,.7) 0%, transparent 100%);
+  pointer-events: auto;
 }
 .bf-action-btn {
   flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px;
@@ -6110,10 +6115,14 @@ body.nb-presenting .scroll-top-btn { display: none !important; visibility: hidde
   object-fit: contain !important;
 }
 .bf-media-fallback {
-  display: none; color: rgba(255,255,255,.5); font-size: .85rem;
+  display: none !important; color: rgba(255,255,255,.5); font-size: .85rem;
 }
 .bf-media-container.bf-media-missing .bf-visual-media { display: none; }
-.bf-media-container.bf-media-missing .bf-media-fallback { display: block; padding: 24px; }
+.bf-media-container.bf-media-missing .bf-media-fallback,
+.bf-media-container.bf-media-missing .bf-media-fallback[hidden] {
+  display: flex !important; align-items: center; justify-content: center;
+  padding: 24px; min-height: 160px; text-align: center;
+}
 .bf-visual-caption {
   flex-shrink: 0;
   padding: 10px 14px 16px;
@@ -7962,4 +7971,69 @@ body {
   .official-correction { margin-left: 0; }
   .annal-question-card .annal-question { padding-top: 13px; }
   .official-correction { padding: 14px; }
+}
+
+/* ═══ FIX v251/v252: feed nav + media visibility ═══ */
+.bottom-nav { z-index: 1100 !important; }
+#vFeed {
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: var(--bottom) !important;
+  inset: 0 0 var(--bottom) 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: calc(100svh - var(--bottom)) !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  z-index: 1000 !important;
+}
+#vFeed .bf-feed {
+  flex: 1 1 auto !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: 100% !important;
+}
+#vFeed .bf-slide,
+#vFeed .bf-slide.bf-slide-active {
+  height: 100% !important;
+  min-height: 100% !important;
+  max-height: 100% !important;
+}
+#vFeed .bf-horiz-page {
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: 100% !important;
+}
+/* Kill leftover 100svh shells that overflow/clip media after nav-safe feed height */
+#vFeed .bf-card-content,
+#vFeed .bf-card-shell {
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+}
+#vFeed .bf-reel-media,
+#vFeed .bf-media-container {
+  min-height: min(52vh, 420px) !important;
+  background: #02070b !important;
+}
+#vFeed .bf-reel-media > img,
+#vFeed .bf-reel-media > video,
+#vFeed .bf-visual-media {
+  width: 100% !important;
+  height: auto !important;
+  max-height: min(62vh, 560px) !important;
+  min-height: 180px !important;
+  object-fit: contain !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.edu-visual-wrapper img,
+.edu-visual-wrapper video,
+.edu-chapter-visual {
+  min-height: 120px;
+  max-width: 100%;
+  height: auto !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }

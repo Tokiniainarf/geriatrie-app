@@ -188,7 +188,7 @@ const SYNTHESIS = [
     id: 'cascade',
     title: 'Cascade gériatrique',
     icon: '⛓️',
-    color: '#6D28D9',
+    color: '#1D4ED8',
     sections: [
       {
         title: 'Définition (Rang A)',
@@ -270,7 +270,7 @@ const SYNTHESIS = [
     id: 'fragilite',
     title: 'Concept de fragilité',
     icon: '🫗',
-    color: '#4C1D95',
+    color: '#1E3A8A',
     sections: [
       {
         title: 'Vulnérabilité vs Fragilité',
@@ -448,7 +448,7 @@ const SYNTHESIS = [
     id: 'autonomie',
     title: 'Évaluation de l\'autonomie',
     icon: '🏠',
-    color: '#4C1D95',
+    color: '#1E3A8A',
     sections: [
       {
         title: 'AVD vs AVD instrumentales',
