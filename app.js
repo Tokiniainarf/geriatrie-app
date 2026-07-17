@@ -1,5 +1,5 @@
 /* Gériatrie 2026 — Manuel Interactif v3 */
-const CH_COLORS={ch1:'#0891B2',ch2:'#059669',ch3:'#0D9488',ch4:'#DC2626',ch5:'#0284C7',ch6:'#047857',ch7:'#0369A1',ch8:'#BE123C',ch9:'#0E7490',ch10:'#64748B',ch11:'#B45309',ch12:'#EA580C',ch13:'#0369A1',ch14:'#15803D',ch15:'#0F766E',ch16:'#164E63',ch17:'#475569',ch18:'#059669',ch19:'#0891B2',ch20:'#2563EB'};
+const CH_COLORS={ch1:'#7C3AED',ch2:'#10B981',ch3:'#F59E0B',ch4:'#F43F5E',ch5:'#0EA5E9',ch6:'#EC4899',ch7:'#8B5CF6',ch8:'#EF4444',ch9:'#14B8A6',ch10:'#F97316',ch11:'#6366F1',ch12:'#D946EF',ch13:'#0284C7',ch14:'#22C55E',ch15:'#E11D48',ch16:'#A855F7',ch17:'#F59E0B',ch18:'#059669',ch19:'#EC4899',ch20:'#3B82F6'};
 const BM_SVG={on:'<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.77 5.82 22 7 14.14l-5-4.87 6.91-1.01z"/></svg>',off:'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.77 5.82 22 7 14.14l-5-4.87 6.91-1.01z"/></svg>'};
 
 function safeJSON(k,f){try{return JSON.parse(localStorage.getItem(k))||f}catch{return f}}
@@ -181,7 +181,7 @@ function isPdfCapturePath(src){
   if(/chapters\/educational\//i.test(s) || /chapters\/ai-heroes\//i.test(s)) return false;
   return /figures\/page_/i.test(s) || /\/crops\//i.test(s) || /\/p\d{3}_\d+\.(jpe?g|png)$/i.test(s);
 }
-const S={view:'home',ch:null,bm:safeJSON('gbm',[]),read:safeJSON('grd',[]),fs:parseInt(localStorage.getItem('gfs')||'18'),lh:parseFloat(localStorage.getItem('glh')||'1.7'),th:localStorage.getItem('gth')||'dark'};
+const S={view:'home',ch:null,bm:safeJSON('gbm',[]),read:safeJSON('grd',[]),fs:parseInt(localStorage.getItem('gfs')||'18'),lh:parseFloat(localStorage.getItem('glh')||'1.7'),th:localStorage.getItem('gth')||'light'};
 let flashIdx=0,flashDeck=[],flashFilter='all',flashChapFilter='all';
 
 function bootApp(){
@@ -820,7 +820,7 @@ function showCh(id){
   S.ch=id;
   if(!S.read.includes(id)){ S.read.push(id); localStorage.setItem('grd',JSON.stringify(S.read)); updStats(); }
   const heroEl=document.getElementById('chHero');
-  if(heroEl) heroEl.style.background=`linear-gradient(145deg,${CH_COLORS[id]||'#164E63'},#164E63)`;
+  if(heroEl) heroEl.style.background=`linear-gradient(145deg,${CH_COLORS[id]||'#7C3AED'},#4C1D95)`;
   const chNum=document.getElementById('chNum'); if(chNum) chNum.textContent=id.replace('ch','');
   const chT=document.getElementById('chT'); if(chT) chT.textContent=ch.t;
   // Chapter hero image (AI-generated or fallback to PDF illustration)
@@ -3677,7 +3677,7 @@ function renderSynthThemeSections(card){
 }
 function renderSynthChapterCard(card,idx){
   const chId=synthChIdFromExpanded(card,idx);
-  const color=CH_COLORS[chId]||'#0891B2';
+  const color=CH_COLORS[chId]||'#7C3AED';
   const num=chId.replace('ch','');
   const nSec=(card.sections||[]).length;
   const mastered=isSynthMastered(chId);
@@ -5055,3 +5055,18 @@ function toast(msg){const t=document.getElementById('toast');if(!t)return;t.text
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', go);
   else go();
 })();
+
+/* Deep-link : ?onglet=scores ouvre directement une vue (partage, raccourcis, tests) */
+try {
+  var _ongletParam = new URLSearchParams(location.search).get('onglet');
+  if (_ongletParam) {
+    var _ongletTimer = setInterval(function () {
+      var pl = document.getElementById('appPreloader');
+      if (typeof sw === 'function' && pl && pl.classList.contains('hide')) {
+        clearInterval(_ongletTimer);
+        try { sw(_ongletParam); } catch (e) {}
+      }
+    }, 250);
+    setTimeout(function () { clearInterval(_ongletTimer); }, 20000);
+  }
+} catch (e) {}

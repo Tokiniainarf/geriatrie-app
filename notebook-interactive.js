@@ -260,7 +260,7 @@
 
       fs.innerHTML =
         '<div class="nb-fs-root" style="--nb-color:' +
-        escNb(nb.color || '#0891B2') +
+        escNb(nb.color || '#7C3AED') +
         '">' +
         '<div class="nb-fs-bar">' +
         '<button type="button" class="nb-fs-btn" onclick="NotebookUI.close()" aria-label="Fermer">✕</button>' +

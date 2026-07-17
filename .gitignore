@@ -1,7 +1,4 @@
-data.js.bak
-data.js.bak2
-data.js.tmp
-__pycache__/
-*.pyc
-# Gros médias NotebookLM (junction locale / hors git)
-media/
+node_modules/
+dist/
+vite-dev.log
+*.log

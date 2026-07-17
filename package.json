@@ -1,0 +1,15 @@
+{
+  "name": "geriatrie-app",
+  "private": true,
+  "version": "5.0.0",
+  "description": "Gériatrie — Manuel Interactif (CNEG 5e éd.) · Édition Pop 2025",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.4.11"
+  }
+}

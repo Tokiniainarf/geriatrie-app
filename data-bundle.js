@@ -309,7 +309,7 @@ if (typeof window !== 'undefined') window.FIGURE_META = FIGURE_META;
 
 /* --- interactive-figures.js --- */
 // interactive-figures.js — Animated interactive SVG figures for GeriatrieApp
-// Color scheme: #0891B2 (cyan), #059669 (teal), #164E63 (dark)
+// Color scheme: #7C3AED (cyan), #059669 (teal), #4C1D95 (dark)
 // All SVGs are viewBox-based, responsive, theme-aware (currentColor for text, explicit colors for fills)
 
 var INTERACTIVE_FIGURES = {
@@ -320,16 +320,16 @@ var INTERACTIVE_FIGURES = {
     svg: `<style>
   .bouchon-svg { font-family: 'Figtree', 'Noto Sans', sans-serif; }
   .bouchon-svg .curve-main {
-    fill: none; stroke: #0891B2; stroke-width: 4; stroke-linecap: round;
+    fill: none; stroke: #7C3AED; stroke-width: 4; stroke-linecap: round;
     stroke-dasharray: none !important; stroke-dashoffset: 0 !important; opacity: 1 !important;
   }
   .bouchon-svg .curve-shadow {
-    fill: none; stroke: #22D3EE; stroke-width: 10; stroke-linecap: round; opacity: 0.35;
+    fill: none; stroke: #A78BFA; stroke-width: 10; stroke-linecap: round; opacity: 0.35;
   }
   .bouchon-svg .threshold-line {
     stroke: #DC2626; stroke-width: 2.5; stroke-dasharray: 8 4; opacity: 1 !important;
   }
-  .bouchon-svg .zone1-area { fill: rgba(8,145,178,0.18); opacity: 1 !important; }
+  .bouchon-svg .zone1-area { fill: rgba(124,58,237,0.18); opacity: 1 !important; }
   .bouchon-svg .zone2-area { fill: rgba(5,150,105,0.16); opacity: 1 !important; }
   .bouchon-svg .zone3-area { fill: rgba(220,38,38,0.14); opacity: 1 !important; }
   .bouchon-svg .label { fill: currentColor; font-size: 11px; opacity: 1 !important; }
@@ -370,9 +370,9 @@ var INTERACTIVE_FIGURES = {
   <line x1="350" y1="30" x2="350" y2="280" stroke="currentColor" stroke-dasharray="4 3" stroke-width="1" opacity="0.2"/>
 
   <!-- Labels zones -->
-  <text class="label" x="135" y="52" text-anchor="middle" font-weight="800" fill="#22D3EE" font-size="14">(1)</text>
-  <text class="label" x="135" y="68" text-anchor="middle" font-size="10" fill="#22D3EE">Vieillissement</text>
-  <text class="label" x="135" y="82" text-anchor="middle" font-size="10" fill="#22D3EE">physiologique</text>
+  <text class="label" x="135" y="52" text-anchor="middle" font-weight="800" fill="#A78BFA" font-size="14">(1)</text>
+  <text class="label" x="135" y="68" text-anchor="middle" font-size="10" fill="#A78BFA">Vieillissement</text>
+  <text class="label" x="135" y="82" text-anchor="middle" font-size="10" fill="#A78BFA">physiologique</text>
 
   <text class="label" x="280" y="52" text-anchor="middle" font-weight="800" fill="#34D399" font-size="14">(2)</text>
   <text class="label" x="280" y="68" text-anchor="middle" font-size="10" fill="#34D399">Maladie(s)</text>
@@ -398,19 +398,19 @@ var INTERACTIVE_FIGURES = {
     title: "Critères de fragilité de Fried",
     svg: `<style>
   .fried-svg { font-family: 'Figtree', 'Noto Sans', sans-serif; }
-  .fried-svg .axis-line { stroke: #0891B2; stroke-width: 1; opacity: 0.35; }
+  .fried-svg .axis-line { stroke: #7C3AED; stroke-width: 1; opacity: 0.35; }
   .fried-svg .radar-grid { fill: none; stroke: currentColor; stroke-width: 0.5; opacity: 0.12; }
   .fried-svg .radar-fill {
-    fill: rgba(8,145,178,0.18); stroke: #0891B2; stroke-width: 2;
+    fill: rgba(124,58,237,0.18); stroke: #7C3AED; stroke-width: 2;
     stroke-dasharray: 800; stroke-dashoffset: 800;
     animation: fried-draw 1.5s 0.5s ease-out forwards;
   }
   .fried-svg .radar-fill-bg {
-    fill: rgba(8,145,178,0.06); stroke: none;
+    fill: rgba(124,58,237,0.06); stroke: none;
     opacity: 0; animation: fried-fade 0.8s 1.8s forwards;
   }
   .fried-svg .point-dot {
-    fill: #0891B2; stroke: #fff; stroke-width: 2; r: 5;
+    fill: #7C3AED; stroke: #fff; stroke-width: 2; r: 5;
     opacity: 0; animation: fried-fade 0.4s forwards;
   }
   .fried-svg .point-dot:nth-child(1) { animation-delay: 1.6s; }
@@ -418,11 +418,11 @@ var INTERACTIVE_FIGURES = {
     fill: currentColor; font-size: 10.5px; font-weight: 600; cursor: pointer;
     transition: fill 0.2s;
   }
-  .fried-svg .axis-label-text:hover { fill: #0891B2; }
+  .fried-svg .axis-label-text:hover { fill: #7C3AED; }
   .fried-svg .crit-detail { opacity: 0; pointer-events: none; transition: opacity 0.3s; }
   .fried-svg .crit-btn { cursor: pointer; }
   .fried-svg .crit-btn:hover .crit-detail { opacity: 1; }
-  .fried-svg .center-label { fill: #164E63; font-size: 10px; font-weight: 700; }
+  .fried-svg .center-label { fill: #4C1D95; font-size: 10px; font-weight: 700; }
   @keyframes fried-draw { to { stroke-dashoffset: 0; } }
   @keyframes fried-fade { to { opacity: 1; } }
 </style>
@@ -456,36 +456,36 @@ var INTERACTIVE_FIGURES = {
   <!-- Axis labels (clickable) -->
   <g class="crit-btn">
     <text class="axis-label-text" x="240" y="38" text-anchor="middle">Perte de poids</text>
-    <rect x="175" y="22" width="130" height="52" rx="6" fill="rgba(22,78,99,0.92)" class="crit-detail"/>
+    <rect x="175" y="22" width="130" height="52" rx="6" fill="rgba(76,29,149,0.92)" class="crit-detail"/>
     <text x="240" y="42" text-anchor="middle" fill="#fff" font-size="9" class="crit-detail">≥ 4.5 kg en 1 an</text>
     <text x="240" y="55" text-anchor="middle" fill="#fff" font-size="9" class="crit-detail">ou ≥ 5% du poids</text>
-    <text x="240" y="68" text-anchor="middle" fill="#0891B2" font-size="8" class="crit-detail">↳ Clic pour fermer</text>
+    <text x="240" y="68" text-anchor="middle" fill="#7C3AED" font-size="8" class="crit-detail">↳ Clic pour fermer</text>
   </g>
 
   <g class="crit-btn">
     <text class="axis-label-text" x="410" y="150" text-anchor="start">Fatigue</text>
-    <rect x="395" y="125" width="80" height="44" rx="6" fill="rgba(22,78,99,0.92)" class="crit-detail"/>
+    <rect x="395" y="125" width="80" height="44" rx="6" fill="rgba(76,29,149,0.92)" class="crit-detail"/>
     <text x="435" y="144" text-anchor="middle" fill="#fff" font-size="9" class="crit-detail">Échelle CES-D</text>
     <text x="435" y="157" text-anchor="middle" fill="#fff" font-size="9" class="crit-detail">≥ 2 items</text>
   </g>
 
   <g class="crit-btn">
     <text class="axis-label-text" x="375" y="345" text-anchor="start">Activités physiques</text>
-    <rect x="360" y="340" width="115" height="44" rx="6" fill="rgba(22,78,99,0.92)" class="crit-detail"/>
+    <rect x="360" y="340" width="115" height="44" rx="6" fill="rgba(76,29,149,0.92)" class="crit-detail"/>
     <text x="417" y="359" text-anchor="middle" fill="#fff" font-size="9" class="crit-detail">IPAQ kcal/sem</text>
     <text x="417" y="372" text-anchor="middle" fill="#fff" font-size="9" class="crit-detail">dans le quintile bas</text>
   </g>
 
   <g class="crit-btn">
     <text class="axis-label-text" x="105" y="345" text-anchor="end">Vitesse de marche</text>
-    <rect x="10" y="340" width="110" height="44" rx="6" fill="rgba(22,78,99,0.92)" class="crit-detail"/>
+    <rect x="10" y="340" width="110" height="44" rx="6" fill="rgba(76,29,149,0.92)" class="crit-detail"/>
     <text x="65" y="359" text-anchor="middle" fill="#fff" font-size="9" class="crit-detail">≤ 0.8 m/s</text>
     <text x="65" y="372" text-anchor="middle" fill="#fff" font-size="9" class="crit-detail">sur 4m ou 15 pieds</text>
   </g>
 
   <g class="crit-btn">
     <text class="axis-label-text" x="75" y="150" text-anchor="end">Force musculaire</text>
-    <rect x="0" y="125" width="88" height="44" rx="6" fill="rgba(22,78,99,0.92)" class="crit-detail"/>
+    <rect x="0" y="125" width="88" height="44" rx="6" fill="rgba(76,29,149,0.92)" class="crit-detail"/>
     <text x="44" y="144" text-anchor="middle" fill="#fff" font-size="9" class="crit-detail">Grip strength</text>
     <text x="44" y="157" text-anchor="middle" fill="#fff" font-size="9" class="crit-detail">seuil bas</text>
   </g>
@@ -495,7 +495,7 @@ var INTERACTIVE_FIGURES = {
   <text class="center-label" x="240" y="214" text-anchor="middle" font-size="8">(≥ 3/5)</text>
 
   <!-- Legend -->
-  <rect x="170" y="390" width="12" height="8" rx="2" fill="rgba(8,145,178,0.18)" stroke="#0891B2" stroke-width="1"/>
+  <rect x="170" y="390" width="12" height="8" rx="2" fill="rgba(124,58,237,0.18)" stroke="#7C3AED" stroke-width="1"/>
   <text x="188" y="398" fill="currentColor" font-size="9">Profil fragile type (4/5 critères)</text>
 </svg>`
   },
@@ -505,12 +505,12 @@ var INTERACTIVE_FIGURES = {
     title: "Arthrose du genou — coupe anatomique simplifiée",
     svg: `<style>
   .knee-svg { font-family: 'Figtree', 'Noto Sans', sans-serif; }
-  .knee-svg .bone { fill: #e8ddd3; stroke: #164E63; stroke-width: 1.5; }
+  .knee-svg .bone { fill: #e8ddd3; stroke: #4C1D95; stroke-width: 1.5; }
   .knee-svg .cartilage-healthy { fill: #059669; opacity: 0.7; }
   .knee-svg .cartilage-degraded { fill: #f59e0b; opacity: 0.6; }
   .knee-svg .cartilage-lost { fill: #ef4444; opacity: 0.5; }
-  .knee-svg .synovial { fill: rgba(8,145,178,0.25); stroke: #0891B2; stroke-width: 0.8; stroke-dasharray: 3 2; }
-  .knee-svg .meniscus { fill: #0891B2; opacity: 0.5; }
+  .knee-svg .synovial { fill: rgba(124,58,237,0.25); stroke: #7C3AED; stroke-width: 0.8; stroke-dasharray: 3 2; }
+  .knee-svg .meniscus { fill: #7C3AED; opacity: 0.5; }
   .knee-svg .label-group text { fill: currentColor; font-size: 10px; opacity: 1; transition: opacity 0.3s; }
   .knee-svg .struct:hover + .label-group text,
   .knee-svg .struct:hover ~ .label-group text { opacity: 1; }
@@ -564,18 +564,18 @@ var INTERACTIVE_FIGURES = {
 
   <!-- Labels (appear on hover) -->
   <g class="knee-tooltip ktt-femur" style="opacity:0;transition:opacity 0.3s">
-    <rect x="10" y="40" width="105" height="55" rx="6" fill="rgba(22,78,99,0.92)" stroke="#0891B2" stroke-width="1"/>
+    <rect x="10" y="40" width="105" height="55" rx="6" fill="rgba(76,29,149,0.92)" stroke="#7C3AED" stroke-width="1"/>
     <text x="62" y="58" text-anchor="middle" fill="#fff" font-size="10" font-weight="600">Fémur</text>
     <text x="62" y="73" text-anchor="middle" fill="#fff" font-size="8.5">Os proximal</text>
     <text x="62" y="86" text-anchor="middle" fill="#fff" font-size="8.5">Cartilage dégradé</text>
   </g>
   <g class="knee-tooltip ktt-joint" style="opacity:0;transition:opacity 0.3s">
-    <rect x="295" y="155" width="135" height="45" rx="6" fill="rgba(22,78,99,0.92)" stroke="#0891B2" stroke-width="1"/>
+    <rect x="295" y="155" width="135" height="45" rx="6" fill="rgba(76,29,149,0.92)" stroke="#7C3AED" stroke-width="1"/>
     <text x="362" y="172" text-anchor="middle" fill="#fff" font-size="10" font-weight="600">Espace articulaire</text>
     <text x="362" y="188" text-anchor="middle" fill="#fff" font-size="8.5">Liquide synovial réduit</text>
   </g>
   <g class="knee-tooltip ktt-tibia" style="opacity:0;transition:opacity 0.3s">
-    <rect x="295" y="250" width="135" height="55" rx="6" fill="rgba(22,78,99,0.92)" stroke="#059669" stroke-width="1"/>
+    <rect x="295" y="250" width="135" height="55" rx="6" fill="rgba(76,29,149,0.92)" stroke="#059669" stroke-width="1"/>
     <text x="362" y="268" text-anchor="middle" fill="#fff" font-size="10" font-weight="600">Tibia</text>
     <text x="362" y="283" text-anchor="middle" fill="#fff" font-size="8.5">Os distal</text>
     <text x="362" y="296" text-anchor="middle" fill="#fff" font-size="8.5">Cartilage préservé (stade précoce)</text>
@@ -592,10 +592,10 @@ var INTERACTIVE_FIGURES = {
   <text class="knee-label" x="220" y="12" text-anchor="middle" fill="currentColor" font-size="11" font-weight="700" style="animation-delay:0.3s">Arthrose du genou</text>
 
   <!-- PCL / ACL simplified lines -->
-  <line x1="200" y1="158" x2="210" y2="190" stroke="#0891B2" stroke-width="1.5" opacity="0.4" stroke-dasharray="4 2"/>
-  <line x1="240" y1="158" x2="230" y2="190" stroke="#0891B2" stroke-width="1.5" opacity="0.4" stroke-dasharray="4 2"/>
-  <text x="195" y="178" fill="#0891B2" font-size="7" text-anchor="end" class="knee-label" style="animation-delay:0.8s">LCA</text>
-  <text x="245" y="178" fill="#0891B2" font-size="7" text-anchor="start" class="knee-label" style="animation-delay:0.8s">LCP</text>
+  <line x1="200" y1="158" x2="210" y2="190" stroke="#7C3AED" stroke-width="1.5" opacity="0.4" stroke-dasharray="4 2"/>
+  <line x1="240" y1="158" x2="230" y2="190" stroke="#7C3AED" stroke-width="1.5" opacity="0.4" stroke-dasharray="4 2"/>
+  <text x="195" y="178" fill="#7C3AED" font-size="7" text-anchor="end" class="knee-label" style="animation-delay:0.8s">LCA</text>
+  <text x="245" y="178" fill="#7C3AED" font-size="7" text-anchor="start" class="knee-label" style="animation-delay:0.8s">LCP</text>
 </svg>`
   },
 
@@ -606,13 +606,13 @@ var INTERACTIVE_FIGURES = {
   .cog-svg { font-family: 'Figtree', 'Noto Sans', sans-serif; }
   .cog-svg .box { rx: 10; ry: 10; stroke-width: 2; }
   .cog-svg .box-normal { fill: rgba(5,150,105,0.12); stroke: #059669; }
-  .cog-svg .box-mci { fill: rgba(8,145,178,0.12); stroke: #0891B2; }
+  .cog-svg .box-mci { fill: rgba(124,58,237,0.12); stroke: #7C3AED; }
   .cog-svg .box-dementia { fill: rgba(239,68,68,0.10); stroke: #ef4444; }
-  .cog-svg .box-risk { fill: rgba(22,78,99,0.08); stroke: #164E63; stroke-width: 1.5; rx: 8; ry: 8; }
+  .cog-svg .box-risk { fill: rgba(76,29,149,0.08); stroke: #4C1D95; stroke-width: 1.5; rx: 8; ry: 8; }
   .cog-svg .box-label { fill: currentColor; font-size: 11px; font-weight: 600; }
   .cog-svg .box-sub { fill: currentColor; font-size: 8.5px; opacity: 0.7; }
   .cog-svg .arrow-path {
-    fill: none; stroke: #0891B2; stroke-width: 2.5; stroke-linecap: round;
+    fill: none; stroke: #7C3AED; stroke-width: 2.5; stroke-linecap: round;
     marker-end: url(#cog-arrow);
     stroke-dasharray: 200; stroke-dashoffset: 200;
   }
@@ -621,8 +621,8 @@ var INTERACTIVE_FIGURES = {
   .cog-svg .arrow3 { animation: cog-draw 0.6s 2.3s ease-out forwards; }
   .cog-svg .arrow4 { animation: cog-draw 0.6s 2.7s ease-out forwards; }
   .cog-svg .arrow5 { animation: cog-draw 0.6s 3.0s ease-out forwards; }
-  .cog-svg .arrow-risk { stroke: #164E63; stroke-width: 1.5; stroke-dasharray: 5 3; opacity: 0.5; marker-end: none; }
-  .cog-svg .risk-label { fill: #164E63; font-size: 8.5px; opacity: 0; animation: cog-fade 0.5s forwards; }
+  .cog-svg .arrow-risk { stroke: #4C1D95; stroke-width: 1.5; stroke-dasharray: 5 3; opacity: 0.5; marker-end: none; }
+  .cog-svg .risk-label { fill: #4C1D95; font-size: 8.5px; opacity: 0; animation: cog-fade 0.5s forwards; }
   .cog-svg .risk-label:nth-of-type(1) { animation-delay: 2.0s; }
   .cog-svg .risk-label:nth-of-type(2) { animation-delay: 2.3s; }
   .cog-svg .risk-label:nth-of-type(3) { animation-delay: 2.6s; }
@@ -640,10 +640,10 @@ var INTERACTIVE_FIGURES = {
 <svg class="cog-svg" viewBox="0 0 560 340" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;">
   <defs>
     <marker id="cog-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-      <path d="M0,0 L8,3 L0,6" fill="none" stroke="#0891B2" stroke-width="1.5"/>
+      <path d="M0,0 L8,3 L0,6" fill="none" stroke="#7C3AED" stroke-width="1.5"/>
     </marker>
     <marker id="cog-arrow-dark" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-      <path d="M0,0 L8,3 L0,6" fill="none" stroke="#164E63" stroke-width="1.5"/>
+      <path d="M0,0 L8,3 L0,6" fill="none" stroke="#4C1D95" stroke-width="1.5"/>
     </marker>
   </defs>
 
@@ -677,29 +677,29 @@ var INTERACTIVE_FIGURES = {
   <path class="arrow-path arrow2" d="M350,165 L410,165"/>
 
   <!-- Transition labels on arrows -->
-  <text x="180" y="155" text-anchor="middle" fill="#0891B2" font-size="8" opacity="0" style="animation:cog-fade 0.5s 1.2s forwards">~10-15%/an</text>
-  <text x="380" y="155" text-anchor="middle" fill="#0891B2" font-size="8" opacity="0" style="animation:cog-fade 0.5s 2.2s forwards">~10-15%/an</text>
+  <text x="180" y="155" text-anchor="middle" fill="#7C3AED" font-size="8" opacity="0" style="animation:cog-fade 0.5s 1.2s forwards">~10-15%/an</text>
+  <text x="380" y="155" text-anchor="middle" fill="#7C3AED" font-size="8" opacity="0" style="animation:cog-fade 0.5s 2.2s forwards">~10-15%/an</text>
 
   <!-- Risk factor boxes (below) -->
   <g class="risk-node">
     <rect class="box box-risk" x="140" y="260" width="100" height="55"/>
-    <text class="box-label" x="190" y="282" text-anchor="middle" font-size="9.5" fill="#164E63">Facteurs</text>
-    <text class="box-label" x="190" y="295" text-anchor="middle" font-size="9.5" fill="#164E63">vasculaires</text>
-    <text class="box-sub" x="190" y="308" text-anchor="middle" fill="#164E63">HTA, diabète, AVC</text>
+    <text class="box-label" x="190" y="282" text-anchor="middle" font-size="9.5" fill="#4C1D95">Facteurs</text>
+    <text class="box-label" x="190" y="295" text-anchor="middle" font-size="9.5" fill="#4C1D95">vasculaires</text>
+    <text class="box-sub" x="190" y="308" text-anchor="middle" fill="#4C1D95">HTA, diabète, AVC</text>
   </g>
 
   <g class="risk-node">
     <rect class="box box-risk" x="270" y="260" width="100" height="55"/>
-    <text class="box-label" x="320" y="282" text-anchor="middle" font-size="9.5" fill="#164E63">Facteurs</text>
-    <text class="box-label" x="320" y="295" text-anchor="middle" font-size="9.5" fill="#164E63">neurodégénératifs</text>
-    <text class="box-sub" x="320" y="308" text-anchor="middle" fill="#164E63">ApoE4, amyloïde</text>
+    <text class="box-label" x="320" y="282" text-anchor="middle" font-size="9.5" fill="#4C1D95">Facteurs</text>
+    <text class="box-label" x="320" y="295" text-anchor="middle" font-size="9.5" fill="#4C1D95">neurodégénératifs</text>
+    <text class="box-sub" x="320" y="308" text-anchor="middle" fill="#4C1D95">ApoE4, amyloïde</text>
   </g>
 
   <g class="risk-node">
     <rect class="box box-risk" x="400" y="260" width="100" height="55"/>
-    <text class="box-label" x="450" y="282" text-anchor="middle" font-size="9.5" fill="#164E63">Facteurs</text>
-    <text class="box-label" x="450" y="295" text-anchor="middle" font-size="9.5" fill="#164E63">modifiables</text>
-    <text class="box-sub" x="450" y="308" text-anchor="middle" fill="#164E63">Isolement, inactivité</text>
+    <text class="box-label" x="450" y="282" text-anchor="middle" font-size="9.5" fill="#4C1D95">Facteurs</text>
+    <text class="box-label" x="450" y="295" text-anchor="middle" font-size="9.5" fill="#4C1D95">modifiables</text>
+    <text class="box-sub" x="450" y="308" text-anchor="middle" fill="#4C1D95">Isolement, inactivité</text>
   </g>
 
   <!-- Dashed arrows from risk factors up to MCI -->
@@ -713,10 +713,10 @@ var INTERACTIVE_FIGURES = {
 
   <!-- Title -->
   <text x="280" y="22" text-anchor="middle" fill="currentColor" font-size="13" font-weight="700">Cascade de décompensation cognitive</text>
-  <line x1="100" y1="32" x2="460" y2="32" stroke="#0891B2" stroke-width="1.5" opacity="0.3"/>
+  <line x1="100" y1="32" x2="460" y2="32" stroke="#7C3AED" stroke-width="1.5" opacity="0.3"/>
 
   <!-- Prevalence annotations -->
-  <rect x="155" y="55" width="250" height="50" rx="8" fill="rgba(8,145,178,0.06)" stroke="none"/>
+  <rect x="155" y="55" width="250" height="50" rx="8" fill="rgba(124,58,237,0.06)" stroke="none"/>
   <text x="280" y="72" text-anchor="middle" fill="currentColor" font-size="9" opacity="0" style="animation:cog-fade 0.5s 4s forwards">Prévalence MCI : 15-20% des > 65 ans</text>
   <text x="280" y="87" text-anchor="middle" fill="currentColor" font-size="9" opacity="0" style="animation:cog-fade 0.5s 4.3s forwards">Conversion MCI → démence : 10-15% / an</text>
   <text x="280" y="100" text-anchor="middle" fill="currentColor" font-size="9" opacity="0" style="animation:cog-fade 0.5s 4.6s forwards">Démence : ~5% des > 65 ans, ~20% des > 80 ans</text>
@@ -728,7 +728,7 @@ var INTERACTIVE_FIGURES = {
     title: "Stades d'escarre — progression cutanée",
     svg: `<style>
   .escarre-svg { font-family: 'Figtree', 'Noto Sans', sans-serif; }
-  .escarre-svg .skin-layer { stroke: #164E63; stroke-width: 1; }
+  .escarre-svg .skin-layer { stroke: #4C1D95; stroke-width: 1; }
   .escarre-svg .epidermis { fill: #fcd5b8; }
   .escarre-svg .dermis { fill: #e8a87c; }
   .escarre-svg .subcutaneous { fill: #d4956b; }
@@ -749,7 +749,7 @@ var INTERACTIVE_FIGURES = {
     stroke-width: 2;
   }
   .escarre-svg .stage-btn:hover { filter: brightness(1.1); }
-  .escarre-svg .stage-btn.s1 { fill: rgba(8,145,178,0.12); stroke: #0891B2; }
+  .escarre-svg .stage-btn.s1 { fill: rgba(124,58,237,0.12); stroke: #7C3AED; }
   .escarre-svg .stage-btn.s2 { fill: rgba(5,150,105,0.12); stroke: #059669; }
   .escarre-svg .stage-btn.s3 { fill: rgba(245,158,11,0.12); stroke: #f59e0b; }
   .escarre-svg .stage-btn.s4 { fill: rgba(239,68,68,0.10); stroke: #ef4444; }
@@ -789,7 +789,7 @@ var INTERACTIVE_FIGURES = {
   </defs>
 
   <text x="260" y="22" text-anchor="middle" fill="currentColor" font-size="13" font-weight="700">Stades d'escarre</text>
-  <line class="title-line" x1="80" y1="32" x2="440" y2="32" stroke="#0891B2" stroke-width="1.5" opacity="0.3"/>
+  <line class="title-line" x1="80" y1="32" x2="440" y2="32" stroke="#7C3AED" stroke-width="1.5" opacity="0.3"/>
 
   <!-- Anatomical cross-section (4 columns for 4 stages) -->
   <!-- Each column shows the same skin layers but with progressive damage -->
@@ -798,7 +798,7 @@ var INTERACTIVE_FIGURES = {
   <g class="stage-box" id="esc-stage1" onclick="toggleEscarreStage(1)">
     <!-- Button -->
     <rect class="stage-btn s1" x="15" y="42" width="115" height="32"/>
-    <text class="stage-btn-label" x="72" y="63" text-anchor="middle" fill="#0891B2">Stade I</text>
+    <text class="stage-btn-label" x="72" y="63" text-anchor="middle" fill="#7C3AED">Stade I</text>
 
     <!-- Skin diagram -->
     <g class="reveal-group" id="esc-r1">
@@ -817,19 +817,19 @@ var INTERACTIVE_FIGURES = {
       <rect class="stage-highlight" x="28" y="88" width="89" height="29" rx="3"/>
 
       <!-- Layer labels -->
-      <text class="skin-title" x="72" y="106" text-anchor="middle" fill="#164E63">Épiderme</text>
-      <text class="skin-title" x="72" y="136" text-anchor="middle" fill="#164E63">Derme</text>
+      <text class="skin-title" x="72" y="106" text-anchor="middle" fill="#4C1D95">Épiderme</text>
+      <text class="skin-title" x="72" y="136" text-anchor="middle" fill="#4C1D95">Derme</text>
       <text class="skin-title" x="72" y="172" text-anchor="middle" fill="#fff" font-size="8">Hypoderme</text>
       <text class="skin-title" x="72" y="204" text-anchor="middle" fill="#fff" font-size="8">Muscle</text>
       <text class="skin-title" x="72" y="228" text-anchor="middle" fill="#7f8c8d" font-size="8">Os</text>
 
       <!-- Info box -->
       <g class="stage-info">
-        <rect x="10" y="245" width="110" height="65" rx="6" fill="rgba(22,78,99,0.92)" stroke="#0891B2" stroke-width="1"/>
+        <rect x="10" y="245" width="110" height="65" rx="6" fill="rgba(76,29,149,0.92)" stroke="#7C3AED" stroke-width="1"/>
         <text x="65" y="262" text-anchor="middle" fill="#fff" font-size="9.5" font-weight="600">Érythème non</text>
         <text x="65" y="275" text-anchor="middle" fill="#fff" font-size="9.5" font-weight="600">blanchissant</text>
-        <text x="65" y="292" text-anchor="middle" fill="#0891B2" font-size="8.5">Peau intacte</text>
-        <text x="65" y="304" text-anchor="middle" fill="#0891B2" font-size="8.5">Rougeur persistante</text>
+        <text x="65" y="292" text-anchor="middle" fill="#7C3AED" font-size="8.5">Peau intacte</text>
+        <text x="65" y="304" text-anchor="middle" fill="#7C3AED" font-size="8.5">Rougeur persistante</text>
       </g>
     </g>
   </g>
@@ -849,14 +849,14 @@ var INTERACTIVE_FIGURES = {
       <!-- Damage: epidermis + dermis -->
       <rect class="stage-highlight" x="153" y="88" width="89" height="64" rx="3"/>
 
-      <text class="skin-title" x="197" y="106" text-anchor="middle" fill="#164E63">Épiderme</text>
-      <text class="skin-title" x="197" y="136" text-anchor="middle" fill="#164E63">Derme</text>
+      <text class="skin-title" x="197" y="106" text-anchor="middle" fill="#4C1D95">Épiderme</text>
+      <text class="skin-title" x="197" y="136" text-anchor="middle" fill="#4C1D95">Derme</text>
       <text class="skin-title" x="197" y="172" text-anchor="middle" fill="#fff" font-size="8">Hypoderme</text>
       <text class="skin-title" x="197" y="204" text-anchor="middle" fill="#fff" font-size="8">Muscle</text>
       <text class="skin-title" x="197" y="228" text-anchor="middle" fill="#7f8c8d" font-size="8">Os</text>
 
       <g class="stage-info">
-        <rect x="135" y="245" width="120" height="65" rx="6" fill="rgba(22,78,99,0.92)" stroke="#059669" stroke-width="1"/>
+        <rect x="135" y="245" width="120" height="65" rx="6" fill="rgba(76,29,149,0.92)" stroke="#059669" stroke-width="1"/>
         <text x="195" y="262" text-anchor="middle" fill="#fff" font-size="9.5" font-weight="600">Perte partielle</text>
         <text x="195" y="275" text-anchor="middle" fill="#fff" font-size="9.5" font-weight="600">de la peau</text>
         <text x="195" y="292" text-anchor="middle" fill="#059669" font-size="8.5">Cloque ou érosion</text>
@@ -880,14 +880,14 @@ var INTERACTIVE_FIGURES = {
       <!-- Damage: full thickness skin -->
       <rect class="stage-highlight" x="278" y="88" width="89" height="99" rx="3"/>
 
-      <text class="skin-title" x="322" y="106" text-anchor="middle" fill="#164E63">Épiderme</text>
-      <text class="skin-title" x="322" y="136" text-anchor="middle" fill="#164E63">Derme</text>
+      <text class="skin-title" x="322" y="106" text-anchor="middle" fill="#4C1D95">Épiderme</text>
+      <text class="skin-title" x="322" y="136" text-anchor="middle" fill="#4C1D95">Derme</text>
       <text class="skin-title" x="322" y="172" text-anchor="middle" fill="#fff" font-size="8">Hypoderme</text>
       <text class="skin-title" x="322" y="204" text-anchor="middle" fill="#fff" font-size="8">Muscle</text>
       <text class="skin-title" x="322" y="228" text-anchor="middle" fill="#7f8c8d" font-size="8">Os</text>
 
       <g class="stage-info">
-        <rect x="260" y="245" width="125" height="65" rx="6" fill="rgba(22,78,99,0.92)" stroke="#f59e0b" stroke-width="1"/>
+        <rect x="260" y="245" width="125" height="65" rx="6" fill="rgba(76,29,149,0.92)" stroke="#f59e0b" stroke-width="1"/>
         <text x="322" y="262" text-anchor="middle" fill="#fff" font-size="9.5" font-weight="600">Perte totale de la</text>
         <text x="322" y="275" text-anchor="middle" fill="#fff" font-size="9.5" font-weight="600">peau (tissu sous-cutané)</text>
         <text x="322" y="292" text-anchor="middle" fill="#f59e0b" font-size="8.5">Muscle non exposé</text>
@@ -911,14 +911,14 @@ var INTERACTIVE_FIGURES = {
       <!-- Damage: ALL layers -->
       <rect class="stage-highlight" x="403" y="88" width="89" height="148" rx="3"/>
 
-      <text class="skin-title" x="447" y="106" text-anchor="middle" fill="#164E63">Épiderme</text>
-      <text class="skin-title" x="447" y="136" text-anchor="middle" fill="#164E63">Derme</text>
+      <text class="skin-title" x="447" y="106" text-anchor="middle" fill="#4C1D95">Épiderme</text>
+      <text class="skin-title" x="447" y="136" text-anchor="middle" fill="#4C1D95">Derme</text>
       <text class="skin-title" x="447" y="172" text-anchor="middle" fill="#fff" font-size="8">Hypoderme</text>
       <text class="skin-title" x="447" y="204" text-anchor="middle" fill="#fff" font-size="8">Muscle</text>
       <text class="skin-title" x="447" y="228" text-anchor="middle" fill="#7f8c8d" font-size="8">Os</text>
 
       <g class="stage-info">
-        <rect x="385" y="245" width="125" height="78" rx="6" fill="rgba(22,78,99,0.92)" stroke="#ef4444" stroke-width="1"/>
+        <rect x="385" y="245" width="125" height="78" rx="6" fill="rgba(76,29,149,0.92)" stroke="#ef4444" stroke-width="1"/>
         <text x="447" y="262" text-anchor="middle" fill="#fff" font-size="9.5" font-weight="600">Perte totale de tissu</text>
         <text x="447" y="275" text-anchor="middle" fill="#fff" font-size="9.5" font-weight="600">avec exposition</text>
         <text x="447" y="288" text-anchor="middle" fill="#fff" font-size="9.5" font-weight="600">d'os, tendon ou muscle</text>
@@ -931,8 +931,8 @@ var INTERACTIVE_FIGURES = {
   <!-- Progress bar showing severity -->
   <g transform="translate(15, 340)">
     <text x="0" y="0" fill="currentColor" font-size="9.5" font-weight="600">Sévérité croissante →</text>
-    <rect x="0" y="8" width="490" height="6" rx="3" fill="rgba(22,78,99,0.1)"/>
-    <rect class="prog-bar" x="0" y="8" width="122" height="6" rx="3" fill="#0891B2" opacity="0.7"/>
+    <rect x="0" y="8" width="490" height="6" rx="3" fill="rgba(76,29,149,0.1)"/>
+    <rect class="prog-bar" x="0" y="8" width="122" height="6" rx="3" fill="#7C3AED" opacity="0.7"/>
     <rect class="prog-bar" x="122" y="8" width="122" height="6" rx="3" fill="#059669" opacity="0.7"/>
     <rect class="prog-bar" x="244" y="8" width="123" height="6" rx="3" fill="#f59e0b" opacity="0.7"/>
     <rect class="prog-bar" x="367" y="8" width="123" height="6" rx="3" fill="#ef4444" opacity="0.7"/>
@@ -940,11 +940,11 @@ var INTERACTIVE_FIGURES = {
 
   <!-- Additional labels at bottom -->
   <g transform="translate(15, 370)">
-    <rect x="0" y="0" width="490" height="80" rx="8" fill="rgba(8,145,178,0.05)" stroke="none"/>
+    <rect x="0" y="0" width="490" height="80" rx="8" fill="rgba(124,58,237,0.05)" stroke="none"/>
     <text x="245" y="18" text-anchor="middle" fill="currentColor" font-size="9.5" font-weight="600">Facteurs de risque d'escarre</text>
     <text x="245" y="34" text-anchor="middle" fill="currentColor" font-size="8.5" opacity="0.8">Immobilité • Incontinence • Malnutrition • Fragilité cutanée</text>
     <text x="245" y="48" text-anchor="middle" fill="currentColor" font-size="8.5" opacity="0.8">Troubles sensoriels • Diabète • Âge avancé • Hypoperfusion</text>
-    <text x="245" y="66" text-anchor="middle" fill="#0891B2" font-size="9" font-weight="600">Échelle de Braden : évaluation du risque</text>
+    <text x="245" y="66" text-anchor="middle" fill="#7C3AED" font-size="9" font-weight="600">Échelle de Braden : évaluation du risque</text>
   </g>
 </svg>`
   },
@@ -955,14 +955,14 @@ var INTERACTIVE_FIGURES = {
     svg: `<style>
   .ch2-svg { font-family: 'Figtree', 'Noto Sans', sans-serif; }
   .ch2-svg .node-box { rx: 10; ry: 10; stroke-width: 2; cursor: pointer; }
-  .ch2-svg .node-root { fill: rgba(8,145,178,0.15); stroke: #0891B2; }
+  .ch2-svg .node-root { fill: rgba(124,58,237,0.15); stroke: #7C3AED; }
   .ch2-svg .node-green { fill: rgba(5,150,105,0.12); stroke: #059669; }
   .ch2-svg .node-yellow { fill: rgba(245,158,11,0.12); stroke: #f59e0b; }
   .ch2-svg .node-red { fill: rgba(239,68,68,0.10); stroke: #ef4444; }
   .ch2-svg .node-label { fill: currentColor; font-size: 11px; font-weight: 600; }
   .ch2-svg .node-sub { fill: currentColor; font-size: 8.5px; opacity: 0.7; }
   .ch2-svg .arrow-path {
-    fill: none; stroke: #0891B2; stroke-width: 2; stroke-linecap: round;
+    fill: none; stroke: #7C3AED; stroke-width: 2; stroke-linecap: round;
     marker-end: url(#ch2-arrow);
     stroke-dasharray: 100; stroke-dashoffset: 100;
   }
@@ -981,7 +981,7 @@ var INTERACTIVE_FIGURES = {
   @keyframes ch2-fade { to { opacity: 1; } }
 </style>
 <svg class="ch2-svg" viewBox="0 0 520 380" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;">
-  <defs><marker id="ch2-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="none" stroke="#0891B2" stroke-width="1.5"/></marker></defs>
+  <defs><marker id="ch2-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="none" stroke="#7C3AED" stroke-width="1.5"/></marker></defs>
   <text x="260" y="22" text-anchor="middle" fill="currentColor" font-size="13" font-weight="700">Arbre décisionnel gériatrique</text>
   <!-- Root node -->
   <g class="gnode">
@@ -1008,7 +1008,7 @@ var INTERACTIVE_FIGURES = {
     <text class="node-label" x="110" y="238" text-anchor="middle" fill="#059669">Autonome</text>
     <text class="node-sub" x="110" y="253" text-anchor="middle">GDS 0-2 · ADL intactes</text>
     <text class="node-sub" x="110" y="265" text-anchor="middle">Suivi standard</text>
-    <g class="tip"><rect x="10" y="278" width="160" height="40" rx="6" fill="rgba(22,78,99,0.92)" stroke="#059669" stroke-width="1"/><text x="90" y="296" text-anchor="middle" fill="#fff" font-size="9">Prévention · Vaccination</text><text x="90" y="310" text-anchor="middle" fill="#fff" font-size="9">Activité physique · Social</text></g>
+    <g class="tip"><rect x="10" y="278" width="160" height="40" rx="6" fill="rgba(76,29,149,0.92)" stroke="#059669" stroke-width="1"/><text x="90" y="296" text-anchor="middle" fill="#fff" font-size="9">Prévention · Vaccination</text><text x="90" y="310" text-anchor="middle" fill="#fff" font-size="9">Activité physique · Social</text></g>
   </g>
   <!-- Branch 2: Fragile -->
   <g class="gnode">
@@ -1016,7 +1016,7 @@ var INTERACTIVE_FIGURES = {
     <text class="node-label" x="260" y="238" text-anchor="middle" fill="#f59e0b">Fragile</text>
     <text class="node-sub" x="260" y="253" text-anchor="middle">GDS 3-4 · Chutes</text>
     <text class="node-sub" x="260" y="265" text-anchor="middle">Intervention précoce</text>
-    <g class="tip"><rect x="190" y="278" width="140" height="40" rx="6" fill="rgba(22,78,99,0.92)" stroke="#f59e0b" stroke-width="1"/><text x="260" y="296" text-anchor="middle" fill="#fff" font-size="9">Géronteambulatoire</text><text x="260" y="310" text-anchor="middle" fill="#fff" font-size="9">Rééducation · Aides</text></g>
+    <g class="tip"><rect x="190" y="278" width="140" height="40" rx="6" fill="rgba(76,29,149,0.92)" stroke="#f59e0b" stroke-width="1"/><text x="260" y="296" text-anchor="middle" fill="#fff" font-size="9">Géronteambulatoire</text><text x="260" y="310" text-anchor="middle" fill="#fff" font-size="9">Rééducation · Aides</text></g>
   </g>
   <!-- Branch 3: Dépendant -->
   <g class="gnode">
@@ -1024,10 +1024,10 @@ var INTERACTIVE_FIGURES = {
     <text class="node-label" x="415" y="238" text-anchor="middle" fill="#ef4444">Dépendant</text>
     <text class="node-sub" x="415" y="253" text-anchor="middle">GDS 5-7 · Poly-pathologie</text>
     <text class="node-sub" x="415" y="265" text-anchor="middle">Soins spécialisés</text>
-    <g class="tip"><rect x="335" y="278" width="160" height="40" rx="6" fill="rgba(22,78,99,0.92)" stroke="#ef4444" stroke-width="1"/><text x="415" y="296" text-anchor="middle" fill="#fff" font-size="9">EHPAD · HAD · SSR</text><text x="415" y="310" text-anchor="middle" fill="#fff" font-size="9">Soins palliatifs · APA</text></g>
+    <g class="tip"><rect x="335" y="278" width="160" height="40" rx="6" fill="rgba(76,29,149,0.92)" stroke="#ef4444" stroke-width="1"/><text x="415" y="296" text-anchor="middle" fill="#fff" font-size="9">EHPAD · HAD · SSR</text><text x="415" y="310" text-anchor="middle" fill="#fff" font-size="9">Soins palliatifs · APA</text></g>
   </g>
   <!-- Legend -->
-  <rect x="130" y="340" width="260" height="30" rx="6" fill="rgba(8,145,178,0.05)"/>
+  <rect x="130" y="340" width="260" height="30" rx="6" fill="rgba(124,58,237,0.05)"/>
   <text x="260" y="360" text-anchor="middle" fill="currentColor" font-size="9">Survolez chaque branche pour les détails</text>
 </svg>`
   },
@@ -1039,11 +1039,11 @@ var INTERACTIVE_FIGURES = {
   .ch4-svg { font-family: 'Figtree', 'Noto Sans', sans-serif; }
   .ch4-svg .ring { fill: none; stroke-width: 28; cursor: pointer; transition: opacity 0.3s; }
   .ch4-svg .ring:hover { opacity: 1 !important; }
-  .ch4-svg .ring4 { stroke: rgba(22,78,99,0.12); }
-  .ch4-svg .ring3 { stroke: rgba(8,145,178,0.15); }
+  .ch4-svg .ring4 { stroke: rgba(76,29,149,0.12); }
+  .ch4-svg .ring3 { stroke: rgba(124,58,237,0.15); }
   .ch4-svg .ring2 { stroke: rgba(5,150,105,0.18); }
   .ch4-svg .ring1 { stroke: rgba(245,158,11,0.20); }
-  .ch4-svg .center-dot { fill: #0891B2; }
+  .ch4-svg .center-dot { fill: #7C3AED; }
   .ch4-svg .center-label { fill: currentColor; font-size: 10px; font-weight: 700; }
   .ch4-svg .ring-label { fill: currentColor; font-size: 9.5px; font-weight: 600; opacity: 0; animation: ch4-fade 0.5s forwards; }
   .ch4-svg .rl1 { animation-delay: 0.5s; }
@@ -1069,30 +1069,30 @@ var INTERACTIVE_FIGURES = {
   <!-- Ring labels -->
   <text class="ring-label rl1" x="240" y="155" text-anchor="middle" fill="#f59e0b">Bienfaisance</text>
   <text class="ring-label rl1" x="240" y="167" text-anchor="middle" fill="#f59e0b" font-size="8">Non-malfaisance</text>
-  <text class="ring-label rl2" x="240" y="108" text-anchor="middle" fill="#0891B2">Justice</text>
-  <text class="ring-label rl2" x="240" y="120" text-anchor="middle" fill="#0891B2" font-size="8">Équité · Accès aux soins</text>
-  <text class="ring-label rl3" x="240" y="55" text-anchor="middle" fill="#164E63">Cadre légal</text>
-  <text class="ring-label rl3" x="240" y="67" text-anchor="middle" fill="#164E63" font-size="8">Loi Kouchner · Tutelle · Curatelle</text>
+  <text class="ring-label rl2" x="240" y="108" text-anchor="middle" fill="#7C3AED">Justice</text>
+  <text class="ring-label rl2" x="240" y="120" text-anchor="middle" fill="#7C3AED" font-size="8">Équité · Accès aux soins</text>
+  <text class="ring-label rl3" x="240" y="55" text-anchor="middle" fill="#4C1D95">Cadre légal</text>
+  <text class="ring-label rl3" x="240" y="67" text-anchor="middle" fill="#4C1D95" font-size="8">Loi Kouchner · Tutelle · Curatelle</text>
   <!-- Hover zones with tooltips -->
   <circle class="ring-trigger" cx="240" cy="210" r="45" fill="transparent" style="cursor:pointer;"
     onmouseover="this.parentNode.querySelector('.ctip-center').style.opacity=1"
     onmouseout="this.parentNode.querySelector('.ctip-center').style.opacity=0"/>
   <g class="tip-box ctip-center">
-    <rect x="140" y="260" width="200" height="55" rx="6" fill="rgba(22,78,99,0.92)" stroke="#0891B2" stroke-width="1"/>
+    <rect x="140" y="260" width="200" height="55" rx="6" fill="rgba(76,29,149,0.92)" stroke="#7C3AED" stroke-width="1"/>
     <text x="240" y="278" text-anchor="middle" fill="#fff" font-size="9.5" font-weight="600">Autonomie du patient</text>
     <text x="240" y="293" text-anchor="middle" fill="#fff" font-size="8.5">Décision éclairée · Consentement</text>
-    <text x="240" y="306" text-anchor="middle" fill="#0891B2" font-size="8">Directive anticipée · Personne de confiance</text>
+    <text x="240" y="306" text-anchor="middle" fill="#7C3AED" font-size="8">Directive anticipée · Personne de confiance</text>
   </g>
   <!-- Side tooltips for each ring -->
   <g class="ring-label rl4">
-    <rect x="30" y="355" width="140" height="35" rx="6" fill="rgba(22,78,99,0.08)" stroke="#059669" stroke-width="1"/>
+    <rect x="30" y="355" width="140" height="35" rx="6" fill="rgba(76,29,149,0.08)" stroke="#059669" stroke-width="1"/>
     <text x="100" y="372" text-anchor="middle" fill="#059669" font-size="8.5" font-weight="600">Refus de soins opposable</text>
     <text x="100" y="384" text-anchor="middle" fill="#059669" font-size="7.5">Art. L1111-4 CSP</text>
   </g>
   <g class="ring-label rl4">
-    <rect x="310" y="355" width="140" height="35" rx="6" fill="rgba(22,78,99,0.08)" stroke="#0891B2" stroke-width="1"/>
-    <text x="380" y="372" text-anchor="middle" fill="#0891B2" font-size="8.5" font-weight="600">Secret médical partagé</text>
-    <text x="380" y="384" text-anchor="middle" fill="#0891B2" font-size="7.5">Équipe de soins uniquement</text>
+    <rect x="310" y="355" width="140" height="35" rx="6" fill="rgba(76,29,149,0.08)" stroke="#7C3AED" stroke-width="1"/>
+    <text x="380" y="372" text-anchor="middle" fill="#7C3AED" font-size="8.5" font-weight="600">Secret médical partagé</text>
+    <text x="380" y="384" text-anchor="middle" fill="#7C3AED" font-size="7.5">Équipe de soins uniquement</text>
   </g>
 </svg>`
   },
@@ -1102,10 +1102,10 @@ var INTERACTIVE_FIGURES = {
     title: "Voies sensorielles — oreille et œil",
     svg: `<style>
   .ch5-svg { font-family: 'Figtree', 'Noto Sans', sans-serif; }
-  .ch5-svg .outline { fill: none; stroke: #164E63; stroke-width: 1.5; }
+  .ch5-svg .outline { fill: none; stroke: #4C1D95; stroke-width: 1.5; }
   .ch5-svg .fill-healthy { fill: rgba(5,150,105,0.15); stroke: #059669; stroke-width: 1; }
   .ch5-svg .fill-loss { fill: rgba(239,68,68,0.15); stroke: #ef4444; stroke-width: 1.5; stroke-dasharray: 4 2; }
-  .ch5-svg .fill-accent { fill: rgba(8,145,178,0.2); stroke: #0891B2; stroke-width: 1; }
+  .ch5-svg .fill-accent { fill: rgba(124,58,237,0.2); stroke: #7C3AED; stroke-width: 1; }
   .ch5-svg .label { fill: currentColor; font-size: 9.5px; font-weight: 600; }
   .ch5-svg .label-sm { fill: currentColor; font-size: 8px; opacity: 1; }
   .ch5-svg .title-text { fill: currentColor; font-size: 11px; font-weight: 700; }
@@ -1120,7 +1120,7 @@ var INTERACTIVE_FIGURES = {
 <svg class="ch5-svg" viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;">
   <text x="260" y="22" text-anchor="middle" fill="currentColor" font-size="13" font-weight="700">Voies sensorielles</text>
   <!-- LEFT: Oreille -->
-  <text class="title-text" x="130" y="50" text-anchor="middle" fill="#0891B2">OREILLE</text>
+  <text class="title-text" x="130" y="50" text-anchor="middle" fill="#7C3AED">OREILLE</text>
   <!-- Outer ear (pinna simplified) -->
   <path class="outline" d="M60,80 C40,80 30,100 30,130 C30,170 50,190 70,190 C75,190 80,185 80,180"/>
   <!-- Ear canal -->
@@ -1131,9 +1131,9 @@ var INTERACTIVE_FIGURES = {
   <text class="label" x="150" y="122" text-anchor="middle">Oreille</text>
   <text class="label" x="150" y="135" text-anchor="middle">moyenne</text>
   <!-- Ossicles -->
-  <circle cx="138" cy="118" r="4" fill="#0891B2" opacity="0.6"/>
-  <circle cx="150" cy="115" r="3" fill="#0891B2" opacity="0.6"/>
-  <circle cx="162" cy="118" r="4" fill="#0891B2" opacity="0.6"/>
+  <circle cx="138" cy="118" r="4" fill="#7C3AED" opacity="0.6"/>
+  <circle cx="150" cy="115" r="3" fill="#7C3AED" opacity="0.6"/>
+  <circle cx="162" cy="118" r="4" fill="#7C3AED" opacity="0.6"/>
   <text class="label-sm" x="150" y="145" text-anchor="middle">OSSELETS</text>
   <!-- Inner ear / Cochlea -->
   <g class="fade-in">
@@ -1142,21 +1142,21 @@ var INTERACTIVE_FIGURES = {
     <text class="label-sm" x="200" y="132" text-anchor="middle" fill="#ef4444">Presbyacousie</text>
   </g>
   <g class="hover-zone" style="cursor:pointer;"><rect x="170" y="95" width="60" height="60" fill="transparent"/></g>
-  <g class="tip"><rect x="50" y="200" width="180" height="50" rx="6" fill="rgba(22,78,99,0.92)" stroke="#ef4444" stroke-width="1"/><text x="140" y="218" text-anchor="middle" fill="#fff" font-size="9" font-weight="600">Presbyacousie</text><text x="140" y="233" text-anchor="middle" fill="#fff" font-size="8.5">Perte des fréquences aiguës (4-8 kHz)</text><text x="140" y="245" text-anchor="middle" fill="#ef4444" font-size="8">Cellules ciliées → dégénérescence</text></g>
+  <g class="tip"><rect x="50" y="200" width="180" height="50" rx="6" fill="rgba(76,29,149,0.92)" stroke="#ef4444" stroke-width="1"/><text x="140" y="218" text-anchor="middle" fill="#fff" font-size="9" font-weight="600">Presbyacousie</text><text x="140" y="233" text-anchor="middle" fill="#fff" font-size="8.5">Perte des fréquences aiguës (4-8 kHz)</text><text x="140" y="245" text-anchor="middle" fill="#ef4444" font-size="8">Cellules ciliées → dégénérescence</text></g>
   <!-- Arrow: sound path -->
-  <path d="M35,130 L80,125" stroke="#0891B2" stroke-width="1.5" fill="none" marker-end="url(#ch5-arr)"/>
-  <defs><marker id="ch5-arr" markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto"><path d="M0,0 L6,2.5 L0,5" fill="none" stroke="#0891B2" stroke-width="1"/></marker></defs>
+  <path d="M35,130 L80,125" stroke="#7C3AED" stroke-width="1.5" fill="none" marker-end="url(#ch5-arr)"/>
+  <defs><marker id="ch5-arr" markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto"><path d="M0,0 L6,2.5 L0,5" fill="none" stroke="#7C3AED" stroke-width="1"/></marker></defs>
 
   <!-- Separator -->
   <line x1="260" y1="45" x2="260" y2="320" stroke="currentColor" stroke-dasharray="4 3" stroke-width="0.5" opacity="0.15"/>
 
   <!-- RIGHT: Œil -->
-  <text class="title-text" x="390" y="50" text-anchor="middle" fill="#0891B2">ŒIL</text>
+  <text class="title-text" x="390" y="50" text-anchor="middle" fill="#7C3AED">ŒIL</text>
   <!-- Eye outline -->
   <ellipse class="outline" cx="390" cy="130" rx="85" ry="55"/>
   <!-- Cornea -->
-  <path class="fill-accent" d="M310,130 C310,100 340,85 390,85 C440,85 470,100 470,130" fill="rgba(8,145,178,0.1)" stroke="#0891B2" stroke-width="1.5"/>
-  <text class="label" x="390" y="82" text-anchor="middle" fill="#0891B2">Cornée</text>
+  <path class="fill-accent" d="M310,130 C310,100 340,85 390,85 C440,85 470,100 470,130" fill="rgba(124,58,237,0.1)" stroke="#7C3AED" stroke-width="1.5"/>
+  <text class="label" x="390" y="82" text-anchor="middle" fill="#7C3AED">Cornée</text>
   <!-- Lens -->
   <ellipse class="fill-loss" cx="390" cy="130" rx="18" ry="25"/>
   <text class="label" x="390" y="128" text-anchor="middle" fill="#ef4444">Cristallín</text>
@@ -1168,19 +1168,19 @@ var INTERACTIVE_FIGURES = {
   <circle cx="390" cy="148" r="8" fill="rgba(245,158,11,0.2)" stroke="#f59e0b" stroke-width="1"/>
   <text class="label-sm" x="390" y="151" text-anchor="middle" fill="#f59e0b" font-size="7">Macula</text>
   <!-- Optic nerve -->
-  <line x1="475" y1="130" x2="510" y2="130" stroke="#164E63" stroke-width="2.5"/>
-  <text class="label-sm" x="510" y="125" text-anchor="end" fill="#164E63">Nerf</text>
-  <text class="label-sm" x="510" y="137" text-anchor="end" fill="#164E63">optique</text>
+  <line x1="475" y1="130" x2="510" y2="130" stroke="#4C1D95" stroke-width="2.5"/>
+  <text class="label-sm" x="510" y="125" text-anchor="end" fill="#4C1D95">Nerf</text>
+  <text class="label-sm" x="510" y="137" text-anchor="end" fill="#4C1D95">optique</text>
 
   <!-- Presbytie tooltip area -->
   <g class="hover-zone" style="cursor:pointer;"><rect x="370" y="105" width="40" height="50" fill="transparent"/></g>
-  <g class="tip"><rect x="290" y="200" width="200" height="50" rx="6" fill="rgba(22,78,99,0.92)" stroke="#ef4444" stroke-width="1"/><text x="390" y="218" text-anchor="middle" fill="#fff" font-size="9" font-weight="600">Presbytie</text><text x="390" y="233" text-anchor="middle" fill="#fff" font-size="8.5">Perte d'élasticité du cristallín</text><text x="390" y="245" text-anchor="middle" fill="#ef4444" font-size="8">Dès 45 ans · Accommodation ↓</text></g>
+  <g class="tip"><rect x="290" y="200" width="200" height="50" rx="6" fill="rgba(76,29,149,0.92)" stroke="#ef4444" stroke-width="1"/><text x="390" y="218" text-anchor="middle" fill="#fff" font-size="9" font-weight="600">Presbytie</text><text x="390" y="233" text-anchor="middle" fill="#fff" font-size="8.5">Perte d'élasticité du cristallín</text><text x="390" y="245" text-anchor="middle" fill="#ef4444" font-size="8">Dès 45 ans · Accommodation ↓</text></g>
 
   <!-- Bottom summary -->
-  <rect x="60" y="280" width="400" height="60" rx="8" fill="rgba(8,145,178,0.05)"/>
+  <rect x="60" y="280" width="400" height="60" rx="8" fill="rgba(124,58,237,0.05)"/>
   <text x="260" y="300" text-anchor="middle" fill="currentColor" font-size="9.5" font-weight="600">Troubles sensoriels liés à l'âge</text>
   <text x="260" y="315" text-anchor="middle" fill="currentColor" font-size="8.5" opacity="0.8">Presbyacousie : 30% des >65 ans · Presbytie : quasi universelle après 50 ans</text>
-  <text x="260" y="330" text-anchor="middle" fill="#0891B2" font-size="8.5">Impact : isolement, chutes, dépression, déclin cognitif</text>
+  <text x="260" y="330" text-anchor="middle" fill="#7C3AED" font-size="8.5">Impact : isolement, chutes, dépression, déclin cognitif</text>
 </svg>`
   },
 
@@ -1193,10 +1193,10 @@ var INTERACTIVE_FIGURES = {
   <!-- Pelvis simplified -->
   <ellipse cx="210" cy="100" rx="90" ry="35" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35"/>
   <!-- Femur head + neck + trochanters -->
-  <circle cx="175" cy="115" r="28" fill="rgba(8,145,178,0.15)" stroke="#0891B2" stroke-width="2"/>
-  <path d="M195,130 L230,155 L245,220" fill="none" stroke="#0891B2" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="175" cy="115" r="28" fill="rgba(124,58,237,0.15)" stroke="#7C3AED" stroke-width="2"/>
+  <path d="M195,130 L230,155 L245,220" fill="none" stroke="#7C3AED" stroke-width="14" stroke-linecap="round"/>
   <!-- Greater trochanter -->
-  <ellipse cx="235" cy="145" rx="16" ry="12" fill="rgba(8,145,178,0.2)" stroke="#0891B2" stroke-width="1.5"/>
+  <ellipse cx="235" cy="145" rx="16" ry="12" fill="rgba(124,58,237,0.2)" stroke="#7C3AED" stroke-width="1.5"/>
   <!-- Fracture line through trochanters -->
   <path d="M210,135 L255,160" stroke="#ef4444" stroke-width="3" stroke-linecap="round"/>
   <path d="M218,132 L250,155" stroke="#ef4444" stroke-width="2" stroke-dasharray="4 2"/>
@@ -1219,11 +1219,11 @@ var INTERACTIVE_FIGURES = {
   <text x="210" y="22" text-anchor="middle" fill="currentColor" font-size="13" font-weight="700">Fracture extrémité inférieure du fémur</text>
   <text x="210" y="40" text-anchor="middle" fill="currentColor" font-size="10" opacity="0.7">FEIF · schéma pédagogique (pas une radio)</text>
   <!-- Shaft -->
-  <path d="M200,55 L200,180" fill="none" stroke="#0891B2" stroke-width="16" stroke-linecap="round"/>
+  <path d="M200,55 L200,180" fill="none" stroke="#7C3AED" stroke-width="16" stroke-linecap="round"/>
   <!-- Condyles -->
-  <ellipse cx="175" cy="210" rx="28" ry="35" fill="rgba(8,145,178,0.15)" stroke="#0891B2" stroke-width="2"/>
-  <ellipse cx="225" cy="210" rx="28" ry="35" fill="rgba(8,145,178,0.15)" stroke="#0891B2" stroke-width="2"/>
-  <path d="M175,185 L225,185" stroke="#0891B2" stroke-width="10"/>
+  <ellipse cx="175" cy="210" rx="28" ry="35" fill="rgba(124,58,237,0.15)" stroke="#7C3AED" stroke-width="2"/>
+  <ellipse cx="225" cy="210" rx="28" ry="35" fill="rgba(124,58,237,0.15)" stroke="#7C3AED" stroke-width="2"/>
+  <path d="M175,185 L225,185" stroke="#7C3AED" stroke-width="10"/>
   <!-- Fracture supracondylar -->
   <path d="M165,175 L235,195" stroke="#ef4444" stroke-width="3.5" stroke-linecap="round"/>
   <circle cx="200" cy="185" r="7" fill="#ef4444"/>
@@ -1232,7 +1232,7 @@ var INTERACTIVE_FIGURES = {
   <text x="255" y="208" fill="#ef4444" font-size="10">extrémité inférieure</text>
   <text x="200" y="100" text-anchor="middle" fill="currentColor" font-size="9">Diaphyse fémorale</text>
   <text x="200" y="255" text-anchor="middle" fill="currentColor" font-size="9">Condyles · genou</text>
-  <rect x="40" y="270" width="340" height="35" rx="8" fill="rgba(8,145,178,0.08)"/>
+  <rect x="40" y="270" width="340" height="35" rx="8" fill="rgba(124,58,237,0.08)"/>
   <text x="210" y="292" text-anchor="middle" fill="currentColor" font-size="10">Souvent traumatisme à haute énergie ou chute chez sujet ostéoporotique</text>
 </svg>`
   },
@@ -1268,7 +1268,7 @@ var INTERACTIVE_FIGURES = {
   <text x="220" y="22" text-anchor="middle" fill="currentColor" font-size="13" font-weight="700">Fractures vertébrales L2–L3</text>
   <text x="220" y="40" text-anchor="middle" fill="currentColor" font-size="10" opacity="0.7">Tassement · cimentoplastie (principe)</text>
   <!-- Normal vertebra -->
-  <rect x="50" y="70" width="70" height="50" rx="6" fill="rgba(8,145,178,0.15)" stroke="#0891B2" stroke-width="2"/>
+  <rect x="50" y="70" width="70" height="50" rx="6" fill="rgba(124,58,237,0.15)" stroke="#7C3AED" stroke-width="2"/>
   <text x="85" y="100" text-anchor="middle" fill="currentColor" font-size="10">L1 normal</text>
   <!-- Collapsed L2 -->
   <path d="M150,85 L220,85 L215,125 L155,130 Z" fill="rgba(239,68,68,0.2)" stroke="#ef4444" stroke-width="2"/>
@@ -1285,31 +1285,31 @@ var INTERACTIVE_FIGURES = {
   <!-- L3 mild -->
   <rect x="150" y="165" width="70" height="40" rx="4" fill="rgba(245,158,11,0.15)" stroke="#f59e0b" stroke-width="1.5"/>
   <text x="185" y="190" text-anchor="middle" fill="#f59e0b" font-size="10">L3 ± tassement</text>
-  <rect x="40" y="230" width="360" height="70" rx="8" fill="rgba(8,145,178,0.06)"/>
+  <rect x="40" y="230" width="360" height="70" rx="8" fill="rgba(124,58,237,0.06)"/>
   <text x="220" y="255" text-anchor="middle" fill="currentColor" font-size="10" font-weight="600">Cimentoplastie / vertébroplastie</text>
   <text x="220" y="275" text-anchor="middle" fill="currentColor" font-size="9" opacity="0.85">Stabilisation · antalgie · pas un traitement de l'ostéoporose de fond</text>
-  <text x="220" y="292" text-anchor="middle" fill="#0891B2" font-size="9">+ Ca²⁺ · vit. D · anti-ostéoporotique · prévention chute</text>
+  <text x="220" y="292" text-anchor="middle" fill="#7C3AED" font-size="9">+ Ca²⁺ · vit. D · anti-ostéoporotique · prévention chute</text>
 </svg>`
   },
   "6.5": {
     title: "Démarche devant suspicion d'ostéoporose",
     svg: `<svg viewBox="0 0 460 380" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;display:block;">
   <text x="230" y="22" text-anchor="middle" fill="currentColor" font-size="13" font-weight="700">Suspicion d'ostéoporose — démarche</text>
-  <rect x="130" y="40" width="200" height="40" rx="8" fill="rgba(8,145,178,0.15)" stroke="#0891B2" stroke-width="1.5"/>
+  <rect x="130" y="40" width="200" height="40" rx="8" fill="rgba(124,58,237,0.15)" stroke="#7C3AED" stroke-width="1.5"/>
   <text x="230" y="65" text-anchor="middle" fill="currentColor" font-size="11" font-weight="600">Facteurs de risque / fracture fragilité</text>
-  <path d="M230,80 L230,100" stroke="#0891B2" stroke-width="2"/>
-  <rect x="130" y="100" width="200" height="40" rx="8" fill="rgba(8,145,178,0.1)" stroke="#0891B2" stroke-width="1.5"/>
+  <path d="M230,80 L230,100" stroke="#7C3AED" stroke-width="2"/>
+  <rect x="130" y="100" width="200" height="40" rx="8" fill="rgba(124,58,237,0.1)" stroke="#7C3AED" stroke-width="1.5"/>
   <text x="230" y="125" text-anchor="middle" fill="currentColor" font-size="11">DXA (T-score) ± radio</text>
-  <path d="M230,140 L230,160" stroke="#0891B2" stroke-width="2"/>
+  <path d="M230,140 L230,160" stroke="#7C3AED" stroke-width="2"/>
   <rect x="100" y="160" width="260" height="40" rx="8" fill="rgba(5,150,105,0.12)" stroke="#059669" stroke-width="1.5"/>
   <text x="230" y="185" text-anchor="middle" fill="currentColor" font-size="11">Bilan étiologique (bio, 2e causes)</text>
-  <path d="M230,200 L230,220" stroke="#0891B2" stroke-width="2"/>
+  <path d="M230,200 L230,220" stroke="#7C3AED" stroke-width="2"/>
   <rect x="80" y="220" width="300" height="50" rx="8" fill="rgba(245,158,11,0.12)" stroke="#f59e0b" stroke-width="1.5"/>
   <text x="230" y="242" text-anchor="middle" fill="currentColor" font-size="11" font-weight="600">Traitement de fond + chute + Ca/vit D</text>
   <text x="230" y="258" text-anchor="middle" fill="currentColor" font-size="10" opacity="0.8">GRIO · durée limitée · réévaluation</text>
-  <rect x="60" y="290" width="340" height="60" rx="8" fill="rgba(8,145,178,0.06)"/>
+  <rect x="60" y="290" width="340" height="60" rx="8" fill="rgba(124,58,237,0.06)"/>
   <text x="230" y="315" text-anchor="middle" fill="currentColor" font-size="10">Ne pas confondre avec figures de fractures (6.1–6.4)</text>
-  <text x="230" y="335" text-anchor="middle" fill="#0891B2" font-size="10">Algorithme clinique · pas une image TDM</text>
+  <text x="230" y="335" text-anchor="middle" fill="#7C3AED" font-size="10">Algorithme clinique · pas une image TDM</text>
 </svg>`
   },
   "6.6": {
@@ -1325,19 +1325,19 @@ var INTERACTIVE_FIGURES = {
   <text x="230" y="80" text-anchor="middle" fill="#f59e0b" font-size="11" font-weight="700">T ≤ −2,5</text>
   <text x="230" y="98" text-anchor="middle" fill="currentColor" font-size="9">+ facteurs de risque</text>
   <text x="230" y="112" text-anchor="middle" fill="currentColor" font-size="9">→ discuter</text>
-  <rect x="310" y="55" width="120" height="70" rx="8" fill="rgba(8,145,178,0.12)" stroke="#0891B2" stroke-width="1.5"/>
-  <text x="370" y="80" text-anchor="middle" fill="#0891B2" font-size="11" font-weight="700">FRAX élevé</text>
+  <rect x="310" y="55" width="120" height="70" rx="8" fill="rgba(124,58,237,0.12)" stroke="#7C3AED" stroke-width="1.5"/>
+  <text x="370" y="80" text-anchor="middle" fill="#7C3AED" font-size="11" font-weight="700">FRAX élevé</text>
   <text x="370" y="98" text-anchor="middle" fill="currentColor" font-size="9">risque 10 ans</text>
   <text x="370" y="112" text-anchor="middle" fill="currentColor" font-size="9">→ individualiser</text>
   <path d="M230,125 L230,150" stroke="currentColor" stroke-width="2"/>
   <rect x="100" y="150" width="260" height="55" rx="8" fill="rgba(5,150,105,0.12)" stroke="#059669" stroke-width="1.5"/>
   <text x="230" y="175" text-anchor="middle" fill="currentColor" font-size="11" font-weight="600">Biphosphonate / dénosumab / autre</text>
   <text x="230" y="193" text-anchor="middle" fill="currentColor" font-size="9" opacity="0.8">+ calcium · vitamine D · prévention chute</text>
-  <rect x="60" y="225" width="340" height="90" rx="8" fill="rgba(8,145,178,0.06)"/>
+  <rect x="60" y="225" width="340" height="90" rx="8" fill="rgba(124,58,237,0.06)"/>
   <text x="230" y="250" text-anchor="middle" fill="currentColor" font-size="10" font-weight="600">Points clés gériatriques</text>
   <text x="230" y="270" text-anchor="middle" fill="currentColor" font-size="9">Clairance rénale · dentaire avant biphosphonate</text>
   <text x="230" y="288" text-anchor="middle" fill="currentColor" font-size="9">Durée 3–5 ans · réévaluation (fig. 6.7)</text>
-  <text x="230" y="305" text-anchor="middle" fill="#0891B2" font-size="9">Observance · effets indésirables (tableau 6.2)</text>
+  <text x="230" y="305" text-anchor="middle" fill="#7C3AED" font-size="9">Observance · effets indésirables (tableau 6.2)</text>
 </svg>`
   },
   "6.7": {
@@ -1346,9 +1346,9 @@ var INTERACTIVE_FIGURES = {
   <text x="230" y="22" text-anchor="middle" fill="currentColor" font-size="13" font-weight="700">Cycle thérapeutique (3–5 ans)</text>
   <text x="230" y="40" text-anchor="middle" fill="currentColor" font-size="10" opacity="0.7">Ostéoporose primitive · personne âgée</text>
   <!-- Timeline -->
-  <line x1="50" y1="120" x2="410" y2="120" stroke="#0891B2" stroke-width="3"/>
-  <circle cx="80" cy="120" r="12" fill="#0891B2"/>
-  <circle cx="180" cy="120" r="12" fill="#0891B2"/>
+  <line x1="50" y1="120" x2="410" y2="120" stroke="#7C3AED" stroke-width="3"/>
+  <circle cx="80" cy="120" r="12" fill="#7C3AED"/>
+  <circle cx="180" cy="120" r="12" fill="#7C3AED"/>
   <circle cx="280" cy="120" r="12" fill="#f59e0b"/>
   <circle cx="380" cy="120" r="12" fill="#059669"/>
   <text x="80" y="90" text-anchor="middle" fill="currentColor" font-size="10" font-weight="700">J0</text>
@@ -1363,10 +1363,10 @@ var INTERACTIVE_FIGURES = {
   <text x="380" y="90" text-anchor="middle" fill="currentColor" font-size="10" font-weight="700">Suite</text>
   <text x="380" y="155" text-anchor="middle" fill="currentColor" font-size="9">Holiday /</text>
   <text x="380" y="168" text-anchor="middle" fill="currentColor" font-size="8" opacity="0.7">relais / arrêt</text>
-  <rect x="50" y="200" width="360" height="75" rx="8" fill="rgba(8,145,178,0.07)"/>
+  <rect x="50" y="200" width="360" height="75" rx="8" fill="rgba(124,58,237,0.07)"/>
   <text x="230" y="225" text-anchor="middle" fill="currentColor" font-size="10" font-weight="600">Pendant tout le cycle</text>
   <text x="230" y="245" text-anchor="middle" fill="currentColor" font-size="9">Calcium + vitamine D · activité physique · prévention des chutes</text>
-  <text x="230" y="262" text-anchor="middle" fill="#0891B2" font-size="9">Réévaluer bénéfice / risque (rein, mâchoire, fractures atypiques)</text>
+  <text x="230" y="262" text-anchor="middle" fill="#7C3AED" font-size="9">Réévaluer bénéfice / risque (rein, mâchoire, fractures atypiques)</text>
 </svg>`
   },
 
@@ -1376,11 +1376,11 @@ var INTERACTIVE_FIGURES = {
     svg: `<style>
   .ch6-svg { font-family: 'Figtree', 'Noto Sans', sans-serif; }
   .ch6-svg .stage-box { cursor: pointer; }
-  .ch6-svg .bone-bg { fill: #e8ddd3; stroke: #164E63; stroke-width: 1.5; rx: 6; }
+  .ch6-svg .bone-bg { fill: #e8ddd3; stroke: #4C1D95; stroke-width: 1.5; rx: 6; }
   .ch6-svg .trab-healthy { stroke: #059669; stroke-width: 1.2; opacity: 0.6; fill: none; }
   .ch6-svg .trab-thin { stroke: #f59e0b; stroke-width: 0.8; opacity: 0.5; fill: none; }
   .ch6-svg .trab-lost { stroke: #ef4444; stroke-width: 0.5; opacity: 0.3; fill: none; stroke-dasharray: 3 2; }
-  .ch6-svg .arrow-down { fill: none; stroke: #0891B2; stroke-width: 2; marker-end: url(#ch6-arr);
+  .ch6-svg .arrow-down { fill: none; stroke: #7C3AED; stroke-width: 2; marker-end: url(#ch6-arr);
     stroke-dasharray: 60; stroke-dashoffset: 60; }
   .ch6-svg .arr1 { animation: ch6-draw 0.6s 0.8s ease-out forwards; }
   .ch6-svg .arr2 { animation: ch6-draw 0.6s 1.8s ease-out forwards; }
@@ -1395,7 +1395,7 @@ var INTERACTIVE_FIGURES = {
   @keyframes ch6-fade { to { opacity: 1; } }
 </style>
 <svg class="ch6-svg" viewBox="0 0 440 520" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;">
-  <defs><marker id="ch6-arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="none" stroke="#0891B2" stroke-width="1.5"/></marker></defs>
+  <defs><marker id="ch6-arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="none" stroke="#7C3AED" stroke-width="1.5"/></marker></defs>
   <text x="220" y="22" text-anchor="middle" fill="currentColor" font-size="13" font-weight="700">Cascade de l'ostéoporose</text>
   <!-- Stage 1: Normal -->
   <g class="stage-box stage s1">
@@ -1406,7 +1406,7 @@ var INTERACTIVE_FIGURES = {
     <line class="trab-healthy" x1="140" y1="75" x2="300" y2="75"/>
     <text class="label" x="220" y="90" text-anchor="middle" fill="#059669">Os normal</text>
     <text class="label-sm" x="220" y="100" text-anchor="middle">T-score ≥ -1</text>
-    <g class="tip"><rect x="100" y="105" width="240" height="30" rx="6" fill="rgba(22,78,99,0.92)" stroke="#059669" stroke-width="1"/><text x="220" y="124" text-anchor="middle" fill="#fff" font-size="9">Densité minérale osseuse normale · Trabécules denses</text></g>
+    <g class="tip"><rect x="100" y="105" width="240" height="30" rx="6" fill="rgba(76,29,149,0.92)" stroke="#059669" stroke-width="1"/><text x="220" y="124" text-anchor="middle" fill="#fff" font-size="9">Densité minérale osseuse normale · Trabécules denses</text></g>
   </g>
   <path class="arrow-down arr1" d="M220,108 L220,140"/>
   <!-- Stage 2: Ostéopenie -->
@@ -1417,7 +1417,7 @@ var INTERACTIVE_FIGURES = {
     <line class="trab-thin" x1="140" y1="170" x2="290" y2="170" opacity="0.3"/>
     <text class="label" x="220" y="185" text-anchor="middle" fill="#f59e0b">Ostéopenie</text>
     <text class="label-sm" x="220" y="195" text-anchor="middle">T-score -1 à -2.5</text>
-    <g class="tip"><rect x="100" y="200" width="240" height="30" rx="6" fill="rgba(22,78,99,0.92)" stroke="#f59e0b" stroke-width="1"/><text x="220" y="219" text-anchor="middle" fill="#fff" font-size="9">Perte trabéculaire débutante · Vit D + Ca²⁺ + exercice</text></g>
+    <g class="tip"><rect x="100" y="200" width="240" height="30" rx="6" fill="rgba(76,29,149,0.92)" stroke="#f59e0b" stroke-width="1"/><text x="220" y="219" text-anchor="middle" fill="#fff" font-size="9">Perte trabéculaire débutante · Vit D + Ca²⁺ + exercice</text></g>
   </g>
   <path class="arrow-down arr2" d="M220,203 L220,235"/>
   <!-- Stage 3: Ostéoporose -->
@@ -1427,7 +1427,7 @@ var INTERACTIVE_FIGURES = {
     <line class="trab-lost" x1="250" y1="245" x2="270" y2="245"/>
     <text class="label" x="220" y="280" text-anchor="middle" fill="#ef4444">Ostéoporose</text>
     <text class="label-sm" x="220" y="290" text-anchor="middle">T-score < -2.5</text>
-    <g class="tip"><rect x="80" y="295" width="280" height="30" rx="6" fill="rgba(22,78,99,0.92)" stroke="#ef4444" stroke-width="1"/><text x="220" y="314" text-anchor="middle" fill="#fff" font-size="9">Trabécules amincies · Biphosphonates · Densitométrie 2 ans</text></g>
+    <g class="tip"><rect x="80" y="295" width="280" height="30" rx="6" fill="rgba(76,29,149,0.92)" stroke="#ef4444" stroke-width="1"/><text x="220" y="314" text-anchor="middle" fill="#fff" font-size="9">Trabécules amincies · Biphosphonates · Densitométrie 2 ans</text></g>
   </g>
   <path class="arrow-down arr3" d="M220,298 L220,330"/>
   <!-- Stage 4: Fracture -->
@@ -1436,13 +1436,13 @@ var INTERACTIVE_FIGURES = {
     <text class="label" x="220" y="355" text-anchor="middle" fill="#ef4444">FRACTURE</text>
     <text class="label-sm" x="220" y="370" text-anchor="middle">Col fémorale · Vertèbre · Poignet</text>
     <text class="label-sm" x="220" y="382" text-anchor="middle">FRAX® : score de risque à 10 ans</text>
-    <g class="tip"><rect x="80" y="395" width="280" height="30" rx="6" fill="rgba(22,78,99,0.92)" stroke="#ef4444" stroke-width="1"/><text x="220" y="414" text-anchor="middle" fill="#fff" font-size="9">20% mortalité à 1 an (col fémorale) · Réhabilitation précoce</text></g>
+    <g class="tip"><rect x="80" y="395" width="280" height="30" rx="6" fill="rgba(76,29,149,0.92)" stroke="#ef4444" stroke-width="1"/><text x="220" y="414" text-anchor="middle" fill="#fff" font-size="9">20% mortalité à 1 an (col fémorale) · Réhabilitation précoce</text></g>
   </g>
   <!-- Stats -->
-  <rect x="60" y="440" width="320" height="60" rx="8" fill="rgba(8,145,178,0.05)"/>
+  <rect x="60" y="440" width="320" height="60" rx="8" fill="rgba(124,58,237,0.05)"/>
   <text x="220" y="458" text-anchor="middle" fill="currentColor" font-size="9" font-weight="600">Prévalence</text>
   <text x="220" y="473" text-anchor="middle" fill="currentColor" font-size="8.5" opacity="0.8">1 femme sur 3 · 1 homme sur 5 après 50 ans</text>
-  <text x="220" y="488" text-anchor="middle" fill="#0891B2" font-size="8.5">Dépistage : densitométrie (DEXA) si facteurs de risque</text>
+  <text x="220" y="488" text-anchor="middle" fill="#7C3AED" font-size="8.5">Dépistage : densitométrie (DEXA) si facteurs de risque</text>
 </svg>`
   },
 
@@ -1451,13 +1451,13 @@ var INTERACTIVE_FIGURES = {
     title: "Voies de la douleur — Gate Control",
     svg: `<style>
   .ch8-svg { font-family: 'Figtree', 'Noto Sans', sans-serif; }
-  .ch8-svg .path-line { fill: none; stroke: #0891B2; stroke-width: 2; stroke-linecap: round; }
-  .ch8-svg .signal { fill: #0891B2; r: 4; opacity: 0; }
+  .ch8-svg .path-line { fill: none; stroke: #7C3AED; stroke-width: 2; stroke-linecap: round; }
+  .ch8-svg .signal { fill: #7C3AED; r: 4; opacity: 0; }
   .ch8-svg .sig1 { animation: ch8-pulse 1.5s 0.5s ease-in-out infinite; }
   .ch8-svg .sig2 { animation: ch8-pulse 1.5s 0.9s ease-in-out infinite; }
   .ch8-svg .sig3 { animation: ch8-pulse 1.5s 1.3s ease-in-out infinite; }
   .ch8-svg .sig4 { animation: ch8-pulse 1.5s 1.7s ease-in-out infinite; }
-  .ch8-svg .organ { fill: rgba(8,145,178,0.12); stroke: #0891B2; stroke-width: 1.5; rx: 8; }
+  .ch8-svg .organ { fill: rgba(124,58,237,0.12); stroke: #7C3AED; stroke-width: 1.5; rx: 8; }
   .ch8-svg .gate-box { fill: rgba(245,158,11,0.15); stroke: #f59e0b; stroke-width: 2; rx: 6; cursor: pointer; }
   .ch8-svg .label { fill: currentColor; font-size: 10px; font-weight: 600; }
   .ch8-svg .label-sm { fill: currentColor; font-size: 8px; opacity: 1; }
@@ -1496,7 +1496,7 @@ var INTERACTIVE_FIGURES = {
     <text x="250" y="228" text-anchor="middle" fill="#f59e0b" font-size="8" font-weight="700">GATE</text>
   </g>
   <!-- Gate control tooltip -->
-  <g class="tip"><rect x="100" y="255" width="220" height="50" rx="6" fill="rgba(22,78,99,0.92)" stroke="#f59e0b" stroke-width="1"/><text x="210" y="273" text-anchor="middle" fill="#fff" font-size="9" font-weight="600">Gate Control (Melzack & Wall)</text><text x="210" y="287" text-anchor="middle" fill="#fff" font-size="8.5">Fibres Aβ (toucher) ferment la porte</text><text x="210" y="299" text-anchor="middle" fill="#f59e0b" font-size="8">→ Massage, TENS, chaleur soulagent</text></g>
+  <g class="tip"><rect x="100" y="255" width="220" height="50" rx="6" fill="rgba(76,29,149,0.92)" stroke="#f59e0b" stroke-width="1"/><text x="210" y="273" text-anchor="middle" fill="#fff" font-size="9" font-weight="600">Gate Control (Melzack & Wall)</text><text x="210" y="287" text-anchor="middle" fill="#fff" font-size="8.5">Fibres Aβ (toucher) ferment la porte</text><text x="210" y="299" text-anchor="middle" fill="#f59e0b" font-size="8">→ Massage, TENS, chaleur soulagent</text></g>
   <!-- Ascending pathway -->
   <path class="path-line" d="M300,180 L360,140"/>
   <circle class="signal sig3" cx="330" cy="160"/>
@@ -1516,14 +1516,14 @@ var INTERACTIVE_FIGURES = {
     <text class="label-sm" x="465" y="63" text-anchor="middle">Perception</text>
   </g>
   <!-- Bottom: descending modulation -->
-  <path d="M430,80 L395,110 L300,230 L250,260" fill="none" stroke="#164E63" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.5"/>
-  <text x="350" y="260" fill="#164E63" font-size="8">Modulation</text>
-  <text x="350" y="272" fill="#164E63" font-size="8">descendante</text>
+  <path d="M430,80 L395,110 L300,230 L250,260" fill="none" stroke="#4C1D95" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.5"/>
+  <text x="350" y="260" fill="#4C1D95" font-size="8">Modulation</text>
+  <text x="350" y="272" fill="#4C1D95" font-size="8">descendante</text>
   <!-- Legend -->
-  <rect x="30" y="310" width="460" height="70" rx="8" fill="rgba(8,145,178,0.05)"/>
+  <rect x="30" y="310" width="460" height="70" rx="8" fill="rgba(124,58,237,0.05)"/>
   <text x="260" y="330" text-anchor="middle" fill="currentColor" font-size="9.5" font-weight="600">Douleur chez la personne âgée</text>
   <text x="260" y="345" text-anchor="middle" fill="currentColor" font-size="8.5" opacity="0.8">Seuil douloureux abaissé · Nociception altérée · Expression atypique</text>
-  <text x="260" y="360" text-anchor="middle" fill="#0891B2" font-size="8.5">Échelle EVA · EN · GDS · Douleur comportementale (ECPA)</text>
+  <text x="260" y="360" text-anchor="middle" fill="#7C3AED" font-size="8.5">Échelle EVA · EN · GDS · Douleur comportementale (ECPA)</text>
   <text x="260" y="374" text-anchor="middle" fill="#f59e0b" font-size="8">Tramadol : éviter si > 75 ans · Paracétamol = 1ère ligne</text>
 </svg>`
   },
@@ -1536,7 +1536,7 @@ var INTERACTIVE_FIGURES = {
   .ch10-svg .spectrum-bar { rx: 8; ry: 8; cursor: pointer; transition: opacity 0.3s; }
   .ch10-svg .spectrum-bar:hover { opacity: 1 !important; }
   .ch10-svg .bar1 { fill: rgba(5,150,105,0.2); stroke: #059669; stroke-width: 1.5; }
-  .ch10-svg .bar2 { fill: rgba(8,145,178,0.2); stroke: #0891B2; stroke-width: 1.5; }
+  .ch10-svg .bar2 { fill: rgba(124,58,237,0.2); stroke: #7C3AED; stroke-width: 1.5; }
   .ch10-svg .bar3 { fill: rgba(245,158,11,0.2); stroke: #f59e0b; stroke-width: 1.5; }
   .ch10-svg .bar4 { fill: rgba(239,68,68,0.15); stroke: #ef4444; stroke-width: 1.5; }
   .ch10-svg .bar5 { fill: rgba(239,68,68,0.25); stroke: #ef4444; stroke-width: 2; }
@@ -1559,43 +1559,43 @@ var INTERACTIVE_FIGURES = {
     <rect class="spectrum-bar bar1" x="20" y="55" width="90" height="50"/>
     <text class="seg-label" x="65" y="76" text-anchor="middle" fill="#059669">Tristesse</text>
     <text class="seg-label" x="65" y="89" text-anchor="middle" fill="#059669">normale</text>
-    <g class="tip"><rect x="10" y="110" width="110" height="40" rx="6" fill="rgba(22,78,99,0.92)" stroke="#059669" stroke-width="1"/><text x="65" y="128" text-anchor="middle" fill="#fff" font-size="8.5">Réaction adaptative</text><text x="65" y="142" text-anchor="middle" fill="#059669" font-size="8">Transitoire · Pas de critères DSM</text></g>
+    <g class="tip"><rect x="10" y="110" width="110" height="40" rx="6" fill="rgba(76,29,149,0.92)" stroke="#059669" stroke-width="1"/><text x="65" y="128" text-anchor="middle" fill="#fff" font-size="8.5">Réaction adaptative</text><text x="65" y="142" text-anchor="middle" fill="#059669" font-size="8">Transitoire · Pas de critères DSM</text></g>
   </g>
   <g class="seg fade-in">
     <rect class="spectrum-bar bar2" x="120" y="55" width="90" height="50"/>
-    <text class="seg-label" x="165" y="76" text-anchor="middle" fill="#0891B2">Deuil</text>
+    <text class="seg-label" x="165" y="76" text-anchor="middle" fill="#7C3AED">Deuil</text>
     <text class="seg-sub" x="165" y="89" text-anchor="middle">pathologique</text>
-    <g class="tip"><rect x="110" y="110" width="130" height="40" rx="6" fill="rgba(22,78,99,0.92)" stroke="#0891B2" stroke-width="1"/><text x="175" y="128" text-anchor="middle" fill="#fff" font-size="8.5">Durée > 6 mois</text><text x="175" y="142" text-anchor="middle" fill="#0891B2" font-size="8">Idéation suicidaire · Psychothérapie</text></g>
+    <g class="tip"><rect x="110" y="110" width="130" height="40" rx="6" fill="rgba(76,29,149,0.92)" stroke="#7C3AED" stroke-width="1"/><text x="175" y="128" text-anchor="middle" fill="#fff" font-size="8.5">Durée > 6 mois</text><text x="175" y="142" text-anchor="middle" fill="#7C3AED" font-size="8">Idéation suicidaire · Psychothérapie</text></g>
   </g>
   <g class="seg fade-in">
     <rect class="spectrum-bar bar3" x="220" y="55" width="95" height="50"/>
     <text class="seg-label" x="267" y="76" text-anchor="middle" fill="#f59e0b">Dépression</text>
     <text class="seg-sub" x="267" y="89" text-anchor="middle">légère</text>
-    <g class="tip"><rect x="210" y="110" width="140" height="40" rx="6" fill="rgba(22,78,99,0.92)" stroke="#f59e0b" stroke-width="1"/><text x="280" y="128" text-anchor="middle" fill="#fff" font-size="8.5">GDS 2-3 · Isolement</text><text x="280" y="142" text-anchor="middle" fill="#f59e0b" font-size="8">Activité sociale · Exercice · Suivi</text></g>
+    <g class="tip"><rect x="210" y="110" width="140" height="40" rx="6" fill="rgba(76,29,149,0.92)" stroke="#f59e0b" stroke-width="1"/><text x="280" y="128" text-anchor="middle" fill="#fff" font-size="8.5">GDS 2-3 · Isolement</text><text x="280" y="142" text-anchor="middle" fill="#f59e0b" font-size="8">Activité sociale · Exercice · Suivi</text></g>
   </g>
   <g class="seg fade-in">
     <rect class="spectrum-bar bar4" x="325" y="55" width="95" height="50"/>
     <text class="seg-label" x="372" y="76" text-anchor="middle" fill="#ef4444">Dépression</text>
     <text class="seg-sub" x="372" y="89" text-anchor="middle">majeure</text>
-    <g class="tip"><rect x="310" y="110" width="150" height="40" rx="6" fill="rgba(22,78,99,0.92)" stroke="#ef4444" stroke-width="1"/><text x="385" y="128" text-anchor="middle" fill="#fff" font-size="8.5">GDS 4-5 · ISRS 1ère ligne</text><text x="385" y="142" text-anchor="middle" fill="#ef4444" font-size="8">Mirtazapine si insomnia/anorexie</text></g>
+    <g class="tip"><rect x="310" y="110" width="150" height="40" rx="6" fill="rgba(76,29,149,0.92)" stroke="#ef4444" stroke-width="1"/><text x="385" y="128" text-anchor="middle" fill="#fff" font-size="8.5">GDS 4-5 · ISRS 1ère ligne</text><text x="385" y="142" text-anchor="middle" fill="#ef4444" font-size="8">Mirtazapine si insomnia/anorexie</text></g>
   </g>
   <g class="seg fade-in">
     <rect class="spectrum-bar bar5" x="430" y="55" width="75" height="50"/>
     <text class="seg-label" x="467" y="76" text-anchor="middle" fill="#ef4444">Risque</text>
     <text class="seg-sub" x="467" y="89" text-anchor="middle">suicidaire</text>
-    <g class="tip"><rect x="395" y="110" width="120" height="40" rx="6" fill="rgba(22,78,99,0.92)" stroke="#ef4444" stroke-width="1"/><text x="455" y="128" text-anchor="middle" fill="#fff" font-size="8.5">Urgence psychiatrique</text><text x="455" y="142" text-anchor="middle" fill="#ef4444" font-size="8">Hospitalisation si nécessaire</text></g>
+    <g class="tip"><rect x="395" y="110" width="120" height="40" rx="6" fill="rgba(76,29,149,0.92)" stroke="#ef4444" stroke-width="1"/><text x="455" y="128" text-anchor="middle" fill="#fff" font-size="8.5">Urgence psychiatrique</text><text x="455" y="142" text-anchor="middle" fill="#ef4444" font-size="8">Hospitalisation si nécessaire</text></g>
   </g>
   <!-- Severity arrow -->
   <line x1="20" y1="120" x2="505" y2="120" stroke="currentColor" stroke-width="1" opacity="0.2"/>
   <text x="260" y="135" text-anchor="middle" fill="currentColor" font-size="8" opacity="0.5">Sévérité croissante →</text>
   <!-- Prevalence & screening -->
-  <rect x="40" y="160" width="440" height="160" rx="8" fill="rgba(8,145,178,0.05)"/>
+  <rect x="40" y="160" width="440" height="160" rx="8" fill="rgba(124,58,237,0.05)"/>
   <text x="260" y="180" text-anchor="middle" fill="currentColor" font-size="10" font-weight="600">Dépistage</text>
   <text x="260" y="198" text-anchor="middle" fill="currentColor" font-size="9" opacity="0.8">GDS-15 (Geriatric Depression Scale) · PHQ-9 · Questionnaire de Yesavage</text>
   <text x="260" y="218" text-anchor="middle" fill="currentColor" font-size="10" font-weight="600">Prévalence</text>
   <text x="260" y="236" text-anchor="middle" fill="currentColor" font-size="9" opacity="0.8">15% des > 65 ans en communauté · 30-40% en EHPAD</text>
   <text x="260" y="256" text-anchor="middle" fill="currentColor" font-size="10" font-weight="600">Particularités gériatriques</text>
-  <text x="260" y="274" text-anchor="middle" fill="#0891B2" font-size="9">Somatisation · Troubles cognitifs réversibles ("pseudodémence")</text>
+  <text x="260" y="274" text-anchor="middle" fill="#7C3AED" font-size="9">Somatisation · Troubles cognitifs réversibles ("pseudodémence")</text>
   <text x="260" y="290" text-anchor="middle" fill="#f59e0b" font-size="9">Comorbidités : AVC · Parkinson · Insuffisance cardiaque · Diabète</text>
   <text x="260" y="308" text-anchor="middle" fill="#ef4444" font-size="8.5" font-weight="600">⚠ Toute idéation suicidaire = évaluation psychiatrique urgente</text>
 </svg>`
@@ -1608,14 +1608,14 @@ var INTERACTIVE_FIGURES = {
   .ch11-svg { font-family: 'Figtree', 'Noto Sans', sans-serif; }
   .ch11-svg .crit-box { rx: 8; cursor: pointer; transition: all 0.3s; }
   .ch11-svg .crit-box:hover { filter: brightness(1.15); }
-  .ch11-svg .c1 { fill: rgba(8,145,178,0.15); stroke: #0891B2; stroke-width: 2; }
+  .ch11-svg .c1 { fill: rgba(124,58,237,0.15); stroke: #7C3AED; stroke-width: 2; }
   .ch11-svg .c2 { fill: rgba(5,150,105,0.15); stroke: #059669; stroke-width: 2; }
   .ch11-svg .c3 { fill: rgba(245,158,11,0.15); stroke: #f59e0b; stroke-width: 2; }
   .ch11-svg .c4 { fill: rgba(239,68,68,0.15); stroke: #ef4444; stroke-width: 2; }
   .ch11-svg .result-box { rx: 10; stroke-width: 2.5; }
   .ch11-svg .pos { fill: rgba(239,68,68,0.12); stroke: #ef4444; }
   .ch11-svg .neg { fill: rgba(5,150,105,0.12); stroke: #059669; }
-  .ch11-svg .arrow { fill: none; stroke: #0891B2; stroke-width: 1.5; stroke-dasharray: 5 3; opacity: 0.5; }
+  .ch11-svg .arrow { fill: none; stroke: #7C3AED; stroke-width: 1.5; stroke-dasharray: 5 3; opacity: 0.5; }
   .ch11-svg .label { fill: currentColor; font-size: 10px; font-weight: 600; }
   .ch11-svg .label-sm { fill: currentColor; font-size: 8px; opacity: 1; }
   .ch11-svg .fade-in { opacity: 0; animation: ch11-fade 0.5s forwards; }
@@ -1634,7 +1634,7 @@ var INTERACTIVE_FIGURES = {
   <!-- 4 Criteria -->
   <g class="fade-in">
     <rect class="crit-box c1" x="30" y="45" width="220" height="55"/>
-    <text class="label" x="140" y="65" text-anchor="middle" fill="#0891B2">(1) Début aigu</text>
+    <text class="label" x="140" y="65" text-anchor="middle" fill="#7C3AED">(1) Début aigu</text>
     <text class="label-sm" x="140" y="80" text-anchor="middle">Fluctuation au cours de la journée</text>
     <text class="label-sm" x="140" y="92" text-anchor="middle">Apparition en heures/jours</text>
   </g>
@@ -1661,8 +1661,8 @@ var INTERACTIVE_FIGURES = {
   <line class="arrow" x1="380" y1="170" x2="380" y2="210"/>
   <!-- Decision node -->
   <g class="fade-in">
-    <rect x="100" y="210" width="320" height="45" rx="8" fill="rgba(8,145,178,0.1)" stroke="#0891B2" stroke-width="1.5"/>
-    <text class="label" x="260" y="232" text-anchor="middle" fill="#0891B2">Algorithme diagnostique</text>
+    <rect x="100" y="210" width="320" height="45" rx="8" fill="rgba(124,58,237,0.1)" stroke="#7C3AED" stroke-width="1.5"/>
+    <text class="label" x="260" y="232" text-anchor="middle" fill="#7C3AED">Algorithme diagnostique</text>
     <text class="label-sm" x="260" y="246" text-anchor="middle">(1) OBLIGATOIRE + (2) OU (3+4)</text>
   </g>
   <line class="arrow" x1="200" y1="255" x2="130" y2="295"/>
@@ -1682,9 +1682,9 @@ var INTERACTIVE_FIGURES = {
     <text class="label-sm" x="385" y="347" text-anchor="middle">Rechercher autre cause</text>
   </g>
   <!-- Bottom info -->
-  <rect x="40" y="380" width="440" height="45" rx="8" fill="rgba(8,145,178,0.05)"/>
+  <rect x="40" y="380" width="440" height="45" rx="8" fill="rgba(124,58,237,0.05)"/>
   <text x="260" y="398" text-anchor="middle" fill="currentColor" font-size="9.5" font-weight="600">Sensibilité 94-100% · Spécificité 90-95%</text>
-  <text x="260" y="415" text-anchor="middle" fill="#0891B2" font-size="8.5">Origine : Infection · Métabolique · Médicamenteuse · Sevrage</text>
+  <text x="260" y="415" text-anchor="middle" fill="#7C3AED" font-size="8.5">Origine : Infection · Métabolique · Médicamenteuse · Sevrage</text>
 </svg>`
   },
 
@@ -1694,12 +1694,12 @@ var INTERACTIVE_FIGURES = {
     svg: `<style>
   .ch12-svg { font-family: 'Figtree', 'Noto Sans', sans-serif; }
   .ch12-svg .chain-node { rx: 8; stroke-width: 2; cursor: pointer; }
-  .ch12-svg .n-intra { fill: rgba(8,145,178,0.12); stroke: #0891B2; }
+  .ch12-svg .n-intra { fill: rgba(124,58,237,0.12); stroke: #7C3AED; }
   .ch12-svg .n-extra { fill: rgba(5,150,105,0.12); stroke: #059669; }
   .ch12-svg .n-trig { fill: rgba(245,158,11,0.15); stroke: #f59e0b; }
   .ch12-svg .n-fall { fill: rgba(239,68,68,0.12); stroke: #ef4444; }
   .ch12-svg .n-cons { fill: rgba(239,68,68,0.20); stroke: #ef4444; stroke-width: 2.5; }
-  .ch12-svg .arrow-v { fill: none; stroke: #0891B2; stroke-width: 2; marker-end: url(#ch12-arr);
+  .ch12-svg .arrow-v { fill: none; stroke: #7C3AED; stroke-width: 2; marker-end: url(#ch12-arr);
     stroke-dasharray: 40; stroke-dashoffset: 40; }
   .ch12-svg .a1 { animation: ch12-draw 0.5s 0.5s ease-out forwards; }
   .ch12-svg .a2 { animation: ch12-draw 0.5s 1.3s ease-out forwards; }
@@ -1717,12 +1717,12 @@ var INTERACTIVE_FIGURES = {
   @keyframes ch12-fade { to { opacity: 1; } }
 </style>
 <svg class="ch12-svg" viewBox="0 0 440 520" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;">
-  <defs><marker id="ch12-arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="none" stroke="#0891B2" stroke-width="1.5"/></marker></defs>
+  <defs><marker id="ch12-arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="none" stroke="#7C3AED" stroke-width="1.5"/></marker></defs>
   <text x="220" y="22" text-anchor="middle" fill="currentColor" font-size="13" font-weight="700">Chaîne de chute</text>
   <!-- Node 1: Intrinsèques -->
   <g class="chain-el">
     <rect class="chain-node n-intra" x="90" y="40" width="260" height="55"/>
-    <text class="label" x="220" y="60" text-anchor="middle" fill="#0891B2">Facteurs intrinsèques</text>
+    <text class="label" x="220" y="60" text-anchor="middle" fill="#7C3AED">Facteurs intrinsèques</text>
     <text class="label-sm" x="220" y="75" text-anchor="middle">Âge · Vision · Proprioception · Force · Équilibre</text>
     <text class="label-sm" x="220" y="86" text-anchor="middle">Cognition · Hypotension orthostatique · Pieds</text>
   </g>
@@ -1772,7 +1772,7 @@ var INTERACTIVE_FIGURES = {
   .ch14-svg .pyra-level { cursor: pointer; transition: opacity 0.3s; }
   .ch14-svg .pyra-level:hover { opacity: 1 !important; }
   .ch14-svg .pyra-shape { stroke-width: 1.5; }
-  .ch14-svg .p1 { fill: rgba(8,145,178,0.20); stroke: #0891B2; }
+  .ch14-svg .p1 { fill: rgba(124,58,237,0.20); stroke: #7C3AED; }
   .ch14-svg .p2 { fill: rgba(5,150,105,0.18); stroke: #059669; }
   .ch14-svg .p3 { fill: rgba(245,158,11,0.18); stroke: #f59e0b; }
   .ch14-svg .p4 { fill: rgba(239,68,68,0.12); stroke: #ef4444; }
@@ -1794,44 +1794,44 @@ var INTERACTIVE_FIGURES = {
   <!-- Base: Hydratation -->
   <g class="pyra-level fade-in">
     <polygon class="pyra-shape p1" points="60,410 420,410 380,360 100,360"/>
-    <text class="label" x="240" y="382" text-anchor="middle" fill="#0891B2">💧 HYDRATATION</text>
+    <text class="label" x="240" y="382" text-anchor="middle" fill="#7C3AED">💧 HYDRATATION</text>
     <text class="label-sm" x="240" y="398" text-anchor="middle">1.5 L/j minimum · Eau · Tisanes · Bouillon</text>
-    <g class="tip"><rect x="100" y="412" width="280" height="30" rx="6" fill="rgba(22,78,99,0.92)" stroke="#0891B2" stroke-width="1"/><text x="240" y="431" text-anchor="middle" fill="#fff" font-size="9">Déshydratation = confusion, constipation, chutes · Coloration urinaire</text></g>
+    <g class="tip"><rect x="100" y="412" width="280" height="30" rx="6" fill="rgba(76,29,149,0.92)" stroke="#7C3AED" stroke-width="1"/><text x="240" y="431" text-anchor="middle" fill="#fff" font-size="9">Déshydratation = confusion, constipation, chutes · Coloration urinaire</text></g>
   </g>
   <!-- Level 2: Féculents + Légumes -->
   <g class="pyra-level fade-in">
     <polygon class="pyra-shape p2" points="100,358 380,358 340,300 140,300"/>
     <text class="label" x="240" y="325" text-anchor="middle" fill="#059669">Féculents · Légumes · Fruits</text>
     <text class="label-sm" x="240" y="342" text-anchor="middle">Céréales complètes · Fibres · Vitamines</text>
-    <g class="tip"><rect x="80" y="360" width="320" height="30" rx="6" fill="rgba(22,78,99,0.92)" stroke="#059669" stroke-width="1"/><text x="240" y="379" text-anchor="middle" fill="#fff" font-size="9">Prévention constipation · Microbiote · Antioxydants</text></g>
+    <g class="tip"><rect x="80" y="360" width="320" height="30" rx="6" fill="rgba(76,29,149,0.92)" stroke="#059669" stroke-width="1"/><text x="240" y="379" text-anchor="middle" fill="#fff" font-size="9">Prévention constipation · Microbiote · Antioxydants</text></g>
   </g>
   <!-- Level 3: Protéines -->
   <g class="pyra-level fade-in">
     <polygon class="pyra-shape p3" points="140,298 340,298 300,240 180,240"/>
     <text class="label" x="240" y="265" text-anchor="middle" fill="#f59e0b">Protéines</text>
     <text class="label-sm" x="240" y="282" text-anchor="middle">Viande · Poisson · Œufs · Légumineuses</text>
-    <g class="tip"><rect x="80" y="300" width="320" height="30" rx="6" fill="rgba(22,78,99,0.92)" stroke="#f59e0b" stroke-width="1"/><text x="240" y="319" text-anchor="middle" fill="#fff" font-size="9">1.0-1.2 g/kg/j · Prévention sarcopénie · Collation le soir</text></g>
+    <g class="tip"><rect x="80" y="300" width="320" height="30" rx="6" fill="rgba(76,29,149,0.92)" stroke="#f59e0b" stroke-width="1"/><text x="240" y="319" text-anchor="middle" fill="#fff" font-size="9">1.0-1.2 g/kg/j · Prévention sarcopénie · Collation le soir</text></g>
   </g>
   <!-- Level 4: Lipides -->
   <g class="pyra-level fade-in">
     <polygon class="pyra-shape p4" points="180,238 300,238 270,195 210,195"/>
     <text class="label" x="240" y="215" text-anchor="middle" fill="#ef4444">Lipides</text>
     <text class="label-sm" x="240" y="228" text-anchor="middle">Oméga-3 · Huile d'olive</text>
-    <g class="tip"><rect x="80" y="240" width="320" height="30" rx="6" fill="rgba(22,78,99,0.92)" stroke="#ef4444" stroke-width="1"/><text x="240" y="259" text-anchor="middle" fill="#fff" font-size="9">Modération mais pas de restriction excessive · Absorption vitamines liposolubles</text></g>
+    <g class="tip"><rect x="80" y="240" width="320" height="30" rx="6" fill="rgba(76,29,149,0.92)" stroke="#ef4444" stroke-width="1"/><text x="240" y="259" text-anchor="middle" fill="#fff" font-size="9">Modération mais pas de restriction excessive · Absorption vitamines liposolubles</text></g>
   </g>
   <!-- Top: Suppléments -->
   <g class="pyra-level fade-in">
     <polygon class="pyra-shape p5" points="210,193 270,193 255,155 225,155"/>
     <text class="label" x="240" y="172" text-anchor="middle" fill="#8B5CF6">Suppléments</text>
     <text class="label-sm" x="240" y="185" text-anchor="middle">Vit D · Ca²⁺</text>
-    <g class="tip"><rect x="80" y="195" width="320" height="30" rx="6" fill="rgba(22,78,99,0.92)" stroke="#8B5CF6" stroke-width="1"/><text x="240" y="214" text-anchor="middle" fill="#fff" font-size="9">Vit D 800-1000 UI/j · Ca 1.2g/j · B12 si carence</text></g>
+    <g class="tip"><rect x="80" y="195" width="320" height="30" rx="6" fill="rgba(76,29,149,0.92)" stroke="#8B5CF6" stroke-width="1"/><text x="240" y="214" text-anchor="middle" fill="#fff" font-size="9">Vit D 800-1000 UI/j · Ca 1.2g/j · B12 si carence</text></g>
   </g>
   <!-- Arrow: left = less, right = more -->
   <text x="50" y="380" fill="currentColor" font-size="8" opacity="0.5" transform="rotate(-60,50,380)">Moins →</text>
   <text x="430" y="380" fill="currentColor" font-size="8" opacity="0.5" transform="rotate(60,430,380)">← Plus</text>
   <!-- MNA tool -->
-  <rect x="100" y="440" width="280" height="30" rx="8" fill="rgba(8,145,178,0.05)"/>
-  <text x="240" y="460" text-anchor="middle" fill="#0891B2" font-size="9.5" font-weight="600">Évaluation : MNA (Mini Nutritional Assessment)</text>
+  <rect x="100" y="440" width="280" height="30" rx="8" fill="rgba(124,58,237,0.05)"/>
+  <text x="240" y="460" text-anchor="middle" fill="#7C3AED" font-size="9.5" font-weight="600">Évaluation : MNA (Mini Nutritional Assessment)</text>
 </svg>`
   },
 
@@ -1841,7 +1841,7 @@ var INTERACTIVE_FIGURES = {
     svg: `<style>
   .ch15-svg { font-family: 'Figtree', 'Noto Sans', sans-serif; }
   .ch15-svg .organ { stroke-width: 1.5; cursor: pointer; }
-  .ch15-svg .bladder { fill: rgba(8,145,178,0.15); stroke: #0891B2; }
+  .ch15-svg .bladder { fill: rgba(124,58,237,0.15); stroke: #7C3AED; }
   .ch15-svg .urethra { fill: rgba(5,150,105,0.12); stroke: #059669; }
   .ch15-svg .sphincter { fill: rgba(245,158,11,0.2); stroke: #f59e0b; stroke-width: 2; }
   .ch15-svg .detrusor { fill: rgba(239,68,68,0.12); stroke: #ef4444; stroke-dasharray: 4 2; stroke-width: 1.5; }
@@ -1864,7 +1864,7 @@ var INTERACTIVE_FIGURES = {
   <text x="240" y="22" text-anchor="middle" fill="currentColor" font-size="13" font-weight="700">Anatomie vésicale simplifiée</text>
   <!-- Bladder -->
   <ellipse class="organ bladder" cx="240" cy="110" rx="80" ry="55"/>
-  <text class="label" x="240" y="105" text-anchor="middle" fill="#0891B2">Vessie</text>
+  <text class="label" x="240" y="105" text-anchor="middle" fill="#7C3AED">Vessie</text>
   <text class="label-sm" x="240" y="120" text-anchor="middle">Détrusor (muscle lisse)</text>
   <!-- Urethra -->
   <rect class="organ urethra" x="225" y="165" width="30" height="60" rx="6"/>
@@ -1880,24 +1880,24 @@ var INTERACTIVE_FIGURES = {
     <text class="label" x="85" y="282" text-anchor="middle" fill="#059669">Continence</text>
     <text class="label-sm" x="85" y="297" text-anchor="middle">Réflexe mictionnel</text>
     <text class="label-sm" x="85" y="309" text-anchor="middle">normal · Volontaire</text>
-    <g class="tip"><rect x="10" y="332" width="150" height="30" rx="6" fill="rgba(22,78,99,0.92)" stroke="#059669" stroke-width="1"/><text x="85" y="351" text-anchor="middle" fill="#fff" font-size="8.5">Remplissage → Signal → Miction</text></g>
+    <g class="tip"><rect x="10" y="332" width="150" height="30" rx="6" fill="rgba(76,29,149,0.92)" stroke="#059669" stroke-width="1"/><text x="85" y="351" text-anchor="middle" fill="#fff" font-size="8.5">Remplissage → Signal → Miction</text></g>
   </g>
   <g class="fade-in">
     <rect class="state-box s2" x="175" y="260" width="130" height="70"/>
     <text class="label" x="240" y="282" text-anchor="middle" fill="#ef4444">Urgence</text>
     <text class="label-sm" x="240" y="297" text-anchor="middle">Détrusor hyperactif</text>
     <text class="label-sm" x="240" y="309" text-anchor="middle">Contractions involontaires</text>
-    <g class="tip"><rect x="165" y="332" width="150" height="30" rx="6" fill="rgba(22,78,99,0.92)" stroke="#ef4444" stroke-width="1"/><text x="240" y="351" text-anchor="middle" fill="#fff" font-size="8.5">Anticholinergiques · Rééducation</text></g>
+    <g class="tip"><rect x="165" y="332" width="150" height="30" rx="6" fill="rgba(76,29,149,0.92)" stroke="#ef4444" stroke-width="1"/><text x="240" y="351" text-anchor="middle" fill="#fff" font-size="8.5">Anticholinergiques · Rééducation</text></g>
   </g>
   <g class="fade-in">
     <rect class="state-box s3" x="330" y="260" width="130" height="70"/>
     <text class="label" x="395" y="282" text-anchor="middle" fill="#f59e0b">Effort</text>
     <text class="label-sm" x="395" y="297" text-anchor="middle">Sphincter faible</text>
     <text class="label-sm" x="395" y="309" text-anchor="middle">Toux · Rire · Port</text>
-    <g class="tip"><rect x="320" y="332" width="150" height="30" rx="6" fill="rgba(22,78,99,0.92)" stroke="#f59e0b" stroke-width="1"/><text x="395" y="351" text-anchor="middle" fill="#fff" font-size="8.5">Périnée · Chirurgie · TVT</text></g>
+    <g class="tip"><rect x="320" y="332" width="150" height="30" rx="6" fill="rgba(76,29,149,0.92)" stroke="#f59e0b" stroke-width="1"/><text x="395" y="351" text-anchor="middle" fill="#fff" font-size="8.5">Périnée · Chirurgie · TVT</text></g>
   </g>
   <!-- Prevalence -->
-  <rect x="60" y="370" width="360" height="25" rx="6" fill="rgba(8,145,178,0.05)"/>
+  <rect x="60" y="370" width="360" height="25" rx="6" fill="rgba(124,58,237,0.05)"/>
   <text x="240" y="387" text-anchor="middle" fill="currentColor" font-size="8.5">Prévalence : 30% des > 65 ans · 50% en EHPAD · Femmes ++</text>
 </svg>`
   },
@@ -1909,11 +1909,11 @@ var INTERACTIVE_FIGURES = {
   .ch16-svg { font-family: 'Figtree', 'Noto Sans', sans-serif; }
   .ch16-svg .step-box { rx: 8; stroke-width: 2; cursor: pointer; }
   .ch16-svg .step-box:hover { filter: brightness(1.12); }
-  .ch16-svg .step1 { fill: rgba(8,145,178,0.15); stroke: #0891B2; }
+  .ch16-svg .step1 { fill: rgba(124,58,237,0.15); stroke: #7C3AED; }
   .ch16-svg .step2 { fill: rgba(245,158,11,0.15); stroke: #f59e0b; }
   .ch16-svg .step3 { fill: rgba(239,68,68,0.12); stroke: #ef4444; }
   .ch16-svg .step4 { fill: rgba(239,68,68,0.20); stroke: #ef4444; stroke-width: 2.5; }
-  .ch16-svg .arrow { fill: none; stroke: #0891B2; stroke-width: 2; marker-end: url(#ch16-arr);
+  .ch16-svg .arrow { fill: none; stroke: #7C3AED; stroke-width: 2; marker-end: url(#ch16-arr);
     stroke-dasharray: 50; stroke-dashoffset: 50; }
   .ch16-svg .a1 { animation: ch16-draw 0.5s 0.5s ease-out forwards; }
   .ch16-svg .a2 { animation: ch16-draw 0.5s 1.5s ease-out forwards; }
@@ -1930,12 +1930,12 @@ var INTERACTIVE_FIGURES = {
   @keyframes ch16-fade { to { opacity: 1; } }
 </style>
 <svg class="ch16-svg" viewBox="0 0 440 460" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;">
-  <defs><marker id="ch16-arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="none" stroke="#0891B2" stroke-width="1.5"/></marker></defs>
+  <defs><marker id="ch16-arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="none" stroke="#7C3AED" stroke-width="1.5"/></marker></defs>
   <text x="220" y="22" text-anchor="middle" fill="currentColor" font-size="13" font-weight="700">Cascade iatrogénique</text>
   <!-- Step 1: Prescription -->
   <g class="fade-in">
     <rect class="step-box step1" x="100" y="45" width="240" height="55"/>
-    <text class="label" x="220" y="67" text-anchor="middle" fill="#0891B2">1. Prescription</text>
+    <text class="label" x="220" y="67" text-anchor="middle" fill="#7C3AED">1. Prescription</text>
     <text class="label-sm" x="220" y="83" text-anchor="middle">Médicament A pour pathologie X</text>
   </g>
   <path class="arrow a1" d="M220,100 L220,130"/>
@@ -1976,7 +1976,7 @@ var INTERACTIVE_FIGURES = {
   .ch17-svg { font-family: 'Figtree', 'Noto Sans', sans-serif; }
   .ch17-svg .curve-cancer { fill: none; stroke: #ef4444; stroke-width: 2.5; stroke-linecap: round;
     stroke-dasharray: 500; stroke-dashoffset: 500; animation: ch17-draw 2s ease-out forwards; }
-  .ch17-svg .curve-degen { fill: none; stroke: #0891B2; stroke-width: 2.5; stroke-linecap: round;
+  .ch17-svg .curve-degen { fill: none; stroke: #7C3AED; stroke-width: 2.5; stroke-linecap: round;
     stroke-dasharray: none; stroke-dashoffset: 0; animation: ch17-draw 2.5s 0.5s ease-out forwards; }
   .ch17-svg .intervention { fill: #059669; stroke: #fff; stroke-width: 2; r: 5; opacity: 0; animation: ch17-fade 0.4s forwards; }
   .ch17-svg .int1 { animation-delay: 1.5s; }
@@ -2003,7 +2003,7 @@ var INTERACTIVE_FIGURES = {
   <text x="430" y="275" fill="#ef4444" font-size="9" font-weight="600">Cancer</text>
   <!-- Degenerative curve (sawtooth) -->
   <path class="curve-degen" d="M80,80 C120,90 140,100 160,95 C180,90 200,110 220,120 C240,115 260,140 280,150 C300,145 320,170 340,180 C360,175 380,200 400,220 C420,230 440,260 470,275"/>
-  <text x="475" y="270" fill="#0891B2" font-size="9" font-weight="600">Dégénérative</text>
+  <text x="475" y="270" fill="#7C3AED" font-size="9" font-weight="600">Dégénérative</text>
   <!-- Intervention points -->
   <circle class="intervention int1" cx="160" cy="95"/>
   <text x="170" y="92" fill="#059669" font-size="7.5">Hôpital</text>
@@ -2031,13 +2031,13 @@ var INTERACTIVE_FIGURES = {
   .ch18-svg { font-family: 'Figtree', 'Noto Sans', sans-serif; }
   .ch18-svg .step { rx: 8; stroke-width: 2; cursor: pointer; transition: filter 0.3s; }
   .ch18-svg .step:hover { filter: brightness(1.12); }
-  .ch18-svg .s1 { fill: rgba(8,145,178,0.15); stroke: #0891B2; }
+  .ch18-svg .s1 { fill: rgba(124,58,237,0.15); stroke: #7C3AED; }
   .ch18-svg .s2 { fill: rgba(5,150,105,0.12); stroke: #059669; }
   .ch18-svg .s3 { fill: rgba(245,158,11,0.12); stroke: #f59e0b; }
   .ch18-svg .s4 { fill: rgba(139,92,246,0.12); stroke: #8B5CF6; }
   .ch18-svg .s5 { fill: rgba(239,68,68,0.12); stroke: #ef4444; }
   .ch18-svg .s6 { fill: rgba(5,150,105,0.18); stroke: #059669; stroke-width: 2.5; }
-  .ch18-svg .arrow-r { fill: none; stroke: #0891B2; stroke-width: 1.5; marker-end: url(#ch18-arr);
+  .ch18-svg .arrow-r { fill: none; stroke: #7C3AED; stroke-width: 1.5; marker-end: url(#ch18-arr);
     stroke-dasharray: 30; stroke-dashoffset: 30; }
   .ch18-svg .a1 { animation: ch18-draw 0.4s 0.4s forwards; }
   .ch18-svg .a2 { animation: ch18-draw 0.4s 1.0s forwards; }
@@ -2059,12 +2059,12 @@ var INTERACTIVE_FIGURES = {
   @keyframes ch18-fade { to { opacity: 1; } }
 </style>
 <svg class="ch18-svg" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;">
-  <defs><marker id="ch18-arr" markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto"><path d="M0,0 L6,2.5 L0,5" fill="none" stroke="#0891B2" stroke-width="1"/></marker></defs>
+  <defs><marker id="ch18-arr" markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto"><path d="M0,0 L6,2.5 L0,5" fill="none" stroke="#7C3AED" stroke-width="1"/></marker></defs>
   <text x="260" y="22" text-anchor="middle" fill="currentColor" font-size="13" font-weight="700">Démarche clinique progressive</text>
   <!-- Step 1: Anamnèse -->
   <g class="fade-in">
     <rect class="step s1" x="15" y="50" width="75" height="60"/>
-    <text class="label" x="52" y="72" text-anchor="middle" fill="#0891B2">1</text>
+    <text class="label" x="52" y="72" text-anchor="middle" fill="#7C3AED">1</text>
     <text class="label-sm" x="52" y="87" text-anchor="middle">Anamnèse</text>
     <text class="label-sm" x="52" y="99" text-anchor="middle">Semiologie</text>
   </g>
@@ -2109,12 +2109,12 @@ var INTERACTIVE_FIGURES = {
     <text class="label-sm" x="485" y="99" text-anchor="middle">thérapeutique</text>
   </g>
   <!-- Bottom: Mini-dossiers context -->
-  <rect x="15" y="130" width="490" height="150" rx="8" fill="rgba(8,145,178,0.04)"/>
+  <rect x="15" y="130" width="490" height="150" rx="8" fill="rgba(124,58,237,0.04)"/>
   <text x="260" y="150" text-anchor="middle" fill="currentColor" font-size="10" font-weight="600">Mini-dossiers progressifs</text>
   <text x="260" y="170" text-anchor="middle" fill="currentColor" font-size="9" opacity="0.8">Étape 1 : Vous recevez les données de base (âge, motif, ATCD)</text>
   <text x="260" y="187" text-anchor="middle" fill="currentColor" font-size="9" opacity="0.8">Étape 2 : Vous demandez les examens pertinents</text>
   <text x="260" y="204" text-anchor="middle" fill="currentColor" font-size="9" opacity="0.8">Étape 3 : Résultats → Diagnostic → Plan thérapeutique</text>
-  <text x="260" y="224" text-anchor="middle" fill="#0891B2" font-size="9" font-weight="600">Objectif : reproduire la démarche clinique réelle</text>
+  <text x="260" y="224" text-anchor="middle" fill="#7C3AED" font-size="9" font-weight="600">Objectif : reproduire la démarche clinique réelle</text>
   <text x="260" y="244" text-anchor="middle" fill="#f59e0b" font-size="8.5">Ne pas passer directement au diagnostic → réfléchir étape par étape</text>
   <text x="260" y="262" text-anchor="middle" fill="currentColor" font-size="8" opacity="0.5">Méthode : hypothèse → argument pour/contre → conclusion</text>
 </svg>`
@@ -2125,15 +2125,15 @@ var INTERACTIVE_FIGURES = {
     title: "Résolution de problèmes cliniques",
     svg: `<style>
   .ch19-svg { font-family: 'Figtree', 'Noto Sans', sans-serif; }
-  .ch19-svg .center-circle { fill: rgba(8,145,178,0.15); stroke: #0891B2; stroke-width: 2.5; }
-  .ch19-svg .branch-line { stroke: #0891B2; stroke-width: 1.5; fill: none; stroke-dasharray: 80; stroke-dashoffset: 80; }
+  .ch19-svg .center-circle { fill: rgba(124,58,237,0.15); stroke: #7C3AED; stroke-width: 2.5; }
+  .ch19-svg .branch-line { stroke: #7C3AED; stroke-width: 1.5; fill: none; stroke-dasharray: 80; stroke-dashoffset: 80; }
   .ch19-svg .b1 { animation: ch19-draw 0.8s 0.3s ease-out forwards; }
   .ch19-svg .b2 { animation: ch19-draw 0.8s 0.8s ease-out forwards; }
   .ch19-svg .b3 { animation: ch19-draw 0.8s 1.3s ease-out forwards; }
   .ch19-svg .b4 { animation: ch19-draw 0.8s 1.8s ease-out forwards; }
   .ch19-svg .leaf { rx: 8; stroke-width: 1.5; cursor: pointer; }
   .ch19-svg .leaf:hover { filter: brightness(1.1); }
-  .ch19-svg .l1 { fill: rgba(8,145,178,0.12); stroke: #0891B2; }
+  .ch19-svg .l1 { fill: rgba(124,58,237,0.12); stroke: #7C3AED; }
   .ch19-svg .l2 { fill: rgba(5,150,105,0.12); stroke: #059669; }
   .ch19-svg .l3 { fill: rgba(245,158,11,0.12); stroke: #f59e0b; }
   .ch19-svg .l4 { fill: rgba(239,68,68,0.12); stroke: #ef4444; }
@@ -2151,13 +2151,13 @@ var INTERACTIVE_FIGURES = {
   <text x="240" y="22" text-anchor="middle" fill="currentColor" font-size="13" font-weight="700">Résolution de problèmes</text>
   <!-- Central node -->
   <circle class="center-circle" cx="240" cy="180" r="50" style="opacity:0;animation:ch19-fade 0.5s forwards;"/>
-  <text x="240" y="172" text-anchor="middle" fill="#0891B2" font-size="10" font-weight="700">Problème</text>
-  <text x="240" y="186" text-anchor="middle" fill="#0891B2" font-size="10" font-weight="700">clinique</text>
+  <text x="240" y="172" text-anchor="middle" fill="#7C3AED" font-size="10" font-weight="700">Problème</text>
+  <text x="240" y="186" text-anchor="middle" fill="#7C3AED" font-size="10" font-weight="700">clinique</text>
   <!-- Branch 1: Données -->
   <line class="branch-line b1" x1="200" y1="150" x2="100" y2="80"/>
   <g class="fade-in">
     <rect class="leaf l1" x="20" y="50" width="140" height="55"/>
-    <text class="leaf-label" x="90" y="70" text-anchor="middle" fill="#0891B2">Données</text>
+    <text class="leaf-label" x="90" y="70" text-anchor="middle" fill="#7C3AED">Données</text>
     <text class="leaf-sub" x="90" y="84" text-anchor="middle">Subjectives (anamnèse)</text>
     <text class="leaf-sub" x="90" y="96" text-anchor="middle">Objectives (examen, labo)</text>
   </g>
@@ -2186,8 +2186,8 @@ var INTERACTIVE_FIGURES = {
     <text class="leaf-sub" x="385" y="316" text-anchor="middle">Suivi · Réévaluation</text>
   </g>
   <!-- Bottom -->
-  <rect x="60" y="345" width="360" height="25" rx="6" fill="rgba(8,145,178,0.05)"/>
-  <text x="240" y="362" text-anchor="middle" fill="#0891B2" font-size="9" font-weight="600">Key Features Problems : raisonnement clinique structuré</text>
+  <rect x="60" y="345" width="360" height="25" rx="6" fill="rgba(124,58,237,0.05)"/>
+  <text x="240" y="362" text-anchor="middle" fill="#7C3AED" font-size="9" font-weight="600">Key Features Problems : raisonnement clinique structuré</text>
 </svg>`
   },
 
@@ -2198,20 +2198,20 @@ var INTERACTIVE_FIGURES = {
   .ch20-svg { font-family: 'Figtree', 'Noto Sans', sans-serif; }
   .ch20-svg .card { rx: 8; stroke-width: 1.5; cursor: pointer; transition: filter 0.3s; }
   .ch20-svg .card:hover { filter: brightness(1.15); }
-  .ch20-svg .c1 { fill: rgba(8,145,178,0.12); stroke: #0891B2; }
+  .ch20-svg .c1 { fill: rgba(124,58,237,0.12); stroke: #7C3AED; }
   .ch20-svg .c2 { fill: rgba(5,150,105,0.12); stroke: #059669; }
   .ch20-svg .c3 { fill: rgba(245,158,11,0.12); stroke: #f59e0b; }
   .ch20-svg .c4 { fill: rgba(239,68,68,0.10); stroke: #ef4444; }
   .ch20-svg .c5 { fill: rgba(139,92,246,0.12); stroke: #8B5CF6; }
-  .ch20-svg .c6 { fill: rgba(22,78,99,0.12); stroke: #164E63; }
+  .ch20-svg .c6 { fill: rgba(76,29,149,0.12); stroke: #4C1D95; }
   .ch20-svg .card-label { fill: currentColor; font-size: 9px; font-weight: 600; }
   .ch20-svg .card-count { font-size: 18px; font-weight: 800; opacity: 0; animation: ch20-fade 0.4s forwards; }
-  .ch20-svg .cc1 { fill: #0891B2; animation-delay: 0.3s; }
+  .ch20-svg .cc1 { fill: #7C3AED; animation-delay: 0.3s; }
   .ch20-svg .cc2 { fill: #059669; animation-delay: 0.6s; }
   .ch20-svg .cc3 { fill: #f59e0b; animation-delay: 0.9s; }
   .ch20-svg .cc4 { fill: #ef4444; animation-delay: 1.2s; }
   .ch20-svg .cc5 { fill: #8B5CF6; animation-delay: 1.5s; }
-  .ch20-svg .cc6 { fill: #164E63; animation-delay: 1.8s; }
+  .ch20-svg .cc6 { fill: #4C1D95; animation-delay: 1.8s; }
   .ch20-svg .tip { opacity: 0; pointer-events: none; transition: opacity 0.3s; }
   .ch20-svg .card:hover .tip { opacity: 1; }
   @keyframes ch20-fade { to { opacity: 1; } }
@@ -2221,44 +2221,44 @@ var INTERACTIVE_FIGURES = {
   <!-- 6 category cards -->
   <g><rect class="card c1" x="20" y="45" width="135" height="80"/>
     <text class="card-count cc1" x="87" y="80" text-anchor="middle">5</text>
-    <text class="card-label" x="87" y="100" text-anchor="middle" fill="#0891B2">Urgences</text>
+    <text class="card-label" x="87" y="100" text-anchor="middle" fill="#7C3AED">Urgences</text>
     <text class="card-label" x="87" y="115" text-anchor="middle" font-size="7" opacity="0.6">Chute · Confusion · Douleur</text>
-    <g class="tip"><rect x="10" y="128" width="155" height="25" rx="6" fill="rgba(22,78,99,0.92)" stroke="#0891B2" stroke-width="1"/><text x="87" y="145" text-anchor="middle" fill="#fff" font-size="8">ITEM 109, 131, 108, 130</text></g>
+    <g class="tip"><rect x="10" y="128" width="155" height="25" rx="6" fill="rgba(76,29,149,0.92)" stroke="#7C3AED" stroke-width="1"/><text x="87" y="145" text-anchor="middle" fill="#fff" font-size="8">ITEM 109, 131, 108, 130</text></g>
   </g>
   <g><rect class="card c2" x="172" y="45" width="135" height="80"/>
     <text class="card-count cc2" x="239" y="80" text-anchor="middle">6</text>
     <text class="card-label" x="239" y="100" text-anchor="middle" fill="#059669">Path. chroniques</text>
     <text class="card-label" x="239" y="115" text-anchor="middle" font-size="7" opacity="0.6">HTA · Diabète · BPCO</text>
-    <g class="tip"><rect x="162" y="128" width="155" height="25" rx="6" fill="rgba(22,78,99,0.92)" stroke="#059669" stroke-width="1"/><text x="239" y="145" text-anchor="middle" fill="#fff" font-size="8">ITEM 322, 325, 128</text></g>
+    <g class="tip"><rect x="162" y="128" width="155" height="25" rx="6" fill="rgba(76,29,149,0.92)" stroke="#059669" stroke-width="1"/><text x="239" y="145" text-anchor="middle" fill="#fff" font-size="8">ITEM 322, 325, 128</text></g>
   </g>
   <g><rect class="card c3" x="325" y="45" width="135" height="80"/>
     <text class="card-count cc3" x="392" y="80" text-anchor="middle">4</text>
     <text class="card-label" x="392" y="100" text-anchor="middle" fill="#f59e0b">Pharmacologie</text>
     <text class="card-label" x="392" y="115" text-anchor="middle" font-size="7" opacity="0.6">Polymédication · Iatrogénie</text>
-    <g class="tip"><rect x="315" y="128" width="155" height="25" rx="6" fill="rgba(22,78,99,0.92)" stroke="#f59e0b" stroke-width="1"/><text x="392" y="145" text-anchor="middle" fill="#fff" font-size="8">ITEM 322, 325</text></g>
+    <g class="tip"><rect x="315" y="128" width="155" height="25" rx="6" fill="rgba(76,29,149,0.92)" stroke="#f59e0b" stroke-width="1"/><text x="392" y="145" text-anchor="middle" fill="#fff" font-size="8">ITEM 322, 325</text></g>
   </g>
   <g><rect class="card c4" x="20" y="150" width="135" height="80"/>
     <text class="card-count cc4" x="87" y="185" text-anchor="middle">3</text>
     <text class="card-label" x="87" y="205" text-anchor="middle" fill="#ef4444">Éthique</text>
     <text class="card-label" x="87" y="220" text-anchor="middle" font-size="7" opacity="0.6">Fin de vie · Consentement</text>
-    <g class="tip"><rect x="10" y="233" width="155" height="25" rx="6" fill="rgba(22,78,99,0.92)" stroke="#ef4444" stroke-width="1"/><text x="87" y="250" text-anchor="middle" fill="#fff" font-size="8">ITEM 9, 139</text></g>
+    <g class="tip"><rect x="10" y="233" width="155" height="25" rx="6" fill="rgba(76,29,149,0.92)" stroke="#ef4444" stroke-width="1"/><text x="87" y="250" text-anchor="middle" fill="#fff" font-size="8">ITEM 9, 139</text></g>
   </g>
   <g><rect class="card c5" x="172" y="150" width="135" height="80"/>
     <text class="card-count cc5" x="239" y="185" text-anchor="middle">8</text>
     <text class="card-label" x="239" y="205" text-anchor="middle" fill="#8B5CF6">Gériatrie générale</text>
     <text class="card-label" x="239" y="220" text-anchor="middle" font-size="7" opacity="0.6">Vieillissement · Fragilité</text>
-    <g class="tip"><rect x="162" y="233" width="155" height="25" rx="6" fill="rgba(22,78,99,0.92)" stroke="#8B5CF6" stroke-width="1"/><text x="239" y="250" text-anchor="middle" fill="#fff" font-size="8">ITEM 123, 121, 230</text></g>
+    <g class="tip"><rect x="162" y="233" width="155" height="25" rx="6" fill="rgba(76,29,149,0.92)" stroke="#8B5CF6" stroke-width="1"/><text x="239" y="250" text-anchor="middle" fill="#fff" font-size="8">ITEM 123, 121, 230</text></g>
   </g>
   <g><rect class="card c6" x="325" y="150" width="135" height="80"/>
     <text class="card-count cc6" x="392" y="185" text-anchor="middle">5</text>
-    <text class="card-label" x="392" y="205" text-anchor="middle" fill="#164E63">Neurologie</text>
+    <text class="card-label" x="392" y="205" text-anchor="middle" fill="#4C1D95">Neurologie</text>
     <text class="card-label" x="392" y="220" text-anchor="middle" font-size="7" opacity="0.6">Démence · AVC · Parkinson</text>
-    <g class="tip"><rect x="315" y="233" width="155" height="25" rx="6" fill="rgba(22,78,99,0.92)" stroke="#164E63" stroke-width="1"/><text x="392" y="250" text-anchor="middle" fill="#fff" font-size="8">ITEM 23, 108</text></g>
+    <g class="tip"><rect x="315" y="233" width="155" height="25" rx="6" fill="rgba(76,29,149,0.92)" stroke="#4C1D95" stroke-width="1"/><text x="392" y="250" text-anchor="middle" fill="#fff" font-size="8">ITEM 23, 108</text></g>
   </g>
   <!-- Total -->
-  <rect x="120" y="260" width="240" height="40" rx="8" fill="rgba(8,145,178,0.08)"/>
+  <rect x="120" y="260" width="240" height="40" rx="8" fill="rgba(124,58,237,0.08)"/>
   <text x="240" y="280" text-anchor="middle" fill="currentColor" font-size="10" font-weight="600">31 questions isolées au total</text>
-  <text x="240" y="295" text-anchor="middle" fill="#0891B2" font-size="8.5">Chaque question = 1 scenario clinique court</text>
+  <text x="240" y="295" text-anchor="middle" fill="#7C3AED" font-size="8.5">Chaque question = 1 scenario clinique court</text>
 </svg>`
   }
 
@@ -2275,7 +2275,7 @@ INTERACTIVE_FIGURES['1.1'] = {
     .bouchon-exact .physio{fill:none;stroke:currentColor;stroke-width:4;stroke-linecap:round}
     .bouchon-exact .chronic{fill:none;stroke:#059669;stroke-width:5;stroke-linecap:round}
     .bouchon-exact .acute{fill:none;stroke:#ef4444;stroke-width:4;stroke-linecap:round}
-    .bouchon-exact .recovery{fill:none;stroke:#0891b2;stroke-width:3;stroke-dasharray:6 5;marker-end:url(#bouchon-up)}
+    .bouchon-exact .recovery{fill:none;stroke:#7C3AED;stroke-width:3;stroke-dasharray:6 5;marker-end:url(#bouchon-up)}
     .bouchon-exact .label{fill:currentColor;font-size:12px;font-weight:650}
     .bouchon-exact .tag{font-size:13px;font-weight:850}
     .bouchon-exact .event{transition:filter .2s,stroke-width .2s}
@@ -2284,7 +2284,7 @@ INTERACTIVE_FIGURES['1.1'] = {
   <svg class="bouchon-exact" viewBox="0 0 680 390" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="bouchon-title bouchon-desc">
     <title id="bouchon-title">Modèle de décompensation gériatrique de Bouchon</title>
     <desc id="bouchon-desc">Le vieillissement diminue progressivement la réserve. Une maladie chronique accentue cette pente. Un stress aigu provoque une chute sous le seuil d’insuffisance, partiellement réversible par l’intervention.</desc>
-    <defs><marker id="bouchon-up" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#0891b2"/></marker></defs>
+    <defs><marker id="bouchon-up" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#7C3AED"/></marker></defs>
     <line class="axis" x1="76" y1="35" x2="76" y2="330"/><line class="axis" x1="76" y1="330" x2="645" y2="330"/>
     <text class="label" x="22" y="185" transform="rotate(-90 22 185)" text-anchor="middle">Fonction d’organe</text>
     <text class="label" x="360" y="365" text-anchor="middle">Âge</text><text class="label" x="60" y="48" text-anchor="end">100 %</text><text class="label" x="60" y="328" text-anchor="end">0</text>
@@ -2294,11 +2294,11 @@ INTERACTIVE_FIGURES['1.1'] = {
     <path class="chronic" d="M205 82 C286 111 350 150 418 206 C466 232 520 247 585 258"/>
     <text class="tag" x="285" y="128" fill="#059669">2</text><text x="303" y="128" fill="#059669" font-size="12" font-weight="750">Maladie chronique</text>
     <g class="event"><path class="acute" d="M414 204 L414 292"/><circle cx="414" cy="204" r="6" fill="#ef4444"/><text class="tag" x="427" y="224" fill="#ef4444">3</text><text x="447" y="224" fill="#ef4444" font-size="12" font-weight="750">Stress aigu</text></g>
-    <path class="recovery" d="M414 292 C438 272 449 247 461 226"/><text x="471" y="244" fill="#0891b2" font-size="11" font-weight="750">Effet de l’intervention</text>
+    <path class="recovery" d="M414 292 C438 272 449 247 461 226"/><text x="471" y="244" fill="#7C3AED" font-size="11" font-weight="750">Effet de l’intervention</text>
     <g class="event"><path class="acute" d="M552 250 L552 309"/><circle cx="552" cy="250" r="5" fill="#ef4444"/></g>
     <path class="recovery" d="M552 309 C568 292 578 274 586 258"/>
     <path d="M76 266 H414 V292 H552 V309 H645" fill="none" stroke="rgba(239,68,68,.18)" stroke-width="18"/>
-    <g transform="translate(92 292)"><rect width="270" height="31" rx="15" fill="rgba(8,145,178,.10)"/><text x="135" y="20" text-anchor="middle" fill="currentColor" font-size="11" font-weight="700">Réserve fonctionnelle encore mobilisable</text></g>
+    <g transform="translate(92 292)"><rect width="270" height="31" rx="15" fill="rgba(124,58,237,.10)"/><text x="135" y="20" text-anchor="middle" fill="currentColor" font-size="11" font-weight="700">Réserve fonctionnelle encore mobilisable</text></g>
   </svg>`
 };
 
@@ -2306,8 +2306,8 @@ INTERACTIVE_FIGURES['7.2'] = {
   title: 'Signes radiographiques d’une coxarthrose polaire supérieure',
   svg: `<style>
     .cox-svg{font-family:'Figtree','Noto Sans',sans-serif;color:var(--text,#16324a)}
-    .cox-svg .bone{fill:rgba(8,145,178,.10);stroke:currentColor;stroke-width:3}
-    .cox-svg .dense{fill:none;stroke:#0891b2;stroke-width:12;stroke-linecap:round}
+    .cox-svg .bone{fill:rgba(124,58,237,.10);stroke:currentColor;stroke-width:3}
+    .cox-svg .dense{fill:none;stroke:#7C3AED;stroke-width:12;stroke-linecap:round}
     .cox-svg .joint{fill:none;stroke:#f59e0b;stroke-width:4;stroke-linecap:round}
     .cox-svg .leader{stroke:currentColor;stroke-width:1.5;opacity:.55}
     .cox-svg .call{font-size:12px;font-weight:750;fill:currentColor}
@@ -2324,16 +2324,16 @@ INTERACTIVE_FIGURES['7.2'] = {
     <g class="mark"><circle cx="246" cy="162" r="13" fill="rgba(239,68,68,.14)" stroke="#ef4444" stroke-width="3"/><circle cx="301" cy="150" r="9" fill="rgba(239,68,68,.14)" stroke="#ef4444" stroke-width="3"/></g>
     <path class="mark" d="M362 174 Q392 157 400 187 Q373 184 355 205" fill="rgba(5,150,105,.22)" stroke="#059669" stroke-width="3"/>
     <g><line class="leader" x1="164" y1="103" x2="72" y2="65"/><text class="call" x="24" y="55">A · Pincement supérieur</text><text x="24" y="72" fill="#f59e0b" font-size="11">interligne réduit</text></g>
-    <g><line class="leader" x1="226" y1="125" x2="492" y2="68"/><text class="call" x="500" y="58">B · Ostéocondensation</text><text x="500" y="75" fill="#0891b2" font-size="11">os sous-chondral</text></g>
+    <g><line class="leader" x1="226" y1="125" x2="492" y2="68"/><text class="call" x="500" y="58">B · Ostéocondensation</text><text x="500" y="75" fill="#7C3AED" font-size="11">os sous-chondral</text></g>
     <g><line class="leader" x1="274" y1="155" x2="510" y2="170"/><text class="call" x="520" y="165">C · Géodes</text><text x="520" y="182" fill="#ef4444" font-size="11">lacunes sous-chondrales</text></g>
     <g><line class="leader" x1="382" y1="181" x2="520" y2="267"/><text class="call" x="530" y="264">D · Ostéophytose</text><text x="530" y="281" fill="#059669" font-size="11">rebord marginal</text></g>
-    <g fill="#164e63" font-size="10" font-weight="850">
-      <circle cx="166" cy="188" r="12" fill="#fff" stroke="#164e63"/><text x="166" y="192" text-anchor="middle">1</text>
-      <circle cx="194" cy="235" r="12" fill="#fff" stroke="#164e63"/><text x="194" y="239" text-anchor="middle">2</text>
-      <circle cx="250" cy="281" r="12" fill="#fff" stroke="#164e63"/><text x="250" y="285" text-anchor="middle">3</text>
-      <circle cx="326" cy="263" r="12" fill="#fff" stroke="#164e63"/><text x="326" y="267" text-anchor="middle">4</text>
-      <circle cx="365" cy="223" r="12" fill="#fff" stroke="#164e63"/><text x="365" y="227" text-anchor="middle">5</text>
-      <circle cx="347" cy="151" r="12" fill="#fff" stroke="#164e63"/><text x="347" y="155" text-anchor="middle">6</text>
+    <g fill="#4C1D95" font-size="10" font-weight="850">
+      <circle cx="166" cy="188" r="12" fill="#fff" stroke="#4C1D95"/><text x="166" y="192" text-anchor="middle">1</text>
+      <circle cx="194" cy="235" r="12" fill="#fff" stroke="#4C1D95"/><text x="194" y="239" text-anchor="middle">2</text>
+      <circle cx="250" cy="281" r="12" fill="#fff" stroke="#4C1D95"/><text x="250" y="285" text-anchor="middle">3</text>
+      <circle cx="326" cy="263" r="12" fill="#fff" stroke="#4C1D95"/><text x="326" y="267" text-anchor="middle">4</text>
+      <circle cx="365" cy="223" r="12" fill="#fff" stroke="#4C1D95"/><text x="365" y="227" text-anchor="middle">5</text>
+      <circle cx="347" cy="151" r="12" fill="#fff" stroke="#4C1D95"/><text x="347" y="155" text-anchor="middle">6</text>
     </g>
     <text x="340" y="423" text-anchor="middle" fill="currentColor" font-size="11">Touchez ou survolez les anomalies colorées pour les repérer.</text>
   </svg>`
@@ -3959,7 +3959,7 @@ if (typeof window !== 'undefined') {
     },
     '13.3': function () {
       return figCard('13.3', 'Diminution des capacités en endurance au cours de la vie',
-        '<svg class="faithful-chart" viewBox="0 0 680 330" role="img" aria-label="Trois trajectoires de VO2 max avec seuil de marche et effet d’une immobilisation"><line x1="70" y1="25" x2="70" y2="285" stroke="currentColor" opacity=".4"/><line x1="70" y1="285" x2="645" y2="285" stroke="currentColor" opacity=".4"/><line x1="70" y1="220" x2="645" y2="220" stroke="#ef4444" stroke-dasharray="8 5"/><text x="638" y="210" text-anchor="end" fill="#ef4444" font-size="12">Seuil de capacité de marche</text><path d="M80 55 C230 75 420 105 625 145" fill="none" stroke="#0891b2" stroke-width="5"/><path d="M80 100 C240 125 430 160 625 205" fill="none" stroke="#059669" stroke-width="5"/><path d="M80 155 C235 178 420 218 625 265" fill="none" stroke="#f59e0b" stroke-width="5"/><rect x="430" y="25" width="38" height="260" fill="rgba(239,68,68,.10)"/><text x="449" y="42" text-anchor="middle" fill="#ef4444" font-size="11" transform="rotate(90 449 42)">Immobilisation</text><text x="90" y="45" fill="#0891b2" font-size="12">Réserves élevées</text><text x="90" y="93" fill="#059669" font-size="12">Sujet moyen</text><text x="90" y="148" fill="#f59e0b" font-size="12">Sujet fragile</text><text x="355" y="318" text-anchor="middle" fill="currentColor" font-size="12">Âge : 20–29 · 30–39 · 40–49 · 50–59 · 60–69 · 70+</text><text x="18" y="165" transform="rotate(-90 18 165)" text-anchor="middle" fill="currentColor" font-size="12">VO₂max (ml/min/kg)</text></svg>', 'Courbes');
+        '<svg class="faithful-chart" viewBox="0 0 680 330" role="img" aria-label="Trois trajectoires de VO2 max avec seuil de marche et effet d’une immobilisation"><line x1="70" y1="25" x2="70" y2="285" stroke="currentColor" opacity=".4"/><line x1="70" y1="285" x2="645" y2="285" stroke="currentColor" opacity=".4"/><line x1="70" y1="220" x2="645" y2="220" stroke="#ef4444" stroke-dasharray="8 5"/><text x="638" y="210" text-anchor="end" fill="#ef4444" font-size="12">Seuil de capacité de marche</text><path d="M80 55 C230 75 420 105 625 145" fill="none" stroke="#7C3AED" stroke-width="5"/><path d="M80 100 C240 125 430 160 625 205" fill="none" stroke="#059669" stroke-width="5"/><path d="M80 155 C235 178 420 218 625 265" fill="none" stroke="#f59e0b" stroke-width="5"/><rect x="430" y="25" width="38" height="260" fill="rgba(239,68,68,.10)"/><text x="449" y="42" text-anchor="middle" fill="#ef4444" font-size="11" transform="rotate(90 449 42)">Immobilisation</text><text x="90" y="45" fill="#7C3AED" font-size="12">Réserves élevées</text><text x="90" y="93" fill="#059669" font-size="12">Sujet moyen</text><text x="90" y="148" fill="#f59e0b" font-size="12">Sujet fragile</text><text x="355" y="318" text-anchor="middle" fill="currentColor" font-size="12">Âge : 20–29 · 30–39 · 40–49 · 50–59 · 60–69 · 70+</text><text x="18" y="165" transform="rotate(-90 18 165)" text-anchor="middle" fill="currentColor" font-size="12">VO₂max (ml/min/kg)</text></svg>', 'Courbes');
     },
     '13.4': function () {
       return figCard('13.4', 'Déconditionnement après alitement : exemple chiffré',
@@ -3974,7 +3974,7 @@ if (typeof window !== 'undefined') {
     },
     '13.7': function () {
       return figCard('13.7', 'Pression en fonction du positionnement du patient',
-        '<svg class="faithful-chart" viewBox="0 0 680 310" role="img" aria-label="Décubitus dorsal et position demi-assise avec forces d’appui, friction et cisaillement"><rect x="45" y="220" width="260" height="18" rx="9" fill="#64748b" opacity=".35"/><circle cx="105" cy="160" r="26" fill="rgba(8,145,178,.20)" stroke="#0891b2"/><path d="M130 172 C175 178 218 184 275 202" fill="none" stroke="#0891b2" stroke-width="24" stroke-linecap="round"/><g stroke="#ef4444" stroke-width="4"><path d="M105 192V220"/><path d="M202 205V228"/><path d="M270 218V238"/></g><text x="175" y="270" text-anchor="middle" fill="currentColor" font-size="13" font-weight="750">Décubitus dorsal · forces d’appui</text><path d="M380 225 L610 225 L610 210 L455 210 L405 105 L385 112 L438 225Z" fill="#64748b" opacity=".22"/><circle cx="430" cy="92" r="24" fill="rgba(5,150,105,.18)" stroke="#059669"/><path d="M449 112 C480 143 502 175 520 211" fill="none" stroke="#059669" stroke-width="24" stroke-linecap="round"/><g stroke="#ef4444" stroke-width="4"><path d="M500 190L470 220"/><path d="M525 208L557 222"/></g><g stroke="#f59e0b" stroke-width="4"><path d="M470 198L505 198"/><path d="M540 216L575 216"/></g><text x="515" y="270" text-anchor="middle" fill="currentColor" font-size="13" font-weight="750">Demi-assise · cisaillement + frictions</text><text x="340" y="298" text-anchor="middle" fill="#ef4444" font-size="11">La demi-assise augmente l’étirement vasculaire au sacrum.</text></svg>', 'Schéma de forces');
+        '<svg class="faithful-chart" viewBox="0 0 680 310" role="img" aria-label="Décubitus dorsal et position demi-assise avec forces d’appui, friction et cisaillement"><rect x="45" y="220" width="260" height="18" rx="9" fill="#64748b" opacity=".35"/><circle cx="105" cy="160" r="26" fill="rgba(124,58,237,.20)" stroke="#7C3AED"/><path d="M130 172 C175 178 218 184 275 202" fill="none" stroke="#7C3AED" stroke-width="24" stroke-linecap="round"/><g stroke="#ef4444" stroke-width="4"><path d="M105 192V220"/><path d="M202 205V228"/><path d="M270 218V238"/></g><text x="175" y="270" text-anchor="middle" fill="currentColor" font-size="13" font-weight="750">Décubitus dorsal · forces d’appui</text><path d="M380 225 L610 225 L610 210 L455 210 L405 105 L385 112 L438 225Z" fill="#64748b" opacity=".22"/><circle cx="430" cy="92" r="24" fill="rgba(5,150,105,.18)" stroke="#059669"/><path d="M449 112 C480 143 502 175 520 211" fill="none" stroke="#059669" stroke-width="24" stroke-linecap="round"/><g stroke="#ef4444" stroke-width="4"><path d="M500 190L470 220"/><path d="M525 208L557 222"/></g><g stroke="#f59e0b" stroke-width="4"><path d="M470 198L505 198"/><path d="M540 216L575 216"/></g><text x="515" y="270" text-anchor="middle" fill="currentColor" font-size="13" font-weight="750">Demi-assise · cisaillement + frictions</text><text x="340" y="298" text-anchor="middle" fill="#ef4444" font-size="11">La demi-assise augmente l’étirement vasculaire au sacrum.</text></svg>', 'Schéma de forces');
     },
     '13.8': function () {
       return figCard('13.8', 'Physiopathogénie de l’escarre',
@@ -4283,7 +4283,7 @@ const SYNTHESIS = [
     id: 'cascade',
     title: 'Cascade gériatrique',
     icon: '⛓️',
-    color: '#0E7490',
+    color: '#6D28D9',
     sections: [
       {
         title: 'Définition (Rang A)',
@@ -4365,7 +4365,7 @@ const SYNTHESIS = [
     id: 'fragilite',
     title: 'Concept de fragilité',
     icon: '🫗',
-    color: '#164E63',
+    color: '#4C1D95',
     sections: [
       {
         title: 'Vulnérabilité vs Fragilité',
@@ -4543,7 +4543,7 @@ const SYNTHESIS = [
     id: 'autonomie',
     title: 'Évaluation de l\'autonomie',
     icon: '🏠',
-    color: '#164E63',
+    color: '#4C1D95',
     sections: [
       {
         title: 'AVD vs AVD instrumentales',

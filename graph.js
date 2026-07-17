@@ -1,9 +1,9 @@
 /* Graph view — interactive force-directed chapter network */
 (function(){
   const EDGE_COLORS = {
-    sameItem: '#D97706',
-    concept: '#0891B2',
-    samePart: '#64748B'
+    sameItem: '#F59E0B',
+    concept: '#D946EF',
+    samePart: '#0EA5E9'
   };
   const EDGE_STYLES = {
     sameItem: { dash: [], label: 'Même ITEM', line: 'solid' },
@@ -11,9 +11,9 @@
     samePart: { dash: [2, 5], label: 'Même partie', line: 'dotted' }
   };
   const CH_COLORS = typeof window !== 'undefined' && window.CH_COLORS ? window.CH_COLORS : {
-    ch1:'#0891B2',ch2:'#059669',ch3:'#0D9488',ch4:'#DC2626',ch5:'#0284C7',ch6:'#047857',ch7:'#0369A1',ch8:'#BE123C',
-    ch9:'#0E7490',ch10:'#64748B',ch11:'#B45309',ch12:'#EA580C',ch13:'#0369A1',ch14:'#15803D',ch15:'#0F766E',
-    ch16:'#164E63',ch17:'#475569',ch18:'#059669',ch19:'#0891B2',ch20:'#2563EB'
+    ch1:'#7C3AED',ch2:'#10B981',ch3:'#F59E0B',ch4:'#F43F5E',ch5:'#0EA5E9',ch6:'#EC4899',ch7:'#8B5CF6',ch8:'#EF4444',
+    ch9:'#14B8A6',ch10:'#F97316',ch11:'#6366F1',ch12:'#D946EF',ch13:'#0284C7',ch14:'#22C55E',ch15:'#E11D48',
+    ch16:'#A855F7',ch17:'#F59E0B',ch18:'#059669',ch19:'#EC4899',ch20:'#3B82F6'
   };
   const TYPE_PRIORITY = { concept: 3, sameItem: 2, samePart: 1 };
 
@@ -33,7 +33,7 @@
         id: ch.id,
         label: String(ch.t || ch.id).replace(/^.*?:\s*/, ''),
         full: ch.t || ch.id,
-        color: CH_COLORS[ch.id] || '#0891B2',
+        color: CH_COLORS[ch.id] || '#7C3AED',
         part: ch.part,
         items: ch.items || [],
         x: (Math.random() - 0.5) * 200,
@@ -1151,7 +1151,7 @@
     const vh = (H / scale) * s;
     mctx.fillStyle = 'rgba(8,145,178,0.12)';
     mctx.fillRect(vx0, vy0, vw, vh);
-    mctx.strokeStyle = '#0891B2';
+    mctx.strokeStyle = '#D946EF';
     mctx.lineWidth = 1.5;
     mctx.strokeRect(vx0, vy0, vw, vh);
   }

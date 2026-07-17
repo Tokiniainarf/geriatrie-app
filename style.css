@@ -1,57 +1,71 @@
 /* ================================================================
-   Gériatrie — Manuel numérique (ui-ux-pro-max)
-   Cyan santé #0891B2 · fond clair · pas de violet
+   Gériatrie — Manuel numérique · Édition Pop 2025
+   Fond clair coloré · violet #7C3AED · ludique & moderne
    ================================================================ */
 
 :root {
-  --bg-deep: #ECFEFF;
+  --bg-deep: #F6F4FE;
   --bg-base: #FFFFFF;
-  --bg-elevated: rgba(255, 255, 255, 0.88);
-  --bg-card: rgba(255, 255, 255, 0.75);
-  --bg-card-hover: rgba(255, 255, 255, 0.95);
-  --glass: rgba(255, 255, 255, 0.65);
-  --glass-border: #A5F3FC;
-  --glass-border-strong: #67E8F9;
-  --nav-glass: rgba(255, 255, 255, 0.82);
-  --text: #164E63;
-  --text2: #334155;
-  --text3: #64748B;
-  --accent: #0891B2;
-  --accent-cta: #059669;
-  --accent-glow: rgba(8, 145, 178, 0.2);
-  --accent-soft: rgba(8, 145, 178, 0.1);
-  --green: #059669;
-  --red: #DC2626;
-  --blue: #0284C7;
-  --orange: #D97706;
-  --radius: 18px;
-  --radius-sm: 12px;
+  --bg-elevated: rgba(255, 255, 255, 0.92);
+  --bg-card: rgba(255, 255, 255, 0.8);
+  --bg-card-hover: rgba(255, 255, 255, 0.98);
+  --glass: rgba(255, 255, 255, 0.7);
+  --glass-border: #E9E4FA;
+  --glass-border-strong: #D6CDF7;
+  --nav-glass: rgba(255, 255, 255, 0.85);
+  --text: #251D4E;
+  --text2: #4B4574;
+  --text3: #7C78A3;
+  --accent: #7C3AED;
+  --accent-2: #D946EF;
+  --accent-cta: #FF5D7A;
+  --accent-glow: rgba(124, 58, 237, 0.22);
+  --accent-soft: rgba(124, 58, 237, 0.09);
+  --green: #10B981;
+  --red: #F43F5E;
+  --blue: #0EA5E9;
+  --orange: #F59E0B;
+  --pink: #EC4899;
+  --mint: #10B981;
+  --sky: #0EA5E9;
+  --coral: #FF5D7A;
+  --amber: #F59E0B;
+  --grad-brand: linear-gradient(135deg, #7C3AED 0%, #D946EF 55%, #FF5D7A 100%);
+  --grad-fun: linear-gradient(90deg, #7C3AED, #D946EF, #FF5D7A, #F59E0B, #10B981, #0EA5E9);
+  --radius: 22px;
+  --radius-sm: 14px;
   --bottom: 72px;
   --topbar: 56px;
   --sans: 'Figtree', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --display: 'Fredoka', 'Figtree', -apple-system, system-ui, sans-serif;
   --reader: 'Literata', 'Georgia', serif;
-  --shadow-soft: 0 10px 40px rgba(8, 145, 178, 0.1);
-  --shadow-card: 0 4px 20px rgba(22, 78, 99, 0.08);
+  --shadow-soft: 0 12px 40px rgba(124, 58, 237, 0.14);
+  --shadow-card: 0 4px 20px rgba(76, 58, 140, 0.09);
+  --shadow-pop: 0 8px 24px rgba(124, 58, 237, 0.18), 0 2px 6px rgba(124, 58, 237, 0.08);
 }
 
 [data-theme="dark"] {
-  --bg-deep: #0f1117;
-  --bg-base: #161822;
-  --bg-elevated: rgba(22, 24, 34, 0.92);
-  --bg-card: rgba(255, 255, 255, 0.04);
-  --bg-card-hover: rgba(255, 255, 255, 0.07);
-  --glass: rgba(255, 255, 255, 0.06);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-border-strong: rgba(255, 255, 255, 0.14);
-  --nav-glass: rgba(15, 17, 23, 0.82);
-  --text: #EDEDEF;
-  --text2: #8A8F98;
-  --text3: #5A5F68;
-  --accent: #22D3EE;
-  --accent-glow: rgba(34, 211, 238, 0.25);
-  --accent-soft: rgba(34, 211, 238, 0.12);
-  --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.35);
-  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.25);
+  --bg-deep: #131022;
+  --bg-base: #1A1730;
+  --bg-elevated: rgba(30, 26, 52, 0.94);
+  --bg-card: rgba(255, 255, 255, 0.05);
+  --bg-card-hover: rgba(255, 255, 255, 0.09);
+  --glass: rgba(255, 255, 255, 0.07);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-border-strong: rgba(255, 255, 255, 0.2);
+  --nav-glass: rgba(19, 16, 34, 0.85);
+  --text: #F1EFFF;
+  --text2: #A9A4CC;
+  --text3: #6F6A94;
+  --accent: #A78BFA;
+  --accent-2: #E879F9;
+  --accent-cta: #FB7185;
+  --accent-glow: rgba(167, 139, 250, 0.3);
+  --accent-soft: rgba(167, 139, 250, 0.14);
+  --grad-brand: linear-gradient(135deg, #8B5CF6 0%, #D946EF 55%, #FB7185 100%);
+  --shadow-soft: 0 10px 36px rgba(0, 0, 0, 0.45);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.3);
+  --shadow-pop: 0 8px 28px rgba(139, 92, 246, 0.35), 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -61,13 +75,20 @@ body {
   color: var(--text);
   background-color: var(--bg-deep);
   background-image:
-    radial-gradient(ellipse 90% 55% at 10% -5%, rgba(8, 145, 178, 0.12), transparent 55%),
-    radial-gradient(ellipse 70% 45% at 95% 5%, rgba(5, 150, 105, 0.1), transparent 50%),
-    radial-gradient(ellipse 60% 40% at 50% 100%, rgba(103, 232, 249, 0.15), transparent 55%);
+    radial-gradient(ellipse 80% 50% at 12% -8%, rgba(124, 58, 237, 0.12), transparent 55%),
+    radial-gradient(ellipse 60% 45% at 92% 2%, rgba(217, 70, 239, 0.12), transparent 50%),
+    radial-gradient(ellipse 55% 42% at 88% 92%, rgba(16, 185, 129, 0.12), transparent 55%),
+    radial-gradient(ellipse 55% 40% at 4% 96%, rgba(14, 165, 233, 0.12), transparent 52%);
   background-attachment: fixed;
   overflow-x: hidden; padding-bottom: var(--bottom);
 }
-[data-theme="dark"] body { background-image: none; background-color: var(--bg-deep); }
+[data-theme="dark"] body {
+  background-image:
+    radial-gradient(ellipse 70% 45% at 18% -5%, rgba(139, 92, 246, 0.18), transparent 55%),
+    radial-gradient(ellipse 55% 40% at 92% 8%, rgba(217, 70, 239, 0.12), transparent 50%),
+    radial-gradient(ellipse 60% 45% at 50% 105%, rgba(14, 165, 233, 0.12), transparent 55%);
+  background-color: var(--bg-deep);
+}
 button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
 input { font-family: inherit; font-size: inherit; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }

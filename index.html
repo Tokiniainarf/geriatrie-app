@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="dark">
+<html lang="fr" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes">
-<meta name="theme-color" content="#ECFEFF">
+<meta name="theme-color" content="#F6F4FE">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Gériatrie">
@@ -14,23 +14,26 @@
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;600;700&family=Literata:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;600;700;800&family=Fredoka:wght@500;600;700&family=Literata:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <title>Gériatrie — Manuel Interactif</title>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<link rel="stylesheet" href="style.css?v=240">
+<link rel="stylesheet" href="style.css?v=250"><link rel="stylesheet" href="vibrant.css?v=250">
 <style>
 /* Critical preloader (inline so it shows before CSS/JS) */
-#appPreloader{position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:radial-gradient(ellipse 80% 50% at 50% 0%,#164E63 0%,#0f1117 55%,#050508 100%);color:#EDEDEF;font-family:Figtree,system-ui,sans-serif;transition:opacity .45s ease,visibility .45s}
+#appPreloader{position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:radial-gradient(ellipse 90% 55% at 15% 0%,rgba(124,58,237,.16),transparent 55%),radial-gradient(ellipse 70% 50% at 90% 15%,rgba(217,70,239,.14),transparent 55%),radial-gradient(ellipse 70% 55% at 50% 110%,rgba(14,165,233,.16),transparent 55%),linear-gradient(180deg,#FDFCFF,#F3F0FE);color:#251D4E;font-family:Figtree,system-ui,sans-serif;transition:opacity .45s ease,visibility .45s}
 #appPreloader.hide{opacity:0;visibility:hidden;pointer-events:none}
-#appPreloader .pl-logo{width:72px;height:72px;border-radius:20px;background:linear-gradient(135deg,#0891B2,#059669);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 40px rgba(8,145,178,.35)}
-#appPreloader .pl-logo svg{width:36px;height:36px;stroke:#fff}
-#appPreloader .pl-title{font-size:1.35rem;font-weight:800;letter-spacing:-.02em}
-#appPreloader .pl-sub{font-size:.85rem;color:rgba(255,255,255,.55);text-align:center;max-width:280px;line-height:1.4}
-#appPreloader .pl-track{width:min(240px,70vw);height:6px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden}
-#appPreloader .pl-fill{height:100%;width:8%;border-radius:99px;background:linear-gradient(90deg,#22D3EE,#34D399);transition:width .35s ease;box-shadow:0 0 12px rgba(52,211,153,.5)}
-#appPreloader .pl-status{font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+#appPreloader .pl-logo{width:78px;height:78px;border-radius:26px;background:linear-gradient(135deg,#7C3AED,#D946EF 55%,#FF5D7A);display:flex;align-items:center;justify-content:center;box-shadow:0 14px 44px rgba(124,58,237,.4);animation:plFloat 2.4s ease-in-out infinite}
+@keyframes plFloat{0%,100%{transform:rotate(-6deg) translateY(0)}50%{transform:rotate(5deg) translateY(-9px)}}
+#appPreloader .pl-logo svg{width:38px;height:38px;stroke:#fff}
+#appPreloader .pl-title{font-family:Fredoka,Figtree,system-ui,sans-serif;font-size:1.65rem;font-weight:700;letter-spacing:-.01em;background:linear-gradient(90deg,#7C3AED,#D946EF,#FF5D7A);-webkit-background-clip:text;background-clip:text;color:transparent}
+#appPreloader .pl-sub{font-size:.85rem;color:rgba(37,29,78,.62);text-align:center;max-width:280px;line-height:1.4}
+#appPreloader .pl-track{width:min(240px,70vw);height:8px;border-radius:99px;background:rgba(124,58,237,.12);overflow:hidden}
+#appPreloader .pl-fill{height:100%;width:8%;border-radius:99px;background:linear-gradient(90deg,#7C3AED,#D946EF,#FF5D7A,#F59E0B);background-size:200% 100%;animation:plSlide 1.6s linear infinite;transition:width .35s ease;box-shadow:0 0 14px rgba(217,70,239,.55)}
+@keyframes plSlide{from{background-position:0% 0}to{background-position:200% 0}}
+#appPreloader .pl-status{font-size:.72rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:rgba(37,29,78,.45)}
+@media (prefers-reduced-motion: reduce){#appPreloader .pl-logo,#appPreloader .pl-fill{animation:none}}
 </style>
 </head>
 <body>
@@ -577,22 +580,22 @@
 <script>
 (function(){
   var steps = [
-    { src: 'data-bundle.js?v=238', label: 'Contenu des chapitres…', pct: 34 },
-    { src: 'practice-data.js?v=235', label: 'Entraînements structurés…', pct: 40 },
-    { src: 'annales-authentiques.js?v=238', label: 'Sources des annales…', pct: 45 },
-    { src: 'annales-texte.js?v=235', label: 'Sujets EVC recherchables…', pct: 50 },
-    { src: 'annales-corrections.js?v=240', label: 'Corrigés pédagogiques…', pct: 53 },
-    { src: 'protocoles-has-officiels.js?v=239', label: 'Conduites HAS…', pct: 57 },
-    { src: 'notebook-decks-data.js?v=235', label: 'Decks NotebookLM…', pct: 60 },
-    { src: 'notebook-interactive.js?v=235', label: 'Lecteur présentation…', pct: 65 },
-    { src: 'calculateurs.js?v=235', label: 'Scores & calculateurs…', pct: 70 },
-    { src: 'quiz.js?v=235', label: 'Mode examen…', pct: 75 },
-    { src: 'dashboard.js?v=236', label: 'Tableau de bord…', pct: 80 },
-    { src: 'appsearch.js?v=235', label: 'Recherche…', pct: 85 },
-    { src: 'erreurs-journal.js?v=235', label: 'Fichier erreurs…', pct: 89 },
-    { src: 'graph.js?v=235', label: 'Parcours liés…', pct: 93 },
-    { src: 'brainfeed.js?v=240', label: 'BrainFeed…', pct: 97 },
-    { src: 'app.js?v=241', label: 'Interface…', pct: 100 }
+    { src: 'data-bundle.js?v=250', label: 'Contenu des chapitres…', pct: 34 },
+    { src: 'practice-data.js?v=250', label: 'Entraînements structurés…', pct: 40 },
+    { src: 'annales-authentiques.js?v=250', label: 'Sources des annales…', pct: 45 },
+    { src: 'annales-texte.js?v=250', label: 'Sujets EVC recherchables…', pct: 50 },
+    { src: 'annales-corrections.js?v=250', label: 'Corrigés pédagogiques…', pct: 53 },
+    { src: 'protocoles-has-officiels.js?v=250', label: 'Conduites HAS…', pct: 57 },
+    { src: 'notebook-decks-data.js?v=250', label: 'Decks NotebookLM…', pct: 60 },
+    { src: 'notebook-interactive.js?v=250', label: 'Lecteur présentation…', pct: 65 },
+    { src: 'calculateurs.js?v=250', label: 'Scores & calculateurs…', pct: 70 },
+    { src: 'quiz.js?v=250', label: 'Mode examen…', pct: 75 },
+    { src: 'dashboard.js?v=250', label: 'Tableau de bord…', pct: 80 },
+    { src: 'appsearch.js?v=250', label: 'Recherche…', pct: 85 },
+    { src: 'erreurs-journal.js?v=250', label: 'Fichier erreurs…', pct: 89 },
+    { src: 'graph.js?v=250', label: 'Parcours liés…', pct: 93 },
+    { src: 'brainfeed.js?v=250', label: 'BrainFeed…', pct: 97 },
+    { src: 'app.js?v=250', label: 'Interface…', pct: 100 }
   ];
   var i = 0;
   var fill = document.getElementById('plFill');
