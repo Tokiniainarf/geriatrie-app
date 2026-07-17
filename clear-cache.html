@@ -5,48 +5,52 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Nettoyage cache PWA — Gériatrie</title>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 </head>
 <body style="font-family:system-ui,sans-serif;text-align:center;padding:48px 20px;background:#0f172a;color:#e2e8f0;min-height:100vh;box-sizing:border-box">
   <h1 style="font-size:1.4rem;margin:0 0 12px">Nettoyage du cache</h1>
-  <p id="status" style="color:#94a3b8;line-height:1.5">Suppression des anciennes versions (Listen, SW)…</p>
-  <p style="margin-top:28px;font-size:0.85rem;color:#64748b">Si le lecteur Listen réapparaît encore :<br>Chrome → cadenas → Paramètres du site → Effacer les données</p>
+  <p id="status" style="color:#94a3b8;line-height:1.5">Suppression de l’ancienne version (violet / PWA)…</p>
+  <p style="margin-top:28px;font-size:0.85rem;color:#64748b">
+    Si le violet revient encore :<br>
+    Chrome → cadenas → Paramètres du site → Effacer les données<br>
+    puis rouvrez l’app.
+  </p>
 <script>
 (async () => {
   const s = document.getElementById('status');
   const log = (t) => { s.textContent = t; };
+  const APP = './?v=253&purged=' + Date.now();
   try {
+    // Tell any active SW to skip waiting, then unregister everything
+    if (navigator.serviceWorker) {
+      try {
+        const reg = await navigator.serviceWorker.getRegistration();
+        if (reg && reg.waiting) reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+        if (reg && reg.active) reg.active.postMessage({ type: 'SKIP_WAITING' });
+      } catch (_) {}
+      const regs = await navigator.serviceWorker.getRegistrations();
+      for (const r of regs) {
+        await r.unregister();
+        log('Service Worker désinscrit : ' + (r.scope || ''));
+      }
+    }
     if (window.caches && caches.keys) {
       const keys = await caches.keys();
       for (const k of keys) {
         await caches.delete(k);
         log('Cache supprimé : ' + k);
       }
+      if (!keys.length) log('Aucun cache à supprimer');
     }
-    if (navigator.serviceWorker) {
-      const regs = await navigator.serviceWorker.getRegistrations();
-      for (const r of regs) {
-        await r.unregister();
-        log('Service Worker désinscrit');
-      }
-    }
-    // Strip Listen leftovers if any script left nodes
     try {
-      ['apMiniBar', 'apFullPlayer', 'vAudio'].forEach((id) => {
-        const el = document.getElementById(id);
-        if (el) el.remove();
-      });
-      document.querySelectorAll('.ap-mini, .ap-full, .qa-card-listen').forEach((el) => el.remove());
+      localStorage.removeItem('gth'); // theme leftover if any
     } catch (_) {}
-
-    log('Cache nettoyé. Ouverture de l’app v234…');
-    setTimeout(() => {
-      window.location.replace('./index.html?v=234&purged=' + Date.now());
-    }, 700);
+    log('Cache nettoyé. Ouverture de l’app bleue v253…');
+    setTimeout(() => { window.location.replace(APP); }, 600);
   } catch (e) {
-    log('Redirection…');
-    setTimeout(() => {
-      window.location.replace('./index.html?v=234&purged=' + Date.now());
-    }, 400);
+    log('Redirection vers l’app v253…');
+    setTimeout(() => { window.location.replace(APP); }, 400);
   }
 })();
 </script>

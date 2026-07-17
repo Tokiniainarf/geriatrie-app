@@ -1,5 +1,5 @@
 // Bump CACHE_NAME whenever core assets change so clients drop stale offline caches.
-const CACHE_NAME = 'geriatrie-v252';
+const CACHE_NAME = 'geriatrie-v253';
 // Must match scripts actually loaded by index.html (post data-bundle architecture).
 // Do NOT pre-cache large media: a failed install left users with broken offline media.
 const CORE = [
@@ -46,7 +46,7 @@ self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys().then(keys =>
       Promise.all(keys.map(k => {
-        // Drop every previous app cache (incl. Listen-era shells + bad media)
+        // Drop every previous shell (violet Pop, Listen, v250–v252, …)
         if (k !== CACHE_NAME) return caches.delete(k);
       }))
     ).then(() => self.clients.claim())
@@ -60,19 +60,17 @@ self.addEventListener('message', e => {
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
   const url = new URL(e.request.url);
-  // Never serve removed Listen assets from any old cache
   if (/audio-player|audio-library|audio-player\.css/i.test(url.pathname)) {
     e.respondWith(new Response('Gone', { status: 410, statusText: 'Gone' }));
     return;
   }
-  // Media: network-only. Caching failed/partial media caused mass "Média indisponible".
+  // Media: network-only (avoid sticky bad offline media).
   if (isMediaPath(url.pathname)) {
     e.respondWith(
       fetch(e.request).catch(() => caches.match(e.request).then(c => c || new Response('Media offline', { status: 503 })))
     );
     return;
   }
-  // Network-first for navigations & app shell; offline falls back to cache.
   e.respondWith(
     fetch(e.request).then(resp => {
       if (resp && resp.status === 200 && (resp.type === 'basic' || resp.type === 'cors')) {
