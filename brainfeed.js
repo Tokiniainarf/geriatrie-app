@@ -609,33 +609,19 @@ const BrainFeed = (() => {
       tags: ['Chiffre clé', c.source]
     }));
 
-    // Attach explanatory visuals (new media only - all original texts preserved)
+    // Optional still posters only — AI videos removed (garbled FR + wrong topics).
     chiffreCle.forEach(c => {
       if (c.line && /timed up and go|tug/i.test(c.line)) {
-        c.video = 'images/feed/tug-test-explanatory.mp4';
         c.image = 'images/feed/illustrative/tug-steps-educational.jpg';
       }
       if (c.line && /chutent au moins une fois par an/i.test(c.line)) {
         c.image = 'images/feed/illustrative/falls-multifactorial-educational.jpg';
       }
-      // Additional explanatory image available
-      if (c.line && /chutent au moins une fois par an/i.test(c.line)) {
-        c.image2 = 'images/feed/fall-assessment.jpg';
-      }
-      if (c.line && /fragilit| vitesse de marche/i.test(c.line)) {
+      if (c.line && /fragilit|vitesse de marche/i.test(c.line)) {
         c.image = 'images/feed/frailty-walk.jpg';
-        c.video = 'images/feed/frailty-gait-explanatory.mp4';
       }
       if (c.line && /fried.*critères|nombre de critères de fried/i.test(c.line)) {
         c.image = 'images/feed/illustrative/fried-fragilite.jpg';
-      }
-      if (c.line && /polymédication|iatrogénie/i.test(c.line)) {
-        c.image = 'images/feed/illustrative/feed-vis-5.jpg';
-        c.video = 'images/feed/videos/feed-vis-5.mp4';
-      }
-      if (c.line && /sarcopénie|vitesse de marche/i.test(c.line)) {
-        c.image = 'images/feed/illustrative/feed-vis-17.jpg';
-        c.video = 'images/feed/videos/feed-vis-17.mp4';
       }
     });
 
@@ -656,205 +642,80 @@ const BrainFeed = (() => {
       srs: srs['trap-' + p.id] || { ease: 2.5, interval: 0, nextReview: 0 }
     }));
 
-    // Attach illustrative media for key mechanisms (new explanatory visuals, texts untouched)
+    // Optional still posters only (no AI videos — many Imagine clips had garbled FR).
     piegeExam.forEach(p => {
       const t = (p.trap || '').toLowerCase();
-      if (t.includes('chute') && t.includes('accident')) {
-        p.video = 'images/feed/illustrative/chute-multifactorielle.mp4';
-        p.image = 'images/feed/illustrative/chute-multifactorielle.jpg';
+      if (t.includes('chute')) {
+        p.image = 'images/feed/illustrative/feed-vis-2.jpg';
       }
-      if (t.includes('delirium') && (t.includes('agitation') || t.includes('benzodiazépine'))) {
-        p.video = 'images/feed/illustrative/delirium-mecanisme.mp4';
+      if (t.includes('delirium') || t.includes('confusion')) {
         p.image = 'images/feed/educatif/delirium-hypoactif.webp';
       }
-      if (t.includes('polymédication')) {
-        p.image = 'images/feed/illustrative/polymedication-iatrogene.jpg';
-        p.video = 'images/feed/videos/feed-vis-5.mp4';
-      }
-      if (t.includes('chute') && !t.includes('accident')) {
-        p.image = 'images/feed/illustrative/feed-vis-1.jpg';
-        p.video = 'images/feed/videos/feed-vis-1.mp4';
-      }
-      if (t.includes('sarcopénie') || t.includes('marche')) {
-        p.image = 'images/feed/illustrative/feed-vis-17.jpg';
-      }
-      if (t.includes('ordonnance') || t.includes('prescription')) {
+      if (t.includes('polymédication') || t.includes('ordonnance') || t.includes('prescription')) {
         p.image = 'images/feed/educatif/revue-medicamenteuse.webp';
       }
+      if (t.includes('sarcopénie') || t.includes('dénutrition')) {
+        p.image = 'images/feed/illustrative/feed-vis-22.jpg';
+      }
     });
-    // 20+ visual explanation cards for the feed (videos and images to illustrate mechanisms)
+
+    /* ------------------------------------------------------------------
+       Feed visuals quality gate (2026-07 audit)
+       - ALL Imagine/AI .mp4 removed from Pulse: unreadable FR, wrong topic,
+         stacked titles, invented labels (e.g. DIAPPERS+courbe de tension).
+       - Only curated stills + chapter educational diagrams + native SVG diagrams.
+       ------------------------------------------------------------------ */
     const visualMedias = [
-      // Rappels 9:16 relus : l'image reste volontairement sans texte ;
-      // le message clinique accessible est porté par la carte Pulse.
-      {media: 'images/feed/educatif/delirium-hypoactif.webp', isVideo: false, title: 'Delirium hypoactif : le calme trompeur'},
-      {media: 'images/feed/educatif/hypotension-orthostatique.webp', isVideo: false, title: 'Hypotension orthostatique : lever sécurisé'},
-      {media: 'images/feed/educatif/revue-medicamenteuse.webp', isVideo: false, title: 'Revue médicamenteuse partagée'},
-      {media: 'images/feed/educatif/denutrition-sarcopenie.webp', isVideo: false, title: 'Rompre le cercle dénutrition–sarcopénie'},
-      // Enriched with new targeted diagrams for usefulness (Imagine generated)
-      {media: 'images/chapters/educational/chute-multifactorielle-diagram.jpg', isVideo: false, title: 'Chutes multifactorielles - Diagramme explicatif'},
-      // New 9:16 reel-optimized feed-vis generated (images + videos) - full vertical feel + French captions integrated
-      {media: 'images/feed/illustrative/feed-vis-22.jpg', isVideo: false, title: 'Chutes multifactorielles'},
-      {media: 'images/feed/videos/feed-vis-22.mp4', isVideo: true, title: 'Chutes multifactorielles - Vidéo'},
-      {media: 'images/feed/illustrative/feed-vis-23.jpg', isVideo: false, title: 'Cycle dénutrition-sarcopénie'},
-      {media: 'images/feed/videos/feed-vis-23.mp4', isVideo: true, title: 'Cycle dénutrition - Animation'},
-      {media: 'images/feed/illustrative/feed-vis-24.jpg', isVideo: false, title: 'Causes réversibles du delirium'},
-      {media: 'images/feed/illustrative/feed-vis-25.jpg', isVideo: false, title: 'Critères de Fried (fragilité)'},
-      {media: 'images/feed/videos/feed-vis-25.mp4', isVideo: true, title: 'Critères de Fried - Vidéo'},
-      {media: 'images/feed/illustrative/feed-vis-26.jpg', isVideo: false, title: 'Polymédication et Beers'},
-      // Existing layout-optimized (compact 9/16 for better text flow)
-      {media: 'images/feed/illustrative/delirium-mecanisme-reel.jpg', isVideo: false, title: 'Mécanisme du delirium (compact)'},
-      {media: 'images/feed/videos/delirium-mecanisme-compact.mp4', isVideo: true, title: 'Mécanisme du delirium - Vidéo'},
-      {media: 'images/feed/illustrative/chute-multifactorielle-reel.jpg', isVideo: false, title: 'Chutes multifactorielles (compact)'},
-      {media: 'images/feed/videos/chute-multifactorielle-compact.mp4', isVideo: true, title: 'Chutes multifactorielles - Vidéo'},
-      {media: 'images/feed/illustrative/denutrition-cycle-reel.jpg', isVideo: false, title: 'Cycle de dénutrition (compact)'},
-      {media: 'images/feed/videos/denutrition-cycle-compact.mp4', isVideo: true, title: 'Cycle de dénutrition - Vidéo'},
-      {media: 'images/chapters/educational/ch13-cascade-immobilisation.jpg', isVideo: false, title: 'Cascade d\'immobilisation'},
-      {media: 'images/feed/videos/ch13-immobilisation-cascade-animation.mp4', isVideo: true, title: 'Cascade immobilisation - Animation'},
-      {media: 'images/chapters/educational/ch15-incontinence-classification.jpg', isVideo: false, title: 'Classification des incontinences'},
-      {media: 'images/chapters/educational/ch16-prescription-appropriee.jpg', isVideo: false, title: 'Prescription appropriée'},
-      {media: 'images/chapters/educational/ch17-soins-palliatifs-decision.jpg', isVideo: false, title: 'Décision soins palliatifs'},
-      {media: 'images/chapters/educational/ch19-20-keyfeatures-revision.jpg', isVideo: false, title: 'Key features et révision'},
-      // Keep previous feed-vis for variety
-      {media: 'images/feed/illustrative/feed-vis-1.jpg', isVideo: false, title: 'Chutes multifactorielles'},
-      {media: 'images/feed/videos/feed-vis-1.mp4', isVideo: true, title: 'Chutes multifactorielles - Mécanisme'},
-      {media: 'images/feed/illustrative/feed-vis-2.jpg', isVideo: false, title: 'Mécanisme du delirium'},
-      {media: 'images/feed/videos/feed-vis-2.mp4', isVideo: true, title: 'Mécanisme du delirium'},
-      {media: 'images/feed/illustrative/feed-vis-3.jpg', isVideo: false, title: 'Critères de Fried (fragilité)'},
-      {media: 'images/feed/videos/feed-vis-3.mp4', isVideo: true, title: 'Critères de Fried - Fragilité'},
-      {media: 'images/feed/illustrative/feed-vis-4.jpg', isVideo: false, title: 'Test Timed Up and Go (TUG)'},
-      {media: 'images/feed/videos/feed-vis-4.mp4', isVideo: true, title: 'Test TUG - Étapes et seuils'},
-      {media: 'images/feed/illustrative/feed-vis-5.jpg', isVideo: false, title: 'Polymédication et iatrogénie'},
-      {media: 'images/feed/videos/feed-vis-5.mp4', isVideo: true, title: 'Polymédication - Risques'},
-      {media: 'images/feed/illustrative/feed-vis-6.jpg', isVideo: false, title: 'Vieillissement cellulaire et réserve'},
-      {media: 'images/feed/videos/feed-vis-6.mp4', isVideo: true, title: 'Vieillissement cellulaire'},
-      {media: 'images/feed/illustrative/feed-vis-7.jpg', isVideo: false, title: 'Évaluation gériatrique globale (CGA)'},
-      {media: 'images/feed/videos/feed-vis-7.mp4', isVideo: true, title: 'CGA - Évaluation multidimensionnelle'},
-      {media: 'images/feed/illustrative/feed-vis-8.jpg', isVideo: false, title: 'Déficits sensoriels'},
-      {media: 'images/feed/videos/feed-vis-8.mp4', isVideo: true, title: 'Déficits sensoriels - Conséquences'},
-      {media: 'images/feed/illustrative/feed-vis-9.jpg', isVideo: false, title: 'Nutrition et dénutrition (MNA)'},
-      {media: 'images/feed/videos/feed-vis-9.mp4', isVideo: true, title: 'Nutrition - Dénutrition'},
-      {media: 'images/feed/illustrative/feed-vis-10.jpg', isVideo: false, title: 'Ostéoporose et risque de fracture'},
-      {media: 'images/feed/videos/feed-vis-10.mp4', isVideo: true, title: 'Ostéoporose - Mécanisme'},
-      {media: 'images/feed/illustrative/feed-vis-11.jpg', isVideo: false, title: 'Hypotension orthostatique'},
-      {media: 'images/feed/videos/feed-vis-11.mp4', isVideo: true, title: 'Hypotension orthostatique'},
-      {media: 'images/feed/illustrative/feed-vis-12.jpg', isVideo: false, title: 'Douleur : échelle ECPA'},
-      {media: 'images/feed/videos/feed-vis-12.mp4', isVideo: true, title: 'Douleur - Évaluation ECPA'},
-      {media: 'images/feed/illustrative/feed-vis-13.jpg', isVideo: false, title: 'Incontinence et causes réversibles (DIAPPERS)'},
-      {media: 'images/feed/videos/feed-vis-13.mp4', isVideo: true, title: 'Incontinence - DIAPPERS'},
-      {media: 'images/feed/illustrative/feed-vis-14.jpg', isVideo: false, title: 'Prévention des escarres (Braden)'},
-      {media: 'images/feed/videos/feed-vis-14.mp4', isVideo: true, title: 'Escarres - Prévention Braden'},
-      {media: 'images/feed/illustrative/feed-vis-15.jpg', isVideo: false, title: 'Dépression vs pseudo-démence'},
-      {media: 'images/feed/videos/feed-vis-15.mp4', isVideo: true, title: 'Dépression vs pseudo-démence'},
-      {media: 'images/feed/illustrative/feed-vis-16.jpg', isVideo: false, title: 'Critères de Beers / PIM'},
-      {media: 'images/feed/videos/feed-vis-16.mp4', isVideo: true, title: 'Beers criteria - Risques'},
-      {media: 'images/feed/illustrative/feed-vis-17.jpg', isVideo: false, title: 'Sarcopénie et vitesse de marche'},
-      {media: 'images/feed/videos/feed-vis-17.mp4', isVideo: true, title: 'Sarcopénie - Interventions'},
-      {media: 'images/feed/illustrative/feed-vis-18.jpg', isVideo: false, title: 'Score Tinetti (POMA)'},
-      {media: 'images/feed/videos/feed-vis-18.mp4', isVideo: true, title: 'Score Tinetti - Risque'},
-      {media: 'images/feed/illustrative/feed-vis-19.jpg', isVideo: false, title: 'Causes réversibles du delirium'},
-      {media: 'images/feed/videos/feed-vis-19.mp4', isVideo: true, title: 'Delirium - Causes réversibles'},
-      {media: 'images/feed/illustrative/feed-vis-20.jpg', isVideo: false, title: 'Capacité décisionnelle et éthique'},
-      {media: 'images/feed/videos/feed-vis-20.mp4', isVideo: true, title: 'Capacité et consentement'},
-      {media: 'images/feed/illustrative/feed-vis-21.jpg', isVideo: false, title: 'Sarcopénie - Mécanismes'},
-      {media: 'images/feed/videos/feed-vis-21.mp4', isVideo: true, title: 'Sarcopénie et interventions'}
+      // Photoreal education stills (no embedded text)
+      { media: 'images/feed/educatif/delirium-hypoactif.webp', title: 'Delirium hypoactif : le calme trompeur' },
+      { media: 'images/feed/educatif/hypotension-orthostatique.webp', title: 'Hypotension orthostatique : lever sécurisé' },
+      { media: 'images/feed/educatif/revue-medicamenteuse.webp', title: 'Revue médicamenteuse partagée' },
+      { media: 'images/feed/educatif/denutrition-sarcopenie.webp', title: 'Rompre le cercle dénutrition–sarcopénie' },
+      // Chapter educational diagrams (static, readable)
+      { media: 'images/chapters/educational/chute-multifactorielle-diagram.jpg', title: 'Chutes multifactorielles : diagramme' },
+      { media: 'images/chapters/educational/ch13-cascade-immobilisation.jpg', title: 'Cascade d’immobilisation' },
+      { media: 'images/chapters/educational/ch15-incontinence-classification.jpg', title: 'Classification des incontinences' },
+      { media: 'images/chapters/educational/ch16-prescription-appropriee.jpg', title: 'Prescription appropriée' },
+      { media: 'images/chapters/educational/ch17-soins-palliatifs-decision.jpg', title: 'Décision en soins palliatifs' },
+      // feed-vis stills audited: content matches title (no AI video)
+      { media: 'images/feed/illustrative/feed-vis-2.jpg', title: 'Chutes multifactorielles : modèle de risque' },
+      { media: 'images/feed/illustrative/feed-vis-6.jpg', title: 'Biologie du vieillissement et réserve fonctionnelle' },
+      { media: 'images/feed/illustrative/feed-vis-14.jpg', title: 'Escarres : échelle de Braden et prévention' },
+      { media: 'images/feed/illustrative/feed-vis-18.jpg', title: 'Score de Tinetti : équilibre et marche' },
+      { media: 'images/feed/illustrative/feed-vis-21.jpg', title: 'Sarcopénie : mécanismes et prise en charge' },
+      { media: 'images/feed/illustrative/feed-vis-22.jpg', title: 'Cercle dénutrition–sarcopénie' }
     ];
-    // Only keep media files that resolve (broken paths = "images disparues")
-    const mediaOk = (path) => {
-      if (!path) return false;
-      // Prefer known existing roots; runtime 404 still handled by onerror
-      return /images\/(feed|chapters)\//.test(path);
-    };
-    const verifiedFeedVisualTitles = {
-      1: 'Test Timed Up and Go (TUG)',
-      2: 'Chute : facteurs de risque multifactoriels',
-      3: 'Polymédication et iatrogénie',
-      4: 'Delirium : vulnérabilité et facteurs précipitants',
-      5: 'Phénotype de fragilité de Fried',
-      6: 'Vieillissement cellulaire et réserve fonctionnelle',
-      7: 'Déficits sensoriels : vision et audition',
-      8: 'Dénutrition et dépistage nutritionnel',
-      9: 'Ostéoporose et risque fracturaire',
-      10: 'Évaluation gériatrique globale',
-      11: 'Incontinence : causes réversibles (DIAPPERS)',
-      12: 'Hypotension orthostatique',
-      13: 'Dépression et trouble neurocognitif : les différencier',
-      14: 'Escarres : échelle de Braden et prévention',
-      15: 'Sarcopénie et vitesse de marche',
-      16: 'Delirium : causes réversibles',
-      17: 'Médicaments potentiellement inappropriés',
-      18: 'Score de Tinetti : équilibre et marche',
-      19: 'Globe vésical et fécalome',
-      20: 'Capacité décisionnelle et éthique',
-      21: 'Sarcopénie : mécanismes et prise en charge',
-      22: 'Cercle dénutrition–sarcopénie',
-      23: 'Delirium : causes réversibles',
-      24: 'Chutes multifactorielles',
-      25: 'Fragilité : critères de Fried',
-      26: 'Polymédication et critères de Beers'
-    };
-    // Ces posters ont été relus visuellement. Les autres fichiers restent dans
-    // l'application, mais ne sont pas proposés dans Pulse tant que leur texte
-    // embarqué comporte un seuil simplifié, une coquille ou une règle ambiguë.
-    const feedVisualAllowlist = new Set([2, 6, 7, 10, 11, 14, 18, 21, 22, 24]);
-    const visualNumber = (path) => {
-      const match = String(path || '').match(/feed-vis-(\d+)/i);
-      return match ? Number(match[1]) : 0;
-    };
-    const verifiedVisualTitle = (media, fallback) => verifiedFeedVisualTitles[visualNumber(media)] || fallback;
-    const isReviewedVisual = (media) => {
-      const number = visualNumber(media);
-      return !number || feedVisualAllowlist.has(number);
-    };
+    const mediaOk = (path) => !!path && /images\/(feed|chapters)\//.test(path);
     const visualCue = (title) => {
       const t = String(title || '').toLowerCase();
       if (/chute/.test(t)) return 'Repérez les facteurs intrinsèques, les médicaments et l’environnement : une chute appelle toujours une évaluation multifactorielle.';
-      if (/orthostatique/.test(t)) return 'Mesurez couché puis debout, recherchez les symptômes et sécurisez le lever : l’absence de tachycardie oriente vers une dysautonomie ou un traitement chronotrope.';
-      if (/delirium/.test(t)) return 'Retenez la séquence : reconnaître la fluctuation et l’inattention, rechercher une cause aiguë, corriger le facteur précipitant.';
-      if (/dénutrition|nutrition|sarcop/.test(t)) return 'Reliez perte d’apports, inflammation et fonte musculaire ; dépister tôt permet d’interrompre le cercle vicieux.';
-      if (/fried|fragilit/.test(t)) return 'Cinq critères, trois pour la fragilité : perte de poids, fatigue, faiblesse, lenteur et faible activité.';
-      if (/polyméd|beers|prescription/.test(t)) return 'Pour chaque médicament : indication, dose rénale, interactions, durée et possibilité de déprescription.';
-      if (/douleur|ecpa/.test(t)) return 'Auto-évaluation si possible ; sinon observer le comportement avec une échelle adaptée, puis réévaluer après traitement.';
-      if (/incontinence|diappers/.test(t)) return 'Avant d’étiqueter une incontinence chronique, recherchez une cause aiguë et réversible avec DIAPPERS.';
-      if (/escarre|braden/.test(t)) return 'Le risque augmente quand le score de Braden baisse : décharge, mobilisation, peau et nutrition sont indissociables.';
-      if (/sensoriel|vision|audition/.test(t)) return 'Rechercher le retentissement fonctionnel et social, corriger ce qui peut l’être et proposer les aides visuelles ou auditives adaptées.';
-      if (/évaluation gériatrique globale/.test(t)) return 'Relier dimensions médicale, fonctionnelle, cognitive, psychique, nutritionnelle et sociale pour construire un plan de soins individualisé.';
+      if (/orthostatique/.test(t)) return 'Mesurez couché puis debout, recherchez les symptômes et sécurisez le lever.';
+      if (/delirium|confusion|hypoactif/.test(t)) return 'Début aigu et fluctuant, inattention, chercher et corriger le facteur précipitant — y compris les formes hypoactives.';
+      if (/dénutrition|nutrition|sarcop/.test(t)) return 'Reliez perte d’apports, inflammation et fonte musculaire ; dépister tôt (MNA) permet d’interrompre le cercle vicieux.';
+      if (/braden|escarre/.test(t)) return 'Plus le score de Braden est bas, plus le risque est élevé : décharge, mobilisation, peaux et nutrition.';
       if (/tinetti/.test(t)) return 'Le score associe équilibre et marche ; un résultat bas signale un risque de chute et appelle une évaluation multifactorielle.';
-      return 'Observez le mécanisme, formulez le message clinique en une phrase, puis faites défiler pour le rappeler sans support.';
+      if (/vieillissement|réserve|biologie/.test(t)) return 'La baisse de réserve homéostatique explique la vulnérabilité : un facteur aigu bascule plus facilement le sujet âgé.';
+      if (/prescription|médicamenteuse/.test(t)) return 'Réévaluer régulièrement indication, dose rénale, interactions et possibilité de déprescription.';
+      if (/incontinence/.test(t)) return 'Devant une incontinence récente, chercher d’abord une cause réversible avant d’étiqueter une forme chronique.';
+      if (/immobilisation/.test(t)) return 'L’alitement prolonge les complications : mobilisation précoce, peaux, nutrition, prévention thromboembolique.';
+      if (/palliatif/.test(t)) return 'Clarifier objectifs de soins, symptômes prioritaires et décisions anticipées avec le patient et les proches.';
+      return 'Observez le schéma, reformulez le message clinique en une phrase, puis mémorisez sans support.';
     };
     const visualExplanations = visualMedias
-      .filter(v => mediaOk(v.media) && isReviewedVisual(v.media))
+      .filter(v => mediaOk(v.media))
       .map((v, i) => ({
         type: 'visual',
         id: 'vis-' + (i + 1),
-        question: verifiedVisualTitle(v.media, v.title),
-        answer: visualCue(verifiedVisualTitle(v.media, v.title)),
+        question: v.title,
+        answer: visualCue(v.title),
         media: v.media,
-        isVideo: !!v.isVideo
+        isVideo: false
       }));
-
-    // One useful card per concept: pair its image and video instead of showing
-    // the same lesson twice in a single scrolling session.
-    const visualTopic = (card) => {
-      const title = String(card.question || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-      if (/chutes? multifactor/.test(title)) return 'chutes-multifactorielles';
-      if (/mecanisme.*delirium|delirium.*mecanisme/.test(title)) return 'delirium-mecanisme';
-      if (/causes.*delirium|delirium.*causes/.test(title)) return 'delirium-causes';
-      if (/cycle.*denutrition|denutrition.*sarcopen/.test(title)) return 'denutrition-cycle';
-      if (/criteres.*fried/.test(title)) return 'fried';
-      const mediaNumber = String(card.media || '').match(/feed-vis-(\d+)/i);
-      if (mediaNumber) return 'feed-vis-' + mediaNumber[1];
-      return title.replace(/\([^)]*\)/g, ' ').replace(/\s*-\s*(video|animation|mecanisme|risques|consequences|etapes et seuils|diagramme explicatif).*$/i, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-    };
+    // Dedupe by title (one card per concept)
     const byTitle = {};
     visualExplanations.forEach(v => {
-      const key = visualTopic(v);
+      const key = String(v.question || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
       if (!byTitle[key]) byTitle[key] = v;
-      else if (v.isVideo && !byTitle[key].isVideo) {
-        const poster = byTitle[key].media;
-        byTitle[key] = { ...v, image: poster, question: byTitle[key].question };
-      } else if (!v.isVideo && byTitle[key].isVideo && !byTitle[key].image) {
-        byTitle[key].image = v.media;
-      }
     });
     const uniqueVisualExplanations = Object.values(byTitle);
     const nativeDiagrams = EDUCATIONAL_DIAGRAMS.map(d => ({
