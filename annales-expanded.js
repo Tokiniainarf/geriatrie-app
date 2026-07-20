@@ -60,7 +60,7 @@ const ANNALES_EXPANDED = [
   { id: 110, chapter: 'ch9', difficulty: 'A',
     title: 'Diagnostic Alzheimer — démarche',
     cas: 'M. Blanc, 72 ans, plainte mnésique 18 mois. MMS 24/30, MoCA 20/30. APOE4 hétérozygote. IRM : atrophie hippocampique bilatérale. NFS, TSH, B12 normales.',
-    correction: 'MCI (Mild Cognitive Impairment) probable → risque conversion Alzheimer 10-15%/an. Bilan : neuropsychologique complet (RL/RI 16, GDS 3), IRM (atrophie hippocampique = signe évocateur), LCR si doute (Aβ42↓, tau↑). Traitement : inhibiteur cholinestérasique (donépézil), activités cognitives stimulation, suivi 6 mois.' },
+    correction: 'Trouble neurocognitif léger (MCI) probable, sans perte majeure d’autonomie. Confirmer par une évaluation neuropsychologique et rechercher les causes réversibles ; l’IRM étudie notamment l’atrophie temporale médiale et les lésions vasculaires. Les biomarqueurs du LCR ou la TEP se discutent en consultation spécialisée si le diagnostic étiologique reste incertain. Un MCI isolé ne justifie pas un inhibiteur de cholinestérase : corriger les facteurs de risque et déficits sensoriels, revoir les médicaments, encourager l’activité physique et cognitive, puis organiser un suivi clinique.' },
 
   // ─── CH10 : Dépression ───
   { id: 111, chapter: 'ch10', difficulty: 'A',

@@ -219,7 +219,7 @@ function bootApp(){
     document.body.classList.remove('ap-mini-visible', 'ap-full-open', 'ap-is-playing');
   } catch (_) {}
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js?v=255').then((reg) => {
+    navigator.serviceWorker.register('sw.js?v=256').then((reg) => {
       try { reg.update(); } catch (_) {}
       if (reg.waiting) {
         try { reg.waiting.postMessage({ type: 'SKIP_WAITING' }); } catch (_) {}
@@ -537,6 +537,13 @@ function initAnnalesTextExplorer(){
   renderAnnalesTextExplorer();
 }
 
+function normalizeAnnalDisplayText(text){
+  return String(text||'')
+    .replace(/Mild CognitiveImpairment/g,'Mild Cognitive Impairment')
+    .replace(/cérébro-spinal\?Précisez/gi,'cérébro-spinal ? Précisez')
+    .replace(/escarre stade Ill\b/g,'escarre stade III');
+}
+
 function renderAnnalesTextExplorer(){
   const host=document.getElementById('annalesTextExplorer');
   if(!host||typeof ANNALES_TEXTE==='undefined')return;
@@ -551,7 +558,7 @@ function renderAnnalesTextExplorer(){
   const results=visible.map(s=>{
     let questionIndex=0;
     const seenQuestions=new Set();
-    const renderText=(text)=>String(text||'')
+    const renderText=(text)=>normalizeAnnalDisplayText(text)
       .replace(/(?=Question(?:s)?(?:\s+n?[°o]?\s*\d+)?\s*:)/gi,'\n\n')
       .split(/\n\s*\n/)
       .filter(Boolean)
@@ -4622,7 +4629,7 @@ function renderProtoList(list){
           ${p.surveillance?`<div class="proto-surveillance">📊 ${esc(p.surveillance)}</div>`:''}
           ${p.effetsSecondaires?`<div class="proto-surveillance">⚡ EI: ${esc(p.effetsSecondaires)}</div>`:''}
           ${p.contreIndications?`<div class="proto-ci">🚫 CI: ${esc(p.contreIndications)}</div>`:''}
-          ${p.sourceUrl?`<a class="proto-source-link" href="${esc(p.sourceUrl)}" target="_blank" rel="noopener">Ouvrir la source HAS ↗</a>`:''}
+          ${p.sourceUrl?`<span class="proto-source-link proto-source-integrated" title="La référence officielle est conservée dans les données de l’app">Source HAS intégrée · référence vérifiée</span>`:''}
         </div>`;
       }).join('')}</div>
     </div>`).join('');

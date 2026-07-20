@@ -497,7 +497,7 @@ const CAS_EVC_2010_2014 = [
   {
     id: 'evc13-5',
     year: 2013,
-    chapter: 'ch21',
+    chapter: 'ch1',
     difficulty: 'A',
     title: 'Vaccination sujet âgé',
     situation: 'M. Perrin, 82 ans, BPCO, EHPAD. Vaccins incomplets.',
@@ -549,7 +549,7 @@ const CAS_EVC_2010_2014 = [
   {
     id: 'evc14-2',
     year: 2014,
-    chapter: 'ch22',
+    chapter: 'ch14',
     difficulty: 'A',
     title: 'Sarcopénie',
     situation: 'Mme Bonnet, 79 ans, SPPB 8/12, difficulté lever chaise.',
@@ -627,7 +627,7 @@ const CAS_EVC_2010_2014 = [
   {
     id: 'evc14-5',
     year: 2014,
-    chapter: 'ch23',
+    chapter: 'ch6',
     difficulty: 'A',
     title: 'Fracture poignet orthogériatrie',
     situation: 'Mme Petit, 83 ans, radius déplacé. Ostéoporose, MMS 23, EHPAD.',

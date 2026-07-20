@@ -864,12 +864,33 @@ const BrainFeed = (() => {
     return false;
   }
 
+  function cardContentSignature(card) {
+    const clean = (value) => String(value || '')
+      .replace(/<[^>]*>/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .toLowerCase();
+    const prompt = clean([
+      card.vignette, card.prompt, card.question, card.trap, card.line, card.text
+    ].filter(Boolean).join(' '));
+    const answer = clean([
+      card.diagnosis, card.answer, card.explain, card.detail, card.explanation
+    ].filter(Boolean).join(' '));
+    // Dans le flux quotidien, un dossier progressif ne doit apparaître
+    // qu'une fois : ses autres questions restent accessibles en session Cas.
+    if (card.type === 'cas_choc' && clean(card.vignette)) {
+      return `cas_choc|case:${clean(card.vignette).slice(0, 700)}`;
+    }
+    if (!prompt && !answer) return `${card.type || 'card'}|id:${card.id || ''}`;
+    return `${card.type || 'card'}|${prompt.slice(0, 520)}|${answer.slice(0, 520)}`;
+  }
+
   function dedupeDeck(cards) {
     const seen = new Set();
     const out = [];
     for (const c of cards) {
       if (isLowQualityCard(c)) continue;
-      const key = String(c.id || '') + '|' + String(c.question || c.trap || c.line || c.text || '').toLowerCase().replace(/\s+/g, ' ').trim().slice(0, 120);
+      const key = cardContentSignature(c);
       if (seen.has(key)) continue;
       seen.add(key);
       out.push(c);
@@ -914,13 +935,23 @@ const BrainFeed = (() => {
       ...pools.piegeExam, ...pools.chiffreCle, ...pools.visualExplanations
     ]);
     const seen = new Set();
+    const seenContent = new Set();
     const isDue = (card) => card.srsKey && Object.prototype.hasOwnProperty.call(pools.srs, card.srsKey) && pools.srs[card.srsKey].nextReview <= Date.now();
     const add = (list, count, salt = '') => {
-      const available = list.filter(card => !seen.has(card.id));
+      const localContent = new Set();
+      const available = list.filter(card => {
+        const signature = cardContentSignature(card);
+        if (seen.has(card.id) || seenContent.has(signature) || localContent.has(signature)) return false;
+        localContent.add(signature);
+        return true;
+      });
       const due = available.filter(isDue).sort((a, b) => (a.srs.nextReview || 0) - (b.srs.nextReview || 0));
       const fresh = dayPick(available.filter(card => !isDue(card)), Math.max(0, count - due.length), salt);
       const accepted = [...due.slice(0, count), ...fresh].slice(0, count);
-      accepted.forEach(card => seen.add(card.id));
+      accepted.forEach(card => {
+        seen.add(card.id);
+        seenContent.add(cardContentSignature(card));
+      });
       return accepted;
     };
     const strongCases = pools.casChoc.filter(isCompactFeedCase);

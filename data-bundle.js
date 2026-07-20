@@ -4911,7 +4911,7 @@ const ANNALES = [
     questions: [
       { q: "Qu'est-ce que la sédation en fin de vie ?", a: "Administration de médicaments à doses progressives pour obtenir une diminution de la vigilance visant à soulager une souffrance réfractaire. Types : sédation proportionnelle (réversible), sédation profonde et continue jusqu'au décès (SPCMD). La décision doit respecter les conditions cliniques et légales applicables, l'information et la traçabilité.", rang: "A" },
       { q: "Quelles sont les conditions légales de la sédation ?", a: "Loi Claeys-Leonetti : évaluer le caractère réfractaire de la souffrance et la situation clinique, recueillir la demande et les volontés du patient lorsqu'il peut les exprimer, appliquer la procédure collégiale lorsqu'elle est requise, informer les personnes concernées et tracer la décision dans le dossier. La sédation est proportionnée à l'objectif de soulagement ; la SPCMD répond à des conditions légales spécifiques.", rang: "A" },
-      { q: "Comment gérer la douleur de ce patient en attendant la sédation ?", a: "1. Morphine titration : morphine SC 1-2 mg toutes les 4h + doses de secours (1/6ème de la dose totale journalière). 2. Si douleur neuropathique : kétamine à faible dose. 3. Anxiolytique si anxiété : midazolam SC. 4. Soins de confort : bouche, peau, position. 5. Écoute, présence, accompagnement spirituel si souhaité.", rang: "A" }
+      { q: "Comment gérer la douleur de ce patient en attendant la sédation ?", a: "Poursuivre sans délai l'analgésie et les soins de confort. Titrer l'opioïde selon l'intensité, les traitements antérieurs, la fonction rénale, la voie disponible et le protocole du service ; prévoir des interdoses et réévaluer douleur, vigilance et effets indésirables. Rechercher une composante neuropathique, traiter l'anxiété sans confondre anxiolyse et sédation, et maintenir écoute, présence et accompagnement souhaité.", rang: "A" }
     ]
   },
 
@@ -5025,7 +5025,7 @@ const ANNALES_EXPANDED = [
   { id: 110, chapter: 'ch9', difficulty: 'A',
     title: 'Diagnostic Alzheimer — démarche',
     cas: 'M. Blanc, 72 ans, plainte mnésique 18 mois. MMS 24/30, MoCA 20/30. APOE4 hétérozygote. IRM : atrophie hippocampique bilatérale. NFS, TSH, B12 normales.',
-    correction: 'MCI (Mild Cognitive Impairment) probable → risque conversion Alzheimer 10-15%/an. Bilan : neuropsychologique complet (RL/RI 16, GDS 3), IRM (atrophie hippocampique = signe évocateur), LCR si doute (Aβ42↓, tau↑). Traitement : inhibiteur cholinestérasique (donépézil), activités cognitives stimulation, suivi 6 mois.' },
+    correction: 'Trouble neurocognitif léger (MCI) probable, sans perte majeure d’autonomie. Confirmer par une évaluation neuropsychologique et rechercher les causes réversibles ; l’IRM étudie notamment l’atrophie temporale médiale et les lésions vasculaires. Les biomarqueurs du LCR ou la TEP se discutent en consultation spécialisée si le diagnostic étiologique reste incertain. Un MCI isolé ne justifie pas un inhibiteur de cholinestérase : corriger les facteurs de risque et déficits sensoriels, revoir les médicaments, encourager l’activité physique et cognitive, puis organiser un suivi clinique.' },
 
   // ─── CH10 : Dépression ───
   { id: 111, chapter: 'ch10', difficulty: 'A',
@@ -14820,7 +14820,7 @@ const CAS_EVC_2010_2014 = [
   {
     id: 'evc13-5',
     year: 2013,
-    chapter: 'ch21',
+    chapter: 'ch1',
     difficulty: 'A',
     title: 'Vaccination sujet âgé',
     situation: 'M. Perrin, 82 ans, BPCO, EHPAD. Vaccins incomplets.',
@@ -14872,7 +14872,7 @@ const CAS_EVC_2010_2014 = [
   {
     id: 'evc14-2',
     year: 2014,
-    chapter: 'ch22',
+    chapter: 'ch14',
     difficulty: 'A',
     title: 'Sarcopénie',
     situation: 'Mme Bonnet, 79 ans, SPPB 8/12, difficulté lever chaise.',
@@ -14950,7 +14950,7 @@ const CAS_EVC_2010_2014 = [
   {
     id: 'evc14-5',
     year: 2014,
-    chapter: 'ch23',
+    chapter: 'ch6',
     difficulty: 'A',
     title: 'Fracture poignet orthogériatrie',
     situation: 'Mme Petit, 83 ans, radius déplacé. Ostéoporose, MMS 23, EHPAD.',
