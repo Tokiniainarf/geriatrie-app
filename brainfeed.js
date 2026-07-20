@@ -646,7 +646,7 @@ const BrainFeed = (() => {
     piegeExam.forEach(p => {
       const t = (p.trap || '').toLowerCase();
       if (t.includes('chute')) {
-        p.image = 'images/feed/illustrative/feed-vis-2.jpg';
+        p.image = 'images/chapters/educational/chute-multifactorielle-diagram.jpg';
       }
       if (t.includes('delirium') || t.includes('confusion')) {
         p.image = 'images/feed/educatif/delirium-hypoactif.webp';
@@ -671,18 +671,11 @@ const BrainFeed = (() => {
       { media: 'images/feed/educatif/hypotension-orthostatique.webp', title: 'Hypotension orthostatique : lever sécurisé' },
       { media: 'images/feed/educatif/revue-medicamenteuse.webp', title: 'Revue médicamenteuse partagée' },
       { media: 'images/feed/educatif/denutrition-sarcopenie.webp', title: 'Rompre le cercle dénutrition–sarcopénie' },
-      // Chapter educational diagrams (static, readable)
+      // Chapter educational diagrams (static, readable and clinically coherent)
       { media: 'images/chapters/educational/chute-multifactorielle-diagram.jpg', title: 'Chutes multifactorielles : diagramme' },
-      { media: 'images/chapters/educational/ch13-cascade-immobilisation.jpg', title: 'Cascade d’immobilisation' },
-      { media: 'images/chapters/educational/ch15-incontinence-classification.jpg', title: 'Classification des incontinences' },
       { media: 'images/chapters/educational/ch16-prescription-appropriee.jpg', title: 'Prescription appropriée' },
-      { media: 'images/chapters/educational/ch17-soins-palliatifs-decision.jpg', title: 'Décision en soins palliatifs' },
-      // feed-vis stills audited: content matches title (no AI video)
-      { media: 'images/feed/illustrative/feed-vis-2.jpg', title: 'Chutes multifactorielles : modèle de risque' },
+      // Curated feed stills: legible French and no contradictory scale values.
       { media: 'images/feed/illustrative/feed-vis-6.jpg', title: 'Biologie du vieillissement et réserve fonctionnelle' },
-      { media: 'images/feed/illustrative/feed-vis-14.jpg', title: 'Escarres : échelle de Braden et prévention' },
-      { media: 'images/feed/illustrative/feed-vis-18.jpg', title: 'Score de Tinetti : équilibre et marche' },
-      { media: 'images/feed/illustrative/feed-vis-21.jpg', title: 'Sarcopénie : mécanismes et prise en charge' },
       { media: 'images/feed/illustrative/feed-vis-22.jpg', title: 'Cercle dénutrition–sarcopénie' }
     ];
     const mediaOk = (path) => !!path && /images\/(feed|chapters)\//.test(path);

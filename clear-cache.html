@@ -20,7 +20,7 @@
 (async () => {
   const s = document.getElementById('status');
   const log = (t) => { s.textContent = t; };
-  const APP = './?v=253&purged=' + Date.now();
+  const APP = './?v=255&purged=' + Date.now();
   try {
     // Tell any active SW to skip waiting, then unregister everything
     if (navigator.serviceWorker) {

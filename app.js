@@ -219,7 +219,7 @@ function bootApp(){
     document.body.classList.remove('ap-mini-visible', 'ap-full-open', 'ap-is-playing');
   } catch (_) {}
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js?v=254').then((reg) => {
+    navigator.serviceWorker.register('sw.js?v=255').then((reg) => {
       try { reg.update(); } catch (_) {}
       if (reg.waiting) {
         try { reg.waiting.postMessage({ type: 'SKIP_WAITING' }); } catch (_) {}
@@ -758,9 +758,17 @@ function renderHome(){
     const rd=S.read.includes(ch.id),bm=S.bm.includes(ch.id);
     const pct=rd?100:0;
     const el=document.createElement('div');el.className='ch-row ch-row-enter';
+    el.setAttribute('role','button');
+    el.setAttribute('tabindex','0');
+    el.setAttribute('aria-label',`Ouvrir le chapitre ${ch.id.replace('ch','')} : ${ch.t}`);
     el.style.animationDelay=(chIdx*0.04)+'s';
     chIdx++;
     el.onclick=()=>showCh(ch.id);
+    el.onkeydown=(event)=>{
+      if(event.target!==el || (event.key!=='Enter' && event.key!==' ')) return;
+      event.preventDefault();
+      showCh(ch.id);
+    };
     el.innerHTML=`<div class="ch-row-num" style="background:${CH_COLORS[ch.id]}15;color:${CH_COLORS[ch.id]}">${ch.id.replace('ch','')}</div>
       <div class="ch-row-body">
         <div class="ch-row-title">${esc(ch.t)}</div>
