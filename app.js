@@ -219,7 +219,7 @@ function bootApp(){
     document.body.classList.remove('ap-mini-visible', 'ap-full-open', 'ap-is-playing');
   } catch (_) {}
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js?v=256').then((reg) => {
+    navigator.serviceWorker.register('sw.js?v=262').then((reg) => {
       try { reg.update(); } catch (_) {}
       if (reg.waiting) {
         try { reg.waiting.postMessage({ type: 'SKIP_WAITING' }); } catch (_) {}
@@ -347,6 +347,7 @@ function sw(view, opts){
     if(targetView==='graph'&&typeof initGraph==='function') safe(initGraph, 'graph');
     if(targetView==='feed'&&typeof BrainFeed!=='undefined') safe(()=>BrainFeed.init(), 'feed');
     if(targetView!=='feed'&&typeof BrainFeed!=='undefined'&&BrainFeed.destroy) safe(()=>BrainFeed.destroy(), 'feed-destroy');
+    if(targetView==='clinique'&&typeof ClinicalAssistant!=='undefined') safe(()=>ClinicalAssistant.init(), 'clinical-assistant');
     if(targetView==='dash'&&typeof Dashboard!=='undefined') safe(()=>Dashboard.render(), 'dash');
     if(targetView==='erreurs'&&typeof ErrorJournal!=='undefined') safe(()=>ErrorJournal.render(), 'erreurs');
     if(targetView==='dict') safe(renderDict, 'dict');

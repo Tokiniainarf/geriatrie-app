@@ -19,7 +19,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<link rel="stylesheet" href="style.css?v=256"><link rel="stylesheet" href="vibrant.css?v=256">
+<link rel="stylesheet" href="style.css?v=262"><link rel="stylesheet" href="vibrant.css?v=262">
 <style>
 /* Critical preloader (inline so it shows before CSS/JS) */
 #appPreloader{position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:radial-gradient(ellipse 90% 55% at 15% 0%,rgba(37,99,235,.16),transparent 55%),radial-gradient(ellipse 70% 50% at 90% 15%,rgba(255,93,122,.14),transparent 55%),radial-gradient(ellipse 70% 55% at 50% 110%,rgba(14,165,233,.16),transparent 55%),linear-gradient(180deg,#FAFCFF,#EDF3FE);color:#16264A;font-family:Figtree,system-ui,sans-serif;transition:opacity .45s ease,visibility .45s}
@@ -98,7 +98,20 @@
       <div class="stat"><span class="stat-num">11</span><span class="stat-label">ITEMs</span></div>
       <div class="stat stat-click" role="button" tabindex="0" onclick="sw('fav')" onkeydown="if(event.key==='Enter')sw('fav')"><span class="stat-num" id="statFav">0</span><span class="stat-label">fav.</span></div>
     </div>
-    
+
+    <button type="button" class="clinical-home-card" onclick="sw('clinique')">
+      <span class="clinical-home-visual" aria-hidden="true">
+        <i>+</i>
+        <b>🩺</b>
+      </span>
+      <span class="clinical-home-copy">
+        <small>Assistant clinique · aucune donnée enregistrée</small>
+        <strong>Recevoir un patient</strong>
+        <span>Saisissez le motif, les constantes et les signes : l’app adapte les questions, le bilan, les scores et la conduite à tenir.</span>
+      </span>
+      <span class="clinical-home-action">Commencer <b>→</b></span>
+    </button>
+
     <!-- ACCÈS RAPIDES (dédupliqués — pas de double Synth/Items ni Garde=Protocoles) -->
     <div class="quick-access-grid">
       <button class="qa-card" onclick="sw('synth')">
@@ -136,6 +149,11 @@
     <div id="p1"></div>
     <div class="section-header">Partie II — Entraînement</div>
     <div id="p2"></div>
+  </div>
+
+  <!-- ASSISTANT CLINIQUE -->
+  <div class="view" id="vClinique">
+    <div id="clinicalApp"></div>
   </div>
 
   <!-- PARCOURS LIES -->
@@ -586,16 +604,18 @@
     { src: 'annales-texte.js?v=253', label: 'Sujets EVC recherchables…', pct: 50 },
     { src: 'annales-corrections.js?v=253', label: 'Corrigés pédagogiques…', pct: 53 },
     { src: 'protocoles-has-officiels.js?v=253', label: 'Conduites HAS…', pct: 57 },
+    { src: 'clinical-pathways.js?v=262', label: 'Référentiel clinique…', pct: 59 },
     { src: 'notebook-decks-data.js?v=253', label: 'Decks NotebookLM…', pct: 60 },
     { src: 'notebook-interactive.js?v=253', label: 'Lecteur présentation…', pct: 65 },
-    { src: 'calculateurs.js?v=253', label: 'Scores & calculateurs…', pct: 70 },
+    { src: 'calculateurs.js?v=262', label: 'Scores & calculateurs…', pct: 70 },
+    { src: 'clinical-assistant.js?v=262', label: 'Consultation guidée…', pct: 73 },
     { src: 'quiz.js?v=253', label: 'Mode examen…', pct: 75 },
     { src: 'dashboard.js?v=253', label: 'Tableau de bord…', pct: 80 },
     { src: 'appsearch.js?v=253', label: 'Recherche…', pct: 85 },
     { src: 'erreurs-journal.js?v=253', label: 'Fichier erreurs…', pct: 89 },
     { src: 'graph.js?v=253', label: 'Parcours liés…', pct: 93 },
     { src: 'brainfeed.js?v=256', label: 'BrainFeed…', pct: 97 },
-    { src: 'app.js?v=256', label: 'Interface…', pct: 100 }
+    { src: 'app.js?v=262', label: 'Interface…', pct: 100 }
   ];
   var i = 0;
   var fill = document.getElementById('plFill');

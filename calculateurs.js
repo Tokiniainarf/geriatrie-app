@@ -3642,6 +3642,17 @@ const Medicalcul = {
         </div>
       `;
       Medicalcul.currentResultText = `[Gériatrie - ${calc.nom}]\nScore : ${scoreVal}\nInterprétation : ${norm.interp}${refs && refs.detail ? '\nPrécisions : ' + refs.detail : ''}${calc.seuils ? '\nRepères : ' + calc.seuils : ''}${refs && refs.source ? '\nRéf. : ' + refs.source : ''}`;
+      try {
+        document.dispatchEvent(new CustomEvent('medicalcul:result', {
+          detail: {
+            id,
+            name: calc.nom,
+            score: scoreVal,
+            interpretation: norm.interp,
+            text: Medicalcul.currentResultText
+          }
+        }));
+      } catch (_) {}
       const hideBtn = document.getElementById('calc-hide-score-btn');
       if (hideBtn) hideBtn.addEventListener('click', () => {
         hideScorePanel();

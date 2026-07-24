@@ -982,6 +982,15 @@ button { -webkit-tap-highlight-color: transparent; }
   margin-inline: auto !important;
   gap: 0 !important;
 }
+
+/* La vue clinique contient sa propre barre d'action fixe. Une animation avec
+   transform sur l'ancêtre ferait de cet ancêtre le repère de positionnement
+   et repousserait la barre hors de l'écran sur mobile. */
+#vClinique.view,
+#vClinique.view.active {
+  animation: none !important;
+  transform: none !important;
+}
 #vFeed .bf-visual-page .bf-reel-media,
 #vFeed .bf-visual-page .bf-native-diagram-wrap {
   width: 100% !important;
