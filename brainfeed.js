@@ -665,16 +665,38 @@ const BrainFeed = (() => {
          stacked titles, invented labels (e.g. DIAPPERS+courbe de tension).
        - Only curated stills + chapter educational diagrams + native SVG diagrams.
        ------------------------------------------------------------------ */
-    const visualMedias = [
-      // Photoreal education stills (no embedded text)
+        const visualMedias = [
+      // ═══════════════════════════════════════════════════════════════
+      // 20 Reels Cliniques EVC (Générés Gemini Notebook)
+      // ═══════════════════════════════════════════════════════════════
+      { media: 'images/feed/videos/reel_01_vieillissement_fragilite_fried.mp4', isVideo: true, title: 'Reel 1 : Vieillissement & Fragilité de Fried', desc: 'Physiopathologie (1+2+3 de Bouchon) & 5 critères phénotypiques de Fried' },
+      { media: 'images/feed/videos/reel_02_autonomie_adl_iadl.mp4', isVideo: true, title: 'Reel 2 : Autonomie : ADL vs IADL', desc: 'Katz ADL (élémentaires) vs Lawton IADL (instrumentales & financières)' },
+      { media: 'images/feed/videos/reel_03_dependance_iatrogene_hopital.mp4', isVideo: true, title: 'Reel 3 : Dépendance Iatrogène à l\'Hôpital', desc: 'Prévention de la perte d\'autonomie liée à l\'alitement hospitalier (HAS)' },
+      { media: 'images/feed/videos/reel_04_osteoporose_tscore.mp4', isVideo: true, title: 'Reel 4 : Alerte Ostéoporose & T-Score', desc: 'Diagnostic ostéodensitométrique (T-score ≤ -2.5), fractures sévères & biphosphonates' },
+      { media: 'images/feed/videos/reel_05_arthrose_geriatrique_pieges.mp4', isVideo: true, title: 'Reel 5 : Les Pièges de l\'Arthrose Gériatrique', desc: 'Gonarthrose destructrice rapide & contre-indications absolues des AINS' },
+      { media: 'images/feed/videos/reel_06_douleur_invisible_algoplus_dn4.mp4', isVideo: true, title: 'Reel 6 : Repérer la Douleur Invisible', desc: 'Patient non communicant (Algoplus, ECPA) & douleur neuropathique (score DN4)' },
+      { media: 'images/feed/videos/reel_07_tnc_leger_vs_majeur.mp4', isVideo: true, title: 'Reel 7 : Diagnostic des TNC : Léger vs Majeur', desc: 'Différenciation clinique des Troubles Neurocognitifs (TNC, Alzheimer, Lewy)' },
+      { media: 'images/feed/videos/reel_08_depression_masquee_score_rud.mp4', isVideo: true, title: 'Reel 8 : Dépression Masquée & Score RUD', desc: 'Sémiologie atypique, risque suicidaire (RUD) et maniement des ISRS' },
+      { media: 'images/feed/videos/reel_09_syndrome_confusionnel_urgences_pieges.mp4', isVideo: true, title: 'Reel 9 : Syndrome Confusionnel (CAM)', desc: 'Critères DSM-5, score CAM, urgence étiologique & éviction des contentions' },
+      { media: 'images/feed/videos/reel_10_chute_risques_syndrome_post_chute.mp4', isVideo: true, title: 'Reel 10 : La Chute & Syndrome Post-Chute', desc: 'Évaluation motrice (TUG > 20s), syndrome post-chute et risque de rhabdomyolyse' },
+      { media: 'images/feed/videos/reel_11_immobilisation_escarres_4_stades.mp4', isVideo: true, title: 'Reel 11 : Immobilisation & Escarres', desc: 'Échelles Norton/Braden, ischémie de pression & conduite selon les 4 stades' },
+      { media: 'images/feed/videos/reel_12_nouveaux_criteres_has_denutrition.mp4', isVideo: true, title: 'Reel 12 : Nouveaux Critères HAS Dénutrition', desc: 'Recommandations HAS ≥70 ans, seuils IMC < 22, albuminémie < 35 g/L & sarcopénie' },
+      { media: 'images/feed/videos/reel_13_incontinence_diappers_globe.mp4', isVideo: true, title: 'Reel 13 : Incontinence & DIAPPERS', desc: 'Causes réversibles (DIAPPERS), rétention aiguë et miction par regorgement' },
+      { media: 'images/feed/videos/reel_14_stopp_start_surdosage_avk.mp4', isVideo: true, title: 'Reel 14 : STOPP-START & Surdosage AVK', desc: 'Sécurisation médicamenteuse, règles STOPP-START & algorithme d\'urgence AVK' },
+      { media: 'images/feed/videos/reel_15_lecanemab_surveillance_aria.mp4', isVideo: true, title: 'Reel 15 : Lécanémab & Surveillance des ARIA', desc: 'Recommandations SFGG 2025 : critères d\'éligibilité, CI (APOE4, AVK) et protocole IRM' },
+      { media: 'images/feed/videos/reel_16_insuffisance_cardiaque_protocole_hanon.mp4', isVideo: true, title: 'Reel 16 : Insuffisance Cardiaque (Protocole Hanon)', desc: 'Optimisation cardiogériatrique (HFrEF), 4 piliers et titration prudente à 1/4 de dose' },
+      { media: 'images/feed/videos/reel_17_exacerbation_bpco_choix_antibiotique.mp4', isVideo: true, title: 'Reel 17 : Exacerbation BPCO & Antibiothérapie', desc: 'Guide HAS : critères d\'hospitalisation, corticothérapie orale & antibiothérapie ciblée' },
+      { media: 'images/feed/videos/reel_18_grille_aggir_evaluation_autonomie.mp4', isVideo: true, title: 'Reel 18 : Grille AGGIR & Évaluation de l\'Autonomie', desc: '10 variables discriminantes, 7 illustratives et calcul du GIR 1 à 6' },
+      { media: 'images/feed/videos/reel_19_diagnostic_denutrition_geriatrique.mp4', isVideo: true, title: 'Reel 19 : Diagnostic de la Dénutrition Gériatrique', desc: 'Critères phénotypiques et étiologiques HAS 2021 chez la personne âgée' },
+      { media: 'images/feed/videos/video_20_delirium_evc_geriatrie_apercu.mp4', isVideo: true, title: 'Reel 20 : Délirium EVC Gériatrie (Masterclass)', desc: 'Diagnostic positif, étiologies médicamenteuses et prise en charge globale' },
+
+      // Stills éducatifs et schémas complémentaires
       { media: 'images/feed/educatif/delirium-hypoactif.webp', title: 'Delirium hypoactif : le calme trompeur' },
       { media: 'images/feed/educatif/hypotension-orthostatique.webp', title: 'Hypotension orthostatique : lever sécurisé' },
       { media: 'images/feed/educatif/revue-medicamenteuse.webp', title: 'Revue médicamenteuse partagée' },
       { media: 'images/feed/educatif/denutrition-sarcopenie.webp', title: 'Rompre le cercle dénutrition–sarcopénie' },
-      // Chapter educational diagrams (static, readable and clinically coherent)
       { media: 'images/chapters/educational/chute-multifactorielle-diagram.jpg', title: 'Chutes multifactorielles : diagramme' },
       { media: 'images/chapters/educational/ch16-prescription-appropriee.jpg', title: 'Prescription appropriée' },
-      // Curated feed stills: legible French and no contradictory scale values.
       { media: 'images/feed/illustrative/feed-vis-6.jpg', title: 'Biologie du vieillissement et réserve fonctionnelle' },
       { media: 'images/feed/illustrative/feed-vis-22.jpg', title: 'Cercle dénutrition–sarcopénie' }
     ];
@@ -963,7 +985,7 @@ const BrainFeed = (() => {
       ...add(strongCases, 4, 'core-cas'),
       ...add(pools.memoJour, 2, 'core-memo'),
       ...add(pools.piegeExam, 2, 'core-piege'),
-      ...add([...diagrams, ...mediaVisuals], 1, 'core-visual'),
+      ...add([...mediaVisuals, ...diagrams], 3, 'core-visual'),
       ...add(pools.chiffreCle, 1, 'core-chiffre')
     ];
     if (core.length < DAILY_GOAL) core.push(...add(all, DAILY_GOAL - core.length, 'core-fill'));
@@ -973,7 +995,7 @@ const BrainFeed = (() => {
       ...add(strongCases, 4, 'bonus-cas'),
       ...add(pools.memoJour, 1, 'bonus-memo'),
       ...add(pools.piegeExam, 1, 'bonus-piege'),
-      ...add([...mediaVisuals, ...diagrams], 1, 'bonus-visual'),
+      ...add([...mediaVisuals, ...diagrams], 3, 'bonus-visual'),
       ...add(pools.chiffreCle, 1, 'bonus-chiffre')
     ];
     if (core.length + bonus.length < FEED_LENGTH) bonus.push(...add(all, FEED_LENGTH - core.length - bonus.length, 'bonus-fill'));
