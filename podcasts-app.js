@@ -1,5 +1,6 @@
 /* ===============================================================
    PODCASTS MODULE — Lecteur Audio Natif NotebookLM EVC
+   Lecture streaming directe haute qualité des 27 masterclasses
    =============================================================== */
 
 const Podcasts = (function() {
@@ -9,10 +10,14 @@ const Podcasts = (function() {
   let isPlaying = false;
   let playbackSpeed = 1.0;
   let audioElement = null;
-  let localAudioFiles = new Map();
 
   function init() {
     initAudioElement();
+    if (typeof PODCASTS_DATA !== 'undefined' && PODCASTS_DATA.length > 0) {
+      if (!currentPodcast) {
+        selectPodcast(PODCASTS_DATA[0].id, false);
+      }
+    }
     renderList();
   }
 
@@ -21,11 +26,25 @@ const Podcasts = (function() {
     if (!audioElement) {
       audioElement = document.createElement('audio');
       audioElement.id = 'podAudioElement';
-      audioElement.preload = 'metadata';
+      audioElement.preload = 'auto';
       document.body.appendChild(audioElement);
 
       audioElement.addEventListener('timeupdate', () => {
         updateProgress();
+      });
+
+      audioElement.addEventListener('durationchange', () => {
+        updateDuration();
+      });
+
+      audioElement.addEventListener('play', () => {
+        isPlaying = true;
+        updatePlayButtons();
+      });
+
+      audioElement.addEventListener('pause', () => {
+        isPlaying = false;
+        updatePlayButtons();
       });
 
       audioElement.addEventListener('ended', () => {
@@ -34,64 +53,20 @@ const Podcasts = (function() {
       });
 
       audioElement.addEventListener('error', (e) => {
-        console.warn('[Podcasts] Erreur de lecture audio:', e);
+        console.warn('[Podcasts] Erreur audio:', e);
       });
     }
-  }
-
-  function loadLocalFolder(fileList) {
-    if (!fileList || !fileList.length) return;
-    localAudioFiles.clear();
-    let count = 0;
-    for (let i = 0; i < fileList.length; i++) {
-      const file = fileList[i];
-      if (file.name.endsWith('.m4a') || file.name.endsWith('.mp3') || file.name.endsWith('.wav')) {
-        const normName = file.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-        localAudioFiles.set(normName, file);
-        localAudioFiles.set(file.name, file);
-        count++;
-      }
-    }
-    const statusEl = document.getElementById('podFolderStatus');
-    if (statusEl) {
-      statusEl.textContent = `✅ ${count} audios NotebookLM connectés !`;
-      statusEl.style.color = '#14b8a6';
-      statusEl.style.fontWeight = '700';
-    }
-    if (currentPodcast) {
-      prepareAudioSource(currentPodcast);
-    }
-    renderList();
   }
 
   function prepareAudioSource(pod) {
     initAudioElement();
     if (!pod) return;
-    
-    // Check if matching local file exists
-    let matchedFile = null;
-    if (pod.audioFilename) {
-      const norm = pod.audioFilename.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-      matchedFile = localAudioFiles.get(pod.audioFilename) || localAudioFiles.get(norm);
+    const url = pod.audioUrl || ('audio/podcasts/' + pod.slug);
+    if (audioElement.src !== url && !audioElement.src.endsWith(url)) {
+      audioElement.src = url;
+      audioElement.load();
     }
-
-    if (!matchedFile) {
-      // Fuzzy search in localAudioFiles
-      for (const [name, file] of localAudioFiles.entries()) {
-        const podNorm = pod.title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').slice(0, 15);
-        if (name.includes(podNorm)) {
-          matchedFile = file;
-          break;
-        }
-      }
-    }
-
-    if (matchedFile) {
-      audioElement.src = URL.createObjectURL(matchedFile);
-    } else {
-      // Stream path in audio/podcasts/ or synthesized fallback
-      audioElement.src = 'audio/podcasts/' + encodeURIComponent(pod.audioFilename || (pod.id + '.m4a'));
-    }
+    audioElement.playbackRate = playbackSpeed;
   }
 
   function getFilteredPodcasts() {
@@ -132,23 +107,22 @@ const Podcasts = (function() {
 
     grid.innerHTML = list.map(pod => {
       const isCurrent = currentPodcast && currentPodcast.id === pod.id;
-      const hasLocal = pod.audioFilename && (localAudioFiles.has(pod.audioFilename) || localAudioFiles.has(pod.audioFilename.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')));
       return `
-        <div class="pod-card ${isCurrent ? 'pod-card-active' : ''}" id="pod-card-${pod.id}" onclick="Podcasts.selectPodcast('${pod.id}')">
+        <div class="pod-card ${isCurrent ? 'pod-card-active' : ''}" id="pod-card-${pod.id}" onclick="Podcasts.selectPodcast('${pod.id}', true)">
           <div class="pod-card-top">
             <span class="pod-cat-badge">${pod.categoryLabel}</span>
-            <span class="pod-dur-badge">⏱ ${pod.duration}</span>
+            <span class="pod-dur-badge">⏱ ${pod.sizeMB ? pod.sizeMB + ' Mo' : 'Masterclass'}</span>
           </div>
           <h3 class="pod-card-title">${esc(pod.title)}</h3>
           <p class="pod-card-chapter">📖 ${esc(pod.chapterTitle)}</p>
           <p class="pod-card-summary">${esc(pod.summary)}</p>
           <div class="pod-card-tags">
             ${(pod.tags || []).map(t => `<span class="pod-tag">${esc(t)}</span>`).join('')}
-            ${hasLocal ? '<span class="pod-tag" style="background:#0d9488; color:#fff;">✓ Fichier M4A connecté</span>' : ''}
+            <span class="pod-tag pod-tag-ready">✓ Audio NotebookLM</span>
           </div>
           <div class="pod-card-actions">
             <button type="button" class="pod-card-play-btn" onclick="event.stopPropagation(); Podcasts.playPodcast('${pod.id}')">
-              ${isCurrent && isPlaying ? '⏸ Pause' : '▶ Écouter l\'audio'}
+              ${isCurrent && isPlaying ? '⏸ Pause' : '▶ Écouter la masterclass'}
             </button>
           </div>
         </div>
@@ -156,52 +130,53 @@ const Podcasts = (function() {
     }).join('');
   }
 
-  function selectPodcast(id) {
+  function selectPodcast(id, autoPlay = false) {
     const pod = (typeof PODCASTS_DATA !== 'undefined') ? PODCASTS_DATA.find(p => p.id === id) : null;
     if (!pod) return;
     currentPodcast = pod;
     prepareAudioSource(currentPodcast);
     updatePlayerUI();
     renderList();
+    if (autoPlay) {
+      startPlay();
+    }
   }
 
   function playPodcast(id) {
     if (!currentPodcast || currentPodcast.id !== id) {
-      selectPodcast(id);
+      selectPodcast(id, true);
+    } else {
+      togglePlay();
     }
-    togglePlay();
   }
 
   function togglePlay() {
     initAudioElement();
     if (!currentPodcast) {
       if (typeof PODCASTS_DATA !== 'undefined' && PODCASTS_DATA.length > 0) {
-        selectPodcast(PODCASTS_DATA[0].id);
-      } else {
-        return;
+        selectPodcast(PODCASTS_DATA[0].id, true);
       }
+      return;
     }
 
     if (isPlaying) {
       audioElement.pause();
-      isPlaying = false;
-      updatePlayButtons();
     } else {
-      audioElement.playbackRate = playbackSpeed;
-      const playPromise = audioElement.play();
-      if (playPromise && typeof playPromise.catch === 'function') {
-        playPromise.then(() => {
-          isPlaying = true;
-          updatePlayButtons();
-        }).catch((err) => {
-          console.warn('[Podcasts] Playback blocked or source pending:', err);
-          isPlaying = false;
-          updatePlayButtons();
-        });
-      } else {
-        isPlaying = true;
-        updatePlayButtons();
-      }
+      startPlay();
+    }
+  }
+
+  function startPlay() {
+    initAudioElement();
+    if (!audioElement.src || audioElement.src === '' || audioElement.src === window.location.href) {
+      prepareAudioSource(currentPodcast);
+    }
+    audioElement.playbackRate = playbackSpeed;
+    const p = audioElement.play();
+    if (p && typeof p.catch === 'function') {
+      p.catch(err => {
+        console.warn('[Podcasts] Erreur de lecture:', err);
+      });
     }
   }
 
@@ -234,12 +209,20 @@ const Podcasts = (function() {
     const titleEl = document.getElementById('podPlayerTitle');
     const subEl = document.getElementById('podPlayerSub');
     const badgeEl = document.getElementById('podPlayerBadge');
-    const durEl = document.getElementById('podTotalDuration');
 
     if (titleEl) titleEl.textContent = currentPodcast.title;
-    if (subEl) subEl.textContent = `${currentPodcast.categoryLabel} · ${currentPodcast.chapterTitle} (${currentPodcast.duration})`;
-    if (badgeEl) badgeEl.textContent = 'AUDIO NOTEBOOKLM SÉLECTIONNÉ';
-    if (durEl) durEl.textContent = currentPodcast.duration;
+    if (subEl) subEl.textContent = `${currentPodcast.categoryLabel} · ${currentPodcast.chapterTitle}`;
+    if (badgeEl) badgeEl.textContent = 'MASTERCLASS NOTEBOOKLM';
+    updateDuration();
+  }
+
+  function updateDuration() {
+    const durEl = document.getElementById('podTotalDuration');
+    if (durEl && audioElement && audioElement.duration && !isNaN(audioElement.duration)) {
+      const m = Math.floor(audioElement.duration / 60);
+      const s = Math.floor(audioElement.duration % 60);
+      durEl.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    }
   }
 
   function updatePlayButtons() {
@@ -256,7 +239,7 @@ const Podcasts = (function() {
     const curTimeEl = document.getElementById('podCurrentTime');
     const slider = document.getElementById('podProgress');
     const curSec = audioElement.currentTime || 0;
-    const dur = audioElement.duration || (currentPodcast ? currentPodcast.durationSec : 1200);
+    const dur = audioElement.duration || 0;
 
     if (curTimeEl) {
       const m = Math.floor(curSec / 60);
@@ -275,7 +258,6 @@ const Podcasts = (function() {
 
   return {
     init,
-    loadLocalFolder,
     setCategory,
     filter,
     selectPodcast,

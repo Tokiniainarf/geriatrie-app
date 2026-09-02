@@ -1168,32 +1168,76 @@ const BrainFeed = (() => {
     });
   }
 
-    function renderVisual(card, slideIdx) {
+      function renderVisual(card, slideIdx) {
     const src = card.media || card.video || card.image || '';
     const isVid = card.isVideo || /\.mp4($|\?)/i.test(src);
     const posterSrc = card.image || (!isVid ? src : '');
     const poster = posterSrc ? ` poster="${esc(posterSrc)}"` : '';
+    const chapId = card.chapter || 'ch1';
 
     if (isVid) {
-      // REEL VIDÉO PUR VERTICAL PLEIN ÉCRAN (Aucun scroll horizontal)
       return `
         <div class="bf-vertical-reel-container" id="bfScroll-${slideIdx}">
           <div class="bf-visual-page bf-reel-single-page">
             <div class="bf-visual-stack bf-reel-fullstack">
-              <div class="bf-media-container bf-reel-media">
-                <button type="button" class="bf-sound-toggle-btn ${isSoundEnabled ? 'is-unmuted' : ''}" onclick="BrainFeed.toggleSound(event, this)">
-                  <span class="bf-sound-icon">${isSoundEnabled ? '🔊' : '🔇'}</span>
-                  <span class="bf-sound-label">${isSoundEnabled ? 'Son actif' : 'Son coupé'}</span>
-                </button>
-                <video class="bf-visual-media" src="${esc(src)}" data-src="${esc(src)}" loop playsinline controls preload="auto"${poster}
+              
+              <!-- Video Player & Interaction Surface -->
+              <div class="bf-media-container bf-reel-media" onclick="BrainFeed.toggleReelPlay(event, this)">
+                <video class="bf-visual-media bf-reel-video" src="${esc(src)}" data-src="${esc(src)}" loop playsinline preload="auto"${poster}
+                  onplay="BrainFeed.onReelPlay(this)" onpause="BrainFeed.onReelPause(this)"
+                  ontimeupdate="BrainFeed.onReelTimeUpdate(this)"
                   onerror="this.dataset.err='1'; this.closest('.bf-media-container')?.classList.add('bf-media-missing');"></video>
+                
+                <!-- Play/Pause Ripple Overlay -->
+                <div class="bf-reel-ripple-icon" aria-hidden="true">▶</div>
+
+                <!-- Floating Sidebar Controls (TikTok / Reels Style) -->
+                <div class="bf-reel-actions-column" onclick="event.stopPropagation()">
+                  <button type="button" class="bf-reel-action-btn bf-sound-toggle-btn ${isSoundEnabled ? 'is-unmuted' : ''}" onclick="BrainFeed.toggleSound(event, this)" title="Activer / Couper le son">
+                    <span class="bf-act-icon bf-sound-icon">${isSoundEnabled ? '🔊' : '🔇'}</span>
+                    <span class="bf-act-label">${isSoundEnabled ? 'Son' : 'Muet'}</span>
+                  </button>
+
+                  <button type="button" class="bf-reel-action-btn bf-speed-toggle-btn" onclick="BrainFeed.cycleReelSpeed(event, this)" title="Vitesse de lecture">
+                    <span class="bf-act-icon">⚡</span>
+                    <span class="bf-act-label bf-speed-label">1x</span>
+                  </button>
+
+                  <button type="button" class="bf-reel-action-btn" onclick="BrainFeed.replayReel(event, this)" title="Rejouer depuis le début">
+                    <span class="bf-act-icon">↺</span>
+                    <span class="bf-act-label">Rejouer</span>
+                  </button>
+
+                  <button type="button" class="bf-reel-action-btn bf-act-chap" onclick="BrainFeed.openReelChapter(event, '${chapId}')" title="Ouvrir le chapitre complet">
+                    <span class="bf-act-icon">📖</span>
+                    <span class="bf-act-label">${chapId.toUpperCase()}</span>
+                  </button>
+                </div>
+
+                <!-- Bottom Video Scrub Bar -->
+                <div class="bf-reel-scrubber-track" onclick="BrainFeed.seekReel(event, this)" title="Naviguer dans la vidéo">
+                  <div class="bf-reel-scrubber-fill"></div>
+                </div>
+
                 <div class="bf-media-fallback" hidden aria-hidden="true">Média indisponible</div>
               </div>
+
+              <!-- Frosted Clinical Takeaway Overlay -->
               <div class="bf-visual-caption bf-reel-caption">
-                <p class="bf-visual-kicker">🎬 CLINICAL REEL</p>
-                <p class="bf-visual-title">${esc(card.title || card.question)}</p>
-                <p class="bf-visual-sub">${esc(card.question || card.answer || '')}</p>
+                <div class="bf-reel-kicker-row">
+                  <span class="bf-reel-badge">🎬 REEL CLINIQUE</span>
+                  <span class="bf-reel-chap-tag">RÉFÉRENTIEL EVC</span>
+                </div>
+                <h3 class="bf-reel-title">${esc(card.title || card.question)}</h3>
+                <p class="bf-reel-summary">${esc(card.question || '')}</p>
+                
+                ${card.answer ? `
+                  <div class="bf-reel-memo-drawer" id="reel-memo-${slideIdx}">
+                    <p class="bf-reel-memo-text">💡 <strong>À retenir :</strong> ${esc(card.answer)}</p>
+                  </div>
+                ` : ''}
               </div>
+
             </div>
           </div>
         </div>`;

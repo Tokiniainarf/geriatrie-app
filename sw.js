@@ -1,5 +1,5 @@
 // Bump CACHE_NAME whenever core assets change so clients drop stale offline caches.
-const CACHE_NAME = 'geriatrie-v265';
+const CACHE_NAME = 'geriatrie-v266';
 // Must match scripts actually loaded by index.html (post data-bundle architecture).
 // Do NOT pre-cache large media: a failed install left users with broken offline media.
 const CORE = [
