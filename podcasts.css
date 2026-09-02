@@ -688,3 +688,196 @@
   color: #2dd4bf !important;
   border: 1px solid rgba(45, 212, 191, 0.4);
 }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   FULLSCREEN IMMERSIVE MOBILE REELS (TIKTOK / INSTAGRAM STANDARD)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Reset all legacy padding for reel containers */
+#vFeed .bf-vertical-reel-container {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: stretch !important;
+  justify-content: center !important;
+  background: #000 !important;
+  position: relative !important;
+}
+
+#vFeed .bf-reel-single-page {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: stretch !important;
+  justify-content: center !important;
+  background: #000 !important;
+  overflow: hidden !important;
+}
+
+#vFeed .bf-reel-fullstack {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  background: #000 !important;
+  border-radius: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+#vFeed .bf-reel-media {
+  width: 100% !important;
+  height: 100% !important;
+  flex: 1 1 auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  position: relative !important;
+  overflow: hidden !important;
+  background: #000 !important;
+}
+
+#vFeed .bf-reel-video {
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 100% !important;
+  min-height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+  border-radius: 0 !important;
+  background: #000 !important;
+}
+
+/* Big Center Play Badge when paused on mobile */
+.bf-reel-play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 15;
+  cursor: pointer;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.bf-reel-media.is-playing .bf-reel-play-overlay {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.bf-reel-play-circle {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0d9488, #06b6d4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 24px rgba(13, 148, 136, 0.7), 0 8px 30px rgba(0, 0, 0, 0.6);
+  animation: bfPlayPulse 2s infinite ease-in-out;
+}
+
+@keyframes bfPlayPulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(13, 148, 136, 0.7); }
+  70% { transform: scale(1.06); box-shadow: 0 0 0 16px rgba(13, 148, 136, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(13, 148, 136, 0); }
+}
+
+.bf-reel-play-triangle {
+  font-size: 2.2rem;
+  color: #ffffff;
+  margin-left: 5px;
+}
+
+.bf-reel-play-hint {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+  letter-spacing: 0.02em;
+  background: rgba(15, 23, 42, 0.7);
+  padding: 4px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Floating Action Column on Mobile (Positioned comfortably above bottom nav) */
+.bf-reel-actions-column {
+  position: absolute !important;
+  right: 12px !important;
+  bottom: calc(var(--bottom, 64px) + 24px) !important;
+  z-index: 18 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+}
+
+/* Bottom Scrubber Track on Mobile */
+.bf-reel-scrubber-track {
+  position: absolute !important;
+  bottom: calc(var(--bottom, 64px) + 2px) !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 6px !important;
+  background: rgba(255, 255, 255, 0.25) !important;
+  z-index: 22 !important;
+}
+
+/* Frosted Bottom Caption on Mobile */
+.bf-reel-caption {
+  position: absolute !important;
+  bottom: calc(var(--bottom, 64px) + 8px) !important;
+  left: 0 !important;
+  right: 68px !important;
+  z-index: 16 !important;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.65) 70%, transparent 100%) !important;
+  padding: 30px 14px 12px !important;
+}
+
+/* On large screens (Desktop / Tablets), frame it elegantly */
+@media (min-width: 769px) {
+  #vFeed .bf-reel-fullstack {
+    width: min(100%, calc((100dvh - 120px) * 9 / 16)) !important;
+    max-width: 420px !important;
+    height: min(100%, calc(100dvh - 120px)) !important;
+    max-height: 760px !important;
+    border-radius: 24px !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    align-self: center !important;
+  }
+  #vFeed .bf-reel-media,
+  #vFeed .bf-reel-video {
+    border-radius: 24px !important;
+  }
+  .bf-reel-actions-column {
+    bottom: 85px !important;
+  }
+  .bf-reel-scrubber-track {
+    bottom: 0 !important;
+  }
+  .bf-reel-caption {
+    bottom: 6px !important;
+  }
+}

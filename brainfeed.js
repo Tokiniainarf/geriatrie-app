@@ -1183,13 +1183,31 @@ const BrainFeed = (() => {
               
               <!-- Video Player & Interaction Surface -->
               <div class="bf-media-container bf-reel-media" onclick="BrainFeed.toggleReelPlay(event, this)">
-                <video class="bf-visual-media bf-reel-video" src="${esc(src)}" data-src="${esc(src)}" loop playsinline preload="auto"${poster}
-                  onplay="BrainFeed.onReelPlay(this)" onpause="BrainFeed.onReelPause(this)"
+                <video class="bf-visual-media bf-reel-video"
+                  src="${esc(src)}"
+                  data-src="${esc(src)}"
+                  loop
+                  autoplay
+                  muted
+                  playsinline
+                  webkit-playsinline
+                  x5-playsinline
+                  preload="auto"${poster}
+                  onplay="BrainFeed.onReelPlay(this)"
+                  onpause="BrainFeed.onReelPause(this)"
                   ontimeupdate="BrainFeed.onReelTimeUpdate(this)"
                   onerror="this.dataset.err='1'; this.closest('.bf-media-container')?.classList.add('bf-media-missing');"></video>
                 
-                <!-- Play/Pause Ripple Overlay -->
+                <!-- Center Play/Pause Ripple Indicator -->
                 <div class="bf-reel-ripple-icon" aria-hidden="true">▶</div>
+
+                <!-- Big Center Play Button for Mobile when paused -->
+                <div class="bf-reel-play-overlay" aria-label="Lancer la vidéo" onclick="BrainFeed.toggleReelPlay(event, this.closest('.bf-reel-media'))">
+                  <div class="bf-reel-play-circle">
+                    <span class="bf-reel-play-triangle">▶</span>
+                  </div>
+                  <span class="bf-reel-play-hint">Toucher pour lancer la vidéo</span>
+                </div>
 
                 <!-- Floating Sidebar Controls (TikTok / Reels Style) -->
                 <div class="bf-reel-actions-column" onclick="event.stopPropagation()">
@@ -1712,29 +1730,47 @@ const BrainFeed = (() => {
 
   function syncSlideMedia(slide, active = true) {
     if (!slide) return;
+    const isReel = !!slide.querySelector('.bf-reel-single-page');
     const scroller = slide.querySelector('.bf-horiz-scroll');
     const pages = [...slide.querySelectorAll('.bf-horiz-page')];
     const pageIndex = scroller
       ? Math.round(scroller.scrollLeft / Math.max(1, scroller.clientWidth))
       : 0;
     const visiblePage = pages[Math.max(0, Math.min(pageIndex, pages.length - 1))];
+
     slide.querySelectorAll('video').forEach(video => {
       try {
         if (!video.getAttribute('src') && video.dataset.src) {
           video.src = video.dataset.src;
         }
       } catch (_) {}
-      if (!active || !visiblePage?.contains(video)) {
+
+      // FOR REELS: If slide is active, it IS visible!
+      const isVisible = isReel ? true : (visiblePage && visiblePage.contains(video));
+
+      if (!active || !isVisible) {
         try { video.pause(); } catch (_) {}
         return;
       }
+
       try {
-        video.muted = true;
+        video.playsInline = true;
+        video.setAttribute('playsinline', '');
+        video.setAttribute('webkit-playsinline', '');
+        video.setAttribute('x5-playsinline', '');
+        
+        // Autoplay on mobile: start muted if unmuted playback is rejected
+        video.muted = !isSoundEnabled;
         const p = video.play();
-        if (p && typeof p.catch === 'function') p.catch(() => {});
+        if (p && typeof p.catch === 'function') {
+          p.catch(() => {
+            video.muted = true;
+            video.play().catch(() => {});
+          });
+        }
       } catch (_) {}
     });
-    // Eager-decode nearby images so captions don't sit on empty shells
+
     slide.querySelectorAll('img[src]').forEach(img => {
       if (!img.complete || img.naturalWidth === 0) {
         try { img.loading = 'eager'; img.decode?.().catch(() => {}); } catch (_) {}
@@ -2467,6 +2503,24 @@ const BrainFeed = (() => {
 })();
 
 // Expose for inline handlers + cross-scope access (const is not a window property).
+
+// Mobile Touch Unlock: Déverrouille la lecture audio dès le premier toucher utilisateur
+if (typeof document !== 'undefined') {
+  let bf_touch_unlocked = false;
+  document.addEventListener('touchstart', function onFirstTouch() {
+    if (bf_touch_unlocked) return;
+    bf_touch_unlocked = true;
+    document.querySelectorAll('.bf-reel-video').forEach(v => {
+      if (isSoundEnabled) {
+        v.muted = false;
+      }
+      if (v.paused && v.closest('.bf-slide-active')) {
+        v.play().catch(() => {});
+      }
+    });
+  }, { passive: true, once: true });
+}
+
 if (typeof window !== 'undefined') window.BrainFeed = BrainFeed;
 
 /* Pulse Social : double-tap sur une carte pour la garder (geste Instagram) */
