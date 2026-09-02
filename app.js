@@ -3931,7 +3931,11 @@ function filterDeck(){
     if (!c.question && c.q) c.question = c.q;
     if (!c.answer && c.a) c.answer = c.a;
     const matchRang = (flashFilter === 'all' || c.rang === flashFilter || (!c.rang && flashFilter === 'all'));
-    const matchChap = (flashChapFilter === 'all' || c.chapter === flashChapFilter);
+    const matchChap = (
+      flashChapFilter === 'all' ||
+      (flashChapFilter === 'notebooklm' && (c.id >= 9500 || (Array.isArray(c.tags) && c.tags.includes('NotebookLM')))) ||
+      c.chapter === flashChapFilter
+    );
     if(!matchRang || !matchChap)return false;
     const signature=((c.question||c.q||'')+'|'+(c.answer||c.a||''))
       .toLowerCase().replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();
