@@ -1145,6 +1145,119 @@ const BrainFeed = (() => {
     } catch (_) { return true; }
   })();
 
+
+  function onReelPlay(vid) {
+    const container = vid.closest('.bf-reel-media');
+    if (container) {
+      container.classList.remove('is-paused');
+      container.classList.add('is-playing');
+    }
+  }
+
+  function onReelPause(vid) {
+    const container = vid.closest('.bf-reel-media');
+    if (container) {
+      container.classList.remove('is-playing');
+      container.classList.add('is-paused');
+    }
+  }
+
+  function onReelTimeUpdate(vid) {
+    const container = vid.closest('.bf-reel-media');
+    if (!container) return;
+    const fill = container.querySelector('.bf-reel-scrubber-fill');
+    if (fill && vid.duration) {
+      const pct = (vid.currentTime / vid.duration) * 100;
+      fill.style.width = pct + '%';
+    }
+  }
+
+  function toggleReelPlay(e, container) {
+    if (e) {
+      e.stopPropagation();
+    }
+    if (!container) return;
+    const vid = container.querySelector('video');
+    const ripple = container.querySelector('.bf-reel-ripple-icon');
+    if (!vid) return;
+
+    if (vid.paused) {
+      vid.muted = !isSoundEnabled;
+      if (isSoundEnabled) vid.volume = 1.0;
+      vid.play().then(() => {
+        showRipple(ripple, '▶');
+        container.classList.remove('is-paused');
+        container.classList.add('is-playing');
+      }).catch(() => {
+        vid.muted = true;
+        vid.play().then(() => {
+          showRipple(ripple, '▶');
+          container.classList.remove('is-paused');
+          container.classList.add('is-playing');
+        }).catch(() => {});
+      });
+    } else {
+      vid.pause();
+      showRipple(ripple, '❚❚');
+      container.classList.remove('is-playing');
+      container.classList.add('is-paused');
+    }
+  }
+
+  function showRipple(el, icon) {
+    if (!el) return;
+    el.textContent = icon;
+    el.classList.remove('is-active');
+    void el.offsetWidth;
+    el.classList.add('is-active');
+    setTimeout(() => el.classList.remove('is-active'), 450);
+  }
+
+  function cycleReelSpeed(e, btn) {
+    if (e) { e.preventDefault(); e.stopPropagation(); }
+    const container = btn.closest('.bf-reel-fullstack');
+    const vid = container ? container.querySelector('video') : null;
+    const label = btn.querySelector('.bf-speed-label') || btn;
+    if (!vid) return;
+
+    const speeds = [1.0, 1.25, 1.5, 2.0];
+    const curIdx = speeds.indexOf(vid.playbackRate || 1.0);
+    const nextSpeed = speeds[(curIdx + 1) % speeds.length];
+    vid.playbackRate = nextSpeed;
+    label.textContent = nextSpeed + 'x';
+  }
+
+  function replayReel(e, btn) {
+    if (e) { e.preventDefault(); e.stopPropagation(); }
+    const container = btn.closest('.bf-reel-fullstack');
+    const vid = container ? container.querySelector('video') : null;
+    if (!vid) return;
+    vid.currentTime = 0;
+    vid.muted = !isSoundEnabled;
+    if (isSoundEnabled) vid.volume = 1.0;
+    vid.play().catch(() => {});
+  }
+
+  function openReelChapter(e, chapId) {
+    if (e) { e.preventDefault(); e.stopPropagation(); }
+    if (typeof openCh === 'function') {
+      openCh(chapId);
+    } else if (typeof sw === 'function') {
+      sw('ch');
+    }
+  }
+
+  function seekReel(e, track) {
+    if (e) { e.preventDefault(); e.stopPropagation(); }
+    const container = track.closest('.bf-reel-media');
+    const vid = container ? container.querySelector('video') : null;
+    if (!vid || !vid.duration) return;
+    const rect = track.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const pct = Math.max(0, Math.min(1, clickX / rect.width));
+    vid.currentTime = pct * vid.duration;
+  }
+
   function toggleSound(e, btn) {
     if (e) { e.preventDefault(); e.stopPropagation(); }
     isSoundEnabled = !isSoundEnabled;
@@ -2495,6 +2608,14 @@ const BrainFeed = (() => {
     renderSlides,
     selectSession,
     toggleSound,
+    toggleReelPlay,
+    onReelPlay,
+    onReelPause,
+    onReelTimeUpdate,
+    cycleReelSpeed,
+    replayReel,
+    openReelChapter,
+    seekReel,
     audit: () => {
       const pools = buildSpecialPools();
       return { deck: buildDailyDeck(pools), pools };
