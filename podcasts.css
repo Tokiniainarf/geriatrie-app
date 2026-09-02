@@ -1284,3 +1284,70 @@
   from { opacity: 0; transform: translateY(-4px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* ===============================================================
+   PODCASTS CARDS LIGHT & DARK THEME ADAPTIVE CONTRAST
+   =============================================================== */
+.pod-card {
+  background: var(--bg-card, #ffffff) !important;
+  border: 1px solid var(--glass-border, #E2EAF9) !important;
+  box-shadow: var(--shadow-card, 0 4px 16px rgba(0, 0, 0, 0.05)) !important;
+}
+
+.pod-card:hover {
+  background: var(--bg-card-hover, #ffffff) !important;
+  border-color: #0d9488 !important;
+}
+
+.pod-card.is-playing-card {
+  border-color: #0d9488 !important;
+  background: rgba(13, 148, 136, 0.08) !important;
+  box-shadow: 0 4px 20px rgba(13, 148, 136, 0.18) !important;
+}
+
+.pod-card-title {
+  color: var(--text, #16264A) !important;
+}
+
+.pod-card-title:hover {
+  color: #0d9488 !important;
+}
+
+.pod-card-chapter {
+  color: var(--text3, #71809E) !important;
+}
+
+.pod-card-summary {
+  color: var(--text2, #3C4A6E) !important;
+}
+
+.pod-keypoints-list {
+  color: var(--text2, #3C4A6E) !important;
+}
+
+/* Dark mode overrides */
+[data-theme="dark"] .pod-card {
+  background: rgba(30, 41, 59, 0.65) !important;
+  border-color: rgba(255, 255, 255, 0.09) !important;
+}
+
+[data-theme="dark"] .pod-card:hover {
+  background: rgba(30, 41, 59, 0.85) !important;
+  border-color: rgba(13, 148, 136, 0.5) !important;
+}
+
+[data-theme="dark"] .pod-card-title {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .pod-card-chapter {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .pod-card-summary {
+  color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .pod-keypoints-list {
+  color: #cbd5e1 !important;
+}
