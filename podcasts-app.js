@@ -96,7 +96,7 @@ const Podcasts = (function() {
     renderList();
   }
 
-  function renderList() {
+      function renderList() {
     const grid = document.getElementById('podcastsGrid');
     if (!grid) return;
     const list = getFilteredPodcasts();
@@ -107,24 +107,37 @@ const Podcasts = (function() {
 
     grid.innerHTML = list.map(pod => {
       const isCurrent = currentPodcast && currentPodcast.id === pod.id;
+      const durationDisplay = pod.duration ? (`⏱ ` + pod.duration) : '⏱ 15 min';
       return `
-        <div class="pod-card ${isCurrent ? 'pod-card-active' : ''}" id="pod-card-${pod.id}" onclick="Podcasts.selectPodcast('${pod.id}', true)">
-          <div class="pod-card-top">
-            <span class="pod-cat-badge">${pod.categoryLabel}</span>
-            <span class="pod-dur-badge">⏱ ${pod.sizeMB ? pod.sizeMB + ' Mo' : 'Masterclass'}</span>
-          </div>
-          <h3 class="pod-card-title">${esc(pod.title)}</h3>
-          <p class="pod-card-chapter">📖 ${esc(pod.chapterTitle)}</p>
-          <p class="pod-card-summary">${esc(pod.summary)}</p>
-          <div class="pod-card-tags">
-            ${(pod.tags || []).map(t => `<span class="pod-tag">${esc(t)}</span>`).join('')}
-            <span class="pod-tag pod-tag-ready">✓ Audio NotebookLM</span>
-          </div>
-          <div class="pod-card-actions">
-            <button type="button" class="pod-card-play-btn" onclick="event.stopPropagation(); Podcasts.playPodcast('${pod.id}')">
-              ${isCurrent && isPlaying ? '⏸ Pause' : '▶ Écouter la masterclass'}
+        <div class="pod-card ${isCurrent ? 'pod-card-active' : ''} ${isCurrent && isPlaying ? 'is-playing-card' : ''}" id="pod-card-${pod.id}">
+          <div class="pod-card-head">
+            <div class="pod-card-meta">
+              <span class="pod-cat-badge">${esc(pod.categoryLabel || 'Masterclass')}</span>
+              <span class="pod-dur-badge">${durationDisplay}</span>
+            </div>
+            <button type="button" class="pod-mini-play-btn ${isCurrent && isPlaying ? 'playing' : ''}" onclick="event.stopPropagation(); Podcasts.playPodcast('${pod.id}')" aria-label="${isCurrent && isPlaying ? 'Pause' : 'Écouter'}">
+              ${isCurrent && isPlaying ? '⏸' : '▶'}
             </button>
           </div>
+          
+          <h3 class="pod-card-title" onclick="Podcasts.selectPodcast('${pod.id}', true)">${esc(pod.title)}</h3>
+          <p class="pod-card-chapter">📖 ${esc(pod.chapterTitle || pod.chapter || '')}</p>
+          
+          <details class="pod-card-details">
+            <summary class="pod-card-summary-toggle">💡 Points clés &amp; résumé EVC</summary>
+            <div class="pod-card-expanded">
+              <p class="pod-card-summary">${esc(pod.summary)}</p>
+              ${pod.keyPoints && pod.keyPoints.length ? `
+                <ul class="pod-keypoints-list">
+                  ${pod.keyPoints.map(kp => `<li>${esc(kp)}</li>`).join('')}
+                </ul>
+              ` : ''}
+              <div class="pod-card-tags">
+                ${(pod.tags || []).map(t => `<span class="pod-tag">${esc(t)}</span>`).join('')}
+                <span class="pod-tag pod-tag-ready">✓ Audio Studio NotebookLM</span>
+              </div>
+            </div>
+          </details>
         </div>
       `;
     }).join('');

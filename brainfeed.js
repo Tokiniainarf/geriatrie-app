@@ -1041,8 +1041,11 @@ const BrainFeed = (() => {
     const pools = buildSpecialPools();
     const mixed = buildDailyDeck(pools);
     if (activeSession === 'flash') return dayPick(dedupeDeck(pools.flashRecall), 32, 'session-flash');
-    if (activeSession === 'cas') return dayPick(pools.casChoc.filter(isHighYieldFeedCase), 30, 'session-cas');
-    if (activeSession === 'pieges') return dayPick(dedupeDeck([...pools.piegeExam, ...pools.quizFlash]), 28, 'session-pieges');
+    if (activeSession === 'cas') {
+      const cases = pools.casChoc.filter(isHighYieldFeedCase);
+      const traps = dedupeDeck([...pools.piegeExam, ...pools.quizFlash]);
+      return dayPick(dedupeDeck([...cases, ...traps]), 32, 'session-cas');
+    }
     if (activeSession === 'visual') {
       const diagrams = pools.visualExplanations.filter(card => card.diagram);
       const media = pools.visualExplanations.filter(card => !card.diagram);
@@ -1052,12 +1055,14 @@ const BrainFeed = (() => {
   }
 
   function updateSessionChrome() {
+    const vFeed = document.getElementById('vFeed');
+    if (vFeed) {
+      vFeed.classList.toggle('bf-session-reels', activeSession === 'visual');
+    }
     const labels = {
-      mix: '20 essentiels + bonus · rappels, cas, pièges et visuels',
-      flash: 'Rappels courts · priorité aux cartes dues',
-      cas: 'Cas / CROQ d’entraînement · une décision à la fois',
-      pieges: 'Pièges EVC · reconnaître l’erreur avant de corriger',
-      visual: 'Figures et vidéos éducatives · voir, prévoir, retenir'
+      mix: '✨ Pour toi · Les essentiels du jour & flashcards cliniques',
+      visual: '🎬 Reels 9:16 · Vidéos immersives plein écran',
+      cas: '🩺 Cas & Pièges · Cas cliniques CROQ et pièges diagnostiques'
     };
     let activeTab = null;
     document.querySelectorAll('#bfSessionTabs .bf-session-tab').forEach(tab => {
@@ -1078,7 +1083,9 @@ const BrainFeed = (() => {
   }
 
   function selectSession(session) {
-    if (!['mix', 'flash', 'cas', 'pieges', 'visual'].includes(session)) session = 'mix';
+    if (session === 'flash') session = 'mix';
+    if (session === 'pieges') session = 'cas';
+    if (!['mix', 'visual', 'cas'].includes(session)) session = 'mix';
     activeSession = session;
     try { localStorage.setItem('bf_session', activeSession); } catch (_) {}
     if (observer) observer.disconnect();
@@ -1093,7 +1100,7 @@ const BrainFeed = (() => {
     if (feed) feed.scrollTop = 0;
     updateSessionChrome();
     renderSlides();
-    showToast({ mix: '✨ Pour toi', flash: '🧠 Rappels essentiels', cas: '🩺 Cas / CROQ', pieges: '⚠️ Pièges EVC', visual: '🎬 Visuels éducatifs' }[activeSession]);
+    showToast({ mix: '✨ Pour toi', visual: '🎬 Reels 9:16', cas: '🩺 Cas & Pièges' }[activeSession] || '✨ Pour toi');
   }
 
   function getChapterName(chId) {
@@ -1353,18 +1360,23 @@ const BrainFeed = (() => {
                 <div class="bf-media-fallback" hidden aria-hidden="true">Média indisponible</div>
               </div>
 
-              <!-- Frosted Clinical Takeaway Overlay -->
+              <!-- Floating Close Button for pure Reel immersion -->
+                <button type="button" class="bf-reel-exit-btn" onclick="sw('home')" title="Quitter le mode Reels" aria-label="Quitter le mode Reels">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+
+              <!-- Frosted Clinical Takeaway Overlay (Pure & Épuré) -->
               <div class="bf-visual-caption bf-reel-caption">
                 <div class="bf-reel-kicker-row">
-                  <span class="bf-reel-badge">🎬 REEL CLINIQUE</span>
-                  <span class="bf-reel-chap-tag">RÉFÉRENTIEL EVC</span>
+                  <span class="bf-reel-badge">🎬 REEL ${card.chapter ? card.chapter.toUpperCase() : 'EVC'}</span>
+                  <span class="bf-reel-chap-tag">RÉFÉRENTIEL COLLÈGE</span>
                 </div>
                 <h3 class="bf-reel-title">${esc(card.title || card.question)}</h3>
-                <p class="bf-reel-summary">${esc(card.question || '')}</p>
+                ${(card.title && card.question && card.title !== card.question) ? `<p class="bf-reel-summary">${esc(card.question)}</p>` : ''}
                 
                 ${card.answer ? `
                   <div class="bf-reel-memo-drawer" id="reel-memo-${slideIdx}">
-                    <p class="bf-reel-memo-text">💡 <strong>À retenir :</strong> ${esc(card.answer)}</p>
+                    <p class="bf-reel-memo-text">💡 <strong>Message clé :</strong> ${esc(card.answer)}</p>
                   </div>
                 ` : ''}
               </div>

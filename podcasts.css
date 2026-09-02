@@ -881,3 +881,406 @@
     bottom: 6px !important;
   }
 }
+
+
+/* ===============================================================
+   OVERHAUL v269: FEED REELS TIKTOK IMMERSION & COMPACT PODCASTS
+   =============================================================== */
+
+/* ── REELS TIKTOK-STYLE OVERHAUL ── */
+#vFeed.bf-session-reels .bf-header {
+  display: none !important;
+}
+
+#vFeed.bf-session-reels .bf-progress-track {
+  display: none !important;
+}
+
+#vFeed.bf-session-reels .bf-actions {
+  display: none !important;
+}
+
+/* Floating Frosted Pill Tabs for Reels */
+#vFeed.bf-session-reels .bf-session-tabs {
+  position: absolute !important;
+  top: 12px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 25 !important;
+  background: rgba(15, 23, 42, 0.72) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 999px !important;
+  padding: 4px 6px !important;
+  margin: 0 !important;
+  display: inline-flex !important;
+  gap: 4px !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5) !important;
+  max-width: 88vw !important;
+  overflow: hidden !important;
+}
+
+#vFeed.bf-session-reels .bf-session-tab {
+  padding: 6px 14px !important;
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  border-radius: 999px !important;
+  color: rgba(255, 255, 255, 0.78) !important;
+  background: transparent !important;
+  border: none !important;
+  white-space: nowrap !important;
+  transition: background 0.15s ease, color 0.15s ease !important;
+}
+
+#vFeed.bf-session-reels .bf-session-tab.active {
+  background: rgba(255, 255, 255, 0.22) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* Discreet Floating Exit Button for Reels */
+.bf-reel-exit-btn {
+  position: absolute !important;
+  top: 14px !important;
+  right: 14px !important;
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  background: rgba(15, 23, 42, 0.7) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  color: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 26 !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) !important;
+  transition: transform 0.15s ease, background 0.15s ease !important;
+}
+
+.bf-reel-exit-btn:hover {
+  background: rgba(225, 29, 72, 0.85) !important;
+  transform: scale(1.05) !important;
+}
+
+/* Ensure clean action column alignment */
+.bf-reel-action-btn {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  background: rgba(15, 23, 42, 0.68) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 2px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5) !important;
+  cursor: pointer !important;
+}
+
+.bf-reel-action-btn .bf-act-icon {
+  font-size: 1.15rem !important;
+  line-height: 1 !important;
+}
+
+.bf-reel-action-btn .bf-act-label {
+  font-size: 0.58rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.03em !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* Clean Caption Text */
+.bf-reel-kicker-row {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin-bottom: 6px !important;
+}
+
+.bf-reel-badge {
+  font-size: 0.68rem !important;
+  font-weight: 800 !important;
+  padding: 3px 8px !important;
+  border-radius: 6px !important;
+  background: linear-gradient(135deg, #0d9488, #0284c7) !important;
+  color: #ffffff !important;
+  letter-spacing: 0.04em !important;
+}
+
+.bf-reel-chap-tag {
+  font-size: 0.68rem !important;
+  font-weight: 700 !important;
+  color: #94a3b8 !important;
+}
+
+.bf-reel-title {
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  line-height: 1.35 !important;
+  margin: 0 0 4px 0 !important;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8) !important;
+}
+
+.bf-reel-summary {
+  font-size: 0.82rem !important;
+  color: #cbd5e1 !important;
+  line-height: 1.4 !important;
+  margin: 0 0 6px 0 !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8) !important;
+}
+
+.bf-reel-memo-drawer {
+  background: rgba(15, 23, 42, 0.75) !important;
+  border-left: 3px solid #0d9488 !important;
+  border-radius: 6px !important;
+  padding: 8px 12px !important;
+  margin-top: 6px !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+.bf-reel-memo-text {
+  font-size: 0.8rem !important;
+  color: #e2e8f0 !important;
+  line-height: 1.4 !important;
+  margin: 0 !important;
+}
+
+/* ── COMPACT PODCASTS STYLING ── */
+.podcast-player-card {
+  padding: 14px 18px !important;
+  margin-bottom: 18px !important;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.92)) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+  border-radius: 16px !important;
+}
+
+.pod-player-compact-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pod-player-main-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.pod-playing-info {
+  flex: 1 1 240px;
+  min-width: 0;
+}
+
+.pod-badge {
+  font-size: 0.65rem !important;
+  padding: 2px 8px !important;
+  margin-bottom: 4px !important;
+}
+
+.pod-playing-info h3 {
+  font-size: 0.98rem !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  margin: 0 0 2px 0 !important;
+}
+
+.pod-playing-info p {
+  font-size: 0.78rem !important;
+  color: #94a3b8 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  margin: 0 !important;
+}
+
+.pod-controls-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.pod-play-btn {
+  padding: 8px 18px !important;
+  font-size: 0.88rem !important;
+  border-radius: 20px !important;
+}
+
+.pod-ctrl-jump {
+  padding: 6px 10px !important;
+  font-size: 0.75rem !important;
+}
+
+/* Ultra-Clean Podcasts Grid & Cards */
+.podcasts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 14px;
+}
+
+.pod-card {
+  background: rgba(30, 41, 59, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 14px 16px;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.pod-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(13, 148, 136, 0.45);
+  background: rgba(30, 41, 59, 0.75);
+}
+
+.pod-card.is-playing-card {
+  border-color: #0d9488 !important;
+  background: rgba(13, 148, 136, 0.1) !important;
+  box-shadow: 0 0 16px rgba(13, 148, 136, 0.25) !important;
+}
+
+.pod-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.pod-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pod-mini-play-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #0d9488, #0284c7);
+  color: #fff;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(13, 148, 136, 0.4);
+  transition: transform 0.12s ease;
+}
+
+.pod-mini-play-btn:active {
+  transform: scale(0.92);
+}
+
+.pod-mini-play-btn.playing {
+  background: linear-gradient(135deg, #e11d48, #be123c);
+  box-shadow: 0 2px 8px rgba(225, 29, 72, 0.5);
+}
+
+.pod-card-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #f8fafc;
+  line-height: 1.35;
+  margin: 0 0 4px 0;
+  cursor: pointer;
+}
+
+.pod-card-title:hover {
+  color: #2dd4bf;
+}
+
+.pod-card-chapter {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  margin: 0 0 10px 0;
+}
+
+.pod-card-details {
+  margin-top: auto;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  padding-top: 8px;
+}
+
+.pod-card-summary-toggle {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #2dd4bf;
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pod-card-summary-toggle::-webkit-details-marker {
+  display: none;
+}
+
+.pod-card-expanded {
+  margin-top: 10px;
+  padding-top: 6px;
+  animation: fadeInDown 0.2s ease-out;
+}
+
+.pod-card-summary {
+  font-size: 0.82rem;
+  color: #cbd5e1;
+  line-height: 1.45;
+  margin: 0 0 8px 0;
+}
+
+.pod-keypoints-list {
+  padding-left: 18px;
+  margin: 0 0 10px 0;
+  font-size: 0.78rem;
+  color: #94a3b8;
+  line-height: 1.4;
+}
+
+.pod-keypoints-list li {
+  margin-bottom: 4px;
+}
+
+.pod-card-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.pod-tag {
+  font-size: 0.68rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.07);
+  color: #94a3b8;
+}
+
+.pod-tag-ready {
+  background: rgba(13, 148, 136, 0.15);
+  color: #2dd4bf;
+  border: 1px solid rgba(13, 148, 136, 0.3);
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
