@@ -197,7 +197,20 @@ const BrainFeed = (() => {
     try {
       return JSON.parse(localStorage.getItem('bf_stats')) || { streak: 0, points: 0, lastDay: '', dailyDone: 0, totalCards: 0 };
     } catch {
-      return { streak: 0, points: 0, lastDay: '', dailyDone: 0, totalCards: 0 };
+      if (typeof window !== 'undefined') {
+    const unlockAudio = () => {
+      document.querySelectorAll('video').forEach(v => {
+        if (isSoundEnabled) {
+          v.muted = false;
+          v.volume = 1.0;
+        }
+      });
+      ['click', 'touchstart', 'pointerdown'].forEach(ev => window.removeEventListener(ev, unlockAudio));
+    };
+    ['click', 'touchstart', 'pointerdown'].forEach(ev => window.addEventListener(ev, unlockAudio, { passive: true }));
+  }
+
+  return { streak: 0, points: 0, lastDay: '', dailyDone: 0, totalCards: 0 };
     }
   }
   function saveStats(s) { localStorage.setItem('bf_stats', JSON.stringify(s)); }
@@ -1126,7 +1139,10 @@ const BrainFeed = (() => {
   }
 
   let isSoundEnabled = (function() {
-    try { return localStorage.getItem('bf_sound_unmuted') === 'true'; } catch (_) { return false; }
+    try {
+      const stored = localStorage.getItem('bf_sound_unmuted');
+      return stored === null ? true : stored === 'true'; // ACTIVE PAR DÉFAUT
+    } catch (_) { return true; }
   })();
 
   function toggleSound(e, btn) {
@@ -1152,27 +1168,45 @@ const BrainFeed = (() => {
     });
   }
 
-  function renderVisual(card, slideIdx) {
+    function renderVisual(card, slideIdx) {
     const src = card.media || card.video || card.image || '';
     const isVid = card.isVideo || /\.mp4($|\?)/i.test(src);
     const posterSrc = card.image || (!isVid ? src : '');
     const poster = posterSrc ? ` poster="${esc(posterSrc)}"` : '';
-    // Always set src (not only data-src): lazy data-src never loaded when
-    // IntersectionObserver missed the active slide → black frame + "Média indisponible".
+
+    if (isVid) {
+      // REEL VIDÉO PUR VERTICAL PLEIN ÉCRAN (Aucun scroll horizontal)
+      return `
+        <div class="bf-vertical-reel-container" id="bfScroll-${slideIdx}">
+          <div class="bf-visual-page bf-reel-single-page">
+            <div class="bf-visual-stack bf-reel-fullstack">
+              <div class="bf-media-container bf-reel-media">
+                <button type="button" class="bf-sound-toggle-btn ${isSoundEnabled ? 'is-unmuted' : ''}" onclick="BrainFeed.toggleSound(event, this)">
+                  <span class="bf-sound-icon">${isSoundEnabled ? '🔊' : '🔇'}</span>
+                  <span class="bf-sound-label">${isSoundEnabled ? 'Son actif' : 'Son coupé'}</span>
+                </button>
+                <video class="bf-visual-media" src="${esc(src)}" data-src="${esc(src)}" loop playsinline controls preload="auto"${poster}
+                  onerror="this.dataset.err='1'; this.closest('.bf-media-container')?.classList.add('bf-media-missing');"></video>
+                <div class="bf-media-fallback" hidden aria-hidden="true">Média indisponible</div>
+              </div>
+              <div class="bf-visual-caption bf-reel-caption">
+                <p class="bf-visual-kicker">🎬 CLINICAL REEL</p>
+                <p class="bf-visual-title">${esc(card.title || card.question)}</p>
+                <p class="bf-visual-sub">${esc(card.question || card.answer || '')}</p>
+              </div>
+            </div>
+          </div>
+        </div>`;
+    }
+
     const mediaHtml = card.diagram
       ? renderEducationalDiagram(card.diagram, false)
-      : isVid
-      ? `<video class="bf-visual-media" src="${esc(src)}" data-src="${esc(src)}" muted loop playsinline controls preload="metadata"${poster}
-           onerror="this.dataset.err='1'; if(!this.poster){ this.closest('.bf-media-container')?.classList.add('bf-media-missing'); }"></video>`
       : src
       ? `<img class="bf-visual-media" src="${esc(src)}" alt="${esc(card.question || '')}" loading="eager" decoding="async"
            onerror="this.closest('.bf-media-container')?.classList.add('bf-media-missing')">`
       : '';
     const answerMediaHtml = card.diagram
       ? renderEducationalDiagram(card.diagram, true)
-      : (isVid && posterSrc)
-      ? `<img class="bf-visual-media" src="${esc(posterSrc)}" alt="${esc(card.question || '')}" loading="eager" decoding="async"
-           onerror="this.closest('.bf-media-container')?.classList.add('bf-media-missing')">`
       : mediaHtml;
     return `
       <div class="bf-horiz-scroll" id="bfScroll-${slideIdx}">

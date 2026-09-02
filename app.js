@@ -182,7 +182,7 @@ function isPdfCapturePath(src){
   return /figures\/page_/i.test(s) || /\/crops\//i.test(s) || /\/p\d{3}_\d+\.(jpe?g|png)$/i.test(s);
 }
 const S={view:'home',ch:null,bm:safeJSON('gbm',[]),read:safeJSON('grd',[]),fs:parseInt(localStorage.getItem('gfs')||'18'),lh:parseFloat(localStorage.getItem('glh')||'1.7'),th:localStorage.getItem('gth')||'light'};
-let flashIdx=0,flashDeck=[],flashFilter='all',flashChapFilter='notebooklm';
+let flashIdx=0,flashDeck=[],flashFilter='all',flashChapFilter='all';
 
 function bootApp(){
   if (window.__geriBooted) return;
