@@ -43,7 +43,7 @@ const BrainFeed = (() => {
     chiffre_cle: 0,
     citation: 0,
     piege_exam: 0.16,
-    visual: 0.15,
+    visual: 0.22,
     flash: 0,
     synthesis: 0,
     case: 0,
