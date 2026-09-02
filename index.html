@@ -35,6 +35,7 @@
 #appPreloader .pl-status{font-size:.72rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:rgba(22,38,74,.45)}
 @media (prefers-reduced-motion: reduce){#appPreloader .pl-logo,#appPreloader .pl-fill{animation:none}}
 </style>
+  <link rel="stylesheet" href="podcasts.css?v=263">
 </head>
 <body>
 <div id="appPreloader" role="status" aria-live="polite" aria-busy="true">
@@ -118,6 +119,10 @@
         <span class="qa-icon">📋</span>
         <span class="qa-label">Synthèses</span>
       </button>
+      <button class="qa-card" onclick="sw('podcasts')">
+        <span class="qa-icon">🎙️</span>
+        <span class="qa-label">Podcasts</span>
+      </button>
       <button class="qa-card" onclick="sw('flash')">
         <span class="qa-icon">🎴</span>
         <span class="qa-label">Flashcards</span>
@@ -186,6 +191,7 @@
       <button type="button" id="btnSubSynth" class="active" onclick="switchStudyMode('synth')">Fiches synthèse</button>
       <button type="button" id="btnSubNotebook" onclick="switchStudyMode('notebook')">Présentations</button>
       <button type="button" id="btnSubItems" onclick="switchStudyMode('items')">Codes ITEM</button>
+      <button type="button" id="btnSubPodcasts" onclick="sw('podcasts')">🎙️ Podcasts</button>
     </div>
     <div id="subTabSynth" class="sub-tab-content">
       <div id="synthGrid" class="synth-grid"></div>
@@ -199,6 +205,60 @@
     </div>
   </div>
 
+  
+  <!-- PODCASTS AUDIO -->
+  <div class="view" id="vPodcasts">
+    <div class="page-hd">
+      <h1>🎙️ Masterclasses &amp; Podcasts Audio EVC</h1>
+      <p>28 cours oraux immersifs pour réviser à l'écoute · Synthèses cliniques CNEG / SFGG</p>
+    </div>
+    
+    <!-- Audio Player Sticky Card -->
+    <div class="podcast-player-card" id="podcastPlayerCard">
+      <div class="pod-player-header">
+        <div class="pod-playing-info">
+          <span class="pod-badge" id="podPlayerBadge">MASTERCLASS AUDIO</span>
+          <h3 id="podPlayerTitle">Sélectionnez un épisode pour démarrer l'écoute</h3>
+          <p id="podPlayerSub">Appuyez sur Lecture pour lancer l'écoute commentée</p>
+        </div>
+      </div>
+      <div class="pod-controls-row">
+        <button type="button" class="pod-ctrl-btn" onclick="Podcasts.replay(15)" title="Reculer de 15s">⏪ 15s</button>
+        <button type="button" class="pod-play-btn" id="podMainPlayBtn" onclick="Podcasts.togglePlay()">▶ Lancer l'écoute</button>
+        <button type="button" class="pod-ctrl-btn" onclick="Podcasts.forward(15)" title="Avancer de 15s">15s ⏩</button>
+        <div class="pod-speed-selector">
+          <button type="button" class="pod-speed-btn active" data-spd="1" onclick="Podcasts.setSpeed(1, this)">1x</button>
+          <button type="button" class="pod-speed-btn" data-spd="1.25" onclick="Podcasts.setSpeed(1.25, this)">1.25x</button>
+          <button type="button" class="pod-speed-btn" data-spd="1.5" onclick="Podcasts.setSpeed(1.5, this)">1.5x</button>
+        </div>
+      </div>
+      <div class="pod-progress-row">
+        <span id="podCurrentTime">00:00</span>
+        <input type="range" class="pod-progress-slider" id="podProgress" min="0" max="100" value="0" oninput="Podcasts.seek(this.value)">
+        <span id="podTotalDuration">--:--</span>
+      </div>
+    </div>
+
+    <!-- Filters & Search -->
+    <div class="pod-filter-section">
+      <div class="pod-search-bar">
+        <input type="search" id="podSearch" placeholder="Rechercher un épisode, un mot-clé (Hanon, Lécanémab, Chute, Escarre...)" oninput="Podcasts.filter()">
+      </div>
+      <div class="pod-category-chips" id="podCategoryChips">
+        <button type="button" class="pod-chip active" data-cat="all" onclick="Podcasts.setCategory('all', this)">Tous (28)</button>
+        <button type="button" class="pod-chip" data-cat="cardio" onclick="Podcasts.setCategory('cardio', this)">🫀 Cardio</button>
+        <button type="button" class="pod-chip" data-cat="neuro" onclick="Podcasts.setCategory('neuro', this)">🧠 Neuro-TNC</button>
+        <button type="button" class="pod-chip" data-cat="pharmacology" onclick="Podcasts.setCategory('pharmacology', this)">💊 Pharmacologie</button>
+        <button type="button" class="pod-chip" data-cat="mobility" onclick="Podcasts.setCategory('mobility', this)">🦴 Mobilité &amp; Chutes</button>
+        <button type="button" class="pod-chip" data-cat="nutrition" onclick="Podcasts.setCategory('nutrition', this)">🥗 Nutrition</button>
+        <button type="button" class="pod-chip" data-cat="ethics" onclick="Podcasts.setCategory('ethics', this)">⚖️ Éthique</button>
+      </div>
+    </div>
+
+    <!-- Podcast List Grid -->
+    <div class="podcasts-grid" id="podcastsGrid"></div>
+  </div>
+
   <!-- FLASHCARDS -->
   <div class="view" id="vFlash">
     <div class="page-hd"><h1>Mode Révision</h1></div>
@@ -206,7 +266,8 @@
       <div class="flash-stats"><span id="flashProg">0 / 0</span></div>
       <div class="flash-filters">
         <select id="flashChapFilter" class="flash-select" onchange="filterFlashChap(this.value)" style="margin-right:8px; padding:4px 8px; border-radius:6px; background:var(--bg-card); color:var(--text); border:1px solid var(--border); font-size:0.85rem; font-family:inherit;">
-          <option value="all">Tous chapitres</option>
+          <option value="notebooklm" selected>✨ Decks NotebookLM (EVC 2026)</option>
+          <option value="all">Tous chapitres (2000 cartes)</option>
         </select>
         <button class="flash-filt active" data-r="all" onclick="filterFlash('all',this)">Tous</button>
         <button class="flash-filt" data-r="A" onclick="filterFlash('A',this)">Rang A</button>
@@ -598,24 +659,26 @@
 <script>
 (function(){
   var steps = [
-    { src: 'data-bundle.js?v=256', label: 'Contenu des chapitres…', pct: 34 },
-    { src: 'practice-data.js?v=253', label: 'Entraînements structurés…', pct: 40 },
-    { src: 'annales-authentiques.js?v=253', label: 'Sources des annales…', pct: 45 },
-    { src: 'annales-texte.js?v=253', label: 'Sujets EVC recherchables…', pct: 50 },
-    { src: 'annales-corrections.js?v=253', label: 'Corrigés pédagogiques…', pct: 53 },
-    { src: 'protocoles-has-officiels.js?v=253', label: 'Conduites HAS…', pct: 57 },
-    { src: 'clinical-pathways.js?v=262', label: 'Référentiel clinique…', pct: 59 },
-    { src: 'notebook-decks-data.js?v=253', label: 'Decks NotebookLM…', pct: 60 },
-    { src: 'notebook-interactive.js?v=253', label: 'Lecteur présentation…', pct: 65 },
-    { src: 'calculateurs.js?v=262', label: 'Scores & calculateurs…', pct: 70 },
-    { src: 'clinical-assistant.js?v=262', label: 'Consultation guidée…', pct: 73 },
-    { src: 'quiz.js?v=253', label: 'Mode examen…', pct: 75 },
-    { src: 'dashboard.js?v=253', label: 'Tableau de bord…', pct: 80 },
-    { src: 'appsearch.js?v=253', label: 'Recherche…', pct: 85 },
-    { src: 'erreurs-journal.js?v=253', label: 'Fichier erreurs…', pct: 89 },
-    { src: 'graph.js?v=253', label: 'Parcours liés…', pct: 93 },
-    { src: 'brainfeed.js?v=256', label: 'BrainFeed…', pct: 97 },
-    { src: 'app.js?v=262', label: 'Interface…', pct: 100 }
+    { src: 'data-bundle.js?v=263', label: 'Contenu des chapitres…', pct: 34 },
+    { src: 'practice-data.js?v=263', label: 'Entraînements structurés…', pct: 40 },
+    { src: 'annales-authentiques.js?v=263', label: 'Sources des annales…', pct: 45 },
+    { src: 'annales-texte.js?v=263', label: 'Sujets EVC recherchables…', pct: 50 },
+    { src: 'annales-corrections.js?v=263', label: 'Corrigés pédagogiques…', pct: 53 },
+    { src: 'protocoles-has-officiels.js?v=263', label: 'Conduites HAS…', pct: 57 },
+    { src: 'clinical-pathways.js?v=263', label: 'Référentiel clinique…', pct: 59 },
+    { src: 'notebook-decks-data.js?v=263', label: 'Decks NotebookLM…', pct: 60 },
+    { src: 'podcasts-data.js?v=263', label: 'Podcasts audio…', pct: 62 },
+    { src: 'podcasts-app.js?v=263', label: 'Lecteur audio…', pct: 64 },
+    { src: 'notebook-interactive.js?v=263', label: 'Lecteur présentation…', pct: 65 },
+    { src: 'calculateurs.js?v=263', label: 'Scores & calculateurs…', pct: 70 },
+    { src: 'clinical-assistant.js?v=263', label: 'Consultation guidée…', pct: 73 },
+    { src: 'quiz.js?v=263', label: 'Mode examen…', pct: 75 },
+    { src: 'dashboard.js?v=263', label: 'Tableau de bord…', pct: 80 },
+    { src: 'appsearch.js?v=263', label: 'Recherche…', pct: 85 },
+    { src: 'erreurs-journal.js?v=263', label: 'Fichier erreurs…', pct: 89 },
+    { src: 'graph.js?v=263', label: 'Parcours liés…', pct: 93 },
+    { src: 'brainfeed.js?v=263', label: 'BrainFeed…', pct: 97 },
+    { src: 'app.js?v=263', label: 'Interface…', pct: 100 }
   ];
   var i = 0;
   var fill = document.getElementById('plFill');

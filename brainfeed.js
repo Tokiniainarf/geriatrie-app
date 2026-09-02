@@ -1125,6 +1125,33 @@ const BrainFeed = (() => {
     </div>`;
   }
 
+  let isSoundEnabled = (function() {
+    try { return localStorage.getItem('bf_sound_unmuted') === 'true'; } catch (_) { return false; }
+  })();
+
+  function toggleSound(e, btn) {
+    if (e) { e.preventDefault(); e.stopPropagation(); }
+    isSoundEnabled = !isSoundEnabled;
+    try { localStorage.setItem('bf_sound_unmuted', isSoundEnabled ? 'true' : 'false'); } catch (_) {}
+    
+    document.querySelectorAll('.bf-sound-toggle-btn').forEach(b => {
+      b.classList.toggle('is-unmuted', isSoundEnabled);
+      const icon = b.querySelector('.bf-sound-icon');
+      const label = b.querySelector('.bf-sound-label');
+      if (icon) icon.textContent = isSoundEnabled ? '🔊' : '🔇';
+      if (label) label.textContent = isSoundEnabled ? 'Son actif' : 'Son coupé';
+    });
+
+    document.querySelectorAll('video').forEach(v => {
+      v.muted = !isSoundEnabled;
+      if (isSoundEnabled) {
+        v.volume = 1.0;
+        const p = v.play();
+        if (p && typeof p.catch === 'function') p.catch(() => {});
+      }
+    });
+  }
+
   function renderVisual(card, slideIdx) {
     const src = card.media || card.video || card.image || '';
     const isVid = card.isVideo || /\.mp4($|\?)/i.test(src);
@@ -2353,6 +2380,7 @@ const BrainFeed = (() => {
     shareCard,
     renderSlides,
     selectSession,
+    toggleSound,
     audit: () => {
       const pools = buildSpecialPools();
       return { deck: buildDailyDeck(pools), pools };

@@ -182,7 +182,7 @@ function isPdfCapturePath(src){
   return /figures\/page_/i.test(s) || /\/crops\//i.test(s) || /\/p\d{3}_\d+\.(jpe?g|png)$/i.test(s);
 }
 const S={view:'home',ch:null,bm:safeJSON('gbm',[]),read:safeJSON('grd',[]),fs:parseInt(localStorage.getItem('gfs')||'18'),lh:parseFloat(localStorage.getItem('glh')||'1.7'),th:localStorage.getItem('gth')||'light'};
-let flashIdx=0,flashDeck=[],flashFilter='all',flashChapFilter='all';
+let flashIdx=0,flashDeck=[],flashFilter='all',flashChapFilter='notebooklm';
 
 function bootApp(){
   if (window.__geriBooted) return;
@@ -343,6 +343,7 @@ function sw(view, opts){
     }
     // Always rebuild deck on open (boot may have failed earlier)
     if(targetView==='flash') safe(loadFlashDeck, 'flash');
+    if(targetView==='podcasts') safe(() => { if (window.Podcasts) Podcasts.init(); }, 'podcasts');
     if(targetView==='fav') safe(renderFav, 'fav');
     if(targetView==='graph'&&typeof initGraph==='function') safe(initGraph, 'graph');
     if(targetView==='feed'&&typeof BrainFeed!=='undefined') safe(()=>BrainFeed.init(), 'feed');
