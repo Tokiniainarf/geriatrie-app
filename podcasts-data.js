@@ -7,6 +7,7 @@ const PODCASTS_DATA = [
   {
     id: "pod-01",
     title: "Prescrire des psychotropes au cerveau vieillissant",
+    audioFilename: "Le_paradoxe_mortel_des_médicaments_pour_seniors.m4a",
     duration: "20:48",
     durationSec: 1248,
     category: "pharmacology",
@@ -25,6 +26,7 @@ const PODCASTS_DATA = [
   {
     id: "pod-02",
     title: "Soigner les seniors sans les briser : la bientraitance active",
+    audioFilename: "Soigner_les_seniors_sans_les_briser.m4a",
     duration: "19:48",
     durationSec: 1188,
     category: "ethics",
@@ -43,6 +45,7 @@ const PODCASTS_DATA = [
   {
     id: "pod-03",
     title: "Quand l'hôpital rend les seniors dépendants (Dépendance iatrogène)",
+    audioFilename: "Quand_l_hôpital_rend_les_seniors_dépendants.m4a",
     duration: "23:53",
     durationSec: 1433,
     category: "mobility",
@@ -61,6 +64,7 @@ const PODCASTS_DATA = [
   {
     id: "pod-04",
     title: "L'insuffisance cardiaque : ce caméléon gériatrique & Protocole Hanon",
+    audioFilename: "L_insuffisance_cardiaque_ce_caméléon_gériatrique.m4a",
     duration: "16:09",
     durationSec: 969,
     category: "cardio",
@@ -79,6 +83,7 @@ const PODCASTS_DATA = [
   {
     id: "pod-05",
     title: "Quinze secondes pour éviter la chute : dépistage et syndrome post-chute",
+    audioFilename: "Quinze_secondes_pour_éviter_la_chute.m4a",
     duration: "22:41",
     durationSec: 1361,
     category: "mobility",
@@ -97,6 +102,7 @@ const PODCASTS_DATA = [
   {
     id: "pod-06",
     title: "Pourquoi le corps âgé nous trompe : sémiologie gériatrique atypique",
+    audioFilename: "Pourquoi_le_corps_âgé_nous_trompe.m4a",
     duration: "15:21",
     durationSec: 921,
     category: "general",
@@ -114,6 +120,7 @@ const PODCASTS_DATA = [
   {
     id: "pod-07",
     title: "Pourquoi vieillir n'est pas une maladie : biologie et réserve homéostatique",
+    audioFilename: "Pourquoi_vieillir_n_est_pas_une_maladie (1).m4a",
     duration: "15:51",
     durationSec: 951,
     category: "general",
@@ -131,6 +138,7 @@ const PODCASTS_DATA = [
   {
     id: "pod-08",
     title: "Dénutrition gériatrique : les nouveaux critères HAS 2021 et pièges du SRI",
+    audioFilename: "Dénutrition_et_sarcopénie_du_sujet_âgé.m4a",
     duration: "18:15",
     durationSec: 1095,
     category: "nutrition",
@@ -149,6 +157,7 @@ const PODCASTS_DATA = [
   {
     id: "pod-09",
     title: "Lécanémab : espoir thérapeutique et vigilance absolue sur les ARIA (SFGG 2025)",
+    audioFilename: "Les_mécanismes_des_troubles_neurocognitifs_majeurs.m4a",
     duration: "17:40",
     durationSec: 1060,
     category: "neuro",
@@ -167,6 +176,7 @@ const PODCASTS_DATA = [
   {
     id: "pod-10",
     title: "Syndrome confusionnel : l'urgence somatique et l'outil CAM",
+    audioFilename: "L_urgence_vitale_du_syndrome_confusionnel_gériatrique.m4a",
     duration: "21:10",
     durationSec: 1270,
     category: "neuro",
@@ -185,6 +195,7 @@ const PODCASTS_DATA = [
   {
     id: "pod-11",
     title: "Incontinence urinaire gériatrique : les causes réversibles DIAPPERS",
+    audioFilename: "L_incontinence_gériatrique_au-delà_des_couches.m4a",
     duration: "16:30",
     durationSec: 990,
     category: "general",
@@ -202,6 +213,7 @@ const PODCASTS_DATA = [
   {
     id: "pod-12",
     title: "Ostéoporose et risque fracturaire : au-delà du T-score",
+    audioFilename: "L_ostéoporose_gériatrique_et_ses_pièges_cliniques.m4a",
     duration: "19:05",
     durationSec: 1145,
     category: "mobility",
@@ -220,6 +232,7 @@ const PODCASTS_DATA = [
   {
     id: "pod-13",
     title: "Douleur du sujet âgé non communicant : l'échelle Algoplus",
+    audioFilename: "Traquer_la_douleur_invisible_des_aînés.m4a",
     duration: "18:50",
     durationSec: 1130,
     category: "pharmacology",
@@ -238,6 +251,7 @@ const PODCASTS_DATA = [
   {
     id: "pod-14",
     title: "STOPP-START et sécurisation médicamenteuse : éviter le piège des AVK",
+    audioFilename: "Le_paradoxe_mortel_des_médicaments_pour_seniors.m4a",
     duration: "22:15",
     durationSec: 1335,
     category: "pharmacology",
@@ -256,6 +270,7 @@ const PODCASTS_DATA = [
   {
     id: "pod-15",
     title: "Arthrose et Rhumatologie gériatrique : coxarthrose et gonarthrose",
+    audioFilename: "Pièges_de_l_arthrose_gériatrique_aux_EVC.m4a",
     duration: "17:25",
     durationSec: 1045,
     category: "mobility",
@@ -273,6 +288,7 @@ const PODCASTS_DATA = [
   {
     id: "pod-16",
     title: "Dépression masquée et risque suicidaire : l'échelle RUD et GDS",
+    audioFilename: "La_dépression_masquée_des_seniors.m4a",
     duration: "19:30",
     durationSec: 1170,
     category: "neuro",
@@ -291,6 +307,7 @@ const PODCASTS_DATA = [
   {
     id: "pod-17",
     title: "Troubles sensoriels : préserver la vision et l'audition pour sauver le cerveau",
+    audioFilename: "Vision_audition_et_autonomie_en_gériatrie.m4a",
     duration: "16:45",
     durationSec: 1005,
     category: "general",
@@ -308,6 +325,7 @@ const PODCASTS_DATA = [
   {
     id: "pod-18",
     title: "Éthique en fin de vie : proportionnalité des soins et directives anticipées",
+    audioFilename: "L_éthique_médicale_selon_la_loi_Claeys-Leonetti.m4a",
     duration: "20:15",
     durationSec: 1215,
     category: "ethics",
@@ -326,6 +344,7 @@ const PODCASTS_DATA = [
   {
     id: "pod-19",
     title: "Grille AGGIR et plan d'aide APA : évaluer pour autonomiser",
+    audioFilename: "Quinze_secondes_pour_évaluer_votre_autonomie.m4a",
     duration: "18:40",
     durationSec: 1120,
     category: "mobility",
@@ -343,6 +362,7 @@ const PODCASTS_DATA = [
   {
     id: "pod-20",
     title: "Escarres de décubitus : de l'évaluation Braden aux pansements modernes",
+    audioFilename: "Mouvement_et_nutrition_contre_les_escarres.m4a",
     duration: "17:55",
     durationSec: 1075,
     category: "mobility",
@@ -361,6 +381,7 @@ const PODCASTS_DATA = [
   {
     id: "pod-21",
     title: "BPCO du patient âgé et antibiothérapie ciblée (Critères d'Anthonisen)",
+    audioFilename: "L_alitement_est_une_urgence_gériatrique_absolue.m4a",
     duration: "19:10",
     durationSec: 1150,
     category: "cardio",
@@ -379,6 +400,7 @@ const PODCASTS_DATA = [
   {
     id: "pod-22",
     title: "Fragilité selon Fried et filières de soins gériatriques (EGS)",
+    audioFilename: "La_chute_n_est_jamais_banale.m4a",
     duration: "21:35",
     durationSec: 1295,
     category: "general",
@@ -396,6 +418,7 @@ const PODCASTS_DATA = [
   {
     id: "pod-23",
     title: "Iatrogénie hospitalière et chutes aux urgences : la filière directe",
+    audioFilename: "Quand_l_hôpital_aggrave_la_dépendance.m4a",
     duration: "20:00",
     durationSec: 1200,
     category: "general",
@@ -413,6 +436,7 @@ const PODCASTS_DATA = [
   {
     id: "pod-24",
     title: "Sarcopénie et activité physique adaptée : sauver le capital musculaire",
+    audioFilename: "Dénutrition_et_sarcopénie_du_sujet_âgé.m4a",
     duration: "18:20",
     durationSec: 1100,
     category: "nutrition",
@@ -430,6 +454,7 @@ const PODCASTS_DATA = [
   {
     id: "pod-25",
     title: "Troubles du comportement BPSD dans l'Alzheimer : stratégie non pharmacologique",
+    audioFilename: "Maître_de_son_corps_malgré_la_tutelle.m4a",
     duration: "22:50",
     durationSec: 1370,
     category: "neuro",
@@ -447,6 +472,7 @@ const PODCASTS_DATA = [
   {
     id: "pod-26",
     title: "Pneumopathies d'inhalation et dysphagie : adapter les textures",
+    audioFilename: "Sédation_profonde_et_dignité_en_gériatrie.m4a",
     duration: "17:10",
     durationSec: 1030,
     category: "nutrition",
@@ -465,6 +491,7 @@ const PODCASTS_DATA = [
   {
     id: "pod-27",
     title: "Hypertension artérielle du grand âge : cibles et pièges de l'orthostatisme",
+    audioFilename: "Les_pièges_du_diagnostic_en_gériatrie.m4a",
     duration: "18:05",
     durationSec: 1085,
     category: "cardio",
@@ -483,6 +510,7 @@ const PODCASTS_DATA = [
   {
     id: "pod-28",
     title: "L'art de la synthèse clinique à l'EVC : réussir l'épreuve pratique",
+    audioFilename: "Maîtriser_le_raisonnement_gériatrique_aux_EVC.m4a",
     duration: "24:15",
     durationSec: 1455,
     category: "general",

@@ -182,7 +182,7 @@ function isPdfCapturePath(src){
   return /figures\/page_/i.test(s) || /\/crops\//i.test(s) || /\/p\d{3}_\d+\.(jpe?g|png)$/i.test(s);
 }
 const S={view:'home',ch:null,bm:safeJSON('gbm',[]),read:safeJSON('grd',[]),fs:parseInt(localStorage.getItem('gfs')||'18'),lh:parseFloat(localStorage.getItem('glh')||'1.7'),th:localStorage.getItem('gth')||'light'};
-let flashIdx=0,flashDeck=[],flashFilter='all',flashChapFilter='all';
+let flashIdx=0,flashDeck=[],flashFilter='all',flashChapFilter='ch1';
 
 function bootApp(){
   if (window.__geriBooted) return;
@@ -3854,15 +3854,30 @@ window.synthPrint=synthPrint;
 
 function populateChapFilter() {
   const sel = document.getElementById('flashChapFilter');
-  if (!sel || sel.options.length > 1) return;
+  if (!sel || sel.dataset.populated === 'true') return;
+  sel.innerHTML = '';
+  
   if (typeof APP_DATA !== 'undefined' && APP_DATA.chapters) {
-    APP_DATA.chapters.forEach(c => {
+    APP_DATA.chapters.forEach((c, idx) => {
       const opt = document.createElement('option');
       opt.value = c.id;
-      opt.textContent = c.t;
+      opt.textContent = `Ch. ${idx + 1} — ${c.t}`;
       sel.appendChild(opt);
     });
   }
+  
+  const optNb = document.createElement('option');
+  optNb.value = 'notebooklm';
+  optNb.textContent = '✨ Decks NotebookLM (EVC 2026)';
+  sel.appendChild(optNb);
+  
+  const optAll = document.createElement('option');
+  optAll.value = 'all';
+  optAll.textContent = 'Tous chapitres (global)';
+  sel.appendChild(optAll);
+  
+  sel.value = flashChapFilter || 'ch1';
+  sel.dataset.populated = 'true';
 }
 
 function filterFlashChap(val) {

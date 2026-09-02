@@ -1,5 +1,5 @@
 /* ===============================================================
-   PODCASTS MODULE — Lecteur & Catalogue Audio EVC
+   PODCASTS MODULE — Lecteur Audio Natif NotebookLM EVC
    =============================================================== */
 
 const Podcasts = (function() {
@@ -8,18 +8,89 @@ const Podcasts = (function() {
   let currentPodcast = null;
   let isPlaying = false;
   let playbackSpeed = 1.0;
-  let progressInterval = null;
-  let currentSeconds = 0;
-  let synthUtterance = null;
+  let audioElement = null;
+  let localAudioFiles = new Map();
 
   function init() {
+    initAudioElement();
     renderList();
-    initSpeechSynthesis();
   }
 
-  function initSpeechSynthesis() {
-    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-      window.speechSynthesis.onvoiceschanged = () => {};
+  function initAudioElement() {
+    if (typeof document === 'undefined') return;
+    if (!audioElement) {
+      audioElement = document.createElement('audio');
+      audioElement.id = 'podAudioElement';
+      audioElement.preload = 'metadata';
+      document.body.appendChild(audioElement);
+
+      audioElement.addEventListener('timeupdate', () => {
+        updateProgress();
+      });
+
+      audioElement.addEventListener('ended', () => {
+        isPlaying = false;
+        updatePlayButtons();
+      });
+
+      audioElement.addEventListener('error', (e) => {
+        console.warn('[Podcasts] Erreur de lecture audio:', e);
+      });
+    }
+  }
+
+  function loadLocalFolder(fileList) {
+    if (!fileList || !fileList.length) return;
+    localAudioFiles.clear();
+    let count = 0;
+    for (let i = 0; i < fileList.length; i++) {
+      const file = fileList[i];
+      if (file.name.endsWith('.m4a') || file.name.endsWith('.mp3') || file.name.endsWith('.wav')) {
+        const normName = file.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        localAudioFiles.set(normName, file);
+        localAudioFiles.set(file.name, file);
+        count++;
+      }
+    }
+    const statusEl = document.getElementById('podFolderStatus');
+    if (statusEl) {
+      statusEl.textContent = `✅ ${count} audios NotebookLM connectés !`;
+      statusEl.style.color = '#14b8a6';
+      statusEl.style.fontWeight = '700';
+    }
+    if (currentPodcast) {
+      prepareAudioSource(currentPodcast);
+    }
+    renderList();
+  }
+
+  function prepareAudioSource(pod) {
+    initAudioElement();
+    if (!pod) return;
+    
+    // Check if matching local file exists
+    let matchedFile = null;
+    if (pod.audioFilename) {
+      const norm = pod.audioFilename.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      matchedFile = localAudioFiles.get(pod.audioFilename) || localAudioFiles.get(norm);
+    }
+
+    if (!matchedFile) {
+      // Fuzzy search in localAudioFiles
+      for (const [name, file] of localAudioFiles.entries()) {
+        const podNorm = pod.title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').slice(0, 15);
+        if (name.includes(podNorm)) {
+          matchedFile = file;
+          break;
+        }
+      }
+    }
+
+    if (matchedFile) {
+      audioElement.src = URL.createObjectURL(matchedFile);
+    } else {
+      // Stream path in audio/podcasts/ or synthesized fallback
+      audioElement.src = 'audio/podcasts/' + encodeURIComponent(pod.audioFilename || (pod.id + '.m4a'));
     }
   }
 
@@ -61,6 +132,7 @@ const Podcasts = (function() {
 
     grid.innerHTML = list.map(pod => {
       const isCurrent = currentPodcast && currentPodcast.id === pod.id;
+      const hasLocal = pod.audioFilename && (localAudioFiles.has(pod.audioFilename) || localAudioFiles.has(pod.audioFilename.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')));
       return `
         <div class="pod-card ${isCurrent ? 'pod-card-active' : ''}" id="pod-card-${pod.id}" onclick="Podcasts.selectPodcast('${pod.id}')">
           <div class="pod-card-top">
@@ -72,10 +144,11 @@ const Podcasts = (function() {
           <p class="pod-card-summary">${esc(pod.summary)}</p>
           <div class="pod-card-tags">
             ${(pod.tags || []).map(t => `<span class="pod-tag">${esc(t)}</span>`).join('')}
+            ${hasLocal ? '<span class="pod-tag" style="background:#0d9488; color:#fff;">✓ Fichier M4A connecté</span>' : ''}
           </div>
           <div class="pod-card-actions">
             <button type="button" class="pod-card-play-btn" onclick="event.stopPropagation(); Podcasts.playPodcast('${pod.id}')">
-              ${isCurrent && isPlaying ? '⏸ Pause' : '▶ Écouter la masterclass'}
+              ${isCurrent && isPlaying ? '⏸ Pause' : '▶ Écouter l\'audio'}
             </button>
           </div>
         </div>
@@ -87,6 +160,7 @@ const Podcasts = (function() {
     const pod = (typeof PODCASTS_DATA !== 'undefined') ? PODCASTS_DATA.find(p => p.id === id) : null;
     if (!pod) return;
     currentPodcast = pod;
+    prepareAudioSource(currentPodcast);
     updatePlayerUI();
     renderList();
   }
@@ -99,6 +173,7 @@ const Podcasts = (function() {
   }
 
   function togglePlay() {
+    initAudioElement();
     if (!currentPodcast) {
       if (typeof PODCASTS_DATA !== 'undefined' && PODCASTS_DATA.length > 0) {
         selectPodcast(PODCASTS_DATA[0].id);
@@ -108,84 +183,49 @@ const Podcasts = (function() {
     }
 
     if (isPlaying) {
-      pauseAudio();
+      audioElement.pause();
+      isPlaying = false;
+      updatePlayButtons();
     } else {
-      startAudio();
-    }
-  }
-
-  function startAudio() {
-    if (!currentPodcast) return;
-    isPlaying = true;
-    updatePlayButtons();
-
-    // Use SpeechSynthesis as offline audible narrator if available
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-      const narrativeText = `${currentPodcast.title}. Chapitre ${currentPodcast.chapterTitle}. ${currentPodcast.summary}. Points clés : ${currentPodcast.keyPoints.join('. ')}`;
-      synthUtterance = new SpeechSynthesisUtterance(narrativeText);
-      synthUtterance.lang = 'fr-FR';
-      synthUtterance.rate = playbackSpeed;
-      synthUtterance.onend = () => {
-        pauseAudio();
-        currentSeconds = 0;
-        updateProgress();
-      };
-      window.speechSynthesis.speak(synthUtterance);
-    }
-
-    clearInterval(progressInterval);
-    progressInterval = setInterval(() => {
-      currentSeconds += 1 * playbackSpeed;
-      if (currentSeconds >= currentPodcast.durationSec) {
-        currentSeconds = currentPodcast.durationSec;
-        pauseAudio();
+      audioElement.playbackRate = playbackSpeed;
+      const playPromise = audioElement.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.then(() => {
+          isPlaying = true;
+          updatePlayButtons();
+        }).catch((err) => {
+          console.warn('[Podcasts] Playback blocked or source pending:', err);
+          isPlaying = false;
+          updatePlayButtons();
+        });
+      } else {
+        isPlaying = true;
+        updatePlayButtons();
       }
-      updateProgress();
-    }, 1000);
-  }
-
-  function pauseAudio() {
-    isPlaying = false;
-    clearInterval(progressInterval);
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
     }
-    updatePlayButtons();
   }
 
   function replay(seconds) {
-    currentSeconds = Math.max(0, currentSeconds - seconds);
-    updateProgress();
-    if (isPlaying) {
-      startAudio();
-    }
+    if (!audioElement) return;
+    audioElement.currentTime = Math.max(0, audioElement.currentTime - seconds);
   }
 
   function forward(seconds) {
-    if (!currentPodcast) return;
-    currentSeconds = Math.min(currentPodcast.durationSec, currentSeconds + seconds);
-    updateProgress();
-    if (isPlaying) {
-      startAudio();
-    }
+    if (!audioElement) return;
+    audioElement.currentTime = Math.min(audioElement.duration || 9999, audioElement.currentTime + seconds);
   }
 
   function seek(pct) {
-    if (!currentPodcast) return;
-    currentSeconds = Math.floor((pct / 100) * currentPodcast.durationSec);
-    updateProgress();
-    if (isPlaying) {
-      startAudio();
-    }
+    if (!audioElement || !audioElement.duration) return;
+    audioElement.currentTime = (pct / 100) * audioElement.duration;
   }
 
   function setSpeed(spd, btn) {
     playbackSpeed = parseFloat(spd) || 1.0;
     document.querySelectorAll('.pod-speed-btn').forEach(b => b.classList.remove('active'));
     if (btn) btn.classList.add('active');
-    if (isPlaying) {
-      startAudio();
+    if (audioElement) {
+      audioElement.playbackRate = playbackSpeed;
     }
   }
 
@@ -198,9 +238,8 @@ const Podcasts = (function() {
 
     if (titleEl) titleEl.textContent = currentPodcast.title;
     if (subEl) subEl.textContent = `${currentPodcast.categoryLabel} · ${currentPodcast.chapterTitle} (${currentPodcast.duration})`;
-    if (badgeEl) badgeEl.textContent = 'EN COURS D\'ÉCOUTE';
+    if (badgeEl) badgeEl.textContent = 'AUDIO NOTEBOOKLM SÉLECTIONNÉ';
     if (durEl) durEl.textContent = currentPodcast.duration;
-    updateProgress();
   }
 
   function updatePlayButtons() {
@@ -213,16 +252,19 @@ const Podcasts = (function() {
   }
 
   function updateProgress() {
-    if (!currentPodcast) return;
+    if (!audioElement) return;
     const curTimeEl = document.getElementById('podCurrentTime');
     const slider = document.getElementById('podProgress');
+    const curSec = audioElement.currentTime || 0;
+    const dur = audioElement.duration || (currentPodcast ? currentPodcast.durationSec : 1200);
+
     if (curTimeEl) {
-      const m = Math.floor(currentSeconds / 60);
-      const s = Math.floor(currentSeconds % 60);
+      const m = Math.floor(curSec / 60);
+      const s = Math.floor(curSec % 60);
       curTimeEl.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
     }
-    if (slider) {
-      slider.value = (currentSeconds / currentPodcast.durationSec) * 100;
+    if (slider && dur > 0) {
+      slider.value = (curSec / dur) * 100;
     }
   }
 
@@ -233,6 +275,7 @@ const Podcasts = (function() {
 
   return {
     init,
+    loadLocalFolder,
     setCategory,
     filter,
     selectPodcast,

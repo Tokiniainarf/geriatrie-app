@@ -35,7 +35,7 @@
 #appPreloader .pl-status{font-size:.72rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:rgba(22,38,74,.45)}
 @media (prefers-reduced-motion: reduce){#appPreloader .pl-logo,#appPreloader .pl-fill{animation:none}}
 </style>
-  <link rel="stylesheet" href="podcasts.css?v=264">
+  <link rel="stylesheet" href="podcasts.css?v=265">
 </head>
 <body>
 <div id="appPreloader" role="status" aria-live="polite" aria-busy="true">
@@ -214,6 +214,14 @@
     </div>
     
     <!-- Audio Player Sticky Card -->
+    
+      <div class="pod-local-banner" id="podLocalBanner">
+        <input type="file" id="podFolderInput" webkitdirectory directory multiple style="display:none" onchange="Podcasts.loadLocalFolder(this.files)">
+        <button type="button" class="pod-folder-btn" onclick="document.getElementById('podFolderInput').click()">
+          📂 Lier le dossier des vrais audios NotebookLM (Desktop\GERIARTRIE\MEDIA NOTEBOOK LM)
+        </button>
+        <span class="pod-folder-status" id="podFolderStatus">Audios intégrés prêts</span>
+      </div>
     <div class="podcast-player-card" id="podcastPlayerCard">
       <div class="pod-player-header">
         <div class="pod-playing-info">
@@ -266,8 +274,7 @@
       <div class="flash-stats"><span id="flashProg">0 / 0</span></div>
       <div class="flash-filters">
         <select id="flashChapFilter" class="flash-select" onchange="filterFlashChap(this.value)" style="margin-right:8px; padding:4px 8px; border-radius:6px; background:var(--bg-card); color:var(--text); border:1px solid var(--border); font-size:0.85rem; font-family:inherit;">
-          <option value="all" selected>Tous chapitres (2000 cartes classées)</option>
-          <option value="notebooklm">✨ Decks NotebookLM (EVC 2026)</option>
+          <option value="ch1" selected>Ch. 1 — Biologie du vieillissement</option>
         </select>
         <button class="flash-filt active" data-r="all" onclick="filterFlash('all',this)">Tous</button>
         <button class="flash-filt" data-r="A" onclick="filterFlash('A',this)">Rang A</button>
@@ -659,26 +666,26 @@
 <script>
 (function(){
   var steps = [
-    { src: 'data-bundle.js?v=264', label: 'Contenu des chapitres…', pct: 34 },
-    { src: 'practice-data.js?v=264', label: 'Entraînements structurés…', pct: 40 },
-    { src: 'annales-authentiques.js?v=264', label: 'Sources des annales…', pct: 45 },
-    { src: 'annales-texte.js?v=264', label: 'Sujets EVC recherchables…', pct: 50 },
-    { src: 'annales-corrections.js?v=264', label: 'Corrigés pédagogiques…', pct: 53 },
-    { src: 'protocoles-has-officiels.js?v=264', label: 'Conduites HAS…', pct: 57 },
-    { src: 'clinical-pathways.js?v=264', label: 'Référentiel clinique…', pct: 59 },
-    { src: 'notebook-decks-data.js?v=264', label: 'Decks NotebookLM…', pct: 60 },
-    { src: 'podcasts-data.js?v=264', label: 'Podcasts audio…', pct: 62 },
-    { src: 'podcasts-app.js?v=264', label: 'Lecteur audio…', pct: 64 },
-    { src: 'notebook-interactive.js?v=264', label: 'Lecteur présentation…', pct: 65 },
-    { src: 'calculateurs.js?v=264', label: 'Scores & calculateurs…', pct: 70 },
-    { src: 'clinical-assistant.js?v=264', label: 'Consultation guidée…', pct: 73 },
-    { src: 'quiz.js?v=264', label: 'Mode examen…', pct: 75 },
-    { src: 'dashboard.js?v=264', label: 'Tableau de bord…', pct: 80 },
-    { src: 'appsearch.js?v=264', label: 'Recherche…', pct: 85 },
-    { src: 'erreurs-journal.js?v=264', label: 'Fichier erreurs…', pct: 89 },
-    { src: 'graph.js?v=264', label: 'Parcours liés…', pct: 93 },
-    { src: 'brainfeed.js?v=264', label: 'BrainFeed…', pct: 97 },
-    { src: 'app.js?v=264', label: 'Interface…', pct: 100 }
+    { src: 'data-bundle.js?v=265', label: 'Contenu des chapitres…', pct: 34 },
+    { src: 'practice-data.js?v=265', label: 'Entraînements structurés…', pct: 40 },
+    { src: 'annales-authentiques.js?v=265', label: 'Sources des annales…', pct: 45 },
+    { src: 'annales-texte.js?v=265', label: 'Sujets EVC recherchables…', pct: 50 },
+    { src: 'annales-corrections.js?v=265', label: 'Corrigés pédagogiques…', pct: 53 },
+    { src: 'protocoles-has-officiels.js?v=265', label: 'Conduites HAS…', pct: 57 },
+    { src: 'clinical-pathways.js?v=265', label: 'Référentiel clinique…', pct: 59 },
+    { src: 'notebook-decks-data.js?v=265', label: 'Decks NotebookLM…', pct: 60 },
+    { src: 'podcasts-data.js?v=265', label: 'Podcasts audio…', pct: 62 },
+    { src: 'podcasts-app.js?v=265', label: 'Lecteur audio…', pct: 64 },
+    { src: 'notebook-interactive.js?v=265', label: 'Lecteur présentation…', pct: 65 },
+    { src: 'calculateurs.js?v=265', label: 'Scores & calculateurs…', pct: 70 },
+    { src: 'clinical-assistant.js?v=265', label: 'Consultation guidée…', pct: 73 },
+    { src: 'quiz.js?v=265', label: 'Mode examen…', pct: 75 },
+    { src: 'dashboard.js?v=265', label: 'Tableau de bord…', pct: 80 },
+    { src: 'appsearch.js?v=265', label: 'Recherche…', pct: 85 },
+    { src: 'erreurs-journal.js?v=265', label: 'Fichier erreurs…', pct: 89 },
+    { src: 'graph.js?v=265', label: 'Parcours liés…', pct: 93 },
+    { src: 'brainfeed.js?v=265', label: 'BrainFeed…', pct: 97 },
+    { src: 'app.js?v=265', label: 'Interface…', pct: 100 }
   ];
   var i = 0;
   var fill = document.getElementById('plFill');
