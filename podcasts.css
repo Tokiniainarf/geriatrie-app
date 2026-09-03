@@ -2498,3 +2498,13 @@ body:has(#vFeed.bf-session-reels.active) .pod-spotify-mini-player,
   background: #047857 !important;
   transform: translateY(-1px) !important;
 }
+
+/* Confinement de débordement pour écrans larges (Desktop & Tablettes) */
+#vFeed .bf-slide {
+  overflow: hidden !important;
+}
+#vFeed .bf-horiz-scroll {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+}
+

@@ -4874,19 +4874,32 @@ function renderMeds() {
 
     if (classeObj.medicaments && Array.isArray(classeObj.medicaments)) {
       classeObj.medicaments.forEach(med => {
-        const isPim = /benzodiazepine|neuroleptique|antipsychotique|anticholinergique|ains|antidépresseur tricyclique|neuro/i.test(className || med.nom) ||
-                      /oxazepam|alprazolam|lorazepam|zolpidem|zopiclone|haloperidol|risperidone|olanzapine|aripiprazole|clozapine|amitriptyline|imipramine|clomipramine|diclofenac|ibuprofene|ketoprofene|naproxene|piroxicam|meloxicam|celecoxib|indometacine/i.test(med.nom) ||
-                      (med.effets_secondaires && med.effets_secondaires.toLowerCase().includes('chutes')) ||
-                      (med.effets_secondaires && med.effets_secondaires.toLowerCase().includes('confusion'));
+        const isOpioid = /morphine|oxycodone|fentanyl|tramadol|buprenorphine/i.test(med.nom);
+        const isTruePim = /benzodiazepine|neuroleptique|antipsychotique|anticholinergique|ains|antidépresseur tricyclique/i.test(className || med.nom) ||
+                          /oxazepam|alprazolam|lorazepam|zolpidem|zopiclone|haloperidol|risperidone|olanzapine|aripiprazole|clozapine|amitriptyline|imipramine|clomipramine|diclofenac|ibuprofene|ketoprofene|naproxene|piroxicam|meloxicam|celecoxib|indometacine/i.test(med.nom);
+        const hasVigilanceRisk = !isTruePim && !isOpioid && med.effets_secondaires && (/chutes|confusion/i.test(med.effets_secondaires));
+
+        let badgeHtml = '';
+        let borderColor = 'var(--accent, #0891b2)';
+        if (isTruePim) {
+          borderColor = 'var(--danger, #ef4444)';
+          badgeHtml = `<div style="display:inline-block; font-size:0.75rem; background:rgba(239,68,68,0.15); color:var(--danger,#ef4444); padding:2px 8px; border-radius:4px; margin-top:4px; font-weight:bold;">⚠️ Molécule Inappropriée (STOPP v3)</div>`;
+        } else if (isOpioid) {
+          borderColor = '#f59e0b';
+          badgeHtml = `<div style="display:inline-block; font-size:0.75rem; background:rgba(245,158,11,0.15); color:#d97706; padding:2px 8px; border-radius:4px; margin-top:4px; font-weight:bold;">⚠️ STOPP v3 : Vigilance chutes &amp; constipation (laxatif systématique) · Indiquée en douleur aiguë sévère &amp; soins palliatifs</div>`;
+        } else if (hasVigilanceRisk) {
+          borderColor = '#eab308';
+          badgeHtml = `<div style="display:inline-block; font-size:0.75rem; background:rgba(234,179,8,0.15); color:#ca8a04; padding:2px 8px; border-radius:4px; margin-top:4px; font-weight:bold;">⚠️ Vigilance Gériatrique : Risque de chutes / sédation</div>`;
+        }
 
         html += `
-          <div class="calc-card med-card" data-class="${esc(className)}" style="border-left: 4px solid ${isPim ? 'var(--danger, #ef4444)' : 'var(--accent, #0891b2)'}">
+          <div class="calc-card med-card" data-class="${esc(className)}" style="border-left: 4px solid ${borderColor}">
             <span class="source-status unverified">Fiche de révision · RCP/ANSM à vérifier</span>
             <div class="calc-card-hdr">
               <span class="calc-card-nom">${esc(med.nom)}</span>
               <span class="calc-badge">${esc(className.toUpperCase())}</span>
             </div>
-            ${isPim ? `<div style="display:inline-block; font-size:0.75rem; background:rgba(239,68,68,0.15); color:var(--danger,#ef4444); padding:2px 8px; border-radius:4px; margin-top:4px; font-weight:bold;">⚠️ Molécule Inappropriée (STOPP v3)</div>` : ''}
+            ${badgeHtml}
             <div class="med-details" style="display:flex; flex-direction:column; gap:8px; margin-top:8px;">
               ${med.dose_adaptee_sujet_age ? `<div><strong>Posologie gériatrique :</strong> <span class="fs-sm">${esc(med.dose_adaptee_sujet_age)}</span></div>` : ''}
               ${med.voie ? `<div><strong>Voie :</strong> <span class="fs-sm">${esc(med.voie)}</span></div>` : ''}

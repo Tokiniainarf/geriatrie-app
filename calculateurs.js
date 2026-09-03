@@ -2824,6 +2824,50 @@ Date de l\'évaluation : ${new Date().toLocaleDateString('fr-FR')}
     },
     seuils: '1-4 = Handicap mineur/modéré · 5-7 = Important · 8-10 = Très important · 11-12 = Extrêmement important · ≥13 = Sévère'
   },
+  {
+    id: 'lee_index',
+    nom: 'Lee (Index Pronostique de Mortalité à 4 ans)',
+    domaine: 'Autonomie',
+    type: 'checklist',
+    chapitre: 'ch1',
+    description: "Indice pronostique validé (Lee SJ et al., JAMA 2006) estimant la mortalité à 4 ans chez le sujet âgé de plus de 60 ans vivant à domicile. Clé en gériatrie pour guider la balance bénéfice/risque des traitements préventifs (dépistages de cancers, statines, cibles glycémiques assouplies).",
+    ref: 'Lee SJ, et al. Development and validation of a prognostic index for 4-year mortality in older adults. JAMA. 2006;295(7):801-808.',
+    sourceUrl: 'https://jamanetwork.com/journals/jama/fullarticle/202359',
+    fields: [
+      { id: 'lee_age', label: "1. Tranche d'âge", type: 'select', options: ['0 — Moins de 60 ans (hors cible)', '1 — 60 à 69 ans (+1 pt)', '2 — 70 à 74 ans (+2 pts)', '3 — 75 à 79 ans (+3 pts)', '4 — 80 à 84 ans (+4 pts)', '5 — 85 ans ou plus (+5 pts)'] },
+      { id: 'lee_sexe', label: '2. Sexe', type: 'select', options: ['0 — Féminin (0 pt)', '2 — Masculin (+2 pts)'] },
+      { id: 'lee_bmi', label: '3. Indice de Masse Corporelle (IMC)', type: 'select', options: ['0 — IMC ≥ 25 kg/m² (0 pt)', '1 — IMC < 25 kg/m² (+1 pt)'] },
+      { id: 'lee_diabete', label: '4. Diabète', type: 'select', options: ['0 — Non (0 pt)', '1 — Oui (+1 pt)'] },
+      { id: 'lee_cancer', label: '5. Cancer (hors carcinome cutané basocellulaire)', type: 'select', options: ['0 — Non (0 pt)', '2 — Oui (+2 pts)'] },
+      { id: 'lee_bpco', label: "6. BPCO ou maladie respiratoire chronique limitant l'effort", type: 'select', options: ['0 — Non (0 pt)', '2 — Oui (+2 pts)'] },
+      { id: 'lee_ic', label: '7. Insuffisance cardiaque congestive', type: 'select', options: ['0 — Non (0 pt)', '2 — Oui (+2 pts)'] },
+      { id: 'lee_tabac', label: '8. Tabagisme actuel', type: 'select', options: ['0 — Non (0 pt)', '2 — Oui (+2 pts)'] },
+      { id: 'lee_marche', label: '9. Difficulté à marcher plusieurs centaines de mètres', type: 'select', options: ['0 — Non (0 pt)', '2 — Oui (+2 pts)'] },
+      { id: 'lee_objets', label: '10. Difficulté à pousser ou tirer des objets lourds', type: 'select', options: ['0 — Non (0 pt)', '1 — Oui (+1 pt)'] },
+      { id: 'lee_argent', label: '11. Difficulté pour la gestion des finances / budget (IADL)', type: 'select', options: ['0 — Non (0 pt)', '2 — Oui (+2 pts)'] },
+      { id: 'lee_toilette', label: '12. Difficulté pour la toilette personnelle (ADL)', type: 'select', options: ['0 — Non (0 pt)', '2 — Oui (+2 pts)'] }
+    ],
+    calculate: (v) => {
+      const keys = ['lee_age','lee_sexe','lee_bmi','lee_diabete','lee_cancer','lee_bpco','lee_ic','lee_tabac','lee_marche','lee_objets','lee_argent','lee_toilette'];
+      const score = keys.reduce((acc, k) => acc + (parseInt(v[k], 10) || 0), 0);
+      let interp = '', cls = '';
+      if (score <= 5) {
+        interp = 'Risque faible de mortalité à 4 ans (< 10%). Espérance de vie compatible avec les stratégies de dépistage et de prévention primaire/secondaire.';
+        cls = 'good';
+      } else if (score <= 9) {
+        interp = 'Risque intermédiaire de mortalité à 4 ans (~15 à 30%). Adapter les cibles thérapeutiques au profil fonctionnel et aux souhaits du patient.';
+        cls = 'warn';
+      } else if (score <= 13) {
+        interp = 'Risque élevé de mortalité à 4 ans (~40 à 60%). Réévaluer la balance bénéfice/risque des traitements préventifs lourds (déprescription ciblée).';
+        cls = 'danger';
+      } else {
+        interp = "Risque très élevé de mortalité à 4 ans (> 65-80%). Privilégier le confort, le maintien de l'autonomie restante et la limitation des iatrogénies inutiles.";
+        cls = 'danger';
+      }
+      return { score: score + ' points', interp, cls };
+    },
+    seuils: '0-5 pts : Faible (<10%) · 6-9 pts : Intermédiaire (15-30%) · 10-13 pts : Élevé (40-60%) · ≥14 pts : Très élevé (>65%)'
+  },
 ];
 
 
@@ -2831,6 +2875,7 @@ Date de l\'évaluation : ${new Date().toLocaleDateString('fr-FR')}
 //  À QUOI SERT CHAQUE SCORE (explication courte affichée dans le détail)
 // ─────────────────────────────────────────────────────────────────────────────
 const SCORE_UTILITE = {
+  lee_index: 'Estimer la mortalité à 4 ans chez la personne âgée à domicile pour guider les décisions de déprescription et la pertinence des dépistages.',
   egs: 'Bilan global du patient âgé fragile : autonomie, cognition, mobilité, nutrition et sensoriel — base de la prise en charge gériatrique.',
   mms: 'Dépister et suivre un trouble cognitif global (orientation, mémoire, langage, praxies). Ne pose pas seul le diagnostic de démence.',
   moca: 'Dépister un trouble cognitif léger (MCI) plus sensible que le MMS, surtout fonctions exécutives et attention.',

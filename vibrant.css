@@ -824,7 +824,8 @@ button { -webkit-tap-highlight-color: transparent; }
 @keyframes panUp { from { opacity: 0; transform: translateY(70px) rotateX(9deg); } to { opacity: 1; transform: none; } }
 
 /* ── Toast : rebond ── */
-.toast { animation: toastPop .4s cubic-bezier(.34, 1.56, .64, 1) both; }
+.toast:not(.show), .toast:empty { display: none !important; opacity: 0 !important; }
+.toast.show { animation: toastPop .4s cubic-bezier(.34, 1.56, .64, 1) both; }
 @keyframes toastPop { from { opacity: 0; transform: translate(-50%, 16px) scale(.8); } to { opacity: 1; transform: translate(-50%, 0) scale(1); } }
 
 /* ── Logo top-bar : petit battement ── */
