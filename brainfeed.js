@@ -1047,9 +1047,8 @@ const BrainFeed = (() => {
       return dayPick(dedupeDeck([...cases, ...traps]), 32, 'session-cas');
     }
     if (activeSession === 'visual') {
-      const diagrams = pools.visualExplanations.filter(card => card.diagram);
-      const media = pools.visualExplanations.filter(card => !card.diagram);
-      return dayPick(dedupeDeck([...media, ...diagrams]), 28, 'session-visual');
+      const videoCards = pools.visualExplanations.filter(card => card.isVideo || /\.mp4($|\?)/i.test(card.media || card.video || ''));
+      return videoCards.length > 0 ? videoCards : pools.visualExplanations.slice(0, 20);
     }
     return mixed;
   }
@@ -1100,7 +1099,7 @@ const BrainFeed = (() => {
     if (feed) feed.scrollTop = 0;
     updateSessionChrome();
     renderSlides();
-    showToast({ mix: '✨ Pour toi', visual: '🎬 Reels 9:16', cas: '🩺 Cas & Pièges' }[activeSession] || '✨ Pour toi');
+    // Session toast removed so buttons are not covered
   }
 
   function getChapterName(chId) {

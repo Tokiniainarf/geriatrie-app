@@ -1885,3 +1885,100 @@ body:has(#vFeed.bf-session-reels.active) .app-nav {
   background: rgba(255, 255, 255, 0.12) !important;
   color: #ffffff !important;
 }
+
+
+/* ===============================================================
+   HIGH CONTRAST FIX FOR ANSWER TEXT IN POUR TOI
+   =============================================================== */
+#vFeed .bf-answer-body,
+#vFeed .bf-rich-answer,
+#vFeed .bf-answer-body p,
+#vFeed .bf-answer-body li,
+#vFeed .bf-answer-paragraph {
+  color: var(--text, #16264A) !important;
+  font-weight: 500 !important;
+}
+
+[data-theme="dark"] #vFeed .bf-answer-body,
+[data-theme="dark"] #vFeed .bf-rich-answer,
+[data-theme="dark"] #vFeed .bf-answer-body p,
+[data-theme="dark"] #vFeed .bf-answer-body li,
+[data-theme="dark"] #vFeed .bf-answer-paragraph {
+  color: #f8fafc !important;
+}
+
+/* ===============================================================
+   SPOTIFY MINI-PLAYER FIXED AT BOTTOM ABOVE APP-NAV
+   =============================================================== */
+.pod-spotify-mini-player {
+  position: fixed !important;
+  bottom: var(--bottom, 64px) !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100vw !important;
+  z-index: 1050 !important;
+  display: none;
+  background: rgba(18, 18, 18, 0.98) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Hide mini player when in fullscreen Reels */
+body:has(#vFeed.bf-session-reels.active) .pod-spotify-mini-player {
+  display: none !important;
+}
+
+
+/* ===============================================================
+   FINAL UX POLISH: CONTRAST, TOAST SUPPRESSION & MINIPLAYER VISIBILITY
+   =============================================================== */
+#vFeed .bf-toast {
+  display: none !important;
+}
+
+#vFeed .bf-answer-body,
+#vFeed .bf-rich-answer,
+#vFeed .bf-card-main,
+#vFeed .bf-card-main.scrollable,
+#vFeed .bf-answer-body p,
+#vFeed .bf-answer-body li,
+#vFeed .bf-answer-paragraph {
+  color: var(--text, #16264A) !important;
+  font-weight: 500 !important;
+}
+
+[data-theme="dark"] #vFeed .bf-answer-body,
+[data-theme="dark"] #vFeed .bf-rich-answer,
+[data-theme="dark"] #vFeed .bf-card-main,
+[data-theme="dark"] #vFeed .bf-card-main.scrollable,
+[data-theme="dark"] #vFeed .bf-answer-body p,
+[data-theme="dark"] #vFeed .bf-answer-body li,
+[data-theme="dark"] #vFeed .bf-answer-paragraph {
+  color: #f8fafc !important;
+}
+
+.pod-spotify-list {
+  padding-bottom: 160px !important;
+}
+
+.pod-spotify-mini-player {
+  position: fixed !important;
+  bottom: var(--bottom, 64px) !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100vw !important;
+  z-index: 1050 !important;
+  background: rgba(18, 18, 18, 0.98) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.5) !important;
+  display: none;
+}
+
+body:has(#vPodcasts.active) .pod-spotify-mini-player,
+.pod-spotify-mini-player.is-playing-now {
+  display: block !important;
+}
+
+body:has(#vFeed.bf-session-reels.active) .pod-spotify-mini-player {
+  display: none !important;
+}

@@ -174,6 +174,7 @@ const Podcasts = (function() {
     updatePlayerUI();
     renderList();
     if (autoPlay) {
+      document.getElementById('podcastPlayerCard')?.classList.add('is-playing-now');
       startPlay();
     }
   }
@@ -231,6 +232,14 @@ const Podcasts = (function() {
     audioElement.currentTime = (pct / 100) * audioElement.duration;
   }
 
+  function seekTrack(e, track) {
+    if (!audioElement || !audioElement.duration || !track) return;
+    const rect = track.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const pct = Math.max(0, Math.min(1, clickX / rect.width));
+    audioElement.currentTime = pct * audioElement.duration;
+  }
+
   function setSpeed(spd, btn) {
     playbackSpeed = parseFloat(spd) || 1.0;
     document.querySelectorAll('.pod-speed-btn').forEach(b => b.classList.remove('active'));
@@ -244,10 +253,12 @@ const Podcasts = (function() {
     if (!currentPodcast) return;
     const titleEl = document.getElementById('podPlayerTitle');
     const subEl = document.getElementById('podPlayerSub');
+    const coverIcon = document.getElementById('podPlayerIcon');
     const badgeEl = document.getElementById('podPlayerBadge');
 
     if (titleEl) titleEl.textContent = currentPodcast.title;
-    if (subEl) subEl.textContent = `${currentPodcast.categoryLabel} · ${currentPodcast.chapterTitle}`;
+    if (subEl) subEl.textContent = `${currentPodcast.categoryLabel || 'Masterclass'} · ${currentPodcast.chapterTitle || ''}`;
+    if (coverIcon) coverIcon.textContent = currentPodcast.chapter ? currentPodcast.chapter.toUpperCase() : '🎙️';
     if (badgeEl) badgeEl.textContent = 'MASTERCLASS NOTEBOOKLM';
     updateDuration();
   }
@@ -264,18 +275,27 @@ const Podcasts = (function() {
   function updatePlayButtons() {
     const mainBtn = document.getElementById('podMainPlayBtn');
     if (mainBtn) {
-      mainBtn.textContent = isPlaying ? '⏸ Mettre en pause' : '▶ Lancer l\'écoute';
-      mainBtn.classList.toggle('is-playing', isPlaying);
+      const icon = mainBtn.querySelector('.pod-play-icon') || mainBtn;
+      icon.textContent = isPlaying ? '⏸' : '▶';
+      mainBtn.classList.toggle('playing', isPlaying);
+      mainBtn.title = isPlaying ? 'Mettre en pause' : 'Écouter';
     }
     renderList();
   }
 
   function updateProgress() {
     if (!audioElement) return;
-    const curTimeEl = document.getElementById('podCurrentTime');
-    const slider = document.getElementById('podProgress');
     const curSec = audioElement.currentTime || 0;
     const dur = audioElement.duration || 0;
+    const pct = dur > 0 ? (curSec / dur) * 100 : 0;
+
+    const miniFill = document.getElementById('podProgressMiniFill');
+    if (miniFill) {
+      miniFill.style.width = pct + '%';
+    }
+
+    const curTimeEl = document.getElementById('podCurrentTime');
+    const slider = document.getElementById('podProgress');
 
     if (curTimeEl) {
       const m = Math.floor(curSec / 60);
@@ -283,7 +303,7 @@ const Podcasts = (function() {
       curTimeEl.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
     }
     if (slider && dur > 0) {
-      slider.value = (curSec / dur) * 100;
+      slider.value = pct;
     }
   }
 
