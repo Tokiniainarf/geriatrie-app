@@ -13,6 +13,7 @@ const Podcasts = (function() {
 
   function init() {
     initAudioElement();
+    setupSwipeGestures();
     if (typeof PODCASTS_DATA !== 'undefined' && PODCASTS_DATA.length > 0) {
       if (!currentPodcast) {
         selectPodcast(PODCASTS_DATA[0].id, false);
@@ -50,6 +51,7 @@ const Podcasts = (function() {
       audioElement.addEventListener('ended', () => {
         isPlaying = false;
         updatePlayButtons();
+        nextPodcast();
       });
 
       audioElement.addEventListener('error', (e) => {
@@ -318,6 +320,50 @@ const Podcasts = (function() {
     }
   }
 
+  function nextPodcast() {
+    if (!PODCASTS_DATA || !PODCASTS_DATA.length) return;
+    let idx = PODCASTS_DATA.findIndex(p => p.id === currentPodcast?.id);
+    if (idx === -1) idx = 0;
+    const nextIdx = (idx + 1) % PODCASTS_DATA.length;
+    animateTrackChange('left');
+    selectPodcast(PODCASTS_DATA[nextIdx].id, true);
+    updateFullPlayerUI();
+  }
+
+  function prevPodcast() {
+    if (!PODCASTS_DATA || !PODCASTS_DATA.length) return;
+    if (audioElement && audioElement.currentTime > 3) {
+      audioElement.currentTime = 0;
+      updateFullPlayerTimes();
+      return;
+    }
+    let idx = PODCASTS_DATA.findIndex(p => p.id === currentPodcast?.id);
+    if (idx === -1) idx = 0;
+    const prevIdx = (idx - 1 + PODCASTS_DATA.length) % PODCASTS_DATA.length;
+    animateTrackChange('right');
+    selectPodcast(PODCASTS_DATA[prevIdx].id, true);
+    updateFullPlayerUI();
+  }
+
+  function animateTrackChange(direction) {
+    const artwork = document.getElementById('podFullArtwork');
+    if (!artwork) return;
+    artwork.classList.add(direction === 'left' ? 'swipe-left' : 'swipe-right');
+    setTimeout(() => {
+      artwork.classList.remove('swipe-left', 'swipe-right');
+    }, 240);
+  }
+
+  function openRelatedChapter(chId) {
+    if (!chId) return;
+    closeFullPlayer();
+    if (typeof showCh === 'function') {
+      showCh(chId);
+    } else if (typeof sw === 'function') {
+      sw('ch');
+    }
+  }
+
   function updateFullPlayerUI() {
     if (!currentPodcast) return;
     const title = document.getElementById('podFullTitle');
@@ -346,12 +392,25 @@ const Podcasts = (function() {
     }
 
     if (notesBody) {
+      const ch = currentPodcast.chapter || '';
+      const chTitle = currentPodcast.chapterTitle || 'Gériatrie EVC';
       notesBody.innerHTML = `
-        <p class="pod-full-summary-text">${esc(currentPodcast.summary)}</p>
+        <div class="pod-study-quick-nav">
+          <button type="button" class="pod-study-ch-btn" onclick="Podcasts.openRelatedChapter('${ch}')">
+            📖 Ouvrir le cours : ${esc(chTitle)}
+          </button>
+        </div>
+        <div class="pod-study-section">
+          <h4 class="pod-study-sec-title">🎯 Résumé &amp; Cœur de Révision</h4>
+          <p class="pod-full-summary-text">${esc(currentPodcast.summary)}</p>
+        </div>
         ${currentPodcast.keyPoints && currentPodcast.keyPoints.length ? `
-          <ul class="pod-full-keypoints-list">
-            ${currentPodcast.keyPoints.map(kp => `<li>${esc(kp)}</li>`).join('')}
-          </ul>
+          <div class="pod-study-section">
+            <h4 class="pod-study-sec-title">💡 Points clés EVC &amp; Recommandations CNEG</h4>
+            <ul class="pod-full-keypoints-list">
+              ${currentPodcast.keyPoints.map(kp => `<li>${esc(kp)}</li>`).join('')}
+            </ul>
+          </div>
         ` : ''}
         <div class="pod-full-tags-wrap">
           ${(currentPodcast.tags || []).map(t => `<span class="pod-full-tag">${esc(t)}</span>`).join('')}
@@ -490,6 +549,38 @@ const Podcasts = (function() {
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchDeltaX = 0;
+
+  function setupSwipeGestures() {
+    if (typeof document === 'undefined') return;
+    const player = document.getElementById('podcastFullPlayer');
+    if (!player) return;
+    player.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      touchDeltaX = 0;
+    }, { passive: true });
+
+    player.addEventListener('touchmove', (e) => {
+      touchDeltaX = e.touches[0].clientX - touchStartX;
+    }, { passive: true });
+
+    player.addEventListener('touchend', (e) => {
+      const touchDeltaY = e.changedTouches[0].clientY - touchStartY;
+      if (Math.abs(touchDeltaX) > 50 && Math.abs(touchDeltaX) > Math.abs(touchDeltaY) * 1.3) {
+        if (touchDeltaX < -50) {
+          nextPodcast();
+        } else if (touchDeltaX > 50) {
+          prevPodcast();
+        }
+      } else if (touchDeltaY > 80 && Math.abs(touchDeltaX) < 50) {
+        closeFullPlayer();
+      }
+    }, { passive: true });
+  }
+
   return {
     init,
     setCategory,
@@ -499,6 +590,9 @@ const Podcasts = (function() {
     togglePlay,
     openFullPlayer,
     closeFullPlayer,
+    nextPodcast,
+    prevPodcast,
+    openRelatedChapter,
     toggleFav,
     closeMiniPlayer,
     replay,

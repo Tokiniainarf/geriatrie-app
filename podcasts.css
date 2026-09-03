@@ -1519,6 +1519,54 @@ body:has(#vFeed.bf-session-reels.active) .app-nav {
   z-index: 40 !important;
 }
 
+/* Sub-category filter chips in "Pour toi" */
+#bfSubFilterBar {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  padding: 4px 14px 6px !important;
+  position: absolute !important;
+  top: 96px !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 20 !important;
+  scrollbar-width: none !important;
+}
+#bfSubFilterBar::-webkit-scrollbar { display: none !important; }
+#vFeed.bf-session-reels #bfSubFilterBar { display: none !important; }
+
+.bf-sub-chip {
+  padding: 5px 12px !important;
+  border-radius: 999px !important;
+  border: 1px solid var(--border, #cbd5e1) !important;
+  background: var(--bg-card, #ffffff) !important;
+  color: var(--text, #334155) !important;
+  font-size: 0.74rem !important;
+  font-weight: 700 !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+  transition: all 0.15s ease !important;
+}
+.bf-sub-chip.active {
+  background: #0284c7 !important;
+  color: #ffffff !important;
+  border-color: #0284c7 !important;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35) !important;
+}
+[data-theme="dark"] .bf-sub-chip {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+  color: #f1f5f9 !important;
+}
+[data-theme="dark"] .bf-sub-chip.active {
+  background: #38bdf8 !important;
+  color: #0b1329 !important;
+  border-color: #38bdf8 !important;
+}
+
 /* ===============================================================
    « POUR TOI » & « CAS & PIÈGES » UX AVEC ANTI-CHEVAUCHEMENT TABS
    =============================================================== */
@@ -1555,7 +1603,7 @@ body:has(#vFeed.bf-session-reels.active) .app-nav {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  padding: 122px 14px 74px !important;
+  padding: 138px 14px 74px !important;
   box-sizing: border-box !important;
   height: 100% !important;
   min-height: 100% !important;
@@ -3029,5 +3077,66 @@ body:has(#vFeed.bf-session-reels.active) .pod-spotify-mini-player,
   background: rgba(16, 185, 129, 0.2) !important;
   color: #34d399 !important;
   border: 1px solid rgba(16, 185, 129, 0.3) !important;
+}
+
+/* Spotify Prev / Next Buttons */
+.pod-full-prev, .pod-full-next {
+  color: #ffffff !important;
+  opacity: 0.9 !important;
+  padding: 10px !important;
+}
+.pod-full-prev:hover, .pod-full-next:hover {
+  opacity: 1 !important;
+  transform: scale(1.08) !important;
+}
+
+/* Artwork Swipe Animation */
+.pod-full-artwork {
+  transition: transform 0.22s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.22s ease !important;
+}
+.pod-full-artwork.swipe-left {
+  transform: scale(0.92) translateX(-35px) !important;
+  opacity: 0.5 !important;
+}
+.pod-full-artwork.swipe-right {
+  transform: scale(0.92) translateX(35px) !important;
+  opacity: 0.5 !important;
+}
+
+/* Revision Helper Buttons & Sections */
+.pod-study-quick-nav {
+  margin-bottom: 14px !important;
+}
+.pod-study-ch-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  width: 100% !important;
+  padding: 11px 16px !important;
+  background: #1ed760 !important;
+  color: #030712 !important;
+  font-weight: 800 !important;
+  font-size: 0.85rem !important;
+  border: none !important;
+  border-radius: 12px !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 14px rgba(30, 215, 96, 0.35) !important;
+  transition: transform 0.15s ease, background 0.15s ease !important;
+}
+.pod-study-ch-btn:active {
+  transform: scale(0.97) !important;
+  background: #17b850 !important;
+}
+.pod-study-sec-title {
+  font-size: 0.76rem !important;
+  font-weight: 800 !important;
+  color: #5eead4 !important;
+  margin: 0 0 6px 0 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+.pod-study-section {
+  margin-bottom: 12px !important;
 }
 

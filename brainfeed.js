@@ -1053,15 +1053,47 @@ const BrainFeed = (() => {
     return mixed;
   }
 
+  let activeSubFilter = 'all';
+
+  function filterSubCategory(subType, btn) {
+    activeSubFilter = subType || 'all';
+    document.querySelectorAll('#bfSubFilterBar .bf-sub-chip').forEach(b => {
+      b.classList.toggle('active', b.dataset.filter === activeSubFilter);
+    });
+    const pools = buildSpecialPools();
+    if (activeSubFilter === 'all') {
+      deck = buildDailyDeck(pools);
+    } else if (activeSubFilter === 'flash') {
+      deck = dayPick(dedupeDeck(pools.flashRecall), 30, 'sub-flash');
+    } else if (activeSubFilter === 'piege_exam') {
+      deck = dayPick(dedupeDeck(pools.piegeExam), 30, 'sub-pieges');
+    } else if (activeSubFilter === 'quiz_flash') {
+      deck = dayPick(dedupeDeck(pools.quizFlash), 30, 'sub-quiz');
+    } else if (activeSubFilter === 'cas_choc') {
+      const cases = dedupeDeck(pools.casChoc.filter(isHighYieldFeedCase));
+      deck = dayPick(cases, 30, 'sub-cas');
+    }
+    idx = 0;
+    combo = 0;
+    quizCombo = 0;
+    completedCardIds = new Set();
+    const feed = document.getElementById('bfFeed');
+    if (feed) feed.scrollTop = 0;
+    renderSlides();
+    updateProgress();
+  }
+
   function updateSessionChrome() {
     const vFeed = document.getElementById('vFeed');
     if (vFeed) {
       vFeed.classList.toggle('bf-session-reels', activeSession === 'visual');
     }
+    const subBar = document.getElementById('bfSubFilterBar');
+    if (subBar) {
+      subBar.style.display = (activeSession === 'visual') ? 'none' : 'flex';
+    }
     const labels = {
-      mix: '✨ Pour toi · Les essentiels du jour, flashcards & quiz',
-      pieges: '⚠️ Pièges · Pièges diagnostiques & erreurs fréquentes EVC',
-      cas: '🩺 Cas Cliniques · Dossiers cliniques courts & raisonnement CROQ',
+      mix: '✨ Pour toi · Les essentiels du jour & révision ciblée',
       visual: '🎬 Reels 9:16 · Vidéos immersives plein écran'
     };
     let activeTab = null;
@@ -1084,8 +1116,12 @@ const BrainFeed = (() => {
 
   function selectSession(session) {
     if (session === 'flash') session = 'mix';
-    if (!['mix', 'pieges', 'cas', 'visual'].includes(session)) session = 'mix';
+    if (!['mix', 'visual'].includes(session)) session = 'mix';
     activeSession = session;
+    activeSubFilter = 'all';
+    document.querySelectorAll('#bfSubFilterBar .bf-sub-chip').forEach(b => {
+      b.classList.toggle('active', b.dataset.filter === 'all');
+    });
     try { localStorage.setItem('bf_session', activeSession); } catch (_) {}
     if (observer) observer.disconnect();
     activeTimers.forEach(t => clearTimeout(t));
@@ -1099,7 +1135,6 @@ const BrainFeed = (() => {
     if (feed) feed.scrollTop = 0;
     updateSessionChrome();
     renderSlides();
-    // Session toast removed so buttons are not covered
   }
 
   function getChapterName(chId) {
@@ -2604,6 +2639,7 @@ const BrainFeed = (() => {
     shareCard,
     renderSlides,
     selectSession,
+    filterSubCategory,
     toggleSound,
     toggleReelPlay,
     onReelPlay,
