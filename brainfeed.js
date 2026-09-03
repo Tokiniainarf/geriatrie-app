@@ -1360,26 +1360,10 @@ const BrainFeed = (() => {
                 <div class="bf-media-fallback" hidden aria-hidden="true">Média indisponible</div>
               </div>
 
-              <!-- Floating Close Button for pure Reel immersion -->
+                <!-- Floating Close Button for pure Reel immersion -->
                 <button type="button" class="bf-reel-exit-btn" onclick="sw('home')" title="Quitter le mode Reels" aria-label="Quitter le mode Reels">
                   <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                 </button>
-
-              <!-- Frosted Clinical Takeaway Overlay (Pure & Épuré) -->
-              <div class="bf-visual-caption bf-reel-caption">
-                <div class="bf-reel-kicker-row">
-                  <span class="bf-reel-badge">🎬 REEL ${card.chapter ? card.chapter.toUpperCase() : 'EVC'}</span>
-                  <span class="bf-reel-chap-tag">RÉFÉRENTIEL COLLÈGE</span>
-                </div>
-                <h3 class="bf-reel-title">${esc(card.title || card.question)}</h3>
-                ${(card.title && card.question && card.title !== card.question) ? `<p class="bf-reel-summary">${esc(card.question)}</p>` : ''}
-                
-                ${card.answer ? `
-                  <div class="bf-reel-memo-drawer" id="reel-memo-${slideIdx}">
-                    <p class="bf-reel-memo-text">💡 <strong>Message clé :</strong> ${esc(card.answer)}</p>
-                  </div>
-                ` : ''}
-              </div>
 
             </div>
           </div>
@@ -1449,19 +1433,7 @@ const BrainFeed = (() => {
       slide.innerHTML = renderClassicCard(card, slideIdx);
     }
 
-    const socialTypes = {
-      flash: ['🧠', 'Rappel essentiel'], synthesis: ['📚', 'Synthèse'], case: ['🩺', 'Cas clinique'], reco: ['✅', 'Référence'],
-      memo_jour: ['🧩', 'Mémo'], cas_choc: ['🚑', 'Cas / CROQ'], quiz_flash: ['⚡', 'Quiz flash'],
-      chiffre_cle: ['📊', 'Chiffre clé'], citation: ['💬', 'Repère'], piege_exam: ['⚠️', 'Piège EVC'], visual: ['🎬', 'Visuel éducatif']
-    };
-    const [avatar, typeName] = socialTypes[card.type] || ['✨', 'Pulse'];
-    const chapter = getChapterName(card.chapter);
-    slide.querySelectorAll('.bf-horiz-page').forEach((page, pageIndex) => {
-      const author = document.createElement('div');
-      author.className = 'bf-social-author';
-      author.innerHTML = `<span class="bf-social-avatar" aria-hidden="true">${avatar}</span><span class="bf-social-copy"><strong>Pulse Gériatrie</strong><small>${esc(typeName)}${chapter ? ` · ${esc(chapter)}` : ''}</small></span><span class="bf-social-position">${slideIdx + 1}<small>/${deck.length}</small>${pageIndex ? '<i>réponse</i>' : ''}</span>`;
-      page.appendChild(author);
-    });
+        // Social author bar removed for clean, focused card UX
     slide.dataset.tier = card.feedTier || (activeSession === 'mix' && slideIdx < DAILY_GOAL ? 'essential' : 'session');
 
     bindSlideInteractions(slide, card, slideIdx);
@@ -1589,7 +1561,11 @@ const BrainFeed = (() => {
             <main class="bf-card-main scrollable">
               ${formatRichAnswer(card)}
             </main>
-            <footer class="bf-card-ftr">
+            <footer class="bf-card-ftr bf-answer-footer">
+              <div class="bf-eval-buttons-inline">
+                <button type="button" class="bf-eval-btn bf-eval-fail" onclick="BrainFeed.actionDontKnow()" aria-label="À revoir">✕ À revoir</button>
+                <button type="button" class="bf-eval-btn bf-eval-pass" onclick="BrainFeed.actionKnow()" aria-label="Acquis">✓ Acquis</button>
+              </div>
               <div class="bf-card-tags">${tagsHtml}</div>
               <span class="bf-swipe-left-hint">← Revoir la question</span>
             </footer>
@@ -1628,7 +1604,11 @@ const BrainFeed = (() => {
             <main class="bf-card-main scrollable">
               ${formatRichAnswer(card)}
             </main>
-            <footer class="bf-card-ftr">
+            <footer class="bf-card-ftr bf-answer-footer">
+              <div class="bf-eval-buttons-inline">
+                <button type="button" class="bf-eval-btn bf-eval-fail" onclick="BrainFeed.actionDontKnow()" aria-label="À revoir">✕ À revoir</button>
+                <button type="button" class="bf-eval-btn bf-eval-pass" onclick="BrainFeed.actionKnow()" aria-label="Acquis">✓ Acquis</button>
+              </div>
               <span class="bf-swipe-left-hint">← Revoir l'énoncé</span>
             </footer>
           </article>
@@ -1673,7 +1653,11 @@ const BrainFeed = (() => {
               <div class="bf-croq-answer-prompt"><span>Question</span><p>${esc(card.prompt || '')}</p></div>
               ${formatRichAnswer(card)}
             </main>
-            <footer class="bf-card-ftr">
+            <footer class="bf-card-ftr bf-answer-footer">
+              <div class="bf-eval-buttons-inline">
+                <button type="button" class="bf-eval-btn bf-eval-fail" onclick="BrainFeed.actionDontKnow()" aria-label="À revoir">✕ À revoir</button>
+                <button type="button" class="bf-eval-btn bf-eval-pass" onclick="BrainFeed.actionKnow()" aria-label="Acquis">✓ Acquis</button>
+              </div>
               <span class="bf-swipe-left-hint">⬅ Revoir le cas</span>
             </footer>
           </article>
@@ -1845,7 +1829,11 @@ const BrainFeed = (() => {
               ${card.video ? `<div class="bf-media-container"><video src="${card.video}" controls muted playsinline></video></div>` : ''}
               ${!card.video && card.image ? `<div class="bf-media-container"><img src="${card.image}" alt=""></div>` : ''}
             </main>
-            <footer class="bf-card-ftr">
+            <footer class="bf-card-ftr bf-answer-footer">
+              <div class="bf-eval-buttons-inline">
+                <button type="button" class="bf-eval-btn bf-eval-fail" onclick="BrainFeed.actionDontKnow()" aria-label="À revoir">✕ À revoir</button>
+                <button type="button" class="bf-eval-btn bf-eval-pass" onclick="BrainFeed.actionKnow()" aria-label="Acquis">✓ Acquis</button>
+              </div>
               <span class="bf-swipe-left-hint">⬅ Revoir le piège</span>
             </footer>
           </article>

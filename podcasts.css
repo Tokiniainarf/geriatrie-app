@@ -1351,3 +1351,537 @@
 [data-theme="dark"] .pod-keypoints-list {
   color: #cbd5e1 !important;
 }
+
+
+/* ===============================================================
+   TIKTOK 9:16 FULLSCREEN REELS IMMERSION (PURE EDGE-TO-EDGE)
+   =============================================================== */
+#vFeed.bf-session-reels {
+  position: fixed !important;
+  inset: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100dvh !important;
+  max-height: none !important;
+  z-index: 2500 !important;
+  background: #000000 !important;
+  overflow: hidden !important;
+}
+
+/* Hide app bottom navigation bar during Reels for true TikTok experience */
+body:has(#vFeed.bf-session-reels.active) .bottom-nav,
+body:has(#vFeed.bf-session-reels.active) .app-nav {
+  display: none !important;
+}
+
+#vFeed.bf-session-reels .bf-header,
+#vFeed.bf-session-reels .bf-progress-track,
+#vFeed.bf-session-reels .bf-actions,
+#vFeed.bf-session-reels .bf-visual-caption,
+#vFeed.bf-session-reels .bf-reel-caption {
+  display: none !important;
+}
+
+#vFeed.bf-session-reels .bf-feed,
+#vFeed.bf-session-reels .bf-slide,
+#vFeed.bf-session-reels .bf-vertical-reel-container,
+#vFeed.bf-session-reels .bf-reel-single-page,
+#vFeed.bf-session-reels .bf-visual-stack,
+#vFeed.bf-session-reels .bf-reel-fullstack,
+#vFeed.bf-session-reels .bf-media-container,
+#vFeed.bf-session-reels .bf-reel-media {
+  width: 100vw !important;
+  height: 100dvh !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  background: #000000 !important;
+  position: absolute !important;
+  inset: 0 !important;
+  overflow: hidden !important;
+}
+
+#vFeed.bf-session-reels video.bf-reel-video,
+#vFeed.bf-session-reels .bf-visual-media {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: cover !important;
+  border-radius: 0 !important;
+  position: absolute !important;
+  inset: 0 !important;
+}
+
+/* Vertical action controls on right for Reels */
+#vFeed.bf-session-reels .bf-reel-actions-column {
+  position: absolute !important;
+  right: 14px !important;
+  bottom: 50px !important;
+  z-index: 35 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+  align-items: center !important;
+}
+
+#vFeed.bf-session-reels .bf-reel-scrubber-track {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 4px !important;
+  z-index: 40 !important;
+}
+
+/* ===============================================================
+   « POUR TOI » CENTERED, MODERN FLASHCARD UX
+   =============================================================== */
+#vFeed:not(.bf-session-reels) .bf-feed {
+  background: var(--bg-deep, #F3F7FE) !important;
+}
+
+[data-theme="dark"] #vFeed:not(.bf-session-reels) .bf-feed {
+  background: #0B132B !important;
+}
+
+#vFeed:not(.bf-session-reels) .bf-slide {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 10px !important;
+  box-sizing: border-box !important;
+}
+
+#vFeed:not(.bf-session-reels) .bf-horiz-page {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 10px 14px !important;
+  box-sizing: border-box !important;
+}
+
+#vFeed:not(.bf-session-reels) .bf-card-shell {
+  width: min(94vw, 480px) !important;
+  max-width: 480px !important;
+  margin: 0 auto !important;
+  padding: 22px 20px 22px !important;
+  border-radius: 20px !important;
+  background: var(--bg-card, #ffffff) !important;
+  border: 1px solid var(--glass-border, #E2EAF9) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  min-height: min(72vh, 520px) !important;
+  box-sizing: border-box !important;
+}
+
+[data-theme="dark"] #vFeed:not(.bf-session-reels) .bf-card-shell {
+  background: rgba(21, 32, 56, 0.92) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45) !important;
+}
+
+#vFeed .bf-bg-emoji {
+  display: none !important;
+}
+
+#vFeed .bf-social-author {
+  display: none !important;
+}
+
+#vFeed:not(.bf-session-reels) .bf-actions {
+  display: none !important;
+}
+
+#vFeed:not(.bf-session-reels) .bf-question-text {
+  font-size: clamp(1.15rem, 4.5vw, 1.35rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.42 !important;
+  color: var(--text, #16264A) !important;
+  text-align: left !important;
+  margin: 16px 0 !important;
+}
+
+#vFeed .bf-action-reveal {
+  width: 100% !important;
+  padding: 14px 20px !important;
+  font-size: 0.98rem !important;
+  font-weight: 750 !important;
+  border-radius: 14px !important;
+  background: linear-gradient(135deg, #0d9488, #0284c7) !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 4px 16px rgba(13, 148, 136, 0.35) !important;
+  cursor: pointer !important;
+  transition: transform 0.12s ease !important;
+}
+
+#vFeed .bf-action-reveal:active {
+  transform: scale(0.98) !important;
+}
+
+/* Inline Evaluation Buttons on Answer Page */
+.bf-eval-buttons-inline {
+  display: flex !important;
+  gap: 12px !important;
+  width: 100% !important;
+  margin: 14px 0 8px 0 !important;
+}
+
+.bf-eval-btn {
+  flex: 1 !important;
+  padding: 12px 14px !important;
+  border-radius: 12px !important;
+  font-size: 0.92rem !important;
+  font-weight: 750 !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: transform 0.12s ease !important;
+}
+
+.bf-eval-btn:active {
+  transform: scale(0.96) !important;
+}
+
+.bf-eval-fail {
+  background: rgba(244, 63, 94, 0.12) !important;
+  color: #e11d48 !important;
+  border: 1.5px solid rgba(244, 63, 94, 0.35) !important;
+}
+
+.bf-eval-pass {
+  background: linear-gradient(135deg, #10b981, #059669) !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35) !important;
+}
+
+/* ===============================================================
+   SPOTIFY-STYLE PODCASTS REDESIGN
+   =============================================================== */
+.pod-spotify-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 110px;
+}
+
+.pod-spotify-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--glass-border, #E2EAF9);
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.12s ease;
+  cursor: pointer;
+  position: relative;
+  box-shadow: var(--shadow-card, 0 4px 16px rgba(0, 0, 0, 0.04));
+}
+
+.pod-spotify-item:hover {
+  background: var(--bg-card-hover, #f8fafc);
+  border-color: #1ed760;
+  transform: translateY(-1px);
+}
+
+.pod-spotify-item.is-playing-item {
+  border-color: #1ed760 !important;
+  background: rgba(30, 215, 96, 0.08) !important;
+  box-shadow: 0 4px 20px rgba(30, 215, 96, 0.16) !important;
+}
+
+/* Spotify Album Cover */
+.pod-spotify-cover {
+  width: 52px;
+  height: 52px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  color: #2dd4bf;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  font-weight: 800;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.pod-spotify-ch-badge {
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 0.68rem;
+}
+
+.pod-spotify-play-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.pod-spotify-item:hover .pod-spotify-play-overlay,
+.pod-spotify-item.is-playing-item .pod-spotify-play-overlay {
+  opacity: 1;
+}
+
+.pod-spotify-play-icon {
+  color: #1ed760;
+  font-size: 1.1rem;
+}
+
+/* Sound wave equalizer animation */
+.pod-equalizer-bars {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+}
+
+.pod-equalizer-bars span {
+  width: 3px;
+  background: #1ed760;
+  border-radius: 2px;
+  animation: eqBounce 0.8s ease-in-out infinite alternate;
+}
+
+.pod-equalizer-bars span:nth-child(1) { height: 6px; animation-delay: 0.1s; }
+.pod-equalizer-bars span:nth-child(2) { height: 12px; animation-delay: 0.3s; }
+.pod-equalizer-bars span:nth-child(3) { height: 8px; animation-delay: 0.2s; }
+
+@keyframes eqBounce {
+  from { height: 4px; }
+  to { height: 12px; }
+}
+
+.pod-spotify-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.pod-spotify-title {
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: var(--text, #16264A);
+  margin: 0 0 4px 0;
+  line-height: 1.35;
+}
+
+.is-playing-item .pod-spotify-title {
+  color: #1ed760 !important;
+}
+
+.pod-spotify-subtitle-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  font-size: 0.76rem;
+  color: var(--text3, #71809E);
+  margin-bottom: 6px;
+}
+
+.pod-spotify-cat-pill {
+  padding: 1px 7px;
+  border-radius: 8px;
+  background: var(--accent-soft, rgba(37, 99, 235, 0.08));
+  color: var(--accent, #2563EB);
+  font-weight: 600;
+  font-size: 0.68rem;
+}
+
+.pod-spotify-dot {
+  opacity: 0.5;
+}
+
+.pod-spotify-action {
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.pod-spotify-circle-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: var(--bg-deep, #e2e8f0);
+  color: var(--text, #16264A);
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.12s ease, background 0.15s ease;
+}
+
+.pod-spotify-circle-btn:active {
+  transform: scale(0.9);
+}
+
+.pod-spotify-circle-btn.playing {
+  background: #1ed760 !important;
+  color: #000000 !important;
+  box-shadow: 0 2px 10px rgba(30, 215, 96, 0.45) !important;
+}
+
+/* Spotify Docked Bottom Mini-Player */
+.pod-spotify-mini-player {
+  position: fixed !important;
+  bottom: var(--bottom, 72px) !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1050 !important;
+  background: rgba(18, 18, 18, 0.96) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.45) !important;
+}
+
+.pod-mini-progress-track {
+  height: 3px !important;
+  width: 100% !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+  cursor: pointer !important;
+}
+
+.pod-mini-progress-fill {
+  height: 100% !important;
+  width: 0% !important;
+  background: #1ed760 !important;
+  box-shadow: 0 0 6px #1ed760 !important;
+  transition: width 0.1s linear !important;
+}
+
+.pod-mini-player-content {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  padding: 8px 16px !important;
+  max-width: 900px !important;
+  margin: 0 auto !important;
+}
+
+.pod-mini-cover {
+  width: 42px !important;
+  height: 42px !important;
+  border-radius: 6px !important;
+  background: linear-gradient(135deg, #1e293b, #0f172a) !important;
+  color: #1ed760 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 0.76rem !important;
+  font-weight: 800 !important;
+  flex-shrink: 0 !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3) !important;
+}
+
+.pod-mini-meta {
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+
+.pod-mini-title {
+  font-size: 0.88rem !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  margin: 0 0 2px 0 !important;
+}
+
+.pod-mini-sub {
+  font-size: 0.72rem !important;
+  color: #94a3b8 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  margin: 0 !important;
+}
+
+.pod-mini-controls {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex-shrink: 0 !important;
+}
+
+.pod-mini-play-btn {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50% !important;
+  border: none !important;
+  background: #1ed760 !important;
+  color: #000000 !important;
+  font-size: 0.92rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  font-weight: 800 !important;
+  box-shadow: 0 2px 10px rgba(30, 215, 96, 0.4) !important;
+  transition: transform 0.12s ease !important;
+}
+
+.pod-mini-play-btn:active {
+  transform: scale(0.92) !important;
+}
+
+.pod-mini-ctrl-btn {
+  padding: 5px 8px !important;
+  font-size: 0.72rem !important;
+  border-radius: 12px !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: #f1f5f9 !important;
+  border: none !important;
+  cursor: pointer !important;
+  font-weight: 600 !important;
+}
+
+/* Dark mode overrides for Spotify podcasts */
+[data-theme="dark"] .pod-spotify-item {
+  background: rgba(30, 41, 59, 0.65) !important;
+  border-color: rgba(255, 255, 255, 0.09) !important;
+}
+
+[data-theme="dark"] .pod-spotify-item:hover {
+  background: rgba(30, 41, 59, 0.9) !important;
+  border-color: #1ed760 !important;
+}
+
+[data-theme="dark"] .pod-spotify-title {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .pod-spotify-subtitle-row {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .pod-spotify-circle-btn {
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
+}
