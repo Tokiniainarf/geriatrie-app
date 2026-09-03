@@ -1100,7 +1100,7 @@ const BrainFeed = (() => {
     const feed = document.getElementById('bfFeed');
     if (feed) feed.scrollTop = 0;
     renderSlides();
-    updateProgress();
+    updateHeader();
   }
 
   function updateSessionChrome() {
@@ -1545,10 +1545,10 @@ const BrainFeed = (() => {
     let keywordsHtml = '';
     if (expectedKeywords.length) {
       keywordsHtml = `
-        <div class="bf-coach-keywords" style="margin-top: 14px; padding-top: 10px; border-top: 1px dashed var(--border); display: flex; flex-direction: column; gap: 6px;">
-          <span class="bf-keyword-heading" style="font-size: 0.8rem; font-weight: bold; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">🔑 Pour une réponse complète</span>
-          <div class="bf-keyword-tags" style="display: flex; flex-wrap: wrap; gap: 6px;">
-            ${expectedKeywords.map(k => `<span class="bf-keyword-tag" style="font-size: 0.75rem; background: var(--bg-body); border: 1px solid var(--border); color: var(--text); padding: 2px 8px; border-radius: 99px; font-weight: 500;">${esc(k)}</span>`).join('')}
+        <div class="bf-coach-keywords" style="margin-top: 8px; padding-top: 6px; border-top: 1px dashed var(--border); display: flex; flex-direction: column; gap: 4px;">
+          <span class="bf-keyword-heading" style="font-size: 0.72rem; font-weight: bold; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">🔑 Mots-clés attendus</span>
+          <div class="bf-keyword-tags" style="display: flex; flex-wrap: wrap; gap: 4px;">
+            ${expectedKeywords.map(k => `<span class="bf-keyword-tag" style="font-size: 0.72rem; background: var(--bg-body); border: 1px solid var(--border); color: var(--text); padding: 2px 7px; border-radius: 99px; font-weight: 500;">${esc(k)}</span>`).join('')}
           </div>
         </div>
       `;
@@ -1557,16 +1557,16 @@ const BrainFeed = (() => {
     let coachingHtml = '';
     if (coachingTip) {
       coachingHtml = `
-        <div class="bf-coach-tip-box" style="margin-top: 12px; padding: 10px 12px; background: rgba(245, 158, 11, 0.06); border-left: 3px solid #f59e0b; border-radius: 0 6px 6px 0; font-size: 0.85rem;">
-          <div class="bf-coach-tip-title" style="font-weight: 700; color: #d97706; margin-bottom: 4px; display: flex; align-items: center; gap: 4px;">🎓 Coaching EVC / Conseils</div>
-          <p class="bf-coach-tip-text" style="margin: 0; color: var(--text); line-height: 1.4;">${coachingTip}</p>
+        <div class="bf-coach-tip-box" style="margin-top: 8px; padding: 6px 10px; background: rgba(245, 158, 11, 0.06); border-left: 3px solid #f59e0b; border-radius: 0 6px 6px 0; font-size: 0.8rem;">
+          <div class="bf-coach-tip-title" style="font-weight: 700; color: #d97706; margin-bottom: 2px; font-size: 0.75rem;">🎓 Coaching EVC</div>
+          <p class="bf-coach-tip-text" style="margin: 0; color: var(--text); line-height: 1.35;">${coachingTip}</p>
         </div>
       `;
     }
 
     return `
       <div class="bf-rich-answer" style="display: flex; flex-direction: column; gap: 4px;">
-        <div class="bf-answer-body" style="color: var(--text); font-size: 0.95rem;">${formatted}</div>
+        <div class="bf-answer-body" style="color: var(--text); font-size: 0.92rem; line-height: 1.42;">${formatted}</div>
         ${keywordsHtml}
         ${coachingHtml}
       </div>
@@ -1675,36 +1675,30 @@ const BrainFeed = (() => {
       <div class="bf-horiz-scroll" id="bfScroll-${slideIdx}">
         <!-- PAGE 1 : CAS CLINIQUE -->
         <div class="bf-horiz-page page-1 bf-theme-choc">
-          <div class="bf-bg-emoji">🚑</div>
-          <article class="bf-card-content bf-card-shell">
+          <article class="bf-card-content bf-card-shell bf-card-cas">
             <header class="bf-card-hdr">
-              <span class="bf-type-badge">🩺 CAS / CROQ EVC</span>
-              <div class="bf-choc-timer" data-seconds="${card.timer}">
-                <svg class="bf-choc-ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16" class="bf-choc-ring-bg"/><circle cx="18" cy="18" r="16" class="bf-choc-ring-fg"/></svg>
-                <span class="bf-choc-time">${card.timer}</span>
-              </div>
+              <span class="bf-type-badge">🩺 CAS CLINIQUE EVC</span>
+              ${card.timer ? `<span class="bf-choc-timer-chip">⏱ ${card.timer}s</span>` : ''}
             </header>
-            <main class="bf-card-main scrollable">
-              <p class="bf-choc-sub">⏱ Réponse ciblée · <strong>${card.timer} secondes</strong></p>
-              <div class="bf-croq-case">
-                <p class="bf-croq-vignette">${esc(card.vignette)}</p>
-                <div class="bf-croq-question"><span>Question</span><p>${esc(card.prompt || 'Quelle est votre conduite ?')}</p></div>
+            <main class="bf-card-main bf-cas-main">
+              <div class="bf-cas-vignette">${esc(card.vignette)}</div>
+              <div class="bf-cas-prompt">
+                <span class="bf-cas-prompt-label">👉 QUESTION :</span>
+                <p class="bf-cas-prompt-text">${esc(card.prompt || 'Quelle est votre conduite diagnostique et thérapeutique ?')}</p>
               </div>
             </main>
             <footer class="bf-card-ftr">
-              <button type="button" class="bf-action-reveal" data-bf-reveal="${slideIdx}" data-stop-timer="1">Révéler la réponse ➔</button>
+              <button type="button" class="bf-action-reveal bf-reveal-compact" data-bf-reveal="${slideIdx}" data-stop-timer="1">Révéler la réponse ➔</button>
             </footer>
           </article>
         </div>
-        <!-- PAGE 2 : DIAGNOSTIC -->
+        <!-- PAGE 2 : DIAGNOSTIC & CONDUITE -->
         <div class="bf-horiz-page page-2 bf-theme-choc-back">
-          <div class="bf-bg-emoji">🩺</div>
-          <article class="bf-card-content bf-card-shell">
+          <article class="bf-card-content bf-card-shell bf-card-cas">
             <header class="bf-card-hdr">
-              <span class="bf-type-badge">🩺 Réponse structurée</span>
+              <span class="bf-type-badge">🩺 Conduite attendue</span>
             </header>
-            <main class="bf-card-main scrollable">
-              <div class="bf-croq-answer-prompt"><span>Question</span><p>${esc(card.prompt || '')}</p></div>
+            <main class="bf-card-main bf-cas-main">
               ${formatRichAnswer(card)}
             </main>
             <footer class="bf-card-ftr bf-answer-footer">
@@ -1712,7 +1706,7 @@ const BrainFeed = (() => {
                 <button type="button" class="bf-eval-btn bf-eval-fail" onclick="BrainFeed.actionDontKnow()" aria-label="À revoir">✕ À revoir</button>
                 <button type="button" class="bf-eval-btn bf-eval-pass" onclick="BrainFeed.actionKnow()" aria-label="Acquis">✓ Acquis</button>
               </div>
-              <span class="bf-swipe-left-hint">⬅ Revoir le cas</span>
+              <span class="bf-swipe-left-hint">⬅ Revoir l'énoncé</span>
             </footer>
           </article>
         </div>
@@ -1732,28 +1726,26 @@ const BrainFeed = (() => {
       <div class="bf-horiz-scroll" id="bfScroll-${slideIdx}">
         <!-- PAGE 1 : QUESTIONS/CHOIX -->
         <div class="bf-horiz-page page-1 bf-theme-quiz">
-          <div class="bf-bg-emoji">❓</div>
-          <article class="bf-card-content bf-card-shell">
+          <article class="bf-card-content bf-card-shell bf-card-quiz">
             <header class="bf-card-hdr">
               <span class="bf-type-badge">⚡ QUIZ FLASH</span>
             </header>
-            <main class="bf-card-main scrollable">
+            <main class="bf-card-main bf-quiz-main">
               <h2 class="bf-quiz-q">${esc(card.question)}</h2>
               <div class="bf-quiz-options">${opts}</div>
             </main>
             <footer class="bf-card-ftr">
-              <button type="button" class="bf-action-reveal" data-bf-reveal="${slideIdx}">Révéler la réponse ➔</button>
+              <button type="button" class="bf-action-reveal bf-reveal-compact" data-bf-reveal="${slideIdx}">Révéler la réponse ➔</button>
             </footer>
           </article>
         </div>
         <!-- PAGE 2 : EXPLICATION -->
         <div class="bf-horiz-page page-2 bf-theme-quiz-back">
-          <div class="bf-bg-emoji">📖</div>
-          <article class="bf-card-content bf-card-shell">
+          <article class="bf-card-content bf-card-shell bf-card-quiz">
             <header class="bf-card-hdr">
               <span class="bf-type-badge">📖 Explication</span>
             </header>
-            <main class="bf-card-main scrollable">
+            <main class="bf-card-main bf-quiz-main">
               ${formatRichAnswer(card)}
             </main>
             <footer class="bf-card-ftr">

@@ -1418,54 +1418,160 @@ body:has(#vFeed.bf-session-reels.active) .app-nav {
   inset: auto !important;
 }
 
-#vFeed.bf-session-reels .bf-slide {
-  position: relative !important;
-  width: 100vw !important;
-  height: 100% !important;
-  min-height: 100% !important;
-  max-width: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  scroll-snap-align: start !important;
-  scroll-snap-stop: always !important;
-  background: #000000 !important;
-  overflow: hidden !important;
-  inset: auto !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+/* REELS CONTAINER: Mobile plein écran vs Desktop Format 9:16 Strict */
+@media (max-width: 768px) {
+  #vFeed.bf-session-reels .bf-slide {
+    position: relative !important;
+    width: 100vw !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    scroll-snap-align: start !important;
+    scroll-snap-stop: always !important;
+    background: #000000 !important;
+    overflow: hidden !important;
+    inset: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  #vFeed.bf-session-reels .bf-vertical-reel-container,
+  #vFeed.bf-session-reels .bf-reel-single-page,
+  #vFeed.bf-session-reels .bf-visual-stack,
+  #vFeed.bf-session-reels .bf-reel-fullstack,
+  #vFeed.bf-session-reels .bf-media-container,
+  #vFeed.bf-session-reels .bf-reel-media {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    background: #000000 !important;
+    overflow: hidden !important;
+  }
+
+  #vFeed.bf-session-reels video.bf-reel-video,
+  #vFeed.bf-session-reels .bf-visual-media {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    object-fit: cover !important;
+    border-radius: 0 !important;
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 1 !important;
+  }
 }
 
-#vFeed.bf-session-reels .bf-vertical-reel-container,
-#vFeed.bf-session-reels .bf-reel-single-page,
-#vFeed.bf-session-reels .bf-visual-stack,
-#vFeed.bf-session-reels .bf-reel-fullstack,
-#vFeed.bf-session-reels .bf-media-container,
-#vFeed.bf-session-reels .bf-reel-media {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  max-width: none !important;
-  max-height: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
-  background: #000000 !important;
-  overflow: hidden !important;
-}
+/* DESKTOP / PC (min-width: 769px): Format 9:16 strict avec centrage cinématique */
+@media (min-width: 769px) {
+  #vFeed.bf-session-reels {
+    background: radial-gradient(circle at 50% 30%, #151e33 0%, #060911 100%) !important;
+  }
 
-#vFeed.bf-session-reels video.bf-reel-video,
-#vFeed.bf-session-reels .bf-visual-media {
-  width: 100% !important;
-  height: 100% !important;
-  max-width: none !important;
-  max-height: none !important;
-  object-fit: cover !important;
-  border-radius: 0 !important;
-  position: absolute !important;
-  inset: 0 !important;
-  z-index: 1 !important;
+  #vFeed.bf-session-reels .bf-feed {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow-y: scroll !important;
+    overflow-x: hidden !important;
+    scroll-snap-type: y mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    background: transparent !important;
+  }
+
+  #vFeed.bf-session-reels .bf-slide {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    box-sizing: border-box !important;
+    padding: 16px 0 !important;
+    background: transparent !important;
+    scroll-snap-align: start !important;
+    scroll-snap-stop: always !important;
+    overflow: hidden !important;
+  }
+
+  #vFeed.bf-session-reels .bf-vertical-reel-container,
+  #vFeed.bf-session-reels .bf-reel-single-page {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    background: transparent !important;
+    overflow: visible !important;
+  }
+
+  #vFeed.bf-session-reels .bf-visual-stack,
+  #vFeed.bf-session-reels .bf-reel-fullstack {
+    position: relative !important;
+    inset: auto !important;
+    aspect-ratio: 9 / 16 !important;
+    height: min(calc(100vh - 100px), 780px) !important;
+    width: calc(min(calc(100vh - 100px), 780px) * 9 / 16) !important;
+    max-width: 440px !important;
+    margin: auto !important;
+    border-radius: 24px !important;
+    box-shadow: 0 24px 70px -10px rgba(0, 0, 0, 0.9), 0 0 0 2px rgba(255, 255, 255, 0.14) !important;
+    background: #000000 !important;
+    overflow: hidden !important;
+  }
+
+  #vFeed.bf-session-reels .bf-media-container,
+  #vFeed.bf-session-reels .bf-reel-media {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: 100% !important;
+    aspect-ratio: 9 / 16 !important;
+    border-radius: 24px !important;
+    overflow: hidden !important;
+    background: #000000 !important;
+  }
+
+  #vFeed.bf-session-reels video.bf-reel-video,
+  #vFeed.bf-session-reels .bf-visual-media {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    aspect-ratio: 9 / 16 !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    border-radius: 24px !important;
+    display: block !important;
+    background: #000000 !important;
+    z-index: 1 !important;
+  }
+
+  #vFeed.bf-session-reels .bf-reel-actions-column {
+    position: absolute !important;
+    right: 14px !important;
+    bottom: 70px !important;
+    z-index: 35 !important;
+  }
+
+  #vFeed.bf-session-reels #bfSessionTabs {
+    position: absolute !important;
+    top: 16px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 50 !important;
+  }
 }
 
 /* Play overlay visible when video is paused */
@@ -1603,7 +1709,7 @@ body:has(#vFeed.bf-session-reels.active) .app-nav {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  padding: 138px 14px 74px !important;
+  padding: 126px 12px 64px !important;
   box-sizing: border-box !important;
   height: 100% !important;
   min-height: 100% !important;
@@ -2478,62 +2584,181 @@ body:has(#vFeed.bf-session-reels.active) .pod-spotify-mini-player,
   color: #94a3b8 !important;
 }
 
-/* Cas Choc / CROQ Vignette */
-#vFeed .bf-croq-vignette {
-  color: #1e293b !important;
-  font-family: inherit !important;
-  font-size: 1rem !important;
-  font-weight: 500 !important;
-  line-height: 1.58 !important;
-  margin-bottom: 14px !important;
+/* ===============================================================
+   CAS CLINIQUES & QUIZ FLASH : MISE EN PAGE OPTIMISÉE ZÉRO-SCROLL
+   =============================================================== */
+
+/* Coques de cartes compactes pour Cas et Quiz */
+#vFeed .bf-card-shell.bf-card-cas,
+#vFeed .bf-card-shell.bf-card-quiz {
+  padding: 14px 16px 12px !important;
+  width: min(95vw, 490px) !important;
+  max-width: 490px !important;
+  border-radius: 18px !important;
+  gap: 6px !important;
+  justify-content: space-between !important;
 }
-[data-theme="dark"] #vFeed .bf-croq-vignette {
+
+#vFeed .bf-card-shell.bf-card-cas .bf-card-hdr,
+#vFeed .bf-card-shell.bf-card-quiz .bf-card-hdr {
+  margin-bottom: 6px !important;
+  gap: 8px !important;
+}
+
+#vFeed .bf-card-shell.bf-card-cas .bf-type-badge,
+#vFeed .bf-card-shell.bf-card-quiz .bf-type-badge {
+  font-size: 0.72rem !important;
+  padding: 3px 9px !important;
+}
+
+/* Badge Timer discret pour Cas Clinique */
+.bf-choc-timer-chip {
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  color: #0284c7 !important;
+  background: rgba(2, 132, 199, 0.1) !important;
+  border: 1px solid rgba(2, 132, 199, 0.25) !important;
+  padding: 2px 8px !important;
+  border-radius: 999px !important;
+}
+[data-theme="dark"] .bf-choc-timer-chip {
+  color: #38bdf8 !important;
+  background: rgba(56, 189, 248, 0.12) !important;
+  border-color: rgba(56, 189, 248, 0.3) !important;
+}
+
+/* Cas Clinique Épuré (Zéro Carrés Superflus) */
+.bf-cas-main {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  margin: 0 !important;
+}
+
+.bf-cas-vignette {
+  font-size: 0.93rem !important;
+  line-height: 1.46 !important;
+  color: #1e293b !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-weight: 500 !important;
+}
+[data-theme="dark"] .bf-cas-vignette {
   color: #e2e8f0 !important;
 }
 
-#vFeed .bf-croq-question {
-  background: #f8fafc !important;
-  border: 1px solid #cbd5e1 !important;
-  border-left: 4px solid #0284c7 !important;
-  border-radius: 0 12px 12px 0 !important;
-  padding: 12px 14px !important;
+.bf-cas-prompt {
+  background: rgba(2, 132, 199, 0.07) !important;
+  border-left: 3px solid #0284c7 !important;
+  border-radius: 0 8px 8px 0 !important;
+  padding: 6px 10px !important;
+  margin-top: 4px !important;
 }
-[data-theme="dark"] #vFeed .bf-croq-question {
-  background: #1e293b !important;
-  border-color: #334155 !important;
+[data-theme="dark"] .bf-cas-prompt {
+  background: rgba(56, 189, 248, 0.09) !important;
   border-left-color: #38bdf8 !important;
 }
 
-#vFeed .bf-croq-question span {
-  font-size: 0.72rem !important;
-  font-weight: 700 !important;
+.bf-cas-prompt-label {
+  display: block !important;
+  font-size: 0.7rem !important;
+  font-weight: 800 !important;
   color: #0284c7 !important;
+  letter-spacing: 0.04em !important;
   text-transform: uppercase !important;
-  letter-spacing: 0.05em !important;
+  margin-bottom: 2px !important;
 }
-[data-theme="dark"] #vFeed .bf-croq-question span {
+[data-theme="dark"] .bf-cas-prompt-label {
   color: #38bdf8 !important;
 }
 
-#vFeed .bf-croq-question p {
+.bf-cas-prompt-text {
+  margin: 0 !important;
+  font-size: 0.92rem !important;
+  font-weight: 650 !important;
   color: #0f172a !important;
-  font-weight: 600 !important;
-  font-size: 0.96rem !important;
-  margin: 4px 0 0 0 !important;
+  line-height: 1.34 !important;
 }
-[data-theme="dark"] #vFeed .bf-croq-question p {
+[data-theme="dark"] .bf-cas-prompt-text {
   color: #f8fafc !important;
 }
 
-/* Timer Cas Choc */
-#vFeed .bf-choc-sub {
-  color: #475569 !important;
-  font-size: 0.85rem !important;
-  font-weight: 500 !important;
-  margin-bottom: 12px !important;
+/* Quiz Flash Compact Zéro-Scroll */
+.bf-quiz-main {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
 }
-[data-theme="dark"] #vFeed .bf-choc-sub {
-  color: #94a3b8 !important;
+
+#vFeed .bf-quiz-q {
+  font-size: 1.02rem !important;
+  font-weight: 700 !important;
+  line-height: 1.34 !important;
+  color: #0f172a !important;
+  margin: 0 0 6px 0 !important;
+}
+[data-theme="dark"] #vFeed .bf-quiz-q {
+  color: #f8fafc !important;
+}
+
+#vFeed .bf-card-shell.bf-card-quiz .bf-quiz-options {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 5px !important;
+  margin-top: 2px !important;
+}
+
+#vFeed .bf-card-shell.bf-card-quiz .bf-quiz-opt {
+  padding: 7px 11px !important;
+  min-height: 38px !important;
+  border-radius: 10px !important;
+  font-family: inherit !important;
+  font-size: 0.88rem !important;
+  line-height: 1.28 !important;
+  font-weight: 500 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  text-align: left !important;
+  transition: all 0.15s ease !important;
+  background: #f8fafc !important;
+  border: 1.5px solid #e2e8f0 !important;
+  color: #1e293b !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+}
+[data-theme="dark"] #vFeed .bf-card-shell.bf-card-quiz .bf-quiz-opt {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+  color: #f1f5f9 !important;
+}
+
+#vFeed .bf-card-shell.bf-card-quiz .bf-quiz-letter {
+  width: 22px !important;
+  height: 22px !important;
+  min-width: 22px !important;
+  border-radius: 50% !important;
+  background: #e2e8f0 !important;
+  color: #475569 !important;
+  font-weight: 700 !important;
+  font-size: 0.74rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+[data-theme="dark"] #vFeed .bf-card-shell.bf-card-quiz .bf-quiz-letter {
+  background: #334155 !important;
+  color: #cbd5e1 !important;
+}
+
+/* Bouton Révéler Compact (Ne Déborde Jamais) */
+#vFeed .bf-action-reveal.bf-reveal-compact {
+  padding: 9px 18px !important;
+  font-size: 0.88rem !important;
+  font-weight: 700 !important;
+  border-radius: 10px !important;
+  min-height: 38px !important;
+  margin-top: 4px !important;
+  width: 100% !important;
 }
 
 /* Back of Card Answers (Tous les types) */
@@ -2544,9 +2769,9 @@ body:has(#vFeed.bf-session-reels.active) .pod-spotify-mini-player,
 #vFeed .bf-answer-paragraph {
   color: #1e293b !important;
   font-family: inherit !important;
-  font-size: 1.02rem !important;
+  font-size: 0.94rem !important;
   font-weight: 500 !important;
-  line-height: 1.62 !important;
+  line-height: 1.48 !important;
 }
 [data-theme="dark"] #vFeed .bf-answer-body,
 [data-theme="dark"] #vFeed .bf-rich-answer,
@@ -2556,88 +2781,15 @@ body:has(#vFeed.bf-session-reels.active) .pod-spotify-mini-player,
   color: #f1f5f9 !important;
 }
 
-#vFeed .bf-keyword-heading {
-  color: #334155 !important;
-  font-size: 0.8rem !important;
-  font-weight: 700 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.05em !important;
-  margin-top: 14px !important;
-}
-[data-theme="dark"] #vFeed .bf-keyword-heading {
-  color: #94a3b8 !important;
-}
-
-#vFeed .bf-keyword-tag {
-  background: #f1f5f9 !important;
-  color: #1e293b !important;
-  border: 1px solid #cbd5e1 !important;
-  font-size: 0.8rem !important;
-  font-weight: 500 !important;
-  padding: 3px 10px !important;
-  border-radius: 999px !important;
-}
-[data-theme="dark"] #vFeed .bf-keyword-tag {
-  background: #1e293b !important;
-  color: #e2e8f0 !important;
-  border-color: #334155 !important;
-}
-
 #vFeed .bf-swipe-left-hint {
   color: #64748b !important;
-  font-size: 0.84rem !important;
+  font-size: 0.8rem !important;
   font-weight: 500 !important;
-  margin-top: 6px !important;
+  margin-top: 4px !important;
   text-align: center !important;
 }
 [data-theme="dark"] #vFeed .bf-swipe-left-hint {
   color: #94a3b8 !important;
-}
-
-/* Quiz Options */
-#vFeed .bf-quiz-options {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 10px !important;
-  margin-top: 14px !important;
-}
-#vFeed .bf-quiz-opt {
-  background: #f8fafc !important;
-  border: 1.5px solid #e2e8f0 !important;
-  color: #1e293b !important;
-  border-radius: 14px !important;
-  padding: 13px 16px !important;
-  font-family: inherit !important;
-  font-size: 0.94rem !important;
-  font-weight: 500 !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 12px !important;
-  text-align: left !important;
-  transition: all 0.15s ease !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02) !important;
-}
-[data-theme="dark"] #vFeed .bf-quiz-opt {
-  background: #1e293b !important;
-  border-color: #334155 !important;
-  color: #f1f5f9 !important;
-}
-#vFeed .bf-quiz-letter {
-  width: 24px !important;
-  height: 24px !important;
-  min-width: 24px !important;
-  border-radius: 50% !important;
-  background: #e2e8f0 !important;
-  color: #475569 !important;
-  font-weight: 700 !important;
-  font-size: 0.8rem !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-[data-theme="dark"] #vFeed .bf-quiz-letter {
-  background: #334155 !important;
-  color: #cbd5e1 !important;
 }
 
 /* Reveal Button */
@@ -2647,9 +2799,9 @@ body:has(#vFeed.bf-session-reels.active) .pod-spotify-mini-player,
   border: none !important;
   border-radius: 999px !important;
   font-family: inherit !important;
-  font-size: 0.98rem !important;
+  font-size: 0.95rem !important;
   font-weight: 600 !important;
-  padding: 14px 28px !important;
+  padding: 12px 24px !important;
   box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35) !important;
   cursor: pointer !important;
   transition: all 0.2s ease !important;
