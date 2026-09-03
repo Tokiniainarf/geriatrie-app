@@ -173,8 +173,10 @@ const Podcasts = (function() {
     prepareAudioSource(currentPodcast);
     updatePlayerUI();
     renderList();
+    const card = document.getElementById('podcastPlayerCard');
+    if (card) card.classList.remove('is-hidden');
     if (autoPlay) {
-      document.getElementById('podcastPlayerCard')?.classList.add('is-playing-now');
+      card?.classList.add('is-playing-now');
       startPlay();
     }
   }
@@ -307,6 +309,19 @@ const Podcasts = (function() {
     }
   }
 
+  function closeMiniPlayer() {
+    if (audioElement) {
+      try { audioElement.pause(); } catch (_) {}
+      isPlaying = false;
+    }
+    const card = document.getElementById('podcastPlayerCard');
+    if (card) {
+      card.classList.remove('is-playing-now');
+      card.classList.add('is-hidden');
+    }
+    updatePlayButtons();
+  }
+
   function esc(s) {
     if (!s) return '';
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -319,6 +334,7 @@ const Podcasts = (function() {
     selectPodcast,
     playPodcast,
     togglePlay,
+    closeMiniPlayer,
     replay,
     forward,
     seek,

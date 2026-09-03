@@ -1807,9 +1807,7 @@ const BrainFeed = (() => {
                 <span class="bf-trap-x">✕</span>
                 <p>${esc(card.trap)}</p>
               </div>
-              <p class="bf-trap-prompt" style="text-align: center; margin-top: 8px; font-size: 0.92rem; color: rgba(255,255,255,0.75); font-style: italic; font-weight: 500;">
-                👉 Pourquoi est-ce une erreur et comment la corriger ?
-              </p>
+              <p class="bf-trap-prompt">👉 Pourquoi est-ce une erreur et comment la corriger ?</p>
             </main>
             <footer class="bf-card-ftr">
               <button type="button" class="bf-action-reveal" data-bf-reveal="${slideIdx}">Révéler la réponse ➔</button>

@@ -1974,11 +1974,527 @@ body:has(#vFeed.bf-session-reels.active) .pod-spotify-mini-player {
   display: none;
 }
 
-body:has(#vPodcasts.active) .pod-spotify-mini-player,
-.pod-spotify-mini-player.is-playing-now {
+body:has(#vPodcasts.active) .pod-spotify-mini-player:not(.is-hidden),
+.pod-spotify-mini-player.is-playing-now:not(.is-hidden) {
   display: block !important;
 }
 
-body:has(#vFeed.bf-session-reels.active) .pod-spotify-mini-player {
+body:has(#vFeed.bf-session-reels.active) .pod-spotify-mini-player,
+.pod-spotify-mini-player.is-hidden {
   display: none !important;
+}
+
+
+/* ===============================================================
+   PODCASTS MINI-PLAYER CLOSE BUTTON (✕)
+   =============================================================== */
+.pod-mini-close-btn {
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  color: #ffffff !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+  margin-left: 6px !important;
+  flex-shrink: 0 !important;
+  transition: all 0.2s ease !important;
+}
+.pod-mini-close-btn:hover {
+  background: rgba(239, 68, 68, 0.85) !important;
+  border-color: #ef4444 !important;
+  transform: scale(1.08) !important;
+}
+.pod-mini-close-btn:active {
+  transform: scale(0.92) !important;
+}
+
+/* ===============================================================
+   SUPPRESSION DE LA BARRE DISCONTINUE EN HAUT DU FEED
+   =============================================================== */
+#vFeed .bf-progress-track,
+.bf-progress-track,
+.bf-progress-track::after {
+  display: none !important;
+}
+
+/* ===============================================================
+   MODERN DESIGN SYSTEM POUR « POUR TOI » ET « CAS & PIÈGES »
+   =============================================================== */
+
+/* Typographie & Palette Contemporaine */
+#vFeed {
+  font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", "Inter", "Segoe UI", Roboto, sans-serif !important;
+  background: #f8fafc !important;
+}
+[data-theme="dark"] #vFeed {
+  background: #090d16 !important;
+}
+
+#vFeed:not(.bf-session-reels) .bf-feed {
+  background: #f1f5f9 !important;
+}
+[data-theme="dark"] #vFeed:not(.bf-session-reels) .bf-feed {
+  background: #090d16 !important;
+}
+
+#vFeed:not(.bf-session-reels) .bf-slide {
+  background: transparent !important;
+}
+
+#vFeed:not(.bf-session-reels) .bf-horiz-page {
+  background: transparent !important;
+}
+
+/* Cartes Cliniques Épurées Style Notion / Linear */
+#vFeed:not(.bf-session-reels) .bf-card-shell {
+  background: #ffffff !important;
+  border: 1px solid rgba(226, 232, 240, 0.9) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04) !important;
+  color: #0f172a !important;
+  padding: 24px 22px !important;
+}
+[data-theme="dark"] #vFeed:not(.bf-session-reels) .bf-card-shell {
+  background: #111827 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5) !important;
+  color: #f8fafc !important;
+}
+
+/* Onglets de Session Haut de Gamme */
+#vFeed .bf-session-tabs {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 8px 16px !important;
+  gap: 10px !important;
+}
+#vFeed .bf-session-tab {
+  font-family: inherit !important;
+  font-size: 0.88rem !important;
+  font-weight: 600 !important;
+  border-radius: 999px !important;
+  padding: 8px 16px !important;
+  min-height: 38px !important;
+  border: 1px solid rgba(203, 213, 225, 0.8) !important;
+  background: rgba(255, 255, 255, 0.85) !important;
+  color: #475569 !important;
+  backdrop-filter: blur(12px) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+#vFeed .bf-session-tab.active {
+  background: #0f172a !important;
+  color: #ffffff !important;
+  border-color: #0f172a !important;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.25) !important;
+  transform: translateY(-1px) !important;
+}
+[data-theme="dark"] #vFeed .bf-session-tab {
+  background: rgba(30, 41, 59, 0.7) !important;
+  color: #94a3b8 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+[data-theme="dark"] #vFeed .bf-session-tab.active {
+  background: #38bdf8 !important;
+  color: #0f172a !important;
+  border-color: #38bdf8 !important;
+  box-shadow: 0 4px 16px rgba(56, 189, 248, 0.3) !important;
+}
+
+/* Badges Pastel Satinés */
+#vFeed .bf-card-hdr {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin-bottom: 16px !important;
+}
+#vFeed .bf-type-badge {
+  font-family: inherit !important;
+  font-size: 0.76rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+  padding: 5px 11px !important;
+  border-radius: 999px !important;
+  border: 1px solid transparent !important;
+}
+#vFeed .bf-type-badge:not([class*="rang"]) {
+  background: #eef2ff !important;
+  color: #4338ca !important;
+  border-color: #c7d2fe !important;
+}
+[data-theme="dark"] #vFeed .bf-type-badge:not([class*="rang"]) {
+  background: rgba(99, 102, 241, 0.18) !important;
+  color: #a5b4fc !important;
+  border-color: rgba(99, 102, 241, 0.35) !important;
+}
+#vFeed .bf-rang-a {
+  background: #fef3c7 !important;
+  color: #b45309 !important;
+  border: 1px solid #fde68a !important;
+  font-size: 0.74rem !important;
+  font-weight: 700 !important;
+  padding: 4px 10px !important;
+  border-radius: 999px !important;
+}
+[data-theme="dark"] #vFeed .bf-rang-a {
+  background: rgba(245, 158, 11, 0.18) !important;
+  color: #fcd34d !important;
+  border-color: rgba(245, 158, 11, 0.35) !important;
+}
+#vFeed .bf-rang-b {
+  background: #e0f2fe !important;
+  color: #0369a1 !important;
+  border: 1px solid #bae6fd !important;
+  font-size: 0.74rem !important;
+  font-weight: 700 !important;
+  padding: 4px 10px !important;
+  border-radius: 999px !important;
+}
+[data-theme="dark"] #vFeed .bf-rang-b {
+  background: rgba(14, 165, 233, 0.18) !important;
+  color: #7dd3fc !important;
+  border-color: rgba(14, 165, 233, 0.35) !important;
+}
+
+#vFeed .bf-tag,
+#vFeed .bf-card-chapter {
+  background: #f1f5f9 !important;
+  color: #334155 !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 999px !important;
+  font-size: 0.76rem !important;
+  font-weight: 600 !important;
+  padding: 4px 12px !important;
+}
+[data-theme="dark"] #vFeed .bf-tag,
+[data-theme="dark"] #vFeed .bf-card-chapter {
+  background: #1e293b !important;
+  color: #cbd5e1 !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Typographie des Questions */
+#vFeed .bf-card-main {
+  color: #0f172a !important;
+}
+[data-theme="dark"] #vFeed .bf-card-main {
+  color: #f8fafc !important;
+}
+#vFeed .bf-card-main blockquote,
+#vFeed .bf-card-main h2,
+#vFeed .bf-quiz-q {
+  color: #0f172a !important;
+  font-family: inherit !important;
+  font-size: clamp(1.15rem, 3.8vw, 1.35rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.45 !important;
+  letter-spacing: -0.015em !important;
+  margin: 0 0 16px 0 !important;
+  border: none !important;
+  padding: 0 !important;
+}
+[data-theme="dark"] #vFeed .bf-card-main blockquote,
+[data-theme="dark"] #vFeed .bf-card-main h2,
+[data-theme="dark"] #vFeed .bf-quiz-q {
+  color: #f8fafc !important;
+}
+
+/* ===============================================================
+   PIEGES & CAS CHOC : RESOLUTION COMPLETE DES TEXTES INVISIBLES
+   =============================================================== */
+
+/* Boîte du Piège */
+#vFeed .bf-trap-wrong {
+  background: #fff1f2 !important;
+  border: 1.5px solid #fecdd3 !important;
+  border-radius: 16px !important;
+  padding: 16px 18px !important;
+  margin: 12px 0 16px 0 !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 12px !important;
+  box-shadow: 0 2px 8px rgba(244, 63, 94, 0.06) !important;
+}
+[data-theme="dark"] #vFeed .bf-trap-wrong {
+  background: rgba(244, 63, 94, 0.12) !important;
+  border-color: rgba(244, 63, 94, 0.3) !important;
+  box-shadow: none !important;
+}
+
+#vFeed .bf-trap-x {
+  width: 26px !important;
+  height: 26px !important;
+  min-width: 26px !important;
+  border-radius: 50% !important;
+  background: #e11d48 !important;
+  color: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  margin-top: 2px !important;
+}
+
+#vFeed .bf-trap-wrong p {
+  color: #9f1239 !important;
+  font-family: inherit !important;
+  font-size: 1.02rem !important;
+  font-weight: 600 !important;
+  line-height: 1.5 !important;
+  margin: 0 !important;
+}
+[data-theme="dark"] #vFeed .bf-trap-wrong p {
+  color: #fda4af !important;
+}
+
+/* Question / Prompt du Piège */
+#vFeed .bf-trap-prompt {
+  color: #475569 !important;
+  font-family: inherit !important;
+  font-size: 0.94rem !important;
+  font-weight: 500 !important;
+  font-style: normal !important;
+  line-height: 1.5 !important;
+  text-align: center !important;
+  margin: 12px 0 !important;
+}
+[data-theme="dark"] #vFeed .bf-trap-prompt {
+  color: #94a3b8 !important;
+}
+
+/* Cas Choc / CROQ Vignette */
+#vFeed .bf-croq-vignette {
+  color: #1e293b !important;
+  font-family: inherit !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  line-height: 1.58 !important;
+  margin-bottom: 14px !important;
+}
+[data-theme="dark"] #vFeed .bf-croq-vignette {
+  color: #e2e8f0 !important;
+}
+
+#vFeed .bf-croq-question {
+  background: #f8fafc !important;
+  border: 1px solid #cbd5e1 !important;
+  border-left: 4px solid #0284c7 !important;
+  border-radius: 0 12px 12px 0 !important;
+  padding: 12px 14px !important;
+}
+[data-theme="dark"] #vFeed .bf-croq-question {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+  border-left-color: #38bdf8 !important;
+}
+
+#vFeed .bf-croq-question span {
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  color: #0284c7 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+[data-theme="dark"] #vFeed .bf-croq-question span {
+  color: #38bdf8 !important;
+}
+
+#vFeed .bf-croq-question p {
+  color: #0f172a !important;
+  font-weight: 600 !important;
+  font-size: 0.96rem !important;
+  margin: 4px 0 0 0 !important;
+}
+[data-theme="dark"] #vFeed .bf-croq-question p {
+  color: #f8fafc !important;
+}
+
+/* Timer Cas Choc */
+#vFeed .bf-choc-sub {
+  color: #475569 !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  margin-bottom: 12px !important;
+}
+[data-theme="dark"] #vFeed .bf-choc-sub {
+  color: #94a3b8 !important;
+}
+
+/* Back of Card Answers (Tous les types) */
+#vFeed .bf-answer-body,
+#vFeed .bf-rich-answer,
+#vFeed .bf-answer-body p,
+#vFeed .bf-answer-body li,
+#vFeed .bf-answer-paragraph {
+  color: #1e293b !important;
+  font-family: inherit !important;
+  font-size: 1.02rem !important;
+  font-weight: 500 !important;
+  line-height: 1.62 !important;
+}
+[data-theme="dark"] #vFeed .bf-answer-body,
+[data-theme="dark"] #vFeed .bf-rich-answer,
+[data-theme="dark"] #vFeed .bf-answer-body p,
+[data-theme="dark"] #vFeed .bf-answer-body li,
+[data-theme="dark"] #vFeed .bf-answer-paragraph {
+  color: #f1f5f9 !important;
+}
+
+#vFeed .bf-keyword-heading {
+  color: #334155 !important;
+  font-size: 0.8rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  margin-top: 14px !important;
+}
+[data-theme="dark"] #vFeed .bf-keyword-heading {
+  color: #94a3b8 !important;
+}
+
+#vFeed .bf-keyword-tag {
+  background: #f1f5f9 !important;
+  color: #1e293b !important;
+  border: 1px solid #cbd5e1 !important;
+  font-size: 0.8rem !important;
+  font-weight: 500 !important;
+  padding: 3px 10px !important;
+  border-radius: 999px !important;
+}
+[data-theme="dark"] #vFeed .bf-keyword-tag {
+  background: #1e293b !important;
+  color: #e2e8f0 !important;
+  border-color: #334155 !important;
+}
+
+#vFeed .bf-swipe-left-hint {
+  color: #64748b !important;
+  font-size: 0.84rem !important;
+  font-weight: 500 !important;
+  margin-top: 6px !important;
+  text-align: center !important;
+}
+[data-theme="dark"] #vFeed .bf-swipe-left-hint {
+  color: #94a3b8 !important;
+}
+
+/* Quiz Options */
+#vFeed .bf-quiz-options {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  margin-top: 14px !important;
+}
+#vFeed .bf-quiz-opt {
+  background: #f8fafc !important;
+  border: 1.5px solid #e2e8f0 !important;
+  color: #1e293b !important;
+  border-radius: 14px !important;
+  padding: 13px 16px !important;
+  font-family: inherit !important;
+  font-size: 0.94rem !important;
+  font-weight: 500 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  text-align: left !important;
+  transition: all 0.15s ease !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02) !important;
+}
+[data-theme="dark"] #vFeed .bf-quiz-opt {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+  color: #f1f5f9 !important;
+}
+#vFeed .bf-quiz-letter {
+  width: 24px !important;
+  height: 24px !important;
+  min-width: 24px !important;
+  border-radius: 50% !important;
+  background: #e2e8f0 !important;
+  color: #475569 !important;
+  font-weight: 700 !important;
+  font-size: 0.8rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+[data-theme="dark"] #vFeed .bf-quiz-letter {
+  background: #334155 !important;
+  color: #cbd5e1 !important;
+}
+
+/* Reveal Button */
+#vFeed .bf-action-reveal {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 999px !important;
+  font-family: inherit !important;
+  font-size: 0.98rem !important;
+  font-weight: 600 !important;
+  padding: 14px 28px !important;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35) !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  width: 100% !important;
+}
+#vFeed .bf-action-reveal:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.45) !important;
+}
+#vFeed .bf-action-reveal:active {
+  transform: scale(0.98) !important;
+}
+
+/* Evaluation Buttons */
+#vFeed .bf-eval-buttons-inline {
+  display: flex !important;
+  gap: 12px !important;
+  width: 100% !important;
+  margin-top: 14px !important;
+}
+#vFeed .bf-eval-btn {
+  flex: 1 !important;
+  padding: 13px 18px !important;
+  border-radius: 14px !important;
+  font-family: inherit !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  transition: all 0.18s ease !important;
+}
+#vFeed .bf-eval-fail {
+  background: #fff1f2 !important;
+  color: #e11d48 !important;
+  border: 1.5px solid #fecdd3 !important;
+}
+#vFeed .bf-eval-fail:hover {
+  background: #ffe4e6 !important;
+  transform: translateY(-1px) !important;
+}
+#vFeed .bf-eval-pass {
+  background: #059669 !important;
+  color: #ffffff !important;
+  border: 1.5px solid #047857 !important;
+  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.3) !important;
+}
+#vFeed .bf-eval-pass:hover {
+  background: #047857 !important;
+  transform: translateY(-1px) !important;
 }
