@@ -992,25 +992,21 @@ const BrainFeed = (() => {
       return accepted;
     };
     const strongCases = pools.casChoc.filter(isCompactFeedCase);
-    const diagrams = pools.visualExplanations.filter(card => card.diagram);
-    const mediaVisuals = pools.visualExplanations.filter(card => !card.diagram);
     const core = [
-      ...add(pools.flashRecall, 6, 'core-flash'),
-      ...add(pools.quizFlash, 4, 'core-quiz'),
+      ...add(pools.flashRecall, 7, 'core-flash'),
+      ...add(pools.quizFlash, 5, 'core-quiz'),
       ...add(strongCases, 4, 'core-cas'),
       ...add(pools.memoJour, 2, 'core-memo'),
-      ...add(pools.piegeExam, 2, 'core-piege'),
-      ...add([...mediaVisuals, ...diagrams], 3, 'core-visual'),
+      ...add(pools.piegeExam, 3, 'core-piege'),
       ...add(pools.chiffreCle, 1, 'core-chiffre')
     ];
     if (core.length < DAILY_GOAL) core.push(...add(all, DAILY_GOAL - core.length, 'core-fill'));
     const bonus = [
       ...add(pools.flashRecall, 8, 'bonus-flash'),
-      ...add(pools.quizFlash, 4, 'bonus-quiz'),
+      ...add(pools.quizFlash, 5, 'bonus-quiz'),
       ...add(strongCases, 4, 'bonus-cas'),
-      ...add(pools.memoJour, 1, 'bonus-memo'),
-      ...add(pools.piegeExam, 1, 'bonus-piege'),
-      ...add([...mediaVisuals, ...diagrams], 3, 'bonus-visual'),
+      ...add(pools.memoJour, 2, 'bonus-memo'),
+      ...add(pools.piegeExam, 3, 'bonus-piege'),
       ...add(pools.chiffreCle, 1, 'bonus-chiffre')
     ];
     if (core.length + bonus.length < FEED_LENGTH) bonus.push(...add(all, FEED_LENGTH - core.length - bonus.length, 'bonus-fill'));
@@ -1018,8 +1014,8 @@ const BrainFeed = (() => {
       ...core.slice(0, DAILY_GOAL).map(card => ({ ...card, feedTier: 'essential' })),
       ...bonus.map(card => ({ ...card, feedTier: 'bonus' }))
     ];
-    // Alternance éditoriale : rappel, décision, défi puis respiration visuelle.
-    const cadence = ['flash', 'quiz_flash', 'cas_choc', 'memo_jour', 'piege_exam', 'visual', 'chiffre_cle'];
+    // Alternance éditoriale : rappel, décision, piège et défi clinique (sans vidéos)
+    const cadence = ['flash', 'quiz_flash', 'piege_exam', 'cas_choc', 'memo_jour', 'chiffre_cle'];
     const buckets = Object.fromEntries(cadence.map(type => [type, cards.filter(card => card.type === type)]));
     const ordered = [];
     while (ordered.length < cards.length) {
@@ -1042,11 +1038,13 @@ const BrainFeed = (() => {
 
     const pools = buildSpecialPools();
     const mixed = buildDailyDeck(pools);
-    if (activeSession === 'flash') return dayPick(dedupeDeck(pools.flashRecall), 32, 'session-flash');
+    if (activeSession === 'pieges') {
+      const traps = dedupeDeck(pools.piegeExam);
+      return dayPick(traps, 32, 'session-pieges');
+    }
     if (activeSession === 'cas') {
-      const cases = pools.casChoc.filter(isHighYieldFeedCase);
-      const traps = dedupeDeck([...pools.piegeExam, ...pools.quizFlash]);
-      return dayPick(dedupeDeck([...cases, ...traps]), 32, 'session-cas');
+      const cases = dedupeDeck(pools.casChoc.filter(isHighYieldFeedCase));
+      return dayPick(cases, 32, 'session-cas');
     }
     if (activeSession === 'visual') {
       const videoCards = pools.visualExplanations.filter(card => card.isVideo || /\.mp4($|\?)/i.test(card.media || card.video || ''));
@@ -1061,9 +1059,10 @@ const BrainFeed = (() => {
       vFeed.classList.toggle('bf-session-reels', activeSession === 'visual');
     }
     const labels = {
-      mix: '✨ Pour toi · Les essentiels du jour & flashcards cliniques',
-      visual: '🎬 Reels 9:16 · Vidéos immersives plein écran',
-      cas: '🩺 Cas & Pièges · Cas cliniques CROQ et pièges diagnostiques'
+      mix: '✨ Pour toi · Les essentiels du jour, flashcards & quiz',
+      pieges: '⚠️ Pièges · Pièges diagnostiques & erreurs fréquentes EVC',
+      cas: '🩺 Cas Cliniques · Dossiers cliniques courts & raisonnement CROQ',
+      visual: '🎬 Reels 9:16 · Vidéos immersives plein écran'
     };
     let activeTab = null;
     document.querySelectorAll('#bfSessionTabs .bf-session-tab').forEach(tab => {
@@ -1085,8 +1084,7 @@ const BrainFeed = (() => {
 
   function selectSession(session) {
     if (session === 'flash') session = 'mix';
-    if (session === 'pieges') session = 'cas';
-    if (!['mix', 'visual', 'cas'].includes(session)) session = 'mix';
+    if (!['mix', 'pieges', 'cas', 'visual'].includes(session)) session = 'mix';
     activeSession = session;
     try { localStorage.setItem('bf_session', activeSession); } catch (_) {}
     if (observer) observer.disconnect();

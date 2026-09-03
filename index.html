@@ -386,8 +386,9 @@
     </div>
     <div class="bf-session-tabs" id="bfSessionTabs" role="tablist" aria-label="Séances de révision">
       <button type="button" class="bf-session-tab active" data-session="mix" onclick="BrainFeed.selectSession('mix')" role="tab" aria-selected="true">✨ Pour toi</button>
+      <button type="button" class="bf-session-tab" data-session="pieges" onclick="BrainFeed.selectSession('pieges')" role="tab" aria-selected="false">⚠️ Pièges</button>
+      <button type="button" class="bf-session-tab" data-session="cas" onclick="BrainFeed.selectSession('cas')" role="tab" aria-selected="false">🩺 Cas Cliniques</button>
       <button type="button" class="bf-session-tab" data-session="visual" onclick="BrainFeed.selectSession('visual')" role="tab" aria-selected="false">🎬 Reels</button>
-      <button type="button" class="bf-session-tab" data-session="cas" onclick="BrainFeed.selectSession('cas')" role="tab" aria-selected="false">🩺 Cas &amp; Pièges</button>
     </div>
     <div class="bf-progress-track"><div class="bf-progress-fill" id="bfProgress"></div></div>
     <div class="bf-feed" id="bfFeed">
@@ -588,7 +589,7 @@
     <div class="pod-mini-progress-track" onclick="Podcasts.seekTrack(event, this)" title="Cliquer pour naviguer dans l'audio">
       <div class="pod-mini-progress-fill" id="podProgressMiniFill"></div>
     </div>
-    <div class="pod-mini-player-content">
+    <div class="pod-mini-player-content" onclick="Podcasts.openFullPlayer()" title="Toucher pour ouvrir le lecteur grand écran" style="cursor:pointer">
       <div class="pod-mini-cover" id="podPlayerCover">
         <span class="pod-mini-cover-icon" id="podPlayerIcon">🎙️</span>
       </div>
@@ -597,13 +598,13 @@
         <p class="pod-mini-sub" id="podPlayerSub">Audio haute qualité NotebookLM · Cas &amp; Recommandations EVC</p>
       </div>
       <div class="pod-mini-controls">
-        <button type="button" class="pod-mini-ctrl-btn pod-skip-btn" onclick="Podcasts.replay(15)" title="Reculer de 15s" aria-label="Reculer de 15s">↺15</button>
-        <button type="button" class="pod-mini-play-btn" id="podMainPlayBtn" onclick="Podcasts.togglePlay()" aria-label="Lecture / Pause">
+        <button type="button" class="pod-mini-ctrl-btn pod-skip-btn" onclick="event.stopPropagation(); Podcasts.replay(15)" title="Reculer de 15s" aria-label="Reculer de 15s">↺15</button>
+        <button type="button" class="pod-mini-play-btn" id="podMainPlayBtn" onclick="event.stopPropagation(); Podcasts.togglePlay()" aria-label="Lecture / Pause">
           <span class="pod-play-icon">▶</span>
         </button>
-        <button type="button" class="pod-mini-ctrl-btn pod-skip-btn" onclick="Podcasts.forward(15)" title="Avancer de 15s" aria-label="Avancer de 15s">15↻</button>
-        <button type="button" class="pod-mini-speed-pill" id="podSpeedCycleBtn" onclick="Podcasts.cycleSpeed()" title="Vitesse de lecture (1x, 1.25x, 1.5x, 2x)" aria-label="Vitesse de lecture">1x</button>
-        <button type="button" class="pod-mini-close-btn" onclick="Podcasts.closeMiniPlayer()" aria-label="Fermer le lecteur" title="Fermer le lecteur">✕</button>
+        <button type="button" class="pod-mini-ctrl-btn pod-skip-btn" onclick="event.stopPropagation(); Podcasts.forward(15)" title="Avancer de 15s" aria-label="Avancer de 15s">15↻</button>
+        <button type="button" class="pod-mini-speed-pill" id="podSpeedCycleBtn" onclick="event.stopPropagation(); Podcasts.cycleSpeed()" title="Vitesse de lecture (1x, 1.25x, 1.5x, 2x)" aria-label="Vitesse de lecture">1x</button>
+        <button type="button" class="pod-mini-close-btn" onclick="event.stopPropagation(); Podcasts.closeMiniPlayer()" aria-label="Fermer le lecteur" title="Fermer le lecteur">✕</button>
       </div>
     </div>
     <!-- Hidden inputs for backward compatibility -->
@@ -611,6 +612,87 @@
     <span id="podCurrentTime" style="display:none;">00:00</span>
     <span id="podTotalDuration" style="display:none;">--:--</span>
     <span id="podPlayerBadge" style="display:none;">MASTERCLASS</span>
+  </div>
+
+  <!-- Spotify Full-Screen Now Playing Modal / Bottom Sheet -->
+  <div class="pod-spotify-full-modal" id="podcastFullPlayer" aria-hidden="true">
+    <div class="pod-full-container">
+      <!-- Top Navigation -->
+      <div class="pod-full-header">
+        <button type="button" class="pod-full-chevron" onclick="Podcasts.closeFullPlayer()" aria-label="Réduire le lecteur" title="Réduire">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="pod-full-header-titles">
+          <span class="pod-full-header-eyebrow">EN COURS DE LECTURE</span>
+          <h4 class="pod-full-header-sub" id="podFullHeaderSub">Masterclass Audio NotebookLM</h4>
+        </div>
+        <button type="button" class="pod-full-fav-btn" id="podFullFavBtn" onclick="Podcasts.toggleFav()" aria-label="Favori" title="Mettre en favori">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        </button>
+      </div>
+
+      <!-- Large Cover Artwork -->
+      <div class="pod-full-artwork-wrapper">
+        <div class="pod-full-artwork" id="podFullArtwork">
+          <div class="pod-full-ch-badge" id="podFullChBadge">CH 01</div>
+          <div class="pod-full-cover-icon" id="podFullCoverIcon">🎙️</div>
+          <div class="pod-full-eq-waves" id="podFullEqWaves" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Titles & Specialty -->
+      <div class="pod-full-meta">
+        <div class="pod-full-title-wrap">
+          <h2 class="pod-full-title" id="podFullTitle">Sélectionnez un épisode</h2>
+          <p class="pod-full-chapter" id="podFullChapter">Ch. 1 — Biologie du vieillissement</p>
+        </div>
+        <div class="pod-full-tags-row" id="podFullTagsRow">
+          <span class="pod-full-pill" id="podFullCatPill">Biologie &amp; EGS</span>
+        </div>
+      </div>
+
+      <!-- Scrubber & Timestamps -->
+      <div class="pod-full-scrubber-box">
+        <div class="pod-full-scrubber-track" id="podFullScrubber" onclick="Podcasts.seekTrack(event, this)">
+          <div class="pod-full-scrubber-fill" id="podFullScrubberFill"></div>
+        </div>
+        <div class="pod-full-times">
+          <span id="podFullCurrentTime">00:00</span>
+          <span id="podFullTotalDuration">18:00</span>
+        </div>
+      </div>
+
+      <!-- Playback Controls -->
+      <div class="pod-full-controls">
+        <button type="button" class="pod-full-btn pod-full-speed" id="podFullSpeedBtn" onclick="Podcasts.cycleSpeed()" title="Changer la vitesse">1x</button>
+        <button type="button" class="pod-full-btn pod-full-skip" onclick="Podcasts.replay(15)" title="Reculer de 15 secondes" aria-label="Reculer de 15 secondes">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+          <span class="pod-skip-num">15</span>
+        </button>
+        <button type="button" class="pod-full-play-btn" id="podFullPlayBtn" onclick="Podcasts.togglePlay()" aria-label="Lecture / Pause">
+          <span class="pod-full-play-icon" id="podFullPlayIcon">▶</span>
+        </button>
+        <button type="button" class="pod-full-btn pod-full-skip" onclick="Podcasts.forward(15)" title="Avancer de 15 secondes" aria-label="Avancer de 15 secondes">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+          <span class="pod-skip-num">15</span>
+        </button>
+        <button type="button" class="pod-full-btn pod-full-restart" onclick="Podcasts.replay(99999)" title="Recommencer depuis le début" aria-label="Recommencer">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+        </button>
+      </div>
+
+      <!-- High-Yield Notes Accordion -->
+      <div class="pod-full-notes-card">
+        <div class="pod-full-notes-header">
+          <span>💡 Points clés EVC &amp; Recommandations CNEG</span>
+        </div>
+        <div class="pod-full-notes-body" id="podFullNotesBody">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </div>
   </div>
 
 <nav class="bottom-nav" id="bnav">
@@ -663,26 +745,26 @@
 <script>
 (function(){
   var steps = [
-    { src: 'data-bundle.js?v=274', label: 'Contenu des chapitres…', pct: 34 },
-    { src: 'practice-data.js?v=274', label: 'Entraînements structurés…', pct: 40 },
-    { src: 'annales-authentiques.js?v=274', label: 'Sources des annales…', pct: 45 },
-    { src: 'annales-texte.js?v=274', label: 'Sujets EVC recherchables…', pct: 50 },
-    { src: 'annales-corrections.js?v=274', label: 'Corrigés pédagogiques…', pct: 53 },
-    { src: 'protocoles-has-officiels.js?v=274', label: 'Conduites HAS…', pct: 57 },
-    { src: 'clinical-pathways.js?v=274', label: 'Référentiel clinique…', pct: 59 },
-    { src: 'notebook-decks-data.js?v=274', label: 'Decks NotebookLM…', pct: 60 },
-    { src: 'podcasts-data.js?v=274', label: 'Podcasts audio…', pct: 62 },
-    { src: 'podcasts-app.js?v=274', label: 'Lecteur audio…', pct: 64 },
-    { src: 'notebook-interactive.js?v=274', label: 'Lecteur présentation…', pct: 65 },
-    { src: 'calculateurs.js?v=274', label: 'Scores & calculateurs…', pct: 70 },
-    { src: 'clinical-assistant.js?v=274', label: 'Consultation guidée…', pct: 73 },
-    { src: 'quiz.js?v=274', label: 'Mode examen…', pct: 75 },
-    { src: 'dashboard.js?v=274', label: 'Tableau de bord…', pct: 80 },
-    { src: 'appsearch.js?v=274', label: 'Recherche…', pct: 85 },
-    { src: 'erreurs-journal.js?v=274', label: 'Fichier erreurs…', pct: 89 },
-    { src: 'graph.js?v=274', label: 'Parcours liés…', pct: 93 },
-    { src: 'brainfeed.js?v=274', label: 'BrainFeed…', pct: 97 },
-    { src: 'app.js?v=274', label: 'Interface…', pct: 100 }
+    { src: 'data-bundle.js?v=275', label: 'Contenu des chapitres…', pct: 34 },
+    { src: 'practice-data.js?v=275', label: 'Entraînements structurés…', pct: 40 },
+    { src: 'annales-authentiques.js?v=275', label: 'Sources des annales…', pct: 45 },
+    { src: 'annales-texte.js?v=275', label: 'Sujets EVC recherchables…', pct: 50 },
+    { src: 'annales-corrections.js?v=275', label: 'Corrigés pédagogiques…', pct: 53 },
+    { src: 'protocoles-has-officiels.js?v=275', label: 'Conduites HAS…', pct: 57 },
+    { src: 'clinical-pathways.js?v=275', label: 'Référentiel clinique…', pct: 59 },
+    { src: 'notebook-decks-data.js?v=275', label: 'Decks NotebookLM…', pct: 60 },
+    { src: 'podcasts-data.js?v=275', label: 'Podcasts audio…', pct: 62 },
+    { src: 'podcasts-app.js?v=275', label: 'Lecteur audio…', pct: 64 },
+    { src: 'notebook-interactive.js?v=275', label: 'Lecteur présentation…', pct: 65 },
+    { src: 'calculateurs.js?v=275', label: 'Scores & calculateurs…', pct: 70 },
+    { src: 'clinical-assistant.js?v=275', label: 'Consultation guidée…', pct: 73 },
+    { src: 'quiz.js?v=275', label: 'Mode examen…', pct: 75 },
+    { src: 'dashboard.js?v=275', label: 'Tableau de bord…', pct: 80 },
+    { src: 'appsearch.js?v=275', label: 'Recherche…', pct: 85 },
+    { src: 'erreurs-journal.js?v=275', label: 'Fichier erreurs…', pct: 89 },
+    { src: 'graph.js?v=275', label: 'Parcours liés…', pct: 93 },
+    { src: 'brainfeed.js?v=275', label: 'BrainFeed…', pct: 97 },
+    { src: 'app.js?v=275', label: 'Interface…', pct: 100 }
   ];
   var i = 0;
   var fill = document.getElementById('plFill');

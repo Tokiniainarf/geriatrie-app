@@ -111,7 +111,7 @@ const Podcasts = (function() {
       const chapBadge = pod.chapter ? pod.chapter.toUpperCase() : 'EVC';
 
       return `
-        <div class="pod-spotify-item ${isCurrent ? 'is-active-item' : ''} ${isCurrent && isPlaying ? 'is-playing-item' : ''}" id="pod-card-${pod.id}" onclick="Podcasts.playPodcast('${pod.id}')">
+        <div class="pod-spotify-item ${isCurrent ? 'is-active-item' : ''} ${isCurrent && isPlaying ? 'is-playing-item' : ''}" id="pod-card-${pod.id}" onclick="Podcasts.openFullPlayer('${pod.id}')">
           <!-- Left: Spotify-style Cover Artwork Thumbnail -->
           <div class="pod-spotify-cover">
             <span class="pod-spotify-ch-badge">${chapBadge}</span>
@@ -157,7 +157,7 @@ const Podcasts = (function() {
 
           <!-- Right: Circular Play Button -->
           <div class="pod-spotify-action">
-            <button type="button" class="pod-spotify-circle-btn ${isCurrent && isPlaying ? 'playing' : ''}" onclick="event.stopPropagation(); Podcasts.playPodcast('${pod.id}')" aria-label="${isCurrent && isPlaying ? 'Pause' : 'Écouter'}">
+            <button type="button" class="pod-spotify-circle-btn ${isCurrent && isPlaying ? 'playing' : ''}" onclick="event.stopPropagation(); Podcasts.openFullPlayer('${pod.id}')" aria-label="${isCurrent && isPlaying ? 'Pause' : 'Écouter'}">
               ${isCurrent && isPlaying ? '⏸' : '▶'}
             </button>
           </div>
@@ -280,9 +280,127 @@ const Podcasts = (function() {
     if (cycleBtn) {
       cycleBtn.textContent = playbackSpeed + 'x';
     }
+    const fullSpeedBtn = document.getElementById('podFullSpeedBtn');
+    if (fullSpeedBtn) {
+      fullSpeedBtn.textContent = playbackSpeed + 'x';
+    }
     document.querySelectorAll('.pod-speed-btn').forEach(b => {
       b.classList.toggle('active', parseFloat(b.dataset.spd) === playbackSpeed);
     });
+  }
+
+  function openFullPlayer(id) {
+    const card = document.getElementById('podcastPlayerCard');
+    if (card) {
+      card.classList.remove('is-hidden');
+      card.classList.add('is-playing-now');
+    }
+    if (id) {
+      if (!currentPodcast || currentPodcast.id !== id) {
+        selectPodcast(id, true);
+      } else if (!isPlaying) {
+        startPlay();
+      }
+    }
+    const fullModal = document.getElementById('podcastFullPlayer');
+    if (fullModal) {
+      fullModal.classList.add('is-open');
+      fullModal.setAttribute('aria-hidden', 'false');
+    }
+    updateFullPlayerUI();
+  }
+
+  function closeFullPlayer() {
+    const fullModal = document.getElementById('podcastFullPlayer');
+    if (fullModal) {
+      fullModal.classList.remove('is-open');
+      fullModal.setAttribute('aria-hidden', 'true');
+    }
+  }
+
+  function updateFullPlayerUI() {
+    if (!currentPodcast) return;
+    const title = document.getElementById('podFullTitle');
+    const chap = document.getElementById('podFullChapter');
+    const headerSub = document.getElementById('podFullHeaderSub');
+    const chBadge = document.getElementById('podFullChBadge');
+    const coverIcon = document.getElementById('podFullCoverIcon');
+    const catPill = document.getElementById('podFullCatPill');
+    const notesBody = document.getElementById('podFullNotesBody');
+    const speedBtn = document.getElementById('podFullSpeedBtn');
+    const favBtn = document.getElementById('podFullFavBtn');
+
+    if (title) title.textContent = currentPodcast.title;
+    if (chap) chap.textContent = currentPodcast.chapterTitle || 'Gériatrie EVC';
+    if (headerSub) headerSub.textContent = (currentPodcast.chapter ? currentPodcast.chapter.toUpperCase() + ' · ' : '') + 'Masterclass NotebookLM';
+    if (chBadge) chBadge.textContent = currentPodcast.chapter ? currentPodcast.chapter.toUpperCase() : 'EVC';
+    if (coverIcon) coverIcon.textContent = currentPodcast.chapter ? currentPodcast.chapter.toUpperCase() : '🎙️';
+    if (catPill) catPill.textContent = currentPodcast.categoryLabel || 'Masterclass';
+    if (speedBtn) speedBtn.textContent = playbackSpeed + 'x';
+
+    if (favBtn) {
+      try {
+        const favs = JSON.parse(localStorage.getItem('pod_favs') || '[]');
+        favBtn.classList.toggle('active', favs.includes(currentPodcast.id));
+      } catch (_) {}
+    }
+
+    if (notesBody) {
+      notesBody.innerHTML = `
+        <p class="pod-full-summary-text">${esc(currentPodcast.summary)}</p>
+        ${currentPodcast.keyPoints && currentPodcast.keyPoints.length ? `
+          <ul class="pod-full-keypoints-list">
+            ${currentPodcast.keyPoints.map(kp => `<li>${esc(kp)}</li>`).join('')}
+          </ul>
+        ` : ''}
+        <div class="pod-full-tags-wrap">
+          ${(currentPodcast.tags || []).map(t => `<span class="pod-full-tag">${esc(t)}</span>`).join('')}
+          <span class="pod-full-tag pod-tag-studio">✓ Studio NotebookLM</span>
+        </div>
+      `;
+    }
+
+    updateFullPlayerTimes();
+    updatePlayButtons();
+  }
+
+  function updateFullPlayerTimes() {
+    if (!audioElement) return;
+    const curSec = audioElement.currentTime || 0;
+    const dur = audioElement.duration || 0;
+    const pct = dur > 0 ? (curSec / dur) * 100 : 0;
+
+    const fill = document.getElementById('podFullScrubberFill');
+    if (fill) fill.style.width = pct + '%';
+
+    const curTimeEl = document.getElementById('podFullCurrentTime');
+    const durTimeEl = document.getElementById('podFullTotalDuration');
+
+    if (curTimeEl) {
+      const m = Math.floor(curSec / 60);
+      const s = Math.floor(curSec % 60);
+      curTimeEl.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    }
+    if (durTimeEl && dur > 0) {
+      const m = Math.floor(dur / 60);
+      const s = Math.floor(dur % 60);
+      durTimeEl.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    }
+  }
+
+  function toggleFav() {
+    if (!currentPodcast) return;
+    const btn = document.getElementById('podFullFavBtn');
+    if (!btn) return;
+    btn.classList.toggle('active');
+    const isFav = btn.classList.contains('active');
+    try {
+      const favs = JSON.parse(localStorage.getItem('pod_favs') || '[]');
+      const idx = favs.indexOf(currentPodcast.id);
+      if (isFav && idx === -1) favs.push(currentPodcast.id);
+      else if (!isFav && idx !== -1) favs.splice(idx, 1);
+      localStorage.setItem('pod_favs', JSON.stringify(favs));
+    } catch (_) {}
   }
 
   function updatePlayerUI() {
@@ -297,6 +415,7 @@ const Podcasts = (function() {
     if (coverIcon) coverIcon.textContent = currentPodcast.chapter ? currentPodcast.chapter.toUpperCase() : '🎙️';
     if (badgeEl) badgeEl.textContent = 'MASTERCLASS NOTEBOOKLM';
     updateDuration();
+    updateFullPlayerUI();
   }
 
   function updateDuration() {
@@ -306,6 +425,7 @@ const Podcasts = (function() {
       const s = Math.floor(audioElement.duration % 60);
       durEl.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
     }
+    updateFullPlayerTimes();
   }
 
   function updatePlayButtons() {
@@ -316,6 +436,12 @@ const Podcasts = (function() {
       mainBtn.classList.toggle('playing', isPlaying);
       mainBtn.title = isPlaying ? 'Mettre en pause' : 'Écouter';
     }
+    const fullPlayBtn = document.getElementById('podFullPlayBtn');
+    const fullPlayIcon = document.getElementById('podFullPlayIcon');
+    const fullArtwork = document.getElementById('podFullArtwork');
+    if (fullPlayIcon) fullPlayIcon.textContent = isPlaying ? '⏸' : '▶';
+    if (fullPlayBtn) fullPlayBtn.classList.toggle('playing', isPlaying);
+    if (fullArtwork) fullArtwork.classList.toggle('is-playing', isPlaying);
     renderList();
   }
 
@@ -341,6 +467,8 @@ const Podcasts = (function() {
     if (slider && dur > 0) {
       slider.value = pct;
     }
+
+    updateFullPlayerTimes();
   }
 
   function closeMiniPlayer() {
@@ -353,6 +481,7 @@ const Podcasts = (function() {
       card.classList.remove('is-playing-now');
       card.classList.add('is-hidden');
     }
+    closeFullPlayer();
     updatePlayButtons();
   }
 
@@ -368,6 +497,9 @@ const Podcasts = (function() {
     selectPodcast,
     playPodcast,
     togglePlay,
+    openFullPlayer,
+    closeFullPlayer,
+    toggleFav,
     closeMiniPlayer,
     replay,
     forward,
