@@ -174,14 +174,21 @@ const Podcasts = (function() {
     updatePlayerUI();
     renderList();
     const card = document.getElementById('podcastPlayerCard');
-    if (card) card.classList.remove('is-hidden');
     if (autoPlay) {
-      card?.classList.add('is-playing-now');
+      if (card) {
+        card.classList.remove('is-hidden');
+        card.classList.add('is-playing-now');
+      }
       startPlay();
     }
   }
 
   function playPodcast(id) {
+    const card = document.getElementById('podcastPlayerCard');
+    if (card) {
+      card.classList.remove('is-hidden');
+      card.classList.add('is-playing-now');
+    }
     if (!currentPodcast || currentPodcast.id !== id) {
       selectPodcast(id, true);
     } else {
@@ -191,6 +198,11 @@ const Podcasts = (function() {
 
   function togglePlay() {
     initAudioElement();
+    const card = document.getElementById('podcastPlayerCard');
+    if (card) {
+      card.classList.remove('is-hidden');
+      card.classList.add('is-playing-now');
+    }
     if (!currentPodcast) {
       if (typeof PODCASTS_DATA !== 'undefined' && PODCASTS_DATA.length > 0) {
         selectPodcast(PODCASTS_DATA[0].id, true);
@@ -244,11 +256,33 @@ const Podcasts = (function() {
 
   function setSpeed(spd, btn) {
     playbackSpeed = parseFloat(spd) || 1.0;
+    const cycleBtn = document.getElementById('podSpeedCycleBtn');
+    if (cycleBtn) {
+      cycleBtn.textContent = playbackSpeed + 'x';
+    }
     document.querySelectorAll('.pod-speed-btn').forEach(b => b.classList.remove('active'));
     if (btn) btn.classList.add('active');
     if (audioElement) {
       audioElement.playbackRate = playbackSpeed;
     }
+  }
+
+  function cycleSpeed() {
+    const speeds = [1.0, 1.25, 1.5, 2.0];
+    let curIdx = speeds.indexOf(playbackSpeed);
+    if (curIdx === -1) curIdx = 0;
+    const nextIdx = (curIdx + 1) % speeds.length;
+    playbackSpeed = speeds[nextIdx];
+    if (audioElement) {
+      audioElement.playbackRate = playbackSpeed;
+    }
+    const cycleBtn = document.getElementById('podSpeedCycleBtn');
+    if (cycleBtn) {
+      cycleBtn.textContent = playbackSpeed + 'x';
+    }
+    document.querySelectorAll('.pod-speed-btn').forEach(b => {
+      b.classList.toggle('active', parseFloat(b.dataset.spd) === playbackSpeed);
+    });
   }
 
   function updatePlayerUI() {
@@ -339,7 +373,8 @@ const Podcasts = (function() {
     forward,
     seek,
     seekTrack,
-    setSpeed
+    setSpeed,
+    cycleSpeed
   };
 })();
 

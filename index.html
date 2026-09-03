@@ -584,7 +584,7 @@
 
 
   <!-- Spotify Docked Mini Player (Fixed at bottom above nav) -->
-  <div class="pod-spotify-mini-player" id="podcastPlayerCard">
+  <div class="pod-spotify-mini-player is-hidden" id="podcastPlayerCard">
     <div class="pod-mini-progress-track" onclick="Podcasts.seekTrack(event, this)" title="Cliquer pour naviguer dans l'audio">
       <div class="pod-mini-progress-fill" id="podProgressMiniFill"></div>
     </div>
@@ -597,16 +597,12 @@
         <p class="pod-mini-sub" id="podPlayerSub">Audio haute qualité NotebookLM · Cas &amp; Recommandations EVC</p>
       </div>
       <div class="pod-mini-controls">
-        <button type="button" class="pod-mini-ctrl-btn" onclick="Podcasts.replay(15)" title="Reculer de 15s" aria-label="Reculer de 15s">↺15</button>
+        <button type="button" class="pod-mini-ctrl-btn pod-skip-btn" onclick="Podcasts.replay(15)" title="Reculer de 15s" aria-label="Reculer de 15s">↺15</button>
         <button type="button" class="pod-mini-play-btn" id="podMainPlayBtn" onclick="Podcasts.togglePlay()" aria-label="Lecture / Pause">
           <span class="pod-play-icon">▶</span>
         </button>
-        <button type="button" class="pod-mini-ctrl-btn" onclick="Podcasts.forward(15)" title="Avancer de 15s" aria-label="Avancer de 15s">15↻</button>
-        <div class="pod-speed-selector">
-          <button type="button" class="pod-speed-btn active" data-spd="1" onclick="Podcasts.setSpeed(1, this)">1x</button>
-          <button type="button" class="pod-speed-btn" data-spd="1.25" onclick="Podcasts.setSpeed(1.25, this)">1.25x</button>
-          <button type="button" class="pod-speed-btn" data-spd="1.5" onclick="Podcasts.setSpeed(1.5, this)">1.5x</button>
-        </div>
+        <button type="button" class="pod-mini-ctrl-btn pod-skip-btn" onclick="Podcasts.forward(15)" title="Avancer de 15s" aria-label="Avancer de 15s">15↻</button>
+        <button type="button" class="pod-mini-speed-pill" id="podSpeedCycleBtn" onclick="Podcasts.cycleSpeed()" title="Vitesse de lecture (1x, 1.25x, 1.5x, 2x)" aria-label="Vitesse de lecture">1x</button>
         <button type="button" class="pod-mini-close-btn" onclick="Podcasts.closeMiniPlayer()" aria-label="Fermer le lecteur" title="Fermer le lecteur">✕</button>
       </div>
     </div>
@@ -667,26 +663,26 @@
 <script>
 (function(){
   var steps = [
-    { src: 'data-bundle.js?v=273', label: 'Contenu des chapitres…', pct: 34 },
-    { src: 'practice-data.js?v=273', label: 'Entraînements structurés…', pct: 40 },
-    { src: 'annales-authentiques.js?v=273', label: 'Sources des annales…', pct: 45 },
-    { src: 'annales-texte.js?v=273', label: 'Sujets EVC recherchables…', pct: 50 },
-    { src: 'annales-corrections.js?v=273', label: 'Corrigés pédagogiques…', pct: 53 },
-    { src: 'protocoles-has-officiels.js?v=273', label: 'Conduites HAS…', pct: 57 },
-    { src: 'clinical-pathways.js?v=273', label: 'Référentiel clinique…', pct: 59 },
-    { src: 'notebook-decks-data.js?v=273', label: 'Decks NotebookLM…', pct: 60 },
-    { src: 'podcasts-data.js?v=273', label: 'Podcasts audio…', pct: 62 },
-    { src: 'podcasts-app.js?v=273', label: 'Lecteur audio…', pct: 64 },
-    { src: 'notebook-interactive.js?v=273', label: 'Lecteur présentation…', pct: 65 },
-    { src: 'calculateurs.js?v=273', label: 'Scores & calculateurs…', pct: 70 },
-    { src: 'clinical-assistant.js?v=273', label: 'Consultation guidée…', pct: 73 },
-    { src: 'quiz.js?v=273', label: 'Mode examen…', pct: 75 },
-    { src: 'dashboard.js?v=273', label: 'Tableau de bord…', pct: 80 },
-    { src: 'appsearch.js?v=273', label: 'Recherche…', pct: 85 },
-    { src: 'erreurs-journal.js?v=273', label: 'Fichier erreurs…', pct: 89 },
-    { src: 'graph.js?v=273', label: 'Parcours liés…', pct: 93 },
-    { src: 'brainfeed.js?v=273', label: 'BrainFeed…', pct: 97 },
-    { src: 'app.js?v=273', label: 'Interface…', pct: 100 }
+    { src: 'data-bundle.js?v=274', label: 'Contenu des chapitres…', pct: 34 },
+    { src: 'practice-data.js?v=274', label: 'Entraînements structurés…', pct: 40 },
+    { src: 'annales-authentiques.js?v=274', label: 'Sources des annales…', pct: 45 },
+    { src: 'annales-texte.js?v=274', label: 'Sujets EVC recherchables…', pct: 50 },
+    { src: 'annales-corrections.js?v=274', label: 'Corrigés pédagogiques…', pct: 53 },
+    { src: 'protocoles-has-officiels.js?v=274', label: 'Conduites HAS…', pct: 57 },
+    { src: 'clinical-pathways.js?v=274', label: 'Référentiel clinique…', pct: 59 },
+    { src: 'notebook-decks-data.js?v=274', label: 'Decks NotebookLM…', pct: 60 },
+    { src: 'podcasts-data.js?v=274', label: 'Podcasts audio…', pct: 62 },
+    { src: 'podcasts-app.js?v=274', label: 'Lecteur audio…', pct: 64 },
+    { src: 'notebook-interactive.js?v=274', label: 'Lecteur présentation…', pct: 65 },
+    { src: 'calculateurs.js?v=274', label: 'Scores & calculateurs…', pct: 70 },
+    { src: 'clinical-assistant.js?v=274', label: 'Consultation guidée…', pct: 73 },
+    { src: 'quiz.js?v=274', label: 'Mode examen…', pct: 75 },
+    { src: 'dashboard.js?v=274', label: 'Tableau de bord…', pct: 80 },
+    { src: 'appsearch.js?v=274', label: 'Recherche…', pct: 85 },
+    { src: 'erreurs-journal.js?v=274', label: 'Fichier erreurs…', pct: 89 },
+    { src: 'graph.js?v=274', label: 'Parcours liés…', pct: 93 },
+    { src: 'brainfeed.js?v=274', label: 'BrainFeed…', pct: 97 },
+    { src: 'app.js?v=274', label: 'Interface…', pct: 100 }
   ];
   var i = 0;
   var fill = document.getElementById('plFill');

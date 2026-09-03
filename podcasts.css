@@ -144,34 +144,53 @@
 
 .pod-search-bar input {
   width: 100%;
-  padding: 12px 16px;
-  border-radius: 12px;
-  background: rgba(30, 41, 59, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #fff;
+  padding: 12px 18px;
+  border-radius: 14px;
+  background: var(--bg-card, #ffffff) !important;
+  border: 1px solid var(--border, #cbd5e1) !important;
+  color: var(--text, #0f172a) !important;
   font-size: 0.95rem;
   box-sizing: border-box;
   margin-bottom: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.pod-search-bar input::placeholder {
+  color: var(--text3, #94a3b8) !important;
+}
+
+.pod-search-bar input:focus {
+  outline: none;
+  border-color: #0d9488 !important;
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.2) !important;
+}
+
+[data-theme="dark"] .pod-search-bar input {
+  background: rgba(30, 41, 59, 0.8) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  color: #f8fafc !important;
 }
 
 .pod-category-chips {
   display: flex;
   gap: 8px;
   overflow-x: auto;
-  padding-bottom: 6px;
+  padding-bottom: 8px;
+  scrollbar-width: none;
 }
+.pod-category-chips::-webkit-scrollbar { display: none; }
 
 .pod-chip {
   white-space: nowrap;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #cbd5e1;
-  padding: 6px 14px;
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border, #cbd5e1);
+  color: var(--text2, #475569);
+  padding: 7px 15px;
   border-radius: 20px;
   font-size: 0.82rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s;
 }
 
 .pod-chip.active {
@@ -1385,24 +1404,54 @@ body:has(#vFeed.bf-session-reels.active) .app-nav {
   display: none !important;
 }
 
-#vFeed.bf-session-reels .bf-feed,
-#vFeed.bf-session-reels .bf-slide,
+#vFeed.bf-session-reels .bf-feed {
+  position: relative !important;
+  width: 100vw !important;
+  height: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-y: scroll !important;
+  scroll-snap-type: y mandatory !important;
+  -webkit-overflow-scrolling: touch !important;
+  background: #000000 !important;
+  inset: auto !important;
+}
+
+#vFeed.bf-session-reels .bf-slide {
+  position: relative !important;
+  width: 100vw !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  scroll-snap-align: start !important;
+  scroll-snap-stop: always !important;
+  background: #000000 !important;
+  overflow: hidden !important;
+  inset: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
 #vFeed.bf-session-reels .bf-vertical-reel-container,
 #vFeed.bf-session-reels .bf-reel-single-page,
 #vFeed.bf-session-reels .bf-visual-stack,
 #vFeed.bf-session-reels .bf-reel-fullstack,
 #vFeed.bf-session-reels .bf-media-container,
 #vFeed.bf-session-reels .bf-reel-media {
-  width: 100vw !important;
-  height: 100dvh !important;
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
   max-width: none !important;
   max-height: none !important;
   margin: 0 !important;
   padding: 0 !important;
   border-radius: 0 !important;
   background: #000000 !important;
-  position: absolute !important;
-  inset: 0 !important;
   overflow: hidden !important;
 }
 
@@ -1416,18 +1465,49 @@ body:has(#vFeed.bf-session-reels.active) .app-nav {
   border-radius: 0 !important;
   position: absolute !important;
   inset: 0 !important;
+  z-index: 1 !important;
 }
 
-/* Vertical action controls on right for Reels */
+/* Play overlay visible when video is paused */
+#vFeed.bf-session-reels .bf-reel-play-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 25 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(0, 0, 0, 0.42) !important;
+  cursor: pointer !important;
+}
+
+#vFeed.bf-session-reels .bf-reel-media.is-playing .bf-reel-play-overlay {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Vertical action controls on right for Reels — strictly non-overlapping */
 #vFeed.bf-session-reels .bf-reel-actions-column {
   position: absolute !important;
   right: 14px !important;
-  bottom: 50px !important;
+  bottom: 60px !important;
   z-index: 35 !important;
   display: flex !important;
   flex-direction: column !important;
-  gap: 14px !important;
+  gap: 12px !important;
   align-items: center !important;
+}
+
+#vFeed.bf-session-reels .bf-reel-actions-column button,
+#vFeed.bf-session-reels .bf-reel-actions-column .bf-reel-action-btn,
+#vFeed.bf-session-reels .bf-reel-actions-column .bf-sound-toggle-btn {
+  position: relative !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  margin: 0 !important;
 }
 
 #vFeed.bf-session-reels .bf-reel-scrubber-track {
@@ -1440,52 +1520,71 @@ body:has(#vFeed.bf-session-reels.active) .app-nav {
 }
 
 /* ===============================================================
-   « POUR TOI » CENTERED, MODERN FLASHCARD UX
+   « POUR TOI » & « CAS & PIÈGES » UX AVEC ANTI-CHEVAUCHEMENT TABS
    =============================================================== */
+#vFeed:not(.bf-session-reels) {
+  background: var(--bg-deep, #F1F5F9) !important;
+}
+
 #vFeed:not(.bf-session-reels) .bf-feed {
-  background: var(--bg-deep, #F3F7FE) !important;
+  background: transparent !important;
+  height: 100% !important;
+}
+
+[data-theme="dark"] #vFeed:not(.bf-session-reels) {
+  background: #070e1a !important;
 }
 
 [data-theme="dark"] #vFeed:not(.bf-session-reels) .bf-feed {
-  background: #0B132B !important;
+  background: transparent !important;
 }
 
 #vFeed:not(.bf-session-reels) .bf-slide {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  padding: 10px !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  padding: 0 !important;
+  background: transparent !important;
   box-sizing: border-box !important;
+  overflow: hidden !important;
 }
 
 #vFeed:not(.bf-session-reels) .bf-horiz-page {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  padding: 10px 14px !important;
+  padding: 122px 14px 74px !important;
   box-sizing: border-box !important;
+  height: 100% !important;
+  min-height: 100% !important;
 }
 
 #vFeed:not(.bf-session-reels) .bf-card-shell {
   width: min(94vw, 480px) !important;
   max-width: 480px !important;
   margin: 0 auto !important;
-  padding: 22px 20px 22px !important;
+  padding: 20px 20px 18px !important;
   border-radius: 20px !important;
   background: var(--bg-card, #ffffff) !important;
   border: 1px solid var(--glass-border, #E2EAF9) !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07) !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
-  min-height: min(72vh, 520px) !important;
+  max-height: calc(100% - 10px) !important;
   box-sizing: border-box !important;
 }
 
 [data-theme="dark"] #vFeed:not(.bf-session-reels) .bf-card-shell {
-  background: rgba(21, 32, 56, 0.92) !important;
+  background: rgba(21, 32, 56, 0.94) !important;
   border-color: rgba(255, 255, 255, 0.12) !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45) !important;
+}
+
+#vFeed .bf-page-dots {
+  display: none !important;
 }
 
 #vFeed .bf-bg-emoji {
@@ -1748,15 +1847,15 @@ body:has(#vFeed.bf-session-reels.active) .app-nav {
 /* Spotify Docked Bottom Mini-Player */
 .pod-spotify-mini-player {
   position: fixed !important;
-  bottom: var(--bottom, 72px) !important;
+  bottom: 64px !important;
   left: 0 !important;
   right: 0 !important;
   z-index: 1050 !important;
-  background: rgba(18, 18, 18, 0.96) !important;
+  background: rgba(15, 23, 42, 0.97) !important;
   backdrop-filter: blur(20px) !important;
   -webkit-backdrop-filter: blur(20px) !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.14) !important;
-  box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.45) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 -4px 22px rgba(0, 0, 0, 0.45) !important;
 }
 
 .pod-mini-progress-track {
@@ -1785,15 +1884,15 @@ body:has(#vFeed.bf-session-reels.active) .app-nav {
 }
 
 .pod-mini-cover {
-  width: 42px !important;
-  height: 42px !important;
-  border-radius: 6px !important;
-  background: linear-gradient(135deg, #1e293b, #0f172a) !important;
-  color: #1ed760 !important;
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 8px !important;
+  background: linear-gradient(135deg, #0d9488, #042f2e) !important;
+  color: #5eead4 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  font-size: 0.76rem !important;
+  font-size: 0.78rem !important;
   font-weight: 800 !important;
   flex-shrink: 0 !important;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3) !important;
@@ -1805,7 +1904,7 @@ body:has(#vFeed.bf-session-reels.active) .app-nav {
 }
 
 .pod-mini-title {
-  font-size: 0.88rem !important;
+  font-size: 0.9rem !important;
   font-weight: 700 !important;
   color: #ffffff !important;
   white-space: nowrap !important;
@@ -1831,13 +1930,13 @@ body:has(#vFeed.bf-session-reels.active) .app-nav {
 }
 
 .pod-mini-play-btn {
-  width: 36px !important;
-  height: 36px !important;
+  width: 38px !important;
+  height: 38px !important;
   border-radius: 50% !important;
   border: none !important;
   background: #1ed760 !important;
   color: #000000 !important;
-  font-size: 0.92rem !important;
+  font-size: 0.95rem !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -1851,6 +1950,45 @@ body:has(#vFeed.bf-session-reels.active) .app-nav {
   transform: scale(0.92) !important;
 }
 
+.pod-mini-speed-pill {
+  padding: 5px 9px !important;
+  font-size: 0.74rem !important;
+  border-radius: 10px !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: #1ed760 !important;
+  border: 1px solid rgba(30, 215, 96, 0.35) !important;
+  font-weight: 700 !important;
+  min-width: 34px !important;
+  text-align: center !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+}
+
+.pod-mini-speed-pill:active {
+  transform: scale(0.92) !important;
+  background: rgba(30, 215, 96, 0.25) !important;
+}
+
+.pod-mini-close-btn {
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #94a3b8 !important;
+  border: none !important;
+  font-size: 0.85rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+}
+
+.pod-mini-close-btn:hover {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+
 .pod-mini-ctrl-btn {
   padding: 5px 8px !important;
   font-size: 0.72rem !important;
@@ -1860,6 +1998,25 @@ body:has(#vFeed.bf-session-reels.active) .app-nav {
   border: none !important;
   cursor: pointer !important;
   font-weight: 600 !important;
+}
+
+@media (max-width: 600px) {
+  .pod-skip-btn {
+    display: none !important;
+  }
+  .pod-mini-player-content {
+    padding: 6px 12px !important;
+    gap: 10px !important;
+  }
+  .pod-mini-title {
+    font-size: 0.85rem !important;
+  }
+  .pod-mini-sub {
+    font-size: 0.68rem !important;
+  }
+  #vPodcasts {
+    padding-bottom: 125px !important;
+  }
 }
 
 /* Dark mode overrides for Spotify podcasts */
