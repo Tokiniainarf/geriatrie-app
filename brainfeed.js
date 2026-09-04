@@ -680,7 +680,7 @@ const BrainFeed = (() => {
        ------------------------------------------------------------------ */
         const visualMedias = [
       // ═══════════════════════════════════════════════════════════════
-      // 40 Reels Cliniques EVC (Générés Gemini Notebook)
+      // 49 Reels Cliniques EVC (Générés Gemini Notebook)
       // ═══════════════════════════════════════════════════════════════
       { media: 'images/feed/videos/reel_01_vieillissement_fragilite_fried.mp4', isVideo: true, chapter: 'ch1', title: 'Reel 1 : Vieillissement & Fragilité de Fried', desc: 'Physiopathologie (1+2+3 de Bouchon) & 5 critères phénotypiques de Fried' },
       { media: 'images/feed/videos/reel_02_autonomie_adl_iadl.mp4', isVideo: true, chapter: 'ch3', title: 'Reel 2 : Autonomie : ADL vs IADL', desc: 'Katz ADL (élémentaires) vs Lawton IADL (instrumentales & financières)' },
@@ -722,6 +722,15 @@ const BrainFeed = (() => {
       { media: 'images/feed/videos/reel_38_glucose_5_rehydratation_pieges.mp4', isVideo: true, chapter: 'ch16', title: 'Reel 38 : Pourquoi le G5% ne Remonte pas la Tension', desc: 'Répartition intracellulaire de l\'eau pure vs sérum physiologique isotonique pour l\'hypovolémie' },
       { media: 'images/feed/videos/reel_39_hemorragie_cerebrale_anticoagulants.mp4', isVideo: true, chapter: 'ch16', title: 'Reel 39 : Hémorragie sous Anticoagulants (AOD & AVK)', desc: 'Antagonisation d\'extrême urgence : Idarucizumab (anti-IIa), Andexanet (anti-Xa) ou PPSB' },
       { media: 'images/feed/videos/reel_40_titration_l_thyroxine_hypothyroidie.mp4', isVideo: true, chapter: 'ch16', title: 'Reel 40 : Titration Prudente de la L-Thyroxine', desc: 'Débuter à doses minimes (12.5 µg/j) chez le coronarien âgé pour éviter la décompensation' },
+      { media: 'images/feed/videos/reel_41_cocktail_reins_triple_whammy.mp4', isVideo: true, chapter: 'ch16', title: 'Reel 41 : Le Cocktail qui Détruit les Reins (Triple Whammy)', desc: 'Association fatale AINS + IEC/ARA2 + Diurétique : effondrement de la filtration glomérulaire et anurie aiguë' },
+      { media: 'images/feed/videos/reel_42_spcd_hallucinations_delires_alzheimer.mp4', isVideo: true, chapter: 'ch9', title: 'Reel 42 : Hallucinations & Délires dans l\'Alzheimer (SPCD)', desc: 'Recommandations SFGG/SF3PA : éliminer une cause somatique, diversion, et recours ultra-limité à la Rispéridone' },
+      { media: 'images/feed/videos/reel_43_insomnie_sujet_age_deprescription_bzd.mp4', isVideo: true, chapter: 'ch16', title: 'Reel 43 : Insomnie du Sujet Âgé : Éviter les Somnifères', desc: 'Hygiène du sommeil vs danger mortel des Z-drugs et benzodiazépines (chutes nocturnes et confusion)' },
+      { media: 'images/feed/videos/reel_44_urgence_hypoglycemie_resucrage_g30.mp4', isVideo: true, chapter: 'ch16', title: 'Reel 44 : Urgence Hypoglycémie chez le Sujet Âgé', desc: 'Repérer les signes atypiques, resucrage oral 15g vs injection IV de Glucosé 30% (20 à 30 mL) en urgence' },
+      { media: 'images/feed/videos/reel_45_pneumopathie_inhalation_troubles_deglutition.mp4', isVideo: true, chapter: 'ch2', title: 'Reel 45 : Pneumopathie d\'Inhalation & Fausses Routes', desc: 'Dépistage de la presbyphagie, eau gélifiée, position assise et antibiothérapie probabiliste ciblée' },
+      { media: 'images/feed/videos/reel_46_deprescription_protecteurs_gastriques_ipp.mp4', isVideo: true, chapter: 'ch16', title: 'Reel 46 : Pourquoi Arrêter les Protecteurs Gastriques (IPP)', desc: 'Surprescription iatrogène, risque de Clostridioides difficile, hypomagnésémie et règles de déprescription' },
+      { media: 'images/feed/videos/reel_47_syndrome_de_glissement_urgence_geriatrique.mp4', isVideo: true, chapter: 'ch1', title: 'Reel 47 : Le Piège du Syndrome de Glissement', desc: 'Décompensation rapide post-agression : anorexie, mutisme, adynamie et réanimation gériatrique intensive' },
+      { media: 'images/feed/videos/reel_48_fonction_renale_cockcroft_fonte_musculaire.mp4', isVideo: true, chapter: 'ch16', title: 'Reel 48 : Fonction Rénale : Le Piège de la Fonte Musculaire', desc: 'Créatininémie faussement rassurante chez le sarcopénique : calcul systématique de la clairance (Cockcroft/CKD-EPI)' },
+      { media: 'images/feed/videos/reel_49_depistage_risque_chute_appui_unipodal_tug.mp4', isVideo: true, chapter: 'ch12', title: 'Reel 49 : Dépister le Risque de Chute en 30 Secondes', desc: 'Tests de dépistage rapide en consultation : appui unipodal (<5s), Timed Up and Go (TUG) et lever de chaise' },
 
       // Stills éducatifs et schémas complémentaires
       { media: 'images/feed/educatif/delirium-hypoactif.webp', title: 'Delirium hypoactif : le calme trompeur' },
