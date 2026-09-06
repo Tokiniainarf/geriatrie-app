@@ -251,3 +251,41 @@ button {cursor:pointer}
 #vPodcasts .pod-spotify-item {background:#192b21!important;border-color:#35513e!important}
 #vPodcasts .pod-spotify-item:hover {background:#233e2d!important}
 #vPodcasts .pod-spotify-circle-btn {background:#88e5a9!important;color:#11241a!important}
+/* Learning feed: a publication, clear actions, and room to read. */
+#vFeed:not(.bf-session-reels) {background:var(--bg-deep)!important}
+#vFeed:not(.bf-session-reels) .bf-header {background:var(--bg-base)!important;color:var(--text)!important;border-bottom:1px solid var(--border)!important;box-shadow:none!important}
+#vFeed:not(.bf-session-reels) .bf-header-title strong {color:var(--text)!important;letter-spacing:-.04em;font-size:1.5rem}
+#vFeed:not(.bf-session-reels) .bf-header-title span {color:var(--text2)!important}
+#vFeed:not(.bf-session-reels) .bf-horiz-page {padding:174px 16px 92px!important}
+#vFeed:not(.bf-session-reels) .bf-card-shell {width:min(94vw,560px)!important;max-width:560px!important;padding:24px!important;border-radius:24px!important;background:var(--bg-card)!important;border-color:var(--border)!important;box-shadow:0 16px 48px #102b1710!important;overflow-y:auto!important}
+#vFeed:not(.bf-session-reels) .bf-question-text {font-size:clamp(1.2rem,3vw,1.65rem)!important;line-height:1.4!important;letter-spacing:-.025em}
+#vFeed:not(.bf-session-reels) .bf-actions {display:flex!important;position:absolute!important;bottom:12px!important;left:50%!important;right:auto!important;transform:translateX(-50%)!important;flex-direction:row!important;gap:8px!important;width:min(92%,480px)!important;justify-content:space-around!important;background:var(--bg-card)!important;border:1px solid var(--border)!important;border-radius:20px!important;padding:8px!important}
+#vFeed:not(.bf-session-reels) .bf-action-btn {color:var(--text)!important;background:transparent!important;box-shadow:none!important;min-width:56px!important;min-height:48px!important}
+#vFeed:not(.bf-session-reels) .bf-action-btn span {color:var(--text2)!important;text-shadow:none!important;font-size:.7rem!important}
+#vFeed:not(.bf-session-reels) .bf-sub-chip.active {background:var(--accent)!important;color:var(--bg-base)!important}
+#vFeed:not(.bf-session-reels) .bf-toast {display:block!important}
+/* Patient: a legible, calm sequence; clinical rules remain in their engine. */
+#vClinique .clinical-hero {background:var(--ws-paper);color:var(--text);border:1px solid var(--border);box-shadow:none;border-radius:24px;padding:32px}
+#vClinique .clinical-hero h1 {color:var(--text);font-size:clamp(2rem,4vw,3.5rem);letter-spacing:-.045em}
+#vClinique .clinical-hero p {color:var(--text2);font-size:1rem;line-height:1.65}
+#vClinique .clinical-eyebrow {color:var(--accent);letter-spacing:.12em}
+#vClinique .clinical-context-card {background:var(--bg-card);color:var(--text);border:1px solid var(--border);border-radius:16px;min-height:150px;box-shadow:none}
+#vClinique .clinical-context-card.is-selected {background:var(--accent-soft);border:2px solid var(--accent)}
+#vClinique .clinical-context-card small {display:block;color:var(--text2);font-size:.85rem;line-height:1.5}
+#vClinique .clinical-section-heading h2 {font-size:1.2rem}
+#vClinique .clinical-section-heading p,#vClinique .clinical-step-head p {font-size:.95rem;line-height:1.6}
+#vClinique .clinical-stepper {gap:6px;padding:10px;border-radius:16px}
+#vClinique .clinical-stepper button {min-height:60px;min-width:64px}
+#vClinique .clinical-stepper button small {display:block;font-size:.75rem}
+#vClinique input,#vClinique select {min-height:46px;font-size:1rem}
+#vClinique textarea {font-size:1rem;line-height:1.6}
+#vClinique .clinical-primary-btn {background:var(--accent);color:var(--bg-base);min-height:48px;box-shadow:none;border-radius:12px}
+@media(max-width:600px){
+ #vClinique .clinical-hero {padding:24px 18px}
+ #vClinique .clinical-context-grid {grid-template-columns:1fr}
+ #vClinique .clinical-context-card {min-height:100px;text-align:left}
+ #vFeed:not(.bf-session-reels) .bf-card-shell {padding:18px!important}
+}
+@media(max-height:600px){#vFeed:not(.bf-session-reels) .bf-horiz-page{padding-top:165px!important;padding-bottom:80px!important}}
+#vClinique .clinical-privacy-card {background:var(--bg-base);border:1px solid var(--border);color:var(--text)}
+#vClinique .clinical-privacy-card small {color:var(--text2);font-size:.8rem;line-height:1.5}

@@ -7,7 +7,7 @@
     "dev": "vite --host",
     "build": "node tools/build-static.js",
     "preview": "vite preview",
-    "test": "node tests/run-e2e.js && node tests/scores_protocol_coherence.js && node --test tests/service-worker.test.js tests/dashboard.test.js"
+    "test": "node tests/run-e2e.js && node tests/scores_protocol_coherence.js && node --test tests/service-worker.test.js tests/dashboard.test.js tests/brainfeed-media.test.js"
   },
   "devDependencies": {
     "vite": "^8.1.5"

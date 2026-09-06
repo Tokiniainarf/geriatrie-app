@@ -1352,14 +1352,11 @@ const BrainFeed = (() => {
       if (label) label.textContent = isSoundEnabled ? 'Son actif' : 'Son coupé';
     });
 
-    document.querySelectorAll('video').forEach(v => {
+    document.querySelectorAll('#bfFeed video').forEach(v => {
       v.muted = !isSoundEnabled;
-      if (isSoundEnabled) {
-        v.volume = 1.0;
-        const p = v.play();
-        if (p && typeof p.catch === 'function') p.catch(() => {});
-      }
+      if (isSoundEnabled) v.volume = 1.0;
     });
+    syncSlideMedia(activeSlide(), true);
   }
 
       function renderVisual(card, slideIdx) {
@@ -2652,6 +2649,7 @@ const BrainFeed = (() => {
   }
 
   function destroy() {
+    document.querySelectorAll('#bfFeed video').forEach(video => video.pause());
     if (observer) observer.disconnect();
     activeTimers.forEach(t => clearTimeout(t));
     activeTimers.clear();
@@ -2690,22 +2688,7 @@ const BrainFeed = (() => {
 
 // Expose for inline handlers + cross-scope access (const is not a window property).
 
-// Mobile Touch Unlock: Déverrouille la lecture audio dès le premier toucher utilisateur
-if (typeof document !== 'undefined') {
-  let bf_touch_unlocked = false;
-  document.addEventListener('touchstart', function onFirstTouch() {
-    if (bf_touch_unlocked) return;
-    bf_touch_unlocked = true;
-    document.querySelectorAll('.bf-reel-video').forEach(v => {
-      if (isSoundEnabled) {
-        v.muted = false;
-      }
-      if (v.paused && v.closest('.bf-slide-active')) {
-        v.play().catch(() => {});
-      }
-    });
-  }, { passive: true, once: true });
-}
+// Audio is unlocked only by the player's explicit sound/play controls.
 
 if (typeof window !== 'undefined') window.BrainFeed = BrainFeed;
 
