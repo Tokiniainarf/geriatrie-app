@@ -1,0 +1,12 @@
+const {test}=require('node:test');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const vm=require('node:vm');
+const path=require('node:path');
+const source=fs.readFileSync(path.join(__dirname,'../dashboard.js'),'utf8').replace('return { render, destroy };','return { dailyCountFor, currentStreakFor, chapterCompletionPct, buildActivityByDay, getAverageQuizScore };');
+const dashboard=vm.runInNewContext(source+';Dashboard',{Date});
+test('yesterday does not count toward today',()=>assert.equal(dashboard.dailyCountFor({dailyDone:20,lastDay:'Mon Jan 01 2001'}),0));
+test('current daily counter uses the feed dailyDate field',()=>assert.equal(dashboard.dailyCountFor({dailyDone:7,dailyDate:new Date().toDateString()}),7));
+test('opening a chapter does not grant mastery',()=>assert.equal(dashboard.chapterCompletionPct('ch1',['ch1'],{},[{id:'a',chapter:'ch1'}]),0));
+test('dashboard does not invent activity for an inactive day',()=>assert.deepEqual(Object.keys(dashboard.buildActivityByDay({totalCards:100,dailyDone:20,lastDay:'Mon Jan 01 2001'},{})),[]));
+test('a zero percent quiz score is not replaced by another field',()=>assert.equal(dashboard.getAverageQuizScore({quizHistory:[{pct:0,score:80}]},{},{},[]),0));

@@ -4,14 +4,27 @@
   "description": "Manuel de gériatrie interactif — 20 chapitres (CNEG 5e éd.), fiches synthèse, flashcards, feed de révision et entraînement EVC.",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#F3F7FE",
-  "theme_color": "#2563EB",
-  "orientation": "portrait-primary",
+  "background_color": "#F6F7F3",
+  "theme_color": "#285F47",
+  "orientation": "any",
   "icons": [
-    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
-    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
   ],
-  "categories": ["medical", "education"],
+  "categories": [
+    "medical",
+    "education"
+  ],
   "lang": "fr",
   "scope": "./"
 }

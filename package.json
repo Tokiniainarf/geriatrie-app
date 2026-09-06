@@ -5,8 +5,9 @@
   "description": "Gériatrie — Manuel Interactif (CNEG 5e éd.) · Édition Pop 2025",
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "node tools/build-static.js",
+    "preview": "vite preview",
+    "test": "node tests/run-e2e.js && node tests/scores_protocol_coherence.js && node --test tests/service-worker.test.js tests/dashboard.test.js"
   },
   "devDependencies": {
     "vite": "^8.1.5"

@@ -31,7 +31,7 @@ const Dashboard = (() => {
 
     const activityByDay = buildActivityByDay(bfStats, revStats);
     const activeDays = new Set(Object.keys(activityByDay).filter(k => activityByDay[k] > 0));
-    const currentStreak = bfStats.streak || 0;
+    const currentStreak = currentStreakFor(bfStats);
     const bestStreak = Math.max(
       bfStats.bestStreak || 0,
       currentStreak,
@@ -47,7 +47,7 @@ const Dashboard = (() => {
     const totalChapters = typeof APP_DATA !== 'undefined' ? APP_DATA.chapters.length : 20;
     const readPct = Math.round((read.length / totalChapters) * 100);
 
-    const dailyDone = bfStats.dailyDone || 0;
+    const dailyDone = dailyCountFor(bfStats);
     const dailyPct = Math.min(100, Math.round((dailyDone / DAILY_GOAL) * 100));
     const ringOffset = Math.round(283 * (1 - dailyPct / 100));
 
@@ -76,7 +76,7 @@ const Dashboard = (() => {
         <div class="dash-card dash-card-quiz">
           <div class="dash-card-icon">🎯</div>
           <div class="dash-card-value">${avgQuizScore != null ? `<span class="dash-counter" data-count="${avgQuizScore}">0</span>%` : '—'}</div>
-          <div class="dash-card-label">Score moyen (révisions)</div>
+          <div class="dash-card-label">Indice de révision (estimé)</div>
         </div>
 
         <div class="dash-card dash-card-time">
@@ -162,7 +162,7 @@ const Dashboard = (() => {
       <div class="dash-section">
         <h2>Progression par chapitre</h2>
         <div class="dash-chapters">${buildChapterBars(read, srs, allFlash)}</div>
-        <p class="dash-ch-summary">Chapitres lus : <strong>${readPct}%</strong> (${read.length}/${totalChapters})</p>
+        <p class="dash-ch-summary">Chapitres consultés : <strong>${readPct}%</strong> (${read.length}/${totalChapters}). Les barres reflètent les cartes révisées, pas la simple ouverture du chapitre.</p>
       </div>
 
       <div class="dash-section dash-section-weak">
@@ -185,20 +185,23 @@ const Dashboard = (() => {
     runDashboardAnimations(container);
   }
 
+  function dailyCountFor(stats) {
+    return (stats.dailyDate || stats.lastDay) === new Date().toDateString()
+      ? Math.max(0, Number(stats.dailyDone) || 0) : 0;
+  }
+
+  function currentStreakFor(stats) {
+    const yesterday = new Date(); yesterday.setDate(yesterday.getDate() - 1);
+    return [new Date().toDateString(), yesterday.toDateString()].includes(stats.lastDay)
+      ? Math.max(0, Number(stats.streak) || 0) : 0;
+  }
+
   function buildActivityByDay(bfStats, revStats) {
     const map = { ...(bfStats.activityByDay || {}) };
     const today = new Date().toDateString();
-    if (bfStats.dailyDone) {
-      map[today] = Math.max(map[today] || 0, bfStats.dailyDone);
-    }
-    if (bfStats.totalCards && !map[today]) {
-      map[today] = Math.max(map[today] || 0, Math.min(bfStats.dailyDone || 1, 5));
-    }
-    getActiveDayKeys(bfStats).forEach(k => {
-      if (!map[k]) map[k] = 1;
-    });
-    if (revStats.lastSessionDay) {
-      map[revStats.lastSessionDay] = Math.max(map[revStats.lastSessionDay] || 0, 3);
+    const dailyDone = dailyCountFor(bfStats);
+    if (dailyDone) {
+      map[today] = Math.max(map[today] || 0, dailyDone);
     }
     return map;
   }
@@ -232,7 +235,7 @@ const Dashboard = (() => {
   function getAverageQuizScore(bfStats, revStats, srs, allFlash) {
     const history = bfStats.quizHistory || [];
     if (history.length) {
-      const sum = history.reduce((s, h) => s + (h.pct || h.score || 0), 0);
+      const sum = history.reduce((s, h) => s + (h.pct ?? h.score ?? 0), 0);
       return Math.round(sum / history.length);
     }
     const byCh = revStats.byChapter || {};
@@ -397,7 +400,7 @@ const Dashboard = (() => {
 
   function chapterCompletionPct(chId, read, srs, allFlash) {
     const cards = allFlash.filter(fc => fc.chapter === chId);
-    if (!cards.length) return read.includes(chId) ? 100 : 0;
+    if (!cards.length) return 0;
     let score = 0;
     cards.forEach(fc => {
       const e = srs[fc.id];
@@ -406,7 +409,6 @@ const Dashboard = (() => {
       else score += 45;
     });
     const srsPct = Math.round(score / cards.length);
-    if (read.includes(chId)) return Math.max(srsPct, 100);
     return srsPct;
   }
 

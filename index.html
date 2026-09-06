@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes">
-<meta name="theme-color" content="#F3F7FE">
+<meta name="theme-color" content="#F6F7F3">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Gériatrie">
@@ -19,7 +19,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<link rel="stylesheet" href="style.css?v=279"><link rel="stylesheet" href="vibrant.css?v=279">
+<link rel="stylesheet" href="style.css?v=279">
 <style>
 /* Critical preloader (inline so it shows before CSS/JS) */
 #appPreloader{position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:radial-gradient(ellipse 90% 55% at 15% 0%,rgba(37,99,235,.16),transparent 55%),radial-gradient(ellipse 70% 50% at 90% 15%,rgba(255,93,122,.14),transparent 55%),radial-gradient(ellipse 70% 55% at 50% 110%,rgba(14,165,233,.16),transparent 55%),linear-gradient(180deg,#FAFCFF,#EDF3FE);color:#16264A;font-family:Figtree,system-ui,sans-serif;transition:opacity .45s ease,visibility .45s}
@@ -36,8 +36,10 @@
 @media (prefers-reduced-motion: reduce){#appPreloader .pl-logo,#appPreloader .pl-fill{animation:none}}
 </style>
   <link rel="stylesheet" href="podcasts.css?v=279">
+<link rel="stylesheet" href="workspace.css?v=281">
 </head>
 <body>
+<a class="skip-link" href="#mainContent">Aller au contenu</a>
 <div id="appPreloader" role="status" aria-live="polite" aria-busy="true">
   <div class="pl-logo" aria-hidden="true">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"/></svg>
@@ -49,8 +51,9 @@
 </div>
 <div class="reading-progress" id="readingProgress"></div>
 
+<aside class="workspace-sidebar" id="workspaceSidebar"><a class="ws-brand" href="#" onclick="sw('home');return false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16M12 5C9 3 5 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-3-1-7-1-10 1Z"/></svg><span>Gériatrie<small>L’ATELIER DES SAVOIRS</small></span></a><nav aria-label="Navigation principale"><div class="ws-nav-label">ESPACE DE TRAVAIL</div><button type="button" data-workspace-view="home" onclick="sw('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg><span>Vue d’ensemble</span></button><button type="button" data-workspace-view="library" onclick="WorkspaceUI.openLibrary()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16M12 5C9 3 5 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-3-1-7-1-10 1Z"/></svg><span>Le manuel</span></button><button type="button" data-workspace-view="synth" onclick="sw('synth')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H5v20h14V7l-5-5Zm0 0v6h5M8 12h8m-8 4h6"/></svg><span>Fiches de synthèse</span></button><button type="button" data-workspace-view="podcasts" onclick="sw('podcasts')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14v-3a9 9 0 0 1 18 0v3"/><rect x="3" y="12" width="4" height="8" rx="2"/><rect x="17" y="12" width="4" height="8" rx="2"/></svg><span>Podcasts</span></button><div class="ws-nav-label">ENTRAÎNEMENT</div><button type="button" data-workspace-view="flash" onclick="sw('flash')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="6" width="15" height="15" rx="3"/><path d="M17 3H6a3 3 0 0 0-3 3v11M11 12h5m-5 4h3"/></svg><span>Flashcards</span></button><button type="button" data-workspace-view="annales" onclick="sw('annales')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H5v20h14V7l-5-5Zm0 0v6h5M8 12h8m-8 4h6"/></svg><span>Annales EVC</span></button><button type="button" data-workspace-view="dash" onclick="sw('dash')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 3v17h17M8 15l4-5 4 2 5-7"/></svg><span>Ma progression</span></button><div class="ws-nav-label">PRATIQUE</div><button type="button" data-workspace-view="scores" onclick="sw('scores')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="3"/><path d="M8 6h8M8 11h1m6 0h1m-8 4h1m6 0h1m-8 4h1m6 0h1"/></svg><span>Scores & calculateurs</span></button><button type="button" data-workspace-view="proto" onclick="sw('proto')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/><path d="m4 12 4 0 2-4 3 8 2-4h5"/></svg><span>Protocoles</span></button><button type="button" data-workspace-view="dict" onclick="sw('dict')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16M12 5C9 3 5 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-3-1-7-1-10 1Z"/></svg><span>Dictionnaire</span></button></nav><div class="ws-sidebar-bottom"><div class="ws-edition"><span class="ws-edition-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 3C10 1 3 7 5 14s15 5 15-11ZM5 21l10-12"/></svg></span><strong>Apprendre. Comprendre.<br>Prendre soin.</strong><small>CNEG · 5e édition · 2021</small></div><button type="button" onclick="sw('set')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3"/><circle cx="15" cy="17" r="3"/></svg>Réglages</button></div></aside><button class="ws-scrim" type="button" aria-label="Fermer la navigation" onclick="WorkspaceUI.toggleMenu(false)" hidden></button>
 <header class="top-bar">
-  <div class="top-left">
+  <div class="top-left"><button class="top-btn ws-menu" aria-label="Ouvrir la navigation" aria-expanded="false" aria-controls="workspaceSidebar" onclick="WorkspaceUI.toggleMenu()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
     <button type="button" class="top-btn top-back-btn" id="btnBack" onclick="goBack()" aria-label="Retour" title="Retour" hidden>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
     </button>
@@ -58,11 +61,11 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"/></svg>
     </div>
     <div>
-      <h1>Gériatrie</h1>
-      <div class="top-sub">5e édition · CNEG · Boddaert</div>
+      <div class="ws-top-title" id="workspaceTitle">Votre espace de révision</div>
+      <div class="top-sub">Le savoir au service du soin</div>
     </div>
   </div>
-  <div class="top-actions">
+  <div class="top-actions"><button class="ws-global-search" aria-label="Rechercher dans le manuel" onclick="toggleSearch()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span>Rechercher dans le manuel</span><kbd>/</kbd></button>
     <button class="top-btn" onclick="toggleSearch()" aria-label="Rechercher" title="Rechercher">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
     </button>
@@ -72,89 +75,36 @@
     </button>
   </div>
   <div class="search-bar" id="searchBar">
-    <input type="text" id="searchInput" placeholder="Chercher un chapitre, concept, flashcard..." oninput="onSearch(this.value)">
+    <input type="text" id="searchInput" aria-label="Recherche dans toutes les ressources" placeholder="Chercher un chapitre, concept, flashcard..." oninput="onSearch(this.value)">
     <button onclick="toggleSearch()">Annuler</button>
   </div>
   <div id="searchResults" class="search-results-dropdown"></div>
 </header>
 
-<main class="main-content">
+<main class="main-content" id="mainContent" tabindex="-1">
   <!-- HOME -->
-  <div class="view active" id="vHome">
-    <div class="hero-card">
-      <div class="hero-gradient"></div>
-      <img src="images/chapters/ai-heroes/hero-main.jpg" class="hero-main-img" alt="Gériatrie" loading="lazy">
-      <div class="hero-content">
-        <div class="hero-title">Gériatrie</div>
-        <div class="hero-sub">5e édition · Collège National des Enseignants de Gériatrie · Pr Jacques Boddaert · Elsevier Masson 2021</div>
-        <div class="hero-actions">
-          <button type="button" class="hero-btn" onclick="sw('graph')">Parcours liés</button>
-          <button type="button" class="hero-btn hero-btn-ghost" onclick="sw('fav')">Favoris</button>
-        </div>
-      </div>
-    </div>
-    <div class="stats-bar" id="statsBar">
-      <div class="stat"><span class="stat-num">20</span><span class="stat-label">chap.</span></div>
-      <div class="stat"><span class="stat-num">70</span><span class="stat-label">visuels</span></div>
-      <div class="stat"><span class="stat-num">11</span><span class="stat-label">ITEMs</span></div>
-      <div class="stat stat-click" role="button" tabindex="0" onclick="sw('fav')" onkeydown="if(event.key==='Enter')sw('fav')"><span class="stat-num" id="statFav">0</span><span class="stat-label">fav.</span></div>
-    </div>
-
-    <button type="button" class="clinical-home-card" onclick="sw('clinique')">
-      <span class="clinical-home-visual" aria-hidden="true">
-        <i>+</i>
-        <b>🩺</b>
-      </span>
-      <span class="clinical-home-copy">
-        <small>Assistant clinique · aucune donnée enregistrée</small>
-        <strong>Recevoir un patient</strong>
-        <span>Saisissez le motif, les constantes et les signes : l’app adapte les questions, le bilan, les scores et la conduite à tenir.</span>
-      </span>
-      <span class="clinical-home-action">Commencer <b>→</b></span>
-    </button>
-
-    <!-- ACCÈS RAPIDES (dédupliqués — pas de double Synth/Items ni Garde=Protocoles) -->
-    <div class="quick-access-grid">
-      <button class="qa-card" onclick="sw('synth')">
-        <span class="qa-icon">📋</span>
-        <span class="qa-label">Synthèses</span>
-      </button>
-      <button class="qa-card" onclick="sw('podcasts')">
-        <span class="qa-icon">🎙️</span>
-        <span class="qa-label">Podcasts</span>
-      </button>
-      <button class="qa-card" onclick="sw('flash')">
-        <span class="qa-icon">🎴</span>
-        <span class="qa-label">Flashcards</span>
-      </button>
-      <button class="qa-card" onclick="sw('quiz')">
-        <span class="qa-icon">🧠</span>
-        <span class="qa-label">Quiz</span>
-      </button>
-      <button class="qa-card" onclick="sw('scores')">
-        <span class="qa-icon">🧮</span>
-        <span class="qa-label">Scores</span>
-      </button>
-      <button class="qa-card" onclick="sw('proto')">
-        <span class="qa-icon">📋</span>
-        <span class="qa-label">Protocoles</span>
-      </button>
-      <button class="qa-card" onclick="sw('annales')">
-        <span class="qa-icon">📝</span>
-        <span class="qa-label">Annales</span>
-      </button>
-      <button class="qa-card" onclick="sw('dash')">
-        <span class="qa-icon">📈</span>
-        <span class="qa-label">Progression</span>
-      </button>
-    </div>
-    
-    <div id="recent" style="display:none"></div>
-    <div class="section-header">Partie I — Connaissances</div>
-    <div id="p1"></div>
-    <div class="section-header">Partie II — Entraînement</div>
-    <div id="p2"></div>
+  <section class="view active" id="vHome" aria-labelledby="homeHeading">
+ <div class="ws-welcome"><div><div class="ws-eyebrow">VOTRE CAMPUS, À VOTRE RYTHME</div><h1 id="homeHeading">Un peu chaque jour.<br><em>Beaucoup pour demain.</em></h1><p>Retrouvez vos repères, cultivez vos connaissances.</p></div><span class="ws-date" id="workspaceDate"></span></div>
+ <div class="ws-home-grid"><div class="ws-home-primary">
+  <section class="ws-hero" aria-labelledby="wsHeroTitle"><div class="ws-hero-copy"><span class="ws-pill">LE MANUEL DE RÉFÉRENCE</span><h2 id="wsHeroTitle">La gériatrie,<br>dans toute sa richesse.</h2><p>20 chapitres pour relier les connaissances<br class="ws-desktop-br"> à la pratique, un sujet à la fois.</p><button class="ws-primary" id="resumeStudy" type="button">Ouvrir le manuel <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></button><span class="ws-hero-foot">CNEG · 5e édition · Elsevier Masson</span></div>
+   <div class="ws-book-scene" aria-hidden="true"><div class="ws-orbit orbit-one"></div><div class="ws-orbit orbit-two"></div><div class="ws-book-shadow"></div><div class="ws-book"><div class="ws-book-spine"></div><div class="ws-book-face"><div class="ws-book-top">COLLÈGE NATIONAL<br>DES ENSEIGNANTS DE GÉRIATRIE</div><div class="ws-book-title">Gériatrie<span>5<sup>e</sup> édition</span></div><div class="ws-book-lines"><i></i><i></i><i></i><i></i></div><span class="ws-book-bottom">LES RÉFÉRENTIELS DES COLLÈGES</span></div></div><span class="ws-book-label">Le socle de vos révisions</span></div>
+  </section>
+  <div class="ws-shortcuts" aria-label="Raccourcis de révision">
+   <button type="button" onclick="sw('flash')"><span class="ws-shortcut-icon mint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="6" width="15" height="15" rx="3"/><path d="M17 3H6a3 3 0 0 0-3 3v11M11 12h5m-5 4h3"/></svg></span><span><strong>Flashcards</strong><small>Ancrer les essentiels</small></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></button>
+   <button type="button" onclick="sw('annales')"><span class="ws-shortcut-icon peach"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H5v20h14V7l-5-5Zm0 0v6h5M8 12h8m-8 4h6"/></svg></span><span><strong>Annales EVC</strong><small>S’entraîner en situation</small></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></button>
+   <button type="button" onclick="sw('podcasts')"><span class="ws-shortcut-icon lavender"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14v-3a9 9 0 0 1 18 0v3"/><rect x="3" y="12" width="4" height="8" rx="2"/><rect x="17" y="12" width="4" height="8" rx="2"/></svg></span><span><strong>Podcasts</strong><small>Réviser autrement</small></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></button>
   </div>
+  <section class="ws-library" id="workspaceLibrary" aria-labelledby="libraryHeading"><div class="ws-section-heading"><div><span class="ws-eyebrow">EXPLORER & COMPRENDRE</span><h2 id="libraryHeading" tabindex="-1">Votre bibliothèque</h2></div><span id="libraryCount">20 chapitres</span></div>
+   <div class="ws-library-tools"><div class="ws-filters" role="group" aria-label="Filtrer les chapitres"><button type="button" data-filter="all" aria-pressed="true">Tous les chapitres</button><button type="button" data-filter="unseen" aria-pressed="false">À découvrir</button><button type="button" data-filter="favorites" aria-pressed="false">Favoris <span id="statFav">0</span></button></div><label class="ws-library-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input type="search" id="librarySearch" placeholder="Un thème, un item…" aria-label="Filtrer la bibliothèque"></label></div>
+   <div class="ws-chapter-grid" id="p1"></div><div class="ws-part-label" id="partTwoLabel">Partie II · Entraînement</div><div class="ws-chapter-grid" id="p2"></div><p class="ws-no-results" id="libraryEmpty" hidden>Aucun chapitre trouvé. Essayez un autre thème ou un autre filtre.</p><span class="ws-sr-only" id="libraryStatus" role="status"></span>
+  </section>
+ </div><aside class="ws-home-secondary" aria-label="Votre révision du jour">
+  <section class="ws-daily"><div class="ws-panel-heading"><span>Votre fil du jour</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h2>Gardez le rythme.</h2><p>Chaque notion revue compte.</p><div class="ws-goal-ring" id="dailyRing"><div><strong id="dailyCount">0<span>/ 20</span></strong><small>cartes aujourd’hui</small></div></div><button class="ws-primary" type="button" onclick="sw('feed')">Ma session de révision <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></button><div class="ws-streak" id="workspaceStreak">Votre prochaine session vous attend.</div></section>
+  <section class="ws-progress-panel"><div class="ws-panel-heading"><span>Votre parcours</span><button type="button" onclick="sw('dash')" aria-label="Voir ma progression"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></button></div><div class="ws-read-count"><strong id="workspaceRead">0</strong><span>/ 20 chapitres consultés</span></div><div class="ws-read-track" role="progressbar" aria-label="Chapitres consultés" aria-valuemin="0" aria-valuemax="20" aria-valuenow="0" id="workspaceProgress"><span></span></div><p>Consulter est un premier pas.<br>Réviser aide à mémoriser.</p></section>
+  <button class="ws-clinical" type="button" onclick="sw('clinique')"><span class="ws-clinical-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/><path d="m4 12 4 0 2-4 3 8 2-4h5"/></svg></span><span class="ws-eyebrow">DU SAVOIR À LA PRATIQUE</span><strong>Structurer son<br>raisonnement clinique.</strong><span>Motif, signes, scores et repères :<br>un parcours guidé pour s’orienter.</span><span class="ws-text-link">Explorer l’assistant <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></span><small>Support pédagogique · à confronter à l’avis clinique</small></button>
+  <div class="ws-local-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>Votre progression reste<br>dans ce navigateur.</span></div>
+ </aside></div><footer class="ws-footer"><span>Gériatrie · L’atelier des savoirs</span><span>Conçu pour apprendre, jour après jour.</span></footer>
+</section>
 
   <!-- ASSISTANT CLINIQUE -->
   <div class="view" id="vClinique">
@@ -241,7 +191,7 @@
     <div class="flash-hdr">
       <div class="flash-stats"><span id="flashProg">0 / 0</span></div>
       <div class="flash-filters">
-        <select id="flashChapFilter" class="flash-select" onchange="filterFlashChap(this.value)" style="margin-right:8px; padding:4px 8px; border-radius:6px; background:var(--bg-card); color:var(--text); border:1px solid var(--border); font-size:0.85rem; font-family:inherit;">
+        <select id="flashChapFilter" aria-label="Chapitre à réviser" class="flash-select" onchange="filterFlashChap(this.value)" style="margin-right:8px; padding:4px 8px; border-radius:6px; background:var(--bg-card); color:var(--text); border:1px solid var(--border); font-size:0.85rem; font-family:inherit;">
           <option value="ch1" selected>Ch. 1 — Biologie du vieillissement</option>
         </select>
         <button class="flash-filt active" data-r="all" onclick="filterFlash('all',this)">Tous</button>
@@ -250,7 +200,7 @@
       </div>
     </div>
     <div class="flash-container">
-      <div class="flash-card" id="flashCard" onclick="this.classList.toggle('flipped')">
+      <div class="flash-card" id="flashCard" role="button" tabindex="0" aria-label="Afficher la réponse" aria-describedby="flashQ" onclick="this.classList.toggle('flipped')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click()}">
         <div class="flash-front">
           <div class="flash-ch" id="flashCh"></div>
           <div class="flash-rang" id="flashRang"></div>
@@ -274,7 +224,7 @@
   <div class="view" id="vCh">
     <div class="ch-hero" id="chHero">
       <div class="ch-num" id="chNum"></div>
-      <div class="ch-title" id="chT"></div>
+      <h1 class="ch-title" id="chT"></h1>
       <div class="ch-tags" id="chTags"></div>
     </div>
     <div class="ch-toolbar" id="chToolbar"></div>
@@ -699,36 +649,7 @@
     </div>
   </div>
 
-<nav class="bottom-nav" id="bnav">
-  <button class="active" data-v="home" onclick="sw('home')" title="Accueil">
-    <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-    <span>Accueil</span>
-  </button>
-  <button data-v="dict" onclick="sw('dict')" title="Dictionnaire médical">
-    <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-    <span>Dict</span>
-  </button>
-  <button data-v="feed" onclick="sw('feed')" title="BrainFeed révision">
-    <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
-    <span>Feed</span>
-  </button>
-  <button data-v="annales" onclick="sw('annales')" title="Annales EVC">
-    <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-    <span>Annales</span>
-  </button>
-  <button data-v="scores" onclick="sw('scores')" title="Medicalcul (scores gériatriques)">
-    <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
-    <span>Scores</span>
-  </button>
-  <button data-v="proto" onclick="sw('proto')" title="Protocoles">
-    <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/><path d="M14 8h3"/><path d="M14 12h3"/><path d="M14 16h3"/></svg>
-    <span>Protocoles</span>
-  </button>
-  <button data-v="set" onclick="sw('set')" title="Réglages">
-    <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-    <span>Réglages</span>
-  </button>
-</nav>
+<nav class="bottom-nav" id="bnav" aria-label="Navigation mobile"><button type="button" data-v="home" onclick="sw('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg><span>Accueil</span></button><button type="button" data-v="flash" onclick="sw('flash')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="6" width="15" height="15" rx="3"/><path d="M17 3H6a3 3 0 0 0-3 3v11M11 12h5m-5 4h3"/></svg><span>Réviser</span></button><button type="button" data-v="scores" onclick="sw('scores')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="3"/><path d="M8 6h8M8 11h1m6 0h1m-8 4h1m6 0h1m-8 4h1m6 0h1"/></svg><span>Scores</span></button><button type="button" data-v="dash" onclick="sw('dash')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 3v17h17M8 15l4-5 4 2 5-7"/></svg><span>Parcours</span></button><button type="button" aria-label="Ouvrir le menu" aria-controls="workspaceSidebar" aria-expanded="false" onclick="WorkspaceUI.toggleMenu()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>Menu</span></button></nav>
 
 <div class="concept-modal" id="conceptModal" onclick="if(event.target===this)closeConceptModal()">
   <div class="concept-pan">
@@ -749,6 +670,7 @@
 <script>
 (function(){
   var steps = [
+    { src: 'workspace.js?v=281', label: 'Votre espace…', pct: 8 },
     { src: 'data-bundle.js?v=279', label: 'Contenu des chapitres…', pct: 34 },
     { src: 'practice-data.js?v=279', label: 'Entraînements structurés…', pct: 40 },
     { src: 'annales-authentiques.js?v=279', label: 'Sources des annales…', pct: 45 },
@@ -770,7 +692,9 @@
     { src: 'brainfeed.js?v=279', label: 'BrainFeed…', pct: 97 },
     { src: 'app.js?v=279', label: 'Interface…', pct: 100 }
   ];
+  steps.forEach(function(step){ var link=document.createElement('link'); link.rel='preload'; link.as='script'; link.href=step.src; document.head.appendChild(link); });
   var i = 0;
+  var failed = [];
   var fill = document.getElementById('plFill');
   var status = document.getElementById('plStatus');
   function setProg(p, label){
@@ -783,6 +707,13 @@
   }
   function next(){
     if(i >= steps.length){
+      if(failed.length){
+        var pl=document.getElementById('appPreloader');
+        if(pl){pl.classList.remove('hide');pl.setAttribute('aria-busy','false');}
+        fail('Chargement incomplet : ' + failed.join(', '));
+        var retry=document.createElement('button');retry.className='ws-primary';retry.textContent='Réessayer';retry.onclick=function(){location.reload();};pl.appendChild(retry);
+        return;
+      }
       setProg(100, 'Prêt');
       setTimeout(function(){
         var pl = document.getElementById('appPreloader');
@@ -804,7 +735,8 @@
     };
     s.onerror = function(){
       fail('Erreur: ' + step.src.split('?')[0] + ' — vérifiez la connexion / cache');
-      // Continue so partial app may still work
+      failed.push(step.src.split('?')[0]);
+      // Finish downloading, then present a recoverable loading error.
       next();
     };
     document.body.appendChild(s);
@@ -812,11 +744,7 @@
   // Start after DOM is interactive
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', next);
   else next();
-  // Safety hide after 20s
-  setTimeout(function(){
-    var pl = document.getElementById('appPreloader');
-    if(pl && !pl.classList.contains('hide')) pl.classList.add('hide');
-  }, 20000);
+
 })();
 </script>
 
@@ -825,5 +753,3 @@
 </button>
 </body>
 </html>
-
-
