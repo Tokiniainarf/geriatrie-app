@@ -3,7 +3,7 @@ const WorkspaceUI = (() => {
   let filter = 'all';
   let query = '';
   let menuReturnFocus = null;
-  const labels = {home:'Votre espace de révision',ch:'Le manuel',synth:'Fiches de synthèse',podcasts:'Podcasts',flash:'Flashcards',annales:'Annales EVC',dash:'Ma progression',scores:'Scores & calculateurs',proto:'Protocoles',dict:'Dictionnaire',set:'Réglages',fav:'Vos favoris',feed:'Votre session de révision',clinique:'Raisonnement clinique',graph:'Parcours liés',quiz:'Entraînement',erreurs:'Journal des erreurs'};
+  const labels = {home:'Votre espace de révision',ch:'Le manuel',synth:'Fiches de synthèse',podcasts:'Podcasts',flash:'Flashcards',annales:'Annales EVC',dash:'Ma progression',scores:'Scores & calculateurs',proto:'Protocoles',dict:'Dictionnaire',set:'Réglages',fav:'Vos favoris',feed:'Pulse · Votre feed de révision',clinique:'Accueil patient · Consultation guidée',graph:'Parcours liés',quiz:'Entraînement',erreurs:'Journal des erreurs'};
   const normalize = value => String(value).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const readObject = key => {
@@ -42,7 +42,7 @@ const WorkspaceUI = (() => {
     const input=document.getElementById('librarySearch');
     input.value=query;
     input.oninput=()=>{query=input.value;renderChapters();};
-    document.querySelectorAll('[data-filter]').forEach(button=>{
+    document.querySelectorAll('.ws-filters [data-filter]').forEach(button=>{
       button.setAttribute('aria-pressed',String(button.dataset.filter===filter));
       button.onclick=()=>{filter=button.dataset.filter;renderChapters();};
     });
@@ -56,7 +56,7 @@ const WorkspaceUI = (() => {
       (filter!=='favorites'||S.bm.includes(ch.id)) &&
       normalize(ch.t+' '+(ch.items||[]).join(' ')).includes(normalize(query))
     );
-    document.querySelectorAll('[data-filter]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.filter===filter)));
+    document.querySelectorAll('.ws-filters [data-filter]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.filter===filter)));
     for(const part of [1,2]) {
       const root=document.getElementById('p'+part);
       root.innerHTML=chapters.filter(ch=>ch.part===part).map(ch=>{
@@ -73,7 +73,7 @@ const WorkspaceUI = (() => {
         card.querySelector('.ws-bookmark').onclick=()=>{
           const id=card.dataset.chapter;
           quickBm(id);
-          const next=document.querySelector(`[data-chapter="${id}"] .ws-bookmark`)||document.querySelector('[data-filter="favorites"]');
+          const next=document.querySelector(`[data-chapter="${id}"] .ws-bookmark`)||document.querySelector('.ws-filters [data-filter="favorites"]');
           next.focus({preventScroll:true});
         };
       });

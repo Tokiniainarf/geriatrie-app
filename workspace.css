@@ -209,3 +209,45 @@ button {cursor:pointer}
 #flashCard .flash-rang{background:var(--accent-soft);color:var(--accent)}
 #flashChapFilter{min-height:44px}
 .ws-menu-open #mainContent{pointer-events:none}
+/* Pulse and audio remain distinct immersive learning spaces. */
+#vFeed.bf-session-reels .bf-reel-fullstack {
+  position:relative!important; inset:auto!important;
+  width:min(100vw,calc((100dvh - 90px) * .5625))!important;
+  height:auto!important; aspect-ratio:9/16!important;
+  max-width:none!important; max-height:none!important; min-height:0!important;
+  margin:auto!important; overflow:hidden!important; border-radius:18px!important;
+}
+#vFeed.bf-session-reels .bf-reel-fullstack .bf-reel-media {
+  position:absolute!important; inset:0!important; width:100%!important; height:100%!important;
+  min-height:0!important; max-height:none!important; border-radius:inherit!important;
+}
+#vFeed.bf-session-reels .bf-reel-fullstack video.bf-reel-video {
+  position:absolute!important; inset:0!important; width:100%!important; height:100%!important;
+  min-height:0!important; max-height:none!important; object-fit:contain!important; border-radius:inherit!important;
+}
+#vFeed.bf-session-reels .bf-reel-single-page,#vFeed.bf-session-reels .bf-vertical-reel-container {display:flex!important;align-items:center!important;justify-content:center!important;padding:0!important}
+#vFeed.bf-session-reels .bf-action-btn:focus-visible,#vFeed.bf-session-reels button:focus-visible {outline-color:#b4f5cd}
+#vPodcasts {--text:#f5f7f6;--text2:#b5c2bd;--text3:#aebcb5;--bg-card:#19231f;--border:#35473d;--accent:#70e6a0;background:linear-gradient(180deg,#244b39 0,#101b16 340px);color:var(--text);border-radius:24px;padding:32px!important;min-height:80vh}
+#vPodcasts .page-hd h1 {color:#fff;font-size:clamp(2rem,4vw,3.5rem);letter-spacing:-.045em;line-height:1.12}
+#vPodcasts .page-hd p {color:#c1d6c8;max-width:42em}
+.pod-library-eyebrow {font-size:.72rem;letter-spacing:.18em;font-weight:800;color:#97e9b5}
+#vPodcasts .pod-search-bar input {background:#1c3026!important;color:#fff!important;border:1px solid #52715e!important;min-height:48px}
+#vPodcasts .pod-search-bar input::placeholder {color:#b5c6bc}
+#vPodcasts .pod-chip {background:#243b2e!important;color:#e9f3eb!important;border-color:#466650!important;min-height:44px}
+#vPodcasts .pod-chip.active {background:#88e5a9!important;color:#11241a!important}
+#vPodcasts .pod-spotify-card {background:#192b21!important;border:1px solid #35513e!important;box-shadow:none!important;transition:background .16s,transform .16s}
+#vPodcasts .pod-spotify-card:hover {background:#233e2d!important;transform:translateY(-2px)}
+#vPodcasts .pod-spotify-title {color:#fff!important}
+#vPodcasts .pod-spotify-subtitle-row,#vPodcasts .pod-card-summary {color:#c5d6cb!important}
+#vPodcasts button:focus-visible {outline-color:#88e5a9}
+@media(max-width:760px){
+ #vPodcasts {padding:22px 14px!important;border-radius:16px}
+ #vFeed.bf-session-reels .bf-reel-fullstack {width:min(100vw,calc((100dvh - 90px) * .5625))!important;border-radius:10px!important}
+}
+@media(prefers-reduced-motion:reduce){#vPodcasts .pod-spotify-card {transition:none;transform:none!important}}
+/* Keep the two navigation rows separate so tabs cannot intercept filter taps. */
+#vFeed:not(.bf-session-reels) #bfSubFilterBar {top:120px!important;min-height:44px!important;padding:4px 14px!important}
+#vFeed:not(.bf-session-reels) #bfSubFilterBar button {min-height:36px!important}
+#vPodcasts .pod-spotify-item {background:#192b21!important;border-color:#35513e!important}
+#vPodcasts .pod-spotify-item:hover {background:#233e2d!important}
+#vPodcasts .pod-spotify-circle-btn {background:#88e5a9!important;color:#11241a!important}

@@ -7,7 +7,7 @@ const source=fs.readFileSync(path.join(__dirname,'../sw.js'),'utf8');
 function setup({failInstall=false}={}){
   const handlers={},deleted=[];let skipped=0;const requested=[];
   const cache={addAll:async()=>{if(failInstall)throw Error('offline');},match:async key=>{requested.push(key);return new Response('cached');}};
-  const context={URL,Request,Response,Set,caches:{open:async()=>cache,keys:async()=>['geriatrie-v280','geriatrie-v281','other-app-v1'],delete:async key=>deleted.push(key)},
+  const context={URL,Request,Response,Set,caches:{open:async()=>cache,keys:async()=>['geriatrie-v280','geriatrie-v282','other-app-v1'],delete:async key=>deleted.push(key)},
     self:{registration:{scope:'https://example.test/geriatrie/'},location:{origin:'https://example.test'},addEventListener:(name,fn)=>handlers[name]=fn,skipWaiting:()=>{skipped++;},clients:{claim:async()=>{}}},
     fetch:async()=>{throw Error('offline');}};
   context.Request=class extends Request{constructor(url,options){super(new URL(url,context.self.registration.scope),options);}};
