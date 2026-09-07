@@ -217,8 +217,8 @@ const MEGA_FLASHCARDS_7 = [
     id: 3977,
     chapter: "ch20",
     rang: "B",
-    question: "Pourquoi la parathormone (tériparatide) est-elle limitée à 18 mois de traitement ?",
-    answer: "C'est la durée maximale d'efficacité démontrée pour stimuler l'ostéoformation sans induire de perte osseuse secondaire par activation ostéoclastique. Le traitement doit être relayé par un anti-résorbeur.",
+    question: "Quelle est la durée maximale du traitement par tériparatide selon le RCP européen de Forsteo ?",
+    answer: "La durée totale maximale est de 24 mois. Cette cure ne doit pas être répétée au cours de la vie. La stratégie de relais est à organiser avec le prescripteur ; ne pas confondre durée autorisée et conditions nationales de remboursement.",
     tags: ["Tériparatide", "Durée", "Ostéoporose"]
   },
     {
@@ -289,8 +289,8 @@ const MEGA_FLASHCARDS_7 = [
     id: 3986,
     chapter: "ch20",
     rang: "B",
-    question: "Qu'est-ce que le score MNA et quel seuil signe un état de dénutrition avérée ?",
-    answer: "Mini Nutritional Assessment, questionnaire d'évaluation nutritionnelle (score max 30). Un score MNA < 17/30 signe une dénutrition avérée ; un score entre 17 et 23.5 signe un risque de dénutrition.",
+    question: "Comment interpréter un MNA complet inférieur à 17/30 ?",
+    answer: "Le MNA classe ce résultat dans la catégorie dénutrition ; 17 à 23,5 indique un risque. Chez les personnes de 70 ans et plus, confirmer le diagnostic clinique selon la HAS : au moins un critère phénotypique et un critère étiologique. Le score ne remplace pas ces critères.",
     tags: ["MNA", "Dénutrition", "Évaluation"]
   },
     {

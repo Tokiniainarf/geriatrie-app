@@ -538,7 +538,7 @@ const MEGA_FLASHCARDS_3 = [
     chapter: "ch14",
     rang: "A",
     question: "En quoi consiste le critère phénotypique de réduction de la masse musculaire ?",
-    answer: "C'est la présence d'une sarcopénie confirmée par une mesure de la composition corporelle (DEXA ou impédancemétrie montrant un indice de masse squelettique appendiculaire bas) et/ou d'une fonction musculaire altérée.",
+    answer: "Chez une personne de 70 ans et plus, la HAS retient la sarcopénie confirmée : associer une diminution de la force musculaire et une diminution de la masse musculaire. Une baisse isolée de la force ne suffit pas à confirmer la sarcopénie.",
     tags: ["sarcopénie", "masse musculaire", "critère phénotypique", "DEXA"]
   },
     {

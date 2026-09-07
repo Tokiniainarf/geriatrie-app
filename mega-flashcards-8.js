@@ -353,9 +353,9 @@ const MEGA_FLASHCARDS_8 = [
     id: 3194,
     chapter: "ch4",
     rang: "A",
-    question: "Le numéro national 3977 contre la maltraitance ?",
-    answer: "Numéro de téléphone national unique destiné à l'écoute et au signalement des situations de maltraitance envers les personnes âgées et les adultes en situation de handicap. Il est accessible aux professionnels de santé, aux familles et aux victimes et permet le déclenchement d'enquêtes médico-sociales.",
-    tags: ["3977", "maltraitance", "signalement"]
+    question: "Quel numéro national appeler pour signaler une maltraitance envers un adulte vulnérable ?",
+    answer: "Le 3133, depuis le 1er mars 2026, permet de signaler une maltraitance envers un adulte vulnérable. Il remplace le 3977. En cas de danger immédiat, contacter les services d’urgence.",
+    tags: ["3133", "maltraitance", "signalement"]
   },
     {
     id: 3195,

@@ -761,8 +761,8 @@ const MEGA_FLASHCARDS_5 = [
     id: 3895,
     chapter: "ch18",
     rang: "B",
-    question: "Comment adapter la posologie des anticoagulants oraux directs (AOD) chez le sujet âgé ?",
-    answer: "Réduire les doses d'Apixaban (à 2.5 mg x2/j) ou de Dabigatran si présence de ≥ 2 critères : âge ≥ 80 ans, poids ≤ 60 kg, créatininémie ≥ 133 µmol/L (ou DFG 30-50 ml/min pour le Dabigatran).",
+    question: "Pourquoi ne faut-il pas appliquer les mêmes critères de réduction de dose à tous les AOD ?",
+    answer: "Les règles dépendent du médicament et de son indication. En fibrillation atriale non valvulaire, les critères âge ≥ 80 ans, poids ≤ 60 kg et créatininémie ≥ 133 µmol/L concernent l’apixaban : au moins deux conduisent à 2,5 mg deux fois par jour. Le dabigatran suit son propre RCP ; ne pas lui transposer cette règle. Vérifier aussi la fonction rénale et les interactions.",
     tags: ["AOD", "Posologie", "Insuffisance rénale"]
   },
     {

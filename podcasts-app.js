@@ -135,15 +135,15 @@ const Podcasts = (function() {
             <div class="pod-spotify-subtitle-row">
               <span class="pod-spotify-cat-pill">${esc(pod.categoryLabel || 'Masterclass')}</span>
               <span class="pod-spotify-dot">·</span>
-              <span class="pod-spotify-dur">⏱ ${durationDisplay}</span>
-              ${pod.chapterTitle ? `<span class="pod-spotify-dot">·</span><span class="pod-spotify-chap">📖 ${esc(pod.chapterTitle)}</span>` : ''}
+              <span class="pod-spotify-dur"> ${durationDisplay}</span>
+              ${pod.chapterTitle ? `<span class="pod-spotify-dot">·</span><span class="pod-spotify-chap"> ${esc(pod.chapterTitle)}</span>` : ''}
             </div>
 
             <!-- Details Dropdown / Key Points Accordion -->
             <details class="pod-card-details" onclick="event.stopPropagation()">
-              <summary class="pod-card-summary-toggle">💡 Résumé &amp; points clés EVC</summary>
+              <summary class="pod-card-summary-toggle"> Résumé &amp; points clés EVC</summary>
               <div class="pod-card-expanded">
-                <p class="pod-card-summary">${esc(pod.summary)}</p>
+                <p class="pod-card-summary">${esc(pod.summary)}</p>${pod.reviewNote ? `<p class="content-review-note">${esc(pod.reviewNote)}</p>` : ""}
                 ${pod.keyPoints && pod.keyPoints.length ? `
                   <ul class="pod-keypoints-list">
                     ${pod.keyPoints.map(kp => `<li>${esc(kp)}</li>`).join('')}
@@ -380,7 +380,7 @@ const Podcasts = (function() {
     if (chap) chap.textContent = currentPodcast.chapterTitle || 'Gériatrie EVC';
     if (headerSub) headerSub.textContent = (currentPodcast.chapter ? currentPodcast.chapter.toUpperCase() + ' · ' : '') + 'Masterclass NotebookLM';
     if (chBadge) chBadge.textContent = currentPodcast.chapter ? currentPodcast.chapter.toUpperCase() : 'EVC';
-    if (coverIcon) coverIcon.textContent = currentPodcast.chapter ? currentPodcast.chapter.toUpperCase() : '🎙️';
+    if (coverIcon) coverIcon.textContent = currentPodcast.chapter ? currentPodcast.chapter.toUpperCase() : '';
     if (catPill) catPill.textContent = currentPodcast.categoryLabel || 'Masterclass';
     if (speedBtn) speedBtn.textContent = playbackSpeed + 'x';
 
@@ -397,16 +397,16 @@ const Podcasts = (function() {
       notesBody.innerHTML = `
         <div class="pod-study-quick-nav">
           <button type="button" class="pod-study-ch-btn" onclick="Podcasts.openRelatedChapter('${ch}')">
-            📖 Ouvrir le cours : ${esc(chTitle)}
+             Ouvrir le cours : ${esc(chTitle)}
           </button>
         </div>
         <div class="pod-study-section">
-          <h4 class="pod-study-sec-title">🎯 Résumé &amp; Cœur de Révision</h4>
+          <h4 class="pod-study-sec-title"> Résumé &amp; Cœur de Révision</h4>
           <p class="pod-full-summary-text">${esc(currentPodcast.summary)}</p>
         </div>
         ${currentPodcast.keyPoints && currentPodcast.keyPoints.length ? `
           <div class="pod-study-section">
-            <h4 class="pod-study-sec-title">💡 Points clés EVC &amp; Recommandations CNEG</h4>
+            <h4 class="pod-study-sec-title"> Points clés EVC &amp; Recommandations CNEG</h4>
             <ul class="pod-full-keypoints-list">
               ${currentPodcast.keyPoints.map(kp => `<li>${esc(kp)}</li>`).join('')}
             </ul>
@@ -471,7 +471,7 @@ const Podcasts = (function() {
 
     if (titleEl) titleEl.textContent = currentPodcast.title;
     if (subEl) subEl.textContent = `${currentPodcast.categoryLabel || 'Masterclass'} · ${currentPodcast.chapterTitle || ''}`;
-    if (coverIcon) coverIcon.textContent = currentPodcast.chapter ? currentPodcast.chapter.toUpperCase() : '🎙️';
+    if (coverIcon) coverIcon.textContent = currentPodcast.chapter ? currentPodcast.chapter.toUpperCase() : '';
     if (badgeEl) badgeEl.textContent = 'MASTERCLASS NOTEBOOKLM';
     updateDuration();
     updateFullPlayerUI();

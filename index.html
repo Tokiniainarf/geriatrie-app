@@ -36,7 +36,7 @@
 @media (prefers-reduced-motion: reduce){#appPreloader .pl-logo,#appPreloader .pl-fill{animation:none}}
 </style>
   <link rel="stylesheet" href="podcasts.css?v=279">
-<link rel="stylesheet" href="workspace.css?v=283">
+<link rel="stylesheet" href="workspace.css?v=284">
 </head>
 <body>
 <a class="skip-link" href="#mainContent">Aller au contenu</a>
@@ -170,12 +170,12 @@
       </div>
       <div class="pod-category-chips" id="podCategoryChips">
         <button type="button" class="pod-chip active" data-cat="all" onclick="Podcasts.setCategory('all', this)">Tous (27)</button>
-        <button type="button" class="pod-chip" data-cat="cardio" onclick="Podcasts.setCategory('cardio', this)">🫀 Cardio</button>
-        <button type="button" class="pod-chip" data-cat="neuro" onclick="Podcasts.setCategory('neuro', this)">🧠 Neuro-TNC</button>
-        <button type="button" class="pod-chip" data-cat="pharmacology" onclick="Podcasts.setCategory('pharmacology', this)">💊 Pharmacologie</button>
-        <button type="button" class="pod-chip" data-cat="mobility" onclick="Podcasts.setCategory('mobility', this)">🦴 Mobilité &amp; Chutes</button>
-        <button type="button" class="pod-chip" data-cat="nutrition" onclick="Podcasts.setCategory('nutrition', this)">🥗 Nutrition</button>
-        <button type="button" class="pod-chip" data-cat="ethics" onclick="Podcasts.setCategory('ethics', this)">⚖️ Éthique</button>
+        <button type="button" class="pod-chip" data-cat="cardio" onclick="Podcasts.setCategory('cardio', this)"> Cardio</button>
+        <button type="button" class="pod-chip" data-cat="neuro" onclick="Podcasts.setCategory('neuro', this)"> Neuro-TNC</button>
+        <button type="button" class="pod-chip" data-cat="pharmacology" onclick="Podcasts.setCategory('pharmacology', this)"> Pharmacologie</button>
+        <button type="button" class="pod-chip" data-cat="mobility" onclick="Podcasts.setCategory('mobility', this)"> Mobilité &amp; Chutes</button>
+        <button type="button" class="pod-chip" data-cat="nutrition" onclick="Podcasts.setCategory('nutrition', this)"> Nutrition</button>
+        <button type="button" class="pod-chip" data-cat="ethics" onclick="Podcasts.setCategory('ethics', this)"> Éthique</button>
       </div>
     </div>
 
@@ -335,15 +335,15 @@
       </div>
     </div>
     <div class="bf-session-tabs" id="bfSessionTabs" role="tablist" aria-label="Séances de révision">
-      <button type="button" class="bf-session-tab active" data-session="mix" onclick="BrainFeed.selectSession('mix')" role="tab" aria-selected="true">✨ Pour toi</button>
-      <button type="button" class="bf-session-tab" data-session="visual" onclick="BrainFeed.selectSession('visual')" role="tab" aria-selected="false">🎬 Reels</button>
+      <button type="button" class="bf-session-tab active" data-session="mix" onclick="BrainFeed.selectSession('mix')" role="tab" aria-selected="true"> Pour toi</button>
+      <button type="button" class="bf-session-tab" data-session="visual" onclick="BrainFeed.selectSession('visual')" role="tab" aria-selected="false"> Reels</button>
     </div>
     <div class="bf-sub-filter-bar" id="bfSubFilterBar">
       <button type="button" class="bf-sub-chip active" data-filter="all" onclick="BrainFeed.filterSubCategory('all', this)">Tous</button>
-      <button type="button" class="bf-sub-chip" data-filter="flash" onclick="BrainFeed.filterSubCategory('flash', this)">🎴 Flashcards</button>
-      <button type="button" class="bf-sub-chip" data-filter="piege_exam" onclick="BrainFeed.filterSubCategory('piege_exam', this)">⚠️ Pièges</button>
-      <button type="button" class="bf-sub-chip" data-filter="quiz_flash" onclick="BrainFeed.filterSubCategory('quiz_flash', this)">📍 Quiz</button>
-      <button type="button" class="bf-sub-chip" data-filter="cas_choc" onclick="BrainFeed.filterSubCategory('cas_choc', this)">🩺 Cas</button>
+      <button type="button" class="bf-sub-chip" data-filter="flash" onclick="BrainFeed.filterSubCategory('flash', this)"> Flashcards</button>
+      <button type="button" class="bf-sub-chip" data-filter="piege_exam" onclick="BrainFeed.filterSubCategory('piege_exam', this)"> Pièges</button>
+      <button type="button" class="bf-sub-chip" data-filter="quiz_flash" onclick="BrainFeed.filterSubCategory('quiz_flash', this)"> Quiz</button>
+      <button type="button" class="bf-sub-chip" data-filter="cas_choc" onclick="BrainFeed.filterSubCategory('cas_choc', this)"> Cas</button>
     </div>
     <div class="bf-progress-track"><div class="bf-progress-fill" id="bfProgress"></div></div>
     <div class="bf-feed" id="bfFeed">
@@ -546,7 +546,7 @@
     </div>
     <div class="pod-mini-player-content" onclick="Podcasts.openFullPlayer()" title="Toucher pour ouvrir le lecteur grand écran" style="cursor:pointer">
       <div class="pod-mini-cover" id="podPlayerCover">
-        <span class="pod-mini-cover-icon" id="podPlayerIcon">🎙️</span>
+        <span class="pod-mini-cover-icon" id="podPlayerIcon"></span>
       </div>
       <div class="pod-mini-meta">
         <h3 class="pod-mini-title" id="podPlayerTitle">Sélectionnez un épisode pour écouter</h3>
@@ -590,7 +590,7 @@
       <div class="pod-full-artwork-wrapper">
         <div class="pod-full-artwork" id="podFullArtwork">
           <div class="pod-full-ch-badge" id="podFullChBadge">CH 01</div>
-          <div class="pod-full-cover-icon" id="podFullCoverIcon">🎙️</div>
+          <div class="pod-full-cover-icon" id="podFullCoverIcon"></div>
           <div class="pod-full-eq-waves" id="podFullEqWaves" aria-hidden="true">
             <span></span><span></span><span></span><span></span><span></span>
           </div>
@@ -640,7 +640,7 @@
       <!-- High-Yield Notes Accordion -->
       <div class="pod-full-notes-card">
         <div class="pod-full-notes-header">
-          <span>💡 Points clés EVC &amp; Recommandations CNEG</span>
+          <span> Points clés EVC &amp; Recommandations CNEG</span>
         </div>
         <div class="pod-full-notes-body" id="podFullNotesBody">
           <!-- Populated dynamically -->

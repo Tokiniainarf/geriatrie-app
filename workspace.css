@@ -289,3 +289,13 @@ button {cursor:pointer}
 @media(max-height:600px){#vFeed:not(.bf-session-reels) .bf-horiz-page{padding-top:165px!important;padding-bottom:80px!important}}
 #vClinique .clinical-privacy-card {background:var(--bg-base);border:1px solid var(--border);color:var(--text)}
 #vClinique .clinical-privacy-card small {color:var(--text2);font-size:.8rem;line-height:1.5}
+.content-review-note {padding:12px 14px;border:1px solid currentColor;border-radius:10px;font-size:.85rem;line-height:1.55;color:#dceccf}
+#vFeed .bf-bg-emoji:empty,#vFeed .bf-fire-emoji:empty,#vFeed .bf-act-icon:empty {display:none!important}
+#vFeed .bf-type-badge {letter-spacing:.08em;font-size:.7rem}
+#vFeed .bf-sound-icon {font-family:inherit;font-size:.7rem!important;font-weight:800;letter-spacing:.06em}
+#vPodcasts .pod-card-summary-toggle {font-weight:650;letter-spacing:.01em}
+#vFeed .reel-review-note {position:absolute;left:12px;right:65px;bottom:30px;z-index:8;padding:10px 12px;background:#15291fed;color:#fff;border:1px solid #9db7a8;border-radius:10px;font-size:.8rem;line-height:1.45;pointer-events:none}
+@media(min-width:1000px){
+ #vFeed.active {inset:0!important;bottom:0!important;max-height:100dvh!important}
+ #vFeed:not(.bf-session-reels) #bfSubFilterBar {justify-content:center!important;width:100%!important;max-width:none!important}
+}

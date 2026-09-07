@@ -17,13 +17,13 @@ const BrainFeed = (() => {
   const COMBO_BONUS_AT = 5;
   const COMBO_CONFETTI_AT = 10;
   const ACHIEVEMENTS = [
-    { id: 'first_card', icon: '🎯', title: 'Première carte', desc: '1 carte validée', check: (s) => (s.totalCards || 0) >= 1 },
-    { id: 'streak_3', icon: '🔥', title: 'En feu', desc: '3 jours de suite', check: (s) => (s.streak || 0) >= 3 },
-    { id: 'streak_10', icon: '💥', title: 'Inferno', desc: '10 jours de suite', check: (s) => (s.streak || 0) >= 10 },
-    { id: 'cards_50', icon: '📚', title: 'Demi-cent', desc: '50 cartes au total', check: (s) => (s.totalCards || 0) >= 50 },
-    { id: 'cards_100', icon: '🏅', title: 'Centurion', desc: '100 cartes au total', check: (s) => (s.totalCards || 0) >= 100 },
-    { id: 'combo_10', icon: '⚡', title: 'Combo x10', desc: '10 bonnes réponses d\'affilée', check: (s) => s._sessionCombo10 },
-    { id: 'daily_goal', icon: '🏆', title: 'Objectif jour', desc: '20 cartes utiles aujourd\'hui', check: (s) => (s.dailyDone || 0) >= DAILY_GOAL }
+    { id: 'first_card', icon: '', title: 'Première carte', desc: '1 carte validée', check: (s) => (s.totalCards || 0) >= 1 },
+    { id: 'streak_3', icon: '', title: 'En feu', desc: '3 jours de suite', check: (s) => (s.streak || 0) >= 3 },
+    { id: 'streak_10', icon: '', title: 'Inferno', desc: '10 jours de suite', check: (s) => (s.streak || 0) >= 10 },
+    { id: 'cards_50', icon: '', title: 'Demi-cent', desc: '50 cartes au total', check: (s) => (s.totalCards || 0) >= 50 },
+    { id: 'cards_100', icon: '', title: 'Centurion', desc: '100 cartes au total', check: (s) => (s.totalCards || 0) >= 100 },
+    { id: 'combo_10', icon: '', title: 'Combo x10', desc: '10 bonnes réponses d\'affilée', check: (s) => s._sessionCombo10 },
+    { id: 'daily_goal', icon: '', title: 'Objectif jour', desc: '20 cartes utiles aujourd\'hui', check: (s) => (s.dailyDone || 0) >= DAILY_GOAL }
   ];
   let observer = null;
   let audioCtx = null;
@@ -693,7 +693,7 @@ const BrainFeed = (() => {
       { media: 'images/feed/videos/reel_09_syndrome_confusionnel_urgences_pieges.mp4', isVideo: true, chapter: 'ch11', title: 'Reel 9 : Syndrome Confusionnel (CAM)', desc: 'Critères DSM-5, score CAM, urgence étiologique & éviction des contentions' },
       { media: 'images/feed/videos/reel_10_chute_risques_syndrome_post_chute.mp4', isVideo: true, chapter: 'ch12', title: 'Reel 10 : La Chute & Syndrome Post-Chute', desc: 'Évaluation motrice (TUG > 20s), syndrome post-chute et risque de rhabdomyolyse' },
       { media: 'images/feed/videos/reel_11_immobilisation_escarres_4_stades.mp4', isVideo: true, chapter: 'ch13', title: 'Reel 11 : Immobilisation & Escarres', desc: 'Échelles Norton/Braden, ischémie de pression & conduite selon les 4 stades' },
-      { media: 'images/feed/videos/reel_12_nouveaux_criteres_has_denutrition.mp4', isVideo: true, chapter: 'ch14', title: 'Reel 12 : Nouveaux Critères HAS Dénutrition', desc: 'Recommandations HAS ≥70 ans, seuils IMC < 22, albuminémie < 35 g/L & sarcopénie' },
+      { media: 'images/feed/videos/reel_12_nouveaux_criteres_has_denutrition.mp4', isVideo: true, chapter: 'ch14', title: 'Reel 12 : Nouveaux Critères HAS Dénutrition', desc: 'HAS ≥70 ans : un critère phénotypique et un étiologique ; albuminémie réservée à la sévérité (seuil < 30 g/L). Description corrigée ; vidéo à revalider.' },
       { media: 'images/feed/videos/reel_13_incontinence_diappers_globe.mp4', isVideo: true, chapter: 'ch15', title: 'Reel 13 : Incontinence & DIAPPERS', desc: 'Causes réversibles (DIAPPERS), rétention aiguë et miction par regorgement' },
       { media: 'images/feed/videos/reel_14_stopp_start_surdosage_avk.mp4', isVideo: true, chapter: 'ch16', title: 'Reel 14 : STOPP-START & Surdosage AVK', desc: 'Sécurisation médicamenteuse, règles STOPP-START & algorithme d\'urgence AVK' },
       { media: 'images/feed/videos/reel_15_lecanemab_surveillance_aria.mp4', isVideo: true, chapter: 'ch9', title: 'Reel 15 : Lécanémab & Surveillance des ARIA', desc: 'Recommandations SFGG 2025 : critères d\'éligibilité, CI (APOE4, AVK) et protocole IRM' },
@@ -709,7 +709,7 @@ const BrainFeed = (() => {
       { media: 'images/feed/videos/reel_25_routines_soins_maltraitance_ordinaire.mp4', isVideo: true, chapter: 'ch4', title: 'Reel 25 : Bientraitance & Maltraitance Ordinaire', desc: 'Repérer la maltraitance passive, respect du rythme du patient et refus de soins' },
       { media: 'images/feed/videos/reel_26_decision_sedation_profonde_continue.mp4', isVideo: true, chapter: 'ch17', title: 'Reel 26 : Décider d\'une Sédation Profonde (Claeys-Leonetti)', desc: 'Pronostic engagé à court terme, souffrance réfractaire et procédure collégiale' },
       { media: 'images/feed/videos/reel_27_conciliation_medicamenteuse_ordonnance.mp4', isVideo: true, chapter: 'ch16', title: 'Reel 27 : Conciliation Médicamenteuse', desc: 'Bilan médicamenteux d\'entrée, repérage des divergences non intentionnelles et réévaluation' },
-      { media: 'images/feed/videos/reel_28_calendrier_vaccinal_seniors.mp4', isVideo: true, chapter: 'ch2', title: 'Reel 28 : Calendrier Vaccinal après 65 Ans', desc: 'Grippe, pneumocoque (schéma séquentiel), zona et rappel diphtérie-tétanos-poliomyélite' },
+      { media: 'images/feed/videos/reel_28_calendrier_vaccinal_seniors.mp4', isVideo: true, chapter: 'ch2', title: 'Reel 28 : Calendrier Vaccinal après 65 Ans', desc: 'Calendrier à actualiser : dès 65 ans, VPC20 ou VPC21 selon les antécédents vaccinaux ; consulter le calendrier en vigueur. Vidéo à revalider.' },
       { media: 'images/feed/videos/reel_29_cibles_hba1c_diabete_sujet_age.mp4', isVideo: true, chapter: 'ch16', title: 'Reel 29 : Cibles HbA1c chez le Diabétique Âgé', desc: 'Patient vigoureux (<7%), fragile (<8%) vs dépendant (<9%) : éviter l\'hypoglycémie fatale' },
       { media: 'images/feed/videos/reel_30_transfusion_seniors_prevention_taco.mp4', isVideo: true, chapter: 'ch16', title: 'Reel 30 : Transfusion du Sujet Âgé : Éviter le TACO', desc: 'Vitesse lente, 1 CGR à la fois, surveillance volémique et risque de surcharge pulmonaire' },
       { media: 'images/feed/videos/reel_31_sepsis_geriatrique_sans_fievre.mp4', isVideo: true, chapter: 'ch1', title: 'Reel 31 : Sepsis Gériatrique : Le Piège sans Fièvre', desc: 'Absence d\'hyperthermie, hypothermie (<36°C), polypnée et confusion inaugurale' },
@@ -1133,8 +1133,8 @@ const BrainFeed = (() => {
       subBar.style.display = (activeSession === 'visual') ? 'none' : 'flex';
     }
     const labels = {
-      mix: '✨ Pour toi · Les essentiels du jour & révision ciblée',
-      visual: '🎬 Reels 9:16 · Vidéos immersives plein écran'
+      mix: ' Pour toi · Les essentiels du jour & révision ciblée',
+      visual: ' Reels 9:16 · Vidéos immersives plein écran'
     };
     let activeTab = null;
     document.querySelectorAll('#bfSessionTabs .bf-session-tab').forEach(tab => {
@@ -1192,18 +1192,18 @@ const BrainFeed = (() => {
   function renderEducationalDiagram(kind, revealed) {
     const diagrams = {
       delirium: {
-        eyebrow: 'CONFUSION AIGUË', center: 'DELIRIUM', icon: '⚡',
-        nodes: [['🫁', 'Hypoxie / infection'], ['💊', 'Iatrogénie'], ['🩺', 'Douleur'], ['↔', 'Globe / fécalome'], ['⚗', 'Trouble métabolique']],
+        eyebrow: 'CONFUSION AIGUË', center: 'DELIRIUM', icon: '',
+        nodes: [['', 'Hypoxie / infection'], ['', 'Iatrogénie'], ['', 'Douleur'], ['', 'Globe / fécalome'], ['', 'Trouble métabolique']],
         footer: 'Aigu + fluctuant + inattention = urgence diagnostique'
       },
       fall: {
-        eyebrow: 'APRÈS UNE CHUTE', center: 'ÉVALUER', icon: '↘',
-        nodes: [['🧍', 'Marche · vision · cognition'], ['💊', 'Médicaments'], ['🫀', 'Orthostatisme · cause aiguë'], ['🏠', 'Environnement'], ['🩹', 'Conséquences et peur de chuter']],
+        eyebrow: 'APRÈS UNE CHUTE', center: 'ÉVALUER', icon: '',
+        nodes: [['', 'Marche · vision · cognition'], ['', 'Médicaments'], ['', 'Orthostatisme · cause aiguë'], ['', 'Environnement'], ['', 'Conséquences et peur de chuter']],
         footer: 'Une chute est un symptôme : penser multifactoriel'
       },
       nutrition: {
         eyebrow: 'CERCLE VICIEUX', center: 'FONTE\nMUSCULAIRE', icon: '↻',
-        nodes: [['🍽', 'Baisse des apports'], ['🦠', 'Inflammation / maladie aiguë'], ['🦵', 'Faiblesse et mobilité réduite'], ['🧩', 'Perte d’autonomie'], ['↻', 'Risque de nouvelle dénutrition']],
+        nodes: [['', 'Baisse des apports'], ['', 'Inflammation / maladie aiguë'], ['', 'Faiblesse et mobilité réduite'], ['', 'Perte d’autonomie'], ['↻', 'Risque de nouvelle dénutrition']],
         footer: 'Dépister tôt pour interrompre la cascade'
       }
     };
@@ -1348,7 +1348,7 @@ const BrainFeed = (() => {
       b.classList.toggle('is-unmuted', isSoundEnabled);
       const icon = b.querySelector('.bf-sound-icon');
       const label = b.querySelector('.bf-sound-label');
-      if (icon) icon.textContent = isSoundEnabled ? '🔊' : '🔇';
+      if (icon) icon.textContent = isSoundEnabled ? 'VOL' : 'MUET';
       if (label) label.textContent = isSoundEnabled ? 'Son actif' : 'Son coupé';
     });
 
@@ -1389,6 +1389,7 @@ const BrainFeed = (() => {
                   ontimeupdate="BrainFeed.onReelTimeUpdate(this)"
                   onerror="this.dataset.err='1'; this.closest('.bf-media-container')?.classList.add('bf-media-missing');"></video>
                 
+                ${/reel_(12|28)_/.test(src) ? `<div class="reel-review-note">Contenu à actualiser : ${/reel_12_/.test(src) ? 'le diagnostic de dénutrition associe un critère phénotypique et un étiologique ; l’albumine évalue la sévérité.' : 'le calendrier pneumococcique a changé : consulter le calendrier vaccinal en vigueur.'}</div>` : ''}
                 <!-- Center Play/Pause Ripple Indicator -->
                 <div class="bf-reel-ripple-icon" aria-hidden="true">▶</div>
 
@@ -1403,12 +1404,12 @@ const BrainFeed = (() => {
                 <!-- Floating Sidebar Controls (TikTok / Reels Style) -->
                 <div class="bf-reel-actions-column" onclick="event.stopPropagation()">
                   <button type="button" class="bf-reel-action-btn bf-sound-toggle-btn ${isSoundEnabled ? 'is-unmuted' : ''}" onclick="BrainFeed.toggleSound(event, this)" title="Activer / Couper le son">
-                    <span class="bf-act-icon bf-sound-icon">${isSoundEnabled ? '🔊' : '🔇'}</span>
+                    <span class="bf-act-icon bf-sound-icon">${isSoundEnabled ? 'VOL' : 'MUET'}</span>
                     <span class="bf-act-label">${isSoundEnabled ? 'Son' : 'Muet'}</span>
                   </button>
 
                   <button type="button" class="bf-reel-action-btn bf-speed-toggle-btn" onclick="BrainFeed.cycleReelSpeed(event, this)" title="Vitesse de lecture">
-                    <span class="bf-act-icon">⚡</span>
+                    <span class="bf-act-icon"></span>
                     <span class="bf-act-label bf-speed-label">1x</span>
                   </button>
 
@@ -1418,7 +1419,7 @@ const BrainFeed = (() => {
                   </button>
 
                   <button type="button" class="bf-reel-action-btn bf-act-chap" onclick="BrainFeed.openReelChapter(event, '${chapId}')" title="Ouvrir le chapitre complet">
-                    <span class="bf-act-icon">📖</span>
+                    <span class="bf-act-icon"></span>
                     <span class="bf-act-label">${chapId.toUpperCase()}</span>
                   </button>
                 </div>
@@ -1563,7 +1564,7 @@ const BrainFeed = (() => {
     if (expectedKeywords.length) {
       keywordsHtml = `
         <div class="bf-coach-keywords" style="margin-top: 8px; padding-top: 6px; border-top: 1px dashed var(--border); display: flex; flex-direction: column; gap: 4px;">
-          <span class="bf-keyword-heading" style="font-size: 0.72rem; font-weight: bold; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">🔑 Mots-clés attendus</span>
+          <span class="bf-keyword-heading" style="font-size: 0.72rem; font-weight: bold; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;"> Mots-clés attendus</span>
           <div class="bf-keyword-tags" style="display: flex; flex-wrap: wrap; gap: 4px;">
             ${expectedKeywords.map(k => `<span class="bf-keyword-tag" style="font-size: 0.72rem; background: var(--bg-body); border: 1px solid var(--border); color: var(--text); padding: 2px 7px; border-radius: 99px; font-weight: 500;">${esc(k)}</span>`).join('')}
           </div>
@@ -1575,7 +1576,7 @@ const BrainFeed = (() => {
     if (coachingTip) {
       coachingHtml = `
         <div class="bf-coach-tip-box" style="margin-top: 8px; padding: 6px 10px; background: rgba(245, 158, 11, 0.06); border-left: 3px solid #f59e0b; border-radius: 0 6px 6px 0; font-size: 0.8rem;">
-          <div class="bf-coach-tip-title" style="font-weight: 700; color: #d97706; margin-bottom: 2px; font-size: 0.75rem;">🎓 Coaching EVC</div>
+          <div class="bf-coach-tip-title" style="font-weight: 700; color: #d97706; margin-bottom: 2px; font-size: 0.75rem;"> Coaching EVC</div>
           <p class="bf-coach-tip-text" style="margin: 0; color: var(--text); line-height: 1.35;">${coachingTip}</p>
         </div>
       `;
@@ -1593,7 +1594,7 @@ const BrainFeed = (() => {
   function renderClassicCard(card, slideIdx) {
     const chName = getChapterName(card.chapter);
     const typeLabels = { flash: 'Flashcard', synthesis: 'Synthèse', case: 'Cas clinique', reco: 'HAS' };
-    const typeIcons = { flash: '🎴', synthesis: '📋', case: '🏥', reco: '📋' };
+    const typeIcons = { flash: '', synthesis: '', case: '', reco: '' };
     const rangBadge = card.rang
       ? `<span class="bf-rang bf-rang-${String(card.rang).toLowerCase()}">Rang ${card.rang}</span>` : '';
     const chTag = chName ? `<span class="bf-card-chapter">${esc(chName)}</span>` : '';
@@ -1604,10 +1605,10 @@ const BrainFeed = (() => {
       <div class="bf-horiz-scroll" id="bfScroll-${slideIdx}">
         <!-- PAGE 1 : QUESTION -->
         <div class="bf-horiz-page page-1 bf-theme-classic">
-          <div class="bf-bg-emoji" aria-hidden="true">🎴</div>
+          <div class="bf-bg-emoji" aria-hidden="true"></div>
           <article class="bf-card-content bf-card-shell">
             <header class="bf-card-hdr">
-              <span class="bf-type-badge">${typeIcons[card.type] || '🎴'} ${typeLabels[card.type] || 'Carte'}</span>
+              <span class="bf-type-badge">${typeIcons[card.type] || ''} ${typeLabels[card.type] || 'Carte'}</span>
               ${rangBadge}
             </header>
             ${progressDots}
@@ -1622,10 +1623,10 @@ const BrainFeed = (() => {
         </div>
         <!-- PAGE 2 : RÉPONSE -->
         <div class="bf-horiz-page page-2 bf-theme-classic-back">
-          <div class="bf-bg-emoji" aria-hidden="true">💡</div>
+          <div class="bf-bg-emoji" aria-hidden="true"></div>
           <article class="bf-card-content bf-card-shell">
             <header class="bf-card-hdr">
-              <span class="bf-type-badge">💡 Réponse</span>
+              <span class="bf-type-badge"> Réponse</span>
               ${rangBadge}
             </header>
             <div class="bf-page-dots" aria-hidden="true"><span></span><span class="on"></span></div>
@@ -1650,10 +1651,10 @@ const BrainFeed = (() => {
       <div class="bf-horiz-scroll" id="bfScroll-${slideIdx}">
         <!-- PAGE 1 : ENONCE -->
         <div class="bf-horiz-page page-1 bf-theme-memo">
-          <div class="bf-bg-emoji">🧠</div>
+          <div class="bf-bg-emoji"></div>
           <article class="bf-card-content bf-card-shell">
             <header class="bf-card-hdr">
-              <span class="bf-type-badge">🧠 ${esc(card.title)}</span>
+              <span class="bf-type-badge"> ${esc(card.title)}</span>
             </header>
             <div class="bf-page-dots" aria-hidden="true"><span class="on"></span><span></span></div>
             <main class="bf-card-main">
@@ -1666,10 +1667,10 @@ const BrainFeed = (() => {
         </div>
         <!-- PAGE 2 : MNEMO -->
         <div class="bf-horiz-page page-2 bf-theme-memo-back">
-          <div class="bf-bg-emoji" aria-hidden="true">✨</div>
+          <div class="bf-bg-emoji" aria-hidden="true"></div>
           <article class="bf-card-content bf-card-shell">
             <header class="bf-card-hdr">
-              <span class="bf-type-badge">✨ Rétention</span>
+              <span class="bf-type-badge"> Rétention</span>
             </header>
             <div class="bf-page-dots" aria-hidden="true"><span></span><span class="on"></span></div>
             <main class="bf-card-main scrollable">
@@ -1694,13 +1695,13 @@ const BrainFeed = (() => {
         <div class="bf-horiz-page page-1 bf-theme-choc">
           <article class="bf-card-content bf-card-shell bf-card-cas">
             <header class="bf-card-hdr">
-              <span class="bf-type-badge">🩺 CAS CLINIQUE EVC</span>
-              ${card.timer ? `<span class="bf-choc-timer-chip">⏱ ${card.timer}s</span>` : ''}
+              <span class="bf-type-badge"> CAS CLINIQUE EVC</span>
+              ${card.timer ? `<span class="bf-choc-timer-chip"> ${card.timer}s</span>` : ''}
             </header>
             <main class="bf-card-main bf-cas-main">
               <div class="bf-cas-vignette">${esc(card.vignette)}</div>
               <div class="bf-cas-prompt">
-                <span class="bf-cas-prompt-label">👉 QUESTION :</span>
+                <span class="bf-cas-prompt-label"> QUESTION :</span>
                 <p class="bf-cas-prompt-text">${esc(card.prompt || 'Quelle est votre conduite diagnostique et thérapeutique ?')}</p>
               </div>
             </main>
@@ -1713,7 +1714,7 @@ const BrainFeed = (() => {
         <div class="bf-horiz-page page-2 bf-theme-choc-back">
           <article class="bf-card-content bf-card-shell bf-card-cas">
             <header class="bf-card-hdr">
-              <span class="bf-type-badge">🩺 Conduite attendue</span>
+              <span class="bf-type-badge"> Conduite attendue</span>
             </header>
             <main class="bf-card-main bf-cas-main">
               ${formatRichAnswer(card)}
@@ -1723,7 +1724,7 @@ const BrainFeed = (() => {
                 <button type="button" class="bf-eval-btn bf-eval-fail" onclick="BrainFeed.actionDontKnow()" aria-label="À revoir">✕ À revoir</button>
                 <button type="button" class="bf-eval-btn bf-eval-pass" onclick="BrainFeed.actionKnow()" aria-label="Acquis">✓ Acquis</button>
               </div>
-              <span class="bf-swipe-left-hint">⬅ Revoir l'énoncé</span>
+              <span class="bf-swipe-left-hint"> Revoir l'énoncé</span>
             </footer>
           </article>
         </div>
@@ -1745,7 +1746,7 @@ const BrainFeed = (() => {
         <div class="bf-horiz-page page-1 bf-theme-quiz">
           <article class="bf-card-content bf-card-shell bf-card-quiz">
             <header class="bf-card-hdr">
-              <span class="bf-type-badge">⚡ QUIZ FLASH</span>
+              <span class="bf-type-badge"> QUIZ FLASH</span>
             </header>
             <main class="bf-card-main bf-quiz-main">
               <h2 class="bf-quiz-q">${esc(card.question)}</h2>
@@ -1760,13 +1761,13 @@ const BrainFeed = (() => {
         <div class="bf-horiz-page page-2 bf-theme-quiz-back">
           <article class="bf-card-content bf-card-shell bf-card-quiz">
             <header class="bf-card-hdr">
-              <span class="bf-type-badge">📖 Explication</span>
+              <span class="bf-type-badge"> Explication</span>
             </header>
             <main class="bf-card-main bf-quiz-main">
               ${formatRichAnswer(card)}
             </main>
             <footer class="bf-card-ftr">
-              <span class="bf-swipe-left-hint">⬅ Revoir la question</span>
+              <span class="bf-swipe-left-hint"> Revoir la question</span>
             </footer>
           </article>
         </div>
@@ -1779,10 +1780,10 @@ const BrainFeed = (() => {
       <div class="bf-horiz-scroll" id="bfScroll-${slideIdx}">
         <!-- PAGE 1 : QUESTION -->
         <div class="bf-horiz-page page-1 bf-theme-stat">
-          <div class="bf-bg-emoji">📊</div>
+          <div class="bf-bg-emoji"></div>
           <article class="bf-card-content bf-card-shell">
             <header class="bf-card-hdr">
-              <span class="bf-type-badge">📊 CHIFFRE CLÉ</span>
+              <span class="bf-type-badge"> CHIFFRE CLÉ</span>
             </header>
             <main class="bf-card-main">
               ${card.video ? `<div class="bf-media-container"><video src="${card.video}" controls muted loop playsinline></video></div>` : ''}
@@ -1796,10 +1797,10 @@ const BrainFeed = (() => {
         </div>
         <!-- PAGE 2 : RÉPONSE -->
         <div class="bf-horiz-page page-2 bf-theme-stat">
-          <div class="bf-bg-emoji">📈</div>
+          <div class="bf-bg-emoji"></div>
           <article class="bf-card-content bf-card-shell">
             <header class="bf-card-hdr">
-              <span class="bf-type-badge">📊 Valeur</span>
+              <span class="bf-type-badge"> Valeur</span>
             </header>
             <main class="bf-card-main">
               ${card.video ? `<div class="bf-media-container"><video src="${card.video}" controls muted loop playsinline></video></div>` : ''}
@@ -1811,7 +1812,7 @@ const BrainFeed = (() => {
             </main>
             <footer class="bf-card-ftr">
               <span class="bf-stat-source">${esc(card.source)}</span>
-              <span class="bf-swipe-left-hint">⬅ Revoir la question</span>
+              <span class="bf-swipe-left-hint"> Revoir la question</span>
             </footer>
           </article>
         </div>
@@ -1823,7 +1824,7 @@ const BrainFeed = (() => {
       <div class="bf-horiz-scroll" id="bfScroll-${slideIdx}">
         <!-- PAGE 1 : CITATION -->
         <div class="bf-horiz-page page-1 bf-theme-quote">
-          <div class="bf-bg-emoji">💬</div>
+          <div class="bf-bg-emoji"></div>
           <article class="bf-card-content bf-card-shell">
             <header class="bf-card-hdr">
               <span class="bf-type-badge">CITATION</span>
@@ -1839,7 +1840,7 @@ const BrainFeed = (() => {
         </div>
         <!-- PAGE 2 : RÉPONSE -->
         <div class="bf-horiz-page page-2 bf-theme-quote">
-          <div class="bf-bg-emoji">✍️</div>
+          <div class="bf-bg-emoji"></div>
           <article class="bf-card-content bf-card-shell">
             <header class="bf-card-hdr">
               <span class="bf-type-badge">Auteur</span>
@@ -1849,7 +1850,7 @@ const BrainFeed = (() => {
               <cite class="bf-quote-author">— ${esc(card.author)}</cite>
             </main>
             <footer class="bf-card-ftr">
-              <span class="bf-swipe-left-hint">⬅ Revoir la citation</span>
+              <span class="bf-swipe-left-hint"> Revoir la citation</span>
             </footer>
           </article>
         </div>
@@ -1861,17 +1862,17 @@ const BrainFeed = (() => {
       <div class="bf-horiz-scroll" id="bfScroll-${slideIdx}">
         <!-- PAGE 1 : LE PIEGE -->
         <div class="bf-horiz-page page-1 bf-theme-trap">
-          <div class="bf-bg-emoji">🪤</div>
+          <div class="bf-bg-emoji"></div>
           <article class="bf-card-content bf-card-shell">
             <header class="bf-card-hdr">
-              <span class="bf-type-badge">🪤 ERREUR FRÉQUENTE</span>
+              <span class="bf-type-badge"> ERREUR FRÉQUENTE</span>
             </header>
             <main class="bf-card-main">
               <div class="bf-trap-wrong">
                 <span class="bf-trap-x">✕</span>
                 <p>${esc(card.trap)}</p>
               </div>
-              <p class="bf-trap-prompt">👉 Pourquoi est-ce une erreur et comment la corriger ?</p>
+              <p class="bf-trap-prompt"> Pourquoi est-ce une erreur et comment la corriger ?</p>
             </main>
             <footer class="bf-card-ftr">
               <button type="button" class="bf-action-reveal" data-bf-reveal="${slideIdx}">Révéler la réponse ➔</button>
@@ -1880,10 +1881,10 @@ const BrainFeed = (() => {
         </div>
         <!-- PAGE 2 : RECTIFICATION -->
         <div class="bf-horiz-page page-2 bf-theme-trap-back">
-          <div class="bf-bg-emoji">✅</div>
+          <div class="bf-bg-emoji"></div>
           <article class="bf-card-content bf-card-shell">
             <header class="bf-card-hdr">
-              <span class="bf-type-badge">✅ À retenir</span>
+              <span class="bf-type-badge"> À retenir</span>
             </header>
             <main class="bf-card-main scrollable">
               ${formatRichAnswer(card)}
@@ -1895,7 +1896,7 @@ const BrainFeed = (() => {
                 <button type="button" class="bf-eval-btn bf-eval-fail" onclick="BrainFeed.actionDontKnow()" aria-label="À revoir">✕ À revoir</button>
                 <button type="button" class="bf-eval-btn bf-eval-pass" onclick="BrainFeed.actionKnow()" aria-label="Acquis">✓ Acquis</button>
               </div>
-              <span class="bf-swipe-left-hint">⬅ Revoir le piège</span>
+              <span class="bf-swipe-left-hint"> Revoir le piège</span>
             </footer>
           </article>
         </div>
@@ -2057,7 +2058,7 @@ const BrainFeed = (() => {
     if (!heart) {
       heart = document.createElement('div');
       heart.className = 'bf-doubletap-heart';
-      heart.innerHTML = '❤️';
+      heart.innerHTML = '';
       slide.appendChild(heart);
     }
     
@@ -2309,7 +2310,7 @@ const BrainFeed = (() => {
     }
     if (pointsEl) pointsEl.textContent = `${points} pts`;
     if (streakEl) {
-      streakEl.innerHTML = `<span class="bf-fire-emoji" aria-hidden="true">🔥</span><span class="bf-streak-num">${streak}</span>`;
+      streakEl.innerHTML = `<span class="bf-fire-emoji" aria-hidden="true"></span><span class="bf-streak-num">${streak}</span>`;
       streakEl.classList.toggle('bf-streak-hot', streak >= 3);
       streakEl.classList.toggle('bf-streak-mega', streak >= 10);
     }
@@ -2352,7 +2353,7 @@ const BrainFeed = (() => {
       if (combo === COMBO_CONFETTI_AT) {
         sessionCombo10Unlocked = true;
         launchConfetti('bfComboConfetti');
-        showToast(`🎉 COMBO x${combo} !`);
+        showToast(` COMBO x${combo} !`);
       }
     } else {
       combo = 0;
@@ -2391,7 +2392,7 @@ const BrainFeed = (() => {
     if (!completeCard(card, true)) return;
     activeSlide()?.classList.add('bf-feedback-success');
     haptic(14);
-    showToast(combo >= COMBO_BONUS_AT ? `🔥 COMBO x${combo} !` : `+${10 + Math.min(combo * 2, 24)} pts`);
+    showToast(combo >= COMBO_BONUS_AT ? ` COMBO x${combo} !` : `+${10 + Math.min(combo * 2, 24)} pts`);
     scrollToNext();
   }
 
@@ -2431,7 +2432,7 @@ const BrainFeed = (() => {
     }
     updateActionRail();
     haptic(9);
-    showToast(alreadySaved && !forceSave ? 'Retiré des favoris' : '❤️ Gardé pour plus tard');
+    showToast(alreadySaved && !forceSave ? 'Retiré des favoris' : ' Gardé pour plus tard');
   }
 
   function actionFav() {
@@ -2463,7 +2464,7 @@ const BrainFeed = (() => {
       comboEl.className = 'bf-combo-float';
       feed.appendChild(comboEl);
     }
-    comboEl.textContent = combo >= COMBO_BONUS_AT ? `🔥 MEGA x${combo}` : `COMBO x${combo}`;
+    comboEl.textContent = combo >= COMBO_BONUS_AT ? ` MEGA x${combo}` : `COMBO x${combo}`;
     comboEl.classList.remove('bf-combo-mega');
     if (combo >= COMBO_BONUS_AT) comboEl.classList.add('bf-combo-mega');
     comboEl.classList.add('show');
@@ -2518,7 +2519,7 @@ const BrainFeed = (() => {
     if (navigator.share) {
       navigator.share({ title: 'BrainFeed Gériatrie', text: payload }).catch(() => {});
     } else if (navigator.clipboard) {
-      navigator.clipboard.writeText(payload).then(() => showToast('📋 Copié pour partage'));
+      navigator.clipboard.writeText(payload).then(() => showToast(' Copié pour partage'));
     }
   }
 
@@ -2596,7 +2597,7 @@ const BrainFeed = (() => {
       cel.innerHTML = `
         <canvas id="bfConfetti" class="bf-confetti-canvas"></canvas>
         <div class="bf-celebration-inner">
-          <h2>🏆 Objectif du jour !</h2>
+          <h2> Objectif du jour !</h2>
           <p>${DAILY_GOAL} cartes — tu assures.</p>
           <p class="bf-celebration-sub">Tape pour continuer le feed</p>
         </div>`;
@@ -2697,7 +2698,7 @@ if (typeof window !== 'undefined') window.BrainFeed = BrainFeed;
   function spawnHeart(x, y) {
     var heart = document.createElement('div');
     heart.className = 'bf-heart-burst';
-    heart.textContent = '❤️';
+    heart.textContent = '';
     heart.style.left = x + 'px';
     heart.style.top = y + 'px';
     document.body.appendChild(heart);

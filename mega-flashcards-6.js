@@ -114,8 +114,8 @@ const MEGA_FLASHCARDS_6 = [
     chapter: "ch19",
     rang: "A",
     question: "Quel numéro national d'appel est dédié au signalement des maltraitances envers les personnes âgées ?",
-    answer: "Le 3977. C'est la plateforme d'écoute et de traitement des signalements de maltraitance à domicile ou en établissement.",
-    tags: ["3977", "Maltraitance", "Signalement"]
+    answer: "En France, le 3133 est le numéro national de signalement des maltraitances envers les adultes vulnérables depuis le 1er mars 2026. Il remplace le 3977. Une urgence immédiate relève des services d’urgence.",
+    tags: ["3133", "Maltraitance", "Signalement"]
   },
     {
     id: 3915,
@@ -258,7 +258,7 @@ const MEGA_FLASHCARDS_6 = [
     chapter: "ch19",
     rang: "B",
     question: "Comment s'assurer du respect des droits du patient majeur protégé (sous tutelle) en consultation ?",
-    answer: "Associer systématiquement le tuteur ou représentant légal pour toute décision médicale majeure. S'assurer de la présence du tuteur ou d'une ordonnance du juge pour signer le consentement opératoire, sauf urgence vitale.",
+    answer: "Rechercher le consentement du patient majeur protégé lorsqu’il peut exprimer sa volonté, avec une assistance adaptée si nécessaire. Si une mesure prévoit la représentation relative à la personne et que le patient ne peut consentir, le représentant intervient selon le périmètre de la mesure. La tutelle ne rend pas automatiquement obligatoire la signature du tuteur pour toute chirurgie.",
     tags: ["Tutelle", "Consentement", "Protection juridique"]
   },
     {

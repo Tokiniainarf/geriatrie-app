@@ -289,8 +289,8 @@ const FLASHCARDS_EXPANDED = [
     "id": 9522,
     "chapter": "ch9",
     "rang": "A",
-    "question": "Quelle est l'indication princeps du Lécanémab selon les recommandations actuelles des centres mémoire ?",
-    "answer": "Patients au stade de trouble neurocognitif léger (MCI) ou de démence très légère dus à la maladie d'Alzheimer (score MMSE ≥ 22-24) avec preuve confirmée de pathologie amyloïde (biomarqueurs LCR ou TEP amyloïde).",
+    "question": "Quel est le périmètre de l’indication européenne du lécanémab ?",
+    "answer": "Le RCP européen concerne les adultes ayant un trouble cognitif léger ou une démence légère dus à Alzheimer, avec pathologie amyloïde confirmée, non porteurs ou hétérozygotes ApoE ε4. Les homozygotes sont exclus de cette indication. L’éligibilité complète et les conditions d’accès nationales doivent être vérifiées en centre spécialisé.",
     "tags": [
       "NotebookLM",
       "indication",
@@ -346,7 +346,7 @@ const FLASHCARDS_EXPANDED = [
     "chapter": "ch9",
     "rang": "A",
     "question": "Quel examen d'imagerie et quel calendrier de surveillance sont indispensables avant et pendant le traitement par Lécanémab ?",
-    "answer": "IRM cérébrale de référence à l'inclusion, puis IRM de contrôle systématique avant la 5e, 7e et 14e perfusion (environ à 2, 3 et 6 mois).",
+    "answer": "Une IRM cérébrale de référence est requise avant traitement, puis avant les 3e, 5e, 7e et 14e perfusions selon le RCP européen consulté en septembre 2026. Des IRM supplémentaires sont nécessaires si des symptômes évoquent une ARIA ; suivre le protocole spécialisé à jour.",
     "tags": [
       "NotebookLM",
       "calendrier IRM",
@@ -482,7 +482,7 @@ const FLASHCARDS_EXPANDED = [
     "chapter": "ch3",
     "rang": "A",
     "question": "Quelle est la différence fondamentale entre l'échelle ADL de Katz et l'échelle IADL de Lawton ?",
-    "answer": "L'ADL (6 items) évalue l'autonomie physique basale (toilette, habillage, transferts, continence, repas). L'IADL (4 à 8 items) évalue l'autonomie instrumentale/cognitive (téléphone, budget, transports, médicaments).",
+    "answer": "Les ADL de Katz explorent six activités de base : toilette, habillage, utilisation des toilettes, transferts, continence et alimentation. Les IADL de Lawton explorent les activités instrumentales, notamment téléphone, transports, médicaments et finances.",
     "tags": [
       "NotebookLM",
       "ADL",
@@ -622,7 +622,7 @@ const FLASHCARDS_EXPANDED = [
     "chapter": "ch11",
     "rang": "A",
     "question": "Quelle est la place des benzodiazépines dans la prise en charge d'un syndrome confusionnel en gériatrie ?",
-    "answer": "Contre-indiquées en dehors du sevrage alcoolique avéré, car elles aggravent la confusion, favorisent les réactions paradoxales et augmentent le risque de chute.",
+    "answer": "Elles ne sont pas un traitement systématique de la confusion et peuvent l’aggraver. Rechercher notamment un sevrage alcoolique ou de benzodiazépines et adapter le traitement à la cause ; ne pas interrompre brutalement un traitement chronique.",
     "tags": [
       "NotebookLM",
       "BZD",
@@ -692,7 +692,7 @@ const FLASHCARDS_EXPANDED = [
     "chapter": "ch13",
     "rang": "A",
     "question": "Quel est le rythme recommandé de changement de position pour un patient alité à haut risque d'escarre ?",
-    "answer": "Changement de posture toutes les 2 à 3 heures (alternance décubitus dorsal et décubitus latéral oblique à 30°).",
+    "answer": "Individualiser le rythme selon la peau, la mobilité, la tolérance, l’état clinique et le support de redistribution de pression. Un intervalle de 2 à 3 heures peut convenir à de nombreux patients disposant d’un support adapté, mais ne constitue pas une règle universelle.",
     "tags": [
       "NotebookLM",
       "posture",
