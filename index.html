@@ -35,8 +35,8 @@
 #appPreloader .pl-status{font-size:.72rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:rgba(22,38,74,.45)}
 @media (prefers-reduced-motion: reduce){#appPreloader .pl-logo,#appPreloader .pl-fill{animation:none}}
 </style>
-  <link rel="stylesheet" href="podcasts.css?v=279">
-<link rel="stylesheet" href="workspace.css?v=290">
+  <link rel="stylesheet" href="podcasts.css?v=291">
+<link rel="stylesheet" href="workspace.css?v=291">
 <link rel="stylesheet" href="pulse.css?v=286">
 </head>
 <body>
@@ -371,6 +371,24 @@
       </button>
     </div>
     <div class="bf-toast" id="bfToast"></div>
+
+    <!-- PLAYLIST BOTTOM SHEET (DISCRET & IMMERSIF) -->
+    <div class="bf-playlist-sheet-backdrop" id="bfPlaylistBackdrop" onclick="BrainFeed.closePlaylistSheet()"></div>
+    <div class="bf-playlist-sheet" id="bfPlaylistSheet" role="dialog" aria-modal="true" aria-label="Playlists cliniques EVC">
+      <div class="bf-sheet-handle-bar" onclick="BrainFeed.closePlaylistSheet()">
+        <div class="bf-sheet-handle"></div>
+      </div>
+      <div class="bf-sheet-header">
+        <div class="bf-sheet-title-group">
+          <h3 class="bf-sheet-title">Playlists Cliniques EVC</h3>
+          <p class="bf-sheet-subtitle">106 vidéos classées par domaine d'épreuve</p>
+        </div>
+        <button type="button" class="bf-sheet-close-btn" onclick="BrainFeed.closePlaylistSheet()" aria-label="Fermer le menu des playlists">✕</button>
+      </div>
+      <div class="bf-sheet-tabs" id="bfSheetTabs" role="tablist"></div>
+      <div class="bf-sheet-active-bar" id="bfSheetActiveBar"></div>
+      <div class="bf-sheet-content" id="bfSheetContent"></div>
+    </div>
   </div>
 
   <!-- DICTIONNAIRE MÉDICAL -->
@@ -692,8 +710,8 @@
     { src: 'appsearch.js?v=279', label: 'Recherche…', pct: 85 },
     { src: 'erreurs-journal.js?v=279', label: 'Fichier erreurs…', pct: 89 },
     { src: 'graph.js?v=279', label: 'Parcours liés…', pct: 93 },
-    { src: 'brainfeed.js?v=290', label: 'BrainFeed…', pct: 97 },
-    { src: 'app.js?v=290', label: 'Interface…', pct: 100 }
+    { src: 'brainfeed.js?v=291', label: 'BrainFeed…', pct: 97 },
+    { src: 'app.js?v=291', label: 'Interface…', pct: 100 }
   ];
   steps.forEach(function(step){ var link=document.createElement('link'); link.rel='preload'; link.as='script'; link.href=step.src; document.head.appendChild(link); });
   var i = 0;

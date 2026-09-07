@@ -34,6 +34,26 @@ const BrainFeed = (() => {
   let completedCardIds = new Set();
   let feedScrollHandler = null;
 
+  const PLAYLIST_DEFS = [
+    { id: 'all', label: 'Tous', icon: '🌟', badge: '106 vidéos', desc: 'Flux complet des 106 Reels & Masterclasses' },
+    { id: 'cardio', label: 'Cardio & Métabolisme', icon: '🫀', badge: 'Cardio', desc: 'Cœur rigide, HTA, AVC, dysnatrémies, kaliémie, perfusions, rein' },
+    { id: 'neuro', label: 'Neuro & Cognition', icon: '🧠', badge: 'Neuro', desc: 'Confusion CAM, TNC Alzheimer/Lewy, dépression, chutes, sommeil' },
+    { id: 'pharma', label: 'Pharmacologie & Iatrogénie', icon: '💊', badge: 'Pharma', desc: 'STOPP/START, anticoagulants AVK/AOD, psychotropes, morphiniques' },
+    { id: 'nutrition', label: 'Nutrition & Autonomie', icon: '🍽️', badge: 'Nutrition', desc: 'Dénutrition HAS 2021, SRI, escarres, sarcopénie, grilles ADL/GIR' },
+    { id: 'ethique', label: 'Éthique & Masterclasses', icon: '⚖️', badge: 'Éthique', desc: 'Soins palliatifs, loi Claeys-Leonetti, tutelle, synthèses CNEG' }
+  ];
+
+  const P_MAP = {
+    cardio: [4, 13, 16, 17, 28, 29, 30, 31, 38, 40, 44, 45, 48, 53, 57, 58, 63, 72, 73, 74, 75, 76, 78, 84, 86, 90, 91, 101, 102],
+    neuro: [7, 8, 9, 10, 15, 20, 21, 23, 34, 36, 42, 43, 49, 54, 61, 67, 69, 71, 96, 97, 98, 99, 103],
+    pharma: [5, 6, 14, 24, 27, 32, 33, 37, 39, 41, 46, 51, 52, 55, 56, 60, 62, 64, 65, 66, 68, 70, 77, 85, 87, 88, 89, 93, 100],
+    nutrition: [1, 2, 3, 11, 12, 18, 19, 35, 47, 50, 59, 80, 81, 82, 95, 104],
+    ethique: [22, 25, 26, 79, 83, 92, 94, 105, 106]
+  };
+
+  let activePlaylist = 'all';
+  let sheetSelectedPlaylist = 'all';
+
   const TYPE_RATIO = {
     // Le feed est une séance de révision, pas un mélange de citations,
     // chiffres isolés ou cartes OCR. Priorité aux décisions cliniques.
@@ -815,13 +835,29 @@ const BrainFeed = (() => {
       if (/palliatif/.test(t)) return 'Clarifier objectifs de soins, symptômes prioritaires et décisions anticipées avec le patient et les proches.';
       return 'Observez le schéma, reformulez le message clinique en une phrase, puis mémorisez sans support.';
     };
+    visualMedias.forEach((r, idx) => {
+      const match = (r.title || '').match(/Reel\s+(\d+)/i);
+      const num = match ? parseInt(match[1], 10) : (idx + 1);
+      r.reelNum = num;
+      for (const [pKey, nums] of Object.entries(P_MAP)) {
+        if (nums.includes(num)) {
+          r.playlist = pKey;
+          break;
+        }
+      }
+      if (!r.playlist) r.playlist = 'cardio';
+    });
+
     const visualExplanations = visualMedias
       .filter(v => mediaOk(v.media))
       .map((v, i) => ({
         type: 'visual',
         id: 'vis-' + (i + 1),
+        reelNum: v.reelNum || (i + 1),
         chapter: v.chapter || 'ch1',
         title: v.title,
+        desc: v.desc || '',
+        playlist: v.playlist || 'cardio',
         question: v.title,
         answer: visualCue(v.title),
         media: v.media,
@@ -1134,7 +1170,10 @@ const BrainFeed = (() => {
     }
     if (activeSession === 'visual') {
       const videoCards = pools.visualExplanations.filter(card => card.isVideo || /\.mp4($|\?)/i.test(card.media || card.video || ''));
-      return videoCards.length > 0 ? videoCards : pools.visualExplanations.slice(0, 20);
+      const filtered = activePlaylist === 'all'
+        ? videoCards
+        : videoCards.filter(card => card.playlist === activePlaylist);
+      return filtered.length > 0 ? filtered : videoCards;
     }
     return mixed;
   }
@@ -1467,6 +1506,13 @@ const BrainFeed = (() => {
                   <button type="button" class="bf-reel-action-btn bf-act-chap" onclick="BrainFeed.openReelChapter(event, '${chapId}')" title="Ouvrir le chapitre complet">
                     <span class="bf-act-icon"></span>
                     <span class="bf-act-label">${chapId.toUpperCase()}</span>
+                  </button>
+
+                  <button type="button" class="bf-reel-action-btn bf-act-playlist ${activePlaylist !== 'all' ? 'is-filtered' : ''}" onclick="BrainFeed.openPlaylistSheet(event)" title="Thèmes & Playlists cliniques" aria-label="Playlists cliniques">
+                    <span class="bf-act-icon">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                    </span>
+                    <span class="bf-act-label">${activePlaylist !== 'all' ? esc(PLAYLIST_DEFS.find(p => p.id === activePlaylist)?.badge || 'Thème') : 'Thèmes'}</span>
                   </button>
                 </div>
 
@@ -2583,6 +2629,14 @@ const BrainFeed = (() => {
 
   function onKeyDown(e) {
     if (!document.getElementById('vFeed')?.classList.contains('active')) return;
+    if (e.key === 'Escape') {
+      const sheet = document.getElementById('bfPlaylistSheet');
+      if (sheet && sheet.classList.contains('is-open')) {
+        e.preventDefault();
+        closePlaylistSheet();
+        return;
+      }
+    }
     if (e.target?.closest?.('input,textarea,select,button,a,[contenteditable="true"]') || e.ctrlKey || e.metaKey || e.altKey) return;
     if (e.key === 'ArrowDown' || e.key === 'j') { e.preventDefault(); moveBy(1); }
     else if (e.key === 'ArrowUp' || e.key === 'k') { e.preventDefault(); moveBy(-1); }
@@ -2712,9 +2766,128 @@ const BrainFeed = (() => {
     activeTimers.forEach(t => clearTimeout(t));
     activeTimers.clear();
     document.removeEventListener('keydown', onKeyDown);
+    closePlaylistSheet();
     const feed = document.getElementById('bfFeed');
     if (feed && feedScrollHandler) feed.removeEventListener('scroll', feedScrollHandler);
     feedScrollHandler = null;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     PLAYLIST BOTTOM SHEET CONTROLLER (OPTION 1 — 100% IMMERSIF)
+     ═══════════════════════════════════════════════════════════════ */
+
+  function openPlaylistSheet(e) {
+    if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
+    sheetSelectedPlaylist = activePlaylist;
+    renderPlaylistSheet();
+    const sheet = document.getElementById('bfPlaylistSheet');
+    const backdrop = document.getElementById('bfPlaylistBackdrop');
+    if (sheet) sheet.classList.add('is-open');
+    if (backdrop) backdrop.classList.add('is-open');
+  }
+
+  function closePlaylistSheet() {
+    const sheet = document.getElementById('bfPlaylistSheet');
+    const backdrop = document.getElementById('bfPlaylistBackdrop');
+    if (sheet) sheet.classList.remove('is-open');
+    if (backdrop) backdrop.classList.remove('is-open');
+  }
+
+  function selectSheetTab(pId) {
+    sheetSelectedPlaylist = pId || 'all';
+    renderPlaylistSheet();
+  }
+
+  function applyPlaylist(pId) {
+    activePlaylist = pId || 'all';
+    deck = buildDeck();
+    idx = 0;
+    renderSlides();
+    const feed = document.getElementById('bfFeed');
+    if (feed) feed.scrollTop = 0;
+    closePlaylistSheet();
+    const pDef = PLAYLIST_DEFS.find(p => p.id === activePlaylist) || PLAYLIST_DEFS[0];
+    showToast(`Playlist : ${pDef.icon} ${pDef.label} (${deck.length} vidéos)`);
+  }
+
+  function jumpToReel(cardId) {
+    const pools = buildSpecialPools();
+    const allVideos = pools.visualExplanations.filter(card => card.isVideo || /\.mp4($|\?)/i.test(card.media || card.video || ''));
+    const targetCard = allVideos.find(c => c.id === cardId);
+    if (!targetCard) return;
+
+    if (activePlaylist !== 'all' && targetCard.playlist !== activePlaylist) {
+      activePlaylist = targetCard.playlist;
+    }
+    deck = buildDeck();
+    const targetIdx = deck.findIndex(c => c.id === cardId);
+    idx = targetIdx >= 0 ? targetIdx : 0;
+    renderSlides();
+    const feed = document.getElementById('bfFeed');
+    if (feed) {
+      const el = document.getElementById(`bfScroll-${idx}`);
+      if (el) el.scrollIntoView({ behavior: 'auto' });
+    }
+    closePlaylistSheet();
+  }
+
+  function renderPlaylistSheet() {
+    const tabsContainer = document.getElementById('bfSheetTabs');
+    const activeBarContainer = document.getElementById('bfSheetActiveBar');
+    const contentContainer = document.getElementById('bfSheetContent');
+    if (!tabsContainer || !activeBarContainer || !contentContainer) return;
+
+    const pools = buildSpecialPools();
+    const allVideos = pools.visualExplanations.filter(card => card.isVideo || /\.mp4($|\?)/i.test(card.media || card.video || ''));
+
+    // Render tabs
+    tabsContainer.innerHTML = PLAYLIST_DEFS.map(p => {
+      const count = p.id === 'all' ? allVideos.length : allVideos.filter(v => v.playlist === p.id).length;
+      const isActive = p.id === sheetSelectedPlaylist;
+      return `
+        <button type="button" class="bf-sheet-tab ${isActive ? 'active' : ''}" onclick="BrainFeed.selectSheetTab('${p.id}')">
+          <span>${p.icon}</span>
+          <span>${esc(p.label)}</span>
+          <span class="bf-sheet-tab-count">${count}</span>
+        </button>
+      `;
+    }).join('');
+
+    // Render active bar
+    const curP = PLAYLIST_DEFS.find(p => p.id === sheetSelectedPlaylist) || PLAYLIST_DEFS[0];
+    const filteredVideos = curP.id === 'all' ? allVideos : allVideos.filter(v => v.playlist === curP.id);
+    const isAlreadyActive = curP.id === activePlaylist;
+
+    activeBarContainer.innerHTML = `
+      <div class="bf-sheet-active-text">
+        <div class="bf-sheet-active-name">${curP.icon} ${esc(curP.label)} (${filteredVideos.length} vidéos)</div>
+        <div class="bf-sheet-active-desc">${esc(curP.desc)}</div>
+      </div>
+      <button type="button" class="bf-sheet-apply-btn ${isAlreadyActive ? 'is-active-filter' : ''}" onclick="BrainFeed.applyPlaylist('${curP.id}')">
+        ${isAlreadyActive ? '✓ En cours' : 'Activer'}
+      </button>
+    `;
+
+    // Current playing card
+    const curPlayingCard = deck[idx];
+
+    // Render video list
+    contentContainer.innerHTML = filteredVideos.map(v => {
+      const isCurrent = curPlayingCard && curPlayingCard.id === v.id;
+      return `
+        <div class="bf-sheet-video-card ${isCurrent ? 'is-playing' : ''}" onclick="BrainFeed.jumpToReel('${v.id}')" role="button" tabindex="0">
+          <div class="bf-sheet-card-num">#${v.reelNum || ''}</div>
+          <div class="bf-sheet-card-info">
+            <div class="bf-sheet-card-title">${esc(v.title || '')}</div>
+            <div class="bf-sheet-card-desc">${esc(v.desc || '')}</div>
+          </div>
+          <div class="bf-sheet-card-meta">
+            <span class="bf-sheet-card-tag">${esc((v.chapter || '').toUpperCase())}</span>
+            <span class="bf-sheet-card-play">${isCurrent ? '▶' : '›'}</span>
+          </div>
+        </div>
+      `;
+    }).join('');
   }
 
   return {
@@ -2738,6 +2911,11 @@ const BrainFeed = (() => {
     replayReel,
     openReelChapter,
     seekReel,
+    openPlaylistSheet,
+    closePlaylistSheet,
+    selectSheetTab,
+    applyPlaylist,
+    jumpToReel,
     audit: () => {
       const pools = buildSpecialPools();
       return { deck: buildDailyDeck(pools), pools };

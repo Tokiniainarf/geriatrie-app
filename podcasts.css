@@ -3292,3 +3292,365 @@ body:has(#vFeed.bf-session-reels.active) .pod-spotify-mini-player,
   margin-bottom: 12px !important;
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   DISCREET REELS PLAYLIST SHEET (OPTION 1 — 100% IMMERSIVE)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Sidebar "Thèmes" button */
+.bf-act-playlist {
+  position: relative !important;
+}
+
+.bf-act-playlist.is-filtered {
+  border-color: #38bdf8 !important;
+  background: rgba(14, 165, 233, 0.42) !important;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.6) !important;
+}
+
+.bf-act-playlist.is-filtered .bf-act-label {
+  color: #7dd3fc !important;
+  font-weight: 800 !important;
+}
+
+/* Backdrop */
+.bf-playlist-sheet-backdrop {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 9998 !important;
+  background: rgba(0, 0, 0, 0.72) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 0.26s ease !important;
+}
+
+.bf-playlist-sheet-backdrop.is-open {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+/* Bottom Sheet Modal */
+.bf-playlist-sheet {
+  position: fixed !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 9999 !important;
+  max-height: 82vh !important;
+  max-height: 82dvh !important;
+  background: linear-gradient(180deg, #131d2e 0%, #0b1120 100%) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 26px 26px 0 0 !important;
+  box-shadow: 0 -12px 48px rgba(0, 0, 0, 0.75) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  color: #f8fafc !important;
+  transform: translateY(105%) !important;
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  font-family: inherit !important;
+}
+
+@media (min-width: 768px) {
+  .bf-playlist-sheet {
+    left: 50% !important;
+    right: auto !important;
+    width: min(540px, 94vw) !important;
+    transform: translate(-50%, 105%) !important;
+    border-radius: 24px 24px 0 0 !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.14) !important;
+  }
+}
+
+.bf-playlist-sheet.is-open {
+  transform: translateY(0%) !important;
+}
+
+@media (min-width: 768px) {
+  .bf-playlist-sheet.is-open {
+    transform: translate(-50%, 0%) !important;
+  }
+}
+
+/* Drag handle */
+.bf-sheet-handle-bar {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 12px 0 4px !important;
+  cursor: pointer !important;
+}
+
+.bf-sheet-handle {
+  width: 42px !important;
+  height: 5px !important;
+  border-radius: 99px !important;
+  background: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Header */
+.bf-sheet-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 8px 20px 12px !important;
+}
+
+.bf-sheet-title-group h3 {
+  margin: 0 !important;
+  font-size: 1.15rem !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  letter-spacing: -0.01em !important;
+}
+
+.bf-sheet-title-group p {
+  margin: 2px 0 0 0 !important;
+  font-size: 0.78rem !important;
+  color: #94a3b8 !important;
+}
+
+.bf-sheet-close-btn {
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #ffffff !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: background 0.15s ease, transform 0.15s ease !important;
+}
+
+.bf-sheet-close-btn:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  transform: scale(1.06) !important;
+}
+
+/* Horizontal pill tabs */
+.bf-sheet-tabs {
+  display: flex !important;
+  gap: 8px !important;
+  overflow-x: auto !important;
+  padding: 4px 18px 12px !important;
+  scrollbar-width: none !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+.bf-sheet-tabs::-webkit-scrollbar {
+  display: none !important;
+}
+
+.bf-sheet-tab {
+  flex-shrink: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 7px 13px !important;
+  border-radius: 99px !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #cbd5e1 !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+}
+
+.bf-sheet-tab:hover {
+  background: rgba(255, 255, 255, 0.14) !important;
+  color: #ffffff !important;
+}
+
+.bf-sheet-tab.active {
+  background: linear-gradient(135deg, #0284c7 0%, #0d9488 100%) !important;
+  border-color: #38bdf8 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4) !important;
+}
+
+.bf-sheet-tab-count {
+  font-size: 0.68rem !important;
+  padding: 1px 6px !important;
+  border-radius: 99px !important;
+  background: rgba(0, 0, 0, 0.28) !important;
+  color: inherit !important;
+}
+
+/* Active playlist info bar */
+.bf-sheet-active-bar {
+  margin: 0 18px 10px !important;
+  padding: 10px 14px !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+}
+
+.bf-sheet-active-text {
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+
+.bf-sheet-active-name {
+  font-size: 0.84rem !important;
+  font-weight: 800 !important;
+  color: #38bdf8 !important;
+  margin-bottom: 2px !important;
+}
+
+.bf-sheet-active-desc {
+  font-size: 0.73rem !important;
+  color: #94a3b8 !important;
+  line-height: 1.35 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.bf-sheet-apply-btn {
+  flex-shrink: 0 !important;
+  padding: 7px 14px !important;
+  border-radius: 10px !important;
+  background: #0284c7 !important;
+  color: #ffffff !important;
+  font-size: 0.76rem !important;
+  font-weight: 800 !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+}
+
+.bf-sheet-apply-btn:hover {
+  background: #0369a1 !important;
+  transform: translateY(-1px) !important;
+}
+
+.bf-sheet-apply-btn.is-active-filter {
+  background: rgba(16, 185, 129, 0.25) !important;
+  color: #34d399 !important;
+  border: 1px solid rgba(52, 211, 153, 0.4) !important;
+  cursor: default !important;
+}
+
+/* Video list container */
+.bf-sheet-content {
+  flex: 1 !important;
+  overflow-y: auto !important;
+  padding: 2px 18px 24px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 7px !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent !important;
+}
+
+.bf-sheet-content::-webkit-scrollbar {
+  width: 5px !important;
+}
+
+.bf-sheet-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-radius: 99px !important;
+}
+
+/* Video card in list */
+.bf-sheet-video-card {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 9px 12px !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border-radius: 12px !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+  text-align: left !important;
+  width: 100% !important;
+}
+
+.bf-sheet-video-card:hover {
+  background: rgba(255, 255, 255, 0.09) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  transform: translateX(3px) !important;
+}
+
+.bf-sheet-video-card.is-playing {
+  background: rgba(13, 148, 136, 0.2) !important;
+  border-color: #0d9488 !important;
+  box-shadow: 0 2px 12px rgba(13, 148, 136, 0.25) !important;
+}
+
+.bf-sheet-card-num {
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  color: #38bdf8 !important;
+  flex-shrink: 0 !important;
+  min-width: 46px !important;
+}
+
+.bf-sheet-video-card.is-playing .bf-sheet-card-num {
+  color: #34d399 !important;
+}
+
+.bf-sheet-card-info {
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+
+.bf-sheet-card-title {
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  line-height: 1.3 !important;
+  margin-bottom: 2px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.bf-sheet-card-desc {
+  font-size: 0.72rem !important;
+  color: #94a3b8 !important;
+  line-height: 1.3 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.bf-sheet-card-meta {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  flex-shrink: 0 !important;
+}
+
+.bf-sheet-card-tag {
+  font-size: 0.65rem !important;
+  font-weight: 800 !important;
+  padding: 2px 6px !important;
+  border-radius: 6px !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #cbd5e1 !important;
+  letter-spacing: 0.03em !important;
+}
+
+.bf-sheet-card-play {
+  font-size: 0.85rem !important;
+  color: #38bdf8 !important;
+  line-height: 1 !important;
+}
+
+.bf-sheet-video-card.is-playing .bf-sheet-card-play {
+  color: #34d399 !important;
+}
+
+
