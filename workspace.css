@@ -290,6 +290,32 @@ button {cursor:pointer}
 #vClinique .clinical-privacy-card {background:var(--bg-base);border:1px solid var(--border);color:var(--text)}
 #vClinique .clinical-privacy-card small {color:var(--text2);font-size:.8rem;line-height:1.5}
 .content-review-note {padding:12px 14px;border:1px solid currentColor;border-radius:10px;font-size:.85rem;line-height:1.55;color:#dceccf}
+/* Resource libraries: consistent reading column and progressive disclosure. */
+#vProto,#vAnnales {max-width:1040px;margin-inline:auto;padding-bottom:100px}
+#vProto .page-hd,#vAnnales .page-hd {margin-bottom:24px}
+#vProto .sub-tab-switch,#vAnnales .sub-tab-switch {display:flex;flex-wrap:wrap;gap:8px;padding:6px;border:1px solid var(--border);border-radius:16px;background:var(--bg-card);margin:20px 0}
+#vProto .sub-tab-switch button,#vAnnales .sub-tab-switch button {flex:1 1 160px;min-height:46px;white-space:normal;line-height:1.4;padding:10px 16px;border-radius:11px}
+#vProto .content-role-grid {display:none}
+#vProto .proto-cat-header,#vAnnales .ann-year-header {display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:18px 20px;border:0;border-radius:12px;background:var(--bg-card);color:var(--text);font:inherit;cursor:pointer}
+#vProto .proto-cat-label,#vAnnales .ann-year-label {flex:1;min-width:0;font-weight:700}
+#vProto .proto-cat-group,#vAnnales .ann-year-group {margin-bottom:14px;border:1px solid var(--border);border-radius:16px;overflow:hidden}
+#vProto .proto-cat-body,#vAnnales .ann-year-body {grid-template-columns:1fr!important;gap:12px!important;padding:12px!important}
+#vProto .resource-detail,#vAnnales .resource-detail {display:block!important;height:auto!important;min-height:0!important;padding:0!important;margin:0 0 10px!important;border:1px solid var(--border);border-radius:12px;background:var(--bg-card);box-shadow:none;overflow:hidden}
+.resource-detail > summary {display:block;position:relative;cursor:pointer;padding:20px 48px 20px 20px;list-style:none}
+.resource-detail > summary::-webkit-details-marker {display:none}
+.resource-detail > summary::after {content:'+';position:absolute;right:20px;top:24px;font-size:22px;color:var(--text2)}
+.resource-detail[open] > summary::after {content:'−'}
+.resource-detail > summary:focus-visible {outline:3px solid var(--accent);outline-offset:-3px}
+.resource-open-label {display:block;margin-top:12px;font-size:.78rem;color:var(--text2)}
+.resource-detail-body {padding:20px;border-top:1px solid var(--border);line-height:1.7;overflow-wrap:anywhere}
+#vProto .proto-card-title,#vAnnales .ann-card-title {position:static;line-height:1.5;font-size:1.05rem;margin:10px 0;white-space:normal;overflow-wrap:anywhere}
+#vAnnales .ann-filter-bar {display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:20px 0}
+#vAnnales .ann-filter-bar input,#vAnnales .ann-filter-bar select {flex:1 1 190px;min-width:0;min-height:46px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:var(--bg-card);color:var(--text);font:inherit}
+#vAnnales .ann-q {margin:18px 0;padding:16px;border:1px solid var(--border);border-radius:12px}
+#vAnnales .ann-a-text {margin-top:14px;line-height:1.75}
+#vProto .source-status,#vAnnales .source-status {position:static!important;display:inline-block;white-space:normal;line-height:1.5;height:auto}
+#vProto .proto-steps li {padding-block:5px;line-height:1.7}
+@media(max-width:600px){#vProto,#vAnnales{padding-inline:12px}.resource-detail > summary{padding:16px 40px 16px 16px}.resource-detail-body{padding:16px}#vAnnales .ann-q{padding:12px}#vProto .proto-cat-body,#vAnnales .ann-year-body{padding:8px!important}}
 #vFeed .bf-bg-emoji:empty,#vFeed .bf-fire-emoji:empty,#vFeed .bf-act-icon:empty {display:none!important}
 #vFeed .bf-type-badge {letter-spacing:.08em;font-size:.7rem}
 #vFeed .bf-sound-icon {font-family:inherit;font-size:.7rem!important;font-weight:800;letter-spacing:.06em}

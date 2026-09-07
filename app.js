@@ -4287,7 +4287,8 @@ function renderAnnales(){
   // Filters
   if(filtEl){
     filtEl.innerHTML=`<div class="ann-filter-bar">
-      <select id="annYearFilter" onchange="filterAnnales()"><option value="">Tous les styles</option>${years.map(y=>`<option value="${y}">Style ${y}</option>`).join('')}</select>
+      <input type="search" id="annSearch" aria-label="Rechercher un cas clinique" placeholder="Rechercher un cas, une situation…" oninput="filterAnnales()">
+      <select id="annYearFilter" aria-label="Filtrer par style d’année" onchange="filterAnnales()"><option value="">Tous les styles</option>${years.map(y=>`<option value="${y}">Style ${y}</option>`).join('')}</select>
       <select id="annChapFilter" onchange="filterAnnales()"><option value="">Tous les chapitres</option>${chapters.map(c=>{const ch=APP_DATA.chapters.find(x=>x.id===c);return`<option value="${c}">${c.replace('ch','')} — ${ch?ch.t:c}</option>`}).join('')}</select>
       <span class="ann-count" id="annCount">${all.length} cas</span>
     </div>`;
@@ -4309,6 +4310,8 @@ function renderAnnalesList(){
   let list=window._annales||[];
   if(window._annYear)list=list.filter(a=>String(a.year)===window._annYear);
   if(window._annChap)list=list.filter(a=>a.chapter===window._annChap);
+  const searchText=document.getElementById('annSearch')?.value.trim().toLocaleLowerCase('fr') || '';
+  if(searchText)list=list.filter(a=>[a.title,a.titre,a.situation,a.cas,a.case].filter(Boolean).join(' ').toLocaleLowerCase('fr').includes(searchText));
   const cnt=document.getElementById('annCount');if(cnt)cnt.textContent=list.length+' cas';
   // Group by year
   const groups={};
@@ -4322,23 +4325,25 @@ function renderAnnalesList(){
     const cases=groups[year];
     const openCls=yi===0?' open':'';
     return`<div class="ann-year-group${openCls}">
-      <div class="ann-year-header" onclick="this.parentElement.classList.toggle('open')">
+      <button type="button" class="ann-year-header" aria-expanded="${yi===0}" onclick="this.setAttribute('aria-expanded',this.parentElement.classList.toggle('open'))">
         <span class="ann-year-label">${cases.some(c=>c._official)?year:'Style '+year}</span>
         <span class="ann-year-count">${cases.length} cas</span>
         <span class="ann-chevron">▾</span>
-      </div>
+      </button>
       <div class="ann-year-body">${cases.map(a=>{
         const chName=APP_DATA.chapters.find(c=>c.id===a.chapter);
         const diffBadge=a.difficulty?`<span class="rang-badge rang-${a.difficulty.toLowerCase()}">Rang ${a.difficulty}</span>`:'';
         const questions=a.questions?a.questions.map((q,i)=>`<div class="ann-q"><div class="ann-q-text"><strong>Q${i+1}:</strong> ${esc(q.q||q.question||'')}</div><div class="ann-a-text ann-a-hidden" style="display:none" id="ans-${a.id}-${i}">${renderSafeTrainingAnswer(q.a||q.answer||'')}</div><button type="button" class="ann-reveal-btn" aria-expanded="false" aria-controls="ans-${a.id}-${i}" onclick="toggleAnnAnswer('ans-${a.id}-${i}',this)">Voir réponse</button></div>`).join(''):(a.correction||a.reponse?`<div class="ann-q"><div class="ann-a-text ann-a-hidden" style="display:none" id="ans-${a.id}">${renderSafeTrainingAnswer(a.correction||a.reponse)}</div><button type="button" class="ann-reveal-btn" aria-expanded="false" aria-controls="ans-${a.id}" onclick="toggleAnnAnswer('ans-${a.id}',this)">Voir réponse</button></div>`:'');
-         return`<div class="ann-card">
+         return`<details class="ann-card resource-detail">
+          <summary>
            <span class="source-status ${a._official?'official':'training'}">${esc(a._sourceLabel)}</span>
           <div class="ann-card-head">${diffBadge}<span class="ann-card-ch">${chName?chName.t:a.chapter||''}</span></div>
           <div class="ann-card-title">${esc(a.title||a.titre||'')}</div>
+          <span class="resource-open-label">Ouvrir le cas et ses questions</span></summary><div class="resource-detail-body">
           <div class="ann-card-situation">${esc(a.situation||a.cas||a.case||'')}</div>
           ${questions}
           ${a.juryTips&&!hasUnsafeGlycemiaMismatch(a.juryTips)?`<div class="ann-jury-tip">💡 Jury: ${esc(a.juryTips)}</div>`:''}
-        </div>`;
+        </div></details>`;
       }).join('')}</div>
     </div>`;
   }).join('');
@@ -4651,11 +4656,11 @@ function renderProtoList(list){
   }
   el.innerHTML=entries.map(([cat,items],ci)=>`
     <div class="proto-cat-group${ci===0?' open':''}">
-      <div class="proto-cat-header" onclick="this.parentElement.classList.toggle('open')">
+      <button type="button" class="proto-cat-header" aria-expanded="${ci===0}" onclick="this.setAttribute('aria-expanded',this.parentElement.classList.toggle('open'))">
         <span class="proto-cat-label">${esc(cat)}</span>
         <span class="proto-cat-count">${items.length}</span>
         <span class="ann-chevron">▾</span>
-      </div>
+      </button>
       <div class="proto-cat-body">${items.map(p=>{
         const steps=getProtoBodySteps(p);
         const meta=getProtoMetaBlocks(p);
@@ -4663,9 +4668,10 @@ function renderProtoList(list){
         const hasBody=steps.length>0||meta.length>0||p.indication||p.surveillance||p.alerte||p.alert||p.contreIndications||p.effetsSecondaires;
         const verified=p.sourceKind==='has';
         const guard=p.sourceKind==='garde';
-        return`<div class="proto-card${p.urgency==='high'?' proto-urgent':''}${hasBody?'':' proto-empty'}">
+        return`<details class="resource-detail proto-card${p.urgency==='high'?' proto-urgent':''}${hasBody?'':' proto-empty'}"><summary>
           <span class="source-status ${verified?'official':guard?'guard':'unverified'}">${verified?esc(p.sourceLabel||'HAS · intégré dans l’app'):guard?esc(p.sourceLabel||'Repère de garde'):'Synthèse clinique interne'}</span>
-          <div class="proto-card-head"><span class="proto-icon">${icon}</span><div class="proto-card-title">${esc(p.titre||p.title||'')}</div></div>
+          <div class="proto-card-head"><div class="proto-card-title">${esc(p.titre||p.title||'')}</div></div>
+          <span class="resource-open-label">Consulter la conduite et les repères</span></summary><div class="resource-detail-body">
           ${p.indication?`<div class="proto-indication">${esc(p.indication)}</div>`:''}
           ${meta.map(m=>`<div class="proto-meta"><strong>${esc(m.label)} :</strong> ${esc(m.text)}</div>`).join('')}
           ${steps.length?`<ol class="proto-steps">${steps.map(s=>`<li>${esc(s)}</li>`).join('')}</ol>`:''}
@@ -4675,7 +4681,7 @@ function renderProtoList(list){
           ${p.effetsSecondaires?`<div class="proto-surveillance">⚡ EI: ${esc(p.effetsSecondaires)}</div>`:''}
           ${p.contreIndications?`<div class="proto-ci">🚫 CI: ${esc(p.contreIndications)}</div>`:''}
           ${p.sourceUrl?`<span class="proto-source-link proto-source-integrated" title="La référence officielle est conservée dans les données de l’app">Source HAS intégrée · référence vérifiée</span>`:''}
-        </div>`;
+        </div></details>`;
       }).join('')}</div>
     </div>`).join('');
 }
