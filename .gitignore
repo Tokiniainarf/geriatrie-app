@@ -3,3 +3,7 @@ node_modules/
 dist/
 vite-dev.log
 *.log
+.agents/
+__pycache__/
+*.pyc
+convert_all_podcasts.js
