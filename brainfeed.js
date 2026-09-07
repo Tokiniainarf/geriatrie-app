@@ -342,7 +342,7 @@ const BrainFeed = (() => {
 
   function isCaseChocReady(vignette, diagnosis) {
     const stem = String(vignette || '').replace(/\s+/g, ' ').trim();
-    const correction = String(diagnosis || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+    const correction = String(diagnosis || '').replace(/<\/?[a-z][^>]*>/gi, ' ').replace(/\s+/g, ' ').trim();
     // Une carte reste concise, mais aucune donnée n'est coupée pour rentrer.
     if (stem.length < 70 || stem.length > 650 || correction.length < 35 || correction.length > 620) return false;
     if (/…|\.\.\./.test(stem + ' ' + correction)) return false;
@@ -355,7 +355,7 @@ const BrainFeed = (() => {
     return String(value || '')
       .replace(/<br\s*\/?\s*>/gi, '\n')
       .replace(/<\/p\s*>/gi, '\n')
-      .replace(/<[^>]*>/g, ' ')
+      .replace(/<\/?[a-z][^>]*>/gi, ' ')
       .replace(/[●➔]/g, '•')
       .replace(/[ \t]+/g, ' ')
       .replace(/\s*\n\s*/g, '\n')
@@ -943,7 +943,7 @@ const BrainFeed = (() => {
 
   function cardContentSignature(card) {
     const clean = (value) => String(value || '')
-      .replace(/<[^>]*>/g, ' ')
+      .replace(/<\/?[a-z][^>]*>/gi, ' ')
       .replace(/\s+/g, ' ')
       .trim()
       .toLowerCase();
@@ -987,8 +987,8 @@ const BrainFeed = (() => {
   function isHighYieldFeedCase(card) {
     if (!card) return false;
     const vignette = String(card.vignette || '').replace(/\s+/g, ' ').trim();
-    const prompt = String(card.prompt || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
-    const answer = String(card.diagnosis || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+    const prompt = String(card.prompt || '').replace(/<\/?[a-z][^>]*>/gi, ' ').replace(/\s+/g, ' ').trim();
+    const answer = String(card.diagnosis || '').replace(/<\/?[a-z][^>]*>/gi, ' ').replace(/\s+/g, ' ').trim();
     if (vignette.length < 70 || vignette.length > 450 || prompt.length < 12 || prompt.length > 170) return false;
     if (answer.length < 70 || answer.length > 620) return false;
     if (/…|\.\.\./.test(vignette + ' ' + prompt + ' ' + answer)) return false;
@@ -1001,7 +1001,7 @@ const BrainFeed = (() => {
   }
 
   function isCompactFeedCase(card) {
-    const answer = String(card?.diagnosis || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+    const answer = String(card?.diagnosis || '').replace(/<\/?[a-z][^>]*>/gi, ' ').replace(/\s+/g, ' ').trim();
     const totalPrompt = `${card?.vignette || ''} ${card?.prompt || ''}`.replace(/\s+/g, ' ').trim();
     return isHighYieldFeedCase(card) && totalPrompt.length <= 470 && answer.length <= 430;
   }
@@ -2292,6 +2292,14 @@ const BrainFeed = (() => {
   }
 
   function updateHeader() {
+    const position = document.getElementById('pulsePosition');
+    if (position) position.textContent = deck.length ? `${idx + 1} / ${deck.length}` : 'Aucune publication';
+    const topic = document.getElementById('pulseTopic');
+    if (topic) topic.textContent = getChapterName(deck[idx]?.chapter) || 'Révision transversale';
+    const previous = document.getElementById('pulsePrevious');
+    const next = document.getElementById('pulseNext');
+    if (previous) previous.disabled = idx === 0;
+    if (next) next.disabled = !deck.length || idx >= deck.length - 1;
     const counter = document.getElementById('bfCounter');
     const progressBar = document.getElementById('bfProgress');
     const goalFill = document.getElementById('bfDailyGoalFill');
@@ -2439,20 +2447,24 @@ const BrainFeed = (() => {
     actionFavForIdx(idx);
   }
 
-  function scrollToNext() {
+  function moveBy(direction) {
     const feed = document.getElementById('bfFeed');
-    if (!feed) return;
-    if (idx + 1 >= deck.length) {
-      showToast('Fin de cette sélection · change de rubrique pour continuer');
+    if (!feed || !deck.length) return;
+    const target = idx + direction;
+    if (target < 0 || target >= deck.length) {
+      showToast(target < 0 ? 'Première publication' : 'Sélection terminée · explore une autre rubrique');
       return;
     }
-    const nextSlide = feed.querySelector(`.bf-slide[data-idx="${idx + 1}"]`);
-    if (nextSlide) nextSlide.scrollIntoView({ behavior: motionOK() ? 'smooth' : 'auto', block: 'start' });
-    else {
-      idx++;
-      if (idx < deck.length) renderSlides();
+    let slide = feed.querySelector(`.bf-slide[data-idx="${target}"]`);
+    if (!slide) {
+      idx = target;
+      renderSlides();
+      slide = feed.querySelector(`.bf-slide[data-idx="${target}"]`);
     }
+    if (slide) feed.scrollTo({top: feed.scrollTop + slide.getBoundingClientRect().top - feed.getBoundingClientRect().top, behavior: motionOK() ? 'smooth' : 'auto'});
   }
+
+  function scrollToNext() { moveBy(1); }
 
   function showCombo() {
     if (combo < 3) return;
@@ -2525,14 +2537,13 @@ const BrainFeed = (() => {
 
   function onKeyDown(e) {
     if (!document.getElementById('vFeed')?.classList.contains('active')) return;
-    if (e.key === 'ArrowUp' || e.key === 'k') actionKnow();
-    else if (e.key === 'ArrowDown' || e.key === 'j') actionDontKnow();
+    if (e.target?.closest?.('input,textarea,select,button,a,[contenteditable="true"]') || e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.key === 'ArrowDown' || e.key === 'j') { e.preventDefault(); moveBy(1); }
+    else if (e.key === 'ArrowUp' || e.key === 'k') { e.preventDefault(); moveBy(-1); }
     else if (e.key === 'f') actionFav();
-    else if (e.key === 'ArrowLeft') actionFav();
-    else if (e.key === 'ArrowRight') shareCard(idx);
     else if (e.key === ' ') {
-      e.preventDefault();
-      document.getElementById(`bfCard-${idx}`)?.classList.toggle('flipped');
+      const reveal = activeSlide()?.querySelector('[data-bf-reveal],.bf-memo-reveal,.bf-choc-reveal,.bf-trap-reveal');
+      if (reveal) { e.preventDefault(); reveal.click(); }
     }
   }
 
@@ -2670,6 +2681,7 @@ const BrainFeed = (() => {
     shareCard,
     renderSlides,
     selectSession,
+    moveBy,
     filterSubCategory,
     toggleSound,
     toggleReelPlay,

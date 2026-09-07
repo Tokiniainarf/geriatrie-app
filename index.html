@@ -37,6 +37,7 @@
 </style>
   <link rel="stylesheet" href="podcasts.css?v=279">
 <link rel="stylesheet" href="workspace.css?v=284">
+<link rel="stylesheet" href="pulse.css?v=285">
 </head>
 <body>
 <a class="skip-link" href="#mainContent">Aller au contenu</a>
@@ -345,6 +346,8 @@
       <button type="button" class="bf-sub-chip" data-filter="quiz_flash" onclick="BrainFeed.filterSubCategory('quiz_flash', this)"> Quiz</button>
       <button type="button" class="bf-sub-chip" data-filter="cas_choc" onclick="BrainFeed.filterSubCategory('cas_choc', this)"> Cas</button>
     </div>
+    <div class="pulse-context"><span class="pulse-avatar" aria-hidden="true">G</span><div><strong>Gériatrie · À retenir</strong><span id="pulseTopic">Révision transversale</span></div><span id="pulsePosition" aria-label="Position dans la sélection">1 / 40</span></div>
+    <div class="pulse-scroll-controls"><button id="pulsePrevious" type="button" onclick="BrainFeed.moveBy(-1)" aria-label="Publication précédente">↑</button><button id="pulseNext" type="button" onclick="BrainFeed.moveBy(1)" aria-label="Publication suivante">↓</button><span>Défile pour découvrir</span></div>
     <div class="bf-progress-track"><div class="bf-progress-fill" id="bfProgress"></div></div>
     <div class="bf-feed" id="bfFeed">
       <!-- Slides rendered dynamically by brainfeed.js -->

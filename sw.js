@@ -1,7 +1,7 @@
 // A release is installed only when its complete shell is available.
-const CACHE_NAME = 'geriatrie-v284';
+const CACHE_NAME = 'geriatrie-v285';
 const CORE = [
-  './','./index.html','./style.css','./workspace.css','./workspace.js','./manifest.json',
+  './','./index.html','./style.css','./workspace.css','./pulse.css','./workspace.js','./manifest.json',
   './data-bundle.js','./practice-data.js','./annales-authentiques.js','./annales-texte.js',
   './annales-corrections.js','./protocoles-has-officiels.js','./clinical-pathways.js',
   './notebook-decks-data.js','./podcasts-data.js','./podcasts-app.js','./podcasts.css',

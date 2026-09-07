@@ -12,3 +12,5 @@ test('teriparatide and lecanemab cards use verified European references',()=>{as
 test('sarcopenia and consent preserve essential qualifying criteria',()=>{assert.match(card(3667).answer,/force musculaire et/);assert.match(card(3932).answer,/peut exprimer sa volonté/);assert.match(card(3914).answer,/3133/);});
 test('all editorial feed quizzes have one correct answer and an explanation',()=>{for(const c of result.pools.quizFlash){assert.equal(c.options.filter(o=>o.correct).length,1,c.id);assert.ok(c.explanation,c.id);assert.equal(new Set(c.options.map(o=>o.text)).size,c.options.length,c.id);}});
 test('corrected podcast summaries disclose unchanged recordings',()=>{const pods=vm.runInContext('PODCASTS_DATA',ctx);for(const id of ['pod-01','pod-08','pod-12','pod-16','pod-22','pod-26'])assert.match(pods.find(p=>p.id===id).reviewNote,/pas été réenregistrée/);});
+
+test('case normalization preserves comparisons between less-than and greater-than signs',()=>{const c=result.pools.casChoc.find(c=>c.vignette.includes('Tinetti : 18/28'));assert.ok(c,'Tinetti case remains in the feed');assert.match(c.diagnosis,/<\s*19/);assert.match(c.diagnosis,/>\s*20/);});
