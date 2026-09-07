@@ -4281,6 +4281,14 @@ function renderAnnales(){
     a._official=a.official===true && /^https:\/\/(?:www\.)?(?:cng\.sante\.fr|sante\.gouv\.fr)\//i.test(url);
     a._sourceLabel=a._official?'Sujet officiel vérifié':'Entraînement reconstitué · non officiel';
   });
+  const questionGroups=new Map();
+  all.forEach(a=>{
+    if(!a.questions?.length)return;
+    const key=JSON.stringify(a.questions.map(q=>[q.q||q.question||'',q.a||q.answer||'']));
+    if(!questionGroups.has(key))questionGroups.set(key,[]);
+    questionGroups.get(key).push(a);
+  });
+  questionGroups.forEach(group=>group.forEach((a,i)=>{a._templateVariant=i;a._templateCount=group.length;}));
   // Years available
   const years=[...new Set(all.map(a=>a.year).filter(Boolean))].sort((a,b)=>b-a);
   const chapters=[...new Set(all.map(a=>a.chapter).filter(Boolean))];
@@ -4291,6 +4299,7 @@ function renderAnnales(){
       <select id="annYearFilter" aria-label="Filtrer par style d’année" onchange="filterAnnales()"><option value="">Tous les styles</option>${years.map(y=>`<option value="${y}">Style ${y}</option>`).join('')}</select>
       <select id="annChapFilter" onchange="filterAnnales()"><option value="">Tous les chapitres</option>${chapters.map(c=>{const ch=APP_DATA.chapters.find(x=>x.id===c);return`<option value="${c}">${c.replace('ch','')} — ${ch?ch.t:c}</option>`}).join('')}</select>
       <span class="ann-count" id="annCount">${all.length} cas</span>
+      <label class="ann-variants-toggle"><input type="checkbox" id="annShowVariants" onchange="filterAnnales()"> Afficher aussi les variantes à questions identiques</label>
     </div>`;
   }
   window._annales=all;
@@ -4308,10 +4317,11 @@ function renderAnnales(){
 function renderAnnalesList(){
   const el=document.getElementById('annalesContent');if(!el)return;
   let list=window._annales||[];
+  if(!document.getElementById('annShowVariants')?.checked)list=list.filter(a=>!a._templateVariant);
   if(window._annYear)list=list.filter(a=>String(a.year)===window._annYear);
   if(window._annChap)list=list.filter(a=>a.chapter===window._annChap);
   const searchText=document.getElementById('annSearch')?.value.trim().toLocaleLowerCase('fr') || '';
-  if(searchText)list=list.filter(a=>[a.title,a.titre,a.situation,a.cas,a.case].filter(Boolean).join(' ').toLocaleLowerCase('fr').includes(searchText));
+  if(searchText)list=list.filter(a=>[a.title,a.titre,a.situation,a.cas,a.case,a.patient,a.context].filter(Boolean).join(' ').toLocaleLowerCase('fr').includes(searchText));
   const cnt=document.getElementById('annCount');if(cnt)cnt.textContent=list.length+' cas';
   // Group by year
   const groups={};
@@ -4339,8 +4349,10 @@ function renderAnnalesList(){
            <span class="source-status ${a._official?'official':'training'}">${esc(a._sourceLabel)}</span>
           <div class="ann-card-head">${diffBadge}<span class="ann-card-ch">${chName?chName.t:a.chapter||''}</span></div>
           <div class="ann-card-title">${esc(a.title||a.titre||'')}</div>
+          ${a._templateCount>1?`<span class="resource-open-label">Questions communes à ${a._templateCount} variantes de situation</span>`:''}
           <span class="resource-open-label">Ouvrir le cas et ses questions</span></summary><div class="resource-detail-body">
-          <div class="ann-card-situation">${esc(a.situation||a.cas||a.case||'')}</div>
+          <div class="ann-card-situation">${esc(a.situation||a.cas||a.case||a.patient||'')}</div>
+          ${[['Contexte',a.context],['Examen',a.examen],['Biologie',a.biologie],['Imagerie',a.imagerie]].filter(([,value])=>value).map(([label,value])=>`<p><strong>${label} :</strong> ${esc(value)}</p>`).join('')}
           ${questions}
           ${a.juryTips&&!hasUnsafeGlycemiaMismatch(a.juryTips)?`<div class="ann-jury-tip">💡 Jury: ${esc(a.juryTips)}</div>`:''}
         </div></details>`;

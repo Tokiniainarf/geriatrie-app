@@ -313,6 +313,8 @@ button {cursor:pointer}
 #vAnnales .ann-filter-bar input,#vAnnales .ann-filter-bar select {flex:1 1 190px;min-width:0;min-height:46px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:var(--bg-card);color:var(--text);font:inherit}
 #vAnnales .ann-q {margin:18px 0;padding:16px;border:1px solid var(--border);border-radius:12px}
 #vAnnales .ann-a-text {margin-top:14px;line-height:1.75}
+#vAnnales .ann-variants-toggle {display:flex;align-items:center;gap:10px;width:100%;font-size:.85rem;line-height:1.5;color:var(--text2);padding:8px 0}
+#vAnnales .ann-filter-bar .ann-variants-toggle input {flex:0 0 auto;min-height:20px;width:20px;height:20px;accent-color:var(--accent)}
 #vProto .source-status,#vAnnales .source-status {position:static!important;display:inline-block;white-space:normal;line-height:1.5;height:auto}
 #vProto .proto-steps li {padding-block:5px;line-height:1.7}
 @media(max-width:600px){#vProto,#vAnnales{padding-inline:12px}.resource-detail > summary{padding:16px 40px 16px 16px}.resource-detail-body{padding:16px}#vAnnales .ann-q{padding:12px}#vProto .proto-cat-body,#vAnnales .ann-year-body{padding:8px!important}}
