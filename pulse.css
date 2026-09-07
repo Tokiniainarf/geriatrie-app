@@ -40,3 +40,15 @@
 @media(max-width:800px){.pulse-scroll-controls {display:none}#vFeed:not(.bf-session-reels) .bf-header {padding:12px 14px!important}#vFeed:not(.bf-session-reels) .bf-card-shell {padding:22px!important}}
 @media(max-height:650px){.pulse-context {display:none}#vFeed:not(.bf-session-reels) .bf-horiz-page {padding-top:170px!important;padding-bottom:86px!important}}
 @media(prefers-reduced-motion:reduce){.pulse-scroll-controls button {transition:none}#vFeed .bf-feed {scroll-behavior:auto!important}}
+
+/* Keep long content in normal flow; the card scrolls instead of overlapping. */
+#vFeed:not(.bf-session-reels) .bf-card-shell {justify-content:flex-start!important;overflow-y:auto!important}
+#vFeed:not(.bf-session-reels) .bf-card-shell > .bf-card-hdr,
+#vFeed:not(.bf-session-reels) .bf-card-shell > .bf-card-main,
+#vFeed:not(.bf-session-reels) .bf-card-shell > .bf-card-ftr {flex:0 0 auto!important}
+#vFeed:not(.bf-session-reels) .bf-card-main {justify-content:flex-start!important;min-height:0!important}
+#vFeed:not(.bf-session-reels) .bf-card-main > * {flex-shrink:0!important}
+#vFeed:not(.bf-session-reels) .bf-card-hdr {margin-bottom:16px!important}
+#vFeed:not(.bf-session-reels) .bf-quiz-q {color:#203c30!important;line-height:1.4!important}
+
+#vFeed:not(.bf-session-reels) .bf-card-shell {scrollbar-width:thin;scrollbar-color:#9aae98 transparent}
